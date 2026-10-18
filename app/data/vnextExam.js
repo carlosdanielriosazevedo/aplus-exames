@@ -2706,7 +2706,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
-    "focus": "Taxa instantanea e derivada num ponto",
+    "focus": "Taxa instantânea e derivada num ponto",
     "q": "Para f(x)=x^2, o limite lim_{h->0} [f(1+h)-f(1)]/h vale",
     "o": [
       "1",
@@ -2716,7 +2716,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     ],
     "a": 2,
     "sol": "Expandindo e simplificando, o quociente tende para 2a=2.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "exam"
     ],
@@ -2735,8 +2735,8 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Modelação",
-    "focus": "Taxa instantanea e derivada num ponto",
-    "q": "A posicao e dada por s(t)=2t^2. Qual e a velocidade instantanea em t=4?",
+    "focus": "Taxa instantânea e derivada num ponto",
+    "q": "A posição e dada por s(t)=2t^2. Qual é a velocidade instantânea em t=4?",
     "o": [
       "18",
       "16",
@@ -2744,8 +2744,8 @@ export const VNEXT_EXAM_QUESTIONS=[
       "4"
     ],
     "a": 1,
-    "sol": "A velocidade e s'(t); avaliando em t=4, obtem-se 16.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "sol": "A velocidade e s'(t); avaliando em t=4, obtém-se 16.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "exam"
     ],
@@ -2764,7 +2764,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
-    "focus": "Taxa instantanea e derivada num ponto",
+    "focus": "Taxa instantânea e derivada num ponto",
     "q": "Para f(x)=x^2, quanto vale f'(-2)?",
     "o": [
       "-3",
@@ -2773,8 +2773,8 @@ export const VNEXT_EXAM_QUESTIONS=[
       "-8"
     ],
     "a": 1,
-    "sol": "Derivando a expressao e substituindo x=-2, obtem-se -4.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "sol": "Derivando a expressão e substituindo x=-2, obtém-se -4.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "exam"
     ],
@@ -2793,17 +2793,17 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Interpretação",
-    "focus": "Funcao derivada",
-    "q": "Se f'(x)=(x-1)(x+2), em x<-2, entao",
+    "focus": "função derivada",
+    "q": "Se f'(x)=(x-1)(x+2), em x<-2, então",
     "o": [
-      "f e decrescente",
-      "f e constante",
-      "nao se pode concluir",
-      "f e crescente"
+      "f é decrescente",
+      "f é constante",
+      "não se pode concluir",
+      "f é crescente"
     ],
     "a": 3,
     "sol": "Ambos os fatores sao negativos, produto positivo.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "exam"
     ],
@@ -2822,7 +2822,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Raciocínio",
-    "focus": "Funcao derivada",
+    "focus": "função derivada",
     "q": "f'(x)=3x^2+2; uma possibilidade para f(x) e",
     "o": [
       "x^3+2x+C",
@@ -2831,8 +2831,8 @@ export const VNEXT_EXAM_QUESTIONS=[
       "x^2+2x+C"
     ],
     "a": 0,
-    "sol": "Derivando x^3+2x+C obtem-se 3x^2+2.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "sol": "Derivando x^3+2x+C obtém-se 3x^2+2.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "exam"
     ],
@@ -2851,8 +2851,8 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
-    "focus": "Funcao derivada",
-    "q": "Se f(x)=x^3+x, entao f'(x)=",
+    "focus": "função derivada",
+    "q": "Se f(x)=x^3+x, então f'(x)=",
     "o": [
       "x^3+x",
       "3x^2+1+1",
@@ -2860,8 +2860,8 @@ export const VNEXT_EXAM_QUESTIONS=[
       "3x^2+1"
     ],
     "a": 3,
-    "sol": "Derivando termo a termo obtem-se 3x^2+1.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "sol": "Derivando termo a termo obtém-se 3x^2+1.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "exam"
     ],
@@ -2880,13 +2880,13 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
-    "focus": "Monotonia, extremos e otimizacao",
+    "focus": "Monotonia, extremos e otimização",
     "q": "No intervalo [0,5], para f(x)=x^2-4x, os extremos absolutos sao",
     "o": [
-      "maximo 5 em x=5",
-      "minimo -4 em x=2",
+      "máximo 5 em x=5",
+      "mínimo -4 em x=2",
       "apenas o ponto onde f'=0",
-      "maximo 5 em x=5; minimo -4 em x=2."
+      "máximo 5 em x=5; mínimo -4 em x=2."
     ],
     "a": 3,
     "sol": "Comparam-se valores nos pontos criticos e nas extremidades do intervalo.",
@@ -2909,16 +2909,16 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Raciocínio",
-    "focus": "Monotonia, extremos e otimizacao",
-    "q": "Uma solucao de f'(x)=0 fora do dominio fisico de um problema",
+    "focus": "Monotonia, extremos e otimização",
+    "q": "Uma solução de f'(x)=0 fora do domínio fisico de um problema",
     "o": [
       "deve ser sempre aceite",
       "deve ser rejeitada como candidata nesse contexto",
-      "e automaticamente maximo",
-      "e automaticamente minimo"
+      "e automaticamente máximo",
+      "e automaticamente mínimo"
     ],
     "a": 1,
-    "sol": "O dominio do modelo faz parte do problema.",
+    "sol": "O domínio do modelo faz parte do problema.",
     "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
     "contexts": [
       "exam"
@@ -2938,13 +2938,13 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
-    "focus": "Monotonia, extremos e otimizacao",
-    "q": "Se f'(x)=x-3, entao junto de x=3 a situacao correta e",
+    "focus": "Monotonia, extremos e otimização",
+    "q": "Se f'(x)=x-3, então junto de x=3 a situação correta é",
     "o": [
-      "decrescente para x<3 e crescente para x>3; minimo em x=3.",
+      "decrescente para x<3 e crescente para x>3; mínimo em x=3.",
       "decrescente para x<3 e crescente para x>3",
-      "minimo em x=3",
-      "nao se pode concluir nada"
+      "mínimo em x=3",
+      "não se pode concluir nada"
     ],
     "a": 0,
     "sol": "Analisa-se o sinal de f' antes e depois de 3.",
@@ -2967,7 +2967,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Aplicação",
-    "focus": "Regras de derivacao",
+    "focus": "Regras de derivação",
     "q": "Usando a regra do produto, deriva f(x)=x(x^2+3).",
     "o": [
       "3x^2-3",
@@ -2976,8 +2976,8 @@ export const VNEXT_EXAM_QUESTIONS=[
       "0"
     ],
     "a": 2,
-    "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 3x^2+3.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtém-se 3x^2+3.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "exam"
     ],
@@ -2996,7 +2996,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Raciocínio",
-    "focus": "Regras de derivacao",
+    "focus": "Regras de derivação",
     "q": "Derivar f(x)=x^2(x+1) por expansao ou regra do produto deve dar",
     "o": [
       "resultados diferentes",
@@ -3006,7 +3006,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     ],
     "a": 1,
     "sol": "As regras sao coerentes e descrevem a mesma derivada.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "exam"
     ],
@@ -3025,7 +3025,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
-    "focus": "Regras de derivacao",
+    "focus": "Regras de derivação",
     "q": "Deriva f(x)=2x^5-3x^2.",
     "o": [
       "10x^4-6x",
@@ -3034,8 +3034,8 @@ export const VNEXT_EXAM_QUESTIONS=[
       "0"
     ],
     "a": 0,
-    "sol": "Aplicando regra da potencia e linearidade obtem-se 10x^4-6x.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "sol": "Aplicando regra da potência e linearidade obtém-se 10x^4-6x.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "exam"
     ],
@@ -3054,8 +3054,8 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Interpretação",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "A tangente ao grafico em x=1 e y=-2x+7. Entao f'(1)=",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "A tangente ao gráfico em x=1 e y=-2x+7. Então f'(1)=",
     "o": [
       "-2",
       "5",
@@ -3083,8 +3083,8 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Raciocínio",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "Se a tangente em (0,-3) tem declive 4, uma reta normal ao grafico nesse ponto e",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "Se a tangente em (0,-3) tem declive 4, uma reta normal ao gráfico nesse ponto e",
     "o": [
       "y=4x+-3",
       "y=-4x+-3",
@@ -3092,7 +3092,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "x=0"
     ],
     "a": 2,
-    "sol": "O declive normal e -1/4; usando o ponto obtem-se y=(-1/4)x-3.",
+    "sol": "O declive normal e -1/4; usando o ponto obtém-se y=(-1/4)x-3.",
     "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
     "contexts": [
       "exam"
@@ -3112,8 +3112,8 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "Para f(x)=x^2+1, a tangente em x=0 tem equacao",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "Para f(x)=x^2+1, a tangente em x=0 tem equação",
     "o": [
       "y=0x+1",
       "y=1",
@@ -3141,8 +3141,8 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Modelação",
-    "focus": "Taxa media de variacao",
-    "q": "Uma grandeza de populacao passa de 500 para 620 em 6 unidades de tempo. Qual e a taxa media?",
+    "focus": "taxa média de variação",
+    "q": "Uma grandeza de população passa de 500 para 620 em 6 unidades de tempo. Qual é a taxa média?",
     "o": [
       "20",
       "120",
@@ -3151,7 +3151,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     ],
     "a": 0,
     "sol": "(620-500)/6=20 individuos por ano.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "exam"
     ],
@@ -3170,8 +3170,8 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Raciocínio",
-    "focus": "Taxa media de variacao",
-    "q": "Se f(-1)=3 e a taxa media em [-1,3] e 2, quanto vale f(3)?",
+    "focus": "taxa média de variação",
+    "q": "Se f(-1)=3 e a taxa média em [-1,3] e 2, quanto vale f(3)?",
     "o": [
       "12",
       "10",
@@ -3180,7 +3180,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     ],
     "a": 3,
     "sol": "[f(3)-3]/(3--1)=2, logo f(3)=11.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "exam"
     ],
@@ -3199,8 +3199,8 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
-    "focus": "Taxa media de variacao",
-    "q": "Para f(x)=2x+(3), qual e a taxa media de variacao entre x=1 e x=5?",
+    "focus": "taxa média de variação",
+    "q": "Para f(x)=2x+(3), qual é a taxa média de variação entre x=1 e x=5?",
     "o": [
       "2",
       "3",
@@ -3208,8 +3208,8 @@ export const VNEXT_EXAM_QUESTIONS=[
       "4"
     ],
     "a": 0,
-    "sol": "Por ser afim, a taxa media e constante e igual ao declive 2.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "sol": "Por ser afim, a taxa média e constante e igual ao declive 2.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "exam"
     ],
@@ -6738,7 +6738,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Crescimento/decrescimento exponencial e modelação",
-    "q": "Uma quantidade cresce50% em 2 períodos, com fator constante por período. O fator b satisfaz...",
+    "q": "Uma quantidade cresce50% em2 períodos, com fator constante por período. O fator b satisfaz...",
     "o": [
       "b²=1,5.",
       "2b=1,5.",
@@ -7007,7 +7007,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "uma raiz."
     ],
     "a": 0,
-    "sol": "A função cresce para x<0 e decresce para x>0, atingindo1 em 0.",
+    "sol": "A função cresce para x<0 e decresce para x>0, atingindo1 em0.",
     "hyp": "Pode confundir derivada nula com mínimo.",
     "contexts": [
       "exam"
@@ -9435,7 +9435,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Probabilidade total e problemas em cadeia",
-    "q": "Uma condição rara ocorre em 2% dos casos. Um alarme dispara em95% dos casos com condição e em10% sem condição. P(alarme)=...",
+    "q": "Uma condição rara ocorre em2% dos casos. Um alarme dispara em95% dos casos com condição e em10% sem condição. P(alarme)=...",
     "o": [
       "0,117.",
       "0,105.",

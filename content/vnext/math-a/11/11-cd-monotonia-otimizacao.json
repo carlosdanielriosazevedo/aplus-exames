@@ -5,10 +5,10 @@
   "year": "11.º",
   "themeId": "11-cd",
   "subtopicId": "11-cd-monotonia-otimizacao",
-  "subtopic": "Monotonia, extremos e otimizacao",
+  "subtopic": "Monotonia, extremos e otimização",
   "editorialTarget": 50,
   "status": "prototype",
-  "note": "Conteudo original A+. Trabalha sinal da derivada, quadros de variacao, extremos locais/absolutos e problemas de otimizacao em modelos quadraticos e contextos simples. Nao ligado ao motor atual.",
+  "note": "Conteudo original A+. Trabalha sinal da derivada, quadros de variação, extremos locais/absolutos e problemas de otimização em modelos quadraticos e contextos simples. não ligado ao motor atual.",
   "questions": [
     {
       "id": "VN11CD-MO-001",
@@ -73,7 +73,7 @@
       "cognitive": "Compreensao",
       "q": "Um ponto onde f'(a)=0 chama-se frequentemente",
       "o": [
-        "assintota",
+        "assíntota",
         "zero obrigatorio de f",
         "ponto estacionario",
         "ponto de descontinuidade"
@@ -100,13 +100,13 @@
       "cognitive": "Compreensao",
       "q": "Se f' muda de positivo para negativo em a, f tem tipicamente",
       "o": [
-        "um minimo local",
+        "um mínimo local",
         "nenhum extremo",
-        "uma assintota",
-        "um maximo local em a"
+        "uma assíntota",
+        "um máximo local em a"
       ],
       "a": 3,
-      "sol": "A funcao passa de crescente para decrescente.",
+      "sol": "A função passa de crescente para decrescente.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -127,13 +127,13 @@
       "cognitive": "Compreensao",
       "q": "Se f' muda de negativo para positivo em a, f tem tipicamente",
       "o": [
-        "um minimo local em a",
-        "um maximo local",
+        "um mínimo local em a",
+        "um máximo local",
         "um zero obrigatorio",
         "uma descontinuidade"
       ],
       "a": 0,
-      "sol": "A funcao passa de decrescente para crescente.",
+      "sol": "A função passa de decrescente para crescente.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -154,9 +154,9 @@
       "cognitive": "Compreensao",
       "q": "A condicao f'(a)=0, so por si,",
       "o": [
-        "garante um maximo",
-        "nao garante que a seja extremo",
-        "garante um minimo",
+        "garante um máximo",
+        "não garante que a seja extremo",
+        "garante um mínimo",
         "garante f(a)=0"
       ],
       "a": 1,
@@ -183,7 +183,7 @@
       "o": [
         "escolher sempre o primeiro zero de f'",
         "ignorar extremos do intervalo",
-        "comparar valores relevantes e respeitar o dominio",
+        "comparar valores relevantes e respeitar o domínio",
         "usar apenas f'"
       ],
       "a": 2,
@@ -233,15 +233,15 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "Se f e crescente antes de a e crescente depois de a, mesmo com f'(a)=0, entao a",
+      "q": "Se f e crescente antes de a e crescente depois de a, mesmo com f'(a)=0, então a",
       "o": [
-        "nao e necessariamente extremo",
-        "e maximo",
-        "e minimo",
+        "não e necessariamente extremo",
+        "e máximo",
+        "e mínimo",
         "e sempre zero"
       ],
       "a": 0,
-      "sol": "Nao houve mudanca de monotonia.",
+      "sol": "Não houve mudanca de monotonia.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -262,8 +262,8 @@
       "cognitive": "Compreensao",
       "q": "O estudo do sinal de f' permite construir",
       "o": [
-        "apenas o grafico de f'",
-        "um quadro de variacao de f",
+        "apenas o gráfico de f'",
+        "um quadro de variação de f",
         "uma tabela de probabilidades",
         "uma soma de termos"
       ],
@@ -287,12 +287,12 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=2x, entao junto de x=0 a situacao correta e",
+      "q": "Se f'(x)=2x, então junto de x=0 a situação correta é",
       "o": [
         "decrescente em ]-inf,0[ e crescente em ]0,+inf[",
-        "minimo em x=0",
-        "decrescente em ]-inf,0[ e crescente em ]0,+inf[; minimo em x=0.",
-        "nao se pode concluir nada"
+        "mínimo em x=0",
+        "decrescente em ]-inf,0[ e crescente em ]0,+inf[; mínimo em x=0.",
+        "não se pode concluir nada"
       ],
       "a": 2,
       "sol": "Analisa-se o sinal de f' antes e depois de 0.",
@@ -314,12 +314,12 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=-2x, entao junto de x=0 a situacao correta e",
+      "q": "Se f'(x)=-2x, então junto de x=0 a situação correta é",
       "o": [
         "crescente em ]-inf,0[ e decrescente em ]0,+inf[",
-        "maximo em x=0",
-        "nao se pode concluir nada",
-        "crescente em ]-inf,0[ e decrescente em ]0,+inf[; maximo em x=0."
+        "máximo em x=0",
+        "não se pode concluir nada",
+        "crescente em ]-inf,0[ e decrescente em ]0,+inf[; máximo em x=0."
       ],
       "a": 3,
       "sol": "Analisa-se o sinal de f' antes e depois de 0.",
@@ -341,12 +341,12 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=x-3, entao junto de x=3 a situacao correta e",
+      "q": "Se f'(x)=x-3, então junto de x=3 a situação correta é",
       "o": [
-        "decrescente para x<3 e crescente para x>3; minimo em x=3.",
+        "decrescente para x<3 e crescente para x>3; mínimo em x=3.",
         "decrescente para x<3 e crescente para x>3",
-        "minimo em x=3",
-        "nao se pode concluir nada"
+        "mínimo em x=3",
+        "não se pode concluir nada"
       ],
       "a": 0,
       "sol": "Analisa-se o sinal de f' antes e depois de 3.",
@@ -368,12 +368,12 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=3-x, entao junto de x=3 a situacao correta e",
+      "q": "Se f'(x)=3-x, então junto de x=3 a situação correta é",
       "o": [
         "crescente para x<3 e decrescente para x>3",
-        "crescente para x<3 e decrescente para x>3; maximo em x=3.",
-        "maximo em x=3",
-        "nao se pode concluir nada"
+        "crescente para x<3 e decrescente para x>3; máximo em x=3.",
+        "máximo em x=3",
+        "não se pode concluir nada"
       ],
       "a": 1,
       "sol": "Analisa-se o sinal de f' antes e depois de 3.",
@@ -395,12 +395,12 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=(x-1)(x+2), entao junto de x=1 a situacao correta e",
+      "q": "Se f'(x)=(x-1)(x+2), então junto de x=1 a situação correta é",
       "o": [
         "crescente para x<-2 e x>1; decrescente para -2<x<1",
-        "minimo em x=1",
-        "crescente para x<-2 e x>1; decrescente para -2<x<1; minimo em x=1.",
-        "nao se pode concluir nada"
+        "mínimo em x=1",
+        "crescente para x<-2 e x>1; decrescente para -2<x<1; mínimo em x=1.",
+        "não se pode concluir nada"
       ],
       "a": 2,
       "sol": "Analisa-se o sinal de f' antes e depois de 1.",
@@ -422,12 +422,12 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=(x-1)(x+2), entao junto de x=-2 a situacao correta e",
+      "q": "Se f'(x)=(x-1)(x+2), então junto de x=-2 a situação correta é",
       "o": [
         "crescente antes de -2 e decrescente depois de -2",
-        "maximo em x=-2",
-        "nao se pode concluir nada",
-        "crescente antes de -2 e decrescente depois de -2; maximo em x=-2."
+        "máximo em x=-2",
+        "não se pode concluir nada",
+        "crescente antes de -2 e decrescente depois de -2; máximo em x=-2."
       ],
       "a": 3,
       "sol": "Analisa-se o sinal de f' antes e depois de -2.",
@@ -449,12 +449,12 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=x^2, entao junto de x=0 a situacao correta e",
+      "q": "Se f'(x)=x^2, então junto de x=0 a situação correta é",
       "o": [
         "crescente dos dois lados de 0; sem extremo garantido em x=0.",
         "crescente dos dois lados de 0",
         "sem extremo garantido em x=0",
-        "nao se pode concluir nada"
+        "não se pode concluir nada"
       ],
       "a": 0,
       "sol": "Analisa-se o sinal de f' antes e depois de 0.",
@@ -476,12 +476,12 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=-x^2, entao junto de x=0 a situacao correta e",
+      "q": "Se f'(x)=-x^2, então junto de x=0 a situação correta é",
       "o": [
         "decrescente dos dois lados de 0",
         "decrescente dos dois lados de 0; sem extremo garantido em x=0.",
         "sem extremo garantido em x=0",
-        "nao se pode concluir nada"
+        "não se pode concluir nada"
       ],
       "a": 1,
       "sol": "Analisa-se o sinal de f' antes e depois de 0.",
@@ -503,12 +503,12 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=x(x-2), entao junto de x=0 a situacao correta e",
+      "q": "Se f'(x)=x(x-2), então junto de x=0 a situação correta é",
       "o": [
         "positivo para x<0, negativo para 0<x<2",
-        "maximo em x=0",
-        "positivo para x<0, negativo para 0<x<2; maximo em x=0.",
-        "nao se pode concluir nada"
+        "máximo em x=0",
+        "positivo para x<0, negativo para 0<x<2; máximo em x=0.",
+        "não se pode concluir nada"
       ],
       "a": 2,
       "sol": "Analisa-se o sinal de f' antes e depois de 0.",
@@ -530,12 +530,12 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=x(x-2), entao junto de x=2 a situacao correta e",
+      "q": "Se f'(x)=x(x-2), então junto de x=2 a situação correta é",
       "o": [
         "negativo para 0<x<2, positivo para x>2",
-        "minimo em x=2",
-        "nao se pode concluir nada",
-        "negativo para 0<x<2, positivo para x>2; minimo em x=2."
+        "mínimo em x=2",
+        "não se pode concluir nada",
+        "negativo para 0<x<2, positivo para x>2; mínimo em x=2."
       ],
       "a": 3,
       "sol": "Analisa-se o sinal de f' antes e depois de 2.",
@@ -559,13 +559,13 @@
       "cognitive": "Aplicacao",
       "q": "Para f(x)=x^2-4x+5, o extremo relevante ocorre em",
       "o": [
-        "x=2, sendo minimo e f(2)=1.",
-        "x=2, sendo minimo mas com outro valor",
+        "x=2, sendo mínimo e f(2)=1.",
+        "x=2, sendo mínimo mas com outro valor",
         "x=0",
-        "nao existe extremo"
+        "não existe extremo"
       ],
       "a": 0,
-      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parábola.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -586,13 +586,13 @@
       "cognitive": "Aplicacao",
       "q": "Para f(x)=-x^2+6x-5, o extremo relevante ocorre em",
       "o": [
-        "x=3, sendo maximo mas com outro valor",
-        "x=3, sendo maximo e f(3)=4.",
+        "x=3, sendo máximo mas com outro valor",
+        "x=3, sendo máximo e f(3)=4.",
         "x=0",
-        "nao existe extremo"
+        "não existe extremo"
       ],
       "a": 1,
-      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parábola.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -613,13 +613,13 @@
       "cognitive": "Aplicacao",
       "q": "Para f(x)=x^2+2x+3, o extremo relevante ocorre em",
       "o": [
-        "x=-1, sendo minimo mas com outro valor",
+        "x=-1, sendo mínimo mas com outro valor",
         "x=0",
-        "x=-1, sendo minimo e f(-1)=2.",
-        "nao existe extremo"
+        "x=-1, sendo mínimo e f(-1)=2.",
+        "não existe extremo"
       ],
       "a": 2,
-      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parábola.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -640,13 +640,13 @@
       "cognitive": "Aplicacao",
       "q": "Para f(x)=-2x^2+8x+1, o extremo relevante ocorre em",
       "o": [
-        "x=2, sendo maximo mas com outro valor",
+        "x=2, sendo máximo mas com outro valor",
         "x=0",
-        "nao existe extremo",
-        "x=2, sendo maximo e f(2)=9."
+        "não existe extremo",
+        "x=2, sendo máximo e f(2)=9."
       ],
       "a": 3,
-      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parábola.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -667,13 +667,13 @@
       "cognitive": "Aplicacao",
       "q": "Para f(x)=3x^2-12x+7, o extremo relevante ocorre em",
       "o": [
-        "x=2, sendo minimo e f(2)=-5.",
-        "x=2, sendo minimo mas com outro valor",
+        "x=2, sendo mínimo e f(2)=-5.",
+        "x=2, sendo mínimo mas com outro valor",
         "x=0",
-        "nao existe extremo"
+        "não existe extremo"
       ],
       "a": 0,
-      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parábola.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -694,13 +694,13 @@
       "cognitive": "Aplicacao",
       "q": "Para f(x)=-x^2-4x, o extremo relevante ocorre em",
       "o": [
-        "x=-2, sendo maximo mas com outro valor",
-        "x=-2, sendo maximo e f(-2)=4.",
+        "x=-2, sendo máximo mas com outro valor",
+        "x=-2, sendo máximo e f(-2)=4.",
         "x=0",
-        "nao existe extremo"
+        "não existe extremo"
       ],
       "a": 1,
-      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parábola.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -721,13 +721,13 @@
       "cognitive": "Aplicacao",
       "q": "Para f(x)=x^2-10x+30, o extremo relevante ocorre em",
       "o": [
-        "x=5, sendo minimo mas com outro valor",
+        "x=5, sendo mínimo mas com outro valor",
         "x=0",
-        "x=5, sendo minimo e f(5)=5.",
-        "nao existe extremo"
+        "x=5, sendo mínimo e f(5)=5.",
+        "não existe extremo"
       ],
       "a": 2,
-      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parábola.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -748,13 +748,13 @@
       "cognitive": "Aplicacao",
       "q": "Para f(x)=-3x^2+12x, o extremo relevante ocorre em",
       "o": [
-        "x=2, sendo maximo mas com outro valor",
+        "x=2, sendo máximo mas com outro valor",
         "x=0",
-        "nao existe extremo",
-        "x=2, sendo maximo e f(2)=12."
+        "não existe extremo",
+        "x=2, sendo máximo e f(2)=12."
       ],
       "a": 3,
-      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parábola.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -775,13 +775,13 @@
       "cognitive": "Aplicacao",
       "q": "Para f(x)=2x^2+4x-1, o extremo relevante ocorre em",
       "o": [
-        "x=-1, sendo minimo e f(-1)=-3.",
-        "x=-1, sendo minimo mas com outro valor",
+        "x=-1, sendo mínimo e f(-1)=-3.",
+        "x=-1, sendo mínimo mas com outro valor",
         "x=0",
-        "nao existe extremo"
+        "não existe extremo"
       ],
       "a": 0,
-      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parábola.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -802,13 +802,13 @@
       "cognitive": "Aplicacao",
       "q": "Para f(x)=-x^2+2x+8, o extremo relevante ocorre em",
       "o": [
-        "x=1, sendo maximo mas com outro valor",
-        "x=1, sendo maximo e f(1)=9.",
+        "x=1, sendo máximo mas com outro valor",
+        "x=1, sendo máximo e f(1)=9.",
         "x=0",
-        "nao existe extremo"
+        "não existe extremo"
       ],
       "a": 1,
-      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parábola.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -829,9 +829,9 @@
       "cognitive": "Raciocinio",
       "q": "No intervalo [-2,3], para f(x)=x^2, os extremos absolutos sao",
       "o": [
-        "maximo 9 em x=3",
-        "minimo 0 em x=0",
-        "maximo 9 em x=3; minimo 0 em x=0.",
+        "máximo 9 em x=3",
+        "mínimo 0 em x=0",
+        "máximo 9 em x=3; mínimo 0 em x=0.",
         "apenas o ponto onde f'=0"
       ],
       "a": 2,
@@ -856,10 +856,10 @@
       "cognitive": "Raciocinio",
       "q": "No intervalo [0,5], para f(x)=x^2-4x, os extremos absolutos sao",
       "o": [
-        "maximo 5 em x=5",
-        "minimo -4 em x=2",
+        "máximo 5 em x=5",
+        "mínimo -4 em x=2",
         "apenas o ponto onde f'=0",
-        "maximo 5 em x=5; minimo -4 em x=2."
+        "máximo 5 em x=5; mínimo -4 em x=2."
       ],
       "a": 3,
       "sol": "Comparam-se valores nos pontos criticos e nas extremidades do intervalo.",
@@ -883,9 +883,9 @@
       "cognitive": "Raciocinio",
       "q": "No intervalo [0,5], para f(x)=-x^2+4x, os extremos absolutos sao",
       "o": [
-        "maximo 4 em x=2; minimo -5 em x=5.",
-        "maximo 4 em x=2",
-        "minimo -5 em x=5",
+        "máximo 4 em x=2; mínimo -5 em x=5.",
+        "máximo 4 em x=2",
+        "mínimo -5 em x=5",
         "apenas o ponto onde f'=0"
       ],
       "a": 0,
@@ -910,9 +910,9 @@
       "cognitive": "Raciocinio",
       "q": "No intervalo [-3,1], para f(x)=x^2+2x, os extremos absolutos sao",
       "o": [
-        "maximo 3 em x=1",
-        "maximo 3 em x=1; minimo -1 em x=-1.",
-        "minimo -1 em x=-1",
+        "máximo 3 em x=1",
+        "máximo 3 em x=1; mínimo -1 em x=-1.",
+        "mínimo -1 em x=-1",
         "apenas o ponto onde f'=0"
       ],
       "a": 1,
@@ -937,9 +937,9 @@
       "cognitive": "Raciocinio",
       "q": "No intervalo [-2,1], para f(x)=-x^2, os extremos absolutos sao",
       "o": [
-        "maximo 0 em x=0",
-        "minimo -4 em x=-2",
-        "maximo 0 em x=0; minimo -4 em x=-2.",
+        "máximo 0 em x=0",
+        "mínimo -4 em x=-2",
+        "máximo 0 em x=0; mínimo -4 em x=-2.",
         "apenas o ponto onde f'=0"
       ],
       "a": 2,
@@ -962,7 +962,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Modelacao",
-      "q": "Um retangulo tem perimetro 20. Se um lado mede x, a area e A(x)=x(10-x). A area maxima ocorre para",
+      "q": "Um retangulo tem perimetro 20. Se um lado mede x, a área e A(x)=x(10-x). A área maxima ocorre para",
       "o": [
         "x=10",
         "x=2",
@@ -989,7 +989,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Modelacao",
-      "q": "Um retangulo tem lados x e 12-x. A area maxima ocorre para",
+      "q": "Um retangulo tem lados x e 12-x. A área maxima ocorre para",
       "o": [
         "x=6",
         "x=12",
@@ -1016,7 +1016,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Modelacao",
-      "q": "Um lucro e modelado por L(x)=-x^2+20x-60. O lucro maximo ocorre em",
+      "q": "Um lucro e modelado por L(x)=-x^2+20x-60. O lucro máximo ocorre em",
       "o": [
         "x=20",
         "x=10",
@@ -1043,7 +1043,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Modelacao",
-      "q": "Um custo e C(x)=x^2-8x+30. O custo minimo ocorre em",
+      "q": "Um custo e C(x)=x^2-8x+30. O custo mínimo ocorre em",
       "o": [
         "x=8",
         "x=2",
@@ -1097,7 +1097,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Modelacao",
-      "q": "Uma receita e R(x)=-2x^2+40x. O maximo ocorre para",
+      "q": "Uma receita e R(x)=-2x^2+40x. O máximo ocorre para",
       "o": [
         "x=10",
         "x=20",
@@ -1124,7 +1124,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Modelacao",
-      "q": "Uma area e A(x)=24x-2x^2. O maximo ocorre em",
+      "q": "Uma área e A(x)=24x-2x^2. O máximo ocorre em",
       "o": [
         "x=12",
         "x=6",
@@ -1151,7 +1151,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Modelacao",
-      "q": "Uma distancia quadratica e D(x)=x^2-6x+13. O minimo ocorre em",
+      "q": "Uma distancia quadratica e D(x)=x^2-6x+13. O mínimo ocorre em",
       "o": [
         "x=6",
         "x=1",
@@ -1178,7 +1178,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Modelacao",
-      "q": "Uma funcao de erro e E(x)=4x^2-16x+25. O minimo ocorre em",
+      "q": "Uma função de erro e E(x)=4x^2-16x+25. O mínimo ocorre em",
       "o": [
         "x=4",
         "x=1",
@@ -1205,7 +1205,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Modelacao",
-      "q": "Um rendimento e P(x)=-3x^2+18x+1. O maximo ocorre em",
+      "q": "Um rendimento e P(x)=-3x^2+18x+1. O máximo ocorre em",
       "o": [
         "x=3",
         "x=6",
@@ -1232,11 +1232,11 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se f'(x)>0 em ]-inf,1[, f'(1)=0 e f'(x)<0 em ]1,+inf[, entao",
+      "q": "Se f'(x)>0 em ]-inf,1[, f'(1)=0 e f'(x)<0 em ]1,+inf[, então",
       "o": [
-        "f tem minimo local em x=1",
-        "f tem maximo local em x=1",
-        "f e crescente em todo o dominio",
+        "f tem mínimo local em x=1",
+        "f tem máximo local em x=1",
+        "f e crescente em todo o domínio",
         "f(1)=0"
       ],
       "a": 1,
@@ -1259,11 +1259,11 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se f'(x)<0 em ]-inf,4[, f'(4)=0 e f'(x)>0 em ]4,+inf[, entao",
+      "q": "Se f'(x)<0 em ]-inf,4[, f'(4)=0 e f'(x)>0 em ]4,+inf[, então",
       "o": [
-        "f tem maximo local",
-        "f e decrescente em todo o dominio",
-        "f tem minimo local em x=4",
+        "f tem máximo local",
+        "f e decrescente em todo o domínio",
+        "f tem mínimo local em x=4",
         "f(4)=0"
       ],
       "a": 2,
@@ -1286,15 +1286,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se f'(x)=0 em x=2 mas e positiva de ambos os lados, entao",
+      "q": "Se f'(x)=0 em x=2 mas e positiva de ambos os lados, então",
       "o": [
-        "x=2 e maximo",
-        "x=2 e minimo",
+        "x=2 e máximo",
+        "x=2 e mínimo",
         "f(2)=0",
-        "x=2 nao e extremo por mudanca de monotonia"
+        "x=2 não e extremo por mudanca de monotonia"
       ],
       "a": 3,
-      "sol": "A funcao continua crescente.",
+      "sol": "A função continua crescente.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -1313,7 +1313,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Num intervalo fechado, para localizar maximo absoluto devemos",
+      "q": "Num intervalo fechado, para localizar máximo absoluto devemos",
       "o": [
         "comparar pontos criticos interiores e extremidades",
         "usar apenas f'=0",
@@ -1340,15 +1340,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Uma solucao de f'(x)=0 fora do dominio fisico de um problema",
+      "q": "Uma solução de f'(x)=0 fora do domínio fisico de um problema",
       "o": [
         "deve ser sempre aceite",
         "deve ser rejeitada como candidata nesse contexto",
-        "e automaticamente maximo",
-        "e automaticamente minimo"
+        "e automaticamente máximo",
+        "e automaticamente mínimo"
       ],
       "a": 1,
-      "sol": "O dominio do modelo faz parte do problema.",
+      "sol": "O domínio do modelo faz parte do problema.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",

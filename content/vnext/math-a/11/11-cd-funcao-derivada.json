@@ -5,10 +5,10 @@
   "year": "11.º",
   "themeId": "11-cd",
   "subtopicId": "11-cd-funcao-derivada",
-  "subtopic": "Funcao derivada",
+  "subtopic": "função derivada",
   "editorialTarget": 50,
   "status": "prototype",
-  "note": "Conteudo original A+. Trabalha funcao derivada, derivacao de polinomios simples, avaliacao, sinal de f' e interpretacao da monotonia. Nao ligado ao motor atual.",
+  "note": "Conteudo original A+. Trabalha função derivada, derivação de polinómios simples, avaliação, sinal de f' e interpretação da monotonia. não ligado ao motor atual.",
   "questions": [
     {
       "id": "VN11CD-FD-001",
@@ -17,16 +17,16 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "A funcao derivada f' associa a cada x do seu dominio",
+      "q": "A função derivada f' associa a cada x do seu domínio",
       "o": [
-        "o declive da tangente ao grafico de f nesse x",
+        "o declive da tangente ao gráfico de f nesse x",
         "o valor f(x)",
-        "a area sob f",
-        "a taxa media desde 0"
+        "a área sob f",
+        "a taxa média desde 0"
       ],
       "a": 0,
-      "sol": "A funcao derivada recolhe as taxas instantaneas de variacao.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "A função derivada recolhe as taxas instantâneas de variação.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -53,7 +53,7 @@
       ],
       "a": 1,
       "sol": "Sinal positivo da derivada indica crescimento.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -80,7 +80,7 @@
       ],
       "a": 2,
       "sol": "Sinal negativo indica decrescimento.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -107,7 +107,7 @@
       ],
       "a": 3,
       "sol": "Derivada identicamente zero implica constancia.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -125,7 +125,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "A derivada da funcao constante f(x)=c e",
+      "q": "A derivada da função constante f(x)=c e",
       "o": [
         "0",
         "c",
@@ -133,8 +133,8 @@
         "x"
       ],
       "a": 0,
-      "sol": "Uma constante nao varia.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Uma constante não varia.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -161,7 +161,7 @@
       ],
       "a": 1,
       "sol": "A reta y=x tem declive 1.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -187,8 +187,8 @@
         "2"
       ],
       "a": 2,
-      "sol": "Pela regra da potencia.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Pela regra da potência.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -214,8 +214,8 @@
         "3x^2"
       ],
       "a": 3,
-      "sol": "Pela regra da potencia.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Pela regra da potência.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -233,7 +233,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "A funcao derivada de uma funcao afim f(x)=mx+b e",
+      "q": "A função derivada de uma função afim f(x)=mx+b e",
       "o": [
         "f'(x)=m",
         "f'(x)=b",
@@ -242,7 +242,7 @@
       ],
       "a": 0,
       "sol": "O declive e constante.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -260,16 +260,16 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "O grafico de f' permite estudar diretamente",
+      "q": "O gráfico de f' permite estudar diretamente",
       "o": [
         "apenas zeros de f",
         "crescimento e decrescimento de f",
         "apenas valores de f",
-        "a area exata sob f sem mais informacao"
+        "a área exata sob f sem mais informacao"
       ],
       "a": 1,
       "sol": "O sinal de f' controla a monotonia.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -287,7 +287,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Se f(x)=x^4, entao f'(x)=",
+      "q": "Se f(x)=x^4, então f'(x)=",
       "o": [
         "x^4",
         "4x^3+1",
@@ -295,8 +295,8 @@
         "0"
       ],
       "a": 2,
-      "sol": "Derivando termo a termo obtem-se 4x^3.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Derivando termo a termo obtém-se 4x^3.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -314,7 +314,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Se f(x)=5x^3, entao f'(x)=",
+      "q": "Se f(x)=5x^3, então f'(x)=",
       "o": [
         "5x^3",
         "15x^2+1",
@@ -322,8 +322,8 @@
         "15x^2"
       ],
       "a": 3,
-      "sol": "Derivando termo a termo obtem-se 15x^2.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Derivando termo a termo obtém-se 15x^2.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -341,7 +341,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Se f(x)=2x^5, entao f'(x)=",
+      "q": "Se f(x)=2x^5, então f'(x)=",
       "o": [
         "10x^4",
         "2x^5",
@@ -349,8 +349,8 @@
         "0"
       ],
       "a": 0,
-      "sol": "Derivando termo a termo obtem-se 10x^4.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Derivando termo a termo obtém-se 10x^4.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -368,7 +368,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Se f(x)=x^2+3x, entao f'(x)=",
+      "q": "Se f(x)=x^2+3x, então f'(x)=",
       "o": [
         "x^2+3x",
         "2x+3",
@@ -376,8 +376,8 @@
         "0"
       ],
       "a": 1,
-      "sol": "Derivando termo a termo obtem-se 2x+3.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Derivando termo a termo obtém-se 2x+3.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -395,7 +395,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Se f(x)=3x^2-4x+1, entao f'(x)=",
+      "q": "Se f(x)=3x^2-4x+1, então f'(x)=",
       "o": [
         "3x^2-4x+1",
         "6x-4+1",
@@ -403,8 +403,8 @@
         "0"
       ],
       "a": 2,
-      "sol": "Derivando termo a termo obtem-se 6x-4.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Derivando termo a termo obtém-se 6x-4.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -422,7 +422,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Se f(x)=x^3+x, entao f'(x)=",
+      "q": "Se f(x)=x^3+x, então f'(x)=",
       "o": [
         "x^3+x",
         "3x^2+1+1",
@@ -430,8 +430,8 @@
         "3x^2+1"
       ],
       "a": 3,
-      "sol": "Derivando termo a termo obtem-se 3x^2+1.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Derivando termo a termo obtém-se 3x^2+1.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -449,7 +449,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Se f(x)=4x^2+7, entao f'(x)=",
+      "q": "Se f(x)=4x^2+7, então f'(x)=",
       "o": [
         "8x",
         "4x^2+7",
@@ -457,8 +457,8 @@
         "0"
       ],
       "a": 0,
-      "sol": "Derivando termo a termo obtem-se 8x.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Derivando termo a termo obtém-se 8x.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -476,7 +476,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Se f(x)=-x^3+2x, entao f'(x)=",
+      "q": "Se f(x)=-x^3+2x, então f'(x)=",
       "o": [
         "-x^3+2x",
         "-3x^2+2",
@@ -484,8 +484,8 @@
         "0"
       ],
       "a": 1,
-      "sol": "Derivando termo a termo obtem-se -3x^2+2.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Derivando termo a termo obtém-se -3x^2+2.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -503,7 +503,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Se f(x)=7x-5, entao f'(x)=",
+      "q": "Se f(x)=7x-5, então f'(x)=",
       "o": [
         "7x-5",
         "7+1",
@@ -511,8 +511,8 @@
         "0"
       ],
       "a": 2,
-      "sol": "Derivando termo a termo obtem-se 7.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Derivando termo a termo obtém-se 7.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -530,7 +530,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Se f(x)=9, entao f'(x)=",
+      "q": "Se f(x)=9, então f'(x)=",
       "o": [
         "9",
         "1",
@@ -538,8 +538,8 @@
         "0"
       ],
       "a": 3,
-      "sol": "Derivando termo a termo obtem-se 0.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Derivando termo a termo obtém-se 0.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -557,7 +557,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Se f(x)=x^5-x^2, entao f'(x)=",
+      "q": "Se f(x)=x^5-x^2, então f'(x)=",
       "o": [
         "5x^4-2x",
         "x^5-x^2",
@@ -565,8 +565,8 @@
         "0"
       ],
       "a": 0,
-      "sol": "Derivando termo a termo obtem-se 5x^4-2x.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Derivando termo a termo obtém-se 5x^4-2x.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -584,7 +584,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Se f(x)=2x^3+6x^2, entao f'(x)=",
+      "q": "Se f(x)=2x^3+6x^2, então f'(x)=",
       "o": [
         "2x^3+6x^2",
         "6x^2+12x",
@@ -592,8 +592,8 @@
         "0"
       ],
       "a": 1,
-      "sol": "Derivando termo a termo obtem-se 6x^2+12x.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Derivando termo a termo obtém-se 6x^2+12x.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -611,7 +611,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Se f(x)=x^4+2x^2+1, entao f'(x)=",
+      "q": "Se f(x)=x^4+2x^2+1, então f'(x)=",
       "o": [
         "x^4+2x^2+1",
         "4x^3+4x+1",
@@ -619,8 +619,8 @@
         "0"
       ],
       "a": 2,
-      "sol": "Derivando termo a termo obtem-se 4x^3+4x.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Derivando termo a termo obtém-se 4x^3+4x.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -638,7 +638,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Se f(x)=-3x^2+x-8, entao f'(x)=",
+      "q": "Se f(x)=-3x^2+x-8, então f'(x)=",
       "o": [
         "-3x^2+x-8",
         "-6x+1+1",
@@ -646,8 +646,8 @@
         "-6x+1"
       ],
       "a": 3,
-      "sol": "Derivando termo a termo obtem-se -6x+1.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Derivando termo a termo obtém-se -6x+1.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -665,7 +665,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Se f(x)=6x^3-2, entao f'(x)=",
+      "q": "Se f(x)=6x^3-2, então f'(x)=",
       "o": [
         "18x^2",
         "6x^3-2",
@@ -673,8 +673,8 @@
         "0"
       ],
       "a": 0,
-      "sol": "Derivando termo a termo obtem-se 18x^2.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Derivando termo a termo obtém-se 18x^2.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -701,7 +701,7 @@
       ],
       "a": 1,
       "sol": "Substitui-se x=1 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -728,7 +728,7 @@
       ],
       "a": 2,
       "sol": "Substitui-se x=2 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -755,7 +755,7 @@
       ],
       "a": 3,
       "sol": "Substitui-se x=2 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -782,7 +782,7 @@
       ],
       "a": 0,
       "sol": "Substitui-se x=-1 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -809,7 +809,7 @@
       ],
       "a": 1,
       "sol": "Substitui-se x=1 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -836,7 +836,7 @@
       ],
       "a": 2,
       "sol": "Substitui-se x=1 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -863,7 +863,7 @@
       ],
       "a": 3,
       "sol": "Substitui-se x=2 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -890,7 +890,7 @@
       ],
       "a": 0,
       "sol": "Substitui-se x=3 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -917,7 +917,7 @@
       ],
       "a": 1,
       "sol": "Substitui-se x=-2 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -944,7 +944,7 @@
       ],
       "a": 2,
       "sol": "Substitui-se x=4 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -962,7 +962,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=2x, em x>0, entao",
+      "q": "Se f'(x)=2x, em x>0, então",
       "o": [
         "f e decrescente",
         "f e constante",
@@ -971,7 +971,7 @@
       ],
       "a": 3,
       "sol": "Para x>0, 2x>0.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -989,7 +989,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=2x, em x<0, entao",
+      "q": "Se f'(x)=2x, em x<0, então",
       "o": [
         "f e decrescente",
         "f e crescente",
@@ -998,7 +998,7 @@
       ],
       "a": 0,
       "sol": "Para x<0, 2x<0.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1016,7 +1016,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=x^2, em todo x diferente de 0, entao",
+      "q": "Se f'(x)=x^2, em todo x diferente de 0, então",
       "o": [
         "f e decrescente",
         "f e crescente",
@@ -1025,7 +1025,7 @@
       ],
       "a": 1,
       "sol": "x^2>0 para x diferente de 0.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1043,7 +1043,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=-x^2, em todo x diferente de 0, entao",
+      "q": "Se f'(x)=-x^2, em todo x diferente de 0, então",
       "o": [
         "f e crescente",
         "f e constante",
@@ -1052,7 +1052,7 @@
       ],
       "a": 2,
       "sol": "-x^2<0.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1070,7 +1070,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=x-2, em x>2, entao",
+      "q": "Se f'(x)=x-2, em x>2, então",
       "o": [
         "f e decrescente",
         "f e constante",
@@ -1079,7 +1079,7 @@
       ],
       "a": 3,
       "sol": "x-2>0.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1097,7 +1097,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=x-2, em x<2, entao",
+      "q": "Se f'(x)=x-2, em x<2, então",
       "o": [
         "f e decrescente",
         "f e crescente",
@@ -1106,7 +1106,7 @@
       ],
       "a": 0,
       "sol": "x-2<0.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1124,16 +1124,16 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=(x-1)(x+2), em x>1, entao",
+      "q": "Se f'(x)=(x-1)(x+2), em x>1, então",
       "o": [
         "f e decrescente",
         "f e crescente",
         "f e constante",
-        "nao se pode concluir"
+        "não se pode concluir"
       ],
       "a": 1,
       "sol": "Ambos os fatores sao positivos.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1151,16 +1151,16 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=(x-1)(x+2), em -2<x<1, entao",
+      "q": "Se f'(x)=(x-1)(x+2), em -2<x<1, então",
       "o": [
         "f e crescente",
         "f e constante",
         "f e decrescente",
-        "nao se pode concluir"
+        "não se pode concluir"
       ],
       "a": 2,
       "sol": "Os fatores tem sinais opostos.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1178,16 +1178,16 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=(x-1)(x+2), em x<-2, entao",
+      "q": "Se f'(x)=(x-1)(x+2), em x<-2, então",
       "o": [
         "f e decrescente",
         "f e constante",
-        "nao se pode concluir",
+        "não se pode concluir",
         "f e crescente"
       ],
       "a": 3,
       "sol": "Ambos os fatores sao negativos, produto positivo.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1205,16 +1205,16 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=0, em num intervalo inteiro, entao",
+      "q": "Se f'(x)=0, em num intervalo inteiro, então",
       "o": [
         "f e constante nesse intervalo",
         "f e crescente",
         "f e decrescente",
-        "f nao existe"
+        "f não existe"
       ],
       "a": 0,
       "sol": "Derivada nula em todo o intervalo implica constancia.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1241,7 +1241,7 @@
       ],
       "a": 1,
       "sol": "A derivada de x^4+C e 4x^3.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1268,7 +1268,7 @@
       ],
       "a": 2,
       "sol": "A derivada de 3x^2+C e 6x.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1295,7 +1295,7 @@
       ],
       "a": 3,
       "sol": "A derivada de 5x+C e 5.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1321,8 +1321,8 @@
         "x^2+2x+C"
       ],
       "a": 0,
-      "sol": "Derivando x^3+2x+C obtem-se 3x^2+2.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "sol": "Derivando x^3+2x+C obtém-se 3x^2+2.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1349,7 +1349,7 @@
       ],
       "a": 1,
       "sol": "A derivada e 2x-4.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",

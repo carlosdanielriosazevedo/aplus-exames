@@ -1869,8 +1869,8 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "anchor",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Taxa instantanea e derivada num ponto",
+    "cognitive": "Aplicação",
+    "focus": "Taxa instantânea e derivada num ponto",
     "q": "Para f(x)=x^2, quanto vale f'(0)?",
     "o": [
       "1",
@@ -1879,8 +1879,8 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "2"
     ],
     "a": 2,
-    "sol": "Derivando a expressao e substituindo x=0, obtem-se 0.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "sol": "Derivando a expressão e substituindo x=0, obtém-se 0.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "diagnostic"
     ],
@@ -1899,18 +1899,18 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "probe",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Taxa instantanea e derivada num ponto",
+    "cognitive": "Compreensão",
+    "focus": "Taxa instantânea e derivada num ponto",
     "q": "A derivada de f no ponto a representa",
     "o": [
-      "a taxa instantanea de variacao de f em a",
-      "uma taxa media em qualquer intervalo",
+      "a taxa instantânea de variação de f em a",
+      "uma taxa média em qualquer intervalo",
       "o valor f(a)",
-      "a area acumulada"
+      "a área acumulada"
     ],
     "a": 0,
-    "sol": "A derivada mede a variacao local instantanea.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "sol": "A derivada mede a variação local instantânea.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "diagnostic"
     ],
@@ -1929,9 +1929,9 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "anchor",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Funcao derivada",
-    "q": "Se f(x)=x^4, entao f'(x)=",
+    "cognitive": "Aplicação",
+    "focus": "função derivada",
+    "q": "Se f(x)=x^4, então f'(x)=",
     "o": [
       "x^4",
       "4x^3+1",
@@ -1939,8 +1939,8 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "0"
     ],
     "a": 2,
-    "sol": "Derivando termo a termo obtem-se 4x^3.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "sol": "Derivando termo a termo obtém-se 4x^3.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "diagnostic"
     ],
@@ -1959,18 +1959,18 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "probe",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Funcao derivada",
-    "q": "A funcao derivada f' associa a cada x do seu dominio",
+    "cognitive": "Compreensão",
+    "focus": "função derivada",
+    "q": "A função derivada f' associa a cada x do seu domínio",
     "o": [
-      "o declive da tangente ao grafico de f nesse x",
+      "o declive da tangente ao gráfico de f nesse x",
       "o valor f(x)",
-      "a area sob f",
-      "a taxa media desde 0"
+      "a área sob f",
+      "a taxa média desde 0"
     ],
     "a": 0,
-    "sol": "A funcao derivada recolhe as taxas instantaneas de variacao.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "sol": "A função derivada recolhe as taxas instantâneas de variação.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "diagnostic"
     ],
@@ -1989,14 +1989,14 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "anchor",
     "difficulty": 2,
-    "cognitive": "Interpretacao",
-    "focus": "Monotonia, extremos e otimizacao",
-    "q": "Se f'(x)=2x, entao junto de x=0 a situacao correta e",
+    "cognitive": "Interpretação",
+    "focus": "Monotonia, extremos e otimização",
+    "q": "Se f'(x)=2x, então junto de x=0 a situação correta é",
     "o": [
       "decrescente em ]-inf,0[ e crescente em ]0,+inf[",
-      "minimo em x=0",
-      "decrescente em ]-inf,0[ e crescente em ]0,+inf[; minimo em x=0.",
-      "nao se pode concluir nada"
+      "mínimo em x=0",
+      "decrescente em ]-inf,0[ e crescente em ]0,+inf[; mínimo em x=0.",
+      "não se pode concluir nada"
     ],
     "a": 2,
     "sol": "Analisa-se o sinal de f' antes e depois de 0.",
@@ -2019,8 +2019,8 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "probe",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Monotonia, extremos e otimizacao",
+    "cognitive": "Compreensão",
+    "focus": "Monotonia, extremos e otimização",
     "q": "Sabe-se que f'(x)>0 para todo o x de ]−2,3[. Como varia f nesse intervalo?",
     "o": [
       "crescente nesse intervalo",
@@ -2049,8 +2049,8 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "anchor",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Regras de derivacao",
+    "cognitive": "Aplicação",
+    "focus": "Regras de derivação",
     "q": "Deriva f(x)=x^5.",
     "o": [
       "x^5",
@@ -2059,8 +2059,8 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "0"
     ],
     "a": 2,
-    "sol": "Aplicando regra da potencia e linearidade obtem-se 5x^4.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "sol": "Aplicando regra da potência e linearidade obtém-se 5x^4.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "diagnostic"
     ],
@@ -2079,8 +2079,8 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "probe",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Regras de derivacao",
+    "cognitive": "Compreensão",
+    "focus": "Regras de derivação",
     "q": "A derivada de uma soma f+g e",
     "o": [
       "f'+g'",
@@ -2089,8 +2089,8 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "fg'"
     ],
     "a": 0,
-    "sol": "A derivacao e linear relativamente a soma.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "sol": "A derivação é linear relativamente à soma.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "diagnostic"
     ],
@@ -2109,9 +2109,9 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "anchor",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "Para f(x)=x^2, a tangente em x=1 tem equacao",
+    "cognitive": "Aplicação",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "Para f(x)=x^2, a tangente em x=1 tem equação",
     "o": [
       "y=2x+1",
       "y=1x+2",
@@ -2139,9 +2139,9 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "probe",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "A reta tangente ao grafico de f em x=a passa por",
+    "cognitive": "Compreensão",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "A reta tangente ao gráfico de f em x=a passa por",
     "o": [
       "(a,f(a))",
       "(a,f'(a))",
@@ -2149,7 +2149,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "(0,f(a))"
     ],
     "a": 0,
-    "sol": "O ponto de tangencia pertence ao grafico.",
+    "sol": "O ponto de tangência pertence ao gráfico.",
     "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
     "contexts": [
       "diagnostic"
@@ -2169,9 +2169,9 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "anchor",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Taxa media de variacao",
-    "q": "Para f(x)=x^2, qual e a taxa media de variacao entre x=1 e x=3?",
+    "cognitive": "Aplicação",
+    "focus": "taxa média de variação",
+    "q": "Para f(x)=x^2, qual é a taxa média de variação entre x=1 e x=3?",
     "o": [
       "5",
       "3",
@@ -2180,7 +2180,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     ],
     "a": 2,
     "sol": "(9-1)/(3-1)=4.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "diagnostic"
     ],
@@ -2199,9 +2199,9 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "probe",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Taxa media de variacao",
-    "q": "A taxa media de variacao de f entre a e b e",
+    "cognitive": "Compreensão",
+    "focus": "taxa média de variação",
+    "q": "A taxa média de variação de f entre a e b e",
     "o": [
       "(f(b)-f(a))/(b-a)",
       "(f(a)+f(b))/2",
@@ -2209,8 +2209,8 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "(b-a)/(f(b)-f(a))"
     ],
     "a": 0,
-    "sol": "E a variacao da funcao por unidade de variacao da variavel.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "sol": "É a variação da função por unidade de variação da variável.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "diagnostic"
     ],

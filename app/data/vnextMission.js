@@ -6301,8 +6301,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Taxa instantanea e derivada num ponto",
+    "cognitive": "Aplicação",
+    "focus": "Taxa instantânea e derivada num ponto",
     "q": "Para f(x)=x^2, quanto vale f'(1)?",
     "o": [
       "3",
@@ -6311,8 +6311,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2"
     ],
     "a": 3,
-    "sol": "Derivando a expressao e substituindo x=1, obtem-se 2.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "sol": "Derivando a expressão e substituindo x=1, obtém-se 2.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
     ],
@@ -6330,18 +6330,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Taxa instantanea e derivada num ponto",
+    "cognitive": "Compreensão",
+    "focus": "Taxa instantânea e derivada num ponto",
     "q": "Geometricamente, f'(a) representa",
     "o": [
       "o declive de qualquer secante",
-      "o declive da reta tangente ao grafico em x=a",
+      "o declive da reta tangente ao gráfico em x=a",
       "a ordenada do ponto",
       "a distancia a origem"
     ],
     "a": 1,
     "sol": "A derivada e o declive da tangente.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
     ],
@@ -6359,8 +6359,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Raciocinio",
-    "focus": "Taxa instantanea e derivada num ponto",
+    "cognitive": "Raciocínio",
+    "focus": "Taxa instantânea e derivada num ponto",
     "q": "Para f(x)=x^2, o limite lim_{h->0} [f(0+h)-f(0)]/h vale",
     "o": [
       "2",
@@ -6370,7 +6370,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 1,
     "sol": "Expandindo e simplificando, o quociente tende para 2a=0.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
     ],
@@ -6388,8 +6388,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Taxa instantanea e derivada num ponto",
+    "cognitive": "Aplicação",
+    "focus": "Taxa instantânea e derivada num ponto",
     "q": "Para f(x)=x^2, quanto vale f'(3)?",
     "o": [
       "6",
@@ -6398,8 +6398,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "12"
     ],
     "a": 0,
-    "sol": "Derivando a expressao e substituindo x=3, obtem-se 6.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "sol": "Derivando a expressão e substituindo x=3, obtém-se 6.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
     ],
@@ -6418,8 +6418,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Modelacao",
-    "focus": "Taxa instantanea e derivada num ponto",
-    "q": "A posicao e dada por s(t)=t^2. Qual e a velocidade instantanea em t=3?",
+    "focus": "Taxa instantânea e derivada num ponto",
+    "q": "A posição e dada por s(t)=t^2. Qual é a velocidade instantânea em t=3?",
     "o": [
       "6",
       "8",
@@ -6427,8 +6427,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "3"
     ],
     "a": 0,
-    "sol": "A velocidade e s'(t); avaliando em t=3, obtem-se 6.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "sol": "A velocidade e s'(t); avaliando em t=3, obtém-se 6.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
     ],
@@ -6446,8 +6446,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Taxa instantanea e derivada num ponto",
+    "cognitive": "Compreensão",
+    "focus": "Taxa instantânea e derivada num ponto",
     "q": "A definicao por limite de f'(a) e",
     "o": [
       "lim_{h->0} [f(a+h)+f(a)]/h",
@@ -6457,7 +6457,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 2,
     "sol": "E o limite do quociente incremental.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
     ],
@@ -6475,9 +6475,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Interpretacao",
-    "focus": "Taxa instantanea e derivada num ponto",
-    "q": "Num ponto x=2, sabe-se que f(2)=5 e f'(2)=3. Qual e o declive da tangente?",
+    "cognitive": "Interpretação",
+    "focus": "Taxa instantânea e derivada num ponto",
+    "q": "Num ponto x=2, sabe-se que f(2)=5 e f'(2)=3. Qual é o declive da tangente?",
     "o": [
       "5",
       "2",
@@ -6486,7 +6486,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 3,
     "sol": "Por definicao, o declive da tangente e f'(2)=3.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
     ],
@@ -6504,9 +6504,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-funcao-derivada",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Funcao derivada",
-    "q": "Se f(x)=5x^3, entao f'(x)=",
+    "cognitive": "Aplicação",
+    "focus": "função derivada",
+    "q": "Se f(x)=5x^3, então f'(x)=",
     "o": [
       "5x^3",
       "15x^2+1",
@@ -6514,8 +6514,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "15x^2"
     ],
     "a": 3,
-    "sol": "Derivando termo a termo obtem-se 15x^2.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "sol": "Derivando termo a termo obtém-se 15x^2.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
     ],
@@ -6533,8 +6533,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-funcao-derivada",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Funcao derivada",
+    "cognitive": "Compreensão",
+    "focus": "função derivada",
     "q": "Se f'(x)>0 num intervalo, f e",
     "o": [
       "decrescente",
@@ -6544,7 +6544,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 1,
     "sol": "Sinal positivo da derivada indica crescimento.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
     ],
@@ -6562,18 +6562,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-funcao-derivada",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Interpretacao",
-    "focus": "Funcao derivada",
-    "q": "Se f'(x)=2x, em x>0, entao",
+    "cognitive": "Interpretação",
+    "focus": "função derivada",
+    "q": "Se f'(x)=2x, em x>0, então",
     "o": [
-      "f e decrescente",
-      "f e constante",
-      "f e negativa",
-      "f e crescente"
+      "f é decrescente",
+      "f é constante",
+      "f é negativa",
+      "f é crescente"
     ],
     "a": 3,
     "sol": "Para x>0, 2x>0.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
     ],
@@ -6591,9 +6591,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-funcao-derivada",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Funcao derivada",
-    "q": "Se f(x)=2x^5, entao f'(x)=",
+    "cognitive": "Aplicação",
+    "focus": "função derivada",
+    "q": "Se f(x)=2x^5, então f'(x)=",
     "o": [
       "10x^4",
       "2x^5",
@@ -6601,8 +6601,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "0"
     ],
     "a": 0,
-    "sol": "Derivando termo a termo obtem-se 10x^4.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "sol": "Derivando termo a termo obtém-se 10x^4.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
     ],
@@ -6620,8 +6620,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-funcao-derivada",
     "year": "11.º",
     "difficulty": 4,
-    "cognitive": "Raciocinio",
-    "focus": "Funcao derivada",
+    "cognitive": "Raciocínio",
+    "focus": "função derivada",
     "q": "f'(x)=4x^3; uma possibilidade para f(x) e",
     "o": [
       "4x^4+C",
@@ -6631,7 +6631,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 1,
     "sol": "A derivada de x^4+C e 4x^3.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
     ],
@@ -6649,8 +6649,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-funcao-derivada",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Funcao derivada",
+    "cognitive": "Compreensão",
+    "focus": "função derivada",
     "q": "Se f'(x)<0 num intervalo, f e",
     "o": [
       "crescente",
@@ -6660,7 +6660,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 2,
     "sol": "Sinal negativo indica decrescimento.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
     ],
@@ -6678,18 +6678,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-funcao-derivada",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Interpretacao",
-    "focus": "Funcao derivada",
-    "q": "Se f'(x)=2x, em x<0, entao",
+    "cognitive": "Interpretação",
+    "focus": "função derivada",
+    "q": "Se f'(x)=2x, em x<0, então",
     "o": [
-      "f e decrescente",
-      "f e crescente",
-      "f e constante",
-      "f e positiva"
+      "f é decrescente",
+      "f é crescente",
+      "f é constante",
+      "f é positiva"
     ],
     "a": 0,
     "sol": "Para x<0, 2x<0.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
     ],
@@ -6707,14 +6707,14 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-monotonia-otimizacao",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Interpretacao",
-    "focus": "Monotonia, extremos e otimizacao",
-    "q": "Se f'(x)=-2x, entao junto de x=0 a situacao correta e",
+    "cognitive": "Interpretação",
+    "focus": "Monotonia, extremos e otimização",
+    "q": "Se f'(x)=-2x, então junto de x=0 a situação correta é",
     "o": [
       "crescente em ]-inf,0[ e decrescente em ]0,+inf[",
-      "maximo em x=0",
-      "nao se pode concluir nada",
-      "crescente em ]-inf,0[ e decrescente em ]0,+inf[; maximo em x=0."
+      "máximo em x=0",
+      "não se pode concluir nada",
+      "crescente em ]-inf,0[ e decrescente em ]0,+inf[; máximo em x=0."
     ],
     "a": 3,
     "sol": "Analisa-se o sinal de f' antes e depois de 0.",
@@ -6736,8 +6736,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-monotonia-otimizacao",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Monotonia, extremos e otimizacao",
+    "cognitive": "Compreensão",
+    "focus": "Monotonia, extremos e otimização",
     "q": "Sabe-se que f'(x)<0 para todo o x de ]1,5[. Como varia f nesse intervalo?",
     "o": [
       "crescente",
@@ -6765,13 +6765,13 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-monotonia-otimizacao",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Raciocinio",
-    "focus": "Monotonia, extremos e otimizacao",
+    "cognitive": "Raciocínio",
+    "focus": "Monotonia, extremos e otimização",
     "q": "No intervalo [-2,3], para f(x)=x^2, os extremos absolutos sao",
     "o": [
-      "maximo 9 em x=3",
-      "minimo 0 em x=0",
-      "maximo 9 em x=3; minimo 0 em x=0.",
+      "máximo 9 em x=3",
+      "mínimo 0 em x=0",
+      "máximo 9 em x=3; mínimo 0 em x=0.",
       "apenas o ponto onde f'=0"
     ],
     "a": 2,
@@ -6794,17 +6794,17 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-monotonia-otimizacao",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Monotonia, extremos e otimizacao",
+    "cognitive": "Aplicação",
+    "focus": "Monotonia, extremos e otimização",
     "q": "Para f(x)=x^2-4x+5, o extremo relevante ocorre em",
     "o": [
-      "x=2, sendo minimo e f(2)=1.",
-      "x=2, sendo minimo mas com outro valor",
+      "x=2, sendo mínimo e f(2)=1.",
+      "x=2, sendo mínimo mas com outro valor",
       "x=0",
-      "nao existe extremo"
+      "não existe extremo"
     ],
     "a": 0,
-    "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+    "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parábola.",
     "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
     "contexts": [
       "mission"
@@ -6823,13 +6823,13 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-monotonia-otimizacao",
     "year": "11.º",
     "difficulty": 4,
-    "cognitive": "Raciocinio",
-    "focus": "Monotonia, extremos e otimizacao",
-    "q": "Se f'(x)>0 em ]-inf,1[, f'(1)=0 e f'(x)<0 em ]1,+inf[, entao",
+    "cognitive": "Raciocínio",
+    "focus": "Monotonia, extremos e otimização",
+    "q": "Se f'(x)>0 em ]-inf,1[, f'(1)=0 e f'(x)<0 em ]1,+inf[, então",
     "o": [
-      "f tem minimo local em x=1",
-      "f tem maximo local em x=1",
-      "f e crescente em todo o dominio",
+      "f tem mínimo local em x=1",
+      "f tem máximo local em x=1",
+      "f é crescente em todo o domínio",
       "f(1)=0"
     ],
     "a": 1,
@@ -6852,11 +6852,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-monotonia-otimizacao",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Monotonia, extremos e otimizacao",
+    "cognitive": "Compreensão",
+    "focus": "Monotonia, extremos e otimização",
     "q": "Um ponto onde f'(a)=0 chama-se frequentemente",
     "o": [
-      "assintota",
+      "assíntota",
       "zero obrigatorio de f",
       "ponto estacionario",
       "ponto de descontinuidade"
@@ -6882,8 +6882,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Modelacao",
-    "focus": "Monotonia, extremos e otimizacao",
-    "q": "Um retangulo tem perimetro 20. Se um lado mede x, a area e A(x)=x(10-x). A area maxima ocorre para",
+    "focus": "Monotonia, extremos e otimização",
+    "q": "Um retangulo tem perimetro 20. Se um lado mede x, a área e A(x)=x(10-x). A área maxima ocorre para",
     "o": [
       "x=10",
       "x=2",
@@ -6910,8 +6910,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Regras de derivacao",
+    "cognitive": "Aplicação",
+    "focus": "Regras de derivação",
     "q": "Deriva f(x)=x^7.",
     "o": [
       "x^7",
@@ -6920,8 +6920,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "7x^6"
     ],
     "a": 3,
-    "sol": "Aplicando regra da potencia e linearidade obtem-se 7x^6.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "sol": "Aplicando regra da potência e linearidade obtém-se 7x^6.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
     ],
@@ -6939,8 +6939,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Regras de derivacao",
+    "cognitive": "Compreensão",
+    "focus": "Regras de derivação",
     "q": "A derivada de cf, com c constante, e",
     "o": [
       "c'f",
@@ -6950,7 +6950,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 1,
     "sol": "A constante multiplica a derivada.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
     ],
@@ -6968,8 +6968,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Aplicacao",
-    "focus": "Regras de derivacao",
+    "cognitive": "Aplicação",
+    "focus": "Regras de derivação",
     "q": "Usando a regra do produto, deriva f(x)=x(x+1).",
     "o": [
       "2x+1",
@@ -6978,8 +6978,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "0"
     ],
     "a": 0,
-    "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 2x+1.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtém-se 2x+1.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
     ],
@@ -6997,8 +6997,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Regras de derivacao",
+    "cognitive": "Aplicação",
+    "focus": "Regras de derivação",
     "q": "Deriva f(x)=3x^4.",
     "o": [
       "12x^3",
@@ -7007,8 +7007,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "0"
     ],
     "a": 0,
-    "sol": "Aplicando regra da potencia e linearidade obtem-se 12x^3.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "sol": "Aplicando regra da potência e linearidade obtém-se 12x^3.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
     ],
@@ -7026,9 +7026,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 4,
-    "cognitive": "Raciocinio",
-    "focus": "Regras de derivacao",
-    "q": "Se f'(x)=2x e g'(x)=3, entao (f+g)'(x)=",
+    "cognitive": "Raciocínio",
+    "focus": "Regras de derivação",
+    "q": "Se f'(x)=2x e g'(x)=3, então (f+g)'(x)=",
     "o": [
       "2x+3",
       "6x",
@@ -7037,7 +7037,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 0,
     "sol": "Somam-se as derivadas.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
     ],
@@ -7055,8 +7055,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Regras de derivacao",
+    "cognitive": "Compreensão",
+    "focus": "Regras de derivação",
     "q": "A derivada de x^n, para n inteiro positivo, e",
     "o": [
       "x^(n-1)",
@@ -7065,8 +7065,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "(n-1)x^n"
     ],
     "a": 2,
-    "sol": "E a regra da potencia.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "sol": "E a regra da potência.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
     ],
@@ -7084,8 +7084,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Aplicacao",
-    "focus": "Regras de derivacao",
+    "cognitive": "Aplicação",
+    "focus": "Regras de derivação",
     "q": "Usando a regra do produto, deriva f(x)=x^2(x+1).",
     "o": [
       "3x^2-2x",
@@ -7094,8 +7094,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "0"
     ],
     "a": 1,
-    "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 3x^2+2x.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtém-se 3x^2+2x.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
     ],
@@ -7113,9 +7113,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "Para f(x)=x^2, a tangente em x=2 tem equacao",
+    "cognitive": "Aplicação",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "Para f(x)=x^2, a tangente em x=2 tem equação",
     "o": [
       "y=4x+4",
       "y=2x",
@@ -7142,8 +7142,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Reta tangente e interpretacao geometrica",
+    "cognitive": "Compreensão",
+    "focus": "Reta tangente e interpretação geométrica",
     "q": "O declive da tangente em x=a e",
     "o": [
       "f(a)",
@@ -7171,9 +7171,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Raciocinio",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "Sabendo que f(2)=5 e f'(2)=3, qual e a reta tangente?",
+    "cognitive": "Raciocínio",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "Sabendo que f(2)=5 e f'(2)=3, qual é a reta tangente?",
     "o": [
       "y=3x+5",
       "y=3x-1",
@@ -7200,9 +7200,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "Para f(x)=x^2, a tangente em x=-1 tem equacao",
+    "cognitive": "Aplicação",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "Para f(x)=x^2, a tangente em x=-1 tem equação",
     "o": [
       "y=-2x-1",
       "y=-2x+1",
@@ -7230,8 +7230,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Modelacao",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "Sabendo que f(2)=5 e f'(2)=3, pela aproximacao linear f(2,1) e",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "Sabendo que f(2)=5 e f'(2)=3, pela aproximação linear f(2,1) e",
     "o": [
       "5,03",
       "aproximadamente 5,3",
@@ -7258,9 +7258,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "Uma equacao da tangente em x=a e",
+    "cognitive": "Compreensão",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "Uma equação da tangente em x=a e",
     "o": [
       "y-a=f(a)(x-f'(a))",
       "y=f(a)x+a",
@@ -7287,9 +7287,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Interpretacao",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "A tangente ao grafico em x=2 e y=4x-3. Entao f'(2)=",
+    "cognitive": "Interpretação",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "A tangente ao gráfico em x=2 e y=4x-3. Então f'(2)=",
     "o": [
       "5",
       "2",
@@ -7316,9 +7316,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-taxa-media",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Taxa media de variacao",
-    "q": "Para f(x)=x^2, qual e a taxa media de variacao entre x=2 e x=5?",
+    "cognitive": "Aplicação",
+    "focus": "taxa média de variação",
+    "q": "Para f(x)=x^2, qual é a taxa média de variação entre x=2 e x=5?",
     "o": [
       "8",
       "6",
@@ -7327,7 +7327,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 3,
     "sol": "(25-4)/(5-2)=7.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
     ],
@@ -7345,18 +7345,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-taxa-media",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Taxa media de variacao",
-    "q": "Geometricamente, a taxa media de variacao entre dois pontos do grafico e",
+    "cognitive": "Compreensão",
+    "focus": "taxa média de variação",
+    "q": "Geometricamente, a taxa média de variação entre dois pontos do gráfico e",
     "o": [
       "o declive da tangente no primeiro ponto",
       "o declive da reta secante",
-      "a area sob o grafico",
-      "a ordenada media"
+      "a área sob o gráfico",
+      "a ordenada média"
     ],
     "a": 1,
     "sol": "A secante passa pelos dois pontos considerados.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
     ],
@@ -7375,8 +7375,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Modelacao",
-    "focus": "Taxa media de variacao",
-    "q": "Uma grandeza de temperatura passa de 12 para 20 em 4 unidades de tempo. Qual e a taxa media?",
+    "focus": "taxa média de variação",
+    "q": "Uma grandeza de temperatura passa de 12 para 20 em 4 unidades de tempo. Qual é a taxa média?",
     "o": [
       "8",
       "4",
@@ -7385,7 +7385,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 2,
     "sol": "(20-12)/4=2 graus por hora.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
     ],
@@ -7403,9 +7403,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-taxa-media",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Taxa media de variacao",
-    "q": "Para f(x)=x^2, qual e a taxa media de variacao entre x=0 e x=4?",
+    "cognitive": "Aplicação",
+    "focus": "taxa média de variação",
+    "q": "Para f(x)=x^2, qual é a taxa média de variação entre x=0 e x=4?",
     "o": [
       "4",
       "5",
@@ -7414,7 +7414,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 0,
     "sol": "(16-0)/(4-0)=4.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
     ],
@@ -7432,9 +7432,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-taxa-media",
     "year": "11.º",
     "difficulty": 4,
-    "cognitive": "Raciocinio",
-    "focus": "Taxa media de variacao",
-    "q": "Se f(1)=5 e a taxa media em [1,4] e 3, quanto vale f(4)?",
+    "cognitive": "Raciocínio",
+    "focus": "taxa média de variação",
+    "q": "Se f(1)=5 e a taxa média em [1,4] e 3, quanto vale f(4)?",
     "o": [
       "14",
       "15",
@@ -7443,7 +7443,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 0,
     "sol": "[f(4)-5]/(4-1)=3, logo f(4)=14.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
     ],
@@ -7461,9 +7461,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-taxa-media",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Taxa media de variacao",
-    "q": "Se f mede distancia em km e t mede tempo em horas, a taxa media tem unidades",
+    "cognitive": "Compreensão",
+    "focus": "taxa média de variação",
+    "q": "Se f mede distancia em km e t mede tempo em horas, a taxa média tem unidades",
     "o": [
       "km.h",
       "h/km",
@@ -7472,7 +7472,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 2,
     "sol": "As unidades da taxa sao unidades de saida por unidades de entrada.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
     ],
@@ -7491,8 +7491,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Modelacao",
-    "focus": "Taxa media de variacao",
-    "q": "Uma grandeza de volume passa de 100 para 160 em 3 unidades de tempo. Qual e a taxa media?",
+    "focus": "taxa média de variação",
+    "q": "Uma grandeza de volume passa de 100 para 160 em 3 unidades de tempo. Qual é a taxa média?",
     "o": [
       "60",
       "3",
@@ -7501,7 +7501,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 3,
     "sol": "(160-100)/3=20 litros por minuto.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
     ],
