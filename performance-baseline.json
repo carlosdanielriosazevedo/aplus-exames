@@ -1,0 +1,202 @@
+{
+  "generatedAt": "2026-10-18T22:12:09.854Z",
+  "totalJsBytes": 5549774,
+  "totalGzipBytes": 1344096,
+  "chunkCount": 68,
+  "largestChunks": [
+    {
+      "file": "5282.633456d7c3e2356e.js",
+      "bytes": 1195287,
+      "gzipBytes": 197399
+    },
+    {
+      "file": "2343.63c68e53a6f061cb.js",
+      "bytes": 881475,
+      "gzipBytes": 165548
+    },
+    {
+      "file": "8000.89a7d7c413b3ce2e.js",
+      "bytes": 602667,
+      "gzipBytes": 166934
+    },
+    {
+      "file": "8919.5f92630429356fdd.js",
+      "bytes": 439914,
+      "gzipBytes": 107886
+    },
+    {
+      "file": "1074.bd3f05e8fd7fe691.js",
+      "bytes": 315660,
+      "gzipBytes": 83123
+    },
+    {
+      "file": "2390.575fd3f8a4a3d352.js",
+      "bytes": 297390,
+      "gzipBytes": 90640
+    },
+    {
+      "file": "5467.b130e31bb2dff025.js",
+      "bytes": 280931,
+      "gzipBytes": 72909
+    },
+    {
+      "file": "1255-fc6c00ab2f765339.js",
+      "bytes": 173688,
+      "gzipBytes": 46374
+    },
+    {
+      "file": "4bd1b696-f785427dddbba9fb.js",
+      "bytes": 173020,
+      "gzipBytes": 54242
+    },
+    {
+      "file": "3922.b64f315d38579dc0.js",
+      "bytes": 168368,
+      "gzipBytes": 48482
+    },
+    {
+      "file": "framework-f31701c9d93f12a4.js",
+      "bytes": 139835,
+      "gzipBytes": 44778
+    },
+    {
+      "file": "main-ad041aa8a0967938.js",
+      "bytes": 126212,
+      "gzipBytes": 36203
+    },
+    {
+      "file": "polyfills-42372ed130431b0a.js",
+      "bytes": 112594,
+      "gzipBytes": 39520
+    },
+    {
+      "file": "4574.697219dcd278b29c.js",
+      "bytes": 98610,
+      "gzipBytes": 17117
+    },
+    {
+      "file": "4052.f712da56cf6e6557.js",
+      "bytes": 96450,
+      "gzipBytes": 25605
+    }
+  ],
+  "routePageChunks": [
+    {
+      "file": "app/page-da788f5ad214e5c8.js",
+      "bytes": 6285,
+      "gzipBytes": 2338
+    }
+  ],
+  "routePageMetrics": {
+    "/": {
+      "bytes": 6285,
+      "gzipBytes": 2338,
+      "chunks": [
+        {
+          "file": "app/page-da788f5ad214e5c8.js",
+          "bytes": 6285,
+          "gzipBytes": 2338
+        }
+      ]
+    },
+    "/portugues-mini-exame": {
+      "bytes": 3645,
+      "gzipBytes": 1382,
+      "chunks": [
+        {
+          "file": "app/portugues-mini-exame/page-48a245f1f345c7df.js",
+          "bytes": 3645,
+          "gzipBytes": 1382
+        }
+      ]
+    }
+  },
+  "routeBundles": {
+    "/": {
+      "bytes": 359043,
+      "gzipBytes": 105943,
+      "chunks": [
+        {
+          "file": "static/chunks/webpack-10947a854ae6d527.js",
+          "bytes": 5534
+        },
+        {
+          "file": "static/chunks/4bd1b696-f785427dddbba9fb.js",
+          "bytes": 173020
+        },
+        {
+          "file": "static/chunks/1255-fc6c00ab2f765339.js",
+          "bytes": 173688
+        },
+        {
+          "file": "static/chunks/main-app-b4b7046f345acff6.js",
+          "bytes": 516
+        },
+        {
+          "file": "static/chunks/app/page-da788f5ad214e5c8.js",
+          "bytes": 6285
+        }
+      ]
+    },
+    "/portugues-mini-exame": {
+      "bytes": 459187,
+      "gzipBytes": 136631,
+      "chunks": [
+        {
+          "file": "static/chunks/webpack-10947a854ae6d527.js",
+          "bytes": 5534
+        },
+        {
+          "file": "static/chunks/4bd1b696-f785427dddbba9fb.js",
+          "bytes": 173020
+        },
+        {
+          "file": "static/chunks/1255-fc6c00ab2f765339.js",
+          "bytes": 173688
+        },
+        {
+          "file": "static/chunks/main-app-b4b7046f345acff6.js",
+          "bytes": 516
+        },
+        {
+          "file": "static/chunks/8084-acec3e40ea3d7ba8.js",
+          "bytes": 28957
+        },
+        {
+          "file": "static/chunks/314-af4aaeb0d27eddf7.js",
+          "bytes": 37938
+        },
+        {
+          "file": "static/chunks/4414-c714e654a1a33c2d.js",
+          "bytes": 35889
+        },
+        {
+          "file": "static/chunks/app/portugues-mini-exame/page-48a245f1f345c7df.js",
+          "bytes": 3645
+        }
+      ]
+    }
+  },
+  "budgets": {
+    "/": 665600,
+    "/portugues-mini-exame": 512000
+  },
+  "homeBundleSignatures": {
+    "physicsChemistryHeavy": {
+      "matches": [],
+      "present": false
+    },
+    "constructedResponseGrader": {
+      "matches": [],
+      "present": false
+    },
+    "constructedResponseBank": {
+      "matches": [],
+      "present": false
+    },
+    "portugueseHeavy": {
+      "matches": [],
+      "present": false
+    }
+  }
+}

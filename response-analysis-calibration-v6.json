@@ -1,0 +1,190 @@
+{
+  "invariantCases": 52,
+  "seedAnswers": 13,
+  "totalProtectedCases": 367,
+  "rows": [
+    {
+      "subject": "portuguese",
+      "itemId": "PT639-FND-311",
+      "profile": "student-shorthand",
+      "minScore": 0.16,
+      "response": "A ordem ajuda a perceber melhor: problema -> alternativas -> condições. Fica mais claro e organizado.",
+      "scores": {
+        "base": 0.3923076923076923,
+        "accentless": 0.3923076923076923,
+        "noisy": 0.3923076923076923,
+        "contradicted": 0.16153846153846155,
+        "corrected": 0.4076923076923077
+      }
+    },
+    {
+      "subject": "portuguese",
+      "itemId": "PT639-FND-313",
+      "profile": "student-shorthand",
+      "minScore": 0.16,
+      "response": "As razoes dão beneficios concretos e por isso justificam/sustentam a tese.",
+      "scores": {
+        "base": 0.43846153846153846,
+        "accentless": 0.43846153846153846,
+        "noisy": 0.43846153846153846,
+        "contradicted": 0.3230769230769231,
+        "corrected": 0.43846153846153846
+      }
+    },
+    {
+      "subject": "portuguese",
+      "itemId": "PT639-FND-315",
+      "profile": "student-shorthand",
+      "minScore": 0.16,
+      "response": "'Esta iniciativa' = horta; 'por isso' = consequencia. Liga as frases e dá coesao.",
+      "scores": {
+        "base": 0.1846153846153846,
+        "accentless": 0.26153846153846155,
+        "noisy": 0.1846153846153846,
+        "contradicted": 0,
+        "corrected": 0.1846153846153846
+      }
+    },
+    {
+      "subject": "portuguese",
+      "itemId": "PT639-FND-317",
+      "profile": "student-shorthand",
+      "minScore": 0.16,
+      "response": "O pronome 'o' refere-se ao relatorio. Evita repetir e mantem a referencia.",
+      "scores": {
+        "base": 0.1846153846153846,
+        "accentless": 0.26153846153846155,
+        "noisy": 0.1846153846153846,
+        "contradicted": 0.1846153846153846,
+        "corrected": 0.1846153846153846
+      }
+    },
+    {
+      "subject": "portuguese",
+      "itemId": "PT639-FND-319",
+      "profile": "student-shorthand",
+      "minScore": 0.16,
+      "response": "É predicativo do CD: diz uma propriedade da proposta, que é 'útil'.",
+      "scores": {
+        "base": 0.36153846153846153,
+        "accentless": 0.36153846153846153,
+        "noisy": 0.36153846153846153,
+        "contradicted": 0.24615384615384617,
+        "corrected": 0.4461538461538461
+      }
+    },
+    {
+      "subject": "portuguese",
+      "itemId": "PT639-FND-322",
+      "profile": "student-shorthand",
+      "minScore": 0.16,
+      "response": "1a = temporal; 2a = relativa restritiva, porque limita qual atividade.",
+      "scores": {
+        "base": 0.2846153846153846,
+        "accentless": 0.36153846153846153,
+        "noisy": 0.2846153846153846,
+        "contradicted": 0.36153846153846153,
+        "corrected": 0.36153846153846153
+      }
+    },
+    {
+      "subject": "physics-chemistry-a",
+      "itemId": "FQA-R-ELEM-01",
+      "profile": "student-shorthand",
+      "minScore": 0.22,
+      "response": "Transições eletrónicas -> fotões com energias específicas. Cada elemento tem níveis diferentes, logo espectro próprio.",
+      "scores": {
+        "base": 1,
+        "accentless": 1,
+        "noisy": 1,
+        "contradicted": 0.31,
+        "corrected": 1
+      }
+    },
+    {
+      "subject": "physics-chemistry-a",
+      "itemId": "FQA-R-MAT-01",
+      "profile": "student-shorthand",
+      "minScore": 0.22,
+      "response": "Pipeta p/ aliquota -> balão volumetrico -> água até ao traço -> homogeneizar.",
+      "scores": {
+        "base": 0.52,
+        "accentless": 0.52,
+        "noisy": 0.52,
+        "contradicted": 0.11000000000000001,
+        "corrected": 0.52
+      }
+    },
+    {
+      "subject": "physics-chemistry-a",
+      "itemId": "FQA-R-ENE-01",
+      "profile": "student-shorthand",
+      "minScore": 0.22,
+      "response": "Medir m, h e v em 2 pontos; calcular Em e comparar tendo em conta a incerteza.",
+      "scores": {
+        "base": 0.47500000000000003,
+        "accentless": 0.47500000000000003,
+        "noisy": 0.47500000000000003,
+        "contradicted": 0.47500000000000003,
+        "corrected": 0.47500000000000003
+      }
+    },
+    {
+      "subject": "physics-chemistry-a",
+      "itemId": "FQA-R-MEC-01",
+      "profile": "student-shorthand",
+      "minScore": 0.22,
+      "response": "declive v(t)=aceleração; área algébrica=deslocamento; distância soma módulos das áreas.",
+      "scores": {
+        "base": 0.72,
+        "accentless": 0.72,
+        "noisy": 0.72,
+        "contradicted": 0.5,
+        "corrected": 0.72
+      }
+    },
+    {
+      "subject": "physics-chemistry-a",
+      "itemId": "FQA-R-WAV-01",
+      "profile": "student-shorthand",
+      "minScore": 0.22,
+      "response": "Maior distancia = menor erro relativo no tempo; repetir medidas -> média + dispersão.",
+      "scores": {
+        "base": 0.51,
+        "accentless": 0.51,
+        "noisy": 0.51,
+        "contradicted": 0.29,
+        "corrected": 0.51
+      }
+    },
+    {
+      "subject": "physics-chemistry-a",
+      "itemId": "FQA-R-EQ-01",
+      "profile": "student-shorthand",
+      "minScore": 0.22,
+      "response": "Aquecer favorece endotérmico. Catalisador acelera ida+volta, não muda Kc nem composição final.",
+      "scores": {
+        "base": 0.8,
+        "accentless": 0.8,
+        "noisy": 0.8,
+        "contradicted": 0.32999999999999996,
+        "corrected": 1
+      }
+    },
+    {
+      "subject": "physics-chemistry-a",
+      "itemId": "FQA-R-AQ-01",
+      "profile": "student-shorthand",
+      "minScore": 0.22,
+      "response": "Equivalência = proporção estequiométrica. Pode ver-se por indicador/curva pH; não é sempre pH 7.",
+      "scores": {
+        "base": 0.45,
+        "accentless": 0.45,
+        "noisy": 0.45,
+        "contradicted": 0.71,
+        "corrected": 0.71
+      }
+    }
+  ],
+  "failures": []
+}

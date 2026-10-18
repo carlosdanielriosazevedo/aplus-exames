@@ -214,6 +214,12 @@ for(const subject of [
     await page.getByRole("button",{name:"Começar diagnóstico",exact:true}).click();
     for(let index=0;index<2;index++){
       await expect(page.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
+      if(index===0){
+        // Paridade entre disciplinas: mesmo contador x/N e uma única saída «Guardar e sair».
+        await expect(page.locator(".sessionTop span").last()).toHaveText(/^\d+\/\d+ · \d+%$/u);
+        await expect(page.getByRole("button",{name:"Guardar e sair",exact:true})).toHaveCount(1);
+        await expect(page.getByRole("button",{name:"Sair da sessão",exact:true})).toHaveCount(0);
+      }
       const options=page.locator(".opts button:visible, .portugueseOptions button:visible");
       if(await options.count())await options.first().click();
       else{
