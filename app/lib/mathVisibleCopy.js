@@ -28,7 +28,7 @@ const REPLACEMENTS=[
   [/\bentao\b/giu,"então"],
   [/\bdominio\b/giu,"domínio"],
   [/\bpotencias\b/giu,"potências"],
-  [/\bpotencia\b/giu,"potência"],
+  [/\bpotencia(?![\p{L}\p{M}])/giu,"potência"],
   [/\btangencia\b/giu,"tangência"],
   [/\bavaliacao\b/giu,"avaliação"],
   [/\bderivacoes\b/giu,"derivações"],
