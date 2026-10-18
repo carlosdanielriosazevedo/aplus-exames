@@ -3055,7 +3055,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Reta tangente e interpretação geométrica",
-    "q": "A tangente ao gráfico em x=1 e y=-2x+7. então f'(1)=",
+    "q": "A tangente ao gráfico em x=1 e y=-2x+7. Então f'(1)=",
     "o": [
       "-2",
       "5",

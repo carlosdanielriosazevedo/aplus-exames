@@ -7289,7 +7289,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Reta tangente e interpretação geométrica",
-    "q": "A tangente ao gráfico em x=2 e y=4x-3. então f'(2)=",
+    "q": "A tangente ao gráfico em x=2 e y=4x-3. Então f'(2)=",
     "o": [
       "5",
       "2",
