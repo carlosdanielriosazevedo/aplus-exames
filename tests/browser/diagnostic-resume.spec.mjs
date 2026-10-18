@@ -2,6 +2,8 @@ import {test,expect} from "@playwright/test";
 import {DIAGNOSTIC_BLUEPRINT} from "../../app/data/content.js";
 import {diagnosticAnchor,emptyScores} from "../../app/lib/engine.js";
 import {createDiagnosticDraft,transactDiagnosticAnswer} from "../../app/lib/diagnosticRecovery.js";
+import {PORTUGUESE_ITEMS} from "../../app/data/portugueseContent.js";
+import {PHYSICS_CHEMISTRY_A_ITEMS} from "../../app/data/physicsChemistryFoundation.js";
 
 const SUBJECTS=[
   {id:"math-a",marker:"AVALIAÇÃO INICIAL · MATEMÁTICA A · PROVA 635"},
@@ -36,7 +38,8 @@ function configuredState(subjectId){
 function pausedSubjectState(subjectId,current=2){
   const state=configuredState(subjectId);
   const now=Date.now();
-  const itemIds=Array.from({length:Math.max(4,current+1)},(_,index)=>`resume-${subjectId}-item-${index+1}`);
+  const sourceItems=subjectId==="portuguese"?PORTUGUESE_ITEMS:PHYSICS_CHEMISTRY_A_ITEMS;
+  const itemIds=sourceItems.slice(0,Math.max(4,current+1)).map(item=>item.id);
   state.subjectProgress[subjectId]={
     ...state.subjectProgress[subjectId],
     lastPosition:{
@@ -139,17 +142,26 @@ test("Matemática A · depois de duas respostas o draft é retomado após reload
 });
 
 for(const subjectId of ["portuguese","physics-chemistry-a"]){
-  test(`${subjectId} · depois de duas respostas a sessão pausada sobrevive ao reload`,async({page})=>{
+  test(`${subjectId} · duas respostas guardadas e regresso direto à pergunta após reload`,async({page})=>{
     await seed(page,pausedSubjectState(subjectId,2));
     await page.goto("/");
-    await expect(page.getByRole("button",{name:"Aprender"})).toBeVisible({timeout:30_000});
-    let current=await page.evaluate(id=>JSON.parse(localStorage.getItem("a25")).subjectProgress[id].lastPosition.current,subjectId);
-    expect(current).toBe(2);
+    const submit=page.getByRole("button",{name:"Responder",exact:true});
+    await expect(submit).toBeVisible({timeout:30_000});
+    const snapshot=await page.evaluate(id=>{
+      const saved=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+      return {current:saved?.current,results:saved?.results?.length,itemId:saved?.itemIds?.[saved?.current]};
+    },subjectId);
+    expect(snapshot.current).toBe(2);
+    expect(snapshot.results).toBe(2);
+    expect(snapshot.itemId).toBeTruthy();
 
     await page.reload();
-    await expect(page.getByRole("button",{name:"Aprender"})).toBeVisible({timeout:30_000});
-    current=await page.evaluate(id=>JSON.parse(localStorage.getItem("a25")).subjectProgress[id].lastPosition.current,subjectId);
-    expect(current).toBe(2);
+    await expect(submit).toBeVisible({timeout:30_000});
+    const restored=await page.evaluate(id=>{
+      const saved=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+      return {current:saved?.current,results:saved?.results?.length,itemId:saved?.itemIds?.[saved?.current]};
+    },subjectId);
+    expect(restored).toEqual(snapshot);
     await expectNoSubjectSelector(page);
   });
 }
