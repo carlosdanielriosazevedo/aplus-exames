@@ -372,8 +372,7 @@ export default function App(){
       const activeSubjectConfigured=!!activeSubjectId
         &&(recoveredState.selectedSubjectIds||[]).includes(activeSubjectId)
         &&(recoveredState.subjectSettings?.[activeSubjectId]?.profileConfigured===true||recoveredState.onboardingSharedProfileDone===true);
-      if(subjectPaused&&["portuguese","physics-chemistry-a"].includes(activeSubjectId)&&subjectProgressFor(recoveredState,activeSubjectId).lastPosition?.results?.length>0)setScreen("resumeSubject");
-      else if(activeSubjectDiagnosticDone(recoveredState)||subjectPaused)setScreen("home");
+      if(activeSubjectDiagnosticDone(recoveredState)||subjectPaused)setScreen("home");
       else setScreen(activeSubjectConfigured?"diag":"welcome");
     }
     setHydrated(true);
@@ -467,8 +466,6 @@ export default function App(){
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
   if(screen==="subjectManager")return <SubjectManager s={s} setS={setS} go={go}/>;
-  if(screen==="resumeSubject"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="resume"/>;
-  if(screen==="resumeSubject"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="resume"/>;
   if(["home","train","progress","exams"].includes(screen)&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view={screen}/>;
   if(["home","train","progress","exams"].includes(screen)&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view={screen}/>;
   if(screen==="reviewMatter"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="reviewMatter"/>;
