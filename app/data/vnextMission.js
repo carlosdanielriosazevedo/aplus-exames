@@ -14422,7 +14422,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
-    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
     "q": "Se z=2(cosπ/6+i sinπ/6), então z² tem módulo...",
     "o": [
       "2.",
@@ -14451,7 +14451,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
-    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
     "q": "Se z1=r1(cosα+i sinα) e z2=r2(cosβ+i sinβ), então um argumento de z1z2 é...",
     "o": [
       "α−β.",
@@ -14480,7 +14480,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
-    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
     "q": "As soluções de z²=1 são...",
     "o": [
       "±1.",
@@ -14509,7 +14509,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
-    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
     "q": "Se z=2(cos(π/6)+i sin(π/6)), um argumento de z² é...",
     "o": [
       "π/6.",
@@ -14538,7 +14538,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 4,
     "cognitive": "Interpretação",
-    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
     "q": "Multiplicar por um complexo de módulo 2 e argumento π/3 corresponde geometricamente a...",
     "o": [
       "uma dilatação de fator 2 e rotação de π/3.",
@@ -14567,7 +14567,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
-    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
     "q": "No quociente z1/z2, com z2≠0, o módulo é...",
     "o": [
       "r1r2.",
@@ -14596,7 +14596,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
-    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
     "q": "As soluções de z²=i têm módulo...",
     "o": [
       "√2.",
