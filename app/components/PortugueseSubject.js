@@ -1,5 +1,5 @@
 "use client";
-import {useState} from "react";
+import {useEffect,useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import PortugueseLearnPanel from "./PortugueseLearnPanel";
 import StudyModeHub from "./StudyModeHub";
@@ -114,7 +114,7 @@ function portugueseItemInScope(item,currentYear,scopeIds){
   return scopeIds.includes(`domain:${item.domain}`);
 }
 
-function PortugueseSubject({s,setS,go,view="home"}){
+function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
   const [session,setSession]=useState(null);
   const [answer,setAnswer]=useState(null);
   const [feedback,setFeedback]=useState(null);
@@ -223,6 +223,10 @@ function PortugueseSubject({s,setS,go,view="home"}){
     const restored=saved.currentResult?.final?saved.currentResult:restorePortugueseRubricEvidence(items[current],saved.currentResult);
     setAnswer(saved.currentAnswer??restored?.responseText??null);setFeedback(restored);setEditingCriterionId(null);
   }
+
+  useEffect(()=>{
+    if(autoResumeDiagnostic&&progress.lastPosition?.kind==="diagnostic")resume();
+  },[]);
 
   function resetPortuguese(){
     if(!window.confirm("Repor apenas o progresso de Português? O progresso de Matemática A não será alterado."))return;
