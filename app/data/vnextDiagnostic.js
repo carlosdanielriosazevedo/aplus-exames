@@ -1869,7 +1869,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "anchor",
     "difficulty": 2,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "Taxa instantânea e derivada num ponto",
     "q": "Para f(x)=x^2, quanto vale f'(0)?",
     "o": [
@@ -1899,7 +1899,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "probe",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "Taxa instantânea e derivada num ponto",
     "q": "A derivada de f no ponto a representa",
     "o": [
@@ -1929,7 +1929,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "anchor",
     "difficulty": 2,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "função derivada",
     "q": "Se f(x)=x^4, então f'(x)=",
     "o": [
@@ -1959,7 +1959,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "probe",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "função derivada",
     "q": "A função derivada f' associa a cada x do seu domínio",
     "o": [
@@ -1989,7 +1989,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "anchor",
     "difficulty": 2,
-    "cognitive": "interpretação",
+    "cognitive": "Interpretação",
     "focus": "Monotonia, extremos e otimização",
     "q": "Se f'(x)=2x, então junto de x=0 a situação correta é",
     "o": [
@@ -2019,7 +2019,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "probe",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "Monotonia, extremos e otimização",
     "q": "Sabe-se que f'(x)>0 para todo o x de ]−2,3[. Como varia f nesse intervalo?",
     "o": [
@@ -2049,7 +2049,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "anchor",
     "difficulty": 2,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "Regras de derivação",
     "q": "Deriva f(x)=x^5.",
     "o": [
@@ -2079,7 +2079,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "probe",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "Regras de derivação",
     "q": "A derivada de uma soma f+g e",
     "o": [
@@ -2109,7 +2109,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "anchor",
     "difficulty": 2,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "Reta tangente e interpretação geométrica",
     "q": "Para f(x)=x^2, a tangente em x=1 tem equação",
     "o": [
@@ -2139,7 +2139,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "probe",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "Reta tangente e interpretação geométrica",
     "q": "A reta tangente ao gráfico de f em x=a passa por",
     "o": [
@@ -2169,7 +2169,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "anchor",
     "difficulty": 2,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "taxa média de variação",
     "q": "Para f(x)=x^2, qual é a taxa média de variação entre x=1 e x=3?",
     "o": [
@@ -2199,7 +2199,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "year": "11.º",
     "role": "probe",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "taxa média de variação",
     "q": "A taxa média de variação de f entre a e b e",
     "o": [

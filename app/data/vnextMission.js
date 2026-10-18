@@ -6301,7 +6301,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "Taxa instantânea e derivada num ponto",
     "q": "Para f(x)=x^2, quanto vale f'(1)?",
     "o": [
@@ -6330,7 +6330,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "Taxa instantânea e derivada num ponto",
     "q": "Geometricamente, f'(a) representa",
     "o": [
@@ -6359,7 +6359,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "raciocínio",
+    "cognitive": "Raciocínio",
     "focus": "Taxa instantânea e derivada num ponto",
     "q": "Para f(x)=x^2, o limite lim_{h->0} [f(0+h)-f(0)]/h vale",
     "o": [
@@ -6388,7 +6388,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "Taxa instantânea e derivada num ponto",
     "q": "Para f(x)=x^2, quanto vale f'(3)?",
     "o": [
@@ -6446,7 +6446,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "Taxa instantânea e derivada num ponto",
     "q": "A definicao por limite de f'(a) e",
     "o": [
@@ -6475,7 +6475,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "interpretação",
+    "cognitive": "Interpretação",
     "focus": "Taxa instantânea e derivada num ponto",
     "q": "Num ponto x=2, sabe-se que f(2)=5 e f'(2)=3. Qual é o declive da tangente?",
     "o": [
@@ -6504,7 +6504,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-funcao-derivada",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "função derivada",
     "q": "Se f(x)=5x^3, então f'(x)=",
     "o": [
@@ -6533,7 +6533,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-funcao-derivada",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "função derivada",
     "q": "Se f'(x)>0 num intervalo, f e",
     "o": [
@@ -6562,7 +6562,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-funcao-derivada",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "interpretação",
+    "cognitive": "Interpretação",
     "focus": "função derivada",
     "q": "Se f'(x)=2x, em x>0, então",
     "o": [
@@ -6591,7 +6591,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-funcao-derivada",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "função derivada",
     "q": "Se f(x)=2x^5, então f'(x)=",
     "o": [
@@ -6620,7 +6620,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-funcao-derivada",
     "year": "11.º",
     "difficulty": 4,
-    "cognitive": "raciocínio",
+    "cognitive": "Raciocínio",
     "focus": "função derivada",
     "q": "f'(x)=4x^3; uma possibilidade para f(x) e",
     "o": [
@@ -6649,7 +6649,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-funcao-derivada",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "função derivada",
     "q": "Se f'(x)<0 num intervalo, f e",
     "o": [
@@ -6678,7 +6678,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-funcao-derivada",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "interpretação",
+    "cognitive": "Interpretação",
     "focus": "função derivada",
     "q": "Se f'(x)=2x, em x<0, então",
     "o": [
@@ -6707,7 +6707,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-monotonia-otimizacao",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "interpretação",
+    "cognitive": "Interpretação",
     "focus": "Monotonia, extremos e otimização",
     "q": "Se f'(x)=-2x, então junto de x=0 a situação correta é",
     "o": [
@@ -6736,7 +6736,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-monotonia-otimizacao",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "Monotonia, extremos e otimização",
     "q": "Sabe-se que f'(x)<0 para todo o x de ]1,5[. Como varia f nesse intervalo?",
     "o": [
@@ -6765,7 +6765,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-monotonia-otimizacao",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "raciocínio",
+    "cognitive": "Raciocínio",
     "focus": "Monotonia, extremos e otimização",
     "q": "No intervalo [-2,3], para f(x)=x^2, os extremos absolutos sao",
     "o": [
@@ -6794,7 +6794,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-monotonia-otimizacao",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "Monotonia, extremos e otimização",
     "q": "Para f(x)=x^2-4x+5, o extremo relevante ocorre em",
     "o": [
@@ -6823,7 +6823,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-monotonia-otimizacao",
     "year": "11.º",
     "difficulty": 4,
-    "cognitive": "raciocínio",
+    "cognitive": "Raciocínio",
     "focus": "Monotonia, extremos e otimização",
     "q": "Se f'(x)>0 em ]-inf,1[, f'(1)=0 e f'(x)<0 em ]1,+inf[, então",
     "o": [
@@ -6852,7 +6852,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-monotonia-otimizacao",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "Monotonia, extremos e otimização",
     "q": "Um ponto onde f'(a)=0 chama-se frequentemente",
     "o": [
@@ -6910,7 +6910,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "Regras de derivação",
     "q": "Deriva f(x)=x^7.",
     "o": [
@@ -6939,7 +6939,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "Regras de derivação",
     "q": "A derivada de cf, com c constante, e",
     "o": [
@@ -6968,7 +6968,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "Regras de derivação",
     "q": "Usando a regra do produto, deriva f(x)=x(x+1).",
     "o": [
@@ -6997,7 +6997,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "Regras de derivação",
     "q": "Deriva f(x)=3x^4.",
     "o": [
@@ -7026,7 +7026,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 4,
-    "cognitive": "raciocínio",
+    "cognitive": "Raciocínio",
     "focus": "Regras de derivação",
     "q": "Se f'(x)=2x e g'(x)=3, então (f+g)'(x)=",
     "o": [
@@ -7055,7 +7055,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "Regras de derivação",
     "q": "A derivada de x^n, para n inteiro positivo, e",
     "o": [
@@ -7084,7 +7084,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "Regras de derivação",
     "q": "Usando a regra do produto, deriva f(x)=x^2(x+1).",
     "o": [
@@ -7113,7 +7113,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "Reta tangente e interpretação geométrica",
     "q": "Para f(x)=x^2, a tangente em x=2 tem equação",
     "o": [
@@ -7142,7 +7142,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "Reta tangente e interpretação geométrica",
     "q": "O declive da tangente em x=a e",
     "o": [
@@ -7171,7 +7171,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "raciocínio",
+    "cognitive": "Raciocínio",
     "focus": "Reta tangente e interpretação geométrica",
     "q": "Sabendo que f(2)=5 e f'(2)=3, qual é a reta tangente?",
     "o": [
@@ -7200,7 +7200,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "Reta tangente e interpretação geométrica",
     "q": "Para f(x)=x^2, a tangente em x=-1 tem equação",
     "o": [
@@ -7258,7 +7258,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "Reta tangente e interpretação geométrica",
     "q": "Uma equação da tangente em x=a e",
     "o": [
@@ -7287,7 +7287,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "interpretação",
+    "cognitive": "Interpretação",
     "focus": "Reta tangente e interpretação geométrica",
     "q": "A tangente ao gráfico em x=2 e y=4x-3. então f'(2)=",
     "o": [
@@ -7316,7 +7316,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-taxa-media",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "taxa média de variação",
     "q": "Para f(x)=x^2, qual é a taxa média de variação entre x=2 e x=5?",
     "o": [
@@ -7345,7 +7345,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-taxa-media",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "taxa média de variação",
     "q": "Geometricamente, a taxa média de variação entre dois pontos do gráfico e",
     "o": [
@@ -7403,7 +7403,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-taxa-media",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "aplicação",
+    "cognitive": "Aplicação",
     "focus": "taxa média de variação",
     "q": "Para f(x)=x^2, qual é a taxa média de variação entre x=0 e x=4?",
     "o": [
@@ -7432,7 +7432,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-taxa-media",
     "year": "11.º",
     "difficulty": 4,
-    "cognitive": "raciocínio",
+    "cognitive": "Raciocínio",
     "focus": "taxa média de variação",
     "q": "Se f(1)=5 e a taxa média em [1,4] e 3, quanto vale f(4)?",
     "o": [
@@ -7461,7 +7461,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-taxa-media",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "compreensão",
+    "cognitive": "Compreensão",
     "focus": "taxa média de variação",
     "q": "Se f mede distancia em km e t mede tempo em horas, a taxa média tem unidades",
     "o": [
