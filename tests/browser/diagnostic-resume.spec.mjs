@@ -222,6 +222,10 @@ for(const subject of [
       :{itemId:snapshot.state?.subjectProgress?.[subject.id]?.lastPosition?.itemIds?.[snapshot.state?.subjectProgress?.[subject.id]?.lastPosition?.current],responses:snapshot.state?.subjectProgress?.[subject.id]?.lastPosition?.results?.length};
     expect(savedPosition.itemId).toBeTruthy();
     expect(savedPosition.responses).toBeGreaterThanOrEqual(2);
+    const reloadErrors=[];
+    page.on("pageerror",error=>reloadErrors.push("pageerror: "+error.message));
+    page.on("console",message=>{if(message.type()==="error")reloadErrors.push("console: "+message.text())});
+    page.on("requestfailed",request=>reloadErrors.push("request: "+request.url()+" · "+request.failure()?.errorText));
     await page.reload();
     await expectNoSubjectSelector(page);
     const restoredSubmit=page.getByRole("button",{name:"Responder",exact:true});
@@ -232,7 +236,7 @@ for(const subject of [
         state:JSON.parse(localStorage.getItem("a25")||"null"),
         draft:JSON.parse(localStorage.getItem("a25-active-session-v1")||"null")
       }));
-      console.log("REAL_RELOAD_DIAGNOSTIC",JSON.stringify({
+      console.log("REAL_RELOAD_DIAGNOSTIC",JSON.stringify({reloadErrors,
         subject:subject.id,heading:debug.heading,text:debug.text,
         active:debug.state?.activeSubjectId,selected:debug.state?.selectedSubjectIds,
         diagnosticDone:debug.state?.diagnosticDone,
