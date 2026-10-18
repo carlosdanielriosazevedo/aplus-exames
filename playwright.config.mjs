@@ -5,8 +5,9 @@ export default defineConfig({
   fullyParallel:false,
   workers:1,
   timeout:120_000,
+  globalTimeout:10*60_000,
   expect:{timeout:10_000},
-  reporter:[["list"]],
+  reporter:[["list"],["./tests/browser/test-begin-reporter.cjs"]],
   use:{
     ...devices["Desktop Chrome"],
     baseURL:"http://127.0.0.1:3000",
