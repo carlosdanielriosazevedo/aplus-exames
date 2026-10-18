@@ -15,7 +15,8 @@ const BAD_VISIBLE_PATTERNS=[
   ["grafico/graficos",/\bgrafico(?:s)?\b/iu],
   ["equacao/equacoes",/\bequacao(?:es)?\b/iu],
   ["Qual e",/\bQual e\b/u],
-  ["area e",/\barea e\b/iu]
+  ["area e",/\barea e\b/iu],
+  ["potênciação (grafia incorreta)",/\bpotênciação\b/iu]
 ];
 
 const PROOF_ITEM_ID="DG-VN11CD-DP-011";
