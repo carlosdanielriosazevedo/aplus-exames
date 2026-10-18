@@ -4,7 +4,7 @@
   "curriculum": "vNext 2026/27",
   "year": "11.º",
   "themeId": "11-trig",
-  "subtopicId": "11-trig-ângulos-radianos",
+  "subtopicId": "11-trig-angulos-radianos",
   "subtopic": "Ângulos orientados, arcos e radianos",
   "editorialTarget": 50,
   "status": "prototype",
@@ -13,7 +13,7 @@
     {
       "id": "VN11TRIG-AR-001",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -32,7 +32,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:graus-volta",
+      "signature": "11-trig-angulos-radianos:graus-volta",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -40,7 +40,7 @@
     {
       "id": "VN11TRIG-AR-002",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -59,7 +59,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:graus-meia-volta",
+      "signature": "11-trig-angulos-radianos:graus-meia-volta",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -67,7 +67,7 @@
     {
       "id": "VN11TRIG-AR-003",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -86,7 +86,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:graus-quarto-volta",
+      "signature": "11-trig-angulos-radianos:graus-quarto-volta",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -94,7 +94,7 @@
     {
       "id": "VN11TRIG-AR-004",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -113,7 +113,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:radianos-volta",
+      "signature": "11-trig-angulos-radianos:radianos-volta",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -121,7 +121,7 @@
     {
       "id": "VN11TRIG-AR-005",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -140,7 +140,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:radianos-meia-volta",
+      "signature": "11-trig-angulos-radianos:radianos-meia-volta",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -148,7 +148,7 @@
     {
       "id": "VN11TRIG-AR-006",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
@@ -167,7 +167,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:converter-graus-rad",
+      "signature": "11-trig-angulos-radianos:converter-graus-rad",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -175,7 +175,7 @@
     {
       "id": "VN11TRIG-AR-007",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
@@ -194,7 +194,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:converter-rad-graus",
+      "signature": "11-trig-angulos-radianos:converter-rad-graus",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -202,7 +202,7 @@
     {
       "id": "VN11TRIG-AR-008",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -221,7 +221,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:graus-para-rad",
+      "signature": "11-trig-angulos-radianos:graus-para-rad",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -229,7 +229,7 @@
     {
       "id": "VN11TRIG-AR-009",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -248,7 +248,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:graus-para-rad",
+      "signature": "11-trig-angulos-radianos:graus-para-rad",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -256,7 +256,7 @@
     {
       "id": "VN11TRIG-AR-010",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -275,7 +275,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:graus-para-rad",
+      "signature": "11-trig-angulos-radianos:graus-para-rad",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -283,7 +283,7 @@
     {
       "id": "VN11TRIG-AR-011",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -302,7 +302,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:graus-para-rad",
+      "signature": "11-trig-angulos-radianos:graus-para-rad",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -310,7 +310,7 @@
     {
       "id": "VN11TRIG-AR-012",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -329,7 +329,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:graus-para-rad",
+      "signature": "11-trig-angulos-radianos:graus-para-rad",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -337,7 +337,7 @@
     {
       "id": "VN11TRIG-AR-013",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -356,7 +356,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:rad-para-graus",
+      "signature": "11-trig-angulos-radianos:rad-para-graus",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -364,7 +364,7 @@
     {
       "id": "VN11TRIG-AR-014",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -383,7 +383,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:rad-para-graus",
+      "signature": "11-trig-angulos-radianos:rad-para-graus",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -391,7 +391,7 @@
     {
       "id": "VN11TRIG-AR-015",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -410,7 +410,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:rad-para-graus",
+      "signature": "11-trig-angulos-radianos:rad-para-graus",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -418,7 +418,7 @@
     {
       "id": "VN11TRIG-AR-016",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
@@ -437,7 +437,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:ângulo-orientado",
+      "signature": "11-trig-angulos-radianos:angulo-orientado",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -445,7 +445,7 @@
     {
       "id": "VN11TRIG-AR-017",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
@@ -464,7 +464,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:ângulo-orientado",
+      "signature": "11-trig-angulos-radianos:angulo-orientado",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -472,7 +472,7 @@
     {
       "id": "VN11TRIG-AR-018",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
@@ -491,7 +491,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:coterminais",
+      "signature": "11-trig-angulos-radianos:coterminais",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -499,7 +499,7 @@
     {
       "id": "VN11TRIG-AR-019",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
@@ -518,7 +518,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:coterminais",
+      "signature": "11-trig-angulos-radianos:coterminais",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -526,7 +526,7 @@
     {
       "id": "VN11TRIG-AR-020",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -545,7 +545,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:coterminal-positivo",
+      "signature": "11-trig-angulos-radianos:coterminal-positivo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -553,7 +553,7 @@
     {
       "id": "VN11TRIG-AR-021",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
@@ -572,7 +572,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:reduzir-graus",
+      "signature": "11-trig-angulos-radianos:reduzir-graus",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -580,7 +580,7 @@
     {
       "id": "VN11TRIG-AR-022",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
@@ -599,7 +599,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:reduzir-rad",
+      "signature": "11-trig-angulos-radianos:reduzir-rad",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -607,7 +607,7 @@
     {
       "id": "VN11TRIG-AR-023",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
@@ -626,7 +626,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:reduzir-rad-negativo",
+      "signature": "11-trig-angulos-radianos:reduzir-rad-negativo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -634,7 +634,7 @@
     {
       "id": "VN11TRIG-AR-024",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -653,7 +653,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:decompor-voltas",
+      "signature": "11-trig-angulos-radianos:decompor-voltas",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -661,7 +661,7 @@
     {
       "id": "VN11TRIG-AR-025",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Compreensão",
@@ -680,7 +680,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:comprimento-arco",
+      "signature": "11-trig-angulos-radianos:comprimento-arco",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -688,7 +688,7 @@
     {
       "id": "VN11TRIG-AR-026",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
@@ -707,7 +707,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:comprimento-arco",
+      "signature": "11-trig-angulos-radianos:comprimento-arco",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -715,7 +715,7 @@
     {
       "id": "VN11TRIG-AR-027",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
@@ -734,7 +734,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:comprimento-arco-graus",
+      "signature": "11-trig-angulos-radianos:comprimento-arco-graus",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -742,7 +742,7 @@
     {
       "id": "VN11TRIG-AR-028",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -761,7 +761,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:ângulo-por-arco",
+      "signature": "11-trig-angulos-radianos:angulo-por-arco",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -769,7 +769,7 @@
     {
       "id": "VN11TRIG-AR-029",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Compreensão",
@@ -788,7 +788,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:área-setor",
+      "signature": "11-trig-angulos-radianos:area-setor",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -796,7 +796,7 @@
     {
       "id": "VN11TRIG-AR-030",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
@@ -815,7 +815,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:área-setor",
+      "signature": "11-trig-angulos-radianos:area-setor",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -823,7 +823,7 @@
     {
       "id": "VN11TRIG-AR-031",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
@@ -842,7 +842,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:área-setor",
+      "signature": "11-trig-angulos-radianos:area-setor",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -850,7 +850,7 @@
     {
       "id": "VN11TRIG-AR-032",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -869,7 +869,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:ângulo-por-área",
+      "signature": "11-trig-angulos-radianos:angulo-por-area",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -877,7 +877,7 @@
     {
       "id": "VN11TRIG-AR-033",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
@@ -896,7 +896,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:definicao-radiano",
+      "signature": "11-trig-angulos-radianos:definicao-radiano",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -904,7 +904,7 @@
     {
       "id": "VN11TRIG-AR-034",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -923,7 +923,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:rad-aproximação",
+      "signature": "11-trig-angulos-radianos:rad-aproximacao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -931,7 +931,7 @@
     {
       "id": "VN11TRIG-AR-035",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
@@ -950,7 +950,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:vantagem-radianos",
+      "signature": "11-trig-angulos-radianos:vantagem-radianos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -958,7 +958,7 @@
     {
       "id": "VN11TRIG-AR-036",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -977,7 +977,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:reduzir-negativo",
+      "signature": "11-trig-angulos-radianos:reduzir-negativo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -985,7 +985,7 @@
     {
       "id": "VN11TRIG-AR-037",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1004,7 +1004,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:voltas-total",
+      "signature": "11-trig-angulos-radianos:voltas-total",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1012,7 +1012,7 @@
     {
       "id": "VN11TRIG-AR-038",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1031,7 +1031,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:voltas-orientadas",
+      "signature": "11-trig-angulos-radianos:voltas-orientadas",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1039,7 +1039,7 @@
     {
       "id": "VN11TRIG-AR-039",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1058,7 +1058,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:arco-para-voltas",
+      "signature": "11-trig-angulos-radianos:arco-para-voltas",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1066,7 +1066,7 @@
     {
       "id": "VN11TRIG-AR-040",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1085,7 +1085,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:setor-percentagem",
+      "signature": "11-trig-angulos-radianos:setor-percentagem",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1093,7 +1093,7 @@
     {
       "id": "VN11TRIG-AR-041",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1112,7 +1112,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:percentagem-volta",
+      "signature": "11-trig-angulos-radianos:percentagem-volta",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1120,7 +1120,7 @@
     {
       "id": "VN11TRIG-AR-042",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1139,7 +1139,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:arco-simbolico",
+      "signature": "11-trig-angulos-radianos:arco-simbolico",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1147,7 +1147,7 @@
     {
       "id": "VN11TRIG-AR-043",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1166,7 +1166,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:área-setor-inversa",
+      "signature": "11-trig-angulos-radianos:area-setor-inversa",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1174,7 +1174,7 @@
     {
       "id": "VN11TRIG-AR-044",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1193,7 +1193,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:raio-por-área",
+      "signature": "11-trig-angulos-radianos:raio-por-area",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1201,7 +1201,7 @@
     {
       "id": "VN11TRIG-AR-045",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
@@ -1220,7 +1220,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:coterminais-multiplas-voltas",
+      "signature": "11-trig-angulos-radianos:coterminais-multiplas-voltas",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1228,7 +1228,7 @@
     {
       "id": "VN11TRIG-AR-046",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1247,7 +1247,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:reduzir-grande",
+      "signature": "11-trig-angulos-radianos:reduzir-grande",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1255,7 +1255,7 @@
     {
       "id": "VN11TRIG-AR-047",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1274,7 +1274,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:reduzir-intervalo-simetrico",
+      "signature": "11-trig-angulos-radianos:reduzir-intervalo-simetrico",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1282,7 +1282,7 @@
     {
       "id": "VN11TRIG-AR-048",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1301,7 +1301,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:modelacao-roda",
+      "signature": "11-trig-angulos-radianos:modelacao-roda",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1309,7 +1309,7 @@
     {
       "id": "VN11TRIG-AR-049",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1328,7 +1328,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:modelacao-polia",
+      "signature": "11-trig-angulos-radianos:modelacao-polia",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1336,7 +1336,7 @@
     {
       "id": "VN11TRIG-AR-050",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-ângulos-radianos",
+      "subtopicId": "11-trig-angulos-radianos",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1355,7 +1355,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-ângulos-radianos:modelacao-ponteiro",
+      "signature": "11-trig-angulos-radianos:modelacao-ponteiro",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
