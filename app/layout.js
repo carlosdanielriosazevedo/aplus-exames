@@ -5,6 +5,7 @@ import './public-release.css';
 import './exam-hub-contrast.css';
 import './desktop-shell-polish.css';
 import './diagnostic-option-contrast.css';
+import './screen-text-contrast.css';
 import ClientRuntimeReporter from './components/ClientRuntimeReporter';
 import StorageDurabilityNotice from './components/StorageDurabilityNotice';
 

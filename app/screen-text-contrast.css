@@ -1,0 +1,11 @@
+/* Contraste AA (WCAG 1.4.3) do texto secundário nos ecrãs de entrada, escolha de disciplina
+   e sessão de diagnóstico. Valores medidos sobre o fundo real de cada elemento (≥ 4,7:1).
+   Carregado em último lugar: só altera a cor, nunca o tamanho nem o layout. */
+.hero .features span{color:#67738b}
+.hero .publicLegalLinks a{color:#475569}
+.subjectSelectionSummary small{color:#676d7b}
+.subjectCard.available .subjectInfo small{color:#666d7b}
+.light .sessionTop>span,.light .sessionTop>span strong{color:#6a7386}
+.light .questionMeta span{color:#607081}
+.light .back{color:#66738d}
+.light .pauseLink{color:#6b7485}
