@@ -2,7 +2,7 @@ import {describe,it,expect} from "vitest";
 import fs from "node:fs";
 import path from "node:path";
 import {spawnSync} from "node:child_process";
-import {mathVisibleText} from "../../app/lib/mathVisibleCopy.js";
+import {mathVisibleText,normalizeMathCognitive} from "../../app/lib/mathVisibleCopy.js";
 
 const BAD_PATTERNS=[
   ["expressao",/\bexpressao(?:es)?\b/iu],
@@ -55,8 +55,8 @@ describe("Matemática A · conteúdo versionado",()=>{
     expect(mathVisibleText("decrescente em ]-inf,0[ e crescente em ]0,+inf[")).toBe("decrescente em ]-inf,0[ e crescente em ]0,+inf[");
     expect(mathVisibleText("f e crescente")).toBe("f é crescente");
     expect(mathVisibleText("potênciação")).toBe("potenciação");
-    expect(mathVisibleText("Aplicacao")).toBe("Aplicação");
-    expect(mathVisibleText("Compreensao")).toBe("Compreensão");
+    expect(normalizeMathCognitive("Aplicacao")).toBe("Aplicação");
+    expect(normalizeMathCognitive("Compreensao")).toBe("Compreensão");
   });
   it("mantém sincronizados os três ficheiros gerados",()=>{
     const violations=[];
