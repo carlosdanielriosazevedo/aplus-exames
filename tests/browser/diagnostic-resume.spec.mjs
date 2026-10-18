@@ -239,6 +239,15 @@ for(const subject of [
     await reopened.goto("/");
     await expectNoSubjectSelector(reopened);
     await expect(reopened.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
+    const reopenedPosition=await reopened.evaluate(id=>{
+      const draft=JSON.parse(localStorage.getItem("a25-active-session-v1")||"null");
+      const state=JSON.parse(localStorage.getItem("a25")||"null");
+      const saved=state?.subjectProgress?.[id]?.lastPosition;
+      return draft?.kind==="diagnostic"&&id==="math-a"
+        ?{itemId:draft.current?.id,responses:draft.responses?.length}
+        :{itemId:saved?.itemIds?.[saved.current],responses:saved?.results?.length};
+    },subject.id);
+    expect(reopenedPosition,"fechar e reabrir o separador deve preservar a pergunta e as duas respostas").toEqual(savedPosition);
     await context.close();
   });
 }
