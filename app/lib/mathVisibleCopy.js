@@ -1,4 +1,7 @@
 const REPLACEMENTS=[
+  [/potênciação/giu,"potenciação"],
+  [/A derivação e linear relativamente a soma\./giu,"A derivação é linear relativamente à soma."],
+  [/E a variação da função por unidade de variação da variavel\./giu,"É a variação da função por unidade de variação da variável."],
   [/\bexpressoes\b/giu,"expressões"],
   [/\bexpressao\b/giu,"expressão"],
   [/\bobtem-se\b/giu,"obtém-se"],
