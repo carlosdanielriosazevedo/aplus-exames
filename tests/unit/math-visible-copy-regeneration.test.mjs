@@ -50,7 +50,7 @@ describe("Matemática A · conteúdo versionado",()=>{
     }
     expect(violations).toEqual([]);
   });
-  it("não altera conjunções legítimas e corrige rótulos",()=>{
+  it("preserva conjunções e normaliza rótulos após regeneração",()=>{
     expect(mathVisibleText("Derivando a expressão e substituindo x=0")).toBe("Derivando a expressão e substituindo x=0");
     expect(mathVisibleText("decrescente em ]-inf,0[ e crescente em ]0,+inf[")).toBe("decrescente em ]-inf,0[ e crescente em ]0,+inf[");
     expect(mathVisibleText("f e crescente")).toBe("f é crescente");
