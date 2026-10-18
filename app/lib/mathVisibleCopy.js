@@ -118,6 +118,11 @@ export function mathVisibleText(value){
   return next;
 }
 
+export function normalizeMathCognitive(value){
+  const text=mathVisibleText(value);
+  return typeof text==="string"&&text.length?text.charAt(0).toLocaleUpperCase("pt-PT")+text.slice(1):text;
+}
+
 const VISIBLE_SCALAR_KEYS=[
   "q","sol","focus","subtopic","prompt","explanation","title","subtitle","label","feedback","hint","text","statement","instruction"
 ];
