@@ -237,11 +237,15 @@ for(const subject of [
         resources:performance.getEntriesByType("resource").filter(e=>/clientApp|_next|webpack|chunks/.test(e.name)).slice(-12).map(e=>({name:e.name.split("/").slice(-2).join("/"),duration:Math.round(e.duration),transferSize:e.transferSize})),
         heading:document.querySelector("h1")?.textContent,
         text:document.body?.innerText?.slice(0,700),
+        rootHtml:document.querySelector("main")?.outerHTML.slice(0,500),
+        appEntries:performance.getEntriesByType("resource").filter(e=>/\\.js(?:\\?|$)/.test(e.name)).map(e=>({name:e.name.split("/").slice(-2).join("/"),duration:Math.round(e.duration),responseEnd:Math.round(e.responseEnd)})).slice(-25),
+        navigation:performance.getEntriesByType("navigation").map(e=>({type:e.type,domInteractive:Math.round(e.domInteractive),loadEventEnd:Math.round(e.loadEventEnd)})),
+        reactRootProps:Object.keys(document.body?.firstElementChild||{}).filter(k=>k.startsWith("__react")).slice(0,5),
         state:JSON.parse(localStorage.getItem("a25")||"null"),
         draft:JSON.parse(localStorage.getItem("a25-active-session-v1")||"null")
       }));
       console.log("REAL_RELOAD_DIAGNOSTIC",JSON.stringify({reloadErrors,
-        subject:subject.id,heading:debug.heading,text:debug.text,readiness:debug.readiness,appRoot:debug.appRoot,scripts:debug.scripts,resources:debug.resources,
+        subject:subject.id,heading:debug.heading,text:debug.text,readiness:debug.readiness,appRoot:debug.appRoot,rootHtml:debug.rootHtml,appEntries:debug.appEntries,navigation:debug.navigation,reactRootProps:debug.reactRootProps,scripts:debug.scripts,resources:debug.resources,
         active:debug.state?.activeSubjectId,selected:debug.state?.selectedSubjectIds,
         diagnosticDone:debug.state?.diagnosticDone,
         draftKind:debug.draft?.kind,draftVersion:debug.draft?.version,
