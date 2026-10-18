@@ -180,7 +180,14 @@ for(const subject of SUBJECTS){
     const reopened=await context.newPage();
     await reopened.goto("/");
     if(subject.id==="math-a")await expect(reopened.getByText(subject.marker,{exact:true})).toBeVisible({timeout:30_000});
-    else await expect(reopened.getByRole("button",{name:"Aprender"})).toBeVisible({timeout:30_000});
+    else{
+      await expect(reopened.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
+      const recovered=await reopened.evaluate(id=>{
+        const position=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+        return {current:position?.current,results:position?.results?.length};
+      },subject.id);
+      expect(recovered).toEqual({current:2,results:2});
+    }
     await expectNoSubjectSelector(reopened);
     await context.close();
   });
