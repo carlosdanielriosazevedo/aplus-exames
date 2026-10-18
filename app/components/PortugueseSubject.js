@@ -224,12 +224,6 @@ function PortugueseSubject({s,setS,go,view="home"}){
     setAnswer(saved.currentAnswer??restored?.responseText??null);setFeedback(restored);setEditingCriterionId(null);
   }
 
-  useEffect(()=>{
-    if(!session&&progress.lastPosition&&(view==="home"||view==="diagnostic")){
-      resume();
-    }
-  },[]);
-
   function resetPortuguese(){
     if(!window.confirm("Repor apenas o progresso de Português? O progresso de Matemática A não será alterado."))return;
     setS(prev=>clearPortugueseMiniExamDraft(resetSubjectProgress(prev,"portuguese")));
