@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import {CURRICULUM_SUBTOPICS} from "../app/data/curriculumVnext.js";
-import {normalizeMathVisibleItem,mathVisibleText} from "../app/lib/mathVisibleCopy.js";
+import {normalizeMathVisibleItem,normalizeMathCognitive} from "../app/lib/mathVisibleCopy.js";
 
 const ROOT=path.resolve("content/vnext/math-a");
 const OUTPUT=path.resolve("app/data/vnextDiagnostic.js");
@@ -43,7 +43,7 @@ function diagnosticItem(question,subtopic,role,sourceFile){
     year:question.year,
     role,
     difficulty:question.difficulty,
-    cognitive:mathVisibleText(question.cognitive),
+    cognitive:normalizeMathCognitive(question.cognitive),
     focus:subtopic.label,
     q:question.q,
     o:question.o,
