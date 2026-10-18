@@ -268,7 +268,7 @@
         "2ln x."
       ],
       "a": 1,
-      "sol": "Pela cadeia:2x/x²=2/x.",
+      "sol": "Pela cadeia: 2x/x²=2/x.",
       "hyp": "Pode derivar ln e x² separadamente sem cadeia.",
       "contexts": [
         "mission",
@@ -322,7 +322,7 @@
         "1/(x+3)."
       ],
       "a": 3,
-      "sol": "A derivada interna é1.",
+      "sol": "A derivada interna é 1.",
       "hyp": "Pode deslocar fora do denominador.",
       "contexts": [
         "mission",
@@ -376,7 +376,7 @@
         "−2sin(2x)."
       ],
       "a": 1,
-      "sol": "Derivada interna2.",
+      "sol": "Derivada interna 2.",
       "hyp": "Pode esquecer a cadeia.",
       "contexts": [
         "mission",
@@ -403,8 +403,8 @@
         "3cos(3x)."
       ],
       "a": 2,
-      "sol": "Derivada de cos é −sin e a interna dá3.",
-      "hyp": "Pode esquecer o sinal ou o fator3.",
+      "sol": "Derivada de cos é −sin e a interna dá 3.",
+      "hyp": "Pode esquecer o sinal ou o fator 3.",
       "contexts": [
         "mission",
         "training",
@@ -512,7 +512,7 @@
       ],
       "a": 2,
       "sol": "Pela regra da cadeia, 3(x²+1)^2 multiplica pela derivada 2x da função interior. Logo, a derivada é 6x(x²+1)^2.",
-      "hyp": "Pode esquecer o fator2x.",
+      "hyp": "Pode esquecer o fator 2x.",
       "contexts": [
         "mission",
         "training",
@@ -620,7 +620,7 @@
       ],
       "a": 2,
       "sol": "Pela cadeia: g'/g.",
-      "hyp": "Pode esquecer o numerador2x.",
+      "hyp": "Pode esquecer o numerador 2x.",
       "contexts": [
         "mission",
         "training",
@@ -808,7 +808,7 @@
         "−2sinxcosx."
       ],
       "a": 1,
-      "sol": "A função é identicamente1; derivada0.",
+      "sol": "A função é identicamente 1; derivada 0.",
       "hyp": "Pode derivar apenas um termo.",
       "contexts": [
         "mission",
@@ -1052,7 +1052,7 @@
       ],
       "a": 2,
       "sol": "Cadeia: cos(lnx)·1/x.",
-      "hyp": "Pode esquecer o fator1/x.",
+      "hyp": "Pode esquecer o fator 1/x.",
       "contexts": [
         "mission",
         "training",
@@ -1105,8 +1105,8 @@
         "3sin³(2x)."
       ],
       "a": 0,
-      "sol": "Exterior:3sin²(2x); interior:2cos(2x).",
-      "hyp": "Pode esquecer o fator2.",
+      "sol": "Exterior: 3sin²(2x); interior: 2cos(2x).",
+      "hyp": "Pode esquecer o fator 2.",
       "contexts": [
         "mission",
         "training",
@@ -1133,7 +1133,7 @@
       ],
       "a": 1,
       "sol": "2cos(3x)·[−3sin(3x)].",
-      "hyp": "Pode perder o sinal ou o fator3.",
+      "hyp": "Pode perder o sinal ou o fator 3.",
       "contexts": [
         "mission",
         "training",
@@ -1241,7 +1241,7 @@
       ],
       "a": 1,
       "sol": "Cadeia: sec²(2x)·2.",
-      "hyp": "Pode esquecer o fator2.",
+      "hyp": "Pode esquecer o fator 2.",
       "contexts": [
         "mission",
         "training",
@@ -1295,7 +1295,7 @@
       ],
       "a": 3,
       "sol": "Pela regra da potência, f'(x)=(1/3)x^{-2/3}=1/(3x^{2/3}), para x≠0.",
-      "hyp": "Pode esquecer o fator1/3.",
+      "hyp": "Pode esquecer o fator 1/3.",
       "contexts": [
         "mission",
         "training",
@@ -1321,8 +1321,8 @@
         "−10sin(2t)."
       ],
       "a": 0,
-      "sol": "Deriva-se seno e multiplica-se pela frequência angular2.",
-      "hyp": "Pode esquecer o fator2.",
+      "sol": "Deriva-se seno e multiplica-se pela frequência angular 2.",
+      "hyp": "Pode esquecer o fator 2.",
       "contexts": [
         "mission",
         "training",

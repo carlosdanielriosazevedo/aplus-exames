@@ -403,8 +403,8 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "focus": "Medidas de dispersão e interpretação conjunta",
     "q": "A amplitude de um conjunto de dados é...",
     "o": [
-      "máximo−mínimo.",
-      "média−mediana.",
+      "máximo − mínimo.",
+      "média − mediana.",
       "soma dos valores.",
       "maior frequência."
     ],
@@ -2539,7 +2539,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "20."
     ],
     "a": 2,
-    "sol": "A e B podem trocar:2! maneiras; restantes 3 pessoas:3!=6. Total 12.",
+    "sol": "A e B podem trocar: 2! maneiras; restantes 3 pessoas: 3!=6. Total 12.",
     "hyp": "Pode fixar uma ordem para A,B.",
     "contexts": [
       "diagnostic"
@@ -3224,7 +3224,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "q": "No plano, o produto escalar de u=(a,b) e v=(c,d) é...",
     "o": [
       "ac+bd.",
-      "ac−bd.",
+      "ac − bd.",
       "a+c+b+d.",
       "ad+bc."
     ],
@@ -4400,7 +4400,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     ],
     "a": 2,
     "sol": "2^(3x)=2², logo x=2/3.",
-    "hyp": "Pode dividir as bases8/4.",
+    "hyp": "Pode dividir as bases 8/4.",
     "contexts": [
       "diagnostic"
     ],
@@ -4430,7 +4430,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     ],
     "a": 0,
     "sol": "8=2³, logo x=3.",
-    "hyp": "Pode dividir8 por2.",
+    "hyp": "Pode dividir 8 por 2.",
     "contexts": [
       "diagnostic"
     ],
@@ -4489,8 +4489,8 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "a=0."
     ],
     "a": 0,
-    "sol": "Para uma exponencial real definida em todo R exige-se base positiva e diferente de1.",
-    "hyp": "Pode admitir bases não positivas ou a base1 como caso exponencial não trivial.",
+    "sol": "Para uma exponencial real definida em todo R exige-se base positiva e diferente de 1.",
+    "hyp": "Pode admitir bases não positivas ou a base 1 como caso exponencial não trivial.",
     "contexts": [
       "diagnostic"
     ],
@@ -4639,8 +4639,8 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "Q0−t/H."
     ],
     "a": 1,
-    "sol": "Quando t=H, o expoente é1 e a quantidade fica Q0/2.",
-    "hyp": "Pode usar fator2 ou multiplicar H pelo tempo.",
+    "sol": "Quando t=H, o expoente é 1 e a quantidade fica Q0/2.",
+    "hyp": "Pode usar fator 2 ou multiplicar H pelo tempo.",
     "contexts": [
       "diagnostic"
     ],
@@ -4669,8 +4669,8 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "uma constante."
     ],
     "a": 0,
-    "sol": "Um fator multiplicativo maior que1 faz a quantidade crescer a cada unidade de tempo.",
-    "hyp": "Pode confundir base maior que1 com taxa absoluta.",
+    "sol": "Um fator multiplicativo maior que 1 faz a quantidade crescer a cada unidade de tempo.",
+    "hyp": "Pode confundir base maior que 1 com taxa absoluta.",
     "contexts": [
       "diagnostic"
     ],
@@ -4696,7 +4696,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "0 e 3.",
       "0 apenas.",
       "3 apenas.",
-      "−3 e0."
+      "−3 e 0."
     ],
     "a": 0,
     "sol": "Produto nulo quando x=0 ou x=3.",
@@ -5296,7 +5296,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "maior sempre.",
       "igual sempre.",
       "negativo.",
-      "menor que2, mantendo σ comparável."
+      "menor que 2, mantendo σ comparável."
     ],
     "a": 3,
     "sol": "EP≈σ/√n.",
@@ -5479,7 +5479,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "20."
     ],
     "a": 2,
-    "sol": "2² é a variância, logo o desvio padrão é2.",
+    "sol": "2² é a variância, logo o desvio padrão é 2.",
     "hyp": "Pode confundir variância e desvio padrão.",
     "contexts": [
       "diagnostic"
@@ -5506,7 +5506,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "da distribuição da média/soma de muitas observações.",
       "apenas da mediana populacional.",
       "de qualquer dado individual.",
-      "só de amostras de tamanho1."
+      "só de amostras de tamanho 1."
     ],
     "a": 0,
     "sol": "Sob condições adequadas, médias/somas normalizadas aproximam uma distribuição Normal.",
@@ -5895,7 +5895,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "o": [
       "o número total de vértices.",
       "o grau do vértice i.",
-      "o número de caminhos de comprimento2.",
+      "o número de caminhos de comprimento 2.",
       "a distância ao vértice i."
     ],
     "a": 1,
@@ -6015,7 +6015,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "o": [
       "linha 1×3.",
       "coluna 3×1.",
-      "quadrada3×3.",
+      "quadrada 3×3.",
       "diagonal."
     ],
     "a": 0,
@@ -6313,7 +6313,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "focus": "Valor médio/dispersão de modelos e Modelo Normal",
     "q": "Para uma Normal, P(X<μ) e P(X>μ) são...",
     "o": [
-      "0 e1.",
+      "0 e 1.",
       "dependentes de μ.",
       "ambas 0,5.",
       "ambas 1."
@@ -6495,11 +6495,11 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "o": [
       "tem de ser 0,5.",
       "tem de ser 1.",
-      "fica entre 0,2 e0,8, dependendo de P(A).",
+      "fica entre 0,2 e 0,8, dependendo de P(A).",
       "é sempre 0,16."
     ],
     "a": 2,
-    "sol": "É uma média ponderada de 0,2 e0,8.",
+    "sol": "É uma média ponderada de 0,2 e 0,8.",
     "hyp": "Pode usar média simples sem conhecer os pesos.",
     "contexts": [
       "diagnostic"
@@ -6620,7 +6620,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     ],
     "a": 3,
     "sol": "1/2^{10}=1/1024.",
-    "hyp": "Pode confundir potência com produto10×2.",
+    "hyp": "Pode confundir potência com produto 10×2.",
     "contexts": [
       "diagnostic"
     ],

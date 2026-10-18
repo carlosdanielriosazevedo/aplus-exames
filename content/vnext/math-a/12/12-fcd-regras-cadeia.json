@@ -187,7 +187,7 @@
         "ln x."
       ],
       "a": 2,
-      "sol": "Produto:1·lnx+x·1/x=lnx+1.",
+      "sol": "Produto: 1·lnx+x·1/x=lnx+1.",
       "hyp": "Pode esquecer um dos termos.",
       "contexts": [
         "mission",
@@ -322,7 +322,7 @@
         "2x ln x+x."
       ],
       "a": 3,
-      "sol": "Produto:2xlnx+x²(1/x)=2xlnx+x.",
+      "sol": "Produto: 2xlnx+x²(1/x)=2xlnx+x.",
       "hyp": "Pode esquecer o segundo termo.",
       "contexts": [
         "mission",
@@ -566,7 +566,7 @@
       ],
       "a": 0,
       "sol": "(1/2)(3x+1)^{-1/2}·3.",
-      "hyp": "Pode esquecer o fator3.",
+      "hyp": "Pode esquecer o fator 3.",
       "contexts": [
         "mission",
         "training",
@@ -727,7 +727,7 @@
         "2ln x."
       ],
       "a": 2,
-      "sol": "Cadeia:2lnx·1/x.",
+      "sol": "Cadeia: 2lnx·1/x.",
       "hyp": "Pode derivar o quadrado sem a função interna.",
       "contexts": [
         "mission",
@@ -863,7 +863,7 @@
       ],
       "a": 3,
       "sol": "Produto e cadeia no seno.",
-      "hyp": "Pode esquecer o fator3.",
+      "hyp": "Pode esquecer o fator 3.",
       "contexts": [
         "mission",
         "training",
@@ -1079,7 +1079,7 @@
       ],
       "a": 3,
       "sol": "Cadeia com derivada interna cosx.",
-      "hyp": "Pode esquecer o fator1/2.",
+      "hyp": "Pode esquecer o fator 1/2.",
       "contexts": [
         "mission",
         "training",
@@ -1105,7 +1105,7 @@
         "3[1+e^{2x}]²."
       ],
       "a": 0,
-      "sol": "Exterior:3[...]²; interior:2e^{2x}.",
+      "sol": "Exterior: 3[...]²; interior: 2e^{2x}.",
       "hyp": "Pode esquecer uma das cadeias.",
       "contexts": [
         "mission",
@@ -1160,7 +1160,7 @@
       ],
       "a": 2,
       "sol": "ln√u=(1/2)lnu; derivada=(1/2)·2x/(1+x²).",
-      "hyp": "Pode esquecer o fator1/2.",
+      "hyp": "Pode esquecer o fator 1/2.",
       "contexts": [
         "mission",
         "training",

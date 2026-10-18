@@ -565,7 +565,7 @@
         "y=1."
       ],
       "a": 0,
-      "sol": "Passa por (0,1) e tem declive1.",
+      "sol": "Passa por (0,1) e tem declive 1.",
       "hyp": "Pode esquecer o ponto de tangência.",
       "contexts": [
         "mission",
@@ -619,8 +619,8 @@
         "e²."
       ],
       "a": 2,
-      "sol": "f'(x)=2e^{2x−1}; em x=1 dá2e.",
-      "hyp": "Pode esquecer o fator2.",
+      "sol": "f'(x)=2e^{2x−1}; em x=1 dá 2e.",
+      "hyp": "Pode esquecer o fator 2.",
       "contexts": [
         "mission",
         "training",
@@ -646,7 +646,7 @@
         "2e."
       ],
       "a": 3,
-      "sol": "f'(x)=2xe^{x²}; em1 dá2e.",
+      "sol": "f'(x)=2xe^{x²}; em 1 dá 2e.",
       "hyp": "Pode avaliar o expoente errado.",
       "contexts": [
         "mission",
@@ -670,7 +670,7 @@
         "é estritamente crescente.",
         "é convexa apenas.",
         "é decrescente.",
-        "tem máximo em0."
+        "tem máximo em 0."
       ],
       "a": 0,
       "sol": "Derivada positiva implica crescimento.",
@@ -754,7 +754,7 @@
         "e^x(x+1)."
       ],
       "a": 3,
-      "sol": "Regra do produto:1·e^x+x·e^x.",
+      "sol": "Regra do produto: 1·e^x+x·e^x.",
       "hyp": "Pode derivar apenas um fator.",
       "contexts": [
         "mission",
@@ -1051,7 +1051,7 @@
         "120."
       ],
       "a": 2,
-      "sol": "P'=20e^{0,2t}; em0 dá20.",
+      "sol": "P'=20e^{0,2t}; em 0 dá 20.",
       "hyp": "Pode confundir taxa relativa 0,2 com taxa absoluta.",
       "contexts": [
         "mission",
@@ -1321,7 +1321,7 @@
         "uma raiz."
       ],
       "a": 0,
-      "sol": "A função cresce para x<0 e decresce para x>0, atingindo1 em0.",
+      "sol": "A função cresce para x<0 e decresce para x>0, atingindo 1 em 0.",
       "hyp": "Pode confundir derivada nula com mínimo.",
       "contexts": [
         "mission",

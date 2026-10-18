@@ -152,7 +152,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Numa amostra de100 pessoas, 64 respondem 'sim'. A estimativa pontual de p é...",
+      "q": "Numa amostra de 100 pessoas, 64 respondem 'sim'. A estimativa pontual de p é...",
       "o": [
         "64.",
         "0,64.",
@@ -427,7 +427,7 @@
         "maior sempre.",
         "igual sempre.",
         "negativo.",
-        "menor que2, mantendo σ comparável."
+        "menor que 2, mantendo σ comparável."
       ],
       "a": 3,
       "sol": "EP≈σ/√n.",
@@ -458,7 +458,7 @@
       ],
       "a": 0,
       "sol": "10/√25=2.",
-      "hyp": "Pode dividir por25.",
+      "hyp": "Pode dividir por 25.",
       "contexts": [
         "mission",
         "training",
@@ -485,7 +485,7 @@
       ],
       "a": 1,
       "sol": "Substitui-se p por p̂ na fórmula de erro padrão.",
-      "hyp": "Pode esquecer o fator1−p̂.",
+      "hyp": "Pode esquecer o fator 1−p̂.",
       "contexts": [
         "mission",
         "training",
@@ -611,7 +611,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se um estimador tem viés2 e variância9, o MSE é...",
+      "q": "Se um estimador tem viés 2 e variância 9, o MSE é...",
       "o": [
         "11.",
         "9.",
@@ -638,12 +638,12 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se outro estimador tem viés0 e variância16, comparando MSE...",
+      "q": "Se outro estimador tem viés 0 e variância 16, comparando MSE...",
       "o": [
-        "ambos têm16.",
-        "o primeiro tem11.",
+        "ambos têm 16.",
+        "o primeiro tem 11.",
         "não é possível comparar.",
-        "o primeiro tem MSE13 e o segundo16."
+        "o primeiro tem MSE13 e o segundo 16."
       ],
       "a": 3,
       "sol": "MSE1=13, MSE2=16.",
@@ -782,7 +782,7 @@
       ],
       "a": 0,
       "sol": "0,55×400=220.",
-      "hyp": "Pode confundir proporção com percentagem de100.",
+      "hyp": "Pode confundir proporção com percentagem de 100.",
       "contexts": [
         "mission",
         "training",
@@ -890,7 +890,7 @@
       ],
       "a": 0,
       "sol": "É a variância da média de Bernoullis.",
-      "hyp": "Pode esquecer o fator1−p.",
+      "hyp": "Pode esquecer o fator 1−p.",
       "contexts": [
         "mission",
         "training",
@@ -916,7 +916,7 @@
         "p=0,1 sempre."
       ],
       "a": 1,
-      "sol": "p(1−p) é máximo em0,5.",
+      "sol": "p(1−p) é máximo em 0,5.",
       "hyp": "Pode pensar que eventos raros têm maior variância absoluta.",
       "contexts": [
         "mission",
@@ -1048,10 +1048,10 @@
         "duplicar n.",
         "reduzir n para metade.",
         "quadruplicar n.",
-        "aumentar n em50%."
+        "aumentar n em 50%."
       ],
       "a": 2,
-      "sol": "Erro padrão varia com1/√n.",
+      "sol": "Erro padrão varia com 1/√n.",
       "hyp": "Pode usar relação linear.",
       "contexts": [
         "mission",
@@ -1099,10 +1099,10 @@
       "cognitive": "Raciocínio",
       "q": "Um estimador θ̂ tem E(θ̂)=θ+1/n. É...",
       "o": [
-        "enviesado para n finito, mas o viés tende a0.",
+        "enviesado para n finito, mas o viés tende a 0.",
         "não enviesado.",
         "inconsistente obrigatoriamente.",
-        "de viés1."
+        "de viés 1."
       ],
       "a": 0,
       "sol": "Bias=1/n.",
@@ -1183,10 +1183,10 @@
         "μ=52 exatamente.",
         "μ̂=10.",
         "μ̂=100.",
-        "μ̂=52 com erro padrão estimado1."
+        "μ̂=52 com erro padrão estimado 1."
       ],
       "a": 3,
-      "sol": "A estimativa central é52 e s/√n=1 quantifica incerteza típica.",
+      "sol": "A estimativa central é 52 e s/√n=1 quantifica incerteza típica.",
       "hyp": "Pode apresentar estimativa como parâmetro exato.",
       "contexts": [
         "mission",
@@ -1286,7 +1286,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Se o erro padrão é0,1, reportar uma estimativa com 8 casas decimais pode ser...",
+      "q": "Se o erro padrão é 0,1, reportar uma estimativa com 8 casas decimais pode ser...",
       "o": [
         "necessário sempre.",
         "prova de grande n.",
@@ -1315,10 +1315,10 @@
       "cognitive": "Raciocínio",
       "q": "Se θ̂ é não enviesado e EP=3, então aproximadamente a sua distribuição é centrada...",
       "o": [
-        "em θ, com dispersão típica3.",
+        "em θ, com dispersão típica 3.",
         "em θ+3.",
-        "em0.",
-        "em3."
+        "em 0.",
+        "em 3."
       ],
       "a": 0,
       "sol": "Não enviesamento fixa o centro; EP descreve a dispersão.",

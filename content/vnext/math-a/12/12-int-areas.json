@@ -106,7 +106,7 @@
         "6."
       ],
       "a": 3,
-      "sol": "É um retângulo de base3 e altura2.",
+      "sol": "É um retângulo de base 3 e altura 2.",
       "hyp": "Pode somar base e altura.",
       "contexts": [
         "mission",
@@ -133,8 +133,8 @@
         "8."
       ],
       "a": 0,
-      "sol": "É um triângulo de base2 e altura2, área2; também ∫_0^2 x dx=2.",
-      "hyp": "Pode esquecer dividir por2.",
+      "sol": "É um triângulo de base 2 e altura 2, área 2; também ∫_0^2 x dx=2.",
+      "hyp": "Pode esquecer dividir por 2.",
       "contexts": [
         "mission",
         "training",
@@ -188,7 +188,7 @@
       ],
       "a": 2,
       "sol": "∫_0^2 3x²dx=[x³]_0^2=8.",
-      "hyp": "Pode esquecer integrar o fator3.",
+      "hyp": "Pode esquecer integrar o fator 3.",
       "contexts": [
         "mission",
         "training",
@@ -214,8 +214,8 @@
         "1/2."
       ],
       "a": 3,
-      "sol": "É um triângulo de base1 e altura1.",
-      "hyp": "Pode usar base×altura sem dividir por2.",
+      "sol": "É um triângulo de base 1 e altura 1.",
+      "hyp": "Pode usar base×altura sem dividir por 2.",
       "contexts": [
         "mission",
         "training",
@@ -233,7 +233,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "A integral ∫_{−1}^1 x dx vale0, mas a área geométrica entre y=x e Ox nesse intervalo é...",
+      "q": "A integral ∫_{−1}^1 x dx vale 0, mas a área geométrica entre y=x e Ox nesse intervalo é...",
       "o": [
         "1.",
         "0.",
@@ -241,7 +241,7 @@
         "1/2."
       ],
       "a": 0,
-      "sol": "Há dois triângulos de área1/2 cada, sem cancelamento geométrico.",
+      "sol": "Há dois triângulos de área 1/2 cada, sem cancelamento geométrico.",
       "hyp": "Pode confundir integral algébrica com área total.",
       "contexts": [
         "mission",
@@ -349,7 +349,7 @@
         "9."
       ],
       "a": 0,
-      "sol": "A diferença vertical é constante2; área=2×3=6.",
+      "sol": "A diferença vertical é constante 2; área=2×3=6.",
       "hyp": "Pode somar as funções.",
       "contexts": [
         "mission",
@@ -377,7 +377,7 @@
       ],
       "a": 1,
       "sol": "x=x² =>x(x−1)=0.",
-      "hyp": "Pode dividir por x e perder a solução0.",
+      "hyp": "Pode dividir por x e perder a solução 0.",
       "contexts": [
         "mission",
         "training",
@@ -533,7 +533,7 @@
       "q": "Para determinar área entre dois gráficos sem limites dados, primeiro devemos...",
       "o": [
         "derivar ambos obrigatoriamente.",
-        "integrar de0 a1.",
+        "integrar de 0 a 1.",
         "somar as funções.",
         "encontrar pontos de interseção relevantes."
       ],
@@ -566,7 +566,7 @@
       ],
       "a": 0,
       "sol": "x²=2x =>x(x−2)=0.",
-      "hyp": "Pode dividir por x e perder0.",
+      "hyp": "Pode dividir por x e perder 0.",
       "contexts": [
         "mission",
         "training",
@@ -669,7 +669,7 @@
       "o": [
         "abaixo ou sobre Ox.",
         "acima de Ox.",
-        "sempre igual a0.",
+        "sempre igual a 0.",
         "acima para x<0 e abaixo para x>0."
       ],
       "a": 0,
@@ -721,10 +721,10 @@
       "cognitive": "Raciocínio",
       "q": "Para f(x)=x²−4, em [−3,3], os zeros relevantes são...",
       "o": [
-        "−4 e4.",
-        "0 e2.",
-        "−2 e2.",
-        "−2 e0."
+        "−4 e 4.",
+        "0 e 2.",
+        "−2 e 2.",
+        "−2 e 0."
       ],
       "a": 2,
       "sol": "x²=4.",
@@ -749,7 +749,7 @@
       "q": "No intervalo [−2,2], x²−4 é...",
       "o": [
         "não negativa.",
-        "positiva exceto em0.",
+        "positiva exceto em 0.",
         "ímpar.",
         "não positiva."
       ],
@@ -863,7 +863,7 @@
       ],
       "a": 3,
       "sol": "cos muda de sinal emπ/2; área=∫_0^{π/2}cosx dx−∫_{π/2}^π cosx dx=1+1=2.",
-      "hyp": "Pode usar a integral algébrica0.",
+      "hyp": "Pode usar a integral algébrica 0.",
       "contexts": [
         "mission",
         "training",
@@ -998,7 +998,7 @@
       ],
       "a": 0,
       "sol": "e^x=1 =>x=0.",
-      "hyp": "Pode confundir e^1=e com1.",
+      "hyp": "Pode confundir e^1=e com 1.",
       "contexts": [
         "mission",
         "training",
@@ -1052,7 +1052,7 @@
       ],
       "a": 2,
       "sol": "∫_0^1(e^x−1)dx=(e−1)−1=e−2.",
-      "hyp": "Pode esquecer integrar o termo−1.",
+      "hyp": "Pode esquecer integrar o termo −1.",
       "contexts": [
         "mission",
         "training",
@@ -1151,7 +1151,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Uma velocidade v(t) é positiva entre0 e4 e negativa entre4 e6. A distância total percorrida é...",
+      "q": "Uma velocidade v(t) é positiva entre 0 e 4 e negativa entre 4 e 6. A distância total percorrida é...",
       "o": [
         "∫_0^6v(t)dt.",
         "|∫_0^6v(t)dt| sempre.",
@@ -1240,7 +1240,7 @@
         "0."
       ],
       "a": 1,
-      "sol": "Em cada subintervalo usa-se superior−inferior.",
+      "sol": "Em cada subintervalo usa-se superior − inferior.",
       "hyp": "Pode manter a mesma ordem após a troca.",
       "contexts": [
         "mission",

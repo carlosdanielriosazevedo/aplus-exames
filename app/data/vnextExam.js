@@ -2454,7 +2454,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "G=10, N=20"
     ],
     "a": 1,
-    "sol": "G fica a 1/3 de OH a partir de O:10; N é ponto médio:15.",
+    "sol": "G fica a 1/3 de OH a partir de O:10; N é ponto médio: 15.",
     "hyp": "Pode inverter a razão de G ou confundir N com G.",
     "contexts": [
       "exam"
@@ -3237,7 +3237,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "400."
     ],
     "a": 2,
-    "sol": "Centenas:9, dezenas:10, unidades pares:5. 9×10×5=450.",
+    "sol": "Centenas: 9, dezenas: 10, unidades pares: 5. 9×10×5=450.",
     "hyp": "Pode contar zero inicial ou esquecer paridade.",
     "contexts": [
       "exam"
@@ -3324,7 +3324,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "100."
     ],
     "a": 0,
-    "sol": "Primeiro:4 opções (1-4); segundo:4 restantes incluindo 0; terceiro:3. Total 48.",
+    "sol": "Primeiro: 4 opções (1-4); segundo: 4 restantes incluindo 0; terceiro: 3. Total 48.",
     "hyp": "Pode usar A(5,3)=60 sem excluir zero inicial.",
     "contexts": [
       "exam"
@@ -3527,7 +3527,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "15."
     ],
     "a": 3,
-    "sol": "Fora da diagonal há 30; metade fica acima:15.",
+    "sol": "Fora da diagonal há 30; metade fica acima: 15.",
     "hyp": "Pode contar a diagonal.",
     "contexts": [
       "exam"
@@ -3672,7 +3672,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "5040."
     ],
     "a": 2,
-    "sol": "Bloco ABC com ordem fixa +4 pessoas =5 blocos:5!=120.",
+    "sol": "Bloco ABC com ordem fixa +4 pessoas =5 blocos: 5!=120.",
     "hyp": "Pode multiplicar por 3!.",
     "contexts": [
       "exam"
@@ -4682,7 +4682,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "q": "No espaço, para u=(a,b,c) e v=(d,e,f), u·v é...",
     "o": [
       "ad+be+cf.",
-      "ad−be+cf.",
+      "ad − be+cf.",
       "a+d+b+e+c+f.",
       "af+be+cd."
     ],
@@ -6276,10 +6276,10 @@ export const VNEXT_EXAM_QUESTIONS=[
     "focus": "Unidade imaginária, conjunto C e equações de 2.º grau",
     "q": "iⁿ=i quando...",
     "o": [
-      "n≡2 mod4.",
-      "n≡1 mod4.",
-      "n≡3 mod4.",
-      "n≡0 mod4."
+      "n≡2 mod 4.",
+      "n≡1 mod 4.",
+      "n≡3 mod 4.",
+      "n≡0 mod 4."
     ],
     "a": 1,
     "sol": "O primeiro termo do ciclo corresponde a resto 1.",
@@ -6390,7 +6390,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Equações exponenciais/logarítmicas e problemas",
-    "q": "Um investimento C(t)=2000·1,04^t ultrapassa3000 quando...",
+    "q": "Um investimento C(t)=2000·1,04^t ultrapassa 3000 quando...",
     "o": [
       "t>ln(1,5)/ln(1,04).",
       "t<ln(1,5)/ln(1,04).",
@@ -6398,7 +6398,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "t>ln1,04/ln1,5."
     ],
     "a": 0,
-    "sol": "1,04^t>1,5; como a base é maior que1, t>log_1,04(1,5).",
+    "sol": "1,04^t>1,5; como a base é maior que 1, t>log_1,04(1,5).",
     "hyp": "Pode inverter a desigualdade ou a razão de logs.",
     "contexts": [
       "exam"
@@ -6453,7 +6453,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "a função cresce sempre linearmente.",
       "a diferença entre termos é constante.",
       "a função é periódica.",
-      "um aumento de1 em x multiplica o valor por a."
+      "um aumento de 1 em x multiplica o valor por a."
     ],
     "a": 3,
     "sol": "A razão entre valores separados por uma unidade é constante e igual à base.",
@@ -6485,8 +6485,8 @@ export const VNEXT_EXAM_QUESTIONS=[
       "x+1."
     ],
     "a": 0,
-    "sol": "O fator3 cancela e a razão exponencial é2.",
-    "hyp": "Pode multiplicar os fatores3 e2.",
+    "sol": "O fator 3 cancela e a razão exponencial é 2.",
+    "hyp": "Pode multiplicar os fatores 3 e 2.",
     "contexts": [
       "exam"
     ],
@@ -6544,7 +6544,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     ],
     "a": 0,
     "sol": "A raiz quadrada real exige radicando não negativo.",
-    "hyp": "Pode excluir0.",
+    "hyp": "Pode excluir 0.",
     "contexts": [
       "exam"
     ],
@@ -6572,7 +6572,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "crescente."
     ],
     "a": 3,
-    "sol": "A exponencial de base maior que1 é crescente, e a sua inversa também.",
+    "sol": "A exponencial de base maior que 1 é crescente, e a sua inversa também.",
     "hyp": "Pode pensar que inversa significa monotonia oposta.",
     "contexts": [
       "exam"
@@ -6597,7 +6597,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "o": [
       "função raiz quadrada.",
       "função logarítmica de base a.",
-      "função recíproca1/a^x.",
+      "função recíproca 1/a^x.",
       "função afim."
     ],
     "a": 1,
@@ -6631,7 +6631,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     ],
     "a": 2,
     "sol": "O coeficiente passa a expoente do argumento.",
-    "hyp": "Pode multiplicar o argumento por2.",
+    "hyp": "Pode multiplicar o argumento por 2.",
     "contexts": [
       "exam"
     ],
@@ -6738,7 +6738,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Crescimento/decrescimento exponencial e modelação",
-    "q": "Uma quantidade cresce50% em2 períodos, com fator constante por período. O fator b satisfaz...",
+    "q": "Uma quantidade cresce 50% em 2 períodos, com fator constante por período. O fator b satisfaz...",
     "o": [
       "b²=1,5.",
       "2b=1,5.",
@@ -6746,8 +6746,8 @@ export const VNEXT_EXAM_QUESTIONS=[
       "b²=0,5."
     ],
     "a": 0,
-    "sol": "O fator total é1,50 e resulta de duas multiplicações pelo mesmo b.",
-    "hyp": "Pode dividir50% por2 em vez de compor fatores.",
+    "sol": "O fator total é 1,50 e resulta de duas multiplicações pelo mesmo b.",
+    "hyp": "Pode dividir 50% por 2 em vez de compor fatores.",
     "contexts": [
       "exam"
     ],
@@ -6767,7 +6767,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Crescimento/decrescimento exponencial e modelação",
-    "q": "Um medicamento começa com80 mg e perde20% por hora. Um modelo é...",
+    "q": "Um medicamento começa com 80 mg e perde 20% por hora. Um modelo é...",
     "o": [
       "80·1,2^t.",
       "80−0,2t.",
@@ -6775,8 +6775,8 @@ export const VNEXT_EXAM_QUESTIONS=[
       "80·0,2^t."
     ],
     "a": 2,
-    "sol": "Após cada hora permanece80%=0,8 da quantidade anterior.",
-    "hyp": "Pode usar a taxa perdida0,2 como fator que permanece.",
+    "sol": "Após cada hora permanece 80%=0,8 da quantidade anterior.",
+    "hyp": "Pode usar a taxa perdida 0,2 como fator que permanece.",
     "contexts": [
       "exam"
     ],
@@ -6833,7 +6833,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "V(x)=20·30−4x²."
     ],
     "a": 0,
-    "sol": "Após dobrar, altura x e lados da base 20−2x e30−2x.",
+    "sol": "Após dobrar, altura x e lados da base 20−2x e 30−2x.",
     "hyp": "Pode retirar x apenas uma vez de cada dimensão.",
     "contexts": [
       "exam"
@@ -7007,7 +7007,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "uma raiz."
     ],
     "a": 0,
-    "sol": "A função cresce para x<0 e decresce para x>0, atingindo1 em0.",
+    "sol": "A função cresce para x<0 e decresce para x>0, atingindo 1 em 0.",
     "hyp": "Pode confundir derivada nula com mínimo.",
     "contexts": [
       "exam"
@@ -7094,8 +7094,8 @@ export const VNEXT_EXAM_QUESTIONS=[
       "−10sin(2t)."
     ],
     "a": 0,
-    "sol": "Deriva-se seno e multiplica-se pela frequência angular2.",
-    "hyp": "Pode esquecer o fator2.",
+    "sol": "Deriva-se seno e multiplica-se pela frequência angular 2.",
+    "hyp": "Pode esquecer o fator 2.",
     "contexts": [
       "exam"
     ],
@@ -7321,12 +7321,12 @@ export const VNEXT_EXAM_QUESTIONS=[
     "q": "Para f(x)=x²−4x em [0,5], os candidatos a extremos absolutos são...",
     "o": [
       "x=2 apenas.",
-      "x=0 e5 apenas.",
+      "x=0 e 5 apenas.",
       "x=0,4,5.",
       "x=0,2,5."
     ],
     "a": 3,
-    "sol": "f'=2x−4=0 dá2, além das extremidades0 e5.",
+    "sol": "f'=2x−4=0 dá 2, além das extremidades 0 e 5.",
     "hyp": "Pode considerar apenas pontos críticos.",
     "contexts": [
       "exam"
@@ -7340,30 +7340,30 @@ export const VNEXT_EXAM_QUESTIONS=[
     "productionEligible": false
   },
   {
-    "id": "EX-VN12FCONT-EG-045",
+    "id": "EX-VN12FCONT-EG-039",
     "themeId": "12-fcont",
     "subtopicId": "12-fcont-estudo-global",
     "year": "12.º",
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Monotonia, extremos e estudo global de funções",
-    "q": "Se o estudo analítico de f' não permite resolver exatamente f'(x)=0, uma abordagem adequada é...",
+    "q": "Para f(x)=x/(1+x²), há máximo local em...",
     "o": [
-      "localizar numericamente as raízes de f'.",
-      "assumir que não há pontos críticos.",
-      "igualar f a0.",
-      "substituir x=1."
+      "x=−1.",
+      "x=0.",
+      "x=1.",
+      "nenhum."
     ],
-    "a": 0,
-    "sol": "Métodos aproximados podem ser usados para localizar pontos críticos.",
-    "hyp": "Pode abandonar o estudo por falta de solução fechada.",
+    "a": 2,
+    "sol": "f' passa de positivo para negativo em 1.",
+    "hyp": "Pode trocar o ponto de máximo e mínimo.",
     "contexts": [
       "exam"
     ],
-    "signature": "exam:12-fcont-estudo-global:12-fcont-estudo-global:numerico",
+    "signature": "exam:12-fcont-estudo-global:12-fcont-estudo-global:racional-max",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
-    "sourceQuestionId": "VN12FCONT-EG-045",
+    "sourceQuestionId": "VN12FCONT-EG-039",
     "sourceFile": "content/vnext/math-a/12/12-fcont-estudo-global.json",
     "optionOrderVersion": 1,
     "productionEligible": false
@@ -7442,7 +7442,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "0."
     ],
     "a": 2,
-    "sol": "É a soma 1+x+...+x^{n−1} avaliada em1, com n termos.",
+    "sol": "É a soma 1+x+...+x^{n−1} avaliada em 1, com n termos.",
     "hyp": "Pode confundir com n−1.",
     "contexts": [
       "exam"
@@ -7466,8 +7466,8 @@ export const VNEXT_EXAM_QUESTIONS=[
     "q": "A expressão 0/0 num cálculo de limite é...",
     "o": [
       "uma indeterminação, não o valor do limite.",
-      "sempre igual a0.",
-      "sempre igual a1.",
+      "sempre igual a 0.",
+      "sempre igual a 1.",
       "prova de inexistência do limite."
     ],
     "a": 0,
@@ -7610,13 +7610,13 @@ export const VNEXT_EXAM_QUESTIONS=[
     "focus": "Distribuições de amostragem / comportamento amostral",
     "q": "A correção finita √[(N−n)/(N−1)] é...",
     "o": [
-      "sempre maior que1.",
-      "menor ou igual a1.",
+      "sempre maior que 1.",
+      "menor ou igual a 1.",
       "sempre zero.",
       "igual a n/N."
     ],
     "a": 1,
-    "sol": "Como N−n≤N−1 para n≥1, o fator não excede1.",
+    "sol": "Como N−n≤N−1 para n≥1, o fator não excede 1.",
     "hyp": "Pode achar que correção aumenta o erro.",
     "contexts": [
       "exam"
@@ -7733,7 +7733,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     ],
     "a": 1,
     "sol": "Substitui-se p por p̂ na fórmula de erro padrão.",
-    "hyp": "Pode esquecer o fator1−p̂.",
+    "hyp": "Pode esquecer o fator 1−p̂.",
     "contexts": [
       "exam"
     ],
@@ -7869,7 +7869,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Intervalos de confiança, margem de erro e interpretação",
-    "q": "Para margem≤0,03 a95%, usando z*=1,96 e p=0,5, precisamos aproximadamente de n≥...",
+    "q": "Para margem≤0,03 a 95%, usando z*=1,96 e p=0,5, precisamos aproximadamente de n≥...",
     "o": [
       "384.",
       "1068.",
@@ -7877,7 +7877,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "33."
     ],
     "a": 1,
-    "sol": "n≥(1,96²×0,25)/(0,03²)≈1067,1, arredondando para cima1068.",
+    "sol": "n≥(1,96²×0,25)/(0,03²)≈1067,1, arredondando para cima 1068.",
     "hyp": "Pode usar a fórmula sem quadrar z ou margem.",
     "contexts": [
       "exam"
@@ -7902,7 +7902,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "o": [
       "95% dos dados estão dentro do intervalo.",
       "o parâmetro muda de amostra para amostra.",
-      "em muitas repetições do procedimento, cerca de95% dos intervalos conteriam o parâmetro.",
+      "em muitas repetições do procedimento, cerca de 95% dos intervalos conteriam o parâmetro.",
       "há 95% de certeza subjetiva por definição."
     ],
     "a": 2,
@@ -7920,30 +7920,30 @@ export const VNEXT_EXAM_QUESTIONS=[
     "productionEligible": false
   },
   {
-    "id": "EX-VN12IE-TLC-023",
+    "id": "EX-VN12IE-TLC-027",
     "themeId": "12-ie",
     "subtopicId": "12-ie-tlc",
     "year": "12.º opcional",
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Teorema Limite Central em contexto introdutório",
-    "q": "Uma média amostral 2 erros padrão acima de μ corresponde a...",
+    "q": "Aproximadamente 95% está entre...",
     "o": [
-      "z=−2.",
-      "z=μ+2.",
-      "z=2.",
-      "probabilidade2."
+      "μ−σ e μ+σ.",
+      "μ−3σ e μ+3σ.",
+      "μ−2σ e μ+2σ.",
+      "μ e μ+2σ."
     ],
     "a": 2,
-    "sol": "z mede número de erros padrão desde a média.",
-    "hyp": "Pode confundir z e valor original.",
+    "sol": "É a regra aproximada dos dois desvios padrão.",
+    "hyp": "Pode confundir 68% e 95%.",
     "contexts": [
       "exam"
     ],
-    "signature": "exam:12-ie-tlc:12-ie-tlc:z",
+    "signature": "exam:12-ie-tlc:12-ie-tlc:regra95",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
-    "sourceQuestionId": "VN12IE-TLC-023",
+    "sourceQuestionId": "VN12IE-TLC-027",
     "sourceFile": "content/vnext/math-a/12/12-ie-tlc.json",
     "optionOrderVersion": 1,
     "productionEligible": false
@@ -8023,7 +8023,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     ],
     "a": 3,
     "sol": "cos muda de sinal emπ/2; área=∫_0^{π/2}cosx dx−∫_{π/2}^π cosx dx=1+1=2.",
-    "hyp": "Pode usar a integral algébrica0.",
+    "hyp": "Pode usar a integral algébrica 0.",
     "contexts": [
       "exam"
     ],
@@ -8101,7 +8101,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Integral definido",
-    "q": "Se f é constante igual a7 em [2,5], o seu valor médio é...",
+    "q": "Se f é constante igual a 7 em [2,5], o seu valor médio é...",
     "o": [
       "21.",
       "7.",
@@ -8110,7 +8110,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     ],
     "a": 1,
     "sol": "A média de uma função constante é a própria constante.",
-    "hyp": "Pode usar integral total21.",
+    "hyp": "Pode usar integral total 21.",
     "contexts": [
       "exam"
     ],
@@ -8225,7 +8225,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "(2x+1)^4/2."
     ],
     "a": 1,
-    "sol": "Derivar (2x+1)^4/8 dá4·2/8=1 vezes o cubo.",
+    "sol": "Derivar (2x+1)^4/8 dá 4·2/8=1 vezes o cubo.",
     "hyp": "Pode compensar mal o fator interno.",
     "contexts": [
       "exam"
@@ -8284,7 +8284,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     ],
     "a": 1,
     "sol": "Falta metade da derivada interna.",
-    "hyp": "Pode esquecer o fator1/2.",
+    "hyp": "Pode esquecer o fator 1/2.",
     "contexts": [
       "exam"
     ],
@@ -8341,7 +8341,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "ln|x|+C."
     ],
     "a": 3,
-    "sol": "A primitiva é ln|x| em intervalos que não atravessam0.",
+    "sol": "A primitiva é ln|x| em intervalos que não atravessam 0.",
     "hyp": "Pode aplicar a regra das potências com n=−1.",
     "contexts": [
       "exam"
@@ -8370,7 +8370,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "2."
     ],
     "a": 2,
-    "sol": "Primitiva (t−2)²/2? Melhor: t²/2−2t; em3 dá4,5−6=−1,5; em1 dá0,5−2=−1,5; diferença0.",
+    "sol": "Primitiva (t−2)²/2? Melhor: t²/2−2t; em 3 dá 4,5−6=−1,5; em 1 dá 0,5−2=−1,5; diferença 0.",
     "hyp": "Pode confundir derivada e valor acumulado.",
     "contexts": [
       "exam"
@@ -8544,8 +8544,8 @@ export const VNEXT_EXAM_QUESTIONS=[
       "(50,50)^T."
     ],
     "a": 1,
-    "sol": "A primeira coluna indica que 80% permanecem no estado1 e20% passam ao estado2.",
-    "hyp": "Pode usar a segunda coluna apesar de x_0 estar todo no estado1.",
+    "sol": "A primeira coluna indica que 80% permanecem no estado 1 e 20% passam ao estado 2.",
+    "hyp": "Pode usar a segunda coluna apesar de x_0 estar todo no estado 1.",
     "contexts": [
       "exam"
     ],
@@ -8573,7 +8573,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "(12,8)^T."
     ],
     "a": 2,
-    "sol": "Primeiro recurso:8+2=10; segundo:4+6=10.",
+    "sol": "Primeiro recurso: 8+2=10; segundo: 4+6=10.",
     "hyp": "Pode multiplicar apenas diagonais.",
     "contexts": [
       "exam"
@@ -8596,13 +8596,13 @@ export const VNEXT_EXAM_QUESTIONS=[
     "focus": "Modelação e aplicações",
     "q": "Se A=[[2,1],[3,4]] dá unidades de recursos por produto e q=(5,2)^T, então Aq=(12,23)^T. A primeira componente representa...",
     "o": [
-      "produção total do produto1.",
-      "custo do recurso1.",
+      "produção total do produto 1.",
+      "custo do recurso 1.",
       "número de produtos.",
-      "consumo total do recurso1."
+      "consumo total do recurso 1."
     ],
     "a": 3,
-    "sol": "A primeira linha corresponde ao recurso1.",
+    "sol": "A primeira linha corresponde ao recurso 1.",
     "hyp": "Pode interpretar a componente pela coluna em vez da linha.",
     "contexts": [
       "exam"
@@ -8747,7 +8747,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "i−j=1."
     ],
     "a": 0,
-    "sol": "Em indexação começando em1, os índices somam n+1.",
+    "sol": "Em indexação começando em 1, os índices somam n+1.",
     "hyp": "Pode usar a regra da diagonal principal.",
     "contexts": [
       "exam"
@@ -8773,7 +8773,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "todos os elementos iguais.",
       "diagonal principal nula.",
       "uma única coluna.",
-      "elementos fora da diagonal principal iguais a0."
+      "elementos fora da diagonal principal iguais a 0."
     ],
     "a": 3,
     "sol": "Só a diagonal principal pode ter valores não nulos.",
@@ -8829,7 +8829,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "q": "Refletir em y=x e depois novamente em y=x equivale a...",
     "o": [
       "identidade.",
-      "rotação de180°.",
+      "rotação de 180°.",
       "reflexão no eixo Ox.",
       "cisalhamento."
     ],
@@ -9153,7 +9153,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "[0,μ]."
     ],
     "a": 0,
-    "sol": "Cerca de68% fica a menos de um desvio-padrão da média.",
+    "sol": "Cerca de 68% fica a menos de um desvio-padrão da média.",
     "hyp": "Pode trocar as percentagens 68-95-99,7.",
     "contexts": [
       "exam"
@@ -9203,7 +9203,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Valor médio/dispersão de modelos e Modelo Normal",
-    "q": "Um z-score igual a2 significa que o valor está...",
+    "q": "Um z-score igual a 2 significa que o valor está...",
     "o": [
       "2 unidades acima da média.",
       "2 desvios-padrão acima da média.",
@@ -9270,7 +9270,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     ],
     "a": 2,
     "sol": "Online+compra 0,14; físico+compra 0,12; total 0,26.",
-    "hyp": "Pode fazer média simples das taxas 0,2 e0,4.",
+    "hyp": "Pode fazer média simples das taxas 0,2 e 0,4.",
     "contexts": [
       "exam"
     ],
@@ -9409,7 +9409,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "q": "Num exemplo com prevalência de 1%, sensibilidade de 99% e 5% de falsos positivos, P(doença|positivo) é cerca de 16,7%. Isto mostra que uma elevada sensibilidade do teste...",
     "o": [
       "não implica, por si só, elevada P(doença|positivo).",
-      "garante posterior superior a90%.",
+      "garante posterior superior a 90%.",
       "torna irrelevante a prevalência.",
       "elimina falsos positivos."
     ],
@@ -9435,7 +9435,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Probabilidade total e problemas em cadeia",
-    "q": "Uma condição rara ocorre em2% dos casos. Um alarme dispara em95% dos casos com condição e em10% sem condição. P(alarme)=...",
+    "q": "Uma condição rara ocorre em 2% dos casos. Um alarme dispara em 95% dos casos com condição e em 10% sem condição. P(alarme)=...",
     "o": [
       "0,117.",
       "0,105.",
@@ -9464,7 +9464,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Probabilidade total e problemas em cadeia",
-    "q": "Uma escola tem 40% alunos do 10.º, 35% do 11.º e 25% do 12.º. Taxas de participação:50%,60%,80%. P(participar)=...",
+    "q": "Uma escola tem 40% alunos do 10.º, 35% do 11.º e 25% do 12.º. Taxas de participação: 50%,60%,80%. P(participar)=...",
     "o": [
       "0,63.",
       "0,60.",
@@ -9646,7 +9646,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "L0−n."
     ],
     "a": 2,
-    "sol": "Cada iteração divide a amplitude por2.",
+    "sol": "Cada iteração divide a amplitude por 2.",
     "hyp": "Pode usar decrescimento linear.",
     "contexts": [
       "exam"
@@ -9671,7 +9671,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "o": [
       "avaliar apenas f(10).",
       "calcular f'(0).",
-      "avaliar f num ponto entre1 e2, por exemplo1,5.",
+      "avaliar f num ponto entre 1 e 2, por exemplo 1,5.",
       "mudar para um intervalo sem relação."
     ],
     "a": 2,
@@ -9727,7 +9727,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "focus": "Teorema do Valor Intermédio/Bolzano-Cauchy e localização de raízes",
     "q": "Para f(x)=x³−2, f(1)<0 e f(2)>0. Assim...",
     "o": [
-      "a raiz é exatamente1,5.",
+      "a raiz é exatamente 1,5.",
       "há duas raízes.",
       "não há raiz.",
       "há pelo menos uma raiz em ]1,2[."
@@ -9747,59 +9747,59 @@ export const VNEXT_EXAM_QUESTIONS=[
     "productionEligible": false
   },
   {
-    "id": "EX-VN12RAE-NEW-025",
+    "id": "EX-VN12RAE-NEW-024",
     "themeId": "12-rae",
     "subtopicId": "12-rae-newton",
     "year": "12.º",
     "difficulty": 3,
-    "cognitive": "Interpretação",
+    "cognitive": "Raciocínio",
     "focus": "Método de Newton-Raphson, aproximação e análise de adequação",
-    "q": "Para uma equação com várias raízes, Newton pode...",
+    "q": "A aproximação 13/6≈2,1667 está...",
     "o": [
-      "convergir para raízes diferentes consoante x0.",
-      "encontrar sempre a menor raiz.",
-      "encontrar todas simultaneamente.",
-      "ignorar x0."
+      "mais longe da raiz 2.",
+      "exatamente na raiz.",
+      "na raiz −2.",
+      "mais perto da raiz 2 do que x0=3."
     ],
-    "a": 0,
-    "sol": "O ponto inicial influencia a bacia de atração.",
-    "hyp": "Pode pensar que o método escolhe uma raiz canónica.",
+    "a": 3,
+    "sol": "O erro passou de 1 para cerca de 0,1667.",
+    "hyp": "Pode ignorar qual raiz está a ser aproximada.",
     "contexts": [
       "exam"
     ],
-    "signature": "exam:12-rae-newton:12-rae-newton:multiplas-raizes",
+    "signature": "exam:12-rae-newton:12-rae-newton:melhoria",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
-    "sourceQuestionId": "VN12RAE-NEW-025",
+    "sourceQuestionId": "VN12RAE-NEW-024",
     "sourceFile": "content/vnext/math-a/12/12-rae-newton.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
-    "id": "EX-VN12RAE-NEW-045",
+    "id": "EX-VN12RAE-NEW-043",
     "themeId": "12-rae",
     "subtopicId": "12-rae-newton",
     "year": "12.º",
     "difficulty": 4,
-    "cognitive": "Raciocínio",
+    "cognitive": "Interpretação",
     "focus": "Método de Newton-Raphson, aproximação e análise de adequação",
-    "q": "Se x_n está muito perto de uma raiz simples α e f'(α)≠0, então o erro e_n=x_n−α tende a satisfazer...",
+    "q": "Um método híbrido bisseção+Newton pode ser útil para...",
     "o": [
-      "|e_{n+1}|≈C|e_n|².",
-      "|e_{n+1}|=|e_n|/2 exatamente.",
-      "|e_{n+1}|≈C|e_n|.",
-      "|e_{n+1}|=0 sempre."
+      "eliminar todas as avaliações de f.",
+      "evitar qualquer derivada sempre.",
+      "combinar garantia de intervalo com rapidez local.",
+      "obter solução simbólica exata."
     ],
-    "a": 0,
-    "sol": "É a expressão típica da convergência quadrática.",
-    "hyp": "Pode atribuir uma taxa linear.",
+    "a": 2,
+    "sol": "A bisseção mantém robustez e Newton acelera quando seguro.",
+    "hyp": "Pode pensar que os métodos são incompatíveis.",
     "contexts": [
       "exam"
     ],
-    "signature": "exam:12-rae-newton:12-rae-newton:erro-quadratico",
+    "signature": "exam:12-rae-newton:12-rae-newton:hibrido",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
-    "sourceQuestionId": "VN12RAE-NEW-045",
+    "sourceQuestionId": "VN12RAE-NEW-043",
     "sourceFile": "content/vnext/math-a/12/12-rae-newton.json",
     "optionOrderVersion": 1,
     "productionEligible": false

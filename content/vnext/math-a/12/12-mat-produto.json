@@ -403,7 +403,7 @@
         "[[1,0],[0,1]]."
       ],
       "a": 2,
-      "sol": "AB: linha1·colunas=(2,1); linha2=(1,1).",
+      "sol": "AB: linha 1·colunas=(2,1); linha 2=(1,1).",
       "hyp": "Pode calcular BA em vez de AB.",
       "contexts": [
         "mission",

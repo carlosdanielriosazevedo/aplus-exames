@@ -295,7 +295,7 @@
         "não existe."
       ],
       "a": 2,
-      "sol": "Para x≠1, f(x)=x+1; o limite é2.",
+      "sol": "Para x≠1, f(x)=x+1; o limite é 2.",
       "hyp": "Pode substituir diretamente e obter 0/0.",
       "contexts": [
         "mission",
@@ -316,10 +316,10 @@
       "cognitive": "Raciocínio",
       "q": "Para f(x)=(x²−1)/(x−1), x≠1, sabe-se que lim_{x→1}f(x)=2. Se definirmos f(1)=2, a função torna-se...",
       "o": [
-        "descontínua em1.",
-        "não definida em1.",
+        "descontínua em 1.",
+        "não definida em 1.",
         "constante.",
-        "contínua em1."
+        "contínua em 1."
       ],
       "a": 3,
       "sol": "O valor passa a coincidir com o limite.",
@@ -430,7 +430,7 @@
         "1/4."
       ],
       "a": 3,
-      "sol": "Racionalizando:1/(√x+2)→1/4.",
+      "sol": "Racionalizando: 1/(√x+2)→1/4.",
       "hyp": "Pode substituir e concluir que o limite não existe.",
       "contexts": [
         "mission",
@@ -452,8 +452,8 @@
       "q": "A expressão 0/0 num cálculo de limite é...",
       "o": [
         "uma indeterminação, não o valor do limite.",
-        "sempre igual a0.",
-        "sempre igual a1.",
+        "sempre igual a 0.",
+        "sempre igual a 1.",
         "prova de inexistência do limite."
       ],
       "a": 0,
@@ -692,9 +692,9 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Como os limites laterais de 1/x em0 têm sinais opostos, o limite bilateral em0...",
+      "q": "Como os limites laterais de 1/x em 0 têm sinais opostos, o limite bilateral em 0...",
       "o": [
-        "é0.",
+        "é 0.",
         "não existe como limite real nem como +∞/−∞ comum.",
         "é+∞.",
         "é−∞."
@@ -719,15 +719,15 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Considere f(x)=x+1 se x<2 e f(x)=5 se x≥2. Para ser contínua em2 seria necessário...",
+      "q": "Considere f(x)=x+1 se x<2 e f(x)=5 se x≥2. Para ser contínua em 2 seria necessário...",
       "o": [
         "que x+1 fosse substituído por x+3.",
         "que f(2)=2.",
-        "que 5 fosse substituído por3.",
+        "que 5 fosse substituído por 3.",
         "nada; já é contínua."
       ],
       "a": 2,
-      "sol": "Limite pela esquerda em2 é3; o valor pela direita e no ponto deve ser3.",
+      "sol": "Limite pela esquerda em 2 é 3; o valor pela direita e no ponto deve ser 3.",
       "hyp": "Pode usar o valor x=2 sem aplicar a expressão correta.",
       "contexts": [
         "mission",
@@ -746,7 +746,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se f(x)=ax+1 para x<2 e f(x)=5 para x≥2, a continuidade em2 exige a=",
+      "q": "Se f(x)=ax+1 para x<2 e f(x)=5 para x≥2, a continuidade em 2 exige a=",
       "o": [
         "1.",
         "5/2.",
@@ -755,7 +755,7 @@
       ],
       "a": 3,
       "sol": "2a+1=5 =>a=2.",
-      "hyp": "Pode igualar a diretamente a5.",
+      "hyp": "Pode igualar a diretamente a 5.",
       "contexts": [
         "mission",
         "training",
@@ -773,7 +773,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se f(x)=x² para x≤1 e f(x)=ax+b para x>1, continuidade em1 exige...",
+      "q": "Se f(x)=x² para x≤1 e f(x)=ax+b para x>1, continuidade em 1 exige...",
       "o": [
         "a+b=1.",
         "a+b=0.",
@@ -836,7 +836,7 @@
       ],
       "a": 2,
       "sol": "Fatoriza-se (x−2)(x+2), ficando x+2.",
-      "hyp": "Pode concluir0/0.",
+      "hyp": "Pode concluir 0/0.",
       "contexts": [
         "mission",
         "training",
@@ -917,7 +917,7 @@
       ],
       "a": 1,
       "sol": "É um limite fundamental.",
-      "hyp": "Pode substituir e parar em0/0.",
+      "hyp": "Pode substituir e parar em 0/0.",
       "contexts": [
         "mission",
         "training",
@@ -943,7 +943,7 @@
         "não existe."
       ],
       "a": 2,
-      "sol": "1−cosx é da ordem de x²/2, logo o quociente tende a0.",
+      "sol": "1−cosx é da ordem de x²/2, logo o quociente tende a 0.",
       "hyp": "Pode confundir com (1−cosx)/x².",
       "contexts": [
         "mission",
@@ -997,7 +997,7 @@
         "−4."
       ],
       "a": 0,
-      "sol": "O limite em2 é4.",
+      "sol": "O limite em 2 é 4.",
       "hyp": "Pode usar o valor do numerador ou do denominador.",
       "contexts": [
         "mission",
@@ -1024,7 +1024,7 @@
         "2."
       ],
       "a": 1,
-      "sol": "O limite em0 é1/2.",
+      "sol": "O limite em 0 é 1/2.",
       "hyp": "Pode substituir diretamente e obter indeterminação.",
       "contexts": [
         "mission",
@@ -1047,11 +1047,11 @@
       "o": [
         "que tem exatamente um zero.",
         "que é crescente.",
-        "que f toma o valor0 em algum ponto de ]1,4[.",
+        "que f toma o valor 0 em algum ponto de ]1,4[.",
         "que f'(x)>0."
       ],
       "a": 2,
-      "sol": "Pelo TVI, passa por todos os valores entre −2 e5.",
+      "sol": "Pelo TVI, passa por todos os valores entre −2 e 5.",
       "hyp": "Pode concluir unicidade/monotonia sem dados.",
       "contexts": [
         "mission",
@@ -1078,7 +1078,7 @@
         "Sim."
       ],
       "a": 3,
-      "sol": "3 está entre1 e4; o TVI garante pelo menos um c.",
+      "sol": "3 está entre 1 e 4; o TVI garante pelo menos um c.",
       "hyp": "Pode exigir monotonia.",
       "contexts": [
         "mission",
@@ -1097,7 +1097,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Se f é contínua em [a,b] e nunca vale0, então f(a) e f(b)...",
+      "q": "Se f é contínua em [a,b] e nunca vale 0, então f(a) e f(b)...",
       "o": [
         "não podem ter sinais opostos.",
         "têm de ser iguais.",
@@ -1240,8 +1240,8 @@
         "8."
       ],
       "a": 1,
-      "sol": "x³−8=(x−2)(x²+2x+4); em2 dá12.",
-      "hyp": "Pode confundir com derivada x³ em x=2? A derivada também é12, confirmando.",
+      "sol": "x³−8=(x−2)(x²+2x+4); em 2 dá 12.",
+      "hyp": "Pode confundir com derivada x³ em x=2? A derivada também é 12, confirmando.",
       "contexts": [
         "mission",
         "training",
@@ -1267,7 +1267,7 @@
         "0."
       ],
       "a": 2,
-      "sol": "É a soma 1+x+...+x^{n−1} avaliada em1, com n termos.",
+      "sol": "É a soma 1+x+...+x^{n−1} avaliada em 1, com n termos.",
       "hyp": "Pode confundir com n−1.",
       "contexts": [
         "mission",
@@ -1289,12 +1289,12 @@
       "q": "Uma temperatura T(t) é contínua entre as 10h e as 11h, com T(10)=18°C e T(11)=22°C. Podemos afirmar que...",
       "o": [
         "a temperatura cresceu sempre.",
-        "às10h30 era exatamente20°C.",
-        "a derivada foi sempre4.",
-        "em algum instante a temperatura foi20°C."
+        "às 10h30 era exatamente 20°C.",
+        "a derivada foi sempre 4.",
+        "em algum instante a temperatura foi 20°C."
       ],
       "a": 3,
-      "sol": "O TVI garante que20°C foi atingido, mas não quando nem monotonia.",
+      "sol": "O TVI garante que 20°C foi atingido, mas não quando nem monotonia.",
       "hyp": "Pode assumir variação linear.",
       "contexts": [
         "mission",
@@ -1313,7 +1313,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "A altura de água H(t) é contínua e passa de 1,2m para0,8m. Então...",
+      "q": "A altura de água H(t) é contínua e passa de 1,2m para 0,8m. Então...",
       "o": [
         "atinge 1,0m em algum instante intermédio.",
         "desce sempre.",
@@ -1343,9 +1343,9 @@
       "q": "Uma função pode ser contínua num ponto e não ser derivável nesse ponto?",
       "o": [
         "Não.",
-        "Sim, por exemplo |x| em0.",
+        "Sim, por exemplo |x| em 0.",
         "Só se for polinomial.",
-        "Só se o valor no ponto for0."
+        "Só se o valor no ponto for 0."
       ],
       "a": 1,
       "sol": "Derivabilidade implica continuidade, mas o recíproco é falso.",

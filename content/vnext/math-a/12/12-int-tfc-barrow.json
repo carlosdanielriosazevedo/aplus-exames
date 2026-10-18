@@ -79,7 +79,7 @@
         "2."
       ],
       "a": 2,
-      "sol": "Uma primitiva é x²/2; em 1 menos em 0 dá1/2.",
+      "sol": "Uma primitiva é x²/2; em 1 menos em 0 dá 1/2.",
       "hyp": "Pode usar f(1)−f(0).",
       "contexts": [
         "mission",
@@ -322,8 +322,8 @@
         "2."
       ],
       "a": 3,
-      "sol": "Primitiva2√x;4−2=2.",
-      "hyp": "Pode esquecer o fator2.",
+      "sol": "Primitiva 2√x;4−2=2.",
+      "hyp": "Pode esquecer o fator 2.",
       "contexts": [
         "mission",
         "training",
@@ -349,7 +349,7 @@
         "3/2."
       ],
       "a": 0,
-      "sol": "Primitiva x²+x; em1 dá2.",
+      "sol": "Primitiva x²+x; em 1 dá 2.",
       "hyp": "Pode avaliar apenas o integrando.",
       "contexts": [
         "mission",
@@ -592,7 +592,7 @@
         "0."
       ],
       "a": 1,
-      "sol": "A'(x)=x−2; em3 dá1.",
+      "sol": "A'(x)=x−2; em 3 dá 1.",
       "hyp": "Pode calcular A(3) em vez da derivada.",
       "contexts": [
         "mission",
@@ -619,7 +619,7 @@
         "2."
       ],
       "a": 2,
-      "sol": "Primitiva (t−2)²/2? Melhor: t²/2−2t; em3 dá4,5−6=−1,5; em1 dá0,5−2=−1,5; diferença0.",
+      "sol": "Primitiva (t−2)²/2? Melhor: t²/2−2t; em 3 dá 4,5−6=−1,5; em 1 dá 0,5−2=−1,5; diferença 0.",
       "hyp": "Pode confundir derivada e valor acumulado.",
       "contexts": [
         "mission",
@@ -641,7 +641,7 @@
       "q": "Se A(x)=∫_1^x (t−2)dt, então A(3)=0 porque...",
       "o": [
         "o integrando é zero em todo intervalo.",
-        "a derivada é zero em3.",
+        "a derivada é zero em 3.",
         "o intervalo tem comprimento zero.",
         "as contribuições negativa em [1,2] e positiva em [2,3] cancelam-se."
       ],
@@ -728,7 +728,7 @@
       ],
       "a": 2,
       "sol": "Primitiva e^{x²}; e−1.",
-      "hyp": "Pode manter o fator2.",
+      "hyp": "Pode manter o fator 2.",
       "contexts": [
         "mission",
         "training",
@@ -809,7 +809,7 @@
       ],
       "a": 1,
       "sol": "Primitiva e^{2x}/2.",
-      "hyp": "Pode esquecer dividir por2.",
+      "hyp": "Pode esquecer dividir por 2.",
       "contexts": [
         "mission",
         "training",
@@ -863,7 +863,7 @@
       ],
       "a": 3,
       "sol": "sin(π/2)/3=1/3.",
-      "hyp": "Pode esquecer o fator1/3.",
+      "hyp": "Pode esquecer o fator 1/3.",
       "contexts": [
         "mission",
         "training",
@@ -917,7 +917,7 @@
       ],
       "a": 1,
       "sol": "Pelo Teorema Fundamental do Cálculo e pela regra da cadeia, A'(x)=cos(x²)·(x²)'=2x cos(x²).",
-      "hyp": "Pode esquecer o fator2x.",
+      "hyp": "Pode esquecer o fator 2x.",
       "contexts": [
         "mission",
         "training",
@@ -1052,7 +1052,7 @@
       ],
       "a": 2,
       "sol": "10−F(2)=7.",
-      "hyp": "Pode somar7.",
+      "hyp": "Pode somar 7.",
       "contexts": [
         "mission",
         "training",
@@ -1262,9 +1262,9 @@
       "q": "Se f(t)>0 em [0,2], f(t)<0 em [2,5], então A(x)=∫_0^x f tem...",
       "o": [
         "mínimo em x=2.",
-        "nenhum extremo em2.",
+        "nenhum extremo em 2.",
         "máximo local em x=2.",
-        "descontinuidade em2."
+        "descontinuidade em 2."
       ],
       "a": 2,
       "sol": "A'=f muda + para −.",
@@ -1288,10 +1288,10 @@
       "cognitive": "Modelação",
       "q": "Uma taxa líquida de entrada r(t) é positiva até t=3 e negativa depois. O conteúdo acumulado tende a...",
       "o": [
-        "diminuir até3 e aumentar depois.",
+        "diminuir até 3 e aumentar depois.",
         "ser constante.",
         "ser sempre positivo.",
-        "aumentar até3 e diminuir depois."
+        "aumentar até 3 e diminuir depois."
       ],
       "a": 3,
       "sol": "A derivada do conteúdo é r.",

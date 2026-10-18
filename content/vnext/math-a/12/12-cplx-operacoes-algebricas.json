@@ -102,7 +102,7 @@
       "o": [
         "(a+c)+(b+d)i.",
         "(a−d)+(b−c)i.",
-        "(ac−bd)i.",
+        "(ac − bd)i.",
         "(a−c)+(b−d)i."
       ],
       "a": 3,
@@ -183,8 +183,8 @@
       "o": [
         "ac+bd.",
         "ad+bc.",
-        "ac−bd.",
-        "ad−bc."
+        "ac − bd.",
+        "ad − bc."
       ],
       "a": 2,
       "sol": "bi·di=bd i²=−bd.",
@@ -208,8 +208,8 @@
       "cognitive": "Compreensão",
       "q": "No produto (a+bi)(c+di), a parte imaginária é...",
       "o": [
-        "ac−bd.",
-        "ad−bc.",
+        "ac − bd.",
+        "ad − bc.",
         "ab+cd.",
         "ad+bc."
       ],
@@ -268,7 +268,7 @@
         "−2."
       ],
       "a": 1,
-      "sol": "É produto de conjugados:1²+1²=2.",
+      "sol": "É produto de conjugados: 1²+1²=2.",
       "hyp": "Pode usar diferença de quadrados real sem i².",
       "contexts": [
         "mission",

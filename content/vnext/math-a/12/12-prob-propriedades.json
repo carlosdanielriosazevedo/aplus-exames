@@ -403,7 +403,7 @@
         "3/4."
       ],
       "a": 2,
-      "sol": "Há 3 pares em 6 resultados:3/6=1/2.",
+      "sol": "Há 3 pares em 6 resultados: 3/6=1/2.",
       "hyp": "Pode usar a quantidade de pares sem dividir.",
       "contexts": [
         "mission",
@@ -430,7 +430,7 @@
         "1/13."
       ],
       "a": 3,
-      "sol": "Há 4 ases em 52 cartas:4/52=1/13.",
+      "sol": "Há 4 ases em 52 cartas: 4/52=1/13.",
       "hyp": "Pode dividir 4 por 13 em vez de 52.",
       "contexts": [
         "mission",
@@ -484,7 +484,7 @@
         "7/3."
       ],
       "a": 1,
-      "sol": "É o complementar:1−3/10=7/10.",
+      "sol": "É o complementar: 1−3/10=7/10.",
       "hyp": "Pode repetir a probabilidade de vermelha.",
       "contexts": [
         "mission",
@@ -835,7 +835,7 @@
         "7/36."
       ],
       "a": 2,
-      "sol": "Há 6 pares favoráveis em 36 resultados equiprováveis:6/36=1/6.",
+      "sol": "Há 6 pares favoráveis em 36 resultados equiprováveis: 6/36=1/6.",
       "hyp": "Pode usar a soma 7 como numerador.",
       "contexts": [
         "mission",
@@ -916,7 +916,7 @@
         "1/2."
       ],
       "a": 1,
-      "sol": "Complemento de nenhuma cara:1−1/8=7/8.",
+      "sol": "Complemento de nenhuma cara: 1−1/8=7/8.",
       "hyp": "Pode contar apenas resultados com exatamente uma cara.",
       "contexts": [
         "mission",

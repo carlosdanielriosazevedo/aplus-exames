@@ -160,7 +160,7 @@
         "−i."
       ],
       "a": 1,
-      "sol": "10≡2 mod4, logo i¹⁰=i²=−1.",
+      "sol": "10≡2 mod 4, logo i¹⁰=i²=−1.",
       "hyp": "Pode reduzir o expoente módulo 2.",
       "contexts": [
         "mission",
@@ -187,7 +187,7 @@
         "1."
       ],
       "a": 2,
-      "sol": "15≡3 mod4, logo i¹⁵=i³=−i.",
+      "sol": "15≡3 mod 4, logo i¹⁵=i³=−i.",
       "hyp": "Pode usar apenas a paridade.",
       "contexts": [
         "mission",
@@ -241,7 +241,7 @@
         "−i."
       ],
       "a": 0,
-      "sol": "2026≡2 mod4.",
+      "sol": "2026≡2 mod 4.",
       "hyp": "Pode não reduzir módulo 4.",
       "contexts": [
         "mission",
@@ -268,7 +268,7 @@
         "−1."
       ],
       "a": 1,
-      "sol": "2027≡3 mod4.",
+      "sol": "2027≡3 mod 4.",
       "hyp": "Pode trocar i³ e i.",
       "contexts": [
         "mission",
@@ -749,7 +749,7 @@
       "q": "iⁿ=1 quando n é...",
       "o": [
         "ímpar.",
-        "congruente com 2 mod4.",
+        "congruente com 2 mod 4.",
         "múltiplo de 3.",
         "múltiplo de 4."
       ],
@@ -775,10 +775,10 @@
       "cognitive": "Raciocínio",
       "q": "iⁿ=−1 quando...",
       "o": [
-        "n≡2 mod4.",
-        "n≡0 mod4.",
-        "n≡1 mod4.",
-        "n≡3 mod4."
+        "n≡2 mod 4.",
+        "n≡0 mod 4.",
+        "n≡1 mod 4.",
+        "n≡3 mod 4."
       ],
       "a": 0,
       "sol": "i²=−1 e o ciclo repete-se.",
@@ -802,10 +802,10 @@
       "cognitive": "Raciocínio",
       "q": "iⁿ=i quando...",
       "o": [
-        "n≡2 mod4.",
-        "n≡1 mod4.",
-        "n≡3 mod4.",
-        "n≡0 mod4."
+        "n≡2 mod 4.",
+        "n≡1 mod 4.",
+        "n≡3 mod 4.",
+        "n≡0 mod 4."
       ],
       "a": 1,
       "sol": "O primeiro termo do ciclo corresponde a resto 1.",
@@ -829,10 +829,10 @@
       "cognitive": "Raciocínio",
       "q": "iⁿ=−i quando...",
       "o": [
-        "n≡1 mod4.",
-        "n≡2 mod4.",
-        "n≡3 mod4.",
-        "n≡0 mod4."
+        "n≡1 mod 4.",
+        "n≡2 mod 4.",
+        "n≡3 mod 4.",
+        "n≡0 mod 4."
       ],
       "a": 2,
       "sol": "i³=−i.",
@@ -862,7 +862,7 @@
         "−2."
       ],
       "a": 3,
-      "sol": "Ambas as potências têm resto 2 mod4 e valem −1.",
+      "sol": "Ambas as potências têm resto 2 mod 4 e valem −1.",
       "hyp": "Pode somar expoentes em vez de valores.",
       "contexts": [
         "mission",
@@ -1024,7 +1024,7 @@
         "x=1±i."
       ],
       "a": 1,
-      "sol": "Dividindo por3: x²−2x+5=0.",
+      "sol": "Dividindo por 3: x²−2x+5=0.",
       "hyp": "Pode não simplificar corretamente.",
       "contexts": [
         "mission",

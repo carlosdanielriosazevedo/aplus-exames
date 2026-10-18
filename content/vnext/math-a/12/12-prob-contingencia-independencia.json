@@ -538,7 +538,7 @@
         "0,18."
       ],
       "a": 3,
-      "sol": "A^c também é independente de B; P(A^c)=0,6, logo0,6×0,3=0,18.",
+      "sol": "A^c também é independente de B; P(A^c)=0,6, logo 0,6×0,3=0,18.",
       "hyp": "Pode usar P(A)P(B).",
       "contexts": [
         "mission",
@@ -566,7 +566,7 @@
       ],
       "a": 0,
       "sol": "0,6×0,7=0,42.",
-      "hyp": "Pode usar complementos depois de multiplicar:1−0,12.",
+      "hyp": "Pode usar complementos depois de multiplicar: 1−0,12.",
       "contexts": [
         "mission",
         "training",
@@ -1240,7 +1240,7 @@
         "complementares."
       ],
       "a": 1,
-      "sol": "0,5×0,2=0,1, mas a conjunta é0,15.",
+      "sol": "0,5×0,2=0,1, mas a conjunta é 0,15.",
       "hyp": "Pode achar que qualquer sobreposição é independência.",
       "contexts": [
         "mission",

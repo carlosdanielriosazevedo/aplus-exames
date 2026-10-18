@@ -152,7 +152,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Uma fábrica usa máquina M1 em 70% da produção e M2 em 30%. Taxas de defeito:2% e5%. P(defeito)=...",
+      "q": "Uma fábrica usa máquina M1 em 70% da produção e M2 em 30%. Taxas de defeito: 2% e 5%. P(defeito)=...",
       "o": [
         "0,07.",
         "0,029.",
@@ -179,7 +179,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Uma escola tem 40% alunos do 10.º, 35% do 11.º e 25% do 12.º. Taxas de participação:50%,60%,80%. P(participar)=...",
+      "q": "Uma escola tem 40% alunos do 10.º, 35% do 11.º e 25% do 12.º. Taxas de participação: 50%,60%,80%. P(participar)=...",
       "o": [
         "0,63.",
         "0,60.",
@@ -206,7 +206,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Três fornecedores entregam 20%,30% e50% das peças; as taxas de falha são 1%,2% e4%. A taxa global é...",
+      "q": "Três fornecedores entregam 20%,30% e 50% das peças; as taxas de falha são 1%,2% e 4%. A taxa global é...",
       "o": [
         "7%.",
         "2%.",
@@ -291,11 +291,11 @@
       "o": [
         "tem de ser 0,5.",
         "tem de ser 1.",
-        "fica entre 0,2 e0,8, dependendo de P(A).",
+        "fica entre 0,2 e 0,8, dependendo de P(A).",
         "é sempre 0,16."
       ],
       "a": 2,
-      "sol": "É uma média ponderada de 0,2 e0,8.",
+      "sol": "É uma média ponderada de 0,2 e 0,8.",
       "hyp": "Pode usar média simples sem conhecer os pesos.",
       "contexts": [
         "mission",
@@ -322,7 +322,7 @@
         "0,4."
       ],
       "a": 3,
-      "sol": "Qualquer média ponderada de dois valores iguais a0,4 vale0,4.",
+      "sol": "Qualquer média ponderada de dois valores iguais a 0,4 vale 0,4.",
       "hyp": "Pode somar as condicionais.",
       "contexts": [
         "mission",
@@ -341,7 +341,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "70% dos clientes são novos e30% recorrentes. Compram 10% dos novos e40% dos recorrentes. P(compra)=...",
+      "q": "70% dos clientes são novos e 30% recorrentes. Compram 10% dos novos e 40% dos recorrentes. P(compra)=...",
       "o": [
         "0,19.",
         "0,25.",
@@ -368,7 +368,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "25% dos emails são spam. O filtro marca 90% do spam e5% dos não-spam. P(marcado)=...",
+      "q": "25% dos emails são spam. O filtro marca 90% do spam e 5% dos não-spam. P(marcado)=...",
       "o": [
         "0,95.",
         "0,2625.",
@@ -584,7 +584,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Uma doença afeta 1% da população. Um teste dá positivo em99% dos doentes e em5% dos não doentes. P(positivo)=...",
+      "q": "Uma doença afeta 1% da população. Um teste dá positivo em 99% dos doentes e em 5% dos não doentes. P(positivo)=...",
       "o": [
         "0,99.",
         "0,0594.",
@@ -668,7 +668,7 @@
       "q": "Num exemplo com prevalência de 1%, sensibilidade de 99% e 5% de falsos positivos, P(doença|positivo) é cerca de 16,7%. Isto mostra que uma elevada sensibilidade do teste...",
       "o": [
         "não implica, por si só, elevada P(doença|positivo).",
-        "garante posterior superior a90%.",
+        "garante posterior superior a 90%.",
         "torna irrelevante a prevalência.",
         "elimina falsos positivos."
       ],
@@ -692,7 +692,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Duas urnas são escolhidas com probabilidades 0,4 e0,6. Na U1, P(V)=0,75; na U2, P(V)=0,25. P(V)=...",
+      "q": "Duas urnas são escolhidas com probabilidades 0,4 e 0,6. Na U1, P(V)=0,75; na U2, P(V)=0,25. P(V)=...",
       "o": [
         "0,50.",
         "0,45.",
@@ -800,7 +800,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Três caixas são escolhidas com probabilidades 0,2, 0,3 e 0,5; as probabilidades de sucesso condicionadas às caixas são 0,1, 0,4 e 0,8. Qual é P(caixa3∩sucesso)?",
+      "q": "Três caixas são escolhidas com probabilidades 0,2, 0,3 e 0,5; as probabilidades de sucesso condicionadas às caixas são 0,1, 0,4 e 0,8. Qual é P(caixa 3∩sucesso)?",
       "o": [
         "0,8.",
         "0,4.",
@@ -827,16 +827,16 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Sabendo que houve sucesso, a probabilidade de ter sido a caixa3 é...",
+      "q": "Sabendo que houve sucesso, a probabilidade de ter sido a caixa 3 é...",
       "o": [
         "0,5.",
         "0,8.",
-        "20/27 aproximadamente0,741.",
+        "20/27 aproximadamente 0,741.",
         "0,4."
       ],
       "a": 2,
       "sol": "0,4/0,54=40/54=20/27≈0,741.",
-      "hyp": "Pode confundir posterior com probabilidade inicial0,5.",
+      "hyp": "Pode confundir posterior com probabilidade inicial 0,5.",
       "contexts": [
         "mission",
         "training",
@@ -916,7 +916,7 @@
         "0,35."
       ],
       "a": 1,
-      "sol": "P(A∩B)=0,35; dividir por P(B)=0,5 dá0,7.",
+      "sol": "P(A∩B)=0,35; dividir por P(B)=0,5 dá 0,7.",
       "hyp": "Pode não atualizar ou usar P(B|A^c).",
       "contexts": [
         "mission",
@@ -989,7 +989,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Uma condição rara ocorre em2% dos casos. Um alarme dispara em95% dos casos com condição e em10% sem condição. P(alarme)=...",
+      "q": "Uma condição rara ocorre em 2% dos casos. Um alarme dispara em 95% dos casos com condição e em 10% sem condição. P(alarme)=...",
       "o": [
         "0,117.",
         "0,105.",
@@ -1043,7 +1043,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Se dois grupos têm pesos 0,8 e0,2 e taxas 0,1 e0,9, a taxa global é...",
+      "q": "Se dois grupos têm pesos 0,8 e 0,2 e taxas 0,1 e 0,9, a taxa global é...",
       "o": [
         "0,5.",
         "0,18.",
@@ -1052,7 +1052,7 @@
       ],
       "a": 2,
       "sol": "0,8×0,1+0,2×0,9=0,08+0,18=0,26.",
-      "hyp": "Pode fazer média simples0,5.",
+      "hyp": "Pode fazer média simples 0,5.",
       "contexts": [
         "mission",
         "training",
@@ -1097,7 +1097,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Três classes têm pesos 0,2,0,5,0,3 e taxas de sucesso0,4,0,6,0,9. P(sucesso)=...",
+      "q": "Três classes têm pesos 0,2,0,5,0,3 e taxas de sucesso 0,4,0,6,0,9. P(sucesso)=...",
       "o": [
         "0,65.",
         "0,633.",
@@ -1124,7 +1124,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Três classes têm pesos 0,2, 0,5 e 0,3 e taxas de sucesso 0,4, 0,6 e 0,9. Qual é P(classe3∩sucesso)?",
+      "q": "Três classes têm pesos 0,2, 0,5 e 0,3 e taxas de sucesso 0,4, 0,6 e 0,9. Qual é P(classe 3∩sucesso)?",
       "o": [
         "0,9.",
         "0,27.",
@@ -1151,7 +1151,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Três classes têm pesos 0,2, 0,5 e 0,3 e taxas de sucesso 0,4, 0,6 e 0,9. Qual é aproximadamente P(classe3|sucesso)?",
+      "q": "Três classes têm pesos 0,2, 0,5 e 0,3 e taxas de sucesso 0,4, 0,6 e 0,9. Qual é aproximadamente P(classe 3|sucesso)?",
       "o": [
         "0,3.",
         "0,9.",
@@ -1160,7 +1160,7 @@
       ],
       "a": 2,
       "sol": "0,27/0,65≈0,415.",
-      "hyp": "Pode manter o peso inicial0,3.",
+      "hyp": "Pode manter o peso inicial 0,3.",
       "contexts": [
         "mission",
         "training",
@@ -1232,7 +1232,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Um seguro tem 30% clientes jovens e70% adultos. Sinistro anual:12% jovens,5% adultos. Taxa global de sinistro=...",
+      "q": "Um seguro tem 30% clientes jovens e 70% adultos. Sinistro anual: 12% jovens,5% adultos. Taxa global de sinistro=...",
       "o": [
         "8,5%.",
         "7,1%.",
@@ -1241,7 +1241,7 @@
       ],
       "a": 1,
       "sol": "0,3×0,12+0,7×0,05=0,036+0,035=0,071.",
-      "hyp": "Pode fazer média simples8,5%.",
+      "hyp": "Pode fazer média simples 8,5%.",
       "contexts": [
         "mission",
         "training",
@@ -1268,7 +1268,7 @@
       ],
       "a": 2,
       "sol": "0,036/0,071≈0,507.",
-      "hyp": "Pode manter o peso inicial30%.",
+      "hyp": "Pode manter o peso inicial 30%.",
       "contexts": [
         "mission",
         "training",

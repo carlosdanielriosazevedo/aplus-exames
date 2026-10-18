@@ -179,7 +179,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Se f'(x)<0 antes de2 e f'(x)>0 depois de2, então x=2 é...",
+      "q": "Se f'(x)<0 antes de 2 e f'(x)>0 depois de 2, então x=2 é...",
       "o": [
         "máximo local.",
         "assíntota.",
@@ -235,13 +235,13 @@
       "cognitive": "Raciocínio",
       "q": "Se f'(x)=(x−1)², então f é...",
       "o": [
-        "crescente em R e não tem extremo em1.",
+        "crescente em R e não tem extremo em 1.",
         "decrescente.",
-        "tem máximo em1.",
-        "tem mínimo em1."
+        "tem máximo em 1.",
+        "tem mínimo em 1."
       ],
       "a": 0,
-      "sol": "f'≥0 e só se anula em1 sem mudar de sinal.",
+      "sol": "f'≥0 e só se anula em 1 sem mudar de sinal.",
       "hyp": "Pode classificar o zero duplo como mínimo.",
       "contexts": [
         "mission",
@@ -264,8 +264,8 @@
       "o": [
         "crescente.",
         "decrescente em R.",
-        "tem mínimo em−2.",
-        "tem máximo em−2."
+        "tem mínimo em −2.",
+        "tem máximo em −2."
       ],
       "a": 1,
       "sol": "f'≤0 e não muda de sinal.",
@@ -565,8 +565,8 @@
         "3x−3."
       ],
       "a": 0,
-      "sol": "Derivada de x³ é3x².",
-      "hyp": "Pode esquecer o fator3.",
+      "sol": "Derivada de x³ é 3x².",
+      "hyp": "Pode esquecer o fator 3.",
       "contexts": [
         "mission",
         "training",
@@ -619,7 +619,7 @@
         "nenhum extremo."
       ],
       "a": 2,
-      "sol": "f''=6x<0 em−1.",
+      "sol": "f''=6x<0 em −1.",
       "hyp": "Pode trocar os extremos.",
       "contexts": [
         "mission",
@@ -673,7 +673,7 @@
         "x=3."
       ],
       "a": 0,
-      "sol": "f''=6x muda de sinal em0.",
+      "sol": "f''=6x muda de sinal em 0.",
       "hyp": "Pode escolher pontos críticos da primeira derivada.",
       "contexts": [
         "mission",
@@ -857,12 +857,12 @@
       "q": "Para f(x)=x²−4x em [0,5], os candidatos a extremos absolutos são...",
       "o": [
         "x=2 apenas.",
-        "x=0 e5 apenas.",
+        "x=0 e 5 apenas.",
         "x=0,4,5.",
         "x=0,2,5."
       ],
       "a": 3,
-      "sol": "f'=2x−4=0 dá2, além das extremidades0 e5.",
+      "sol": "f'=2x−4=0 dá 2, além das extremidades 0 e 5.",
       "hyp": "Pode considerar apenas pontos críticos.",
       "contexts": [
         "mission",
@@ -1024,7 +1024,7 @@
         "x>0."
       ],
       "a": 1,
-      "sol": "f'>0 quando1−x²>0.",
+      "sol": "f'>0 quando 1−x²>0.",
       "hyp": "Pode inverter a desigualdade.",
       "contexts": [
         "mission",
@@ -1051,7 +1051,7 @@
         "nenhum."
       ],
       "a": 2,
-      "sol": "f' passa de positivo para negativo em1.",
+      "sol": "f' passa de positivo para negativo em 1.",
       "hyp": "Pode trocar o ponto de máximo e mínimo.",
       "contexts": [
         "mission",
@@ -1078,7 +1078,7 @@
         "x=−1."
       ],
       "a": 3,
-      "sol": "f' passa de negativo para positivo em−1.",
+      "sol": "f' passa de negativo para positivo em −1.",
       "hyp": "Pode inverter os sinais.",
       "contexts": [
         "mission",
@@ -1186,8 +1186,8 @@
         "e^x−2x."
       ],
       "a": 3,
-      "sol": "Derivada de x² é2x.",
-      "hyp": "Pode esquecer o fator2.",
+      "sol": "Derivada de x² é 2x.",
+      "hyp": "Pode esquecer o fator 2.",
       "contexts": [
         "mission",
         "training",
@@ -1209,7 +1209,7 @@
       "o": [
         "localizar numericamente as raízes de f'.",
         "assumir que não há pontos críticos.",
-        "igualar f a0.",
+        "igualar f a 0.",
         "substituir x=1."
       ],
       "a": 0,

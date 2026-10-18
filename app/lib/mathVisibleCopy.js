@@ -108,6 +108,27 @@ const COPULA_REPLACEMENTS=[
 const PLURAL_TEM=/\b(os valores|as funções|os pontos|as retas|os gráficos|as equações|os números|as soluções|os vetores|as matrizes|os acontecimentos|as probabilidades) tem\b/giu;
 const FEMININE_A=/\b(relativa|relacionada|associada|correspondente|tangente|perpendicular|paralela|aplicada) a (função|reta|curva|equação|área|situação|posição)\b/giu;
 
+
+// Palavras portuguesas coladas a números ("de10", "é1,2", "fator1,05", "logo−2^x").
+// Variáveis (x1, z2, Q1, A0), siglas (IC95%) e funções (sin45°, log2) não são tocadas.
+const NOT_WORDS=new Set(["sin","cos","tan","sen","ln","log","lim","exp","ab","ae","dp","sinx","cosx","tanx"]);
+const WORD_BEFORE_NUMBER=/(?<=^|[\s(«"[])(é|a|e|[a-zà-ÿ]{2,}|[A-ZÀ-Ý][a-zà-ÿ]{2,})(?=\d)/gu;
+const WORD_BEFORE_MINUS_LETTER=/(?<=^|[\s(«"[])([a-zà-ÿ]{2,})−(?=\p{L})/gu;
+const WORD_BEFORE_MINUS_NUMBER=/(?<=^|[\s(«"[])([a-zà-ÿ]{2,})(?=−[\d(])/gu;
+const WORD_COLON_NUMBER=/(?<=^|[\s(«"[])([A-ZÀ-Ý]?[a-zà-ÿ]{3,}):(?=\d)/gu;
+export function separateWordsFromNumbers(value){
+  if(typeof value!=="string")return value;
+  return value
+    .replace(WORD_BEFORE_NUMBER,(match,word,offset,text)=>{
+      if(NOT_WORDS.has(word))return match;
+      if(word==="e"&&/\b(vetor|vetores|unitário|versor)\b/iu.test(text))return match;
+      return word+" ";
+    })
+    .replace(WORD_BEFORE_MINUS_LETTER,(match,word)=>NOT_WORDS.has(word)?match:word+" − ")
+    .replace(WORD_BEFORE_MINUS_NUMBER,(match,word)=>NOT_WORDS.has(word)?match:word+" ")
+    .replace(WORD_COLON_NUMBER,(_,word)=>word+": ");
+}
+
 export function mathVisibleText(value){
   if(typeof value!=="string")return value;
   let next=value;
@@ -115,7 +136,7 @@ export function mathVisibleText(value){
   for(const [pattern,replacement] of COPULA_REPLACEMENTS)next=next.replace(pattern,replacement);
   next=next.replace(PLURAL_TEM,(_,subject)=>`${subject} têm`);
   next=next.replace(FEMININE_A,(_,lead,noun)=>`${lead} à ${noun}`);
-  return next;
+  return separateWordsFromNumbers(next);
 }
 
 export function normalizeMathCognitive(value){
@@ -124,7 +145,7 @@ export function normalizeMathCognitive(value){
 }
 
 const VISIBLE_SCALAR_KEYS=[
-  "q","sol","focus","subtopic","prompt","explanation","title","subtitle","label","feedback","hint","text","statement","instruction"
+  "q","sol","hyp","note","focus","subtopic","prompt","explanation","title","subtitle","label","feedback","hint","text","statement","instruction"
 ];
 const VISIBLE_ARRAY_KEYS=["o","options"];
 

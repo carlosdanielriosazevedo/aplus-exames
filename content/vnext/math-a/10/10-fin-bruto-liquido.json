@@ -916,7 +916,7 @@
         "impossível de verificar."
       ],
       "a": 1,
-      "sol": "A relação bruto−descontos=líquido verifica-se exatamente.",
+      "sol": "A relação bruto − descontos=líquido verifica-se exatamente.",
       "hyp": "Pode não usar a identidade fundamental para validar um recibo.",
       "contexts": [
         "mission",
@@ -998,7 +998,7 @@
       ],
       "a": 0,
       "sol": "Taxa total=23%. 23% de 2 200=506 €.",
-      "hyp": "Pode calcular o líquido quando a pergunta pede a diferença bruto−líquido.",
+      "hyp": "Pode calcular o líquido quando a pergunta pede a diferença bruto − líquido.",
       "contexts": [
         "mission",
         "training",

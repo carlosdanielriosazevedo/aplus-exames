@@ -862,7 +862,7 @@
         "112."
       ],
       "a": 3,
-      "sol": "Escolhe-se qual de A,B:2; depois 3 das outras 8:C(8,3)=56; total112.",
+      "sol": "Escolhe-se qual de A,B:2; depois 3 das outras 8:C(8,3)=56; total 112.",
       "hyp": "Pode escolher A,B ambos ou nenhum.",
       "contexts": [
         "mission",
@@ -889,7 +889,7 @@
         "112."
       ],
       "a": 0,
-      "sol": "Total C(10,4)=210; sem A,B: C(8,4)=70; diferença140.",
+      "sol": "Total C(10,4)=210; sem A,B: C(8,4)=70; diferença 140.",
       "hyp": "Pode contar apenas exatamente uma.",
       "contexts": [
         "mission",
@@ -916,7 +916,7 @@
         "70."
       ],
       "a": 1,
-      "sol": "Exclui-se o caso com ambos: C(8,2)=28. Total210−28=182.",
+      "sol": "Exclui-se o caso com ambos: C(8,2)=28. Total 210−28=182.",
       "hyp": "Pode confundir 'no máximo uma' com 'exatamente uma'.",
       "contexts": [
         "mission",
@@ -1132,7 +1132,7 @@
         "462."
       ],
       "a": 1,
-      "sol": "Total C(12,5)=792; com A,B ambos: C(10,3)=120; diferença672.",
+      "sol": "Total C(12,5)=792; com A,B ambos: C(10,3)=120; diferença 672.",
       "hyp": "Pode excluir todos os casos com A ou B.",
       "contexts": [
         "mission",
@@ -1159,7 +1159,7 @@
         "792."
       ],
       "a": 2,
-      "sol": "Ambos:C(10,3)=120; nenhum:C(10,5)=252; total372.",
+      "sol": "Ambos:C(10,3)=120; nenhum:C(10,5)=252; total 372.",
       "hyp": "Pode contar só o caso ambos.",
       "contexts": [
         "mission",
@@ -1240,7 +1240,7 @@
         "300."
       ],
       "a": 1,
-      "sol": "Total C(11,4)=330; só homens:C(6,4)=15; diferença315.",
+      "sol": "Total C(11,4)=330; só homens:C(6,4)=15; diferença 315.",
       "hyp": "Pode somar apenas casos com exatamente uma mulher.",
       "contexts": [
         "mission",
@@ -1267,7 +1267,7 @@
         "20."
       ],
       "a": 2,
-      "sol": "Cada par de vértices define segmento: C(10,2)=45; retiram-se 10 lados:35.",
+      "sol": "Cada par de vértices define segmento: C(10,2)=45; retiram-se 10 lados: 35.",
       "hyp": "Pode contar todos os segmentos como diagonais.",
       "contexts": [
         "mission",

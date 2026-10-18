@@ -368,7 +368,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Um z-score igual a2 significa que o valor está...",
+      "q": "Um z-score igual a 2 significa que o valor está...",
       "o": [
         "2 unidades acima da média.",
         "2 desvios-padrão acima da média.",
@@ -505,7 +505,7 @@
       "cognitive": "Raciocínio",
       "q": "Para uma Normal, P(X<μ) e P(X>μ) são...",
       "o": [
-        "0 e1.",
+        "0 e 1.",
         "dependentes de μ.",
         "ambas 0,5.",
         "ambas 1."
@@ -565,7 +565,7 @@
         "[0,μ]."
       ],
       "a": 0,
-      "sol": "Cerca de68% fica a menos de um desvio-padrão da média.",
+      "sol": "Cerca de 68% fica a menos de um desvio-padrão da média.",
       "hyp": "Pode trocar as percentagens 68-95-99,7.",
       "contexts": [
         "mission",
@@ -619,8 +619,8 @@
         "μ±4σ."
       ],
       "a": 2,
-      "sol": "Três desvios-padrão de cada lado cobrem cerca de99,7%.",
-      "hyp": "Pode trocar95% e99,7%.",
+      "sol": "Três desvios-padrão de cada lado cobrem cerca de 99,7%.",
+      "hyp": "Pode trocar 95% e 99,7%.",
       "contexts": [
         "mission",
         "training",
@@ -646,8 +646,8 @@
         "2,5%."
       ],
       "a": 3,
-      "sol": "Fora de μ±2σ ficam cerca de5%, divididos em duas caudas de2,5%.",
-      "hyp": "Pode atribuir os5% todos a uma cauda.",
+      "sol": "Fora de μ±2σ ficam cerca de 5%, divididos em duas caudas de 2,5%.",
+      "hyp": "Pode atribuir os 5% todos a uma cauda.",
       "contexts": [
         "mission",
         "training",
@@ -673,8 +673,8 @@
         "50%."
       ],
       "a": 0,
-      "sol": "Metade dos68% centrais fica de cada lado da média:34%.",
-      "hyp": "Pode usar68% inteiro.",
+      "sol": "Metade dos 68% centrais fica de cada lado da média: 34%.",
+      "hyp": "Pode usar 68% inteiro.",
       "contexts": [
         "mission",
         "training",
@@ -700,8 +700,8 @@
         "47,5%."
       ],
       "a": 1,
-      "sol": "Entre ±σ há68%; entre ±2σ há95%; diferença27%, metade em cada lado=13,5%.",
-      "hyp": "Pode usar a diferença total27% numa única faixa.",
+      "sol": "Entre ±σ há 68%; entre ±2σ há 95%; diferença 27%, metade em cada lado=13,5%.",
+      "hyp": "Pode usar a diferença total 27% numa única faixa.",
       "contexts": [
         "mission",
         "training",
@@ -727,7 +727,7 @@
         "[60,90]."
       ],
       "a": 2,
-      "sol": "70−10=60 e70+10=80.",
+      "sol": "70−10=60 e 70+10=80.",
       "hyp": "Pode somar/descontar2σ.",
       "contexts": [
         "mission",
@@ -773,7 +773,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se X~N(100,20), o valor80 tem z-score...",
+      "q": "Se X~N(100,20), o valor 80 tem z-score...",
       "o": [
         "−1.",
         "1.",
@@ -782,7 +782,7 @@
       ],
       "a": 0,
       "sol": "(80−100)/20=−1.",
-      "hyp": "Pode perder o sinal ou dividir80 por20.",
+      "hyp": "Pode perder o sinal ou dividir 80 por 20.",
       "contexts": [
         "mission",
         "training",
@@ -800,7 +800,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se X~N(100,20), o valor140 tem z-score...",
+      "q": "Se X~N(100,20), o valor 140 tem z-score...",
       "o": [
         "1.",
         "2.",
@@ -809,7 +809,7 @@
       ],
       "a": 1,
       "sol": "(140−100)/20=2.",
-      "hyp": "Pode usar diferença40 como z-score.",
+      "hyp": "Pode usar diferença 40 como z-score.",
       "contexts": [
         "mission",
         "training",
@@ -908,7 +908,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "X vale0 ou1 com P(X=1)=p. E(X)=...",
+      "q": "X vale 0 ou 1 com P(X=1)=p. E(X)=...",
       "o": [
         "1−p.",
         "p.",
@@ -989,7 +989,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Se X vale0 ou1 com p=0,5, então Var(X)=...",
+      "q": "Se X vale 0 ou 1 com p=0,5, então Var(X)=...",
       "o": [
         "0,25.",
         "0,5.",
@@ -1052,7 +1052,7 @@
       ],
       "a": 2,
       "sol": "Variância=σ²=16.",
-      "hyp": "Pode dividir o desvio-padrão por2.",
+      "hyp": "Pode dividir o desvio-padrão por 2.",
       "contexts": [
         "mission",
         "training",
@@ -1106,7 +1106,7 @@
       ],
       "a": 0,
       "sol": "Var(aX)=a²Var(X).",
-      "hyp": "Pode multiplicar a variância apenas por3.",
+      "hyp": "Pode multiplicar a variância apenas por 3.",
       "contexts": [
         "mission",
         "training",
@@ -1132,7 +1132,7 @@
         "Var(X)+7."
       ],
       "a": 1,
-      "sol": "A translação não conta e o fator −2 entra ao quadrado:4.",
+      "sol": "A translação não conta e o fator −2 entra ao quadrado: 4.",
       "hyp": "Pode manter o sinal negativo na variância.",
       "contexts": [
         "mission",
@@ -1154,8 +1154,8 @@
       "q": "Se X~N(μ,σ), então Y=(X−μ)/σ tem média e desvio-padrão...",
       "o": [
         "μ eσ.",
-        "1 e0.",
-        "0 e1.",
+        "1 e 0.",
+        "0 e 1.",
         "0 eσ²."
       ],
       "a": 2,
@@ -1205,7 +1205,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Alturas têm modelo N(170,6). Uma altura182 cm está a...",
+      "q": "Alturas têm modelo N(170,6). Uma altura 182 cm está a...",
       "o": [
         "2 desvios-padrão acima da média.",
         "12 desvios-padrão acima.",
@@ -1214,7 +1214,7 @@
       ],
       "a": 0,
       "sol": "(182−170)/6=2.",
-      "hyp": "Pode usar a diferença12 como número de desvios.",
+      "hyp": "Pode usar a diferença 12 como número de desvios.",
       "contexts": [
         "mission",
         "training",
@@ -1234,10 +1234,10 @@
       "cognitive": "Modelação",
       "q": "No modelo N(170,6), aproximadamente 95% das alturas ficam entre...",
       "o": [
-        "164 e176.",
-        "158 e182.",
-        "152 e188.",
-        "160 e180."
+        "164 e 176.",
+        "158 e 182.",
+        "152 e 188.",
+        "160 e 180."
       ],
       "a": 1,
       "sol": "μ±2σ=170±12=[158,182].",
@@ -1261,10 +1261,10 @@
       "cognitive": "Modelação",
       "q": "Tempos de execução seguem N(50,5). Aproximadamente 68% ficam entre...",
       "o": [
-        "40 e60.",
-        "50 e55.",
-        "45 e55.",
-        "35 e65."
+        "40 e 60.",
+        "50 e 55.",
+        "45 e 55.",
+        "35 e 65."
       ],
       "a": 2,
       "sol": "μ±σ=[45,55].",
@@ -1342,7 +1342,7 @@
       "cognitive": "Modelação",
       "q": "Comparar resultados de escalas diferentes através de z-scores é útil porque...",
       "o": [
-        "torna todas as médias iguais a1.",
+        "torna todas as médias iguais a 1.",
         "expressa cada valor em desvios-padrão relativamente à respetiva média.",
         "elimina toda a variabilidade.",
         "transforma qualquer distribuição em Normal."

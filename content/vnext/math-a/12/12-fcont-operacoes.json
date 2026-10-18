@@ -322,7 +322,7 @@
         "também são contínuas em a."
       ],
       "a": 3,
-      "sol": "Podem escrever-se usando |f−g|, soma e divisão por2.",
+      "sol": "Podem escrever-se usando |f−g|, soma e divisão por 2.",
       "hyp": "Pode achar que mudar de ramo implica descontinuidade.",
       "contexts": [
         "mission",
@@ -376,7 +376,7 @@
         "não existe."
       ],
       "a": 1,
-      "sol": "Pelas operações com limites:2·3+1=7.",
+      "sol": "Pelas operações com limites: 2·3+1=7.",
       "hyp": "Pode substituir x em vez do valor limite de f.",
       "contexts": [
         "mission",
@@ -457,7 +457,7 @@
         "1/3."
       ],
       "a": 0,
-      "sol": "Como o limite do denominador é2≠0, aplica-se a regra do quociente.",
+      "sol": "Como o limite do denominador é 2≠0, aplica-se a regra do quociente.",
       "hyp": "Pode inverter o quociente.",
       "contexts": [
         "mission",
@@ -478,13 +478,13 @@
       "cognitive": "Interpretação",
       "q": "Se lim g=0, podemos concluir automaticamente lim(f/g)?",
       "o": [
-        "Sim, é0.",
+        "Sim, é 0.",
         "Não; é preciso analisar o comportamento.",
         "Sim, é lim f.",
         "Sim, é infinito sempre."
       ],
       "a": 1,
-      "sol": "Denominador a tender a0 pode originar vários comportamentos.",
+      "sol": "Denominador a tender a 0 pode originar vários comportamentos.",
       "hyp": "Pode aplicar a regra do quociente fora das hipóteses.",
       "contexts": [
         "mission",
@@ -700,7 +700,7 @@
         "]−∞,−2]∪[2,+∞[."
       ],
       "a": 1,
-      "sol": "É preciso4−x²≥0.",
+      "sol": "É preciso 4−x²≥0.",
       "hyp": "Pode inverter a desigualdade.",
       "contexts": [
         "mission",
@@ -997,7 +997,7 @@
         "−1."
       ],
       "a": 0,
-      "sol": "É um limite fundamental ligado à derivada de ln em1.",
+      "sol": "É um limite fundamental ligado à derivada de ln em 1.",
       "hyp": "Pode substituir e parar em 0/0.",
       "contexts": [
         "mission",
@@ -1025,7 +1025,7 @@
       ],
       "a": 1,
       "sol": "É o limite fundamental associado à derivada de e^x em 0.",
-      "hyp": "Pode substituir e concluir0/0.",
+      "hyp": "Pode substituir e concluir 0/0.",
       "contexts": [
         "mission",
         "training",
@@ -1052,7 +1052,7 @@
       ],
       "a": 2,
       "sol": "sin(3x)/x=3·sin(3x)/(3x)→3.",
-      "hyp": "Pode esquecer o fator3.",
+      "hyp": "Pode esquecer o fator 3.",
       "contexts": [
         "mission",
         "training",
@@ -1079,7 +1079,7 @@
       ],
       "a": 3,
       "sol": "1−cos u ~u²/2; com u=2x resulta (4x²/2)/x²→2.",
-      "hyp": "Pode esquecer o quadrado do fator2.",
+      "hyp": "Pode esquecer o quadrado do fator 2.",
       "contexts": [
         "mission",
         "training",
@@ -1133,7 +1133,7 @@
       ],
       "a": 1,
       "sol": "=5·ln(1+5x)/(5x)→5.",
-      "hyp": "Pode esquecer o fator5.",
+      "hyp": "Pode esquecer o fator 5.",
       "contexts": [
         "mission",
         "training",
@@ -1159,7 +1159,7 @@
         "indeterminado sempre."
       ],
       "a": 2,
-      "sol": "Produto de algo que tende a0 por função limitada tende a0.",
+      "sol": "Produto de algo que tende a 0 por função limitada tende a 0.",
       "hyp": "Pode achar que é preciso existir lim g.",
       "contexts": [
         "mission",
@@ -1205,7 +1205,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Se |f(x)|≤x² perto de0, então lim_{x→0}f(x)=",
+      "q": "Se |f(x)|≤x² perto de 0, então lim_{x→0}f(x)=",
       "o": [
         "0.",
         "1.",
@@ -1213,7 +1213,7 @@
         "+∞."
       ],
       "a": 0,
-      "sol": "Como −x²≤f(x)≤x² e ambos os extremos tendem a0, aplica-se o confronto.",
+      "sol": "Como −x²≤f(x)≤x² e ambos os extremos tendem a 0, aplica-se o confronto.",
       "hyp": "Pode ignorar a desigualdade bilateral.",
       "contexts": [
         "mission",

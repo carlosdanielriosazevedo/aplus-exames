@@ -161,7 +161,7 @@
       ],
       "a": 1,
       "sol": "2x−4=0 => x=2.",
-      "hyp": "Pode igualar apenas x a4.",
+      "hyp": "Pode igualar apenas x a 4.",
       "contexts": [
         "mission",
         "training",
@@ -238,7 +238,7 @@
         "0 e 3.",
         "0 apenas.",
         "3 apenas.",
-        "−3 e0."
+        "−3 e 0."
       ],
       "a": 0,
       "sol": "Produto nulo quando x=0 ou x=3.",
@@ -512,7 +512,7 @@
       ],
       "a": 2,
       "sol": "f'=−2x+6=0.",
-      "hyp": "Pode usar −b/a sem dividir por2 corretamente.",
+      "hyp": "Pode usar −b/a sem dividir por 2 corretamente.",
       "contexts": [
         "mission",
         "training",
@@ -647,7 +647,7 @@
       ],
       "a": 3,
       "sol": "C'=2x−12=0.",
-      "hyp": "Pode usar o coeficiente linear sem dividir por2.",
+      "hyp": "Pode usar o coeficiente linear sem dividir por 2.",
       "contexts": [
         "mission",
         "training",
@@ -701,7 +701,7 @@
       ],
       "a": 1,
       "sol": "2x+2y=20 => y=10−x.",
-      "hyp": "Pode esquecer dividir o perímetro por2.",
+      "hyp": "Pode esquecer dividir o perímetro por 2.",
       "contexts": [
         "mission",
         "training",
@@ -748,13 +748,13 @@
       "cognitive": "Interpretação",
       "q": "Entre todos os retângulos com perímetro fixo, a área é máxima quando...",
       "o": [
-        "um lado tende a0.",
+        "um lado tende a 0.",
         "os lados são muito diferentes.",
         "o maior lado é o dobro do menor.",
         "o retângulo é um quadrado."
       ],
       "a": 3,
-      "sol": "Com perímetro20, x=y=5.",
+      "sol": "Com perímetro 20, x=y=5.",
       "hyp": "Pode não traduzir o resultado algébrico geometricamente.",
       "contexts": [
         "mission",
@@ -781,7 +781,7 @@
         "P'(t)=1050e^{0,05t}."
       ],
       "a": 0,
-      "sol": "Deriva-se a exponencial:1000·0,05=50.",
+      "sol": "Deriva-se a exponencial: 1000·0,05=50.",
       "hyp": "Pode confundir taxa relativa e absoluta.",
       "contexts": [
         "mission",
@@ -808,7 +808,7 @@
         "e^{0,05t}."
       ],
       "a": 1,
-      "sol": "A taxa relativa é constante0,05.",
+      "sol": "A taxa relativa é constante 0,05.",
       "hyp": "Pode usar a taxa absoluta inicial.",
       "contexts": [
         "mission",
@@ -997,7 +997,7 @@
         "]−∞,1[."
       ],
       "a": 0,
-      "sol": "O produto é positivo fora das raízes −2 e1.",
+      "sol": "O produto é positivo fora das raízes −2 e 1.",
       "hyp": "Pode construir mal a tabela de sinais.",
       "contexts": [
         "mission",
@@ -1018,13 +1018,13 @@
       "cognitive": "Interpretação",
       "q": "Se f'(x)=(x−1)(x+2), então f tem...",
       "o": [
-        "mínimo em−2 e máximo em1.",
-        "máximo local em −2 e mínimo local em1.",
+        "mínimo em −2 e máximo em 1.",
+        "máximo local em −2 e mínimo local em 1.",
         "dois máximos.",
         "dois mínimos."
       ],
       "a": 1,
-      "sol": "O sinal muda +→− em−2 e −→+ em1.",
+      "sol": "O sinal muda +→− em −2 e −→+ em 1.",
       "hyp": "Pode inverter os extremos.",
       "contexts": [
         "mission",
@@ -1241,7 +1241,7 @@
       ],
       "a": 1,
       "sol": "L'=−4q+80=0 =>q=20.",
-      "hyp": "Pode usar o coeficiente80 diretamente.",
+      "hyp": "Pode usar o coeficiente 80 diretamente.",
       "contexts": [
         "mission",
         "training",
@@ -1268,7 +1268,7 @@
       ],
       "a": 2,
       "sol": "L(20)=−800+1600−300=500.",
-      "hyp": "Pode esquecer o custo fixo300.",
+      "hyp": "Pode esquecer o custo fixo 300.",
       "contexts": [
         "mission",
         "training",
@@ -1321,7 +1321,7 @@
         "V(x)=20·30−4x²."
       ],
       "a": 0,
-      "sol": "Após dobrar, altura x e lados da base 20−2x e30−2x.",
+      "sol": "Após dobrar, altura x e lados da base 20−2x e 30−2x.",
       "hyp": "Pode retirar x apenas uma vez de cada dimensão.",
       "contexts": [
         "mission",
@@ -1348,7 +1348,7 @@
         "x>0 sem limite."
       ],
       "a": 1,
-      "sol": "É preciso 20−2x>0 e30−2x>0; a restrição mais forte é x<10.",
+      "sol": "É preciso 20−2x>0 e 30−2x>0; a restrição mais forte é x<10.",
       "hyp": "Pode considerar apenas a maior dimensão.",
       "contexts": [
         "mission",

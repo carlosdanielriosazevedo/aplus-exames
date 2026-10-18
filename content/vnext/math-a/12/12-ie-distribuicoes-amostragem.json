@@ -188,7 +188,7 @@
       ],
       "a": 2,
       "sol": "20/10=2.",
-      "hyp": "Pode dividir por100.",
+      "hyp": "Pode dividir por 100.",
       "contexts": [
         "mission",
         "training",
@@ -233,12 +233,12 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Multiplicar n por9 faz o erro padrão...",
+      "q": "Multiplicar n por 9 faz o erro padrão...",
       "o": [
-        "dividir por3.",
-        "dividir por9.",
-        "multiplicar por3.",
-        "multiplicar por9."
+        "dividir por 3.",
+        "dividir por 9.",
+        "multiplicar por 3.",
+        "multiplicar por 9."
       ],
       "a": 0,
       "sol": "A dependência é 1/√n.",
@@ -557,7 +557,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se X tem média50 e desvio padrão10, então uma média de25 observações tem média...",
+      "q": "Se X tem média 50 e desvio padrão 10, então uma média de 25 observações tem média...",
       "o": [
         "50.",
         "10.",
@@ -593,7 +593,7 @@
       ],
       "a": 1,
       "sol": "10/√25=2.",
-      "hyp": "Pode dividir por25.",
+      "hyp": "Pode dividir por 25.",
       "contexts": [
         "mission",
         "training",
@@ -674,7 +674,7 @@
       ],
       "a": 0,
       "sol": "15/10=1,5.",
-      "hyp": "Pode dividir por100.",
+      "hyp": "Pode dividir por 100.",
       "contexts": [
         "mission",
         "training",
@@ -1018,13 +1018,13 @@
       "cognitive": "Raciocínio",
       "q": "A correção finita √[(N−n)/(N−1)] é...",
       "o": [
-        "sempre maior que1.",
-        "menor ou igual a1.",
+        "sempre maior que 1.",
+        "menor ou igual a 1.",
         "sempre zero.",
         "igual a n/N."
       ],
       "a": 1,
-      "sol": "Como N−n≤N−1 para n≥1, o fator não excede1.",
+      "sol": "Como N−n≤N−1 para n≥1, o fator não excede 1.",
       "hyp": "Pode achar que correção aumenta o erro.",
       "contexts": [
         "mission",
@@ -1045,9 +1045,9 @@
       "cognitive": "Interpretação",
       "q": "Se n é muito pequeno face a N, a correção finita fica...",
       "o": [
-        "próxima de0.",
-        "muito maior que1.",
-        "próxima de1.",
+        "próxima de 0.",
+        "muito maior que 1.",
+        "próxima de 1.",
         "negativa."
       ],
       "a": 2,
@@ -1261,9 +1261,9 @@
       "cognitive": "Modelação",
       "q": "Se a taxa verdadeira de defeito é p=0,01, amostras pequenas produzirão p̂ frequentemente...",
       "o": [
-        "sempre igual a0,01.",
+        "sempre igual a 0,01.",
         "Normal perfeita.",
-        "igual a0, refletindo a raridade e discreção.",
+        "igual a 0, refletindo a raridade e discreção.",
         "negativa."
       ],
       "a": 2,

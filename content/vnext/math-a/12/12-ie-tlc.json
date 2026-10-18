@@ -22,7 +22,7 @@
         "da distribuição da média/soma de muitas observações.",
         "apenas da mediana populacional.",
         "de qualquer dado individual.",
-        "só de amostras de tamanho1."
+        "só de amostras de tamanho 1."
       ],
       "a": 0,
       "sol": "Sob condições adequadas, médias/somas normalizadas aproximam uma distribuição Normal.",
@@ -269,7 +269,7 @@
       ],
       "a": 1,
       "sol": "20/√100=2.",
-      "hyp": "Pode dividir por100.",
+      "hyp": "Pode dividir por 100.",
       "contexts": [
         "mission",
         "training",
@@ -295,7 +295,7 @@
         "20."
       ],
       "a": 2,
-      "sol": "2² é a variância, logo o desvio padrão é2.",
+      "sol": "2² é a variância, logo o desvio padrão é 2.",
       "hyp": "Pode confundir variância e desvio padrão.",
       "contexts": [
         "mission",
@@ -323,7 +323,7 @@
       ],
       "a": 3,
       "sol": "12/6=2.",
-      "hyp": "Pode dividir por36.",
+      "hyp": "Pode dividir por 36.",
       "contexts": [
         "mission",
         "training",
@@ -368,7 +368,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Se n passa de25 para100, o erro padrão...",
+      "q": "Se n passa de 25 para 100, o erro padrão...",
       "o": [
         "fica um quarto.",
         "fica metade.",
@@ -566,7 +566,7 @@
       ],
       "a": 0,
       "sol": "z=(104−100)/2=2.",
-      "hyp": "Pode dividir pela variância4.",
+      "hyp": "Pode dividir pela variância 4.",
       "contexts": [
         "mission",
         "training",
@@ -584,7 +584,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Com X̄≈N(50,3²), o valor z de44 é...",
+      "q": "Com X̄≈N(50,3²), o valor z de 44 é...",
       "o": [
         "2.",
         "−2.",
@@ -616,7 +616,7 @@
         "z=−2.",
         "z=μ+2.",
         "z=2.",
-        "probabilidade2."
+        "probabilidade 2."
       ],
       "a": 2,
       "sol": "z mede número de erros padrão desde a média.",
@@ -673,7 +673,7 @@
         "P(Z≤1)."
       ],
       "a": 0,
-      "sol": "76 e84 estão a um desvio padrão de80.",
+      "sol": "76 e 84 estão a um desvio padrão de 80.",
       "hyp": "Pode usar diferenças brutas como z.",
       "contexts": [
         "mission",
@@ -728,7 +728,7 @@
       ],
       "a": 2,
       "sol": "É a regra aproximada dos dois desvios padrão.",
-      "hyp": "Pode confundir 68% e95%.",
+      "hyp": "Pode confundir 68% e 95%.",
       "contexts": [
         "mission",
         "training",
@@ -746,7 +746,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Modelação",
-      "q": "Se médias de lotes de64 peças têm μ=10g, σ individual=0,8g, o erro padrão é...",
+      "q": "Se médias de lotes de 64 peças têm μ=10g, σ individual=0,8g, o erro padrão é...",
       "o": [
         "0,8g.",
         "0,0125g.",
@@ -755,7 +755,7 @@
       ],
       "a": 3,
       "sol": "0,8/8=0,1.",
-      "hyp": "Pode dividir por64.",
+      "hyp": "Pode dividir por 64.",
       "contexts": [
         "mission",
         "training",
@@ -782,7 +782,7 @@
       ],
       "a": 0,
       "sol": "(10,2−10)/0,1=2.",
-      "hyp": "Pode usar σ individual0,8.",
+      "hyp": "Pode usar σ individual 0,8.",
       "contexts": [
         "mission",
         "training",
@@ -940,7 +940,7 @@
         "n diminui.",
         "σ aumenta.",
         "n aumenta e não há violações graves das condições.",
-        "μ se aproxima de0."
+        "μ se aproxima de 0."
       ],
       "a": 2,
       "sol": "O TLC é um resultado assintótico em n.",
@@ -1046,12 +1046,12 @@
       "q": "Uma correção de continuidade pode ser usada ao aproximar uma variável discreta por Normal porque...",
       "o": [
         "a Binomial é contínua.",
-        "a Normal tem média0 sempre.",
+        "a Normal tem média 0 sempre.",
         "a Normal é contínua e a Binomial é discreta.",
         "p é desconhecido."
       ],
       "a": 2,
-      "sol": "Ajusta fronteiras de contagens inteiras por cerca de0,5.",
+      "sol": "Ajusta fronteiras de contagens inteiras por cerca de 0,5.",
       "hyp": "Pode pensar que é correção do tamanho amostral.",
       "contexts": [
         "mission",
@@ -1078,7 +1078,7 @@
         "20,5."
       ],
       "a": 3,
-      "sol": "A correção típica inclui toda a barra de X=20 até20,5.",
+      "sol": "A correção típica inclui toda a barra de X=20 até 20,5.",
       "hyp": "Pode deslocar no sentido errado.",
       "contexts": [
         "mission",
@@ -1124,7 +1124,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Se X̄ tem erro padrão1 para n=100, qual será aproximadamente para n=400?",
+      "q": "Se X̄ tem erro padrão 1 para n=100, qual será aproximadamente para n=400?",
       "o": [
         "0,25.",
         "0,5.",
@@ -1133,7 +1133,7 @@
       ],
       "a": 1,
       "sol": "Quadruplicar n reduz o EP para metade.",
-      "hyp": "Pode usar razão4 diretamente.",
+      "hyp": "Pode usar razão 4 diretamente.",
       "contexts": [
         "mission",
         "training",
@@ -1151,7 +1151,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Para reduzir EP de2 para0,5, n deve ser multiplicado por...",
+      "q": "Para reduzir EP de 2 para 0,5, n deve ser multiplicado por...",
       "o": [
         "4.",
         "8.",
@@ -1159,8 +1159,8 @@
         "2."
       ],
       "a": 2,
-      "sol": "O EP reduz por fator4; n aumenta por4²=16.",
-      "hyp": "Pode usar o mesmo fator4.",
+      "sol": "O EP reduz por fator 4; n aumenta por 4²=16.",
+      "hyp": "Pode usar o mesmo fator 4.",
       "contexts": [
         "mission",
         "training",
@@ -1178,7 +1178,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Tempos individuais têm média30min e DP12min. Para n=144, a média de uma amostra tem DP...",
+      "q": "Tempos individuais têm média 30min e DP12min. Para n=144, a média de uma amostra tem DP...",
       "o": [
         "12min.",
         "0,083min.",
@@ -1187,7 +1187,7 @@
       ],
       "a": 3,
       "sol": "12/12=1.",
-      "hyp": "Pode dividir por144.",
+      "hyp": "Pode dividir por 144.",
       "contexts": [
         "mission",
         "training",
@@ -1205,7 +1205,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Nesse cenário, uma média de33min corresponde a z...",
+      "q": "Nesse cenário, uma média de 33min corresponde a z...",
       "o": [
         "3.",
         "0,25.",
@@ -1214,7 +1214,7 @@
       ],
       "a": 0,
       "sol": "(33−30)/1=3.",
-      "hyp": "Pode usar DP individual12.",
+      "hyp": "Pode usar DP individual 12.",
       "contexts": [
         "mission",
         "training",

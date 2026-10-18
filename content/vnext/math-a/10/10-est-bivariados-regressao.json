@@ -584,7 +584,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "A reta prevê y=12 para certo x, mas o valor observado é 15. Qual é o resíduo observado−previsto?",
+      "q": "A reta prevê y=12 para certo x, mas o valor observado é 15. Qual é o resíduo observado − previsto?",
       "o": [
         "−3",
         "3",
@@ -611,7 +611,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "A previsão é 20 e o observado é 17. Qual é o resíduo observado−previsto?",
+      "q": "A previsão é 20 e o observado é 17. Qual é o resíduo observado − previsto?",
       "o": [
         "3",
         "17",
@@ -997,7 +997,7 @@
         "−3; observado abaixo da reta."
       ],
       "a": 0,
-      "sol": "Previsto=18; observado−previsto=3, logo o ponto está acima.",
+      "sol": "Previsto=18; observado − previsto=3, logo o ponto está acima.",
       "hyp": "Pode inverter o sinal ou a posição.",
       "contexts": [
         "mission",
