@@ -101,9 +101,9 @@ const COPULA_REPLACEMENTS=[
   [/\bquanto e\b/gu,"quanto é"],
   [/\bcorreta e\b/giu,"correta é"],
   [/\bcorreto e\b/giu,"correto é"],
+  [/\b(a|o) (valor|resultado) e (igual|equivalente)\b/giu,(_,article,noun,tail)=>`${article} ${noun} é ${tail}`],
   [/\bf e (?=(?:crescente|decrescente|constante|positiva|positivo|negativa|negativo|nula|nulo)\b)/giu,"f é "],
   [/\b(a|o) (velocidade|aceleração|área|função|expressão|reta|curva|sequência|sucessão|probabilidade|solução|posição|taxa|valor|resultado|gráfico|número|módulo) e\b/giu,(_,article,noun)=>`${article} ${noun} é`],
-  [/\be (igual|equivalente|dada|dado|definida|definido|representada|representado|crescente|decrescente|constante|positiva|positivo|negativa|negativo|nula|nulo)\b/giu,(_,tail)=>`é ${tail}`]
 ];
 
 const PLURAL_TEM=/\b(os valores|as funções|os pontos|as retas|os gráficos|as equações|os números|as soluções|os vetores|as matrizes|os acontecimentos|as probabilidades) tem\b/giu;
