@@ -9,9 +9,9 @@ import {
 } from "./data/content";
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
 import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon,StudySessionHeader} from "./components/chrome";
-const StudyModeHub=dynamic(()=>import("./components/StudyModeHub"),{ssr:false});
-const Welcome=dynamic(()=>import("./components/Welcome").then(m=>m.Welcome),{ssr:false});
-const ScoreLossExplanation=dynamic(()=>import("./components/ScoreLossExplanation"),{ssr:false});
+import StudyModeHub from "./components/StudyModeHub";
+import {Welcome} from "./components/Welcome";
+import ScoreLossExplanation from "./components/ScoreLossExplanation";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
 const AccountCloud=dynamic(()=>import("./components/AccountCloud").then(module=>module.AccountCloud),{ssr:false});
 const MathReviewMatter=dynamic(()=>import("./components/MathReviewMatter"),{ssr:false});
