@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../../app/data/vnextDiagnostic.js";
 import {createDiagnosticDraft} from "../../app/lib/diagnosticRecovery.js";
+import {mathVisibleText} from "../../app/lib/mathVisibleCopy.js";
 
 const BAD_VISIBLE_PATTERNS=[
   ["expressao/expressoes",/\bexpressao(?:es)?\b/iu],
@@ -198,4 +199,11 @@ test("Matemática A · fontes versionadas não contêm cópia visível sem acent
     }
     checkVisible(data,filename);
   }
+});
+
+
+test("Matemática A · regeneração preserva ortografia e acentuação corrigidas",()=>{
+  expect(mathVisibleText("potênciação")).toBe("potenciação");
+  expect(mathVisibleText("A derivação e linear relativamente a soma.")).toBe("A derivação é linear relativamente à soma.");
+  expect(mathVisibleText("E a variação da função por unidade de variação da variavel.")).toBe("É a variação da função por unidade de variação da variável.");
 });
