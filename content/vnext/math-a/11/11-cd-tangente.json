@@ -962,7 +962,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "A tangente ao gráfico em x=2 e y=4x-3. então f'(2)=",
+      "q": "A tangente ao gráfico em x=2 e y=4x-3. Então f'(2)=",
       "o": [
         "5",
         "2",
@@ -989,7 +989,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "A tangente ao gráfico em x=1 e y=-2x+7. então f'(1)=",
+      "q": "A tangente ao gráfico em x=1 e y=-2x+7. Então f'(1)=",
       "o": [
         "-2",
         "5",
@@ -1016,7 +1016,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "A tangente ao gráfico em x=3 e y=6. então f'(3)=",
+      "q": "A tangente ao gráfico em x=3 e y=6. Então f'(3)=",
       "o": [
         "6",
         "0",
@@ -1043,7 +1043,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "A tangente ao gráfico em x=-1 e y=x+4. então f'(-1)=",
+      "q": "A tangente ao gráfico em x=-1 e y=x+4. Então f'(-1)=",
       "o": [
         "3",
         "-1",
@@ -1070,7 +1070,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "A tangente ao gráfico em x=0 e y=-5x+2. então f'(0)=",
+      "q": "A tangente ao gráfico em x=0 e y=-5x+2. Então f'(0)=",
       "o": [
         "2",
         "0",
