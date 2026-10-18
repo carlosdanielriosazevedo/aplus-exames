@@ -4270,7 +4270,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "role": "anchor",
     "difficulty": 2,
     "cognitive": "Raciocínio",
-    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
     "q": "Se z=√2(cosπ/4+i sinπ/4), então z em forma algébrica é...",
     "o": [
       "√2+i.",
@@ -4300,7 +4300,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "role": "probe",
     "difficulty": 1,
     "cognitive": "Compreensão",
-    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
     "q": "Se z1=r1(cosα+i sinα) e z2=r2(cosβ+i sinβ), então z1z2 tem módulo...",
     "o": [
       "r1r2.",

@@ -6186,7 +6186,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
-    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
     "q": "Uma solução de z²=i é...",
     "o": [
       "1+i.",
@@ -6215,7 +6215,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "12.º",
     "difficulty": 4,
     "cognitive": "Interpretação",
-    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
     "q": "Dividir por um complexo de módulo 2 e argumento π/4 corresponde a...",
     "o": [
       "dilatar por 2 e rodar π/4.",
@@ -6244,7 +6244,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Compreensão",
-    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
     "q": "Se z^n=w, com w de módulo R>0, então cada raiz z tem módulo...",
     "o": [
       "R^n.",
