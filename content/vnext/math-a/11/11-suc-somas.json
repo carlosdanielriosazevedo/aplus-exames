@@ -59,7 +59,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-somas:soma-pa-razão",
+      "signature": "11-suc-somas:soma-pa-razao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -167,7 +167,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-somas:soma-pa-razão",
+      "signature": "11-suc-somas:soma-pa-razao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -410,7 +410,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-somas:soma-pg-potência",
+      "signature": "11-suc-somas:soma-pg-potencia",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -734,7 +734,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-somas:soma-potências-3",
+      "signature": "11-suc-somas:soma-potencias-3",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -761,7 +761,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-somas:soma-potências",
+      "signature": "11-suc-somas:soma-potencias",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1166,7 +1166,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-somas:média-pa",
+      "signature": "11-suc-somas:media-pa",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
