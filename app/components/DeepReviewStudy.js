@@ -7,6 +7,15 @@ function compactLead(text){
   return firstSentence||value;
 }
 
+// Formata apenas expoentes inequívocos, sem interpretar ou reescrever o conteúdo matemático.
+// Notações mais complexas mantêm a representação original até existir renderer próprio.
+function FormulaNotation({value}){
+  const parts=String(value).split(/(\^\([^()]*\)|\^[A-Za-z0-9]+)/gu);
+  return parts.map((part,index)=>part.startsWith("^")
+    ? <sup key={index}>{part.slice(1).replace(/^\((.*)\)$/u,"$1")}</sup>
+    : <span key={index}>{part}</span>);
+}
+
 function SectionToolbox({section,kind}){
   if(kind==="portuguese"){
     if(!section.signals?.length)return null;
@@ -18,7 +27,7 @@ function SectionToolbox({section,kind}){
   if(!section.formulas?.length)return null;
   return <div className={styles.reviewToolbox} aria-label={`Relações essenciais de ${section.title}`}>
     <div className={styles.blockHeading}><span>02</span><div><small>FERRAMENTAS</small><b>Relações essenciais</b></div></div>
-    <div className={styles.formulaStack}>{section.formulas.map(formula=><code key={formula}>{formula}</code>)}</div>
+    <div className={styles.formulaStack}>{section.formulas.map(formula=><code key={formula} aria-label={formula}><FormulaNotation value={formula}/></code>)}</div>
   </div>;
 }
 
