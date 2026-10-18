@@ -234,7 +234,7 @@ for(const subject of [
         readiness:document.readyState,
         appRoot:document.querySelector("main")?.className,
         scripts:[...document.scripts].slice(-8).map(s=>({src:s.src,loaded:s.readyState})),
-        resources:performance.getEntriesByType("resource").filter(e=>/clientApp|_next\\/static|webpack|chunks/.test(e.name)).slice(-12).map(e=>({name:e.name.split("/").slice(-2).join("/"),duration:Math.round(e.duration),transferSize:e.transferSize})),
+        resources:performance.getEntriesByType("resource").filter(e=>/clientApp|_next|webpack|chunks/.test(e.name)).slice(-12).map(e=>({name:e.name.split("/").slice(-2).join("/"),duration:Math.round(e.duration),transferSize:e.transferSize})),
         heading:document.querySelector("h1")?.textContent,
         text:document.body?.innerText?.slice(0,700),
         state:JSON.parse(localStorage.getItem("a25")||"null"),
