@@ -176,10 +176,6 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     setResults(saved.results||[]);setAnswer(saved.currentAnswer??null);setFeedback(saved.currentResult||null);
   }
 
-  useEffect(()=>{
-    if(view==="resume"&&progress.lastPosition)resume();
-  },[]);
-
   function resetPhysicsChemistry(){
     if(!window.confirm("Repor apenas o progresso de Física e Química A?"))return;
     setS(prev=>resetSubjectProgress(prev,SUBJECT_ID));setSession(null);setResults([]);setAnswer(null);setFeedback(null);setRubricAssessment({});
