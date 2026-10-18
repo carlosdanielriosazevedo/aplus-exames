@@ -1,0 +1,11 @@
+{
+  "totalProtectedCases": 220,
+  "wave3Cases": 63,
+  "polishedWrongMean": 0.1861341222879684,
+  "negationTrapMean": 0.14351084812623277,
+  "terseCorrectMean": 0.504457593688363,
+  "mathEquivalentCorrectMean": 1,
+  "mathAlmostCorrectMean": 0.6178571428571429,
+  "mathUnsupportedAnswerMean": 0.14285714285714285,
+  "failures": []
+}

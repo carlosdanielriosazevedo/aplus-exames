@@ -1,0 +1,284 @@
+{
+  "generatedAt": "2026-10-18T22:11:44.233Z",
+  "metrics": {
+    "cases": 65,
+    "items": 13,
+    "strongVsWrongRate": 1,
+    "strongVsVagueRate": 1,
+    "paraphraseRecognitionRate": 1,
+    "excellentRecognitionRate": 1,
+    "wrongInflationRate": 0,
+    "vagueInflationRate": 0,
+    "orderingViolations": 1
+  },
+  "summaries": {
+    "portuguese": {
+      "wrong": {
+        "mean": 0.2,
+        "count": 6
+      },
+      "vague": {
+        "mean": 0.25,
+        "count": 6
+      },
+      "partial": {
+        "mean": 0.32,
+        "count": 6
+      },
+      "paraphrase": {
+        "mean": 0.45,
+        "count": 6
+      },
+      "excellent": {
+        "mean": 0.73,
+        "count": 6
+      }
+    },
+    "physics-chemistry-a": {
+      "wrong": {
+        "mean": 0.2,
+        "count": 7
+      },
+      "vague": {
+        "mean": 0.19,
+        "count": 7
+      },
+      "partial": {
+        "mean": 0.55,
+        "count": 7
+      },
+      "paraphrase": {
+        "mean": 0.94,
+        "count": 7
+      },
+      "excellent": {
+        "mean": 0.96,
+        "count": 7
+      }
+    }
+  },
+  "failures": [],
+  "items": [
+    {
+      "key": "portuguese::PT639-FND-311",
+      "scores": {
+        "excellent": 0.63,
+        "paraphrase": 0.63,
+        "partial": 0.4,
+        "vague": 0.38,
+        "wrong": 0.32
+      },
+      "review": {
+        "excellent": true,
+        "paraphrase": true,
+        "partial": true,
+        "vague": true,
+        "wrong": true
+      }
+    },
+    {
+      "key": "portuguese::PT639-FND-313",
+      "scores": {
+        "excellent": 0.86,
+        "paraphrase": 0.41,
+        "partial": 0.26,
+        "vague": 0.26,
+        "wrong": 0.22
+      },
+      "review": {
+        "excellent": true,
+        "paraphrase": true,
+        "partial": true,
+        "vague": true,
+        "wrong": true
+      }
+    },
+    {
+      "key": "portuguese::PT639-FND-315",
+      "scores": {
+        "excellent": 0.64,
+        "paraphrase": 0.32,
+        "partial": 0.18,
+        "vague": 0.08,
+        "wrong": 0.08
+      },
+      "review": {
+        "excellent": true,
+        "paraphrase": true,
+        "partial": true,
+        "vague": true,
+        "wrong": true
+      }
+    },
+    {
+      "key": "portuguese::PT639-FND-317",
+      "scores": {
+        "excellent": 0.71,
+        "paraphrase": 0.37,
+        "partial": 0.26,
+        "vague": 0.08,
+        "wrong": 0.26
+      },
+      "review": {
+        "excellent": true,
+        "paraphrase": true,
+        "partial": true,
+        "vague": true,
+        "wrong": true
+      }
+    },
+    {
+      "key": "portuguese::PT639-FND-319",
+      "scores": {
+        "excellent": 0.77,
+        "paraphrase": 0.55,
+        "partial": 0.44,
+        "vague": 0.33,
+        "wrong": 0.08
+      },
+      "review": {
+        "excellent": true,
+        "paraphrase": true,
+        "partial": true,
+        "vague": true,
+        "wrong": true
+      }
+    },
+    {
+      "key": "portuguese::PT639-FND-322",
+      "scores": {
+        "excellent": 0.77,
+        "paraphrase": 0.44,
+        "partial": 0.37,
+        "vague": 0.38,
+        "wrong": 0.22
+      },
+      "review": {
+        "excellent": true,
+        "paraphrase": true,
+        "partial": true,
+        "vague": true,
+        "wrong": true
+      }
+    },
+    {
+      "key": "physics-chemistry-a::FQA-R-ELEM-01",
+      "scores": {
+        "excellent": 1,
+        "paraphrase": 1,
+        "partial": 0.8,
+        "vague": 0.14,
+        "wrong": 0.21
+      },
+      "review": {
+        "excellent": false,
+        "paraphrase": false,
+        "partial": false,
+        "vague": true,
+        "wrong": true
+      }
+    },
+    {
+      "key": "physics-chemistry-a::FQA-R-MAT-01",
+      "scores": {
+        "excellent": 1,
+        "paraphrase": 0.85,
+        "partial": 0.31,
+        "vague": 0.09,
+        "wrong": 0.22
+      },
+      "review": {
+        "excellent": false,
+        "paraphrase": false,
+        "partial": true,
+        "vague": true,
+        "wrong": true
+      }
+    },
+    {
+      "key": "physics-chemistry-a::FQA-R-ENE-01",
+      "scores": {
+        "excellent": 0.73,
+        "paraphrase": 0.86,
+        "partial": 0.44,
+        "vague": 0.19,
+        "wrong": 0.12
+      },
+      "review": {
+        "excellent": true,
+        "paraphrase": false,
+        "partial": true,
+        "vague": true,
+        "wrong": true
+      }
+    },
+    {
+      "key": "physics-chemistry-a::FQA-R-MEC-01",
+      "scores": {
+        "excellent": 1,
+        "paraphrase": 1,
+        "partial": 0.54,
+        "vague": 0.23,
+        "wrong": 0.23
+      },
+      "review": {
+        "excellent": false,
+        "paraphrase": false,
+        "partial": true,
+        "vague": true,
+        "wrong": true
+      }
+    },
+    {
+      "key": "physics-chemistry-a::FQA-R-WAV-01",
+      "scores": {
+        "excellent": 1,
+        "paraphrase": 0.86,
+        "partial": 0.44,
+        "vague": 0.23,
+        "wrong": 0.05
+      },
+      "review": {
+        "excellent": false,
+        "paraphrase": false,
+        "partial": true,
+        "vague": true,
+        "wrong": true
+      }
+    },
+    {
+      "key": "physics-chemistry-a::FQA-R-EQ-01",
+      "scores": {
+        "excellent": 1,
+        "paraphrase": 1,
+        "partial": 0.57,
+        "vague": 0.33,
+        "wrong": 0.11
+      },
+      "review": {
+        "excellent": false,
+        "paraphrase": false,
+        "partial": true,
+        "vague": true,
+        "wrong": true
+      }
+    },
+    {
+      "key": "physics-chemistry-a::FQA-R-AQ-01",
+      "scores": {
+        "excellent": 1,
+        "paraphrase": 1,
+        "partial": 0.78,
+        "vague": 0.12,
+        "wrong": 0.47
+      },
+      "review": {
+        "excellent": false,
+        "paraphrase": false,
+        "partial": true,
+        "vague": true,
+        "wrong": true
+      }
+    }
+  ]
+}

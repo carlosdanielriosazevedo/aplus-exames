@@ -896,7 +896,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     <button className="primary" onClick={retryRecovery}>Tentar novamente</button></Shell>;
 
   return <Shell>
-    <StudySessionHeader progress={Math.max(8,estimate)} label="Diagnóstico" onExit={()=>go("diag")}/>
+    <StudySessionHeader progress={Math.max(8,estimate)} label={`${Math.min(blueprintLength,anchorsDone+1)}/${blueprintLength}`} onExit={()=>go("diag")} exitLabel="Guardar e sair"/>
     {saveError&&<div className="notice warning"><b>Estamos a conservar o teu progresso</b><span>Tenta continuar novamente. A resposta guardada não será repetida.</span></div>}
     <p className="questionContext">{theme(current.themeId).short}</p>
     <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary>

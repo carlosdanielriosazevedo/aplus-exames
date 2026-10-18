@@ -1,0 +1,10 @@
+{
+  "totalProtectedCases": 279,
+  "wave4Cases": 59,
+  "relatedNonAnswerMean": 0.17651873767258383,
+  "hedgedCorrectMean": 0.5412820512820513,
+  "partialThenFalseMean": 0.2969329388560158,
+  "mathLocalSlipMean": 0.5771428571428572,
+  "mathFalseConclusionMean": 0.7542857142857142,
+  "failures": []
+}

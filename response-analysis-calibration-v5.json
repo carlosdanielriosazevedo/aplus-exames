@@ -1,0 +1,9 @@
+{
+  "totalProtectedCases": 315,
+  "wave5Cases": 36,
+  "selfCorrectedMean": 0.5463510848126233,
+  "studentShorthandMean": 0.48624260355029586,
+  "mathSelfCorrectedMean": 0.9428571428571428,
+  "mathEquivalentNotationMean": 1,
+  "failures": []
+}

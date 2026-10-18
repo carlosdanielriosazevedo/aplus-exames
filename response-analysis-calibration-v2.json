@@ -1,0 +1,89 @@
+{
+  "totalProtectedCases": 164,
+  "wave2OpenCases": 52,
+  "mathematicsCases": 40,
+  "fqaLegitimateParaphrases": {
+    "count": 7,
+    "mean": 0.94,
+    "rows": [
+      {
+        "itemId": "FQA-R-ELEM-01",
+        "score": 1,
+        "review": false
+      },
+      {
+        "itemId": "FQA-R-MAT-01",
+        "score": 0.85,
+        "review": false
+      },
+      {
+        "itemId": "FQA-R-ENE-01",
+        "score": 0.86,
+        "review": false
+      },
+      {
+        "itemId": "FQA-R-MEC-01",
+        "score": 1,
+        "review": false
+      },
+      {
+        "itemId": "FQA-R-WAV-01",
+        "score": 0.86,
+        "review": false
+      },
+      {
+        "itemId": "FQA-R-EQ-01",
+        "score": 1,
+        "review": false
+      },
+      {
+        "itemId": "FQA-R-AQ-01",
+        "score": 1,
+        "review": false
+      }
+    ]
+  },
+  "openByProfile": {
+    "keyword-soup": {
+      "count": 13,
+      "mean": 0.3
+    },
+    "verbose-off-topic": {
+      "count": 13,
+      "mean": 0.16
+    },
+    "mixed-contradictory": {
+      "count": 13,
+      "mean": 0.28
+    },
+    "concise-correct": {
+      "count": 13,
+      "mean": 0.62
+    }
+  },
+  "mathByProfile": {
+    "full-correct": {
+      "count": 10,
+      "mean": 1
+    },
+    "partial": {
+      "count": 7,
+      "mean": 0.59
+    },
+    "wrong": {
+      "count": 10,
+      "mean": 0.02
+    },
+    "final-only": {
+      "count": 10,
+      "mean": 0.11
+    },
+    "propagated-conceptual": {
+      "count": 3,
+      "mean": 0.7
+    }
+  },
+  "failures": [],
+  "worstOpenViolations": [],
+  "worstMathViolations": []
+}
