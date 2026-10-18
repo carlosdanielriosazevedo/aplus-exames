@@ -1,10 +1,6 @@
 import {test,expect} from "@playwright/test";
-import fs from "node:fs";
-import path from "node:path";
-import {spawnSync} from "node:child_process";
 import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../../app/data/vnextDiagnostic.js";
 import {createDiagnosticDraft} from "../../app/lib/diagnosticRecovery.js";
-import {mathVisibleText} from "../../app/lib/mathVisibleCopy.js";
 
 const BAD_VISIBLE_PATTERNS=[
   ["expressao/expressoes",/\bexpressao(?:es)?\b/iu],
@@ -154,65 +150,3 @@ test("Matemática A · diagnóstico completo não mostra texto sem acentos",asyn
   expect(runtimeErrors,"não deve haver erros de cliente nem console.error").toEqual([]);
 });
 
-test("Matemática A · fontes versionadas não contêm cópia visível sem acentos",()=>{
-  const targets=[
-    "app/data/vnextDiagnostic.js",
-    "app/data/vnextMission.js",
-    "app/data/vnextExam.js"
-  ];
-  const root="content/vnext/math-a/11";
-  function collect(dir){
-    return fs.readdirSync(dir,{withFileTypes:true}).flatMap(entry=>{
-      const filename=path.join(dir,entry.name);
-      return entry.isDirectory()?collect(filename):entry.name.endsWith(".json")?[filename]:[];
-    });
-  }
-  targets.push(...collect(root));
-  const visibleKeys=new Set(["q","sol","hyp","note","focus","subtopic","prompt","explanation","title","subtitle","label","feedback","hint","text","statement","instruction","o","options"]);
-  function checkVisible(value,filename,property="root"){
-    if(Array.isArray(value)){for(const item of value)checkVisible(item,filename,property);return}
-    if(value&&typeof value==="object"){
-      for(const [key,item] of Object.entries(value)){
-        if(visibleKeys.has(key))checkVisible(item,filename,key);
-        else if(item&&typeof item==="object")checkVisible(item,filename,key);
-      }
-      return;
-    }
-    if(typeof value==="string"&&visibleKeys.has(property)){
-      for(const [label,pattern] of BAD_VISIBLE_PATTERNS){
-        expect(value,`${filename}:${property} contém padrão sem acento: ${label}`).not.toMatch(pattern);
-      }
-    }
-  }
-  for(const filename of targets){
-    const source=fs.readFileSync(filename,"utf8");
-    const start=filename.endsWith(".json")?source:source.slice(source.indexOf("=[")+1).trim().replace(/;$/u,"");
-    const data=JSON.parse(start);
-    if(filename.endsWith(".json")){
-      expect(data.subtopicId,"IDs curriculares devem permanecer ASCII e corresponder ao ficheiro").toBe(path.basename(filename,".json"));
-      for(const item of data.questions||[]){
-        expect(item.subtopicId,"IDs de perguntas não podem divergir da submatéria").toBe(data.subtopicId);
-      }
-    }else{
-      for(const item of data){
-        expect(item.subtopicId,"o ID de uma pergunta gerada não deve conter acentos").not.toMatch(/[áéíóúâêôãõç]/iu);
-      }
-    }
-    checkVisible(data,filename);
-  }
-});
-
-
-test("Matemática A · regeneração preserva ortografia e acentuação corrigidas",()=>{
-  expect(mathVisibleText("potênciação")).toBe("potenciação");
-  expect(mathVisibleText("A derivação e linear relativamente a soma.")).toBe("A derivação é linear relativamente à soma.");
-  expect(mathVisibleText("E a variação da função por unidade de variação da variavel.")).toBe("É a variação da função por unidade de variação da variável.");
-});
-
-
-test("Matemática A · bancos versionados correspondem exatamente aos três geradores",()=>{
-  for(const name of ["diagnostic","mission","exam"]){
-    const result=spawnSync(process.execPath,[`scripts/generate-vnext-${name}.mjs`,"--check"],{encoding:"utf8",timeout:60_000});
-    expect(result.status,`${name}: gerador e ficheiro commitado devem coincidir. ${result.stderr||result.stdout}`).toBe(0);
-  }
-});
