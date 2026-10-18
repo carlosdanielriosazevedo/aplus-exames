@@ -592,7 +592,7 @@
         "810."
       ],
       "a": 1,
-      "sol": "Centenas:9 opções; dezenas e unidades:10 cada. 9×10×10=900.",
+      "sol": "Centenas: 9 opções; dezenas e unidades: 10 cada. 9×10×10=900.",
       "hyp": "Pode incluir números com zero inicial.",
       "contexts": [
         "mission",
@@ -619,7 +619,7 @@
         "400."
       ],
       "a": 2,
-      "sol": "Centenas:9, dezenas:10, unidades pares:5. 9×10×5=450.",
+      "sol": "Centenas: 9, dezenas: 10, unidades pares: 5. 9×10×5=450.",
       "hyp": "Pode contar zero inicial ou esquecer paridade.",
       "contexts": [
         "mission",
@@ -916,7 +916,7 @@
         "24."
       ],
       "a": 1,
-      "sol": "Primeira:2 opções; restantes:3³=27. Total 54.",
+      "sol": "Primeira: 2 opções; restantes: 3³=27. Total 54.",
       "hyp": "Pode esquecer a restrição inicial.",
       "contexts": [
         "mission",
@@ -970,7 +970,7 @@
         "900."
       ],
       "a": 3,
-      "sol": "Primeiro:9 opções; duas posições intermédias:10×10; último fixo. 9×100=900.",
+      "sol": "Primeiro: 9 opções; duas posições intermédias: 10×10; último fixo. 9×100=900.",
       "hyp": "Pode permitir zero inicial.",
       "contexts": [
         "mission",
@@ -1132,7 +1132,7 @@
         "9."
       ],
       "a": 1,
-      "sol": "Online:4×3=12; físico:5; total 17.",
+      "sol": "Online: 4×3=12; físico: 5; total 17.",
       "hyp": "Pode multiplicar 4×3×5.",
       "contexts": [
         "mission",
@@ -1186,7 +1186,7 @@
         "10."
       ],
       "a": 3,
-      "sol": "Os ramos são exclusivos:3+5+2=10.",
+      "sol": "Os ramos são exclusivos: 3+5+2=10.",
       "hyp": "Pode multiplicar os ramos.",
       "contexts": [
         "mission",
@@ -1213,7 +1213,7 @@
         "20."
       ],
       "a": 0,
-      "sol": "Somam-se os resultados dos ramos:4+5=9.",
+      "sol": "Somam-se os resultados dos ramos: 4+5=9.",
       "hyp": "Pode multiplicar 2×(4+5), contando o ramo inicial duas vezes.",
       "contexts": [
         "mission",
@@ -1321,7 +1321,7 @@
         "75."
       ],
       "a": 0,
-      "sol": "Centenas:3; dezenas:10; unidades pares:5. Total 150.",
+      "sol": "Centenas: 3; dezenas: 10; unidades pares: 5. Total 150.",
       "hyp": "Pode esquecer o zero como algarismo par.",
       "contexts": [
         "mission",

@@ -19,8 +19,8 @@
       "cognitive": "Compreensão",
       "q": "A amplitude de um conjunto de dados é...",
       "o": [
-        "máximo−mínimo.",
-        "média−mediana.",
+        "máximo − mínimo.",
+        "média − mediana.",
         "soma dos valores.",
         "maior frequência."
       ],
@@ -478,9 +478,9 @@
       "cognitive": "Compreensão",
       "q": "O intervalo interquartil, IQR, é...",
       "o": [
-        "máximo−mínimo.",
+        "máximo − mínimo.",
         "Q3−Q1.",
-        "média−mediana.",
+        "média − mediana.",
         "Q1+Q3."
       ],
       "a": 1,
@@ -835,7 +835,7 @@
         "Aumenta 2."
       ],
       "a": 2,
-      "sol": "(2max−2min)=2(max−min).",
+      "sol": "(2max−2min)=2(max − min).",
       "hyp": "Pode confundir multiplicação com adição.",
       "contexts": [
         "mission",
@@ -1160,7 +1160,7 @@
       ],
       "a": 2,
       "sol": "50−30=20.",
-      "hyp": "Pode usar máximo−mínimo.",
+      "hyp": "Pode usar máximo − mínimo.",
       "contexts": [
         "mission",
         "training",

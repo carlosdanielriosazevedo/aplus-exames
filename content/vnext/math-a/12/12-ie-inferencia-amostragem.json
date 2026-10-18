@@ -611,7 +611,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Uma empresa quer estimar satisfação e tem 70% clientes particulares e30% empresariais. Numa amostra proporcional de200, quantos empresariais?",
+      "q": "Uma empresa quer estimar satisfação e tem 70% clientes particulares e 30% empresariais. Numa amostra proporcional de 200, quantos empresariais?",
       "o": [
         "140.",
         "30.",
@@ -694,7 +694,7 @@
       "cognitive": "Interpretação",
       "q": "Uma amostra representativa é aquela que...",
       "o": [
-        "tem necessariamente mais de1000 unidades.",
+        "tem necessariamente mais de 1000 unidades.",
         "reflete adequadamente características relevantes da população para o objetivo do estudo.",
         "tem média igual à população por definição.",
         "é escolhida por voluntariado."
@@ -721,7 +721,7 @@
       "cognitive": "Interpretação",
       "q": "Não resposta é preocupante sobretudo quando...",
       "o": [
-        "a taxa de resposta é100%.",
+        "a taxa de resposta é 100%.",
         "as respostas são numéricas.",
         "quem não responde difere sistematicamente de quem responde.",
         "a amostra é aleatória."
@@ -746,7 +746,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se 1000 pessoas são contactadas mas só200 respondem, a taxa de resposta é...",
+      "q": "Se 1000 pessoas são contactadas mas só 200 respondem, a taxa de resposta é...",
       "o": [
         "80%.",
         "5%.",
@@ -773,10 +773,10 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Uma taxa de resposta de20% é, por si só, prova de viés?",
+      "q": "Uma taxa de resposta de 20% é, por si só, prova de viés?",
       "o": [
         "Não; aumenta a preocupação, mas o viés depende de como respondentes e não respondentes diferem.",
-        "Sim, prova viés exato de80%.",
+        "Sim, prova viés exato de 80%.",
         "Sim, invalida qualquer estudo.",
         "Não, nunca importa."
       ],
@@ -1205,7 +1205,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Uma população tem 40% grupo A e60% grupo B. Uma amostra tem80% A e20% B sem ponderação. Isto sugere...",
+      "q": "Uma população tem 40% grupo A e 60% grupo B. Uma amostra tem 80% A e 20% B sem ponderação. Isto sugere...",
       "o": [
         "possível falta de representatividade face à composição populacional.",
         "representatividade perfeita.",

@@ -102,7 +102,7 @@
       "o": [
         "igual.",
         "o dobro.",
-        "reduzida em1 unidade.",
+        "reduzida em 1 unidade.",
         "metade da anterior."
       ],
       "a": 3,
@@ -134,7 +134,7 @@
       ],
       "a": 0,
       "sol": "(1+3)/2=2.",
-      "hyp": "Pode dividir apenas um extremo por2.",
+      "hyp": "Pode dividir apenas um extremo por 2.",
       "contexts": [
         "mission",
         "training",
@@ -160,7 +160,7 @@
         "[0,2]."
       ],
       "a": 1,
-      "sol": "A mudança de sinal ocorre entre2 e3.",
+      "sol": "A mudança de sinal ocorre entre 2 e 3.",
       "hyp": "Pode escolher o lado com sinais iguais.",
       "contexts": [
         "mission",
@@ -187,7 +187,7 @@
         "[0,2]."
       ],
       "a": 2,
-      "sol": "A mudança de sinal ocorre entre1 e2.",
+      "sol": "A mudança de sinal ocorre entre 1 e 2.",
       "hyp": "Pode escolher a metade errada.",
       "contexts": [
         "mission",
@@ -241,8 +241,8 @@
         "7."
       ],
       "a": 0,
-      "sol": "Divide-se por2.",
-      "hyp": "Pode subtrair1.",
+      "sol": "Divide-se por 2.",
+      "hyp": "Pode subtrair 1.",
       "contexts": [
         "mission",
         "training",
@@ -295,7 +295,7 @@
         "L0−n."
       ],
       "a": 2,
-      "sol": "Cada iteração divide a amplitude por2.",
+      "sol": "Cada iteração divide a amplitude por 2.",
       "hyp": "Pode usar decrescimento linear.",
       "contexts": [
         "mission",
@@ -323,7 +323,7 @@
       ],
       "a": 3,
       "sol": "1/2^{10}=1/1024.",
-      "hyp": "Pode confundir potência com produto10×2.",
+      "hyp": "Pode confundir potência com produto 10×2.",
       "contexts": [
         "mission",
         "training",
@@ -377,7 +377,7 @@
       ],
       "a": 1,
       "sol": "(1,40+1,42)/2=1,41.",
-      "hyp": "Pode somar sem dividir por2.",
+      "hyp": "Pode somar sem dividir por 2.",
       "contexts": [
         "mission",
         "training",
@@ -403,7 +403,7 @@
         "0,1."
       ],
       "a": 2,
-      "sol": "A amplitude é0,02; metade é0,01.",
+      "sol": "A amplitude é 0,02; metade é 0,01.",
       "hyp": "Pode usar a amplitude inteira.",
       "contexts": [
         "mission",
@@ -431,7 +431,7 @@
       ],
       "a": 3,
       "sol": "Erro≤L/2, então L≤0,01.",
-      "hyp": "Pode esquecer o fator2.",
+      "hyp": "Pode esquecer o fator 2.",
       "contexts": [
         "mission",
         "training",
@@ -449,7 +449,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Partindo de amplitude1, quantas bisseções são suficientes para amplitude≤1/8?",
+      "q": "Partindo de amplitude 1, quantas bisseções são suficientes para amplitude≤1/8?",
       "o": [
         "3.",
         "2.",
@@ -476,7 +476,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Partindo de amplitude2, após 4 bisseções a amplitude é...",
+      "q": "Partindo de amplitude 2, após 4 bisseções a amplitude é...",
       "o": [
         "1/4.",
         "1/8.",
@@ -485,7 +485,7 @@
       ],
       "a": 1,
       "sol": "2/16=1/8.",
-      "hyp": "Pode esquecer o fator inicial2.",
+      "hyp": "Pode esquecer o fator inicial 2.",
       "contexts": [
         "mission",
         "training",
@@ -538,7 +538,7 @@
         "convergência relativamente lenta."
       ],
       "a": 3,
-      "sol": "O erro reduz-se por fator2 por iteração, de forma previsível mas não muito rápida.",
+      "sol": "O erro reduz-se por fator 2 por iteração, de forma previsível mas não muito rápida.",
       "hyp": "Pode pensar que não há estimativa de erro.",
       "contexts": [
         "mission",
@@ -557,7 +557,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Para f(x)=x²−2 em [1,2], o primeiro ponto médio é1,5 e f(1,5)>0. O novo intervalo é...",
+      "q": "Para f(x)=x²−2 em [1,2], o primeiro ponto médio é 1,5 e f(1,5)>0. O novo intervalo é...",
       "o": [
         "[1,1,5].",
         "[1,5,2].",
@@ -619,7 +619,7 @@
         "[1,25,2]."
       ],
       "a": 2,
-      "sol": "A mudança de sinal é entre1,25 e1,5.",
+      "sol": "A mudança de sinal é entre 1,25 e 1,5.",
       "hyp": "Pode escolher o lado com dois valores negativos.",
       "contexts": [
         "mission",
@@ -776,7 +776,7 @@
       "q": "Usar apenas |f(m)| pequeno como controlo do erro em x pode ser enganador quando...",
       "o": [
         "f é muito plana perto da raiz.",
-        "f é linear com declive1.",
+        "f é linear com declive 1.",
         "o intervalo é pequeno.",
         "a raiz é inteira."
       ],
@@ -809,7 +809,7 @@
       ],
       "a": 1,
       "sol": "Erro≤L/2.",
-      "hyp": "Pode esquecer multiplicar o erro alvo por2.",
+      "hyp": "Pode esquecer multiplicar o erro alvo por 2.",
       "contexts": [
         "mission",
         "training",
@@ -827,7 +827,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Com amplitude inicial1, quantas bisseções garantem amplitude≤1/1000?",
+      "q": "Com amplitude inicial 1, quantas bisseções garantem amplitude≤1/1000?",
       "o": [
         "9.",
         "1000.",
@@ -835,7 +835,7 @@
         "5."
       ],
       "a": 2,
-      "sol": "2^{10}=1024≥1000, enquanto2^9=512.",
+      "sol": "2^{10}=1024≥1000, enquanto 2^9=512.",
       "hyp": "Pode usar log10 em vez de log2.",
       "contexts": [
         "mission",
@@ -854,7 +854,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Com amplitude inicial10, para obter amplitude≤0,01 precisamos de n tal que...",
+      "q": "Com amplitude inicial 10, para obter amplitude≤0,01 precisamos de n tal que...",
       "o": [
         "n≥1000.",
         "2n≥1000.",
@@ -884,7 +884,7 @@
       "q": "O número de iterações cresce aproximadamente de forma...",
       "o": [
         "logarítmica com a precisão inversa.",
-        "linear com o número de casas decimais em base10 exatamente.",
+        "linear com o número de casas decimais em base 10 exatamente.",
         "quadrática.",
         "exponencial."
       ],
@@ -989,7 +989,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Para f(x)=cosx−x em [0,1], o primeiro ponto médio é0,5 e f(0,5)>0. Como f(1)<0, o novo intervalo é...",
+      "q": "Para f(x)=cosx−x em [0,1], o primeiro ponto médio é 0,5 e f(0,5)>0. Como f(1)<0, o novo intervalo é...",
       "o": [
         "[0,5,1].",
         "[0,0,5].",
@@ -997,7 +997,7 @@
         "[0,1]."
       ],
       "a": 0,
-      "sol": "A mudança de sinal fica entre0,5 e1.",
+      "sol": "A mudança de sinal fica entre 0,5 e 1.",
       "hyp": "Pode escolher o lado com sinais positivos.",
       "contexts": [
         "mission",
@@ -1051,7 +1051,7 @@
         "0,75."
       ],
       "a": 2,
-      "sol": "Começou com amplitude1 e foi dividida duas vezes.",
+      "sol": "Começou com amplitude 1 e foi dividida duas vezes.",
       "hyp": "Pode contar uma só divisão.",
       "contexts": [
         "mission",
@@ -1078,7 +1078,7 @@
         "0,0005."
       ],
       "a": 3,
-      "sol": "Metade de uma unidade na 3.ª casa decimal é0,0005.",
+      "sol": "Metade de uma unidade na 3.ª casa decimal é 0,0005.",
       "hyp": "Pode usar uma unidade inteira da última casa.",
       "contexts": [
         "mission",
@@ -1106,7 +1106,7 @@
       ],
       "a": 0,
       "sol": "Erro máximo do ponto médio é L/2.",
-      "hyp": "Pode esquecer o fator2.",
+      "hyp": "Pode esquecer o fator 2.",
       "contexts": [
         "mission",
         "training",
@@ -1178,7 +1178,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Exemplo",
-      "q": "Para f(x)=(x−1)², f(0)>0 e f(2)>0 apesar de haver raiz em1. Isto mostra que...",
+      "q": "Para f(x)=(x−1)², f(0)>0 e f(2)>0 apesar de haver raiz em 1. Isto mostra que...",
       "o": [
         "Bolzano é falso.",
         "a função é descontínua.",
@@ -1205,7 +1205,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Se a amplitude inicial é5 e queremos amplitude≤0,005, precisamos de n com...",
+      "q": "Se a amplitude inicial é 5 e queremos amplitude≤0,005, precisamos de n com...",
       "o": [
         "2^n≥1000.",
         "n≥1000.",
@@ -1240,7 +1240,7 @@
         "2^{10}=100."
       ],
       "a": 1,
-      "sol": "A amplitude após10 passos é5/1024≈0,00488.",
+      "sol": "A amplitude após 10 passos é 5/1024≈0,00488.",
       "hyp": "Pode usar divisão por n.",
       "contexts": [
         "mission",
@@ -1294,7 +1294,7 @@
         "garantia mais robusta sob hipóteses simples, mas convergência mais lenta."
       ],
       "a": 3,
-      "sol": "O bracket fornece robustez e o erro reduz-se linearmente por fator1/2.",
+      "sol": "O bracket fornece robustez e o erro reduz-se linearmente por fator 1/2.",
       "hyp": "Pode inverter as características dos métodos.",
       "contexts": [
         "mission",
@@ -1342,8 +1342,8 @@
       "cognitive": "Modelação",
       "q": "Se um parâmetro p resolve F(p)=0 e a bisseção termina com [2,34;2,35], uma comunicação rigorosa é...",
       "o": [
-        "'a raiz é exatamente2,345'.",
-        "'a raiz está localizada entre2,34 e2,35'.",
+        "'a raiz é exatamente 2,345'.",
+        "'a raiz está localizada entre 2,34 e 2,35'.",
         "'p=2,35 com erro zero'.",
         "'F é linear'."
       ],

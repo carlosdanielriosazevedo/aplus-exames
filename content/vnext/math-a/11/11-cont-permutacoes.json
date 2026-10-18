@@ -187,7 +187,7 @@
         "20."
       ],
       "a": 2,
-      "sol": "A e B podem trocar:2! maneiras; restantes 3 pessoas:3!=6. Total 12.",
+      "sol": "A e B podem trocar: 2! maneiras; restantes 3 pessoas: 3!=6. Total 12.",
       "hyp": "Pode fixar uma ordem para A,B.",
       "contexts": [
         "mission",
@@ -241,7 +241,7 @@
         "42."
       ],
       "a": 0,
-      "sol": "Restam 6 pessoas para 6 lugares:6!=720.",
+      "sol": "Restam 6 pessoas para 6 lugares: 6!=720.",
       "hyp": "Pode usar 7!.",
       "contexts": [
         "mission",
@@ -268,7 +268,7 @@
         "60."
       ],
       "a": 1,
-      "sol": "Trata-se AB como bloco:4! posições dos 4 blocos ×2! ordens internas=48.",
+      "sol": "Trata-se AB como bloco: 4! posições dos 4 blocos ×2! ordens internas=48.",
       "hyp": "Pode esquecer a troca dentro do bloco.",
       "contexts": [
         "mission",
@@ -430,7 +430,7 @@
         "6."
       ],
       "a": 3,
-      "sol": "Restam B,C,D para 3 posições:3!=6.",
+      "sol": "Restam B,C,D para 3 posições: 3!=6.",
       "hyp": "Pode multiplicar por posições já fixas.",
       "contexts": [
         "mission",
@@ -565,7 +565,7 @@
         "720."
       ],
       "a": 0,
-      "sol": "Bloco AB com ordem fixa + 4 pessoas =5 blocos:5!=120.",
+      "sol": "Bloco AB com ordem fixa + 4 pessoas =5 blocos: 5!=120.",
       "hyp": "Pode multiplicar por 2 mesmo com ordem interna fixa.",
       "contexts": [
         "mission",
@@ -592,7 +592,7 @@
         "36."
       ],
       "a": 1,
-      "sol": "Bloco ABC +3 pessoas =4 blocos:4!×3!=24×6=144.",
+      "sol": "Bloco ABC +3 pessoas =4 blocos: 4!×3!=24×6=144.",
       "hyp": "Pode esquecer permutar dentro do bloco.",
       "contexts": [
         "mission",
@@ -619,7 +619,7 @@
         "5040."
       ],
       "a": 2,
-      "sol": "Bloco ABC com ordem fixa +4 pessoas =5 blocos:5!=120.",
+      "sol": "Bloco ABC com ordem fixa +4 pessoas =5 blocos: 5!=120.",
       "hyp": "Pode multiplicar por 3!.",
       "contexts": [
         "mission",
@@ -700,7 +700,7 @@
         "48."
       ],
       "a": 1,
-      "sol": "2 escolhas para a extremidade de A e 5! para os restantes:2×120=240.",
+      "sol": "2 escolhas para a extremidade de A e 5! para os restantes: 2×120=240.",
       "hyp": "Pode contar apenas uma extremidade.",
       "contexts": [
         "mission",
@@ -754,7 +754,7 @@
         "240."
       ],
       "a": 3,
-      "sol": "Os casos são exclusivos:2×5!=240.",
+      "sol": "Os casos são exclusivos: 2×5!=240.",
       "hyp": "Pode somar sem reconhecer simetria.",
       "contexts": [
         "mission",
@@ -781,7 +781,7 @@
         "12."
       ],
       "a": 0,
-      "sol": "Posições possíveis para o par ordenado de lugares: (1,3),(2,4),(3,5):3 escolhas; A,B trocam:2; restantes 3!:6. Total 36.",
+      "sol": "Posições possíveis para o par ordenado de lugares: (1,3),(2,4),(3,5):3 escolhas; A,B trocam: 2; restantes 3!:6. Total 36.",
       "hyp": "Pode tratar 'uma pessoa entre' como adjacência.",
       "contexts": [
         "mission",
@@ -808,7 +808,7 @@
         "360."
       ],
       "a": 1,
-      "sol": "Total 720; adjacentes:5!×2=240; diferença 480.",
+      "sol": "Total 720; adjacentes: 5!×2=240; diferença 480.",
       "hyp": "Pode subtrair apenas 2 casos.",
       "contexts": [
         "mission",
@@ -862,7 +862,7 @@
         "2880."
       ],
       "a": 3,
-      "sol": "Bloco de 4 +4 pessoas=5 blocos:5!×4!=120×24=2880.",
+      "sol": "Bloco de 4 +4 pessoas=5 blocos: 5!×4!=120×24=2880.",
       "hyp": "Pode usar 8! diretamente.",
       "contexts": [
         "mission",
@@ -970,7 +970,7 @@
         "96."
       ],
       "a": 3,
-      "sol": "Total 120; A primeiro:4!=24; resto 96.",
+      "sol": "Total 120; A primeiro: 4!=24; resto 96.",
       "hyp": "Pode subtrair 1 em vez de 24.",
       "contexts": [
         "mission",
@@ -997,7 +997,7 @@
         "1200."
       ],
       "a": 0,
-      "sol": "A:5 posições internas; B:4 restantes; outras 5 pessoas:5!=120. Total 5×4×120=2400.",
+      "sol": "A:5 posições internas; B:4 restantes; outras 5 pessoas: 5!=120. Total 5×4×120=2400.",
       "hyp": "Pode contar posições internas como combinação sem ordem.",
       "contexts": [
         "mission",
@@ -1078,7 +1078,7 @@
         "144."
       ],
       "a": 3,
-      "sol": "Primeiras três:3!; restantes quatro:4!; total 6×24=144.",
+      "sol": "Primeiras três: 3!; restantes quatro: 4!; total 6×24=144.",
       "hyp": "Pode usar 7! ou combinar sem ordenar.",
       "contexts": [
         "mission",
@@ -1186,7 +1186,7 @@
         "240."
       ],
       "a": 3,
-      "sol": "2 escolhas para a primeira posição e 5! para o resto:240.",
+      "sol": "2 escolhas para a primeira posição e 5! para o resto: 240.",
       "hyp": "Pode usar apenas uma vogal.",
       "contexts": [
         "mission",
@@ -1267,7 +1267,7 @@
         "128."
       ],
       "a": 2,
-      "sol": "São as permutações das 7 tarefas:7!.",
+      "sol": "São as permutações das 7 tarefas: 7!.",
       "hyp": "Pode usar 2⁷.",
       "contexts": [
         "mission",
@@ -1294,7 +1294,7 @@
         "1440."
       ],
       "a": 3,
-      "sol": "Bloco crítico +5 tarefas=6 blocos:6!×2=1440.",
+      "sol": "Bloco crítico +5 tarefas=6 blocos: 6!×2=1440.",
       "hyp": "Pode esquecer a ordem interna das duas tarefas.",
       "contexts": [
         "mission",
@@ -1321,7 +1321,7 @@
         "5040."
       ],
       "a": 0,
-      "sol": "O bloco tem ordem fixa:6!=720.",
+      "sol": "O bloco tem ordem fixa: 6!=720.",
       "hyp": "Pode multiplicar por 2.",
       "contexts": [
         "mission",
@@ -1348,7 +1348,7 @@
         "432."
       ],
       "a": 1,
-      "sol": "AB juntos:5!×2=240; CD juntos:240; ambos:4!×2×2=96. União=240+240−96=384.",
+      "sol": "AB juntos: 5!×2=240; CD juntos: 240; ambos: 4!×2×2=96. União=240+240−96=384.",
       "hyp": "Pode somar os dois grupos sem retirar a interseção.",
       "contexts": [
         "mission",

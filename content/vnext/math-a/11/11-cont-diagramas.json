@@ -484,7 +484,7 @@
         "3."
       ],
       "a": 1,
-      "sol": "Cada folha antiga gera 3 novas:4×3.",
+      "sol": "Cada folha antiga gera 3 novas: 4×3.",
       "hyp": "Pode somar 3 ao total antigo.",
       "contexts": [
         "mission",
@@ -673,7 +673,7 @@
         "8."
       ],
       "a": 0,
-      "sol": "As 12 células fora da diagonal agrupam-se aos pares:12/2=6.",
+      "sol": "As 12 células fora da diagonal agrupam-se aos pares: 12/2=6.",
       "hyp": "Pode contar pares ordenados.",
       "contexts": [
         "mission",
@@ -997,7 +997,7 @@
         "6."
       ],
       "a": 0,
-      "sol": "Somam-se os ramos finais:2+3+4=9.",
+      "sol": "Somam-se os ramos finais: 2+3+4=9.",
       "hyp": "Pode multiplicar 3×2×3×4.",
       "contexts": [
         "mission",
@@ -1078,7 +1078,7 @@
         "15."
       ],
       "a": 3,
-      "sol": "Fora da diagonal há 30; metade fica acima:15.",
+      "sol": "Fora da diagonal há 30; metade fica acima: 15.",
       "hyp": "Pode contar a diagonal.",
       "contexts": [
         "mission",
@@ -1159,7 +1159,7 @@
         "7."
       ],
       "a": 2,
-      "sol": "As 42 ordens agrupam-se duas a duas:21.",
+      "sol": "As 42 ordens agrupam-se duas a duas: 21.",
       "hyp": "Pode esquecer que AB e BA são o mesmo par.",
       "contexts": [
         "mission",
@@ -1240,7 +1240,7 @@
         "30."
       ],
       "a": 1,
-      "sol": "As categorias são ramos alternativos:5+2+6=13.",
+      "sol": "As categorias são ramos alternativos: 5+2+6=13.",
       "hyp": "Pode multiplicar categorias alternativas.",
       "contexts": [
         "mission",

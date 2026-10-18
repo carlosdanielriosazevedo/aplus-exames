@@ -79,7 +79,7 @@
         "50."
       ],
       "a": 2,
-      "sol": "Primeira linha:10+20=30.",
+      "sol": "Primeira linha: 10+20=30.",
       "hyp": "Pode somar a primeira coluna.",
       "contexts": [
         "mission",
@@ -106,7 +106,7 @@
         "25."
       ],
       "a": 3,
-      "sol": "Primeira coluna:10+15=25.",
+      "sol": "Primeira coluna: 10+15=25.",
       "hyp": "Pode somar a primeira linha.",
       "contexts": [
         "mission",
@@ -214,7 +214,7 @@
         "(80,45)^T."
       ],
       "a": 3,
-      "sol": "1.ª loja:10·2+20·3=80; 2.ª:15·2+5·3=45.",
+      "sol": "1.ª loja: 10·2+20·3=80; 2.ª:15·2+5·3=45.",
       "hyp": "Pode somar quantidades sem ponderar pelos preços.",
       "contexts": [
         "mission",
@@ -264,7 +264,7 @@
       "o": [
         "linhas=produtos e colunas=recursos.",
         "linhas=recursos e colunas=produtos.",
-        "há 2 produtos e3 recursos.",
+        "há 2 produtos e 3 recursos.",
         "a dimensão é arbitrária."
       ],
       "a": 1,
@@ -295,7 +295,7 @@
         "(10,8)^T."
       ],
       "a": 2,
-      "sol": "Recurso1:2·5+1·2=12; recurso2:3·5+4·2=23.",
+      "sol": "Recurso 1:2·5+1·2=12; recurso 2:3·5+4·2=23.",
       "hyp": "Pode multiplicar elemento a elemento.",
       "contexts": [
         "mission",
@@ -316,13 +316,13 @@
       "cognitive": "Interpretação",
       "q": "Se A=[[2,1],[3,4]] dá unidades de recursos por produto e q=(5,2)^T, então Aq=(12,23)^T. A primeira componente representa...",
       "o": [
-        "produção total do produto1.",
-        "custo do recurso1.",
+        "produção total do produto 1.",
+        "custo do recurso 1.",
         "número de produtos.",
-        "consumo total do recurso1."
+        "consumo total do recurso 1."
       ],
       "a": 3,
-      "sol": "A primeira linha corresponde ao recurso1.",
+      "sol": "A primeira linha corresponde ao recurso 1.",
       "hyp": "Pode interpretar a componente pela coluna em vez da linha.",
       "contexts": [
         "mission",
@@ -371,9 +371,9 @@
       "q": "Se Aq=(12,23)^T e b=(15,20)^T, o plano é...",
       "o": [
         "viável porque 12<15.",
-        "inviável porque excede o recurso2.",
-        "viável porque o total35<35.",
-        "inviável apenas no recurso1."
+        "inviável porque excede o recurso 2.",
+        "viável porque o total 35<35.",
+        "inviável apenas no recurso 1."
       ],
       "a": 1,
       "sol": "23>20, logo a segunda restrição falha.",
@@ -453,7 +453,7 @@
       "o": [
         "0.",
         "1.",
-        "sempre−1.",
+        "sempre −1.",
         "graus dos vértices."
       ],
       "a": 0,
@@ -480,7 +480,7 @@
       "o": [
         "o número total de vértices.",
         "o grau do vértice i.",
-        "o número de caminhos de comprimento2.",
+        "o número de caminhos de comprimento 2.",
         "a distância ao vértice i."
       ],
       "a": 1,
@@ -503,7 +503,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Para A=[[0,1,1],[1,0,0],[1,0,0]], o grau do vértice1 é...",
+      "q": "Para A=[[0,1,1],[1,0,0],[1,0,0]], o grau do vértice 1 é...",
       "o": [
         "1.",
         "0.",
@@ -533,7 +533,7 @@
       "q": "Para a rede com matriz de adjacência A=[[0,1,1],[1,0,0],[1,0,0]], os vértices 2 e 3...",
       "o": [
         "estão diretamente ligados.",
-        "têm grau2.",
+        "têm grau 2.",
         "têm laço.",
         "não estão diretamente ligados."
       ],
@@ -559,7 +559,7 @@
       "cognitive": "Compreensão",
       "q": "Em uma matriz de adjacência A, a entrada (A²)_ij conta, em rede simples apropriada...",
       "o": [
-        "percursos de comprimento2 de i para j.",
+        "percursos de comprimento 2 de i para j.",
         "ligações diretas apenas.",
         "distância mínima sempre.",
         "grau de i apenas."
@@ -613,13 +613,13 @@
       "cognitive": "Interpretação",
       "q": "Numa rede com matriz de adjacência A=[[0,1],[1,0]], tem-se A²=I. O facto de (A²)_11=1 significa...",
       "o": [
-        "há um laço direto no vértice1.",
-        "o grau é1 necessariamente por essa entrada.",
-        "existe um percurso de comprimento2 do vértice1 para ele próprio.",
-        "o vértice1 é isolado."
+        "há um laço direto no vértice 1.",
+        "o grau é 1 necessariamente por essa entrada.",
+        "existe um percurso de comprimento 2 do vértice 1 para ele próprio.",
+        "o vértice 1 é isolado."
       ],
       "a": 2,
-      "sol": "O percurso é1→2→1.",
+      "sol": "O percurso é 1→2→1.",
       "hyp": "Pode interpretar A² como adjacência direta.",
       "contexts": [
         "mission",
@@ -638,7 +638,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Compreensão",
-      "q": "Uma matriz de transição com colunas que somam1 pode modelar...",
+      "q": "Uma matriz de transição com colunas que somam 1 pode modelar...",
       "o": [
         "uma rotação geométrica apenas.",
         "uma tabela de preços.",
@@ -700,8 +700,8 @@
         "(50,50)^T."
       ],
       "a": 1,
-      "sol": "A primeira coluna indica que 80% permanecem no estado1 e20% passam ao estado2.",
-      "hyp": "Pode usar a segunda coluna apesar de x_0 estar todo no estado1.",
+      "sol": "A primeira coluna indica que 80% permanecem no estado 1 e 20% passam ao estado 2.",
+      "hyp": "Pode usar a segunda coluna apesar de x_0 estar todo no estado 1.",
       "contexts": [
         "mission",
         "training",
@@ -727,7 +727,7 @@
         "(50,50)^T."
       ],
       "a": 2,
-      "sol": "A segunda coluna aplica-se aos100 indivíduos no estado2.",
+      "sol": "A segunda coluna aplica-se aos 100 indivíduos no estado 2.",
       "hyp": "Pode escolher a coluna errada.",
       "contexts": [
         "mission",
@@ -746,10 +746,10 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Se as colunas de P somam1 e x representa contagens, então a soma total tende a...",
+      "q": "Se as colunas de P somam 1 e x representa contagens, então a soma total tende a...",
       "o": [
         "duplicar sempre.",
-        "cair para0.",
+        "cair para 0.",
         "depender apenas da diagonal.",
         "ser preservada no modelo fechado."
       ],
@@ -782,7 +782,7 @@
       ],
       "a": 0,
       "sol": "Aplicam-se duas transições: P(Px_0)=P²x_0.",
-      "hyp": "Pode confundir repetição com multiplicação por2.",
+      "hyp": "Pode confundir repetição com multiplicação por 2.",
       "contexts": [
         "mission",
         "training",
@@ -1051,7 +1051,7 @@
         "(12,8)^T."
       ],
       "a": 2,
-      "sol": "Primeiro recurso:8+2=10; segundo:4+6=10.",
+      "sol": "Primeiro recurso: 8+2=10; segundo: 4+6=10.",
       "hyp": "Pode multiplicar apenas diagonais.",
       "contexts": [
         "mission",
@@ -1159,7 +1159,7 @@
         "a segunda característica apenas."
       ],
       "a": 2,
-      "sol": "Os pesos 0,5 e0,5 somam1 e dão a média.",
+      "sol": "Os pesos 0,5 e 0,5 somam 1 e dão a média.",
       "hyp": "Pode interpretar pesos iguais como soma total.",
       "contexts": [
         "mission",

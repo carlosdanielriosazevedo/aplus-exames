@@ -565,7 +565,7 @@
         "20."
       ],
       "a": 0,
-      "sol": "10 escolhas para presidente e 9 para vice:90.",
+      "sol": "10 escolhas para presidente e 9 para vice: 90.",
       "hyp": "Pode usar combinação porque são duas pessoas.",
       "contexts": [
         "mission",
@@ -673,7 +673,7 @@
         "100."
       ],
       "a": 0,
-      "sol": "Primeiro:4 opções (1-4); segundo:4 restantes incluindo 0; terceiro:3. Total 48.",
+      "sol": "Primeiro: 4 opções (1-4); segundo: 4 restantes incluindo 0; terceiro: 3. Total 48.",
       "hyp": "Pode usar A(5,3)=60 sem excluir zero inicial.",
       "contexts": [
         "mission",
@@ -700,7 +700,7 @@
         "625."
       ],
       "a": 1,
-      "sol": "Primeiro:5; depois 5×4×3; total 300.",
+      "sol": "Primeiro: 5; depois 5×4×3; total 300.",
       "hyp": "Pode usar A(6,4)=360.",
       "contexts": [
         "mission",
@@ -727,7 +727,7 @@
         "21."
       ],
       "a": 2,
-      "sol": "A fixo; duas posições com 7 e 6 opções:42.",
+      "sol": "A fixo; duas posições com 7 e 6 opções: 42.",
       "hyp": "Pode contar A novamente.",
       "contexts": [
         "mission",
@@ -943,7 +943,7 @@
         "30."
       ],
       "a": 2,
-      "sol": "A,B nas primeiras:2!; restantes duas:6×5=30; total 60.",
+      "sol": "A,B nas primeiras: 2!; restantes duas: 6×5=30; total 60.",
       "hyp": "Pode fixar a ordem de A,B.",
       "contexts": [
         "mission",
@@ -1159,7 +1159,7 @@
         "40."
       ],
       "a": 2,
-      "sol": "Caso unidade 0: centenas 5, dezenas 4 =>20. Caso unidade 2 ou4:2 escolhas; centenas 4 não nulas restantes; dezenas 4 restantes =>32. Total 52.",
+      "sol": "Caso unidade 0: centenas 5, dezenas 4 =>20. Caso unidade 2 ou 4:2 escolhas; centenas 4 não nulas restantes; dezenas 4 restantes =>32. Total 52.",
       "hyp": "Pode usar 3 unidades pares ×5×4 sem tratar zero inicial.",
       "contexts": [
         "mission",
@@ -1186,7 +1186,7 @@
         "48."
       ],
       "a": 3,
-      "sol": "Unidade ímpar:3 escolhas; centenas:4 escolhas não nulas distintas da unidade; dezenas:4 restantes incluindo 0. Total 48.",
+      "sol": "Unidade ímpar: 3 escolhas; centenas: 4 escolhas não nulas distintas da unidade; dezenas: 4 restantes incluindo 0. Total 48.",
       "hyp": "Pode contar 0 como escolha de centenas.",
       "contexts": [
         "mission",
@@ -1213,7 +1213,7 @@
         "120."
       ],
       "a": 0,
-      "sol": "Primeira posição:4; segunda:9; terceira:8. Total 288.",
+      "sol": "Primeira posição: 4; segunda: 9; terceira: 8. Total 288.",
       "hyp": "Pode usar 4×3×2 ignorando os restantes elementos.",
       "contexts": [
         "mission",
@@ -1240,7 +1240,7 @@
         "336."
       ],
       "a": 1,
-      "sol": "Primeira:6; depois 9×8; total 432.",
+      "sol": "Primeira: 6; depois 9×8; total 432.",
       "hyp": "Pode usar apenas os 6 elementos fora do subconjunto em todas as posições.",
       "contexts": [
         "mission",

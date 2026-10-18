@@ -52,7 +52,7 @@
         "(2,3)."
       ],
       "a": 1,
-      "sol": "Multiplica ambas as coordenadas por2.",
+      "sol": "Multiplica ambas as coordenadas por 2.",
       "hyp": "Pode escalar apenas uma coordenada.",
       "contexts": [
         "mission",
@@ -73,7 +73,7 @@
       "cognitive": "Compreensão",
       "q": "A matriz [[k,0],[0,k]] representa...",
       "o": [
-        "uma rotação de90°.",
+        "uma rotação de 90°.",
         "uma reflexão no eixo Ox.",
         "uma dilatação/redução uniforme de fator k.",
         "uma translação."
@@ -296,7 +296,7 @@
       ],
       "a": 2,
       "sol": "Os pontos com y=−x ficam fixos.",
-      "hyp": "Pode confundir com rotação de180°.",
+      "hyp": "Pode confundir com rotação de 180°.",
       "contexts": [
         "mission",
         "training",
@@ -343,9 +343,9 @@
       "cognitive": "Compreensão",
       "q": "A matriz −I=[[−1,0],[0,−1]] representa...",
       "o": [
-        "rotação de180° em torno da origem.",
+        "rotação de 180° em torno da origem.",
         "reflexão no eixo Ox.",
-        "rotação de90°.",
+        "rotação de 90°.",
         "translação pela origem."
       ],
       "a": 0,
@@ -476,7 +476,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Uma rotação anti-horária de90° transforma (2,3) em...",
+      "q": "Uma rotação anti-horária de 90° transforma (2,3) em...",
       "o": [
         "(3,−2).",
         "(−3,2).",
@@ -503,7 +503,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Uma rotação horária de90° transforma (2,3) em...",
+      "q": "Uma rotação horária de 90° transforma (2,3) em...",
       "o": [
         "(−3,2).",
         "(−2,−3).",
@@ -566,7 +566,7 @@
       ],
       "a": 0,
       "sol": "cosπ=−1 e sinπ=0.",
-      "hyp": "Pode confundir π com90°.",
+      "hyp": "Pode confundir π com 90°.",
       "contexts": [
         "mission",
         "training",
@@ -673,7 +673,7 @@
         "(5,4)."
       ],
       "a": 0,
-      "sol": "Escala x por3 e mantém y.",
+      "sol": "Escala x por 3 e mantém y.",
       "hyp": "Pode aplicar o mesmo fator às duas coordenadas.",
       "contexts": [
         "mission",
@@ -694,13 +694,13 @@
       "cognitive": "Interpretação",
       "q": "[[3,0],[0,1]] representa...",
       "o": [
-        "alongamento vertical de fator3.",
-        "alongamento horizontal de fator3.",
-        "rotação de3 radianos.",
-        "translação horizontal de3."
+        "alongamento vertical de fator 3.",
+        "alongamento horizontal de fator 3.",
+        "rotação de 3 radianos.",
+        "translação horizontal de 3."
       ],
       "a": 1,
-      "sol": "A primeira coordenada é multiplicada por3.",
+      "sol": "A primeira coordenada é multiplicada por 3.",
       "hyp": "Pode confundir fator na diagonal com translação.",
       "contexts": [
         "mission",
@@ -750,8 +750,8 @@
       "o": [
         "compressão horizontal.",
         "reflexão no eixo Ox.",
-        "rotação de180°.",
-        "compressão vertical de fator1/2."
+        "rotação de 180°.",
+        "compressão vertical de fator 1/2."
       ],
       "a": 3,
       "sol": "Só a coordenada y é reduzida.",
@@ -962,7 +962,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Duas rotações em torno da origem de90° anti-horárias compõem uma rotação de...",
+      "q": "Duas rotações em torno da origem de 90° anti-horárias compõem uma rotação de...",
       "o": [
         "90°.",
         "270°.",
@@ -997,7 +997,7 @@
         "0."
       ],
       "a": 0,
-      "sol": "Duas rotações de90° dão180°, isto é −I.",
+      "sol": "Duas rotações de 90° dão 180°, isto é −I.",
       "hyp": "Pode achar que R²=I.",
       "contexts": [
         "mission",
@@ -1024,7 +1024,7 @@
         "0."
       ],
       "a": 1,
-      "sol": "Quatro rotações de90° completam360°.",
+      "sol": "Quatro rotações de 90° completam 360°.",
       "hyp": "Pode confundir com R².",
       "contexts": [
         "mission",
@@ -1045,14 +1045,14 @@
       "cognitive": "Raciocínio",
       "q": "Refletir no eixo Ox duas vezes equivale a...",
       "o": [
-        "rotação de180°.",
+        "rotação de 180°.",
         "reflexão no eixo Oy.",
         "identidade.",
         "matriz nula."
       ],
       "a": 2,
       "sol": "A segunda reflexão desfaz a primeira.",
-      "hyp": "Pode pensar que duas reflexões no mesmo eixo dão180°.",
+      "hyp": "Pode pensar que duas reflexões no mesmo eixo dão 180°.",
       "contexts": [
         "mission",
         "training",
@@ -1073,9 +1073,9 @@
       "q": "Refletir no eixo Ox e depois no eixo Oy equivale a...",
       "o": [
         "identidade.",
-        "rotação de90°.",
+        "rotação de 90°.",
         "reflexão em y=x.",
-        "rotação de180°."
+        "rotação de 180°."
       ],
       "a": 3,
       "sol": "(x,y)→(x,−y)→(−x,−y).",
@@ -1100,7 +1100,7 @@
       "q": "Refletir em y=x e depois novamente em y=x equivale a...",
       "o": [
         "identidade.",
-        "rotação de180°.",
+        "rotação de 180°.",
         "reflexão no eixo Ox.",
         "cisalhamento."
       ],
@@ -1124,12 +1124,12 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Se A transforma e1=(1,0) em u e e2=(0,1) em v, então as colunas de A são...",
+      "q": "Se A transforma e 1=(1,0) em u e e 2=(0,1) em v, então as colunas de A são...",
       "o": [
         "u+v e u−v.",
         "u e v, respetivamente.",
-        "as coordenadas de e1,e2.",
-        "sempre e1,e2."
+        "as coordenadas de e 1,e2.",
+        "sempre e 1,e2."
       ],
       "a": 1,
       "sol": "Ae1 é a primeira coluna e Ae2 a segunda.",
@@ -1151,7 +1151,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Uma transformação envia e1 para (2,1) e e2 para (−1,3). A sua matriz é...",
+      "q": "Uma transformação envia e 1 para (2,1) e e 2 para (−1,3). A sua matriz é...",
       "o": [
         "[[2,1],[−1,3]].",
         "[[−1,2],[3,1]].",
@@ -1178,7 +1178,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Uma transformação linear envia e1 para (2,1) e e2 para (−1,3). Para onde envia (1,1)?",
+      "q": "Uma transformação linear envia e 1 para (2,1) e e 2 para (−1,3). Para onde envia (1,1)?",
       "o": [
         "(3,2).",
         "(2,3).",
@@ -1205,7 +1205,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Se duas transformações lineares têm a mesma imagem de e1 e e2, então...",
+      "q": "Se duas transformações lineares têm a mesma imagem de e 1 e e 2, então...",
       "o": [
         "são a mesma transformação.",
         "podem ser diferentes em outros vetores.",
@@ -1232,10 +1232,10 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Uma transformação envia e1 para (0,1) e e2 para (−1,0). Isto é...",
+      "q": "Uma transformação envia e 1 para (0,1) e e 2 para (−1,0). Isto é...",
       "o": [
-        "rotação de90° horária.",
-        "rotação de90° anti-horária.",
+        "rotação de 90° horária.",
+        "rotação de 90° anti-horária.",
         "reflexão no eixo Oy.",
         "escala uniforme."
       ],
@@ -1264,7 +1264,7 @@
         "duplica toda a figura uniformemente.",
         "roda a figura.",
         "duplica as coordenadas horizontais e mantém as verticais.",
-        "translada a figura2 unidades."
+        "translada a figura 2 unidades."
       ],
       "a": 2,
       "sol": "É um escalamento horizontal.",
@@ -1286,7 +1286,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Aplicar uma rotação de90° a todos os vértices de um polígono em torno da origem...",
+      "q": "Aplicar uma rotação de 90° a todos os vértices de um polígono em torno da origem...",
       "o": [
         "duplica a área.",
         "altera comprimentos.",

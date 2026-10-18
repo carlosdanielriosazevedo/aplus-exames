@@ -1083,7 +1083,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Aplicação",
     "focus": "Dados bivariados, diagrama de dispersão, correlação, regressão, outliers e correlação vs causalidade",
-    "q": "A reta prevê y=12 para certo x, mas o valor observado é 15. Qual é o resíduo observado−previsto?",
+    "q": "A reta prevê y=12 para certo x, mas o valor observado é 15. Qual é o resíduo observado − previsto?",
     "o": [
       "−3",
       "3",
@@ -1149,7 +1149,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "−3; observado abaixo da reta."
     ],
     "a": 0,
-    "sol": "Previsto=18; observado−previsto=3, logo o ponto está acima.",
+    "sol": "Previsto=18; observado − previsto=3, logo o ponto está acima.",
     "hyp": "Pode inverter o sinal ou a posição.",
     "contexts": [
       "mission"
@@ -7703,7 +7703,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "810."
     ],
     "a": 1,
-    "sol": "Centenas:9 opções; dezenas e unidades:10 cada. 9×10×10=900.",
+    "sol": "Centenas: 9 opções; dezenas e unidades: 10 cada. 9×10×10=900.",
     "hyp": "Pode incluir números com zero inicial.",
     "contexts": [
       "mission"
@@ -7790,7 +7790,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "20."
     ],
     "a": 0,
-    "sol": "10 escolhas para presidente e 9 para vice:90.",
+    "sol": "10 escolhas para presidente e 9 para vice: 90.",
     "hyp": "Pode usar combinação porque são duas pessoas.",
     "contexts": [
       "mission"
@@ -8254,7 +8254,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "30."
     ],
     "a": 1,
-    "sol": "As categorias são ramos alternativos:5+2+6=13.",
+    "sol": "As categorias são ramos alternativos: 5+2+6=13.",
     "hyp": "Pode multiplicar categorias alternativas.",
     "contexts": [
       "mission"
@@ -8602,7 +8602,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "720."
     ],
     "a": 0,
-    "sol": "Bloco AB com ordem fixa + 4 pessoas =5 blocos:5!=120.",
+    "sol": "Bloco AB com ordem fixa + 4 pessoas =5 blocos: 5!=120.",
     "hyp": "Pode multiplicar por 2 mesmo com ordem interna fixa.",
     "contexts": [
       "mission"
@@ -8660,7 +8660,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "128."
     ],
     "a": 2,
-    "sol": "São as permutações das 7 tarefas:7!.",
+    "sol": "São as permutações das 7 tarefas: 7!.",
     "hyp": "Pode usar 2⁷.",
     "contexts": [
       "mission"
@@ -8718,7 +8718,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "36."
     ],
     "a": 1,
-    "sol": "Bloco ABC +3 pessoas =4 blocos:4!×3!=24×6=144.",
+    "sol": "Bloco ABC +3 pessoas =4 blocos: 4!×3!=24×6=144.",
     "hyp": "Pode esquecer permutar dentro do bloco.",
     "contexts": [
       "mission"
@@ -14191,7 +14191,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Forma trigonométrica, módulo e argumento",
-    "q": "Se arg(z)=0 mod2π, então z é...",
+    "q": "Se arg(z)=0 mod 2π, então z é...",
     "o": [
       "real positivo.",
       "real negativo.",
@@ -14224,8 +14224,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "o": [
       "ac+bd.",
       "ad+bc.",
-      "ac−bd.",
-      "ad−bc."
+      "ac − bd.",
+      "ad − bc."
     ],
     "a": 2,
     "sol": "bi·di=bd i²=−bd.",
@@ -14369,7 +14369,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "o": [
       "(a+c)+(b+d)i.",
       "(a−d)+(b−c)i.",
-      "(ac−bd)i.",
+      "(ac − bd)i.",
       "(a−c)+(b−d)i."
     ],
     "a": 3,
@@ -14808,7 +14808,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "−2."
     ],
     "a": 3,
-    "sol": "Ambas as potências têm resto 2 mod4 e valem −1.",
+    "sol": "Ambas as potências têm resto 2 mod 4 e valem −1.",
     "hyp": "Pode somar expoentes em vez de valores.",
     "contexts": [
       "mission"
@@ -14838,7 +14838,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 1,
     "sol": "x−1=7 =>x=8.",
-    "hyp": "Pode responder o argumento7.",
+    "hyp": "Pode responder o argumento 7.",
     "contexts": [
       "mission"
     ],
@@ -14945,7 +14945,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Equações exponenciais/logarítmicas e problemas",
-    "q": "Uma população P(t)=1000·1,05^t atinge2000 quando t satisfaz...",
+    "q": "Uma população P(t)=1000·1,05^t atinge 2000 quando t satisfaz...",
     "o": [
       "t=2/1,05.",
       "t=ln2·ln1,05.",
@@ -14983,7 +14983,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 2,
     "sol": "x=2^4=16.",
-    "hyp": "Pode multiplicar2×4.",
+    "hyp": "Pode multiplicar 2×4.",
     "contexts": [
       "mission"
     ],
@@ -15012,7 +15012,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 1,
     "sol": "2x ln3=ln7.",
-    "hyp": "Pode esquecer o fator2 do expoente.",
+    "hyp": "Pode esquecer o fator 2 do expoente.",
     "contexts": [
       "mission"
     ],
@@ -15040,7 +15040,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "alternada."
     ],
     "a": 1,
-    "sol": "Bases superiores a1 geram crescimento exponencial.",
+    "sol": "Bases superiores a 1 geram crescimento exponencial.",
     "hyp": "Pode associar expoente crescente a valores sempre decrescentes.",
     "contexts": [
       "mission"
@@ -15148,16 +15148,16 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Função exponencial",
-    "q": "Uma quantidade multiplica por1,05 a cada período. O fator1,05 indica...",
+    "q": "Uma quantidade multiplica por 1,05 a cada período. O fator 1,05 indica...",
     "o": [
-      "decréscimo de5%.",
-      "aumento absoluto de1,05 unidades.",
-      "crescimento de5% por período.",
+      "decréscimo de 5%.",
+      "aumento absoluto de 1,05 unidades.",
+      "crescimento de 5% por período.",
       "duplicação a cada período."
     ],
     "a": 2,
-    "sol": "1,05=1+0,05, portanto há acréscimo relativo de5%.",
-    "hyp": "Pode ler1,05 como105% de aumento em vez de105% do valor anterior.",
+    "sol": "1,05=1+0,05, portanto há acréscimo relativo de 5%.",
+    "hyp": "Pode ler 1,05 como 105% de aumento em vez de 105% do valor anterior.",
     "contexts": [
       "mission"
     ],
@@ -15214,7 +15214,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "R."
     ],
     "a": 1,
-    "sol": "−2^x<0, logo−2^x+1<1; aproxima-se de1 sem atingir.",
+    "sol": "−2^x<0, logo −2^x+1<1; aproxima-se de 1 sem atingir.",
     "hyp": "Pode não considerar a reflexão antes da translação.",
     "contexts": [
       "mission"
@@ -15359,8 +15359,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "f²(x) como domínio."
     ],
     "a": 0,
-    "sol": "f^−1 significa função inversa, enquanto1/f é a função recíproca quando definida.",
-    "hyp": "Pode tratar o expoente−1 como recíproco em qualquer contexto funcional.",
+    "sol": "f^−1 significa função inversa, enquanto 1/f é a função recíproca quando definida.",
+    "hyp": "Pode tratar o expoente −1 como recíproco em qualquer contexto funcional.",
     "contexts": [
       "mission"
     ],
@@ -15447,7 +15447,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 0,
     "sol": "O argumento do logaritmo tem de ser positivo.",
-    "hyp": "Pode incluir0.",
+    "hyp": "Pode incluir 0.",
     "contexts": [
       "mission"
     ],
@@ -15476,7 +15476,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 2,
     "sol": "2³=8.",
-    "hyp": "Pode dividir8 por2.",
+    "hyp": "Pode dividir 8 por 2.",
     "contexts": [
       "mission"
     ],
@@ -15591,8 +15591,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "a≠0 e x≠0."
     ],
     "a": 1,
-    "sol": "A base tem de ser positiva e diferente de1; o argumento tem de ser positivo.",
-    "hyp": "Pode permitir argumento negativo ou base1.",
+    "sol": "A base tem de ser positiva e diferente de 1; o argumento tem de ser positivo.",
+    "hyp": "Pode permitir argumento negativo ou base 1.",
     "contexts": [
       "mission"
     ],
@@ -15641,7 +15641,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Crescimento/decrescimento exponencial e modelação",
-    "q": "Uma população de2000 cresce10% ao ano. Um modelo é...",
+    "q": "Uma população de 2000 cresce 10% ao ano. Um modelo é...",
     "o": [
       "P(t)=2000+0,1t.",
       "P(t)=2000·1,1^t.",
@@ -15649,7 +15649,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "P(t)=1,1·2000t."
     ],
     "a": 1,
-    "sol": "O valor inicial é2000 e o fator anual é1,10.",
+    "sol": "O valor inicial é 2000 e o fator anual é 1,10.",
     "hyp": "Pode modelar percentagem constante como crescimento linear.",
     "contexts": [
       "mission"
@@ -15678,7 +15678,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "oscilação."
     ],
     "a": 1,
-    "sol": "A quantidade é multiplicada repetidamente por um fator inferior a1.",
+    "sol": "A quantidade é multiplicada repetidamente por um fator inferior a 1.",
     "hyp": "Pode pensar que qualquer base positiva gera crescimento.",
     "contexts": [
       "mission"
@@ -15699,7 +15699,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Crescimento/decrescimento exponencial e modelação",
-    "q": "Uma população passa de500 para605 em 2 anos com taxa anual constante. O fator anual é...",
+    "q": "Uma população passa de 500 para 605 em 2 anos com taxa anual constante. O fator anual é...",
     "o": [
       "1,1.",
       "1,21.",
@@ -15707,8 +15707,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "1,05."
     ],
     "a": 0,
-    "sol": "605/500=1,21=1,1², logo fator anual1,1.",
-    "hyp": "Pode usar o crescimento total21% como taxa anual.",
+    "sol": "605/500=1,21=1,1², logo fator anual 1,1.",
+    "hyp": "Pode usar o crescimento total 21% como taxa anual.",
     "contexts": [
       "mission"
     ],
@@ -15728,11 +15728,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Crescimento/decrescimento exponencial e modelação",
-    "q": "Num modelo A(t)=1200·1,07^t, o número1200 é...",
+    "q": "Num modelo A(t)=1200·1,07^t, o número 1200 é...",
     "o": [
-      "a taxa de7%.",
+      "a taxa de 7%.",
       "o fator de crescimento.",
-      "o valor após1 período.",
+      "o valor após 1 período.",
       "o valor inicial A(0)."
     ],
     "a": 3,
@@ -15759,14 +15759,14 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Crescimento/decrescimento exponencial e modelação",
     "q": "Uma concentração é dada por C(t)=50·0,7^t. C(0) e a taxa de perda são, respetivamente...",
     "o": [
-      "0 e70%.",
-      "50 e70%.",
-      "50 e30%.",
-      "50 e7%."
+      "0 e 70%.",
+      "50 e 70%.",
+      "50 e 30%.",
+      "50 e 7%."
     ],
     "a": 2,
-    "sol": "Valor inicial50; fator0,7 significa perda30%.",
-    "hyp": "Pode interpretar0,7 como perda70%.",
+    "sol": "Valor inicial 50; fator 0,7 significa perda 30%.",
+    "hyp": "Pode interpretar 0,7 como perda 70%.",
     "contexts": [
       "mission"
     ],
@@ -15815,7 +15815,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Crescimento/decrescimento exponencial e modelação",
-    "q": "Um investimento passa de1000€ para1210€ em 2 anos, com taxa anual constante. A taxa anual é...",
+    "q": "Um investimento passa de 1000€ para 1210€ em 2 anos, com taxa anual constante. A taxa anual é...",
     "o": [
       "21%.",
       "10%.",
@@ -15824,7 +15824,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 1,
     "sol": "1210/1000=1,21=1,1².",
-    "hyp": "Pode dividir21% por2 e obter10,5%, ignorando composição.",
+    "hyp": "Pode dividir 21% por 2 e obter 10,5%, ignorando composição.",
     "contexts": [
       "mission"
     ],
@@ -15853,7 +15853,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 1,
     "sol": "2x−4=0 => x=2.",
-    "hyp": "Pode igualar apenas x a4.",
+    "hyp": "Pode igualar apenas x a 4.",
     "contexts": [
       "mission"
     ],
@@ -15968,7 +15968,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "]−∞,1[."
     ],
     "a": 0,
-    "sol": "O produto é positivo fora das raízes −2 e1.",
+    "sol": "O produto é positivo fora das raízes −2 e 1.",
     "hyp": "Pode construir mal a tabela de sinais.",
     "contexts": [
       "mission"
@@ -16027,7 +16027,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 3,
     "sol": "C'=2x−12=0.",
-    "hyp": "Pode usar o coeficiente linear sem dividir por2.",
+    "hyp": "Pode usar o coeficiente linear sem dividir por 2.",
     "contexts": [
       "mission"
     ],
@@ -16316,7 +16316,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "y=1."
     ],
     "a": 0,
-    "sol": "Passa por (0,1) e tem declive1.",
+    "sol": "Passa por (0,1) e tem declive 1.",
     "hyp": "Pode esquecer o ponto de tangência.",
     "contexts": [
       "mission"
@@ -16664,7 +16664,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "ln x."
     ],
     "a": 2,
-    "sol": "Produto:1·lnx+x·1/x=lnx+1.",
+    "sol": "Produto: 1·lnx+x·1/x=lnx+1.",
     "hyp": "Pode esquecer um dos termos.",
     "contexts": [
       "mission"
@@ -16722,7 +16722,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2ln x."
     ],
     "a": 2,
-    "sol": "Cadeia:2lnx·1/x.",
+    "sol": "Cadeia: 2lnx·1/x.",
     "hyp": "Pode derivar o quadrado sem a função interna.",
     "contexts": [
       "mission"
@@ -16839,7 +16839,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 0,
     "sol": "(1/2)(3x+1)^{-1/2}·3.",
-    "hyp": "Pode esquecer o fator3.",
+    "hyp": "Pode esquecer o fator 3.",
     "contexts": [
       "mission"
     ],
@@ -16867,8 +16867,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "f'(x)=x²."
     ],
     "a": 1,
-    "sol": "É polinomial e a regra da potência dá2x.",
-    "hyp": "Pode esquecer o fator2.",
+    "sol": "É polinomial e a regra da potência dá 2x.",
+    "hyp": "Pode esquecer o fator 2.",
     "contexts": [
       "mission"
     ],
@@ -16917,7 +16917,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Derivabilidade e relação com continuidade",
-    "q": "Considere f(x)=x² para x≤1 e f(x)=ax+b para x>1. Continuidade em1 exige...",
+    "q": "Considere f(x)=x² para x≤1 e f(x)=ax+b para x>1. Continuidade em 1 exige...",
     "o": [
       "a+b=1.",
       "a+b=2.",
@@ -16925,7 +16925,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "a=2."
     ],
     "a": 0,
-    "sol": "O valor do ramo esquerdo em1 é1.",
+    "sol": "O valor do ramo esquerdo em 1 é 1.",
     "hyp": "Pode usar a condição de derivabilidade prematuramente.",
     "contexts": [
       "mission"
@@ -16950,11 +16950,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "o": [
       "é descontínua em 0.",
       "tem derivada 0.",
-      "tem derivada1.",
+      "tem derivada 1.",
       "não é derivável em 0 com derivada real finita."
     ],
     "a": 3,
-    "sol": "O quociente incremental é1/√h→+∞ pela direita.",
+    "sol": "O quociente incremental é 1/√h→+∞ pela direita.",
     "hyp": "Pode concluir derivabilidade a partir da continuidade.",
     "contexts": [
       "mission"
@@ -16984,7 +16984,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 1,
     "sol": "L(4,1)=2+0,1/4=2,025.",
-    "hyp": "Pode multiplicar o incremento por4.",
+    "hyp": "Pode multiplicar o incremento por 4.",
     "contexts": [
       "mission"
     ],
@@ -17007,12 +17007,12 @@ export const VNEXT_MISSION_QUESTIONS=[
     "q": "A função |x| é derivável em 0?",
     "o": [
       "Sim, com derivada 0.",
-      "Sim, com derivada1.",
+      "Sim, com derivada 1.",
       "Não.",
-      "Sim, com derivada−1."
+      "Sim, com derivada −1."
     ],
     "a": 2,
-    "sol": "As derivadas laterais são −1 e1.",
+    "sol": "As derivadas laterais são −1 e 1.",
     "hyp": "Pode olhar apenas para continuidade.",
     "contexts": [
       "mission"
@@ -17033,7 +17033,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Derivabilidade e relação com continuidade",
-    "q": "Considere f(x)=x² para x≤1 e f(x)=ax+b para x>1. Para além da continuidade em1, a derivabilidade em1 exige...",
+    "q": "Considere f(x)=x² para x≤1 e f(x)=ax+b para x>1. Para além da continuidade em 1, a derivabilidade em 1 exige...",
     "o": [
       "a=1.",
       "a=2.",
@@ -17041,7 +17041,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "a+b=2."
     ],
     "a": 1,
-    "sol": "Derivada esquerda de x² em1 é2; derivada direita da reta éa.",
+    "sol": "Derivada esquerda de x² em 1 é 2; derivada direita da reta éa.",
     "hyp": "Pode igualar valores em vez de declives.",
     "contexts": [
       "mission"
@@ -17062,7 +17062,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Monotonia, extremos e estudo global de funções",
-    "q": "Se f'(x)<0 antes de2 e f'(x)>0 depois de2, então x=2 é...",
+    "q": "Se f'(x)<0 antes de 2 e f'(x)>0 depois de 2, então x=2 é...",
     "o": [
       "máximo local.",
       "assíntota.",
@@ -17128,7 +17128,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "nenhum extremo."
     ],
     "a": 2,
-    "sol": "f''=6x<0 em−1.",
+    "sol": "f''=6x<0 em −1.",
     "hyp": "Pode trocar os extremos.",
     "contexts": [
       "mission"
@@ -17384,12 +17384,12 @@ export const VNEXT_MISSION_QUESTIONS=[
     "q": "Uma temperatura T(t) é contínua entre as 10h e as 11h, com T(10)=18°C e T(11)=22°C. Podemos afirmar que...",
     "o": [
       "a temperatura cresceu sempre.",
-      "às10h30 era exatamente20°C.",
-      "a derivada foi sempre4.",
-      "em algum instante a temperatura foi20°C."
+      "às 10h30 era exatamente 20°C.",
+      "a derivada foi sempre 4.",
+      "em algum instante a temperatura foi 20°C."
     ],
     "a": 3,
-    "sol": "O TVI garante que20°C foi atingido, mas não quando nem monotonia.",
+    "sol": "O TVI garante que 20°C foi atingido, mas não quando nem monotonia.",
     "hyp": "Pode assumir variação linear.",
     "contexts": [
       "mission"
@@ -17557,13 +17557,13 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Operações com funções contínuas",
     "q": "Se lim g=0, podemos concluir automaticamente lim(f/g)?",
     "o": [
-      "Sim, é0.",
+      "Sim, é 0.",
       "Não; é preciso analisar o comportamento.",
       "Sim, é lim f.",
       "Sim, é infinito sempre."
     ],
     "a": 1,
-    "sol": "Denominador a tender a0 pode originar vários comportamentos.",
+    "sol": "Denominador a tender a 0 pode originar vários comportamentos.",
     "hyp": "Pode aplicar a regra do quociente fora das hipóteses.",
     "contexts": [
       "mission"
@@ -17729,7 +17729,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Distribuições de amostragem / comportamento amostral",
-    "q": "Se X tem média50 e desvio padrão10, então uma média de25 observações tem média...",
+    "q": "Se X tem média 50 e desvio padrão 10, então uma média de 25 observações tem média...",
     "o": [
       "50.",
       "10.",
@@ -17854,7 +17854,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 1,
     "sol": "10/√25=2.",
-    "hyp": "Pode dividir por25.",
+    "hyp": "Pode dividir por 25.",
     "contexts": [
       "mission"
     ],
@@ -17874,7 +17874,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Estimação de parâmetros",
-    "q": "Numa amostra de100 pessoas, 64 respondem 'sim'. A estimativa pontual de p é...",
+    "q": "Numa amostra de 100 pessoas, 64 respondem 'sim'. A estimativa pontual de p é...",
     "o": [
       "64.",
       "0,64.",
@@ -18135,7 +18135,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Raciocínio inferencial e amostragem",
-    "q": "Uma empresa quer estimar satisfação e tem 70% clientes particulares e30% empresariais. Numa amostra proporcional de200, quantos empresariais?",
+    "q": "Uma empresa quer estimar satisfação e tem 70% clientes particulares e 30% empresariais. Numa amostra proporcional de 200, quantos empresariais?",
     "o": [
       "140.",
       "30.",
@@ -18282,7 +18282,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Intervalos de confiança, margem de erro e interpretação",
     "q": "Um intervalo de 95% não significa que...",
     "o": [
-      "o procedimento cobre o parâmetro em cerca de95% de repetições sob as condições.",
+      "o procedimento cobre o parâmetro em cerca de 95% de repetições sob as condições.",
       "há 95% de probabilidade de o parâmetro fixo estar neste intervalo específico, na interpretação frequentista clássica.",
       "o intervalo depende da amostra.",
       "existe incerteza amostral."
@@ -18343,7 +18343,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "quadruplicar n.",
       "duplicar n.",
       "reduzir n para metade.",
-      "multiplicar n por8."
+      "multiplicar n por 8."
     ],
     "a": 0,
     "sol": "Margem∝1/√n.",
@@ -18398,9 +18398,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Intervalos de confiança, margem de erro e interpretação",
     "q": "Uma sondagem dá p̂=0,52 com IC95% [0,49;0,55]. Uma leitura cuidadosa é...",
     "o": [
-      "os dados são compatíveis com valores próximos de metade e não sustentam uma separação clara de0,50 ao nível considerado.",
+      "os dados são compatíveis com valores próximos de metade e não sustentam uma separação clara de 0,50 ao nível considerado.",
       "p=0,52 exatamente.",
-      "há 95% dos eleitores entre0,49 e0,55.",
+      "há 95% dos eleitores entre 0,49 e 0,55.",
       "p>0,5 está provado."
     ],
     "a": 0,
@@ -18430,7 +18430,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "estimativa × n.",
       "erro padrão/n.",
       "quantil crítico × erro padrão.",
-      "parâmetro−estimativa."
+      "parâmetro − estimativa."
     ],
     "a": 2,
     "sol": "Combina nível de confiança e variabilidade amostral.",
@@ -18454,7 +18454,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Intervalos de confiança, margem de erro e interpretação",
-    "q": "Passar de 95% para99% de confiança, com mesmos dados, faz a margem...",
+    "q": "Passar de 95% para 99% de confiança, com mesmos dados, faz a margem...",
     "o": [
       "diminuir.",
       "ficar igual.",
@@ -18462,7 +18462,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "mudar de sinal."
     ],
     "a": 2,
-    "sol": "O quantil crítico99% é maior.",
+    "sol": "O quantil crítico 99% é maior.",
     "hyp": "Pode pensar que maior confiança é mais precisão.",
     "contexts": [
       "mission"
@@ -18550,7 +18550,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 0,
     "sol": "z=(104−100)/2=2.",
-    "hyp": "Pode dividir pela variância4.",
+    "hyp": "Pode dividir pela variância 4.",
     "contexts": [
       "mission"
     ],
@@ -18570,7 +18570,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Teorema Limite Central em contexto introdutório",
-    "q": "Se n passa de25 para100, o erro padrão...",
+    "q": "Se n passa de 25 para 100, o erro padrão...",
     "o": [
       "fica um quarto.",
       "fica metade.",
@@ -18607,7 +18607,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "20,5."
     ],
     "a": 3,
-    "sol": "A correção típica inclui toda a barra de X=20 até20,5.",
+    "sol": "A correção típica inclui toda a barra de X=20 até 20,5.",
     "hyp": "Pode deslocar no sentido errado.",
     "contexts": [
       "mission"
@@ -18657,7 +18657,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Modelação",
     "focus": "Teorema Limite Central em contexto introdutório",
-    "q": "Se médias de lotes de64 peças têm μ=10g, σ individual=0,8g, o erro padrão é...",
+    "q": "Se médias de lotes de 64 peças têm μ=10g, σ individual=0,8g, o erro padrão é...",
     "o": [
       "0,8g.",
       "0,0125g.",
@@ -18666,7 +18666,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 3,
     "sol": "0,8/8=0,1.",
-    "hyp": "Pode dividir por64.",
+    "hyp": "Pode dividir por 64.",
     "contexts": [
       "mission"
     ],
@@ -18753,7 +18753,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 0,
     "sol": "x²=2x =>x(x−2)=0.",
-    "hyp": "Pode dividir por x e perder0.",
+    "hyp": "Pode dividir por x e perder 0.",
     "contexts": [
       "mission"
     ],
@@ -18773,7 +18773,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Áreas e aplicações",
-    "q": "A integral ∫_{−1}^1 x dx vale0, mas a área geométrica entre y=x e Ox nesse intervalo é...",
+    "q": "A integral ∫_{−1}^1 x dx vale 0, mas a área geométrica entre y=x e Ox nesse intervalo é...",
     "o": [
       "1.",
       "0.",
@@ -18781,7 +18781,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "1/2."
     ],
     "a": 0,
-    "sol": "Há dois triângulos de área1/2 cada, sem cancelamento geométrico.",
+    "sol": "Há dois triângulos de área 1/2 cada, sem cancelamento geométrico.",
     "hyp": "Pode confundir integral algébrica com área total.",
     "contexts": [
       "mission"
@@ -18802,7 +18802,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Áreas e aplicações",
-    "q": "Uma velocidade v(t) é positiva entre0 e4 e negativa entre4 e6. A distância total percorrida é...",
+    "q": "Uma velocidade v(t) é positiva entre 0 e 4 e negativa entre 4 e 6. A distância total percorrida é...",
     "o": [
       "∫_0^6v(t)dt.",
       "|∫_0^6v(t)dt| sempre.",
@@ -18897,7 +18897,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "7."
     ],
     "a": 1,
-    "sol": "Pela aditividade:3+7=10.",
+    "sol": "Pela aditividade: 3+7=10.",
     "hyp": "Pode multiplicar integrais.",
     "contexts": [
       "mission"
@@ -19216,8 +19216,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2t³."
     ],
     "a": 0,
-    "sol": "Uma primitiva de6t² é2t³.",
-    "hyp": "Pode esquecer o coeficiente1/3.",
+    "sol": "Uma primitiva de 6t² é 2t³.",
+    "hyp": "Pode esquecer o coeficiente 1/3.",
     "contexts": [
       "mission"
     ],
@@ -19266,7 +19266,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Conceito de primitiva/antiderivada",
-    "q": "Em ]−∞,0[, uma primitiva de1/x pode escrever-se...",
+    "q": "Em ]−∞,0[, uma primitiva de 1/x pode escrever-se...",
     "o": [
       "ln x.",
       "−ln(−x).",
@@ -19274,7 +19274,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "1/x."
     ],
     "a": 2,
-    "sol": "ln(−x)=ln|x| e a sua derivada é1/x para x<0.",
+    "sol": "ln(−x)=ln|x| e a sua derivada é 1/x para x<0.",
     "hyp": "Pode pensar que é necessário sinal negativo.",
     "contexts": [
       "mission"
@@ -19390,7 +19390,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "x⁴+C."
     ],
     "a": 2,
-    "sol": "A constante4 sai da integral.",
+    "sol": "A constante 4 sai da integral.",
     "hyp": "Pode absorver tudo na expressão log sem perceber que ln4 é apenas constante; 4ln|x| é a forma correta base.",
     "contexts": [
       "mission"
@@ -19419,8 +19419,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "e^{3t}+C."
     ],
     "a": 3,
-    "sol": "Derivar e^{3t} dá3e^{3t}.",
-    "hyp": "Pode manter o coeficiente3.",
+    "sol": "Derivar e^{3t} dá 3e^{3t}.",
+    "hyp": "Pode manter o coeficiente 3.",
     "contexts": [
       "mission"
     ],
@@ -19477,8 +19477,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "e^{x+1}."
     ],
     "a": 0,
-    "sol": "Derivada de x²+2x é2(x+1), logo a integral é (1/2)e^{x²+2x}+C.",
-    "hyp": "Pode não reconhecer o fator2.",
+    "sol": "Derivada de x²+2x é 2(x+1), logo a integral é (1/2)e^{x²+2x}+C.",
+    "hyp": "Pode não reconhecer o fator 2.",
     "contexts": [
       "mission"
     ],
@@ -19535,7 +19535,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2."
     ],
     "a": 2,
-    "sol": "Uma primitiva é x²/2; em 1 menos em 0 dá1/2.",
+    "sol": "Uma primitiva é x²/2; em 1 menos em 0 dá 1/2.",
     "hyp": "Pode usar f(1)−f(0).",
     "contexts": [
       "mission"
@@ -19593,8 +19593,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2."
     ],
     "a": 3,
-    "sol": "Primitiva2√x;4−2=2.",
-    "hyp": "Pode esquecer o fator2.",
+    "sol": "Primitiva 2√x;4−2=2.",
+    "hyp": "Pode esquecer o fator 2.",
     "contexts": [
       "mission"
     ],
@@ -19680,7 +19680,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "0."
     ],
     "a": 1,
-    "sol": "A'(x)=x−2; em3 dá1.",
+    "sol": "A'(x)=x−2; em 3 dá 1.",
     "hyp": "Pode calcular A(3) em vez da derivada.",
     "contexts": [
       "mission"
@@ -19788,11 +19788,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Adição, subtração e multiplicação por escalar",
-    "q": "Se A e B têm dimensões 2×3 e3×2, então A+B...",
+    "q": "Se A e B têm dimensões 2×3 e 3×2, então A+B...",
     "o": [
-      "é2×2.",
-      "é3×3.",
-      "tem6 elementos e por isso existe.",
+      "é 2×2.",
+      "é 3×3.",
+      "tem 6 elementos e por isso existe.",
       "não está definida."
     ],
     "a": 3,
@@ -19883,7 +19883,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "[[1,2],[−1,3]]."
     ],
     "a": 3,
-    "sol": "Divide-se cada elemento por2.",
+    "sol": "Divide-se cada elemento por 2.",
     "hyp": "Pode dividir apenas uma linha.",
     "contexts": [
       "mission"
@@ -19964,7 +19964,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Modelação e aplicações",
     "q": "Em uma matriz de adjacência A, a entrada (A²)_ij conta, em rede simples apropriada...",
     "o": [
-      "percursos de comprimento2 de i para j.",
+      "percursos de comprimento 2 de i para j.",
       "ligações diretas apenas.",
       "distância mínima sempre.",
       "grau de i apenas."
@@ -20057,7 +20057,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "50."
     ],
     "a": 2,
-    "sol": "Primeira linha:10+20=30.",
+    "sol": "Primeira linha: 10+20=30.",
     "hyp": "Pode somar a primeira coluna.",
     "contexts": [
       "mission"
@@ -20435,7 +20435,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 2,
     "sol": "São 3 diagonais +3 acima da diagonal; os restantes ficam determinados por simetria.",
-    "hyp": "Pode contar todos os9.",
+    "hyp": "Pode contar todos os 9.",
     "contexts": [
       "mission"
     ],
@@ -20492,7 +20492,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "4×3 se linhas=lojas e colunas=meses."
     ],
     "a": 3,
-    "sol": "A convenção dada fixa 4 linhas e3 colunas.",
+    "sol": "A convenção dada fixa 4 linhas e 3 colunas.",
     "hyp": "Pode ignorar a convenção especificada.",
     "contexts": [
       "mission"
@@ -20550,7 +20550,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "(2,3)."
     ],
     "a": 1,
-    "sol": "Multiplica ambas as coordenadas por2.",
+    "sol": "Multiplica ambas as coordenadas por 2.",
     "hyp": "Pode escalar apenas uma coordenada.",
     "contexts": [
       "mission"
@@ -20637,7 +20637,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "0."
     ],
     "a": 0,
-    "sol": "Duas rotações de90° dão180°, isto é −I.",
+    "sol": "Duas rotações de 90° dão 180°, isto é −I.",
     "hyp": "Pode achar que R²=I.",
     "contexts": [
       "mission"
@@ -20660,7 +20660,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Transformações geométricas com matrizes",
     "q": "A matriz [[k,0],[0,k]] representa...",
     "o": [
-      "uma rotação de90°.",
+      "uma rotação de 90°.",
       "uma reflexão no eixo Ox.",
       "uma dilatação/redução uniforme de fator k.",
       "uma translação."
@@ -20696,7 +20696,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 0,
     "sol": "cosπ=−1 e sinπ=0.",
-    "hyp": "Pode confundir π com90°.",
+    "hyp": "Pode confundir π com 90°.",
     "contexts": [
       "mission"
     ],
@@ -20986,7 +20986,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 0,
     "sol": "0,6×0,7=0,42.",
-    "hyp": "Pode usar complementos depois de multiplicar:1−0,12.",
+    "hyp": "Pode usar complementos depois de multiplicar: 1−0,12.",
     "contexts": [
       "mission"
     ],
@@ -21391,8 +21391,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2,5%."
     ],
     "a": 3,
-    "sol": "Fora de μ±2σ ficam cerca de5%, divididos em duas caudas de2,5%.",
-    "hyp": "Pode atribuir os5% todos a uma cauda.",
+    "sol": "Fora de μ±2σ ficam cerca de 5%, divididos em duas caudas de 2,5%.",
+    "hyp": "Pode atribuir os 5% todos a uma cauda.",
     "contexts": [
       "mission"
     ],
@@ -21441,7 +21441,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Valor médio/dispersão de modelos e Modelo Normal",
-    "q": "Alturas têm modelo N(170,6). Uma altura182 cm está a...",
+    "q": "Alturas têm modelo N(170,6). Uma altura 182 cm está a...",
     "o": [
       "2 desvios-padrão acima da média.",
       "12 desvios-padrão acima.",
@@ -21450,7 +21450,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 0,
     "sol": "(182−170)/6=2.",
-    "hyp": "Pode usar a diferença12 como número de desvios.",
+    "hyp": "Pode usar a diferença 12 como número de desvios.",
     "contexts": [
       "mission"
     ],
@@ -21507,7 +21507,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "[60,90]."
     ],
     "a": 2,
-    "sol": "70−10=60 e70+10=80.",
+    "sol": "70−10=60 e 70+10=80.",
     "hyp": "Pode somar/descontar2σ.",
     "contexts": [
       "mission"
@@ -21934,7 +21934,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Probabilidade total e problemas em cadeia",
-    "q": "Uma fábrica usa máquina M1 em 70% da produção e M2 em 30%. Taxas de defeito:2% e5%. P(defeito)=...",
+    "q": "Uma fábrica usa máquina M1 em 70% da produção e M2 em 30%. Taxas de defeito: 2% e 5%. P(defeito)=...",
     "o": [
       "0,07.",
       "0,029.",
@@ -22029,7 +22029,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "0,4."
     ],
     "a": 3,
-    "sol": "Qualquer média ponderada de dois valores iguais a0,4 vale0,4.",
+    "sol": "Qualquer média ponderada de dois valores iguais a 0,4 vale 0,4.",
     "hyp": "Pode somar as condicionais.",
     "contexts": [
       "mission"
@@ -22050,7 +22050,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Probabilidade total e problemas em cadeia",
-    "q": "Um seguro tem 30% clientes jovens e70% adultos. Sinistro anual:12% jovens,5% adultos. Taxa global de sinistro=...",
+    "q": "Um seguro tem 30% clientes jovens e 70% adultos. Sinistro anual: 12% jovens,5% adultos. Taxa global de sinistro=...",
     "o": [
       "8,5%.",
       "7,1%.",
@@ -22059,7 +22059,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 1,
     "sol": "0,3×0,12+0,7×0,05=0,036+0,035=0,071.",
-    "hyp": "Pode fazer média simples8,5%.",
+    "hyp": "Pode fazer média simples 8,5%.",
     "contexts": [
       "mission"
     ],
@@ -22108,7 +22108,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Probabilidade total e problemas em cadeia",
-    "q": "Uma doença afeta 1% da população. Um teste dá positivo em99% dos doentes e em5% dos não doentes. P(positivo)=...",
+    "q": "Uma doença afeta 1% da população. Um teste dá positivo em 99% dos doentes e em 5% dos não doentes. P(positivo)=...",
     "o": [
       "0,99.",
       "0,0594.",
@@ -22195,7 +22195,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Variáveis aleatórias discretas e função massa",
-    "q": "X assume −1,0,2 com probabilidades0,2;0,5;0,3. E(X)=...",
+    "q": "X assume −1,0,2 com probabilidades 0,2;0,5;0,3. E(X)=...",
     "o": [
       "0,4.",
       "0,6.",
@@ -22253,7 +22253,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Variáveis aleatórias discretas e função massa",
-    "q": "Um prémio aleatório paga 100€ com0,01, 10€ com0,09 e0€ com0,90. Valor esperado bruto=...",
+    "q": "Um prémio aleatório paga 100€ com 0,01, 10€ com 0,09 e 0€ com 0,90. Valor esperado bruto=...",
     "o": [
       "1€.",
       "10€.",
@@ -22348,7 +22348,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "[0,2]."
     ],
     "a": 1,
-    "sol": "A mudança de sinal ocorre entre2 e3.",
+    "sol": "A mudança de sinal ocorre entre 2 e 3.",
     "hyp": "Pode escolher o lado com sinais iguais.",
     "contexts": [
       "mission"
@@ -22398,7 +22398,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Método da bisseção, aproximação e erro",
-    "q": "Para f(x)=x²−2 em [1,2], o primeiro ponto médio é1,5 e f(1,5)>0. O novo intervalo é...",
+    "q": "Para f(x)=x²−2 em [1,2], o primeiro ponto médio é 1,5 e f(1,5)>0. O novo intervalo é...",
     "o": [
       "[1,1,5].",
       "[1,5,2].",
@@ -22456,7 +22456,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Exemplo",
     "focus": "Método da bisseção, aproximação e erro",
-    "q": "Para f(x)=(x−1)², f(0)>0 e f(2)>0 apesar de haver raiz em1. Isto mostra que...",
+    "q": "Para f(x)=(x−1)², f(0)>0 e f(2)>0 apesar de haver raiz em 1. Isto mostra que...",
     "o": [
       "Bolzano é falso.",
       "a função é descontínua.",
@@ -22551,7 +22551,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "]2,3[."
     ],
     "a": 1,
-    "sol": "O polinómio é contínuo e muda de sinal entre1 e2.",
+    "sol": "O polinómio é contínuo e muda de sinal entre 1 e 2.",
     "hyp": "Pode usar o valor √2 sem justificar pelo teorema.",
     "contexts": [
       "mission"
@@ -22609,7 +22609,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "]0,04;0,25[."
     ],
     "a": 0,
-    "sol": "Há mudança de sinal entre1,4 e1,5.",
+    "sol": "Há mudança de sinal entre 1,4 e 1,5.",
     "hyp": "Pode usar os valores de f como extremos.",
     "contexts": [
       "mission"
@@ -22809,7 +22809,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "|f(x_n)| pequeno, com interpretação adequada.",
       "f'(x_n)>0 sempre.",
       "x_n>0.",
-      "x_n próximo de1."
+      "x_n próximo de 1."
     ],
     "a": 0,
     "sol": "Um resíduo pequeno indica que a aproximação quase satisfaz a equação.",

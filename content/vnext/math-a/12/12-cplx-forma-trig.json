@@ -665,7 +665,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Se arg(z)=0 mod2π, então z é...",
+      "q": "Se arg(z)=0 mod 2π, então z é...",
       "o": [
         "real positivo.",
         "real negativo.",
@@ -692,7 +692,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Se arg(z)=π mod2π, então z é...",
+      "q": "Se arg(z)=π mod 2π, então z é...",
       "o": [
         "real positivo.",
         "real negativo.",
@@ -719,7 +719,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Se arg(z)=π/2 mod2π, então z é...",
+      "q": "Se arg(z)=π/2 mod 2π, então z é...",
       "o": [
         "real positivo.",
         "real negativo.",
@@ -746,7 +746,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Se arg(z)=3π/2 mod2π, então z é...",
+      "q": "Se arg(z)=3π/2 mod 2π, então z é...",
       "o": [
         "imaginário puro positivo.",
         "real negativo.",
@@ -1019,7 +1019,7 @@
       "q": "Se z tem argumento θ, então −z tem argumento...",
       "o": [
         "−θ.",
-        "θ+π mod2π.",
+        "θ+π mod 2π.",
         "θ+π/2.",
         "2θ."
       ],
@@ -1047,7 +1047,7 @@
       "o": [
         "θ−π/2.",
         "−θ.",
-        "θ+π/2 mod2π.",
+        "θ+π/2 mod 2π.",
         "θ+π."
       ],
       "a": 2,
@@ -1075,7 +1075,7 @@
         "θ+π/2.",
         "θ+π.",
         "−θ.",
-        "θ−π/2 mod2π."
+        "θ−π/2 mod 2π."
       ],
       "a": 3,
       "sol": "Multiplicar por −i roda −90°.",

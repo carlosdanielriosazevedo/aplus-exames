@@ -133,8 +133,8 @@
         "x²."
       ],
       "a": 0,
-      "sol": "Derivada de x²−2 é2x.",
-      "hyp": "Pode esquecer o fator2.",
+      "sol": "Derivada de x²−2 é 2x.",
+      "hyp": "Pode esquecer o fator 2.",
       "contexts": [
         "mission",
         "training",
@@ -376,7 +376,7 @@
         "3."
       ],
       "a": 1,
-      "sol": "Derivada de x³ é3x².",
+      "sol": "Derivada de x³ é 3x².",
       "hyp": "Pode esquecer o quadrado.",
       "contexts": [
         "mission",
@@ -562,7 +562,7 @@
         "|f(x_n)| pequeno, com interpretação adequada.",
         "f'(x_n)>0 sempre.",
         "x_n>0.",
-        "x_n próximo de1."
+        "x_n próximo de 1."
       ],
       "a": 0,
       "sol": "Um resíduo pequeno indica que a aproximação quase satisfaz a equação.",
@@ -620,7 +620,7 @@
       ],
       "a": 2,
       "sol": "3−(9−4)/6=3−5/6=13/6.",
-      "hyp": "Pode usar ponto médio entre2 e3.",
+      "hyp": "Pode usar ponto médio entre 2 e 3.",
       "contexts": [
         "mission",
         "training",
@@ -640,13 +640,13 @@
       "cognitive": "Raciocínio",
       "q": "A aproximação 13/6≈2,1667 está...",
       "o": [
-        "mais longe da raiz2.",
+        "mais longe da raiz 2.",
         "exatamente na raiz.",
-        "na raiz−2.",
-        "mais perto da raiz2 do que x0=3."
+        "na raiz −2.",
+        "mais perto da raiz 2 do que x0=3."
       ],
       "a": 3,
-      "sol": "O erro passou de1 para cerca de0,1667.",
+      "sol": "O erro passou de 1 para cerca de 0,1667.",
       "hyp": "Pode ignorar qual raiz está a ser aproximada.",
       "contexts": [
         "mission",
@@ -727,8 +727,8 @@
         "−1/x²."
       ],
       "a": 2,
-      "sol": "Derivada de ln x é1/x.",
-      "hyp": "Pode confundir com derivada de1/x.",
+      "sol": "Derivada de ln x é 1/x.",
+      "hyp": "Pode confundir com derivada de 1/x.",
       "contexts": [
         "mission",
         "training",
@@ -754,7 +754,7 @@
         "x_{n+1}=x_n−x_n(ln x_n−1)."
       ],
       "a": 3,
-      "sol": "Divide-se por1/x_n, multiplicando pela própria abcissa.",
+      "sol": "Divide-se por 1/x_n, multiplicando pela própria abcissa.",
       "hyp": "Pode esquecer o denominador da derivada.",
       "contexts": [
         "mission",
@@ -778,7 +778,7 @@
         "positivo.",
         "negativo.",
         "inteiro.",
-        "menor que1."
+        "menor que 1."
       ],
       "a": 0,
       "sol": "O logaritmo natural só está definido para x>0.",
@@ -808,7 +808,7 @@
         "−cosx−1."
       ],
       "a": 1,
-      "sol": "Derivada de cosx é−sinx e de−x é−1.",
+      "sol": "Derivada de cosx é−sinx e de − x é−1.",
       "hyp": "Pode esquecer um dos sinais.",
       "contexts": [
         "mission",
@@ -884,7 +884,7 @@
       "q": "Perto de uma raiz simples α, Newton tem tipicamente convergência...",
       "o": [
         "quadrática.",
-        "linear com fator1/2.",
+        "linear com fator 1/2.",
         "cúbica sempre.",
         "sem taxa previsível."
       ],
@@ -910,7 +910,7 @@
       "cognitive": "Interpretação",
       "q": "Convergência quadrática significa, de forma aproximada, que...",
       "o": [
-        "o erro é dividido exatamente por2.",
+        "o erro é dividido exatamente por 2.",
         "o número de algarismos corretos pode duplicar em cada passo perto da raiz.",
         "são precisas n² iterações.",
         "a raiz é um quadrado."
@@ -962,7 +962,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Exemplo",
-      "q": "Para f(x)=(x−1)², a raiz1 é...",
+      "q": "Para f(x)=(x−1)², a raiz 1 é...",
       "o": [
         "simples.",
         "complexa.",
@@ -970,7 +970,7 @@
         "dupla."
       ],
       "a": 3,
-      "sol": "O fator (x−1) aparece com multiplicidade2.",
+      "sol": "O fator (x−1) aparece com multiplicidade 2.",
       "hyp": "Pode ignorar a multiplicidade.",
       "contexts": [
         "mission",
@@ -1105,7 +1105,7 @@
         "x+e^{-x}."
       ],
       "a": 0,
-      "sol": "Derivada de−e^{-x} é +e^{-x}.",
+      "sol": "Derivada de − e^{-x} é +e^{-x}.",
       "hyp": "Pode perder o duplo sinal.",
       "contexts": [
         "mission",

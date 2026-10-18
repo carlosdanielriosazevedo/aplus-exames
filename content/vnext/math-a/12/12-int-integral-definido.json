@@ -160,7 +160,7 @@
         "2."
       ],
       "a": 1,
-      "sol": "É a área de um retângulo de base1 e altura1.",
+      "sol": "É a área de um retângulo de base 1 e altura 1.",
       "hyp": "Pode confundir com média dos limites.",
       "contexts": [
         "mission",
@@ -187,7 +187,7 @@
         "9."
       ],
       "a": 2,
-      "sol": "Área de retângulo:3×2=6.",
+      "sol": "Área de retângulo: 3×2=6.",
       "hyp": "Pode somar altura e base.",
       "contexts": [
         "mission",
@@ -268,7 +268,7 @@
         "7."
       ],
       "a": 1,
-      "sol": "Pela aditividade:3+7=10.",
+      "sol": "Pela aditividade: 3+7=10.",
       "hyp": "Pode multiplicar integrais.",
       "contexts": [
         "mission",
@@ -403,8 +403,8 @@
         "3."
       ],
       "a": 2,
-      "sol": "A constante3 sai da integral.",
-      "hyp": "Pode somar3.",
+      "sol": "A constante 3 sai da integral.",
+      "hyp": "Pode somar 3.",
       "contexts": [
         "mission",
         "training",
@@ -505,13 +505,13 @@
       "cognitive": "Raciocínio",
       "q": "Se 2≤f(x)≤5 em [0,3], então ∫_0^3 f está entre...",
       "o": [
-        "2 e5.",
-        "0 e3.",
-        "6 e15.",
-        "3 e7."
+        "2 e 5.",
+        "0 e 3.",
+        "6 e 15.",
+        "3 e 7."
       ],
       "a": 2,
-      "sol": "Integram-se os limites constantes:2×3 e5×3.",
+      "sol": "Integram-se os limites constantes: 2×3 e 5×3.",
       "hyp": "Pode esquecer a largura do intervalo.",
       "contexts": [
         "mission",
@@ -584,7 +584,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se f é constante igual a7 em [2,5], o seu valor médio é...",
+      "q": "Se f é constante igual a 7 em [2,5], o seu valor médio é...",
       "o": [
         "21.",
         "7.",
@@ -593,7 +593,7 @@
       ],
       "a": 1,
       "sol": "A média de uma função constante é a própria constante.",
-      "hyp": "Pode usar integral total21.",
+      "hyp": "Pode usar integral total 21.",
       "contexts": [
         "mission",
         "training",
@@ -668,7 +668,7 @@
       "q": "Se f é ímpar e integrável em [−a,a], então...",
       "o": [
         "∫_{−a}^a f=0.",
-        "a integral é2∫_0^a f.",
+        "a integral é 2∫_0^a f.",
         "a integral é sempre positiva.",
         "não existe."
       ],
@@ -694,7 +694,7 @@
       "cognitive": "Compreensão",
       "q": "Se f é par em [−a,a], então...",
       "o": [
-        "a integral é0.",
+        "a integral é 0.",
         "∫_{−a}^a f=2∫_0^a f.",
         "a integral é∫_0^a f.",
         "a integral é negativa."
@@ -830,7 +830,7 @@
       "q": "Se f≥0 em [a,b], então ∫|f|...",
       "o": [
         "é−∫f.",
-        "é0.",
+        "é 0.",
         "é igual a∫f.",
         "não existe."
       ],
@@ -857,7 +857,7 @@
       "q": "Se f≤0 em [a,b], então ∫|f|...",
       "o": [
         "é∫f.",
-        "é0.",
+        "é 0.",
         "é (∫f)².",
         "é−∫f."
       ],
@@ -967,7 +967,7 @@
         "velocidade final.",
         "aceleração média.",
         "tempo total.",
-        "distância percorrida em10s."
+        "distância percorrida em 10s."
       ],
       "a": 3,
       "sol": "Integrar velocidade positiva dá deslocamento/distância.",
@@ -1043,7 +1043,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Se uma taxa de entrada é r(t)=5 L/min durante12min, o acumulado é...",
+      "q": "Se uma taxa de entrada é r(t)=5 L/min durante 12min, o acumulado é...",
       "o": [
         "17 L.",
         "5/12 L.",
@@ -1070,7 +1070,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Se uma potência constante de2 kW atua durante3h, a energia é...",
+      "q": "Se uma potência constante de 2 kW atua durante 3h, a energia é...",
       "o": [
         "2/3 kWh.",
         "5 kWh.",
@@ -1132,7 +1132,7 @@
         "−4."
       ],
       "a": 1,
-      "sol": "Linearidade:10−6=4.",
+      "sol": "Linearidade: 10−6=4.",
       "hyp": "Pode somar.",
       "contexts": [
         "mission",
@@ -1267,7 +1267,7 @@
         "8."
       ],
       "a": 2,
-      "sol": "Integral=4; divide-se pela amplitude2:2.",
+      "sol": "Integral=4; divide-se pela amplitude 2:2.",
       "hyp": "Pode usar a integral total.",
       "contexts": [
         "mission",
@@ -1286,7 +1286,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Uma taxa de consumo c(t) em L/h tem integral 120 L num período de8h. A taxa média foi...",
+      "q": "Uma taxa de consumo c(t) em L/h tem integral 120 L num período de 8h. A taxa média foi...",
       "o": [
         "120 L/h.",
         "8 L/h.",

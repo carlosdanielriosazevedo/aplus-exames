@@ -1078,7 +1078,7 @@
         "0,91."
       ],
       "a": 3,
-      "sol": "Complemento de duas coroas:1−0,3²=0,91.",
+      "sol": "Complemento de duas coroas: 1−0,3²=0,91.",
       "hyp": "Pode somar 0,7+0,7 e ultrapassar 1.",
       "contexts": [
         "mission",
@@ -1268,7 +1268,7 @@
       ],
       "a": 2,
       "sol": "Online+compra 0,14; físico+compra 0,12; total 0,26.",
-      "hyp": "Pode fazer média simples das taxas 0,2 e0,4.",
+      "hyp": "Pode fazer média simples das taxas 0,2 e 0,4.",
       "contexts": [
         "mission",
         "training",

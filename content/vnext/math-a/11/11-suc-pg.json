@@ -1294,7 +1294,7 @@
         "768."
       ],
       "a": 3,
-      "sol": "q³=96/12=8 =>q=2. De u_5 a u_8 há 3 passos:96×8=768.",
+      "sol": "q³=96/12=8 =>q=2. De u_5 a u_8 há 3 passos: 96×8=768.",
       "hyp": "Pode aplicar só um fator 2.",
       "contexts": [
         "mission",

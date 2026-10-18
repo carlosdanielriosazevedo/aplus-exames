@@ -106,8 +106,8 @@
         "5."
       ],
       "a": 3,
-      "sol": "Linha1, coluna2.",
-      "hyp": "Pode ler coluna1, linha2.",
+      "sol": "Linha 1, coluna 2.",
+      "hyp": "Pode ler coluna 1, linha 2.",
       "contexts": [
         "mission",
         "training",
@@ -133,7 +133,7 @@
         "1."
       ],
       "a": 0,
-      "sol": "Linha2, coluna1.",
+      "sol": "Linha 2, coluna 1.",
       "hyp": "Pode inverter os índices.",
       "contexts": [
         "mission",
@@ -237,7 +237,7 @@
       "o": [
         "linha 1×3.",
         "coluna 3×1.",
-        "quadrada3×3.",
+        "quadrada 3×3.",
         "diagonal."
       ],
       "a": 0,
@@ -262,9 +262,9 @@
       "cognitive": "Aplicação",
       "q": "A matriz [[2],[0],[5]] é...",
       "o": [
-        "linha1×3.",
+        "linha 1×3.",
         "coluna 3×1.",
-        "quadrada3×3.",
+        "quadrada 3×3.",
         "identidade."
       ],
       "a": 1,
@@ -289,9 +289,9 @@
       "cognitive": "Compreensão",
       "q": "Uma matriz nula é aquela em que...",
       "o": [
-        "a diagonal é0 apenas.",
-        "o determinante é0.",
-        "todos os elementos são0.",
+        "a diagonal é 0 apenas.",
+        "o determinante é 0.",
+        "todos os elementos são 0.",
         "há uma linha nula."
       ],
       "a": 2,
@@ -319,7 +319,7 @@
         "todos os elementos iguais.",
         "diagonal principal nula.",
         "uma única coluna.",
-        "elementos fora da diagonal principal iguais a0."
+        "elementos fora da diagonal principal iguais a 0."
       ],
       "a": 3,
       "sol": "Só a diagonal principal pode ter valores não nulos.",
@@ -345,7 +345,7 @@
       "o": [
         "1 na diagonal principal.",
         "0 na diagonal principal.",
-        "todos os elementos1.",
+        "todos os elementos 1.",
         "−1 na diagonal."
       ],
       "a": 0,
@@ -484,7 +484,7 @@
         "identidade."
       ],
       "a": 1,
-      "sol": "O elemento abaixo da diagonal é0.",
+      "sol": "O elemento abaixo da diagonal é 0.",
       "hyp": "Pode olhar apenas para o 3 acima.",
       "contexts": [
         "mission",
@@ -511,7 +511,7 @@
         "nula."
       ],
       "a": 2,
-      "sol": "O elemento acima da diagonal é0.",
+      "sol": "O elemento acima da diagonal é 0.",
       "hyp": "Pode confundir a posição do zero.",
       "contexts": [
         "mission",
@@ -534,7 +534,7 @@
       "o": [
         "mudando sinais.",
         "invertendo a ordem dos elementos na diagonal.",
-        "substituindo tudo por1.",
+        "substituindo tudo por 1.",
         "trocando linhas por colunas."
       ],
       "a": 3,
@@ -862,7 +862,7 @@
         "4×3 se linhas=lojas e colunas=meses."
       ],
       "a": 3,
-      "sol": "A convenção dada fixa 4 linhas e3 colunas.",
+      "sol": "A convenção dada fixa 4 linhas e 3 colunas.",
       "hyp": "Pode ignorar a convenção especificada.",
       "contexts": [
         "mission",
@@ -908,7 +908,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Uma matriz com 20 elementos e5 linhas tem quantas colunas?",
+      "q": "Uma matriz com 20 elementos e 5 linhas tem quantas colunas?",
       "o": [
         "15.",
         "4.",
@@ -997,7 +997,7 @@
         "i−j=1."
       ],
       "a": 0,
-      "sol": "Em indexação começando em1, os índices somam n+1.",
+      "sol": "Em indexação começando em 1, os índices somam n+1.",
       "hyp": "Pode usar a regra da diagonal principal.",
       "contexts": [
         "mission",
@@ -1052,7 +1052,7 @@
       ],
       "a": 2,
       "sol": "São 3 diagonais +3 acima da diagonal; os restantes ficam determinados por simetria.",
-      "hyp": "Pode contar todos os9.",
+      "hyp": "Pode contar todos os 9.",
       "contexts": [
         "mission",
         "training",
@@ -1078,7 +1078,7 @@
         "3."
       ],
       "a": 3,
-      "sol": "Escolhem-se os 3 pares acima da diagonal; abaixo ficam os opostos e a diagonal é0.",
+      "sol": "Escolhem-se os 3 pares acima da diagonal; abaixo ficam os opostos e a diagonal é 0.",
       "hyp": "Pode contar cada par duas vezes.",
       "contexts": [
         "mission",
@@ -1159,7 +1159,7 @@
         "4."
       ],
       "a": 2,
-      "sol": "A^T é5×2 e conserva os10 elementos.",
+      "sol": "A^T é 5×2 e conserva os 10 elementos.",
       "hyp": "Pode achar que transposição altera quantidade.",
       "contexts": [
         "mission",
@@ -1213,7 +1213,7 @@
         "matriz linha."
       ],
       "a": 0,
-      "sol": "I=1·I é diagonal com diagonal constante1.",
+      "sol": "I=1·I é diagonal com diagonal constante 1.",
       "hyp": "Pode considerar identidade uma classe isolada.",
       "contexts": [
         "mission",
@@ -1237,10 +1237,10 @@
         "A é a identidade.",
         "A é a matriz nula.",
         "A pode ser qualquer diagonal.",
-        "A tem apenas diagonal1."
+        "A tem apenas diagonal 1."
       ],
       "a": 1,
-      "sol": "A^T=A e A^T=−A implicam A=−A, logo2A=0.",
+      "sol": "A^T=A e A^T=−A implicam A=−A, logo 2A=0.",
       "hyp": "Pode pensar que basta diagonal nula.",
       "contexts": [
         "mission",
@@ -1295,7 +1295,7 @@
       ],
       "a": 3,
       "sol": "Sem laços, nenhum vértice liga a si próprio.",
-      "hyp": "Pode colocar1 por identidade.",
+      "hyp": "Pode colocar 1 por identidade.",
       "contexts": [
         "mission",
         "training",

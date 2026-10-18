@@ -20,7 +20,7 @@
       "q": "No plano, o produto escalar de u=(a,b) e v=(c,d) é...",
       "o": [
         "ac+bd.",
-        "ac−bd.",
+        "ac − bd.",
         "a+c+b+d.",
         "ad+bc."
       ],
@@ -236,7 +236,7 @@
       "q": "No espaço, para u=(a,b,c) e v=(d,e,f), u·v é...",
       "o": [
         "ad+be+cf.",
-        "ad−be+cf.",
+        "ad − be+cf.",
         "a+d+b+e+c+f.",
         "af+be+cd."
       ],

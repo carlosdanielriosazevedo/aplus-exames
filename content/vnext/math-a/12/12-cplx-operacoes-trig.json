@@ -805,7 +805,7 @@
         "0,π/2,π,3π/2.",
         "π/4,3π/4,5π/4,7π/4.",
         "π/8,3π/8,5π/8,7π/8.",
-        "π/4 e5π/4 apenas."
+        "π/4 e 5π/4 apenas."
       ],
       "a": 1,
       "sol": "4φ=π+2kπ => φ=π/4+kπ/2.",
@@ -1051,7 +1051,7 @@
         "±√2(1−i)."
       ],
       "a": 2,
-      "sol": "4i tem módulo 4 e argumento π/2; raízes têm módulo2 e argumento π/4 e5π/4, equivalentes a ±√2(1+i).",
+      "sol": "4i tem módulo 4 e argumento π/2; raízes têm módulo 2 e argumento π/4 e 5π/4, equivalentes a ±√2(1+i).",
       "hyp": "Pode usar módulo √2.",
       "contexts": [
         "mission",
@@ -1078,7 +1078,7 @@
         "±√2(1−i)."
       ],
       "a": 3,
-      "sol": "Argumento −π/2; raízes de módulo2 com argumentos −π/4 e3π/4.",
+      "sol": "Argumento −π/2; raízes de módulo 2 com argumentos −π/4 e 3π/4.",
       "hyp": "Pode errar o sinal imaginário.",
       "contexts": [
         "mission",
@@ -1132,7 +1132,7 @@
         "±2."
       ],
       "a": 1,
-      "sol": "Módulo2 e argumentos 0,π/2,π,3π/2.",
+      "sol": "Módulo 2 e argumentos 0,π/2,π,3π/2.",
       "hyp": "Pode esquecer as raízes não reais.",
       "contexts": [
         "mission",
@@ -1268,7 +1268,7 @@
       ],
       "a": 2,
       "sol": "Uma das raízes cúbicas é cis(2π/3).",
-      "hyp": "Pode escolher números de módulo1 que não satisfazem o cubo.",
+      "hyp": "Pode escolher números de módulo 1 que não satisfazem o cubo.",
       "contexts": [
         "mission",
         "training",
@@ -1294,8 +1294,8 @@
         "3θ=2kπ."
       ],
       "a": 3,
-      "sol": "z² tem argumento2θ e conj(z) argumento−θ; igualdade implica 3θ=2kπ.",
-      "hyp": "Pode esquecer equivalência módulo2π.",
+      "sol": "z² tem argumento 2θ e conj(z) argumento − θ; igualdade implica 3θ=2kπ.",
+      "hyp": "Pode esquecer equivalência módulo 2π.",
       "contexts": [
         "mission",
         "training",
