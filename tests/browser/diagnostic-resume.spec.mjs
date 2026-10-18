@@ -225,6 +225,7 @@ for(const subject of [
     await page.reload();
     const restoredSubmit=page.getByRole("button",{name:"Responder",exact:true});
     await expect(restoredSubmit).toBeVisible({timeout:30_000});
+    await expectNoSubjectSelector(page);
     const reloadState=await page.evaluate(id=>{
       const draft=JSON.parse(localStorage.getItem("a25-active-session-v1")||"null");
       const state=JSON.parse(localStorage.getItem("a25")||"null");
@@ -237,8 +238,8 @@ for(const subject of [
     await page.close();
     const reopened=await context.newPage();
     await reopened.goto("/");
-    await expectNoSubjectSelector(reopened);
     await expect(reopened.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
+    await expectNoSubjectSelector(reopened);
     const reopenedPosition=await reopened.evaluate(id=>{
       const draft=JSON.parse(localStorage.getItem("a25-active-session-v1")||"null");
       const state=JSON.parse(localStorage.getItem("a25")||"null");
