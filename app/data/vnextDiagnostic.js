@@ -2089,7 +2089,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "fg'"
     ],
     "a": 0,
-    "sol": "A derivação e linear relativamente a soma.",
+    "sol": "A derivação é linear relativamente à soma.",
     "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "diagnostic"
@@ -2209,7 +2209,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "(b-a)/(f(b)-f(a))"
     ],
     "a": 0,
-    "sol": "E a variação da função por unidade de variação da variavel.",
+    "sol": "É a variação da função por unidade de variação da variável.",
     "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "diagnostic"
@@ -4270,7 +4270,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "role": "anchor",
     "difficulty": 2,
     "cognitive": "Raciocínio",
-    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
     "q": "Se z=√2(cosπ/4+i sinπ/4), então z em forma algébrica é...",
     "o": [
       "√2+i.",
@@ -4300,7 +4300,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "role": "probe",
     "difficulty": 1,
     "cognitive": "Compreensão",
-    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
     "q": "Se z1=r1(cosα+i sinα) e z2=r2(cosβ+i sinβ), então z1z2 tem módulo...",
     "o": [
       "r1r2.",
