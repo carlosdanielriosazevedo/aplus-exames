@@ -9,7 +9,7 @@ import {
 } from "./data/content";
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
 import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon,StudySessionHeader} from "./components/chrome";
-const StudyModeHub=dynamic(()=>import("./components/StudyModeHub"),{ssr:false});
+import StudyModeHub from "./components/StudyModeHub";
 import {Welcome} from "./components/Welcome";
 import ScoreLossExplanation from "./components/ScoreLossExplanation";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
@@ -309,7 +309,7 @@ export default function App(){
     let recoveredCompletion=false;
     let recoveredLegacy=false;
     const openDiagnostic=(next.betaSessions||[]).some(x=>x.kind==="diagnostic"&&!x.finishedAt);
-    const legacyDiagnostic=openDiagnostic&&(!draft||(draft.kind==="diagnostic"&&![2,3,4].includes(draft.version)));
+    const legacyDiagnostic=openDiagnostic&&(!draft||(draft.kind==="diagnostic"&&![2,3].includes(draft.version)));
     if(legacyDiagnostic||draft?.kind==="diagnostic"){
       await loadDiagnosticRecovery();
       if(!live)return;
