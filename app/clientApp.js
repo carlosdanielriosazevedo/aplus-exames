@@ -373,7 +373,11 @@ export default function App(){
         &&(recoveredState.selectedSubjectIds||[]).includes(activeSubjectId)
         &&(recoveredState.subjectSettings?.[activeSubjectId]?.profileConfigured===true||recoveredState.onboardingSharedProfileDone===true);
       if(activeSubjectDiagnosticDone(recoveredState)||subjectPaused)setScreen("home");
-      else setScreen(activeSubjectConfigured?"diag":"welcome");
+      else{
+        let fromLanding=false;
+        try{fromLanding=window.sessionStorage.getItem("a25-onboarding-entry")==="1"}catch{}
+        setScreen(activeSubjectConfigured?"diag":(fromLanding?"subjectOnboard":"welcome"));
+      }
     }
     setHydrated(true);
     })();
