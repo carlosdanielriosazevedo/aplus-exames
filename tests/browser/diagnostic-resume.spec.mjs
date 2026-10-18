@@ -242,11 +242,14 @@ for(const subject of [
         navigation:performance.getEntriesByType("navigation").map(e=>({type:e.type,domInteractive:Math.round(e.domInteractive),loadEventEnd:Math.round(e.loadEventEnd)})),
         reactRootProps:Object.keys(document.body?.firstElementChild||{}).filter(k=>k.startsWith("__react")).slice(0,5),
         state:JSON.parse(localStorage.getItem("a25")||"null"),
-        draft:JSON.parse(localStorage.getItem("a25-active-session-v1")||"null")
+        draft:JSON.parse(localStorage.getItem("a25-active-session-v1")||"null"),
+        progressStorage:{localKeys:Object.keys(localStorage),sessionKeys:Object.keys(sessionStorage)},
+        location:{href:location.href,search:location.search},
+        activeScripts:[...document.querySelectorAll("script[src]")].map(s=>s.src).slice(-15)
       }));
       console.log("REAL_RELOAD_DIAGNOSTIC",JSON.stringify({reloadErrors,
         subject:subject.id,heading:debug.heading,text:debug.text,readiness:debug.readiness,appRoot:debug.appRoot,rootHtml:debug.rootHtml,appEntries:debug.appEntries,navigation:debug.navigation,reactRootProps:debug.reactRootProps,scripts:debug.scripts,resources:debug.resources,
-        active:debug.state?.activeSubjectId,selected:debug.state?.selectedSubjectIds,
+        active:debug.state?.activeSubjectId,selected:debug.state?.selectedSubjectIds,progressStorage:debug.progressStorage,location:debug.location,activeScripts:debug.activeScripts,
         diagnosticDone:debug.state?.diagnosticDone,
         draftKind:debug.draft?.kind,draftVersion:debug.draft?.version,
         draftPhase:debug.draft?.phase,responses:debug.draft?.responses?.length,
