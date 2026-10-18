@@ -9,7 +9,7 @@ import {
 } from "./data/content";
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
 import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon,StudySessionHeader} from "./components/chrome";
-import StudyModeHub from "./components/StudyModeHub";
+const StudyModeHub=dynamic(()=>import("./components/StudyModeHub"),{ssr:false});
 import {Welcome} from "./components/Welcome";
 import ScoreLossExplanation from "./components/ScoreLossExplanation";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
