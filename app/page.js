@@ -1,9 +1,9 @@
 "use client";
 
-import {lazy,Suspense,useEffect,useState} from "react";
+import dynamic from "next/dynamic";
+import {useEffect,useState} from "react";
 
-const ClientApp=lazy(()=>import("./clientApp"));
-
+const ClientApp=dynamic(()=>import("./clientApp"),{ssr:false,loading:()=> <Loading/>});
 const STORAGE_KEYS=["a25","a25-friends-beta"];
 
 function storedProgress(){
@@ -38,5 +38,5 @@ export default function Page(){
     window.history.replaceState(window.history.state,"",url.pathname+url.search+url.hash);setBoot(true);
   }
   if(!ready)return <Landing onStart={()=>{}}/>;
-  return boot?<Suspense fallback={<Loading/>}><ClientApp/></Suspense>:<Landing onStart={start}/>;
+  return boot?<ClientApp/>:<Landing onStart={start}/>;
 }
