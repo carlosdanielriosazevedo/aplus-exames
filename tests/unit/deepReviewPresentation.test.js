@@ -77,6 +77,20 @@ describe("Rever Matéria · apresentação transversal",()=>{
     expect(text).toMatch(/kind==="portuguese"/u);
   });
 
+  it("limita frações empilhadas a rácios numéricos e conserva o texto matemático acessível",()=>{
+    const text=source("app/components/DeepReviewStudy.js");
+    const css=source("app/components/MathReviewMatter.module.css");
+    expect(text).toMatch(/className=\{styles\.numericFraction\}/u);
+    expect(text).toMatch(/const \[numerator,denominator\]=part\.split\("\/"\)/u);
+    expect(text).toMatch(/aria-label=\{formula\}/u);
+    expect(css).toMatch(/\.numericFraction\{/u);
+    expect(css).toMatch(/border-bottom:1px solid currentColor/u);
+    const numericRatio=/(?<![\w^])\d+\/\d+(?![\w/])/gu;
+    expect("P(A)=3/5").toMatch(numericRatio);
+    expect("x/2 + a/b").not.toMatch(numericRatio);
+    expect("x^1/2").not.toMatch(numericRatio);
+  });
+
   it("mantém hierarquia responsiva e largura de leitura controlada",()=>{
     const css=source("app/components/MathReviewMatter.module.css");
     expect(css).toMatch(/max-width:980px/u);

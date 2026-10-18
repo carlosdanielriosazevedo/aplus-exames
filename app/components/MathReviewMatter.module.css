@@ -248,6 +248,21 @@
 
 .explanationBlock,
 .reviewToolbox,
+.numericFraction{
+  display:inline-flex;
+  flex-direction:column;
+  vertical-align:middle;
+  align-items:center;
+  line-height:1.1;
+  margin:0 0.13em;
+  font-variant-numeric:tabular-nums;
+}
+.numericFraction span:first-child{
+  border-bottom:1px solid currentColor;
+  padding:0 0.16em 0.1em;
+}
+.numericFraction span:last-child{padding:0.1em 0.16em 0;}
+
 .reviewExample{
   border-radius:16px;
 }

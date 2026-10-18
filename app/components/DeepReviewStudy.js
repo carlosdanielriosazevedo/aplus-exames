@@ -10,10 +10,15 @@ function compactLead(text){
 // Formata apenas expoentes inequívocos, sem interpretar ou reescrever o conteúdo matemático.
 // Notações mais complexas mantêm a representação original até existir renderer próprio.
 function FormulaNotation({value}){
-  const parts=String(value).split(/(\^\([^()]*\)|\^[A-Za-z0-9]+)/gu);
-  return parts.map((part,index)=>part.startsWith("^")
-    ? <sup key={index}>{part.slice(1).replace(/^\((.*)\)$/u,"$1")}</sup>
-    : <span key={index}>{part}</span>);
+  const parts=String(value).split(/(\^\([^()]*\)|\^[A-Za-z0-9]+|(?<![\w^])\d+\/\d+(?![\w/]))/gu);
+  return parts.map((part,index)=>{
+    if(part.startsWith("^"))return <sup key={index}>{part.slice(1).replace(/^\((.*)\)$/u,"$1")}</sup>;
+    if(/^\d+\/\d+$/u.test(part)){
+      const [numerator,denominator]=part.split("/");
+      return <span className={styles.numericFraction} key={index} aria-hidden="true"><span>{numerator}</span><span>{denominator}</span></span>;
+    }
+    return <span key={index}>{part}</span>;
+  });
 }
 
 function SectionToolbox({section,kind}){
