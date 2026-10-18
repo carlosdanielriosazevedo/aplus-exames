@@ -241,7 +241,7 @@
         "e sempre zero"
       ],
       "a": 0,
-      "sol": "não houve mudanca de monotonia.",
+      "sol": "Não houve mudanca de monotonia.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
