@@ -185,6 +185,18 @@ test("Matemática A · fontes versionadas não contêm cópia visível sem acent
     const source=fs.readFileSync(filename,"utf8");
     const start=filename.endsWith(".json")?source:source.slice(source.indexOf("=[")+1).trim().replace(/;$/u,"");
     const data=JSON.parse(start);
+    if(filename.endsWith(".json")){
+      expect(data.subtopicId,"IDs curriculares devem permanecer ASCII e corresponder ao ficheiro").toBe(path.basename(filename,".json"));
+      for(const item of data.questions||[]){
+        expect(item.subtopicId,"IDs de perguntas não podem divergir da submatéria").toBe(data.subtopicId);
+        expect(item.signature,"assinatura técnica deve manter identificador ASCII").not.toMatch(/[áéíóúâêôãõç]/iu);
+      }
+    }else{
+      for(const item of data){
+        expect(item.subtopicId,"o ID de uma pergunta gerada não deve conter acentos").not.toMatch(/[áéíóúâêôãõç]/iu);
+        expect(item.signature,"a assinatura gerada deve permanecer sem acentos").not.toMatch(/[áéíóúâêôãõç]/iu);
+      }
+    }
     checkVisible(data,filename);
   }
 });
