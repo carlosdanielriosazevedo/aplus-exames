@@ -231,13 +231,17 @@ for(const subject of [
     const restoredSubmit=page.getByRole("button",{name:"Responder",exact:true});
     if(!await restoredSubmit.isVisible().catch(()=>false)){
       const debug=await page.evaluate(()=>({
+        readiness:document.readyState,
+        appRoot:document.querySelector("main")?.className,
+        scripts:[...document.scripts].slice(-8).map(s=>({src:s.src,loaded:s.readyState})),
+        resources:performance.getEntriesByType("resource").filter(e=>/clientApp|_next\\/static|webpack|chunks/.test(e.name)).slice(-12).map(e=>({name:e.name.split("/").slice(-2).join("/"),duration:Math.round(e.duration),transferSize:e.transferSize})),
         heading:document.querySelector("h1")?.textContent,
         text:document.body?.innerText?.slice(0,700),
         state:JSON.parse(localStorage.getItem("a25")||"null"),
         draft:JSON.parse(localStorage.getItem("a25-active-session-v1")||"null")
       }));
       console.log("REAL_RELOAD_DIAGNOSTIC",JSON.stringify({reloadErrors,
-        subject:subject.id,heading:debug.heading,text:debug.text,
+        subject:subject.id,heading:debug.heading,text:debug.text,readiness:debug.readiness,appRoot:debug.appRoot,scripts:debug.scripts,resources:debug.resources,
         active:debug.state?.activeSubjectId,selected:debug.state?.selectedSubjectIds,
         diagnosticDone:debug.state?.diagnosticDone,
         draftKind:debug.draft?.kind,draftVersion:debug.draft?.version,
