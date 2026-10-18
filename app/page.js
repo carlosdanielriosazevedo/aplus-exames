@@ -1,9 +1,8 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import ClientApp from "./clientApp";
 import {useEffect,useState} from "react";
 
-const ClientApp=dynamic(()=>import("./clientApp"),{ssr:false,loading:()=> <Loading/>});
 const STORAGE_KEYS=["a25","a25-friends-beta"];
 
 function storedProgress(){
