@@ -224,7 +224,25 @@ for(const subject of [
     expect(savedPosition.responses).toBeGreaterThanOrEqual(2);
     await page.reload();
     await expectNoSubjectSelector(page);
-    await expect(page.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
+    const restoredSubmit=page.getByRole("button",{name:"Responder",exact:true});
+    if(!await restoredSubmit.isVisible().catch(()=>false)){
+      const debug=await page.evaluate(()=>({
+        heading:document.querySelector("h1")?.textContent,
+        text:document.body?.innerText?.slice(0,700),
+        state:JSON.parse(localStorage.getItem("a25")||"null"),
+        draft:JSON.parse(localStorage.getItem("a25-active-session-v1")||"null")
+      }));
+      console.log("REAL_RELOAD_DIAGNOSTIC",JSON.stringify({
+        subject:subject.id,heading:debug.heading,text:debug.text,
+        active:debug.state?.activeSubjectId,selected:debug.state?.selectedSubjectIds,
+        diagnosticDone:debug.state?.diagnosticDone,
+        draftKind:debug.draft?.kind,draftVersion:debug.draft?.version,
+        draftPhase:debug.draft?.phase,responses:debug.draft?.responses?.length,
+        current:debug.draft?.current?.id,
+        savedPosition:debug.state?.subjectProgress?.[subject.id]?.lastPosition
+      }));
+    }
+    await expect(restoredSubmit).toBeVisible({timeout:30_000});
     const reloadState=await page.evaluate(id=>{
       const draft=JSON.parse(localStorage.getItem("a25-active-session-v1")||"null");
       const state=JSON.parse(localStorage.getItem("a25")||"null");
