@@ -17,7 +17,7 @@
   ],
   "note": "Passagem editorial interna APProva+ do 11.º ano. A submatéria 11-cd-derivada-ponto é coberta pelo manifesto individual; este plano cobre as restantes 34 submatérias. Qualquer alteração posterior do blob-fonte invalida automaticamente esta passagem.",
   "sources": [
-    {"sourcePath":"content/vnext/math-a/11/11-cd-funcao-derivada.json","sourceBlobSha":"f22665934f855dfa424d0a7f062b6c4e93a2da2c"},
+    {"sourcePath":"content/vnext/math-a/11/11-cd-funcao-derivada.json","sourceBlobSha":"cab18c824a585350ae7f67d5fc42c57e3db0bd38"},
     {"sourcePath":"content/vnext/math-a/11/11-cd-monotonia-otimizacao.json","sourceBlobSha":"419d8dab8edcd4da14f18c4758ad6ac25ed30e30"},
     {"sourcePath":"content/vnext/math-a/11/11-cd-regras.json","sourceBlobSha":"6e83d069deee531dcafff957e8fdd7139152da08"},
     {"sourcePath":"content/vnext/math-a/11/11-cd-tangente.json","sourceBlobSha":"aec3240b63c931fd62e87dfbba170391dd452970"},
