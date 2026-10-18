@@ -1,6 +1,7 @@
 import {test,expect} from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
+import {spawnSync} from "node:child_process";
 import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../../app/data/vnextDiagnostic.js";
 import {createDiagnosticDraft} from "../../app/lib/diagnosticRecovery.js";
 import {mathVisibleText} from "../../app/lib/mathVisibleCopy.js";
@@ -206,4 +207,12 @@ test("Matemática A · regeneração preserva ortografia e acentuação corrigid
   expect(mathVisibleText("potênciação")).toBe("potenciação");
   expect(mathVisibleText("A derivação e linear relativamente a soma.")).toBe("A derivação é linear relativamente à soma.");
   expect(mathVisibleText("E a variação da função por unidade de variação da variavel.")).toBe("É a variação da função por unidade de variação da variável.");
+});
+
+
+test("Matemática A · bancos versionados correspondem exatamente aos três geradores",()=>{
+  for(const name of ["diagnostic","mission","exam"]){
+    const result=spawnSync(process.execPath,[`scripts/generate-vnext-${name}.mjs`,"--check"],{encoding:"utf8",timeout:60_000});
+    expect(result.status,`${name}: gerador e ficheiro commitado devem coincidir. ${result.stderr||result.stdout}`).toBe(0);
+  }
 });
