@@ -7,34 +7,6 @@ on:
     branches: [main]
 
 jobs:
-  regenerate-math-banks:
-    if: github.event_name == 'pull_request' && github.head_ref == 'fix/block1-1-committed-math-copy' && github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
-          persist-credentials: true
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Regenerate Mathematics banks
-        run: |
-          node scripts/generate-vnext-diagnostic.mjs
-          node scripts/generate-vnext-mission.mjs
-          node scripts/generate-vnext-exam.mjs
-          node scripts/generate-vnext-diagnostic.mjs --check
-          node scripts/generate-vnext-mission.mjs --check
-          node scripts/generate-vnext-exam.mjs --check
-          git add app/data/vnextDiagnostic.js app/data/vnextMission.js app/data/vnextExam.js
-          if ! git diff --cached --quiet; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -m "chore(math): synchronize versioned banks with generators"
-            git push origin "HEAD:${{ github.head_ref }}"
-          fi
   validate:
     runs-on: ubuntu-latest
     timeout-minutes: 25
