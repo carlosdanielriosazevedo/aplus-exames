@@ -309,7 +309,7 @@ export default function App(){
     let recoveredCompletion=false;
     let recoveredLegacy=false;
     const openDiagnostic=(next.betaSessions||[]).some(x=>x.kind==="diagnostic"&&!x.finishedAt);
-    const legacyDiagnostic=openDiagnostic&&(!draft||(draft.kind==="diagnostic"&&![2,3].includes(draft.version)));
+    const legacyDiagnostic=openDiagnostic&&(!draft||(draft.kind==="diagnostic"&&![2,3,4].includes(draft.version)));
     if(legacyDiagnostic||draft?.kind==="diagnostic"){
       await loadDiagnosticRecovery();
       if(!live)return;
