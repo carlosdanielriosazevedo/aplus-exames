@@ -24,13 +24,14 @@ test("Bloco 2.2 · ecrã de pergunta tem contador comum e uma única saída",asy
   const header=page.locator(".sessionTop");
   await expect(header).toBeVisible({timeout:30_000});
   await expect(header.locator("[data-session-progress]")).toHaveText(/^\d+%$/u);
+  await expect(header.locator("span").last()).toHaveText(/^\d+\/\d+ · \d+%$/u);
 
   const exits=page.getByRole("button",{name:/sair|guardar e sair/i});
   await expect(exits).toHaveCount(1);
   await expect(page.getByRole("button",{name:"Guardar e continuar depois",exact:true})).toHaveCount(0);
 
   page.once("dialog",dialog=>dialog.accept());
-  await header.getByRole("button",{name:"Sair da sessão"}).click();
+  await header.getByRole("button",{name:"Guardar e sair"}).click();
   await expect(page.getByRole("heading",{name:"Diagnóstico de Matemática A"})).toBeVisible();
   const preserved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-active-session-v1")));
   expect(preserved.sessionId).toBe("block2-2-question-parity");
