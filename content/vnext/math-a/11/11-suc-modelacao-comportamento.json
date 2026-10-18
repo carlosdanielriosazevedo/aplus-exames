@@ -1220,7 +1220,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-modelacao-comportamento:população-decrescente",
+      "signature": "11-suc-modelacao-comportamento:populacao-decrescente",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1247,7 +1247,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-modelacao-comportamento:variação-absoluta",
+      "signature": "11-suc-modelacao-comportamento:variacao-absoluta",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1301,7 +1301,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-modelacao-comportamento:validação-modelo",
+      "signature": "11-suc-modelacao-comportamento:validacao-modelo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
