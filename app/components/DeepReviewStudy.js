@@ -35,7 +35,7 @@ function SectionToolbox({section,kind}){
   if(!section.formulas?.length)return null;
   return <div className={styles.reviewToolbox} aria-label={`Relações essenciais de ${section.title}`}>
     <div className={styles.blockHeading}><span>02</span><div><small>FERRAMENTAS</small><b>Relações essenciais</b></div></div>
-    <div className={styles.formulaStack}>{section.formulas.map(formula=><code key={formula}><span role="img" aria-label={formula}><FormulaNotation value={formula}/></span></code>)}</div>
+    <div className={styles.formulaStack}>{section.formulas.map(formula=><code key={formula}><span role="img" aria-label={formula}><span aria-hidden="true"><FormulaNotation value={formula}/></span></span></code>)}</div>
   </div>;
 }
 
