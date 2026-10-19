@@ -117,7 +117,7 @@ describe("Rever Matéria · apresentação transversal",()=>{
 
   it("não converte parcialmente expoentes fracionários ou identificadores",()=>{
     const text=source("app/components/DeepReviewStudy.js");
-    expect(text).toMatch(/\\\^\[A-Za-z0-9\]\+\(\?!\[\\w\/\]\)/u);
+    expect(text).toContain(String.raw`\^[A-Za-z0-9]+(?![\w/])`);
     const exponent=/\^[A-Za-z0-9]+(?![\w/])/gu;
     expect("f(x)=x^2+1").toMatch(exponent);
     expect("x^1/2").not.toMatch(exponent);
