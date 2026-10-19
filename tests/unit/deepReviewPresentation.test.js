@@ -115,6 +115,16 @@ describe("Rever Matéria · apresentação transversal",()=>{
     expect("√(a+(b+c))").not.toMatch(parenthesized);
   });
 
+  it("não converte parcialmente expoentes fracionários ou identificadores",()=>{
+    const text=source("app/components/DeepReviewStudy.js");
+    expect(text).toMatch(/\\\^\[A-Za-z0-9\]\+\(\?!\[\\w\/\]\)/u);
+    const exponent=/\^[A-Za-z0-9]+(?![\w/])/gu;
+    expect("f(x)=x^2+1").toMatch(exponent);
+    expect("x^1/2").not.toMatch(exponent);
+    expect("x^a_b").not.toMatch(exponent);
+    expect("f(x)=a^x").toMatch(exponent);
+  });
+
   it("mantém hierarquia responsiva e largura de leitura controlada",()=>{
     const css=source("app/components/MathReviewMatter.module.css");
     expect(css).toMatch(/max-width:980px/u);
