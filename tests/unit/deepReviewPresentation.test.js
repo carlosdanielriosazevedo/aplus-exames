@@ -72,6 +72,12 @@ describe("Rever Matéria · apresentação transversal",()=>{
 
 
 
+  it("declara explicitamente semântica matemática e texto alternativo nas fórmulas",()=>{
+    const component=source("app/components/DeepReviewStudy.js");
+    expect(component).toContain('<code key={formula} role="math" aria-label={formula}>');
+    // Este contrato de fonte NÃO substitui a inspeção da árvore a11y nem o leitor de ecrã.
+  });
+
   it("mantém hierarquia responsiva e largura de leitura controlada",()=>{
     const css=source("app/components/MathReviewMatter.module.css");
     expect(css).toMatch(/max-width:980px/u);
