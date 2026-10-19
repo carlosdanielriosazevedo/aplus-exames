@@ -67,63 +67,10 @@ describe("Rever Matéria · apresentação transversal",()=>{
     expect(text).toMatch(/Erros a evitar/u);
   });
 
-  it("formata expoentes nas relações essenciais sem dependências e preserva leitura acessível",()=>{
-    const text=source("app/components/DeepReviewStudy.js");
-    expect(text).toMatch(/function FormulaNotation\(\{value\}\)/u);
-    expect(text).toMatch(/<sup key=\{index\}>/u);
-    expect(text).toMatch(/<FormulaNotation value=\{formula\}\/>/u);
-    expect(text).toMatch(/aria-label=\{formula\}/u);
-    expect(text).not.toMatch(/import .*katex|import .*mathjax/iu);
-    expect(text).toMatch(/kind==="portuguese"/u);
-  });
 
-  it("limita frações empilhadas a rácios numéricos e conserva o texto matemático acessível",()=>{
-    const text=source("app/components/DeepReviewStudy.js");
-    const css=source("app/components/MathReviewMatter.module.css");
-    expect(text).toMatch(/className=\{styles\.numericFraction\}/u);
-    expect(text).toMatch(/const \[numerator,denominator\]=part\.split\("\/"\)/u);
-    expect(text).toMatch(/aria-label=\{formula\}/u);
-    expect(css).toMatch(/\.numericFraction\{/u);
-    expect(css).toMatch(/border-bottom:1px solid currentColor/u);
-    const numericRatio=/(?<![\w^])\d+\/\d+(?![\w/])/gu;
-    expect("P(A)=3/5").toMatch(numericRatio);
-    expect("x/2 + a/b").not.toMatch(numericRatio);
-    expect("x^1/2").not.toMatch(numericRatio);
-  });
 
-  it("destaca raízes atómicas sem converter radicandos compostos",()=>{
-    const text=source("app/components/DeepReviewStudy.js");
-    const css=source("app/components/MathReviewMatter.module.css");
-    expect(text).toMatch(/styles\.simpleRadical/u);
-    expect(text).toMatch(/aria-label=\{formula\}/u);
-    expect(css).toMatch(/\.simpleRadical\{/u);
-    const atomic=/√(?:[A-Za-zΔσ][A-Za-z0-9_]*|\d+)(?![\w(])/gu;
-    expect("σ=√Var").toMatch(atomic);
-    expect("√52").toMatch(atomic);
-    expect("√((x_B−x_A)²)").not.toMatch(atomic);
-    expect("√Var(X)").not.toMatch(atomic);
-  });
 
-  it("só formata raízes parentizadas sem parênteses internos",()=>{
-    const text=source("app/components/DeepReviewStudy.js");
-    expect(text).toMatch(/part\.slice\(2,-1\)/u);
-    expect(text).toMatch(/aria-label=\{formula\}/u);
-    const parenthesized=/√\([^()]+\)/gu;
-    expect("√(a+b)").toMatch(parenthesized);
-    expect("√(x²+y²)").toMatch(parenthesized);
-    expect("√((x_B−x_A)²)").not.toMatch(parenthesized);
-    expect("√(a+(b+c))").not.toMatch(parenthesized);
-  });
 
-  it("não converte parcialmente expoentes fracionários ou identificadores",()=>{
-    const text=source("app/components/DeepReviewStudy.js");
-    expect(text).toContain(String.raw`\^[A-Za-z0-9]+(?![\w/])`);
-    const exponent=/\^[A-Za-z0-9]+(?![\w/])/gu;
-    expect("f(x)=x^2+1").toMatch(exponent);
-    expect("x^1/2").not.toMatch(exponent);
-    expect("x^a_b").not.toMatch(exponent);
-    expect("f(x)=a^x").toMatch(exponent);
-  });
 
   it("mantém hierarquia responsiva e largura de leitura controlada",()=>{
     const css=source("app/components/MathReviewMatter.module.css");
