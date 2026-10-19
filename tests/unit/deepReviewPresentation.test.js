@@ -74,7 +74,7 @@ describe("Rever Matéria · apresentação transversal",()=>{
 
   it("declara explicitamente semântica matemática e texto alternativo nas fórmulas",()=>{
     const component=source("app/components/DeepReviewStudy.js");
-    expect(component).toContain('<code key={formula}><span role="img" aria-label={formula}>');
+    expect(component).toContain('<code key={formula}><span role="img" aria-label={formula}><span aria-hidden="true">');
     // Este contrato de fonte NÃO substitui a inspeção da árvore a11y nem o leitor de ecrã.
   });
 
