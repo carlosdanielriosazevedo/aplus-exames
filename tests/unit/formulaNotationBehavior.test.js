@@ -42,6 +42,11 @@ describe("FormulaNotation · comportamento da regex real",()=>{
       parts.forEach((part,index)=>{
         if(index%2===0)return;
         const before=parts[index-1],after=parts[index+1]??"";
+        // Uma raiz no denominador (σ/√n) e um expoente agrupado
+        // seguido de divisão (x^(n+1)/(n+1)) são construções válidas.
+        const validRadicalDenominator=before.endsWith("/")&&part.startsWith("√");
+        const validGroupedExponentDivision=part.startsWith("^(")&&after.startsWith("/(");
+        if(validRadicalDenominator||validGroupedExponentDivision)return;
         if(/[\d][.,]$|\/$/u.test(before)||/^([.,]\d|[\p{L}\d_/])/u.test(after))risky.push({formula,part});
       });
     }
