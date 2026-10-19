@@ -17,7 +17,7 @@ export default defineConfig({
     video:"retain-on-failure"
   },
   webServer:{
-    command:"DATABASE_URL='' NEXT_PUBLIC_NEON_AUTH_URL='' NEXT_PUBLIC_NEON_DATA_API_URL='' npm run build && npm run start -- --hostname 127.0.0.1",
+    command:"DATABASE_URL='' NEXT_PUBLIC_NEON_AUTH_URL='' NEXT_PUBLIC_NEON_DATA_API_URL='' npm run build && FORMULA_A11Y_FIXTURE=1 npm run start -- --hostname 127.0.0.1",
     url:"http://127.0.0.1:3000",
     reuseExistingServer:false,
     timeout:240_000
