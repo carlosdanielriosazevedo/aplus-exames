@@ -1,5 +1,6 @@
 "use client";
 import styles from "./MathReviewMatter.module.css";
+import {FORMULA_PATTERN} from "../lib/formulaNotation";
 
 function compactLead(text){
   const value=String(text||"").trim();
@@ -10,7 +11,7 @@ function compactLead(text){
 // Formata apenas expoentes inequívocos, sem interpretar ou reescrever o conteúdo matemático.
 // Notações mais complexas mantêm a representação original até existir renderer próprio.
 function FormulaNotation({value}){
-  const parts=String(value).split(/(\^\([^()]*\)|\^[A-Za-z0-9]+(?![\w/])|(?<![\w^])\d+\/\d+(?![\w/])|√\([^()]+\)|√(?:[A-Za-zΔσ][A-Za-z0-9_]*|\d+)(?![\w(]))/gu);
+  const parts=String(value).split(FORMULA_PATTERN);
   return parts.map((part,index)=>{
     if(part.startsWith("^"))return <sup key={index}>{part.slice(1).replace(/^\((.*)\)$/u,"$1")}</sup>;
     if(/^√\([^()]+\)$/u.test(part))return <span className={styles.simpleRadical} key={index} aria-hidden="true"><span>√</span><span>{part.slice(2,-1)}</span></span>;
