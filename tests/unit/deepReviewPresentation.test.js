@@ -91,6 +91,19 @@ describe("Rever Matéria · apresentação transversal",()=>{
     expect("x^1/2").not.toMatch(numericRatio);
   });
 
+  it("destaca raízes atómicas sem converter radicandos compostos",()=>{
+    const text=source("app/components/DeepReviewStudy.js");
+    const css=source("app/components/MathReviewMatter.module.css");
+    expect(text).toMatch(/styles\.simpleRadical/u);
+    expect(text).toMatch(/aria-label=\{formula\}/u);
+    expect(css).toMatch(/\.simpleRadical\{/u);
+    const atomic=/√(?:[A-Za-zΔσ][A-Za-z0-9_]*|\d+)(?![\w(])/gu;
+    expect("σ=√Var").toMatch(atomic);
+    expect("√52").toMatch(atomic);
+    expect("√((x_B−x_A)²)").not.toMatch(atomic);
+    expect("√Var(X)").not.toMatch(atomic);
+  });
+
   it("mantém hierarquia responsiva e largura de leitura controlada",()=>{
     const css=source("app/components/MathReviewMatter.module.css");
     expect(css).toMatch(/max-width:980px/u);
