@@ -4,7 +4,7 @@ import {test,expect} from "@playwright/test";
 // em produção, e inspeciona a árvore de acessibilidade do Chromium via CDP.
 test("DeepReviewStudy real: uma imagem nomeada, sem texto filho parcial",async({page})=>{
   const formulas=["P(A)=3/5","√52","√(a+b)","σ/√n","f(x)=a^x","x^1/2","√((a+b)²)"];
-  const response=await page.goto("/internal/formula-a11y");
+  const response=await page.goto("/formula-a11y-check");
   expect(response?.status(),`fixture response: ${page.url()} ${String(await page.locator("body").innerText()).slice(0,500)}`).toBe(200);
   await expect(page.getByRole("heading",{name:"Fórmulas de controlo"})).toBeVisible();
   const root=page.locator('[aria-label="Relações essenciais de Fórmulas de controlo"]');
