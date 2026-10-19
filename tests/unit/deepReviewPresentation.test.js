@@ -104,6 +104,17 @@ describe("Rever Matéria · apresentação transversal",()=>{
     expect("√Var(X)").not.toMatch(atomic);
   });
 
+  it("só formata raízes parentizadas sem parênteses internos",()=>{
+    const text=source("app/components/DeepReviewStudy.js");
+    expect(text).toMatch(/part\.slice\(2,-1\)/u);
+    expect(text).toMatch(/aria-label=\{formula\}/u);
+    const parenthesized=/√\([^()]+\)/gu;
+    expect("√(a+b)").toMatch(parenthesized);
+    expect("√(x²+y²)").toMatch(parenthesized);
+    expect("√((x_B−x_A)²)").not.toMatch(parenthesized);
+    expect("√(a+(b+c))").not.toMatch(parenthesized);
+  });
+
   it("mantém hierarquia responsiva e largura de leitura controlada",()=>{
     const css=source("app/components/MathReviewMatter.module.css");
     expect(css).toMatch(/max-width:980px/u);
