@@ -216,7 +216,8 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
     if(!saved)return;
     const items=saved.itemIds.map(portugueseItemById).filter(Boolean);
     if(items.length!==saved.itemIds.length){
-      setS(prev=>resetSubjectProgress(prev,"portuguese"));
+      // Falta conteúdo no catálogo: preservar o progresso até existir recuperação segura.
+      window.alert("Não foi possível recuperar esta sessão porque faltam perguntas. O teu progresso continua guardado.");
       return;
     }
     const current=Math.min(saved.current,items.length-1);
