@@ -39,6 +39,20 @@ describe("FQ A · persistência das provas em curso",()=>{
     });
   }
 
+  for(const examId of ["fqa-mini-1","fqa-full-715"]){
+    it(`${examId} · uma gravação posterior não reinicia o relógio da tentativa`,()=>{
+      const itemIds=["a","b"];
+      savePhysicsChemistryExamDraft(examId,{itemIds,index:1,answers:{a:1},startedAt:1000});
+      savePhysicsChemistryExamDraft(examId,{itemIds,index:0,answers:{a:1,b:0},startedAt:9000});
+      expect(loadPhysicsChemistryExamDraft(examId,itemIds)).toMatchObject({
+        startedAt:1000,index:0,answers:{a:1,b:0}
+      });
+      clearPhysicsChemistryExamDraft(examId);
+      savePhysicsChemistryExamDraft(examId,{itemIds,index:0,answers:{},startedAt:9000});
+      expect(loadPhysicsChemistryExamDraft(examId,itemIds).startedAt).toBe(9000);
+    });
+  }
+
   it("limpar uma prova não apaga a outra",()=>{
     const itemIds=["a","b"];
     const make=(startedAt)=>({itemIds,index:1,answers:{a:0},startedAt});
