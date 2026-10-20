@@ -1,4 +1,4 @@
-import {beginSubjectSession} from "../../app/lib/subjectProgress.js";
+import {beginSubjectSession,recordSubjectSession} from "../../app/lib/subjectProgress.js";
 import {describe,expect,it} from "vitest";
 import {betaEvent,sessionStart} from "../../app/lib/beta.js";
 import {createDiagnosticDraft,validateDiagnosticDraft} from "../../app/lib/diagnosticRecovery.js";
@@ -55,6 +55,19 @@ describe("pending subject attempts cannot be replaced",()=>{
         expect(attempted).toBe(interrupted);
         expect(attempted.subjectProgress[subjectId].lastPosition).toMatchObject({sessionId:"original",kind:"mission",current:1,currentAnswer:"Resposta parcial",itemIds:["Q-1","Q-2"]});
       }
+    });
+  }
+});
+
+describe("pending assessment reward integrity",()=>{
+  for(const subjectId of ["portuguese","physics-chemistry-a"]){
+    it(`${subjectId}: competing completion cannot overwrite progress or award XP`,()=>{
+      const base={subjectProgress:{},subjectProgressModelVersion:4,xp:40};
+      const active=beginSubjectSession(base,{subjectId,kind:"mission",label:"Missão",items:[{id:"A"}],sessionId:"original",startedAt:100});
+      const forged=recordSubjectSession(active,{subjectId,kind:"mission",label:"Outra Missão",items:[{id:"B",domain:"leitura"}],results:[{status:"final",final:true,correct:true,points:1,maxPoints:1}],sessionId:"forged",completedAt:1000});
+      expect(forged).toBe(active);
+      expect(forged.xp).toBe(40);
+      expect(forged.subjectProgress[subjectId].lastPosition.sessionId).toBe("original");
     });
   }
 });
