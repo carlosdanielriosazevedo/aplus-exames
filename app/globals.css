@@ -1704,3 +1704,18 @@ button,input,select,textarea{max-width:100%}
 /* Menus de ação: evitar que um contador de XP comprido force quebras de linha. */
 .studentTopActions>button{white-space:nowrap;flex-shrink:0}
 .studentTopActions>button b{white-space:nowrap;font-variant-numeric:tabular-nums}
+
+
+/* Retoma: um cartão pequeno em vez de ocupar todo o ecrã. */
+@media(max-width:760px){
+  .pausedSession{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;padding:14px 16px;border-radius:16px}
+  .pausedSession>div{min-width:0}
+  .pausedSession small{font-size:11px;letter-spacing:.04em}
+  .pausedSession b{font-size:16px;line-height:1.25;margin-top:5px}
+  .pausedSession span{font-size:13px;line-height:1.35;margin-top:5px}
+  .pausedSession button{width:auto;max-width:150px;min-width:100px;padding:10px 12px;min-height:44px;font-size:14px;line-height:1.2;white-space:normal}
+}
+@media(max-width:360px){
+  .pausedSession{grid-template-columns:minmax(0,1fr)}
+  .pausedSession button{width:100%;max-width:none}
+}
