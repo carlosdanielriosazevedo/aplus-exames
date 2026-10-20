@@ -319,3 +319,37 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
     expect(after).toEqual(before);
   });
 }
+
+for(const subjectId of ["portuguese","physics-chemistry-a"]){
+  test(`${subjectId} · sessão irrecuperável exige confirmação, preserva arquivo e não credita XP`,async({page})=>{
+    const state=pausedSubjectState(subjectId,2);
+    state.xp=50;
+    state.subjectProgress[subjectId].lastPosition.kind="mission";
+    state.subjectProgress[subjectId].lastPosition.label="Missão";
+    state.subjectProgress[subjectId].lastPosition.itemIds[3]="ITEM-NOT-IN-CATALOG-EXCEPTION";
+    await seed(page,state);
+    await page.goto("/");
+    const recover=page.getByRole("button",{name:"Resolver sessão irrecuperável"});
+    await expect(recover).toBeVisible({timeout:30_000});
+    page.once("dialog",dialog=>dialog.dismiss());
+    await recover.click();
+    const before=await page.evaluate(id=>{
+      const st=JSON.parse(localStorage.getItem("a25")||"null");
+      return {xp:st.xp,pending:st.subjectProgress[id].lastPosition?.sessionId,archives:st.subjectProgress[id].interruptedTechnicalSessions||[]};
+    },subjectId);
+    expect(before.pending).toBe(`resume-${subjectId}`);
+    expect(before.archives).toHaveLength(0);
+    page.once("dialog",dialog=>dialog.accept());
+    await recover.click();
+    await expect(recover).toHaveCount(0);
+    const after=await page.evaluate(id=>{
+      const st=JSON.parse(localStorage.getItem("a25")||"null");
+      return {xp:st.xp,pending:st.subjectProgress[id].lastPosition,archives:st.subjectProgress[id].interruptedTechnicalSessions||[]};
+    },subjectId);
+    expect(after.xp).toBe(50);
+    expect(after.pending).toBeNull();
+    expect(after.archives).toEqual([expect.objectContaining({sessionId:`resume-${subjectId}`,status:"interrupted_technical",missingItemIds:["ITEM-NOT-IN-CATALOG-EXCEPTION"]})]);
+    await page.reload();
+    await expect(page.getByRole("button",{name:"Resolver sessão irrecuperável"})).toHaveCount(0);
+  });
+}
