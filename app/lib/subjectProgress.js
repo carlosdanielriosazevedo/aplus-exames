@@ -205,6 +205,8 @@ function subjectSessionXp(kind,results=[]){
 export function recordSubjectSession(state,{subjectId,kind,label,domain=null,items,results,sessionId=null,completedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
   const completionId=sessionId||progress.lastPosition?.sessionId||null;
+  // Não atribuir XP nem evidência a uma conclusão concorrente com uma tentativa pendente.
+  if(progress.lastPosition&&completionId!==progress.lastPosition.sessionId)return state;
   if(completionId&&progress.sessions.some(row=>row.sessionId===completionId))return state;
   const competence={...progress.competence};
   let errorPatterns=normalizeErrorPatterns(progress.errorPatterns);
