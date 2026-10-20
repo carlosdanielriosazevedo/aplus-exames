@@ -1,5 +1,5 @@
 import {notFound} from "next/navigation";
-import DeepReviewStudy from "../../components/DeepReviewStudy";
+import DeepReviewStudy from "../components/DeepReviewStudy";
 
 export const dynamic="force-dynamic";
 
