@@ -116,7 +116,8 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go} s={s}/>;
 
   function start(kind,items,label,domain=null){
-    if(progress.lastPosition&&!window.confirm("Começar uma nova sessão substitui a retoma atual de Física e Química A. Queres continuar?"))return;
+    // Nunca substituir uma tentativa pendente: apenas permitir a retoma.
+    if(progress.lastPosition){resume();return}
     const sessionId=createSubjectSessionId(SUBJECT_ID,kind);
     setSession({sessionId,kind,label,domain,items,current:0});
     setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});
