@@ -109,6 +109,20 @@ describe("exceptional recovery of unavailable questions",()=>{
 
 describe("subject completion idempotency",()=>{
   for(const subjectId of ["portuguese","physics-chemistry-a"]){
+    it(`${subjectId}: Missão repetida não reforça Domínio nem duplica recompensas`,()=>{
+      const base={subjectProgress:{},subjectProgressModelVersion:4,xp:0};
+      const items=[{id:"Q1",domain:"general",competencyId:"general"}];
+      const results=[{status:"final",final:true,correct:true,points:1,maxPoints:1}];
+      const started=beginSubjectSession(base,{subjectId,kind:"mission",label:"Missão",sessionId:"mission-once",items,startedAt:100});
+      const first=recordSubjectSession(started,{subjectId,kind:"mission",label:"Missão",items,results,sessionId:"mission-once",completedAt:200});
+      const repeated=recordSubjectSession(first,{subjectId,kind:"mission",label:"Missão",items,results,sessionId:"mission-once",completedAt:300});
+      expect(repeated).toBe(first);
+      expect(first.subjectProgress[subjectId].missionHistory).toHaveLength(1);
+      expect(first.subjectProgress[subjectId].competence.general.attempts).toBe(1);
+      expect(first.xp).toBe(25);
+    });
+  }
+  for(const subjectId of ["portuguese","physics-chemistry-a"]){
     it(`${subjectId}: repeated completion does not award XP or evidence twice`,()=>{
       const base={subjectProgress:{},subjectProgressModelVersion:4,xp:0};
       const items=[{id:"Q1",domain:"general",competencyId:"general"}];
