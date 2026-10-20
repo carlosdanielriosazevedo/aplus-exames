@@ -185,6 +185,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   },[]);
 
   function resetPhysicsChemistry(){
+    if(progress.lastPosition||examDrafts.length){window.alert("Há uma avaliação em curso. Continua e conclui a sessão antes de repor o progresso.");return}
     if(!window.confirm("Repor apenas o progresso de Física e Química A?"))return;
     setS(prev=>resetSubjectProgress(prev,SUBJECT_ID));setSession(null);setResults([]);setAnswer(null);setFeedback(null);setRubricAssessment({});
   }
