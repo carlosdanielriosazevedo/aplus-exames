@@ -13,6 +13,12 @@ describe("ranking por disciplina",()=>{
     expect(source).toMatch(/RANKING_SUBJECT_IDS\.map/u);
   });
 
+  it("seleciona a disciplina inteira sem depender de uma barra horizontal",()=>{
+    expect(source).toMatch(/value=\{subjectFilter\} onChange=\{event=>setSubjectFilter\(event.target.value\)\}/u);
+    expect(source).toMatch(/\{subject.name\}<\/option>/u);
+    expect(source).not.toMatch(/className="rankingTabs">\s*<button className=\{subjectFilter/u);
+  });
+
   it("passa a disciplina ao leaderboard sem alterar a projeção global",()=>{
     expect(source).toMatch(/demoLeaderboard\(s,\{scope,subjectId\}\)/u);
     expect(source).toMatch(/const projection=leagueProjection\(s\)/u);
