@@ -1719,3 +1719,9 @@ button,input,select,textarea{max-width:100%}
   .pausedSession{grid-template-columns:minmax(0,1fr)}
   .pausedSession button{width:100%;max-width:none}
 }
+
+
+/* Indicadores de progresso no cabeçalho: números inteiros sem quebra. */
+.studentTopActions>button{display:inline-flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap;min-width:0}
+.studentTopActions>button>b{display:inline-block;white-space:nowrap;overflow-wrap:normal;word-break:normal;font-variant-numeric:tabular-nums;line-height:1}
+@media(max-width:760px){.studentTopActions>button{min-width:46px;max-width:110px;padding:0 9px;font-size:13px}.studentTopActions>button>b{font-size:13px}}
