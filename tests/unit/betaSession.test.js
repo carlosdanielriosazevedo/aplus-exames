@@ -1,3 +1,4 @@
+import {beginSubjectSession} from "../../app/lib/subjectProgress.js";
 import {describe,expect,it} from "vitest";
 import {betaEvent,sessionStart} from "../../app/lib/beta.js";
 import {createDiagnosticDraft,validateDiagnosticDraft} from "../../app/lib/diagnosticRecovery.js";
@@ -41,4 +42,19 @@ describe("study session identity",()=>{
     expect(draft.session.id).toBe(session.id);
     expect(validateDiagnosticDraft(draft).ok).toBe(true);
   });
+});
+
+describe("pending subject attempts cannot be replaced",()=>{
+  for(const subjectId of ["portuguese","physics-chemistry-a"]){
+    it(`${subjectId}: starting another assessment preserves the original attempt`,()=>{
+      const initial={subjectProgress:{},subjectProgressModelVersion:4};
+      const first=beginSubjectSession(initial,{subjectId,kind:"mission",label:"Missão",items:[{id:"Q-1"},{id:"Q-2"}],sessionId:"original",startedAt:1000});
+      const interrupted={...first,subjectProgress:{...first.subjectProgress,[subjectId]:{...first.subjectProgress[subjectId],lastPosition:{...first.subjectProgress[subjectId].lastPosition,current:1,results:[{correct:false,final:true}],currentAnswer:"Resposta parcial"}}}};
+      for(const kind of ["diagnostic","mission","training","mini_exam","full_exam"]){
+        const attempted=beginSubjectSession(interrupted,{subjectId,kind,label:"Outra tentativa",items:[{id:"NEW-1"}],sessionId:"replacement",startedAt:2000});
+        expect(attempted).toBe(interrupted);
+        expect(attempted.subjectProgress[subjectId].lastPosition).toMatchObject({sessionId:"original",kind:"mission",current:1,currentAnswer:"Resposta parcial",itemIds:["Q-1","Q-2"]});
+      }
+    });
+  }
 });
