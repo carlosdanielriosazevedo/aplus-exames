@@ -1118,7 +1118,6 @@ function Home({s,setS,go,reset}){
       go(pausedDraft.kind==="mini_exam"?(pausedDraft.screen||"miniExamRun"):pausedDraft.kind==="training"?"trainingRun":(pausedDraft.screen||"mission"));
       return;
     }
-    if(missionDone||plan.type==="blocked")return;
     setShowMissionModal(false);
 
     if(pausedDraft?.kind==="mission"){
@@ -1135,6 +1134,7 @@ function Home({s,setS,go,reset}){
       return;
     }
 
+    if(missionDone||plan.type==="blocked")return;
     const ses=sessionStart("mission",{
       type:plan.type,themeId:plan.themeId,focus:plan.focus||null,
       microcompetencyId:plan.microcompetencyId||microcompetencyId(plan.themeId,plan.focus)||null,
