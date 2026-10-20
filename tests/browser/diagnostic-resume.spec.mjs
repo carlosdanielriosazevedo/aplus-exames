@@ -295,3 +295,25 @@ for(const subject of [
     await context.close();
   });
 }
+
+for(const subjectId of ["portuguese","physics-chemistry-a"]){
+  test(`${subjectId} · Missão pausada não pode ser substituída por novo diagnóstico`,async({page})=>{
+    const state=pausedSubjectState(subjectId,2);
+    state.subjectProgress[subjectId].lastPosition.kind="mission";
+    state.subjectProgress[subjectId].lastPosition.label="Missão";
+    await seed(page,state);
+    await page.goto("/");
+    await expect(page.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
+    const before=await page.evaluate(id=>{
+      const position=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+      return {sessionId:position?.sessionId,kind:position?.kind,current:position?.current,results:position?.results?.length};
+    },subjectId);
+    expect(before).toMatchObject({kind:"mission",current:2,results:2});
+    await page.reload();
+    const after=await page.evaluate(id=>{
+      const position=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+      return {sessionId:position?.sessionId,kind:position?.kind,current:position?.current,results:position?.results?.length};
+    },subjectId);
+    expect(after).toEqual(before);
+  });
+}
