@@ -297,7 +297,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       <div><span>🧠</span><b>Sem nota final</b><small>Recebes feedback e o teu perfil de aprendizagem continua a evoluir.</small></div>
     </div>
     {!scopedCoverage.diagnosticReady&&<div className="notice warning"><b>Primeiro atualiza a matéria dada</b><span>O diagnóstico precisa de cobertura suficiente dos domínios já lecionados.</span></div>}
-    <button className="primary" disabled={!progress.lastPosition&&!scopedCoverage.diagnosticReady} onClick={progress.lastPosition?.kind==="diagnostic"?resume:startDiagnostic}>{progress.lastPosition?.kind==="diagnostic"?"Continuar diagnóstico":"Começar diagnóstico"}</button>
+    <button className="primary" disabled={!progress.lastPosition&&!scopedCoverage.diagnosticReady} onClick={progress.lastPosition?resume:startDiagnostic}>{progress.lastPosition?(progress.lastPosition.kind==="diagnostic"?"Continuar diagnóstico":"Continuar sessão"):"Começar diagnóstico"}</button>
   </Shell>;
 
   if(view==="trainingSetup"){
