@@ -1113,6 +1113,11 @@ function Home({s,setS,go,reset}){
   }
 
   function startDailyMission(source="home_card"){
+    // Uma Missão nova não pode substituir outra avaliação já em curso.
+    if(pausedDraft&&pausedDraft.kind!=="mission"){
+      go(pausedDraft.kind==="mini_exam"?(pausedDraft.screen||"miniExamRun"):pausedDraft.kind==="training"?"trainingRun":(pausedDraft.screen||"mission"));
+      return;
+    }
     if(missionDone||plan.type==="blocked")return;
     setShowMissionModal(false);
 
