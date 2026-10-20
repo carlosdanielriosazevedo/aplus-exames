@@ -1694,3 +1694,13 @@ button,input,select,textarea{max-width:100%}
   .studentTop{width:calc(100vw - 32px);margin-left:calc(50% - 50vw + 16px)}
   .studentTop .subjectSwitcher{max-width:calc(100vw - 106px)}
 }
+
+
+/* Seletor do Ranking: legível e preparado para mais disciplinas. */
+.rankingSubjectSelectLabel{display:block;margin:10px 0 7px;font-size:13px;font-weight:650;color:var(--app-navy,#13314b)}
+.rankingSubjectSelect{width:100%;max-width:500px;min-height:48px;padding:10px 40px 10px 14px;border:1px solid #cdd6df;border-radius:14px;background:#fff;color:#15324a;font:inherit;font-weight:650}
+.rankingSubjectSelect:focus-visible{outline:3px solid #f3bd63;outline-offset:2px}
+@media(max-width:760px){.rankingSubjectSelect{max-width:100%}}
+/* Menus de ação: evitar que um contador de XP comprido force quebras de linha. */
+.studentTopActions>button{white-space:nowrap;flex-shrink:0}
+.studentTopActions>button b{white-space:nowrap;font-variant-numeric:tabular-nums}
