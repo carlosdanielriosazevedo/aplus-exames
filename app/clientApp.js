@@ -1583,9 +1583,9 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   const [sessionId]=useState(()=>draft?.sessionId||latestOpenSessionId(s,"training"));
   const questions=useMemo(()=>{
     if(!cfg)return [];
-    const fresh=trainingQuestions(s,cfg,DEFAULT_TRAINING_QUESTIONS);
-    if(!draft?.questions?.length)return fresh;
-    return [...new Map([...draft.questions,...fresh].map(q=>[q.id,q])).values()].slice(0,10);
+    // Uma sessão retomada mantém exatamente a ordem e identidade das perguntas originais.
+    if(draft?.kind==="training"&&draft.questions?.length)return draft.questions;
+    return trainingQuestions(s,cfg,DEFAULT_TRAINING_QUESTIONS);
   },[cfg]);
   const [i,setI]=useState(draft?.i||0);
   const [sel,setSel]=useState(draft?.sel??null);
