@@ -1657,3 +1657,40 @@ button,input,select,textarea{max-width:100%}
 .demoRankingDisclosure summary{display:inline-flex;align-items:center;min-height:32px;cursor:pointer;list-style:none;font-size:12px;font-weight:800;color:var(--app-muted)}
 .demoRankingDisclosure summary::-webkit-details-marker{display:none}
 .demoRankingDisclosure p{margin:4px 0 0;max-width:620px;font-size:12px;line-height:1.45;color:var(--app-muted)}
+
+
+/* Cabeçalho móvel partilhado — grelha estável entre Aprender, Treinar, Ranking e Progresso.
+   Neutraliza paddings diferentes das superfícies sem alterar os layouts desktop. */
+@media (max-width:760px){
+  .studentTop{
+    box-sizing:border-box;
+    width:calc(100vw - 40px);
+    margin-left:calc(50% - 50vw + 20px);
+    margin-right:0;
+    min-height:112px;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    align-items:start;
+    column-gap:10px;
+  }
+  .studentTopIdentity{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+  .studentTopIdentity .logo{margin:0;line-height:1.2}
+  .studentTop .subjectSwitcher{
+    min-width:0;
+    max-width:min(280px,calc(100vw - 116px));
+    margin:0;
+    flex-shrink:0;
+  }
+  .studentTopActions{justify-self:end;align-self:start;margin:0;flex-wrap:nowrap}
+  .studentTop .studentMenu>summary{width:46px;min-width:46px;height:46px;box-sizing:border-box}
+}
+@media(max-width:360px){
+  .studentTop{width:calc(100vw - 32px);margin-left:calc(50% - 50vw + 16px)}
+  .studentTop .subjectSwitcher{max-width:calc(100vw - 106px)}
+}
