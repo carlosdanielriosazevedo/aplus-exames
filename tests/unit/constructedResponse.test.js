@@ -12,6 +12,20 @@ const byId=id=>{
   return question;
 };
 
+describe("Matemática A · conclusão por palavras no zero da função",()=>{
+  const zero=byId("CRV2-10FUN-STEPS-1");
+  it("atribui crédito à conclusão explícita no terceiro campo",()=>{
+    const result=gradeResponse(zero,{steps:{equation:"3x-12=0",value:"x=4",conclusion:"O zero de f é 4."}});
+    const conclusion=result.stepResults.find(row=>row.stepId==="conclusion");
+    expect(conclusion.points).toBe(10);
+    expect(result.points).toBe(35);
+  });
+  it("não inventa conclusão quando o terceiro campo fica vazio",()=>{
+    const result=gradeResponse(zero,{steps:{equation:"3x-12=0",value:"x=4",conclusion:""}});
+    expect(result.stepResults.find(row=>row.stepId==="conclusion").points).toBe(0);
+  });
+});
+
 describe("constructed response engine",()=>{
   const derivative=byId("CRV2-11CD-STEPS-1");
 
