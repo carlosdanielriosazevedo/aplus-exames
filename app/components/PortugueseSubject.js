@@ -157,7 +157,9 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
   }
 
   function start(kind,items,label,domain=null){
-    if((progress.lastPosition||miniExamDraft)&&!window.confirm("Começar uma nova sessão substitui a retoma atual de Português. Queres continuar?"))return;
+    // Nunca substituir uma tentativa pendente: apenas permitir a retoma.
+    if(progress.lastPosition){resume();return}
+    if(miniExamDraft){go("portugueseMiniExam");return}
     const sessionId=createSubjectSessionId("portuguese",kind);
     setSession({sessionId,kind,label,domain,items,current:0});
     setAnswer(null);setFeedback(null);setEditingCriterionId(null);setResults([]);
