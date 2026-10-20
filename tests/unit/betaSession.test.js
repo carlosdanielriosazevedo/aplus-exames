@@ -1,4 +1,4 @@
-import {beginSubjectSession,recordSubjectSession} from "../../app/lib/subjectProgress.js";
+import {beginSubjectSession,recordSubjectSession,quarantineUnrecoverableSubjectSession} from "../../app/lib/subjectProgress.js";
 import {describe,expect,it} from "vitest";
 import {betaEvent,sessionStart} from "../../app/lib/beta.js";
 import {createDiagnosticDraft,validateDiagnosticDraft} from "../../app/lib/diagnosticRecovery.js";
@@ -68,6 +68,25 @@ describe("pending assessment reward integrity",()=>{
       expect(forged).toBe(active);
       expect(forged.xp).toBe(40);
       expect(forged.subjectProgress[subjectId].lastPosition.sessionId).toBe("original");
+    });
+  }
+});
+
+describe("exceptional recovery of unavailable questions",()=>{
+  for(const subjectId of ["portuguese","physics-chemistry-a"]){
+    it(`${subjectId}: only a genuinely missing question allows archival, without rewards`,()=>{
+      const base={subjectProgress:{},subjectProgressModelVersion:4,xp:77};
+      const running=beginSubjectSession(base,{subjectId,kind:"mission",label:"Missão",sessionId:"original",items:[{id:"present"},{id:"missing"}],startedAt:111});
+      const stillValid=quarantineUnrecoverableSubjectSession(running,subjectId,["present","missing"],222);
+      expect(stillValid).toBe(running);
+      const rescued=quarantineUnrecoverableSubjectSession(running,subjectId,["present"],333);
+      expect(rescued.xp).toBe(77);
+      expect(rescued.subjectProgress[subjectId].lastPosition).toBeNull();
+      expect(rescued.subjectProgress[subjectId].sessions).toHaveLength(0);
+      expect(rescued.subjectProgress[subjectId].interruptedTechnicalSessions).toEqual([
+        expect.objectContaining({sessionId:"original",status:"interrupted_technical",reason:"missing_content",missingItemIds:["missing"],archivedAt:333})
+      ]);
+      expect(quarantineUnrecoverableSubjectSession(rescued,subjectId,[],444)).toBe(rescued);
     });
   }
 });
