@@ -21,7 +21,10 @@ export function loadPhysicsChemistryExamDraft(examId,itemIds=[]){
 export function savePhysicsChemistryExamDraft(examId,{itemIds,index,answers,startedAt,review=false,rubricAssessments={},markedForReview=[]}){
   const store=storage();
   if(!store)return;
-  const payload={version:1,examId,itemIds,index,answers,startedAt,review:!!review,rubricAssessments,markedForReview:Array.from(new Set(markedForReview)).filter(id=>itemIds.includes(id)),updatedAt:Date.now()};
+  // O relógio pertence à tentativa original; nunca reiniciar ao guardar uma sessão retomada.
+  const existing=loadPhysicsChemistryExamDraft(examId,itemIds);
+  const preservedStart=Number.isFinite(existing?.startedAt)?existing.startedAt:startedAt;
+  const payload={version:1,examId,itemIds,index,answers,startedAt:preservedStart,review:!!review,rubricAssessments,markedForReview:Array.from(new Set(markedForReview)).filter(id=>itemIds.includes(id)),updatedAt:Date.now()};
   try{store.setItem(PREFIX+examId,JSON.stringify(payload))}catch{}
 }
 
