@@ -182,6 +182,8 @@ export function createSubjectSessionId(subjectId,kind,at=Date.now()){
 
 export function beginSubjectSession(state,{subjectId,kind,label,domain=null,items,sessionId=null,startedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
+  // Uma tentativa em curso não pode ser substituída, nem por chamadas diretas ao motor.
+  if(progress.lastPosition)return state;
   const id=sessionId||createSubjectSessionId(subjectId,kind,startedAt);
   return putProgress(state,subjectId,{...progress,lastPosition:{sessionId:id,kind,label,domain,itemIds:items.map(item=>item.id),current:0,results:[],startedAt,updatedAt:startedAt},lastActivityAt:startedAt});
 }
