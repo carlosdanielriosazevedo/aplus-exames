@@ -9,7 +9,7 @@ import {portugueseLiteraryWorkById,portugueseLiteraryWorksForYear} from "../data
 import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence,portugueseRevisionCompare,portugueseRevisionEvidenceCompare,rubricObservationEvidenceSnapshot} from "../lib/portugueseEngine";
 import {portugueseObservationGuidance} from "../lib/portugueseObservationGuidance";
 import {portugueseWordLimitFeedback} from "../lib/portugueseWordLimit";
-import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";
+import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor,quarantineUnrecoverableSubjectSession} from "../lib/subjectProgress";
 import {clearPortugueseMiniExamDraft} from "../lib/portugueseMiniExamDraft";
 import {engagementSummary,missionCompletedToday} from "../lib/engagement";
 import {STUDY_MODE_COPY,practiceModeCopy} from "../lib/studyModeCopy";
@@ -211,6 +211,15 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
     go("portugueseMiniExam");
   }
 
+  const unrecoverableSession=!!progress.lastPosition?.itemIds?.length&&progress.lastPosition.itemIds.some(itemId=>!portugueseItemById(itemId));
+  function recoverUnrecoverableSession(){
+    if(!unrecoverableSession)return;
+    if(!window.confirm("Esta sessão não pode ser retomada porque faltam perguntas. Arquivar a tentativa interrompida por erro técnico, sem XP nem alterações ao Domínio, e permitir uma nova avaliação?"))return;
+    setS(prev=>quarantineUnrecoverableSubjectSession(prev,"portuguese",progress.lastPosition.itemIds.filter(itemId=>!!portugueseItemById(itemId))));
+    setSession(null);
+    go("home");
+  }
+
   function resume(){
     const saved=progress.lastPosition;
     if(!saved)return;
@@ -369,6 +378,7 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
     {sharedNav}
   </Shell>;
   if(!session)return sharedShell(<>
+    {unrecoverableSession&&<div className="notice warning"><b>Sessão impossível de recuperar</b><span>Uma ou mais perguntas deixaram de estar disponíveis. A tentativa será arquivada sem pontuação adicional.</span><button className="secondary" onClick={recoverUnrecoverableSession}>Resolver sessão irrecuperável</button></div>}
     <div className="learnIntro"><p>Olá 👋</p><h1>O teu próximo passo.</h1><span>{missionDone?"Missão feita. Podes continuar por tua conta.":progress.diagnosticDone?"Uma recomendação curta, escolhida a partir do teu percurso.":"Primeiro, vamos encontrar o melhor ponto de partida."}</span></div>
     {progress.lastPosition&&progress.lastPosition.kind!=="diagnostic"&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></div><button onClick={resume}>Continuar →</button></div>}
     {!progress.lastPosition&&miniExamDraft&&<div className="pausedSession"><div><small>{miniExamDraft.examId==="full-1"?"EXAME COMPLETO EM PAUSA":"MINI-EXAME EM PAUSA"}</small><b>{miniExamDraft.examId==="full-1"?"Exame Completo de Português":(portugueseMiniExamMeta(miniExamDraft.examId)?.title||"Mini-exame de Português")}</b><span>{miniExamDraft.review?"Revisão em curso":`Pergunta ${miniExamDraft.index+1} de ${miniExamDraft.itemIds?.length||6}`}</span></div><button onClick={()=>{setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:miniExamDraft.examId}}}));go("portugueseMiniExam")}}>Continuar →</button></div>}
