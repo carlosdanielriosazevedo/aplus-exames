@@ -277,9 +277,10 @@ for(const subject of [
   });
 }
 
-for(const subjectId of ["portuguese","physics-chemistry-a"]){
-  test(`${subjectId} · cabeçalho mantém coordenadas entre os quatro separadores móveis`,async({page})=>{
-    await page.setViewportSize({width:390,height:844});
+for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
+  for(const width of [360,390,430]){
+  test(`${subjectId} · cabeçalho estável a ${width}px entre separadores`,async({page})=>{
+    await page.setViewportSize({width,height:844});
     await seed(page,completedState(subjectId));
     await page.goto("/");
     const positions=[];
@@ -310,4 +311,5 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
       }
     }
   });
+  }
 }
