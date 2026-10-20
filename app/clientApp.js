@@ -793,6 +793,7 @@ function DiagIntro({s,setS,go}){
   const profileBlueprint=diagnosticBlueprintForProfile(s.profile);
   const blueprint=profileBlueprint.filter(themeId=>diagnosticAnchor(themeId,difficulty,s));
   const gated=blueprint.length===0;
+  const pendingDiagnostic=loadSessionDraft(s.betaMode||"internal")?.kind==="diagnostic";
   return <Shell><Logo/><p className="eyebrow">AVALIAÇÃO INICIAL · MATEMÁTICA A · PROVA 635</p>
     <div className="diagApronsoHero"><div><h1>Diagnóstico de Matemática A</h1><div className="diagPurposeHero"><small>PARA ENCONTRAR O MELHOR PONTO DE PARTIDA</small><strong>Não é uma avaliação. A app usa apenas matéria do teu percurso e aprofunda só quando precisa de perceber melhor uma dificuldade.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
     <div className="diagIntroGrid">
@@ -807,7 +808,7 @@ function DiagIntro({s,setS,go}){
         ?"A tua seleção ficou guardada. O diagnóstico inicial atual ainda não tem perguntas adequadas para essas submatérias; não precisas de voltar a indicá-las. Podes acrescentar outra matéria já lecionada para começares."
         :"Não vamos avaliar matéria que a tua escola ainda não ensinou. Assinala pelo menos uma submatéria do teu ano para começares."}</span></div>}
     {gated&&!profileBlueprint.length&&<button className="secondary" onClick={()=>go("curriculumSettings")}>{hasIndicatedScope?"Adicionar outra matéria dada":"Indicar matéria dada"}</button>}
-    <button className="primary" disabled={gated} onClick={()=>{
+    <button className="primary" disabled={gated&&!pendingDiagnostic} onClick={()=>{
       const existing=loadSessionDraft(s.betaMode||"internal");
       if(existing?.kind==="diagnostic"){go("diagRun");return}
       const startState=reconcileDiagnosticRuntimeSessions(s);
@@ -828,7 +829,7 @@ function DiagIntro({s,setS,go}){
       setSaveError(false);
       setS(started.state);
       go("diagRun");
-    }}>Começar diagnóstico</button>
+    }}>{pendingDiagnostic?"Continuar diagnóstico":"Começar diagnóstico"}</button>
   </Shell>
 }
 
