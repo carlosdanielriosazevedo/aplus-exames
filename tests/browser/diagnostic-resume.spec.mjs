@@ -303,6 +303,8 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
     state.subjectProgress[subjectId].lastPosition.label="Missão";
     await seed(page,state);
     await page.goto("/");
+    await expect(page.getByRole("button",{name:"Continuar →",exact:true})).toBeVisible({timeout:30_000});
+    await page.getByRole("button",{name:"Continuar →",exact:true}).click();
     await expect(page.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
     const before=await page.evaluate(id=>{
       const position=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
