@@ -106,3 +106,19 @@ describe("exceptional recovery of unavailable questions",()=>{
     });
   }
 });
+
+describe("subject completion idempotency",()=>{
+  for(const subjectId of ["portuguese","physics-chemistry-a"]){
+    it(`${subjectId}: repeated completion does not award XP or evidence twice`,()=>{
+      const base={subjectProgress:{},subjectProgressModelVersion:4,xp:0};
+      const items=[{id:"Q1",domain:"general",competencyId:"general"}];
+      const result=[{status:"final",final:true,correct:true,points:1,maxPoints:1}];
+      const started=beginSubjectSession(base,{subjectId,kind:"training",label:"Treino",sessionId:"once",items,startedAt:100});
+      const first=recordSubjectSession(started,{subjectId,kind:"training",label:"Treino",items,results:result,sessionId:"once",completedAt:200});
+      const repeated=recordSubjectSession(first,{subjectId,kind:"training",label:"Treino",items,results:result,sessionId:"once",completedAt:300});
+      expect(repeated).toBe(first);
+      expect(first.xp).toBe(10);
+      expect(first.subjectProgress[subjectId].sessions).toHaveLength(1);
+    });
+  }
+});
