@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "../piloto/pilot.module.css";
 import {pilotPublicFields} from "../lib/pilotCopy";
 
-export const metadata={title:"Privacidade · APProva+"};
+export const metadata={title:"Privacidade · APProva+",alternates:{canonical:"/privacidade"}};
 
 function PublicContact(){
   const {responsible,email}=pilotPublicFields();
