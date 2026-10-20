@@ -348,11 +348,12 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   if(view==="exams")return <Shell className="wideStudentShell examHub">{sharedTop}<div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Física e Química A · 715</h1><p className="muted">Escolhe entre um treino mais curto e o Exame Completo com a estrutura 15 obrigatórios + 8 opcionais, contando os 4 melhores opcionais.</p></div>
     <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, voltamos à prova para rever as tuas respostas.</ApronsoNudge>
     {examDrafts.map(({id,title,route,draft})=><div className="pausedSession" key={id}><div><small>{draft.review?"REVISÃO EM PAUSA":"PROVA EM PAUSA"}</small><b>{title}</b><span>{draft.review?"Retoma a revisão por critérios.":`Pergunta ${(draft.index||0)+1} de ${draft.itemIds?.length||0}`} · {physicsChemistryDraftAgeLabel(draft.updatedAt)}</span></div><button onClick={()=>go(route)}>Continuar →</button></div>)}
-    <div className="trainChoices">
+    {progress.lastPosition&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{progress.lastPosition.label}</b></div><button onClick={resume}>Continuar →</button></div>}
+    {!progress.lastPosition&&examDrafts.length===0&&<div className="trainChoices">
       <button onClick={()=>go("physicsChemistryMini1")}><span>📝</span><div><b>Mini-exame · Modelo 1</b><small>12 itens · 45 min · seleção, construção e suportes científicos</small></div><em>→</em></button>
       <button onClick={()=>go("physicsChemistryMini2")}><span>🧪</span><div><b>Mini-exame · Modelo 2</b><small>12 itens · 45 min · combinação diferente de 10.º e 11.º</small></div><em>→</em></button>
       <button onClick={()=>go("physicsChemistryExam")}><span>⏱️</span><div><b>Exame Completo · 715</b><small>23 itens · 200 pontos · 120 min + 30 min de tolerância</small></div><em>→</em></button>
-    </div>{sharedNav}</Shell>;
+    </div>}{sharedNav}</Shell>;
 
   if(view==="progress"){
     const rows=PHYSICS_CHEMISTRY_A_DOMAINS.map(domain=>{
