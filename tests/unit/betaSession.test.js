@@ -83,6 +83,9 @@ describe("exceptional recovery of unavailable questions",()=>{
       expect(rescued.xp).toBe(77);
       expect(rescued.subjectProgress[subjectId].lastPosition).toBeNull();
       expect(rescued.subjectProgress[subjectId].sessions).toHaveLength(0);
+      const late=recordSubjectSession(rescued,{subjectId,kind:"mission",label:"Conclusão tardia",items:[{id:"present"}],results:[{status:"final",final:true,correct:true,points:1,maxPoints:1}],sessionId:"original",completedAt:444});
+      expect(late).toBe(rescued);
+      expect(late.xp).toBe(77);
       expect(rescued.subjectProgress[subjectId].interruptedTechnicalSessions).toEqual([
         expect.objectContaining({sessionId:"original",status:"interrupted_technical",reason:"missing_content",missingItemIds:["missing"],archivedAt:333})
       ]);
