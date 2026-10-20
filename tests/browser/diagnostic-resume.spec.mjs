@@ -273,6 +273,25 @@ for(const subject of [
         :{itemId:saved?.itemIds?.[saved.current],responses:saved?.results?.length};
     },subject.id);
     expect(reopenedPosition,"fechar e reabrir o separador deve preservar a pergunta e as duas respostas").toEqual(savedPosition);
+    if(subject.id!=="math-a"){
+      reopened.once("dialog",dialog=>dialog.accept());
+      await reopened.getByRole("button",{name:"Guardar e sair",exact:true}).click();
+      await expect(reopened.getByRole("button",{name:"Continuar diagnóstico",exact:true})).toBeVisible({timeout:30_000});
+      await expect(reopened.getByRole("button",{name:"Começar diagnóstico",exact:true})).toHaveCount(0);
+      const pausedPosition=await reopened.evaluate(id=>{
+        const saved=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+        return {itemId:saved?.itemIds?.[saved.current],responses:saved?.results?.length,sessionId:saved?.sessionId};
+      },subject.id);
+      expect(pausedPosition.itemId).toBe(savedPosition.itemId);
+      expect(pausedPosition.responses).toBe(savedPosition.responses);
+      await reopened.getByRole("button",{name:"Continuar diagnóstico",exact:true}).click();
+      await expect(reopened.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
+      const continuedPosition=await reopened.evaluate(id=>{
+        const saved=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+        return {itemId:saved?.itemIds?.[saved.current],responses:saved?.results?.length,sessionId:saved?.sessionId};
+      },subject.id);
+      expect(continuedPosition).toEqual(pausedPosition);
+    }
     await context.close();
   });
 }
