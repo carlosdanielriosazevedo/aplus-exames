@@ -1731,3 +1731,9 @@ button,input,select,textarea{max-width:100%}
 @media(max-width:760px){
   .learnHome .studentTop{position:relative;top:8px}
 }
+
+/* Medição Playwright: Ranking posicionava logótipo e seletor em y=23/57,
+   face a y=26/60 nos separadores restantes (390px). */
+@media(max-width:760px){
+  .studentTop:has(~ .rankingHero){position:relative;top:3px}
+}
