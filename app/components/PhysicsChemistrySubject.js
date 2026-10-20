@@ -172,7 +172,10 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     const saved=progress.lastPosition;
     if(!saved)return;
     const items=saved.itemIds.map(physicsChemistryItemById).filter(Boolean);
-    if(items.length!==saved.itemIds.length){resetPhysicsChemistry();return}
+    if(items.length!==saved.itemIds.length){
+      window.alert("Não foi possível recuperar esta sessão porque faltam perguntas. O teu progresso continua guardado.");
+      return;
+    }
     setSession({sessionId:saved.sessionId,kind:saved.kind,label:saved.label,domain:saved.domain,items,current:Math.min(saved.current,items.length-1)});
     setResults(saved.results||[]);setAnswer(saved.currentAnswer??null);setFeedback(saved.currentResult||null);
   }
