@@ -6,7 +6,9 @@ const source=readFileSync(new URL("../../app/components/RankingScreen.js",import
 describe("ranking por disciplina",()=>{
   it("expõe Todas e as disciplinas disponíveis pela ordem pedagógica definida",()=>{
     expect(source).toMatch(/Filtrar ranking por disciplina/u);
-    expect(source).toMatch(/>Todas<\/button>/u);
+    expect(source).toMatch(/<select id="rankingSubjectFilter"/u);
+    expect(source).toMatch(/<option value="all">Todas as disciplinas<\/option>/u);
+    expect(source).toMatch(/<option key=\{id\} value=\{id\}>\{subject.name\}<\/option>/u);
     expect(source).toMatch(/const RANKING_SUBJECT_IDS=\["math-a","portuguese","physics-chemistry-a"\]/u);
     expect(source).toMatch(/RANKING_SUBJECT_IDS\.map/u);
   });
