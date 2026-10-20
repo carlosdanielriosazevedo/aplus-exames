@@ -1581,7 +1581,9 @@ function Train({s,setS,go,start}){
 
 function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   const completingRef=useRef(false);
-  const draft=cfg ? (recoveredDraft || (typeof window!=="undefined" ? loadSessionDraft(s.betaMode||"internal") : null)) : null;
+  const storedDraft=cfg ? (recoveredDraft || (typeof window!=="undefined" ? loadSessionDraft(s.betaMode||"internal") : null)) : null;
+  const conflictingDraft=!!storedDraft&&storedDraft.kind!=="training";
+  const draft=conflictingDraft?null:storedDraft;
   const [sessionId]=useState(()=>draft?.sessionId||latestOpenSessionId(s,"training"));
   const questions=useMemo(()=>{
     if(!cfg)return [];
@@ -1602,10 +1604,11 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   useEffect(()=>{if(draft)onRecovered()},[]);
 
   useEffect(()=>{
-    if(!cfg || done || !questions.length)return;
+    if(!cfg || conflictingDraft || done || !questions.length)return;
     saveSessionDraft({kind:"training",betaMode:s.betaMode||"internal",sessionId,cfg,questions,i,sel,fb,correct,earnedPoints,hasIncomplete});
   },[cfg,questions,i,sel,fb,correct,earnedPoints,hasIncomplete,done]);
 
+  if(conflictingDraft)return <Shell><h1>Já tens uma avaliação em curso.</h1><button onClick={()=>go("home")}>Continuar sessão</button></Shell>;
   if(!cfg)return <Shell><Back go={go} to="train"/><h1>Escolhe primeiro o que queres treinar.</h1></Shell>;
   if(questions.length<STUDY_SESSION_MIN_QUESTIONS)return <Shell><Back go={go} to="train"/><h1>Ainda não há perguntas úteis suficientes neste foco.</h1><p className="muted">O treino só começa quando consegue garantir uma sessão completa entre 7 e 10 perguntas.</p></Shell>;
 
