@@ -1539,6 +1539,7 @@ function Train({s,setS,go,start}){
   const available=hasTrainingContent(themeId,focus,s);
   const exactCurated=eligibleQuestions(s,themeId,"training",focus).filter(q=>q.focus===focus).length;
   const exactGenerated=(s.betaMode||"internal")==="internal" && hasGenerator(themeId,focus);
+  const pendingSession=typeof window!=="undefined"?loadSessionDraft(s.betaMode||"internal"):null;
 
   return <Shell className="wideStudentShell trainingSetupPage">
     <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
@@ -1569,11 +1570,12 @@ function Train({s,setS,go,start}){
         :"A app usará perguntas próximas do mesmo tema enquanto este foco é expandido."}</span></div>
       : <div className="notice"><b>Conteúdo ainda em construção</b><span>A taxonomia já contém esta área, mas o banco de perguntas desta versão ainda não tem itens suficientes para a treinar de forma honesta.</span></div>}
 
-    <button className="primary" disabled={!available} onClick={()=>{
+    <button className="primary" disabled={!available&&!pendingSession} onClick={()=>{
+      if(pendingSession){go("home");return}
       const ses=sessionStart("training",{themeId,focus,level});
       setS(prev=>({...prev,betaSessions:[...(prev.betaSessions||[]),ses],betaEvents:[...(prev.betaEvents||[]),betaEvent("training_started",{sessionId:ses.id,themeId,focus,level})]}));
       start({themeId,focus,level});
-    }}>Começar treino</button>
+    }}>{pendingSession?"Continuar sessão":"Começar treino"}</button>
   </Shell>
 }
 
