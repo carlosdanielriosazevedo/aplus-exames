@@ -200,14 +200,10 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
   }
 
   function selectMiniExam(id){
-    const sessionName=id==="full-1"?"Exame Completo":"Mini-exame";
-    if(progress.lastPosition&&!window.confirm(`Tens uma sessão de Português em pausa. Começar o ${sessionName} substitui essa retoma. Queres continuar?`))return;
-    if(miniExamDraft&&miniExamDraft.examId!==id&&!window.confirm(`Tens outra prova em pausa. Começar este ${sessionName} substitui essa retoma. Queres continuar?`))return;
-    setS(prev=>{
-      const base=miniExamDraft&&miniExamDraft.examId!==id?clearPortugueseMiniExamDraft(prev):prev;
-      const subjectProgress={...(base.subjectProgress||{}),portuguese:{...subjectProgressFor(base,"portuguese"),lastPosition:null}};
-      return {...base,subjectProgress,subjectSettings:{...(base.subjectSettings||{}),portuguese:{...(base.subjectSettings?.portuguese||{}),selectedMiniExamId:id}}};
-    });
+    // Não substituir avaliações nem provas pendentes, mesmo por rotas secundárias.
+    if(progress.lastPosition){resume();return}
+    const selectedId=miniExamDraft?.examId||id;
+    setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:selectedId}}}));
     go("portugueseMiniExam");
   }
 
