@@ -93,6 +93,16 @@ describe("exceptional recovery of unavailable questions",()=>{
       const restored=migrateSubjectProgress({...rescued,subjectProgress:{[subjectId]:rescued.subjectProgress[subjectId]}});
       expect(restored.subjectProgress[subjectId].lastPosition).toBeNull();
       expect(restored.subjectProgress[subjectId].interruptedTechnicalSessions).toHaveLength(1);
+      if(subjectId==="portuguese"){
+        // Uma cópia antiga sob um alias legado não pode ressuscitar a sessão arquivada.
+        const merged=migrateSubjectProgress({...rescued,subjectProgress:{
+          portuguese:rescued.subjectProgress.portuguese,
+          portugueseLab:running.subjectProgress.portuguese
+        }});
+        expect(merged.subjectProgress.portuguese.lastPosition).toBeNull();
+        expect(merged.subjectProgress.portuguese.interruptedTechnicalSessions).toHaveLength(1);
+        expect(merged.xp).toBe(77);
+      }
     });
   }
 });
