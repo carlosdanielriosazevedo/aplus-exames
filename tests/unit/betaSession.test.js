@@ -1,4 +1,4 @@
-import {beginSubjectSession,recordSubjectSession,quarantineUnrecoverableSubjectSession} from "../../app/lib/subjectProgress.js";
+import {beginSubjectSession,recordSubjectSession,quarantineUnrecoverableSubjectSession,migrateSubjectProgress} from "../../app/lib/subjectProgress.js";
 import {describe,expect,it} from "vitest";
 import {betaEvent,sessionStart} from "../../app/lib/beta.js";
 import {createDiagnosticDraft,validateDiagnosticDraft} from "../../app/lib/diagnosticRecovery.js";
@@ -87,6 +87,9 @@ describe("exceptional recovery of unavailable questions",()=>{
         expect.objectContaining({sessionId:"original",status:"interrupted_technical",reason:"missing_content",missingItemIds:["missing"],archivedAt:333})
       ]);
       expect(quarantineUnrecoverableSubjectSession(rescued,subjectId,[],444)).toBe(rescued);
+      const restored=migrateSubjectProgress({...rescued,subjectProgress:{[subjectId]:rescued.subjectProgress[subjectId]}});
+      expect(restored.subjectProgress[subjectId].lastPosition).toBeNull();
+      expect(restored.subjectProgress[subjectId].interruptedTechnicalSessions).toHaveLength(1);
     });
   }
 });
