@@ -126,10 +126,11 @@ function mergeProgress(left,right,subjectId){
     diagnosticCompletedAt:Math.max(a.diagnosticCompletedAt||0,b.diagnosticCompletedAt||0)||null,
     sessions:mergeUniqueRows(a.sessions,b.sessions),
     missionHistory:mergeUniqueRows(a.missionHistory,b.missionHistory),
+    interruptedTechnicalSessions:mergeUniqueRows(a.interruptedTechnicalSessions,b.interruptedTechnicalSessions),
     competence:mergeCompetenceRows(a.competence,b.competence),
     errorPatterns:mergeErrorPatterns(a.errorPatterns,b.errorPatterns),
     errorMemoryVersion:1,
-    lastPosition:newest.lastPosition||a.lastPosition||b.lastPosition||null,
+    lastPosition:(()=>{const archivedIds=new Set([...a.interruptedTechnicalSessions||[],...b.interruptedTechnicalSessions||[]].map(row=>row.sessionId));return [newest.lastPosition,a.lastPosition,b.lastPosition].find(row=>row&&!archivedIds.has(row.sessionId))||null})(),
     lastActivityAt:Math.max(a.lastActivityAt||0,b.lastActivityAt||0)||null
   },subjectId);
 }
