@@ -265,6 +265,33 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
   return completed;
 }
 
+
+/**
+ * Desbloqueio estritamente técnico: só quando faltam itens necessários à retoma.
+ * Arquiva a tentativa sem pontuar, sem criar uma conclusão nem creditar XP.
+ */
+export function quarantineUnrecoverableSubjectSession(state,subjectId,availableItemIds,at=Date.now()){
+  const progress=subjectProgressFor(state,subjectId);
+  const pending=progress.lastPosition;
+  if(!pending||!Array.isArray(pending.itemIds)||!pending.itemIds.length)return state;
+  const available=new Set(availableItemIds);
+  const missing=pending.itemIds.filter(id=>!available.has(id));
+  if(!missing.length)return state;
+  const archived={
+    ...pending,
+    status:"interrupted_technical",
+    reason:"missing_content",
+    missingItemIds:missing,
+    archivedAt:at
+  };
+  return putProgress(state,subjectId,{
+    ...progress,
+    lastPosition:null,
+    interruptedTechnicalSessions:[...(progress.interruptedTechnicalSessions||[]),archived].slice(-MAX_SESSIONS),
+    lastActivityAt:at
+  });
+}
+
 export function resetSubjectProgress(state,subjectId){
   const subjectProgress={...(state.subjectProgress||{})};
   delete subjectProgress[subjectId];
