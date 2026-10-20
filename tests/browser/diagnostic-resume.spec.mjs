@@ -301,7 +301,12 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
       });
       positions.push({tab,geometry});
     }
-    console.log("HEADER_POSITIONS",subjectId,JSON.stringify(positions));
+    for(const row of positions){
+      for(const item of row.geometry.filter(Boolean)){
+        expect(item.x,`${subjectId} ${width}px: ${row.tab} sai pela margem esquerda`).toBeGreaterThanOrEqual(0);
+        expect(item.x+item.width,`${subjectId} ${width}px: ${row.tab} sai pela margem direita`).toBeLessThanOrEqual(width+1);
+      }
+    }
     const reference=positions[0].geometry;
     for(const row of positions.slice(1)){
       for(let index=0;index<reference.length;index++){
