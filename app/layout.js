@@ -31,7 +31,7 @@ export const metadata={
     description:'Preparação inteligente e adaptativa para os exames nacionais.',
     images:['/opengraph-image']
   },
-  icons:{icon:'/favicon.ico',shortcut:'/favicon.ico'}
+  icons:{icon:'/favicon.ico',shortcut:'/favicon.ico',apple:[{url:'/icons/apple-touch-icon.png',sizes:'180x180',type:'image/png'}]}
 };
 export const viewport={width:'device-width',initialScale:1,viewportFit:'cover',themeColor:'#08132e'};
 

@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "../pilot.module.css";
 import {guardianPilotText} from "../../lib/pilotCopy";
 
-export const metadata={title:"Informação para encarregado de educação · APProva+"};
+export const metadata={title:"Informação para encarregado de educação · APProva+",alternates:{canonical:"/piloto/encarregado"}};
 
 export default function GuardianPilotInfo(){
   return <main className={styles.page}><section className={styles.wrap}>

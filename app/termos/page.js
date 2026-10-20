@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const metadata={title:"Termos de utilização · APProva+"};
+export const metadata={title:"Termos de utilização · APProva+",alternates:{canonical:"/termos"}};
 
 const section={marginTop:28};
 
