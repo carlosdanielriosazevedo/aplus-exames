@@ -136,3 +136,20 @@ describe("subject completion idempotency",()=>{
     });
   }
 });
+
+describe("standalone exam completion idempotency",()=>{
+  for(const subjectId of ["portuguese","physics-chemistry-a"]){
+    it(`${subjectId}: revisiting a completed exam cannot reapply evidence or rewards`,()=>{
+      const base={subjectProgress:{},subjectProgressModelVersion:4,xp:13};
+      const items=[{id:"EX-1",domain:"reading",competencyId:"exam:reading"}];
+      const results=[{status:"final",final:true,correct:true,points:5,maxPoints:5}];
+      const args={subjectId,kind:"full_exam",label:"Exame Completo",items,results,sessionId:"exam-original",completedAt:12345};
+      const once=recordSubjectSession(base,args);
+      const twice=recordSubjectSession(once,{...args,completedAt:45678});
+      expect(twice).toBe(once);
+      expect(once.subjectProgress[subjectId].sessions).toHaveLength(1);
+      expect(once.subjectProgress[subjectId].competence["exam:reading"].attempts).toBe(1);
+      expect(once.xp).toBe(13);
+    });
+  }
+});
