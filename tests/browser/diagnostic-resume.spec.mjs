@@ -276,3 +276,33 @@ for(const subject of [
     await context.close();
   });
 }
+
+for(const subjectId of ["portuguese","physics-chemistry-a"]){
+  test(`${subjectId} · cabeçalho mantém coordenadas entre os quatro separadores móveis`,async({page})=>{
+    await page.setViewportSize({width:390,height:844});
+    await seed(page,completedState(subjectId));
+    await page.goto("/");
+    const positions=[];
+    for(const tab of ["Aprender","Treinar","Ranking","Progresso"]){
+      await page.getByRole("button",{name:tab,exact:true}).last().click();
+      await expect(page.locator(".studentTop")).toBeVisible({timeout:30_000});
+      const geometry=await page.evaluate(()=>{
+        const selectors=[".studentTop .logo",".studentTop .subjectSwitcher",".studentTop .studentMenu>summary"];
+        return selectors.map(selector=>{
+          const el=document.querySelector(selector);
+          if(!el)throw new Error("Elemento comum ausente: "+selector);
+          const rect=el.getBoundingClientRect();
+          return {x:rect.x,y:rect.y,width:rect.width,height:rect.height};
+        });
+      });
+      positions.push({tab,geometry});
+    }
+    const reference=positions[0].geometry;
+    for(const row of positions.slice(1)){
+      for(let index=0;index<reference.length;index++){
+        expect(Math.abs(row.geometry[index].x-reference[index].x),`${row.tab}: elemento ${index} deslocou-se na horizontal`).toBeLessThanOrEqual(2);
+        expect(Math.abs(row.geometry[index].y-reference[index].y),`${row.tab}: elemento ${index} deslocou-se na vertical`).toBeLessThanOrEqual(2);
+      }
+    }
+  });
+}
