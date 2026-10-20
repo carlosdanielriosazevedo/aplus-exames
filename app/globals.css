@@ -1725,3 +1725,9 @@ button,input,select,textarea{max-width:100%}
 .studentTopActions>button{display:inline-flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap;min-width:0}
 .studentTopActions>button>b{display:inline-block;white-space:nowrap;overflow-wrap:normal;word-break:normal;font-variant-numeric:tabular-nums;line-height:1}
 @media(max-width:760px){.studentTopActions>button{min-width:46px;max-width:110px;padding:0 9px;font-size:13px}.studentTopActions>button>b{font-size:13px}}
+
+/* Ecrã Aprender tinha o cabeçalho 8px acima dos restantes separadores móveis,
+   medido no Chromium a 390px (Português e FQ A). */
+@media(max-width:760px){
+  .learnHome .studentTop{position:relative;top:8px}
+}
