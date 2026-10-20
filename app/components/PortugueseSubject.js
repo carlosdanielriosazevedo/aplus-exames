@@ -232,6 +232,7 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
   },[]);
 
   function resetPortuguese(){
+    if(progress.lastPosition||miniExamDraft){window.alert("Há uma avaliação em curso. Continua e conclui a sessão antes de repor o progresso.");return}
     if(!window.confirm("Repor apenas o progresso de Português? O progresso de Matemática A não será alterado."))return;
     setS(prev=>clearPortugueseMiniExamDraft(resetSubjectProgress(prev,"portuguese")));
     setSession(null);setResults([]);setAnswer(null);setFeedback(null);setEditingCriterionId(null);setMissionFocus(null);
