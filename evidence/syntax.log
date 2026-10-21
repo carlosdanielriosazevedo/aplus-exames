@@ -1,0 +1,6 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 syntax:audit
+> node scripts/syntax-audit.cjs
+
+✓ syntax audit: 612 ficheiros JS/MJS/CJS analisados sem erros de parser
