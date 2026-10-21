@@ -1,5 +1,6 @@
 "use client";
 import {useEffect,useState} from "react";
+import {hasPendingAssessment,preservePendingAssessment} from "../lib/pendingAssessment";
 import {Back,BrandName,Shell} from "./chrome";
 import {
   cloudConfiguration,getCloudSession,cloudSignIn,cloudSignUp,cloudSignOut,
@@ -173,6 +174,7 @@ export function AccountCloud({s,setS,go}){
   }
 
   async function loadCloud(){
+    if(hasPendingAssessment(s)){setMessage({ok:false,text:"Há uma avaliação em curso. Continua e conclui a tentativa antes de carregar progresso online."});return}
     setBusy(true);setMessage(null);setConflictRemote(null);
     try{
       const row=await loadStudentCloudState();
@@ -187,7 +189,7 @@ export function AccountCloud({s,setS,go}){
           remoteDeviceId:row.last_device_id,
           remoteState:row.state_json
         });
-        setS({...recalibrated,cloudMeta:{...(recalibrated.cloudMeta||{}),lastLoadedAt:Date.now(),lastRemoteUpdatedAt:row.updated_at}});
+        setS(prev=>preservePendingAssessment(prev,{...recalibrated,cloudMeta:{...(recalibrated.cloudMeta||{}),lastLoadedAt:Date.now(),lastRemoteUpdatedAt:row.updated_at}}));
         refreshLocalSafety();
         setMessage({ok:true,text:`Progresso online carregado. Criámos primeiro uma cópia de segurança neste dispositivo.`});
       }
@@ -199,6 +201,7 @@ export function AccountCloud({s,setS,go}){
   }
 
   async function resolveKeepRemote(){
+    if(hasPendingAssessment(s)){setMessage({ok:false,text:"Há uma avaliação em curso. Continua e conclui a tentativa antes de carregar progresso online."});return}
     if(!conflictRemote?.state_json)return;
     setBusy(true);setMessage(null);
     try{
@@ -210,7 +213,7 @@ export function AccountCloud({s,setS,go}){
         remoteDeviceId:conflictRemote.last_device_id,
         remoteState:conflictRemote.state_json
       });
-      setS(next);
+      setS(prev=>preservePendingAssessment(prev,next));
       setConflictRemote(null);
       refreshLocalSafety();
       setMessage({ok:true,text:`Usámos o progresso online mais recente. A versão anterior deste dispositivo ficou guardada numa cópia de segurança.`});
@@ -242,6 +245,7 @@ export function AccountCloud({s,setS,go}){
   }
 
   async function resolveMerge(){
+    if(hasPendingAssessment(s)){setMessage({ok:false,text:"Há uma avaliação em curso. Continua e conclui a tentativa antes de carregar progresso online."});return}
     if(!conflictRemote?.state_json)return;
     setBusy(true);setMessage(null);
     try{
@@ -266,7 +270,7 @@ export function AccountCloud({s,setS,go}){
 
       const revision=Number(result?.data?.revision)||Number(conflictRemote.revision)+1;
       next=markCloudSaved(next,{revision,deviceId,savedState:next});
-      setS(next);
+      setS(prev=>preservePendingAssessment(prev,next));
       setConflictRemote(null);
       refreshLocalSafety();
       setMessage({ok:true,text:`Combinámos o progresso dos dois dispositivos e guardámos a nova versão online.`});

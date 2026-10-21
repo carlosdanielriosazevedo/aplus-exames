@@ -1,3 +1,4 @@
+import {beginSubjectSession,recordSubjectSession,quarantineUnrecoverableSubjectSession,migrateSubjectProgress} from "../../app/lib/subjectProgress.js";
 import {describe,expect,it} from "vitest";
 import {betaEvent,sessionStart} from "../../app/lib/beta.js";
 import {createDiagnosticDraft,validateDiagnosticDraft} from "../../app/lib/diagnosticRecovery.js";
@@ -41,4 +42,114 @@ describe("study session identity",()=>{
     expect(draft.session.id).toBe(session.id);
     expect(validateDiagnosticDraft(draft).ok).toBe(true);
   });
+});
+
+describe("pending subject attempts cannot be replaced",()=>{
+  for(const subjectId of ["portuguese","physics-chemistry-a"]){
+    it(`${subjectId}: starting another assessment preserves the original attempt`,()=>{
+      const initial={subjectProgress:{},subjectProgressModelVersion:4};
+      const first=beginSubjectSession(initial,{subjectId,kind:"mission",label:"Missão",items:[{id:"Q-1"},{id:"Q-2"}],sessionId:"original",startedAt:1000});
+      const interrupted={...first,subjectProgress:{...first.subjectProgress,[subjectId]:{...first.subjectProgress[subjectId],lastPosition:{...first.subjectProgress[subjectId].lastPosition,current:1,results:[{correct:false,final:true}],currentAnswer:"Resposta parcial"}}}};
+      for(const kind of ["diagnostic","mission","training","mini_exam","full_exam"]){
+        const attempted=beginSubjectSession(interrupted,{subjectId,kind,label:"Outra tentativa",items:[{id:"NEW-1"}],sessionId:"replacement",startedAt:2000});
+        expect(attempted).toBe(interrupted);
+        expect(attempted.subjectProgress[subjectId].lastPosition).toMatchObject({sessionId:"original",kind:"mission",current:1,currentAnswer:"Resposta parcial",itemIds:["Q-1","Q-2"]});
+      }
+    });
+  }
+});
+
+describe("pending assessment reward integrity",()=>{
+  for(const subjectId of ["portuguese","physics-chemistry-a"]){
+    it(`${subjectId}: competing completion cannot overwrite progress or award XP`,()=>{
+      const base={subjectProgress:{},subjectProgressModelVersion:4,xp:40};
+      const active=beginSubjectSession(base,{subjectId,kind:"mission",label:"Missão",items:[{id:"A"}],sessionId:"original",startedAt:100});
+      const forged=recordSubjectSession(active,{subjectId,kind:"mission",label:"Outra Missão",items:[{id:"B",domain:"leitura"}],results:[{status:"final",final:true,correct:true,points:1,maxPoints:1}],sessionId:"forged",completedAt:1000});
+      expect(forged).toBe(active);
+      expect(forged.xp).toBe(40);
+      expect(forged.subjectProgress[subjectId].lastPosition.sessionId).toBe("original");
+    });
+  }
+});
+
+describe("exceptional recovery of unavailable questions",()=>{
+  for(const subjectId of ["portuguese","physics-chemistry-a"]){
+    it(`${subjectId}: only a genuinely missing question allows archival, without rewards`,()=>{
+      const base={subjectProgress:{},subjectProgressModelVersion:4,xp:77};
+      const running=beginSubjectSession(base,{subjectId,kind:"mission",label:"Missão",sessionId:"original",items:[{id:"present"},{id:"missing"}],startedAt:111});
+      const stillValid=quarantineUnrecoverableSubjectSession(running,subjectId,["present","missing"],222);
+      expect(stillValid).toBe(running);
+      const rescued=quarantineUnrecoverableSubjectSession(running,subjectId,["present"],333);
+      expect(rescued.xp).toBe(77);
+      expect(rescued.subjectProgress[subjectId].lastPosition).toBeNull();
+      expect(rescued.subjectProgress[subjectId].sessions).toHaveLength(0);
+      const late=recordSubjectSession(rescued,{subjectId,kind:"mission",label:"Conclusão tardia",items:[{id:"present"}],results:[{status:"final",final:true,correct:true,points:1,maxPoints:1}],sessionId:"original",completedAt:444});
+      expect(late).toBe(rescued);
+      expect(late.xp).toBe(77);
+      expect(rescued.subjectProgress[subjectId].interruptedTechnicalSessions).toEqual([
+        expect.objectContaining({sessionId:"original",status:"interrupted_technical",reason:"missing_content",missingItemIds:["missing"],archivedAt:333})
+      ]);
+      expect(quarantineUnrecoverableSubjectSession(rescued,subjectId,[],444)).toBe(rescued);
+      const restored=migrateSubjectProgress({...rescued,subjectProgress:{[subjectId]:rescued.subjectProgress[subjectId]}});
+      expect(restored.subjectProgress[subjectId].lastPosition).toBeNull();
+      expect(restored.subjectProgress[subjectId].interruptedTechnicalSessions).toHaveLength(1);
+      if(subjectId==="portuguese"){
+        // Uma cópia antiga sob um alias legado não pode ressuscitar a sessão arquivada.
+        const merged=migrateSubjectProgress({...rescued,subjectProgress:{
+          portuguese:rescued.subjectProgress.portuguese,
+          portugueseLab:running.subjectProgress.portuguese
+        }});
+        expect(merged.subjectProgress.portuguese.lastPosition).toBeNull();
+        expect(merged.subjectProgress.portuguese.interruptedTechnicalSessions).toHaveLength(1);
+        expect(merged.xp).toBe(77);
+      }
+    });
+  }
+});
+
+describe("subject completion idempotency",()=>{
+  for(const subjectId of ["portuguese","physics-chemistry-a"]){
+    it(`${subjectId}: Missão repetida não reforça Domínio nem duplica recompensas`,()=>{
+      const base={subjectProgress:{},subjectProgressModelVersion:4,xp:0};
+      const items=[{id:"Q1",domain:"general",competencyId:"general"}];
+      const results=[{status:"final",final:true,correct:true,points:1,maxPoints:1}];
+      const started=beginSubjectSession(base,{subjectId,kind:"mission",label:"Missão",sessionId:"mission-once",items,startedAt:100});
+      const first=recordSubjectSession(started,{subjectId,kind:"mission",label:"Missão",items,results,sessionId:"mission-once",completedAt:200});
+      const repeated=recordSubjectSession(first,{subjectId,kind:"mission",label:"Missão",items,results,sessionId:"mission-once",completedAt:300});
+      expect(repeated).toBe(first);
+      expect(first.subjectProgress[subjectId].missionHistory).toHaveLength(1);
+      expect(first.subjectProgress[subjectId].competence.general.attempts).toBe(1);
+      expect(first.xp).toBe(25);
+    });
+  }
+  for(const subjectId of ["portuguese","physics-chemistry-a"]){
+    it(`${subjectId}: repeated completion does not award XP or evidence twice`,()=>{
+      const base={subjectProgress:{},subjectProgressModelVersion:4,xp:0};
+      const items=[{id:"Q1",domain:"general",competencyId:"general"}];
+      const result=[{status:"final",final:true,correct:true,points:1,maxPoints:1}];
+      const started=beginSubjectSession(base,{subjectId,kind:"training",label:"Treino",sessionId:"once",items,startedAt:100});
+      const first=recordSubjectSession(started,{subjectId,kind:"training",label:"Treino",items,results:result,sessionId:"once",completedAt:200});
+      const repeated=recordSubjectSession(first,{subjectId,kind:"training",label:"Treino",items,results:result,sessionId:"once",completedAt:300});
+      expect(repeated).toBe(first);
+      expect(first.xp).toBe(10);
+      expect(first.subjectProgress[subjectId].sessions).toHaveLength(1);
+    });
+  }
+});
+
+describe("standalone exam completion idempotency",()=>{
+  for(const subjectId of ["portuguese","physics-chemistry-a"]){
+    it(`${subjectId}: revisiting a completed exam cannot reapply evidence or rewards`,()=>{
+      const base={subjectProgress:{},subjectProgressModelVersion:4,xp:13};
+      const items=[{id:"EX-1",domain:"reading",competencyId:"exam:reading"}];
+      const results=[{status:"final",final:true,correct:true,points:5,maxPoints:5}];
+      const args={subjectId,kind:"full_exam",label:"Exame Completo",items,results,sessionId:"exam-original",completedAt:12345};
+      const once=recordSubjectSession(base,args);
+      const twice=recordSubjectSession(once,{...args,completedAt:45678});
+      expect(twice).toBe(once);
+      expect(once.subjectProgress[subjectId].sessions).toHaveLength(1);
+      expect(once.subjectProgress[subjectId].competence["exam:reading"].attempts).toBe(1);
+      expect(once.xp).toBe(13);
+    });
+  }
 });
