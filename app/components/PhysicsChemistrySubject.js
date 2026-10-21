@@ -78,7 +78,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   const onboardingDoneScreen="diag";
   const missionDone=missionCompletedToday(s);
   useEffect(()=>{
-
+    if(!["home","exams"].includes(view))return;
     const mini1=physicsChemistryMiniExamById("fqa-mini-1");
     const mini2=physicsChemistryMiniExamById("fqa-mini-2");
     const fullRows=[...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.mandatoryItems,...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.optionalItems];
