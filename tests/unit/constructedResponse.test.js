@@ -12,6 +12,36 @@ const byId=id=>{
   return question;
 };
 
+describe("Matemática A · conclusão por palavras no zero da função",()=>{
+  const zero=byId("CRV2-10FUN-STEPS-1");
+  it("atribui crédito à conclusão explícita no terceiro campo",()=>{
+    const result=gradeResponse(zero,{steps:{equation:"3x-12=0",value:"x=4",conclusion:"O zero de f é 4."}});
+    const conclusion=result.stepResults.find(row=>row.stepId==="conclusion");
+    expect(conclusion.points).toBe(10);
+    expect(result.points).toBe(35);
+  });
+  for(const conclusion of ["A raiz da função é 4.","Como f(4)=0, o zero é 4."]){
+    it(`aceita a conclusão equivalente: ${conclusion}`,()=>{
+      const result=gradeResponse(zero,{steps:{equation:"0=3x-12",value:"4",conclusion}});
+      expect(result.points).toBe(35);
+      expect(result.stepResults.map(row=>row.points)).toEqual([10,15,10]);
+    });
+  }
+  for(const conclusion of ["O zero é 14.","O zero é 5.","Não sei concluir."]){
+    it(`conserva só os 25 pontos comprovados: ${conclusion}`,()=>{
+      const result=gradeResponse(zero,{steps:{equation:"3x-12=0",value:"x=4",conclusion}});
+      expect(result.points).toBe(25);
+      expect(result.stepResults.find(row=>row.stepId==="conclusion").points).toBe(0);
+      expect(result.errorDiagnosis.label).toBe("Etapa ainda não validada");
+    });
+  }
+  it("não inventa conclusão quando o terceiro campo fica vazio",()=>{
+    const result=gradeResponse(zero,{steps:{equation:"3x-12=0",value:"x=4",conclusion:""}});
+    expect(result.stepResults.find(row=>row.stepId==="conclusion").points).toBe(0);
+    expect(result.points).toBe(25);
+  });
+});
+
 describe("constructed response engine",()=>{
   const derivative=byId("CRV2-11CD-STEPS-1");
 

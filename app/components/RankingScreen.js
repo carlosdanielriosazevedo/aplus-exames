@@ -76,13 +76,11 @@ export default function Ranking({s,setS,go}){
 
     <section aria-label="Filtrar ranking por disciplina">
       <small className="eyebrow">DISCIPLINA</small>
-      <div className="rankingTabs">
-        <button className={subjectFilter==="all"?"sel":""} onClick={()=>setSubjectFilter("all")}>Todas</button>
-        {RANKING_SUBJECT_IDS.map(id=>{
-          const subject=subjectById(id);
-          return <button key={id} className={subjectFilter===id?"sel":""} onClick={()=>setSubjectFilter(id)}>{subject.shortName||subject.name}</button>;
-        })}
-      </div>
+      <label className="rankingSubjectSelectLabel" htmlFor="rankingSubjectFilter">Escolher disciplina</label>
+      <select id="rankingSubjectFilter" className="rankingSubjectSelect" value={subjectFilter} onChange={event=>setSubjectFilter(event.target.value)}>
+        <option value="all">Todas as disciplinas</option>
+        {RANKING_SUBJECT_IDS.map(id=>{const subject=subjectById(id);return <option key={id} value={id}>{subject.name}</option>})}
+      </select>
       <p className="muted">{subjectId
         ?`Estás a comparar apenas o XP ganho em ${subjectLabel}. A tua divisão continua a ser decidida pelo XP total em “Todas”.`
         :"“Todas” soma o XP das tuas disciplinas. Usa os filtros para comparar a tua atividade numa disciplina específica."}</p>
