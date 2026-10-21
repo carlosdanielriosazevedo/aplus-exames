@@ -36,6 +36,12 @@ try{
 }
 assert.doesNotMatch(cloud,/sessionDraft|active-session/u,"a cloud de progresso não deve começar a transportar rascunhos de sessão sem um protocolo próprio de conflitos");
 
+// Nenhuma das ações de carga pode substituir a tentativa local ou o seu baseline.
+for(const handler of ["loadCloud","resolveKeepRemote","resolveMerge"]){
+  assert.ok(account.includes(`async function ${handler}(){\n    if(hasPendingAssessment(s))`),`${handler} deve bloquear a carga durante uma avaliação`);
+}
+assert.ok((account.match(/setS\(prev=>preservePendingAssessment\(prev,/gu)||[]).length>=3,"a aplicação tardia de uma resposta cloud também deve respeitar a tentativa atual");
+
 // Logout nunca deve apagar o estudo local.
 assert.match(account,/Sessão terminada\. O progresso local continua neste dispositivo\./u,"logout deve informar e preservar o progresso local");
 assert.doesNotMatch(account,/async function signout\(\)[\s\S]{0,700}clearLocalState/u,"logout não pode limpar silenciosamente o estado local");

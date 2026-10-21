@@ -540,3 +540,12 @@ test("math-a · Exame Completo permanece bloqueado",async({page})=>{
  await expect(page.locator(".exam.locked").filter({hasText:"Exame Completo"})).toContainText("ainda não disponível");
  await expect(page.getByRole("button",{name:/Exame Completo/u})).toHaveCount(0);
 });
+
+test("math-a · diagnóstico legado incompatível é conservado sem oferecer reinício",async({page})=>{
+ const {state,draft}=mathStateAfterTwoAnswers();draft.version=1;
+ await seed(page,state,draft);await page.goto("/");
+ await expect(page.getByText("Não foi possível recuperar esta sessão",{exact:true})).toBeVisible({timeout:30_000});
+ const preserved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-active-session-v1")));
+ expect(preserved).toEqual(draft);
+ await expect(page.getByRole("button",{name:/Começar.*novo|Recomeçar/u})).toHaveCount(0);
+});

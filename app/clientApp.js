@@ -130,7 +130,6 @@ function diagnosticRecoveryFn(name){
 }
 const createDiagnosticDraft=diagnosticRecoveryFn("createDiagnosticDraft");
 const recoverDiagnosticTransaction=diagnosticRecoveryFn("recoverDiagnosticTransaction");
-const recoverLegacyDiagnosticSessions=diagnosticRecoveryFn("recoverLegacyDiagnosticSessions");
 const transactDiagnosticAnswer=diagnosticRecoveryFn("transactDiagnosticAnswer");
 const emptyScores=()=>TAXONOMY.reduce((acc,t)=>{acc[t.id]={domain:null,conf:0,evidence:[]};return acc;},{});
 const theme=id=>TAXONOMY.find(t=>t.id===id);
@@ -308,9 +307,8 @@ export default function App(){
     let validDraft=draft;
     let recoveryError=null;
     let recoveredCompletion=false;
-    let recoveredLegacy=false;
     const openDiagnostic=(next.betaSessions||[]).some(x=>x.kind==="diagnostic"&&!x.finishedAt);
-    const legacyDiagnostic=openDiagnostic&&(!draft||(draft.kind==="diagnostic"&&![2,3].includes(draft.version)));
+    const legacyDiagnostic=openDiagnostic&&(!draft||(draft.kind==="diagnostic"&&![2,3,4].includes(draft.version)));
     if(legacyDiagnostic||draft?.kind==="diagnostic"){
       await loadDiagnosticRecovery();
       if(!live)return;
@@ -318,11 +316,9 @@ export default function App(){
       setDiagnosticRecoveryReady(true);
     }
     if(!next.diagnosticDone&&legacyDiagnostic){
-      const recovery=recoverLegacyDiagnosticSessions({state:next,saveState:saveLocalState});
-      if(recovery.ok){
-        recoveredState=recovery.state;recoveredLegacy=recovery.migrated;validDraft=null;
-        if(draft&&!clearSessionDraft(next.betaMode||"internal"))recoveryError="legacy_draft_clear_failed";
-      }else recoveryError=recovery.reason;
+      // A legacy attempt needs explicit recovery; never erase its draft automatically.
+      recoveryError="legacy_diagnostic_requires_recovery";
+      validDraft=null;
     }else if(draft?.kind==="diagnostic"){
       const recovery=recoverDiagnosticTransaction({
         state:next,draft,saveState:saveLocalState,saveDraft:saveSessionDraft,
@@ -357,8 +353,7 @@ export default function App(){
       setScreen("diagRecoveryError");
     }else if(recoveredCompletion){
       setScreen("diagResult");
-    }else if(recoveredLegacy){
-      setScreen("diag");
+
     }else if(canRecover){
       setRecoveredSession(validDraft);
       setScreen(recovered);
@@ -842,7 +837,6 @@ function DiagIntro({s,setS,go}){
       const started=ensureDiagnosticStarted(startState,draft);
       if(!started.ok){
         reportDiagnosticFlowIssue("start",started.reason||"ensure_failed");
-        clearSessionDraft(startState.betaMode||"internal");
         setSaveError(true);
         return;
       }
