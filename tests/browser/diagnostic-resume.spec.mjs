@@ -383,7 +383,7 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
 }
 
 for(const subjectId of ["portuguese","physics-chemistry-a"]){
-  for(const mode of ["mini","full"]){
+  for(const mode of (subjectId==="physics-chemistry-a"?["mini","mini2","full"]:["mini","full"])){
     test(`${subjectId} · ${mode} mantém identidade, respostas e relógio após rota concorrente e reabertura`,async({browser})=>{
       const context=await browser.newContext({viewport:{width:390,height:844}});
       const page=await context.newPage();
@@ -394,7 +394,7 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
       await page.evaluate(state=>localStorage.setItem("a25",JSON.stringify(state)),state);
       await page.reload();
       await expect(page.locator(".adaptivePath")).toBeVisible({timeout:30_000});
-      const route=subjectId==="portuguese"?"portugueseMiniExam":mode==="full"?"physicsChemistryExam":"physicsChemistryMini1";
+      const route=subjectId==="portuguese"?"portugueseMiniExam":mode==="full"?"physicsChemistryExam":mode==="mini2"?"physicsChemistryMini2":"physicsChemistryMini1";
       if(subjectId==="portuguese"){
         await page.evaluate(mode=>{
           const s=JSON.parse(localStorage.getItem("a25"));
@@ -405,7 +405,7 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
         await expect(page.locator(".adaptivePath")).toBeVisible({timeout:30_000});
       }
       await page.evaluate(({route,subjectId})=>window.dispatchEvent(new PopStateEvent("popstate",{state:{...window.history.state,approvaSessionGuard:true,approvaScreen:route,approvaSubjectId:subjectId}})),{route,subjectId});
-      const key=subjectId==="portuguese"?"a25":`applus:fqa-exam-draft:v1:${mode==="full"?"fqa-full-715":"fqa-mini-1"}`;
+      const key=subjectId==="portuguese"?"a25":`applus:fqa-exam-draft:v1:${mode==="full"?"fqa-full-715":mode==="mini2"?"fqa-mini-2":"fqa-mini-1"}`;
       const read=()=>page.evaluate(({key,subjectId})=>{
         const value=JSON.parse(localStorage.getItem(key)||"null");
         return subjectId==="portuguese"?value?.subjectSettings?.portuguese?.miniExamDraft:value;
@@ -479,13 +479,13 @@ function mathPendingAttempt(kind){
 }
 
 for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
- for(const kind of ["diagnostic","mission","training","mini_exam","full_exam"]){
+ for(const kind of (subjectId==="physics-chemistry-a"?["diagnostic","mission","training","mini_exam","mini_exam_2","full_exam"]:["diagnostic","mission","training","mini_exam","full_exam"])){
   if(subjectId==="math-a"&&kind==="full_exam")continue; // Motor completo continua bloqueado.
   test(`${subjectId} · ${kind} sobrevive ao encerramento completo do Chromium`,async({},testInfo)=>{
    const directory=mkdtempSync(join(tmpdir(),"approva-recovery-"));
    const options={...testInfo.project.use.launchOptions,headless:true,viewport:{width:390,height:844}};
    let context=await chromium.launchPersistentContext(directory,options);
-   const exam=["mini_exam","full_exam"].includes(kind);
+   const exam=["mini_exam","mini_exam_2","full_exam"].includes(kind);
    let state,draft=null;
    if(subjectId==="math-a")({state,draft}=mathPendingAttempt(kind));
    else if(exam){state=completedState(subjectId);state.profile.schoolYear="12.º";if(subjectId==="portuguese")state.subjectSettings.portuguese.selectedMiniExamId=kind==="full_exam"?"full-1":"mini-1"}
@@ -500,7 +500,7 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
     await page.goto("http://127.0.0.1:3000/");
     if(subjectId!=="math-a"&&exam){
      await expect(page.locator(".studentTop")).toBeVisible({timeout:30_000});
-     const route=subjectId==="portuguese"?"portugueseMiniExam":kind==="full_exam"?"physicsChemistryExam":"physicsChemistryMini1";
+     const route=subjectId==="portuguese"?"portugueseMiniExam":kind==="full_exam"?"physicsChemistryExam":kind==="mini_exam_2"?"physicsChemistryMini2":"physicsChemistryMini1";
      await page.evaluate(({route,subjectId})=>window.dispatchEvent(new PopStateEvent("popstate",{state:{...window.history.state,approvaSessionGuard:true,approvaScreen:route,approvaSubjectId:subjectId}})),{route,subjectId});
      const choices=page.locator(".ptx-options button, .opts button").first();
      await expect(page.locator(".ptx-question-card, .fqaMiniExamPage, .fqaFullExamPage").first()).toBeVisible({timeout:30_000});
@@ -513,7 +513,7 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
     const snapshot=page=>page.evaluate(({subjectId,exam,kind})=>{
      const state=JSON.parse(localStorage.getItem("a25"));
      const draft=subjectId==="math-a"?JSON.parse(localStorage.getItem("a25-active-session-v1")||"null")
-      :exam?(subjectId==="portuguese"?state.subjectSettings.portuguese.miniExamDraft:JSON.parse(localStorage.getItem("applus:fqa-exam-draft:v1:"+(kind==="full_exam"?"fqa-full-715":"fqa-mini-1"))||"null")):state.subjectProgress[subjectId].lastPosition;
+      :exam?(subjectId==="portuguese"?state.subjectSettings.portuguese.miniExamDraft:JSON.parse(localStorage.getItem("applus:fqa-exam-draft:v1:"+(kind==="full_exam"?"fqa-full-715":kind==="mini_exam_2"?"fqa-mini-2":"fqa-mini-1"))||"null")):state.subjectProgress[subjectId].lastPosition;
      if(!draft)return null;
      const attempt=draft.session||draft;
      return {id:attempt.sessionId||attempt.attemptId||attempt.startedAt,current:attempt.current??attempt.index??attempt.i??null,itemId:attempt.current?.id||null,itemIds:attempt.itemIds||attempt.questions?.map(row=>row.id)||null,answers:attempt.answers||attempt.responses||attempt.results||null,answer:attempt.currentAnswer??attempt.sel??null,startedAt:attempt.startedAt||null,xp:state.xp||0};
