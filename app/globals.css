@@ -1737,3 +1737,16 @@ button,input,select,textarea{max-width:100%}
 @media(max-width:760px){
   .studentTop:has(~ .rankingHero){position:relative;top:3px}
 }
+
+/* O seletor fica abaixo da linha de ações; o XP ocupa a mesma posição com ou sem menu. */
+@media(max-width:760px){
+  .studentTopIdentity .logo{height:46px;display:flex;align-items:center}
+  .studentTopActions{gap:8px}
+  .studentTopActions>button[aria-label$=" XP"]{display:inline-flex;width:auto}
+  .studentTopActions:not(:has(.studentMenu)){padding-right:54px}
+}
+
+@media(max-width:760px){
+  .divisionBadge{flex:0 0 90px;min-width:90px;align-self:flex-start}
+  .divisionBadge b{white-space:nowrap}
+}
