@@ -25,7 +25,14 @@ export function savePhysicsChemistryExamDraft(examId,{itemIds,index,answers,star
   const existing=loadPhysicsChemistryExamDraft(examId,itemIds);
   const preservedStart=Number.isFinite(existing?.startedAt)?existing.startedAt:startedAt;
   const payload={version:1,examId,itemIds,index,answers,startedAt:preservedStart,review:!!review,rubricAssessments,markedForReview:Array.from(new Set(markedForReview)).filter(id=>itemIds.includes(id)),updatedAt:Date.now()};
-  try{store.setItem(PREFIX+examId,JSON.stringify(payload))}catch{}
+  try{
+    const raw=store.getItem(PREFIX+examId);
+    if(raw){
+      const pending=JSON.parse(raw);
+      if(pending.version!==1||JSON.stringify(pending.itemIds)!==JSON.stringify(itemIds))return false;
+    }
+    store.setItem(PREFIX+examId,JSON.stringify(payload));return true;
+  }catch{return false}
 }
 
 export function clearPhysicsChemistryExamDraft(examId){
@@ -41,4 +48,17 @@ export function physicsChemistryDraftAgeLabel(updatedAt){
   if(minutes<60)return "guardado há "+minutes+" min";
   const hours=Math.round(minutes/60);
   return "guardado há "+hours+" h";
+}
+
+export function pendingPhysicsChemistryExam(){
+  const store=storage();
+  if(!store)return null;
+  for(const [examId,route] of [["fqa-mini-1","physicsChemistryMini1"],["fqa-mini-2","physicsChemistryMini2"],["fqa-full-715","physicsChemistryExam"]]){
+    try{if(store.getItem(PREFIX+examId))return {examId,route}}catch{return {error:true}}
+  }
+  return null;
+}
+
+export function hasPhysicsChemistryExamDraft(examId){
+  try{return !!storage()?.getItem(PREFIX+examId)}catch{return true}
 }

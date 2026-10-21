@@ -1,6 +1,6 @@
 import {test,expect} from "@playwright/test";
 import {DIAGNOSTIC_BLUEPRINT} from "../../app/data/content.js";
-import {diagnosticAnchor,emptyScores} from "../../app/lib/engine.js";
+import {diagnosticAnchor,emptyScores,dailyMissionPlan,selectQuestionForPlan,trainingQuestions,buildMiniExam} from "../../app/lib/engine.js";
 import {createDiagnosticDraft,transactDiagnosticAnswer} from "../../app/lib/diagnosticRecovery.js";
 
 const SUBJECTS=[
@@ -48,7 +48,7 @@ function pausedSubjectState(subjectId,current=2){
       domain:null,
       itemIds,
       current,
-      results:Array.from({length:current},()=>({status:"final",final:true,correct:true,points:1,maxPoints:1,gradingMode:"deterministic"})),
+      results:Array.from({length:current},()=>({status:"final",final:true,correct:true,points:1,maxPoints:1,gradingMode:"deterministic",classificationMode:null,countsForExamScore:null,penalty:0,provisionalPoints:null,requiresReview:false,responseText:"",type1Count:0,type2Count:0})),
       startedAt:now-60_000,
       updatedAt:now
     },
@@ -220,7 +220,7 @@ for(const subject of [
         await expect(page.getByRole("button",{name:"Guardar e sair",exact:true})).toHaveCount(1);
         await expect(page.getByRole("button",{name:"Sair da sessão",exact:true})).toHaveCount(0);
       }
-      const options=page.locator(".opts button:visible, .portugueseOptions button:visible");
+      const options=page.locator(".opts button:visible, .portugueseOptions button:visible, .ptx-options button:visible");
       if(await options.count())await options.first().click();
       else{
         const textarea=page.locator("textarea:visible").first();
@@ -352,4 +352,120 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
     await page.reload();
     await expect(page.getByRole("button",{name:"Resolver sessão irrecuperável"})).toHaveCount(0);
   });
+}
+
+for(const subjectId of ["portuguese","physics-chemistry-a"]){
+  for(const kind of ["diagnostic","mission","training"]){
+    test(`${subjectId} · ${kind} resiste à navegação direta para outro exame`,async({page})=>{
+      const state=pausedSubjectState(subjectId,2);
+      state.subjectProgress[subjectId].lastPosition.kind=kind;
+      state.subjectProgress[subjectId].lastPosition.currentAnswer="Resposta conservada";
+      await seed(page,state);
+      await page.goto("/");
+      await expect(page.getByRole("button",{name:kind==="diagnostic"?"Responder":"Continuar →",exact:true})).toBeVisible({timeout:30_000});
+      const read=()=>page.evaluate(id=>JSON.parse(localStorage.getItem("a25")).subjectProgress[id].lastPosition,subjectId);
+      const before=await read();
+      await page.evaluate(({subjectId})=>window.dispatchEvent(new PopStateEvent("popstate",{state:{...window.history.state,approvaSessionGuard:true,approvaScreen:subjectId==="portuguese"?"portugueseMiniExam":"physicsChemistryExam",approvaSubjectId:subjectId}})),{subjectId});
+      await expect(page.getByText("Tens uma avaliação em curso",{exact:true})).toBeVisible();
+      await page.getByRole("button",{name:"Continuar",exact:true}).click();
+      await expect(page.getByRole("button",{name:"Responder",exact:true})).toBeVisible();
+      const after=await read();
+      expect(after.sessionId).toBe(before.sessionId);
+      expect(after.current).toBe(before.current);
+      expect(after.results).toEqual(before.results);
+      expect(after.currentAnswer).toBe(before.currentAnswer);
+      expect(after.startedAt).toBe(before.startedAt);
+    });
+  }
+}
+
+for(const subjectId of ["portuguese","physics-chemistry-a"]){
+  for(const mode of ["mini","full"]){
+    test(`${subjectId} · ${mode} mantém identidade, respostas e relógio após rota concorrente e reabertura`,async({browser})=>{
+      const context=await browser.newContext({viewport:{width:390,height:844}});
+      const page=await context.newPage();
+      const state=completedState(subjectId);
+      state.profile.schoolYear="12.º";
+      // Seed once, then remove the initializer: reload must use actual saved data.
+      await page.goto("/");
+      await page.evaluate(state=>localStorage.setItem("a25",JSON.stringify(state)),state);
+      await page.reload();
+      await expect(page.locator(".adaptivePath")).toBeVisible({timeout:30_000});
+      const route=subjectId==="portuguese"?"portugueseMiniExam":mode==="full"?"physicsChemistryExam":"physicsChemistryMini1";
+      if(subjectId==="portuguese"){
+        await page.evaluate(mode=>{
+          const s=JSON.parse(localStorage.getItem("a25"));
+          s.subjectSettings.portuguese.selectedMiniExamId=mode==="full"?"full-1":"mini-1";
+          localStorage.setItem("a25",JSON.stringify(s));
+        },mode);
+        await page.reload();
+        await expect(page.locator(".adaptivePath")).toBeVisible({timeout:30_000});
+      }
+      await page.evaluate(({route,subjectId})=>window.dispatchEvent(new PopStateEvent("popstate",{state:{...window.history.state,approvaSessionGuard:true,approvaScreen:route,approvaSubjectId:subjectId}})),{route,subjectId});
+      const key=subjectId==="portuguese"?"a25":`applus:fqa-exam-draft:v1:${mode==="full"?"fqa-full-715":"fqa-mini-1"}`;
+      const read=()=>page.evaluate(({key,subjectId})=>{
+        const value=JSON.parse(localStorage.getItem(key)||"null");
+        return subjectId==="portuguese"?value?.subjectSettings?.portuguese?.miniExamDraft:value;
+      },{key,subjectId});
+      await expect.poll(read).toBeTruthy();
+      const options=page.locator(".opts button:visible, .portugueseOptions button:visible, .ptx-options button:visible");
+      if(await options.first().isVisible())await options.first().click();
+      else await page.getByRole("textbox").first().fill("Resposta em edição que deve sobreviver à recuperação da tentativa.");
+      await expect.poll(async()=>Object.keys((await read()).answers).length).toBeGreaterThan(0);
+      const before=await read();
+      await page.evaluate(subjectId=>window.dispatchEvent(new PopStateEvent("popstate",{state:{...window.history.state,approvaSessionGuard:true,approvaScreen:"trainingSetup",approvaSubjectId:subjectId}})),subjectId);
+      await expect(page.getByText("Tens uma avaliação em curso",{exact:true})).toBeVisible();
+      await page.getByRole("button",{name:"Continuar",exact:true}).click();
+      await expect.poll(read).toMatchObject({startedAt:before.startedAt,answers:before.answers,index:before.index});
+      await page.close();
+      const reopened=await context.newPage();
+      await reopened.goto("/");
+      await expect(reopened.getByRole("button",{name:"Continuar →",exact:true}).first()).toBeVisible({timeout:30_000});
+      await reopened.getByRole("button",{name:"Continuar →",exact:true}).first().click();
+      const restored=await reopened.evaluate(({key,subjectId})=>{
+        const value=JSON.parse(localStorage.getItem(key));
+        return subjectId==="portuguese"?value.subjectSettings.portuguese.miniExamDraft:value;
+      },{key,subjectId});
+      expect(restored).toMatchObject({startedAt:before.startedAt,answers:before.answers,index:before.index});
+      if(before.attemptId)expect(restored.attemptId).toBe(before.attemptId);
+      await context.close();
+    });
+  }
+}
+
+for(const kind of ["diagnostic","mission","training","mini_exam"]){
+ test(`math-a · ${kind} conserva a tentativa perante três rotas concorrentes`,async({page})=>{
+  const prepared=mathStateAfterTwoAnswers();
+  const state=prepared.state;
+  let draft=prepared.draft;
+  const sessionId=`adversarial-${kind}`;
+  if(kind!=="diagnostic"){
+   state.diagnosticDone=true;
+   const plan=dailyMissionPlan(state);
+   const cfg={themeId:plan.themeId,focus:plan.focus,level:"auto"};
+   const questions=kind==="mini_exam"?buildMiniExam(state):trainingQuestions(state,cfg);
+   draft=kind==="mission"?{kind,sessionId,plan,current:selectQuestionForPlan(state,plan),targetCount:2,totalCount:2,usedIds:[],sel:0}
+    :kind==="training"?{kind,sessionId,cfg,questions,i:2,sel:0}
+    :{kind,screen:"miniExamRun",session:{sessionId,questions,current:2,answers:questions.map((_,i)=>i<2?0:null),startedAt:Date.now()-60000}};
+  }
+  await seed(page,state,draft);
+  await page.goto("/");
+  await expect(page.locator(".sessionTop, .examQuestion").first()).toBeVisible({timeout:30_000});
+  const key="a25-active-session-v1";
+  const read=()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
+  await expect.poll(read).toBeTruthy();
+  const id=kind==="mini_exam"?draft.session.sessionId:draft.sessionId;
+  for(const route of ["mission","trainingSetup","miniExamIntro"]){
+   if((kind==="mission"&&route==="mission")||(kind==="mini_exam"&&route==="miniExamIntro"))continue;
+   await page.evaluate(route=>window.dispatchEvent(new PopStateEvent("popstate",{state:{...window.history.state,approvaSessionGuard:true,approvaScreen:route,approvaSubjectId:"math-a"}})),route);
+   await expect(page.getByText("Tens uma avaliação em curso",{exact:true})).toBeVisible();
+   await page.getByRole("button",{name:"Continuar",exact:true}).click();
+   await expect(page.getByText("Tens uma avaliação em curso",{exact:true})).toHaveCount(0);
+   await expect.poll(async()=>{const d=await read();return d.sessionId||d.session?.sessionId}).toBe(id);
+   const after=await read();
+   expect(after.kind).toBe(kind);
+   if(kind==="training")expect(after.questions.map(q=>q.id)).toEqual(draft.questions.map(q=>q.id));
+   if(kind==="mini_exam")expect(after.session.startedAt).toBe(draft.session.startedAt);
+  }
+ });
 }

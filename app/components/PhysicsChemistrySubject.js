@@ -78,7 +78,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   const onboardingDoneScreen="diag";
   const missionDone=missionCompletedToday(s);
   useEffect(()=>{
-    if(!["home","exams"].includes(view))return;
+
     const mini1=physicsChemistryMiniExamById("fqa-mini-1");
     const mini2=physicsChemistryMiniExamById("fqa-mini-2");
     const fullRows=[...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.mandatoryItems,...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.optionalItems];
@@ -98,7 +98,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     setS(prev=>{
       const active=subjectProgressFor(prev,SUBJECT_ID).lastPosition;
       if(!active||active.sessionId!==session.sessionId)return prev;
-      return advanceSubjectSession(prev,SUBJECT_ID,{
+      return advanceSubjectSession(prev,SUBJECT_ID,{sessionId:session.sessionId,
         current:session.current,
         results,
         currentResult:feedback,
@@ -118,6 +118,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   function start(kind,items,label,domain=null){
     // Nunca substituir uma tentativa pendente: apenas permitir a retoma.
     if(progress.lastPosition){resume();return}
+    if(examDrafts.length){go(examDrafts[0].route);return}
     const sessionId=createSubjectSessionId(SUBJECT_ID,kind);
     setSession({sessionId,kind,label,domain,items,current:0});
     setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});
@@ -145,12 +146,13 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   }
 
   function submit(){
+    if(feedback)return;
     const item=session.items[session.current];
     if(!answerReady(item))return;
     const result=gradePhysicsChemistryResponse(item,answer);
     const nextResults=[...results,result];
     setFeedback(result);setResults(nextResults);
-    setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current:session.current,results:nextResults,currentResult:result,currentAnswer:answer}));
+    setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{sessionId:session.sessionId,current:session.current,results:nextResults,currentResult:result,currentAnswer:answer}));
   }
 
   function next(){
@@ -165,7 +167,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     const current=session.current+1;
     setSession(prev=>({...prev,current}));
     setAnswer(null);setFeedback(null);setRubricAssessment({});
-    setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current,results,currentResult:null,currentAnswer:null}));
+    setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{sessionId:session.sessionId,current,results,currentResult:null,currentAnswer:null}));
   }
 
   const unrecoverableSession=!!progress.lastPosition?.itemIds?.length&&progress.lastPosition.itemIds.some(itemId=>!physicsChemistryItemById(itemId));
@@ -190,7 +192,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   }
 
   useEffect(()=>{
-    if(autoResumeDiagnostic&&progress.lastPosition?.kind==="diagnostic")resume();
+    if(autoResumeDiagnostic&&progress.lastPosition)resume();
   },[]);
 
   function resetPhysicsChemistry(){

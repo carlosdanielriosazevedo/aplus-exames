@@ -233,8 +233,13 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
   }
 
   useEffect(()=>{
-    if(autoResumeDiagnostic&&progress.lastPosition?.kind==="diagnostic")resume();
+    if(autoResumeDiagnostic&&progress.lastPosition)resume();
   },[]);
+
+  useEffect(()=>{
+    if(!session||session.finished)return;
+    setS(prev=>advanceSubjectSession(prev,"portuguese",{sessionId:session.sessionId,current:session.current,results,currentResult:feedback,currentAnswer:answer}));
+  },[session,answer,feedback,results,setS]);
 
   function resetPortuguese(){
     if(progress.lastPosition||miniExamDraft){window.alert("Há uma avaliação em curso. Continua e conclui a sessão antes de repor o progresso.");return}
@@ -427,13 +432,13 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
     const nextFeedback=gradePortugueseResponse(item,answer);
     capturePortugueseValidationCase({item,response:answer,result:nextFeedback});
     setFeedback(nextFeedback);
-    setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current,results,currentResult:nextFeedback,currentAnswer:answer}));
+    setS(prev=>advanceSubjectSession(prev,"portuguese",{sessionId:session.sessionId,current:session.current,results,currentResult:nextFeedback,currentAnswer:answer}));
   }
 
   function recordRubricEvidence(criterionId,observationId,evidence){
     const nextFeedback=assessPortugueseRubricObservation(feedback,criterionId,observationId,evidence);
     setFeedback(nextFeedback);setEditingCriterionId(null);
-    setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current,results,currentResult:nextFeedback,currentAnswer:nextFeedback.responseText}));
+    setS(prev=>advanceSubjectSession(prev,"portuguese",{sessionId:session.sessionId,current:session.current,results,currentResult:nextFeedback,currentAnswer:nextFeedback.responseText}));
   }
 
 
@@ -444,12 +449,12 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
       setS(prev=>recordSubjectSession(prev,{subjectId:"portuguese",sessionId:session.sessionId,kind:session.kind,label:session.label,domain:session.domain,items:session.items,results:nextResults}));
       setResults(nextResults);setSession(current=>({...current,finished:true}));return;
     }
-    setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current+1,results:nextResults,currentAnswer:null}));
+    setS(prev=>advanceSubjectSession(prev,"portuguese",{sessionId:session.sessionId,current:session.current+1,results:nextResults,currentAnswer:null}));
     setResults(nextResults);setSession(current=>({...current,current:current.current+1}));setAnswer(null);setFeedback(null);setEditingCriterionId(null);
   }
 
   function pauseSession(){
-    setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current,results,currentResult:feedback,currentAnswer:answer}));
+    setS(prev=>advanceSubjectSession(prev,"portuguese",{sessionId:session.sessionId,current:session.current,results,currentResult:feedback,currentAnswer:answer}));
     setSession(null);setEditingCriterionId(null);go("home");
   }
 

@@ -1,4 +1,5 @@
 "use client";
+import {pendingPhysicsChemistryExam} from "./lib/physicsChemistryExamDraft";
 import {useEffect,useMemo,useRef,useState} from "react";
 import dynamic from "next/dynamic";
 import {insertMathText} from "./lib/mathInput";
@@ -333,9 +334,7 @@ export default function App(){
         recoveredState=recovery.state;validDraft=recovery.draft;
       }else{
         validDraft=null;
-        const hasDurableWork=(draft.responses?.length||0)>0||!!draft.pendingResponse||draft.phase==="completion_pending";
-        if(!hasDurableWork)clearSessionDraft(next.betaMode||"internal");
-        else recoveryError=recovery.reason;
+        recoveryError=recovery.reason;
         console.warn(`Draft de diagnóstico ignorado: ${recovery.reason}`);
       }
     }
@@ -466,6 +465,27 @@ export default function App(){
     setScreen(x);
   };
 
+  // Resolve pending attempts before mounting an assessment, including popstate.
+  const assessmentRoutes=["diag","diagRun","mission","trainingSetup","trainingRun","miniExamIntro","miniExamRun","miniExamReview","portugueseMiniExam","physicsChemistryMini1","physicsChemistryMini2","physicsChemistryExam"];
+  if(hydrated&&assessmentRoutes.includes(screen)){
+    const subject=s.activeSubjectId||"math-a";
+    const position=s.subjectProgress?.[subject]?.lastPosition;
+    const math=subject==="math-a"?loadSessionDraft(s.betaMode||"internal"):null;
+    const fqa=subject==="physics-chemistry-a"?pendingPhysicsChemistryExam():null;
+    const pt=subject==="portuguese"&&s.subjectSettings?.portuguese?.miniExamDraft;
+    const examRoutes=["portugueseMiniExam","physicsChemistryMini1","physicsChemistryMini2","physicsChemistryExam"];
+    let target=null;
+    if(position){
+      if(examRoutes.includes(screen))target="resumeSubjectDiagnostic";
+    }else if(pt)target="portugueseMiniExam";
+    else target=fqa?.route||(math?draftScreen(math):null);
+    const sameMathExam=math?.kind==="mini_exam"&&["miniExamIntro","miniExamRun","miniExamReview"].includes(screen);
+    if(target&&target!==screen&&!sameMathExam&&!(math?.kind==="diagnostic"&&screen==="diag"))return <Shell><Logo/><div className="notice"><b>Tens uma avaliação em curso</b><span>Continua a tentativa guardada, com as tuas respostas.</span></div><button className="btn" onClick={()=>{
+      if(math){setRecoveredSession(math);if(math.cfg)setTrainingCfg(math.cfg);if(math.session)setExamSession(math.session)}
+      go(target);
+    }}>Continuar</button></Shell>;
+  }
+
   const mathSurface=(s.activeSubjectId==="math-a"||(!s.activeSubjectId&&MATH_ENGINE_SCREENS.has(screen)))&&MATH_ENGINE_SCREENS.has(screen);
   const diagnosticSurface=["diag","diagRun","diagResult"].includes(screen)&&s.activeSubjectId==="math-a";
   if(mathSurface&&(!mathEngineReady||(diagnosticSurface&&!diagnosticRecoveryReady)))return <Shell><Logo/><div className="cloudLoading">A preparar Matemática A…</div></Shell>;
@@ -513,7 +533,8 @@ export default function App(){
   if(screen==="progress")return <Progress s={s} go={go}/>;
   if(screen==="ranking")return <Ranking s={s} setS={setS} go={go}/>;
   if(screen==="exams")return <Exams s={s} go={go} startMini={()=>{
-    clearSessionDraft(s.betaMode||"internal");
+    const pending=loadSessionDraft(s.betaMode||"internal");
+    if(pending){setRecoveredSession(pending);if(pending.session)setExamSession(pending.session);if(pending.cfg)setTrainingCfg(pending.cfg);go(draftScreen(pending));return}
     setRecoveredSession(null);
     const questions=buildMiniExam(s,MATH_MINI_EXAM_QUESTIONS);
     const ses=sessionStart("mini_exam",{questionCount:questions.length});
