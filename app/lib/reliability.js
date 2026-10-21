@@ -1,6 +1,5 @@
 
 const COMPLETED_KEY="a25-completed-sessions-v1";
-const MAX_COMPLETED=120;
 
 function readCompleted(){
   try{
@@ -12,7 +11,7 @@ function readCompleted(){
 
 function writeCompleted(rows){
   try{
-    localStorage.setItem(COMPLETED_KEY,JSON.stringify(rows.slice(-MAX_COMPLETED)));
+    localStorage.setItem(COMPLETED_KEY,JSON.stringify(rows));
     return true;
   }catch{return false}
 }
@@ -23,8 +22,7 @@ export function claimSessionCompletion(sessionId){
   const rows=readCompleted();
   if(rows.some(x=>x.id===sessionId))return false;
   rows.push({id:sessionId,at:Date.now()});
-  writeCompleted(rows);
-  return true;
+  return writeCompleted(rows);
 }
 
 export function releaseSessionCompletion(sessionId){

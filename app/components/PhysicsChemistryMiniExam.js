@@ -7,7 +7,7 @@ import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./P
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
 import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";
-import {clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";
+import {hasPhysicsChemistryExamDraft,clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";
 
 const SUBJECT_ID="physics-chemistry-a";
 
@@ -41,6 +41,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   const [rubricAssessments,setRubricAssessments]=useState(()=>initialDraft?.rubricAssessments||{});
   const [markedForReview,setMarkedForReview]=useState(()=>initialDraft?.markedForReview||[]);
   const [startedAt]=useState(()=>initialDraft?.startedAt||Date.now());
+  const [recoveryBlocked]=useState(()=>!initialDraft&&hasPhysicsChemistryExamDraft(exam.id));
   const [now,setNow]=useState(Date.now);
   const recordedRef=useRef(false);
   const item=exam.items[index];
@@ -55,6 +56,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   },[review]);
   useEffect(()=>{if(remaining===0&&!review)finish({force:true})},[remaining,review]);
   useEffect(()=>{
+    if(recoveryBlocked)return;
     savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review,rubricAssessments,markedForReview});
   },[answers,exam.id,index,itemIds,markedForReview,review,rubricAssessments,startedAt]);
 
@@ -83,6 +85,8 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
     clearPhysicsChemistryExamDraft(exam.id);
     go("exams");
   }
+
+  if(recoveryBlocked)return <Shell><div role="alert">Não foi possível recuperar esta prova. As respostas guardadas foram conservadas.</div></Shell>;
 
   if(submitCheck&&!review)return <Shell className="wideStudentShell fqaSubmitCheckPage">
     <ExamSubmissionCheck

@@ -1,0 +1,552 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 prebuild
+> node scripts/physics-chemistry-foundation-audit.mjs && node scripts/portuguese-literary-coverage-audit.mjs && node scripts/parent-experience-audit.mjs && node scripts/automatic-open-response-audit.mjs && node scripts/open-response-calibration-audit.mjs && node scripts/explanatory-feedback-audit.mjs && node scripts/submitted-answer-lock-audit.mjs && node scripts/open-response-scale-calibration.mjs && node scripts/response-analysis-calibration-v2.mjs && node scripts/response-analysis-calibration-v3.mjs && node scripts/response-analysis-calibration-v4.mjs && node scripts/response-analysis-calibration-v5.mjs && node scripts/response-analysis-calibration-v6.mjs && node scripts/response-analysis-calibration-v7.mjs && node scripts/error-diagnosis-audit.mjs && node scripts/learning-feedback-quality-audit.mjs && node scripts/diagnostic-minimal-pairs-audit.mjs
+
+✓ FQ A: AE março 2026 · 21 atividades práticas · 43 submatérias · 2145+ itens · tabelas + gráficos + diagramas · ≥14 problemas por etapas · ≥14 respostas abertas · mínimo 7/submatéria · blueprint 715 15+8/4
+✓ cobertura literária de Português: 25 obras · 1348 itens · anos 10.º=250 · 11.º=478 · 12.º=620 · respostas A/B/C/D 320/330/355/343
+
+=== DIAGNÓSTICO TEMPORÁRIO · FQ A 11.º beta ===
+✓ FQ A 11.º beta readiness: 25 submatérias · 1247+ itens · 4 domínios · MC + etapas + resposta científica aberta
+DIAG_PASS: FQ A 11.º beta
+
+=== DIAGNÓSTICO TEMPORÁRIO · FQ A Exame Completo ===
+✓ FQ A exam flow: 23 itens · 15+8/4 · 120+30 min · revisão automática provisória · confiança explícita · sem feedback imediato
+DIAG_PASS: FQ A Exame Completo
+
+=== DIAGNÓSTICO TEMPORÁRIO · FQ A Mini-exame ===
+✓ FQ A mini-exams: 2 modelos · 12 itens · 6+6 anos · 45 min · correção automática provisória · sem feedback imediato
+DIAG_PASS: FQ A Mini-exame
+
+=== DIAGNÓSTICO TEMPORÁRIO · FQ A correção ===
+✓ FQ A automatic criteria: pontuação provisória · confiança · critérios explicados · sem autoavaliação manual
+DIAG_PASS: FQ A correção
+
+=== DIAGNÓSTICO TEMPORÁRIO · FQ A revisão/progresso ===
+✓ FQ A review status: respondidas · provisórias · confiança reduzida · revisão persistente · retoma visível
+DIAG_PASS: FQ A revisão/progresso
+FQA_BETA_DIAGNOSIS_GO
+✓ subject selection starts empty
+✓ zero-selection state is explicit
+✓ availability note is secondary
+✓ continue is blocked with zero subjects
+✓ diagnostic typography has no missing-space regression
+✓ parent screen is wired into the app
+✓ parent has two clear entry choices
+✓ parent dashboard is per subject
+✓ parent dashboard includes weekly activity
+✓ parent dashboard includes four-week consistency trend
+✓ parent dashboard includes recent assessment context
+✓ parent assessments avoid false grades for open responses
+✓ privacy boundary is explicit
+✓ parent dashboard styles exist
+
+Parent experience audit passed.
+✓ Portuguese open response is auto-assessed
+✓ Portuguese returns provisional points
+✓ Portuguese stronger answer scores above weak answer
+✓ FQ A open response is auto-assessed
+✓ FQ A returns provisional points
+✓ FQ A stronger answer scores above weak answer
+
+Automatic open-response audit passed.
+✓ Portuguese paraphrase receives meaningful credit
+✓ Portuguese keyword soup cannot receive full credit
+✓ Portuguese off-topic answer is not fully credited
+✓ FQ A paraphrase receives meaningful credit
+✓ FQ A scientific contradiction is detected
+✓ FQ A keyword soup cannot receive full credit
+
+Open-response calibration audit passed.
+✓ shared explanatory feedback helper exists
+✓ Portuguese mission shows strengths and gaps
+✓ FQ A mission shows strengths and gaps
+✓ FQ A mission keeps explanatory feedback without post-correction rewriting
+✓ Portuguese exam review explains open answers
+✓ FQ A mini-exam review explains open answers
+✓ FQ A full-exam review explains open answers
+
+Explanatory feedback audit passed.
+✓ Matemática A locks multiple-choice after feedback
+✓ Matemática A locks constructed practice after feedback
+✓ Matemática A only permits exam edits before delivery
+✓ Português locks choices, short answers and open answers after feedback
+✓ Português no longer exposes response rewrite actions
+✓ Português exam review is explicitly read-only
+✓ Português exam review has no rewrite action
+✓ FQ A locks response editors after feedback
+✓ FQ A no longer exposes improve-response action
+✓ No post-correction rewrite labels remain in Portuguese or FQ A
+
+Submitted-answer lock audit passed across Matemática A, Português and FQ A.
+
+portuguese::PT639-FND-311
+  excellent    63.1% · confidence 74 · review
+  paraphrase   63.1% · confidence 73 · review
+  partial        40% · confidence 60 · review
+  vague        37.7% · confidence 56 · review
+  wrong        32.3% · confidence 60 · review
+
+portuguese::PT639-FND-313
+  excellent    86.2% · confidence 79 · review
+  paraphrase   40.8% · confidence 60 · review
+  partial      26.2% · confidence 53 · review
+  vague        26.2% · confidence 53 · review
+  wrong        22.3% · confidence 54 · review
+
+portuguese::PT639-FND-315
+  excellent    63.8% · confidence 75 · review
+  paraphrase   32.3% · confidence 51 · review
+  partial      18.5% · confidence 53 · review
+  vague         7.7% · confidence 55 · review
+  wrong         7.7% · confidence 55 · review
+
+portuguese::PT639-FND-317
+  excellent    70.8% · confidence 70 · review
+  paraphrase   36.9% · confidence 56 · review
+  partial      26.2% · confidence 53 · review
+  vague         7.7% · confidence 55 · review
+  wrong        26.2% · confidence 53 · review
+
+portuguese::PT639-FND-319
+  excellent    76.9% · confidence 80 · review
+  paraphrase   55.4% · confidence 73 · review
+  partial      43.8% · confidence 72 · review
+  vague        33.1% · confidence 52 · review
+  wrong         7.7% · confidence 55 · review
+
+portuguese::PT639-FND-322
+  excellent    76.9% · confidence 84 · review
+  paraphrase   43.8% · confidence 69 · review
+  partial      36.9% · confidence 73 · review
+  vague        37.7% · confidence 56 · review
+  wrong        22.3% · confidence 54 · review
+
+physics-chemistry-a::FQA-R-ELEM-01
+  excellent     100% · confidence 96 · ok
+  paraphrase    100% · confidence 87 · ok
+  partial        80% · confidence 79 · ok
+  vague          14% · confidence 53 · review
+  wrong          21% · confidence 53 · review
+
+physics-chemistry-a::FQA-R-MAT-01
+  excellent     100% · confidence 85 · ok
+  paraphrase     85% · confidence 79 · ok
+  partial        31% · confidence 62 · review
+  vague           9% · confidence 54 · review
+  wrong          22% · confidence 56 · review
+
+physics-chemistry-a::FQA-R-ENE-01
+  excellent    73.3% · confidence 78 · review
+  paraphrase   85.8% · confidence 78 · ok
+  partial      44.2% · confidence 65 · review
+  vague        19.2% · confidence 53 · review
+  wrong        11.7% · confidence 56 · review
+
+physics-chemistry-a::FQA-R-MEC-01
+  excellent     100% · confidence 93 · ok
+  paraphrase    100% · confidence 85 · ok
+  partial        54% · confidence 63 · review
+  vague          23% · confidence 57 · review
+  wrong          23% · confidence 51 · review
+
+physics-chemistry-a::FQA-R-WAV-01
+  excellent     100% · confidence 82 · ok
+  paraphrase     86% · confidence 80 · ok
+  partial        44% · confidence 62 · review
+  vague          23% · confidence 58 · review
+  wrong           5% · confidence 56 · review
+
+physics-chemistry-a::FQA-R-EQ-01
+  excellent     100% · confidence 92 · ok
+  paraphrase    100% · confidence 83 · ok
+  partial        57% · confidence 71 · review
+  vague          33% · confidence 56 · review
+  wrong          11% · confidence 56 · review
+
+physics-chemistry-a::FQA-R-AQ-01
+  excellent     100% · confidence 92 · ok
+  paraphrase    100% · confidence 87 · ok
+  partial        78% · confidence 74 · review
+  vague          12% · confidence 57 · review
+  wrong          47% · confidence 64 · review
+
+=== CATEGORY MEANS ===
+portuguese
+  wrong      19.7% (6)
+  vague      25% (6)
+  partial    31.9% (6)
+  paraphrase 45.4% (6)
+  excellent  72.9% (6)
+physics-chemistry-a
+  wrong      20.1% (7)
+  vague      19% (7)
+  partial    55.5% (7)
+  paraphrase 93.8% (7)
+  excellent  96.2% (7)
+
+=== CALIBRATION METRICS ===
+cases: 65
+items: 13
+strongVsWrongRate: 100%
+strongVsVagueRate: 100%
+paraphraseRecognitionRate: 100%
+excellentRecognitionRate: 100%
+wrongInflationRate: 0%
+vagueInflationRate: 0%
+orderingViolations: 100%
+
+OPEN-RESPONSE CALIBRATION PASSED
+Bank: 65 responses across 13 items.
+=== RESPONSE ANALYSIS CALIBRATION V2 ===
+Total protected cases (including wave 1): 164
+
+Open-response adversarial profiles:
+  keyword-soup         30% · 13 cases
+  verbose-off-topic    16% · 13 cases
+  mixed-contradictory  28% · 13 cases
+  concise-correct      62% · 13 cases
+
+FQ A legitimate paraphrase counter-regression:
+  FQA-R-ELEM-01  100%
+  FQA-R-MAT-01   85%
+  FQA-R-ENE-01   85.8%
+  FQA-R-MEC-01   100%
+  FQA-R-WAV-01   86%
+  FQA-R-EQ-01    100%
+  FQA-R-AQ-01    100%
+  mean           93.8%
+
+Mathematics A constructed-response profiles:
+  full-correct         100% · 10 cases
+  partial              59% · 7 cases
+  wrong                2% · 10 cases
+  final-only           11% · 10 cases
+  propagated-conceptual 70% · 3 cases
+
+ADVERSARIAL + LEGITIMATE PARAPHRASE GATE PASSED.
+=== RESPONSE ANALYSIS CALIBRATION V3 ===
+Wave 3 cases: 63
+Total protected cases: 220
+  portuguese::polished-wrong                 12.1% · 6 cases
+  portuguese::negation-trap                  14.9% · 6 cases
+  portuguese::terse-correct                  34.7% · 6 cases
+  physics-chemistry-a::polished-wrong        24.2% · 7 cases
+  physics-chemistry-a::negation-trap         13.9% · 7 cases
+  physics-chemistry-a::terse-correct         63.9% · 7 cases
+  mathematics::equivalent-correct            100% · 8 cases
+  mathematics::almost-correct                61.8% · 8 cases
+  mathematics::unsupported-answer            14.3% · 8 cases
+
+RESPONSE ANALYSIS CALIBRATION V3 PASSED
+=== RESPONSE ANALYSIS CALIBRATION V4 ===
+Wave 4 cases: 59
+Total protected cases: 279
+  portuguese::partial-then-false                 19% · 6 cases
+  portuguese::related-nonanswer                  20.4% · 6 cases
+  portuguese::hedged-correct                     38.3% · 6 cases
+  physics-chemistry-a::partial-then-false        38.9% · 7 cases
+  physics-chemistry-a::related-nonanswer         15.3% · 7 cases
+  physics-chemistry-a::hedged-correct            67.7% · 7 cases
+  mathematics::right-method-local-slip           57.7% · 10 cases
+  mathematics::correct-work-false-conclusion     75.4% · 10 cases
+
+RESPONSE ANALYSIS CALIBRATION V4 PASSED
+=== RESPONSE ANALYSIS CALIBRATION V5 ===
+Wave 5 cases: 36
+Total protected cases: 315
+  portuguese::self-corrected                     37.8% · 6 cases
+  portuguese::student-shorthand                  30.8% · 6 cases
+  physics-chemistry-a::self-corrected            69% · 7 cases
+  physics-chemistry-a::student-shorthand         63.9% · 7 cases
+  mathematics::self-corrected-step               94.3% · 5 cases
+  mathematics::equivalent-notation               100% · 5 cases
+
+RESPONSE ANALYSIS CALIBRATION V5 PASSED
+=== RESPONSE ANALYSIS CALIBRATION V6 · METAMORPHIC INVARIANTS ===
+Seed answers: 13
+Invariant comparisons: 52
+Total protected scenarios: 367
+  portuguese            PT639-FND-311    base 39% · plain 39% · noise 39% · contradiction 16% · corrected 41%
+  portuguese            PT639-FND-313    base 44% · plain 44% · noise 44% · contradiction 32% · corrected 44%
+  portuguese            PT639-FND-315    base 18% · plain 26% · noise 18% · contradiction 0% · corrected 18%
+  portuguese            PT639-FND-317    base 18% · plain 26% · noise 18% · contradiction 18% · corrected 18%
+  portuguese            PT639-FND-319    base 36% · plain 36% · noise 36% · contradiction 25% · corrected 45%
+  portuguese            PT639-FND-322    base 28% · plain 36% · noise 28% · contradiction 36% · corrected 36%
+  physics-chemistry-a   FQA-R-ELEM-01    base 100% · plain 100% · noise 100% · contradiction 31% · corrected 100%
+  physics-chemistry-a   FQA-R-MAT-01     base 52% · plain 52% · noise 52% · contradiction 11% · corrected 52%
+  physics-chemistry-a   FQA-R-ENE-01     base 48% · plain 48% · noise 48% · contradiction 48% · corrected 48%
+  physics-chemistry-a   FQA-R-MEC-01     base 72% · plain 72% · noise 72% · contradiction 50% · corrected 72%
+  physics-chemistry-a   FQA-R-WAV-01     base 51% · plain 51% · noise 51% · contradiction 29% · corrected 51%
+  physics-chemistry-a   FQA-R-EQ-01      base 80% · plain 80% · noise 80% · contradiction 33% · corrected 100%
+  physics-chemistry-a   FQA-R-AQ-01      base 45% · plain 45% · noise 45% · contradiction 71% · corrected 71%
+
+RESPONSE ANALYSIS CALIBRATION V6 PASSED
+=== RESPONSE ANALYSIS CALIBRATION V7 · TOLERANCE + PRUDENCE ===
+✓ spelling-noise resilience checked in Portuguese and FQ A
+✓ genuine ambiguity routes to review
+✓ equivalent units accepted and missing final unit penalized
+✓ alternative scientific method routes to review instead of automatic rejection
+✓ unconventional but equivalent Mathematics forms preserve credit
+
+RESPONSE ANALYSIS CALIBRATION V7 PASSED
+=== ERROR DIAGNOSIS AUDIT ===
+Open-response diagnosis taxonomy: 4 core cases + criterion grounding checked
+Mathematics diagnosis taxonomy: correct, result-only, local-slip + step grounding checked
+
+ERROR DIAGNOSIS AUDIT PASSED
+✓ learning feedback: preserve-correct-work, focused gap, contradiction and Math first-error diagnosis validated
+=== DIAGNOSTIC MINIMAL-PAIR CALIBRATION ===
+✓ FQ A: incompleto vs contradição em Mecânica
+✓ FQ A: catalisador correto vs Kc/composição errados
+✓ Português: consequência vs contraste
+✓ Matemática: correto vs conceptual vs cálculo vs resultado isolado
+✓ Matemática: valor exato vs forma decimal equivalente
+DIAGNOSTIC MINIMAL-PAIR CALIBRATION PASSED
+
+> aplus-exames@5.5.0 build
+> next build && npm run performance:budget
+
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /workspace/scratch/7f5e477b35c5/aplus-exames/package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * /workspace/scratch/7f5e477b35c5/aplus-exames/.worktrees/recovery/package-lock.json
+
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+   ▲ Next.js 15.5.24
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 8.9s
+   Linting and checking validity of types ...
+
+./app/clientApp.js
+448:5  Warning: React Hook useEffect has missing dependencies: 's.activeSubjectId' and 'screen'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+870:49  Warning: React Hook useEffect has missing dependencies: 'onRecovered' and 'retryRecovery'. Either include them or remove the dependency array. If 'onRecovered' changes too often, find the parent component that defines it and wrap that definition in useCallback.  react-hooks/exhaustive-deps
+1126:5  Warning: React Hook useEffect has missing dependencies: 'computedPlan', 'missionDone', 'pausedDraft', 'persistedPlan', 's', 'setS', and 'showFirstUseTour'. Either include them or remove the dependency array. If 'setS' changes too often, find the parent component that defines it and wrap that definition in useCallback.  react-hooks/exhaustive-deps
+1239:5  Warning: React Hook useEffect has missing dependencies: 'draft' and 'onRecovered'. Either include them or remove the dependency array. If 'onRecovered' changes too often, find the parent component that defines it and wrap that definition in useCallback.  react-hooks/exhaustive-deps
+1247:5  Warning: React Hook useEffect has missing dependencies: 'before', 'beforeFocus', 's.betaMode', 'sessionId', and 'targetId'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+1610:5  Warning: React Hook useMemo has missing dependencies: 'draft?.kind', 'draft.questions', and 's'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+1621:42  Warning: React Hook useEffect has missing dependencies: 'draft' and 'onRecovered'. Either include them or remove the dependency array. If 'onRecovered' changes too often, find the parent component that defines it and wrap that definition in useCallback.  react-hooks/exhaustive-deps
+1626:5  Warning: React Hook useEffect has missing dependencies: 'conflictingDraft', 's.betaMode', and 'sessionId'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+1738:74  Warning: React Hook useEffect has missing dependencies: 'allowedYears', 'preferredYear', and 'year'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/AccountCloud.js
+76:36  Warning: React Hook useEffect has a missing dependency: 'refreshSession'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/PhysicsChemistryExam.js
+41:83  Warning: React Hook useMemo has missing dependencies: 'blueprint.mandatoryItems' and 'blueprint.optionalItems'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+87:5  Warning: React Hook useEffect has a missing dependency: 'recoveryBlocked'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/PhysicsChemistryMiniExam.js
+61:5  Warning: React Hook useEffect has a missing dependency: 'recoveryBlocked'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/PhysicsChemistrySubject.js
+108:5  Warning: React Hook useEffect has a missing dependency: 'session'. Either include it or remove the dependency array. Mutable values like 'session.current' aren't valid dependencies because mutating them doesn't re-render the component.  react-hooks/exhaustive-deps
+196:5  Warning: React Hook useEffect has missing dependencies: 'autoResumeDiagnostic', 'progress.lastPosition', and 'resume'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/PortugueseSubject.js
+237:5  Warning: React Hook useEffect has missing dependencies: 'autoResumeDiagnostic', 'progress.lastPosition', and 'resume'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/ReviewerDashboard.js
+82:5  Warning: React Hook useMemo has a missing dependency: 'selected'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/components/chrome.js
+15:70  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/data/schools/acores.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/aveiro.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/beja.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/braga.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/braganca.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/castelo-branco.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/coimbra.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/evora.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/faro.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/guarda.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/leiria.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/lisboa.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/madeira.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/portalegre.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/porto.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/santarem.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/setubal.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/viana-do-castelo.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/vila-real.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/data/schools/viseu.js
+2:1  Warning: Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+./app/page.js
+25:35  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+   Collecting page data ...
+   Generating static pages (0/20) ...
+   Generating static pages (5/20) 
+   Generating static pages (10/20) 
+   Generating static pages (15/20) 
+ ✓ Generating static pages (20/20)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                    2.33 kB         106 kB
+├ ○ /_not-found                            175 B         104 kB
+├ ƒ /api/auth/[...path]                    175 B         104 kB
+├ ƒ /api/auth/capabilities                 175 B         104 kB
+├ ƒ /api/auth/session                      175 B         104 kB
+├ ƒ /api/client-errors                     175 B         104 kB
+├ ƒ /api/health                            175 B         104 kB
+├ ƒ /api/pilot/consent                     175 B         104 kB
+├ ƒ /api/pilot/data                        175 B         104 kB
+├ ƒ /api/pilot/smoke                       175 B         104 kB
+├ ƒ /api/pilot/sync                        175 B         104 kB
+├ ○ /definicoes                          3.29 kB         110 kB
+├ ƒ /formula-a11y-check                  3.11 kB         107 kB
+├ ○ /internal/grader-validation          4.02 kB         108 kB
+├ ○ /internal/grader-validation-admin    3.08 kB         107 kB
+├ ○ /internal/grader-validation-report   7.01 kB         111 kB
+├ ○ /manifest.webmanifest                  175 B         104 kB
+├ ○ /opengraph-image                       175 B         104 kB
+├ ○ /participar-validacao                4.23 kB         108 kB
+├ ○ /piloto                              4.09 kB         111 kB
+├ ○ /piloto/encarregado                    341 B         107 kB
+├ ○ /portugues-mini-exame                33.4 kB         137 kB
+├ ○ /privacidade                           341 B         107 kB
+├ ○ /robots.txt                            175 B         104 kB
+├ ○ /sitemap.xml                           175 B         104 kB
+└ ○ /termos                                166 B         107 kB
++ First Load JS shared by all             104 kB
+  ├ chunks/18-51732c0e3a66e117.js        46.4 kB
+  ├ chunks/87c73c54-24122e7b92478d00.js  54.2 kB
+  └ other shared chunks (total)          2.99 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 performance:budget
+> node scripts/performance-baseline.mjs --enforce
+
+
+=== DIAGNÓSTICO TEMPORÁRIO · FQ A 11.º beta ===
+✓ FQ A 11.º beta readiness: 25 submatérias · 1247+ itens · 4 domínios · MC + etapas + resposta científica aberta
+DIAG_PASS: FQ A 11.º beta
+
+=== DIAGNÓSTICO TEMPORÁRIO · FQ A Exame Completo ===
+✓ FQ A exam flow: 23 itens · 15+8/4 · 120+30 min · revisão automática provisória · confiança explícita · sem feedback imediato
+DIAG_PASS: FQ A Exame Completo
+
+=== DIAGNÓSTICO TEMPORÁRIO · FQ A Mini-exame ===
+✓ FQ A mini-exams: 2 modelos · 12 itens · 6+6 anos · 45 min · correção automática provisória · sem feedback imediato
+DIAG_PASS: FQ A Mini-exame
+
+=== DIAGNÓSTICO TEMPORÁRIO · FQ A correção ===
+✓ FQ A automatic criteria: pontuação provisória · confiança · critérios explicados · sem autoavaliação manual
+DIAG_PASS: FQ A correção
+
+=== DIAGNÓSTICO TEMPORÁRIO · FQ A revisão/progresso ===
+✓ FQ A review status: respondidas · provisórias · confiança reduzida · revisão persistente · retoma visível
+DIAG_PASS: FQ A revisão/progresso
+FQA_BETA_DIAGNOSIS_GO
+
+=== APProva+ PERFORMANCE BASELINE ===
+JS chunks: 70
+Total JS: 5,565,583 B (5435.1 KiB)
+Total gzip: 1,350,275 B (1318.6 KiB)
+
+Largest chunks:
+     1195292 B | gzip   197384 B | 8856.0beeba13bc0d3907.js
+      881471 B | gzip   166262 B | 991.d07c47645ca5611b.js
+      607223 B | gzip   168089 B | 9948.0b33e9456c35a516.js
+      439911 B | gzip   107896 B | 281.98a0ed52bcac776a.js
+      319138 B | gzip    84220 B | 8003.79492944ab374201.js
+      300508 B | gzip    91686 B | 6912.9d86daa64cfbc191.js
+      279775 B | gzip    73042 B | 4300.f96a502430d4dea9.js
+      173629 B | gzip    46401 B | 18-51732c0e3a66e117.js
+      173198 B | gzip    49944 B | 8575.db137f7c257d67ad.js
+      173019 B | gzip    54240 B | 87c73c54-24122e7b92478d00.js
+      139835 B | gzip    44827 B | framework-bf8cc7b0cd28b74f.js
+      126211 B | gzip    36183 B | main-b0e43efe53eb8370.js
+      112594 B | gzip    39520 B | polyfills-42372ed130431b0a.js
+       98610 B | gzip    17117 B | 5252.762bc294f09067ba.js
+       96450 B | gzip    25426 B | 7232.4e68eb2df674b199.js
+
+Route page chunks (diagnostic only):
+  /                            6.1 KiB | gzip    2.3 KiB
+  /portugues-mini-exame        4.3 KiB | gzip    1.7 KiB
+
+Route client bundles (budgeted, includes shared chunks):
+  /                          350.6 KiB | gzip  103.5 KiB | budget 650 KiB
+        5.4 KiB  static/chunks/webpack-b946767f3105f026.js
+      169.0 KiB  static/chunks/87c73c54-24122e7b92478d00.js
+      169.6 KiB  static/chunks/18-51732c0e3a66e117.js
+        0.5 KiB  static/chunks/main-app-953d11a833440ca1.js
+        6.1 KiB  static/chunks/app/page-e1e37d7798733a10.js
+  /portugues-mini-exame      449.4 KiB | gzip  133.8 KiB | budget 500 KiB
+        5.4 KiB  static/chunks/webpack-b946767f3105f026.js
+      169.0 KiB  static/chunks/87c73c54-24122e7b92478d00.js
+      169.6 KiB  static/chunks/18-51732c0e3a66e117.js
+        0.5 KiB  static/chunks/main-app-953d11a833440ca1.js
+       28.3 KiB  static/chunks/1983-3371a4a7fa7fad33.js
+       37.3 KiB  static/chunks/9506-47d1b47593e84a13.js
+       35.0 KiB  static/chunks/8859-66e89040ca253402.js
+        4.3 KiB  static/chunks/app/portugues-mini-exame/page-ee33e3ef61c7d4a9.js
+
+Home bundle signatures (diagnostic):
+  physicsChemistryHeavy        absent
+  constructedResponseGrader    absent
+  constructedResponseBank      absent
+  portugueseHeavy              absent
+
+✓ performance budgets passed
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

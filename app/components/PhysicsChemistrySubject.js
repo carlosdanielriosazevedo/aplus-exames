@@ -10,7 +10,7 @@ import {physicsChemistrySubtopicById,physicsChemistrySubtopicsForDomain} from ".
 import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";
 import {buildAdaptivePhysicsChemistryMission,buildPhysicsChemistryDiagnostic,gradePhysicsChemistryResponse,physicsChemistryCoverage,physicsChemistryScope} from "../lib/physicsChemistryEngine";
-import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";
+import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor,quarantineUnrecoverableSubjectSession} from "../lib/subjectProgress";
 import {activateSubjectState,finishSubjectOnboardingState,subjectGoal,subjectOnboardingStep} from "../lib/subjectWorkspace";
 import {missionCompletedToday} from "../lib/engagement";
 import {loadPhysicsChemistryExamDraft,physicsChemistryDraftAgeLabel} from "../lib/physicsChemistryExamDraft";
@@ -98,7 +98,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     setS(prev=>{
       const active=subjectProgressFor(prev,SUBJECT_ID).lastPosition;
       if(!active||active.sessionId!==session.sessionId)return prev;
-      return advanceSubjectSession(prev,SUBJECT_ID,{
+      return advanceSubjectSession(prev,SUBJECT_ID,{sessionId:session.sessionId,
         current:session.current,
         results,
         currentResult:feedback,
@@ -116,7 +116,9 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go} s={s}/>;
 
   function start(kind,items,label,domain=null){
-    if(progress.lastPosition&&!window.confirm("Começar uma nova sessão substitui a retoma atual de Física e Química A. Queres continuar?"))return;
+    // Nunca substituir uma tentativa pendente: apenas permitir a retoma.
+    if(progress.lastPosition){resume();return}
+    if(examDrafts.length){go(examDrafts[0].route);return}
     const sessionId=createSubjectSessionId(SUBJECT_ID,kind);
     setSession({sessionId,kind,label,domain,items,current:0});
     setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});
@@ -144,12 +146,13 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   }
 
   function submit(){
+    if(feedback)return;
     const item=session.items[session.current];
     if(!answerReady(item))return;
     const result=gradePhysicsChemistryResponse(item,answer);
     const nextResults=[...results,result];
     setFeedback(result);setResults(nextResults);
-    setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current:session.current,results:nextResults,currentResult:result,currentAnswer:answer}));
+    setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{sessionId:session.sessionId,current:session.current,results:nextResults,currentResult:result,currentAnswer:answer}));
   }
 
   function next(){
@@ -164,23 +167,36 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     const current=session.current+1;
     setSession(prev=>({...prev,current}));
     setAnswer(null);setFeedback(null);setRubricAssessment({});
-    setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current,results,currentResult:null,currentAnswer:null}));
+    setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{sessionId:session.sessionId,current,results,currentResult:null,currentAnswer:null}));
+  }
+
+  const unrecoverableSession=!!progress.lastPosition?.itemIds?.length&&progress.lastPosition.itemIds.some(itemId=>!physicsChemistryItemById(itemId));
+  function recoverUnrecoverableSession(){
+    if(!unrecoverableSession)return;
+    if(!window.confirm("Esta sessão não pode ser retomada porque faltam perguntas. Arquivar a tentativa interrompida por erro técnico, sem XP nem alterações ao Domínio, e permitir uma nova avaliação?"))return;
+    setS(prev=>quarantineUnrecoverableSubjectSession(prev,SUBJECT_ID,progress.lastPosition.itemIds.filter(itemId=>!!physicsChemistryItemById(itemId))));
+    setSession(null);
+    go("home");
   }
 
   function resume(){
     const saved=progress.lastPosition;
     if(!saved)return;
     const items=saved.itemIds.map(physicsChemistryItemById).filter(Boolean);
-    if(items.length!==saved.itemIds.length){resetPhysicsChemistry();return}
+    if(items.length!==saved.itemIds.length){
+      window.alert("Não foi possível recuperar esta sessão porque faltam perguntas. O teu progresso continua guardado.");
+      return;
+    }
     setSession({sessionId:saved.sessionId,kind:saved.kind,label:saved.label,domain:saved.domain,items,current:Math.min(saved.current,items.length-1)});
     setResults(saved.results||[]);setAnswer(saved.currentAnswer??null);setFeedback(saved.currentResult||null);
   }
 
   useEffect(()=>{
-    if(autoResumeDiagnostic&&progress.lastPosition?.kind==="diagnostic")resume();
+    if(autoResumeDiagnostic&&progress.lastPosition)resume();
   },[]);
 
   function resetPhysicsChemistry(){
+    if(progress.lastPosition||examDrafts.length){window.alert("Há uma avaliação em curso. Continua e conclui a sessão antes de repor o progresso.");return}
     if(!window.confirm("Repor apenas o progresso de Física e Química A?"))return;
     setS(prev=>resetSubjectProgress(prev,SUBJECT_ID));setSession(null);setResults([]);setAnswer(null);setFeedback(null);setRubricAssessment({});
   }
@@ -297,7 +313,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       <div><span>🧠</span><b>Sem nota final</b><small>Recebes feedback e o teu perfil de aprendizagem continua a evoluir.</small></div>
     </div>
     {!scopedCoverage.diagnosticReady&&<div className="notice warning"><b>Primeiro atualiza a matéria dada</b><span>O diagnóstico precisa de cobertura suficiente dos domínios já lecionados.</span></div>}
-    <button className="primary" disabled={!scopedCoverage.diagnosticReady} onClick={startDiagnostic}>Começar diagnóstico</button>
+    <button className="primary" disabled={!progress.lastPosition&&!scopedCoverage.diagnosticReady} onClick={progress.lastPosition?resume:startDiagnostic}>{progress.lastPosition?(progress.lastPosition.kind==="diagnostic"?"Continuar diagnóstico":"Continuar sessão"):"Começar diagnóstico"}</button>
   </Shell>;
 
   if(view==="trainingSetup"){
@@ -334,11 +350,12 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   if(view==="exams")return <Shell className="wideStudentShell examHub">{sharedTop}<div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Física e Química A · 715</h1><p className="muted">Escolhe entre um treino mais curto e o Exame Completo com a estrutura 15 obrigatórios + 8 opcionais, contando os 4 melhores opcionais.</p></div>
     <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, voltamos à prova para rever as tuas respostas.</ApronsoNudge>
     {examDrafts.map(({id,title,route,draft})=><div className="pausedSession" key={id}><div><small>{draft.review?"REVISÃO EM PAUSA":"PROVA EM PAUSA"}</small><b>{title}</b><span>{draft.review?"Retoma a revisão por critérios.":`Pergunta ${(draft.index||0)+1} de ${draft.itemIds?.length||0}`} · {physicsChemistryDraftAgeLabel(draft.updatedAt)}</span></div><button onClick={()=>go(route)}>Continuar →</button></div>)}
-    <div className="trainChoices">
+    {progress.lastPosition&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{progress.lastPosition.label}</b></div><button onClick={resume}>Continuar →</button></div>}
+    {!progress.lastPosition&&examDrafts.length===0&&<div className="trainChoices">
       <button onClick={()=>go("physicsChemistryMini1")}><span>📝</span><div><b>Mini-exame · Modelo 1</b><small>12 itens · 45 min · seleção, construção e suportes científicos</small></div><em>→</em></button>
       <button onClick={()=>go("physicsChemistryMini2")}><span>🧪</span><div><b>Mini-exame · Modelo 2</b><small>12 itens · 45 min · combinação diferente de 10.º e 11.º</small></div><em>→</em></button>
       <button onClick={()=>go("physicsChemistryExam")}><span>⏱️</span><div><b>Exame Completo · 715</b><small>23 itens · 200 pontos · 120 min + 30 min de tolerância</small></div><em>→</em></button>
-    </div>{sharedNav}</Shell>;
+    </div>}{sharedNav}</Shell>;
 
   if(view==="progress"){
     const rows=PHYSICS_CHEMISTRY_A_DOMAINS.map(domain=>{
@@ -386,13 +403,14 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   }
 
   return <main className="learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>
+    {unrecoverableSession&&<div className="notice warning"><b>Sessão impossível de recuperar</b><span>Uma ou mais perguntas deixaram de estar disponíveis. A tentativa será arquivada sem pontuação adicional.</span><button className="secondary" onClick={recoverUnrecoverableSession}>Resolver sessão irrecuperável</button></div>}
     <div className="learnIntro"><p>Olá 👋</p><h1>O teu próximo passo.</h1><span>{missionDone?"Missão feita. Podes continuar por tua conta.":progress.diagnosticDone?"Uma recomendação curta, escolhida a partir do teu percurso.":"Primeiro, vamos encontrar o melhor ponto de partida."}</span></div>
-    {progress.lastPosition&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></div><button onClick={resume}>Continuar →</button></div>}
+    {progress.lastPosition&&progress.lastPosition.kind!=="diagnostic"&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></div><button onClick={resume}>Continuar →</button></div>}
     {!progress.lastPosition&&examDrafts.map(({id,title,route,draft})=><div className="pausedSession" key={"home-"+id}><div><small>{draft.review?"REVISÃO EM PAUSA":"PROVA EM PAUSA"}</small><b>{title}</b><span>{draft.review?"Retoma a revisão por critérios.":`Pergunta ${(draft.index||0)+1} de ${draft.itemIds?.length||0}`} · {physicsChemistryDraftAgeLabel(draft.updatedAt)}</span></div><button onClick={()=>go(route)}>Continuar →</button></div>)}
     <section className="adaptivePath" aria-label="Caminho adaptativo de Física e Química A">
       <div className={`pathNode ${progress.diagnosticDone?"done":"current"}`}><span>{progress.diagnosticDone?"✓":"●"}</span><div><small>{progress.diagnosticDone?"ÚLTIMO PASSO":"PRIMEIRO PASSO"}</small><b>{progress.diagnosticDone?"Diagnóstico concluído":"Conhecer o teu ponto de partida"}</b></div></div>
       <div className="pathLine active"/>
-      <div className={`pathNode current ${missionDone?"complete":""}`}><span>{missionDone?"✓":"●"}</span><article><small>{progress.diagnosticDone?(missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"):"PRÓXIMO PASSO"}</small><h2>{progress.diagnosticDone?"Física e Química A adaptada ao teu percurso":"Diagnóstico de Física e Química A"}</h2><div className="missionCardMeta"><span>{progress.diagnosticDone?"~3–5 min":"8 perguntas"}</span>{progress.diagnosticDone&&<span>{currentYear}</span>}</div><button disabled={!!progress.lastPosition||(!progress.diagnosticDone&&!scopedCoverage.diagnosticReady)||(!missionDone&&progress.diagnosticDone&&!scopedCoverage.missionReady)} onClick={missionDone?()=>go("train"):progress.diagnosticDone?()=>startMission():startDiagnostic}>{missionDone?"Continuar a estudar":progress.diagnosticDone?"Começar Missão":"Começar diagnóstico"}</button></article></div>
+      <div className={`pathNode current ${missionDone?"complete":""}`}><span>{missionDone?"✓":"●"}</span><article><small>{progress.diagnosticDone?(missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"):"PRÓXIMO PASSO"}</small><h2>{progress.diagnosticDone?"Física e Química A adaptada ao teu percurso":"Diagnóstico de Física e Química A"}</h2><div className="missionCardMeta"><span>{progress.diagnosticDone?"~3–5 min":"8 perguntas"}</span>{progress.diagnosticDone&&<span>{currentYear}</span>}</div><button disabled={(!progress.lastPosition&&((!progress.diagnosticDone&&!scopedCoverage.diagnosticReady)||(!missionDone&&progress.diagnosticDone&&!scopedCoverage.missionReady)))} onClick={progress.lastPosition?resume:missionDone?()=>go("train"):progress.diagnosticDone?()=>startMission():startDiagnostic}>{progress.lastPosition?(progress.lastPosition.kind==="diagnostic"?"Continuar diagnóstico":"Continuar sessão"):missionDone?"Continuar a estudar":progress.diagnosticDone?"Começar Missão":"Começar diagnóstico"}</button></article></div>
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{progress.diagnosticDone?"Praticar, rever matéria ou fazer um exame":"Primeira Missão adaptada"}</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>
