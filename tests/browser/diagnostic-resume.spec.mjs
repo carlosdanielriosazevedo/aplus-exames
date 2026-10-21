@@ -537,6 +537,6 @@ test("math-a · Exame Completo permanece bloqueado",async({page})=>{
  await page.goto("/");
  await expect(page.locator(".studentTop")).toBeVisible({timeout:30_000});
  await page.evaluate(()=>window.dispatchEvent(new PopStateEvent("popstate",{state:{...window.history.state,approvaScreen:"exams",approvaSubjectId:"math-a"}})));
- await expect(page.locator(".exam.locked")).toContainText("ainda não disponível");
+ await expect(page.locator(".exam.locked").filter({hasText:"Exame Completo"})).toContainText("ainda não disponível");
  await expect(page.getByRole("button",{name:/Exame Completo/u})).toHaveCount(0);
 });
