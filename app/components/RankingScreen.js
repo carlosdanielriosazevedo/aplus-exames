@@ -65,7 +65,7 @@ export default function Ranking({s,setS,go}){
     }));
   }
 
-  return <Shell><StudentTop s={s} go={go}/>
+  return <Shell className="rankingDesktopShell"><StudentTop s={s} go={go}/>
     <div className="rankingHero">
       <div><p className="eyebrow">🏆 COMPETIÇÃO SEMANAL</p><h1>Treina. Ganha XP. Sobe.</h1>
         <p className="muted">O ranking compara <b>atividade de estudo</b>, nunca Domínio, Certeza, Índice de Preparação ou notas.</p></div>
