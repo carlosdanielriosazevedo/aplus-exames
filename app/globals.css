@@ -1785,3 +1785,26 @@ button,input,select,textarea{max-width:100%}
     margin-bottom:24px;
   }
 }
+
+/* Desktop alignment regression: share the Treinar/Progresso heading baseline.
+   Keep badges out of document-flow width calculations and contain the nudge. */
+@media (min-width:761px){
+  .rankingDesktopShell>.panel>.rankingHero{position:relative;margin:0 0 24px;align-items:flex-start;min-height:0}
+  .rankingDesktopShell .rankingHero>.sectionIntro{margin:0;max-width:calc(100% - 185px)}
+  .rankingDesktopShell .rankingHero .eyebrow{margin-top:0}
+  .rankingDesktopShell .rankingHero .divisionBadge{flex:0 0 168px;min-width:168px}
+  .trainHub .apronsoNudge{
+    box-sizing:border-box;
+    display:grid;
+    grid-template-columns:82px minmax(0,1fr);
+    align-items:center;
+    height:auto;
+    min-height:112px;
+    max-height:180px;
+    padding:12px 20px 12px 12px;
+    gap:16px;
+    overflow:hidden;
+  }
+  .trainHub .apronsoNudge .apronso{display:block;width:82px;height:88px;object-fit:contain;align-self:center}
+  .trainHub .apronsoNudge p{align-self:center;margin:0;min-width:0;line-height:1.5}
+}
