@@ -414,10 +414,14 @@ function mathLearningErrorDiagnosis(stepResults=[],overallReason=null){
     label:reasons.length?"Erro misto":"Resposta essencialmente correta",
     message:reasons.length?"Existem vários pontos a rever na resolução.":"A resolução cobre corretamente as etapas principais."
   };
+  // Evitar sugerir que toda a resolução é inválida quando há etapas já confirmadas.
+  const groundedBase=firstByPriority==="not_verified"&&correctSteps.length>0
+    ?{...base,label:"Etapa ainda não validada",message:"O corretor confirmou parte da resolução, mas não conseguiu validar com segurança a etapa restante."}
+    :base;
   const mainProblem=problemSteps.find(row=>row.reason===firstByPriority)||problemSteps[0]||null;
   const masteredLabels=correctSteps.map(row=>row.label).filter(Boolean);
   return {
-    ...base,
+    ...groundedBase,
     whatWasCorrect:masteredLabels.length?masteredLabels.slice(0,2):[],
     whereItFailed:mainProblem?.label||"",
     studentWork:mainProblem?.answer||"",
