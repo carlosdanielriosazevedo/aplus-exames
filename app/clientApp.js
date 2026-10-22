@@ -1866,11 +1866,11 @@ function PracticeResponse({question,value,onChange,feedback,guided=false}){
       </>}
     </fieldset>
     {feedback&&<div className="notice"><b>{feedback.reviewRequired?"Avaliação incompleta":feedback.correct?"Muito bem!":feedback.points>0?"Tens etapas corretas":"Vamos rever a resolução"}</b>
-      <p>{feedback.points}/{feedback.maxPoints} pontos{feedback.reviewRequired?" confirmados":""}</p>
-      <ScoreLossExplanation result={feedback}/>
+      {feedback.points===feedback.maxPoints&&<p>{feedback.points}/{feedback.maxPoints} pontos</p>}
+      <ScoreLossExplanation result={feedback} detailsProvided/>
       {feedback.errorDiagnosis&&feedback.errorDiagnosis.code!=="correct_or_near_correct"&&<p><b>{feedback.errorDiagnosis.label}:</b> {feedback.errorDiagnosis.message}</p>}
-      <div className="stepResults">{feedback.stepResults.map(row=><div key={row.stepId} className={row.status==="needs_review"?"unverified":row.correct?"correct":"incorrect"}><span>{row.status==="needs_review"?"?":row.correct?"✓":"×"}</span><div><b>{row.label}</b><small>{stepFeedback(row)}</small>{!row.correct&&<small>Exemplo: {row.expected}</small>}</div></div>)}</div>
-      <p>{question.sol}</p>
+      <div className="stepResults">{feedback.stepResults.map(row=><div key={row.stepId} className={row.status==="needs_review"?"unverified":row.correct?"correct":"incorrect"}><span>{row.status==="needs_review"?"?":row.correct?"✓":"×"}</span><div><b>{row.label} · {row.points}/{row.maxPoints} pontos</b><small>{stepFeedback(row)}</small>{!row.correct&&<small>Exemplo: {row.expected}</small>}</div></div>)}</div>
+      <details><summary>Ver resolução completa</summary><p>{question.sol}</p></details>
     </div>}
   </div>;
 }
