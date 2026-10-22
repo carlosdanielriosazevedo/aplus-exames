@@ -1202,13 +1202,15 @@ function Home({s,setS,go,reset}){
       else go("mission");
     }}>Continuar →</button></div>}
 
-    <section className="adaptivePath" aria-label="Caminho adaptativo">
+    {!s.diagnosticDone?<section className="adaptivePath" aria-label="Diagnóstico inicial de Matemática A">
+      <div className="pathNode current"><span>●</span><article><small>PRIMEIRO PASSO</small><h2>O teu diagnóstico inicial</h2><p>Descobre o que já sabes e ajuda o Apronso a preparar um percurso de estudo à tua medida.</p><button onClick={()=>go("diag")}>{pausedDraft?.kind==="diagnostic"?"Continuar Diagnóstico":"Começar Diagnóstico"}</button></article></div>
+    </section>:<section className="adaptivePath" aria-label="Caminho adaptativo">
       <div className="pathNode done"><span>✓</span><div><small>ÚLTIMO PASSO</small><b>{completedMission?.focus||theme(completedMission?.themeId)?.short||"Diagnóstico concluído"}</b></div></div>
       <div className="pathLine active"/>
       <div className={"pathNode current "+(missionDone?"complete":"")}><span>{missionDone?"✓":"●"}</span><article><small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small><h2>{missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.focus||t?.short||"Conteúdo protegido")}</h2><div className="missionCardMeta"><span>~3–5 min</span>{!missionDone&&t?.year&&<span>{t.year}</span>}</div>{missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:<button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Indisponível":pausedDraft?.kind==="mission"?"Continuar Missão":"Começar Missão"}</button>}{!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{probableNext?.short||"A definir após esta sessão"}</b><p>Pode mudar com nova evidência.</p></div></div>
-    </section>
+    </section>}
     <StudentNav active="home" go={go}/>
   </section></main>
 }
