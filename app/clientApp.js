@@ -374,7 +374,7 @@ export default function App(){
       else{
         let fromLanding=false;
         try{fromLanding=window.sessionStorage.getItem("a25-onboarding-entry")==="1"}catch{}
-        setScreen(activeSubjectConfigured?"diag":(fromLanding?"subjectOnboard":"welcome"));
+        setScreen(activeSubjectConfigured?"home":(fromLanding?"subjectOnboard":"welcome"));
       }
     }
     setHydrated(true);
@@ -658,7 +658,7 @@ function SubjectSelection({s,setS,go}){
 
   function save(){
     if(!selected.length)return;
-    const ordered=AVAILABLE_SUBJECT_IDS.filter(id=>selected.includes(id));
+    const ordered=selected.filter(id=>AVAILABLE_SUBJECT_IDS.includes(id));
     setS(prev=>recordMilestone({
       ...prev,
       selectedSubjectIds:ordered,
