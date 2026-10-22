@@ -42,3 +42,12 @@ Restore automatic deployment policy only after confirming no queued surprise bui
 - No operational emergency restoration build, no verified full rollback permission, no validated production deployment hold, no tested RTO.
 - Human pedagogical review deferred, not validated. Accessibility manual (NVDA/VoiceOver), PWA Android/iOS and telemetry/error probe delivery remain separate pending tasks.
 - Keep #385/#387/#388 Draft, main/production/database unchanged, and Issue #373 open.
+
+## Verified Vercel release-hold alternatives (official documentation; NOT applied)
+
+1. **`git.deploymentEnabled: false` in `vercel.json`** suppresses automatic Git deployments for every branch (Vercel docs: https://vercel.com/docs/project-configuration/git-configuration). This is stronger than turning off Preview Branch Tracking, which does not stop production/main. **Activation caveat**: committing this value onto main itself can trigger a build/deployment before it is active; do not claim a verified hold from this edit alone. Confirm effective behavior in a disposable test project and define an activation/release method first.
+2. **Project-level Ignored Build Step**, e.g. a checked temporary `exit 0` configuration, cancels the build when the command runs (https://vercel.com/docs/project-configuration/project-settings). It is NOT the same as preventing an event/deployment record; canceled builds still count toward quotas and may require a separate action to bypass on an authorized release. Never override an existing custom ignore command without preserving and restoring it.
+3. **No change applied** to project settings, main or production. The connected Vercel project API supports `commandForIgnoringBuildStep`, but that alone is not proof of an event-free hold or safe restore. Prefer verifying on a disposable copy that production traffic and domain remain unchanged during activation, blocked pushes and reactivation.
+4. **GO test for hold**: record prior configuration and production deployment+domain; activate chosen hold through an approved non-production rehearsal; push a harmless synthetic test commit in the isolated project; inspect effective settings, exact SHA deployments, domain alias and queues; restore prior state; make sure restore does not enqueue unexpected deployments. A test that generates a canceled deployment is not evidence of zero Git-triggered deployments.
+
+Documentation discovery does not authorize a setting change, test commit to main, deployment, or publication. NO-GO remains.
