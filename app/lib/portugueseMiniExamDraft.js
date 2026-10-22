@@ -7,6 +7,7 @@ function objectOrEmpty(value){
 
 export function normalizePortugueseMiniExamDraft(draft,{examId,itemIds}){
   if(!draft||draft.examId!==examId||!SUPPORTED_DRAFT_VERSIONS.has(draft.version))return null;
+  if(draft.itemIds&&JSON.stringify(draft.itemIds)!==JSON.stringify(itemIds))return null;
   const allowed=new Set(itemIds);
   const filterByItem=source=>Object.fromEntries(Object.entries(objectOrEmpty(source)).filter(([id])=>allowed.has(id)));
   const index=Math.max(0,Math.min(itemIds.length-1,Number.isInteger(draft.index)?draft.index:0));
@@ -35,6 +36,8 @@ export function portugueseMiniExamDraftSnapshot({examId,itemIds,index,review,ans
 }
 
 export function savePortugueseMiniExamDraft(state,draft){
+  const pending=state.subjectSettings?.portuguese?.miniExamDraft;
+  if(pending&&(pending.examId!==draft?.examId||(pending.attemptId&&pending.attemptId!==draft?.attemptId)))return state;
   return {...state,subjectSettings:{...(state.subjectSettings||{}),portuguese:{...(state.subjectSettings?.portuguese||{}),miniExamDraft:draft}}};
 }
 

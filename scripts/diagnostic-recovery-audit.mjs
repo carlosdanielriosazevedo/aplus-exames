@@ -129,7 +129,7 @@ assert.equal(validateDiagnosticDraft({...initial,sel:0,fb:{correct:0!==initial.c
 // 17/18. TTL: evidência/pending real permanece; vazio expira.
 memory.clear();saveSessionDraft(pendingDraft);let key=[...memory.keys()][0],raw=JSON.parse(memory.get(key));raw.savedAt=NOW-25*60*60*1000;memory.set(key,JSON.stringify(raw));
 assert.ok(loadSessionDraft("internal")?.pendingResponse);
-memory.clear();saveSessionDraft(initial);key=[...memory.keys()][0];raw=JSON.parse(memory.get(key));raw.savedAt=NOW-25*60*60*1000;memory.set(key,JSON.stringify(raw));assert.equal(loadSessionDraft("internal"),null);
+memory.clear();saveSessionDraft(initial);key=[...memory.keys()][0];raw=JSON.parse(memory.get(key));raw.savedAt=NOW-25*60*60*1000;memory.set(key,JSON.stringify(raw));assert.ok(loadSessionDraft("internal"));
 
 // 19/20. Clock skew pequeno e legacy state sem draft.
 assert.equal(validateDiagnosticDraft({...initial,startedAt:NOW+5*60*1000},{now:NOW}).ok,true);

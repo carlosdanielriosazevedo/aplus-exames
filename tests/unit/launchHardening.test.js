@@ -50,11 +50,11 @@ describe('November launch hardening',()=>{
     expect(loadSessionDraft('internal')).not.toBeNull();
   });
 
-  it('discards an empty diagnostic draft once it is stale',()=>{
+  it('preserves an empty diagnostic attempt after a long absence',()=>{
     saveSessionDraft(diagnosticDraft());
-    vi.advanceTimersByTime(5*60*1000+1000);
-    expect(loadSessionDraft('internal')).toBeNull();
-    expect(memory.has(KEY)).toBe(false);
+    vi.advanceTimersByTime(7*24*60*60*1000);
+    expect(loadSessionDraft('internal')).not.toBeNull();
+    expect(memory.has(KEY)).toBe(true);
   });
 
   it('preserves real diagnostic progress even after the empty-draft timeout',()=>{
@@ -86,20 +86,20 @@ describe('November launch hardening',()=>{
     expect(loaded.state?.goal).toBe(18);
   });
 
-  it('restarts only the internal diagnostic draft without touching the friends draft',()=>{
+  it('refuses to restart the internal diagnostic and preserves both modes',()=>{
     memory.set(KEY,JSON.stringify(diagnosticDraft({sessionId:'internal'})));
     memory.set(FRIENDS_KEY,JSON.stringify(diagnosticDraft({sessionId:'friends',betaMode:'friends_beta'})));
-    expect(restartDiagnosticDraft('internal')).toEqual({ok:true,cleared:true});
-    expect(memory.has(KEY)).toBe(false);
+    expect(restartDiagnosticDraft('internal')).toEqual({ok:false,reason:'pending_attempt_preserved'});
+    expect(memory.has(KEY)).toBe(true);
     expect(memory.has(FRIENDS_KEY)).toBe(true);
   });
 
-  it('restarts only the friends diagnostic draft when beta friends is active',()=>{
+  it('refuses to restart the friends diagnostic and preserves both modes',()=>{
     memory.set(KEY,JSON.stringify(diagnosticDraft({sessionId:'internal'})));
     memory.set(FRIENDS_KEY,JSON.stringify(diagnosticDraft({sessionId:'friends',betaMode:'friends_beta'})));
-    expect(restartDiagnosticDraft('friends_beta')).toEqual({ok:true,cleared:true});
+    expect(restartDiagnosticDraft('friends_beta')).toEqual({ok:false,reason:'pending_attempt_preserved'});
     expect(memory.has(KEY)).toBe(true);
-    expect(memory.has(FRIENDS_KEY)).toBe(false);
+    expect(memory.has(FRIENDS_KEY)).toBe(true);
   });
 
   it('fails closed if every persistent storage refuses to remove an existing diagnostic draft',()=>{
@@ -107,13 +107,13 @@ describe('November launch hardening',()=>{
     sessionMemory.set(KEY,JSON.stringify(diagnosticDraft({sessionId:'blocked',savedAt:2})));
     global.localStorage.removeItem=()=>{throw new Error('storage blocked')};
     global.sessionStorage.removeItem=()=>{throw new Error('storage blocked')};
-    expect(restartDiagnosticDraft('internal')).toEqual({ok:false,reason:'storage_clear_failed'});
+    expect(restartDiagnosticDraft('internal')).toEqual({ok:false,reason:'pending_attempt_preserved'});
     expect(memory.has(KEY)).toBe(true);
   });
 
   it('refuses to erase a non-diagnostic draft',()=>{
     memory.set(KEY,JSON.stringify({kind:'mission',sessionId:'m1'}));
-    expect(restartDiagnosticDraft('internal')).toEqual({ok:false,reason:'not_diagnostic'});
+    expect(restartDiagnosticDraft('internal')).toEqual({ok:false,reason:'pending_attempt_preserved'});
     expect(memory.has(KEY)).toBe(true);
   });
 

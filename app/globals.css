@@ -1657,3 +1657,96 @@ button,input,select,textarea{max-width:100%}
 .demoRankingDisclosure summary{display:inline-flex;align-items:center;min-height:32px;cursor:pointer;list-style:none;font-size:12px;font-weight:800;color:var(--app-muted)}
 .demoRankingDisclosure summary::-webkit-details-marker{display:none}
 .demoRankingDisclosure p{margin:4px 0 0;max-width:620px;font-size:12px;line-height:1.45;color:var(--app-muted)}
+
+
+/* Cabeçalho móvel partilhado — grelha estável entre Aprender, Treinar, Ranking e Progresso.
+   Neutraliza paddings diferentes das superfícies sem alterar os layouts desktop. */
+@media (max-width:760px){
+  .studentTop{
+    box-sizing:border-box;
+    width:calc(100vw - 40px);
+    margin-left:calc(50% - 50vw + 20px);
+    margin-right:0;
+    min-height:112px;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    align-items:start;
+    column-gap:10px;
+  }
+  .studentTopIdentity{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+  .studentTopIdentity .logo{margin:0;line-height:1.2}
+  .studentTop .subjectSwitcher{
+    min-width:0;
+    max-width:min(280px,calc(100vw - 116px));
+    margin:0;
+    flex-shrink:0;
+  }
+  .studentTopActions{justify-self:end;align-self:start;margin:0;flex-wrap:nowrap}
+  .studentTop .studentMenu>summary{width:46px;min-width:46px;height:46px;box-sizing:border-box}
+}
+@media(max-width:360px){
+  .studentTop{width:calc(100vw - 32px);margin-left:calc(50% - 50vw + 16px)}
+  .studentTop .subjectSwitcher{max-width:calc(100vw - 106px)}
+}
+
+
+/* Seletor do Ranking: legível e preparado para mais disciplinas. */
+.rankingSubjectSelectLabel{display:block;margin:10px 0 7px;font-size:13px;font-weight:650;color:var(--app-navy,#13314b)}
+.rankingSubjectSelect{width:100%;max-width:500px;min-height:48px;padding:10px 40px 10px 14px;border:1px solid #cdd6df;border-radius:14px;background:#fff;color:#15324a;font:inherit;font-weight:650}
+.rankingSubjectSelect:focus-visible{outline:3px solid #f3bd63;outline-offset:2px}
+@media(max-width:760px){.rankingSubjectSelect{max-width:100%}}
+/* Menus de ação: evitar que um contador de XP comprido force quebras de linha. */
+.studentTopActions>button{white-space:nowrap;flex-shrink:0}
+.studentTopActions>button b{white-space:nowrap;font-variant-numeric:tabular-nums}
+
+
+/* Retoma: um cartão pequeno em vez de ocupar todo o ecrã. */
+@media(max-width:760px){
+  .pausedSession{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;padding:14px 16px;border-radius:16px}
+  .pausedSession>div{min-width:0}
+  .pausedSession small{font-size:11px;letter-spacing:.04em}
+  .pausedSession b{font-size:16px;line-height:1.25;margin-top:5px}
+  .pausedSession span{font-size:13px;line-height:1.35;margin-top:5px}
+  .pausedSession button{width:auto;max-width:150px;min-width:100px;padding:10px 12px;min-height:44px;font-size:14px;line-height:1.2;white-space:normal}
+}
+@media(max-width:360px){
+  .pausedSession{grid-template-columns:minmax(0,1fr)}
+  .pausedSession button{width:100%;max-width:none}
+}
+
+
+/* Indicadores de progresso no cabeçalho: números inteiros sem quebra. */
+.studentTopActions>button{display:inline-flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap;min-width:0}
+.studentTopActions>button>b{display:inline-block;white-space:nowrap;overflow-wrap:normal;word-break:normal;font-variant-numeric:tabular-nums;line-height:1}
+@media(max-width:760px){.studentTopActions>button{min-width:46px;max-width:110px;padding:0 9px;font-size:13px}.studentTopActions>button>b{font-size:13px}}
+
+/* Ecrã Aprender tinha o cabeçalho 8px acima dos restantes separadores móveis,
+   medido no Chromium a 390px (Português e FQ A). */
+@media(max-width:760px){
+  .learnHome .studentTop{position:relative;top:8px}
+}
+
+/* Medição Playwright: Ranking posicionava logótipo e seletor em y=23/57,
+   face a y=26/60 nos separadores restantes (390px). */
+@media(max-width:760px){
+  .studentTop:has(~ .rankingHero){position:relative;top:3px}
+}
+
+/* O seletor fica abaixo da linha de ações; o XP ocupa a mesma posição com ou sem menu. */
+@media(max-width:760px){
+  .studentTopIdentity .logo{height:46px;display:flex;align-items:center}
+  .studentTopActions{gap:8px}
+  .studentTopActions>button[aria-label$=" XP"]{display:inline-flex;width:auto}
+  .studentTopActions:not(:has(.studentMenu)){padding-right:54px}
+}
+
+@media(max-width:760px){
+  .divisionBadge{flex:0 0 90px;min-width:90px;align-self:flex-start}
+  .divisionBadge b{white-space:nowrap}
+}

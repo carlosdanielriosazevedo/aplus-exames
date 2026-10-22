@@ -7,7 +7,7 @@ import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./P
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
-import {clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";
+import {hasPhysicsChemistryExamDraft,clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";
 
 const SUBJECT_ID="physics-chemistry-a";
 
@@ -49,6 +49,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
   const [rubricAssessments,setRubricAssessments]=useState(()=>initialDraft?.rubricAssessments||{});
   const [markedForReview,setMarkedForReview]=useState(()=>initialDraft?.markedForReview||[]);
   const [startedAt]=useState(()=>initialDraft?.startedAt||Date.now());
+  const [recoveryBlocked]=useState(()=>!initialDraft&&hasPhysicsChemistryExamDraft(examId));
   const [now,setNow]=useState(Date.now);
   const recordedRef=useRef(false);
   const item=rows[current];
@@ -81,6 +82,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
 
   useEffect(()=>{if(timeExpired&&!review)finish({force:true})},[timeExpired,review]);
   useEffect(()=>{
+    if(recoveryBlocked)return;
     savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review,rubricAssessments,markedForReview});
   },[answers,current,examId,itemIds,markedForReview,review,rubricAssessments,startedAt]);
 
@@ -102,6 +104,8 @@ export default function PhysicsChemistryExam({s,setS,go}){
     clearPhysicsChemistryExamDraft(examId);
     go("exams");
   }
+
+  if(recoveryBlocked)return <Shell><div role="alert">Não foi possível recuperar esta prova. As respostas guardadas foram conservadas.</div></Shell>;
 
   if(submitCheck&&!review)return <Shell className="wideStudentShell fqaSubmitCheckPage">
     <ExamSubmissionCheck

@@ -125,11 +125,13 @@ function mergeProgress(left,right,subjectId){
     diagnosticDone:a.diagnosticDone||b.diagnosticDone,
     diagnosticCompletedAt:Math.max(a.diagnosticCompletedAt||0,b.diagnosticCompletedAt||0)||null,
     sessions:mergeUniqueRows(a.sessions,b.sessions),
+    completedSessionIds:[...new Set([...(a.completedSessionIds||[]),...(b.completedSessionIds||[])])],
     missionHistory:mergeUniqueRows(a.missionHistory,b.missionHistory),
+    interruptedTechnicalSessions:mergeUniqueRows(a.interruptedTechnicalSessions,b.interruptedTechnicalSessions),
     competence:mergeCompetenceRows(a.competence,b.competence),
     errorPatterns:mergeErrorPatterns(a.errorPatterns,b.errorPatterns),
     errorMemoryVersion:1,
-    lastPosition:newest.lastPosition||a.lastPosition||b.lastPosition||null,
+    lastPosition:(()=>{const archivedIds=new Set([...a.interruptedTechnicalSessions||[],...b.interruptedTechnicalSessions||[]].map(row=>row.sessionId));return [newest.lastPosition,a.lastPosition,b.lastPosition].find(row=>row&&!archivedIds.has(row.sessionId))||null})(),
     lastActivityAt:Math.max(a.lastActivityAt||0,b.lastActivityAt||0)||null
   },subjectId);
 }
@@ -182,13 +184,15 @@ export function createSubjectSessionId(subjectId,kind,at=Date.now()){
 
 export function beginSubjectSession(state,{subjectId,kind,label,domain=null,items,sessionId=null,startedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
+  // Uma tentativa em curso não pode ser substituída, nem por chamadas diretas ao motor.
+  if(progress.lastPosition||(subjectId==="portuguese"&&state.subjectSettings?.portuguese?.miniExamDraft))return state;
   const id=sessionId||createSubjectSessionId(subjectId,kind,startedAt);
   return putProgress(state,subjectId,{...progress,lastPosition:{sessionId:id,kind,label,domain,itemIds:items.map(item=>item.id),current:0,results:[],startedAt,updatedAt:startedAt},lastActivityAt:startedAt});
 }
 
-export function advanceSubjectSession(state,subjectId,{current,results,currentResult=null,currentAnswer=null,updatedAt=Date.now()}){
+export function advanceSubjectSession(state,subjectId,{sessionId=null,current,results,currentResult=null,currentAnswer=null,updatedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
-  if(!progress.lastPosition)return state;
+  if(!progress.lastPosition||(sessionId&&sessionId!==progress.lastPosition.sessionId))return state;
   return putProgress(state,subjectId,{...progress,lastPosition:{...progress.lastPosition,current,results:results.map(compactResult),currentResult:compactResult(currentResult),currentAnswer,updatedAt},lastActivityAt:updatedAt});
 }
 
@@ -203,7 +207,11 @@ function subjectSessionXp(kind,results=[]){
 export function recordSubjectSession(state,{subjectId,kind,label,domain=null,items,results,sessionId=null,completedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
   const completionId=sessionId||progress.lastPosition?.sessionId||null;
-  if(completionId&&progress.sessions.some(row=>row.sessionId===completionId))return state;
+  // Sessões arquivadas por erro técnico nunca podem receber recompensa tardia.
+  if(completionId&&(progress.interruptedTechnicalSessions||[]).some(row=>row.sessionId===completionId))return state;
+  // Não atribuir XP nem evidência a uma conclusão concorrente com uma tentativa pendente.
+  if(progress.lastPosition&&completionId!==progress.lastPosition.sessionId)return state;
+  if(completionId&&((progress.completedSessionIds||[]).includes(completionId)||progress.sessions.some(row=>row.sessionId===completionId)))return state;
   const competence={...progress.competence};
   let errorPatterns=normalizeErrorPatterns(progress.errorPatterns);
   const recordsAcademicEvidence=kind!=="training";
@@ -250,7 +258,7 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
     };
   });
   const session={sessionId:completionId,kind,label,domain,itemIds:items.map(item=>item.id),results:results.map(compactResult),completedAt};
-  let completed=putProgress(state,subjectId,{...progress,diagnosticDone:progress.diagnosticDone||kind==="diagnostic",diagnosticCompletedAt:kind==="diagnostic"?completedAt:progress.diagnosticCompletedAt,sessions:[...progress.sessions,session].slice(-MAX_SESSIONS),missionHistory:kind==="mission"?[...progress.missionHistory,session].slice(-MAX_SESSIONS):progress.missionHistory,competence,errorPatterns,errorMemoryVersion:1,lastPosition:null,lastActivityAt:completedAt});
+  let completed=putProgress(state,subjectId,{...progress,completedSessionIds:[...new Set([...(progress.completedSessionIds||[]),...progress.sessions.map(row=>row.sessionId).filter(Boolean),...(completionId?[completionId]:[])])],diagnosticDone:progress.diagnosticDone||kind==="diagnostic",diagnosticCompletedAt:kind==="diagnostic"?completedAt:progress.diagnosticCompletedAt,sessions:[...progress.sessions,session].slice(-MAX_SESSIONS),missionHistory:kind==="mission"?[...progress.missionHistory,session].slice(-MAX_SESSIONS):progress.missionHistory,competence,errorPatterns,errorMemoryVersion:1,lastPosition:null,lastActivityAt:completedAt});
   const alreadyCompletedMission=kind==="mission"&&missionCompletedToday(state,completedAt);
   const activityKind=alreadyCompletedMission?"training":kind;
   const xpEarned=subjectSessionXp(activityKind,results);
@@ -261,7 +269,35 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
   return completed;
 }
 
+
+/**
+ * Desbloqueio estritamente técnico: só quando faltam itens necessários à retoma.
+ * Arquiva a tentativa sem pontuar, sem criar uma conclusão nem creditar XP.
+ */
+export function quarantineUnrecoverableSubjectSession(state,subjectId,availableItemIds,at=Date.now()){
+  const progress=subjectProgressFor(state,subjectId);
+  const pending=progress.lastPosition;
+  if(!pending||!Array.isArray(pending.itemIds)||!pending.itemIds.length)return state;
+  const available=new Set(availableItemIds);
+  const missing=pending.itemIds.filter(id=>!available.has(id));
+  if(!missing.length)return state;
+  const archived={
+    ...pending,
+    status:"interrupted_technical",
+    reason:"missing_content",
+    missingItemIds:missing,
+    archivedAt:at
+  };
+  return putProgress(state,subjectId,{
+    ...progress,
+    lastPosition:null,
+    interruptedTechnicalSessions:[...(progress.interruptedTechnicalSessions||[]),archived].slice(-MAX_SESSIONS),
+    lastActivityAt:at
+  });
+}
+
 export function resetSubjectProgress(state,subjectId){
+  if(subjectProgressFor(state,subjectId).lastPosition)return state;
   const subjectProgress={...(state.subjectProgress||{})};
   delete subjectProgress[subjectId];
   return {...state,subjectProgress,subjectProgressModelVersion:MODEL_VERSION};
