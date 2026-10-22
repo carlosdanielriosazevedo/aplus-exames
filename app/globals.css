@@ -1750,3 +1750,26 @@ button,input,select,textarea{max-width:100%}
   .divisionBadge{flex:0 0 90px;min-width:90px;align-self:flex-start}
   .divisionBadge b{white-space:nowrap}
 }
+
+/* Desktop main navigation: Aprender and Ranking share the same wide white surface
+   as Treinar and Progresso. Mobile styles remain unchanged. */
+@media (min-width:761px){
+  .rankingDesktopShell>.panel,
+  .learnHome>.studentSurface{
+    box-sizing:border-box;
+    width:min(1390px,calc(100vw - 64px));
+    max-width:1390px;
+    min-height:760px;
+    margin-left:auto;
+    margin-right:auto;
+    padding:52px 62px 120px;
+    background:#fff!important;
+    border:1px solid #edf0f5;
+    border-radius:32px;
+    box-shadow:0 25px 70px #17203c18;
+    color:var(--app-navy);
+  }
+  .learnHome .wrap{max-width:1390px}
+  .learnHome{background:#f6f8f9!important;padding:24px 0 112px}
+  .rankingDesktopShell{align-items:start;padding:24px 0 112px}
+}
