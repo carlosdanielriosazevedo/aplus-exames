@@ -75,7 +75,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
   const scopedCoverage=physicsChemistryCoverage(scopedItems);
   const onboardingStep=subjectOnboardingStep(s,SUBJECT_ID);
-  const onboardingDoneScreen="diag";
+  const onboardingDoneScreen="home";
   const missionDone=missionCompletedToday(s);
   useEffect(()=>{
     if(!["home","exams"].includes(view))return;
