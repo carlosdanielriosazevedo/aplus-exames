@@ -114,7 +114,7 @@ export function StudentProfile({s,setS,go,editing=false,initialProfile}){
 
 export function TaughtCurriculum({s,setS,go,onboarding=false}){
   const onboardingStep=subjectOnboardingStep(s,"math-a");
-  const onboardingDoneScreen="diag";
+  const onboardingDoneScreen="home";
   const themes=currentYearThemes(s.profile);
   const subtopicsByTheme=new Map(themes.map(t=>[t.id,curriculumSubtopicsForTheme(t.id)]));
   const valid=new Set([...subtopicsByTheme.values()].flat().map(row=>row.id));
@@ -188,7 +188,7 @@ export function GoalScreen({s,setS,go,onboarding=false}){
         ?recordMilestone(next,"goal_completed",{goal,subjectId:activeSubject.id})
         :next;
     });
-    go(onboarding?"diag":"home");
+    go("home");
   }
   return <Shell><Logo/>
     <p className="eyebrow">{onboarding?"O TEU OBJETIVO":"AJUSTAR OBJETIVO"}</p>
