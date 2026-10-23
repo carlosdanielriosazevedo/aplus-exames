@@ -1822,3 +1822,26 @@ button,input,select,textarea{max-width:100%}
   }
   .learnHome>.studentSurface .adaptivePath{min-width:0}
 }
+
+/* Mobile parity for the four main areas; desktop design remains unchanged. */
+@media (max-width:760px){
+  .learnHome,.light{max-width:100%;overflow-x:clip}
+  .learnHome>.studentSurface,
+  .light>.panel{box-sizing:border-box;width:100%;min-width:0;max-width:100%}
+  .learnHome>.studentSurface .learnIntro,
+  .learnHome>.studentSurface .adaptivePath{width:100%;max-width:100%;min-width:0;margin-left:0;margin-right:0}
+  .learnHome>.studentSurface .learnIntro{margin-top:16px}
+  .trainHub .apronsoNudge{display:grid;grid-template-columns:60px minmax(0,1fr);align-items:center;gap:10px;min-height:88px;height:auto;max-height:none;padding:10px 12px;overflow:hidden}
+  .trainHub .apronsoNudge .apronso{width:60px;height:70px;object-fit:contain;align-self:center}
+  .trainHub .apronsoNudge p{min-width:0;margin:0;font-size:13px;line-height:1.45}
+  .rankingDesktopShell .rankingHero{display:flex;align-items:flex-start;flex-wrap:wrap;gap:10px;min-width:0}
+  .rankingDesktopShell .rankingHero>.sectionIntro{min-width:0;flex:1 1 190px;max-width:100%;margin:0}
+  .rankingDesktopShell .rankingHero .divisionBadge{flex:0 0 auto;max-width:100%}
+  .trainChoices{grid-template-columns:minmax(0,1fr)}
+  .trainChoices>button{width:100%;min-width:0;min-height:0}
+  .studentTop{min-width:0;gap:8px}
+  .studentTopIdentity{min-width:0}
+  .studentTopActions{flex-shrink:0}
+  .studentMenu>summary{min-width:42px}
+  .lessonSummaryGrid{grid-template-columns:minmax(0,1fr)}
+}

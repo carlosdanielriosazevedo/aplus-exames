@@ -580,3 +580,14 @@
   }
   .deepReviewArticle>.studyFlow>.reviewLesson{width:100%;min-width:0}
 }
+
+/* On phones, the five pedagogical blocks use the available width and remain
+   legible independently of the surrounding subject layout. */
+@media (max-width:760px){
+  .deepReviewArticle{box-sizing:border-box;width:100%;max-width:100%!important;min-width:0}
+  .deepReviewArticle>.studyFlow,.studyFlow,.lessonStack,.reviewLesson,.lessonBody{box-sizing:border-box;width:100%;min-width:0;max-width:100%}
+  .lessonSummaryGrid{grid-template-columns:minmax(0,1fr)}
+  .reviewRemember,.reviewPitfalls{min-width:0}
+  .blockHeading{min-width:0;align-items:center}
+  .blockHeading>div{min-width:0;overflow-wrap:anywhere}
+}
