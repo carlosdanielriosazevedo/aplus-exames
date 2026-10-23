@@ -5,7 +5,7 @@ const read=p=>readFileSync(new URL("../../"+p,import.meta.url),"utf8");
 test("deep review summary and attention use shared numbered heading",()=>{
   const src=read("app/components/DeepReviewStudy.js");
   for(const label of ["IDEIA-CHAVE","ATENÇÃO"])assert.match(src,new RegExp('className=\\{styles\\.blockHeading\\}[^\\n]*'+label));
-  assert.doesNotMatch(src,/<small>0[45] · (?:IDEIA-CHAVE|ATENÇÃO)<\\/small>/);
+  assert.ok(!src.includes("<small>04 · IDEIA-CHAVE</small>")&&!src.includes("<small>05 · ATENÇÃO</small>"));
 });
 test("FQA practical review headings share the same pattern",()=>{
   const src=read("app/components/PhysicsChemistryLearnPanel.js");
