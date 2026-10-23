@@ -44,3 +44,18 @@ test("onboarding cannot advance with missing recent grade",()=>{
   assert.match(setup,/aria-required="true"/);
   assert.match(setup,/p\.recentGrade===""/);
 });
+
+test("three onboarding steps keep Continue disabled for missing required answers",()=>{
+ const selection=src("app/clientApp.js");
+ assert.match(selection,/disabled=\{!selected\.length\}/);
+ const setup=src("app/components/SetupScreens.js");
+ assert.match(setup,/const profileIncomplete=gradeMissing/);
+ assert.match(setup,/disabled=\{profileIncomplete\}/);
+ assert.match(setup,/const curriculumIncomplete=onboarding/);
+ assert.match(setup,/disabled=\{curriculumIncomplete\}/);
+ const pt=src("app/components/PortugueseSubject.js");
+ const fqa=src("app/components/PhysicsChemistrySubject.js");
+ for(const source of [pt,fqa]){
+   assert.match(source,/disabled=\{view==="curriculumOnboard"&&scopeDraft\.length===0\}/);
+ }
+});

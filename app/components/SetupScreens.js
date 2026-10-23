@@ -32,8 +32,9 @@ export function StudentProfile({s,setS,go,editing=false,initialProfile}){
     goal:subjectGoal(s,activeSubject.id)
   }));
   const gradeMissing=p.recentGrade===""||p.recentGrade===null||p.recentGrade===undefined||!Number.isFinite(Number(p.recentGrade));
+  const profileIncomplete=gradeMissing||!p.schoolYear||!p.examTiming||!Number.isFinite(Number(p.goal));
   function save(){
-    if(gradeMissing)return;
+    if(profileIncomplete)return;
     const saveProfile=prev=>{
       const next={
         ...prev,
@@ -111,7 +112,7 @@ export function StudentProfile({s,setS,go,editing=false,initialProfile}){
     </div>
 
     <div className="notice"><b>Exemplo</b><span>Se tens tido 18 valores, a app não começa por perguntas demasiado elementares. Se a evidência contrariar essa indicação, adapta imediatamente.</span></div>
-    <button className="primary" disabled={gradeMissing} onClick={save}>{editing?"Guardar percurso":`Continuar para a matéria de ${activeSubject.name}`}</button>
+    <button className="primary" disabled={profileIncomplete} onClick={save}>{editing?"Guardar percurso":`Continuar para a matéria de ${activeSubject.name}`}</button>
   </Shell>
 }
 
@@ -139,7 +140,9 @@ export function TaughtCurriculum({s,setS,go,onboarding=false}){
     if(hasEvidence&&!window.confirm("Já existem resultados nesta matéria. Queres retirá-la das recomendações sem apagar o histórico?"))return;
     setSelected(rows=>all?rows.filter(id=>!ids.includes(id)):[...new Set([...rows,...ids])]);
   }
+  const curriculumIncomplete=onboarding&&!finished&&selected.filter(id=>valid.has(id)).length===0;
   function save(){
+    if(curriculumIncomplete)return;
     const clean=finished?[...valid]:selected.filter(id=>valid.has(id));
     clearSessionDraft(s.betaMode||"internal");
     setS(prev=>{
@@ -177,7 +180,7 @@ export function TaughtCurriculum({s,setS,go,onboarding=false}){
     {selected.length===0&&<div className="notice warning"><b>Ainda não assinalaste nenhuma submatéria deste ano</b><span>A app usará apenas matéria de anos anteriores. No 10.º ano, o Diagnóstico ficará indisponível até assinalares pelo menos uma submatéria.</span></div>}
     <div className="notice"><b>O teu histórico fica guardado</b><span>Se desmarcares uma submatéria, os resultados anteriores não são apagados; apenas deixam de influenciar o plano enquanto ela estiver fora do âmbito.</span></div>
     <div className="notice"><b>Escolhe apenas o que já aprendeste</b><span>A app usa esta seleção para adaptar o diagnóstico, os treinos e as recomendações ao teu percurso escolar.</span></div>
-    <button className="primary" onClick={save}>{onboarding?"Continuar":"Guardar matéria dada"}</button>
+    <button className="primary" disabled={curriculumIncomplete} onClick={save}>{onboarding?"Continuar":"Guardar matéria dada"}</button>
   </Shell>;
 }
 

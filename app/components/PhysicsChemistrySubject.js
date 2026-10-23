@@ -294,7 +294,8 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       </details>})}</div>
       {!scopeDraft.length&&<div className="notice warning"><b>Ainda não assinalaste nenhuma submatéria deste ano</b><span>No 10.º ano, o diagnóstico e as missões ficam indisponíveis até assinalares pelo menos uma submatéria. Podes voltar aqui sempre que começares matéria nova.</span></div>}
       <div className="notice"><b>O teu histórico fica guardado</b><span>Se desmarcares uma submatéria, os resultados anteriores não são apagados; apenas deixam de influenciar o plano enquanto ela estiver fora do âmbito.</span></div>
-      <button className="primary" onClick={()=>{
+      <button className="primary" disabled={view==="curriculumOnboard"&&scopeDraft.length===0} onClick={()=>{
+        if(view==="curriculumOnboard"&&scopeDraft.length===0)return;
         setS(prev=>{
           const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),[SUBJECT_ID]:{...(prev.subjectSettings?.[SUBJECT_ID]||{}),taughtUnitIds:scopeDraft,curriculumConfigured:true}}};
           return view==="curriculumOnboard"&&onboardingStep.nextId?activateSubjectState(configured,onboardingStep.nextId):view==="curriculumOnboard"?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured;
