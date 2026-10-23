@@ -23,8 +23,8 @@ function PracticalReview({practical}){
         <ul>{practical.map(activity=><li key={activity.id}><b>{activity.label}</b> — {activity.focus.join(" · ")}</li>)}</ul>
       </div>:<div className={styles.reviewToolbox}><p>Este domínio não tem uma atividade prática específica registada neste mapa.</p></div>}
       <div className={styles.lessonSummaryGrid}>
-        <div className={styles.reviewRemember}><small>03 · IDEIA-CHAVE</small><b>Fica com isto</b><p>Uma conclusão experimental deve nascer dos dados e das incertezas observadas, não apenas do resultado que esperavas obter.</p></div>
-        <div className={styles.reviewPitfalls}><small>04 · ATENÇÃO</small><b>Não te esqueças</b><ul><li>Distingue variáveis independentes, dependentes e controladas.</li><li>Apresenta unidades e tratamento de dados de forma coerente.</li><li>Discute incerteza, limitações e evidência antes da conclusão.</li></ul></div>
+        <div className={styles.reviewRemember}><div className={styles.blockHeading}><span>03</span><div><small>IDEIA-CHAVE</small><b>Fica com isto</b></div></div><p>Uma conclusão experimental deve nascer dos dados e das incertezas observadas, não apenas do resultado que esperavas obter.</p></div>
+        <div className={styles.reviewPitfalls}><div className={styles.blockHeading}><span>04</span><div><small>ATENÇÃO</small><b>Não te esqueças</b></div></div><ul><li>Distingue variáveis independentes, dependentes e controladas.</li><li>Apresenta unidades e tratamento de dados de forma coerente.</li><li>Discute incerteza, limitações e evidência antes da conclusão.</li></ul></div>
       </div>
     </div>
   </section>;

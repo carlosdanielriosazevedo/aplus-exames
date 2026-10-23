@@ -555,3 +555,14 @@
   .reviewToolbox,.reviewExample,.reviewRemember,.reviewPitfalls{padding:14px;}
   .exampleSteps li{font-size:14px;}
 }
+
+/* Rever Matéria: shared section badges and accessible unit numbers. */
+.lessonHeader>.lessonNumber{color:#fff!important}
+.reviewRemember .blockHeading,
+.reviewPitfalls .blockHeading{margin-bottom:10px}
+.reviewRemember .blockHeading>span,
+.reviewPitfalls .blockHeading>span{flex:0 0 28px;background:#eef3f5;color:var(--app-muted)}
+.reviewRemember .blockHeading small{color:#3f6a54}
+.reviewPitfalls .blockHeading small{color:#8a4e31}
+.reviewRemember .blockHeading b,
+.reviewPitfalls .blockHeading b{color:var(--app-navy)}
