@@ -1808,3 +1808,17 @@ button,input,select,textarea{max-width:100%}
   .trainHub .apronsoNudge .apronso{display:block;width:82px;height:88px;object-fit:contain;align-self:center}
   .trainHub .apronsoNudge p{align-self:center;margin:0;min-width:0;line-height:1.5}
 }
+
+/* Desktop: Aprender follows the same inner margins as Treinar, Ranking and Progresso.
+   The earlier centered 820/860px limits made this tab jump horizontally. */
+@media (min-width:761px){
+  .learnHome>.studentSurface .learnIntro,
+  .learnHome>.studentSurface .adaptivePath{
+    box-sizing:border-box;
+    width:100%;
+    max-width:none;
+    margin-left:0;
+    margin-right:0;
+  }
+  .learnHome>.studentSurface .adaptivePath{min-width:0}
+}
