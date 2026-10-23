@@ -31,7 +31,9 @@ export function StudentProfile({s,setS,go,editing=false,initialProfile}){
     examTiming:subjectSettings.profileConfigured?subjectSettings.examTiming||"unsure":editing?(s.profile?.examTiming||"unsure"):suggestedExamTimingForYear(s.profile?.schoolYear,s.profile?.examTiming),
     goal:subjectGoal(s,activeSubject.id)
   }));
+  const gradeMissing=p.recentGrade===""||p.recentGrade===null||p.recentGrade===undefined||!Number.isFinite(Number(p.recentGrade));
   function save(){
+    if(gradeMissing)return;
     const saveProfile=prev=>{
       const next={
         ...prev,
@@ -88,12 +90,13 @@ export function StudentProfile({s,setS,go,editing=false,initialProfile}){
     </>}
 
     <h3>{p.schoolYear==="Já terminei o secundário"?`Que nota tinhas aproximadamente a ${activeSubject.name}?`:`Que nota tens tido aproximadamente a ${activeSubject.name}?`}</h3>
-    <div className="gradeInput"><input inputMode="numeric" min="0" max="20" placeholder="Ex.: 14" value={p.recentGrade} onChange={e=>{
+    <div className="gradeInput"><input aria-label={`Nota recente de ${activeSubject.name}`} aria-required="true" required inputMode="numeric" min="0" max="20" placeholder="Ex.: 14" value={p.recentGrade} onChange={e=>{
       const raw=e.target.value.replace(/[^0-9]/g,"");
       const n=raw===""?"":Math.max(0,Math.min(20,Number(raw)));
       setP({...p,recentGrade:n});
     }}/><span>/20</span></div>
 
+    {gradeMissing&&<p className="muted" role="status">Indica a nota recente para continuares (0 a 20 valores).</p>}
     <h3>Quando pretendes fazer o exame?</h3>
     <div className="stackChoices">
       {[["thisYear","Este ano letivo"],["nextYear","No próximo ano"],["twoYears","Daqui a 2 anos"],["unsure","Ainda não sei"]].map(([v,l])=><button key={v} className={p.examTiming===v?"sel":""} onClick={()=>setP({...p,examTiming:v})}>{l}</button>)}
@@ -108,7 +111,7 @@ export function StudentProfile({s,setS,go,editing=false,initialProfile}){
     </div>
 
     <div className="notice"><b>Exemplo</b><span>Se tens tido 18 valores, a app não começa por perguntas demasiado elementares. Se a evidência contrariar essa indicação, adapta imediatamente.</span></div>
-    <button className="primary" onClick={save}>{editing?"Guardar percurso":`Continuar para a matéria de ${activeSubject.name}`}</button>
+    <button className="primary" disabled={gradeMissing} onClick={save}>{editing?"Guardar percurso":`Continuar para a matéria de ${activeSubject.name}`}</button>
   </Shell>
 }
 
