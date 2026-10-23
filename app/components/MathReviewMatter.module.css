@@ -566,3 +566,17 @@
 .reviewPitfalls .blockHeading small{color:var(--app-muted)}
 .reviewRemember .blockHeading b,
 .reviewPitfalls .blockHeading b{color:var(--app-orange-dark)}
+
+/* Legacy Portuguese five-block reviews must occupy the full study column,
+   not the half-width cell used by the old two-column chapter layout. */
+@media (min-width:761px){
+  .deepReviewArticle{display:block!important;width:100%;max-width:980px!important}
+  .deepReviewArticle>.studyFlow{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr);
+    width:100%;max-width:100%;min-width:0;
+    padding:0;
+    grid-column:1/-1;
+  }
+  .deepReviewArticle>.studyFlow>.reviewLesson{width:100%;min-width:0}
+}
