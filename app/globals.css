@@ -1893,3 +1893,24 @@ button,input,select,textarea{max-width:100%}
   .rankingDesktopShell>.panel>.rankingHero{margin-left:0!important;padding-left:0!important}
   .rankingDesktopShell>.panel>.rankingHero>.sectionIntro{margin-left:0!important;padding-left:0!important}
 }
+
+/* Mobile tab-title anchor: match Treinar's sectionIntro without touching StudentTop. */
+@media(max-width:760px){
+  .learnHome>.studentSurface>.learnIntro,
+  .rankingDesktopShell>.panel>.rankingHero{
+    margin-top:10px!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    padding:0!important;
+  }
+  .learnHome>.studentSurface>.learnIntro>p,
+  .rankingDesktopShell>.panel>.rankingHero .eyebrow{
+    margin:0 0 5px!important;
+    line-height:normal;
+  }
+  .learnHome>.studentSurface>.learnIntro>h1,
+  .rankingDesktopShell>.panel>.rankingHero h1{
+    margin:5px 0 0!important;
+  }
+  .rankingDesktopShell>.panel>.rankingHero>.sectionIntro{margin:0!important;padding:0!important}
+}
