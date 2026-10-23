@@ -1202,8 +1202,12 @@ function Home({s,setS,go,reset}){
       else go("mission");
     }}>Continuar →</button></div>}
 
-    {!s.diagnosticDone?<section className="adaptivePath" aria-label="Diagnóstico inicial de Matemática A">
-      <div className="pathNode current"><span>●</span><article><small>PRIMEIRO PASSO</small><h2>O teu diagnóstico inicial</h2><p>Descobre o que já sabes e ajuda o Apronso a preparar um percurso de estudo à tua medida.</p><button onClick={()=>go("diag")}>{pausedDraft?.kind==="diagnostic"?"Continuar Diagnóstico":"Começar Diagnóstico"}</button></article></div>
+    {!s.diagnosticDone?<section className="adaptivePath" aria-label="Caminho adaptativo de Matemática A">
+      <div className="pathNode current"><span>●</span><div><small>PRIMEIRO PASSO</small><b>Conhecer o teu ponto de partida</b></div></div>
+      <div className="pathLine active"/>
+      <div className="pathNode current"><span>●</span><article><small>PRÓXIMO PASSO</small><h2>Diagnóstico de Matemática A</h2><div className="missionCardMeta"><span>Diagnóstico inicial</span></div><button onClick={()=>go("diag")}>{pausedDraft?.kind==="diagnostic"?"Continuar diagnóstico":"Começar Diagnóstico"}</button></article></div>
+      <div className="pathLine"/>
+      <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>Primeira Missão adaptada</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>:<section className="adaptivePath" aria-label="Caminho adaptativo">
       <div className="pathNode done"><span>✓</span><div><small>ÚLTIMO PASSO</small><b>{completedMission?.focus||theme(completedMission?.themeId)?.short||"Diagnóstico concluído"}</b></div></div>
       <div className="pathLine active"/>
