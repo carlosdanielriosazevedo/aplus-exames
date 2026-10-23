@@ -16,3 +16,17 @@ test("deep review section numbers render white",()=>{
   const css=read("app/components/MathReviewMatter.module.css");
   assert.match(css,/\.lessonHeader>\.lessonNumber\{color:#fff!important\}/);
 });
+
+test("summary block headings use neutral labels and orange titles",()=>{
+ const css=read("app/components/MathReviewMatter.module.css");
+ assert.match(css,/\.reviewRemember \.blockHeading small,[\s\S]*?\.reviewPitfalls \.blockHeading small\{color:var\(--app-muted\)\}/);
+ assert.match(css,/\.reviewRemember \.blockHeading b,[\s\S]*?\.reviewPitfalls \.blockHeading b\{color:var\(--app-orange-dark\)\}/);
+});
+test("Portuguese legacy content renders all five review blocks",()=>{
+ const source=read("app/components/PortugueseLearnPanel.js");
+ for(const n of ["01","02","03","04","05"])assert.ok(source.includes('<span>'+n+'</span>'));
+ assert.match(source,/PARA ORIENTAR A LEITURA/);
+ assert.match(source,/EXEMPLO ORIENTADO/);
+ assert.match(source,/IDEIA-CHAVE/);
+ assert.match(source,/ATENÇÃO/);
+});
