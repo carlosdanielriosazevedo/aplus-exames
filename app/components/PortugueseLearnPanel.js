@@ -61,7 +61,7 @@ export default function PortugueseLearnPanel({schoolYear="12.º"}){
         ]}
       />
     </article>
-    :<article className="portugueseProgressCard">
+    :<article className={`portugueseProgressCard ${styles.deepReviewArticle}`}> 
       <button type="button" className="back" onClick={()=>setUnitId(null)}>← Todas as unidades do {yearRow.year}</button>
       <p className="eyebrow">PORTUGUÊS · {yearRow.year} · {DOMAIN_LABELS[unit.domain]}</p><h2>{unit.title}</h2>
       {unit.subtitle&&<p className="muted">{unit.subtitle}</p>}
