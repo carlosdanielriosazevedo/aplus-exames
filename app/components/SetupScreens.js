@@ -140,7 +140,7 @@ export function TaughtCurriculum({s,setS,go,onboarding=false}){
     if(hasEvidence&&!window.confirm("Já existem resultados nesta matéria. Queres retirá-la das recomendações sem apagar o histórico?"))return;
     setSelected(rows=>all?rows.filter(id=>!ids.includes(id)):[...new Set([...rows,...ids])]);
   }
-  const curriculumIncomplete=onboarding&&!finished&&selected.filter(id=>valid.has(id)).length===0;
+  const curriculumIncomplete=onboarding&&!finished&&s.profile?.schoolYear!=="10.º"&&selected.filter(id=>valid.has(id)).length===0;
   function save(){
     if(curriculumIncomplete)return;
     const clean=finished?[...valid]:selected.filter(id=>valid.has(id));
