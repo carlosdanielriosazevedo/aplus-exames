@@ -67,8 +67,8 @@ function ReviewSection({section,index,kind}){
       <SectionToolbox section={section} kind={kind}/>
       <GuidedExample example={section.example} kind={kind} noteFallback={section.note}/>
       <div className={styles.lessonSummaryGrid}>
-        {section.remember&&<div className={styles.reviewRemember}><small>04 · IDEIA-CHAVE</small><b>Fica com isto</b><p>{section.remember}</p></div>}
-        {section.pitfalls?.length>0&&<div className={styles.reviewPitfalls}><small>05 · ATENÇÃO</small><b>Erros a evitar</b><ul>{section.pitfalls.map(point=><li key={point}>{point}</li>)}</ul></div>}
+        {section.remember&&<div className={styles.reviewRemember}><div className={styles.blockHeading}><span>04</span><div><small>IDEIA-CHAVE</small><b>Fica com isto</b></div></div><p>{section.remember}</p></div>}
+        {section.pitfalls?.length>0&&<div className={styles.reviewPitfalls}><div className={styles.blockHeading}><span>05</span><div><small>ATENÇÃO</small><b>Erros a evitar</b></div></div><ul>{section.pitfalls.map(point=><li key={point}>{point}</li>)}</ul></div>}
       </div>
     </div>
   </section>;
