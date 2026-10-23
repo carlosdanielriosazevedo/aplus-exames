@@ -24,7 +24,7 @@ test("Math Aprender offers explicit per-subject diagnostic entry",()=>{
   const app=src("app/clientApp.js");
   assert.match(app,/!s\.diagnosticDone\?<section className="adaptivePath"/);
   assert.match(app,/Começar Diagnóstico/);
-  assert.match(app,/Continuar Diagnóstico/);
+  assert.match(app,/Continuar diagnóstico/);
   assert.match(app,/go\("diag"\)/);
 });
 
@@ -35,4 +35,12 @@ test("Portuguese and FQA keep their own diagnosis completion and resume state",(
     assert.match(source,/progress\.lastPosition/,path);
     assert.match(source,/startDiagnostic/,path);
   }
+});
+
+test("onboarding cannot advance with missing recent grade",()=>{
+  const setup=src("app/components/SetupScreens.js");
+  assert.match(setup,/if\(gradeMissing\)return;/);
+  assert.match(setup,/disabled=\{gradeMissing\}/);
+  assert.match(setup,/aria-required="true"/);
+  assert.match(setup,/p\.recentGrade===""/);
 });
