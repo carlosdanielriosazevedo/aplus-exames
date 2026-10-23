@@ -1845,3 +1845,42 @@ button,input,select,textarea{max-width:100%}
   .studentMenu>summary{min-width:42px}
   .lessonSummaryGrid{grid-template-columns:minmax(0,1fr)}
 }
+
+/* Mobile: Treinar/Progresso are the reference for all four main tabs. */
+@media (max-width:760px){
+  .learnHome,
+  .learnHome>.studentSurface{background:#fff!important}
+  .learnHome>.studentSurface,
+  .wideStudentShell>.panel,
+  .rankingDesktopShell>.panel,
+  .progressPage>.panel{
+    box-sizing:border-box;
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    margin-left:0;
+    margin-right:0;
+    padding-left:max(16px,env(safe-area-inset-left));
+    padding-right:max(16px,env(safe-area-inset-right));
+    background:#fff!important;
+  }
+  .learnHome>.studentSurface .learnIntro,
+  .wideStudentShell>.panel>.sectionIntro,
+  .progressPage>.panel>.sectionIntro,
+  .rankingDesktopShell>.panel>.rankingHero{
+    box-sizing:border-box;
+    width:100%;
+    max-width:100%;
+    margin-left:0;
+    margin-right:0;
+  }
+  .learnHome>.studentSurface .learnIntro{margin-top:0}
+  .rankingDesktopShell>.panel>.rankingHero{padding:0}
+  .rankingDesktopShell>.panel>.rankingHero>.sectionIntro{margin:0}
+  .learnHome .studentTop,
+  .wideStudentShell>.panel>.studentTop,
+  .rankingDesktopShell>.panel>.studentTop{
+    margin-top:0;
+    margin-bottom:24px;
+  }
+}
