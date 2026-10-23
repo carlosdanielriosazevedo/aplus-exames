@@ -56,6 +56,21 @@ test("three onboarding steps keep Continue disabled for missing required answers
  const pt=src("app/components/PortugueseSubject.js");
  const fqa=src("app/components/PhysicsChemistrySubject.js");
  for(const source of [pt,fqa]){
-   assert.match(source,/disabled=\{view==="curriculumOnboard"&&scopeDraft\.length===0\}/);
+   assert.match(source,/disabled=\{view==="curriculumOnboard"&&currentYear!=="10.º"&&scopeDraft\.length===0\}/);
  }
+});
+
+test("10th-year student may finish with zero taught topics",()=>{
+ const setup=src("app/components/SetupScreens.js");
+ assert.match(setup,/s\.profile\?\.schoolYear!=="10.º"/);
+ for(const path of ["app/components/PortugueseSubject.js","app/components/PhysicsChemistrySubject.js"]){
+  assert.match(src(path),/currentYear!=="10.º"&&scopeDraft\.length===0/,path);
+ }
+});
+
+test("main student header includes ellipsis fallback on non-Aprender tabs",()=>{
+ const chrome=src("app/components/chrome.js");
+ assert.match(chrome,/menu=children\?augmentStudentMenu/);
+ assert.match(chrome,/aria-label="Abrir menu"/);
+ assert.match(chrome,/Matéria dada na escola/);
 });

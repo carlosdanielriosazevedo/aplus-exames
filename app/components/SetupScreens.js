@@ -140,7 +140,7 @@ export function TaughtCurriculum({s,setS,go,onboarding=false}){
     if(hasEvidence&&!window.confirm("Já existem resultados nesta matéria. Queres retirá-la das recomendações sem apagar o histórico?"))return;
     setSelected(rows=>all?rows.filter(id=>!ids.includes(id)):[...new Set([...rows,...ids])]);
   }
-  const curriculumIncomplete=onboarding&&!finished&&selected.filter(id=>valid.has(id)).length===0;
+  const curriculumIncomplete=onboarding&&!finished&&s.profile?.schoolYear!=="10.º"&&selected.filter(id=>valid.has(id)).length===0;
   function save(){
     if(curriculumIncomplete)return;
     const clean=finished?[...valid]:selected.filter(id=>valid.has(id));
@@ -178,6 +178,7 @@ export function TaughtCurriculum({s,setS,go,onboarding=false}){
       </details>;
     })}</div>
     {selected.length===0&&<div className="notice warning"><b>Ainda não assinalaste nenhuma submatéria deste ano</b><span>A app usará apenas matéria de anos anteriores. No 10.º ano, o Diagnóstico ficará indisponível até assinalares pelo menos uma submatéria.</span></div>}
+    {onboarding&&s.profile?.schoolYear==="10.º"&&<div className="notice"><b>Diagnóstico de Bases ≠ diagnóstico do secundário</b><span>Quando ainda não deste matéria do 10.º ano, um futuro Diagnóstico de Bases avaliará apenas conhecimentos anteriores, sem medir o Domínio do programa do secundário. Podes e deves atualizar regularmente «Matéria dada na escola»; assim as Missões, os Treinos e os diagnósticos poderão adaptar os conteúdos ao que vais aprendendo.</span></div>}
     <div className="notice"><b>O teu histórico fica guardado</b><span>Se desmarcares uma submatéria, os resultados anteriores não são apagados; apenas deixam de influenciar o plano enquanto ela estiver fora do âmbito.</span></div>
     <div className="notice"><b>Escolhe apenas o que já aprendeste</b><span>A app usa esta seleção para adaptar o diagnóstico, os treinos e as recomendações ao teu percurso escolar.</span></div>
     <button className="primary" disabled={curriculumIncomplete} onClick={save}>{onboarding?"Continuar":"Guardar matéria dada"}</button>

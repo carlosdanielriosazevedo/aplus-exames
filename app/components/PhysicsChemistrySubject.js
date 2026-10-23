@@ -293,9 +293,10 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
         <div>{topics.map(topic=><label key={topic.id}><input type="checkbox" checked={scopeDraft.includes(topic.id)} onChange={()=>setScopeDraft(current=>current.includes(topic.id)?current.filter(id=>id!==topic.id):[...current,topic.id])}/><span>{topic.label}</span></label>)}</div>
       </details>})}</div>
       {!scopeDraft.length&&<div className="notice warning"><b>Ainda não assinalaste nenhuma submatéria deste ano</b><span>No 10.º ano, o diagnóstico e as missões ficam indisponíveis até assinalares pelo menos uma submatéria. Podes voltar aqui sempre que começares matéria nova.</span></div>}
-      <div className="notice"><b>O teu histórico fica guardado</b><span>Se desmarcares uma submatéria, os resultados anteriores não são apagados; apenas deixam de influenciar o plano enquanto ela estiver fora do âmbito.</span></div>
-      <button className="primary" disabled={view==="curriculumOnboard"&&scopeDraft.length===0} onClick={()=>{
-        if(view==="curriculumOnboard"&&scopeDraft.length===0)return;
+          {view==="curriculumOnboard"&&currentYear==="10.º"&&<div className="notice"><b>Diagnóstico de Bases ≠ diagnóstico do secundário</b><span>Quando ainda não deste matéria do 10.º ano, um futuro Diagnóstico de Bases avaliará apenas conhecimentos anteriores, sem medir o Domínio do programa do secundário. Podes e deves atualizar regularmente «Matéria dada na escola»; assim as Missões, os Treinos e os diagnósticos poderão adaptar os conteúdos ao que vais aprendendo.</span></div>}
+    <div className="notice"><b>O teu histórico fica guardado</b><span>Se desmarcares uma submatéria, os resultados anteriores não são apagados; apenas deixam de influenciar o plano enquanto ela estiver fora do âmbito.</span></div>
+      <button className="primary" disabled={view==="curriculumOnboard"&&currentYear!=="10.º"&&scopeDraft.length===0} onClick={()=>{
+        if(view==="curriculumOnboard"&&currentYear!=="10.º"&&scopeDraft.length===0)return;
         setS(prev=>{
           const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),[SUBJECT_ID]:{...(prev.subjectSettings?.[SUBJECT_ID]||{}),taughtUnitIds:scopeDraft,curriculumConfigured:true}}};
           return view==="curriculumOnboard"&&onboardingStep.nextId?activateSubjectState(configured,onboardingStep.nextId):view==="curriculumOnboard"?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured;
