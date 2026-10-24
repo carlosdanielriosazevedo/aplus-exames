@@ -1893,3 +1893,34 @@ button,input,select,textarea{max-width:100%}
   .rankingDesktopShell>.panel>.rankingHero{margin-left:0!important;padding-left:0!important}
   .rankingDesktopShell>.panel>.rankingHero>.sectionIntro{margin-left:0!important;padding-left:0!important}
 }
+
+/* Mobile 4-tab heading contract. Reference: Treinar/Progresso sectionIntro.
+   Deliberately does not target StudentTop, APProva+ logo or subject selector. */
+@media(max-width:760px){
+  .learnHome>.studentSurface>.learnIntro,
+  .rankingDesktopShell>.panel>.rankingHero{
+    margin:10px 0 28px!important;
+    padding:0!important;
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
+  }
+  .rankingDesktopShell>.panel>.rankingHero>.sectionIntro{
+    margin:0!important;
+    padding:0!important;
+    width:100%;
+    max-width:100%;
+  }
+  .learnHome>.studentSurface>.learnIntro>p:first-child,
+  .rankingDesktopShell>.panel>.rankingHero .eyebrow{
+    margin:0!important;
+    padding:0!important;
+    line-height:normal;
+  }
+  .learnHome>.studentSurface>.learnIntro>h1,
+  .rankingDesktopShell>.panel>.rankingHero h1{
+    margin:5px 0!important;
+    font-size:29px;
+    line-height:1.08;
+  }
+}
