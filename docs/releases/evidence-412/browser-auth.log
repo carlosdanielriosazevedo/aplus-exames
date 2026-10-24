@@ -1,0 +1,21 @@
+CONSOLE Refused to load the script 'https://vercel.live/_next-live/feedback/feedback.js' because it violates the following Content Security Policy directive: "script-src 'self' 'unsafe-inline'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.
+
+NETWORK vercel.live GET csp
+CONSOLE Refused to load the script 'https://vercel.live/_next-live/feedback/feedback.js' because it violates the following Content Security Policy directive: "script-src 'self' 'unsafe-inline'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.
+
+NETWORK vercel.live GET csp
+DATA_REQUEST GET sec-ch-ua-platform,authorization,referer,sec-ch-ua,sec-ch-ua-mobile,user-agent,accept,x-neon-client-info
+CONSOLE Access to fetch at 'https://ep-holy-term-b93irruj.apirest.c-7.eu-central-1.aws.neon.tech/neondb/rest/v1/student_cloud_state?select=state_json%2Cupdated_at%2Crevision%2Clast_device_id&auth_user_id=eq.bc859b21-e037-469d-961f-15e726c75ab1' from origin 'https://applus-beta-synthetic-git-1472c7-carlos-rios-azevedo-s-projects.vercel.app' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+NETWORK ep-holy-term-b93irruj.apirest.c-7.eu-central-1.aws.neon.tech GET net::ERR_FAILED
+CONSOLE Failed to load resource: net::ERR_FAILED
+Error: expect(locator).toBeVisible() failed
+
+Locator:  getByText('Progresso guardado online com segurança.', { exact: true })
+Expected: visible
+Received: <element(s) not found>
+Timeout:  45000ms
+
+Call log:
+[2m  - Expect "to.be.visible" with timeout 45000ms[22m
+[2m  - waiting for getByText('Progresso guardado online com segurança.', { exact: true })[22m
+

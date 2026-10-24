@@ -1,0 +1,45 @@
+[2m[WebServer] [22m(node:20) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22mnpm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[2m[WebServer] [22m(node:33) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+[2m[WebServer] [22m We detected multiple lockfiles and selected the directory of /workspace/scratch/7f5e477b35c5/aplus-exames/package-lock.json as the root directory.
+[2m[WebServer] [22m To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+[2m[WebServer] [22m   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+[2m[WebServer] [22m Detected additional lockfiles: 
+[2m[WebServer] [22m   * /workspace/scratch/7f5e477b35c5/aplus-exames/.worktrees/release-411/package-lock.json
+[2m[WebServer] [22m
+
+Running 3 tests using 1 worker
+
+(node:45) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+TEST_BEGIN  >  > journey.spec.mjs > Matemática A · percurso completo até missão, treino e mini-exame
+STAGE onboarding math-a
+STAGE diagnostic complete math-a
+STAGE mission complete math-a
+STAGE training complete math-a
+STAGE correction progress ranking math-a
+JOURNEY_COMPLETE math-a
+  ✓  1 ../../../release-evidence/journey.spec.mjs:227:3 › Matemática A · percurso completo até missão, treino e mini-exame (8.7s)
+TEST_BEGIN  >  > journey.spec.mjs > Português · percurso completo até missão, treino e mini-exame
+STAGE onboarding portuguese
+STAGE diagnostic complete portuguese
+STAGE mission complete portuguese
+STAGE training complete portuguese
+STAGE correction progress ranking portuguese
+JOURNEY_COMPLETE portuguese
+  ✓  2 ../../../release-evidence/journey.spec.mjs:227:3 › Português · percurso completo até missão, treino e mini-exame (40.2s)
+TEST_BEGIN  >  > journey.spec.mjs > Física e Química A · percurso completo até missão, treino e mini-exame
+STAGE onboarding physics-chemistry-a
+STAGE diagnostic complete physics-chemistry-a
+STAGE mission complete physics-chemistry-a
+STAGE training complete physics-chemistry-a
+STAGE correction progress ranking physics-chemistry-a
+JOURNEY_COMPLETE physics-chemistry-a
+  ✓  3 ../../../release-evidence/journey.spec.mjs:227:3 › Física e Química A · percurso completo até missão, treino e mini-exame (8.5s)
+
+  3 passed (58.9s)
