@@ -1,6 +1,6 @@
 // Local, synthetic-only compatibility contract. Requires the pinned Git objects.
 import {execFileSync} from "node:child_process";
-import {mkdtempSync,writeFileSync,rmSync} from "node:fs";
+import {mkdtempSync,writeFileSync,rmSync,readFileSync} from "node:fs";
 import {tmpdir} from "node:os";
 import {join,resolve} from "node:path";
 import {pathToFileURL} from "node:url";
@@ -28,7 +28,10 @@ try{
  }
  modules.recovery=Object.fromEntries(await Promise.all(files.filter(f=>f!=="browserStorage.js").map(async f=>[f,await import(pathToFileURL(resolve("app/lib",f)))])));
  // Recovery deliberately retains the exact safety runtime, including reset callback/UI.
- check(git("diff",safety,"--","app","db")==="","recovery must preserve all #385 runtime guards");
+ const pinnedSetup=git("show",`${safety}:app/components/SetupScreens.js`);
+ const expectedSetup=pinnedSetup.replace('import {clearSessionDraft} from "../lib/sessionDraft";\n','').replace('    clearSessionDraft(s.betaMode||"internal");\n','').replace('      const at=Date.now();\n','').split("\n").filter(line=>!line.includes('const betaSessions=(prev.betaSessions||[])')).join("\n").replace('migrateDailyMission({...prev,betaSessions,profile:','migrateDailyMission({...prev,profile:');
+ check(readFileSync(resolve("app/components/SetupScreens.js"),"utf8").trimEnd()===expectedSetup.trimEnd(),"only the exact curriculum data-preservation fix is allowed");
+ check(git("diff",safety,"--","app","db",":(exclude)app/components/SetupScreens.js")==="","all other #385 runtime guards must remain byte-identical");
  check(git("diff",production,combined,"--","app/api","db")==="","no database/API migration in release");
  for(const mode of ["internal","friends_beta"]){
   const key=mode==="internal"?"a25-active-session-v1":"a25-friends-active-session-v1";
