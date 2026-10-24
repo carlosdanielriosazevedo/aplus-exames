@@ -7,11 +7,10 @@ import {pathToFileURL} from "node:url";
 import assert from "node:assert/strict";
 const production="98e811f8be6139f15e89de38c5b5e335dc631bdc";
 const safety="94ee6db5409e213494e275e28d8da01d3a2b4623";
-const visual="d3765d7acc5e490f66e8f97a94a726ab51826285";
 const git=(...args)=>execFileSync("git",args,{encoding:"utf8"}).trim();
 const combined="6098805c1eea0ddec17c596d20414713d1cae7c6"; // #390, exact merge tree of #385/#387.
 const dir=mkdtempSync(join(tmpdir(),"approva-recovery-synthetic-"));
-const files=["sessionDraft.js","browserStorage.js","physicsChemistryExamDraft.js","portugueseMiniExamDraft.js"];
+const files=["sessionDraft.js","browserStorage.js","physicsChemistryExamDraft.js","portugueseMiniExamDraft.js","persistence.js","pilotConsentClient.js"];
 const maps=[];
 function storage(){const m=new Map();maps.push(m);return {getItem:k=>m.get(k)??null,setItem:(k,v)=>m.set(k,String(v)),removeItem:k=>m.delete(k)}}
 globalThis.localStorage=storage();globalThis.sessionStorage=storage();
@@ -24,9 +23,9 @@ try{
   const sub=join(dir,name);execFileSync("mkdir",["-p",sub]);
   writeFileSync(join(sub,"package.json"),'{"type":"module"}');
   for(const file of files)writeFileSync(join(sub,file),git("show",`${ref}:app/lib/${file}`)+"\n");
-  modules[name]=Object.fromEntries(await Promise.all(files.filter(f=>f!=="browserStorage.js").map(async f=>[f,await import(pathToFileURL(join(sub,f)))])));
+  modules[name]=Object.fromEntries(await Promise.all(files.filter(f=>!["browserStorage.js","pilotConsentClient.js"].includes(f)).map(async f=>[f,await import(pathToFileURL(join(sub,f)))])));
  }
- modules.recovery=Object.fromEntries(await Promise.all(files.filter(f=>f!=="browserStorage.js").map(async f=>[f,await import(pathToFileURL(resolve("app/lib",f)))])));
+ modules.recovery=Object.fromEntries(await Promise.all(files.filter(f=>!["browserStorage.js","pilotConsentClient.js"].includes(f)).map(async f=>[f,await import(pathToFileURL(resolve("app/lib",f)))])));
  // Candidate must retain the pinned safety storage implementation.
  check(git("diff",safety,"--",...files.map(f=>`app/lib/${f}`))==="","candidate must preserve #385 storage guards");
  check(git("diff",production,"--","app/api","db")==="","no database/API migration in release");
@@ -88,6 +87,36 @@ try{
     assert.deepEqual(read,written);checks++;
     const state=targetMod.savePortugueseMiniExamDraft({},read);
     check(targetMod.savePortugueseMiniExamDraft(state,{...read,attemptId:"replacement"})===state,"PT pending attempt guarded");
+   }
+  }
+ }
+ // Full saved student state: older versions, three subjects, completed and
+ // unfinished diagnoses, corrections and progress must survive upgrade and
+ // a safe older loader. Legacy telemetry queues are intentionally excluded.
+ for(const mode of ["internal","friends_beta"]){
+  for(const origin of ["production","safety","combined"]){
+   for(const version of [29,31]){
+    maps.forEach(m=>m.clear());
+    const stateKey=mode==="internal"?"a25":"a25-friends-beta";
+    const draftKey=mode==="internal"?"a25-active-session-v1":"a25-friends-active-session-v1";
+    const synthetic={betaMode:mode,xp:234,diagnosticDone:true,diagnosticAnswers:8,
+     diagnosticResponses:[{itemId:"synthetic-math",answer:"x=2",feedback:{correct:true,points:4}}],
+     selectedSubjectIds:["math-a","portuguese","physics-chemistry-a"],activeSubjectId:"portuguese",
+     profile:{schoolYear:"12.º",recentGrade:14,taughtSubtopicIds:["synthetic-scope"]},
+     subjectSettings:{portuguese:{profileConfigured:true,miniExamDraft:{attemptId:"synthetic-exam",answers:{q1:"Resposta sintética"},review:{q1:{correct:true}}}}},
+     subjectProgress:{portuguese:{version:4,diagnosticDone:false,lastPosition:{kind:"diagnostic",current:2,results:[{itemId:"synthetic-pt",answer:"Resposta sintética",correct:true}],sessionId:"synthetic-pt-session"}},
+      "physics-chemistry-a":{version:4,diagnosticDone:true,diagnosticCompletedAt:1,sessions:[{kind:"mission",results:[{answer:"12",feedback:{points:2,maxPoints:2}}]}],competence:{synthetic:{score:.7,evidence:3}}}},
+     scores:{synthetic:{score:.6,evidence:[{correct:true,at:1}]}},_stateVersion:version,_savedAt:1};
+    const rawDraft=JSON.stringify({kind:"training",savedAt:1,responses:["Preservar"]});
+    localStorage.setItem(draftKey,rawDraft);
+    check(modules[origin]["persistence.js"].saveLocalState(synthetic,stateKey),"old writer saves full state");
+    const upgraded=modules.recovery["persistence.js"].loadLocalStateStatus({},()=>({synthetic:{score:0,evidence:[]}}),stateKey);
+    check(upgraded.found&&!upgraded.error,"candidate reads saved full state");
+    for(const field of ["xp","diagnosticDone","diagnosticResponses","selectedSubjectIds","activeSubjectId","profile","subjectSettings","subjectProgress","scores"]){assert.deepEqual(upgraded.state[field],synthetic[field]);checks++}
+    check(modules.recovery["persistence.js"].saveLocalState(upgraded.state,stateKey),"candidate writes upgraded state");
+    const recovered=modules.combined["persistence.js"].loadLocalStateStatus({},()=>({synthetic:{score:0,evidence:[]}}),stateKey);
+    for(const field of ["xp","diagnosticResponses","subjectProgress","subjectSettings","scores"]){assert.deepEqual(recovered.state[field],synthetic[field]);checks++}
+    check(localStorage.getItem(draftKey)===rawDraft,"saving full state cannot remove pending attempt");
    }
   }
  }
