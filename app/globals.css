@@ -1924,3 +1924,99 @@ button,input,select,textarea{max-width:100%}
     line-height:1.08;
   }
 }
+
+/* Mobile-only: owl feet align with the bottom of the headings in Aprender/Treinar.
+   Keep StudentTop coordinates intact on all four tabs. */
+.mobileMainTitle{display:contents}
+.mobileHeadingApronso{display:none!important}
+@media(max-width:760px){
+  .learnHome>.studentSurface>.learnIntro .mobileMainTitle,
+  .trainHub>.panel>.sectionIntro .mobileMainTitle{
+    display:block;position:relative;box-sizing:border-box;min-width:0;
+    padding-right:clamp(72px,22vw,94px);
+  }
+  .learnHome>.studentSurface>.learnIntro .mobileMainTitle>p,
+  .trainHub>.panel>.sectionIntro .mobileMainTitle>p{
+    margin:0!important;padding:0;line-height:20px;
+  }
+  .learnHome>.studentSurface>.learnIntro .mobileMainTitle>h1,
+  .trainHub>.panel>.sectionIntro .mobileMainTitle>h1{
+    margin:5px 0 0!important;font-size:clamp(23px,6vw,29px);
+    line-height:1.1;overflow-wrap:normal;
+  }
+  .learnHome>.studentSurface>.learnIntro .mobileHeadingApronso,
+  .trainHub>.panel>.sectionIntro .mobileHeadingApronso{
+    display:block!important;position:absolute;right:0;bottom:0;
+    width:clamp(68px,21vw,90px);height:clamp(76px,24vw,100px);
+    object-fit:contain;object-position:center bottom;pointer-events:none;
+  }
+  .learnHome>.studentSurface>.learnIntro>span{
+    display:block;width:100%;max-width:none!important;margin-top:9px;
+    padding:0;color:var(--app-muted)!important;font-size:14px;line-height:1.5;
+  }
+  /* The guide text belongs below Treinar, left-aligned and free of a card. */
+  .trainHub .apronsoNudge{
+    display:block!important;position:static!important;width:100%;
+    min-height:0;height:auto;max-height:none;box-sizing:border-box;
+    margin:8px 0 22px;padding:0!important;border:0!important;
+    border-radius:0!important;background:transparent!important;
+    box-shadow:none!important;overflow:visible!important;
+  }
+  .trainHub .apronsoNudge>.apronso{display:none!important}
+  .trainHub .apronsoNudge>p{
+    width:100%;max-width:none;margin:0!important;padding:0;
+    font-size:14px;font-weight:400;line-height:1.5;
+    color:var(--app-muted)!important;
+  }
+  /* Restore the streak flame hidden by the legacy <=430px rule.
+     Three actions fit beside the logo while the subject stays below. */
+  .studentTop .studentTopActions{gap:4px!important}
+  .studentTop .studentTopActions>button[aria-label^="Sequência:"],
+  .studentTop .studentTopActions>button[aria-label$=" XP"]{
+    display:inline-flex!important;flex:0 0 40px;width:40px;min-width:40px;
+    max-width:40px;height:42px;padding:0 3px!important;font-size:12px;
+  }
+  .studentTop .studentTopActions>button>b{font-size:12px}
+  .studentTop .studentMenu>summary{
+    box-sizing:border-box;flex:0 0 40px;width:40px;min-width:40px;
+    height:42px;padding:0 4px;
+  }
+  /* Give the ranking headline and subtitle the full viewport gutter width.
+     Bronze/XP is a compact separate chip below the introduction. */
+  .rankingDesktopShell>.panel>.rankingHero{
+    display:flex!important;flex-direction:column!important;align-items:stretch!important;
+    gap:12px!important;max-width:100%;min-width:0;
+  }
+  .rankingDesktopShell>.panel>.rankingHero>.sectionIntro{
+    flex:none!important;min-width:0;width:100%;max-width:100%!important;
+    margin:0!important;padding:0!important;
+  }
+  .rankingDesktopShell>.panel>.rankingHero .sectionIntro h1{
+    font-size:clamp(19px,5.65vw,24px)!important;line-height:1.16!important;
+    letter-spacing:-.025em;white-space:nowrap;margin:5px 0 0!important;
+    max-width:100%;
+  }
+  .rankingDesktopShell>.panel>.rankingHero .sectionIntro>.muted{
+    box-sizing:border-box;max-width:100%;width:100%;
+    margin:12px 0 0;line-height:1.5;
+  }
+  .rankingDesktopShell>.panel>.rankingHero>.divisionBadge{
+    display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;
+    justify-content:flex-start;align-self:flex-start;gap:6px 9px;
+    box-sizing:border-box;max-width:100%;width:max-content;
+    min-width:0!important;min-height:40px;margin:0;
+    padding:7px 12px;background:#fff8ed;color:var(--app-navy);
+    border:1px solid #f2dfbc;border-radius:999px;
+    text-align:left;box-shadow:none;
+  }
+  .rankingDesktopShell .rankingHero .divisionBadge>span{
+    display:inline;font-size:19px;line-height:1;
+  }
+  .rankingDesktopShell .rankingHero .divisionBadge>b{
+    display:inline;margin:0;font-size:13px;white-space:nowrap;
+  }
+  .rankingDesktopShell .rankingHero .divisionBadge>small{
+    display:inline;margin:0;color:var(--app-muted);font-size:12px;
+    line-height:1.25;
+  }
+}
