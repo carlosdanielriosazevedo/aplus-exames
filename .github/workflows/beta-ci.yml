@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: [main, codex/mobile-apronso-streak-ranking-compact]
 
 jobs:
   validate:
