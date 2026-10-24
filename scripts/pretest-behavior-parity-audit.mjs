@@ -14,7 +14,8 @@ assert.match(fqa,/Não sobe nem desce diretamente o teu Domínio/u,"FQ A deve ex
 
 assert.match(math,/missionDone\?<button onClick=\{\(\)=>go\("train"\)\}/u,"Matemática A deve encaminhar para treino depois da Missão diária.");
 assert.match(portuguese,/missionDone\?\(\)=>go\("train"\)/u,"Português deve encaminhar para treino depois da Missão diária.");
-assert.match(fqa,/missionDone\?\(\)=>go\("train"\):progress\.diagnosticDone\?\(\)=>startMission\(\):startDiagnostic/u,"FQ A deve usar o mesmo CTA adaptativo: diagnóstico, Missão e depois treino.");
+assert.match(fqa,/missionDone\?\(\)=>go\("train"\):progress\.diagnosticDone\?\(\)=>startMission\(\):\(\)=>go\("diag"\)/u,"FQ A deve usar o mesmo CTA adaptativo: diagnóstico, Missão e depois treino.");
+assert.match(fqa,/onClick=\{progress\.lastPosition\?resume:startDiagnostic\}/u,"a introdução deve iniciar ou retomar o diagnóstico explicitamente.");
 assert.match(fqa,/className="adaptivePath"/u,"FQ A deve usar o caminho adaptativo comum no Aprender.");
 assert.match(fqa,/Praticar, rever matéria ou fazer um exame/u,"FQ A deve apresentar o mesmo próximo passo provável das restantes disciplinas.");
 
