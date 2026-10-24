@@ -33,6 +33,13 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
    expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
    await page.screenshot({path:`/tmp/audit-desktop/${subjectId}-${width}-Rever.png`});
    await testInfo.attach('Rever matéria',{body:await page.screenshot(),contentType:'image/png'});
+   await page.getByRole('button',{name:/^Abrir (matéria|unidade|domínio):/u}).first().click();
+   await expect(page.locator('[class*="blockHeading"]').first()).toBeVisible();
+   expect(await page.locator('[class*="blockHeading"]').count()).toBeGreaterThanOrEqual(5);
+   expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+   await page.locator('[class*="blockHeading"]').first().scrollIntoViewIfNeeded();
+   await page.screenshot({path:`/tmp/audit-desktop/${subjectId}-${width}-Conteudo.png`});
+   await testInfo.attach('Cinco blocos de revisão',{body:await page.screenshot(),contentType:'image/png'});
   });
  }
 }

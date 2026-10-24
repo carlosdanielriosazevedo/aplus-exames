@@ -9,7 +9,7 @@ const production="98e811f8be6139f15e89de38c5b5e335dc631bdc";
 const safety="94ee6db5409e213494e275e28d8da01d3a2b4623";
 const visual="d3765d7acc5e490f66e8f97a94a726ab51826285";
 const git=(...args)=>execFileSync("git",args,{encoding:"utf8"}).trim();
-const combined=git("merge-tree","--write-tree",safety,visual).split("\n")[0];
+const combined="6098805c1eea0ddec17c596d20414713d1cae7c6"; // #390, exact merge tree of #385/#387.
 const dir=mkdtempSync(join(tmpdir(),"approva-recovery-synthetic-"));
 const files=["sessionDraft.js","browserStorage.js","physicsChemistryExamDraft.js","portugueseMiniExamDraft.js"];
 const maps=[];

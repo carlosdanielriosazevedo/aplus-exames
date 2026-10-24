@@ -39,6 +39,7 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
         await expect(filter.locator("option")).toHaveText(["Todas as disciplinas","Matemática A","Português","Física e Química A"]);
         for(const value of ["math-a","portuguese","physics-chemistry-a","all"]){await filter.selectOption(value);await expect(filter).toHaveValue(value)}
       }
+      await page.evaluate(()=>window.scrollTo(0,0));
       await page.screenshot({path:`/tmp/audit-visual/${subjectId}-${width}-${tab}.png`});
       await testInfo.attach(`${tab}-${width}`,{body:await page.screenshot(),contentType:"image/png"});
       const layout=await page.evaluate(()=>{
@@ -48,6 +49,26 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
         const range=document.createRange();range.selectNodeContents(xp);
         return {logoRight:logo.right,actionsLeft:actions.left,xpLines:range.getClientRects().length,scrollWidth:document.documentElement.scrollWidth};
       });
+      const counters=await page.evaluate(()=>{
+        const button=document.querySelector('.studentTop button[aria-label$=" XP"]');
+        const range=document.createRange();range.selectNodeContents(button.querySelector('b'));
+        return {textRight:range.getBoundingClientRect().right,buttonRight:button.getBoundingClientRect().right,menuLeft:document.querySelector('.studentMenu>summary').getBoundingClientRect().left};
+      });
+      expect(counters.textRight,`${tab}: XP sai do próprio botão`).toBeLessThanOrEqual(counters.buttonRight);
+      expect(counters.textRight,`${tab}: XP invade o menu`).toBeLessThan(counters.menuLeft);
+      if(tab==='Aprender'){
+        const mascot=await page.locator('.learnIntro').evaluate(el=>{
+          const title=el.querySelector('.mobileMainTitle'),copy=el.querySelector(':scope>span');
+          const pseudo=getComputedStyle(title,'::after');
+          return {titleBottom:title.getBoundingClientRect().bottom,copyTop:copy.getBoundingClientRect().top,legacyContent:getComputedStyle(el,'::after').content,content:pseudo.content,background:pseudo.backgroundImage,bottom:pseudo.bottom};
+        });
+        expect(mascot.legacyContent).toBe('none');
+        expect(mascot.content).toBe('""');
+        expect(mascot.background).toContain('apronso-welcome.webp');
+        expect(mascot.bottom).toBe('0px');
+        expect(mascot.copyTop).toBeGreaterThan(mascot.titleBottom);
+        await expect(page.locator('.learnIntro img.apronso')).toHaveCount(0);
+      }
       expect(layout.logoRight,`${tab}: logótipo sobreposto aos indicadores`).toBeLessThanOrEqual(layout.actionsLeft+1);
       expect(layout.xpLines,`${tab}: XP quebrou de linha`).toBe(1);
       expect(layout.scrollWidth,`${tab}: scroll horizontal`).toBeLessThanOrEqual(width+1);
