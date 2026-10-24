@@ -22,7 +22,7 @@ async function seed(page,state){
 function completedState(subjectId){return configuredState(subjectId);}
 
 for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
-  for(const width of [360,390,430]){
+  for(const width of [320,360,390,430]){
   test(`${subjectId} · cabeçalho estável a ${width}px entre separadores`,async({page},testInfo)=>{
     await page.setViewportSize({width,height:844});
     await seed(page,completedState(subjectId));
@@ -84,7 +84,7 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
 }
 
 for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
- for(const width of [360,390,430]){
+ for(const width of [320,360,390,430]){
   test(`${subjectId} · cartão de sessão em pausa a ${width}px`,async({page},testInfo)=>{
    await page.setViewportSize({width,height:844});
    const state=configuredState(subjectId);

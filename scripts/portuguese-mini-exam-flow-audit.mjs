@@ -49,7 +49,7 @@ assert.match(portugueseSubject,/<Apronso pose="progress" alt="Apronso acompanha 
 assert.match(globalCss,/\.divisionBadge\{display:flex;flex-direction:column;align-items:center;justify-content:center\}/u,"o cartão semanal de XP deve centrar verticalmente medalha, divisão e XP");
 assert.match(learnPanel,/REVER MATÉRIA/u,"o ecrã dedicado deve usar a nomenclatura Rever matéria");
 assert.match(learnPanel,/SCHOOL_YEARS/u,"Rever matéria deve permitir consultar explicitamente os três anos do secundário");
-assert.match(learnPanel,/unit\.keyPoints\.map/u,"cada unidade de Aprender deve apresentar pontos essenciais acionáveis");
+assert.match(learnPanel,/unit\.connections\?\.length\?unit\.connections:unit\.keyPoints\|\|\[\]\)\.map/u,"cada unidade de Aprender deve apresentar pontos essenciais acionáveis");
 assert.doesNotMatch(learnPanel,/onPractice|startPractice|trainingRun|go\("training/u,"Rever matéria de Português deve ser estudo passivo, sem iniciar treino");
 assert.match(learnPanel,/Aqui não há perguntas, pontuação nem avaliação/u,"Rever matéria deve explicar claramente a diferença face a Praticar");
 assert.match(taxonomy,/year:"10\.º"/u,"a taxonomia deve cobrir o 10.º ano");

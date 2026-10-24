@@ -1,4 +1,4 @@
-import test from "node:test";
+import {test} from "vitest";
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 
@@ -39,8 +39,8 @@ test("Portuguese and FQA keep their own diagnosis completion and resume state",(
 
 test("onboarding cannot advance with missing recent grade",()=>{
   const setup=src("app/components/SetupScreens.js");
-  assert.match(setup,/if\(gradeMissing\)return;/);
-  assert.match(setup,/disabled=\{gradeMissing\}/);
+  assert.match(setup,/if\(profileIncomplete\)return;/);
+  assert.match(setup,/disabled=\{profileIncomplete\}/);
   assert.match(setup,/aria-required="true"/);
   assert.match(setup,/p\.recentGrade===""/);
 });

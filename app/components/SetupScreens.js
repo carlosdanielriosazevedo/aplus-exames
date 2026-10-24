@@ -4,7 +4,6 @@ import {BrandName,Logo,Shell} from "./chrome";
 import {SECONDARY_EXAM_SUBJECTS} from "../data/subjects";
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "../data/curriculumVnext";
 import {currentYearThemes,normalizeTaughtSubtopics} from "../lib/curriculumScope";
-import {clearSessionDraft} from "../lib/sessionDraft";
 import {migrateDailyMission} from "../lib/dailyMission";
 import {recordMilestone} from "../lib/productAnalytics";
 import {activateSubjectState,finishSubjectOnboardingState,subjectGoal,subjectOnboardingStep} from "../lib/subjectWorkspace";
@@ -144,11 +143,8 @@ export function TaughtCurriculum({s,setS,go,onboarding=false}){
   function save(){
     if(curriculumIncomplete)return;
     const clean=finished?[...valid]:selected.filter(id=>valid.has(id));
-    clearSessionDraft(s.betaMode||"internal");
     setS(prev=>{
-      const at=Date.now();
-      const betaSessions=(prev.betaSessions||[]).map(session=>session.finishedAt||!["diagnostic","mission","mini_exam"].includes(session.kind)?session:{...session,finishedAt:at,durationSeconds:Math.max(1,Math.round((at-(session.startedAt||at))/1000)),meta:{...(session.meta||{}),recoveryStatus:"scope_changed",abandonedAt:at}});
-      const configured=migrateDailyMission({...prev,betaSessions,profile:{...prev.profile,taughtSubtopicIds:clean},subjectSettings:{...(prev.subjectSettings||{}),"math-a":{...(prev.subjectSettings?.["math-a"]||{}),curriculumConfigured:true}}});
+      const configured=migrateDailyMission({...prev,profile:{...prev.profile,taughtSubtopicIds:clean},subjectSettings:{...(prev.subjectSettings||{}),"math-a":{...(prev.subjectSettings?.["math-a"]||{}),curriculumConfigured:true}}});
       return onboarding&&onboardingStep.nextId
         ?activateSubjectState(configured,onboardingStep.nextId)
         :onboarding?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured;

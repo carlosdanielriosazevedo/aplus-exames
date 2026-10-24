@@ -108,14 +108,16 @@ async function expectNoSubjectSelector(page){
 }
 
 for(const subject of SUBJECTS){
-  test(`${subject.id} · reload antes de responder mantém o diagnóstico configurado`,async({page})=>{
+  test(`${subject.id} · reload antes de escolher diagnóstico mantém Aprender e configuração`,async({page})=>{
     await seed(page,configuredState(subject.id));
     await page.goto("/");
-    await expect(page.getByText(subject.marker,{exact:true})).toBeVisible({timeout:30_000});
+    await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page");
+    await expect(page.getByText(subject.marker,{exact:true})).toHaveCount(0);
     await expectNoSubjectSelector(page);
 
     await page.reload();
-    await expect(page.getByText(subject.marker,{exact:true})).toBeVisible({timeout:30_000});
+    await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page");
+    await expect(page.getByText(subject.marker,{exact:true})).toHaveCount(0);
     await expectNoSubjectSelector(page);
   });
 
@@ -182,7 +184,7 @@ for(const subject of SUBJECTS){
 
     const reopened=await context.newPage();
     await reopened.goto("/");
-    if(subject.id==="math-a")await expect(reopened.getByText(subject.marker,{exact:true})).toBeVisible({timeout:30_000});
+    if(subject.id==="math-a")await expect(reopened.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page");
     else{
       await expect(reopened.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
       const recovered=await reopened.evaluate(id=>{
@@ -210,10 +212,12 @@ for(const subject of [
     await page.getByRole("button",{name:subject.button}).click();
     await page.getByRole("button",{name:"Continuar",exact:true}).click();
     await page.getByRole("button",{name:"Já terminei o secundário",exact:true}).click();
+    await page.getByRole("textbox",{name:/Nota recente de/u}).fill("14");
     await page.getByRole("button",{name:new RegExp(`Continuar para a matéria de ${subject.name}`,"u")}).click();
     await page.getByRole("button",{name:"Continuar",exact:true}).click();
     const skip=page.getByRole("button",{name:"Saltar explicação",exact:true});
     if(await skip.isVisible().catch(()=>false))await skip.click();
+    await page.locator(".adaptivePath").getByRole("button",{name:/Começar diagnóstico/iu}).click();
     await page.getByRole("button",{name:"Começar diagnóstico",exact:true}).click();
     for(let index=0;index<2;index++){
       await expect(page.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
@@ -497,7 +501,7 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
    try{
     await context.addInitScript(({state,draft})=>{localStorage.setItem("a25",JSON.stringify(state));if(draft)localStorage.setItem("a25-active-session-v1",JSON.stringify(draft))},{state,draft});
     let page=context.pages()[0];
-    await page.goto("http://127.0.0.1:3000/");
+    await page.goto(testInfo.project.use.baseURL+"/");
     if(subjectId!=="math-a"&&exam){
      await expect(page.locator(".studentTop")).toBeVisible({timeout:30_000});
      const route=subjectId==="portuguese"?"portugueseMiniExam":kind==="full_exam"?"physicsChemistryExam":kind==="mini_exam_2"?"physicsChemistryMini2":"physicsChemistryMini1";
@@ -524,7 +528,7 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
     await context.close();
     context=await chromium.launchPersistentContext(directory,options);
     page=context.pages()[0];
-    await page.goto("http://127.0.0.1:3000/");
+    await page.goto(testInfo.project.use.baseURL+"/");
     await expect(page.locator(".sessionTop, .studentTop").first()).toBeVisible({timeout:30_000});
     await expect.poll(()=>snapshot(page)).toEqual(before);
    }finally{await context.close();rmSync(directory,{recursive:true,force:true})}

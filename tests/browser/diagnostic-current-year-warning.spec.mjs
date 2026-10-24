@@ -8,6 +8,7 @@ for(const year of ["10.º","12.º"]){
     await page.getByRole("button",{name:/^Português 12\.º ano · Prova 639\b/u}).click();
     await page.getByRole("button",{name:"Continuar",exact:true}).click();
     await page.getByRole("button",{name:year,exact:true}).click();
+    await page.getByRole("textbox",{name:/Nota recente de/u}).fill("14");
     await page.getByRole("button",{name:/Continuar para a matéria de Português/u}).click();
     await expect(page.getByRole("heading",{name:`O que já deste no ${year}?`})).toBeVisible({timeout:30_000});
     const notice=page.locator(".notice.warning").filter({hasText:"Ainda não assinalaste matéria deste ano"});
