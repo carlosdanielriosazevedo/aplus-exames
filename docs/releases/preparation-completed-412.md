@@ -1,3 +1,5 @@
+**Atualização final:** publicação concluída e verificada. Estado atual em [publication-412-20261025.md](./publication-412-20261025.md). O texto abaixo é histórico da preparação.
+
 # APProva+ — preparação real da publicação, 25/10/2026
 
 Esta execução foi autorizada explicitamente para integrar apenas #413 e preparar a recuperação no projeto real, mantendo #412 sem merge e sem promoção de domínios. Atualiza os estados pendentes dos relatórios de 24/10 e da preparação inicial de 25/10.

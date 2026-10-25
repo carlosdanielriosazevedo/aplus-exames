@@ -1,0 +1,27 @@
+{
+  "publicBrowserSmokeExitCode": 0,
+  "domains": [
+    {
+      "domain": "www.approvamais.pt",
+      "status": 200,
+      "url": "https://approvamais.pt/"
+    },
+    {
+      "domain": "approvamais.pt",
+      "status": 200,
+      "url": "https://approvamais.pt"
+    }
+  ],
+  "health": {
+    "app": "APProva+ Exames",
+    "version": "5.5.0",
+    "region": "fra1",
+    "backendConfigured": true,
+    "backendReachable": true,
+    "schemaVersion": 8,
+    "schemaMigration": "008_pilot_telemetry_consent",
+    "pilotSmokeApiVersion": null,
+    "dataApiUrl": null
+  },
+  "healthHttpStatus": 200
+}

@@ -1,3 +1,5 @@
+**Atualização final:** publicação concluída e verificada. Estado atual em [publication-412-20261025.md](./publication-412-20261025.md). O texto abaixo é histórico da preparação.
+
 # Publicação controlada — procedimento preparado em 25/10/2026
 
 **Atualização:** controlo#413 integrado e recuperação real6Sbc preparada/ensaiada; ver [preparation-completed-412.md](./preparation-completed-412.md). Não repetir esses passos nem reconstruir a recuperação sem necessidade. A integração funcional e promoção pública não foram executadas. Este documento conserva os payloads e gates do procedimento. Referência: Issue #373; PR operacional #413 e integração funcional única #412. Nenhuma das PRs históricas deve ser integrada separadamente.

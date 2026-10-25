@@ -1,0 +1,222 @@
+{
+  "sha": "74b29893890b2cc11afd41682c1b0b80a362c346",
+  "tree": "f7bd0db2035d75fd0f9391e75506dd437e936f60",
+  "run": 40182256584,
+  "job": 121135581074,
+  "status": "completed",
+  "conclusion": "success",
+  "logExtract": [
+    "  114 passed (4.4m)",
+    "{\"result\":\"PASS\",\"checks\":770,\"production\":\"98e811f8be6139f15e89de38c5b5e335dc631bdc\",\"safety\":\"94ee6db5409e213494e275e28d8da01d3a2b4623\",\"combined\":\"6098805c1eea0ddec17c596d20414713d1cae7c6\",\"recoveryBase\":\"94ee6db5409e213494e275e28d8da01d3a2b4623\",\"storage\":\"synthetic memory only\",\"network\":false}",
+    "      Tests  836 passed (836)",
+    "TECHNICAL GATE: GO",
+    "  /                          350.7 KiB | gzip  103.5 KiB | budget 650 KiB",
+    "  /portugues-mini-exame      449.5 KiB | gzip  133.9 KiB | budget 500 KiB"
+  ],
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 1
+    },
+    {
+      "name": "Checkout",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 2
+    },
+    {
+      "name": "Node",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 3
+    },
+    {
+      "name": "Install dependencies",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 4
+    },
+    {
+      "name": "Verify versioned Mathematics banks",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 5
+    },
+    {
+      "name": "Install mobile browser test runtime",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 6
+    },
+    {
+      "name": "Mobile browser regression · 390x844",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 7
+    },
+    {
+      "name": "Browser evidence",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 8
+    },
+    {
+      "name": "Synthetic recovery compatibility",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 9
+    },
+    {
+      "name": "Unit tests",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 10
+    },
+    {
+      "name": "Technical gate",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 11
+    },
+    {
+      "name": "Public launch hardening",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 12
+    },
+    {
+      "name": "Portuguese automatic grading contract",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 13
+    },
+    {
+      "name": "Selective grader validation",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 14
+    },
+    {
+      "name": "Real grader capture",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 15
+    },
+    {
+      "name": "Grader validation report",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 16
+    },
+    {
+      "name": "Score explainability",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 17
+    },
+    {
+      "name": "Learning feedback intelligence",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 18
+    },
+    {
+      "name": "Strict observed classification",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 19
+    },
+    {
+      "name": "Grader adversarial bank",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 20
+    },
+    {
+      "name": "Blind human validation campaign",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 21
+    },
+    {
+      "name": "Three-subject beta candidate",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 22
+    },
+    {
+      "name": "Release candidate journey",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 23
+    },
+    {
+      "name": "Public beta readiness",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 24
+    },
+    {
+      "name": "Desktop beta readiness",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 25
+    },
+    {
+      "name": "Cloud resume product contract",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 26
+    },
+    {
+      "name": "Closed beta autosync",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 27
+    },
+    {
+      "name": "Grader quality report",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 28
+    },
+    {
+      "name": "Content readiness report",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 29
+    },
+    {
+      "name": "Full production build",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 30
+    },
+    {
+      "name": "Pilot release gate location",
+      "status": "completed",
+      "conclusion": "skipped",
+      "number": 31
+    },
+    {
+      "name": "Post Node",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 61
+    },
+    {
+      "name": "Post Checkout",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 62
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 63
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+**Atualização final:** publicação concluída e verificada. Estado atual em [publication-412-20261025.md](./publication-412-20261025.md). O texto abaixo é histórico da preparação.
+
 # APProva+ — histórico da execução
 
 **Estado final de25/10:** controlo integrado, recuperação real preparada/ensaiada e CI final da candidata aprovado. Ver o relatório atual completo em [preparation-completed-412.md](./preparation-completed-412.md). As secções seguintes registam a evolução anterior e não substituem essa decisão final.
