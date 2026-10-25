@@ -9,7 +9,8 @@ test("Aprender and Treinar attach a single mobile Apronso to the heading",()=>{
   assert.match(learn,/className="mobileMainTitle"[^]*?O teu próximo passo\./);
   assert.doesNotMatch(learn.slice(learn.indexOf('<div className="learnIntro">'),learn.indexOf('</span></div>',learn.indexOf('<div className="learnIntro">'))),/mobileHeadingApronso/);
   assert.match(train,/className="mobileMainTitle"[^]*?O que queres fazer\?[^]*?mobileHeadingApronso/);
-  assert.match(train,/ApronsoNudge pose="thinking"/);
+  assert.doesNotMatch(train,/ApronsoNudge/);
+  assert.match(train,/<span>\{STUDY_MODE_COPY.nudge\}<\/span>/);
 });
 
 test("mobile preserves header and restores both streak and XP indicators",()=>{
