@@ -26,7 +26,7 @@ for(const subjectId of ['math-a','portuguese','physics-chemistry-a'])for(const w
    const data=await page.locator('.learnIntro').evaluate(el=>{
     const title=el.querySelector('h1'),style=getComputedStyle(title),r=title.getBoundingClientRect(),p=getComputedStyle(el,'::after');
     const copy=el.querySelector(':scope>span');const cr=copy.getBoundingClientRect(),cs=getComputedStyle(copy),er=el.getBoundingClientRect();
-    return {x:r.x,y:r.y,font:style.fontFamily,size:style.fontSize,weight:style.fontWeight,color:style.color,copyX:cr.x,copyFont:cs.fontFamily,copySize:cs.fontSize,copyColor:cs.color,copyWeight:cs.fontWeight,copyY:cr.y,mascot:{right:p.right,bottom:p.bottom,width:p.width,height:p.height,baseline:er.bottom+parseFloat(p.bottom)},overflow:document.documentElement.scrollWidth>innerWidth};
+    return {x:r.x,y:r.y,font:style.fontFamily,size:style.fontSize,lineHeight:style.lineHeight,weight:style.fontWeight,color:style.color,copyX:cr.x,copyFont:cs.fontFamily,copySize:cs.fontSize,copyColor:cs.color,copyWeight:cs.fontWeight,copyY:cr.y,mascot:{right:p.right,bottom:p.bottom,width:p.width,height:p.height,baseline:er.bottom+parseFloat(p.bottom)},overflow:document.documentElement.scrollWidth>innerWidth};
    });layouts.push(data);
    await testInfo.attach(`${tab}-${width}`,{body:await page.screenshot({animations:'disabled'}),contentType:'image/png'});
    if(tab==='Treinar'){
@@ -38,7 +38,7 @@ for(const subjectId of ['math-a','portuguese','physics-chemistry-a'])for(const w
   }
   console.log(JSON.stringify({subjectId,width,layouts}));
   await testInfo.attach('Measured layout',{body:JSON.stringify({subjectId,width,layouts},null,2),contentType:'application/json'});
-  for(const key of ['x','font','size','weight','color','copyX','copyFont','copySize','copyColor','copyWeight'])expect(layouts[1][key],key).toBe(layouts[0][key]);
+  for(const key of ['x','font','size','lineHeight','weight','color','copyX','copyFont','copySize','copyColor','copyWeight','copyY'])expect(layouts[1][key],key).toBe(layouts[0][key]);
   expect(Math.abs(layouts[1].y-layouts[0].y),'title baseline').toBeLessThanOrEqual(1);
   if(width>760){expect(layouts[1].mascot).toEqual(layouts[0].mascot);expect(layouts[1].copyY).toBe(layouts[0].copyY)}
   expect(layouts[1].overflow).toBe(false);

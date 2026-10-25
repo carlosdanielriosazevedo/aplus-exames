@@ -42,11 +42,11 @@
 .trainGreetingSpace{visibility:hidden}
 .trainHub .trainIntro h1{margin:4px 0;font-size:clamp(30px,7vw,42px);letter-spacing:-1.4px;color:var(--app-navy)}
 .trainHub .trainIntro>span{max-width:none;color:#657583!important}
-@media(min-width:761px){.trainHub .trainIntro h1{line-height:normal}}
+@media(min-width:761px){.trainHub .trainIntro h1{line-height:1.5}}
 @media(max-width:760px){
   .trainHub>.panel{border:0}
   /* Aprender's existing top-bar flow is 7px shorter; keep that bar intact. */
-  .trainHub>.panel>.trainIntro{margin:3px 0 28px!important;min-height:0;padding:0}
+  .trainHub>.panel>.trainIntro{margin:-7px 0 28px!important;min-height:0;padding:0}
   .trainHub>.panel>.trainIntro::after{content:none;display:none}
   .trainHub .trainIntro>span{margin-top:9px;font-size:14px;line-height:1.5;color:var(--app-muted)!important}
 }
