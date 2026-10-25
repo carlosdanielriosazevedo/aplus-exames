@@ -36,6 +36,8 @@ for(const subjectId of ['math-a','portuguese','physics-chemistry-a'])for(const w
     await expect(page.locator('.trainIntro .apronsoNudge')).toHaveCSS('background-color','rgba(0, 0, 0, 0)');
    }
   }
+  console.log(JSON.stringify({subjectId,width,layouts}));
+  await testInfo.attach('Measured layout',{body:JSON.stringify({subjectId,width,layouts},null,2),contentType:'application/json'});
   for(const key of ['x','font','size','weight','color','copyX','copyFont','copySize','copyColor','copyWeight'])expect(layouts[1][key],key).toBe(layouts[0][key]);
   expect(Math.abs(layouts[1].y-layouts[0].y),'title baseline').toBeLessThanOrEqual(1);
   if(width>760){expect(layouts[1].mascot).toEqual(layouts[0].mascot);expect(layouts[1].copyY).toBe(layouts[0].copyY)}
