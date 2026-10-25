@@ -1,0 +1,46 @@
+{
+  "prs": [
+    414,
+    415
+  ],
+  "publishedSha": "715e8adbeaae5fd4c06ed0e70727401ceab9f36d",
+  "tree": "0ca1f8b1629f1b86cba39e799b4544f93a45fd6d",
+  "projectId": "prj_H0nD83gkRwu7Id05OhzL4CC60s4M",
+  "deploymentId": "dpl_85RxTaGJJAkmTMn1jheC1u2roGhY",
+  "target": "production",
+  "state": "READY",
+  "region": "fra1",
+  "mainCiRun": 40242554557,
+  "mainCiStatus": "success",
+  "browserTests": 150,
+  "unitTests": 836,
+  "recoveryChecks": 770,
+  "autoAssignCustomDomains": false,
+  "gitDeploymentsEnabled": false,
+  "shareLinkRevoked": true,
+  "publicHealthStatus": 200,
+  "schemaVersion": 8,
+  "publicUiSmoke": "Math anonymous local synthetic onboarding, Treinar, Ranking",
+  "stagedUiSmoke": "Three subjects anonymous local synthetic onboarding, Treinar, Ranking, FQ reload and Progresso",
+  "mobileValidation": "CI only, 320/360/390/430px; no physical device test",
+  "recoveryDeploymentId": "dpl_6SbcBr1MuiwN7DMH2eK5jxjSMEkp",
+  "previousPublicDeploymentId": "dpl_3vf3eAhMfrV9i7nH3qMxhe9du9hi",
+  "aliases": [
+    {
+      "alias": "approvamais.pt",
+      "deployment": "dpl_85RxTaGJJAkmTMn1jheC1u2roGhY"
+    },
+    {
+      "alias": "www.approvamais.pt",
+      "deployment": "dpl_85RxTaGJJAkmTMn1jheC1u2roGhY"
+    },
+    {
+      "alias": "aplus-exames.vercel.app",
+      "deployment": "dpl_85RxTaGJJAkmTMn1jheC1u2roGhY"
+    },
+    {
+      "alias": "aplus-exames-git-main-carlos-rios-azevedo-s-projects.vercel.app",
+      "deployment": "dpl_85RxTaGJJAkmTMn1jheC1u2roGhY"
+    }
+  ]
+}
