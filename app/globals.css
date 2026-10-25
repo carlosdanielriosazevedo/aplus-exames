@@ -1657,3 +1657,366 @@ button,input,select,textarea{max-width:100%}
 .demoRankingDisclosure summary{display:inline-flex;align-items:center;min-height:32px;cursor:pointer;list-style:none;font-size:12px;font-weight:800;color:var(--app-muted)}
 .demoRankingDisclosure summary::-webkit-details-marker{display:none}
 .demoRankingDisclosure p{margin:4px 0 0;max-width:620px;font-size:12px;line-height:1.45;color:var(--app-muted)}
+
+
+/* Cabeçalho móvel partilhado — grelha estável entre Aprender, Treinar, Ranking e Progresso.
+   Neutraliza paddings diferentes das superfícies sem alterar os layouts desktop. */
+@media (max-width:760px){
+  .studentTop{
+    box-sizing:border-box;
+    width:calc(100vw - 40px);
+    margin-left:calc(50% - 50vw + 20px);
+    margin-right:0;
+    min-height:112px;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    align-items:start;
+    column-gap:10px;
+  }
+  .studentTopIdentity{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+  .studentTopIdentity .logo{margin:0;line-height:1.2}
+  .studentTop .subjectSwitcher{
+    min-width:0;
+    max-width:min(280px,calc(100vw - 116px));
+    margin:0;
+    flex-shrink:0;
+  }
+  .studentTopActions{justify-self:end;align-self:start;margin:0;flex-wrap:nowrap}
+  .studentTop .studentMenu>summary{width:46px;min-width:46px;height:46px;box-sizing:border-box}
+}
+@media(max-width:360px){
+  .studentTop{width:calc(100vw - 32px);margin-left:calc(50% - 50vw + 16px)}
+  .studentTop .subjectSwitcher{max-width:calc(100vw - 106px)}
+}
+
+
+/* Seletor do Ranking: legível e preparado para mais disciplinas. */
+.rankingSubjectSelectLabel{display:block;margin:10px 0 7px;font-size:13px;font-weight:650;color:var(--app-navy,#13314b)}
+.rankingSubjectSelect{width:100%;max-width:500px;min-height:48px;padding:10px 40px 10px 14px;border:1px solid #cdd6df;border-radius:14px;background:#fff;color:#15324a;font:inherit;font-weight:650}
+.rankingSubjectSelect:focus-visible{outline:3px solid #f3bd63;outline-offset:2px}
+@media(max-width:760px){.rankingSubjectSelect{max-width:100%}}
+/* Menus de ação: evitar que um contador de XP comprido force quebras de linha. */
+.studentTopActions>button{white-space:nowrap;flex-shrink:0}
+.studentTopActions>button b{white-space:nowrap;font-variant-numeric:tabular-nums}
+
+
+/* Retoma: um cartão pequeno em vez de ocupar todo o ecrã. */
+@media(max-width:760px){
+  .pausedSession{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;padding:14px 16px;border-radius:16px}
+  .pausedSession>div{min-width:0}
+  .pausedSession small{font-size:11px;letter-spacing:.04em}
+  .pausedSession b{font-size:16px;line-height:1.25;margin-top:5px}
+  .pausedSession span{font-size:13px;line-height:1.35;margin-top:5px}
+  .pausedSession button{width:auto;max-width:150px;min-width:100px;padding:10px 12px;min-height:44px;font-size:14px;line-height:1.2;white-space:normal}
+}
+@media(max-width:360px){
+  .pausedSession{grid-template-columns:minmax(0,1fr)}
+  .pausedSession button{width:100%;max-width:none}
+}
+
+
+/* Indicadores de progresso no cabeçalho: números inteiros sem quebra. */
+.studentTopActions>button{display:inline-flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap;min-width:0}
+.studentTopActions>button>b{display:inline-block;white-space:nowrap;overflow-wrap:normal;word-break:normal;font-variant-numeric:tabular-nums;line-height:1}
+@media(max-width:760px){.studentTopActions>button{min-width:46px;max-width:110px;padding:0 9px;font-size:13px}.studentTopActions>button>b{font-size:13px}}
+
+/* Ecrã Aprender tinha o cabeçalho 8px acima dos restantes separadores móveis,
+   medido no Chromium a 390px (Português e FQ A). */
+@media(max-width:760px){
+  .learnHome .studentTop{position:relative;top:8px}
+}
+
+/* Medição Playwright: Ranking posicionava logótipo e seletor em y=23/57,
+   face a y=26/60 nos separadores restantes (390px). */
+@media(max-width:760px){
+  .studentTop:has(~ .rankingHero){position:relative;top:3px}
+}
+
+/* O seletor fica abaixo da linha de ações; o XP ocupa a mesma posição com ou sem menu. */
+@media(max-width:760px){
+  .studentTopIdentity .logo{height:46px;display:flex;align-items:center}
+  .studentTopActions{gap:8px}
+  .studentTopActions>button[aria-label$=" XP"]{display:inline-flex;width:auto}
+  .studentTopActions:not(:has(.studentMenu)){padding-right:54px}
+}
+
+@media(max-width:760px){
+  .divisionBadge{flex:0 0 90px;min-width:90px;align-self:flex-start}
+  .divisionBadge b{white-space:nowrap}
+}
+
+/* Desktop application-wide shell: identical geometry for all Shell screens.
+   Treinar/Progresso are the reference. Retain mobile's existing edge-to-edge UI. */
+@media (min-width:761px){
+  .light,
+  .learnHome{
+    box-sizing:border-box;
+    min-height:100dvh;
+    background:var(--app-canvas,#f6f8f9)!important;
+    padding:32px 24px 118px;
+  }
+  .light>.panel,
+  .wideStudentShell>.panel,
+  .rankingDesktopShell>.panel,
+  .learnHome>.studentSurface{
+    box-sizing:border-box;
+    width:min(1040px,100%);
+    max-width:1040px;
+    min-height:760px;
+    margin:0 auto;
+    padding:38px 44px 110px;
+    background:#fff!important;
+    border:1px solid #edf0f5;
+    border-radius:28px;
+    box-shadow:var(--app-shadow-md,0 25px 70px #17203c18);
+    color:var(--app-navy);
+  }
+  .learnHome .wrap{max-width:1040px}
+  .learnHome .studentSurface>.studentTop,
+  .rankingDesktopShell>.panel>.studentTop,
+  .light>.panel>.studentTop{
+    margin-top:0;
+    margin-bottom:24px;
+  }
+}
+
+/* Desktop alignment regression: share the Treinar/Progresso heading baseline.
+   Keep badges out of document-flow width calculations and contain the nudge. */
+@media (min-width:761px){
+  .rankingDesktopShell>.panel>.rankingHero{position:relative;margin:0 0 24px;align-items:flex-start;min-height:0}
+  .rankingDesktopShell .rankingHero>.sectionIntro{margin:0;max-width:calc(100% - 185px)}
+  .rankingDesktopShell .rankingHero .eyebrow{margin-top:0}
+  .rankingDesktopShell .rankingHero .divisionBadge{flex:0 0 168px;min-width:168px}
+  .trainHub .apronsoNudge{
+    box-sizing:border-box;
+    display:grid;
+    grid-template-columns:82px minmax(0,1fr);
+    align-items:center;
+    height:auto;
+    min-height:112px;
+    max-height:180px;
+    padding:12px 20px 12px 12px;
+    gap:16px;
+    overflow:hidden;
+  }
+  .trainHub .apronsoNudge .apronso{display:block;width:82px;height:88px;object-fit:contain;align-self:center}
+  .trainHub .apronsoNudge p{align-self:center;margin:0;min-width:0;line-height:1.5}
+}
+
+/* Desktop: Aprender follows the same inner margins as Treinar, Ranking and Progresso.
+   The earlier centered 820/860px limits made this tab jump horizontally. */
+@media (min-width:761px){
+  .learnHome>.studentSurface .learnIntro,
+  .learnHome>.studentSurface .adaptivePath{
+    box-sizing:border-box;
+    width:100%;
+    max-width:none;
+    margin-left:0;
+    margin-right:0;
+  }
+  .learnHome>.studentSurface .adaptivePath{min-width:0}
+}
+
+/* Mobile parity for the four main areas; desktop design remains unchanged. */
+@media (max-width:760px){
+  .learnHome,.light{max-width:100%;overflow-x:clip}
+  .learnHome>.studentSurface,
+  .light>.panel{box-sizing:border-box;width:100%;min-width:0;max-width:100%}
+  .learnHome>.studentSurface .learnIntro,
+  .learnHome>.studentSurface .adaptivePath{width:100%;max-width:100%;min-width:0;margin-left:0;margin-right:0}
+  .learnHome>.studentSurface .learnIntro{margin-top:16px}
+  .trainHub .apronsoNudge{display:grid;grid-template-columns:60px minmax(0,1fr);align-items:center;gap:10px;min-height:88px;height:auto;max-height:none;padding:10px 12px;overflow:hidden}
+  .trainHub .apronsoNudge .apronso{width:60px;height:70px;object-fit:contain;align-self:center}
+  .trainHub .apronsoNudge p{min-width:0;margin:0;font-size:13px;line-height:1.45}
+  .rankingDesktopShell .rankingHero{display:flex;align-items:flex-start;flex-wrap:wrap;gap:10px;min-width:0}
+  .rankingDesktopShell .rankingHero>.sectionIntro{min-width:0;flex:1 1 190px;max-width:100%;margin:0}
+  .rankingDesktopShell .rankingHero .divisionBadge{flex:0 0 auto;max-width:100%}
+  .trainChoices{grid-template-columns:minmax(0,1fr)}
+  .trainChoices>button{width:100%;min-width:0;min-height:0}
+  .studentTop{min-width:0;gap:8px}
+  .studentTopIdentity{min-width:0}
+  .studentTopActions{flex-shrink:0}
+  .studentMenu>summary{min-width:42px}
+  .lessonSummaryGrid{grid-template-columns:minmax(0,1fr)}
+}
+
+/* Mobile: Treinar/Progresso are the reference for all four main tabs. */
+@media (max-width:760px){
+  .learnHome,
+  .learnHome>.studentSurface{background:#fff!important}
+  .learnHome>.studentSurface,
+  .wideStudentShell>.panel,
+  .rankingDesktopShell>.panel,
+  .progressPage>.panel{
+    box-sizing:border-box;
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    margin-left:0;
+    margin-right:0;
+    padding-left:max(16px,env(safe-area-inset-left));
+    padding-right:max(16px,env(safe-area-inset-right));
+    background:#fff!important;
+  }
+  .learnHome>.studentSurface .learnIntro,
+  .wideStudentShell>.panel>.sectionIntro,
+  .progressPage>.panel>.sectionIntro,
+  .rankingDesktopShell>.panel>.rankingHero{
+    box-sizing:border-box;
+    width:100%;
+    max-width:100%;
+    margin-left:0;
+    margin-right:0;
+  }
+  .learnHome>.studentSurface .learnIntro{margin-top:0}
+  .rankingDesktopShell>.panel>.rankingHero{padding:0}
+  .rankingDesktopShell>.panel>.rankingHero>.sectionIntro{margin:0}
+  .learnHome .studentTop,
+  .wideStudentShell>.panel>.studentTop,
+  .rankingDesktopShell>.panel>.studentTop{
+    margin-top:0;
+    margin-bottom:24px;
+  }
+}
+
+/* Mobile stable header: keep #405 logo/subject-switcher geometry untouched.
+   Adjust only title blocks, after the original top bar. */
+@media(max-width:760px){
+  .learnHome>.studentSurface>.learnIntro{margin-top:0!important;margin-left:0!important;margin-right:0!important}
+  .learnHome>.studentSurface>.learnIntro>p{margin-top:0;margin-bottom:8px;line-height:20px}
+  .rankingDesktopShell>.panel>.rankingHero{margin-left:0!important;padding-left:0!important}
+  .rankingDesktopShell>.panel>.rankingHero>.sectionIntro{margin-left:0!important;padding-left:0!important}
+}
+
+/* Mobile 4-tab heading contract. Reference: Treinar/Progresso sectionIntro.
+   Deliberately does not target StudentTop, APProva+ logo or subject selector. */
+@media(max-width:760px){
+  .learnHome>.studentSurface>.learnIntro,
+  .rankingDesktopShell>.panel>.rankingHero{
+    margin:10px 0 28px!important;
+    padding:0!important;
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
+  }
+  .rankingDesktopShell>.panel>.rankingHero>.sectionIntro{
+    margin:0!important;
+    padding:0!important;
+    width:100%;
+    max-width:100%;
+  }
+  .learnHome>.studentSurface>.learnIntro>p:first-child,
+  .rankingDesktopShell>.panel>.rankingHero .eyebrow{
+    margin:0!important;
+    padding:0!important;
+    line-height:normal;
+  }
+  .learnHome>.studentSurface>.learnIntro>h1,
+  .rankingDesktopShell>.panel>.rankingHero h1{
+    margin:5px 0!important;
+    font-size:29px;
+    line-height:1.08;
+  }
+}
+
+/* Mobile-only: owl feet align with the bottom of the headings in Aprender/Treinar.
+   Keep StudentTop coordinates intact on all four tabs. */
+.mobileMainTitle{display:contents}
+.mobileHeadingApronso{display:none!important}
+@media(max-width:760px){
+  .learnHome>.studentSurface>.learnIntro .mobileMainTitle,
+  .trainHub>.panel>.sectionIntro .mobileMainTitle{
+    display:block;position:relative;box-sizing:border-box;min-width:0;
+    padding-right:clamp(72px,22vw,94px);
+  }
+  .learnHome>.studentSurface>.learnIntro .mobileMainTitle>p,
+  .trainHub>.panel>.sectionIntro .mobileMainTitle>p{
+    margin:0!important;padding:0;line-height:20px;
+  }
+  .learnHome>.studentSurface>.learnIntro .mobileMainTitle>h1,
+  .trainHub>.panel>.sectionIntro .mobileMainTitle>h1{
+    margin:5px 0 0!important;font-size:clamp(23px,6vw,29px);
+    line-height:1.1;overflow-wrap:normal;
+  }
+  .learnHome>.studentSurface>.learnIntro .mobileHeadingApronso,
+  .trainHub>.panel>.sectionIntro .mobileHeadingApronso{
+    display:block!important;position:absolute;right:0;bottom:0;
+    width:clamp(68px,21vw,90px);height:clamp(76px,24vw,100px);
+    object-fit:contain;object-position:center bottom;pointer-events:none;
+  }
+  .learnHome>.studentSurface>.learnIntro>span{
+    display:block;width:100%;max-width:none!important;margin-top:9px;
+    padding:0;color:var(--app-muted)!important;font-size:14px;line-height:1.5;
+  }
+  /* The guide text belongs below Treinar, left-aligned and free of a card. */
+  .trainHub .apronsoNudge{
+    display:block!important;position:static!important;width:100%;
+    min-height:0;height:auto;max-height:none;box-sizing:border-box;
+    margin:8px 0 22px;padding:0!important;border:0!important;
+    border-radius:0!important;background:transparent!important;
+    box-shadow:none!important;overflow:visible!important;
+  }
+  .trainHub .apronsoNudge>.apronso{display:none!important}
+  .trainHub .apronsoNudge>p{
+    width:100%;max-width:none;margin:0!important;padding:0;
+    font-size:14px;font-weight:400;line-height:1.5;
+    color:var(--app-muted)!important;
+  }
+  /* Restore the streak flame hidden by the legacy <=430px rule.
+     Three actions fit beside the logo while the subject stays below. */
+  .studentTop .studentTopActions{gap:4px!important}
+  .studentTop .studentTopActions>button[aria-label^="Sequência:"],
+  .studentTop .studentTopActions>button[aria-label$=" XP"]{
+    display:inline-flex!important;flex:0 0 40px;width:40px;min-width:40px;
+    max-width:40px;height:42px;padding:0 3px!important;font-size:12px;
+  }
+  .studentTop .studentTopActions>button>b{font-size:12px}
+  .studentTop .studentMenu>summary{
+    box-sizing:border-box;flex:0 0 40px;width:40px;min-width:40px;
+    height:42px;padding:0 4px;
+  }
+  /* Give the ranking headline and subtitle the full viewport gutter width.
+     Bronze/XP is a compact separate chip below the introduction. */
+  .rankingDesktopShell>.panel>.rankingHero{
+    display:flex!important;flex-direction:column!important;align-items:stretch!important;
+    gap:12px!important;max-width:100%;min-width:0;
+  }
+  .rankingDesktopShell>.panel>.rankingHero>.sectionIntro{
+    flex:none!important;min-width:0;width:100%;max-width:100%!important;
+    margin:0!important;padding:0!important;
+  }
+  .rankingDesktopShell>.panel>.rankingHero .sectionIntro h1{
+    font-size:clamp(19px,5.65vw,24px)!important;line-height:1.16!important;
+    letter-spacing:-.025em;white-space:nowrap;margin:5px 0 0!important;
+    max-width:100%;
+  }
+  .rankingDesktopShell>.panel>.rankingHero .sectionIntro>.muted{
+    box-sizing:border-box;max-width:100%;width:100%;
+    margin:12px 0 0;line-height:1.5;
+  }
+  .rankingDesktopShell>.panel>.rankingHero>.divisionBadge{
+    display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;
+    justify-content:flex-start;align-self:flex-start;gap:6px 9px;
+    box-sizing:border-box;max-width:100%;width:max-content;
+    min-width:0!important;min-height:40px;margin:0;
+    padding:7px 12px;background:#fff8ed;color:var(--app-navy);
+    border:1px solid #f2dfbc;border-radius:999px;
+    text-align:left;box-shadow:none;
+  }
+  .rankingDesktopShell .rankingHero .divisionBadge>span{
+    display:inline;font-size:19px;line-height:1;
+  }
+  .rankingDesktopShell .rankingHero .divisionBadge>b{
+    display:inline;margin:0;font-size:13px;white-space:nowrap;
+  }
+  .rankingDesktopShell .rankingHero .divisionBadge>small{
+    display:inline;margin:0;color:var(--app-muted);font-size:12px;
+    line-height:1.25;
+  }
+}

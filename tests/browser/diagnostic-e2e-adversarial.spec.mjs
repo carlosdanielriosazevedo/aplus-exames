@@ -22,6 +22,7 @@ async function reachDiagnostic(page,subject){
 
   await expect(page.getByRole("button",{name:"Já terminei o secundário",exact:true})).toBeVisible({timeout:30_000});
   await page.getByRole("button",{name:"Já terminei o secundário",exact:true}).click();
+  await page.getByRole("textbox",{name:/Nota recente de/u}).fill("14");
   await page.getByRole("button",{name:new RegExp(`Continuar para a matéria de ${subject.name}`,"u")}).click();
 
   await expect(page.getByText(new RegExp(`Todo o programa de ${subject.name} fica disponível\\.`,"u"))).toBeVisible({timeout:30_000});
@@ -29,6 +30,7 @@ async function reachDiagnostic(page,subject){
 
   const skip=page.getByRole("button",{name:"Saltar explicação",exact:true});
   if(await skip.isVisible().catch(()=>false))await skip.click();
+  await page.locator(".adaptivePath").getByRole("button",{name:/Começar diagnóstico/iu}).click();
   await expect(page.getByRole("button",{name:"Começar diagnóstico",exact:true})).toBeVisible({timeout:30_000});
   await page.getByRole("button",{name:"Começar diagnóstico",exact:true}).click();
 }

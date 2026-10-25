@@ -1,4 +1,6 @@
 "use client";
+import {pendingPhysicsChemistryExam} from "./lib/physicsChemistryExamDraft";
+import {hasPendingAssessment} from "./lib/pendingAssessment";
 import {useEffect,useMemo,useRef,useState} from "react";
 import dynamic from "next/dynamic";
 import {insertMathText} from "./lib/mathInput";
@@ -129,7 +131,6 @@ function diagnosticRecoveryFn(name){
 }
 const createDiagnosticDraft=diagnosticRecoveryFn("createDiagnosticDraft");
 const recoverDiagnosticTransaction=diagnosticRecoveryFn("recoverDiagnosticTransaction");
-const recoverLegacyDiagnosticSessions=diagnosticRecoveryFn("recoverLegacyDiagnosticSessions");
 const transactDiagnosticAnswer=diagnosticRecoveryFn("transactDiagnosticAnswer");
 const emptyScores=()=>TAXONOMY.reduce((acc,t)=>{acc[t.id]={domain:null,conf:0,evidence:[]};return acc;},{});
 const theme=id=>TAXONOMY.find(t=>t.id===id);
@@ -307,9 +308,8 @@ export default function App(){
     let validDraft=draft;
     let recoveryError=null;
     let recoveredCompletion=false;
-    let recoveredLegacy=false;
     const openDiagnostic=(next.betaSessions||[]).some(x=>x.kind==="diagnostic"&&!x.finishedAt);
-    const legacyDiagnostic=openDiagnostic&&(!draft||(draft.kind==="diagnostic"&&![2,3].includes(draft.version)));
+    const legacyDiagnostic=openDiagnostic&&(!draft||(draft.kind==="diagnostic"&&![2,3,4].includes(draft.version)));
     if(legacyDiagnostic||draft?.kind==="diagnostic"){
       await loadDiagnosticRecovery();
       if(!live)return;
@@ -317,11 +317,9 @@ export default function App(){
       setDiagnosticRecoveryReady(true);
     }
     if(!next.diagnosticDone&&legacyDiagnostic){
-      const recovery=recoverLegacyDiagnosticSessions({state:next,saveState:saveLocalState});
-      if(recovery.ok){
-        recoveredState=recovery.state;recoveredLegacy=recovery.migrated;validDraft=null;
-        if(draft&&!clearSessionDraft(next.betaMode||"internal"))recoveryError="legacy_draft_clear_failed";
-      }else recoveryError=recovery.reason;
+      // A legacy attempt needs explicit recovery; never erase its draft automatically.
+      recoveryError="legacy_diagnostic_requires_recovery";
+      validDraft=null;
     }else if(draft?.kind==="diagnostic"){
       const recovery=recoverDiagnosticTransaction({
         state:next,draft,saveState:saveLocalState,saveDraft:saveSessionDraft,
@@ -333,9 +331,7 @@ export default function App(){
         recoveredState=recovery.state;validDraft=recovery.draft;
       }else{
         validDraft=null;
-        const hasDurableWork=(draft.responses?.length||0)>0||!!draft.pendingResponse||draft.phase==="completion_pending";
-        if(!hasDurableWork)clearSessionDraft(next.betaMode||"internal");
-        else recoveryError=recovery.reason;
+        recoveryError=recovery.reason;
         console.warn(`Draft de diagnóstico ignorado: ${recovery.reason}`);
       }
     }
@@ -358,8 +354,7 @@ export default function App(){
       setScreen("diagRecoveryError");
     }else if(recoveredCompletion){
       setScreen("diagResult");
-    }else if(recoveredLegacy){
-      setScreen("diag");
+
     }else if(canRecover){
       setRecoveredSession(validDraft);
       setScreen(recovered);
@@ -379,7 +374,7 @@ export default function App(){
       else{
         let fromLanding=false;
         try{fromLanding=window.sessionStorage.getItem("a25-onboarding-entry")==="1"}catch{}
-        setScreen(activeSubjectConfigured?"diag":(fromLanding?"subjectOnboard":"welcome"));
+        setScreen(activeSubjectConfigured?"home":(fromLanding?"subjectOnboard":"welcome"));
       }
     }
     setHydrated(true);
@@ -466,6 +461,27 @@ export default function App(){
     setScreen(x);
   };
 
+  // Resolve pending attempts before mounting an assessment, including popstate.
+  const assessmentRoutes=["diag","diagRun","mission","trainingSetup","trainingRun","miniExamIntro","miniExamRun","miniExamReview","portugueseMiniExam","physicsChemistryMini1","physicsChemistryMini2","physicsChemistryExam"];
+  if(hydrated&&assessmentRoutes.includes(screen)){
+    const subject=s.activeSubjectId||"math-a";
+    const position=s.subjectProgress?.[subject]?.lastPosition;
+    const math=subject==="math-a"?loadSessionDraft(s.betaMode||"internal"):null;
+    const fqa=subject==="physics-chemistry-a"?pendingPhysicsChemistryExam():null;
+    const pt=subject==="portuguese"&&s.subjectSettings?.portuguese?.miniExamDraft;
+    const examRoutes=["portugueseMiniExam","physicsChemistryMini1","physicsChemistryMini2","physicsChemistryExam"];
+    let target=null;
+    if(position){
+      if(examRoutes.includes(screen))target="resumeSubjectDiagnostic";
+    }else if(pt)target="portugueseMiniExam";
+    else target=fqa?.route||(math?draftScreen(math):null);
+    const sameMathExam=math?.kind==="mini_exam"&&["miniExamIntro","miniExamRun","miniExamReview"].includes(screen);
+    if(target&&target!==screen&&!sameMathExam&&!(math?.kind==="diagnostic"&&screen==="diag"))return <Shell><Logo/><div className="notice"><b>Tens uma avaliação em curso</b><span>Continua a tentativa guardada, com as tuas respostas.</span></div><button className="btn" onClick={()=>{
+      if(math){setRecoveredSession(math);if(math.cfg)setTrainingCfg(math.cfg);if(math.session)setExamSession(math.session)}
+      go(target);
+    }}>Continuar</button></Shell>;
+  }
+
   const mathSurface=(s.activeSubjectId==="math-a"||(!s.activeSubjectId&&MATH_ENGINE_SCREENS.has(screen)))&&MATH_ENGINE_SCREENS.has(screen);
   const diagnosticSurface=["diag","diagRun","diagResult"].includes(screen)&&s.activeSubjectId==="math-a";
   if(mathSurface&&(!mathEngineReady||(diagnosticSurface&&!diagnosticRecoveryReady)))return <Shell><Logo/><div className="cloudLoading">A preparar Matemática A…</div></Shell>;
@@ -513,7 +529,8 @@ export default function App(){
   if(screen==="progress")return <Progress s={s} go={go}/>;
   if(screen==="ranking")return <Ranking s={s} setS={setS} go={go}/>;
   if(screen==="exams")return <Exams s={s} go={go} startMini={()=>{
-    clearSessionDraft(s.betaMode||"internal");
+    const pending=loadSessionDraft(s.betaMode||"internal");
+    if(pending){setRecoveredSession(pending);if(pending.session)setExamSession(pending.session);if(pending.cfg)setTrainingCfg(pending.cfg);go(draftScreen(pending));return}
     setRecoveredSession(null);
     const questions=buildMiniExam(s,MATH_MINI_EXAM_QUESTIONS);
     const ses=sessionStart("mini_exam",{questionCount:questions.length});
@@ -535,6 +552,7 @@ export default function App(){
   if(screen==="friendsBetaInfo")return <FriendsBetaInfo s={s} go={go}/>;
 
   return <Home s={s} setS={setS} go={go} reset={()=>{
+    if(hasPendingAssessment(s))return;
     clearLocalState(s.betaMode==="friends_beta"?FRIENDS_STORAGE_KEY:undefined);
     clearSessionDraft(s.betaMode||"internal");
     clearCompletionRegistry();
@@ -640,7 +658,7 @@ function SubjectSelection({s,setS,go}){
 
   function save(){
     if(!selected.length)return;
-    const ordered=AVAILABLE_SUBJECT_IDS.filter(id=>selected.includes(id));
+    const ordered=selected.filter(id=>AVAILABLE_SUBJECT_IDS.includes(id));
     setS(prev=>recordMilestone({
       ...prev,
       selectedSubjectIds:ordered,
@@ -793,6 +811,7 @@ function DiagIntro({s,setS,go}){
   const profileBlueprint=diagnosticBlueprintForProfile(s.profile);
   const blueprint=profileBlueprint.filter(themeId=>diagnosticAnchor(themeId,difficulty,s));
   const gated=blueprint.length===0;
+  const pendingDiagnostic=loadSessionDraft(s.betaMode||"internal")?.kind==="diagnostic";
   return <Shell><Logo/><p className="eyebrow">AVALIAÇÃO INICIAL · MATEMÁTICA A · PROVA 635</p>
     <div className="diagApronsoHero"><div><h1>Diagnóstico de Matemática A</h1><div className="diagPurposeHero"><small>PARA ENCONTRAR O MELHOR PONTO DE PARTIDA</small><strong>Não é uma avaliação. A app usa apenas matéria do teu percurso e aprofunda só quando precisa de perceber melhor uma dificuldade.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
     <div className="diagIntroGrid">
@@ -807,7 +826,7 @@ function DiagIntro({s,setS,go}){
         ?"A tua seleção ficou guardada. O diagnóstico inicial atual ainda não tem perguntas adequadas para essas submatérias; não precisas de voltar a indicá-las. Podes acrescentar outra matéria já lecionada para começares."
         :"Não vamos avaliar matéria que a tua escola ainda não ensinou. Assinala pelo menos uma submatéria do teu ano para começares."}</span></div>}
     {gated&&!profileBlueprint.length&&<button className="secondary" onClick={()=>go("curriculumSettings")}>{hasIndicatedScope?"Adicionar outra matéria dada":"Indicar matéria dada"}</button>}
-    <button className="primary" disabled={gated} onClick={()=>{
+    <button className="primary" disabled={gated&&!pendingDiagnostic} onClick={()=>{
       const existing=loadSessionDraft(s.betaMode||"internal");
       if(existing?.kind==="diagnostic"){go("diagRun");return}
       const startState=reconcileDiagnosticRuntimeSessions(s);
@@ -820,7 +839,6 @@ function DiagIntro({s,setS,go}){
       const started=ensureDiagnosticStarted(startState,draft);
       if(!started.ok){
         reportDiagnosticFlowIssue("start",started.reason||"ensure_failed");
-        clearSessionDraft(startState.betaMode||"internal");
         setSaveError(true);
         return;
       }
@@ -828,7 +846,7 @@ function DiagIntro({s,setS,go}){
       setSaveError(false);
       setS(started.state);
       go("diagRun");
-    }}>Começar diagnóstico</button>
+    }}>{pendingDiagnostic?"Continuar diagnóstico":"Começar diagnóstico"}</button>
   </Shell>
 }
 
@@ -1112,7 +1130,11 @@ function Home({s,setS,go,reset}){
   }
 
   function startDailyMission(source="home_card"){
-    if(missionDone||plan.type==="blocked")return;
+    // Uma Missão nova não pode substituir outra avaliação já em curso.
+    if(pausedDraft&&pausedDraft.kind!=="mission"){
+      go(pausedDraft.kind==="mini_exam"?(pausedDraft.screen||"miniExamRun"):pausedDraft.kind==="training"?"trainingRun":(pausedDraft.screen||"mission"));
+      return;
+    }
     setShowMissionModal(false);
 
     if(pausedDraft?.kind==="mission"){
@@ -1129,6 +1151,7 @@ function Home({s,setS,go,reset}){
       return;
     }
 
+    if(missionDone||plan.type==="blocked")return;
     const ses=sessionStart("mission",{
       type:plan.type,themeId:plan.themeId,focus:plan.focus||null,
       microcompetencyId:plan.microcompetencyId||microcompetencyId(plan.themeId,plan.focus)||null,
@@ -1170,8 +1193,8 @@ function Home({s,setS,go,reset}){
       ?<FirstUseTour onComplete={()=>finishFirstUseTour(false)} onSkip={()=>finishFirstUseTour(true)}/>
       :showMissionModal&&<DailyMissionModal s={s} plan={plan} mode={missionModalMode} onStart={()=>startDailyMission("daily_modal")} onDismiss={dismissMissionModal}/>}
     <section className="wrap studentSurface">
-    <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button><button onClick={reset}>Recomeçar protótipo</button></>}</div></details></StudentTop>
-    <FriendsBetaRibbon s={s}/><div className="learnIntro"><p>Olá 👋</p><h1>O teu próximo passo.</h1><span>{missionDone?"Missão feita. Podes continuar por tua conta.":"Uma recomendação curta, escolhida a partir do teu percurso."}</span></div>
+    <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button>{!hasPendingAssessment(s)&&<button onClick={reset}>Recomeçar protótipo</button>}</>}</div></details></StudentTop>
+    <FriendsBetaRibbon s={s}/><div className="learnIntro"><div className="mobileMainTitle"><p>Olá 👋</p><h1>O teu próximo passo.</h1></div><span>{missionDone?"Missão feita. Podes continuar por tua conta.":"Uma recomendação curta, escolhida a partir do teu percurso."}</span></div>
 
     {pausedDraft&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{pausedDraft.kind==="mini_exam"?"Mini-exame":pausedDraft.kind==="training"?"Treino Livre":"Missão"}</b><span>O teu progresso desta sessão ficou guardado neste dispositivo.</span></div><button onClick={()=>{
       if(pausedDraft.kind==="mini_exam")go(pausedDraft.screen||"miniExamRun");
@@ -1179,13 +1202,19 @@ function Home({s,setS,go,reset}){
       else go("mission");
     }}>Continuar →</button></div>}
 
-    <section className="adaptivePath" aria-label="Caminho adaptativo">
+    {!s.diagnosticDone?<section className="adaptivePath" aria-label="Caminho adaptativo de Matemática A">
+      <div className="pathNode current"><span>●</span><div><small>PRIMEIRO PASSO</small><b>Conhecer o teu ponto de partida</b></div></div>
+      <div className="pathLine active"/>
+      <div className="pathNode current"><span>●</span><article><small>PRÓXIMO PASSO</small><h2>Diagnóstico de Matemática A</h2><div className="missionCardMeta"><span>Diagnóstico inicial</span></div><button onClick={()=>go("diag")}>{pausedDraft?.kind==="diagnostic"?"Continuar diagnóstico":"Começar Diagnóstico"}</button></article></div>
+      <div className="pathLine"/>
+      <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>Primeira Missão adaptada</b><p>Pode mudar com nova evidência.</p></div></div>
+    </section>:<section className="adaptivePath" aria-label="Caminho adaptativo">
       <div className="pathNode done"><span>✓</span><div><small>ÚLTIMO PASSO</small><b>{completedMission?.focus||theme(completedMission?.themeId)?.short||"Diagnóstico concluído"}</b></div></div>
       <div className="pathLine active"/>
       <div className={"pathNode current "+(missionDone?"complete":"")}><span>{missionDone?"✓":"●"}</span><article><small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small><h2>{missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.focus||t?.short||"Conteúdo protegido")}</h2><div className="missionCardMeta"><span>~3–5 min</span>{!missionDone&&t?.year&&<span>{t.year}</span>}</div>{missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:<button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Indisponível":pausedDraft?.kind==="mission"?"Continuar Missão":"Começar Missão"}</button>}{!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{probableNext?.short||"A definir após esta sessão"}</b><p>Pode mudar com nova evidência.</p></div></div>
-    </section>
+    </section>}
     <StudentNav active="home" go={go}/>
   </section></main>
 }
@@ -1533,6 +1562,7 @@ function Train({s,setS,go,start}){
   const available=hasTrainingContent(themeId,focus,s);
   const exactCurated=eligibleQuestions(s,themeId,"training",focus).filter(q=>q.focus===focus).length;
   const exactGenerated=(s.betaMode||"internal")==="internal" && hasGenerator(themeId,focus);
+  const pendingSession=typeof window!=="undefined"?loadSessionDraft(s.betaMode||"internal"):null;
 
   return <Shell className="wideStudentShell trainingSetupPage">
     <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
@@ -1563,23 +1593,26 @@ function Train({s,setS,go,start}){
         :"A app usará perguntas próximas do mesmo tema enquanto este foco é expandido."}</span></div>
       : <div className="notice"><b>Conteúdo ainda em construção</b><span>A taxonomia já contém esta área, mas o banco de perguntas desta versão ainda não tem itens suficientes para a treinar de forma honesta.</span></div>}
 
-    <button className="primary" disabled={!available} onClick={()=>{
+    <button className="primary" disabled={!available&&!pendingSession} onClick={()=>{
+      if(pendingSession){go("home");return}
       const ses=sessionStart("training",{themeId,focus,level});
       setS(prev=>({...prev,betaSessions:[...(prev.betaSessions||[]),ses],betaEvents:[...(prev.betaEvents||[]),betaEvent("training_started",{sessionId:ses.id,themeId,focus,level})]}));
       start({themeId,focus,level});
-    }}>Começar treino</button>
+    }}>{pendingSession?"Continuar sessão":"Começar treino"}</button>
   </Shell>
 }
 
 function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   const completingRef=useRef(false);
-  const draft=cfg ? (recoveredDraft || (typeof window!=="undefined" ? loadSessionDraft(s.betaMode||"internal") : null)) : null;
+  const storedDraft=cfg ? (recoveredDraft || (typeof window!=="undefined" ? loadSessionDraft(s.betaMode||"internal") : null)) : null;
+  const conflictingDraft=!!storedDraft&&storedDraft.kind!=="training";
+  const draft=conflictingDraft?null:storedDraft;
   const [sessionId]=useState(()=>draft?.sessionId||latestOpenSessionId(s,"training"));
   const questions=useMemo(()=>{
     if(!cfg)return [];
-    const fresh=trainingQuestions(s,cfg,DEFAULT_TRAINING_QUESTIONS);
-    if(!draft?.questions?.length)return fresh;
-    return [...new Map([...draft.questions,...fresh].map(q=>[q.id,q])).values()].slice(0,10);
+    // Uma sessão retomada mantém exatamente a ordem e identidade das perguntas originais.
+    if(draft?.kind==="training"&&draft.questions?.length)return draft.questions;
+    return trainingQuestions(s,cfg,DEFAULT_TRAINING_QUESTIONS);
   },[cfg]);
   const [i,setI]=useState(draft?.i||0);
   const [sel,setSel]=useState(draft?.sel??null);
@@ -1594,10 +1627,11 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   useEffect(()=>{if(draft)onRecovered()},[]);
 
   useEffect(()=>{
-    if(!cfg || done || !questions.length)return;
+    if(!cfg || conflictingDraft || done || !questions.length)return;
     saveSessionDraft({kind:"training",betaMode:s.betaMode||"internal",sessionId,cfg,questions,i,sel,fb,correct,earnedPoints,hasIncomplete});
   },[cfg,questions,i,sel,fb,correct,earnedPoints,hasIncomplete,done]);
 
+  if(conflictingDraft)return <Shell><h1>Já tens uma avaliação em curso.</h1><button onClick={()=>go("home")}>Continuar sessão</button></Shell>;
   if(!cfg)return <Shell><Back go={go} to="train"/><h1>Escolhe primeiro o que queres treinar.</h1></Shell>;
   if(questions.length<STUDY_SESSION_MIN_QUESTIONS)return <Shell><Back go={go} to="train"/><h1>Ainda não há perguntas úteis suficientes neste foco.</h1><p className="muted">O treino só começa quando consegue garantir uma sessão completa entre 7 e 10 perguntas.</p></Shell>;
 
@@ -1838,11 +1872,11 @@ function PracticeResponse({question,value,onChange,feedback,guided=false}){
       </>}
     </fieldset>
     {feedback&&<div className="notice"><b>{feedback.reviewRequired?"Avaliação incompleta":feedback.correct?"Muito bem!":feedback.points>0?"Tens etapas corretas":"Vamos rever a resolução"}</b>
-      <p>{feedback.points}/{feedback.maxPoints} pontos{feedback.reviewRequired?" confirmados":""}</p>
-      <ScoreLossExplanation result={feedback}/>
+      {feedback.points===feedback.maxPoints&&<p>{feedback.points}/{feedback.maxPoints} pontos</p>}
+      <ScoreLossExplanation result={feedback} detailsProvided/>
       {feedback.errorDiagnosis&&feedback.errorDiagnosis.code!=="correct_or_near_correct"&&<p><b>{feedback.errorDiagnosis.label}:</b> {feedback.errorDiagnosis.message}</p>}
-      <div className="stepResults">{feedback.stepResults.map(row=><div key={row.stepId} className={row.status==="needs_review"?"unverified":row.correct?"correct":"incorrect"}><span>{row.status==="needs_review"?"?":row.correct?"✓":"×"}</span><div><b>{row.label}</b><small>{stepFeedback(row)}</small>{!row.correct&&<small>Exemplo: {row.expected}</small>}</div></div>)}</div>
-      <p>{question.sol}</p>
+      <div className="stepResults">{feedback.stepResults.map(row=><div key={row.stepId} className={row.status==="needs_review"?"unverified":row.correct?"correct":"incorrect"}><span>{row.status==="needs_review"?"?":row.correct?"✓":"×"}</span><div><b>{row.label} · {row.points}/{row.maxPoints} pontos</b><small>{stepFeedback(row)}</small>{!row.correct&&<small>Exemplo: {row.expected}</small>}</div></div>)}</div>
+      <details><summary>Ver resolução completa</summary><p>{question.sol}</p></details>
     </div>}
   </div>;
 }

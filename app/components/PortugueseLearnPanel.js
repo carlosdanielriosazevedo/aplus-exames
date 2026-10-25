@@ -61,16 +61,46 @@ export default function PortugueseLearnPanel({schoolYear="12.º"}){
         ]}
       />
     </article>
-    :<article className="portugueseProgressCard">
+    :<article className={`portugueseProgressCard ${styles.deepReviewArticle}`}> 
       <button type="button" className="back" onClick={()=>setUnitId(null)}>← Todas as unidades do {yearRow.year}</button>
       <p className="eyebrow">PORTUGUÊS · {yearRow.year} · {DOMAIN_LABELS[unit.domain]}</p><h2>{unit.title}</h2>
       {unit.subtitle&&<p className="muted">{unit.subtitle}</p>}
-      <div className="reviewChapter"><small>1 · VISÃO GLOBAL</small><h3>O que precisas de compreender</h3><p>{unit.summary}</p></div>
-      <div className="reviewChapter"><small>2 · MAPA DE CONTEÚDOS</small><h3>Ideias fundamentais</h3><ol>{unit.keyPoints.map(point=><li key={point}>{point}</li>)}</ol></div>
-      {unit.connections?.length>0&&<div className="reviewChapter formulaChapter"><small>3 · LIGAÇÕES IMPORTANTES</small><h3>Como aprofundar a leitura</h3><ul>{unit.connections.map(point=><li key={point}>{point}</li>)}</ul></div>}
-      {guide?.studySteps?.length>0&&<div className="reviewChapter"><small>4 · MÉTODO</small><h3>{guide.label}</h3><ol>{guide.studySteps.map(point=><li key={point}>{point}</li>)}</ol></div>}
-      {guide?.pitfalls?.length>0&&<div className="reviewChapter warningChapter"><small>5 · ARMADILHAS</small><h3>Erros frequentes e como os evitar</h3><ul>{guide.pitfalls.map(point=><li key={point}>{point}</li>)}</ul></div>}
-      <div className="reviewChapter reviewStudyPlan"><small>6 · PREPARAÇÃO PARA RESPOSTA</small><h3>Do texto para uma resposta completa</h3><ol><li>Responde diretamente ao que foi perguntado, usando o conceito certo.</li><li>Seleciona uma marca textual, ação, imagem ou recurso que sustente a ideia.</li><li>Explica a ligação entre essa evidência e a tua interpretação.</li><li>Relê e elimina resumo de enredo que não contribua para a resposta.</li></ol>{guide?.memoryTip&&<p className="reviewCallout">{guide.memoryTip}</p>}</div>
+      <div className={styles.studyFlow}>
+        <section className={styles.reviewLesson}>
+          <header className={styles.lessonHeader}><span className={styles.lessonNumber}>01</span><div><small>EDUCAÇÃO LITERÁRIA · COMPREENDER</small><h3>{unit.title}</h3></div></header>
+          <div className={styles.lessonBody}>
+            <div className={styles.explanationBlock}>
+              <div className={styles.blockHeading}><span>01</span><div><small>COMPREENDER</small><b>Explicação</b></div></div>
+              <p>{unit.summary}</p>
+            </div>
+            <div className={styles.reviewToolbox}>
+              <div className={styles.blockHeading}><span>02</span><div><small>PARA ORIENTAR A LEITURA</small><b>Pistas a procurar</b></div></div>
+              <ul>{(unit.connections?.length?unit.connections:unit.keyPoints||[]).map(point=><li key={point}>{point}</li>)}</ul>
+            </div>
+            <div className={styles.reviewExample}>
+              <div className={styles.blockHeading}><span>03</span><div><small>EXEMPLO ORIENTADO</small><b>Como construir uma interpretação</b></div></div>
+              <ol className={styles.exampleSteps}>{(guide?.studySteps?.length?guide.studySteps:[
+                "Identifica a ideia central que a pergunta exige interpretar.",
+                "Seleciona uma passagem ou um recurso textual relevante.",
+                "Explica como essa evidência sustenta a interpretação, sem resumir apenas o enredo."
+              ]).map(step=><li key={step}>{step}</li>)}</ol>
+            </div>
+            <div className={styles.lessonSummaryGrid}>
+              <div className={styles.reviewRemember}>
+                <div className={styles.blockHeading}><span>04</span><div><small>IDEIA-CHAVE</small><b>Fica com isto</b></div></div>
+                <p>{guide?.memoryTip||unit.keyPoints?.[0]||unit.summary}</p>
+              </div>
+              <div className={styles.reviewPitfalls}>
+                <div className={styles.blockHeading}><span>05</span><div><small>ATENÇÃO</small><b>Erros a evitar</b></div></div>
+                <ul>{(guide?.pitfalls?.length?guide.pitfalls:[
+                  "Evita limitar a resposta a um resumo da obra.",
+                  "Justifica as interpretações com evidência textual concreta."
+                ]).map(point=><li key={point}>{point}</li>)}</ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </article>)}
     <small className="muted">Taxonomia {PORTUGUESE_TAXONOMY_VERSION} · baseada no referencial curricular já registado na disciplina.</small>
   </section>;

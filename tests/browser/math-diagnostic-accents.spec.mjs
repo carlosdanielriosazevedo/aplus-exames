@@ -94,6 +94,7 @@ async function reachMathDiagnostic(page,runtimeErrors){
 
   await expect(page.getByRole("heading",{name:/Ajuda a .* começar no sítio certo/})).toBeVisible({timeout:30_000});
   await page.getByRole("button",{name:"Já terminei o secundário",exact:true}).click();
+  await page.getByRole("textbox",{name:/Nota recente de/u}).fill("14");
   await page.getByRole("button",{name:/Continuar para a matéria de Matemática A/}).click();
 
   await expect(page.getByRole("heading",{name:"Todo o programa de Matemática A fica disponível."})).toBeVisible({timeout:30_000});
@@ -101,6 +102,7 @@ async function reachMathDiagnostic(page,runtimeErrors){
 
   const optionalTour=page.getByRole("button",{name:"Saltar explicação",exact:true});
   if(await optionalTour.isVisible().catch(()=>false))await optionalTour.click();
+  await page.locator(".adaptivePath").getByRole("button",{name:/Começar diagnóstico/iu}).click();
   await expect(page.getByRole("button",{name:"Começar diagnóstico",exact:true})).toBeVisible({timeout:30_000});
   await page.getByRole("button",{name:"Começar diagnóstico",exact:true}).click();
 

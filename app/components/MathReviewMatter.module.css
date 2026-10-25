@@ -555,3 +555,39 @@
   .reviewToolbox,.reviewExample,.reviewRemember,.reviewPitfalls{padding:14px;}
   .exampleSteps li{font-size:14px;}
 }
+
+/* Rever Matéria: shared section badges and accessible unit numbers. */
+.lessonHeader>.lessonNumber{color:#fff!important}
+.reviewRemember .blockHeading,
+.reviewPitfalls .blockHeading{margin-bottom:10px}
+.reviewRemember .blockHeading>span,
+.reviewPitfalls .blockHeading>span{flex:0 0 28px;background:#eef3f5;color:var(--app-muted)}
+.reviewRemember .blockHeading small,
+.reviewPitfalls .blockHeading small{color:var(--app-muted)}
+.reviewRemember .blockHeading b,
+.reviewPitfalls .blockHeading b{color:var(--app-orange-dark)}
+
+/* Legacy Portuguese five-block reviews must occupy the full study column,
+   not the half-width cell used by the old two-column chapter layout. */
+@media (min-width:761px){
+  .deepReviewArticle{display:block!important;width:100%;max-width:980px!important}
+  .deepReviewArticle>.studyFlow{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr);
+    width:100%;max-width:100%;min-width:0;
+    padding:0;
+    grid-column:1/-1;
+  }
+  .deepReviewArticle>.studyFlow>.reviewLesson{width:100%;min-width:0}
+}
+
+/* On phones, the five pedagogical blocks use the available width and remain
+   legible independently of the surrounding subject layout. */
+@media (max-width:760px){
+  .deepReviewArticle{box-sizing:border-box;width:100%;max-width:100%!important;min-width:0}
+  .deepReviewArticle>.studyFlow,.studyFlow,.lessonStack,.reviewLesson,.lessonBody{box-sizing:border-box;width:100%;min-width:0;max-width:100%}
+  .lessonSummaryGrid{grid-template-columns:minmax(0,1fr)}
+  .reviewRemember,.reviewPitfalls{min-width:0}
+  .blockHeading{min-width:0;align-items:center}
+  .blockHeading>div{min-width:0;overflow-wrap:anywhere}
+}

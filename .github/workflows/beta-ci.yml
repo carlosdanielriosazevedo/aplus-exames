@@ -51,6 +51,23 @@ jobs:
           echo "PLAYWRIGHT_END $(date -u +%Y-%m-%dT%H:%M:%SZ) exit=$result"
           exit "$result"
 
+      - name: Browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-browser-${{ github.sha }}
+          path: |
+            test-results
+            /tmp/audit-visual
+            /tmp/audit-desktop
+          retention-days: 3
+          if-no-files-found: ignore
+
+      - name: Synthetic recovery compatibility
+        run: |
+          git fetch --no-tags --depth=1 origin 98e811f8be6139f15e89de38c5b5e335dc631bdc 94ee6db5409e213494e275e28d8da01d3a2b4623 6098805c1eea0ddec17c596d20414713d1cae7c6
+          node scripts/release-recovery-compatibility.mjs
+
       - name: Unit tests
         run: npm run test:unit
 

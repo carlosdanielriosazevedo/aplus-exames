@@ -65,9 +65,9 @@ export default function Ranking({s,setS,go}){
     }));
   }
 
-  return <Shell><StudentTop s={s} go={go}/>
+  return <Shell className="rankingDesktopShell"><StudentTop s={s} go={go}/>
     <div className="rankingHero">
-      <div><p className="eyebrow">🏆 COMPETIÇÃO SEMANAL</p><h1>Treina. Ganha XP. Sobe.</h1>
+      <div className="sectionIntro"><p className="eyebrow">🏆 COMPETIÇÃO SEMANAL</p><h1>Treina. Ganha XP. Sobe.</h1>
         <p className="muted">O ranking compara <b>atividade de estudo</b>, nunca Domínio, Certeza, Índice de Preparação ou notas.</p></div>
       <div className="divisionBadge"><span>{globalSummary.division.icon}</span><b>{globalSummary.division.label}</b><small>{globalSummary.weekXp} XP total esta semana</small>{subjectId&&<small>{summary.weekXp} XP · {subjectLabel}</small>}</div>
     </div>
@@ -76,13 +76,11 @@ export default function Ranking({s,setS,go}){
 
     <section aria-label="Filtrar ranking por disciplina">
       <small className="eyebrow">DISCIPLINA</small>
-      <div className="rankingTabs">
-        <button className={subjectFilter==="all"?"sel":""} onClick={()=>setSubjectFilter("all")}>Todas</button>
-        {RANKING_SUBJECT_IDS.map(id=>{
-          const subject=subjectById(id);
-          return <button key={id} className={subjectFilter===id?"sel":""} onClick={()=>setSubjectFilter(id)}>{subject.shortName||subject.name}</button>;
-        })}
-      </div>
+      <label className="rankingSubjectSelectLabel" htmlFor="rankingSubjectFilter">Escolher disciplina</label>
+      <select id="rankingSubjectFilter" className="rankingSubjectSelect" value={subjectFilter} onChange={event=>setSubjectFilter(event.target.value)}>
+        <option value="all">Todas as disciplinas</option>
+        {RANKING_SUBJECT_IDS.map(id=>{const subject=subjectById(id);return <option key={id} value={id}>{subject.name}</option>})}
+      </select>
       <p className="muted">{subjectId
         ?`Estás a comparar apenas o XP ganho em ${subjectLabel}. A tua divisão continua a ser decidida pelo XP total em “Todas”.`
         :"“Todas” soma o XP das tuas disciplinas. Usa os filtros para comparar a tua atividade numa disciplina específica."}</p>

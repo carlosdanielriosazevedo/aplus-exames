@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
+import {loadSessionDraftStatus,saveSessionDraft} from "../app/lib/sessionDraft.js";
 
 const account=readFileSync(new URL("../app/components/AccountCloud.js",import.meta.url),"utf8");
 const cloud=readFileSync(new URL("../app/lib/cloud.js",import.meta.url),"utf8");
@@ -12,8 +13,34 @@ const browserStorage=readFileSync(new URL("../app/lib/browserStorage.js",import.
 assert.match(drafts,/writeStorageFallback\(key,JSON\.stringify/u,"rascunhos de sessão devem usar persistência local resiliente");
 assert.match(browserStorage,/\["localStorage","sessionStorage"\]/u,"a persistência deve tentar localStorage antes do fallback de sessão");
 assert.match(browserStorage,/export function writeStorageFallback/u,"o fallback local deve permanecer centralizado e testável");
-assert.match(drafts,/const MAX_AGE_MS=1000\*60\*60\*24/u,"rascunhos transitórios devem manter expiração local explícita");
+// Uma ausência longa não autoriza descartar ou substituir uma avaliação pendente.
+// Exercitar o armazenamento real, em vez de exigir uma constante de expiração.
+const previousStorage=Object.getOwnPropertyDescriptor(globalThis,"localStorage");
+const entries=new Map();
+Object.defineProperty(globalThis,"localStorage",{configurable:true,value:{getItem:key=>entries.get(key)??null,setItem:(key,value)=>entries.set(key,String(value)),removeItem:key=>entries.delete(key)}});
+try{
+  for(const kind of ["diagnostic","mission","training","mini_exam"]){
+    entries.clear();
+    const key="a25-active-session-v1";
+    const original={kind,sessionId:"original-"+kind,answers:[0,1],savedAt:Date.now()-30*864e5};
+    const raw=JSON.stringify(original);entries.set(key,raw);
+    assert.deepEqual(loadSessionDraftStatus().draft,original,"a tentativa deve sobreviver a 30 dias sem uso");
+    assert.equal(saveSessionDraft({...original,sessionId:"replacement"}),false,"outra tentativa não pode substituir o draft");
+    assert.equal(entries.get(key),raw,"a tentativa original e as respostas devem manter-se intactas");
+  }
+  entries.set("a25-active-session-v1","{invalid");
+  assert.equal(loadSessionDraftStatus().error,true,"um draft inválido deve bloquear a recuperação");
+  assert.equal(entries.get("a25-active-session-v1"),"{invalid","um erro de leitura não autoriza apagar dados");
+}finally{
+  if(previousStorage)Object.defineProperty(globalThis,"localStorage",previousStorage);else delete globalThis.localStorage;
+}
 assert.doesNotMatch(cloud,/sessionDraft|active-session/u,"a cloud de progresso não deve começar a transportar rascunhos de sessão sem um protocolo próprio de conflitos");
+
+// Nenhuma das ações de carga pode substituir a tentativa local ou o seu baseline.
+for(const handler of ["loadCloud","resolveKeepRemote","resolveMerge"]){
+  assert.ok(account.includes(`async function ${handler}(){\n    if(hasPendingAssessment(s))`),`${handler} deve bloquear a carga durante uma avaliação`);
+}
+assert.ok((account.match(/setS\(prev=>preservePendingAssessment\(prev,/gu)||[]).length>=3,"a aplicação tardia de uma resposta cloud também deve respeitar a tentativa atual");
 
 // Logout nunca deve apagar o estudo local.
 assert.match(account,/Sessão terminada\. O progresso local continua neste dispositivo\./u,"logout deve informar e preservar o progresso local");

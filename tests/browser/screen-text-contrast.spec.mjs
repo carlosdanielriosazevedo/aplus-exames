@@ -54,10 +54,12 @@ for(const subject of SUBJECTS){
     await page.getByRole("button",{name:subject.button}).click();
     await page.getByRole("button",{name:"Continuar",exact:true}).click();
     await page.getByRole("button",{name:"Já terminei o secundário",exact:true}).click();
+    await page.getByRole("textbox",{name:/Nota recente de/u}).fill("14");
     await page.getByRole("button",{name:new RegExp(`Continuar para a matéria de ${subject.name}`,"u")}).click();
     await page.getByRole("button",{name:"Continuar",exact:true}).click();
     const skip=page.getByRole("button",{name:"Saltar explicação",exact:true});
     if(await skip.isVisible().catch(()=>false))await skip.click();
+    await page.locator(".adaptivePath").getByRole("button",{name:/Começar diagnóstico/iu}).click();
     await page.getByRole("button",{name:"Começar diagnóstico",exact:true}).click();
     await expect(page.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
     expect(await lowContrastTexts(page),"pergunta").toEqual([]);

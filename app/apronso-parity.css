@@ -199,3 +199,19 @@
     right:8px;
   }
 }
+
+/* One existing background mascot, anchored to the heading rather than the copy.
+   Desktop keeps its original integration; all three mobile subjects share this. */
+@media(max-width:760px){
+  .learnHome>.studentSurface>.learnIntro{padding-right:0;min-height:0}
+  .learnHome>.studentSurface>.learnIntro::after{content:none;display:none}
+  .learnHome>.studentSurface>.learnIntro .mobileMainTitle::after{
+    content:"";position:absolute;right:0;bottom:0;
+    width:clamp(68px,21vw,90px);height:clamp(76px,24vw,100px);
+    background:url('/mascot/apronso-welcome.webp') center bottom/contain no-repeat;
+    pointer-events:none;
+  }
+  .studentTop .studentTopActions>button[aria-label$=" XP"]{
+    flex:0 0 auto;width:auto;min-width:72px;max-width:none;padding:0 6px!important;
+  }
+}

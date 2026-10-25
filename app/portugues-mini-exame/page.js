@@ -1,4 +1,4 @@
-import PortuguesePassageMiniExam from "../components/PortuguesePassageMiniExam";
+import PersistentPortuguesePrototype from "../components/PersistentPortuguesePrototype";
 import passageDocument from "../../content/vnext/portuguese/portuguese-639-passage-prototypes.json";
 import {buildPortuguesePassagePrototypeExam} from "../lib/portuguesePassages";
 import "./passage-mini-exam.css";
@@ -8,5 +8,5 @@ export const metadata={title:"Mini-exame Português 639 · APProva+"};
 
 export default function PortuguesePassageMiniExamPage(){
   const exam=buildPortuguesePassagePrototypeExam(passageDocument);
-  return <PortuguesePassageMiniExam exam={exam}/>;
+  return <PersistentPortuguesePrototype exam={exam}/>;
 }
