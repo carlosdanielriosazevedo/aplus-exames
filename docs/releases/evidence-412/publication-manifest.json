@@ -259,5 +259,8 @@
   "decision": "GO executed; publication and public read-only smoke passed",
   "humanPedagogicalReview": "deferred_not_validated",
   "productionEligible": false,
-  "realStudentDataUsed": false
+  "realStudentDataUsed": false,
+  "gitMainAliasAligned": true,
+  "gitMainAliasDeployment": "dpl_3vf3eAhMfrV9i7nH3qMxhe9du9hi",
+  "gitMainAliasOperation": "assign_alias after promotion, without rebuild"
 }
