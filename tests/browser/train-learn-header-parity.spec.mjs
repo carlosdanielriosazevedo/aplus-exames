@@ -30,12 +30,18 @@ for(const subjectId of ['math-a','portuguese','physics-chemistry-a'])for(const w
    });layouts.push(data);
    await testInfo.attach(`${tab}-${width}`,{body:await page.screenshot({animations:'disabled'}),contentType:'image/png'});
    if(tab==='Treinar'){
-    await expect(page.getByText('TREINAR',{exact:true})).toHaveCount(0);
+    await expect(page.locator('.trainIntro .eyebrow')).toHaveText('TREINAR');
+    await expect(page.locator('.trainIntro .eyebrow')).toBeVisible();
     await expect(page.locator('.trainIntro .apronsoNudge')).toHaveCount(0);
-    await expect(page.locator('.trainGreetingSpace')).toBeHidden();
     await expect(page.locator('.trainIntro>span')).toBeVisible();
    }
   }
+  const labelStyle=el=>{const s=getComputedStyle(el);return {font:s.fontFamily,size:s.fontSize,weight:s.fontWeight,color:s.color,spacing:s.letterSpacing}};
+  const trainLabel=await page.locator('.trainIntro .eyebrow').evaluate(labelStyle);
+  await page.getByRole('button',{name:'Progresso',exact:true}).last().click();
+  const progressLabel=page.locator('.progressPage .sectionIntro .eyebrow');
+  await expect(progressLabel).toHaveText('PROGRESSO');
+  expect(trainLabel,'Treinar uses the Progresso section-label style').toEqual(await progressLabel.evaluate(labelStyle));
   console.log(JSON.stringify({subjectId,width,layouts}));
   await testInfo.attach('Measured layout',{body:JSON.stringify({subjectId,width,layouts},null,2),contentType:'application/json'});
   for(const key of ['x','font','size','lineHeight','weight','color','copyX','copyFont','copySize','copyColor','copyWeight','copyY'])expect(layouts[1][key],key).toBe(layouts[0][key]);
