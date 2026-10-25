@@ -7,11 +7,11 @@ for(const branch of ["fix/paused-diagnostic-primary-cta","fix/consistent-mobile-
  it(`${branch} explicitly disables automatic Vercel deployments`,()=>{
   expect(rules[branch]).toBe(false);
   // Vercel deploys if any matching rule is true, even alongside a false rule.
-  expect(Object.entries(rules).filter(([,enabled])=>enabled===true)).toEqual([["main",true]]);
+  expect(Object.entries(rules).filter(([,enabled])=>enabled!==false)).toEqual([]);
  });
 }
 
-it("disables nested branch names by default without changing main's policy",()=>{
+it("holds main and nested branches for deliberate deployment",()=>{
  expect(rules["**"]).toBe(false);
- expect(rules.main).toBe(true);
+ expect(rules.main).toBe(false);
 });
