@@ -25,15 +25,15 @@ for(const subjectId of ['math-a','portuguese','physics-chemistry-a'])for(const w
    await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})))});
    const data=await page.locator('.learnIntro').evaluate(el=>{
     const title=el.querySelector('h1'),style=getComputedStyle(title),r=title.getBoundingClientRect(),p=getComputedStyle(el,'::after');
-    const copy=el.querySelector('.apronsoNudge>p')||el.querySelector(':scope>span');const cr=copy.getBoundingClientRect(),cs=getComputedStyle(copy),er=el.getBoundingClientRect();
+    const copy=el.querySelector(':scope>span');const cr=copy.getBoundingClientRect(),cs=getComputedStyle(copy),er=el.getBoundingClientRect();
     return {x:r.x,y:r.y,font:style.fontFamily,size:style.fontSize,weight:style.fontWeight,color:style.color,copyX:cr.x,copyFont:cs.fontFamily,copySize:cs.fontSize,copyColor:cs.color,copyWeight:cs.fontWeight,copyY:cr.y,mascot:{right:p.right,bottom:p.bottom,width:p.width,height:p.height,baseline:er.bottom+parseFloat(p.bottom)},overflow:document.documentElement.scrollWidth>innerWidth};
    });layouts.push(data);
    await testInfo.attach(`${tab}-${width}`,{body:await page.screenshot({animations:'disabled'}),contentType:'image/png'});
    if(tab==='Treinar'){
     await expect(page.getByText('TREINAR',{exact:true})).toHaveCount(0);
-    await expect(page.locator('.trainIntro .apronsoNudge')).toHaveCSS('border-top-width','0px');
-    await expect(page.locator('.trainIntro .apronsoNudge>img')).toBeHidden();
-    await expect(page.locator('.trainIntro .apronsoNudge')).toHaveCSS('background-color','rgba(0, 0, 0, 0)');
+    await expect(page.locator('.trainIntro .apronsoNudge')).toHaveCount(0);
+    await expect(page.locator('.trainGreetingSpace')).toBeHidden();
+    await expect(page.locator('.trainIntro>span')).toBeVisible();
    }
   }
   console.log(JSON.stringify({subjectId,width,layouts}));

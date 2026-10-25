@@ -21,10 +21,12 @@ describe("desktop shared student-shell polish",()=>{
     expect(css).toMatch(/\.learnHome \.studentSurface\s*\{[\s\S]*?padding-bottom:0;/u);
   });
 
-  it("centres desktop guidance copy in Treinar and Exames without changing mobile",()=>{
+  it("keeps Exames guidance centred and Treinar copy in its shared heading",()=>{
     expect(css).toMatch(/\.apronsoNudge:has\(\+ \.trainChoices\),[\s\S]*?\.examHub \.apronsoNudge\s*\{[\s\S]*?align-items:center;/u);
     expect(css).toMatch(/\.apronsoNudge:has\(\+ \.trainChoices\) p,[\s\S]*?\.examHub \.apronsoNudge p\s*\{[\s\S]*?align-self:center;[\s\S]*?text-align:center;/u);
-    expect(studyModeHub).toContain('<ApronsoNudge pose="thinking">');
+    expect(studyModeHub).toContain('className="sectionIntro learnIntro trainIntro"');
+    expect(studyModeHub).toContain('<span>{STUDY_MODE_COPY.nudge}</span>');
+    expect(studyModeHub).not.toContain("ApronsoNudge");
     expect(studyModeHub).toContain('className="trainChoices"');
   });
 

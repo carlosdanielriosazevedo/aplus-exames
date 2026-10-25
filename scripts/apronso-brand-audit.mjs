@@ -40,7 +40,7 @@ assert.match(parityCss,/\.learnIntro::after\{[\s\S]*?background:url\('\/mascot\/
 assert.match(parityCss,/\.progressPage \.progressHero>\.apronso\{[\s\S]*?position:absolute;/u,"Apronso deve continuar integrado no cartão de Progresso em mobile.");
 
 assert.ok((studentSurfaces.match(/<ApronsoNudge/g)||[]).length>=3,"Apronso must remain on useful shared student surfaces without duplicating nearby UI copy");
-assert.ok((studyModeHub.match(/<ApronsoNudge/g)||[]).length>=1,"Apronso must remain on the shared study hub");
+assert.match(studyModeHub,/<Apronso className="mobileHeadingApronso" pose="welcome"/u,"O Apronso deve acompanhar o título do hub partilhado, sem cartão duplicado.");
 assert.match(portuguese,/Apronso acompanha o teu progresso/u,"Português deve manter Apronso no Progresso.");
 assert.match(fqa,/Apronso acompanha o teu progresso/u,"FQ A deve manter Apronso no Progresso.");
 assert.match(fqa,/diagApronsoHero/u,"FQ A deve reutilizar o mesmo padrão visual do diagnóstico.");
