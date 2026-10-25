@@ -1,0 +1,49 @@
+/* Ranking uses the same compact mascot as Aprender/Treinar. Weekly activity
+   stays separate from the subject filter and never represents knowledge. */
+.rankingDesktopShell>.panel>.rankingHero{
+  display:flex!important;flex-direction:column!important;align-items:stretch!important;
+  gap:12px!important;margin:8px 0 24px;min-width:0;
+}
+.rankingDesktopShell>.panel>.rankingHero>.sectionIntro{
+  position:relative;box-sizing:border-box;flex:none!important;
+  width:100%;max-width:none!important;min-width:0;min-height:138px;
+  margin:0!important;padding:0 138px 0 0;
+}
+.rankingTitle{display:contents}
+.rankingDesktopShell .rankingTitle>.eyebrow{margin:0}
+.rankingDesktopShell .rankingTitle>h1{margin:4px 0;font-size:42px;line-height:1.5;letter-spacing:-1.4px}
+.rankingDesktopShell .rankingHeadingApronso{
+  display:block;position:absolute;right:6px;bottom:-2px;width:126px;height:142px;
+  object-fit:contain;object-position:center bottom;animation:none;pointer-events:none;
+}
+.rankingDesktopShell>.panel>.rankingHero .sectionIntro>.muted{
+  margin:7px 0 0;font-size:14px;font-weight:400;line-height:1.45;color:#657583;
+}
+.rankingDesktopShell>.panel>.rankingHero>.divisionBadge{
+  display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start;
+  flex:0 1 auto!important;align-self:flex-start;gap:6px 8px;
+  width:max-content;max-width:100%;min-width:0!important;min-height:32px;
+  padding:6px 12px;margin:0;border:1px solid #f2dfbc;border-radius:999px;
+  background:#fff8ed;color:var(--app-navy);text-align:left;box-shadow:none;
+}
+.rankingDesktopShell .divisionBadge>span{display:inline;font-size:18px;line-height:1}
+.rankingDesktopShell .divisionBadge>b{display:inline;margin:0;font-size:13px;white-space:nowrap}
+.rankingDesktopShell .divisionBadge>b::after{content:" ·";font-weight:400}
+.rankingDesktopShell .divisionBadge>small{display:inline;min-width:0;max-width:100%;margin:0;font-size:12px;line-height:1.4;color:var(--app-muted);overflow-wrap:anywhere}
+@media(max-width:760px){
+  .rankingDesktopShell>.panel>.rankingHero>.sectionIntro{min-height:0;padding:0!important}
+  .rankingDesktopShell .rankingTitle{
+    display:block;position:relative;min-width:0;padding-right:clamp(72px,22vw,94px);
+  }
+  .rankingDesktopShell .rankingTitle>.eyebrow{line-height:20px;font-size:12px}
+  .rankingDesktopShell>.panel>.rankingHero .sectionIntro h1{
+    font-size:clamp(19px,5.65vw,24px)!important;line-height:1.16!important;
+    white-space:normal!important;margin:5px 0 0!important;
+  }
+  .rankingDesktopShell .rankingHeadingApronso{
+    right:0;bottom:0;width:clamp(68px,21vw,90px);height:clamp(76px,24vw,100px);
+  }
+  .rankingDesktopShell>.panel>.rankingHero .sectionIntro>.muted{
+    width:100%;max-width:none;margin:9px 0 0;line-height:1.5;color:var(--app-muted);
+  }
+}
