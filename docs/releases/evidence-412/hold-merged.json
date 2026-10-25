@@ -1,0 +1,18 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "node scripts/generate-vnext-diagnostic.mjs && node scripts/generate-vnext-mission.mjs && node scripts/generate-vnext-exam.mjs && npx next build && npm run performance:budget",
+  "regions": [
+    "fra1"
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "main": false,
+      "codex/integration-next": false,
+      "codex/*": false,
+      "chore/*": false,
+      "fix/paused-diagnostic-primary-cta": false,
+      "fix/consistent-mobile-header-layout": false,
+      "**": false
+    }
+  }
+}

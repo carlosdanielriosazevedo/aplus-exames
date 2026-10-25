@@ -132,3 +132,10 @@ Mesmo head660b4d5 e deployment8FAu; alias de teste confirmado no ID esperado. Ac
 ```
 
 A CSP continuou a bloquear apenas o feedback opcional da Vercel; não foi relaxada. Contas sintéticas marcadas como teste antes de cloud/telemetria. Nenhum teste foi removido, asserção enfraquecida ou limite aumentado. Os workflows externos anteriores permanecem FAILURE pelos motivos registados, não foram reclassificados como aprovados. Este PASS é de uma execução distinta, integral e autenticada.
+
+
+## Preparação operacional posterior — PR #413
+
+Criada PR Draft #413, head `bbceb1ee873cb7f319e8016c85a0905b9af88771`, base98e811f, mudando apenas main:true→false em vercel.json. [Beta CI40179073959](https://github.com/carlosdanielriosazevedo/aplus-exames/actions/runs/40179073959), job121126014125: **SUCCESS**, incluindo browser, unitários, Technical Gate, auditorias e build integral. Nenhum deployment do head no projeto real; inventário por SHA vazio. A integração sintética das configurações da #412 e #413 não tem conflito e preserva main:false, todas as regras false e o mesmo buildCommand.
+
+A PR#413 está preparada para a decisão de ativação real do controlo; não foi integrada e não ativa o bloqueio por estar apenas aberta. A integração funcional única continua na #412. Procedimento com identidades, payloads concretos e gates: `docs/releases/production-staging-412.md`. Prevê dois builds necessários (recuperação+funcional) e uma promoção pública funcional; não é uma declaração de custo zero. Sem artefacto de recuperação de produção criado, sem ID fictício e sem promoção de Preview sintético. Main e projeto real permanecem inalterados nesta preparação.
