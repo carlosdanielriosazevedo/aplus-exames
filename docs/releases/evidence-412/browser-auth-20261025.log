@@ -1,0 +1,22 @@
+CONSOLE Refused to load the script 'https://vercel.live/_next-live/feedback/feedback.js' because it violates the following Content Security Policy directive: "script-src 'self' 'unsafe-inline'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.
+
+NETWORK vercel.live GET csp
+CONSOLE Refused to load the script 'https://vercel.live/_next-live/feedback/feedback.js' because it violates the following Content Security Policy directive: "script-src 'self' 'unsafe-inline'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.
+
+NETWORK vercel.live GET csp
+DATA_REQUEST GET sec-ch-ua-platform,authorization,referer,sec-ch-ua,sec-ch-ua-mobile,user-agent,accept,x-neon-client-info
+DATA_RESPONSE 200 {"access-control-allow-origin":"https://applus-beta-synthetic-git-1472c7-carlos-rios-azevedo-s-projects.vercel.app","access-control-expose-headers":"Content-Encoding, Content-Location, Content-Range, Content-Type, Date, Location, Server, Transfer-Encoding, Range-Unit"}
+DATA_REQUEST POST sec-ch-ua-platform,authorization,referer,sec-ch-ua,sec-ch-ua-mobile,prefer,user-agent,accept,content-type,x-neon-client-info
+DATA_RESPONSE 201 {"access-control-allow-origin":"https://applus-beta-synthetic-git-1472c7-carlos-rios-azevedo-s-projects.vercel.app","access-control-expose-headers":"Content-Encoding, Content-Location, Content-Range, Content-Type, Date, Location, Server, Transfer-Encoding, Range-Unit"}
+CONSOLE Refused to load the script 'https://vercel.live/_next-live/feedback/feedback.js' because it violates the following Content Security Policy directive: "script-src 'self' 'unsafe-inline'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.
+
+NETWORK vercel.live GET csp
+DATA_REQUEST GET sec-ch-ua-platform,authorization,referer,sec-ch-ua,sec-ch-ua-mobile,user-agent,accept,x-neon-client-info
+DATA_RESPONSE 200 {"access-control-allow-origin":"https://applus-beta-synthetic-git-1472c7-carlos-rios-azevedo-s-projects.vercel.app","access-control-expose-headers":"Content-Encoding, Content-Location, Content-Range, Content-Type, Date, Location, Server, Transfer-Encoding, Range-Unit"}
+CONSOLE Refused to load the script 'https://vercel.live/_next-live/feedback/feedback.js' because it violates the following Content Security Policy directive: "script-src 'self' 'unsafe-inline'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.
+
+NETWORK vercel.live GET csp
+CONSOLE Refused to load the script 'https://vercel.live/_next-live/feedback/feedback.js' because it violates the following Content Security Policy directive: "script-src 'self' 'unsafe-inline'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.
+
+NETWORK vercel.live GET csp
+{"signupUi":true,"signinUi":true,"reloadSession":true,"cloudSaveLoad":true,"consentUi":true,"academicProgressPreserved":true,"logoutUi":true}

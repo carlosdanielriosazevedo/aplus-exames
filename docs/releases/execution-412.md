@@ -1,6 +1,6 @@
 # APProva+ — execução de 24/10/2026
 
-Decisão: **NO-GO para produção**. Candidata técnica consolidada na PR #412, Draft, sem merge. Este registo atualiza o relatório inicial `docs/releases/rc-412-readiness.md`, que descrevia gates entretanto concluídos. Referência central: Issue #373.
+Atualização de 25/10/2026: **validação técnica da candidata concluída; NO-GO para publicação imediata até fechar a preparação operacional no projeto real**. Candidata técnica consolidada na PR #412, Draft, sem merge. Este registo atualiza o relatório inicial `docs/releases/rc-412-readiness.md`, que descrevia gates entretanto concluídos. Referência central: Issue #373.
 
 ## A. Consolidação
 
@@ -35,7 +35,7 @@ Não há diferenças de `app/api` ou `db` face à produção. Desde #385, a úni
 | Compatibilidade integral | 770 verificações PASS |
 | Browser sobre Preview real da candidata | 12 ecrãs PASS, três disciplinas × quatro menus a 390 px; sem tentativas de escrita nesses ensaios |
 | Smoke autenticado HTTP no ambiente isolado | PASS: signup/login, cloud, privacidade, consentimento, revogação, erasure dos seus dados de telemetria, CSRF e idempotência |
-| Smoke autenticado na interface | FAIL: signup passa; guardar online bloqueado pelo preflight CORS da Data API. Não validados carregar online, consentimento e logout/login pela interface nesta execução |
+| Smoke autenticado na interface (25/10) | PASS: signup, login, sessão após reload, guardar/carregar cloud, XP preservado, consentimento/revogação e logout |
 
 CI: https://github.com/carlosdanielriosazevedo/aplus-exames/actions/runs/40134166781
 Artefacto de browser: ID `12576910985`, SHA256 `77c2fac` (prefixo; consultar API para digest integral), expira 27/10. Screenshots do CI foram extraídos e inspecionados, incluindo indicadores emoji e seis algarismos de XP a 320 px. Não confundir inspeção de CSS com validação visual.
@@ -95,7 +95,7 @@ Preview candidato configurado: `dpl_8FAuAULx1K8eQj9iWMYMdjJkFc5o`, SHA 660b4d5, 
 
 Corrigidos exclusivamente neste ambiente: trusted origin do Neon Auth e variáveis Preview não secretas de política/retenção sintética. O smoke autenticado HTTP passou, incluindo 5 logins (mediana 305,1 ms), cloud, CSRF, privacidade e consentimento. Contas geradas em memória com emails reservados example.com e marcadas como teste antes das escritas; não se recolheram credenciais reais.
 
-**Falha remanescente:** o browser autentica, mas o preflight CORS da Data API não devolve `Access-Control-Allow-Origin` para o alias candidato. `get_data_api` mostra a allowlist atualizada; OPTIONS real continua a aceitar apenas a antiga origem de staging. Reiniciar o compute PostgreSQL isolado não resolveu. Não foram enfraquecidos RLS/JWT/CSP, nem aberto wildcard. A allowlist final solicitada conserva a origem anterior e a candidata. É necessário fazer aplicar/reiniciar a configuração do serviço Data API e repetir o teste de interface; não basta confiar no GET da configuração.
+**Histórico entretanto superado:** em 24/10 o browser autenticava, mas o preflight CORS da Data API não devolvia `Access-Control-Allow-Origin` para o alias candidato. `get_data_api` mostra a allowlist atualizada; OPTIONS real continua a aceitar apenas a antiga origem de staging. Reiniciar o compute PostgreSQL isolado não resolveu. Não foram enfraquecidos RLS/JWT/CSP, nem aberto wildcard. A allowlist final solicitada conserva a origem anterior e a candidata. Em 25/10, depois de recuperar o ambiente e iniciar o mesmo compute, o teste integral da interface PASSOU. A resposta real da Data API foi HTTP200 com ACAO igual à origem candidata. Não foi necessária nova alteração de configuração nem novo deployment. Registo: `docs/releases/evidence-412/browser-auth-20261025.log`. A causa temporal exata da divergência anterior não foi demonstrada; não atribuir a resolução a uma intervenção não executada.
 
 A conta rejeitou a tentativa de configurar suspensão automática com HTTP 412. Não se declara scale-to-zero configurado nem custo nulo. Sem serviços pagos adicionais ou domínios criados.
 
@@ -107,12 +107,12 @@ Nenhum merge em main, deployment/rollback real, migração, reset, cópia de sec
 
 ## G. Decisão
 
-**NO-GO para merge/publicação.** Bloqueio concreto: sincronização cloud pela interface ainda falha no ambiente isolado. Acrescem revisão humana do conteúdo não concluída e necessidade de preparar recuperação sob configuração de produção. CI verde/READY não substituem estes gates. O laboratório de controlo de deployments está operacionalmente comprovado para a sequência descrita.
+**Validação técnica da candidata: concluída**, incluindo cloud autenticada pela interface, recuperação e laboratório operacional. **NO-GO para publicação imediata**: a política atual ainda permite deployment automático de main, e ainda não existe artefacto seguro de recuperação reconstruído com configuração de produção no projeto real. Esses preparativos não foram executados devido à separação entre ensaio isolado e intervenção real. Não fazer merge de main:true antes de ativar/verificar o controlo. A revisão humana adiada continua não validada; segundo `scripts/content-readiness.mjs`, o NO-GO desse lane não invalida o piloto controlado, cujo gate próprio passou, nem autoriza produção comercial. Não se introduz aqui uma exigência nova de revisão nem se altera productionEligible=false.
 
 ## H. Procedimento reproduzível e próximo passo
 
-1. Fazer aplicar no serviço Neon Data API isolado a allowlist já guardada. Confirmar OPTIONS com Origin do alias candidato e `Access-Control-Request-Headers: authorization,x-neon-client-info`. Exigir ACAO igual à origem e headers permitidos, sem wildcard ou alterações de RLS. Repetir `browser-auth.mjs` com share link temporário; exigir signup, sessão após reload, guardar/carregar, XP preservado, consentimento/revogação e logout/login. Se falhar, manter NO-GO.
-2. Resolver explicitamente o gate humano de conteúdo segundo a política do projeto. Não marcar como revisto nem alterar a elegibilidade para obter verde.
+1. **Concluído em 25/10:** teste de interface real passou; não repetir alterações da Data API só para reproduzir a falha antiga. Para futuros ensaios, verificar a allowlist já guardada. Confirmar OPTIONS com Origin do alias candidato e `Access-Control-Request-Headers: authorization,x-neon-client-info`. Exigir ACAO igual à origem e headers permitidos, sem wildcard ou alterações de RLS. Repetir `browser-auth.mjs` com share link temporário; exigir signup, sessão após reload, guardar/carregar, XP preservado, consentimento/revogação e logout/login. Se falhar, manter NO-GO.
+2. Preservar a política atual de piloto controlado, a revisão humana adiada/não validada e productionEligible=false. Não confundir deploy técnico no ambiente de produção com aprovação de conteúdo para produção comercial. Uma mudança dessa política exige decisão própria; não é parte desta publicação visual/técnica.
 3. Rever a #412 no SHA 660b4d5. Qualquer alteração de código requer novo SHA/CI. O CI de PR executou a árvore de merge; registar também o SHA e a árvore efetivamente integrados.
 4. Antes de qualquer integração real, preparar uma alteração isolada de política para `git.deploymentEnabled:false` (o ficheiro atual ainda permite main). Não misturar com a integração funcional. Repetir o CI e inspecionar inventário de todos os estados; se surgir publicação, cancelar a sequência e manter NO-GO. Este passo ainda não foi feito no projeto real.
 5. Manter Git false na integração única das alterações #385/#387 e da cadeia visual através da #412. A integração não pode repor `main:true`. Verificar a árvore final e CI do SHA final, e ausência de deployments automáticos. Não fazer merges separados das PRs históricas.
@@ -121,3 +121,14 @@ Nenhum merge em main, deployment/rollback real, migração, reset, cópia de sec
 8. Promover apenas esse ID validado. Confirmar domínios, acessibilidade e smoke não destrutivo. Registar SHA, ID, aliases, gates e hora na #373. Não reativar Git como limpeza: deixá-lo bloqueado para futuras publicações deliberadas, ou tratar a reposição como nova publicação com janela própria.
 
 Reprodução de percurso local: instalar dependências, `npm run build`, `npx playwright test -c tests/release-evidence/journey.playwright.mjs`. Os scripts nesta branch de evidência não alteram a candidata aprovada nem a sua configuração permanente de CI. `browser-auth.mjs` precisa de `RELEASE_SHARE_TOKEN` temporário; o token nunca é versionado. O teste deixa contas exclusivamente sintéticas e não deve ser apontado a produção.
+
+
+## Atualização final de 25/10 — execução autenticada real
+
+Mesmo head660b4d5 e deployment8FAu; alias de teste confirmado no ID esperado. Acesso temporário criado no alias, sem desativar Deployment Protection, sem versionar o token. Chromium140/Playwright1.55; script `browser-auth.mjs` já versionado na branch de evidência. Resultado process exit0:
+
+```json
+{"signupUi":true,"signinUi":true,"reloadSession":true,"cloudSaveLoad":true,"consentUi":true,"academicProgressPreserved":true,"logoutUi":true}
+```
+
+A CSP continuou a bloquear apenas o feedback opcional da Vercel; não foi relaxada. Contas sintéticas marcadas como teste antes de cloud/telemetria. Nenhum teste foi removido, asserção enfraquecida ou limite aumentado. Os workflows externos anteriores permanecem FAILURE pelos motivos registados, não foram reclassificados como aprovados. Este PASS é de uma execução distinta, integral e autenticada.
