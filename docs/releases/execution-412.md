@@ -1,4 +1,6 @@
-# APProva+ — execução de 24/10/2026
+# APProva+ — histórico da execução
+
+**Estado final de25/10:** controlo integrado, recuperação real preparada/ensaiada e CI final da candidata aprovado. Ver o relatório atual completo em [preparation-completed-412.md](./preparation-completed-412.md). As secções seguintes registam a evolução anterior e não substituem essa decisão final.
 
 Atualização de 25/10/2026: **validação técnica da candidata concluída; NO-GO para publicação imediata até fechar a preparação operacional no projeto real**. Candidata técnica consolidada na PR #412, Draft, sem merge. Este registo atualiza o relatório inicial `docs/releases/rc-412-readiness.md`, que descrevia gates entretanto concluídos. Referência central: Issue #373.
 

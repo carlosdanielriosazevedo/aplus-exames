@@ -1,0 +1,11 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v3.2.7 /workspace/scratch/7f5e477b35c5/aplus-exames/.worktrees/release-411
+
+ ✓ tests/unit/deploymentFreeze.test.js (3 tests) 3ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  12:27:05
+   Duration  570ms (transform 41ms, setup 0ms, collect 24ms, tests 3ms, environment 0ms, prepare 123ms)
+

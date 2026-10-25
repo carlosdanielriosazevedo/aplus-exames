@@ -1,0 +1,65 @@
+Expected failure when main:true is reintroduced. Exit code: 1
+
+ RUN  v3.2.7 /workspace/scratch/7f5e477b35c5/aplus-exames/.worktrees/release-411
+
+ ❯ tests/unit/deploymentFreeze.test.js (3 tests | 3 failed) 17ms
+   × fix/paused-diagnostic-primary-cta explicitly disables automatic Vercel deployments 14ms
+     → expected [ [ 'main', true ] ] to deeply equal []
+   × fix/consistent-mobile-header-layout explicitly disables automatic Vercel deployments 1ms
+     → expected [ [ 'main', true ] ] to deeply equal []
+   × holds main and nested branches for deliberate deployment 1ms
+     → expected true to be false // Object.is equality
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  12:30:41
+   Duration  398ms (transform 41ms, setup 0ms, collect 23ms, tests 17ms, environment 0ms, prepare 107ms)
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/deploymentFreeze.test.js > fix/paused-diagnostic-primary-cta explicitly disables automatic Vercel deployments
+ FAIL  tests/unit/deploymentFreeze.test.js > fix/consistent-mobile-header-layout explicitly disables automatic Vercel deployments
+AssertionError: expected [ [ 'main', true ] ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   [
++     "main",
++     true,
++   ],
++ ]
+
+ ❯ tests/unit/deploymentFreeze.test.js:10:71
+      8|   expect(rules[branch]).toBe(false);
+      9|   // Vercel deploys if any matching rule is true, even alongside a fal…
+     10|   expect(Object.entries(rules).filter(([,enabled])=>enabled!==false)).…
+       |                                                                       ^
+     11|  });
+     12| }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/deploymentFreeze.test.js > holds main and nested branches for deliberate deployment
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/deploymentFreeze.test.js:16:21
+     14| it("holds main and nested branches for deliberate deployment",()=>{
+     15|  expect(rules["**"]).toBe(false);
+     16|  expect(rules.main).toBe(false);
+       |                     ^
+     17| });
+     18| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+

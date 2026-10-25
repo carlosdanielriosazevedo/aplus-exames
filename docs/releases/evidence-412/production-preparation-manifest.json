@@ -1,0 +1,42 @@
+{
+  "issue": 373,
+  "holdPr": 413,
+  "holdHead": "bbceb1ee873cb7f319e8016c85a0905b9af88771",
+  "mainAfterHold": "5c4402b3d7059a72ccb31a44294cac9ac992ad18",
+  "mainCiRun": 40179649654,
+  "mainCiResult": "success",
+  "candidatePr": 412,
+  "candidateHead": "3f9e99fca8a926d16a2ee173db069fe2ec614ab1",
+  "candidateTree": "f7bd0db2035d75fd0f9391e75506dd437e936f60",
+  "candidateCiRun": 40180782011,
+  "recoveryDeployment": "dpl_6SbcBr1MuiwN7DMH2eK5jxjSMEkp",
+  "recoverySha": "2615dc45b155d6d515a55a1c523198aab1a4cd1b",
+  "recoveryProject": "prj_H0nD83gkRwu7Id05OhzL4CC60s4M",
+  "recoveryTarget": "production",
+  "recoveryState": "READY",
+  "recoveryPromoted": false,
+  "publicDomains": [
+    "www.approvamais.pt",
+    "approvamais.pt"
+  ],
+  "publicDeployment": "dpl_BNT57a7tuSrhSiYj9yqsadJwspQ9",
+  "publicSha": "98e811f8be6139f15e89de38c5b5e335dc631bdc",
+  "autoAssignCustomDomains": false,
+  "autoAssignmentEvidence": "Authenticated UI Production: Disabled; checkbox unchecked; Save disabled",
+  "writeAttemptsPerRecoveryProbeContext": 0,
+  "recoveryProbeExitCode": 0,
+  "temporaryLinksRevoked": true,
+  "newDeploymentsSinceHold": [
+    {
+      "id": "dpl_6SbcBr1MuiwN7DMH2eK5jxjSMEkp",
+      "state": "READY",
+      "source": "manual recovery"
+    }
+  ],
+  "priorCandidateCiFailure": 40180012456,
+  "priorCandidateCiFailureCause": "Three old deployment policy assertions required main:true; corrected to enforce hold without removing tests",
+  "negativeControl": "re-enabling main:true rejected; local configuration restored",
+  "candidateCiResult": "success",
+  "candidatePrState": "ready_for_review_not_merged",
+  "decision": "GO for controlled integration; publication conditional on final merged SHA CI and exact staged artifact verification"
+}
