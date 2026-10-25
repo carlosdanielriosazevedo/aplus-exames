@@ -36,14 +36,17 @@
   pointer-events:none;
 }
 
-/* Treinar shares Aprender's heading, reserved greeting line and mascot anchor.
+/* Treinar shares Aprender's heading and mascot anchor.
    Keep the guide copy in the header, without a second owl or a card. */
 .trainHub>.panel>.trainIntro{margin:8px 0 16px;max-width:none;width:100%;box-sizing:border-box}
-.trainGreetingSpace{visibility:hidden}
+/* Keep the previous greeting line height so the title and owl stay aligned.
+   Override learnIntro paragraph styling with the shared orange section label. */
+.trainHub .trainIntro .eyebrow{color:var(--app-orange-dark);font-size:16px;line-height:22.5px}
 .trainHub .trainIntro h1{margin:4px 0;font-size:clamp(30px,7vw,42px);letter-spacing:-1.4px;color:var(--app-navy)}
 .trainHub .trainIntro>span{max-width:none;color:#657583!important}
 @media(min-width:761px){.trainHub .trainIntro h1{line-height:1.5}}
 @media(max-width:760px){
+  .trainHub .trainIntro .eyebrow{font-size:12px;line-height:20px}
   .trainHub>.panel{border:0}
   /* Aprender's existing top-bar flow is 7px shorter; keep that bar intact. */
   .trainHub>.panel>.trainIntro{margin:-7px 0 28px!important;min-height:0;padding:0}

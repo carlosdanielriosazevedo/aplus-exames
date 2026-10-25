@@ -5,7 +5,7 @@ import {STUDY_MODE_COPY,practiceModeCopy} from "../lib/studyModeCopy";
 export default function StudyModeHub({subjectId="math-a",go}){
   return <>
     <div className="sectionIntro learnIntro trainIntro">
-      <div className="mobileMainTitle"><p className="trainGreetingSpace" aria-hidden="true">Olá 👋</p><h1>O que queres fazer?</h1><Apronso className="mobileHeadingApronso" pose="welcome" alt=""/></div>
+      <div className="mobileMainTitle"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1><Apronso className="mobileHeadingApronso" pose="welcome" alt=""/></div>
       <span>{STUDY_MODE_COPY.nudge}</span>
     </div>
     <div className="trainChoices">
