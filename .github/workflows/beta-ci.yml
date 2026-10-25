@@ -60,6 +60,7 @@ jobs:
             test-results
             /tmp/audit-visual
             /tmp/audit-desktop
+            /tmp/audit-ranking
           retention-days: 3
           if-no-files-found: ignore
 
