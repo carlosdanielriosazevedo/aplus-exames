@@ -267,7 +267,7 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
       attempts:previous.attempts+1,
       pendingRubrics:trulyReviewed?previous.pendingRubrics:previous.pendingRubrics+1,
       rubricReviews:previous.rubricReviews+(trulyReviewed?1:0),
-      rubricNeedsReview:previous.rubricNeedsReview+evidence.needsReview+(ungraded&&result.requiresReview?1:0),
+      rubricNeedsReview:previous.rubricNeedsReview+evidence.needsReview,
       rubricObserved:previous.rubricObserved+evidence.observed,
       rubricEvidenceByObservation:evidence.rubricEvidenceByObservation,
       lastAnsweredAt:completedAt
