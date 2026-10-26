@@ -42,3 +42,7 @@ CI 40251145482 no head 8909395: 165 browser PASS, incluindo os três percursos c
 As capturas também confirmaram uma segunda saída em Matemática, antes e depois da submissão. Foi removida a saída redundante no fundo de Missão/Treino/Mini-exame e explicitado Guardar e sair no StudySessionHeader, com os handlers existentes. Os testes de retoma e reset passam a utilizar essa saída única. A matriz de correção verifica uma saída antes e depois da submissão. Os campos guiados de Matemática passam a ter fonte herdada, 16 px, padding e borda coerentes, sem mudar o bloqueio ou as respostas.
 
 O achado pedagógico está na Issue #418. Probe com o motor real: tese de referência 13/13; a mesma tese acrescida de «porque isso melhora a concentração» 0/13, final=true. A apresentação nova não resolve este problema.
+
+## Bloqueio de configuração também corrigido
+
+No percurso manual, um perfil de 12.º ano sem matéria atual assinalada mostrava «Podes continuar a preparar-te com a matéria dos anos anteriores», mas o botão Continuar estava desativado. O guard de curriculumOnboard bloqueava precisamente 11.º/12.º sem seleção. Foi removido esse guard de navegação, mantendo intacta a seleção de scopedItems que exclui o ano atual sem matéria dada. Dois testes UI cobrem 11.º e 12.º, configuração vazia, retoma e diagnóstico construído exclusivamente com anos anteriores. O 10.º mantém a política existente de disponibilidade do diagnóstico; não se alteraram os motores.
