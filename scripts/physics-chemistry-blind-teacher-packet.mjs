@@ -1,11 +1,12 @@
 import {OPEN_RESPONSE_WAVE4_CASES} from "../app/data/openResponseCalibrationBankWave4.js";
 import {OPEN_RESPONSE_WAVE5_CASES} from "../app/data/openResponseCalibrationBankWave5.js";
+import {FQA_SHADOW_RESEARCH_WAVE2} from "../app/data/fqaShadowResearchWave2.js";
 import {physicsChemistryConstructedItemById} from "../app/data/physicsChemistryConstructed.js";
 
-// A starter pack only: 5 synthetic responses per item. No expected ratings,
+// A synthetic teaching pack (15 responses/item) including developer-authored examples. No expected ratings,
 // development labels, confidence or shadow flags are visible to the reviewer.
-// This does not replace 15 independently adjudicated cases per item.
-const inputs=[...OPEN_RESPONSE_WAVE4_CASES,...OPEN_RESPONSE_WAVE5_CASES]
+// This is NOT an independent holdout, even though reviewers receive no profiles/scores.
+const inputs=[...OPEN_RESPONSE_WAVE4_CASES,...OPEN_RESPONSE_WAVE5_CASES,...FQA_SHADOW_RESEARCH_WAVE2]
   .filter(row=>row.subject==="physics-chemistry-a");
 
 // Stable, documented shuffle to avoid presenting all mistakes together.
@@ -19,7 +20,12 @@ function stableKey(row){
 function csv(values){
   return values.map(value=>'"'+String(value??"").replace(/"/g,'""').replace(/[\r\n]+/gu," ").trim()+'"').join(",");
 }
-if(inputs.length!==35)throw new Error("Expected 35 synthetic teacher-review examples");
+if(inputs.length!==105)throw new Error("Expected 105 synthetic teacher-review examples");
+for(const id of new Set(inputs.map(row=>row.itemId))){
+  if(inputs.filter(row=>row.itemId===id).length!==15)throw new Error("Expected 15 responses for "+id);
+}
+if(new Set(inputs.map(row=>row.itemId+"|"+row.response)).size!==105)
+  throw new Error("Duplicate teacher review sample detected");
 const rows=inputs.slice().sort((a,b)=>stableKey(a)-stableKey(b));
 const header=["blind_id","item_id","question","max_points","marking_criteria_reference",
   "synthetic_student_response","human_awarded_points","human_criterion_breakdown",
