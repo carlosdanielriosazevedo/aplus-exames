@@ -14,6 +14,7 @@ const RULES={
     ],
     contradictions:[
       ["same-emission-all-elements",/\b(?:todos|quaisquer)\s+(?:os\s+)?elementos\b[^.;]{0,85}\b(?:mesm[oa]s?|iguais?)\b|\bmesm[oa]s?\b[^.;]{0,60}\b(?:todos|elementos)\b/u],
+      ["no-electronic-origin",/\b(?:riscas|espectro)\b[^.;]{0,42}\b(?:nao|nunca)\b[^.;]{0,35}\b(?:transicoes|eletronicas)\b/u],
       ["spectral-lines-mass-only",/\briscas?\b[^.;]{0,50}\b(?:apenas|so)\b[^.;]{0,30}\bmass[ae]\b/u]
     ]
   },
@@ -25,6 +26,7 @@ const RULES={
     ],
     contradictions:[
       ["overshoot-flask-mark",/\b(?:ultrapassar|exceder|passar)\b[^.;]{0,38}\b(?:traco|marca)\b[^.;]{0,65}\b(?:sem afetar|nao altera|nao muda|irrelevante)\b/u],
+      ["no-volume-calibration",/\b(?:nao|nem|nunca)\b[^.;]{0,35}\b(?:necessario|preciso|precisa|importa)\b[^.;]{0,35}\b(?:ajustar|completar|acertar)\b[^.;]{0,70}\b(?:traco|volume)\b/u],
       ["no-homogenization",/\b(?:nao|nunca)\b[^.;]{0,18}\b(?:homogeneiz|mistur|agit)\w*/u]
     ]
   },
@@ -37,6 +39,7 @@ const RULES={
     contradictions:[
       ["always-conserved",/\b(?:conserva|conservacao)\w*\b[^.;]{0,45}\b(?:sempre|necessariamente|obrigatoriamente)\b/u],
       ["difference-refutes-within-uncertainty",/\b(?:mesmo dentro|dentro)\b[^.;]{0,42}\bincerteza\b[^.;]{0,75}\b(?:refutada?|impossivel|nao se conserva)\b/u],
+      ["any-difference-refutes",/\b(?:qualquer|toda)\b[^.;]{0,24}\bdiferenca\b[^.;]{0,115}\b(?:nao se conserva|nao ha conservacao|conservacao refutada)\b/u],
       ["mass-height-only",/\b(?:basta|apenas|so)\b[^.;]{0,47}\b(?:massa|altura)\b[^.;]{0,33}\b(?:e|altura)\b/u]
     ]
   },
@@ -48,6 +51,7 @@ const RULES={
     ],
     contradictions:[
       ["acceleration-not-slope",/\baceleracao\b[^.;]{0,35}\bnao\b[^.;]{0,25}\bdeclive\b|\bdeclive\b[^.;]{0,35}\bnao\b[^.;]{0,35}\baceleracao\b/u],
+      ["slope-never-acceleration",/\bdeclive\b[^.;]{0,45}\b(?:nao|nunca)\b[^.;]{0,44}\baceleracao\b/u],
       ["area-always-distance",/\barea(?: algebrica)?\b[^.;]{0,45}\b(?:representa|da|fornece|corresponde)\b[^.;]{0,35}\bdistancia(?: total)?\b|\barea\b[^.;]{0,40}\bdistancia total\b/u]
     ]
   },
@@ -70,6 +74,7 @@ const RULES={
     ],
     contradictions:[
       ["catalyst-changes-kc",/\bcatalisador\b[^.;]{0,78}\b(?:aumenta|diminui|altera|modifica|muda)\b[^.;]{0,39}\bkc\b|\bkc\b[^.;]{0,70}\b(?:aumenta|diminui|altera)\b/u],
+      ["heating-denies-endothermic",/\b(?:aquec\w*|temperatura)\b[^.;]{0,70}\b(?:nao|nunca)\b[^.;]{0,50}\b(?:endotermic\w*|sentido endotermico)\b/u],
       ["heat-favors-exothermic",/\b(?:aquec|aumento da temperatura)\w*\b[^.;]{0,82}\b(?:favorece|privilegia|desloca)\b[^.;]{0,45}\bexotermic\w*/u]
     ]
   },
@@ -81,6 +86,7 @@ const RULES={
     ],
     contradictions:[
       ["ph-seven-universal",/\bph\b[^.;]{0,50}\b(?:sempre|necessariamente|obrigatoriamente)\b[^.;]{0,16}\b7\b|\bph\b[^.;]{0,14}\b7\b[^.;]{0,45}\b(?:sempre|necessariamente|obrigatoriamente)\b|\b(?:sempre|necessariamente|obrigatoriamente)\b[^.;]{0,65}\bph\b[^.;]{0,16}\b7\b/u],
+      ["equivalence-denies-stoichiometry",/\bequivalencia\b[^.;]{0,42}\b(?:nao|nunca)\b[^.;]{0,45}\b(?:razao|proporcao)\s+estequiometrica\b/u],
       ["indicator-no-use",/\b(?:indicador|curva de ph)\b[^.;]{0,35}\b(?:nao serve|inutil|nunca se usa)\b/u]
     ]
   }
@@ -102,6 +108,7 @@ export function inspectScientificRelations(itemId,response){
     itemId,version:"shadow-v1",reviewRequired:true,score:null,
     status:"unsupported-item",relations:[],contradictions:[],corrected:false
   };
+  const hasGradeInstruction=/\b(?:ignora|desconsidera|atribui|concede|marca|da.me|classifica)\b[^.;]{0,95}\b(?:pontos|cotacao|criterios|avaliacao|10\/10|12\/12|nota|maxima)\b|\b(?:cotacao maxima|nota maxima)\b[^.;]{0,60}\b(?:ignora|atribui|concede)\b/u.test(focus);
   const contradictions=rules.contradictions.filter(([id,pattern])=>{
     if(!pattern.test(focus))return false;
     // A sentence saying "não altera Kc" must not be treated as "altera Kc".
@@ -111,11 +118,11 @@ export function inspectScientificRelations(itemId,response){
     return true;
   }).map(([id])=>id);
   const relations=rules.relations.filter(([,pattern])=>pattern.test(focus)).map(([id])=>id);
-  const hasExplanation=/(?:->|=>|→|=|\b(?:porque|pois|logo|portanto|permite|resulta|corresponde|representa|explica|devido|faz|emite|indica|favorece|altera|sem alterar|mede|medir|calcul|compar|necessari|reduz|acelera|associa|mostra|pela|atraves|usar|usaria|ajust|vem|proven|origina|transfer|complet)\w*\b)/u.test(focus);
+  const hasExplanation=/(?:->|=>|→|=|\b(?:porque|pois|logo|portanto|permite|resulta|corresponde|representa|explica|devido|faz|emite|favorece|altera|sem alterar|mede|medir|calcul|compar|necessari|reduz|acelera|associa|mostra|pela|atraves|usar|usaria|ajust|vem|proven|origina|transfer|complet)\w*\b)/u.test(focus);
   return {
-    itemId,version:"shadow-v1",status:contradictions.length?"contradiction-signals":
+    itemId,version:"shadow-v1",status:hasGradeInstruction?"instruction-attempt":contradictions.length?"contradiction-signals":
       relations.length>=2&&hasExplanation?"candidate-relations":"insufficient-evidence",
-    relations:hasExplanation?relations:[],contradictions,corrected,
+    relations:hasExplanation?relations:[],contradictions,corrected,instructionAttempt:hasGradeInstruction,
     reviewRequired:true,score:null,points:null,
     // A "candidate" must NEVER automatically become an awarded point.
     scoringAuthorized:false
