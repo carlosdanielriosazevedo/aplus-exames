@@ -31,7 +31,12 @@ test("closed grammatical answer stays deterministic; editing prompt or accepted 
   const item=itemById(PORTUGUESE_ITEMS,"PT639-FND-008");
   const answer=item.acceptedAnswers[0];
   expect(gradePortugueseResponse(item,answer)).toMatchObject({final:true,correct:true,points:item.maxPoints});
-  for(const modified of [{...item,prompt:item.prompt+" (novo contexto)"},{...item,acceptedAnswers:[...item.acceptedAnswers,"outra possibilidade"]}]){
+  for(const modified of [
+    {...item,prompt:item.prompt+" (novo contexto)"},
+    {...item,stimulus:(item.stimulus||"")+" (novo contexto que altera a resposta)"},
+    {...item,acceptedAnswers:[...item.acceptedAnswers,"outra possibilidade"]},
+    {...item,maxPoints:item.maxPoints+1}
+  ]){
     expect(isPortugueseClosedShortAnswer(modified)).toBe(false);
     expect(gradePortugueseResponse(modified,answer)).toMatchObject({final:false,points:null,humanReviewRequired:true});
   }
