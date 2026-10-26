@@ -58,7 +58,7 @@ const RULES={
       ["sensor-delay",/\b(?:atrasos?|sensores?|equipamento|temperatura|condicoes do meio)\b[^.;]{0,90}\b(?:control|estim|consider|mant)\w*|\b(?:control|estim|consider)\w*\b[^.;]{0,80}\b(?:atraso|sensor|temperatura)\b/u]
     ],
     contradictions:[
-      ["shorter-distance-less-error",/\b(?:menor|diminuir|encurtar)\b[^.;]{0,40}\bdistancia\b[^.;]{0,65}\b(?:reduz|menor|diminui)\b[^.;]{0,35}\b(?:incerteza|erro)\b/u],
+      ["shorter-distance-less-error",/\b(?:menor|diminuir|encurtar)\b[^.;]{0,40}\bdistancia\b[^.;]{0,65}\b(?:reduz|menor|diminui)\b[^.;]{0,35}\b(?:incerteza|erro)\b|\bdistancia menor\b[^.;]{0,70}\b(?:reduz|menor|diminui)\b[^.;]{0,35}\b(?:incerteza|erro)\b/u],
       ["repeat-unnecessary",/\b(?:nao|nunca|dispensa)\b[^.;]{0,28}\b(?:repetir|repeticoes|varias medicoes)\b/u]
     ]
   },
@@ -75,8 +75,8 @@ const RULES={
   },
   "FQA-R-AQ-01":{
     relations:[
-      ["equivalence-stoichiometry",/\b(?:equivalencia|estequiometr)\w*\b[^.;]{0,80}\b(?:proporcao|razao|estequiometr|quantidades)\w*|\bproporcao estequiometrica\b[^.;]{0,60}\bequivalencia\b/u],
-      ["indicator-or-ph-curve",/\b(?:indicador|curva de ph)\b[^.;]{0,72}\b(?:equivalencia|detet|identific|localiz|viragem)\w*|\b(?:equivalencia|detet|identific)\w*\b[^.;]{0,72}\b(?:indicador|curva de ph)\b/u],
+      ["equivalence-stoichiometry",/\b(?:equivalencia|estequiometr)\w*\b[^.;]{0,80}\b(?:proporcao|razao|estequiometr|quantidades)\w*|\bproporcao estequiometrica\b[^.;]{0,60}\bequivalencia\b|\bproporcao estequiometrica\b/u],
+      ["indicator-or-ph-curve",/\b(?:indicador|curva(?: de)? ph)\b[^.;]{0,72}\b(?:equivalencia|detet|identific|localiz|viragem)\w*|\b(?:equivalencia|detet\w*|identific\w*|localiz\w*|ver.se)\b[^.;]{0,72}\b(?:indicador|curva(?: de)? ph)\b/u],
       ["volume-uncertainty",/\b(?:leitura|volume|menisco|ponto final)\b[^.;]{0,70}\b(?:incerteza|erro|imprecis|afet)\w*|\b(?:incerteza|erro)\b[^.;]{0,70}\b(?:volume|menisco|ponto final)\b/u]
     ],
     contradictions:[
