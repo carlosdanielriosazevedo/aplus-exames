@@ -1,6 +1,7 @@
 import {spawnSync} from "node:child_process";
 
 const checks=[
+  ["Suite unitária completa (bloqueante)","npm",["run","test:unit"]],
   ["Isolamento de bundle por rota","npm",["run","performance:isolation-audit"]],
   ["Syntax/JSX","npm",["run","syntax:audit"]],
   ["Disciplinas do secundário","npm",["run","subjects:audit"]],
