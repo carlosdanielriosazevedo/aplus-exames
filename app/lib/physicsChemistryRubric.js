@@ -223,12 +223,13 @@ export function automaticPhysicsChemistryRubricResult(item,responseText){
   const pointMap=new Map(summary.criterionPoints.map(row=>[row.id,row]));
   const scoredCriteria=criteria.map(criterion=>({...criterion,...(pointMap.get(criterion.id)||{})}));
   const feedbackSummary=automaticFeedbackForCriteria(scoredCriteria,text);
-  const scoreExplainability=buildScoreExplainability({awardedPoints:summary.provisionalPoints,maxPoints:item.maxPoints||10,criteria:scoredCriteria,requiresReview:summary.requiresReview});
+  const requiresReview=summary.requiresReview||missingSpectralEvidence;
+  const scoreExplainability=buildScoreExplainability({awardedPoints:summary.provisionalPoints,maxPoints:item.maxPoints||10,criteria:scoredCriteria,requiresReview});
   return {
     status:"auto-assessed-provisional",final:false,correct:null,points:null,
     provisionalPoints:summary.provisionalPoints,maxPoints:item.maxPoints||10,
     gradingMode:"automatic-rubric-provisional",responseText:text,rubricCompleted:true,
-    requiresReview:summary.requiresReview,autoAssessmentConfidence:summary.confidence,criteria:scoredCriteria,feedbackSummary,scoreExplainability,
+    requiresReview,autoAssessmentConfidence:summary.confidence,criteria:scoredCriteria,feedbackSummary,scoreExplainability,
     note:"A app avaliou automaticamente a resposta científica por critérios. O resultado é provisório quando a interpretação não é totalmente determinística."
   };
 }
