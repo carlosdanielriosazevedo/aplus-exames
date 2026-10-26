@@ -165,6 +165,13 @@ function compactResult(result){
   if(result.gradingMode==="structured-provisional")return {...compact,steps:Array.isArray(result.steps)?result.steps.map(step=>({id:step.id,status:step.status,points:Number.isFinite(step.points)?step.points:null,maxPoints:Number.isFinite(step.maxPoints)?step.maxPoints:null,errorType:step.errorType||null})):[]};
   return {...compact,rubricId:result.rubricId||null,rubricCompleted:!!result.rubricCompleted,revisionCount:Number.isFinite(result.revisionCount)?result.revisionCount:0,previousResponseText:result.previousResponseText||"",revisionHistory:Array.isArray(result.revisionHistory)?result.revisionHistory.map(row=>({revision:Number.isFinite(row?.revision)?row.revision:0,responseText:String(row?.responseText||""),rubricCompleted:!!row?.rubricCompleted,rubricObservationEvidence:Array.isArray(row?.rubricObservationEvidence)?row.rubricObservationEvidence.map(observation=>({criterionId:observation.criterionId,observationId:observation.observationId,evidence:observation.evidence||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})):[]})):[],rubricEvidence:(result.criteria||[]).map(criterion=>({criterionId:criterion.id,evidence:criterion.status||"pending"})),rubricObservationEvidence:(result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,evidence:observation.status||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})))};}
 
+function isUngradedRubricResult(result){
+  return result?.automaticScoringSuspended===true||
+    result?.status==="ungraded-awaiting-validation"||
+    result?.status==="human-review-required"||
+    result?.gradingMode==="criterion-reference-ungraded";
+}
+
 function recordRubricEvidence(previous,result,completedAt){
   const observations=(result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,status:observation.status||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):[]})));
   const nextMap={...(previous.rubricEvidenceByObservation||{})};
@@ -220,10 +227,7 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
     if(!result||result.status==="unanswered")return;
     // An abstention is not a wrong answer: do not feed ungraded prose to the
     // recurring-error memory, or it could invent weaknesses without evidence.
-    const isUngraded=result.automaticScoringSuspended===true||
-      result.status==="ungraded-awaiting-validation"||
-      result.status==="human-review-required"||
-      result.gradingMode==="criterion-reference-ungraded";
+    const isUngraded=isUngradedRubricResult(result);
     if(!isUngraded)errorPatterns=recordErrorPatternEvidence(errorPatterns,item,result,completedAt);
     if(!recordsAcademicEvidence)return;
     const id=item.competencyId||`${item.domain}:general`;
@@ -252,10 +256,7 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
     // Preparing criteria is not the same as grading the student's response.
     // Never promote abstentions to reviewed competence, erase prior evidence with
     // "pending" observations or infer an incorrect answer from null points.
-    const ungraded=result.automaticScoringSuspended===true||
-      result.status==="ungraded-awaiting-validation"||
-      result.status==="human-review-required"||
-      result.gradingMode==="criterion-reference-ungraded";
+    const ungraded=isUngraded;
     const evidence=ungraded?{observed:0,needsReview:0,rubricEvidenceByObservation:previous.rubricEvidenceByObservation}:
       recordRubricEvidence(previous,result,completedAt);
     const trulyReviewed=!ungraded&&!!result.rubricCompleted;
