@@ -9,7 +9,7 @@ const RULES={
   "FQA-R-ELEM-01":{
     relations:[
       ["emission-mechanism",/\b(?:transic(?:ao|oes)|saltos?)\b[^.;]{0,90}\b(?:foto(?:es|ns?)|emit(?:e|em|ir)|radiacao|energia)\b/u],
-      ["element-specificity",/\b(?:cada elemento|diferentes elementos|elementos diferentes)\b[^.;]{0,85}\b(?:niveis|energias|espectro|padrao|riscas)\b|\b(?:espectro|padrao|riscas)\b[^.;]{0,80}\b(?:caracteristic|especific|propri|identific)\w*/u],
+      ["element-specificity",/\b(?:cada elemento|diferentes elementos|elementos diferentes)\b[^.;]{0,85}\b(?:niveis|energias|espectro|padrao|riscas)\b|\b(?:espectro|padrao|riscas)\b[^.;]{0,80}\b(?:caracteristic|especific|propri|identific)\w*|\b(?:energias?|frequencias?|fotoes)\b[^.;]{0,55}\bespecific\w*\b[^.;]{0,30}\bcada elemento\b/u],
       ["photon-frequency",/\b(?:fot(?:ao|oes|on|ons)|radiacao)\b[^.;]{0,70}\b(?:energia|frequencia|comprimento de onda)\b|\b(?:energia|frequencia)\b[^.;]{0,70}\b(?:fot(?:ao|oes|on|ons)|radiacao)\b/u]
     ],
     contradictions:[
@@ -30,7 +30,7 @@ const RULES={
   },
   "FQA-R-ENE-01":{
     relations:[
-      ["measure-variables",/\b(?:medir|mediria|medem|regist|determin)\w*\b[^.;]{0,95}\b(?:massa|altura|velocidade)\b/u],
+      ["measure-variables",/\b(?:medir|mediria|medem|regist|determin)\w*\b[^.;]{0,95}\b(?:massa|altura|velocidade)\b|\bmedir\b[^.;]{0,25}\bm\b[^.;]{0,22}\bh\b[^.;]{0,22}\bv\b[^.;]{0,40}\b(?:pontos|posicoes)\b/u],
       ["compare-initial-final",/\b(?:energia(?:s)?(?: mecanica)?|em)\b[^.;]{0,80}\b(?:inicial|final|dois pontos)\b[^.;]{0,110}\b(?:compar|calcul|determ)\w*|\b(?:compar|calcul|determ)\w*\b[^.;]{0,90}\benergia\b[^.;]{0,75}\b(?:inicial|final|dois pontos)\b/u],
       ["experimental-uncertainty",/\b(?:incerteza|erro experimental)\b[^.;]{0,80}\b(?:compar|compat|conserv|diferenc|valores)\w*|\b(?:compar|compat|conserv|diferenc)\w*\b[^.;]{0,80}\b(?:incerteza|erro experimental)\b/u]
     ],
@@ -53,7 +53,7 @@ const RULES={
   },
   "FQA-R-WAV-01":{
     relations:[
-      ["longer-distance-relative-error",/\b(?:maior|aumentar|aumentaria|mais longa)\b[^.;]{0,42}\bdistancia\b[^.;]{0,90}\b(?:incerteza|erro|precisao|tempo)\b/u],
+      ["longer-distance-relative-error",/\b(?:maior|aumentar|aumentaria|mais longa)\b[^.;]{0,42}\bdistancia\b[^.;]{0,90}\b(?:incerteza|erro|precisao|tempo|resolucao)\b|\bdistancia (?:maior|mais longa)\b[^.;]{0,90}\b(?:incerteza|erro|precisao|tempo|resolucao)\b/u],
       ["repeat-average",/\b(?:repetir|repete|repetiria|varias medicoes)\b[^.;]{0,90}\b(?:media|dispersao|resultados?|medicoes)\b/u],
       ["sensor-delay",/\b(?:atrasos?|sensores?|equipamento|temperatura|condicoes do meio)\b[^.;]{0,90}\b(?:control|estim|consider|mant)\w*|\b(?:control|estim|consider)\w*\b[^.;]{0,80}\b(?:atraso|sensor|temperatura)\b/u]
     ],
@@ -111,7 +111,7 @@ export function inspectScientificRelations(itemId,response){
     return true;
   }).map(([id])=>id);
   const relations=rules.relations.filter(([,pattern])=>pattern.test(focus)).map(([id])=>id);
-  const hasExplanation=/(?:->|=>|→|=|\b(?:porque|pois|logo|portanto|permite|resulta|corresponde|representa|explica|devido|faz|emite|indica|favorece|altera|sem alterar|mede|calcula|compar|necessari|reduz|acelera|associa|mostra|pela|atraves)\w*\b)/u.test(focus);
+  const hasExplanation=/(?:->|=>|→|=|\b(?:porque|pois|logo|portanto|permite|resulta|corresponde|representa|explica|devido|faz|emite|indica|favorece|altera|sem alterar|mede|medir|calcul|compar|necessari|reduz|acelera|associa|mostra|pela|atraves|usar|usaria|ajust|vem|proven|origina|transfer|complet)\w*\b)/u.test(focus);
   return {
     itemId,version:"shadow-v1",status:contradictions.length?"contradiction-signals":
       relations.length>=2&&hasExplanation?"candidate-relations":"insufficient-evidence",
