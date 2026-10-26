@@ -3,6 +3,7 @@ import {PORTUGUESE_DOMAINS,PORTUGUESE_RELEASE_POLICY} from "../data/portugueseFo
 import {assessEvidence,aggregateCriterionAssessment,automaticRubricSummary,automaticFeedbackForCriteria} from "./automaticEvidenceGrader.js";
 import {portugueseObservationGuidance} from "./portugueseObservationGuidance.js";
 import {buildScoreExplainability} from "./scoreExplainability.js";
+import {isPortugueseClosedShortAnswer} from "./portugueseShortAnswerPolicy.js";
 
 const WRITTEN_DOMAIN_IDS=PORTUGUESE_DOMAINS.filter(domain=>domain.writtenExam).map(domain=>domain.id);
 const RESPONSE_PRIORITY={"multiple-choice":0,"short-answer":1,"restricted-response":2,"extended-writing":3};
@@ -220,6 +221,17 @@ export function gradePortugueseResponse(item,response){
     const answer=normalizePortugueseAnswer(response);
     const accepted=(item.acceptedAnswers||[]).map(normalizePortugueseAnswer);
     const answered=answer.length>0;
+    if(!isPortugueseClosedShortAnswer(item)){
+      // Open formulations cannot be graded by exact string matching (nor by a generic rubric).
+      // Lock a submitted answer, preserve it across reload and request human review.
+      return {
+        status:answered?"human-review-required":"unanswered",final:false,correct:null,points:null,
+        provisionalPoints:null,maxPoints:item.maxPoints,gradingMode:"human-review-required",
+        responseText:String(response??"").trim(),requiresReview:answered,rubricCompleted:answered,
+        humanReviewRequired:answered,criteria:[],referenceExamples:(item.acceptedAnswers||[]).slice(0,3),
+        note:"Esta resposta admite diferentes formulações. A app não atribui nota automática; necessita de revisão."
+      };
+    }
     const correct=answered&&accepted.includes(answer);
     return {status:answered?"final":"unanswered",final:true,correct:answered?correct:null,points:answered?(correct?item.maxPoints:0):null,maxPoints:item.maxPoints,gradingMode:item.gradingMode};
   }
