@@ -17,7 +17,7 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
   await page.goto("/?dev=1");
   if(draft){
    await expect(page.locator(".sessionTop")).toBeVisible({timeout:30_000});
-   await page.getByRole("button",{name:"Guardar e continuar depois",exact:true}).click();
+   await page.getByRole("button",{name:"Guardar e sair",exact:true}).click();
   }
   await page.getByLabel("Abrir menu",{exact:true}).click();
   const read=()=>page.evaluate(subjectId=>{

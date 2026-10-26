@@ -23,7 +23,7 @@ for(const {id,item} of fixtures)for(const width of [320,360,390,430,1366,1920]){
   await page.goto('/');
   if(id!=='math-a')await page.getByRole('button',{name:'Continuar sessão',exact:true}).click();
   await expect(page.getByRole('button',{name:'Responder',exact:true})).toBeVisible();
-  await expect(page.getByRole('button',{name:/^(← Voltar|Guardar e sair|Guardar e continuar depois)$/})).toHaveCount(1);
+  await expect(page.getByRole('button',{name:/^(← Voltar|Guardar e sair|Guardar e continuar depois|Sair da sessão)$/})).toHaveCount(1);
   if(id==='math-a'){
    await page.locator('[id="practice-CRV2-10FUN-STEPS-1-equation"]').fill('3x-12=0');
    await page.locator('[id="practice-CRV2-10FUN-STEPS-1-value"]').fill('x=4');
@@ -52,6 +52,7 @@ for(const {id,item} of fixtures)for(const width of [320,360,390,430,1366,1920]){
   }
   expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
   await page.screenshot({path:`/tmp/audit-journey/${id}-${width}-feedback.png`,fullPage:true,animations:'disabled'});
+  await expect(page.getByRole('button',{name:/^(← Voltar|Guardar e sair|Guardar e continuar depois|Sair da sessão)$/})).toHaveCount(1);
   // The submitted answer remains locked; presentation must not reopen an attempt.
   if(id==='math-a'){
    await expect(page.locator('.practiceFields')).toHaveAttribute('disabled','');

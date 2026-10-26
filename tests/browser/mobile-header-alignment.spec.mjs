@@ -122,7 +122,7 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
    await page.goto("/");
    if(subjectId==="math-a"){
     await expect(page.locator(".sessionTop")).toBeVisible({timeout:30_000});
-    await page.getByRole("button",{name:"Guardar e continuar depois",exact:true}).click();
+    await page.getByRole("button",{name:"Guardar e sair",exact:true}).click();
    }
    const card=page.locator(".pausedSession").first();
    await expect(card).toBeVisible({timeout:30_000});

@@ -28,3 +28,8 @@
 .scoreMissingForFullCredit strong,.scoreMissingForFullCredit span{font-size:14px;line-height:1.6}
 .scoreMissingForFullCredit span{color:#526174}
 .scoreLossExplanation,.automaticFeedbackPanel,.automaticCriteriaDetails{overflow-wrap:anywhere}
+
+/* Guided Mathematics uses the same readable answer surface as the other subjects. */
+.practiceFields .constructedResponse textarea{width:100%;min-height:92px;padding:12px 14px;border:2px solid #cbd2dc;border-radius:12px;background:#fff;color:var(--app-navy);font:inherit;font-size:16px;line-height:1.55;resize:vertical}
+.practiceFields .constructedResponse textarea:focus-visible{outline:2px solid var(--app-orange-dark);outline-offset:2px}
+.practiceFields:disabled .constructedResponse textarea{background:#f8fafc;color:#526174;opacity:1}

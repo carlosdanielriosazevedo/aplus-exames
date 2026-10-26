@@ -34,3 +34,11 @@ Item PT639-FND-126 pede uma tese sobre reservar um período diário sem telemóv
 ## Estado
 
 Candidato em validação. Sem publicação em produção. A branch está isolada de codex/integration-next, que contém uma experiência de performance ainda não integrada. Os novos testes usam apenas fixtures locais sintéticas; não copiam dados de utilizadores. A falha de arranque de Chromium local é uma limitação do runtime; a evidência de browser será recolhida em GitHub Actions e no projeto Vercel isolado.
+
+## Continuação da validação
+
+CI 40251145482 no head 8909395: 165 browser PASS, incluindo os três percursos completos; seis falhas na asserção toBeDisabled aplicada a um fieldset (o matcher não mede esse elemento como um input). A verificação foi corrigida para exigir o atributo disabled e testar cada textarea individualmente. Mantém-se a proibição de editar respostas submetidas. Não se declara o CI inicial aprovado.
+
+As capturas também confirmaram uma segunda saída em Matemática, antes e depois da submissão. Foi removida a saída redundante no fundo de Missão/Treino/Mini-exame e explicitado Guardar e sair no StudySessionHeader, com os handlers existentes. Os testes de retoma e reset passam a utilizar essa saída única. A matriz de correção verifica uma saída antes e depois da submissão. Os campos guiados de Matemática passam a ter fonte herdada, 16 px, padding e borda coerentes, sem mudar o bloqueio ou as respostas.
+
+O achado pedagógico está na Issue #418. Probe com o motor real: tese de referência 13/13; a mesma tese acrescida de «porque isso melhora a concentração» 0/13, final=true. A apresentação nova não resolve este problema.
