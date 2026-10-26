@@ -20,6 +20,7 @@ function answered(item,value){
 function examPointsFor(item,result){
   if(!result||result.status==="unanswered")return {points:0,provisional:false,pending:false};
   if(item.responseType==="multiple-choice")return {points:result.correct?item.examPoints:0,provisional:false,pending:false};
+  if(item.responseType==="restricted-response"&&result.automaticScoringSuspended)return {points:null,provisional:true,pending:true,ungraded:true};
   if(["stepwise","restricted-response"].includes(item.responseType)){
     const raw=Number(result.provisionalPoints)||0;
     const max=Number(result.maxPoints)||1;
@@ -124,7 +125,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
     <button className="back" onClick={saveReviewAndExit}>← Guardar revisão e voltar aos exames</button>
     <p className="eyebrow">EXAME COMPLETO · PROVA 715</p>
     <h1>Revisão do Exame Completo</h1>
-    <div className="notice"><b>{"Subtotal provisório já corrigível: "+(mandatoryKnown+optionalKnown).toFixed(1)+" / 200"}</b><span>{pendingOpen?pendingOpen+" resposta(s) aberta(s) têm confiança reduzida. ":""}{hasProvisional?"As respostas abertas e problemas por etapas usam classificação provisória quando a correção não é totalmente determinística.":""}</span></div>
+    <div className="notice"><b>{"Pontos apurados nas partes corrigíveis: "+(mandatoryKnown+optionalKnown).toFixed(1)+" / 200 — não é nota final"}</b><span>{pendingOpen?pendingOpen+" resposta(s) requerem validação. ":""}{hasProvisional?"As respostas abertas sem nota não entram neste subtotal; a escolha dos itens opcionais pode mudar. Não interpretes o subtotal como classificação de exame.":""}</span></div>
     <div className="fqaExamScoreGrid">
       <div><small>Obrigatórios</small><b>{mandatoryKnown.toFixed(1)} / 160</b></div>
       <div><small>Opcionais</small><b>{optionalKnown.toFixed(1)} / 40</b><span>Contam os 4 melhores.</span></div>
@@ -133,21 +134,21 @@ export default function PhysicsChemistryExam({s,setS,go}){
     <p className="muted">Este subtotal é uma estimativa provisória sempre que inclui respostas abertas ou etapas cuja correção não é totalmente determinística.</p>
     <div className="fqaExamReviewList">{rows.map((row,index)=>{
       const result=results[index],score=scored[index],value=answers[row.id];
-      const resultLabel=row.responseType==="multiple-choice"?(result.correct?"Correto":"A rever"):result.status==="unanswered"?"Sem resposta":"Provisório";
+      const resultLabel=row.responseType==="multiple-choice"?(result.correct?"Correto":"A rever"):result.status==="unanswered"?"Sem resposta":result.automaticScoringSuspended?"Sem nota automática":"Provisório";
       return <details id={"fqa-review-"+row.id} key={row.id} className="reviewChapter"><summary><div><small>{row.examSection==="mandatory"?"OBRIGATÓRIO":"OPCIONAL"} · {row.examPoints} pts</small><b>{index+1}. {row.prompt}</b></div><span>{resultLabel}</span></summary><div className="reviewChapterBody">
         <Stimulus item={row}/>
         {row.responseType==="multiple-choice"&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p><p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p><p>{row.explanation}</p></>}
         {row.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={row} result={result}/>} 
-        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p>{Number.isFinite(result.provisionalPoints)&&<div className="autoAssessmentScore"><b>{String(result.provisionalPoints).replace(".",",")} / {result.maxPoints} pontos-base</b><small>estimativa provisória · confiança {result.autoAssessmentConfidence??"—"}%</small></div>}{result.feedbackSummary&&<div className="automaticFeedbackPanel">
+        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p>{result.automaticScoringSuspended&&<div className="notice"><b>Sem classificação automática</b><span>{result.note}</span></div>}{Number.isFinite(result.provisionalPoints)&&<div className="autoAssessmentScore"><b>{String(result.provisionalPoints).replace(".",",")} / {result.maxPoints} pontos-base</b><small>estimativa provisória · confiança {result.autoAssessmentConfidence??"—"}%</small></div>}{result.feedbackSummary&&<div className="automaticFeedbackPanel">
     {result.feedbackSummary.strengths.length>0&&<section className="automaticFeedbackGood"><b>O que fizeste bem</b>{result.feedbackSummary.strengths.map(row=><div key={row.id}><strong>✓ {row.label}</strong>{row.evidence&&<blockquote>“{row.evidence}”</blockquote>}</div>)}</section>}
     {result.feedbackSummary.gaps.length>0&&<section className="automaticFeedbackImprove"><b>O que faltou</b>{result.feedbackSummary.gaps.map(row=><div key={row.id}><strong>{row.message}</strong><span>{row.label}</span></div>)}</section>}
     {result.feedbackSummary.errorDiagnosis&&result.feedbackSummary.errorDiagnosis.code!=="correct_or_near_correct"&&<p className="automaticFeedbackNext"><b>{result.feedbackSummary.errorDiagnosis.label}:</b> {result.feedbackSummary.errorDiagnosis.message}</p>}
     {result.feedbackSummary.diagnosticCard?.preserveCorrectWork&&<p className="automaticFeedbackNext"><b>Mantém:</b> {result.feedbackSummary.diagnosticCard.whatYouKnow}</p>}
     <p className="automaticFeedbackNext"><b>Próximo passo:</b> {result.feedbackSummary.nextAction}</p>
-  </div>}<div className="automaticCriteriaList">{(result.criteria||[]).map(criterion=><div className={"automaticCriterion "+criterion.status} key={criterion.id}><div><b>{criterion.label}</b><span>{criterion.status==="observed"?"✓ Detetado":criterion.status==="partial"?"◐ Parcial":"○ Não detetado"}</span></div></div>)}</div></>}
+  </div>}<div className="automaticCriteriaList">{(result.criteria||[]).map(criterion=><div className={"automaticCriterion "+criterion.status} key={criterion.id}><div><b>{criterion.label}</b><span>{criterion.status==="observed"?"✓ Detetado":criterion.status==="partial"?"◐ Parcial":criterion.status==="pending"?"— Por verificar":"○ Não detetado"}</span></div></div>)}</div></>}
       </div></details>;
     })}</div>
-    {pendingOpen>0&&<div className="notice warning"><b>{pendingOpen} resposta(s) com confiança reduzida</b><span>A app já atribuiu uma estimativa provisória. Não é necessário o aluno preencher uma grelha de autoavaliação.</span></div>}
+    {pendingOpen>0&&<div className="notice warning"><b>{pendingOpen} resposta(s) por validar</b><span>As respostas científicas abertas não receberam pontuação automática. O subtotal acima não é a nota final do exame.</span></div>}
     <button className="primary" onClick={saveReviewAndExit}>Guardar revisão e terminar</button>
   </Shell>;
 
