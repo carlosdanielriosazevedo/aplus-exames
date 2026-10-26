@@ -2,6 +2,7 @@ import {test,expect} from "vitest";
 import {inspectScientificRelations,SHADOW_FQA_ITEM_IDS} from "../../scripts/lib/physicsChemistryShadowRelations.mjs";
 import {OPEN_RESPONSE_WAVE4_CASES} from "../../app/data/openResponseCalibrationBankWave4.js";
 import {OPEN_RESPONSE_WAVE5_CASES} from "../../app/data/openResponseCalibrationBankWave5.js";
+import {FQA_SHADOW_RESEARCH_WAVE2} from "../../app/data/fqaShadowResearchWave2.js";
 
 const negatives=[
   ["FQA-R-ELEM-01","Todos os elementos têm essencialmente o mesmo conjunto de energias emitidas.","same-emission-all-elements"],
@@ -99,5 +100,43 @@ test("v4 related but irrelevant science must not be taken for explanatory eviden
     const result=inspectScientificRelations(row.itemId,row.response);
     expect(result.status,row.itemId).toBe("insufficient-evidence");
     expect(result.score).toBeNull();
+  }
+});
+
+test("70 new developer-authored examples span ten distinct profiles for each scientific rubric",()=>{
+  expect(FQA_SHADOW_RESEARCH_WAVE2).toHaveLength(70);
+  expect(new Set(FQA_SHADOW_RESEARCH_WAVE2.map(row=>row.itemId)).size).toBe(7);
+  for(const id of SHADOW_FQA_ITEM_IDS){
+    const items=FQA_SHADOW_RESEARCH_WAVE2.filter(row=>row.itemId===id);
+    expect(items).toHaveLength(10);
+    expect(new Set(items.map(row=>row.profile)).size).toBe(10);
+  }
+});
+
+test("none of the new clearly unsafe/vague/keyword-scattered science receives candidate status",()=>{
+  const unsafe=new Set(["partial","irrelevant","contradiction","negation","keyword-soup","injection"]);
+  const rows=FQA_SHADOW_RESEARCH_WAVE2.filter(row=>unsafe.has(row.profile));
+  expect(rows).toHaveLength(42);
+  for(const row of rows){
+    const result=inspectScientificRelations(row.itemId,row.response);
+    expect(result.status,`${row.itemId} / ${row.profile}`).not.toBe("candidate-relations");
+    expect(result).toMatchObject({score:null,points:null,reviewRequired:true,scoringAuthorized:false});
+  }
+});
+
+test("new explicit scientific negations are flagged on all seven domain questions",()=>{
+  const rows=FQA_SHADOW_RESEARCH_WAVE2.filter(row=>row.profile==="negation");
+  expect(rows).toHaveLength(7);
+  for(const row of rows){
+    const x=inspectScientificRelations(row.itemId,row.response);
+    expect(x.contradictions.length,`${row.itemId}: ${row.response}`).toBeGreaterThan(0);
+  }
+});
+
+test("new deliberate prompt injections cannot promote a response to a scored or candidate state",()=>{
+  for(const row of FQA_SHADOW_RESEARCH_WAVE2.filter(row=>row.profile==="injection")){
+    const x=inspectScientificRelations(row.itemId,row.response);
+    expect(x.status).not.toBe("candidate-relations");
+    expect(x.scoringAuthorized).toBe(false);
   }
 });
