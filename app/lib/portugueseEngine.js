@@ -75,8 +75,7 @@ export function restorePortugueseRubricEvidence(item,snapshot){
   // Free short answers have no rubricId. Recover by re-grading the already-submitted
   // text through the current fail-closed policy, never by trusting a stored score.
   // A submitted response stays locked after reload, without requiring a review queue.
-  if(snapshot.status==="human-review-required"&&
-      item?.responseType==="short-answer"&&!isPortugueseClosedShortAnswer(item)){
+  if(snapshot.status==="human-review-required"&&item?.responseType==="short-answer"){
     const text=String(snapshot.responseText??"").trim();
     if(!text)return null;
     const recovered=gradePortugueseResponse(item,text);
@@ -215,6 +214,16 @@ export function normalizePortugueseAnswer(value){
     .trim();
 }
 
+// An exact-answer item may still contain a legitimate longer formulation.
+// Never infer that the extension is correct; simply avoid an unjustified zero
+// when a substantial declared answer appears with additional context.
+function mayContainClosedShortAnswerParaphrase(answer,accepted){
+  return accepted.some(candidate=>{
+    if(candidate.length<7||answer===candidate)return false;
+    return (" "+answer+" ").includes(" "+candidate+" ");
+  });
+}
+
 export function portugueseWordCount(value){
   const normalized=String(value??"").trim();
   return normalized?normalized.split(/\s+/u).filter(Boolean).length:0;
@@ -244,6 +253,17 @@ export function gradePortugueseResponse(item,response){
       };
     }
     const correct=answered&&accepted.includes(answer);
+    if(answered&&!correct&&mayContainClosedShortAnswerParaphrase(answer,accepted)){
+      // An apparently valid answer embedded in a longer explanation may
+      // contain a negation or contradiction. Abstain instead of awarding credit.
+      return {
+        status:"human-review-required",final:false,correct:null,points:null,
+        provisionalPoints:null,maxPoints:item.maxPoints,gradingMode:"human-review-required",
+        responseText:String(response??"").trim(),requiresReview:true,rubricCompleted:true,
+        humanReviewRequired:true,criteria:[],referenceExamples:(item.acceptedAnswers||[]).slice(0,3),
+        note:"Esta formulação acrescenta contexto à resposta curta de referência. Não recebe zero automático nem crédito automático; a interpretação requer validação."
+      };
+    }
     return {status:answered?"final":"unanswered",final:true,correct:answered?correct:null,points:answered?(correct?item.maxPoints:0):null,maxPoints:item.maxPoints,gradingMode:item.gradingMode};
   }
   if(["restricted-response","extended-writing"].includes(item.responseType)){
