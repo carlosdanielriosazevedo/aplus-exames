@@ -4,6 +4,7 @@ import {PHYSICS_CHEMISTRY_A_CONSTRUCTED_ITEMS} from "../../app/data/physicsChemi
 import {gradePortugueseResponse,restorePortugueseRubricEvidence} from "../../app/lib/portugueseEngine.js";
 import {gradePhysicsChemistryResponse} from "../../app/lib/physicsChemistryEngine.js";
 import {isPortugueseClosedShortAnswer,portugueseShortAnswerReviewRequired} from "../../app/lib/portugueseShortAnswerPolicy.js";
+import {advanceSubjectSession,beginSubjectSession,subjectProgressFor} from "../../app/lib/subjectProgress.js";
 
 const itemById=(list,id)=>{const item=list.find(row=>row.id===id);expect(item,`Missing item ${id}`);return item;};
 
@@ -53,6 +54,21 @@ test("submissão livre permanece bloqueada após recuperar snapshot sem rubricId
   const mutated={...item,prompt:item.prompt+" (nova versão)"};
   const conservative=restorePortugueseRubricEvidence(mutated,submitted);
   expect(conservative?.points).toBeNull();
+});
+
+test("Portuguese short answer survives full compact/persist/reload with submission still locked",()=>{
+  const item=itemById(PORTUGUESE_ITEMS,"PT639-FND-126");
+  const submitted=gradePortugueseResponse(item,"Defendo um período sem telemóveis, pois melhora a concentração.");
+  const initial=beginSubjectSession({subjectProgress:{}},{subjectId:"portuguese",kind:"mission",label:"Missão",items:[item],sessionId:"pt-recovery-418",startedAt:1000});
+  const paused=advanceSubjectSession(initial,"portuguese",{
+    sessionId:"pt-recovery-418",current:0,results:[],currentResult:submitted,
+    currentAnswer:submitted.responseText,updatedAt:2000
+  });
+  const snap=JSON.parse(JSON.stringify(subjectProgressFor(paused,"portuguese").lastPosition.currentResult));
+  expect(snap).toMatchObject({status:"human-review-required",final:false,points:null,humanReviewRequired:true,responseText:submitted.responseText});
+  expect(restorePortugueseRubricEvidence(item,snap)).toMatchObject({status:"human-review-required",humanReviewRequired:true,points:null,responseText:submitted.responseText});
+  delete snap.humanReviewRequired; // Legacy snapshots from the vulnerable build
+  expect(restorePortugueseRubricEvidence(item,snap)).toMatchObject({status:"human-review-required",humanReviewRequired:true,points:null,responseText:submitted.responseText});
 });
 
 test("all seven FQ A restricted responses suspend automatic grading even for keyword soup and injections",()=>{
