@@ -218,7 +218,13 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
   items.forEach((item,index)=>{
     const result=results[index];
     if(!result||result.status==="unanswered")return;
-    errorPatterns=recordErrorPatternEvidence(errorPatterns,item,result,completedAt);
+    // An abstention is not a wrong answer: do not feed ungraded prose to the
+    // recurring-error memory, or it could invent weaknesses without evidence.
+    const isUngraded=result.automaticScoringSuspended===true||
+      result.status==="ungraded-awaiting-validation"||
+      result.status==="human-review-required"||
+      result.gradingMode==="criterion-reference-ungraded";
+    if(!isUngraded)errorPatterns=recordErrorPatternEvidence(errorPatterns,item,result,completedAt);
     if(!recordsAcademicEvidence)return;
     const id=item.competencyId||`${item.domain}:general`;
     const previous=normalizeCompetenceRow(competence[id]);
