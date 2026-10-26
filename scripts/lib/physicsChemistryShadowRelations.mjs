@@ -118,7 +118,7 @@ export function inspectScientificRelations(itemId,response){
     return true;
   }).map(([id])=>id);
   const relations=rules.relations.filter(([,pattern])=>pattern.test(focus)).map(([id])=>id);
-  const hasExplanation=/(?:->|=>|→|=|\b(?:porque|pois|logo|portanto|permite|resulta|corresponde|representa|explica|devido|faz|emite|favorece|altera|sem alterar|mede|medir|calcul|compar|necessari|reduz|acelera|associa|mostra|pela|atraves|usar|usaria|ajust|vem|proven|origina|transfer|complet)\w*\b)/u.test(focus);
+  const hasExplanation=/(?:->|=>|→|=|\b(?:porque|pois|logo|portanto|permite|resulta|corresponde|representa|explica|devido|faz|emite|favorece|altera|sem alterar|mede|medir|calcul|compar|necessari|reduz|acelera|associa|mostra|pela|atraves|usar|usaria|ajust|vem|proven|origina|transfer|complet|ocorre|detetada|detetado)\w*\b)/u.test(focus);
   return {
     itemId,version:"shadow-v1",status:hasGradeInstruction?"instruction-attempt":contradictions.length?"contradiction-signals":
       relations.length>=2&&hasExplanation?"candidate-relations":"insufficient-evidence",
