@@ -127,6 +127,20 @@ function physicsChemistryKeywordSoupLike(text){
   return !finiteRelation.test(normalized);
 }
 
+// Guard the spectral-emission rubric against generic self-description being mistaken
+// for scientific explanation. Other FQ A rubrics retain their existing calibration.
+function lacksSpectralScientificEvidence(item,normalizedText){
+  if(item?.id!=="FQA-R-ELEM-01")return false;
+  const scientificAnchors=[
+    /\\b(?:transicao|transicoes|saltos?\\s+eletronicos?)\\b/u,
+    /\\b(?:niveis?\\s+(?:de\\s+)?energia|eletron(?:es|icos?|icas?))\\b/u,
+    /\\b(?:riscas?|linhas?\\s+espectrais?|espectros?)\\b/u,
+    /\\b(?:fotoes?|fotons?|radiacao|frequencias?|comprimentos?\\s+de\\s+onda)\\b/u,
+    /\\b(?:padrao|assinatura|caracteristic[oa]s?)\\b/u
+  ];
+  return scientificAnchors.filter(pattern=>pattern.test(normalizedText)).length<2;
+}
+
 function activeUniversalPh7Misconception(item,normalizedText){
   if(item?.id!=="FQA-R-AQ-01")return false;
   const phSeven="\\bph\\s*(?:(?:e|eh|igual\\s+a)\\s*)?7\\b";
@@ -149,6 +163,7 @@ export function automaticPhysicsChemistryRubricResult(item,responseText){
   };
   const normalizedResponse=text.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("pt-PT");
   const keywordSoupLike=physicsChemistryKeywordSoupLike(text);
+  const missingSpectralEvidence=lacksSpectralScientificEvidence(item,normalizedResponse);
   const activeUniversalPh7=activeUniversalPh7Misconception(item,normalizedResponse);
   const criteria=physicsChemistryRubricFor(item).map((criterion,criterionIndex)=>{
     const criterionContradiction=activeUniversalPh7&&criterion.id==="equivalence";
@@ -161,6 +176,10 @@ export function automaticPhysicsChemistryRubricResult(item,responseText){
       const unsafe=contradictionDetected||explicitAmbiguity||!!assessed.manipulationDetected||keywordSoupLike;
       const directDetection=!unsafe&&observation.id==="detection-indicator"&&(/\bindicador\b/u.test(normalizedText)||/curva\s+de\s+ph/u.test(normalizedText));
       let resolved=directDetection?{...assessed,status:"observed",scoreRatio:1,confidence:Math.max(.88,assessed.confidence||0)}:assessed;
+      // No credit for statements that contain no relevant scientific concepts.
+      if(missingSpectralEvidence){
+        resolved={...resolved,status:"not-observed",scoreRatio:0,semanticScore:0,confidence:.95,evidence:""};
+      }
       if(keywordSoupLike){
         resolved={
           ...resolved,
