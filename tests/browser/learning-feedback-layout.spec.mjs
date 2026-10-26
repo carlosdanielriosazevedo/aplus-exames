@@ -53,7 +53,10 @@ for(const {id,item} of fixtures)for(const width of [320,360,390,430,1366,1920]){
   expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
   await page.screenshot({path:`/tmp/audit-journey/${id}-${width}-feedback.png`,fullPage:true,animations:'disabled'});
   // The submitted answer remains locked; presentation must not reopen an attempt.
-  if(id==='math-a')await expect(page.locator('.practiceFields')).toBeDisabled();
+  if(id==='math-a'){
+   await expect(page.locator('.practiceFields')).toHaveAttribute('disabled','');
+   for(const field of await page.locator('.practiceFields textarea').all())await expect(field).toBeDisabled();
+  }
   else await expect(page.locator('textarea')).toBeDisabled();
  });
 }
