@@ -10,10 +10,10 @@ import {gradeResponse as gradeMathResponse} from "../app/lib/constructedResponse
 function ratio(result){
   if(Number.isFinite(result?.provisionalPoints)&&Number(result?.maxPoints)>0)return result.provisionalPoints/result.maxPoints;
   if(Number.isFinite(result?.points)&&Number(result?.maxPoints)>0)return result.points/result.maxPoints;
-  return 0;
+  return null; // Not graded is NOT a zero-percent grade.
 }
-function pct(value){return Math.round(value*1000)/10+"%"}
-function mean(values){return values.length?values.reduce((sum,value)=>sum+value,0)/values.length:0}
+function pct(value){return Number.isFinite(value)?Math.round(value*1000)/10+"%":"SEM NOTA"}
+function mean(values){const scored=values.filter(Number.isFinite);return scored.length?scored.reduce((sum,value)=>sum+value,0)/scored.length:null}
 
 const openRows=OPEN_RESPONSE_WAVE4_CASES.map(row=>{
   const item=row.subject==="portuguese"?portugueseCalibrationItemById(row.itemId):physicsChemistryConstructedItemById(row.itemId);
@@ -30,6 +30,12 @@ const mathRows=MATH_RESPONSE_WAVE4_CASES.map(row=>{
 
 const failures=[];
 for(const row of [...openRows,...mathRows]){
+  // An abstention cannot satisfy the calibration threshold of a correct answer.
+  // Keep the gate red rather than pretending the student received zero points.
+  if(!Number.isFinite(row.score)){
+    failures.push(`${row.subject||"mathematics"}/${row.itemId}/${row.profile}: SEM NOTA — calibração pedagógica indisponível`);
+    continue;
+  }
   if(Number.isFinite(row.minScore)&&row.score<row.minScore-.001)failures.push(`${row.subject||"mathematics"}/${row.itemId}/${row.profile}: ${pct(row.score)} < min ${pct(row.minScore)}`);
   if(Number.isFinite(row.maxScore)&&row.score>row.maxScore+.001)failures.push(`${row.subject||"mathematics"}/${row.itemId}/${row.profile}: ${pct(row.score)} > max ${pct(row.maxScore)}`);
   if(row.requiresReview===true&&row.result.requiresReview!==true)failures.push(`${row.subject}/${row.itemId}/${row.profile}: contradictory answer should require review`);
@@ -63,7 +69,7 @@ const summary={
 };
 
 if(summary.relatedNonAnswerMean>.5)failures.push("related-but-nonanswer mean above 50%");
-if(summary.hedgedCorrectMean<.2)failures.push("hedged-correct mean below 20%");
+if(!Number.isFinite(summary.hedgedCorrectMean)||summary.hedgedCorrectMean<.2)failures.push("hedged-correct mean unavailable or below 20%");
 if(summary.partialThenFalseMean>.62)failures.push("partial-then-false mean above 62%");
 if(summary.mathLocalSlipMean<.2||summary.mathLocalSlipMean>.85)failures.push("Mathematics local-slip mean outside 20%-85%");
 if(summary.mathFalseConclusionMean>.85)failures.push("Mathematics false-conclusion mean above 85%");
