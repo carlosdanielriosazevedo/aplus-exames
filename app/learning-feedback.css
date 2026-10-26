@@ -1,0 +1,30 @@
+/* Reading hierarchy for the existing correction content. No grading/state rules. */
+.automaticFeedbackPanel section>b{font-size:15px;line-height:1.4}
+.automaticFeedbackPanel strong,.automaticFeedbackPanel span,.automaticFeedbackPanel blockquote,
+.automaticFeedbackPanel .automaticFeedbackNext{font-size:14px;line-height:1.6}
+.automaticFeedbackPanel span{color:#526174}
+.automaticFeedbackPanel blockquote{color:#445067}
+.automaticFeedbackPanel .automaticFeedbackNext{color:#35465b}
+.automaticCriteriaDetails>summary,.scoreExplainDetails>summary{
+  display:flex;align-items:center;gap:8px;min-height:44px;padding:10px 0;
+  color:var(--app-navy);font-size:14px;font-weight:800;line-height:1.5;cursor:pointer;
+}
+.automaticCriteriaDetails>summary::before,.scoreExplainDetails>summary::before{content:'+';font-size:20px;line-height:1}
+.automaticCriteriaDetails[open]>summary::before,.scoreExplainDetails[open]>summary::before{content:'−'}
+.automaticCriteriaDetails>summary:focus-visible,.scoreExplainDetails>summary:focus-visible{outline:2px solid var(--app-orange-dark);outline-offset:3px;border-radius:4px}
+.scoreLossExplanation{min-width:0;margin:12px 0;color:var(--app-navy);font-size:14px;line-height:1.6}
+.scoreExplainSummary:empty{display:none}
+.scoreExplainSummary>b,.scoreExplainSummary>span{display:block}
+.scoreExplainSummary>span{margin-top:6px;color:#7b3e14}
+.scoreBreakdown{display:grid;gap:0;border-top:1px solid #dce3eb}
+.scoreBreakdownRow{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:12px;padding:12px 0;border-bottom:1px solid #dce3eb}
+.scoreBreakdownRow>div{min-width:0}
+.scoreBreakdownRow b,.scoreBreakdownRow small{display:block;font-size:14px;line-height:1.6}
+.scoreBreakdownRow small{margin-top:4px;color:#526174}
+.scoreBreakdownRow>strong{white-space:nowrap;font-size:14px;font-variant-numeric:tabular-nums}
+.scoreMissingForFullCredit{margin-top:16px}
+.scoreMissingForFullCredit>b{display:block;margin-bottom:8px;font-size:14px}
+.scoreMissingForFullCredit>div{display:grid;gap:4px;margin-top:10px}
+.scoreMissingForFullCredit strong,.scoreMissingForFullCredit span{font-size:14px;line-height:1.6}
+.scoreMissingForFullCredit span{color:#526174}
+.scoreLossExplanation,.automaticFeedbackPanel,.automaticCriteriaDetails{overflow-wrap:anywhere}

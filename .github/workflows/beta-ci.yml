@@ -61,6 +61,7 @@ jobs:
             /tmp/audit-visual
             /tmp/audit-desktop
             /tmp/audit-ranking
+            /tmp/audit-journey
           retention-days: 3
           if-no-files-found: ignore
 

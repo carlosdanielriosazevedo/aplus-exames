@@ -113,7 +113,7 @@ function childText(children){
   });
   return text;
 }
-function hasBack(children){let found=false;walk(children,child=>{if(child.type===Back)found=true});return found}
+function hasBack(children){let found=false;walk(children,child=>{if(child.type===Back||child.type===StudySessionHeader)found=true});return found}
 function currentScreen(){return typeof window!=="undefined"?window.history.state?.approvaScreen:null}
 function retryApp(){if(typeof window!=="undefined")window.location.reload()}
 function goSafeStart(){

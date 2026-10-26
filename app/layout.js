@@ -7,6 +7,7 @@ import './desktop-shell-polish.css';
 import './diagnostic-option-contrast.css';
 import './screen-text-contrast.css';
 import './ranking-header.css';
+import './learning-feedback.css';
 import ClientRuntimeReporter from './components/ClientRuntimeReporter';
 import StorageDurabilityNotice from './components/StorageDurabilityNotice';
 
