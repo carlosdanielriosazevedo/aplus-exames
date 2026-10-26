@@ -52,7 +52,7 @@ const RULES={
     contradictions:[
       ["acceleration-not-slope",/\baceleracao\b[^.;]{0,35}\bnao\b[^.;]{0,25}\bdeclive\b|\bdeclive\b[^.;]{0,35}\bnao\b[^.;]{0,35}\baceleracao\b/u],
       ["slope-never-acceleration",/\bdeclive\b[^.;]{0,45}\b(?:nao|nunca)\b[^.;]{0,44}\baceleracao\b/u],
-      ["area-always-distance",/\barea(?: algebrica)?\b[^.;]{0,45}\b(?:representa|da|fornece|corresponde)\b[^.;]{0,35}\bdistancia(?: total)?\b|\barea\b[^.;]{0,40}\bdistancia total\b/u]
+      ["area-always-distance",/\barea(?: algebrica)?\b[^.;]{0,45}\b(?:representa|da|fornece|corresponde)\b(?![^.;]{0,55}\bdeslocamento\b)[^.;]{0,35}\bdistancia(?: total)?\b|\barea\b[^.;]{0,40}\bdistancia total\b/u]
     ]
   },
   "FQA-R-WAV-01":{
