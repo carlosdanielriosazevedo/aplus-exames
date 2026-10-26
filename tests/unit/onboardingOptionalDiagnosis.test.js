@@ -45,7 +45,7 @@ test("onboarding cannot advance with missing recent grade",()=>{
   assert.match(setup,/p\.recentGrade===""/);
 });
 
-test("three onboarding steps keep Continue disabled for missing required answers",()=>{
+test("required selection and profile guards remain; Portuguese allows previous-year scope",()=>{
  const selection=src("app/clientApp.js");
  assert.match(selection,/disabled=\{!selected\.length\}/);
  const setup=src("app/components/SetupScreens.js");
@@ -55,17 +55,21 @@ test("three onboarding steps keep Continue disabled for missing required answers
  assert.match(setup,/disabled=\{curriculumIncomplete\}/);
  const pt=src("app/components/PortugueseSubject.js");
  const fqa=src("app/components/PhysicsChemistrySubject.js");
- for(const source of [pt,fqa]){
-   assert.match(source,/disabled=\{view==="curriculumOnboard"&&currentYear!=="10.º"&&scopeDraft\.length===0\}/);
- }
+ assert.match(fqa,/disabled=\{view==="curriculumOnboard"&&currentYear!=="10.º"&&scopeDraft\.length===0\}/);
+ // Portuguese permits an empty current-year scope; UI tests assert that every
+ // resulting diagnostic question is from a previous year (11th and 12th).
+ assert.doesNotMatch(pt,/disabled=\{view==="curriculumOnboard"/);
+ assert.doesNotMatch(pt,/if\(view==="curriculumOnboard"&&currentYear!=="10.º"&&scopeDraft\.length===0\)return/);
+ assert.match(pt,/allowedYears\.includes\(item\.year\)&&portugueseItemInScope\(item,currentYear,taughtUnitIds\)/);
 });
 
 test("10th-year student may finish with zero taught topics",()=>{
  const setup=src("app/components/SetupScreens.js");
  assert.match(setup,/s\.profile\?\.schoolYear!=="10.º"/);
- for(const path of ["app/components/PortugueseSubject.js","app/components/PhysicsChemistrySubject.js"]){
-  assert.match(src(path),/currentYear!=="10.º"&&scopeDraft\.length===0/,path);
- }
+ assert.match(src("app/components/PhysicsChemistrySubject.js"),/currentYear!=="10.º"&&scopeDraft\.length===0/);
+ const pt=src("app/components/PortugueseSubject.js");
+ assert.match(pt,/currentYear==="10.º"\?"No 10.º ano, o diagnóstico e as missões ficam indisponíveis/);
+ assert.match(pt,/!progress\.diagnosticDone&&!scopedCoverage\.diagnosticReady/);
 });
 
 test("main student header includes ellipsis fallback on non-Aprender tabs",()=>{
