@@ -43,6 +43,25 @@ test("closed grammatical answer stays deterministic; editing prompt or accepted 
   }
 });
 
+test("closed answer with additional language or negation is never given automatic zero or unjustified credit",()=>{
+  const item=itemById(PORTUGUESE_ITEMS,"PT639-FND-008");
+  for(const response of ["É oração completiva, porque completa o sentido do verbo.",
+                         "Não é oração completiva, apesar de o parecer."]){
+    const result=gradePortugueseResponse(item,response);
+    expect(result).toMatchObject({
+      status:"human-review-required",final:false,points:null,correct:null,
+      requiresReview:true,humanReviewRequired:true,responseText:response
+    });
+    expect(restorePortugueseRubricEvidence(item,JSON.parse(JSON.stringify(result))))
+      .toMatchObject({humanReviewRequired:true,points:null,responseText:response});
+  }
+  // An unrelated, unequivocally wrong closed answer remains deterministically wrong.
+  expect(gradePortugueseResponse(item,"oração subordinada adjetiva relativa"))
+    .toMatchObject({status:"final",final:true,points:0,correct:false});
+  expect(gradePortugueseResponse(item,"Oração completiva."))
+    .toMatchObject({status:"final",final:true,points:item.maxPoints,correct:true});
+});
+
 test("submissão livre permanece bloqueada após recuperar snapshot sem rubricId",()=>{
   const item=itemById(PORTUGUESE_ITEMS,"PT639-FND-126");
   const response="As escolas devem reservar um período sem telemóveis porque permite maior concentração.";
