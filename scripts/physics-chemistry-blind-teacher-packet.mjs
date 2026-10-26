@@ -6,8 +6,9 @@ import {physicsChemistryConstructedItemById} from "../app/data/physicsChemistryC
 // A synthetic teaching pack (15 responses/item) including developer-authored examples. No expected ratings,
 // development labels, confidence or shadow flags are visible to the reviewer.
 // This is NOT an independent holdout, even though reviewers receive no profiles/scores.
-const inputs=[...OPEN_RESPONSE_WAVE4_CASES,...OPEN_RESPONSE_WAVE5_CASES,...FQA_SHADOW_RESEARCH_WAVE2]
-  .filter(row=>row.subject==="physics-chemistry-a");
+const inputs=[...OPEN_RESPONSE_WAVE4_CASES,...OPEN_RESPONSE_WAVE5_CASES]
+  .filter(row=>row.subject==="physics-chemistry-a")
+  .concat(FQA_SHADOW_RESEARCH_WAVE2);
 
 // Stable, documented shuffle to avoid presenting all mistakes together.
 // Not secret randomness and not an audit holdout against the developer.
