@@ -71,7 +71,18 @@ export function rubricObservationEvidenceSnapshot(result){
 }
 
 export function restorePortugueseRubricEvidence(item,snapshot){
-  if(!snapshot||snapshot.rubricId!==rubricIdFor(item))return null;
+  if(!snapshot)return null;
+  // Free short answers have no rubricId. Recover by re-grading the already-submitted
+  // text through the current fail-closed policy, never by trusting a stored score.
+  // A submitted response stays locked after reload, without requiring a review queue.
+  if(snapshot.status==="human-review-required"&&snapshot.humanReviewRequired===true&&
+      item?.responseType==="short-answer"&&!isPortugueseClosedShortAnswer(item)){
+    const text=String(snapshot.responseText??"").trim();
+    if(!text)return null;
+    const recovered=gradePortugueseResponse(item,text);
+    return recovered.humanReviewRequired?recovered:null;
+  }
+  if(snapshot.rubricId!==rubricIdFor(item))return null;
   const responseText=snapshot.responseText||"resposta submetida";
   let result=gradePortugueseResponse(item,responseText);
   if(!result.final){
