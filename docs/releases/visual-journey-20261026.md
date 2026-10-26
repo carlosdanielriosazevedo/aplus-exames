@@ -46,3 +46,7 @@ O achado pedagógico está na Issue #418. Probe com o motor real: tese de refer�
 ## Bloqueio de configuração também corrigido
 
 No percurso manual, um perfil de 12.º ano sem matéria atual assinalada mostrava «Podes continuar a preparar-te com a matéria dos anos anteriores», mas o botão Continuar estava desativado. O guard de curriculumOnboard bloqueava precisamente 11.º/12.º sem seleção. Foi removido esse guard de navegação, mantendo intacta a seleção de scopedItems que exclui o ano atual sem matéria dada. Dois testes UI cobrem 11.º e 12.º, configuração vazia, retoma e diagnóstico construído exclusivamente com anos anteriores. O 10.º mantém a política existente de disponibilidade do diagnóstico; não se alteraram os motores.
+
+## Confirmação explícita da saída nos testes
+
+A repetição do CI 40319713867 falhou nos quatro casos de pausa de Matemática: o botão canónico StudySessionHeader abre a confirmação de segurança existente, que o Playwright dispensa por omissão. A sessão não saía, por isso o cartão de retoma não aparecia. Os testes de pausa/reset passam a esperar o diálogo confirm, verificar a mensagem de conservação e aceitar explicitamente antes de exigir a retoma e preservação. Não se removeu a confirmação nem se relaxaram os testes de dados; o CI final é repetido no novo head.

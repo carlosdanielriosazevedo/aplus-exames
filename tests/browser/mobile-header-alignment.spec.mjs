@@ -122,7 +122,12 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
    await page.goto("/");
    if(subjectId==="math-a"){
     await expect(page.locator(".sessionTop")).toBeVisible({timeout:30_000});
-    await page.getByRole("button",{name:"Guardar e sair",exact:true}).click();
+    const exitDialog=page.waitForEvent("dialog");
+    const exitClick=page.getByRole("button",{name:"Guardar e sair",exact:true}).click();
+    const dialog=await exitDialog;
+    expect(dialog.type()).toBe("confirm");
+    expect(dialog.message()).toContain("O progresso já registado fica guardado.");
+    await dialog.accept();await exitClick;
    }
    const card=page.locator(".pausedSession").first();
    await expect(card).toBeVisible({timeout:30_000});
