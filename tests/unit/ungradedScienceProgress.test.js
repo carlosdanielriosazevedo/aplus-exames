@@ -52,3 +52,21 @@ test("resumed ungraded response preserves its safety marker without assigning a 
   const resumed=subjectProgressFor(saved,"physics-chemistry-a").lastPosition;
   expect(resumed.currentResult).toMatchObject({final:false,points:null,provisionalPoints:null,automaticScoringSuspended:true,requiresReview:true});
 });
+
+test("ungraded scientific answers never contribute alleged recurring errors",()=>{
+  const result=gradePhysicsChemistryResponse(item,"A aceleração não corresponde ao declive.");
+  const before=globalThis.__aplusRecordErrorPatternEvidence;
+  try{
+    globalThis.__aplusRecordErrorPatternEvidence=()=>{
+      throw new Error("An ungraded answer must not feed the error classifier");
+    };
+    const finished=recordSubjectSession({subjectProgress:{},xp:0},{
+      subjectId:"physics-chemistry-a",kind:"mini_exam",label:"teste",
+      items:[item],results:[result],sessionId:"no-fake-errors",completedAt:1750000000090
+    });
+    expect(subjectProgressFor(finished,"physics-chemistry-a").errorPatterns).toEqual({});
+  }finally{
+    if(before===undefined)delete globalThis.__aplusRecordErrorPatternEvidence;
+    else globalThis.__aplusRecordErrorPatternEvidence=before;
+  }
+});
