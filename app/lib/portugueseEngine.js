@@ -75,7 +75,7 @@ export function restorePortugueseRubricEvidence(item,snapshot){
   // Free short answers have no rubricId. Recover by re-grading the already-submitted
   // text through the current fail-closed policy, never by trusting a stored score.
   // A submitted response stays locked after reload, without requiring a review queue.
-  if(snapshot.status==="human-review-required"&&snapshot.humanReviewRequired===true&&
+  if(snapshot.status==="human-review-required"&&
       item?.responseType==="short-answer"&&!isPortugueseClosedShortAnswer(item)){
     const text=String(snapshot.responseText??"").trim();
     if(!text)return null;
