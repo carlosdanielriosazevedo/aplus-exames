@@ -80,7 +80,7 @@ const RULES={
       ["volume-uncertainty",/\b(?:leitura|volume|menisco|ponto final)\b[^.;]{0,70}\b(?:incerteza|erro|imprecis|afet)\w*|\b(?:incerteza|erro)\b[^.;]{0,70}\b(?:volume|menisco|ponto final)\b/u]
     ],
     contradictions:[
-      ["ph-seven-universal",/\bph\b[^.;]{0,12}\b7\b[^.;]{0,50}\b(?:sempre|necessariamente|obrigatoriamente)\b|\b(?:sempre|necessariamente|obrigatoriamente)\b[^.;]{0,65}\bph\b[^.;]{0,12}\b7\b/u],
+      ["ph-seven-universal",/\bph\b[^.;]{0,50}\b(?:sempre|necessariamente|obrigatoriamente)\b[^.;]{0,16}\b7\b|\bph\b[^.;]{0,14}\b7\b[^.;]{0,45}\b(?:sempre|necessariamente|obrigatoriamente)\b|\b(?:sempre|necessariamente|obrigatoriamente)\b[^.;]{0,65}\bph\b[^.;]{0,16}\b7\b/u],
       ["indicator-no-use",/\b(?:indicador|curva de ph)\b[^.;]{0,35}\b(?:nao serve|inutil|nunca se usa)\b/u]
     ]
   }
@@ -102,7 +102,14 @@ export function inspectScientificRelations(itemId,response){
     itemId,version:"shadow-v1",reviewRequired:true,score:null,
     status:"unsupported-item",relations:[],contradictions:[],corrected:false
   };
-  const contradictions=rules.contradictions.filter(([,pattern])=>pattern.test(focus)).map(([id])=>id);
+  const contradictions=rules.contradictions.filter(([id,pattern])=>{
+    if(!pattern.test(focus))return false;
+    // A sentence saying "não altera Kc" must not be treated as "altera Kc".
+    if(id==="catalyst-changes-kc"&&/\b(?:nao|nem|sem)\s+(?:se\s+)?(?:altera|muda|modifica|aumenta|diminui)\b[^.;]{0,25}\bkc\b/u.test(focus)
+      &&!/\b(?:aumenta|diminui)\b[^.;]{0,20}\bkc\b/u.test(focus))return false;
+    if(id==="ph-seven-universal"&&/\b(?:nao|nem)\b[^.;]{0,26}\b(?:sempre|necessariamente)\b[^.;]{0,25}\b(?:ph|7)\b/u.test(focus))return false;
+    return true;
+  }).map(([id])=>id);
   const relations=rules.relations.filter(([,pattern])=>pattern.test(focus)).map(([id])=>id);
   const hasExplanation=/(?:->|=>|→|=|\b(?:porque|pois|logo|portanto|permite|resulta|corresponde|representa|explica|devido|faz|emite|indica|favorece|altera|sem alterar|mede|calcula|compar|necessari|reduz|acelera|associa|mostra|pela|atraves)\w*\b)/u.test(focus);
   return {
