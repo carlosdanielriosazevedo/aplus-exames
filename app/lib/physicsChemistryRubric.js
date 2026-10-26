@@ -132,11 +132,11 @@ function physicsChemistryKeywordSoupLike(text){
 function lacksSpectralScientificEvidence(item,normalizedText){
   if(item?.id!=="FQA-R-ELEM-01")return false;
   const scientificAnchors=[
-    /\\b(?:transicao|transicoes|saltos?\\s+eletronicos?)\\b/u,
-    /\\b(?:niveis?\\s+(?:de\\s+)?energia|eletron(?:es|icos?|icas?))\\b/u,
-    /\\b(?:riscas?|linhas?\\s+espectrais?|espectros?)\\b/u,
-    /\\b(?:fotoes?|fotons?|radiacao|frequencias?|comprimentos?\\s+de\\s+onda)\\b/u,
-    /\\b(?:padrao|assinatura|caracteristic[oa]s?)\\b/u
+    /\b(?:transicao|transicoes|saltos?\s+eletronicos?)\b/u,
+    /\b(?:niveis?\s+(?:de\s+)?energia|eletron(?:es|icos?|icas?))\b/u,
+    /\b(?:riscas?|linhas?\s+espectrais?|espectros?)\b/u,
+    /\b(?:fotoes?|fotons?|radiacao|frequencias?|comprimentos?\s+de\s+onda)\b/u,
+    /\b(?:padrao|assinatura|caracteristic[oa]s?)\b/u
   ];
   return scientificAnchors.filter(pattern=>pattern.test(normalizedText)).length<2;
 }
