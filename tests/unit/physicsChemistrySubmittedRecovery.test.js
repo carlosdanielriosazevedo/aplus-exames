@@ -2,6 +2,7 @@ import {test,expect} from "vitest";
 import {PHYSICS_CHEMISTRY_A_CONSTRUCTED_ITEMS} from "../../app/data/physicsChemistryConstructed.js";
 import {restorePhysicsChemistrySubmittedResponse} from "../../app/lib/physicsChemistrySubmittedRecovery.js";
 import {gradePhysicsChemistryResponse} from "../../app/lib/physicsChemistryEngine.js";
+import {beginSubjectSession,advanceSubjectSession,subjectProgressFor} from "../../app/lib/subjectProgress.js";
 
 const item=PHYSICS_CHEMISTRY_A_CONSTRUCTED_ITEMS.find(row=>row.id==="FQA-R-ENE-01");
 if(!item)throw Error("Missing physics chemistry fixture");
@@ -58,4 +59,29 @@ test("not-submitted and non-open items do not receive fabricated review markers"
   const choice={responseType:"multiple-choice"};
   const original={status:"final",final:true,points:10};
   expect(restorePhysicsChemistrySubmittedResponse(choice,original)).toBe(original);
+});
+
+test("a persisted pre-migration 9.2/12 assessment becomes ungraded after full session serialization",()=>{
+  const text="A energia conserva-se sempre, basta medir massa e altura.";
+  const old={status:"auto-assessed-provisional",final:false,correct:true,
+    responseText:text,points:9.2,provisionalPoints:9.2,requiresReview:false,
+    gradingMode:"automatic-rubric-provisional",maxPoints:12};
+  const begun=beginSubjectSession({subjectProgress:{}},{
+    subjectId:"physics-chemistry-a",kind:"mission",label:"Missão",
+    items:[item],sessionId:"old-fqa-unsafe",startedAt:1
+  });
+  const paused=advanceSubjectSession(begun,"physics-chemistry-a",{
+    sessionId:"old-fqa-unsafe",current:0,results:[old],currentResult:old,
+    currentAnswer:text,updatedAt:2
+  });
+  const stored=JSON.parse(JSON.stringify(subjectProgressFor(paused,"physics-chemistry-a").lastPosition));
+  expect(stored.currentResult.provisionalPoints).toBe(9.2); // old stored snapshot, not trusted
+  const result=restorePhysicsChemistrySubmittedResponse(item,stored.currentResult,stored.currentAnswer);
+  const previouslyGraded=stored.results.map(record=>restorePhysicsChemistrySubmittedResponse(item,record));
+  for(const restored of [result,...previouslyGraded]){
+    expect(restored).toMatchObject({
+      status:"ungraded-awaiting-validation",points:null,provisionalPoints:null,
+      requiresReview:true,automaticScoringSuspended:true,responseText:text
+    });
+  }
 });
