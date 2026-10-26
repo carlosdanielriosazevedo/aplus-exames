@@ -16,6 +16,7 @@ import {missionCompletedToday} from "../lib/engagement";
 import {loadPhysicsChemistryExamDraft,physicsChemistryDraftAgeLabel} from "../lib/physicsChemistryExamDraft";
 import {answerOptionState} from "../lib/feedbackCopy";
 import ScoreLossExplanation from "./ScoreLossExplanation";
+import {restorePhysicsChemistrySubmittedResponse} from "../lib/physicsChemistrySubmittedRecovery";
 
 const SUBJECT_ID="physics-chemistry-a";
 const SCHOOL_YEARS=["10.º","11.º"];
@@ -188,7 +189,16 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       return;
     }
     setSession({sessionId:saved.sessionId,kind:saved.kind,label:saved.label,domain:saved.domain,items,current:Math.min(saved.current,items.length-1)});
-    setResults(saved.results||[]);setAnswer(saved.currentAnswer??null);setFeedback(saved.currentResult||null);
+    // Rebuild safety state for previously submitted scientific answers. Do not
+    // resurrect old provisional grades (including in prior session results).
+    const recoveredResults=(saved.results||[]).map((result,index)=>
+      restorePhysicsChemistrySubmittedResponse(items[index],result)
+    );
+    const recoveredFeedback=restorePhysicsChemistrySubmittedResponse(items[Math.min(saved.current,items.length-1)],
+      saved.currentResult,saved.currentAnswer);
+    setResults(recoveredResults);
+    setAnswer(recoveredFeedback?.responseText??saved.currentAnswer??null);
+    setFeedback(recoveredFeedback);
   }
 
   useEffect(()=>{
