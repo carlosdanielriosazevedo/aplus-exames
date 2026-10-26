@@ -79,3 +79,25 @@ test("explicit correction of a wrong statement differs from repeating the wrong 
   expect(amended.contradictions).not.toContain("catalyst-changes-kc");
   expect(amended.scoringAuthorized).toBe(false);
 });
+
+test("v4 adversarial science baseline: seven false scientific conclusions signal contradictions",()=>{
+  const rows=OPEN_RESPONSE_WAVE4_CASES.filter(row=>
+    row.subject==="physics-chemistry-a"&&row.profile==="partial-then-false");
+  expect(rows).toHaveLength(7);
+  for(const row of rows){
+    const result=inspectScientificRelations(row.itemId,row.response);
+    expect(result.contradictions.length,JSON.stringify({id:row.itemId,result})).toBeGreaterThan(0);
+    expect(result).toMatchObject({status:"contradiction-signals",scoringAuthorized:false,score:null});
+  }
+});
+
+test("v4 related but irrelevant science must not be taken for explanatory evidence",()=>{
+  const rows=OPEN_RESPONSE_WAVE4_CASES.filter(row=>
+    row.subject==="physics-chemistry-a"&&row.profile==="related-nonanswer");
+  expect(rows).toHaveLength(7);
+  for(const row of rows){
+    const result=inspectScientificRelations(row.itemId,row.response);
+    expect(result.status,row.itemId).toBe("insufficient-evidence");
+    expect(result.score).toBeNull();
+  }
+});
