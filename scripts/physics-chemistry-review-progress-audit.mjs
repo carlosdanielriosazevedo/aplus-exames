@@ -5,6 +5,7 @@ const mini=readFileSync(new URL("../app/components/PhysicsChemistryMiniExam.js",
 const full=readFileSync(new URL("../app/components/PhysicsChemistryExam.js",import.meta.url),"utf8");
 const draft=readFileSync(new URL("../app/lib/physicsChemistryExamDraft.js",import.meta.url),"utf8");
 const subject=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
+const safeRestore=readFileSync(new URL("../app/lib/physicsChemistrySubmittedRecovery.js",import.meta.url),"utf8");
 
 assert.match(mini,/answeredCount/u,"Mini-exame: deve mostrar quantas respostas foram dadas.");
 assert.match(mini,/ungraded/u,"Mini-exame: deve contar respostas sem classificação automática.");
@@ -31,5 +32,8 @@ for(const [label,source] of [["Mini-exame",mini],["Exame Completo",full]]){
 assert.match(draft,/review:!!review/u,"o rascunho deve persistir explicitamente a fase de revisão.");
 assert.match(subject,/REVISÃO EM PAUSA/u,"a área de Exames deve tornar uma revisão guardada facilmente retomável.");
 assert.match(subject,/loadPhysicsChemistryExamDraft/u,"o hub de Exames deve ler os rascunhos guardados.");
+assert.match(subject,/restorePhysicsChemistrySubmittedResponse/u,"retomar uma sessão não pode ressuscitar pontuação científica antiga.");
+assert.match(safeRestore,/automaticScoringSuspended:true/u,"submissões antigas sem texto devem continuar bloqueadas, sem nota.");
+assert.match(safeRestore,/provisionalPoints:null/u,"a retoma deve deixar qualquer nota científica não validada em null.");
 
 console.log("✓ FQ A review status: respondidas · sem falsas notas · validação pendente · revisão persistente · retoma visível");
