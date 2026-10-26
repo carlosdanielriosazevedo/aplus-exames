@@ -50,3 +50,5 @@ No percurso manual, um perfil de 12.º ano sem matéria atual assinalada mostrav
 ## Confirmação explícita da saída nos testes
 
 A repetição do CI 40319713867 falhou nos quatro casos de pausa de Matemática: o botão canónico StudySessionHeader abre a confirmação de segurança existente, que o Playwright dispensa por omissão. A sessão não saía, por isso o cartão de retoma não aparecia. Os testes de pausa/reset passam a esperar o diálogo confirm, verificar a mensagem de conservação e aceitar explicitamente antes de exigir a retoma e preservação. Não se removeu a confirmação nem se relaxaram os testes de dados; o CI final é repetido no novo head.
+
+As capturas do CI em 320 e 1920 px mostraram ainda os três campos guiados de Matemática com larguras diferentes: o justify-content herdado fazia encolher a coluna grid segundo o título. A coluna fica explicitamente minmax(0,1fr), com alinhamento stretch, e os seis cenários passam a exigir os mesmos x/largura e fonte mínima de 16 px para os três campos.

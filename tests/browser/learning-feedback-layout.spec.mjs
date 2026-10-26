@@ -25,6 +25,9 @@ for(const {id,item} of fixtures)for(const width of [320,360,390,430,1366,1920]){
   await expect(page.getByRole('button',{name:'Responder',exact:true})).toBeVisible();
   await expect(page.getByRole('button',{name:/^(← Voltar|Guardar e sair|Guardar e continuar depois|Sair da sessão)$/})).toHaveCount(1);
   if(id==='math-a'){
+   const fields=await page.locator('.practiceFields textarea').evaluateAll(els=>els.map(e=>{const r=e.getBoundingClientRect();return {x:r.x,width:r.width,font:parseFloat(getComputedStyle(e).fontSize)}}));
+   expect(fields).toHaveLength(3);
+   for(const field of fields){expect(Math.abs(field.x-fields[0].x)).toBeLessThanOrEqual(1);expect(Math.abs(field.width-fields[0].width)).toBeLessThanOrEqual(1);expect(field.font).toBeGreaterThanOrEqual(16)}
    await page.locator('[id="practice-CRV2-10FUN-STEPS-1-equation"]').fill('3x-12=0');
    await page.locator('[id="practice-CRV2-10FUN-STEPS-1-value"]').fill('x=4');
    await page.locator('[id="practice-CRV2-10FUN-STEPS-1-conclusion"]').fill('Não sei concluir.');
