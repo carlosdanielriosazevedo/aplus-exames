@@ -246,7 +246,12 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
         {!feedback?<button className="primary" disabled={!answerReady(item)} onClick={submit}>Responder</button>:<>
           {item.responseType==="multiple-choice"&&<div className={"feedback answerFeedback "+(feedback.correct?"good":"bad")}><b>{feedback.correct?"✓ Muito bem!":"Não é essa."}</b><span>{feedback.correct?item.explanation:<>A resposta correta é:<strong>{item.options[item.answerIndex]}</strong>{item.explanation&&<small>{item.explanation}</small>}</>}</span></div>}
           {item.responseType==="stepwise"&&<><PhysicsChemistryStepwiseReview item={item} result={feedback}/><ScoreLossExplanation result={feedback} summaryProvided/></>}
-          {item.responseType==="restricted-response"&&<div className="fqaConstructedReview">
+          {item.responseType==="restricted-response"&&feedback.automaticScoringSuspended&&<div className="fqaConstructedReview">
+            <div className="notice"><b>Resposta guardada — sem nota automática</b><span>{feedback.note}</span></div>
+            <details className="automaticCriteriaDetails"><summary>Consultar critérios da resposta</summary><div className="automaticCriteriaList">{(feedback.criteria||[]).map(criterion=><div key={criterion.id} className="automaticCriterion"><b>{criterion.label}</b>{(criterion.observations||[]).map(observation=><small key={observation.id}>{observation.label}</small>)}</div>)}</div></details>
+            <p className="muted">A resposta está bloqueada após a submissão. Estes critérios não representam uma classificação nem uma avaliação automática da tua resposta.</p>
+          </div>}
+          {item.responseType==="restricted-response"&&!feedback.automaticScoringSuspended&&<div className="fqaConstructedReview">
             <div className="notice"><b>Avaliação automática provisória</b><span>{feedback.note}</span></div>
             {Number.isFinite(feedback.provisionalPoints)&&<><div className="autoAssessmentScore"><b>{String(feedback.provisionalPoints).replace(".",",")} / {feedback.maxPoints} pontos</b><small>estimativa provisória · confiança {feedback.autoAssessmentConfidence??"—"}%</small></div><ScoreLossExplanation result={feedback} summaryProvided/></>}
             {feedback.feedbackSummary&&<div className="automaticFeedbackPanel">
