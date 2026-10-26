@@ -17,7 +17,8 @@ test("an ungraded scientific attempt remains pending and never becomes a complet
   expect(row.pendingRubrics).toBe(1);
   expect(row.rubricReviews).toBe(0);
   expect(row.rubricObserved).toBe(0);
-  expect(row.rubricNeedsReview).toBe(1);
+  expect(row.rubricNeedsReview).toBe(0); // No fabricated negative competence evidence.
+  expect(row.structuredScoredAttempts).toBe(0);
   expect(row.correct).toBe(0);
   expect(progress.sessions.at(-1).results[0]).toMatchObject({points:null,provisionalPoints:null,requiresReview:true,automaticScoringSuspended:true});
 });
