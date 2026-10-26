@@ -48,15 +48,17 @@ assert.match(component,/timeExpired/u,"o fluxo deve detetar o fim do tempo total
 assert.match(component,/recordedRef/u,"o fim manual ou automático não pode gravar a sessão duas vezes.");
 assert.match(component,/Terminar e rever/u,"o fluxo deve terminar em revisão");
 assert.match(component,/Contam os 4 melhores/u,"a revisão deve explicar a regra dos opcionais");
-assert.match(component,/Subtotal provisório já corrigível/u,"a revisão deve distinguir explicitamente a estimativa automática da classificação final");
-assert.match(component,/estimativa provisória/u,"a pontuação de respostas construídas deve ser apresentada como provisória");
-assert.match(component,/confiança reduzida/u,"o aluno deve ser avisado quando a interpretação automática é incerta");
-assert.match(component,/provisionalPoints/u,"respostas construídas devem aproveitar pontuação automática provisória");
-assert.match(component,/autoAssessmentConfidence/u,"a revisão deve expor a confiança da correção automática");
+assert.match(component,/Pontos apurados nas partes corrigíveis/u,"a revisão deve identificar apenas os pontos realmente corrigíveis");
+assert.match(component,/não é nota final/u,"a revisão deve impedir interpretação do subtotal como nota final");
+assert.match(component,/result\.automaticScoringSuspended/u,"a revisão deve identificar respostas abertas sem pontuação automática");
+assert.match(component,/points:null,provisional:true,pending:true,ungraded:true/u,"respostas sem classificação não podem ser convertidas em zero");
+assert.match(component,/resposta\(s\) por validar/u,"o aluno deve ser avisado sobre respostas sem classificação");
+assert.match(component,/Number\.isFinite\(result\.provisionalPoints\)/u,"uma pontuação provisória só pode ser mostrada quando existe e é finita");
+assert.match(component,/result\.automaticScoringSuspended&&<div className="notice"/u,"a revisão deve mostrar a mensagem sem classificação antes de qualquer resultado automático");
 assert.match(component,/feedbackSummary/u,"a revisão deve explicar forças, lacunas e próximo passo");
 assert.match(component,/gradePhysicsChemistryResponse/u,"o Exame Completo deve reutilizar o motor específico da disciplina");
 assert.match(component,/recordSubjectSession/u,"o Exame Completo deve entrar no progresso partilhado");
 assert.doesNotMatch(component,/PhysicsChemistryRubricReview/u,"o aluno não deve voltar a preencher uma grelha manual de autoavaliação");
 assert.doesNotMatch(component,/Resposta certa:[\s\S]{0,120}Seguinte/u,"não deve haver correção imediata antes do fim");
 
-console.log("✓ FQ A exam flow: 23 itens · 15+8/4 · 120+30 min · revisão automática provisória · confiança explícita · sem feedback imediato");
+console.log("✓ FQ A exam flow: 23 itens · 15+8/4 · 120+30 min · sem falsas notas · revisão transparente · sem feedback imediato");

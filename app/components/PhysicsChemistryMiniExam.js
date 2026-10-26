@@ -65,6 +65,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   const deterministic=exam.items.map((row,i)=>({item:row,result:results[i]})).filter(row=>row.item.responseType==="multiple-choice");
   const deterministicCorrect=deterministic.filter(row=>row.result.correct).length;
   const provisional=results.filter(row=>["structured-provisional","auto-assessed-provisional"].includes(row.gradingMode)||row.status==="auto-assessed-provisional").length;
+  const ungraded=results.filter(row=>row?.automaticScoringSuspended).length;
   const openPending=results.filter(row=>row.requiresReview).length;
 
   function answer(value){setAnswers(current=>({...current,[item.id]:value}))}
@@ -107,26 +108,26 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
     <div className="fqaExamScoreGrid">
       <div><small>Respondidas</small><b>{answeredCount} / {exam.itemCount}</b></div>
       <div><small>Escolha múltipla</small><b>{deterministicCorrect} / {deterministic.length}</b><span>corretas</span></div>
-      <div><small>Construídas</small><b>{provisional}</b><span>{openPending?"inclui avaliações de confiança reduzida":"correção provisória"}</span></div>
+      <div><small>Sem classificação automática</small><b>{ungraded}</b><span>respostas abertas não classificadas</span></div>
     </div>
-    <div className="notice"><b>Correção automática maximizada</b><span>A app corrige escolhas, etapas e respostas científicas automaticamente sempre que consegue. Nas respostas abertas, a pontuação continua provisória quando a interpretação tem incerteza.</span></div>
+    <div className="notice"><b>Correção parcial e transparente</b><span>As escolhas múltiplas e os problemas por etapas continuam com a correção própria. As respostas científicas abertas estão guardadas, mas não recebem pontuação até existir uma avaliação fiável.</span></div>
     <div className="fqaExamReviewList">{exam.items.map((row,rowIndex)=>{
       const value=answers[row.id],result=results[rowIndex];
-      const resultLabel=row.responseType==="multiple-choice"?(result.correct?"Correta":"A rever"):result.status==="unanswered"?"Sem resposta":"Avaliação automática";
+      const resultLabel=row.responseType==="multiple-choice"?(result.correct?"Correta":"A rever"):result.status==="unanswered"?"Sem resposta":result.automaticScoringSuspended?"Sem nota automática":"Avaliação automática";
       return <details id={"fqa-review-"+row.id} className="reviewChapter" key={row.id}><summary><div><small>{row.year} · {row.responseType==="multiple-choice"?"SELEÇÃO":"CONSTRUÇÃO"}</small><b>{rowIndex+1}. {row.prompt}</b></div><span>{resultLabel}</span></summary><div className="reviewChapterBody">
         <PhysicsChemistryStimulus item={row}/>
         {row.responseType==="multiple-choice"&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p>{!result.correct&&<p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p>}<p>{row.explanation}</p></>}
         {row.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={row} result={result}/>} 
-        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p>{Number.isFinite(result.provisionalPoints)&&<div className="autoAssessmentScore"><b>{String(result.provisionalPoints).replace(".",",")} / {result.maxPoints} pontos</b><small>estimativa provisória · confiança {result.autoAssessmentConfidence??"—"}%</small></div>}{result.feedbackSummary&&<div className="automaticFeedbackPanel">
+        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p>{result.automaticScoringSuspended&&<div className="notice"><b>Sem classificação automática</b><span>{result.note}</span></div>}{Number.isFinite(result.provisionalPoints)&&<div className="autoAssessmentScore"><b>{String(result.provisionalPoints).replace(".",",")} / {result.maxPoints} pontos</b><small>estimativa provisória · confiança {result.autoAssessmentConfidence??"—"}%</small></div>}{result.feedbackSummary&&<div className="automaticFeedbackPanel">
     {result.feedbackSummary.strengths.length>0&&<section className="automaticFeedbackGood"><b>O que fizeste bem</b>{result.feedbackSummary.strengths.map(row=><div key={row.id}><strong>✓ {row.label}</strong>{row.evidence&&<blockquote>“{row.evidence}”</blockquote>}</div>)}</section>}
     {result.feedbackSummary.gaps.length>0&&<section className="automaticFeedbackImprove"><b>O que faltou</b>{result.feedbackSummary.gaps.map(row=><div key={row.id}><strong>{row.message}</strong><span>{row.label}</span></div>)}</section>}
     {result.feedbackSummary.errorDiagnosis&&result.feedbackSummary.errorDiagnosis.code!=="correct_or_near_correct"&&<p className="automaticFeedbackNext"><b>{result.feedbackSummary.errorDiagnosis.label}:</b> {result.feedbackSummary.errorDiagnosis.message}</p>}
     {result.feedbackSummary.diagnosticCard?.preserveCorrectWork&&<p className="automaticFeedbackNext"><b>Mantém:</b> {result.feedbackSummary.diagnosticCard.whatYouKnow}</p>}
     <p className="automaticFeedbackNext"><b>Próximo passo:</b> {result.feedbackSummary.nextAction}</p>
-  </div>}<div className="automaticCriteriaList">{(result.criteria||[]).map(criterion=><div className={"automaticCriterion "+criterion.status} key={criterion.id}><div><b>{criterion.label}</b><span>{criterion.status==="observed"?"✓ Detetado":criterion.status==="partial"?"◐ Parcial":"○ Não detetado"}</span></div></div>)}</div><p className="muted">Uma formulação cientificamente equivalente pode ser válida. O aluno não precisa de preencher uma autoavaliação.</p></>}
+  </div>}<div className="automaticCriteriaList">{(result.criteria||[]).map(criterion=><div className={"automaticCriterion "+criterion.status} key={criterion.id}><div><b>{criterion.label}</b><span>{criterion.status==="observed"?"✓ Detetado":criterion.status==="partial"?"◐ Parcial":criterion.status==="pending"?"— Por verificar":"○ Não detetado"}</span></div></div>)}</div><p className="muted">Uma formulação cientificamente equivalente pode ser válida. O aluno não precisa de preencher uma autoavaliação.</p></>}
       </div></details>;
     })}</div>
-    {openPending>0&&<div className="notice warning"><b>{openPending} avaliação(ões) com confiança reduzida</b><span>A app já as avaliou provisoriamente; não precisas de completar nenhuma grelha manual.</span></div>}
+    {openPending>0&&<div className="notice warning"><b>{openPending} resposta(s) por validar</b><span>As respostas científicas abertas não têm nota automática nesta versão. Os critérios são apenas orientações para estudar.</span></div>}
     <button className="primary" onClick={saveReviewAndExit}>Guardar revisão e terminar</button>
   </Shell>;
 

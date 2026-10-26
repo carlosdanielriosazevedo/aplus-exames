@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {readFileSync,readdirSync} from "node:fs";
 import {gradePortugueseResponse,normalizePortugueseAnswer} from "../app/lib/portugueseEngine.js";
+import {isPortugueseClosedShortAnswer} from "../app/lib/portugueseShortAnswerPolicy.js";
 
 const contentDir=new URL("../content/vnext/portuguese/foundation/",import.meta.url);
 const packFiles=readdirSync(contentDir)
@@ -12,12 +13,12 @@ const packFiles=readdirSync(contentDir)
   });
 const packs=packFiles.map(name=>JSON.parse(readFileSync(new URL(name,contentDir),"utf8")));
 const items=packs.flatMap(pack=>pack.items);
-const deterministic=items.filter(item=>["multiple-choice","short-answer"].includes(item.responseType));
-const open=items.filter(item=>["restricted-response","extended-writing"].includes(item.responseType));
+const deterministic=items.filter(item=>item.responseType==="multiple-choice"||isPortugueseClosedShortAnswer(item));
+const open=items.filter(item=>["restricted-response","extended-writing"].includes(item.responseType)||(item.responseType==="short-answer"&&!isPortugueseClosedShortAnswer(item)));
 
 assert.equal(items.length,334,"a passagem editorial deve cobrir os 334 itens atuais");
-assert.equal(deterministic.length,278,"o banco atual deve manter 278 itens determinísticos");
-assert.equal(open.length,56,"a passagem editorial deve manter as 56 respostas abertas");
+assert.equal(deterministic.length,240,"199 escolhas múltiplas + 41 curtas fechadas devem manter decisão determinística");
+assert.equal(open.length,94,"56 respostas longas + 38 curtas livres ficam sob revisão");
 
 const weakSignals=[];
 const lengthSkew=[];
@@ -66,13 +67,21 @@ for(const item of items){
     checkedShortAnswers++;
     const normalized=item.acceptedAnswers.map(normalizePortugueseAnswer);
     assert.equal(new Set(normalized).size,normalized.length,`${item.id}: equivalentes repetidos após normalização`);
+    const closed=isPortugueseClosedShortAnswer(item);
     for(const accepted of item.acceptedAnswers){
       const result=gradePortugueseResponse(item,accepted);
-      assert.equal(result.final,true,`${item.id}: resposta curta aceite deve ser final`);
-      assert.equal(result.correct,true,`${item.id}: equivalente declarado deve ser aceite: ${accepted}`);
+      if(closed){
+        assert.equal(result.final,true,`${item.id}: resposta fechada aceite deve ser final`);
+        assert.equal(result.correct,true,`${item.id}: equivalente declarado deve ser aceite: ${accepted}`);
+      }else{
+        assert.equal(result.final,false,`${item.id}: resposta livre não pode receber nota final automática`);
+        assert.equal(result.points,null,`${item.id}: não pode inventar pontuação automática`);
+        assert.equal(result.humanReviewRequired,true,`${item.id}: revisão explícita obrigatória`);
+      }
     }
     const negative=gradePortugueseResponse(item,"resposta editorialmente impossível 9472");
-    assert.equal(negative.correct,false,`${item.id}: resposta sentinela não pode ser aceite`);
+    if(closed)assert.equal(negative.correct,false,`${item.id}: resposta sentinela não pode ser aceite`);
+    else assert.equal(negative.points,null,`${item.id}: resposta sentinela não pode receber nota inventada`);
   }
 
   if(["restricted-response","extended-writing"].includes(item.responseType)){

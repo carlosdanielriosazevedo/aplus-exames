@@ -27,14 +27,14 @@ assert.doesNotMatch(subject,/startMiniExam/u,"o hub não deve gerar mini-exames 
 assert.match(component,/>Responder</u,"o mini-exame deve manter confirmação explícita da resposta.");
 assert.match(component,/não mostra a correção durante o mini-exame/u,"Responder não deve revelar feedback durante a prova.");
 assert.match(component,/Rever o mini-exame/u,"a correção deve aparecer numa fase de revisão posterior.");
-assert.match(component,/Correção automática maximizada/u,"a revisão deve usar o corretor automático atual");
-assert.match(component,/pontuação continua provisória quando a interpretação tem incerteza/u,"a app não deve mascarar incerteza em respostas abertas");
-assert.match(component,/autoAssessmentConfidence/u,"a confiança da avaliação automática deve ficar visível na revisão");
-assert.match(component,/feedbackSummary/u,"a revisão deve explicar forças, lacunas e próximo passo");
-assert.match(component,/não precisas de completar nenhuma grelha manual/u,"a revisão não deve pedir autoavaliação manual ao aluno");
+assert.match(component,/Correção parcial e transparente/u,"a revisão deve explicar quais as respostas corrigidas e quais ainda não têm nota");
+assert.match(component,/respostas científicas abertas estão guardadas, mas não recebem pontuação/u,"a app não pode atribuir nota não validada a respostas abertas");
+assert.match(component,/result\.automaticScoringSuspended/u,"a revisão deve assinalar as respostas cuja correção automática foi suspensa");
+assert.match(component,/result\.feedbackSummary&&/u,"só se podem mostrar explicações de pontuação quando o motor as fornecer");
+assert.match(component,/respostas científicas abertas não têm nota automática/u,"a revisão deve ser clara quanto às respostas sem nota");
 assert.doesNotMatch(component,/PhysicsChemistryRubricReview/u,"a grelha manual antiga não deve regressar ao mini-exame");
 assert.match(component,/PhysicsChemistryStimulus/u,"mini-exame deve reutilizar gráficos, diagramas e tabelas.");
 assert.match(component,/recordSubjectSession/u,"mini-exame deve alimentar o progresso partilhado.");
 assert.doesNotMatch(component,/useState\(null\).*feedback/u,"mini-exame não deve reutilizar o padrão de feedback imediato do treino.");
 
-console.log("✓ FQ A mini-exams: 2 modelos · 12 itens · 6+6 anos · 45 min · correção automática provisória · sem feedback imediato");
+console.log("✓ FQ A mini-exams: 2 modelos · 12 itens · 6+6 anos · 45 min · correção transparente sem notas falsas · sem feedback imediato");

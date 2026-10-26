@@ -1,5 +1,5 @@
-import {assessEvidence,aggregateCriterionAssessment,automaticRubricSummary,automaticFeedbackForCriteria} from "./automaticEvidenceGrader.js";
-import {buildScoreExplainability} from "./scoreExplainability.js";
+
+
 export const PHYSICS_CHEMISTRY_A_SELF_ASSESSMENT_LEVELS=[
   {id:"observed",label:"Cumpri"},
   {id:"partial",label:"Parcial"},
@@ -127,6 +127,20 @@ function physicsChemistryKeywordSoupLike(text){
   return !finiteRelation.test(normalized);
 }
 
+// Guard the spectral-emission rubric against generic self-description being mistaken
+// for scientific explanation. Other FQ A rubrics retain their existing calibration.
+function lacksSpectralScientificEvidence(item,normalizedText){
+  if(item?.id!=="FQA-R-ELEM-01")return false;
+  const scientificAnchors=[
+    /\b(?:transicao|transicoes|saltos?\s+eletronicos?)\b/u,
+    /\b(?:niveis?\s+(?:de\s+)?energia|eletron(?:es|icos?|icas?))\b/u,
+    /\b(?:riscas?|linhas?\s+espectrais?|espectros?)\b/u,
+    /\b(?:fotoes?|fotons?|radiacao|frequencias?|comprimentos?\s+de\s+onda)\b/u,
+    /\b(?:padrao|assinatura|caracteristic[oa]s?)\b/u
+  ];
+  return scientificAnchors.filter(pattern=>pattern.test(normalizedText)).length<2;
+}
+
 function activeUniversalPh7Misconception(item,normalizedText){
   if(item?.id!=="FQA-R-AQ-01")return false;
   const phSeven="\\bph\\s*(?:(?:e|eh|igual\\s+a)\\s*)?7\\b";
@@ -141,76 +155,31 @@ function activeUniversalPh7Misconception(item,normalizedText){
   return !(directRejection||(correctionMarker&&laterRejection));
 }
 
+// The previous keyword/overlap grader awarded high points to contradictory and
+// injected science. Until blind pedagogical calibration exists, restricted open
+// answers are recorded without any automatic numeric grade or success claim.
 export function automaticPhysicsChemistryRubricResult(item,responseText){
-  const text=String(responseText||"").trim();
+  const text=String(responseText??"").trim();
+  const maxPoints=Number.isFinite(item?.maxPoints)?item.maxPoints:10;
   if(!text)return {
-    status:"unanswered",final:false,correct:null,points:null,maxPoints:item.maxPoints||10,
-    gradingMode:"automatic-rubric-provisional",responseText:text,rubricCompleted:false,criteria:[]
+    status:"unanswered",final:false,correct:null,points:null,provisionalPoints:null,
+    maxPoints,gradingMode:"criterion-reference-ungraded",responseText:"",
+    rubricCompleted:false,requiresReview:false,criteria:[]
   };
-  const normalizedResponse=text.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("pt-PT");
-  const keywordSoupLike=physicsChemistryKeywordSoupLike(text);
-  const activeUniversalPh7=activeUniversalPh7Misconception(item,normalizedResponse);
-  const criteria=physicsChemistryRubricFor(item).map((criterion,criterionIndex)=>{
-    const criterionContradiction=activeUniversalPh7&&criterion.id==="equivalence";
-    const observations=(criterion.observations||[]).map(observation=>{
-      const assessed=assessEvidence(text,observation.label,criterion.label,item.criteria?.[criterionIndex]);
-      const normalizedText=normalizedResponse;
-      const explicitAmbiguity=!!assessed.ambiguityDetected||explicitPhysicsChemistryAmbiguity(normalizedText);
-      const observationContradiction=activeUniversalPh7&&observation.id==="detection-region";
-      const contradictionDetected=!!assessed.contradictionDetected||criterionContradiction||observationContradiction;
-      const unsafe=contradictionDetected||explicitAmbiguity||!!assessed.manipulationDetected||keywordSoupLike;
-      const directDetection=!unsafe&&observation.id==="detection-indicator"&&(/\bindicador\b/u.test(normalizedText)||/curva\s+de\s+ph/u.test(normalizedText));
-      let resolved=directDetection?{...assessed,status:"observed",scoreRatio:1,confidence:Math.max(.88,assessed.confidence||0)}:assessed;
-      if(keywordSoupLike){
-        resolved={
-          ...resolved,
-          status:resolved.status==="observed"?"partial":resolved.status,
-          scoreRatio:Math.min(.35,Number.isFinite(resolved.scoreRatio)?resolved.scoreRatio:.35)
-        };
-      }
-      if(criterionContradiction||observationContradiction){
-        resolved={
-          ...resolved,
-          status:resolved.status==="observed"?"partial":resolved.status,
-          scoreRatio:Math.min(.35,Number.isFinite(resolved.scoreRatio)?resolved.scoreRatio:.35),
-          contradictionDetected:true
-        };
-      }
-      if(explicitAmbiguity){
-        resolved={
-          ...resolved,
-          status:resolved.status==="observed"?"partial":resolved.status,
-          scoreRatio:Math.min(.35,Number.isFinite(resolved.scoreRatio)?resolved.scoreRatio:.35),
-          ambiguityDetected:true
-        };
-      }
-      return {
-        ...observation,
-        status:resolved.status,
-        confidence:resolved.confidence,
-        scoreRatio:resolved.scoreRatio,
-        semanticScore:resolved.semanticScore,
-        contradictionDetected:!!resolved.contradictionDetected,
-        ambiguityDetected:!!resolved.ambiguityDetected,
-        manipulationDetected:!!resolved.manipulationDetected,
-        studentEvidence:resolved.evidence?[resolved.evidence]:[],
-        autoAssessed:true
-      };
-    });
-    const aggregate=aggregateCriterionAssessment(observations);
-    return {...criterion,...aggregate,observations,autoAssessed:true};
-  });
-  const summary=automaticRubricSummary(criteria,item.maxPoints||10);
-  const pointMap=new Map(summary.criterionPoints.map(row=>[row.id,row]));
-  const scoredCriteria=criteria.map(criterion=>({...criterion,...(pointMap.get(criterion.id)||{})}));
-  const feedbackSummary=automaticFeedbackForCriteria(scoredCriteria,text);
-  const scoreExplainability=buildScoreExplainability({awardedPoints:summary.provisionalPoints,maxPoints:item.maxPoints||10,criteria:scoredCriteria,requiresReview:summary.requiresReview});
+  const criteria=physicsChemistryRubricFor(item).map(criterion=>({
+    ...criterion,status:"pending",autoAssessed:false,
+    awardedPoints:null,lostPoints:null,
+    observations:(criterion.observations||[]).map(observation=>({
+      ...observation,status:"pending",autoAssessed:false,studentEvidence:[]
+    }))
+  }));
   return {
-    status:"auto-assessed-provisional",final:false,correct:null,points:null,
-    provisionalPoints:summary.provisionalPoints,maxPoints:item.maxPoints||10,
-    gradingMode:"automatic-rubric-provisional",responseText:text,rubricCompleted:true,
-    requiresReview:summary.requiresReview,autoAssessmentConfidence:summary.confidence,criteria:scoredCriteria,feedbackSummary,scoreExplainability,
-    note:"A app avaliou automaticamente a resposta científica por critérios. O resultado é provisório quando a interpretação não é totalmente determinística."
+    status:"ungraded-awaiting-validation",final:false,correct:null,points:null,
+    provisionalPoints:null,maxPoints,gradingMode:"criterion-reference-ungraded",
+    responseText:text,rubricCompleted:true,requiresReview:true,
+    autoAssessmentConfidence:null,criteria,feedbackSummary:null,scoreExplainability:null,
+    automaticScoringSuspended:true,
+    note:"A tua resposta foi guardada, mas não recebeu classificação automática. Os critérios abaixo são apenas orientações para comparação; esta versão ainda não oferece revisão humana desta resposta."
   };
 }
 

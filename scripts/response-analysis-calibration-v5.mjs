@@ -10,10 +10,10 @@ import {gradeResponse as gradeMathResponse} from "../app/lib/constructedResponse
 function ratio(result){
   if(Number.isFinite(result?.provisionalPoints)&&Number(result?.maxPoints)>0)return result.provisionalPoints/result.maxPoints;
   if(Number.isFinite(result?.points)&&Number(result?.maxPoints)>0)return result.points/result.maxPoints;
-  return 0;
+  return null; // Not graded is NOT a zero-percent grade.
 }
-function pct(value){return Math.round(value*1000)/10+"%"}
-function mean(values){return values.length?values.reduce((sum,value)=>sum+value,0)/values.length:0}
+function pct(value){return Number.isFinite(value)?Math.round(value*1000)/10+"%":"SEM NOTA"}
+function mean(values){const scored=values.filter(Number.isFinite);return scored.length?scored.reduce((sum,value)=>sum+value,0)/scored.length:null}
 
 const openRows=OPEN_RESPONSE_WAVE5_CASES.map(row=>{
   const item=row.subject==="portuguese"?portugueseCalibrationItemById(row.itemId):physicsChemistryConstructedItemById(row.itemId);
@@ -30,6 +30,12 @@ const mathRows=MATH_RESPONSE_WAVE5_CASES.map(row=>{
 
 const failures=[];
 for(const row of [...openRows,...mathRows]){
+  // An abstention cannot satisfy the calibration threshold of a correct answer.
+  // Keep the gate red rather than pretending the student received zero points.
+  if(!Number.isFinite(row.score)){
+    failures.push(`${row.subject||"mathematics"}/${row.itemId}/${row.profile}: SEM NOTA — calibração pedagógica indisponível`);
+    continue;
+  }
   if(Number.isFinite(row.minScore)&&row.score<row.minScore-.001)failures.push(`${row.subject||"mathematics"}/${row.itemId}/${row.profile}: ${pct(row.score)} < min ${pct(row.minScore)}`);
   if(Number.isFinite(row.maxScore)&&row.score>row.maxScore+.001)failures.push(`${row.subject||"mathematics"}/${row.itemId}/${row.profile}: ${pct(row.score)} > max ${pct(row.maxScore)}`);
 }
@@ -60,8 +66,8 @@ const summary={
   failures
 };
 
-if(summary.selfCorrectedMean<.2)failures.push("self-corrected open responses mean below 20%");
-if(summary.studentShorthandMean<.18)failures.push("student-shorthand mean below 18%");
+if(!Number.isFinite(summary.selfCorrectedMean)||summary.selfCorrectedMean<.2)failures.push("self-corrected mean unavailable or below 20%");
+if(!Number.isFinite(summary.studentShorthandMean)||summary.studentShorthandMean<.18)failures.push("student-shorthand mean unavailable or below 18%");
 if(summary.mathSelfCorrectedMean<.7)failures.push("Mathematics self-corrected mean below 70%");
 if(summary.mathEquivalentNotationMean<.9)failures.push("Mathematics equivalent-notation mean below 90%");
 

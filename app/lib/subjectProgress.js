@@ -160,10 +160,17 @@ function putProgress(state,subjectId,progress){
 
 function compactResult(result){
   if(!result)return null;
-  const compact={status:result.status,final:!!result.final,correct:result.correct??null,points:Number.isFinite(result.points)?result.points:null,maxPoints:Number.isFinite(result.maxPoints)?result.maxPoints:null,provisionalPoints:Number.isFinite(result.provisionalPoints)?result.provisionalPoints:null,penalty:Number.isFinite(result.penalty)?result.penalty:0,type1Count:Number.isFinite(result.type1Count)?result.type1Count:0,type2Count:Number.isFinite(result.type2Count)?result.type2Count:0,requiresReview:!!result.requiresReview,gradingMode:result.gradingMode||null,classificationMode:result.classificationMode||null,countsForExamScore:typeof result.countsForExamScore==="boolean"?result.countsForExamScore:null,responseText:result.responseText||""};
+  const compact={status:result.status,final:!!result.final,correct:result.correct??null,points:Number.isFinite(result.points)?result.points:null,maxPoints:Number.isFinite(result.maxPoints)?result.maxPoints:null,provisionalPoints:Number.isFinite(result.provisionalPoints)?result.provisionalPoints:null,penalty:Number.isFinite(result.penalty)?result.penalty:0,type1Count:Number.isFinite(result.type1Count)?result.type1Count:0,type2Count:Number.isFinite(result.type2Count)?result.type2Count:0,requiresReview:!!result.requiresReview,humanReviewRequired:!!result.humanReviewRequired,automaticScoringSuspended:!!result.automaticScoringSuspended,gradingMode:result.gradingMode||null,classificationMode:result.classificationMode||null,countsForExamScore:typeof result.countsForExamScore==="boolean"?result.countsForExamScore:null,responseText:result.responseText||""};
   if(result.final)return compact;
   if(result.gradingMode==="structured-provisional")return {...compact,steps:Array.isArray(result.steps)?result.steps.map(step=>({id:step.id,status:step.status,points:Number.isFinite(step.points)?step.points:null,maxPoints:Number.isFinite(step.maxPoints)?step.maxPoints:null,errorType:step.errorType||null})):[]};
   return {...compact,rubricId:result.rubricId||null,rubricCompleted:!!result.rubricCompleted,revisionCount:Number.isFinite(result.revisionCount)?result.revisionCount:0,previousResponseText:result.previousResponseText||"",revisionHistory:Array.isArray(result.revisionHistory)?result.revisionHistory.map(row=>({revision:Number.isFinite(row?.revision)?row.revision:0,responseText:String(row?.responseText||""),rubricCompleted:!!row?.rubricCompleted,rubricObservationEvidence:Array.isArray(row?.rubricObservationEvidence)?row.rubricObservationEvidence.map(observation=>({criterionId:observation.criterionId,observationId:observation.observationId,evidence:observation.evidence||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})):[]})):[],rubricEvidence:(result.criteria||[]).map(criterion=>({criterionId:criterion.id,evidence:criterion.status||"pending"})),rubricObservationEvidence:(result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,evidence:observation.status||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})))};}
+
+function isUngradedRubricResult(result){
+  return result?.automaticScoringSuspended===true||
+    result?.status==="ungraded-awaiting-validation"||
+    result?.status==="human-review-required"||
+    result?.gradingMode==="criterion-reference-ungraded";
+}
 
 function recordRubricEvidence(previous,result,completedAt){
   const observations=(result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,status:observation.status||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):[]})));
@@ -218,7 +225,10 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
   items.forEach((item,index)=>{
     const result=results[index];
     if(!result||result.status==="unanswered")return;
-    errorPatterns=recordErrorPatternEvidence(errorPatterns,item,result,completedAt);
+    // An abstention is not a wrong answer: do not feed ungraded prose to the
+    // recurring-error memory, or it could invent weaknesses without evidence.
+    const isUngraded=isUngradedRubricResult(result);
+    if(!isUngraded)errorPatterns=recordErrorPatternEvidence(errorPatterns,item,result,completedAt);
     if(!recordsAcademicEvidence)return;
     const id=item.competencyId||`${item.domain}:general`;
     const previous=normalizeCompetenceRow(competence[id]);
@@ -243,14 +253,20 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
       };
       return;
     }
-    const evidence=recordRubricEvidence(previous,result,completedAt);
+    // Preparing criteria is not the same as grading the student's response.
+    // Never promote abstentions to reviewed competence, erase prior evidence with
+    // "pending" observations or infer an incorrect answer from null points.
+    const ungraded=isUngraded;
+    const evidence=ungraded?{observed:0,needsReview:0,rubricEvidenceByObservation:previous.rubricEvidenceByObservation}:
+      recordRubricEvidence(previous,result,completedAt);
+    const trulyReviewed=!ungraded&&!!result.rubricCompleted;
     competence[id]={
       ...previous,
       domainId:item.domain||previous.domainId,
       label:item.competencyLabel||previous.label,
       attempts:previous.attempts+1,
-      pendingRubrics:result.rubricCompleted?previous.pendingRubrics:previous.pendingRubrics+1,
-      rubricReviews:previous.rubricReviews+(result.rubricCompleted?1:0),
+      pendingRubrics:trulyReviewed?previous.pendingRubrics:previous.pendingRubrics+1,
+      rubricReviews:previous.rubricReviews+(trulyReviewed?1:0),
       rubricNeedsReview:previous.rubricNeedsReview+evidence.needsReview,
       rubricObserved:previous.rubricObserved+evidence.observed,
       rubricEvidenceByObservation:evidence.rubricEvidenceByObservation,

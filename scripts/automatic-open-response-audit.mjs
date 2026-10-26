@@ -34,9 +34,9 @@ const checks=[
   ["Portuguese open response is auto-assessed",ptGood.status==="auto-assessed-provisional"&&ptGood.rubricCompleted],
   ["Portuguese returns provisional points",Number.isFinite(ptGood.provisionalPoints)&&ptGood.provisionalPoints>0],
   ["Portuguese stronger answer scores above weak answer",(ptGood.provisionalPoints||0)>(ptWeak.provisionalPoints||0)],
-  ["FQ A open response is auto-assessed",fqGood.status==="auto-assessed-provisional"&&fqGood.rubricCompleted],
-  ["FQ A returns provisional points",Number.isFinite(fqGood.provisionalPoints)&&fqGood.provisionalPoints>0],
-  ["FQ A stronger answer scores above weak answer",(fqGood.provisionalPoints||0)>(fqWeak.provisionalPoints||0)]
+  ["FQ A open response is explicitly ungraded",fqGood.status==="ungraded-awaiting-validation"&&fqGood.rubricCompleted&&fqGood.requiresReview],
+  ["FQ A has no provisional points for strong or weak answers",fqGood.provisionalPoints===null&&fqWeak.provisionalPoints===null],
+  ["FQ A protects evidence from unvalidated score",fqGood.automaticScoringSuspended&&fqWeak.automaticScoringSuspended&&fqWeak.feedbackSummary===null]
 ];
 
 const failed=checks.filter(([,ok])=>!ok);

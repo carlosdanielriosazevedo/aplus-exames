@@ -89,15 +89,15 @@ describe("correção determinística",()=>{
     });
   });
 
-  it("aceita equivalência textual normalizada em resposta curta",()=>{
+  it("não classifica automaticamente itens curtos artificiais sem política editorial auditada",()=>{
     expect(gradePortugueseResponse(shortAnswer,"os lusiadas")).toMatchObject({
-      final:true,status:"final",correct:true,points:3
+      final:false,status:"human-review-required",correct:null,points:null,requiresReview:true
     });
   });
 
-  it("rejeita resposta curta não prevista",()=>{
+  it("não inventa zero automático para curtas sem política editorial validada",()=>{
     expect(gradePortugueseResponse(shortAnswer,"Mensagem")).toMatchObject({
-      final:true,status:"final",correct:false,points:0
+      final:false,status:"human-review-required",correct:null,points:null,requiresReview:true
     });
   });
 });
