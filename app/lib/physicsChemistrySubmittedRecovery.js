@@ -1,4 +1,4 @@
-import {gradePhysicsChemistryResponse} from "./physicsChemistryEngine.js";
+import {automaticPhysicsChemistryRubricResult} from "./physicsChemistryRubric.js";
 
 // Restoring an already submitted open response must never revive an earlier
 // provisional score from the unsafe semantic grader. Do not treat the response
@@ -9,7 +9,8 @@ export function restorePhysicsChemistrySubmittedResponse(item,snapshot,savedAnsw
 
   const original=String(snapshot.responseText??savedAnswer??"").trim();
   if(original){
-    const safe=gradePhysicsChemistryResponse(item,original);
+    // Restore should not trigger real-response validation capture a second time.
+    const safe=automaticPhysicsChemistryRubricResult(item,original);
     return safe.automaticScoringSuspended===true?safe:{
       status:"ungraded-awaiting-validation",final:false,correct:null,points:null,
       provisionalPoints:null,maxPoints:item.maxPoints||10,
