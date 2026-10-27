@@ -14,6 +14,19 @@ if(live&&(process.env.PILOT_APPROVED!=="YES"||!process.env.AI_GATEWAY_API_KEY||!
  throw Error("Live pilot requires approval, verified MODEL_ID, dedicated gateway key and confirmed server-side budget");
 if(live&&(!Number.isFinite(priceInput)||priceInput<=0||!Number.isFinite(priceOutput)||priceOutput<=0))
  throw Error("Specify verified current input/output token prices in USD per million");
+// Verify model availability and unit prices against the live public catalogue before any paid call.
+if(live){
+ const catalogueResponse=await fetch("https://ai-gateway.vercel.sh/v1/models",{signal:AbortSignal.timeout(10000)});
+ if(!catalogueResponse.ok)throw Error("Model catalogue inaccessible");
+ const catalogue=await catalogueResponse.json();
+ const entry=catalogue.data?.find(x=>x.id===modelId);
+ if(!entry)throw Error("MODEL_ID not present in current catalogue");
+ const actualInput=Number(entry.pricing?.input)*1e6;
+ const actualOutput=Number(entry.pricing?.output)*1e6;
+ if(!Number.isFinite(actualInput)||!Number.isFinite(actualOutput)||
+    Math.abs(actualInput-priceInput)>1e-6||Math.abs(actualOutput-priceOutput)>1e-6)
+  throw Error("Quoted model prices differ from live catalogue; aborting");
+}
 const sample=["ELEM","MAT","ENE","MEC","WAV","EQ","AQ"].map(x=>
  FQA_SHADOW_RESEARCH_WAVE2.find(r=>r.itemId==="FQA-R-"+x+"-01"&&r.profile==="paraphrase"));
 if(sample.some(x=>!x)||sample.length!==7)throw Error("Fixture set changed");
@@ -51,6 +64,6 @@ for(const row of sample){
 }
 const report={status:live?"EXPERIMENT_ONLY":"DRY_RUN",model:live?modelId:null,
  sampleType:"DEVELOPER_SYNTHETIC_NOT_HOLDOUT",sampleCount:sample.length,
- localReservationTargetUsd:budget,localReservedEstimatedUsd:estimatedSpent,serverSideBudgetVerified:live,results};
+ localReservationTargetUsd:budget,localReservedEstimatedUsd:estimatedSpent,serverSideBudgetConfirmationProvided:live,results};
 console.log(JSON.stringify(report,null,2));
 // No disk writes of student responses, credentials, or model outputs. No scoring.
