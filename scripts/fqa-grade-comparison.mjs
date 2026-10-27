@@ -26,7 +26,10 @@ function stats(rows){
     coverage:rows.length?graded.length/rows.length:null,
     mae:errors.length?errors.reduce((a,b)=>a+b,0)/errors.length:null,
     maxAbsoluteError:errors.length?Math.max(...errors):null,
-    overcredit:graded.filter(x=>x.error>0).length,undercredit:graded.filter(x=>x.error<0).length};
+    overcredit:graded.filter(x=>x.error>0).length,undercredit:graded.filter(x=>x.error<0).length,
+    severeOvercredit:graded.filter(x=>x.error/x.maxPoints>=0.25).length,
+    severeUndercredit:graded.filter(x=>-x.error/x.maxPoints>=0.25).length,
+    criterionMAE:graded.length?graded.reduce((a,x)=>a+x.criterionAbsoluteError,0)/graded.reduce((a,x)=>a+x.criterionCount,0):null};
 }
 export function compareGrades(humanCsv,predictionCsv){
   const h=read(humanCsv,["blind_id","item_id","max_points","human_awarded_points","human_criterion_breakdown","human_rationale"]);
@@ -48,8 +51,9 @@ export function compareGrades(humanCsv,predictionCsv){
     if(!scored&&(prediction.points!==""||prediction.criterion_points!==""))throw Error("Abstention must have empty score "+id);
     if(scored&&prediction.points==="")throw Error("Authorized score missing "+id);
     const points=scored?validNumber(prediction.points,max,"prediction "+id):null;
-    if(scored)criteria(prediction.criterion_points,points,hc.length,id);
-    outcomes.push({blind_id:id,item_id:human.item_id,reference,points,scored,error:scored?points-reference:null});
+    const pc=scored?criteria(prediction.criterion_points,points,hc.length,id):null;
+    outcomes.push({blind_id:id,item_id:human.item_id,maxPoints:max,reference,points,scored,error:scored?points-reference:null,
+      criterionCount:hc.length,criterionAbsoluteError:scored?hc.reduce((sum,n,i)=>sum+Math.abs(n-pc[i]),0):null});
   }
   return {status:"DESCRIPTIVE_ONLY_NOT_GO",overall:stats(outcomes),
     perItem:Object.fromEntries([...new Set(outcomes.map(x=>x.item_id))].sort().map(id=>[id,stats(outcomes.filter(x=>x.item_id===id))])),
