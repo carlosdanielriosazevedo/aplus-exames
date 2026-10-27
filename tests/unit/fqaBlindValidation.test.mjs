@@ -1,4 +1,4 @@
-import test from "node:test";
+import {test} from "vitest";
 import assert from "node:assert/strict";
 import {parseCsv,validateCsv} from "../../scripts/fqa-blind-validation.mjs";
 
