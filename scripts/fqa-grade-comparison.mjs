@@ -20,6 +20,13 @@ function criteria(json,total,length,id){
     throw Error("Invalid criterion breakdown "+id);
   return parts;
 }
+function classifyRisk(row){
+  if(!row.scored)return "ABSTAINED";
+  if(row.error/row.maxPoints>=0.25)return "SEVERE_OVERCREDIT";
+  if(-row.error/row.maxPoints>=0.25)return "SEVERE_UNDERCREDIT";
+  if(row.criterionAbsoluteError>0)return "CRITERION_DISAGREEMENT";
+  return "AGREEMENT";
+}
 function stats(rows){
   const graded=rows.filter(x=>x.scored),errors=graded.map(x=>Math.abs(x.error));
   return {total:rows.length,scored:graded.length,abstained:rows.length-graded.length,
@@ -29,7 +36,8 @@ function stats(rows){
     overcredit:graded.filter(x=>x.error>0).length,undercredit:graded.filter(x=>x.error<0).length,
     severeOvercredit:graded.filter(x=>x.error/x.maxPoints>=0.25).length,
     severeUndercredit:graded.filter(x=>-x.error/x.maxPoints>=0.25).length,
-    criterionMAE:graded.length?graded.reduce((a,x)=>a+x.criterionAbsoluteError,0)/graded.reduce((a,x)=>a+x.criterionCount,0):null};
+    criterionMAE:graded.length?graded.reduce((a,x)=>a+x.criterionAbsoluteError,0)/graded.reduce((a,x)=>a+x.criterionCount,0):null,
+    riskCounts:Object.fromEntries(["ABSTAINED","SEVERE_OVERCREDIT","SEVERE_UNDERCREDIT","CRITERION_DISAGREEMENT","AGREEMENT"].map(k=>[k,rows.filter(x=>x.risk===k).length]))};
 }
 export function compareGrades(humanCsv,predictionCsv){
   const h=read(humanCsv,["blind_id","item_id","max_points","human_awarded_points","human_criterion_breakdown","human_rationale"]);
@@ -52,11 +60,15 @@ export function compareGrades(humanCsv,predictionCsv){
     if(scored&&prediction.points==="")throw Error("Authorized score missing "+id);
     const points=scored?validNumber(prediction.points,max,"prediction "+id):null;
     const pc=scored?criteria(prediction.criterion_points,points,hc.length,id):null;
-    outcomes.push({blind_id:id,item_id:human.item_id,maxPoints:max,reference,points,scored,error:scored?points-reference:null,
-      criterionCount:hc.length,criterionAbsoluteError:scored?hc.reduce((sum,n,i)=>sum+Math.abs(n-pc[i]),0):null});
+    const criterionErrors=scored?hc.map((n,i)=>pc[i]-n):null;
+    const row={blind_id:id,item_id:human.item_id,maxPoints:max,reference,points,scored,error:scored?points-reference:null,
+      criterionCount:hc.length,criterionErrors,criterionAbsoluteError:scored?criterionErrors.reduce((sum,n)=>sum+Math.abs(n),0):null};
+    row.risk=classifyRisk(row);
+    outcomes.push(row);
   }
   return {status:"DESCRIPTIVE_ONLY_NOT_GO",overall:stats(outcomes),
     perItem:Object.fromEntries([...new Set(outcomes.map(x=>x.item_id))].sort().map(id=>[id,stats(outcomes.filter(x=>x.item_id===id))])),
+    priorityReview:outcomes.filter(x=>x.risk==="SEVERE_OVERCREDIT"||x.risk==="SEVERE_UNDERCREDIT").map(x=>({blind_id:x.blind_id,item_id:x.item_id,risk:x.risk,error:x.error})),
     outcomes};
 }
 if(process.argv[1]&&import.meta.url===new URL("file://"+process.argv[1]).href){
