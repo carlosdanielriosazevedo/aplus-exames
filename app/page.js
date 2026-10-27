@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import {useEffect,useState} from "react";
 
 const ClientApp=dynamic(()=>import("./clientApp"),{ssr:false,loading:()=> <Loading/>});
@@ -27,7 +26,7 @@ function Landing({onStart}){return <main className="dark center"><section classN
   <p className="eyebrow">PREPARAÇÃO INTELIGENTE PARA EXAMES NACIONAIS</p>
   <h1>A tua melhor nota<br/><em>começa aqui.</em></h1>
   <p>A <Brand/> descobre onde estás a perder pontos e decide o que vale mais a pena estudar hoje.</p>
-  <Link className="landingStartLink" href="/?entrada=1" onClick={onStart?event=>{event.preventDefault();onStart()}:undefined}>Descobrir o meu nível →</Link>
+  <form action="/" method="get" className="landingEntryForm"><button type="submit" name="entrada" value="1" onClick={onStart?event=>{event.preventDefault();onStart()}:undefined}>Descobrir o meu nível →</button></form>
   <div className="features"><span>⚡ 10–20 min/dia</span><span>🎯 Adaptativo</span><span>📈 Progresso real</span></div>
   <div aria-label="Informação legal" className="publicLegalLinks"><a href="/privacidade">Privacidade</a><a href="/termos">Termos de utilização</a></div>
 </section></main>}
