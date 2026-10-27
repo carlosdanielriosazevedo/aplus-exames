@@ -1,3 +1,5 @@
+import {gradeResponse} from "../../app/lib/constructedResponse.js";
+import {CONSTRUCTED_RESPONSE_BANK} from "../../app/lib/constructedResponseBank.js";
 import {describe,it,expect} from "vitest";
 import {buildScoreExplainability,criterionPointRows,stepPointRows} from "../../app/lib/scoreExplainability.js";
 
@@ -44,5 +46,14 @@ describe("missing score is unknown, never zero",()=>{
  });
  it("rejects nonnumeric values as score",()=>{
   for(const value of [false,true,[],{}])expect(buildScoreExplainability({awardedPoints:value,maxPoints:10}).awardedPoints).toBeNull();
+ });
+ it("real mathematics grader does not present needs_review as zero",()=>{
+  const question=CONSTRUCTED_RESPONSE_BANK.find(q=>q.id==="CRV2-10FUN-STEPS-1");
+  expect(question).toBeDefined();
+  const grade=gradeResponse(question,{steps:{},working:"Vou aplicar a regra e simplificar a expressão para obter o resultado."});
+  expect(grade.stepResults.some(row=>row.status==="needs_review")).toBe(true);
+  expect(grade.scoreExplainability.awardedPoints).toBeNull();
+  expect(grade.scoreExplainability.requiresReview).toBe(true);
+  expect(grade.scoreExplainability.rows.filter(row=>row.status==="needs_review").every(row=>row.awardedPoints===null)).toBe(true);
  });
 });
