@@ -5,7 +5,7 @@ test.describe("Landing hydration and existing session",()=>{
     test(`landing click works at ${size.width}px`,async({page})=>{
       await page.setViewportSize(size);
       await page.goto("/",{waitUntil:"domcontentloaded"});
-      const start=page.getByRole("button",{name:/descobrir o meu nível/i});
+      const start=page.getByRole("link",{name:/descobrir o meu nível/i});
       await expect(start).toBeVisible();
       await expect(start).toBeEnabled();
       await start.click();
@@ -13,9 +13,19 @@ test.describe("Landing hydration and existing session",()=>{
       await expect.poll(()=>page.evaluate(()=>sessionStorage.getItem("a25-onboarding-entry"))).toBe("1");
     });
   }
+  test("public content and links are available without JavaScript",async({browser})=>{
+    const context=await browser.newContext({javaScriptEnabled:false});
+    const page=await context.newPage();
+    await page.goto("/");
+    await expect(page.getByRole("heading",{name:/a tua melhor nota/i})).toBeVisible();
+    await expect(page.getByRole("link",{name:"Privacidade"})).toBeVisible();
+    await expect(page.getByRole("link",{name:"Termos de utilização"})).toBeVisible();
+    await expect(page.getByRole("link",{name:/descobrir o meu nível/i})).toHaveAttribute("href","/?entrada=1");
+    await context.close();
+  });
   test("existing onboarding entry resumes without landing",async({page})=>{
     await page.addInitScript(()=>sessionStorage.setItem("a25-onboarding-entry","1"));
     await page.goto("/");
-    await expect(page.getByRole("button",{name:/descobrir o meu nível/i})).toBeHidden({timeout:30000});
+    await expect(page.getByRole("link",{name:/descobrir o meu nível/i})).toBeHidden({timeout:30000});
   });
 });
