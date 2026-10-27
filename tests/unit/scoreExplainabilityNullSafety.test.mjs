@@ -30,4 +30,19 @@ describe("missing score is unknown, never zero",()=>{
   expect(criterionPointRows([{points:5,awardedPoints:null,status:"needs_review"}])[0].awardedPoints).toBeNull();
   expect(criterionPointRows([{points:5,awardedPoints:null,status:"unsure"}])[0].lostPoints).toBeNull();
  });
+ it("never fabricates half credit from an absent partial ratio",()=>{
+  const row=criterionPointRows([{points:10,awardedPoints:null,scoreRatio:null,status:"partial"}])[0];
+  expect(row.awardedPoints).toBeNull();
+ });
+ it("overrides explicit engine zero for pending mathematics steps",()=>{
+  const e=buildScoreExplainability({awardedPoints:0,maxPoints:35,steps:[{status:"needs_review",points:0,maxPoints:10}],requiresReview:false});
+  expect(e.awardedPoints).toBeNull();
+  expect(e.rows[0].awardedPoints).toBeNull();
+  expect(e.rows[0].lostPoints).toBeNull();
+  expect(e.requiresReview).toBe(true);
+  expect(e.consistencyError).toBeNull();
+ });
+ it("rejects nonnumeric values as score",()=>{
+  for(const value of [false,true,[],{}])expect(buildScoreExplainability({awardedPoints:value,maxPoints:10}).awardedPoints).toBeNull();
+ });
 });
