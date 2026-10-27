@@ -26,18 +26,18 @@ function Landing({onStart}){return <main className="dark center"><section classN
   <p className="eyebrow">PREPARAÇÃO INTELIGENTE PARA EXAMES NACIONAIS</p>
   <h1>A tua melhor nota<br/><em>começa aqui.</em></h1>
   <p>A <Brand/> descobre onde estás a perder pontos e decide o que vale mais a pena estudar hoje.</p>
-  <button type="button" onClick={onStart}>Descobrir o meu nível →</button>
+  <a href="/?entrada=1" onClick={onStart?event=>{event.preventDefault();onStart()}:undefined}>Descobrir o meu nível →</a>
   <div className="features"><span>⚡ 10–20 min/dia</span><span>🎯 Adaptativo</span><span>📈 Progresso real</span></div>
   <div aria-label="Informação legal" className="publicLegalLinks"><a href="/privacidade">Privacidade</a><a href="/termos">Termos de utilização</a></div>
 </section></main>}
 
 export default function Page(){
   const [ready,setReady]=useState(false),[boot,setBoot]=useState(false);
-  useEffect(()=>{const q=new URLSearchParams(window.location.search);setBoot(storedProgress()||privateEntry()||q.has("preview"));setReady(true)},[]);
+  useEffect(()=>{const q=new URLSearchParams(window.location.search);setBoot(storedProgress()||privateEntry()||q.has("preview")||q.get("entrada")==="1");setReady(true)},[]);
   function start(){
     try{window.sessionStorage.setItem(ENTRY_KEY,"1")}catch{}
     setBoot(true);
   }
-  if(!ready)return <Loading/>;
+  if(!ready)return <Landing onStart={null}/>;
   return boot?<ClientApp/>:<Landing onStart={start}/>;
 }
