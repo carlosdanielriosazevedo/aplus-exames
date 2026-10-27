@@ -12,7 +12,7 @@ test("builds seven item-specific requests without marking student text trusted",
   const req=makeContextualReviewRequest("FQA-R-"+suffix+"-01",answer);
   expect(req.rubric.criteria).toHaveLength(3);
   expect(req.studentResponse.type).toBe("untrusted_text");
-  expect(req.instructions.join(" ")).toMatch(/não atribuas pontos/);
+  expect(req.instructions.join(" ")).toMatch(/não atribuas pontos/i);
  }
 });
 test("valid evidence yields criterion-only interpretation and no grade",()=>{
