@@ -20,9 +20,10 @@ for(const complete of [true,false]){
    await expect(feedback.getByText("35/35 pontos",{exact:true})).toBeVisible();
    await expect(feedback.locator(".scoreLossExplanation")).toHaveCount(0);
   }else{
-   await expect(feedback.locator(".scoreExplainSummary")).toContainText("25 / 35");
+   await expect(feedback.locator(".scoreExplainSummary")).toContainText("Resposta por classificar");
    await expect(feedback.locator(".scoreExplainSummary")).toHaveCount(1);
-   await expect(feedback.locator(".scoreBreakdown, .scoreMissingForFullCredit")).toHaveCount(0);
+   await expect(feedback.locator(".scoreMissingForFullCredit")).toHaveCount(0);
+   await expect(feedback.getByText("Por classificar",{exact:true}).first()).toBeVisible();
    await expect(feedback.getByText("Etapa ainda não validada:",{exact:false})).toBeVisible();
    await expect(feedback.getByText("Exemplo: O zero de f é 4.",{exact:true})).toHaveCount(1);
   }
