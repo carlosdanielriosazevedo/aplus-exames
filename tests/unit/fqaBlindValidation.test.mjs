@@ -14,12 +14,12 @@ test("validates blinded rubric totals without calling grading engine",()=>{
 });
 test("rejects duplicate blind IDs",()=>{
   const report=validateCsv(make([good,good]),{expectedCount:2});
-  assert.equal(report.ok,false);assert.match(report.errors.join(" "),"duplicate blind_id");
+  assert.equal(report.ok,false);assert.match(report.errors.join(" "),/duplicate blind_id/);
 });
 test("rejects missing adjudication and never replaces it with zero",()=>{
   const report=validateCsv(make([["B2","FQA-R-ELEM-01","10","","",""]]),{expectedCount:1});
   assert.equal(report.completed,0);assert.equal(report.ok,false);
-  assert.match(report.errors.join(" "),"missing human adjudication");
+  assert.match(report.errors.join(" "),/missing human adjudication/);
 });
 test("rejects inconsistent rubric sums and out-of-bounds scores",()=>{
   const report=validateCsv(make([["B1","FQA-R-ELEM-01","10","11","[6,4]","Wrong score"]]),{expectedCount:1});
