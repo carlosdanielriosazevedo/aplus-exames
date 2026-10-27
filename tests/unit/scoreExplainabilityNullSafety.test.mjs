@@ -26,6 +26,8 @@ describe("missing score is unknown, never zero",()=>{
  it("does not invent points in missing criterion or step fields",()=>{
   expect(criterionPointRows([{points:null,awardedPoints:null,status:"needs_review"}])[0].awardedPoints).toBeNull();
   expect(criterionPointRows([{points:"",awardedPoints:""}])[0].maxPoints).toBeNull();
-  expect(stepPointRows([{maxPoints:2,points:null}])[0].awardedPoints).toBe(0);
+  expect(stepPointRows([{maxPoints:2,points:null}])[0].awardedPoints).toBeNull();
+  expect(criterionPointRows([{points:5,awardedPoints:null,status:"needs_review"}])[0].awardedPoints).toBeNull();
+  expect(criterionPointRows([{points:5,awardedPoints:null,status:"unsure"}])[0].lostPoints).toBeNull();
  });
 });
