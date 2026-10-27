@@ -23,6 +23,19 @@ test.describe("Landing hydration and existing session",()=>{
     await expect(page.getByRole("link",{name:/descobrir o meu nível/i})).toHaveAttribute("href","/?entrada=1");
     await context.close();
   });
+  test("entry works before delayed React hydration",async({page})=>{
+    await page.route(/\\/_next\\/static\\/.*\\.js(?:\\?.*)?$/,async route=>{
+      await new Promise(resolve=>setTimeout(resolve,3000));
+      await route.continue();
+    });
+    await page.goto("/",{waitUntil:"domcontentloaded"});
+    const entry=page.getByRole("link",{name:/descobrir o meu nível/i});
+    await expect(entry).toBeVisible();
+    await entry.click({noWaitAfter:true});
+    await expect(page).toHaveURL(/entrada=1/,{timeout:15000});
+    await expect.poll(()=>page.evaluate(()=>sessionStorage.getItem("a25-onboarding-entry")),{timeout:30000}).toBe(null);
+    await expect(entry).toBeHidden({timeout:30000});
+  });
   test("existing onboarding entry resumes without landing",async({page})=>{
     await page.addInitScript(()=>sessionStorage.setItem("a25-onboarding-entry","1"));
     await page.goto("/");
