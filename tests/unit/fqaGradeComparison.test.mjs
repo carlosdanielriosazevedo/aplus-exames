@@ -38,3 +38,25 @@ test("abstained responses excluded from criterion error denominators",()=>{
  assert.equal(r.overall.criterionMAE,0.5);
  assert.equal(r.overall.scored,1);
 });
+
+test("prioritizes severe overcredit and undercredit for human review",()=>{
+ const over=predictions.replace('"8","true","[4,4]"','"10","true","[5,5]"');
+ const report=compareGrades(humans,over);
+ assert.deepEqual(report.priorityReview,[{blind_id:"B1",item_id:"FQA-R-ELEM-01",risk:"SEVERE_OVERCREDIT",error:3}]);
+ assert.equal(report.overall.riskCounts.SEVERE_OVERCREDIT,1);
+ assert.equal(report.overall.riskCounts.ABSTAINED,1);
+});
+test("keeps criterion disagreement visible when total agrees",()=>{
+ const equal=predictions.replace('"8","true","[4,4]"','"7","true","[4,3]"');
+ const report=compareGrades(humans,equal);
+ const row=report.outcomes.find(x=>x.blind_id==="B1");
+ assert.equal(row.error,0);
+ assert.deepEqual(row.criterionErrors,[1,-1]);
+ assert.equal(row.risk,"CRITERION_DISAGREEMENT");
+ assert.equal(report.overall.criterionMAE,1);
+});
+test("does not flag abstention as scoring failure or priority-review error",()=>{
+ const report=compareGrades(humans,predictions);
+ assert.equal(report.priorityReview.length,0);
+ assert.equal(report.outcomes.find(x=>x.blind_id==="B2").risk,"ABSTAINED");
+});
