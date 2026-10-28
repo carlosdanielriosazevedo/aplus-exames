@@ -1,12 +1,12 @@
 "use client";
-import {buildScoreExplainability} from "../lib/scoreExplainability";
+import {buildScoreExplainability,shouldShowScoreLossPanel} from "../lib/scoreExplainability";
 const n=v=>String(Math.round(Number(v)*10)/10).replace(".",",");
 export default function ScoreLossDetails({result,title="Porque perdeste pontos",detailsProvided=false}){
  if(!result)return null;
  const pendingSteps=(result.steps||result.stepResults||[]).some(row=>["needs_review","needs-review","human-review-required","review_required","pending","unsure"].includes(row.status));
  const fresh=buildScoreExplainability({awardedPoints:Number.isFinite(result.provisionalPoints)?result.provisionalPoints:result.points,maxPoints:result.maxPoints,criteria:result.criteria||[],steps:result.steps||result.stepResults||[],globalPenalty:result.penalty||result.globalPenalty||0,globalPenaltyReason:result.penaltyReason||result.globalPenaltyReason,requiresReview:result.requiresReview||result.reviewRequired});
  const e=pendingSteps?fresh:(result.scoreExplainability||fresh);
- if(e.lostPoints===0||(!Number.isFinite(e.lostPoints)&&!e.requiresReview))return null;
+ if(!shouldShowScoreLossPanel(e))return null;
  const missing=e.reasons?.filter(row=>row.id!=="global-penalty")||[];
  const penalty=e.reasons?.find(row=>row.id==="global-penalty");
  return <section className="scoreLossExplanation" aria-label={title}>
