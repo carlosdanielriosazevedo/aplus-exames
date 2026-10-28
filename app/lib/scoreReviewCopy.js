@@ -9,3 +9,4 @@ export function miniExamReviewItemLabel(grade,fallbackMaxPoints){
   if(!Number.isFinite(max))return `${status} · Por classificar`;
   return `${status} · ${String(grade.points).replace(".",",")}/${max} pontos`;
 }
+export const CONTENT_REPORT_SAVED_MESSAGE="✓ Obrigado. O problema ficou registado.";
