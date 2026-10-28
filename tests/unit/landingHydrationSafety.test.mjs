@@ -10,7 +10,9 @@ test("public landing and legal links remain server rendered",()=>{
 test("native form provides pre-hydration onboarding entry",()=>{
  expect(source).toContain('<form action="/" method="get"');
  expect(source).toContain('type="submit" name="entrada" value="1"');
- expect(source).toContain('q.get("entrada")==="1"');
+ expect(source).toContain('url.searchParams.get("entrada")==="1"');
+ expect(source).toContain('window.sessionStorage.setItem(ENTRY_KEY,"1")');
+ expect(source).toContain('window.history.replaceState');
  expect(source).toContain("event.preventDefault();onStart()");
 });
 test("stored progress and private entries remain supported",()=>{
