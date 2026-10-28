@@ -34,7 +34,7 @@ for(const [subjectId,items] of [
       await expect(page.locator(".learnHome .pausedSession")).toHaveCount(0);
       await expect(page.getByRole("button",{name:"Continuar sessão",exact:true})).toHaveCount(1);
       await card.getByRole("button",{name:"Continuar sessão"}).click();
-      await expect(page.locator(".studySessionShell")).toBeVisible({timeout:30000});
+      await expect(page.locator(subjectId==="portuguese"?".studySessionShell":".wideStudentShell .questionCard")).toBeVisible({timeout:30000});
       await expect(page.locator(".sessionTop")).toBeVisible();
       const recovered=await page.evaluate(subjectId=>JSON.parse(localStorage.getItem("a25"))?.subjectProgress?.[subjectId]?.lastPosition,subjectId);
       expect(recovered.sessionId).toBe(state.subjectProgress[subjectId].lastPosition.sessionId);
