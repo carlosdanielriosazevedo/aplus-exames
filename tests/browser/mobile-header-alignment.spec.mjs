@@ -133,7 +133,10 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
    await expect(page.locator(".learnHome button",{hasText:"Continuar →"})).toHaveCount(0);
    const rect=await card.boundingBox();
    expect(rect.x).toBeGreaterThanOrEqual(0);expect(rect.x+rect.width).toBeLessThanOrEqual(width+1);
-   expect(rect.height).toBeLessThanOrEqual(230);
+   // This is the existing full-sized navy mission card, not the old compact yellow banner.
+   expect(rect.height).toBeLessThanOrEqual(440);
+   const view=await page.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,width:innerWidth}));
+   expect(view.scrollWidth).toBeLessThanOrEqual(view.width+1);
    await page.screenshot({path:`/tmp/audit-visual/${subjectId}-${width}-Pausa.png`});
    await testInfo.attach(`Sessão em pausa-${width}`,{body:await page.screenshot(),contentType:"image/png"});
   });
