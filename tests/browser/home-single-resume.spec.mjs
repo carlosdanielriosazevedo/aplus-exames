@@ -14,7 +14,10 @@ test("Português · Missão em pausa fica apenas na caixa principal com uma aç�
   const home=page.locator(".learnHome");
   await expect(home).toBeVisible({timeout:30000});
   await expect(home.locator(".pausedSession")).toHaveCount(0);
-  await expect(home.locator(".pathNode.current article")).toContainText("SESSÃO EM PAUSA");
+  await expect(home.locator(".pausedActivityEyebrow")).toContainText("MISSÃO DE HOJE");
+  await expect(home.locator(".pausedActivityStatus")).toHaveText("SESSÃO EM PAUSA");
+  await expect(home.locator(".pausedActivityStatus")).toHaveCSS("color","rgb(255, 179, 173)");
+  await expect(home.locator(".pausedActivityEyebrow")).toHaveAttribute("aria-label","MISSÃO DE HOJE — Sessão em pausa");
   await expect(home.locator(".sessionPausedMeta")).toHaveText("Pergunta 4 de 7");
   const resume=home.getByRole("button",{name:"Continuar sessão",exact:true});
   await expect(resume).toHaveCount(1);
