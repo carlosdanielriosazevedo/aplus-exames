@@ -43,7 +43,7 @@ test.describe("Landing hydration and existing session",()=>{
     const button=page.getByRole("button",{name:/descobrir o meu nível/i});
     await expect(button).toBeVisible();
     await expect(button).toHaveCSS("background-color","rgb(255, 178, 36)");
-    await expect(button).toHaveCSS("color","rgb(8, 19, 46)");
+    await expect(button).toHaveCSS("color","rgb(16, 43, 66)");
     await button.hover();
     await expect(button).toHaveCSS("background-color","rgb(255, 173, 25)");
   });
