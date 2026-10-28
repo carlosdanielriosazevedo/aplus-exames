@@ -104,7 +104,7 @@ export function gradePhysicsChemistryStepwise(item,value){
     const relationKnown=relationAccepted(row.work,stepPolicy.acceptedRelations||step.accepted||[]);
     if(!relationKnown){
       requiresReview=true;
-      steps.push({id:step.id,status:"alternative-method-review",points:null,maxPoints:step.points,expected:step.expected,answer:row,errorType:null,note:"A relação/processo não coincide com os modelos reconhecidos. Pode ser cientificamente válido e precisa de revisão."});
+      steps.push({id:step.id,status:"alternative-method-review",points:null,maxPoints:step.points,expected:step.expected,answer:row,errorType:null,note:"A app não conseguiu verificar automaticamente este processo. Pode ser cientificamente válido; compara-o com a resolução."});
       continue;
     }
     traversed[step.id]=true;
@@ -117,7 +117,7 @@ export function gradePhysicsChemistryStepwise(item,value){
         steps.push({id:step.id,status:"correct",correct:true,points:step.points,maxPoints:step.points,expected:step.expected,answer:row,errorType:null});
       }else{
         type2Count+=1;
-        steps.push({id:step.id,status:"analytical-error",correct:false,points:step.points,maxPoints:step.points,expected:step.expected,answer:row,errorType:2,note:"O processo base está identificado, mas o resultado simbólico precisa de revisão."});
+        steps.push({id:step.id,status:"analytical-error",correct:false,points:step.points,maxPoints:step.points,expected:step.expected,answer:row,errorType:2,note:"O processo base está identificado, mas o resultado simbólico não foi confirmado pela app."});
       }
       continue;
     }
@@ -175,7 +175,7 @@ export function gradePhysicsChemistryStepwise(item,value){
     status:"provisional-review",final:false,correct:null,points:null,provisionalPoints,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode,steps,
     type1Count,type2Count,penalty,requiresReview,
     note:requiresReview
-      ?"Há pelo menos um processo alternativo que a app não deve decidir automaticamente. Mantém-se revisão humana/guiada."
+      ?"Há pelo menos um processo alternativo que a app não consegue avaliar automaticamente. A classificação não está disponível para essa parte da resposta."
       :"Indicação provisória segundo regras gerais de itens por etapas: soma das etapas e desvalorização por erros detetáveis. Não substitui os critérios específicos oficiais."
   };
 }
