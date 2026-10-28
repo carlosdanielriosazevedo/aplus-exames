@@ -124,9 +124,13 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
     await expect(page.locator(".sessionTop")).toBeVisible({timeout:30_000});
     await page.getByRole("button",{name:"Guardar e continuar depois",exact:true}).click();
    }
-   const card=page.locator(".pausedSession").first();
+   const card=page.locator(".learnHome .adaptivePath .pathNode.current article").first();
    await expect(card).toBeVisible({timeout:30_000});
-   await expect(card.getByRole("button",{name:/Continuar/u})).toBeVisible();
+   await expect(card.locator(".missionPausedStatus")).toHaveCount(1);
+   await expect(card.locator(".missionPausedStatus")).toContainText("SESSÃO EM PAUSA");
+   await expect(card.getByRole("button",{name:"Continuar sessão",exact:true})).toBeVisible();
+   await expect(page.locator(".learnHome .pausedSession")).toHaveCount(0);
+   await expect(page.locator(".learnHome button",{hasText:"Continuar →"})).toHaveCount(0);
    const rect=await card.boundingBox();
    expect(rect.x).toBeGreaterThanOrEqual(0);expect(rect.x+rect.width).toBeLessThanOrEqual(width+1);
    expect(rect.height).toBeLessThanOrEqual(230);
