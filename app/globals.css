@@ -160,7 +160,7 @@
 .testerSegmentPicker button.selected{background:rgba(142,120,255,.24);border-color:#9e8cff}
 .testerSegmentPicker strong,.testerSegmentPicker small{display:block}
 .testerSegmentPicker strong{font-size:7.5px}.testerSegmentPicker small{font-size:6.2px;line-height:1.35;color:rgba(255,255,255,.65);margin-top:2px}
-.hero>button:disabled{opacity:.45;cursor:not-allowed}
+.hero>button:disabled,.hero>.landingEntryForm>button:disabled{opacity:.45;cursor:not-allowed}
 .testerSegmentTag{display:flex;gap:6px;align-items:center;margin:8px 0}
 .testerSegmentTag b,.testerSegmentTag span{font-size:6.5px;padding:4px 7px;border-radius:999px}
 .testerSegmentTag b{background:rgba(255,255,255,.11)}.testerSegmentTag span{background:#ece8ff;color:#5e4bb3}
@@ -382,7 +382,7 @@ button{touch-action:manipulation}
   input,select,textarea{font-size:16px!important}
   input[type=range]{min-height:44px;height:44px}
   .goalSlider{min-height:44px}
-  .primary,.secondary,.hero>button{min-height:50px;font-size:16px}
+  .primary,.secondary,.hero>button,.hero>.landingEntryForm>button{min-height:50px;font-size:16px}
   .back,.goalLink,.reviewLink,.pauseLink,.reportToggle,.qaLink.studentAccount{min-height:44px;display:inline-flex;align-items:center;font-size:12px}
   .qaLink.studentAccount{justify-content:center}
 
@@ -516,8 +516,8 @@ body{color:var(--app-navy);background:#fff}
 .eyebrow,.questionContext,.trainChoices em,.pathNode.current article small,.pathNode.current summary,.focusDisclosure>summary,.resultDetails>summary,.progressDetails>summary,.progressHelp>summary{color:var(--app-orange-dark)}
 .hero .logo{margin-bottom:24px}
 .hero h1 em{color:var(--app-orange-dark)}.hero>p:not(.eyebrow){color:var(--app-muted)}
-.hero>button,.primary,.pathNode.current button,.dailyMissionStart,.firstUseTourNext{background:var(--app-orange);color:var(--app-navy);box-shadow:0 10px 25px #f59e0b2d}
-.hero>button:hover,.primary:hover,.pathNode.current button:hover,.dailyMissionStart:hover,.firstUseTourNext:hover{background:#ffad19}
+.hero>button,.hero>.landingEntryForm>button,.primary,.pathNode.current button,.dailyMissionStart,.firstUseTourNext{background:var(--app-orange);color:var(--app-navy);box-shadow:0 10px 25px #f59e0b2d}
+.hero>button:hover,.hero>.landingEntryForm>button:hover,.primary:hover,.pathNode.current button:hover,.dailyMissionStart:hover,.firstUseTourNext:hover{background:#ffad19}
 .sel,.subjectCard.selected{border-color:var(--app-orange)!important;background:var(--app-orange-soft)!important}
 .notice,.branchNote.strong,.decisionExplain,.competenceOutcome,.lastExam,.subjectSelectionSummary{background:#fff6e6;border-color:#f2d8a8}
 .bar i,.focusMiniBar i{background:var(--app-orange)}
