@@ -2,6 +2,7 @@
 import {useEffect,useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import StudyModeHub from "./StudyModeHub";
+import PausedHomeStatus from "./PausedHomeStatus";
 import PhysicsChemistryLearnPanel from "./PhysicsChemistryLearnPanel";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
 import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";
@@ -77,6 +78,19 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   const onboardingStep=subjectOnboardingStep(s,SUBJECT_ID);
   const onboardingDoneScreen="home";
   const missionDone=missionCompletedToday(s);
+  const homePausedPosition=progress.lastPosition;
+  const homePausedExam=!homePausedPosition?examDrafts[0]||null:null;
+  const homePaused=!!(homePausedPosition||homePausedExam);
+  const homePauseProgress=homePausedPosition
+    ?(Number.isInteger(homePausedPosition.current)&&homePausedPosition.itemIds?.length
+      ?`Pergunta ${homePausedPosition.current+1} de ${homePausedPosition.itemIds.length}`:null)
+    :homePausedExam?.draft?.review?"Revisão guardada"
+    :homePausedExam?.draft?.itemIds?.length?`Pergunta ${(homePausedExam.draft.index||0)+1} de ${homePausedExam.draft.itemIds.length}`:null;
+  function resumeHome(){
+    if(homePausedPosition){resume();return}
+    if(homePausedExam)go(homePausedExam.route);
+  }
+
   useEffect(()=>{
     if(!["home","exams"].includes(view))return;
     const mini1=physicsChemistryMiniExamById("fqa-mini-1");
@@ -407,12 +421,16 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   return <main className="learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>
     {unrecoverableSession&&<div className="notice warning"><b>Sessão impossível de recuperar</b><span>Uma ou mais perguntas deixaram de estar disponíveis. A tentativa será arquivada sem pontuação adicional.</span><button className="secondary" onClick={recoverUnrecoverableSession}>Resolver sessão irrecuperável</button></div>}
     <div className="learnIntro"><div className="mobileMainTitle"><p>Olá 👋</p><h1>O teu próximo passo.</h1></div><span>{missionDone?"Missão feita. Podes continuar por tua conta.":progress.diagnosticDone?"Uma recomendação curta, escolhida a partir do teu percurso.":"Primeiro, vamos encontrar o melhor ponto de partida."}</span></div>
-    {progress.lastPosition&&progress.lastPosition.kind!=="diagnostic"&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></div><button onClick={resume}>Continuar →</button></div>}
-    {!progress.lastPosition&&examDrafts.map(({id,title,route,draft})=><div className="pausedSession" key={"home-"+id}><div><small>{draft.review?"REVISÃO EM PAUSA":"PROVA EM PAUSA"}</small><b>{title}</b><span>{draft.review?"Retoma a revisão por critérios.":`Pergunta ${(draft.index||0)+1} de ${draft.itemIds?.length||0}`} · {physicsChemistryDraftAgeLabel(draft.updatedAt)}</span></div><button onClick={()=>go(route)}>Continuar →</button></div>)}
     <section className="adaptivePath" aria-label="Caminho adaptativo de Física e Química A">
       <div className={`pathNode ${progress.diagnosticDone?"done":"current"}`}><span>{progress.diagnosticDone?"✓":"●"}</span><div><small>{progress.diagnosticDone?"ÚLTIMO PASSO":"PRIMEIRO PASSO"}</small><b>{progress.diagnosticDone?"Diagnóstico concluído":"Conhecer o teu ponto de partida"}</b></div></div>
       <div className="pathLine active"/>
-      <div className={`pathNode current ${missionDone?"complete":""}`}><span>{missionDone?"✓":"●"}</span><article><small>{progress.diagnosticDone?(missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"):"PRÓXIMO PASSO"}</small><h2>{progress.diagnosticDone?"Física e Química A adaptada ao teu percurso":"Diagnóstico de Física e Química A"}</h2><div className="missionCardMeta"><span>{progress.diagnosticDone?"~3–5 min":"8 perguntas"}</span>{progress.diagnosticDone&&<span>{currentYear}</span>}</div><button disabled={(!progress.lastPosition&&((!progress.diagnosticDone&&!scopedCoverage.diagnosticReady)||(!missionDone&&progress.diagnosticDone&&!scopedCoverage.missionReady)))} onClick={progress.lastPosition?resume:missionDone?()=>go("train"):progress.diagnosticDone?()=>startMission():()=>go("diag")}>{progress.lastPosition?(progress.lastPosition.kind==="diagnostic"?"Continuar diagnóstico":"Continuar sessão"):missionDone?"Continuar a estudar":progress.diagnosticDone?"Começar Missão":"Começar diagnóstico"}</button></article></div>
+      <div className={`pathNode current ${missionDone&&!homePaused?"complete":""}`}><span>{missionDone&&!homePaused?"✓":"●"}</span><article>
+        <small>{homePausedExam?(homePausedExam.id==="fqa-full-715"?"EXAME COMPLETO":"MINI-EXAME"):homePausedPosition?.kind==="training"?"TREINO LIVRE":homePausedPosition?.kind==="diagnostic"?"DIAGNÓSTICO":progress.diagnosticDone?(missionDone&&!homePaused?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"):"PRÓXIMO PASSO"}</small>
+        <h2>{homePausedExam?homePausedExam.title:homePausedPosition&&homePausedPosition.kind!=="mission"?(homePausedPosition.label||"Sessão de Física e Química A"):progress.diagnosticDone?"Física e Química A adaptada ao teu percurso":"Diagnóstico de Física e Química A"}</h2>
+        {homePaused&&<PausedHomeStatus progressText={homePauseProgress}/>}
+        <div className="missionCardMeta"><span>{homePausedExam?(homePausedExam.id==="fqa-full-715"?"Exame completo":"Mini-exame"):progress.diagnosticDone?"~3–5 min":"8 perguntas"}</span>{progress.diagnosticDone&&<span>{currentYear}</span>}</div>
+        <button disabled={!homePaused&&((!progress.diagnosticDone&&!scopedCoverage.diagnosticReady)||(!missionDone&&progress.diagnosticDone&&!scopedCoverage.missionReady))} onClick={homePaused?resumeHome:missionDone?()=>go("train"):progress.diagnosticDone?()=>startMission():()=>go("diag")}>{homePaused?"Continuar sessão":missionDone?"Continuar a estudar":progress.diagnosticDone?"Começar Missão":"Começar diagnóstico"}</button>
+      </article></div>
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{progress.diagnosticDone?"Praticar, rever matéria ou fazer um exame":"Primeira Missão adaptada"}</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>

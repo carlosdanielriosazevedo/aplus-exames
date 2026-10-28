@@ -124,12 +124,19 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
     await expect(page.locator(".sessionTop")).toBeVisible({timeout:30_000});
     await page.getByRole("button",{name:"Guardar e continuar depois",exact:true}).click();
    }
-   const card=page.locator(".pausedSession").first();
+   const card=page.locator(".learnHome .adaptivePath .pathNode.current article").first();
    await expect(card).toBeVisible({timeout:30_000});
-   await expect(card.getByRole("button",{name:/Continuar/u})).toBeVisible();
+   await expect(card.locator(".missionPausedStatus")).toHaveCount(1);
+   await expect(card.locator(".missionPausedStatus")).toContainText("SESSÃO EM PAUSA");
+   await expect(card.getByRole("button",{name:"Continuar sessão",exact:true})).toBeVisible();
+   await expect(page.locator(".learnHome .pausedSession")).toHaveCount(0);
+   await expect(page.locator(".learnHome button",{hasText:"Continuar →"})).toHaveCount(0);
    const rect=await card.boundingBox();
    expect(rect.x).toBeGreaterThanOrEqual(0);expect(rect.x+rect.width).toBeLessThanOrEqual(width+1);
-   expect(rect.height).toBeLessThanOrEqual(230);
+   // This is the existing full-sized navy mission card, not the old compact yellow banner.
+   expect(rect.height).toBeLessThanOrEqual(440);
+   const view=await page.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,width:innerWidth}));
+   expect(view.scrollWidth).toBeLessThanOrEqual(view.width+1);
    await page.screenshot({path:`/tmp/audit-visual/${subjectId}-${width}-Pausa.png`});
    await testInfo.attach(`Sessão em pausa-${width}`,{body:await page.screenshot(),contentType:"image/png"});
   });

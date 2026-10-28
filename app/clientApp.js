@@ -14,6 +14,7 @@ import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,Fri
 import StudyModeHub from "./components/StudyModeHub";
 import {Welcome} from "./components/Welcome";
 import ScoreLossExplanation from "./components/ScoreLossExplanation";
+import PausedHomeStatus from "./components/PausedHomeStatus";
 import {miniExamReviewItemLabel,CONTENT_REPORT_SAVED_MESSAGE} from "./lib/scoreReviewCopy";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
 const AccountCloud=dynamic(()=>import("./components/AccountCloud").then(module=>module.AccountCloud),{ssr:false});
@@ -1058,6 +1059,19 @@ function Home({s,setS,go,reset}){
   const computedPlan=dailyMissionPlan(s);
   const persistedPlan=missionPlanForToday(s,null);
   const [pausedDraft,setPausedDraft]=useState(()=>typeof window!=="undefined"?loadSessionDraft(s.betaMode||"internal"):null);
+  // A resumed attempt takes priority over recommendations. Do not add a second CTA.
+  const pausedKind=pausedDraft?.kind;
+  const pausedProgress=pausedKind==="training"&&pausedDraft.questions?.length
+    ?`Pergunta ${(pausedDraft.i||0)+1} de ${pausedDraft.questions.length}`
+    :pausedKind==="mini_exam"&&pausedDraft.session?.questions?.length
+      ?`Pergunta ${(pausedDraft.session.current||0)+1} de ${pausedDraft.session.questions.length}`
+      :pausedKind==="mission"&&Number.isInteger(pausedDraft.totalCount)&&pausedDraft.totalCount>0
+        ?`${pausedDraft.totalCount} perguntas realizadas`
+        :pausedKind?"Progresso guardado":null;
+  const pausedTitle=pausedKind==="mini_exam"?"Mini-exame de Matemática A"
+    :pausedKind==="training"?"Treino Livre"
+    :pausedKind==="diagnostic"?"Diagnóstico de Matemática A":null;
+
   const plan=pausedDraft?.kind==="mission"&&pausedDraft.plan
     ?pausedDraft.plan
     :(persistedPlan||computedPlan);
@@ -1069,7 +1083,8 @@ function Home({s,setS,go,reset}){
   const pendingSelectedDiagnostics=hasPendingSelectedDiagnostics(s);
 
   useEffect(()=>{
-    if(typeof window==="undefined"||missionDone||showFirstUseTour||pendingSelectedDiagnostics)return;
+    // Uma missão já guardada deve ser retomada só pelo botão do cartão azul, sem modal concorrente.
+    if(typeof window==="undefined"||missionDone||showFirstUseTour||pendingSelectedDiagnostics||pausedDraft)return;
 
     const assignmentPlan=pausedDraft?.kind==="mission"&&pausedDraft.plan
       ?pausedDraft.plan
@@ -1188,6 +1203,11 @@ function Home({s,setS,go,reset}){
     });
   }
 
+  function resumePausedFromHome(){
+    if(!pausedDraft)return;
+    if(pausedDraft.kind==="mission"){startDailyMission("home_card");return}
+    go(draftScreen(pausedDraft)||"home");
+  }
   const probableNext=ranked[0]?.theme;
   return <main className="learnHome">
     {showFirstUseTour
@@ -1197,22 +1217,16 @@ function Home({s,setS,go,reset}){
     <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button>{!hasPendingAssessment(s)&&<button onClick={reset}>Recomeçar protótipo</button>}</>}</div></details></StudentTop>
     <FriendsBetaRibbon s={s}/><div className="learnIntro"><div className="mobileMainTitle"><p>Olá 👋</p><h1>O teu próximo passo.</h1></div><span>{missionDone?"Missão feita. Podes continuar por tua conta.":"Uma recomendação curta, escolhida a partir do teu percurso."}</span></div>
 
-    {pausedDraft&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{pausedDraft.kind==="mini_exam"?"Mini-exame":pausedDraft.kind==="training"?"Treino Livre":"Missão"}</b><span>O teu progresso desta sessão ficou guardado neste dispositivo.</span></div><button onClick={()=>{
-      if(pausedDraft.kind==="mini_exam")go(pausedDraft.screen||"miniExamRun");
-      else if(pausedDraft.kind==="training")go("trainingRun");
-      else go("mission");
-    }}>Continuar →</button></div>}
-
     {!s.diagnosticDone?<section className="adaptivePath" aria-label="Caminho adaptativo de Matemática A">
       <div className="pathNode current"><span>●</span><div><small>PRIMEIRO PASSO</small><b>Conhecer o teu ponto de partida</b></div></div>
       <div className="pathLine active"/>
-      <div className="pathNode current"><span>●</span><article><small>PRÓXIMO PASSO</small><h2>Diagnóstico de Matemática A</h2><div className="missionCardMeta"><span>Diagnóstico inicial</span></div><button onClick={()=>go("diag")}>{pausedDraft?.kind==="diagnostic"?"Continuar diagnóstico":"Começar Diagnóstico"}</button></article></div>
+      <div className="pathNode current"><span>●</span><article><small>{pausedDraft?"DIAGNÓSTICO":"PRÓXIMO PASSO"}</small><h2>{pausedTitle||"Diagnóstico de Matemática A"}</h2>{pausedDraft&&<PausedHomeStatus progressText={pausedProgress}/>}<div className="missionCardMeta"><span>Diagnóstico inicial</span></div><button onClick={pausedDraft?resumePausedFromHome:()=>go("diag")}>{pausedDraft?"Continuar sessão":"Começar Diagnóstico"}</button></article></div>
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>Primeira Missão adaptada</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>:<section className="adaptivePath" aria-label="Caminho adaptativo">
       <div className="pathNode done"><span>✓</span><div><small>ÚLTIMO PASSO</small><b>{completedMission?.focus||theme(completedMission?.themeId)?.short||"Diagnóstico concluído"}</b></div></div>
       <div className="pathLine active"/>
-      <div className={"pathNode current "+(missionDone?"complete":"")}><span>{missionDone?"✓":"●"}</span><article><small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small><h2>{missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.focus||t?.short||"Conteúdo protegido")}</h2><div className="missionCardMeta"><span>~3–5 min</span>{!missionDone&&t?.year&&<span>{t.year}</span>}</div>{missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:<button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Indisponível":pausedDraft?.kind==="mission"?"Continuar Missão":"Começar Missão"}</button>}{!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
+      <div className={"pathNode current "+(missionDone&&!pausedDraft?"complete":"")}><span>{missionDone&&!pausedDraft?"✓":"●"}</span><article><small>{pausedKind==="mini_exam"?"MINI-EXAME":pausedKind==="training"?"TREINO LIVRE":missionDone&&!pausedDraft?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small><h2>{pausedTitle||(missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.focus||t?.short||"Conteúdo protegido"))}</h2>{pausedDraft&&<PausedHomeStatus progressText={pausedProgress}/>}<div className="missionCardMeta"><span>{pausedKind==="mini_exam"?"Mini-exame":pausedKind==="training"?"Treino Livre":"~3–5 min"}</span>{!missionDone&&t?.year&&<span>{t.year}</span>}</div>{pausedDraft?<button onClick={resumePausedFromHome}>Continuar sessão</button>:missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:<button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Indisponível":"Começar Missão"}</button>}{!pausedDraft&&!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{probableNext?.short||"A definir após esta sessão"}</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>}

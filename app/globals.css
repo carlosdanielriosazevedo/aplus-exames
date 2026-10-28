@@ -2020,3 +2020,24 @@ button,input,select,textarea{max-width:100%}
     line-height:1.25;
   }
 }
+
+
+/* Paused attempt: one action in the existing navy Aprender card, never a second banner. */
+.learnHome .pathNode.current article .missionPausedStatus{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  margin:10px 0 2px;max-width:100%;
+}
+.learnHome .pathNode.current article .missionPausedStatus>span{
+  display:inline-flex;align-items:center;max-width:100%;
+  padding:5px 10px;border:1px solid rgba(255,178,36,.45);
+  border-radius:999px;color:#ffca6b!important;background:rgba(255,178,36,.10);
+  font-size:11px;line-height:1.35;font-weight:750;letter-spacing:.025em;
+}
+.learnHome .pathNode.current article .missionPausedStatus>.missionPausedProgress{
+  color:#ecf4f6!important;background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.20);
+  font-weight:600;letter-spacing:0;
+}
+@media(max-width:390px){
+  .learnHome .pathNode.current article .missionPausedStatus{gap:6px;}
+  .learnHome .pathNode.current article .missionPausedStatus>span{font-size:11px;padding:5px 8px;}
+}
