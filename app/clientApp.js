@@ -1083,7 +1083,8 @@ function Home({s,setS,go,reset}){
   const pendingSelectedDiagnostics=hasPendingSelectedDiagnostics(s);
 
   useEffect(()=>{
-    if(typeof window==="undefined"||missionDone||showFirstUseTour||pendingSelectedDiagnostics)return;
+    // Uma missão já guardada deve ser retomada só pelo botão do cartão azul, sem modal concorrente.
+    if(typeof window==="undefined"||missionDone||showFirstUseTour||pendingSelectedDiagnostics||pausedDraft)return;
 
     const assignmentPlan=pausedDraft?.kind==="mission"&&pausedDraft.plan
       ?pausedDraft.plan
