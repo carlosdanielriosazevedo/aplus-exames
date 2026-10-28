@@ -1,5 +1,5 @@
 import {describe,it,expect} from "vitest";
-import {miniExamReviewItemLabel} from "../../app/lib/scoreReviewCopy.js";
+import {miniExamReviewItemLabel,CONTENT_REPORT_SAVED_MESSAGE} from "../../app/lib/scoreReviewCopy.js";
 import {shouldShowScoreLossPanel} from "../../app/lib/scoreExplainability.js";
 
 describe("mini-exam review copy is truthful",()=>{
@@ -18,6 +18,10 @@ describe("mini-exam review copy is truthful",()=>{
  });
  it("avoids fabricated points on incomplete score objects",()=>{
   expect(miniExamReviewItemLabel({status:"partial",points:null,maxPoints:35},35)).toBe("Parcial · Por classificar");
+ });
+ it("acknowledges stored problem reports without promising human review",()=>{
+  expect(CONTENT_REPORT_SAVED_MESSAGE).toContain("registado");
+  expect(CONTENT_REPORT_SAVED_MESSAGE).not.toMatch(/revisão|pessoa|professor/i);
  });
  it("no loss pane is justified for an unanswered item",()=>{
   // The component must also suppress an unanswered item before calling this helper.
