@@ -2,7 +2,7 @@
 export function miniExamReviewItemLabel(grade,fallbackMaxPoints){
   if(!grade||grade.status==="unanswered")return "Não respondida";
   const status=grade.status==="needs_review"?"Avaliação incompleta":grade.status==="correct"?"Certa":grade.status==="partial"?"Parcial":"Errada";
-  const pending=grade.reviewRequired||grade.requiresReview||grade.stepResults?.some(row=>row.status==="needs_review");
+  const pending=grade.status==="needs_review"||grade.reviewRequired||grade.requiresReview||grade.stepResults?.some(row=>row.status==="needs_review");
   if(pending)return `${status} · Por classificar`;
   if(!Number.isFinite(grade.points))return `${status} · Por classificar`;
   const max=grade.maxPoints??fallbackMaxPoints;
