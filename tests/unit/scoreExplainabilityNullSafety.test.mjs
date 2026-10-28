@@ -1,7 +1,7 @@
 import {gradeResponse} from "../../app/lib/constructedResponse.js";
 import {CONSTRUCTED_RESPONSE_BANK} from "../../app/lib/constructedResponseBank.js";
 import {describe,it,expect} from "vitest";
-import {buildScoreExplainability,criterionPointRows,stepPointRows} from "../../app/lib/scoreExplainability.js";
+import {buildScoreExplainability,criterionPointRows,stepPointRows,shouldShowScoreLossPanel} from "../../app/lib/scoreExplainability.js";
 
 describe("missing score is unknown, never zero",()=>{
  it("does not invent a zero grade when top-level points are null",()=>{
@@ -46,6 +46,17 @@ describe("missing score is unknown, never zero",()=>{
  });
  it("rejects nonnumeric values as score",()=>{
   for(const value of [false,true,[],{}])expect(buildScoreExplainability({awardedPoints:value,maxPoints:10}).awardedPoints).toBeNull();
+ });
+ it("hides misleading loss panel for full scores even if flagged for review",()=>{
+  const e=buildScoreExplainability({awardedPoints:10,maxPoints:10,requiresReview:true});
+  expect(e.requiresReview).toBe(true);
+  expect(e.lostPoints).toBe(0);
+  expect(shouldShowScoreLossPanel(e)).toBe(false);
+ });
+ it("keeps pending-score explanation visible without promising human review",()=>{
+  const e=buildScoreExplainability({awardedPoints:0,maxPoints:35,steps:[{status:"needs_review",points:0,maxPoints:10}]});
+  expect(e.awardedPoints).toBeNull();
+  expect(shouldShowScoreLossPanel(e)).toBe(true);
  });
  it("real mathematics grader does not present needs_review as zero",()=>{
   const question=CONSTRUCTED_RESPONSE_BANK.find(q=>q.id==="CRV2-10FUN-STEPS-1");
