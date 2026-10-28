@@ -12,7 +12,7 @@ test("unanswered mini-exam review does not invent a provisional zero grade",asyn
     localStorage.setItem("a25-active-session-v1",JSON.stringify(draft));
   },{state,draft});
   await page.goto("/");
-  await expect(page.locator(".examQuestion")).toBeVisible({timeout:30000});
+  await expect(page.getByRole("button",{name:"Ver mapa de respostas"})).toBeVisible({timeout:30000});
   await page.getByRole("button",{name:"Ver mapa de respostas"}).click();
   await page.getByRole("button",{name:"Entregar Mini-exame"}).click();
   await page.getByRole("button",{name:"Rever o Mini-exame"}).click();
