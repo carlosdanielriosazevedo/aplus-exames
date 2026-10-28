@@ -427,8 +427,8 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
       await page.close();
       const reopened=await context.newPage();
       await reopened.goto("/");
-      await expect(reopened.getByRole("button",{name:"Continuar →",exact:true}).first()).toBeVisible({timeout:30_000});
-      await reopened.getByRole("button",{name:"Continuar →",exact:true}).first().click();
+      await expect(reopened.getByRole("button",{name:"Continuar sessão",exact:true}).first()).toBeVisible({timeout:30_000});
+      await reopened.getByRole("button",{name:"Continuar sessão",exact:true}).first().click();
       const restored=await reopened.evaluate(({key,subjectId})=>{
         const value=JSON.parse(localStorage.getItem(key));
         return subjectId==="portuguese"?value.subjectSettings.portuguese.miniExamDraft:value;
