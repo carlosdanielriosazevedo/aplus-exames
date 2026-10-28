@@ -1,6 +1,4 @@
 import {test,expect} from "@playwright/test";
-import {PORTUGUESE_ITEMS} from "../../app/data/portugueseContent.js";
-import {PHYSICS_CHEMISTRY_A_ITEMS} from "../../app/data/physicsChemistryFoundation.js";
 
 function configured(subjectId,kind,itemIds){
   const now=Date.now();
@@ -20,20 +18,19 @@ function configured(subjectId,kind,itemIds){
   };
 }
 for(const [subjectId,items] of [
-  ["portuguese",PORTUGUESE_ITEMS],
-  ["physics-chemistry-a",PHYSICS_CHEMISTRY_A_ITEMS]
+  ["portuguese",["PT639-FND-001","PT639-FND-002","PT639-FND-004","PT639-FND-018"]],
+  ["physics-chemistry-a",["FQA-ELEM-01","FQA-MAT-01","FQA-ENE-01","FQA-ELEM-02"]]
 ]){
   for(const kind of ["mission","training"]){
     test(subjectId+" · "+kind+" · single resume CTA restores exact saved item",async({page})=>{
       await page.setViewportSize({width:390,height:844});
-      const selected=items.slice(0,7);
-      const state=configured(subjectId,kind,selected.map(item=>item.id));
+      const state=configured(subjectId,kind,items);
       await page.addInitScript(state=>localStorage.setItem("a25",JSON.stringify(state)),state);
       await page.goto("/");
       const card=page.locator(".learnHome .adaptivePath .pathNode.current article");
       await expect(card).toBeVisible({timeout:30000});
       await expect(card.locator(".missionPausedStatus")).toContainText("SESSÃO EM PAUSA");
-      await expect(card.locator(".missionPausedProgress")).toContainText("Pergunta 3 de 7");
+      await expect(card.locator(".missionPausedProgress")).toContainText("Pergunta 3 de 4");
       await expect(page.locator(".learnHome .pausedSession")).toHaveCount(0);
       await expect(page.getByRole("button",{name:"Continuar sessão",exact:true})).toHaveCount(1);
       await card.getByRole("button",{name:"Continuar sessão"}).click();
