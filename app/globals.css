@@ -2020,3 +2020,6 @@ button,input,select,textarea{max-width:100%}
     line-height:1.25;
   }
 }
+
+/* Resume state lives inside the single primary learning-path card. */
+.adaptivePath .missionCardMeta .sessionPausedMeta{background:#ffe2a3!important;color:#6c4c0e!important;font-weight:850}
