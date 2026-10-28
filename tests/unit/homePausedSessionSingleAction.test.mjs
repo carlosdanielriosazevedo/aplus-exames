@@ -27,6 +27,6 @@ describe("single paused-assessment CTA on Aprender",()=>{
   expect(home).not.toContain('className="pausedSession"');
   for(const kind of ["mini_exam","training","diagnostic","mission"])expect(home).toContain(`kind==="${kind}"`);
   expect(home).toContain('"SESSÃO EM PAUSA"');
-  expect(home).toContain('"Continuar sessão"');
+  expect(home).toContain('>Continuar sessão</button>');
  });
 });
