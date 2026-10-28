@@ -1,6 +1,7 @@
 "use client";
 import {useEffect,useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
+import PausedHomeStatus from "./PausedHomeStatus";
 import PortugueseLearnPanel from "./PortugueseLearnPanel";
 import StudyModeHub from "./StudyModeHub";
 import {PORTUGUESE_COMPETENCIES} from "../data/portugueseFoundation";
@@ -142,6 +143,23 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
   const scopedCoverage=portugueseCoverage(scopedItems);
   const progress=subjectProgressFor(s,"portuguese");
   const miniExamDraft=s.subjectSettings?.portuguese?.miniExamDraft||null;
+  // The Aprender page has one resume action, inside the existing navy step card.
+  const homePausedPosition=progress.lastPosition;
+  const homePausedExam=!homePausedPosition?miniExamDraft:null;
+  const homePaused=!!(homePausedPosition||homePausedExam);
+  const homePauseProgress=homePausedPosition
+    ?(Number.isInteger(homePausedPosition.current)&&homePausedPosition.itemIds?.length
+        ?`Pergunta ${homePausedPosition.current+1} de ${homePausedPosition.itemIds.length}`:null)
+    :homePausedExam?.review?"Revisão guardada"
+    :homePausedExam?.itemIds?.length?`Pergunta ${(homePausedExam.index||0)+1} de ${homePausedExam.itemIds.length}`:null;
+  function resumeHome(){
+    if(homePausedPosition){resume();return}
+    if(homePausedExam){
+      setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:homePausedExam.examId}}}));
+      go("portugueseMiniExam");
+    }
+  }
+
   const onboardingStep=subjectOnboardingStep(s,"portuguese");
   const onboardingDoneScreen="home";
   const competenceRows=Object.entries(progress.competence);
@@ -383,12 +401,16 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
   if(!session)return sharedShell(<>
     {unrecoverableSession&&<div className="notice warning"><b>Sessão impossível de recuperar</b><span>Uma ou mais perguntas deixaram de estar disponíveis. A tentativa será arquivada sem pontuação adicional.</span><button className="secondary" onClick={recoverUnrecoverableSession}>Resolver sessão irrecuperável</button></div>}
     <div className="learnIntro"><div className="mobileMainTitle"><p>Olá 👋</p><h1>O teu próximo passo.</h1></div><span>{missionDone?"Missão feita. Podes continuar por tua conta.":progress.diagnosticDone?"Uma recomendação curta, escolhida a partir do teu percurso.":"Primeiro, vamos encontrar o melhor ponto de partida."}</span></div>
-    {progress.lastPosition&&progress.lastPosition.kind!=="diagnostic"&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></div><button onClick={resume}>Continuar →</button></div>}
-    {!progress.lastPosition&&miniExamDraft&&<div className="pausedSession"><div><small>{miniExamDraft.examId==="full-1"?"EXAME COMPLETO EM PAUSA":"MINI-EXAME EM PAUSA"}</small><b>{miniExamDraft.examId==="full-1"?"Exame Completo de Português":(portugueseMiniExamMeta(miniExamDraft.examId)?.title||"Mini-exame de Português")}</b><span>{miniExamDraft.review?"Revisão em curso":`Pergunta ${miniExamDraft.index+1} de ${miniExamDraft.itemIds?.length||6}`}</span></div><button onClick={()=>{setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:miniExamDraft.examId}}}));go("portugueseMiniExam")}}>Continuar →</button></div>}
     <section className="adaptivePath" aria-label="Caminho adaptativo de Português">
       <div className={`pathNode ${progress.diagnosticDone?"done":"current"}`}><span>{progress.diagnosticDone?"✓":"●"}</span><div><small>{progress.diagnosticDone?"ÚLTIMO PASSO":"PRIMEIRO PASSO"}</small><b>{progress.diagnosticDone?"Diagnóstico concluído":"Conhecer o teu ponto de partida"}</b></div></div>
       <div className="pathLine active"/>
-      <div className={`pathNode current ${missionDone?"complete":""}`}><span>{missionDone?"✓":"●"}</span><article><small>{progress.diagnosticDone?(missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"):"PRÓXIMO PASSO"}</small><h2>{progress.diagnosticDone?"Português adaptado ao teu percurso":"Diagnóstico de Português"}</h2><div className="missionCardMeta"><span>{progress.diagnosticDone?"~3–5 min":"8 perguntas"}</span>{progress.diagnosticDone&&<span>{currentYear}</span>}</div><button disabled={(!progress.lastPosition&&((!progress.diagnosticDone&&!scopedCoverage.diagnosticReady)||(!missionDone&&progress.diagnosticDone&&scopedItems.length<7)))} onClick={progress.lastPosition?resume:missionDone?()=>go("train"):progress.diagnosticDone?startRecommendedMission:()=>go("diag")}>{progress.lastPosition?(progress.lastPosition.kind==="diagnostic"?"Continuar diagnóstico":"Continuar sessão"):missionDone?"Continuar a estudar":progress.diagnosticDone?"Começar Missão":"Começar diagnóstico"}</button></article></div>
+      <div className={`pathNode current ${missionDone&&!homePaused?"complete":""}`}><span>{missionDone&&!homePaused?"✓":"●"}</span><article>
+        <small>{homePausedExam?(homePausedExam.examId==="full-1"?"EXAME COMPLETO":"MINI-EXAME"):homePausedPosition?.kind==="training"?"TREINO LIVRE":homePausedPosition?.kind==="diagnostic"?"DIAGNÓSTICO":progress.diagnosticDone?(missionDone&&!homePaused?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"):"PRÓXIMO PASSO"}</small>
+        <h2>{homePausedExam?(homePausedExam.examId==="full-1"?"Exame Completo de Português":(portugueseMiniExamMeta(homePausedExam.examId)?.title||"Mini-exame de Português")):homePausedPosition&&homePausedPosition.kind!=="mission"?(homePausedPosition.label||"Sessão de Português"):progress.diagnosticDone?"Português adaptado ao teu percurso":"Diagnóstico de Português"}</h2>
+        {homePaused&&<PausedHomeStatus progressText={homePauseProgress}/>}
+        <div className="missionCardMeta"><span>{homePausedExam?(homePausedExam.examId==="full-1"?"Exame completo":"Mini-exame"):progress.diagnosticDone?"~3–5 min":"8 perguntas"}</span>{progress.diagnosticDone&&<span>{currentYear}</span>}</div>
+        <button disabled={!homePaused&&((!progress.diagnosticDone&&!scopedCoverage.diagnosticReady)||(!missionDone&&progress.diagnosticDone&&scopedItems.length<7))} onClick={homePaused?resumeHome:missionDone?()=>go("train"):progress.diagnosticDone?startRecommendedMission:()=>go("diag")}>{homePaused?"Continuar sessão":missionDone?"Continuar a estudar":progress.diagnosticDone?"Começar Missão":"Começar diagnóstico"}</button>
+      </article></div>
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{progress.diagnosticDone?"Praticar, rever matéria ou fazer um exame":"Primeira Missão adaptada"}</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>
