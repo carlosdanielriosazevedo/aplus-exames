@@ -17,5 +17,5 @@ test("native form provides pre-hydration onboarding entry",()=>{
 });
 test("stored progress and private entries remain supported",()=>{
  expect(source).toContain("storedProgress()||privateEntry()");
- expect(source).toContain('q.has("preview")');
+ expect(source).toContain('url.searchParams.has("preview")');
 });
