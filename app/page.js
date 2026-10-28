@@ -33,7 +33,17 @@ function Landing({onStart}){return <main className="dark center"><section classN
 
 export default function Page(){
   const [ready,setReady]=useState(false),[boot,setBoot]=useState(false);
-  useEffect(()=>{const q=new URLSearchParams(window.location.search);setBoot(storedProgress()||privateEntry()||q.has("preview")||q.get("entrada")==="1");setReady(true)},[]);
+  useEffect(()=>{
+    const url=new URL(window.location.href);
+    const fromEntryForm=url.searchParams.get("entrada")==="1";
+    if(fromEntryForm){
+      try{window.sessionStorage.setItem(ENTRY_KEY,"1")}catch{}
+      url.searchParams.delete("entrada");
+      window.history.replaceState(window.history.state,"",url.pathname+url.search+url.hash);
+    }
+    setBoot(storedProgress()||privateEntry()||url.searchParams.has("preview")||fromEntryForm);
+    setReady(true);
+  },[]);
   function start(){
     try{window.sessionStorage.setItem(ENTRY_KEY,"1")}catch{}
     setBoot(true);
