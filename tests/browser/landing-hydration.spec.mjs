@@ -33,8 +33,19 @@ test.describe("Landing hydration and existing session",()=>{
     const entry=page.getByRole("button",{name:/descobrir o meu nível/i});
     await expect(entry).toBeVisible();
     await entry.click({noWaitAfter:true});
-    await expect(page).toHaveURL(/entrada=1/,{timeout:15000});
-    await expect(entry).toBeHidden({timeout:30000});
+    await expect(page.getByRole("heading",{name:"Que disciplinas queres preparar?"})).toBeVisible({timeout:30000});
+    await expect.poll(()=>page.evaluate(()=>sessionStorage.getItem("a25-onboarding-entry"))).toBe("1");
+    await expect(page).not.toHaveURL(/(?:[?&])entrada=1(?:&|$)/);
+    await expect(entry).toBeHidden();
+  });
+  test("landing CTA preserves orange styling and hover",async({page})=>{
+    await page.goto("/");
+    const button=page.getByRole("button",{name:/descobrir o meu nível/i});
+    await expect(button).toBeVisible();
+    await expect(button).toHaveCSS("background-color","rgb(255, 178, 36)");
+    await expect(button).toHaveCSS("color","rgb(8, 19, 46)");
+    await button.hover();
+    await expect(button).toHaveCSS("background-color","rgb(255, 173, 25)");
   });
   test("existing onboarding entry resumes without landing",async({page})=>{
     await page.addInitScript(()=>sessionStorage.setItem("a25-onboarding-entry","1"));
