@@ -40,11 +40,11 @@ function statusLabel(step){
   if(step.status==="correct")return "Etapa correta";
   if(step.status==="follow-through")return "Método correto com valor anterior";
   if(step.status==="numeric-error")return "Provável erro de cálculo";
-  if(step.status==="unit-error")return "Unidade a rever";
-  if(step.status==="analytical-error")return "Resultado simbólico a rever";
+  if(step.status==="unit-error")return "Unidade não validada";
+  if(step.status==="analytical-error")return "Resultado simbólico não confirmado";
   if(step.status==="process-missing")return "Processo não evidenciado";
   if(step.status==="result-missing")return "Resultado em falta";
-  if(step.status==="alternative-method-review")return "Processo alternativo · rever";
+  if(step.status==="alternative-method-review")return "Processo alternativo · não verificado";
   return "Sem resposta";
 }
 
@@ -52,7 +52,7 @@ export function PhysicsChemistryStepwiseReview({item,result}){
   const points=Number.isFinite(result?.provisionalPoints)?result.provisionalPoints:null;
   return <div className="fqaConstructedReview">
     <div className="notice">
-      <b>{points===null?"Revisão necessária":"Indicação provisória · "+points+"/"+result.maxPoints+" pontos"}</b>
+      <b>{points===null?"Avaliação automática incompleta":"Indicação provisória · "+points+"/"+result.maxPoints+" pontos"}</b>
       <span>{result.note}</span>
     </div>
     {(result.steps||[]).map((step,index)=><article className={"fqaStepReview "+(step.status==="correct"||step.status==="follow-through"?"ok":"review")} key={step.id}>
@@ -65,6 +65,6 @@ export function PhysicsChemistryStepwiseReview({item,result}){
       <span>{"Erros tipo 2: "+(result.type2Count||0)}</span>
       <b>{"Desvalorização provisória: "+(result.penalty||0)+" ponto(s)"}</b>
     </div>}
-    <p className="muted">A app só automatiza situações que consegue reconhecer com segurança. Processos alternativos cientificamente válidos, contradições, instruções específicas e outros casos continuam sujeitos a revisão.</p>
+    <p className="muted">A app só avalia automaticamente os processos que consegue reconhecer com segurança. Se uma etapa não foi verificada, compara-a com a resolução apresentada; não existe uma revisão humana pendente.</p>
   </div>;
 }

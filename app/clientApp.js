@@ -14,6 +14,7 @@ import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,Fri
 import StudyModeHub from "./components/StudyModeHub";
 import {Welcome} from "./components/Welcome";
 import ScoreLossExplanation from "./components/ScoreLossExplanation";
+import {miniExamReviewItemLabel,CONTENT_REPORT_SAVED_MESSAGE} from "./lib/scoreReviewCopy";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
 const AccountCloud=dynamic(()=>import("./components/AccountCloud").then(module=>module.AccountCloud),{ssr:false});
 const MathReviewMatter=dynamic(()=>import("./components/MathReviewMatter"),{ssr:false});
@@ -1875,7 +1876,7 @@ function PracticeResponse({question,value,onChange,feedback,guided=false}){
       {feedback.points===feedback.maxPoints&&<p>{feedback.points}/{feedback.maxPoints} pontos</p>}
       <ScoreLossExplanation result={feedback} detailsProvided/>
       {feedback.errorDiagnosis&&feedback.errorDiagnosis.code!=="correct_or_near_correct"&&<p><b>{feedback.errorDiagnosis.label}:</b> {feedback.errorDiagnosis.message}</p>}
-      <div className="stepResults">{feedback.stepResults.map(row=><div key={row.stepId} className={row.status==="needs_review"?"unverified":row.correct?"correct":"incorrect"}><span>{row.status==="needs_review"?"?":row.correct?"✓":"×"}</span><div><b>{row.label} · {row.points}/{row.maxPoints} pontos</b><small>{stepFeedback(row)}</small>{!row.correct&&<small>Exemplo: {row.expected}</small>}</div></div>)}</div>
+      <div className="stepResults">{feedback.stepResults.map(row=><div key={row.stepId} className={row.status==="needs_review"?"unverified":row.correct?"correct":"incorrect"}><span>{row.status==="needs_review"?"?":row.correct?"✓":"×"}</span><div><b>{row.label} · {row.status==="needs_review"?"Por classificar":`${row.points}/${row.maxPoints} pontos`}</b><small>{stepFeedback(row)}</small>{!row.correct&&<small>Exemplo: {row.expected}</small>}</div></div>)}</div>
       <details><summary>Ver resolução completa</summary><p>{question.sol}</p></details>
     </div>}
   </div>;
@@ -2070,14 +2071,14 @@ function MiniExamCompletedReview({s,setS,go}){
   if(!r.itemResults&&!fallbackSummary)return <Shell><Logo/><p className="muted">A recuperar a avaliação deste Mini-exame…</p></Shell>;
   const itemResults=r.itemResults||fallbackSummary.results;
   const rows=questions.map((q,i)=>({q,i,answer:r.answers[i],grade:itemResults[i]||fallbackSummary.results[i]}));
-  const statusLabel=status=>status==="needs_review"?"Avaliação incompleta":status==="correct"?"Certa":status==="partial"?"Parcial":status==="unanswered"?"Não respondida":"Errada";
+
   return <Shell><Back go={go} to="miniExamResult"/><Logo/><p className="eyebrow">REVISÃO DO MINI-EXAME</p>
     <h1>Revê as tuas respostas.</h1>
     <p className="muted">O Mini-exame já terminou e as respostas estão bloqueadas. Aqui podes perceber o que acertaste, o que falhou e como resolver cada pergunta.</p>
     {r.reviewRequired&&<p className="notice warning">A app não conseguiu avaliar toda a resolução. Os pontos apresentados são apenas os confirmados, sem estimativa de nota final. Compara as etapas com a resolução abaixo; não há uma revisão humana pendente.</p>}
     <div className="completedExamSummary"><b>{examScoreLabel(r)}</b><span>{String(r.earnedPoints??fallbackSummary.earnedPoints).replace(".",",")}/{r.maxPoints??fallbackSummary.maxPoints} pontos{r.reviewRequired?" confirmados":""}</span></div>
     <div className="completedExamReview">{rows.map(({q,i,answer,grade})=><details key={q.id} open={grade?.status!=="correct"} className={`reviewItem ${grade?.status||"unanswered"}`}>
-      <summary><span>Questão {i+1} · {theme(q.themeId).short}</span><strong>{statusLabel(grade?.status)} · {String(grade?.points||0).replace(".",",")}/{grade?.maxPoints||q.points} pontos</strong></summary>
+      <summary><span>Questão {i+1} · {theme(q.themeId).short}</span><strong>{miniExamReviewItemLabel(grade,q.points)}</strong></summary>
       <div className="reviewItemBody"><h2>{q.q}</h2>
         <div className="reviewAnswer"><small>A tua resposta</small><p>{studentResponseLabel(q,answer)}</p></div>
         {responseType(q)==="completion"&&<div className="stepResults">{q.response.blanks.map(blank=><div key={blank.id} className={answer?.[blank.id]===blank.correct?"correct":"incorrect"}><div><b>{blank.label}</b><small>A tua escolha: {blank.options[answer?.[blank.id]]??"Sem resposta"}</small><small>Resposta correta: {blank.options[blank.correct]}</small></div></div>)}</div>}
@@ -2166,7 +2167,7 @@ function ReportButton({item,s,setS,compact=false}){
     setS(prev=>({...prev,contentReports:[...(prev.contentReports||[]),report]}));
     setSent(true);setOpen(false);
   }
-  if(sent)return <div className="reportThanks">✓ Obrigado. Ficou sinalizado para revisão.</div>;
+  if(sent)return <div className="reportThanks">{CONTENT_REPORT_SAVED_MESSAGE}</div>;
   return <div className={"reportBox "+(compact?"compact":"")}>
     <button className="reportToggle" onClick={()=>setOpen(!open)}>⚑ Reportar problema nesta pergunta</button>
     {open&&<div className="reportChoices">{categories.map(([v,l])=><button key={v} onClick={()=>send(v,l)}>{l}</button>)}</div>}
