@@ -14,7 +14,7 @@ import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,Fri
 import StudyModeHub from "./components/StudyModeHub";
 import {Welcome} from "./components/Welcome";
 import ScoreLossExplanation from "./components/ScoreLossExplanation";
-import {miniExamReviewItemLabel} from "./lib/scoreReviewCopy";
+import {miniExamReviewItemLabel,CONTENT_REPORT_SAVED_MESSAGE} from "./lib/scoreReviewCopy";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
 const AccountCloud=dynamic(()=>import("./components/AccountCloud").then(module=>module.AccountCloud),{ssr:false});
 const MathReviewMatter=dynamic(()=>import("./components/MathReviewMatter"),{ssr:false});
@@ -2167,7 +2167,7 @@ function ReportButton({item,s,setS,compact=false}){
     setS(prev=>({...prev,contentReports:[...(prev.contentReports||[]),report]}));
     setSent(true);setOpen(false);
   }
-  if(sent)return <div className="reportThanks">✓ Obrigado. Ficou sinalizado para revisão.</div>;
+  if(sent)return <div className="reportThanks">{CONTENT_REPORT_SAVED_MESSAGE}</div>;
   return <div className={"reportBox "+(compact?"compact":"")}>
     <button className="reportToggle" onClick={()=>setOpen(!open)}>⚑ Reportar problema nesta pergunta</button>
     {open&&<div className="reportChoices">{categories.map(([v,l])=><button key={v} onClick={()=>send(v,l)}>{l}</button>)}</div>}
