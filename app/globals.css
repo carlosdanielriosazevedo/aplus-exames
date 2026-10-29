@@ -2020,3 +2020,15 @@ button,input,select,textarea{max-width:100%}
     line-height:1.25;
   }
 }
+
+/* Resume state lives inside the single primary learning-path card. */
+.adaptivePath .missionCardMeta .sessionPausedMeta{background:#ffe2a3!important;color:#6c4c0e!important;font-weight:850}
+
+/* Keep the original activity ("MISSÃO DE HOJE") alongside its paused state.
+   Coral is legible on the dark learning card; never add another resume CTA. */
+.learnHome .pathNode.current article small.pausedActivityEyebrow{
+  display:flex;flex-wrap:wrap;align-items:baseline;column-gap:7px;row-gap:2px;line-height:1.35;
+  color:#ffb02e!important
+}
+.learnHome .pathNode.current article .pausedActivityEyebrow .pausedActivitySeparator{color:#b9c9d3!important}
+.learnHome .pathNode.current article .pausedActivityEyebrow .pausedActivityStatus{color:#ffb3ad!important;font-weight:900}

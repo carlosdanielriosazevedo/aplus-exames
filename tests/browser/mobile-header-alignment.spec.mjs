@@ -124,12 +124,24 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
     await expect(page.locator(".sessionTop")).toBeVisible({timeout:30_000});
     await page.getByRole("button",{name:"Guardar e continuar depois",exact:true}).click();
    }
-   const card=page.locator(".pausedSession").first();
+   const home=page.locator(".learnHome");
+   await expect(home).toBeVisible({timeout:30_000});
+   await expect(home.locator(".pausedSession")).toHaveCount(0);
+   const card=home.locator(".pathNode.current article");
    await expect(card).toBeVisible({timeout:30_000});
-   await expect(card.getByRole("button",{name:/Continuar/u})).toBeVisible();
+   const label=card.locator(".pausedActivityEyebrow");
+   await expect(label).toBeVisible();
+   const activity=subjectId==="math-a"?"TREINO LIVRE":"MISSÃO DE HOJE";
+   await expect(label).toContainText(activity);
+   await expect(label.locator(".pausedActivityStatus")).toHaveText("SESSÃO EM PAUSA");
+   await expect(label.locator(".pausedActivityStatus")).toHaveCSS("color","rgb(255, 179, 173)");
+   await expect(card.getByRole("button",{name:"Continuar sessão",exact:true})).toHaveCount(1);
    const rect=await card.boundingBox();
-   expect(rect.x).toBeGreaterThanOrEqual(0);expect(rect.x+rect.width).toBeLessThanOrEqual(width+1);
-   expect(rect.height).toBeLessThanOrEqual(230);
+   expect(rect.x).toBeGreaterThanOrEqual(0);
+   expect(rect.x+rect.width).toBeLessThanOrEqual(width+1);
+   expect(rect.height).toBeLessThanOrEqual(320);
+   const layout=await page.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,innerWidth:window.innerWidth}));
+   expect(layout.scrollWidth,"A caixa de pausa não deve criar scroll horizontal").toBeLessThanOrEqual(width+1);
    await page.screenshot({path:`/tmp/audit-visual/${subjectId}-${width}-Pausa.png`});
    await testInfo.attach(`Sessão em pausa-${width}`,{body:await page.screenshot(),contentType:"image/png"});
   });

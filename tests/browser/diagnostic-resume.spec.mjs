@@ -283,7 +283,7 @@ for(const subject of [
     if(subject.id!=="math-a"){
       reopened.once("dialog",dialog=>dialog.accept());
       await reopened.getByRole("button",{name:"Guardar e sair",exact:true}).click();
-      await expect(reopened.getByRole("button",{name:"Continuar diagnóstico",exact:true})).toBeVisible({timeout:30_000});
+      await expect(reopened.locator(".learnHome").getByRole("button",{name:"Continuar sessão",exact:true})).toBeVisible({timeout:30_000});
       await expect(reopened.getByRole("button",{name:"Começar diagnóstico",exact:true})).toHaveCount(0);
       const pausedPosition=await reopened.evaluate(id=>{
         const saved=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
@@ -291,7 +291,7 @@ for(const subject of [
       },subject.id);
       expect(pausedPosition.itemId).toBe(savedPosition.itemId);
       expect(pausedPosition.responses).toBe(savedPosition.responses);
-      await reopened.getByRole("button",{name:"Continuar diagnóstico",exact:true}).click();
+      await reopened.locator(".learnHome").getByRole("button",{name:"Continuar sessão",exact:true}).click();
       await expect(reopened.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
       const continuedPosition=await reopened.evaluate(id=>{
         const saved=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
@@ -310,8 +310,8 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
     state.subjectProgress[subjectId].lastPosition.label="Missão";
     await seed(page,state);
     await page.goto("/");
-    await expect(page.getByRole("button",{name:"Continuar →",exact:true})).toBeVisible({timeout:30_000});
-    await page.getByRole("button",{name:"Continuar →",exact:true}).click();
+    await expect(page.locator(".learnHome").getByRole("button",{name:"Continuar sessão",exact:true})).toBeVisible({timeout:30_000});
+    await page.locator(".learnHome").getByRole("button",{name:"Continuar sessão",exact:true}).click();
     await expect(page.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
     const before=await page.evaluate(id=>{
       const position=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
@@ -369,7 +369,7 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
       state.subjectProgress[subjectId].lastPosition.currentAnswer="Resposta conservada";
       await seed(page,state);
       await page.goto("/");
-      await expect(page.getByRole("button",{name:kind==="diagnostic"?"Responder":"Continuar →",exact:true})).toBeVisible({timeout:30_000});
+      await expect(page.getByRole("button",{name:kind==="diagnostic"?"Responder":"Continuar sessão",exact:true})).toBeVisible({timeout:30_000});
       const read=()=>page.evaluate(id=>JSON.parse(localStorage.getItem("a25")).subjectProgress[id].lastPosition,subjectId);
       const before=await read();
       await page.evaluate(({subjectId})=>window.dispatchEvent(new PopStateEvent("popstate",{state:{...window.history.state,approvaSessionGuard:true,approvaScreen:subjectId==="portuguese"?"portugueseMiniExam":"physicsChemistryExam",approvaSubjectId:subjectId}})),{subjectId});
@@ -427,8 +427,8 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
       await page.close();
       const reopened=await context.newPage();
       await reopened.goto("/");
-      await expect(reopened.getByRole("button",{name:"Continuar →",exact:true}).first()).toBeVisible({timeout:30_000});
-      await reopened.getByRole("button",{name:"Continuar →",exact:true}).first().click();
+      await expect(reopened.locator(".learnHome").getByRole("button",{name:"Continuar sessão",exact:true})).toBeVisible({timeout:30_000});
+      await reopened.locator(".learnHome").getByRole("button",{name:"Continuar sessão",exact:true}).click();
       const restored=await reopened.evaluate(({key,subjectId})=>{
         const value=JSON.parse(localStorage.getItem(key));
         return subjectId==="portuguese"?value.subjectSettings.portuguese.miniExamDraft:value;
@@ -510,8 +510,8 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
      await expect(page.locator(".ptx-question-card, .fqaMiniExamPage, .fqaFullExamPage").first()).toBeVisible({timeout:30_000});
      if(await choices.isVisible())await choices.click();else await page.getByRole("textbox").first().fill("Resposta guardada antes de fechar a aplicação.");
     }else if(subjectId!=="math-a"&&kind!=="diagnostic"){
-     await expect(page.getByRole("button",{name:"Continuar →",exact:true})).toBeVisible({timeout:30_000});
-     await page.getByRole("button",{name:"Continuar →",exact:true}).click();
+     await expect(page.locator(".learnHome").getByRole("button",{name:"Continuar sessão",exact:true})).toBeVisible({timeout:30_000});
+     await page.locator(".learnHome").getByRole("button",{name:"Continuar sessão",exact:true}).click();
     }
     if(!exam||subjectId==="math-a")await expect(page.locator(".sessionTop")).toBeVisible({timeout:30_000});
     const snapshot=page=>page.evaluate(({subjectId,exam,kind})=>{

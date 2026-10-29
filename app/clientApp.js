@@ -12,6 +12,7 @@ import {
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
 import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon,StudySessionHeader} from "./components/chrome";
 import StudyModeHub from "./components/StudyModeHub";
+import PausedActivityEyebrow from "./components/PausedActivityEyebrow";
 import {Welcome} from "./components/Welcome";
 import ScoreLossExplanation from "./components/ScoreLossExplanation";
 import {miniExamReviewItemLabel,CONTENT_REPORT_SAVED_MESSAGE} from "./lib/scoreReviewCopy";
@@ -1197,11 +1198,6 @@ function Home({s,setS,go,reset}){
     <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button>{!hasPendingAssessment(s)&&<button onClick={reset}>Recomeçar protótipo</button>}</>}</div></details></StudentTop>
     <FriendsBetaRibbon s={s}/><div className="learnIntro"><div className="mobileMainTitle"><p>Olá 👋</p><h1>O teu próximo passo.</h1></div><span>{missionDone?"Missão feita. Podes continuar por tua conta.":"Uma recomendação curta, escolhida a partir do teu percurso."}</span></div>
 
-    {pausedDraft&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{pausedDraft.kind==="mini_exam"?"Mini-exame":pausedDraft.kind==="training"?"Treino Livre":"Missão"}</b><span>O teu progresso desta sessão ficou guardado neste dispositivo.</span></div><button onClick={()=>{
-      if(pausedDraft.kind==="mini_exam")go(pausedDraft.screen||"miniExamRun");
-      else if(pausedDraft.kind==="training")go("trainingRun");
-      else go("mission");
-    }}>Continuar →</button></div>}
 
     {!s.diagnosticDone?<section className="adaptivePath" aria-label="Caminho adaptativo de Matemática A">
       <div className="pathNode current"><span>●</span><div><small>PRIMEIRO PASSO</small><b>Conhecer o teu ponto de partida</b></div></div>
@@ -1212,7 +1208,7 @@ function Home({s,setS,go,reset}){
     </section>:<section className="adaptivePath" aria-label="Caminho adaptativo">
       <div className="pathNode done"><span>✓</span><div><small>ÚLTIMO PASSO</small><b>{completedMission?.focus||theme(completedMission?.themeId)?.short||"Diagnóstico concluído"}</b></div></div>
       <div className="pathLine active"/>
-      <div className={"pathNode current "+(missionDone?"complete":"")}><span>{missionDone?"✓":"●"}</span><article><small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small><h2>{missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.focus||t?.short||"Conteúdo protegido")}</h2><div className="missionCardMeta"><span>~3–5 min</span>{!missionDone&&t?.year&&<span>{t.year}</span>}</div>{missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:<button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Indisponível":pausedDraft?.kind==="mission"?"Continuar Missão":"Começar Missão"}</button>}{!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
+      <div className={"pathNode current "+(missionDone&&!pausedDraft?"complete":"")}><span>{missionDone&&!pausedDraft?"✓":"●"}</span><article>{pausedDraft?<PausedActivityEyebrow kind={pausedDraft.kind}/>:<small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small>}<h2>{pausedDraft?.kind==="mini_exam"?"Mini-exame de Matemática A":pausedDraft?.kind==="training"?"Treino Livre de Matemática A":pausedDraft?.kind==="diagnostic"?"Diagnóstico de Matemática A":missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.focus||t?.short||"Conteúdo protegido")}</h2><div className="missionCardMeta">{pausedDraft?<span className="sessionPausedMeta">{Number.isInteger(pausedDraft.i)?`Pergunta ${pausedDraft.i+1} de ${pausedDraft.questions?.length||0}`:"Progresso guardado"}</span>:<><span>~3–5 min</span>{!missionDone&&t?.year&&<span>{t.year}</span>}</>}</div>{pausedDraft?<button onClick={()=>{if(pausedDraft.kind==="mini_exam")go(pausedDraft.screen||"miniExamRun");else if(pausedDraft.kind==="training")go("trainingRun");else if(pausedDraft.kind==="diagnostic")go(pausedDraft.screen||"diag");else startDailyMission("home_card")}}>Continuar sessão</button>:missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:<button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Indisponível":"Começar Missão"}</button>}{!pausedDraft&&!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{probableNext?.short||"A definir após esta sessão"}</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>}
