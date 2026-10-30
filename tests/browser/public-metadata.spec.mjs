@@ -99,6 +99,7 @@ test("Splash FINAL: ficheiro da imagem 1, WebP sem perda de píxeis",async({requ
   expect(bytes.subarray(8,12).toString("ascii")).toBe("WEBP");
   expect(bytes.length).toBeLessThan(1100000);
   expect(createHash("sha256").update(bytes).digest("hex")).toBe("b6a2b1b69f0f355964128d30c0745fd0cb7fcfeb048904a8b8d9969ff3654579");
+  await page.goto("/");
   const dimensions=await page.evaluate(async()=>{
     const img=new Image();
     img.src="/brand/apronso-splash-final.webp?v=20261030-exact-approved-final";
