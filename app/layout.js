@@ -33,7 +33,7 @@ export const metadata={
     description:'Preparação inteligente e adaptativa para os exames nacionais.',
     images:['/opengraph-image']
   },
-  icons:{icon:'/icons/favicon.ico?v=20261030-fullbleed1',shortcut:'/icons/favicon.ico?v=20261030-fullbleed1',apple:[{url:'/icons/apple-touch-icon.png?v=20261030-fullbleed1',sizes:'180x180',type:'image/png'}]}
+  icons:{icon:'/icons/favicon.ico?v=20261030-exact-approved-final',shortcut:'/icons/favicon.ico?v=20261030-exact-approved-final',apple:[{url:'/icons/apple-touch-icon.png?v=20261030-exact-approved-final',sizes:'180x180',type:'image/png'}]}
 };
 export const viewport={width:'device-width',initialScale:1,viewportFit:'cover',themeColor:'#08132e'};
 

@@ -1,11 +1,17 @@
 import {test,expect} from "vitest";
 import {readFileSync} from "node:fs";
 const source=readFileSync(new URL("../../app/page.js",import.meta.url),"utf8");
+const css=readFileSync(new URL("../../app/launch-splash.css",import.meta.url),"utf8");
 
 test("public landing and legal links remain server rendered",()=>{
- expect(source).toMatch(/if\(!ready\)return <Landing onStart=\{null\}\/>/);
+ expect(source).toContain('if(!ready)return <>');
+ expect(source).toContain('<div className="appInitialBrowser"><Landing onStart={null}/></div>');
+ expect(source).toContain('<div className="appInitialStandalone"><Loading/></div>');
  expect(source).toContain('href="/privacidade"');
  expect(source).toContain('href="/termos"');
+ expect(css).toContain(".appInitialBrowser{display:block}");
+ expect(css).toContain(".appInitialStandalone{display:none}");
+ expect(css).toContain("@media (display-mode:standalone),(display-mode:fullscreen)");
 });
 test("native form provides pre-hydration onboarding entry",()=>{
  expect(source).toContain('<form action="/" method="get"');
