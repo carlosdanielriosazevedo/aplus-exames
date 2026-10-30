@@ -21,3 +21,7 @@ O manifesto e os metadados existentes já referenciam os mesmos percursos de íc
 4. Build, tests browser/mobile, preview, cache e comportamento de instalação devem ser validados antes de qualquer merge.
 
 Esta PR altera apenas recursos de identidade e o redirecionamento do favicon. Não altera persistência, conteúdos pedagógicos, correções, XP nem fluxos de avaliação. **Sem merge, deployment ou rollback de produção sem evidências de validação.**
+
+## Renovação de cache
+
+A versão de 30/10/2026 inclui `?v=20261030` nos endereços do manifesto, favicon anunciado no HTML e ícone Apple. Isto evita que navegadores com cache antiga de `/favicon.ico` (anteriormente servido com cache immutable de um ano) continuem a mostrar o ícone anterior. A rota pública antiga continua disponível por redirecionamento para `/icons/favicon.ico`.
