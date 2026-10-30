@@ -19,7 +19,7 @@ function privateEntry(){
   return q.get("beta")==="friends"||q.get("mode")==="friends_beta";
 }
 function Brand(){return <span className="brandName" aria-label="APProva+"><span className="brandAP">AP</span><span className="brandProva">Prova</span><span className="brandPlus">+</span></span>}
-function Loading(){return <main aria-busy="true" aria-live="polite" className="dark center"><section className="hero"><div className="logo"><Brand/></div><p className="eyebrow">A PREPARAR O TEU ESPAÇO</p></section></main>}
+function Loading(){return <main aria-busy="true" aria-live="polite" aria-label="A preparar a APProva+" className="apronsoStartup"><img className="apronsoStartupArt" src="/brand/apronso-splash-approved.webp" width="941" height="1672" alt="Apronso e assinatura APProva+"/><span className="apronsoStartupSr">A preparar o teu espaço de estudo</span></main>}
 function Landing({onStart}){return <main className="dark center"><section className="hero">
   <div className="logo"><Brand/></div>
   <div className="welcomeApronso"><img className="apronso apronso-motion-idle" src="/mascot/apronso-welcome.webp" alt="Apronso, a mascote da APProva+"/><div><small>OLÁ, EU SOU O APRONSO</small><b>O teu parceiro de estudo.</b><span>Vou ajudar-te a perceber o que estudar, explicar dificuldades e celebrar cada conquista.</span></div></div>
