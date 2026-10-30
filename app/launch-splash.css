@@ -1,23 +1,22 @@
-/* Identidade visual do estado de carregamento interno da APProva+.
-   O ecrã nativo de arranque de WebAPK é controlado pelo Chrome/Android
-   e não suporta colocar texto arbitrário através do manifesto PWA. */
+/* APProva+ — arte aprovada pelo proprietário, sem redesenho.
+   O Chrome/Android controla o splash nativo anterior ao primeiro paint; este
+   ecrã usa a IMAGEM INTEGRAL aprovada na primeira pintura da PWA instalada. */
 .apronsoStartup{
+  width:100%;
   min-height:100vh;
   min-height:100dvh;
-  width:100%;
-  background:#061634;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  background-color:#021537;
+  background-image:url("/brand/apronso-splash-final.webp?v=20261030-exact-approved-final");
+  background-position:center center;
+  background-size:cover;
+  background-repeat:no-repeat;
   overflow:hidden;
 }
-.apronsoStartupArt{
-  width:100%;
-  height:100vh;
-  height:100dvh;
-  max-width:100%;
-  object-fit:contain;
-  display:block;
+.appInitialStandalone{display:none}
+.appInitialBrowser{display:block}
+@media (display-mode:standalone),(display-mode:fullscreen){
+  .appInitialStandalone{display:block}
+  .appInitialBrowser{display:none}
 }
 .apronsoStartupSr{
   position:absolute;
