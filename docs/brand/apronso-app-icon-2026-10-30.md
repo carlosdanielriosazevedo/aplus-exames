@@ -40,3 +40,7 @@ Aprovada em 30/10/2026 nova versão do desenho: fundo laranja uniforme sem porme
 - O teste em `public-metadata.spec.mjs` valida, além das dimensões, os pixels dos cantos (laranja em cima, azul no inferior direito) para prevenir regressão de margens brancas.
 - Revisão visual: `preview.png` local com ícone quadrado, máscara circular e redução a 48px. Revisão num dispositivo real após publicar continua obrigatória para confirmar o launcher Xiaomi.
 - Esta alteração não toca em sessões, progresso, notas, XP, dados, corretor ou layout funcional.
+
+
+## Android restaurado por preferência do proprietário — 30/10/2026
+A versão Android full-bleed da PR #434 não corresponde à preferência final do proprietário. Restaurados **exatamente** os quatro PNGs Android (any/maskable 192 e 512 px) da main em `5b8603999da91a7a6bfa72aae756f69fd88a1899` (anterior à #434), mantendo a moldura/visual da versão preferida. Atualizado apenas o manifesto para `?v=20261030-android-restore-orange2` para solicitar renovação do WebAPK Android. Os ícones iOS, favicon e outras alterações da #434 não são revertidos; não existe rollback da aplicação nem alteração de dados. A asserção de cantos full-bleed foi retirada por ser incompatível com o design solicitado, preservando os testes de tamanhos e instalação.
