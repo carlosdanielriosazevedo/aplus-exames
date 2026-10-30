@@ -44,7 +44,9 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
       const hash=createHash("sha256").update(bytes).digest("hex");
       if(purpose==="any")iconHashes[size]=hash;
       else expect(hash).toBe(iconHashes[size]);
-      // Confere que launcher Android nao mostra a moldura navy espessa do recurso maskable anterior.\n      // Neste hotfix a imagem maskable é idêntica a any, sem a redução para 78%.\n      // Confere o tratamento dos cantos para evitar a moldura laranja
+      // Confere que launcher Android nao mostra a moldura navy espessa do recurso maskable anterior.
+      // Neste hotfix a imagem maskable é idêntica a any, sem a redução para 78%.
+      // Confere o tratamento dos cantos para evitar a moldura laranja
       // no splash nativo gerado pelo Chrome/WebAPK Android.
       const pixels=await page.evaluate(async(src)=>{
         const img=new Image();
