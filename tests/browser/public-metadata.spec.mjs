@@ -58,3 +58,14 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
   const ico=await favicon.body();
   expect(ico.subarray(0,4).toString("hex")).toBe("00000100");
 });
+
+
+test("Splash aprovado: imagem real e compacta, sem alterar o manifesto instalado",async({request})=>{
+  const asset=await request.get("/brand/apronso-splash-approved.webp");
+  expect(asset.status()).toBe(200);
+  expect(asset.headers()["content-type"]).toContain("image/webp");
+  const bytes=await asset.body();
+  expect(bytes.subarray(0,4).toString("ascii")).toBe("RIFF");
+  expect(bytes.subarray(8,12).toString("ascii")).toBe("WEBP");
+  expect(bytes.byteLength).toBeLessThan(140000);
+});
