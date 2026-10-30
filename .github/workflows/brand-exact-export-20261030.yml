@@ -1,0 +1,33 @@
+name: Install exact user-approved Android brand assets
+on:
+  push:
+    branches:
+      - codex/brand-exact-user-files-20261030
+    paths:
+      - 'assets/brand/icon_1024_transparente-20261030.png'
+      - 'public/brand/approva-splash-user-exact-20261030.png'
+      - 'scripts/export-approved-brand.py'
+      - '.github/workflows/brand-exact-export-20261030.yml'
+permissions:
+  contents: write
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install Pillow==11.3.0
+      - run: python scripts/export-approved-brand.py
+      - name: Commit deterministic exports to the isolated PR branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/icons/icon-192.png public/icons/icon-512.png public/icons/maskable-192.png public/icons/maskable-512.png public/icons/apple-touch-icon.png public/icons/favicon-48.png public/icons/favicon.ico public/favicon.ico
+          if ! git diff --cached --quiet; then
+            git commit -m 'brand: export exact user-provided Android artwork'
+            git push
+          fi
