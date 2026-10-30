@@ -6,9 +6,9 @@
   min-height:100vh;
   min-height:100dvh;
   background-color:#021537;
-  background-image:url("/brand/apronso-splash-locked-20261030.webp?v=20261030-2218-user-locked");
+  background-image:url("/brand/approva-splash-user-exact-20261030.png?v=20261030-user-originals-v1");
   background-position:center center;
-  background-size:cover;
+  background-size:contain;
   background-repeat:no-repeat;
   overflow:hidden;
 }
