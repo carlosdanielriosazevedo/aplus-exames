@@ -32,7 +32,7 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
       const icon=manifest.icons.find(item=>item.purpose===purpose&&item.sizes===`${size}x${size}`);
       expect(icon).toBeTruthy();
       expect(icon.type).toBe("image/png");
-      expect(icon.src).toContain("?v=20261030-2218-user-locked");
+      expect(icon.src).toContain("?v=20261030-android-launcher-fullbleed");
       const asset=await request.get(icon.src);
       expect(asset.ok()).toBe(true);
       expect(asset.headers()["content-type"]).toContain("image/png");
@@ -40,7 +40,7 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
       expect(bytes.subarray(0,8).toString("hex")).toBe("89504e470d0a1a0a");
       expect(bytes.readUInt32BE(16)).toBe(size);
       expect(bytes.readUInt32BE(20)).toBe(size);
-      // Confere o tratamento dos cantos para evitar a moldura laranja
+      // Confere que launcher Android nao mostra a moldura navy espessa do recurso maskable anterior.\n      // Neste hotfix a imagem maskable é idêntica a any, sem a redução para 78%.\n      // Confere o tratamento dos cantos para evitar a moldura laranja
       // no splash nativo gerado pelo Chrome/WebAPK Android.
       const pixels=await page.evaluate(async(src)=>{
         const img=new Image();
@@ -62,7 +62,7 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
         return {corner:at(0,0),blue:at(Math.round(img.naturalWidth*.82),Math.round(img.naturalHeight*.78)),plusPixels};
       },icon.src);
       if(purpose==="any")expect(pixels.corner[3]).toBe(0);
-      else expect(pixels.corner.slice(0,3)).toEqual([8,19,46]);
+      else expect(pixels.corner[3]).toBe(0);
       expect(pixels.blue[2]).toBeGreaterThan(pixels.blue[0]+40);
       expect(pixels.plusPixels).toBeGreaterThan(size===192?200:1200);
 
@@ -72,7 +72,7 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
   await page.goto("/");
   const apple=page.locator('link[rel="apple-touch-icon"]');
   await expect(apple).toHaveAttribute("sizes","180x180");
-  await expect(apple).toHaveAttribute("href",/apple-touch-icon\.png\?v=20261030-2218-user-locked$/);
+  await expect(apple).toHaveAttribute("href",/apple-touch-icon\.png\?v=20261030-android-launcher-fullbleed$/);
   const asset=await request.get(await apple.getAttribute("href"));
   expect(asset.ok()).toBe(true);
   const bytes=await asset.body();
@@ -80,7 +80,7 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
   expect(bytes.readUInt32BE(16)).toBe(180);
   expect(bytes.readUInt32BE(20)).toBe(180);
 
-  const versionedFavicon=page.locator('link[rel="icon"][href*="favicon.ico?v=20261030-2218-user-locked"]');
+  const versionedFavicon=page.locator('link[rel="icon"][href*="favicon.ico?v=20261030-android-launcher-fullbleed"]');
   await expect(versionedFavicon).toHaveCount(1);
   const favicon=await request.get("/favicon.ico");
   expect(favicon.status()).toBe(200);
@@ -91,7 +91,7 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
 
 
 test("Splash final: segunda imagem fornecida pelo utilizador, WebP lossless",async({request,page})=>{
-  const asset=await request.get("/brand/apronso-splash-locked-20261030.webp?v=20261030-2218-user-locked");
+  const asset=await request.get("/brand/apronso-splash-locked-20261030.webp?v=20261030-android-launcher-fullbleed");
   expect(asset.status()).toBe(200);
   expect(asset.headers()["content-type"]).toContain("image/webp");
   const bytes=await asset.body();
@@ -102,14 +102,14 @@ test("Splash final: segunda imagem fornecida pelo utilizador, WebP lossless",asy
   await page.goto("/");
   const dimensions=await page.evaluate(async()=>{
     const img=new Image();
-    img.src="/brand/apronso-splash-locked-20261030.webp?v=20261030-2218-user-locked";
+    img.src="/brand/apronso-splash-locked-20261030.webp?v=20261030-android-launcher-fullbleed";
     await img.decode();
     return [img.naturalWidth,img.naturalHeight];
   });
   expect(dimensions).toEqual([941,1672]);
 });
 test("Ícone aprovado igual em Android, iOS e favicon",async({request})=>{
-  const apple=await request.get("/icons/apple-touch-icon.png?v=20261030-2218-user-locked");
+  const apple=await request.get("/icons/apple-touch-icon.png?v=20261030-android-launcher-fullbleed");
   expect(apple.status()).toBe(200);
   expect(createHash("sha256").update(await apple.body()).digest("hex")).toBe("a7f0775faf5807ec796b4a07eefa3ba1540a1867ad1cdecd100c12717d0c3fde");
   const favicon=await request.get("/favicon.ico");
