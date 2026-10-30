@@ -51,7 +51,8 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
   const versionedFavicon=page.locator('link[rel="icon"][href*="favicon.ico?v=20261030"]');
   await expect(versionedFavicon).toHaveCount(1);
   const favicon=await request.get("/favicon.ico");
-  expect(favicon.ok()).toBe(true);
+  expect(favicon.status()).toBe(200);
+  expect(new URL(favicon.url()).pathname).toBe("/favicon.ico");
   const ico=await favicon.body();
   expect(ico.subarray(0,4).toString("hex")).toBe("00000100");
 });
