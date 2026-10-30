@@ -29,3 +29,14 @@ A versão de 30/10/2026 inclui `?v=20261030` nos endereços do manifesto, favico
 ## Segunda versão aprovada — fundo laranja uniforme
 
 Aprovada em 30/10/2026 nova versão do desenho: fundo laranja uniforme sem pormenores brancos nos cantos, Apronso em grande plano, painel azul-escuro inferior direito e `+` amarelo alinhado. O desenho aprovado é o ficheiro `assets/brand/apronso-app-icon-source.webp` e as variantes são geradas diretamente dele. Versão dos URLs de ícones atualizada para `?v=20261030-orange2`, necessária para atualizar instalações WebAPK existentes. A versão maskable contém margem de segurança, preenchida a laranja. Não alterar a identidade de manifesto (`id`) nem o `start_url` para não criar uma segunda app no Android.
+
+
+## Revisão sem contorno (30/10/2026)
+- Os ícones anteriores foram exportados de uma imagem com cantos brancos ou com um quadrado arredondado embutido num fundo adicional; isto criava uma moldura visível na instalação Android.
+- A imagem-base agora é **full bleed** (quadrada, sem cantos arredondados e sem moldura pré-desenhada). Apenas o launcher do Android deve aplicar o recorte final.
+- As variantes **maskable** usam fundo laranja/azul até às extremidades; a mascote e o `+` são dimensionados para continuarem visíveis em recorte circular. Não há um quadrado arredondado dentro de outro quadrado.
+- Ícone de iOS e favicon receberam o mesmo desenho atualizado.
+- Manifesto e metadados têm cache-bust `?v=20261030-fullbleed1`, mantendo id, start_url, scope, manifest e comportamento da aplicação inalterados.
+- O teste em `public-metadata.spec.mjs` valida, além das dimensões, os pixels dos cantos (laranja em cima, azul no inferior direito) para prevenir regressão de margens brancas.
+- Revisão visual: `preview.png` local com ícone quadrado, máscara circular e redução a 48px. Revisão num dispositivo real após publicar continua obrigatória para confirmar o launcher Xiaomi.
+- Esta alteração não toca em sessões, progresso, notas, XP, dados, corretor ou layout funcional.
