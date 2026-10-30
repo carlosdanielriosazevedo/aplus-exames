@@ -9,3 +9,5 @@ Exports are reproducible with `python scripts/export-approved-brand.py` using Pi
 The complete splash is painted unmodified as a CSS background using `contain` rather than `cover`, so it cannot be cropped by the viewport. The WebAPK native first screen is controlled by Chrome/Android and cannot be pixel-identically replaced by a PWA; the selected image is the internal startup screen. Do not promise a native splash unless implementing a native shell.
 
 No grading, sessions, XP, account, databases, pedagogy or payments changed. Do not publish before Beta CI passes and real Xiaomi visual check.
+
+Export workflow success: `41142984945`. Generated assets committed by GitHub Actions, checked against original-image SHA-256 and deterministic resized-output SHA-256. Beta CI must run on the final commit, not only on the initial source-asset commit.
