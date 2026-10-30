@@ -1,4 +1,4 @@
-/* APProva+ — arte aprovada pelo proprietário, sem redesenho.
+/* APProva+ — a segunda imagem aprovada, reproduzida sem redesenho.
    O Chrome/Android controla o splash nativo anterior ao primeiro paint; este
    ecrã usa a IMAGEM INTEGRAL aprovada na primeira pintura da PWA instalada. */
 .apronsoStartup{
@@ -6,7 +6,7 @@
   min-height:100vh;
   min-height:100dvh;
   background-color:#021537;
-  background-image:url("/brand/apronso-splash-final.webp?v=20261030-exact-approved-final");
+  background-image:url("/brand/apronso-splash-locked-20261030.webp?v=20261030-2218-user-locked");
   background-position:center center;
   background-size:cover;
   background-repeat:no-repeat;
