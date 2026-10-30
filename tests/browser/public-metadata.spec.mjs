@@ -27,7 +27,7 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
       const icon=manifest.icons.find(item=>item.purpose===purpose&&item.sizes===`${size}x${size}`);
       expect(icon).toBeTruthy();
       expect(icon.type).toBe("image/png");
-      expect(icon.src).toContain("?v=20261030");
+      expect(icon.src).toContain("?v=20261030-orange2");
       const asset=await request.get(icon.src);
       expect(asset.ok()).toBe(true);
       expect(asset.headers()["content-type"]).toContain("image/png");
@@ -40,7 +40,7 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
   await page.goto("/");
   const apple=page.locator('link[rel="apple-touch-icon"]');
   await expect(apple).toHaveAttribute("sizes","180x180");
-  await expect(apple).toHaveAttribute("href",/apple-touch-icon\.png\?v=20261030$/);
+  await expect(apple).toHaveAttribute("href",/apple-touch-icon\.png\?v=20261030-orange2$/);
   const asset=await request.get(await apple.getAttribute("href"));
   expect(asset.ok()).toBe(true);
   const bytes=await asset.body();
@@ -48,7 +48,7 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
   expect(bytes.readUInt32BE(16)).toBe(180);
   expect(bytes.readUInt32BE(20)).toBe(180);
 
-  const versionedFavicon=page.locator('link[rel="icon"][href*="favicon.ico?v=20261030"]');
+  const versionedFavicon=page.locator('link[rel="icon"][href*="favicon.ico?v=20261030-orange2"]');
   await expect(versionedFavicon).toHaveCount(1);
   const favicon=await request.get("/favicon.ico");
   expect(favicon.status()).toBe(200);

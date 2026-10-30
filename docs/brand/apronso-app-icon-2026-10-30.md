@@ -25,3 +25,7 @@ Esta PR altera apenas os recursos de identidade, as referências versionadas e o
 ## Renovação de cache
 
 A versão de 30/10/2026 inclui `?v=20261030` nos endereços do manifesto, favicon anunciado no HTML e ícone Apple. Isto evita que navegadores com cache antiga de `/favicon.ico` (anteriormente servido com cache immutable de um ano) continuem a mostrar o ícone anterior. A rota pública `/favicon.ico` continua disponível, agora servida diretamente como ficheiro estático (HTTP 200, sem redirecionamento).
+
+## Segunda versão aprovada — fundo laranja uniforme
+
+Aprovada em 30/10/2026 nova versão do desenho: fundo laranja uniforme sem pormenores brancos nos cantos, Apronso em grande plano, painel azul-escuro inferior direito e `+` amarelo alinhado. O desenho aprovado é o ficheiro `assets/brand/apronso-app-icon-source.webp` e as variantes são geradas diretamente dele. Versão dos URLs de ícones atualizada para `?v=20261030-orange2`, necessária para atualizar instalações WebAPK existentes. A versão maskable contém margem de segurança, preenchida a laranja. Não alterar a identidade de manifesto (`id`) nem o `start_url` para não criar uma segunda app no Android.
