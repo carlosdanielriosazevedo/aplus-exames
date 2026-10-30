@@ -2,7 +2,7 @@ const SITE_URL='https://approvamais.pt';
 
 export default function manifest(){
   return {
-    name:'APProva+ · Preparação para exames nacionais',
+    name:'APProva+',
     short_name:'APProva+',
     description:'Preparação inteligente e adaptativa para os exames nacionais.',
     start_url:'/',
@@ -14,10 +14,10 @@ export default function manifest(){
     orientation:'any',
     id:SITE_URL,
     icons:[
-      {src:'/icons/icon-192.png?v=20261030-android-restore-orange2',sizes:'192x192',type:'image/png',purpose:'any'},
-      {src:'/icons/icon-512.png?v=20261030-android-restore-orange2',sizes:'512x512',type:'image/png',purpose:'any'},
-      {src:'/icons/maskable-192.png?v=20261030-android-restore-orange2',sizes:'192x192',type:'image/png',purpose:'maskable'},
-      {src:'/icons/maskable-512.png?v=20261030-android-restore-orange2',sizes:'512x512',type:'image/png',purpose:'maskable'}
+      {src:'/icons/icon-192.png?v=20261030-android-blue-outline-native-splash',sizes:'192x192',type:'image/png',purpose:'any'},
+      {src:'/icons/icon-512.png?v=20261030-android-blue-outline-native-splash',sizes:'512x512',type:'image/png',purpose:'any'},
+      {src:'/icons/maskable-192.png?v=20261030-android-blue-outline-native-splash',sizes:'192x192',type:'image/png',purpose:'maskable'},
+      {src:'/icons/maskable-512.png?v=20261030-android-blue-outline-native-splash',sizes:'512x512',type:'image/png',purpose:'maskable'}
     ]
   };
 }
