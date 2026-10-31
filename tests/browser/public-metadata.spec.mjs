@@ -26,6 +26,12 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
   expect(manifest.name).toBe("APProva+");
   expect(manifest.short_name).toBe("APProva+");
   expect(manifest.background_color).toBe("#01133d");
+  // Ícone só para o splash nativo: 1024 maskable, cor de fundo uniforme.
+  // O launcher (ideal ~83dp) continua a escolher o maskable 512.
+  const splashOnly=manifest.icons.find(item=>item.sizes==="1024x1024");
+  expect(splashOnly.purpose).toBe("maskable");
+  expect(splashOnly.src).toContain("/icons/splash-blank-1024.png?v=20261031-android-v3");
+  expect(manifest.icons.filter(item=>item.purpose.split(" ").includes("any")).every(item=>item.sizes!=="1024x1024")).toBe(true);
   await page.goto("/");
   const iconHashes={};
   for(const purpose of ["any","maskable"]){
@@ -33,7 +39,7 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
       const icon=manifest.icons.find(item=>item.purpose===purpose&&item.sizes===`${size}x${size}`);
       expect(icon).toBeTruthy();
       expect(icon.type).toBe("image/png");
-      expect(icon.src).toContain("?v=20261031-android-v2");
+      expect(icon.src).toContain("?v=20261031-android-v3");
       const asset=await request.get(icon.src);
       expect(asset.ok()).toBe(true);
       expect(asset.headers()["content-type"]).toContain("image/png");
@@ -47,14 +53,14 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
       // do launcher por cima, sem cantos brancos/pretos.
       const expectedSha={
         any:{192:"0def2b1481f8f79d134b6d95c7812ee12c5c14d7ad17be607435335dff81b8a8",512:"3c873a2363f9ec09b09ac2eb798cde54aa5965dc51b8bc8efc7bce5572be5c51"},
-        maskable:{192:"bf44e0546eb9090ef4b47fe635b07403f9e0cdd0094c15e352b0cf4741820a7e",512:"70d4408de0d80ac41ac6a9821261c0596b01879cc37ad8cb744d1710d36ba65d"}
+        maskable:{192:"843d6d7114798e837f9578e43252ef95931be3d31afaa118e89c9ed1e61f9134",512:"4a0f485b1c4c2552111ae8dd813a096769baa4a64bac2f8f29ce6ea909a1cb01"}
       }[purpose][size];
       expect(actualSha).toBe(expectedSha);
       if(purpose==="any")iconHashes[size]=actualSha;
       else expect(actualSha).not.toBe(iconHashes[size]);
       // Confere o tratamento dos cantos para evitar a moldura laranja
       // no splash nativo gerado pelo Chrome/WebAPK Android.
-      const pixels=await page.evaluate(async(src)=>{
+      const pixels=await page.evaluate(async([src,purpose])=>{
         const img=new Image();
         img.src=src;
         await img.decode();
@@ -71,8 +77,10 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
             const i=(y*img.naturalWidth+x)*4;
             if(pixels[i]>185&&pixels[i+1]>115&&pixels[i+2]<140&&pixels[i+3]>200)plusPixels++;
           }
-        return {corner:at(0,0),blue:at(Math.round(img.naturalWidth*.82),Math.round(img.naturalHeight*.78)),plusPixels};
-      },icon.src);
+        // No maskable a arte está reduzida a 81,5% e centrada (zona visível do launcher).
+        const k=purpose==="maskable"?.815:1, o=(1-k)/2, bx=purpose==="maskable"?.93:.82, by=purpose==="maskable"?.65:.78;
+        return {corner:at(0,0),blue:at(Math.round(img.naturalWidth*(o+k*bx)),Math.round(img.naturalHeight*(o+k*by))),plusPixels};
+      },[icon.src,purpose]);
       if(purpose==="any")expect(pixels.corner[3]).toBe(0);
       else expect(pixels.corner[3]).toBe(255);
       expect(pixels.blue[2]).toBeGreaterThan(pixels.blue[0]+40);

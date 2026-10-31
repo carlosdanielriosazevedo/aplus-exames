@@ -22,16 +22,20 @@ out.mkdir(parents=True,exist_ok=True)
 expected={
  'icon-192.png':'0def2b1481f8f79d134b6d95c7812ee12c5c14d7ad17be607435335dff81b8a8',
  'icon-512.png':'3c873a2363f9ec09b09ac2eb798cde54aa5965dc51b8bc8efc7bce5572be5c51',
- 'maskable-192.png':'bf44e0546eb9090ef4b47fe635b07403f9e0cdd0094c15e352b0cf4741820a7e',
- 'maskable-512.png':'70d4408de0d80ac41ac6a9821261c0596b01879cc37ad8cb744d1710d36ba65d',
+ 'maskable-192.png':'843d6d7114798e837f9578e43252ef95931be3d31afaa118e89c9ed1e61f9134',
+ 'maskable-512.png':'4a0f485b1c4c2552111ae8dd813a096769baa4a64bac2f8f29ce6ea909a1cb01',
  'apple-touch-icon.png':'c8892dd366321244b41d289917d976b3e9be06b0c473174d84a1cb3cec30480b',
  'favicon-48.png':'e016e48817b064119ecb4eef9c5ef09cf5d10600d88305bc694a9d191a5976ae',
 }
 for sz in [192,512]:
  im=src.resize((sz,sz),Image.Resampling.LANCZOS)
  im.save(out/f'icon-{sz}.png',optimize=True)
- # Maskable: arte em quadrado completo; o launcher Android aplica a forma.
- Image.open(fullbleed).convert('RGB').resize((sz,sz),Image.Resampling.LANCZOS).save(out/f'maskable-{sz}.png',optimize=True)
+ # Maskable: arte completa reduzida a 81,5% (área visível medida no launcher
+ # Android: 150/182 px = 82,4%), margem preenchida com os píxeis da borda.
+ import cv2, numpy as np
+ full=cv2.imread(str(fullbleed)); a=int(round(sz*0.815)); a-=(sz-a)%2; p=(sz-a)//2
+ art=cv2.resize(full,(a,a),interpolation=cv2.INTER_AREA)
+ cv2.imwrite(str(out/f'maskable-{sz}.png'),cv2.copyMakeBorder(art,p,sz-a-p,p,sz-a-p,cv2.BORDER_REPLICATE),[cv2.IMWRITE_PNG_COMPRESSION,9])
 src.resize((180,180),Image.Resampling.LANCZOS).save(out/'apple-touch-icon.png',optimize=True)
 src.resize((48,48),Image.Resampling.LANCZOS).save(out/'favicon-48.png',optimize=True)
 src.save(root/'public/favicon.ico',format='ICO',sizes=[(16,16),(32,32),(48,48),(64,64)])
