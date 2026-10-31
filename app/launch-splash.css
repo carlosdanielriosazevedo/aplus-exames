@@ -43,3 +43,4 @@
   background:rgba(2,21,55,.85);
   border-radius:8px;
 }
+.apronsoStartupRecovery button{appearance:none;background:transparent;border:0;color:inherit;font:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:0}
