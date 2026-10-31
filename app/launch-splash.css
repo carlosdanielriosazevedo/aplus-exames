@@ -1,7 +1,8 @@
 /* APProva+ — ecrã de abertura único da app instalada (Android/iOS).
    O Chrome/Android mostra sempre, antes do primeiro paint, o seu splash nativo
    (ícone sobre background_color do manifest). Logo a seguir, esta camada mostra
-   a imagem aprovada, sem alterações, durante ~3,5 s e desaparece sozinha.
+   a imagem aprovada, sem alterações, durante ~2,5 s (2,2 s + 0,3 s de fade) e
+   desaparece sozinha.
    - Só existe em modo app (display-mode standalone/fullscreen/minimal-ui):
      no browser normal não aparece nem descarrega a imagem.
    - Desaparece por animação CSS: não depende de JavaScript e nunca fica presa.
@@ -20,7 +21,7 @@
     background-size:contain,cover;
     background-repeat:no-repeat,no-repeat;
     pointer-events:auto;
-    animation:approvaLaunchOut .35s ease-out 3.5s forwards;
+    animation:approvaLaunchOut .3s ease-out 2.2s forwards;
   }
 }
 @keyframes approvaLaunchOut{

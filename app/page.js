@@ -20,7 +20,7 @@ function privateEntry(){
 }
 function Brand(){return <span className="brandName" aria-label="APProva+"><span className="brandAP">AP</span><span className="brandProva">Prova</span><span className="brandPlus">+</span></span>}
 function Loading({failed=false}){return <main aria-busy={!failed} aria-live="polite" aria-label={failed?"Não foi possível carregar a APProva+":"A preparar a APProva+"} className="apronsoStartup"><span className="apronsoStartupSr">{failed?"O arranque falhou":"A preparar o teu espaço de estudo"}</span><form className="apronsoStartupRecovery" action="/" method="get"><button type="submit" name="recuperar" value="inicio">{failed?"Não foi possível abrir. Voltar ao início":"Não abriu? Voltar ao início sem perder o progresso"}</button></form></main>}
-// Ecrã de abertura único da app instalada: imagem aprovada durante ~3,5 s.
+// Ecrã de abertura único da app instalada: imagem aprovada durante ~2,5 s.
 // Só aparece em modo app (display-mode standalone, via CSS) e desaparece sozinho
 // por animação CSS — nunca bloqueia, mesmo que o JavaScript falhe.
 function LaunchScreen(){return <div className="approvaLaunch" aria-hidden="true"/>}
