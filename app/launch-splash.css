@@ -12,12 +12,6 @@
   background-repeat:no-repeat;
   overflow:hidden;
 }
-.appInitialStandalone{display:none}
-.appInitialBrowser{display:block}
-@media (display-mode:standalone),(display-mode:fullscreen){
-  .appInitialStandalone{display:block}
-  .appInitialBrowser{display:none}
-}
 .apronsoStartupSr{
   position:absolute;
   width:1px;
@@ -30,31 +24,23 @@
   border:0;
 }
 
-/* Installed Android PWA: persist the exact approved art through hydration.
-   Before this, Loading() was unmounted immediately after the first useEffect,
-   so a Xiaomi recording showed only Chrome's native icon splash then a white
-   frame. This one-shot CSS overlay lives in RootLayout, not in Page state.
-   It must never show in an ordinary browser tab or replace the Android native
-   Chrome/WebAPK splash, which cannot be customized through a web manifest. */
-.apronsoLaunchOverlay{display:none}
-@media (display-mode:standalone),(display-mode:fullscreen){
-  html,body{background-color:#021537}
-  .apronsoLaunchOverlay{
-    display:block;
-    position:fixed;
-    inset:0;
-    z-index:2147483647;
-    background-color:#021537;
-    background-image:url("/brand/approva-splash-user-exact-20261030.png?v=20261030-user-originals-v1");
-    background-position:center center;
-    background-size:contain;
-    background-repeat:no-repeat;
-    /* Keep the exact image visible for the brief first paint, then remove
-       instantly without a fade or flicker. Never repeat on client navigation. */
-    animation:apronsoLaunchDismiss 1ms step-end 1200ms forwards;
-  }
+/* A recuperação é navegável mesmo se o JavaScript não arrancar. */
+.apronsoStartup{position:relative}
+.apronsoStartupRecovery{
+  position:absolute;
+  bottom:max(24px,env(safe-area-inset-bottom));
+  left:50%;
+  transform:translateX(-50%);
+  color:#fff;
+  font-size:14px;
+  line-height:1.5;
+  text-align:center;
+  text-decoration:underline;
+  text-underline-offset:3px;
+  padding:12px;
+  width:max-content;
+  max-width:calc(100% - 32px);
+  background:rgba(2,21,55,.85);
+  border-radius:8px;
 }
-@keyframes apronsoLaunchDismiss{
-  from{visibility:visible;opacity:1;pointer-events:auto}
-  to{visibility:hidden;opacity:0;pointer-events:none}
-}
+.apronsoStartupRecovery button{appearance:none;background:transparent;border:0;color:inherit;font:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:0}
