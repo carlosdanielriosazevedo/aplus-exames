@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import {useEffect,useState} from "react";
 
-const ClientApp=dynamic(()=>import("./clientApp"),{ssr:false,loading:()=> <Loading/>});
+const ClientApp=dynamic(()=>import("./clientApp"),{ssr:false,loading:({error})=>error?<Loading failed/>:<Loading/>});
 const STORAGE_KEYS=["a25","a25-friends-beta"];
 const ENTRY_KEY="a25-onboarding-entry";
 
@@ -19,7 +19,7 @@ function privateEntry(){
   return q.get("beta")==="friends"||q.get("mode")==="friends_beta";
 }
 function Brand(){return <span className="brandName" aria-label="APProva+"><span className="brandAP">AP</span><span className="brandProva">Prova</span><span className="brandPlus">+</span></span>}
-function Loading(){return <main aria-busy="true" aria-live="polite" aria-label="A preparar a APProva+" className="apronsoStartup"><span className="apronsoStartupSr">A preparar o teu espaço de estudo</span></main>}
+function Loading({failed=false}){return <main aria-busy={!failed} aria-live="polite" aria-label={failed?"Não foi possível carregar a APProva+":"A preparar a APProva+"} className="apronsoStartup"><span className="apronsoStartupSr">{failed?"O arranque falhou":"A preparar o teu espaço de estudo"}</span><a className="apronsoStartupRecovery" href="/?recuperar=inicio">{failed?"Não foi possível abrir. Voltar ao início":"Não abriu? Voltar ao início sem perder o progresso"}</a></main>}
 function Landing({onStart}){return <main className="dark center"><section className="hero">
   <div className="logo"><Brand/></div>
   <div className="welcomeApronso"><img className="apronso apronso-motion-idle" src="/mascot/apronso-welcome.webp" alt="Apronso, a mascote da APProva+"/><div><small>OLÁ, EU SOU O APRONSO</small><b>O teu parceiro de estudo.</b><span>Vou ajudar-te a perceber o que estudar, explicar dificuldades e celebrar cada conquista.</span></div></div>
@@ -41,13 +41,14 @@ export default function Page(){
       url.searchParams.delete("entrada");
       window.history.replaceState(window.history.state,"",url.pathname+url.search+url.hash);
     }
-    setBoot(storedProgress()||privateEntry()||url.searchParams.has("preview")||fromEntryForm);
+    setBoot(url.searchParams.get("recuperar")!=="inicio"&&(storedProgress()||privateEntry()||url.searchParams.has("preview")||fromEntryForm));
     setReady(true);
   },[]);
   function start(){
     try{window.sessionStorage.setItem(ENTRY_KEY,"1")}catch{}
     setBoot(true);
   }
-  if(!ready)return <><div className="appInitialStandalone"><Loading/></div><div className="appInitialBrowser"><Landing onStart={null}/></div></>;
+  // Se a hidratação falhar, manter HTML navegável em vez de um splash infinito.
+  if(!ready)return <Landing onStart={null}/>;
   return boot?<ClientApp/>:<Landing onStart={start}/>;
 }
