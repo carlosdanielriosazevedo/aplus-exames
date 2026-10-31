@@ -1,4 +1,5 @@
 "use client";
+import {academicProgressFor} from "../lib/fqaAcademicIntegrity";
 import {useEffect,useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import StudyModeHub from "./StudyModeHub";
@@ -71,7 +72,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   const [results,setResults]=useState([]);
   const [rubricAssessment,setRubricAssessment]=useState({});
   const [examDrafts,setExamDrafts]=useState([]);
-  const progress=subjectProgressFor(s,SUBJECT_ID);
+  const progress={...subjectProgressFor(s,SUBJECT_ID),...academicProgressFor(s,SUBJECT_ID)};
   const scopedItems=completedFqaCourse?PHYSICS_CHEMISTRY_A_ITEMS:physicsChemistryScope(PHYSICS_CHEMISTRY_A_ITEMS,currentYear,taughtUnitIds);
   const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
   const scopedCoverage=physicsChemistryCoverage(scopedItems);
@@ -183,6 +184,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   function resume(){
     const saved=progress.lastPosition;
     if(!saved)return;
+    if(progress.integrityPendingConflict){window.alert("Há versões diferentes desta tentativa. As respostas foram conservadas; a retoma precisa de resolução segura.");return;}
     const items=saved.itemIds.map(physicsChemistryItemById).filter(Boolean);
     if(items.length!==saved.itemIds.length){
       window.alert("Não foi possível recuperar esta sessão porque faltam perguntas. O teu progresso continua guardado.");
@@ -391,6 +393,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     const overall=totalSignals?Math.round(positiveSignals/totalSignals*100):null;
     return <Shell className="wideStudentShell progressPage">{sharedTop}<div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1></div>
       <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{overall??"—"}<em>{overall!==null?"/100":""}</em></b><div className="bar"><i style={{width:(overall??0)+"%"}}/></div><span>Índice parcial</span></div><p><small>OBJETIVO</small><b>{subjectGoal(s,SUBJECT_ID)} valores</b><span>O índice não prevê a tua nota de exame.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
+      <p className="muted" role="status">{progress.academicProjection?.insufficient?"Informação insuficiente para estimar a preparação. ":"Índice parcial baseado nas sessões identificáveis conservadas. "}As avaliações científicas automáticas não validadas ficam fora dos indicadores. O histórico de atividade e as respostas existentes são preservados.</p>
       <div className="progressOverview">{rows.map(row=><div key={row.id}><span>{row.shortTitle}</span><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><b>{row.percent??"—"}</b></div>)}</div>
       <div className="progressActions"><button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada</button><button className="secondary" onClick={()=>go("profileSettings")}>Ano e percurso escolar</button></div>
       <details className="progressDetails"><summary>Ver detalhe por matéria →</summary>
@@ -406,6 +409,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   }
 
   return <main className="learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>
+    {progress.integrityPendingConflict&&<div className="notice warning" role="alert">Há versões diferentes de uma tentativa. As respostas foram conservadas; a retoma precisa de resolução segura.</div>}
     {unrecoverableSession&&<div className="notice warning"><b>Sessão impossível de recuperar</b><span>Uma ou mais perguntas deixaram de estar disponíveis. A tentativa será arquivada sem pontuação adicional.</span><button className="secondary" onClick={recoverUnrecoverableSession}>Resolver sessão irrecuperável</button></div>}
     <div className="learnIntro"><div className="mobileMainTitle"><p>Olá 👋</p><h1>O teu próximo passo.</h1></div><span>{missionDone?"Missão feita. Podes continuar por tua conta.":progress.diagnosticDone?"Uma recomendação curta, escolhida a partir do teu percurso.":"Primeiro, vamos encontrar o melhor ponto de partida."}</span></div>
     <section className="adaptivePath" aria-label="Caminho adaptativo de Física e Química A">

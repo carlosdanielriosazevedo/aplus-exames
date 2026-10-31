@@ -67,7 +67,7 @@ assert.ok(payloadSource.includes('schema:"aplus-student-state-v8"'),"Payload clo
 assert.ok(payloadSource.includes("subjectProgress:s.subjectProgress||{}"),"Payload cloud deixou de transportar o progresso por disciplina necessário à retoma multi-dispositivo.");
 assert.ok(payloadSource.includes("subjectProgressModelVersion:s.subjectProgressModelVersion||4"),"Payload cloud perdeu a versão do progresso por disciplina.");
 assert.ok(cloudSource.includes('"currentAnswer"'),"A limpeza de texto livre do aluno deve abranger respostas ainda não submetidas.");
-assert.ok(cloudSource.includes("subjectProgress:remote.subjectProgress??local.subjectProgress"),"Carregar cloud deve restaurar o progresso por disciplina quando existe remotamente.");
+assert.ok(cloudSource.includes("remote.subjectProgress??local.subjectProgress")&&cloudSource.includes("mergeFqaHistory(local.subjectProgress?.[FQA_SUBJECT],remote.subjectProgress?.[FQA_SUBJECT])"),"Carregar cloud deve restaurar disciplinas e preservar variantes FQA antes de projetar a evidência.");
 assert.ok((cloudSource.match(/\.from\("student_cloud_state"\)/g)||[]).length>=4,"Cobertura esperada das operações de student_cloud_state diminuiu inesperadamente.");
 assert.ok(!cloudSource.includes('.from("student_cloud_state").delete('),"DELETE direto de progresso exige revisão explícita de segurança.");
 

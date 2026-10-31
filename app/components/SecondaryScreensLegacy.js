@@ -1,4 +1,5 @@
 "use client";
+import {academicProgressFor} from "../lib/fqaAcademicIntegrity";
 import {useEffect,useState} from "react";
 import {Back,BrandName,Shell,StudentNav,StudentTop} from "./chrome";
 import {AVAILABLE_SUBJECT_IDS,SECONDARY_EXAM_SUBJECTS,examCodesLabel} from "../data/subjects";
@@ -266,7 +267,7 @@ export function Parent({s,setS,go,prepIndex,measuredThemes}){
         detail:index===null?"Ainda sem indicador global":`Índice de preparação: ${index}/100`
       };
     }
-    const progress=subjectProgressFor(s,id);
+    const progress=id==="physics-chemistry-a"?academicProgressFor(s,id):subjectProgressFor(s,id);
     return {
       id,meta,goal:subjectGoal(s,id,s.goal||14),diagnosticDone:!!progress.diagnosticDone,
       sessions:(progress.sessions||[]).length,lastActivityAt:progress.lastActivityAt||null,
@@ -282,10 +283,10 @@ export function Parent({s,setS,go,prepIndex,measuredThemes}){
     if(Number.isFinite(value))evidenceRows.push({subject:"Matemática A",label:t.short||t.name,value,attempts:1});
   });
   visibleSubjectIds.filter(id=>id!==DEFAULT_SUBJECT_ID).forEach(id=>{
-    const progress=subjectProgressFor(s,id);
+    const progress=id==="physics-chemistry-a"?academicProgressFor(s,id):subjectProgressFor(s,id);
     const subject=subjectById(id)?.shortName||subjectById(id)?.name||id;
     Object.values(progress.competence||{}).forEach(row=>{
-      const attempts=Number(row.attempts)||0;
+      const attempts=Number(id==="physics-chemistry-a"?row.deterministicAttempts:row.attempts)||0;
       if(!attempts)return;
       const correct=Number(row.correct)||0;
       evidenceRows.push({subject,label:row.label||row.domainId||"Competência",value:Math.round(correct/attempts*100),attempts});

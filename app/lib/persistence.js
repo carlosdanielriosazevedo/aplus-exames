@@ -1,3 +1,4 @@
+import {FQA_SUBJECT,mergeFqaHistory,prepareFqaAcademicState} from "./fqaAcademicIntegrity.js";
 import {pilotTelemetryAllowed} from "./pilotConsentClient.js";
 import {browserStores,readStorageRows,removeStorageKey,writeStorageFallback} from "./browserStorage.js";
 
@@ -45,15 +46,20 @@ export function loadLocalStateStatus(initial,emptyScores,storageKey=STORAGE_KEY)
   const {rows,readable}=readStorageRows(storageKey);
   if(!readable)return {state:null,found:false,error:true};
   const parsed=[];
+  let malformed=false;
   for(const [store,raw] of rows)try{
     const value=withoutLegacyBetaQueues(JSON.parse(raw));
-    if(value&&typeof value==="object")parsed.push([store,value]);else store.removeItem(storageKey);
-  }catch{try{store.removeItem(storageKey)}catch{}}
+    if(value&&typeof value==="object")parsed.push([store,value]);else malformed=true;
+  }catch{malformed=true;}
+  if(malformed)return {state:null,found:true,error:true};
   if(!parsed.length)return {state:null,found:false,error:false};
   parsed.sort((a,b)=>(b[1]?._savedAt||0)-(a[1]?._savedAt||0));
-  const x=parsed[0][1],scores=emptyScores();
+  const x={...parsed[0][1]},scores=emptyScores();
+  let fqa;
+  for(const [,row] of parsed)fqa=mergeFqaHistory(fqa,row.subjectProgress?.[FQA_SUBJECT]);
+  if(fqa)x.subjectProgress={...(x.subjectProgress||{}),[FQA_SUBJECT]:fqa};
   Object.keys(scores).forEach(id=>{if(x.scores?.[id])scores[id]={...scores[id],...x.scores[id]}});
-  return {state:{...initial,...x,scores,betaSessions:[],betaEvents:[],_stateVersion:APP_STATE_VERSION},found:true,error:false};
+  return {state:prepareFqaAcademicState({...initial,...x,scores,betaSessions:[],betaEvents:[],_stateVersion:APP_STATE_VERSION}),found:true,error:false};
 }
 
 export function loadLocalState(initial,emptyScores,storageKey=STORAGE_KEY){return loadLocalStateStatus(initial,emptyScores,storageKey).state}
@@ -84,7 +90,7 @@ function schedulePilotSync(state){
 
 export function saveLocalState(state,storageKey=null){
   const key=storageKey||(state?.betaMode==="friends_beta"?FRIENDS_STORAGE_KEY:STORAGE_KEY);
-  const clean=withoutLegacyBetaQueues(state),persisted=pilotTelemetryAllowed()?clean:withoutPilotTelemetry(clean);
+  const clean=withoutLegacyBetaQueues(prepareFqaAcademicState(state)),persisted=pilotTelemetryAllowed()?clean:withoutPilotTelemetry(clean);
   let payload;
   try{payload=JSON.stringify({...persisted,_stateVersion:APP_STATE_VERSION,_savedAt:Date.now()})}catch{return false}
   const ok=writeStorageFallback(key,payload);
