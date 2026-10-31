@@ -123,15 +123,9 @@ test("Ícone aprovado igual em Android, iOS e favicon",async({request})=>{
   expect(createHash("sha256").update(await favicon.body()).digest("hex")).toBe("e9d21a7b6a8c3a795125a392dbae3e6d9dcdd12a13e954a0e9100bdf36b68bd5");
 });
 
-test("Startup de PWA instalado tem a imagem exata disponível como camada persistente",async({page})=>{
+test("Arranque não inclui camada bloqueante e mantém a imagem original",async({page})=>{
   await page.goto("/");
-  const splash=page.locator(".apronsoLaunchOverlay");
-  await expect(splash).toHaveCount(1);
-  const html=await splash.evaluate(element=>({
-    hidden:element.getAttribute("aria-hidden"),
-    css:window.getComputedStyle(element).display
-  }));
-  expect(html).toEqual({hidden:"true",css:"none"}); // Navegador normal permanece intacto
+  await expect(page.locator(".apronsoLaunchOverlay")).toHaveCount(0);
   const asset=await page.request.get("/brand/approva-splash-user-exact-20261030.png?v=20261030-user-originals-v1");
   expect(asset.ok()).toBe(true);
   expect(asset.headers()["content-type"]).toContain("image/png");
