@@ -1,3 +1,33 @@
+/* APProva+ — ecrã de abertura único da app instalada (Android/iOS).
+   O Chrome/Android mostra sempre, antes do primeiro paint, o seu splash nativo
+   (ícone sobre background_color do manifest). Logo a seguir, esta camada mostra
+   a imagem aprovada, sem alterações, durante ~3,5 s e desaparece sozinha.
+   - Só existe em modo app (display-mode standalone/fullscreen/minimal-ui):
+     no browser normal não aparece nem descarrega a imagem.
+   - Desaparece por animação CSS: não depende de JavaScript e nunca fica presa.
+   - No fim fica visibility:hidden + pointer-events:none: nunca bloqueia toques. */
+.approvaLaunch{display:none}
+@media (display-mode: standalone), (display-mode: fullscreen), (display-mode: minimal-ui){
+  .approvaLaunch{
+    display:block;
+    position:fixed;
+    inset:0;
+    z-index:2147483000;
+    background-color:#01133d;
+    background-image:url("/brand/approva-splash-20261031.png?v=20261031-android-v2");
+    background-image:url("/brand/approva-splash-20261031.webp?v=20261031-android-v2"),linear-gradient(#021a48 0 50%,#000c2f 50% 100%);
+    background-position:center center,center center;
+    background-size:contain,cover;
+    background-repeat:no-repeat,no-repeat;
+    pointer-events:auto;
+    animation:approvaLaunchOut .35s ease-out 3.5s forwards;
+  }
+}
+@keyframes approvaLaunchOut{
+  from{opacity:1;visibility:visible}
+  to{opacity:0;visibility:hidden}
+}
+
 /* APProva+ — a segunda imagem aprovada, reproduzida sem redesenho.
    O Chrome/Android controla o splash nativo anterior ao primeiro paint; este
    ecrã usa a IMAGEM INTEGRAL aprovada na primeira pintura da PWA instalada. */
@@ -5,8 +35,9 @@
   width:100%;
   min-height:100vh;
   min-height:100dvh;
-  background-color:#021537;
-  background-image:url("/brand/approva-splash-user-exact-20261030.png?v=20261030-user-originals-v1");
+  background-color:#01133d;
+  background-image:url("/brand/approva-splash-20261031.png?v=20261031-android-v2");
+  background-image:image-set(url("/brand/approva-splash-20261031.webp?v=20261031-android-v2") type("image/webp"),url("/brand/approva-splash-20261031.png?v=20261031-android-v2") type("image/png"));
   background-position:center center;
   background-size:contain;
   background-repeat:no-repeat;

@@ -8,16 +8,16 @@ export default function manifest(){
     start_url:'/',
     scope:'/',
     display:'standalone',
-    background_color:'#08132e',
+    background_color:'#01133d',
     theme_color:'#08132e',
     lang:'pt-PT',
     orientation:'any',
     id:SITE_URL,
     icons:[
-      {src:'/icons/icon-192.png?v=20261030-user-originals-v1',sizes:'192x192',type:'image/png',purpose:'any'},
-      {src:'/icons/icon-512.png?v=20261030-user-originals-v1',sizes:'512x512',type:'image/png',purpose:'any'},
-      {src:'/icons/maskable-192.png?v=20261030-user-originals-v1',sizes:'192x192',type:'image/png',purpose:'maskable'},
-      {src:'/icons/maskable-512.png?v=20261030-user-originals-v1',sizes:'512x512',type:'image/png',purpose:'maskable'}
+      {src:'/icons/icon-192.png?v=20261031-android-v2',sizes:'192x192',type:'image/png',purpose:'any'},
+      {src:'/icons/icon-512.png?v=20261031-android-v2',sizes:'512x512',type:'image/png',purpose:'any'},
+      {src:'/icons/maskable-192.png?v=20261031-android-v2',sizes:'192x192',type:'image/png',purpose:'maskable'},
+      {src:'/icons/maskable-512.png?v=20261031-android-v2',sizes:'512x512',type:'image/png',purpose:'maskable'}
     ]
   };
 }
