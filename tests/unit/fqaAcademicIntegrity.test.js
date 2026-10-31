@@ -1,6 +1,7 @@
 import {test,expect} from "vitest";
 import {FQA_SUBJECT as ID,academicProgressFor,fqaResultEligibility,mergeFqaHistory,prepareFqaAcademicState,projectFqaAcademicProgress,stampFqaResult} from "../../app/lib/fqaAcademicIntegrity.js";
 import {PHYSICS_CHEMISTRY_A_ITEMS} from "../../app/data/physicsChemistryFoundation.js";
+import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../../app/data/physicsChemistryExamBlueprint.js";
 import {gradePhysicsChemistryResponse} from "../../app/lib/physicsChemistryEngine.js";
 import {advanceSubjectSession,beginSubjectSession,recordSubjectSession,migrateSubjectProgress,resetSubjectProgress,quarantineUnrecoverableSubjectSession} from "../../app/lib/subjectProgress.js";
 import {safeCloudMerge} from "../../app/lib/cloudStateMerge.js";
@@ -149,4 +150,12 @@ test("new scientific completion retains legitimate mission XP and leaves existin
  const done=recordSubjectSession(raw,{subjectId:ID,kind:"mission",items:[item],results:[input],sessionId:"new-synthetic",completedAt:1750000000000});
  expect(done.xp).toBe(raw.xp+25);expect(done.subjectProgress[ID].competence).toEqual(raw.subjectProgress[ID].competence);expect(done.subjectProgress[ID].sessions.at(-1).results[0].responseText).toBe(input.responseText);
  expect(academicProgressFor(done,ID).competence).toEqual({});expect(recordSubjectSession(done,{subjectId:ID,kind:"mission",items:[item],results:[input],sessionId:"new-synthetic",completedAt:1750000000000})).toBe(done);
+});
+
+
+test("full exam operational wrappers preserve the catalog provenance of objective results",()=>{
+ const items=[...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.mandatoryItems,...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.optionalItems].filter(x=>x.responseType==="multiple-choice");
+ const results=items.map(item=>gradePhysicsChemistryResponse(item,item.answerIndex));
+ const raw=state({sessions:[{sessionId:"synthetic-full-exam",kind:"full_exam",completedAt:100,itemIds:items.map(x=>x.id),results}]});
+ expect(academicProgressFor(raw,ID).academicProjection.provenance).toHaveLength(items.length);
 });

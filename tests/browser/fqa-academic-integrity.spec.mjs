@@ -1,4 +1,6 @@
 import {test,expect} from "@playwright/test";
+import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../../app/data/physicsChemistryExamBlueprint.js";
+import {gradePhysicsChemistryResponse} from "../../app/lib/physicsChemistryEngine.js";
 const id="physics-chemistry-a";
 function syntheticState(){
  const now=Date.now();
@@ -22,3 +24,17 @@ for(const width of [360,390,430,1366]){
   }
  });
 }
+
+
+test("new objective exam evidence remains eligible alongside excluded legacy science",async({page})=>{
+ const state=syntheticState();const item=PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.mandatoryItems.find(x=>x.responseType==="multiple-choice");
+ state.subjectProgress[id].sessions.push({sessionId:"synthetic-new-objective",kind:"full_exam",completedAt:Date.now(),itemIds:[item.id],results:[gradePhysicsChemistryResponse(item,item.answerIndex)]});
+ await page.addInitScript(state=>{if(!localStorage.getItem("synthetic-423-seeded")){localStorage.setItem("a25",JSON.stringify(state));localStorage.setItem("synthetic-423-seeded","1")}},state);
+ await page.goto("/");
+ for(let pass=0;pass<2;pass++){
+  await page.getByRole("button",{name:"Progresso",exact:true}).last().click();
+  await expect(page.locator(".progressHero b").first()).toHaveText("100/100");
+  await expect(page.getByRole("status").filter({hasText:"Índice parcial baseado"})).toBeVisible();
+  if(pass===0)await page.reload();
+ }
+});

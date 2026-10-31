@@ -79,6 +79,10 @@ function fingerprint(value){
   for(let i=0;i<text.length;i++){hash^=text.charCodeAt(i);hash=Math.imul(hash,16777619)}
   return `fqa1-${(hash>>>0).toString(16)}`;
 }
+function itemFingerprint(item){
+  const {examPoints:_points,examSection:_section,examOrder:_order,...catalogItem}=item;
+  return fingerprint(catalogItem);
+}
 function resultContract(result){
   return {status:result.status,final:!!result.final,correct:result.correct??null,points:Number.isFinite(result.points)?result.points:null,
     maxPoints:result.maxPoints,provisionalPoints:Number.isFinite(result.provisionalPoints)?result.provisionalPoints:null,
@@ -87,7 +91,7 @@ function resultContract(result){
 }
 export function stampFqaResult(item,result){
   if(!["multiple-choice","stepwise"].includes(item?.responseType))return result;
-  return {...result,academicProvenance:{policyVersion:1,source:"fqa-recorded-engine-v1",itemFingerprint:fingerprint(item),resultFingerprint:fingerprint(resultContract(result))}};
+  return {...result,academicProvenance:{policyVersion:1,source:"fqa-recorded-engine-v1",itemFingerprint:itemFingerprint(item),resultFingerprint:fingerprint(resultContract(result))}};
 }
 
 export function fqaResultEligibility(item,result){
@@ -98,7 +102,7 @@ export function fqaResultEligibility(item,result){
   if(item.responseType==="restricted-response")return excluded("unvalidated_scientific_response");
   if(result.status==="unanswered")return excluded("unanswered");
   const source=result.academicProvenance;
-  if(source?.policyVersion!==1||source.source!=="fqa-recorded-engine-v1"||source.itemFingerprint!==fingerprint(item)||source.resultFingerprint!==fingerprint(resultContract(result)))return excluded("missing_or_changed_provenance");
+  if(source?.policyVersion!==1||source.source!=="fqa-recorded-engine-v1"||source.itemFingerprint!==itemFingerprint(item)||source.resultFingerprint!==fingerprint(resultContract(result)))return excluded("missing_or_changed_provenance");
   if(item.responseType==="multiple-choice"&&result.final===true&&result.gradingMode==="deterministic"&&typeof result.correct==="boolean"&&result.maxPoints===(item.maxPoints||10)&&result.points===(result.correct?result.maxPoints:0))return {eligible:true,policyVersion:1,lane:"recorded-objective",itemId:item.id,reason:"catalog_and_result_contract"};
   if(item.responseType==="stepwise"&&result.gradingMode==="structured-provisional"&&!result.requiresReview&&Number.isFinite(result.provisionalPoints)&&result.maxPoints===item.maxPoints&&result.provisionalPoints>=0&&result.provisionalPoints<=result.maxPoints&&list(result.steps).length>0&&list(result.steps).length===list(item.steps).length&&new Set(result.steps.map(s=>s.id)).size===result.steps.length&&Math.abs(result.steps.reduce((sum,s)=>sum+(s.points||0),0)-(result.penalty||0)-result.provisionalPoints)<0.11&&item.steps.every(step=>list(result.steps).some(row=>row?.id===step.id&&row.maxPoints===step.points&&Number.isFinite(row.points)&&row.points>=0&&row.points<=row.maxPoints)))return {eligible:true,policyVersion:1,lane:"recorded-structured",itemId:item.id,reason:"catalog_and_result_contract"};
   return excluded("unverifiable_result_contract");
