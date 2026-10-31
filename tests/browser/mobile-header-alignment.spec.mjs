@@ -60,12 +60,12 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
         const mascot=await page.locator('.learnIntro').evaluate(el=>{
           const title=el.querySelector('.mobileMainTitle'),copy=el.querySelector(':scope>span');
           const pseudo=getComputedStyle(title,'::after');
-          return {titleBottom:title.getBoundingClientRect().bottom,copyTop:copy.getBoundingClientRect().top,legacyContent:getComputedStyle(el,'::after').content,content:pseudo.content,background:pseudo.backgroundImage,bottom:pseudo.bottom};
+          return {titleBottom:title.getBoundingClientRect().bottom,copyTop:copy.getBoundingClientRect().top,legacyContent:getComputedStyle(el,'::after').content,content:pseudo.content,background:pseudo.backgroundImage,bottom:pseudo.bottom,mascotBottom:title.getBoundingClientRect().top+parseFloat(pseudo.top)+parseFloat(pseudo.height),firstLineBottom:title.querySelector('h1').getBoundingClientRect().top+parseFloat(getComputedStyle(title.querySelector('h1')).lineHeight)};
         });
         expect(mascot.legacyContent).toBe('none');
         expect(mascot.content).toBe('""');
         expect(mascot.background).toContain('apronso-welcome.webp');
-        expect(mascot.bottom).toBe('0px');
+        expect(Math.abs(mascot.mascotBottom-mascot.firstLineBottom)).toBeLessThan(0.02);
         expect(mascot.copyTop).toBeGreaterThan(mascot.titleBottom);
         await expect(page.locator('.learnIntro img.apronso')).toHaveCount(0);
       }

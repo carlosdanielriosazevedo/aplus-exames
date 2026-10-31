@@ -24,7 +24,7 @@ describe("desktop shared student-shell polish",()=>{
   it("keeps Exames guidance centred and Treinar copy in its shared heading",()=>{
     expect(css).toMatch(/\.apronsoNudge:has\(\+ \.trainChoices\),[\s\S]*?\.examHub \.apronsoNudge\s*\{[\s\S]*?align-items:center;/u);
     expect(css).toMatch(/\.apronsoNudge:has\(\+ \.trainChoices\) p,[\s\S]*?\.examHub \.apronsoNudge p\s*\{[\s\S]*?align-self:center;[\s\S]*?text-align:center;/u);
-    expect(studyModeHub).toContain('className="sectionIntro learnIntro trainIntro"');
+    expect(studyModeHub).toContain('className="sectionIntro learnIntro trainIntro menuIntro"');
     expect(studyModeHub).toContain('<span>{STUDY_MODE_COPY.nudge}</span>');
     expect(studyModeHub).not.toContain("ApronsoNudge");
     expect(studyModeHub).toContain('className="trainChoices"');
