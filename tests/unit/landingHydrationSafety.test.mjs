@@ -8,7 +8,7 @@ test("public landing and legal links remain server rendered",()=>{
  expect(source).toContain('if(!ready)return <>');
  expect(source).toContain('if(!ready)return <Landing onStart={null}/>;');
  expect(source).toContain('function Loading({failed=false})');
- expect(source).toContain('href="/?recuperar=inicio"');
+ expect(source).toContain('name="recuperar" value="inicio"');
  expect(source).toContain('url.searchParams.get("recuperar")!=="inicio"');
  expect(source).toContain('href="/privacidade"');
  expect(source).toContain('href="/termos"');
