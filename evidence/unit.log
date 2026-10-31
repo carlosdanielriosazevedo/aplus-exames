@@ -1,0 +1,116 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 test:unit
+> vitest run
+
+
+ RUN  v3.2.7 /workspace/scratch/7f5e477b35c5/aplus-exames/.worktrees/recovery
+
+ ✓ tests/unit/pendingAttemptIntegrity.test.js (12 tests) 31ms
+ ✓ tests/unit/portugueseLiteraryWorks.test.js (8 tests) 103ms
+ ✓ tests/unit/portugueseEngine.test.js (19 tests) 115ms
+ ✓ tests/unit/mathNumberSpacing.test.js (5 tests) 98ms
+ ✓ tests/unit/portugueseDeepReviewEditorialAudit.test.js (4 tests) 43ms
+ ✓ tests/unit/portugueseDeepReviewCoverage12.test.js (5 tests) 25ms
+ ✓ tests/unit/mathDeepReviewMandatoryCoverage.test.js (4 tests) 24ms
+ ✓ tests/unit/constructedResponse.test.js (10 tests) 29ms
+ ✓ tests/unit/deepReviewPresentation.test.js (5 tests) 58ms
+ ✓ tests/unit/portugueseDeepReviewCoverage11.test.js (4 tests) 27ms
+ ✓ tests/unit/visiblePortugueseAccents.test.js (3 tests) 120ms
+ ✓ tests/unit/physicsChemistryDeepReviewMatter10.test.js (9 tests) 17ms
+ ✓ tests/unit/math-visible-copy-regeneration.test.mjs (3 tests) 1360ms
+   ✓ Matemática A · conteúdo versionado > mantém sincronizados os três ficheiros gerados  1305ms
+ ✓ tests/unit/portugueseDeepReviewGramatica10.test.js (12 tests) 18ms
+ ✓ tests/unit/portugueseDeepReviewCoverage10.test.js (4 tests) 20ms
+ ✓ tests/unit/mathDeepReviewCompositeDerivatives.test.js (8 tests) 5ms
+ ✓ tests/unit/betaSession.test.js (15 tests) 13ms
+ ✓ tests/unit/mathDeepReviewElectionsSharing.test.js (10 tests) 8ms
+ ✓ tests/unit/portugueseDeepReviewEscrita10.test.js (10 tests) 26ms
+ ✓ tests/unit/physicsChemistryDeepReviewAqueous11.test.js (10 tests) 10ms
+ ✓ tests/unit/portugueseDeepReviewGramatica11.test.js (10 tests) 10ms
+ ✓ tests/unit/physicsChemistryDeepReviewCoverage.test.js (4 tests) 24ms
+ ✓ tests/unit/portugueseDeepReviewVieira11.test.js (11 tests) 16ms
+ ✓ tests/unit/portugueseDeepReviewLeitura11.test.js (10 tests) 14ms
+ ✓ tests/unit/portugueseDeepReviewAntero11.test.js (8 tests) 12ms
+ ✓ tests/unit/portugueseDeepReviewEca11.test.js (12 tests) 15ms
+ ✓ tests/unit/portugueseDeepReviewEscrita11.test.js (9 tests) 12ms
+ ✓ tests/unit/portugueseDeepReviewLusiadas10.test.js (12 tests) 16ms
+ ✓ tests/unit/mathDeepReview12thCoverage.test.js (5 tests) 19ms
+ ✓ tests/unit/rankingLeagueIdentity.test.js (1 test) 11ms
+ ✓ tests/unit/portugueseDeepReviewFreiLuis11.test.js (11 tests) 16ms
+ ✓ tests/unit/portugueseDeepReviewFernaoLopes10.test.js (9 tests) 14ms
+ ✓ tests/unit/portugueseReviewContent.test.js (3 tests) 11ms
+ ✓ tests/unit/physicsChemistryDeepReviewMechanics11.test.js (9 tests) 9ms
+ ✓ tests/unit/mathDeepReviewFunctions11.test.js (10 tests) 11ms
+ ✓ tests/unit/portugueseDeepReviewGilVicente10.test.js (10 tests) 8ms
+ ✓ tests/unit/portuguesePracticeScope.test.js (5 tests) 10ms
+ ✓ tests/unit/portugueseDeepReviewTrovadoresca10.test.js (9 tests) 8ms
+ ✓ tests/unit/portugueseDeepReviewCesario11.test.js (8 tests) 10ms
+ ✓ tests/unit/mathDeepReviewTrigonometry.test.js (9 tests) 9ms
+ ✓ tests/unit/physicsChemistryDeepReviewEquilibrium11.test.js (9 tests) 11ms
+ ✓ tests/unit/launchHardening.test.js (12 tests) 11ms
+ ✓ tests/unit/physicsChemistryDeepReviewElements10.test.js (10 tests) 11ms
+ ✓ tests/unit/portugueseDeepReviewRomantismoOpcao11.test.js (11 tests) 14ms
+ ✓ tests/unit/portugueseDeepReviewLeitura10.test.js (10 tests) 18ms
+ ✓ tests/unit/portugueseDeepReviewCamoesRimas10.test.js (10 tests) 10ms
+ ✓ tests/unit/portugueseDeepReviewRomance12.test.js (10 tests) 10ms
+ ✓ tests/unit/mathDeepReviewCounting.test.js (10 tests) 6ms
+ ✓ tests/unit/portugueseDeepReviewGramatica12.test.js (10 tests) 11ms
+ ✓ tests/unit/mathDeepReviewSyntheticGeometry10.test.js (11 tests) 8ms
+ ✓ tests/unit/mathDeepReviewDifferentialCalculus11.test.js (9 tests) 6ms
+ ✓ tests/unit/physicsChemistryDeepReviewEnergy10.test.js (8 tests) 7ms
+ ✓ tests/unit/mathDeepReviewOptional12Coverage.test.js (5 tests) 17ms
+ ✓ tests/unit/portugueseDeepReviewMensagem12.test.js (10 tests) 10ms
+ ✓ tests/unit/portugueseDeepReviewEscrita12.test.js (10 tests) 13ms
+ ✓ tests/unit/formulaNotationBehavior.test.js (25 tests) 17ms
+ ✓ tests/unit/mathDeepReviewAnalyticGeometry10.test.js (13 tests) 23ms
+ ✓ tests/unit/mathDeepReviewDotProduct.test.js (10 tests) 12ms
+ ✓ tests/unit/mathDeepReviewApproximateEquations.test.js (9 tests) 5ms
+ ✓ tests/unit/mathDeepReviewPrimitivesIntegrals12.test.js (8 tests) 13ms
+ ✓ tests/unit/physicsChemistryDeepReviewWaves11.test.js (9 tests) 15ms
+ ✓ tests/unit/diagnosticRuntime.test.js (3 tests) 3ms
+ ✓ tests/unit/portugueseDeepReviewGeorge12.test.js (10 tests) 7ms
+ ✓ tests/unit/stateTortureCloudMerge.test.js (7 tests) 5ms
+ ✓ tests/unit/mathReviewContent.test.js (3 tests) 11ms
+ ✓ tests/unit/mathDeepReviewInferentialStatistics12.test.js (7 tests) 7ms
+ ✓ tests/unit/portugueseReviewGuides.test.js (5 tests) 10ms
+ ✓ tests/unit/mathDeepReviewFunctions10.test.js (10 tests) 10ms
+ ✓ tests/unit/portugueseDeepReviewPessoaOrtonimo12.test.js (9 tests) 11ms
+ ✓ tests/unit/mathDeepReviewContinuousDifferentiable.test.js (9 tests) 9ms
+ ✓ tests/unit/mathDeepReviewSequences.test.js (10 tests) 10ms
+ ✓ tests/unit/mathDeepReviewStatistics10.test.js (10 tests) 13ms
+ ✓ tests/unit/portugueseDeepReviewPessoaHeteronimos12.test.js (11 tests) 10ms
+ ✓ app/lib/portugueseWritingCycle.test.js (3 tests) 4ms
+ ✓ tests/unit/mathDeepReviewFinance10.test.js (10 tests) 6ms
+ ✓ tests/unit/physicsChemistryExamDraft.test.js (6 tests) 9ms
+ ✓ tests/unit/iaveScoring.test.js (14 tests) 6ms
+ ✓ tests/unit/betaSyncValidation.test.js (11 tests) 8ms
+ ✓ tests/unit/mathDeepReviewMatrices12.test.js (8 tests) 6ms
+ ✓ tests/unit/mathDeepReviewProbability.test.js (7 tests) 8ms
+ ✓ tests/unit/mathDeepReviewContent.test.js (6 tests) 4ms
+ ✓ tests/unit/mathDeepReviewExponentialLogarithmic.test.js (7 tests) 9ms
+ ✓ tests/unit/incomingAssessmentProgress.test.js (16 tests) 5ms
+ ✓ tests/unit/desktopShellPolish.test.js (6 tests) 4ms
+ ✓ tests/unit/portugueseMiniExamDraft.test.js (4 tests) 8ms
+ ✓ tests/unit/subjectRankingBridge.test.js (3 tests) 5ms
+ ✓ tests/unit/portugueseFullExam.test.js (3 tests) 6ms
+ ✓ tests/unit/portugueseDeepReviewLeitura12.test.js (10 tests) 6ms
+ ✓ tests/unit/rankingSubjectFilter.test.js (7 tests) 4ms
+ ✓ tests/unit/mathLegacyRankingBridge.test.js (2 tests) 5ms
+ ✓ tests/unit/portugueseDeepReviewPoesiaContemporanea12.test.js (10 tests) 6ms
+ ✓ tests/unit/mathReviewOptionalThemesUx.test.js (4 tests) 11ms
+ ✓ tests/unit/feedbackCopy.test.js (6 tests) 3ms
+ ✓ tests/unit/reviewMatterNavigation.test.js (5 tests) 5ms
+ ✓ tests/unit/deploymentFreeze.test.js (3 tests) 2ms
+ ✓ tests/unit/portugueseDeepReviewGramatica12OfficialAe.test.js (4 tests) 3ms
+ ✓ tests/unit/deepReviewMobileFlow.test.js (2 tests) 3ms
+ ✓ tests/unit/rankingDiagnosticBonus.test.js (1 test) 3ms
+ ✓ tests/unit/examHubContrast.test.js (4 tests) 3ms
+ ✓ tests/unit/errorRecoveryUi.test.js (4 tests) 2ms
+ ✓ tests/unit/recoveryCompatibility.test.js (1 test) 148ms
+
+ Test Files  101 passed (101)
+      Tests  805 passed (805)
+   Start at  23:58:35
+   Duration  5.52s (transform 2.13s, setup 0ms, collect 10.85s, tests 3.05s, environment 22ms, prepare 6.73s)
+

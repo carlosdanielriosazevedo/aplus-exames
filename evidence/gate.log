@@ -1,0 +1,3115 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 technical:gate
+> node scripts/technical-gate.mjs
+
+
+=== Isolamento de bundle por rota ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 performance:isolation-audit
+> node scripts/performance-isolation-audit.mjs
+
+✓ performance isolation: first-visit bootstrap stays light; full study client remains lazy
+✓ Isolamento de bundle por rota
+
+=== Syntax/JSX ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 syntax:audit
+> node scripts/syntax-audit.cjs
+
+✓ syntax audit: 612 ficheiros JS/MJS/CJS analisados sem erros de parser
+✓ Syntax/JSX
+
+=== Disciplinas do secundário ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 subjects:audit
+> node scripts/subjects-audit.mjs
+
+✓ subjects: official 2026 catalog, 3 available subjects, shared semantic workspace, persistent switcher, legacy migration and unavailable subjects guarded
+✓ Disciplinas do secundário
+
+=== Workspace e migração de disciplinas ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 subject-workspace:audit
+> node scripts/subject-workspace-audit.mjs
+
+✓ workspace por disciplina: Português único, aliases migrados, progresso preservado e navegação comum
+✓ Workspace e migração de disciplinas
+
+=== Fundação de Português 639 ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-foundation:audit
+> node scripts/portuguese-foundation-audit.mjs
+
+✓ Portuguese 639 foundation: 18 pacotes · 334 itens · 16 competências escritas · distribuição por domínio {"leitura":78,"educacao-literaria":79,"escrita":89,"gramatica":88} · release ainda bloqueado
+✓ Fundação de Português 639
+
+=== Motor de Português 639 ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-engine:audit
+> node scripts/portuguese-engine-audit.mjs
+
+✓ Portuguese engine: 334 items, deterministic answers, conservative open-response grading, balanced diagnostic, adaptive missions and release gates validated
+✓ Motor de Português 639
+
+=== Quarta vaga de Português ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-wave4:audit
+> node scripts/portuguese-wave4-audit.mjs
+
+✓ Portuguese wave 4: 20 itens originais · 5 por domínio · 100% determinísticos · banco total 80
+✓ Quarta vaga de Português
+
+=== Quinta vaga de Português ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-wave5:audit
+> node scripts/portuguese-wave5-audit.mjs
+
+✓ quinta vaga de Português: 20 itens determinísticos · banco 100 · 16/16 competências com pelo menos 6 itens · release bloqueado
+✓ Quinta vaga de Português
+
+=== Sexta vaga de Português ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-wave6:audit
+> node scripts/portuguese-wave6-audit.mjs
+
+✓ sexta vaga de Português: 20 itens determinísticos · domínios 6/6/2/6 · formatos 12 MC + 8 curtas · posições A/B/C/D 3/3/4/2 · banco final 120
+✓ Sexta vaga de Português
+
+=== Qualidade global do banco de Português ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-bank-quality:audit
+> node scripts/portuguese-bank-quality-audit.mjs
+
+Banco: 334 itens · 199 escolha múltipla · 79 resposta curta · 56 resposta aberta
+Anos: 10.º=115 · 11.º=109 · 12.º=110
+Domínios: educacao-literaria=79 · escrita=89 · gramatica=88 · leitura=78
+Posições corretas MC: 0=59 · 1=55 · 2=45 · 3=40 · maior sequência=3
+portuguese-639-pilot.json: respostas MC 0/3/1/0
+portuguese-639-wave1.json: respostas MC 3/0/2/3
+portuguese-639-wave2.json: respostas MC 1/2/2/1
+portuguese-639-wave3.json: respostas MC 2/1/1/2
+portuguese-639-wave4.json: respostas MC 6/5/3/2
+portuguese-639-wave5.json: respostas MC 5/5/4/4
+portuguese-639-wave6.json: respostas MC 3/3/4/2
+portuguese-639-wave7.json: respostas MC 7/6/0/0
+portuguese-639-wave8.json: respostas MC 3/4/3/2
+portuguese-639-wave9.json: respostas MC 5/5/5/5
+portuguese-639-wave10.json: respostas MC 6/6/5/5
+portuguese-639-wave11.json: respostas MC 5/3/3/2
+portuguese-639-wave12.json: respostas MC 4/4/4/4
+portuguese-639-wave13.json: respostas MC 4/4/4/4
+portuguese-639-wave14.json: respostas MC 5/4/4/4
+Portuguese bank quality audit: PASS
+✓ Qualidade global do banco de Português
+
+=== Forma pedagógica do banco de Português ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-bank-shape:audit
+> node scripts/portuguese-bank-shape-audit.mjs
+
+Forma pedagógica do banco de Português
+- banco: 334 itens · mínimo dinâmico por competência=14
+- anos: 10.º=115 (34.4%) · 11.º=109 (32.6%) · 12.º=110 (32.9%)
+- domínios: leitura=78 (23.4%) · educacao-literaria=79 (23.7%) · gramatica=88 (26.3%) · escrita=89 (26.6%)
+- respostas: multiple-choice=199 (59.6%) · short-answer=79 (23.7%) · restricted-response=47 (14.1%) · extended-writing=9 (2.7%)
+- operações cognitivas: interpretar=81 (24.3%) · reconhecer=35 (10.5%) · raciocinar=57 (17.1%) · criar=21 (6.3%) · aplicar=17 (5.1%) · analisar=88 (26.3%) · revisar=16 (4.8%) · avaliar=16 (4.8%) · inferir=3 (0.9%)
+- dificuldade editorial: nível 1=35 (10.5%) · nível 2=221 (66.2%) · nível 3=57 (17.1%) · nível 4=21 (6.3%)
+- competências: min=15 · max=33
+Portuguese bank shape audit: PASS
+✓ Forma pedagógica do banco de Português
+
+=== Profundidade editorial de Português ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-editorial-depth:audit
+> node scripts/portuguese-editorial-depth-audit.mjs
+
+✓ profundidade editorial Português: 334 itens · 199 MC verificados opção a opção · 79 respostas curtas testadas em todos os equivalentes · 56 abertas protegidas
+  sinais linguísticos a rever: 0; assimetrias de comprimento: 2
+✓ Profundidade editorial de Português
+
+=== Revisão editorial das vagas 1 a 5 de Português ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-editorial-legacy:audit
+> node scripts/portuguese-editorial-legacy-audit.mjs
+
+✓ revisão editorial legado Português: 39 itens protegidos nas vagas 1–5; rótulos breves distinguidos de distratores discursivos e equivalentes cronológicos validados
+✓ Revisão editorial das vagas 1 a 5 de Português
+
+=== Autenticidade estrutural do exame Português 639 ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-exam-authenticity:audit
+> node scripts/portuguese-exam-authenticity-audit.mjs
+
+✓ autenticidade Português 639: banco, mini-exames e simulado coerentes com a estrutura oficial de 2026 sem copiar itens
+  mini-exames: 10 itens em runtime · dificuldade editorial calibrada · respostas A/B/C/D equilibradas
+  simulado: respostas construídas com observações atómicas + âncoras forte/parcial/insuficiente
+✓ Autenticidade estrutural do exame Português 639
+
+=== Grupos de texto partilhado Português 639 ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-passage-groups:audit
+> node scripts/portuguese-passage-groups-audit.mjs
+
+✓ grupos de texto Português: 2 textos originais · 6 itens completos · mini-exame 78 pontos · 4 seleção + 2 construção · renderização sem duplicação validada
+✓ Grupos de texto partilhado Português 639
+
+=== Interface de texto partilhado Português 639 ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-passage-ui:audit
+> node scripts/portuguese-passage-ui-audit.mjs
+
+✓ UI Português: texto sticky · avaliação automática bloqueada · evidências por critério · âncoras forte/parcial/insuficiente · resposta submetida fechada
+✓ Interface de texto partilhado Português 639
+
+=== Fluxo integrado de Mini-exame Português 639 ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-mini-exam-flow:audit
+> node scripts/portuguese-mini-exam-flow-audit.mjs
+
+✓ Português integrado: Aprender por ano/unidade · 7 mini-exames por ano no mesmo motor · revisão e memória conservadoras · foundation · zero nota automática
+✓ Fluxo integrado de Mini-exame Português 639
+
+=== Feedback pedagógico da autoavaliação de Português ===
+✓ avaliação automática Português: estados compatíveis · linguagem do corretor · evidência por critério · histórico determinístico · zero autoatribuição pelo aluno
+✓ Feedback pedagógico da autoavaliação de Português
+
+=== Memória de escrita entre tentativas de Português ===
+✓ memória de escrita Português: foco pré-resposta · atenção resolvida reversível · perfil transversal · linguagem neutra de avaliação anterior · zero autoatribuição pelo aluno
+✓ Memória de escrita entre tentativas de Português
+
+=== Grelhas observáveis de Português ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-rubric:audit
+> node scripts/portuguese-rubric-audit.mjs
+
+✓ grelhas de Português: 56 respostas abertas · critérios decompostos em observações atómicas · versões editoriais protegidas
+✓ Grelhas observáveis de Português
+
+=== Cenários adversariais das grelhas de Português ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-rubric-scenarios:audit
+> node scripts/portuguese-rubric-scenarios-audit.mjs
+
+✓ cenários adversariais de Português: 56 grelhas · forte, parcial, ausente e incerto · resposta submetida fechada · persistência atómica
+✓ Cenários adversariais das grelhas de Português
+
+=== Calibração textual das grelhas de Português ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-rubric-text-calibration:audit
+> node scripts/portuguese-rubric-text-calibration-audit.mjs
+
+✓ calibração textual de Português: 56 perguntas · 112 respostas de fronteira únicas · conteúdo separado de fluência · zero classificação automática
+✓ Calibração textual das grelhas de Português
+
+=== Microexemplos específicos por observação em Português ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-observation-guidance:audit
+> node scripts/portuguese-observation-guidance-audit.mjs
+
+✓ orientação das grelhas de Português: 18 pacotes · 334 itens · 56 perguntas abertas · 419 observações · 90 microexemplos específicos · conteúdo crítico 100% coberto · zero classificação automática
+✓ Microexemplos específicos por observação em Português
+
+=== Casos-limite de extensão e conteúdo em Português ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-boundary-cases:audit
+> node scripts/portuguese-boundary-cases-audit.mjs
+
+✓ casos-limite Português: 18 pacotes · 334 itens totais · 56 respostas abertas · 419 observações guiadas · extensão separada de conteúdo · zero classificação automática
+✓ Casos-limite de extensão e conteúdo em Português
+
+=== Feedback visual do limite de palavras em Português ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-word-limit-ui:audit
+> node scripts/portuguese-word-limit-ui-audit.mjs
+
+✓ limite de palavras de Português: vazio / abaixo / dentro / acima distinguidos sem confundir extensão com conteúdo
+✓ Feedback visual do limite de palavras em Português
+
+=== Dificuldade editorial de Português ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-difficulty:audit
+> node scripts/portuguese-difficulty-audit.mjs
+
+✓ dificuldade de Português: 334 itens · níveis 35/221/57/21 · cotação excluída · calibração real ainda bloqueada
+✓ Dificuldade editorial de Português
+
+=== Progresso isolado por disciplina ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 subject-progress:audit
+> node scripts/subject-progress-audit.mjs
+
+✓ progresso académico isolado por disciplina
+✓ diagnóstico, competências, retoma e histórico de Português persistem sem texto livre
+✓ reposição de Português preserva integralmente Matemática A
+✓ XP, streak e ranking incluem Português com conclusão idempotente e uma única Missão diária
+✓ Progresso isolado por disciplina
+
+=== Cobertura de Português 639 ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 portuguese-coverage:audit
+> node scripts/portuguese-coverage.mjs --check
+
+✓ Portuguese 639 coverage: 334 itens · 16/16 competências escritas · release bloqueado
+✓ Cobertura de Português 639
+
+=== Prontidão beta FQ A ===
+✓ FQ A beta readiness: 7 domínios · 43 submatérias · 2145+ itens · 49+ por submatéria · 2 mini-exames · Exame Completo 715 · correção automática provisória
+✓ Prontidão beta FQ A
+
+=== Prontidão beta FQ A 11.º ano ===
+✓ FQ A 11.º beta readiness: 25 submatérias · 1247+ itens · 4 domínios · MC + etapas + resposta científica aberta
+✓ Prontidão beta FQ A 11.º ano
+
+=== Candidato a beta FQ A ponta a ponta ===
+✓ FQ A Beta Candidate: diagnóstico → Aprender → Missão/Praticar/Rever → Mini-exame/Exame Completo → revisão → Progresso → Ranking, com proteção mobile
+✓ Candidato a beta FQ A ponta a ponta
+
+=== Fluxo Exame Completo FQ A ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 physics-chemistry-exam-flow:audit
+> node scripts/physics-chemistry-exam-flow-audit.mjs
+
+✓ FQ A exam flow: 23 itens · 15+8/4 · 120+30 min · revisão automática provisória · confiança explícita · sem feedback imediato
+✓ Fluxo Exame Completo FQ A
+
+=== Mini-exame FQ A ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 physics-chemistry-mini-exam:audit
+> node scripts/physics-chemistry-mini-exam-audit.mjs
+
+✓ FQ A mini-exams: 2 modelos · 12 itens · 6+6 anos · 45 min · correção automática provisória · sem feedback imediato
+✓ Mini-exame FQ A
+
+=== Correção FQ A ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 physics-chemistry-rubric:audit
+> node scripts/physics-chemistry-rubric-audit.mjs
+
+✓ FQ A automatic criteria: pontuação provisória · confiança · critérios explicados · sem autoavaliação manual
+✓ Correção FQ A
+
+=== Revisão e Progresso FQ A ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 physics-chemistry-review:audit
+> node scripts/physics-chemistry-review-progress-audit.mjs
+
+✓ FQ A review status: respondidas · provisórias · confiança reduzida · revisão persistente · retoma visível
+✓ Revisão e Progresso FQ A
+
+=== IDs pedagógicos ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 competency-id:audit
+> node scripts/competency-id-audit.mjs
+
+✓ competency IDs: 69 IDs estáveis, 145 questões mapeadas e migração legacy validada
+✓ IDs pedagógicos
+
+=== Validação matemática ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 math-validation:audit
+> node scripts/math-validation-audit.mjs
+
+✓ math validation: 9 templates · 900 variantes recalculadas · tampering e conflito externo bloqueados
+✓ Validação matemática
+
+=== Revisão editorial Matemática ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 math-editorial:audit
+> node scripts/math-editorial-review-audit.mjs && node scripts/math-12-completeness-audit.mjs
+
+✓ 10.º fechado editorialmente: 31/31 submatérias · 1550/1550 perguntas cobertas · 0 por resolver
+✓ 11.º fechado editorialmente: 35/35 submatérias · 1750/1750 perguntas cobertas · 0 por resolver
+✓ Revisão editorial Matemática: 113 submatéria(s) · 5650 perguntas revistas · 5639 aprovadas · 11 aprovadas com correção · 0 por resolver
+✓ 12.º ano fechado no gate interno: 32 regulares + 15 opcionais · 47/47 submatérias · 2350/2350 perguntas · 0 por resolver
+✓ Revisão editorial Matemática
+
+=== Qualidade pedagógica transversal Matemática ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 math-pedagogical:audit
+> node scripts/math-pedagogical-quality-audit.mjs
+
+
+=== Passagem pedagógica transversal — Matemática A ===
+Banco: 113 submatérias · 5650 perguntas
+Duplicados exatos de enunciado: 0 grupos
+Submatérias com sinais de baixa variedade/calibração: 0
+Correções efetivas: 300 etiquetas cognitivas normalizadas · 95 enunciados polidos · 5641 resoluções enriquecidas · 2 metadados corrigidos
+Distribuição de dificuldade: {"1":604,"2":1700,"3":1831,"4":1515}
+Distribuição cognitiva: {"Compreensão":785,"Aplicação":1233,"Interpretação":1081,"Raciocínio":2157,"Modelação":365,"Comparação":7,"Síntese":15,"Exemplo":7}
+Posição das respostas A/B/C/D: 1469/1469/1356/1356
+
+PEDAGOGICAL QUALITY GATE: GO estrutural
+A análise usa a camada de polimento editorial efetiva: acentuação cognitiva canónica, enunciados menos telegráficos, resoluções curtas enriquecidas com um passo-chave e metadados corrigidos.
+✓ Qualidade pedagógica transversal Matemática
+
+=== Qualidade das resoluções Matemática ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 math-solutions:audit
+> node scripts/math-solution-quality-audit.mjs
+
+
+=== Qualidade das resoluções — Matemática A ===
+Banco: 113 submatérias · 5650 resoluções
+Resoluções fortes: 5650/5650 (100.0%)
+Com raciocínio explícito: 5650/5650
+Com ação/método matemático: 5323/5650
+Com conclusão/verificação: 5302/5650
+Com explicação de porquê explícita: 5650/5650
+Resoluções exatamente repetidas em ≥5 itens: 0 grupos
+Cobertura forte por tema:
+- 10-ele: 200/200
+- 10-est: 300/300
+- 10-fin: 250/250
+- 10-fun: 250/250
+- 10-ga: 300/300
+- 10-gs: 250/250
+- 11-cd: 300/300
+- 11-cont: 300/300
+- 11-fun: 300/300
+- 11-pe: 300/300
+- 11-suc: 250/250
+- 11-trig: 300/300
+- 12-cplx: 350/350
+- 12-expl: 250/250
+- 12-fcd: 250/250
+- 12-fcont: 200/200
+- 12-ie: 250/250
+- 12-int: 250/250
+- 12-mat: 250/250
+- 12-prob: 400/400
+- 12-rae: 150/150
+
+SOLUTION QUALITY GATE: GO
+Cada resolução efetiva tem desenvolvimento mínimo, pelo menos três sinais pedagógicos e não existem blocos de 5+ resoluções exatamente repetidas.
+✓ Qualidade das resoluções Matemática
+
+=== Autenticidade estilo exame Matemática ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 math-exam:audit
+> node scripts/math-exam-authenticity-audit.mjs
+
+
+=== Autenticidade de exame — Matemática A ===
+Corpus geral (diagnóstico, treino e exame): 5291/5650 (93.6%) com ≥5/6 sinais — métrica informativa, não gate.
+Banco específico de Mini-exame: 339/339 (100.0%) com ≥5/6 sinais.
+Critérios: formulação de tarefa, conteúdo matemático explícito, profundidade cognitiva, distratores limpos, contexto de exame e contexto suficiente.
+Cobertura do banco de Mini-exame por tema:
+- 10-ele: 12/12 (100.0%)
+- 10-est: 18/18 (100.0%)
+- 10-fin: 15/15 (100.0%)
+- 10-fun: 15/15 (100.0%)
+- 10-ga: 18/18 (100.0%)
+- 10-gs: 15/15 (100.0%)
+- 11-cd: 18/18 (100.0%)
+- 11-cont: 18/18 (100.0%)
+- 11-fun: 18/18 (100.0%)
+- 11-pe: 18/18 (100.0%)
+- 11-suc: 15/15 (100.0%)
+- 11-trig: 18/18 (100.0%)
+- 12-cplx: 21/21 (100.0%)
+- 12-expl: 15/15 (100.0%)
+- 12-fcd: 15/15 (100.0%)
+- 12-fcont: 12/12 (100.0%)
+- 12-ie: 15/15 (100.0%)
+- 12-int: 15/15 (100.0%)
+- 12-mat: 15/15 (100.0%)
+- 12-prob: 24/24 (100.0%)
+- 12-rae: 9/9 (100.0%)
+
+EXAM AUTHENTICITY GATE: GO
+O gate é aplicado ao banco efetivamente reservado aos Mini-exames. Não afirma equivalência oficial ao IAVE; garante um patamar interno consistente de formulação, profundidade, distratores e contexto exam-like.
+✓ Autenticidade estilo exame Matemática
+
+=== Prontidão piloto alunos reais ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 student-pilot:audit
+> node scripts/student-pilot-readiness-audit.mjs
+
+
+=== Prontidão para piloto com alunos reais — Matemática A ===
+Banco vNext: 113/113 submatérias · 5650/5650 perguntas
+Mini-exame: 339/339 itens · 113/113 submatérias cobertas
+Estrutura inválida: 0
+Itens de Mini-exame marcados productionEligible=true: 0
+Guardrail: este GO autoriza apenas validação controlada com alunos reais; não substitui revisão externa nem desbloqueia produção comercial.
+STUDENT PILOT READINESS: GO
+✓ Prontidão piloto alunos reais
+
+=== Engagement diário ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 engagement:audit
+> node scripts/engagement-audit.mjs
+
+✓ engagement: daily streak, XP goal, mission goal, idempotency, reset and legacy migration validated
+✓ Engagement diário
+
+=== Rankings e divisões ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 competition:audit
+> node scripts/competition-audit.mjs
+
+✓ competition: weekly reset, subject filters, Full Exam XP, anti-farming, privacy, leaderboards and global division outcomes validated
+✓ Rankings e divisões
+
+=== Missão de Hoje ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 daily-mission:audit
+> node scripts/daily-mission-audit.mjs
+
+✓ daily mission: assignment, minimum 7 interactions, 3–5 minute budget, detour, recovery and idempotency validated
+✓ Missão de Hoje
+
+=== Scope curricular por ano ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 curriculum-scope:audit
+> node scripts/curriculum-scope-audit.mjs
+
+✓ curriculum year scope audit: diagnostic, missions, progress and mini-exam stay inside academic scope; Free Training remains open
+✓ Scope curricular por ano
+
+=== Banco vNext estrutural ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 vnext-content:audit
+> node scripts/vnext-content-audit.mjs
+
+vNext content audit
+-------------------
+Ficheiros: 113/113
+Perguntas: 5650/5650
+10.º: 31 ficheiros · 1550 perguntas
+11.º: 35 ficheiros · 1750 perguntas
+12.º: 47 ficheiros · 2350 perguntas
+Blockers: 0
+Warnings: 1
+
+Warnings:
+- {"code":"duplicate_question_global","detail":[{"id":"VN11CD-DP-047","file":"content/vnext/math-a/11/11-cd-derivada-ponto.json","text":"Se f'(a)=0, então"},{"id":"VN12FCONT-DER-018","file":"content/vnext/math-a/12/12-fcont-derivabilidade.json","text":"Se f'(a)=0, então..."}]}
+✓ vNext estruturalmente consistente e sem dependências contextuais detetadas.
+✓ Banco vNext estrutural
+
+=== Independência contextual vNext ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 vnext-context:audit
+> node scripts/vnext-context-independence-audit.mjs
+
+{
+  "ok": true,
+  "files": 113,
+  "questions": 5650,
+  "contextualDependencies": 0
+}
+✓ Independência contextual vNext
+
+=== Piloto vNext isolado ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 vnext-pilot:audit
+> node scripts/vnext-pilot-audit.mjs
+
+✓ vNext pilot: 100 itens sincronizados; scope fechado; protótipos só em modos interno/amigos; produção bloqueada
+✓ Piloto vNext isolado
+
+=== Diagnóstico vNext completo ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 vnext-diagnostic:audit
+> node scripts/vnext-diagnostic-audit.mjs
+
+✓ diagnóstico vNext: 113 submatérias cobertas por âncora + aprofundamento; blueprints curtos sem becos sem saída
+✓ Diagnóstico vNext completo
+
+=== Missões vNext 3–5 minutos ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 vnext-mission:audit
+> node scripts/vnext-mission-audit.mjs
+
+✓ Missões vNext: 113 submatérias · 7 perguntas independentes cada · nunca menos de 7 · orçamento de 3–5 min
+✓ Missões vNext 3–5 minutos
+
+=== Mini-exames vNext completos ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 vnext-exam:audit
+> node scripts/vnext-exam-audit.mjs
+
+✓ Mini-exames vNext: 339 itens · 3 por submatéria · sem reutilização do Diagnóstico/Missões · produção bloqueada
+✓ Mini-exames vNext completos
+
+=== Mobile e legibilidade ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 mobile:audit
+> node scripts/mobile-legibility-audit.mjs
+
+✓ mobile legibility audit: 320×568, 360×800, 390×844, 430×932, 1280×800 · viewport, safe-area, readable text, touch targets, modal and semantics guarded
+✓ Mobile e legibilidade
+
+=== Experiência do aluno ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 student-experience:audit
+> node scripts/student-experience-audit.mjs
+
+✓ student experience: four-area navigation, adaptive path, focus sessions, progressive disclosure, feedback and reduced motion guarded
+✓ Experiência do aluno
+
+=== Navegação e recovery sem becos sem saída ===
+✓ navegação/recovery: voltar real, browser back protegido, sessões sem entradas mortas, estados fatais com saída segura, rascunho FQ A preservado e merge multi-dispositivo sem regressão de progresso
+✓ Navegação e recovery sem becos sem saída
+
+=== Identidade APProva+ e Apronso ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 apronso-brand:audit
+> node scripts/apronso-brand-audit.mjs
+
+✓ APProva+ identity: Apronso is present and visually integrated across Matemática A, Português and FQ A
+✓ Identidade APProva+ e Apronso
+
+=== Resposta construída v2 ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 constructed-response:audit
+> node scripts/constructed-response-audit.mjs
+
+✓ constructed response v2: 8-question training, one-pass multi-step work, deterministic checkpoints and partial credit validated
+✓ recognition feedback, explicit arithmetic errors, conflicting results and incomplete score labels
+✓ mixed training, guided mission selection, focus, difficulty and editorial gates
+✓ second-wave reference answers and accepted equivalent formulations
+✓ Resposta construída v2
+
+=== Resposta construída adversarial ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 constructed-response:adversarial-audit
+> node scripts/constructed-response-adversarial-audit.mjs
+
+✓ adversarial constructed responses: 246 cenários base + 54 contradições explícitas cobrem 41/41 perguntas sem pontuação indevida nem contaminação de Domínio/Certeza
+✓ Resposta construída adversarial
+
+=== Calibração transversal de respostas v4 ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 response-analysis-calibration:v4
+> node scripts/response-analysis-calibration-v4.mjs
+
+=== RESPONSE ANALYSIS CALIBRATION V4 ===
+Wave 4 cases: 59
+Total protected cases: 279
+  portuguese::partial-then-false                 19% · 6 cases
+  portuguese::related-nonanswer                  20.4% · 6 cases
+  portuguese::hedged-correct                     38.3% · 6 cases
+  physics-chemistry-a::partial-then-false        38.9% · 7 cases
+  physics-chemistry-a::related-nonanswer         15.3% · 7 cases
+  physics-chemistry-a::hedged-correct            67.7% · 7 cases
+  mathematics::right-method-local-slip           57.7% · 10 cases
+  mathematics::correct-work-false-conclusion     75.4% · 10 cases
+
+RESPONSE ANALYSIS CALIBRATION V4 PASSED
+✓ Calibração transversal de respostas v4
+
+=== Torture test do corretor v5 ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 response-analysis-calibration:v5
+> node scripts/response-analysis-calibration-v5.mjs
+
+=== RESPONSE ANALYSIS CALIBRATION V5 ===
+Wave 5 cases: 36
+Total protected cases: 315
+  portuguese::self-corrected                     37.8% · 6 cases
+  portuguese::student-shorthand                  30.8% · 6 cases
+  physics-chemistry-a::self-corrected            69% · 7 cases
+  physics-chemistry-a::student-shorthand         63.9% · 7 cases
+  mathematics::self-corrected-step               94.3% · 5 cases
+  mathematics::equivalent-notation               100% · 5 cases
+
+RESPONSE ANALYSIS CALIBRATION V5 PASSED
+✓ Torture test do corretor v5
+
+=== Invariantes semânticos do corretor v6 ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 response-analysis-calibration:v6
+> node scripts/response-analysis-calibration-v6.mjs
+
+=== RESPONSE ANALYSIS CALIBRATION V6 · METAMORPHIC INVARIANTS ===
+Seed answers: 13
+Invariant comparisons: 52
+Total protected scenarios: 367
+  portuguese            PT639-FND-311    base 39% · plain 39% · noise 39% · contradiction 16% · corrected 41%
+  portuguese            PT639-FND-313    base 44% · plain 44% · noise 44% · contradiction 32% · corrected 44%
+  portuguese            PT639-FND-315    base 18% · plain 26% · noise 18% · contradiction 0% · corrected 18%
+  portuguese            PT639-FND-317    base 18% · plain 26% · noise 18% · contradiction 18% · corrected 18%
+  portuguese            PT639-FND-319    base 36% · plain 36% · noise 36% · contradiction 25% · corrected 45%
+  portuguese            PT639-FND-322    base 28% · plain 36% · noise 28% · contradiction 36% · corrected 36%
+  physics-chemistry-a   FQA-R-ELEM-01    base 100% · plain 100% · noise 100% · contradiction 31% · corrected 100%
+  physics-chemistry-a   FQA-R-MAT-01     base 52% · plain 52% · noise 52% · contradiction 11% · corrected 52%
+  physics-chemistry-a   FQA-R-ENE-01     base 48% · plain 48% · noise 48% · contradiction 48% · corrected 48%
+  physics-chemistry-a   FQA-R-MEC-01     base 72% · plain 72% · noise 72% · contradiction 50% · corrected 72%
+  physics-chemistry-a   FQA-R-WAV-01     base 51% · plain 51% · noise 51% · contradiction 29% · corrected 51%
+  physics-chemistry-a   FQA-R-EQ-01      base 80% · plain 80% · noise 80% · contradiction 33% · corrected 100%
+  physics-chemistry-a   FQA-R-AQ-01      base 45% · plain 45% · noise 45% · contradiction 71% · corrected 71%
+
+RESPONSE ANALYSIS CALIBRATION V6 PASSED
+✓ Invariantes semânticos do corretor v6
+
+=== Tolerância e prudência do corretor v7 ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 response-analysis-calibration:v7
+> node scripts/response-analysis-calibration-v7.mjs
+
+=== RESPONSE ANALYSIS CALIBRATION V7 · TOLERANCE + PRUDENCE ===
+✓ spelling-noise resilience checked in Portuguese and FQ A
+✓ genuine ambiguity routes to review
+✓ equivalent units accepted and missing final unit penalized
+✓ alternative scientific method routes to review instead of automatic rejection
+✓ unconventional but equivalent Mathematics forms preserve credit
+
+RESPONSE ANALYSIS CALIBRATION V7 PASSED
+✓ Tolerância e prudência do corretor v7
+
+=== Validação humana cega do corretor ===
+=== GRADER HUMAN VALIDATION AUDIT ===
+✓ blind export contains 45 cases: 15 Mathematics A · 15 Portuguese · 15 Physics & Chemistry A
+✓ benchmark labels, solutions and grader outputs are not exposed to reviewers
+✓ immutable fingerprints reject altered responses
+✓ duplicate labels and unknown diagnoses are rejected
+✓ campaign readiness requires 45 unique cases, 2+ reviewers and 9 overlap cases
+✓ agreement metrics include score delta, diagnosis, review decision, subject breakdown and inter-rater agreement
+NOTE: audit labels are synthetic test fixtures; human agreement remains NOT MEASURED until independent teacher labels are imported.
+GRADER HUMAN VALIDATION AUDIT PASSED
+✓ Validação humana cega do corretor
+
+=== Diagnóstico pedagógico do erro ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 error-diagnosis:audit
+> node scripts/error-diagnosis-audit.mjs
+
+=== ERROR DIAGNOSIS AUDIT ===
+Open-response diagnosis taxonomy: 4 core cases + criterion grounding checked
+Mathematics diagnosis taxonomy: correct, result-only, local-slip + step grounding checked
+
+ERROR DIAGNOSIS AUDIT PASSED
+✓ Diagnóstico pedagógico do erro
+
+=== Feedback individualizado por erro ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 learning-feedback:audit
+> node scripts/learning-feedback-quality-audit.mjs
+
+✓ learning feedback: preserve-correct-work, focused gap, contradiction and Math first-error diagnosis validated
+✓ Feedback individualizado por erro
+
+=== Pares mínimos do diagnóstico ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 diagnostic-minimal-pairs:audit
+> node scripts/diagnostic-minimal-pairs-audit.mjs
+
+=== DIAGNOSTIC MINIMAL-PAIR CALIBRATION ===
+✓ FQ A: incompleto vs contradição em Mecânica
+✓ FQ A: catalisador correto vs Kc/composição errados
+✓ Português: consequência vs contraste
+✓ Matemática: correto vs conceptual vs cálculo vs resultado isolado
+✓ Matemática: valor exato vs forma decimal equivalente
+DIAGNOSTIC MINIMAL-PAIR CALIBRATION PASSED
+✓ Pares mínimos do diagnóstico
+
+=== Diagnóstico pedagógico visível ===
+✓ diagnóstico pedagógico visível em Português, FQ A e Matemática A sem alterar a estrutura visual
+✓ Diagnóstico pedagógico visível
+
+=== Cobertura de resposta construída ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 math-constructed:coverage-audit
+> node scripts/math-constructed-coverage.mjs
+
+{
+  "rows": [
+    {
+      "year": "10.º",
+      "themeId": "10-ele",
+      "theme": "Eleições e partilha",
+      "subtopicId": "10-ele-borda",
+      "focus": "Método de Borda",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-ele",
+      "theme": "Eleições e partilha",
+      "subtopicId": "10-ele-dhondt",
+      "focus": "Método de D'Hondt",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": true,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-ele",
+      "theme": "Eleições e partilha",
+      "subtopicId": "10-ele-majorias",
+      "focus": "Maioria simples e maioria absoluta",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-ele",
+      "theme": "Eleições e partilha",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "focus": "Método de St. Laguë, comparação e limitações",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-est",
+      "theme": "Estatística",
+      "subtopicId": "10-est-amostragem",
+      "focus": "Amostragem, representatividade e enviesamento",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-est",
+      "theme": "Estatística",
+      "subtopicId": "10-est-bivariados-regressao",
+      "focus": "Dados bivariados, diagrama de dispersão, correlação, regressão, outliers e correlação vs causalidade",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-est",
+      "theme": "Estatística",
+      "subtopicId": "10-est-dispersao",
+      "focus": "Medidas de dispersão e interpretação conjunta",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-est",
+      "theme": "Estatística",
+      "subtopicId": "10-est-localizacao",
+      "focus": "Medidas de localização",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-est",
+      "theme": "Estatística",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "focus": "Problema estatístico, variabilidade, população, amostra e variável",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-est",
+      "theme": "Estatística",
+      "subtopicId": "10-est-univariados-representacoes",
+      "focus": "Dados univariados e representações",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-fin",
+      "theme": "Matemática financeira",
+      "subtopicId": "10-fin-bruto-liquido",
+      "focus": "Salário bruto/líquido, Segurança Social e retenção",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-fin",
+      "theme": "Matemática financeira",
+      "subtopicId": "10-fin-irs",
+      "focus": "IRS, taxas, escalões e progressividade",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-fin",
+      "theme": "Matemática financeira",
+      "subtopicId": "10-fin-juro-composto-credito",
+      "focus": "Juro composto, poupança, crédito e modelação financeira",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-fin",
+      "theme": "Matemática financeira",
+      "subtopicId": "10-fin-juro-simples",
+      "focus": "Juro simples",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-fin",
+      "theme": "Matemática financeira",
+      "subtopicId": "10-fin-salarios",
+      "focus": "Salário mensal, anual e valor-hora",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-fun",
+      "theme": "Funções",
+      "subtopicId": "10-fun-afim",
+      "focus": "Função afim e modelação",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": true,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-fun",
+      "theme": "Funções",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "focus": "Conceito de função e representações",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-fun",
+      "theme": "Funções",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "focus": "Domínio, contradomínio/imagem, zeros e sinal",
+      "constructed": 1,
+      "completion": 1,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-fun",
+      "theme": "Funções",
+      "subtopicId": "10-fun-quadratica",
+      "focus": "Função quadrática, zeros, extremos e problemas",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-fun",
+      "theme": "Funções",
+      "subtopicId": "10-fun-transformacoes-ramos-modulo",
+      "focus": "Transformações de gráficos, funções por ramos e módulo",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-ga",
+      "theme": "Geometria analítica",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "focus": "Colinearidade e equações de retas",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-ga",
+      "theme": "Geometria analítica",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "focus": "Coordenadas e transformações no plano",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-ga",
+      "theme": "Geometria analítica",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "focus": "Distâncias e ponto médio",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-ga",
+      "theme": "Geometria analítica",
+      "subtopicId": "10-ga-espaco",
+      "focus": "Coordenadas, vetores e relações geométricas no espaço",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-ga",
+      "theme": "Geometria analítica",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "focus": "Mediatriz, plano mediador, circunferência, círculo, esfera e superfície esférica",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-ga",
+      "theme": "Geometria analítica",
+      "subtopicId": "10-ga-vetores",
+      "focus": "Vetores, coordenadas, norma e operações",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-gs",
+      "theme": "Geometria sintética",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "focus": "Baricentro e propriedades das medianas",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-gs",
+      "theme": "Geometria sintética",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "focus": "Circuncentro e incentro",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-gs",
+      "theme": "Geometria sintética",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "focus": "Localização dos centros, reta de Euler e circunferência dos nove pontos",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-gs",
+      "theme": "Geometria sintética",
+      "subtopicId": "10-gs-ortocentro",
+      "focus": "Ortocentro e alturas",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "10.º",
+      "themeId": "10-gs",
+      "theme": "Geometria sintética",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "focus": "Propriedades geométricas e construções de base",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-cd",
+      "theme": "Cálculo diferencial",
+      "subtopicId": "11-cd-derivada-ponto",
+      "focus": "Taxa instantânea e derivada num ponto",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": true,
+      "reducedDifficulty": true,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-cd",
+      "theme": "Cálculo diferencial",
+      "subtopicId": "11-cd-funcao-derivada",
+      "focus": "função derivada",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": true,
+      "reducedDifficulty": true,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-cd",
+      "theme": "Cálculo diferencial",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "focus": "Monotonia, extremos e otimização",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-cd",
+      "theme": "Cálculo diferencial",
+      "subtopicId": "11-cd-regras",
+      "focus": "Regras de derivação",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-cd",
+      "theme": "Cálculo diferencial",
+      "subtopicId": "11-cd-tangente",
+      "focus": "Reta tangente e interpretação geométrica",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-cd",
+      "theme": "Cálculo diferencial",
+      "subtopicId": "11-cd-taxa-media",
+      "focus": "taxa média de variação",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-cont",
+      "theme": "Contagem",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "focus": "Princípios da adição e multiplicação",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-cont",
+      "theme": "Contagem",
+      "subtopicId": "11-cont-arranjos",
+      "focus": "Arranjos",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-cont",
+      "theme": "Contagem",
+      "subtopicId": "11-cont-combinacoes",
+      "focus": "Combinações e escolha sem ordem",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-cont",
+      "theme": "Contagem",
+      "subtopicId": "11-cont-diagramas",
+      "focus": "Diagramas, tabelas e organização de casos",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-cont",
+      "theme": "Contagem",
+      "subtopicId": "11-cont-fatorial",
+      "focus": "Fatorial e contagens elementares",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-cont",
+      "theme": "Contagem",
+      "subtopicId": "11-cont-permutacoes",
+      "focus": "Permutações",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-fun",
+      "theme": "Funções — 11.º",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "focus": "Assíntotas, interpretação e modelação",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-fun",
+      "theme": "Funções — 11.º",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "focus": "Famílias cúbicas/quárticas e comportamento gráfico",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-fun",
+      "theme": "Funções — 11.º",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "focus": "Divisão de polinómios, Ruffini/Horner",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": true,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-fun",
+      "theme": "Funções — 11.º",
+      "subtopicId": "11-fun-operacoes",
+      "focus": "Operações entre funções",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-fun",
+      "theme": "Funções — 11.º",
+      "subtopicId": "11-fun-racionais",
+      "focus": "Funções racionais",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-fun",
+      "theme": "Funções — 11.º",
+      "subtopicId": "11-fun-resto-raizes",
+      "focus": "Teorema do resto, raízes, multiplicidade e fatorização",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-pe",
+      "theme": "Produto escalar",
+      "subtopicId": "11-pe-angulo-norma",
+      "focus": "Produto escalar, norma e ângulo",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-pe",
+      "theme": "Produto escalar",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "focus": "Declive e inclinação",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-pe",
+      "theme": "Produto escalar",
+      "subtopicId": "11-pe-distancias",
+      "focus": "Distâncias em problemas geométricos",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-pe",
+      "theme": "Produto escalar",
+      "subtopicId": "11-pe-perpendicularidade",
+      "focus": "Perpendicularidade",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-pe",
+      "theme": "Produto escalar",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "focus": "Produto escalar por coordenadas",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-pe",
+      "theme": "Produto escalar",
+      "subtopicId": "11-pe-retas-planos",
+      "focus": "Ângulos e posições relativas de retas e planos",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-suc",
+      "theme": "Sucessões",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "focus": "Comportamento e modelação com sucessões",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-suc",
+      "theme": "Sucessões",
+      "subtopicId": "11-suc-pa",
+      "focus": "Progressões aritméticas",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": true,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-suc",
+      "theme": "Sucessões",
+      "subtopicId": "11-suc-pg",
+      "focus": "Progressões geométricas",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-suc",
+      "theme": "Sucessões",
+      "subtopicId": "11-suc-somas",
+      "focus": "Somas de termos de PA e PG",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-suc",
+      "theme": "Sucessões",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "focus": "Regularidades, termo geral e recorrência",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-trig",
+      "theme": "Trigonometria",
+      "subtopicId": "11-trig-angulos-radianos",
+      "focus": "Ângulos orientados, arcos e radianos",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-trig",
+      "theme": "Trigonometria",
+      "subtopicId": "11-trig-circulo",
+      "focus": "Círculo trigonométrico e redução",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-trig",
+      "theme": "Trigonometria",
+      "subtopicId": "11-trig-equacoes",
+      "focus": "Equações trigonométricas",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-trig",
+      "theme": "Trigonometria",
+      "subtopicId": "11-trig-funcoes",
+      "focus": "Funções seno e cosseno",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-trig",
+      "theme": "Trigonometria",
+      "subtopicId": "11-trig-modelacao",
+      "focus": "Resolução de triângulos e modelação periódica",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "11.º",
+      "themeId": "11-trig",
+      "theme": "Trigonometria",
+      "subtopicId": "11-trig-relacoes",
+      "focus": "Relações e identidades trigonométricas fundamentais",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-cplx",
+      "theme": "Números complexos",
+      "subtopicId": "12-cplx-argand",
+      "focus": "Plano de Argand-Gauss e interpretação geométrica",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-cplx",
+      "theme": "Números complexos",
+      "subtopicId": "12-cplx-conjugado-modulo",
+      "focus": "Conjugado e módulo",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-cplx",
+      "theme": "Números complexos",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "focus": "Forma algébrica, parte real/imaginária e igualdade",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-cplx",
+      "theme": "Números complexos",
+      "subtopicId": "12-cplx-forma-trig",
+      "focus": "Forma trigonométrica, módulo e argumento",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-cplx",
+      "theme": "Números complexos",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "focus": "Operações na forma algébrica",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-cplx",
+      "theme": "Números complexos",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-cplx",
+      "theme": "Números complexos",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "focus": "Unidade imaginária, conjunto C e equações de 2.º grau",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-expl",
+      "theme": "Exponenciais e logaritmos",
+      "subtopicId": "12-expl-equacoes",
+      "focus": "Equações exponenciais/logarítmicas e problemas",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-expl",
+      "theme": "Exponenciais e logaritmos",
+      "subtopicId": "12-expl-exponencial",
+      "focus": "Função exponencial",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-expl",
+      "theme": "Exponenciais e logaritmos",
+      "subtopicId": "12-expl-inversa-raizes",
+      "focus": "Função inversa e raízes",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-expl",
+      "theme": "Exponenciais e logaritmos",
+      "subtopicId": "12-expl-logaritmica",
+      "focus": "Função logarítmica e propriedades",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-expl",
+      "theme": "Exponenciais e logaritmos",
+      "subtopicId": "12-expl-modelacao",
+      "focus": "Crescimento/decrescimento exponencial e modelação",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": true,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-fcd",
+      "theme": "Função composta e derivadas",
+      "subtopicId": "12-fcd-aplicacoes",
+      "focus": "Estudo de funções, modelação e otimização",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-fcd",
+      "theme": "Função composta e derivadas",
+      "subtopicId": "12-fcd-composicao",
+      "focus": "Função composta e domínio",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-fcd",
+      "theme": "Função composta e derivadas",
+      "subtopicId": "12-fcd-e-exponencial",
+      "focus": "Número e e derivada da exponencial",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-fcd",
+      "theme": "Função composta e derivadas",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "focus": "Derivadas de logaritmos, trigonométricas e potências",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-fcd",
+      "theme": "Função composta e derivadas",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "focus": "Operações entre derivadas e regra da cadeia",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-fcont",
+      "theme": "Continuidade e derivabilidade",
+      "subtopicId": "12-fcont-derivabilidade",
+      "focus": "Derivabilidade e relação com continuidade",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-fcont",
+      "theme": "Continuidade e derivabilidade",
+      "subtopicId": "12-fcont-estudo-global",
+      "focus": "Monotonia, extremos e estudo global de funções",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-fcont",
+      "theme": "Continuidade e derivabilidade",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "focus": "Limite intuitivo e continuidade",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-fcont",
+      "theme": "Continuidade e derivabilidade",
+      "subtopicId": "12-fcont-operacoes",
+      "focus": "Operações com funções contínuas",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-prob",
+      "theme": "Probabilidades",
+      "subtopicId": "12-prob-condicionada",
+      "focus": "Probabilidade condicionada",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-prob",
+      "theme": "Probabilidades",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "focus": "Tabelas de contingência e independência",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-prob",
+      "theme": "Probabilidades",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "focus": "Fenómeno aleatório, espaço de resultados e acontecimentos",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-prob",
+      "theme": "Probabilidades",
+      "subtopicId": "12-prob-normal",
+      "focus": "Valor médio/dispersão de modelos e Modelo Normal",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-prob",
+      "theme": "Probabilidades",
+      "subtopicId": "12-prob-produto-arvores",
+      "focus": "Regra do produto e árvores de probabilidade",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-prob",
+      "theme": "Probabilidades",
+      "subtopicId": "12-prob-propriedades",
+      "focus": "Probabilidade e propriedades elementares",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-prob",
+      "theme": "Probabilidades",
+      "subtopicId": "12-prob-total",
+      "focus": "Probabilidade total e problemas em cadeia",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-prob",
+      "theme": "Probabilidades",
+      "subtopicId": "12-prob-variaveis-discretas",
+      "focus": "Variáveis aleatórias discretas e função massa",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-rae",
+      "theme": "Resolução aproximada",
+      "subtopicId": "12-rae-bissecao",
+      "focus": "Método da bisseção, aproximação e erro",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-rae",
+      "theme": "Resolução aproximada",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "focus": "Teorema do Valor Intermédio/Bolzano-Cauchy e localização de raízes",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": true,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º",
+      "themeId": "12-rae",
+      "theme": "Resolução aproximada",
+      "subtopicId": "12-rae-newton",
+      "focus": "Método de Newton-Raphson, aproximação e análise de adequação",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "12.º opcional",
+      "themeId": "12-ie",
+      "theme": "Inferência estatística",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "focus": "Distribuições de amostragem / comportamento amostral",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "12.º opcional",
+      "themeId": "12-ie",
+      "theme": "Inferência estatística",
+      "subtopicId": "12-ie-estimacao",
+      "focus": "Estimação de parâmetros",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "12.º opcional",
+      "themeId": "12-ie",
+      "theme": "Inferência estatística",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "focus": "Raciocínio inferencial e amostragem",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "12.º opcional",
+      "themeId": "12-ie",
+      "theme": "Inferência estatística",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "focus": "Intervalos de confiança, margem de erro e interpretação",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º opcional",
+      "themeId": "12-ie",
+      "theme": "Inferência estatística",
+      "subtopicId": "12-ie-tlc",
+      "focus": "Teorema Limite Central em contexto introdutório",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "12.º opcional",
+      "themeId": "12-int",
+      "theme": "Primitivas e integrais",
+      "subtopicId": "12-int-areas",
+      "focus": "Áreas e aplicações",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º opcional",
+      "themeId": "12-int",
+      "theme": "Primitivas e integrais",
+      "subtopicId": "12-int-integral-definido",
+      "focus": "Integral definido",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": true,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º opcional",
+      "themeId": "12-int",
+      "theme": "Primitivas e integrais",
+      "subtopicId": "12-int-primitiva",
+      "focus": "Conceito de primitiva/antiderivada",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º opcional",
+      "themeId": "12-int",
+      "theme": "Primitivas e integrais",
+      "subtopicId": "12-int-tabela-propriedades",
+      "focus": "Primitivas imediatas e propriedades",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "crítica"
+    },
+    {
+      "year": "12.º opcional",
+      "themeId": "12-int",
+      "theme": "Primitivas e integrais",
+      "subtopicId": "12-int-tfc-barrow",
+      "focus": "Teorema Fundamental do Cálculo / Fórmula de Barrow",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º opcional",
+      "themeId": "12-mat",
+      "theme": "Matrizes",
+      "subtopicId": "12-mat-adicao-escalar",
+      "focus": "Adição, subtração e multiplicação por escalar",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "12.º opcional",
+      "themeId": "12-mat",
+      "theme": "Matrizes",
+      "subtopicId": "12-mat-modelacao",
+      "focus": "Modelação e aplicações",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "12.º opcional",
+      "themeId": "12-mat",
+      "theme": "Matrizes",
+      "subtopicId": "12-mat-produto",
+      "focus": "Produto de matrizes, compatibilidade e não comutatividade",
+      "constructed": 1,
+      "completion": 0,
+      "responseTypes": [
+        "stepwise"
+      ],
+      "partial": true,
+      "equivalents": true,
+      "text": true,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "aprofundar"
+    },
+    {
+      "year": "12.º opcional",
+      "themeId": "12-mat",
+      "theme": "Matrizes",
+      "subtopicId": "12-mat-representacao-tipos",
+      "focus": "Representação, dimensão, elementos e tipos de matrizes",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    },
+    {
+      "year": "12.º opcional",
+      "themeId": "12-mat",
+      "theme": "Matrizes",
+      "subtopicId": "12-mat-transformacoes",
+      "focus": "Transformações geométricas com matrizes",
+      "constructed": 0,
+      "completion": 0,
+      "responseTypes": [],
+      "partial": false,
+      "equivalents": false,
+      "text": false,
+      "propagation": false,
+      "reducedDifficulty": false,
+      "incomplete": false,
+      "rounding": false,
+      "priority": "alta"
+    }
+  ],
+  "summary": {
+    "subtopics": 113,
+    "covered": 41,
+    "gaps": 72,
+    "constructedItems": 41,
+    "completionItems": 1,
+    "criticalGaps": 37,
+    "highGaps": 35,
+    "capabilities": {
+      "text": 17,
+      "propagation": 5,
+      "reducedDifficulty": 2,
+      "incomplete": 3,
+      "rounding": 1
+    },
+    "byYear": {
+      "10.º": {
+        "subtopics": 31,
+        "covered": 12,
+        "items": 12
+      },
+      "11.º": {
+        "subtopics": 35,
+        "covered": 11,
+        "items": 11
+      },
+      "12.º": {
+        "subtopics": 47,
+        "covered": 18,
+        "items": 18
+      }
+    }
+  }
+}
+✓ Cobertura de resposta construída
+
+=== Primeira vaga de resposta construída ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 math-constructed:wave1-audit
+> node scripts/math-constructed-wave1-audit.mjs
+
+✓ first constructed wave: função afim, distância, taxa de variação, propagação, redução de dificuldade e arredondamento validados
+✓ Primeira vaga de resposta construída
+
+=== Segunda vaga de resposta construída ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 math-constructed:wave2-audit
+> node scripts/math-constructed-wave2-audit.mjs
+
+✓ second constructed wave: módulo, tangente, complexos e logaritmos validados com equivalências e condição de existência
+✓ Segunda vaga de resposta construída
+
+=== Terceira vaga de resposta construída ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 math-constructed:wave3-audit
+> node scripts/math-constructed-wave3-audit.mjs
+
+✓ third constructed wave: geometria, contagem, trigonometria, complexos, probabilidade condicionada e Barrow validados
+✓ Terceira vaga de resposta construída
+
+=== Memória pedagógica ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 pedagogical-memory:audit
+> node scripts/pedagogical-memory-audit.mjs
+
+✓ pedagogical memory: open → probable → ambiguous → resolved/stale → reopen lifecycle validated
+✓ Memória pedagógica
+
+=== Cloud reliability ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 cloud-reliability:audit
+> node scripts/cloud-reliability-audit.mjs
+
+✓ cloud reliability/security: revisions, JWT auth, subject progress sync, final migration-state coverage, CTE allowlist, pilot RLS, consent retention, marked test writes, validation and CSRF validated
+✓ Cloud reliability
+
+=== Funil e retenção ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 retention:audit
+> node scripts/retention-funnel-audit.mjs
+
+✓ retention funnel: active days, activation, exact D1/D3/D7 and eligible denominators validated
+✓ Funil e retenção
+
+=== Cobertura de conteúdo ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 content-coverage:audit
+> node scripts/content-coverage-v5-1-audit.mjs
+
+✓ content coverage v5.1: 52 originais verificadas · 69/69 microcompetências cobertas · 42/42 focos críticos com ≥2 assinaturas · corpus totalmente revisto = 100%
+✓ Cobertura de conteúdo
+
+=== Beta de amigos ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 friends-beta:audit
+> node scripts/friends-beta-audit.mjs
+
+✓ friends beta: pilot_self gate, target/observer segmentation, 10-question mini-exam, aggregate reporting and isolated storage validated
+✓ Beta de amigos
+
+=== Motor adaptativo ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 engine:audit
+> node scripts/engine-audit.mjs
+
+✓ fila ordenada por utilidade
+✓ não há duas calibrações consecutivas
+✓ duas confirmações recentes bloqueiam nova confirmação
+✓ hipótese causal não é reavaliada no próprio dia
+✓ hipótese causal pode voltar após intervalo
+✓ 500 perfis sintéticos respeitam guardrails estruturais
+
+Engine audit concluído: 6 grupos de testes passaram.
+✓ Motor adaptativo
+
+=== Fiabilidade ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 reliability:audit
+> node scripts/reliability-audit.mjs
+
+✓ reliability audit: integrity rules passed
+✓ Fiabilidade
+
+=== Recovery do diagnóstico ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 diagnostic-recovery:audit
+> node scripts/diagnostic-recovery-audit.mjs
+
+✓ diagnostic recovery WAL audit: 34 recovery/fault-injection groups passed
+✓ Recovery do diagnóstico
+
+=== Roadmap de revisão ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 review:roadmap
+> node scripts/review-roadmap.mjs
+
+Minimum review roadmap: 64 approvals
+Diagnostic after roadmap: 7/7
+Critical focuses after roadmap: 24/24
+Exam after roadmap: 50/8 items · 12/6 themes · 7/3 cognitive
+Roadmap reaches GO: yes
+✓ review roadmap structural checks passed
+✓ Roadmap de revisão
+
+=== Ponte professor ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 teacher-review:audit
+> node scripts/teacher-review-audit.mjs
+
+✓ teacher review ops: 64 approvals · 8 batches · fingerprints · stale invalidation · conflict lock · QC validated
+✓ Ponte professor
+
+=== Revisões editoriais ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 editorial-revisions:audit
+> node scripts/editorial-revisions-audit.mjs
+
+✓ editorial revisions: diff → v2 pending → re-review → rollback v3 · engine overlay · immutable IDs validated
+✓ Revisões editoriais
+
+=== Pré-revisão QA ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 pre-review-qa:audit
+> node scripts/pre-review-qa-audit.mjs
+
+✓ pre-review QA: 145 itens · 0 blockers · 26 com warnings · respostas A/B/C/D 33/41/41/30
+✓ Pré-revisão QA
+
+=== Validação híbrida ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 hybrid-validation:audit
+> node scripts/hybrid-validation-audit.mjs
+
+✓ hybrid validation: 64 → 45 human reviews · 24 machine lane · 20% sample · fingerprint invalidation · closed-beta gate validated
+✓ Validação híbrida
+
+=== Política de source sem patches textuais ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 source-rewrite:audit
+> node scripts/source-rewrite-policy-audit.mjs
+
+✓ source rewrite policy: 199 scripts inspecionados · alvos reais de escrita analisados · regressões anti-falso-positivo/anti-bypass OK
+✓ Política de source sem patches textuais
+
+=== Catálogo nacional de escolas ===
+✓ School catalogue audit passed: 917 establishments across 20 regions
+✓ Catálogo nacional de escolas
+
+=== Polish final do RC público ===
+✓ final public RC copy/polish audit passed
+✓ Polish final do RC público
+
+=== Higiene do source ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aplus-exames@5.5.0 source:hygiene
+> node scripts/source-hygiene-audit.mjs
+
+✓ source hygiene: 906 ficheiros verificados
+✓ Higiene do source
+
+==============================
+TECHNICAL GATE: GO

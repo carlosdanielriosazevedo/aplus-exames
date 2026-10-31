@@ -1,0 +1,30 @@
+{
+  "candidateCommit": "1b5f02d9f730fb7719fb40053b0e36fb08f999bc",
+  "runtimeBase": "94ee6db5409e213494e275e28d8da01d3a2b4623",
+  "runtimeChanged": false,
+  "unitTests": 805,
+  "unitFiles": 101,
+  "compatibilityAssertions": 554,
+  "technicalGate": "GO",
+  "syntax": "PASS",
+  "build": "PASS",
+  "performance": {
+    "homeKiB": 350.6,
+    "homeLimitKiB": 650,
+    "portugueseMiniKiB": 449.4,
+    "portugueseMiniLimitKiB": 500
+  },
+  "graderReport": "PASS; human agreement not measured",
+  "browser": "reused existing #385 CI 2201 (78 Chromium); no new browser run; identical application runtime",
+  "operationalRecovery": "NOT VALIDATED",
+  "deploymentCreated": false,
+  "remoteCIForCandidate": "NOT RUN; no push",
+  "hashes": {
+    "grader.log": "b88147b9e05b65e2123a15773df2317afca08137f146e2cc7e946855b7521403",
+    "build.log": "44ff989007055d60ccf359b232cff40c16c270b489e38562f49786738769493a",
+    "unit.log": "b4474e27ca59f9eda46ae2d4999e1d50e096b79bffb3d78b888def620ef6a94c",
+    "compatibility.json": "0a3992ebf52036350874f1d75fcd8b4bfa17a927e9f20038c0d47731c612aceb",
+    "syntax.log": "0cdeb876c34d8036878e0737c85376d8ad9c6b29ac654b54390782197440c0c9",
+    "gate.log": "e4f9d51ce0fcd5afdc6f6d79e1e90dcf5c3b4c981e7a774fc60f719ca8dd81fa"
+  }
+}
