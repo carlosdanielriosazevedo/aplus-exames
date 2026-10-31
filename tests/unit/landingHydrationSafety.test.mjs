@@ -44,7 +44,7 @@ test("installed app shows one launch image that disappears by itself",()=>{
  expect(css).toContain('.approvaLaunch{display:none}');
  expect(css).toContain('@media (display-mode: standalone)');
  // Auto-dismiss is CSS-only (works without JS) and ends hidden (never blocks taps).
- expect(css).toContain('animation:approvaLaunchOut .35s ease-out 3.5s forwards;');
+ expect(css).toContain('animation:approvaLaunchOut .3s ease-out 2.2s forwards;');
  expect(css).toMatch(/@keyframes approvaLaunchOut\{[^}]*\}\s*to\{opacity:0;visibility:hidden\}/);
  expect(css).toContain('approva-splash-20261031.webp?v=20261031-android-v2');
 });

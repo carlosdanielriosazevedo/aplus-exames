@@ -15,6 +15,20 @@ Student experience principles:
 
 Current version: 5.5.0.
 
+## 🔒 Ícone Android bloqueado (aprovado pelo product owner em 2026-10-31)
+O ícone Android da app foi aprovado pelo product owner (Carlos) depois de testado no telemóvel real. **Está bloqueado.**
+
+Ninguém o altera — nenhuma pessoa, nem Claude, nem ChatGPT/Codex, nem outro agente — salvo ordem explícita e direta do product owner a pedir para mudar o ícone. Pedidos genéricos ("melhorar a marca", "limpar assets", "otimizar imagens", "rever o manifest") **não** contam como ordem.
+
+Ficheiros bloqueados (não editar, regenerar, recomprimir, mover nem apagar):
+- `assets/brand/icon_1024_fullbleed-20261031.png`
+- `assets/brand/icon_1024_transparente-20261030.png`
+- `public/icons/icon-192.png`, `public/icons/icon-512.png`
+- `public/icons/maskable-192.png`, `public/icons/maskable-512.png` (arte a 81,5%, ajustada à área visível do launcher)
+- As entradas destes 4 ícones em `app/manifest.js`. Não acrescentar ícones maskable entre 193 e 1023 px, porque mudariam o ícone escolhido pelo launcher.
+
+Guarda técnica: `tests/unit/androidIconLock.test.mjs` (corre no CI). Se este teste falhar, a alteração está errada: **não atualizar os hashes do teste**, reverter a alteração.
+
 ## Non-negotiable product rules
 - XP/streak/rankings measure effort/activity, never knowledge.
 - Domain/competence scores measure learning.

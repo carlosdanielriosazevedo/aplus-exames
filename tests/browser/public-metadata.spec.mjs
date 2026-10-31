@@ -26,11 +26,11 @@ test("Bloco 4: manifest e PNGs instaláveis com dimensões reais",async({page,re
   expect(manifest.name).toBe("APProva+");
   expect(manifest.short_name).toBe("APProva+");
   expect(manifest.background_color).toBe("#01133d");
-  // Ícone só para o splash nativo: 1024 maskable, cor de fundo uniforme.
+  // Ícone só para o splash nativo: 1024 maskable, logótipo arredondado sobre o fundo.
   // O launcher (ideal ~83dp) continua a escolher o maskable 512.
   const splashOnly=manifest.icons.find(item=>item.sizes==="1024x1024");
   expect(splashOnly.purpose).toBe("maskable");
-  expect(splashOnly.src).toContain("/icons/splash-blank-1024.png?v=20261031-android-v3");
+  expect(splashOnly.src).toContain("/icons/splash-icon-1024.png?v=20261031-splash-v4");
   expect(manifest.icons.filter(item=>item.purpose.split(" ").includes("any")).every(item=>item.sizes!=="1024x1024")).toBe(true);
   await page.goto("/");
   const iconHashes={};
