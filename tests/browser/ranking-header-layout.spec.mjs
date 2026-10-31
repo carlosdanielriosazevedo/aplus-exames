@@ -31,13 +31,13 @@ for(const subjectId of ['math-a','portuguese','physics-chemistry-a'])for(const w
    const title=el.querySelector('h1'),owl=el.querySelector('img'),copy=el.querySelector('.muted'),badge=el.querySelector('.divisionBadge');
    const r=document.createRange();r.selectNodeContents(title);
    const bounds=e=>{const x=e.getBoundingClientRect();return {left:x.left,right:x.right,top:x.top,bottom:x.bottom,width:x.width,height:x.height}};
-   return {owl:bounds(owl),copy:bounds(copy),badge:bounds(badge),title:bounds(title),titleText:[...r.getClientRects()].map(x=>({left:x.left,right:x.right,top:x.top,bottom:x.bottom})),overflow:document.documentElement.scrollWidth>innerWidth};
+   return {owl:bounds(owl),copy:bounds(copy),badge:bounds(badge),title:bounds(title),titleLineHeight:parseFloat(getComputedStyle(title).lineHeight),titleText:[...r.getClientRects()].map(x=>({left:x.left,right:x.right,top:x.top,bottom:x.bottom})),overflow:document.documentElement.scrollWidth>innerWidth};
   });
   expect(layout.overflow).toBe(false);
   expect(layout.badge.left).toBe(layout.copy.left);expect(layout.badge.top).toBeGreaterThanOrEqual(layout.copy.bottom);
   expect(layout.badge.height).toBeLessThan(60);
   if(width>760){expect(layout.owl.width).toBe(126);expect(layout.owl.height).toBe(142)}
-  else {expect(Math.abs(layout.owl.bottom-layout.title.bottom)).toBeLessThanOrEqual(1)}
+  else {expect(Math.abs(layout.owl.bottom-(layout.title.top+layout.titleLineHeight))).toBeLessThanOrEqual(1)}
   for(const line of layout.titleText)expect(line.right).toBeLessThanOrEqual(layout.owl.left);
   const total=await badge.locator('small').first().innerText(),division=await badge.locator('b').innerText();
   const filter=page.getByLabel('Escolher disciplina',{exact:true});

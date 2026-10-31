@@ -67,7 +67,7 @@ export default function Ranking({s,setS,go}){
 
   return <Shell className="rankingDesktopShell"><StudentTop s={s} go={go}/>
     <div className="rankingHero">
-      <div className="sectionIntro"><div className="rankingTitle"><p className="eyebrow">🏆 COMPETIÇÃO SEMANAL</p><h1>Treina. Ganha XP. Sobe.</h1><Apronso className="rankingHeadingApronso" pose="welcome" alt=""/></div>
+      <div className="sectionIntro menuIntro"><div className="rankingTitle menuTitle"><p className="eyebrow">🏆 COMPETIÇÃO SEMANAL</p><h1>Treina. Ganha XP. Sobe.</h1><Apronso className="rankingHeadingApronso" pose="welcome" alt=""/></div>
         <p className="muted">O ranking compara <b>atividade de estudo</b>, nunca Domínio, Certeza, Índice de Preparação ou notas.</p></div>
       <div className="divisionBadge" aria-label="Divisão e XP total desta semana"><span aria-hidden="true">{globalSummary.division.icon}</span><b>{globalSummary.division.label}</b><small>{globalSummary.weekXp} XP esta semana</small>{subjectId&&<small>{summary.weekXp} XP · {subjectLabel}</small>}</div>
     </div>

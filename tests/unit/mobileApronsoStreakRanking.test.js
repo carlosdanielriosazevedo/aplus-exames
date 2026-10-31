@@ -6,9 +6,9 @@ const read=path=>readFileSync(new URL("../../"+path,import.meta.url),"utf8");
 test("Aprender and Treinar attach a single mobile Apronso to the heading",()=>{
   const learn=read("app/clientApp.js");
   const train=read("app/components/StudyModeHub.js");
-  assert.match(learn,/className="mobileMainTitle"[^]*?O teu próximo passo\./);
-  assert.doesNotMatch(learn.slice(learn.indexOf('<div className="learnIntro">'),learn.indexOf('</span></div>',learn.indexOf('<div className="learnIntro">'))),/mobileHeadingApronso/);
-  assert.match(train,/className="mobileMainTitle"[^]*?O que queres fazer\?[^]*?mobileHeadingApronso/);
+  assert.match(learn,/className="mobileMainTitle menuTitle"[^]*?O teu próximo passo\./);
+  assert.doesNotMatch(learn.slice(learn.indexOf('<div className="learnIntro menuIntro">'),learn.indexOf('</span></div>',learn.indexOf('<div className="learnIntro menuIntro">'))),/mobileHeadingApronso/);
+  assert.match(train,/className="mobileMainTitle menuTitle"[^]*?O que queres fazer\?[^]*?mobileHeadingApronso/);
   assert.doesNotMatch(train,/ApronsoNudge/);
   assert.match(train,/<span>\{STUDY_MODE_COPY.nudge\}<\/span>/);
 });

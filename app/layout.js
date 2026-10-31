@@ -8,6 +8,7 @@ import './diagnostic-option-contrast.css';
 import './screen-text-contrast.css';
 import './ranking-header.css';
 import './launch-splash.css';
+import './menu-header.css';
 import ClientRuntimeReporter from './components/ClientRuntimeReporter';
 import StorageDurabilityNotice from './components/StorageDurabilityNotice';
 
