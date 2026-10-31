@@ -130,3 +130,24 @@ test("Arranque não inclui camada bloqueante e mantém a imagem original",async(
   expect(asset.ok()).toBe(true);
   expect(asset.headers()["content-type"]).toContain("image/png");
 });
+
+// Regression: if hydration/JS is unavailable, the installed entry must not
+// leave a full-screen logo indefinitely with no way to proceed.
+test("Sem JavaScript, entrada tem HTML utilizável em vez de splash infinito",async({browser})=>{
+  const context=await browser.newContext({javaScriptEnabled:false});
+  try{
+    const page=await context.newPage();
+    await page.goto("/");
+    await expect(page.locator(".apronsoLaunchOverlay")).toHaveCount(0);
+    await expect(page.getByRole("button",{name:/Descobrir o meu nível/})).toBeVisible();
+    await expect(page.locator(".apronsoStartup")).toHaveCount(0);
+  }finally{await context.close()}
+});
+
+test("URL de recuperação não apaga o progresso armazenado",async({page})=>{
+  await page.addInitScript(()=>window.localStorage.setItem("a25","{}"));
+  await page.goto("/?recuperar=inicio");
+  await expect(page.getByRole("button",{name:/Descobrir o meu nível/})).toBeVisible();
+  expect(await page.evaluate(()=>window.localStorage.getItem("a25"))).toBe("{}");
+  await expect(page.locator(".apronsoLaunchOverlay")).toHaveCount(0);
+});
