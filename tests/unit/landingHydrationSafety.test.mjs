@@ -5,7 +5,7 @@ const source=readFileSync(new URL("../../app/page.js",import.meta.url),"utf8");
 const css=readFileSync(new URL("../../app/launch-splash.css",import.meta.url),"utf8");
 
 test("public landing and legal links remain server rendered",()=>{
- expect(source).toContain('if(!ready)return <>');
+ expect(source).not.toContain('if(!ready)return <>');
  expect(source).toContain('if(!ready)return <Landing onStart={null}/>;');
  expect(source).toContain('function Loading({failed=false})');
  expect(source).toContain('name="recuperar" value="inicio"');
