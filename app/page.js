@@ -20,6 +20,10 @@ function privateEntry(){
 }
 function Brand(){return <span className="brandName" aria-label="APProva+"><span className="brandAP">AP</span><span className="brandProva">Prova</span><span className="brandPlus">+</span></span>}
 function Loading({failed=false}){return <main aria-busy={!failed} aria-live="polite" aria-label={failed?"Não foi possível carregar a APProva+":"A preparar a APProva+"} className="apronsoStartup"><span className="apronsoStartupSr">{failed?"O arranque falhou":"A preparar o teu espaço de estudo"}</span><form className="apronsoStartupRecovery" action="/" method="get"><button type="submit" name="recuperar" value="inicio">{failed?"Não foi possível abrir. Voltar ao início":"Não abriu? Voltar ao início sem perder o progresso"}</button></form></main>}
+// Ecrã de abertura único da app instalada: imagem aprovada durante ~3,5 s.
+// Só aparece em modo app (display-mode standalone, via CSS) e desaparece sozinho
+// por animação CSS — nunca bloqueia, mesmo que o JavaScript falhe.
+function LaunchScreen(){return <div className="approvaLaunch" aria-hidden="true"/>}
 function Landing({onStart}){return <main className="dark center"><section className="hero">
   <div className="logo"><Brand/></div>
   <div className="welcomeApronso"><img className="apronso apronso-motion-idle" src="/mascot/apronso-welcome.webp" alt="Apronso, a mascote da APProva+"/><div><small>OLÁ, EU SOU O APRONSO</small><b>O teu parceiro de estudo.</b><span>Vou ajudar-te a perceber o que estudar, explicar dificuldades e celebrar cada conquista.</span></div></div>
@@ -49,6 +53,6 @@ export default function Page(){
     setBoot(true);
   }
   // Se a hidratação falhar, manter HTML navegável em vez de um splash infinito.
-  if(!ready)return <Landing onStart={null}/>;
-  return boot?<ClientApp/>:<Landing onStart={start}/>;
+  if(!ready)return <><LaunchScreen/><Landing onStart={null}/></>;
+  return <><LaunchScreen/>{boot?<ClientApp/>:<Landing onStart={start}/>}</>;
 }
