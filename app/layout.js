@@ -38,5 +38,5 @@ export const metadata={
 export const viewport={width:'device-width',initialScale:1,viewportFit:'cover',themeColor:'#08132e'};
 
 export default function RootLayout({children}){
-  return <html lang="pt-PT"><body><div className="apronsoLaunchOverlay" aria-hidden="true"/>{children}<StorageDurabilityNotice/><ClientRuntimeReporter/></body></html>;
+  return <html lang="pt-PT"><body>{children}<StorageDurabilityNotice/><ClientRuntimeReporter/></body></html>;
 }
