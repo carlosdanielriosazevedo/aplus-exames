@@ -35,3 +35,10 @@ test("Cloud history requires privileged trigger, no direct authenticated writes"
   expect(sql).toMatch(/REVOKE ALL ON FUNCTION public\.snapshot_student_cloud_state\(\) FROM PUBLIC, authenticated, anonymous/);
   expect(sql).not.toMatch(/GRANT (INSERT|UPDATE|DELETE) ON TABLE public\.student_cloud_state_history TO authenticated/);
 });
+
+test("Every PL/pgSQL block terminates correctly before its dollar-quote",()=>{
+  for(const tag of ["preflight","snapshot","postflight","versioncheck"]){
+    expect(sql,tag+" must end PL/pgSQL body with END;")
+      .toContain("END;\n$"+tag+"$;");
+  }
+});
