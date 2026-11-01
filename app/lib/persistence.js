@@ -90,9 +90,12 @@ function schedulePilotSync(state){
 
 export function saveLocalState(state,storageKey=null){
   const key=storageKey||(state?.betaMode==="friends_beta"?FRIENDS_STORAGE_KEY:STORAGE_KEY);
-  const clean=withoutLegacyBetaQueues(prepareFqaAcademicState(state)),persisted=pilotTelemetryAllowed()?clean:withoutPilotTelemetry(clean);
-  let payload;
-  try{payload=JSON.stringify({...persisted,_stateVersion:APP_STATE_VERSION,_savedAt:Date.now()})}catch{return false}
+  let payload,persisted;
+  try{
+    const clean=withoutLegacyBetaQueues(prepareFqaAcademicState(state));
+    persisted=pilotTelemetryAllowed()?clean:withoutPilotTelemetry(clean);
+    payload=JSON.stringify({...persisted,_stateVersion:APP_STATE_VERSION,_savedAt:Date.now()});
+  }catch{return false}
   const ok=writeStorageFallback(key,payload);
   if(ok)schedulePilotSync(persisted);
   return ok;

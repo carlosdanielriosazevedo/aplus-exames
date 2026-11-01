@@ -20,7 +20,7 @@ test("queued legacy state is serialized through the policy and privacy filter wi
  const legacy=state("Private synthetic queued answer");const copy=structuredClone(legacy);
  const response=await saveStudentCloudState(legacy,{expectedRevision:1,knownRemote:true,deviceId:"synthetic-device"});
  expect(response.ok).toBe(true);expect(fixture.remote.revision).toBe(2);expect(fixture.writes).toHaveLength(1);
- expect(fixture.remote.auth_user_id).toBe("synthetic-user");expect(fixture.remote.state_json.subjectProgress[id].academicIntegrityPolicy).toBe(1);
+ expect(fixture.remote.auth_user_id).toBe("synthetic-user");expect(fixture.remote.state_json.subjectProgress[id].academicIntegrityPolicy).toBe(2);
  expect(JSON.stringify(fixture.remote.state_json)).not.toContain("Private synthetic queued answer");expect(legacy).toEqual(copy);
  expect(academicProgressFor(fixture.remote.state_json,id).academicProjection.insufficient).toBe(true);
 });
@@ -34,12 +34,12 @@ test("stale device cannot overwrite a newer revision and merge preserves respons
  const resolved=await saveStudentCloudState(loaded,{expectedRevision:2,knownRemote:true,deviceId:"device-A"});expect(resolved.ok).toBe(true);expect(fixture.remote.revision).toBe(3);expect(academicProgressFor(fixture.remote.state_json,id).competence).toEqual({});
 });
 
-test("save/load roundtrip reconciles administrative pending changes and restores local-only text",async()=>{
+test("save/load preserves local-only text but cannot certify a cloud-redacted pause",async()=>{
  const local=state("synthetic completed text");local.subjectProgress[id].lastPosition={sessionId:"synthetic-cloud-pause",kind:"mission",itemIds:["FQA-R-MEC-01"],current:0,results:[],currentAnswer:"synthetic local-only pending",startedAt:100,updatedAt:200};
  expect((await saveStudentCloudState(local,{expectedRevision:1,knownRemote:true,deviceId:"device-A"})).ok).toBe(true);
  const remote=fixture.remote.state_json;remote.subjectProgress[id].lastActivityAt=500;remote.subjectProgress[id].lastPosition.updatedAt=500;
  expect(JSON.stringify(remote)).not.toContain("synthetic local-only pending");const loaded=mergeStudentCloudState(local,remote);
- expect(loaded.subjectProgress[id].integrityPendingConflict).toBe(false);expect(loaded.subjectProgress[id].lastPosition.currentAnswer).toBe("synthetic local-only pending");expect(loaded.subjectProgress[id].lastPosition.startedAt).toBe(100);expect(loaded.xp).toBe(234);
+ expect(loaded.subjectProgress[id].integrityPendingConflict).toBe(true);expect(loaded.subjectProgress[id].integrityPendingConflictKind).toBe("privacy-unproven");expect(JSON.stringify(loaded.subjectProgress[id].integrityPendingVariants)).toContain("synthetic local-only pending");expect(loaded.subjectProgress[id].lastPosition.startedAt).toBe(100);expect(loaded.xp).toBe(234);
 });
 
 test("malformed historical collections remain archived over a cloud save/load",async()=>{

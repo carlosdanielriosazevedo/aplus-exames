@@ -1,4 +1,4 @@
-import {projectFqaAcademicProgress,stampFqaResult,normalizeFqaProgress} from "./fqaAcademicIntegrity.js";
+import {projectFqaAcademicProgress,stampFqaResult,normalizeFqaProgress,observeFqaEngineResult} from "./fqaAcademicIntegrity.js";
 import {STUDY_SESSION_MIN_QUESTIONS,STUDY_SESSION_MAX_QUESTIONS,DEFAULT_MISSION_QUESTIONS} from "./sessionPolicy.js";
 import {PHYSICS_CHEMISTRY_A_DOMAINS} from "../data/physicsChemistryFoundation.js";
 import {PHYSICS_CHEMISTRY_A_SUBTOPICS} from "../data/physicsChemistryTaxonomy.js";
@@ -29,8 +29,8 @@ function gradeStructuredStep(step,value){
   return {id:step.id,status:correct?"correct":"incorrect",correct,points:correct?step.points:0,maxPoints:step.points,expected:step.expected,answer:value};
 }
 
-export function gradePhysicsChemistryResponse(item,value){
-  return stampFqaResult(item,gradeRecordedPhysicsChemistryResponse(item,value));
+export function gradePhysicsChemistryResponse(item,value,session){
+  return observeFqaEngineResult(item,stampFqaResult(item,gradeRecordedPhysicsChemistryResponse(item,value)),session,session?.index??session?.current??0);
 }
 
 function gradeRecordedPhysicsChemistryResponse(item,value){

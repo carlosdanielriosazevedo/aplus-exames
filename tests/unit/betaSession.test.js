@@ -2,6 +2,9 @@ import {beginSubjectSession,recordSubjectSession,quarantineUnrecoverableSubjectS
 import {describe,expect,it} from "vitest";
 import {betaEvent,sessionStart} from "../../app/lib/beta.js";
 import {createDiagnosticDraft,validateDiagnosticDraft} from "../../app/lib/diagnosticRecovery.js";
+import {PHYSICS_CHEMISTRY_A_ITEMS} from "../../app/data/physicsChemistryFoundation.js";
+import {gradePhysicsChemistryResponse} from "../../app/lib/physicsChemistryEngine.js";
+import {beginFqaRuntimeContext} from "../../app/lib/fqaAcademicIntegrity.js";
 
 describe("study session identity",()=>{
   it("returns a safe no-telemetry event object when pilot consent is absent",()=>{
@@ -111,14 +114,14 @@ describe("subject completion idempotency",()=>{
   for(const subjectId of ["portuguese","physics-chemistry-a"]){
     it(`${subjectId}: Missão repetida não reforça Domínio nem duplica recompensas`,()=>{
       const base={subjectProgress:{},subjectProgressModelVersion:4,xp:0};
-      const items=[{id:"Q1",domain:"general",competencyId:"general"}];
-      const results=[{status:"final",final:true,correct:true,points:1,maxPoints:1}];
+      const items=subjectId==="physics-chemistry-a"?[PHYSICS_CHEMISTRY_A_ITEMS.find(item=>item.responseType==="multiple-choice")]:[{id:"Q1",domain:"general",competencyId:"general"}];
       const started=beginSubjectSession(base,{subjectId,kind:"mission",label:"Missão",sessionId:"mission-once",items,startedAt:100});
+      const results=subjectId==="physics-chemistry-a"?[gradePhysicsChemistryResponse(items[0],items[0].answerIndex,started.subjectProgress[subjectId].lastPosition)]:[{status:"final",final:true,correct:true,points:1,maxPoints:1}];
       const first=recordSubjectSession(started,{subjectId,kind:"mission",label:"Missão",items,results,sessionId:"mission-once",completedAt:200});
       const repeated=recordSubjectSession(first,{subjectId,kind:"mission",label:"Missão",items,results,sessionId:"mission-once",completedAt:300});
       expect(repeated).toBe(first);
       expect(first.subjectProgress[subjectId].missionHistory).toHaveLength(1);
-      expect(first.subjectProgress[subjectId].competence.general.attempts).toBe(1);
+      expect(first.subjectProgress[subjectId].competence[items[0].competencyId].attempts).toBe(1);
       expect(first.xp).toBe(25);
     });
   }
@@ -141,14 +144,16 @@ describe("standalone exam completion idempotency",()=>{
   for(const subjectId of ["portuguese","physics-chemistry-a"]){
     it(`${subjectId}: revisiting a completed exam cannot reapply evidence or rewards`,()=>{
       const base={subjectProgress:{},subjectProgressModelVersion:4,xp:13};
-      const items=[{id:"EX-1",domain:"reading",competencyId:"exam:reading"}];
-      const results=[{status:"final",final:true,correct:true,points:5,maxPoints:5}];
-      const args={subjectId,kind:"full_exam",label:"Exame Completo",items,results,sessionId:"exam-original",completedAt:12345};
+      const items=subjectId==="physics-chemistry-a"?[PHYSICS_CHEMISTRY_A_ITEMS.find(item=>item.responseType==="multiple-choice")]:[{id:"EX-1",domain:"reading",competencyId:"exam:reading"}];
+      const context={sessionId:"exam-original",kind:"full_exam",itemIds:items.map(item=>item.id),startedAt:12300};
+      if(subjectId==="physics-chemistry-a")beginFqaRuntimeContext(context);
+      const results=subjectId==="physics-chemistry-a"?[gradePhysicsChemistryResponse(items[0],items[0].answerIndex,context)]:[{status:"final",final:true,correct:true,points:5,maxPoints:5}];
+      const args={subjectId,kind:"full_exam",label:"Exame Completo",items,results,sessionId:"exam-original",startedAt:context.startedAt,completedAt:12345};
       const once=recordSubjectSession(base,args);
       const twice=recordSubjectSession(once,{...args,completedAt:45678});
       expect(twice).toBe(once);
       expect(once.subjectProgress[subjectId].sessions).toHaveLength(1);
-      expect(once.subjectProgress[subjectId].competence["exam:reading"].attempts).toBe(1);
+      expect(once.subjectProgress[subjectId].competence[items[0].competencyId].attempts).toBe(1);
       expect(once.xp).toBe(13);
     });
   }

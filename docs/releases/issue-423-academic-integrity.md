@@ -1,188 +1,157 @@
 # Issue #423 — FQ A historical academic integrity
 
-Base: main `118021d48ae354ec28b029c132d943d5a20b1c4f`. Dedicated branch:
-`codex/issue-423-academic-integrity`. Synthetic data only. No #420 merge,
-production migration, deployment, credentials or real student data.
+PR #450 only; branch `codex/issue-423-academic-integrity`.
+Starting candidate: `d88bdfd3b98f0033137f1412e68b396c01addcf1`.
+Main base: `118021d48ae354ec28b029c132d943d5a20b1c4f`.
+Synthetic data only. Draft; no merge, deployment, production migration or Android
+asset change. These are author implementation/tests, not an independent audit.
 
-## Implemented contract
+## Shared contracts and trust boundary
 
-Policy v1 is deterministic and recomputed on reads. Persisted academic projections
-and arbitrary `validated`, `final`, reviewer or rubric-completion claims cannot
-make a scientific open response eligible. No human-attestation verifier exists;
-this version admits **no scientific open-response score**, including claimed
-human reviews without an independently supported verification path.
+Policy v2 separates complete local history from academic projection. A matching
+catalogue/result fingerprint is a consistency check, not authentication, a human
+review or sufficient authority to admit an event.
 
-Raw subject progress remains the historical record. The separate projection is
-used by FQA Progress, adaptive mission competence ordering, parent competence
-comparisons and Apronso error nudges. Known objective and structured events need
-a matching catalog/result fingerprint, supported grading lane and coherent score
-contract. New engine results carry that provenance; compaction retains it.
-Fingerprints are reproducible consistency checks, not signatures, proof against
-client tampering, or pedagogical certification. They contain no student answers.
+`app/lib/fqaAcademicIntegrity.js` owns three-way attempt comparison
+(`equal`/`different`/`unknown`), normalization, runtime context observations,
+academic eligibility, error-memory inputs and assessment presentation.
+`app/lib/fqaCloudProjection.js` owns the explicit FQA transport allowlist.
 
-Legacy events lacking this provenance and opaque lifetime aggregates remain
-stored but are not silently certified. This deliberately means **some legitimate
-legacy objective/structured evidence is also unavailable in the active index**.
-The UI says information is insufficient, or that coverage is partial; absent
-scores never become incorrect answers. A future audited import/adjudication path
-is needed to admit additional historical evidence. This PR does not regrade the
-past or restore data already lost before the update.
+There is no externally trusted issuer in this PR. Native session entry establishes
+an immutable in-memory context. The actual engine grading call must be observed
+in that context and item slot. Completion binds identity/kind, item order, original
+start, completion date and the consumed result contract. A result observed in
+training cannot be replayed into a different mission context.
 
-The projection replays identifiable retained events chronologically, deduplicates
-session identities and excludes conflicts. Training contributes no academic
-competence. Error memory is derived only from eligible retained events; opaque
-legacy patterns remain archived, not shown as student weaknesses. New scientific
-completions retain their responses/activity/legitimate mission XP but do not add
-competence or error evidence. The scientific grader's presentation/calibration
-itself remains outside #423; #422 is not resolved.
+Observation registries live outside serialized state. Editing a stored kind,
+fingerprint, score, timestamp or purported authority object cannot create an
+observation. **Runtime observations are not cryptographic authentication.** They
+do not establish human attestation or defend against arbitrary code execution in
+the client. No local persisted flag is accepted as a substitute. Scientific prose
+remains excluded even with invented reviewer claims or automatic marks.
 
-## Preservation and synchronization
+## Approved conservative coverage reduction
 
-- Initial policy preparation archives original FQA progress before later session
-  writes can compact legacy fields. Raw scores, existing text/revisions, dates,
-  unknown fields, aggregate values and pending attempts remain recoverable.
-- FQA normalization and subsequent completion no longer truncate the retained
-  history to 100 sessions. No missing past is fabricated from the retained window.
-- Merge/load retains whole source metadata snapshots and unique session/pending
-  variants. Newer timestamps may choose the operational shell, never erase the
-  other response. Incompatible completed variants are academically excluded.
-- Monotonic conflicted-session IDs survive cloud privacy filtering; stripping
-  private text must not accidentally clear a known response conflict.
-- Divergent pending variants block begin/advance/complete/reset/technical archive
-  and exam exit writes. This version **does not implement automatic conflict
-  resolution**; it preserves variants and reports a required safe resolution.
-- A completed identity never becomes a resumed attempt. Older pauses are archived,
-  not reactivated by merging a newer completed state. Incomplete history rows do
-  not falsely complete an otherwise valid pause. Existing XP/reward deduplication
-  and exam clocks remain unchanged.
-- Local loading combines FQA copies from available stores. Malformed JSON is
-  preserved and fails closed through the existing recovery screen rather than
-  being deleted. This defensive shared-loader change also protects other subjects.
-- Cloud loads, merges, and serialization (including retry of queued old states)
-  use the current policy. Queued/snapshot originals are not rewritten in bulk.
-  CAS ownership/revision predicates and schema v8 remain unchanged.
-- The recursive cloud privacy filter remains in place for archives and variants:
-  no new response text, answers or student evidence are sent to the cloud.
+The owner selected the conservative alternative after its recovery/privacy costs
+were presented. Observations expire on full page reload or another device.
+Otherwise coherent retained objective/structured events then remain historical
+but unavailable to the academic projection. No grade becomes zero, no history is
+regraded speculatively and opaque totals are never a fallback source.
 
-No #420 code was cherry-picked. The narrow idea of excluding scientific responses
-from error accumulation is implemented against current main; the policy and
-historical-preservation approach are independent of #420's grader/UI changes.
-Android assets and manifest entries are unchanged.
+Fresh native sessions with actual engine observations can contribute during the
+current runtime. Complete local paused attempts can still resume after reload,
+with identity, submitted answers and original clock preserved. An old resumed
+attempt whose context cannot be authenticated may complete and receive legitimate
+activity/XP without becoming academic evidence.
 
-## Limits and blockers for promotion
+Progress, parental comparisons, error memory and adaptive competence ordering
+consume the projection. Session, parental, full-exam and mini-exam presentations
+also enforce eligibility. Excluded results are not displayed as correct,
+incorrect or completed grading. Unavailable exam points are null, not zero.
+Partial subtotals cover eligible items and explicitly are not a whole-exam grade.
 
-1. No live Neon/RLS, real-account, Safari/iOS or physical-device test is claimed.
-2. A stale application cannot be made to run this client policy. Updated clients
-   exclude unsafe science even when an old device writes old aggregates, but this
-   change cannot guarantee that an unmodified old client preserves every field,
-   or retains responses it never uploaded. No server minimum-client-policy rule
-   is introduced. Mixed-version rollout requires an independent compatibility
-   decision; there is no production GO on the strength of these tests alone.
-3. Raw private text intentionally stays local. A different device cannot recover
-   text absent from its cloud payload. Existing local variants are retained when
-   loading cloud, but missing text is not fabricated or collected anew.
-4. Preservation archives are not silently capped. Growth can hit browser quota;
-   existing storage failure/fallback reporting remains necessary. Quota tests
-   prove the prior durable source is not removed, not unlimited durable capacity.
-5. Unknown provenance, conflicts, and incomplete historical coverage reduce usable
-   evidence. Counts in the new index are not promised to equal old lifetime totals.
-6. No automatic human-review queue or reviewer identity is fabricated. Historical
-   adjudications need a separate verifiable import before academic reuse.
+This coverage reduction is substantial. A fresh diagnostic is tested as usable
+and countable in the same runtime, then preserved but excluded after reload.
+Durable academic continuity is not claimed. Independent review and a separate
+rollout decision are still required.
 
-## Synthetic test matrix and evidence
+## Pauses and privacy uncertainty
 
-`tests/unit/fqaAcademicIntegrity.test.js`: all seven FQA-R items, forged review
-claims, high/low/zero old marks, objective/structured contracts, changed catalog,
-old state versions, unidentifiable/malformed records, opaque/truncated totals,
-130 retained events, training/paused/completed identities, duplicate rewards,
-variant conflicts in both merge orders, privacy roundtrips, reload, two storage
-copies, quota failure, old queue/snapshots, exam clock and other-subject isolation.
+Administrative timestamps, display labels and catalogue-derived domain metadata
+do not establish a different attempt. Identity, question order/position, original
+start, submitted result facts and known responses remain material.
 
-`tests/unit/fqaAcademicIntegration.test.js`: actual cloud save/serialization path
-with synthetic auth/data clients; ownership, revision conflict, old queued payload,
-merge/load, private variants and no private text in outgoing cloud state. This is
-not a database/RLS or live identity-provider test.
+Cloud omission is explicitly unknown, including when original answers happened
+to be equal. It cannot authorize continuation. Missing private content produces
+`integrityPendingConflictKind: "privacy-unproven"`; known divergence remains
+`semantic-v1`. Available originals survive merge order, permutations, redaction
+and reload. Begin/advance/complete/reset/technical archive and unsafe exam exit
+writes remain blocked.
 
-`tests/browser/fqa-academic-integrity.spec.mjs`: 360/390/430/1366 px, raw scientific
-history and XP survive reload, unsafe preparation is unavailable and alleged error
-patterns are absent. Additional existing browser tests cover recovery and other
-subjects. Runtime validation results are recorded in the Draft PR.
+The notice explains uncertainty without claiming a proven different answer.
+Navigation to Progress/subject selection remains possible. No automatic conflict
+resolution or manual adjudication workflow is fabricated.
 
-The historical recovery contract keeps byte equality of #385 draft/clock/storage
-helpers. Its full-state persistence assertion now checks preservation of every
-original subject field while allowing additive integrity metadata. It exercises
-actual stored version tags 29/31; no previous preservation check is dropped.
+A legitimate active cloud roundtrip can also be blocked because omitted answers
+do not establish equivalence. A complete local copy remains usable before an
+ambiguous cloud copy is merged; ambiguity then cannot be cleared automatically.
+This availability cost is explicit and tested.
 
-## Audit decision
+Random revision IDs and response commitments were considered. An ID copied by an
+old client does not prove content equivalence; public hashes can expose short
+answers through enumeration. Neither is introduced. No additional answers,
+answer hashes, persistent keys or response-equivalence identifiers are collected.
 
-Candidate for independent technical audit only. NO-GO for merge, deployment or
-production data migration until audit and rollout limitations above are resolved.
+## Preservation and transport
 
-## P1 audit corrections against 15ef98b
+- Raw results, responses/revisions still present, unknown fields, aggregates,
+  dates, attempts, XP, rewards and activity remain in additive local archives.
+- Retained FQA history is not capped at 100. Missing past is not reconstructed.
+- Completed/interrupted identities cannot restart or receive duplicate XP.
+- Missing/malformed collections normalize before component reads. Original
+  values remain recoverable; structural ambiguity retains its guard.
+- Missing/null/numeric labels receive a safe display label; originals remain
+  recoverable and existing guards are never cleared.
+- Cloud admits known event structures, catalogue item/step IDs, bounded identity
+  fields, numeric facts, supported enums and omission/guard metadata.
+- Labels, arbitrary diagnostics/criteria/extensions, malformed scalar/array
+  content and opaque recovery material stay local. Archives use the same
+  allowlist; nested raw archives are not exported recursively. Known null
+  recovery markers may be transported.
+- Untransportable event/identity material sets a remote recovery/omission guard
+  rather than implying an empty safe history. Unknown subject-map wrappers cannot
+  bypass serialization; Math/Portuguese regressions retain their contracts.
+- Preparation/serialization faults are caught before storage writes. Quota
+  failures retain prior durable bytes; existing fallback/volatile semantics stay.
+- Old queued states pass current serialization at send time. Queue/snapshot
+  originals are not bulk rewritten. Schema v8 and ownership/revision CAS stay.
 
-The three reproduced P1 findings are addressed in the same Draft PR #450.
+Opaque local archives are therefore not complete cloud backups. Another device
+cannot recover intentionally unuploaded content. Material already lost before
+this update is not reconstructed.
 
-### Semantic paused-session comparison
+## Future backend protocol — not implemented
 
-Only `updatedAt`, `lastActivityAt`, `_savedAt` and privacy-omission bookkeeping are
-administrative. Identity, original start, item order, question position, submitted
-results and all present answers remain material. Missing arbitrary fields are not
-wildcards. Local absence of an answer differs from a present local answer.
+A later reviewed protocol needs authority outside mutable client state, session
+identity/lane ownership, verifiable item/result binding, issuance/verification
+keys, replay/rotation/version rules and privacy-safe recovery/compatibility.
+Blindly signing client kinds/scores would not establish correctness. Human
+validation needs a real verifier and reviewer authority.
 
-Cloud serialization records a numeric omission mask, containing field identities
-only, wherever private fields were removed. A schema-identified legacy cloud read
-can mark missing private fields at ingress. Known local private text is restored
-only between compatible variants; every original remains archived. Present but
-different values conflict even when an omission mask is present.
+No receipt endpoints, signing keys, schema/migrations or production configuration
+are introduced. Old applications do not acquire v2 by receiving its marker.
+Mixed-version rollout and old clients discarding unknown fields remain risks.
 
-A semantic conflict marker survives cloud stripping. Old true flags are rechecked
-only when complete original private fields prove that the difference was purely
-administrative. If privacy has erased the evidence required to decide, the flag
-stays `legacy-unresolved`: no automatic continuation, reset or guessed response.
-This unresolved legacy case is an explicit safety boundary, not a resolved audit
-finding or permission to discard either variant.
+## Tests and acceptance
 
-### Complete academic-consumer boundary
+New tests cover context validity/tampering, training replay, invented authority,
+context loss at reload, three-way comparison, both merge orders, local reload/
+retoma, old cloud/queues, opaque depths/archives/recovery, safe labels, serialization
+faults, summaries and eligible/excluded exam points.
 
-Progress, parental competence inputs and adaptive mission ordering consume only
-the projection. Error-memory replay and new FQA error accumulation now receive
-only the verified result contract. Free-form `errorDiagnosis`,
-`feedbackSummary`, `diagnosticCard`, `criteria`, `stepResults`, step labels/reasons/
-messages/loss text and other undeclared extensions are never passed through.
-Step error types are usable only because they are bound by the existing result
-fingerprint; changing a bound field invalidates eligibility. The stored originals
-are not scrubbed or retrospectively regraded. A fingerprint still is not a human
-attestation or an authentication scheme against a client executing arbitrary code.
+Positive fixtures in `tests/helpers/fqaRuntimeEvidence.js` execute ordinary
+begin → grade → advance → record calls, without test-only authority injection.
+Earlier positive competence, training-memory, exam wrapper and XP-deduplication
+requirements are retained using actual contexts. Contract coherence is tested
+separately from academic authority. Earlier optimistic redaction-equality cases
+now require an uncertainty guard under the owner's approved policy.
 
-### Incomplete-state recovery
+Browser coverage includes a fresh native positive journey and reduced coverage
+after reload; existing history, missing fields, private uncertainty, real
+divergence, labels, scientific summaries, parental presentation and retained XP.
+All prior tests remain; no acceptance threshold is lowered.
 
-FQA readers normalize absent collections to safe structures. Invalid fields,
-entries, malformed progress roots and interrupted attempts remain recoverable in
-original archives/recovery fields. Structural ambiguity sets
-`integrityRecoveryBlocked`, which prevents begin, advance, completion, reset,
-technical archive and exam-exit writes. The UI presents a recovery notice and a
-safe return to subject selection, without resetting data or clocks. Repeated
-normalization is idempotent. Malformed root values are local recovery material,
-excluded from outgoing cloud state.
+Counts and exact candidate SHA are recorded in the Draft PR after full unit,
+synthetic cloud integration, historical recovery, browser, Technical Gate,
+build and Performance Budget runs. Remote CI observations are separate.
 
-Regression coverage includes both merge orders, timestamp-only changes, cloud
-omissions, local absence versus a real answer, changed identity/position/clocks,
-old unresolved flags, adversarial assessment metadata across all error-signal
-inputs, coherent/broken step contracts, old versions, missing and wrongly typed
-collections, malformed roots, storage reload, cloud CAS save/load and browser
-recovery. No prior tests or acceptance thresholds have been removed or relaxed.
-Validation counts and the final SHA are recorded in the updated PR description.
+## Remaining release limitations
 
-The restored-feedback path is also covered: saved unsigned diagnostic extensions
-are not replayed as advice. Saved core completion facts and original response
-bytes remain archived; unknown assessments are displayed as unverified and the
-submitted answer stays locked. Newly computed scientific grading/calibration
-remains #422, not a claim of resolution by this PR.
+No live Neon/RLS, real student/account, physical-device or Safari/iOS validation
+is claimed. Ambiguous cloud pauses have no automatic resolution. Durable academic
+context requires future backend work. Archives can exhaust quota. Old clients can
+still apply old behavior or discard unknown data.
 
-The first remote correction run exposed an older learning-feedback audit fixture
-that expected unsigned FQA results to populate memory. Its positive requirement is
-retained using real catalog stepwise items and actual engine outputs; a negative
-assertion now ensures unsigned results are excluded. A matching unit regression
-checks that verified training errors still feed memory without creating academic
-competence. No application code or acceptance threshold was changed for this CI
-fixture correction.
+Keep PR #450 in Draft and NO-GO for integration/release pending independent review
+and explicit acceptance of the coverage/recovery limits. Passing author tests
+does not establish independent approval or production readiness.

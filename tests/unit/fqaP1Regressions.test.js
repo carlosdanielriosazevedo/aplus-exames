@@ -6,6 +6,7 @@ import {subjectProgressFor,advanceSubjectSession,beginSubjectSession,recordSubje
 import {studentStateForCloud,mergeStudentCloudState} from "../../app/lib/cloud.js";
 import {safeCloudMerge} from "../../app/lib/cloudStateMerge.js";
 import {saveLocalState,loadLocalStateStatus} from "../../app/lib/persistence.js";
+import {recordedFqaSession,recordedFqaState} from "../helpers/fqaRuntimeEvidence.js";
 const item=PHYSICS_CHEMISTRY_A_ITEMS.find(x=>x.responseType==="multiple-choice");
 const grade=gradePhysicsChemistryResponse(item,item.answerIndex);
 const position=()=>({sessionId:"synthetic-p1-pause",kind:"mission",itemIds:[item.id],results:[],current:0,currentAnswer:1,startedAt:100,updatedAt:200});
@@ -26,13 +27,13 @@ test("privacy omissions are explicit; local text survives newer cloud timestamps
  const a=state({lastPosition:p,lastActivityAt:200}),remote=studentStateForCloud(a);remote.subjectProgress[ID].lastPosition.updatedAt=400;remote.subjectProgress[ID].lastActivityAt=400;
  expect(JSON.stringify(remote)).not.toContain("synthetic pending text");expect(JSON.stringify(remote)).not.toContain("synthetic submitted text");
  for(const next of [mergeStudentCloudState(a,remote),safeCloudMerge(a,remote)]){
-  expect(next.subjectProgress[ID].integrityPendingConflict).toBe(false);expect(next.subjectProgress[ID].lastPosition.currentAnswer).toBe(p.currentAnswer);expect(next.subjectProgress[ID].lastPosition.results[0].responseText).toBe(p.results[0].responseText);
+  expect(next.subjectProgress[ID].integrityPendingConflict).toBe(true);expect(next.subjectProgress[ID].integrityPendingConflictKind).toBe("privacy-unproven");expect(JSON.stringify(next)).toContain(p.currentAnswer);expect(JSON.stringify(next)).toContain(p.results[0].responseText);expect(advanceSubjectSession(next,ID,{current:0,results:[]})).toBe(next);
  }
 });
 
 test("legacy cloud schema without omission markers is interpreted only at cloud ingress",()=>{
  const a=state({lastPosition:position(),lastActivityAt:200}),remote=JSON.parse(JSON.stringify(a));remote.schema="aplus-student-state-v1";delete remote.subjectProgress[ID].lastPosition.currentAnswer;
- expect(mergeStudentCloudState(a,remote).subjectProgress[ID].integrityPendingConflict).toBe(false);
+ expect(mergeStudentCloudState(a,remote).subjectProgress[ID].integrityPendingConflict).toBe(true);expect(mergeStudentCloudState(a,remote).subjectProgress[ID].integrityPendingConflictKind).toBe("privacy-unproven");
  const localUnknown=structuredClone(remote);delete localUnknown.schema;expect(safeCloudMerge(a,localUnknown).subjectProgress[ID].integrityPendingConflict).toBe(true);
 });
 
@@ -51,7 +52,7 @@ test("redaction cannot clear a real pending conflict",()=>{
 test("legacy flags are cleared only when complete originals prove an administrative false conflict",()=>{
  const original=position(),later={...original,updatedAt:300};const legacy={...state({lastPosition:later}).subjectProgress[ID],integrityPendingConflict:true,integrityPendingVariants:[original,later]};
  expect(mergeFqaHistory(legacy,legacy).integrityPendingConflict).toBe(false);
- const cloud=studentStateForCloud(state(legacy));const next=safeCloudMerge(cloud,cloud);expect(next.subjectProgress[ID].integrityPendingConflict).toBe(true);expect(next.subjectProgress[ID].integrityPendingConflictKind).toBe("legacy-unresolved");
+ const cloud=studentStateForCloud(state(legacy));const next=safeCloudMerge(cloud,cloud);expect(next.subjectProgress[ID].integrityPendingConflict).toBe(true);expect(next.subjectProgress[ID].integrityPendingConflictKind).toBe("privacy-unproven");
 });
 
 const metadataMutations=[
@@ -63,18 +64,20 @@ const metadataMutations=[
  ["reviewRequired",r=>({...r,reviewRequired:true,autoAssessmentConfidence:100,scoreExplainability:{awardedPoints:999}})]
 ];
 test.each(metadataMutations)("unverified %s cannot change memory, competence, parent inputs or mission ordering",(_,mutate)=>{
- const base=state({sessions:[0,1,2].map(i=>session(grade,i))}),tainted=state({sessions:[0,1,2].map(i=>session(mutate(grade),i))});
+ const sessions=[0,1,2].map(i=>recordedFqaSession({sessionId:"synthetic-metadata-"+i,items:[item],completedAt:1750000000000+i}));
+ const base=state({sessions}),tainted=state({sessions:sessions.map(row=>({...row,results:row.results.map(mutate)}))});
  const before=academicProgressFor(base,ID),after=academicProgressFor(tainted,ID);expect(after.errorPatterns).toEqual(before.errorPatterns);expect(after.competence).toEqual(before.competence);expect(JSON.stringify(after.errorPatterns)).not.toContain("UNTRUSTED");
+ expect(before.academicProjection.provenance).toHaveLength(3);
  const pool=PHYSICS_CHEMISTRY_A_ITEMS.slice(0,30);expect(buildAdaptivePhysicsChemistryMission(pool,{progress:after}).items.map(x=>x.id)).toEqual(buildAdaptivePhysicsChemistryMission(pool,{progress:before}).items.map(x=>x.id));
  const completed=recordSubjectSession(state({}),{subjectId:ID,kind:"mission",items:[item],results:[mutate(grade)],sessionId:"synthetic-new",completedAt:1750000000000});expect(completed.subjectProgress[ID].errorPatterns).toEqual({});
 });
 
 test("only bound step error types survive; free-form step messages and criteria are excluded",()=>{
  const stepItem=PHYSICS_CHEMISTRY_A_ITEMS.find(x=>x.responseType==="stepwise");
- const raw={status:"provisional-review",final:false,points:null,correct:null,gradingMode:"structured-provisional",requiresReview:false,provisionalPoints:0,maxPoints:stepItem.maxPoints,steps:stepItem.steps.map(s=>({id:s.id,status:"incorrect",points:0,maxPoints:s.points,errorType:"units"}))};const stamped=stampFqaResult(stepItem,raw);
+ const context=recordedFqaSession({sessionId:"synthetic-bound-steps",items:[stepItem],responses:[{steps:Object.fromEntries(stepItem.steps.map(s=>[s.id,{work:"",result:String(s.value),unit:s.unit||""}]))}]});const stamped=context.results[0];
  const tainted={...stamped,steps:stamped.steps.map(s=>({...s,reason:"conceptual_error",message:"UNTRUSTED",label:"UNTRUSTED",lossReason:"UNTRUSTED",note:"UNTRUSTED"}))};
- expect(verifiedFqaAcademicResult(stepItem,tainted)).toEqual(verifiedFqaAcademicResult(stepItem,stamped));
- const changed={...stamped,steps:stamped.steps.map(s=>({...s,errorType:"conceptual_error"}))};expect(verifiedFqaAcademicResult(stepItem,changed)).toBeNull();
+ expect(verifiedFqaAcademicResult(stepItem,stamped,context)).not.toBeNull();expect(verifiedFqaAcademicResult(stepItem,tainted,context)).toEqual(verifiedFqaAcademicResult(stepItem,stamped,context));
+ const changed={...stamped,steps:stamped.steps.map(s=>({...s,errorType:"conceptual_error"}))};expect(verifiedFqaAcademicResult(stepItem,changed,context)).toBeNull();
 });
 
 test.each([undefined,1,2,3,4])("missing historical fields (version %s) normalize without invented academic evidence",version=>{
@@ -118,17 +121,17 @@ test("a misassigned subject identity is archived and blocked rather than relabel
 
 
 test("resumed assessments cannot replay unsigned feedback or certify an unknown historical grade",()=>{
- const original={...grade,note:"UNTRUSTED",feedbackSummary:{nextAction:"UNTRUSTED",errorDiagnosis:{code:"conceptual_error"}},diagnosticCard:{errorDiagnosis:{code:"units"}}};
- const safe=restoreFqaResultView(item,original);expect(safe.historicalAssessmentUnverified).toBe(false);expect(safe.correct).toBe(original.correct);expect(safe.points).toBe(original.points);expect(JSON.stringify(safe)).not.toContain("UNTRUSTED");
+ const context=recordedFqaSession({sessionId:"synthetic-restored-context",items:[item]});const original={...context.results[0],note:"UNTRUSTED",feedbackSummary:{nextAction:"UNTRUSTED",errorDiagnosis:{code:"conceptual_error"}},diagnosticCard:{errorDiagnosis:{code:"units"}}};
+ const safe=restoreFqaResultView(item,original,context);expect(safe.historicalAssessmentUnverified).toBe(false);expect(safe.correct).toBe(original.correct);expect(safe.points).toBe(original.points);expect(JSON.stringify(safe)).not.toContain("UNTRUSTED");
  const {academicProvenance,...legacy}=original;const unknown=restoreFqaResultView(item,legacy);expect(unknown.historicalAssessmentUnverified).toBe(true);expect(unknown.final).toBe(legacy.final);expect(unknown.correct).toBe(legacy.correct);expect(JSON.stringify(unknown)).not.toContain("UNTRUSTED");expect(original.feedbackSummary.nextAction).toBe("UNTRUSTED");
 });
 
 test("verified resumed steps use catalog references, never stored free-form references",()=>{
- const stepItem=PHYSICS_CHEMISTRY_A_ITEMS.find(x=>x.responseType==="stepwise");const result=stampFqaResult(stepItem,{status:"provisional-review",gradingMode:"structured-provisional",requiresReview:false,provisionalPoints:0,maxPoints:stepItem.maxPoints,steps:stepItem.steps.map(s=>({id:s.id,status:"incorrect",points:0,maxPoints:s.points,errorType:"units"}))});
- const tainted={...result,steps:result.steps.map(s=>({...s,expected:"UNTRUSTED",note:"UNTRUSTED"}))};const restored=restoreFqaResultView(stepItem,tainted);expect(restored.historicalAssessmentUnverified).toBe(false);expect(restored.steps.map(s=>s.expected)).toEqual(stepItem.steps.map(s=>s.expected));expect(JSON.stringify(restored)).not.toContain("UNTRUSTED");
+ const stepItem=PHYSICS_CHEMISTRY_A_ITEMS.find(x=>x.responseType==="stepwise");const context=recordedFqaSession({sessionId:"synthetic-restored-steps",items:[stepItem],responses:[{steps:Object.fromEntries(stepItem.steps.map(s=>[s.id,{work:"",result:String(s.value),unit:s.unit||""}]))}]});const result=context.results[0];
+ const tainted={...result,steps:result.steps.map(s=>({...s,expected:"UNTRUSTED",note:"UNTRUSTED"}))};const restored=restoreFqaResultView(stepItem,tainted,context);expect(restored.historicalAssessmentUnverified).toBe(false);expect(restored.steps.map(s=>s.expected)).toEqual(stepItem.steps.map(s=>s.expected));expect(JSON.stringify(restored)).not.toContain("UNTRUSTED");
 });
 
 test("real verified training errors still feed memory without creating competence",()=>{
  const items=PHYSICS_CHEMISTRY_A_ITEMS.filter(row=>row.responseType==="stepwise").slice(0,2);const results=items.map(item=>gradePhysicsChemistryResponse(item,{steps:Object.fromEntries(item.steps.map(step=>[step.id,{work:"",result:String(step.value),unit:step.unit||""}]))}));
- const at=Date.now();const completed=recordSubjectSession(state({}),{subjectId:ID,kind:"training",items,results,sessionId:"synthetic-verified-training",completedAt:at});const projection=academicProgressFor(completed,ID);expect(Object.values(projection.errorPatterns).some(row=>row.status==="recurring")).toBe(true);expect(projection.competence).toEqual({});expect(completed.subjectProgress[ID].sessions.at(-1).results.every(row=>row.academicProvenance)).toBe(true);
+ const at=Date.now();const completed=recordedFqaState({kind:"training",items,responses:items.map(item=>({steps:Object.fromEntries(item.steps.map(step=>[step.id,{work:"",result:String(step.value),unit:step.unit||""}]))})),sessionId:"synthetic-verified-training",completedAt:at});const projection=academicProgressFor(completed,ID);expect(Object.values(projection.errorPatterns).some(row=>row.status==="recurring")).toBe(true);expect(projection.competence).toEqual({});expect(completed.subjectProgress[ID].sessions.at(-1).results.every(row=>row.academicProvenance)).toBe(true);
 });

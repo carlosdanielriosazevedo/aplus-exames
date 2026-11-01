@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import "../app/lib/recurringErrorRuntime.js";
 import {buildScoreExplainability,SCORE_EXPLAINABILITY_SCHEMA} from "../app/lib/scoreExplainability.js";
 import {recordErrorPatternEvidence,recurringErrorPatterns,extractErrorSignals} from "../app/lib/recurringErrorMemory.js";
-import {recordSubjectSession,subjectProgressFor} from "../app/lib/subjectProgress.js";
+import {beginSubjectSession,recordSubjectSession,subjectProgressFor} from "../app/lib/subjectProgress.js";
 import {PHYSICS_CHEMISTRY_A_ITEMS} from "../app/data/physicsChemistryFoundation.js";
 import {gradePhysicsChemistryResponse} from "../app/lib/physicsChemistryEngine.js";
 
@@ -65,9 +65,9 @@ assert.equal(recurringErrorPatterns(stale,now).length,0,"stale patterns must not
 // exercise the lower-level classifier above, not the academic trust boundary.
 const trainingItems=PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.responseType==="stepwise").slice(0,2);
 assert.equal(trainingItems.length,2);
-const trainingResults=trainingItems.map(item=>gradePhysicsChemistryResponse(item,{steps:Object.fromEntries(item.steps.map(step=>[step.id,{result:String(step.value),work:"",unit:step.unit||""}]))}));
+let state=beginSubjectSession({subjectProgress:{},engagement:null,competition:null,xp:0},{subjectId:"physics-chemistry-a",kind:"training",items:trainingItems,sessionId:"test-session",startedAt:now-1});
+const trainingResults=trainingItems.map((item,index)=>gradePhysicsChemistryResponse(item,{steps:Object.fromEntries(item.steps.map(step=>[step.id,{result:String(step.value),work:"",unit:step.unit||""}]))},{...state.subjectProgress["physics-chemistry-a"].lastPosition,index}));
 assert.ok(trainingResults.every(result=>result.academicProvenance&&result.steps.some(step=>step.errorType)),"training fixture must contain actual verifiable engine error evidence");
-let state={subjectProgress:{},engagement:null,competition:null,xp:0};
 state=recordSubjectSession(state,{
   subjectId:"physics-chemistry-a",kind:"training",label:"Treino",domain:"waves",
   items:trainingItems,results:trainingResults,sessionId:"test-session",completedAt:now

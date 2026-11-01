@@ -1,5 +1,5 @@
 "use client";
-import {academicProgressFor,restoreFqaResultView} from "../lib/fqaAcademicIntegrity";
+import {academicProgressFor,restoreFqaResultView,fqaAssessmentPresentation,fqaPendingNotice} from "../lib/fqaAcademicIntegrity";
 import {useEffect,useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import StudyModeHub from "./StudyModeHub";
@@ -122,9 +122,10 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     if(progress.lastPosition){resume();return}
     if(examDrafts.length){go(examDrafts[0].route);return}
     const sessionId=createSubjectSessionId(SUBJECT_ID,kind);
-    setSession({sessionId,kind,label,domain,items,current:0});
+    const startedAt=Date.now();
+    setSession({sessionId,kind,label,domain,items,current:0,startedAt});
     setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});
-    setS(prev=>beginSubjectSession(prev,{subjectId:SUBJECT_ID,sessionId,kind,label,domain,items}));
+    setS(prev=>beginSubjectSession(prev,{subjectId:SUBJECT_ID,sessionId,kind,label,domain,items,startedAt}));
   }
 
   function startDiagnostic(){start("diagnostic",buildPhysicsChemistryDiagnostic(scopedItems),"Diagnóstico")}
@@ -151,16 +152,17 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     if(feedback)return;
     const item=session.items[session.current];
     if(!answerReady(item))return;
-    const result=gradePhysicsChemistryResponse(item,answer);
+    const result=gradePhysicsChemistryResponse(item,answer,session);
     const nextResults=[...results,result];
-    setFeedback(result);setResults(nextResults);
+    const context={...session,itemIds:session.items.map(row=>row.id)};
+    setFeedback(restoreFqaResultView(item,result,context,session.current));setResults(nextResults);
     setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{sessionId:session.sessionId,current:session.current,results:nextResults,currentResult:result,currentAnswer:answer}));
   }
 
   function next(){
     if(!feedback)return;
     if(session.current>=session.items.length-1){
-      const finalResults=feedback?[...results.slice(0,-1),feedback]:results;
+      const finalResults=results;
       setResults(finalResults);
       setS(prev=>recordSubjectSession(prev,{subjectId:SUBJECT_ID,kind:session.kind,label:session.label,domain:session.domain,items:session.items,results:finalResults,sessionId:session.sessionId}));
       setSession(current=>({...current,finished:true}));
@@ -184,14 +186,14 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   function resume(){
     const saved=progress.lastPosition;
     if(!saved)return;
-    if(progress.integrityPendingConflict){window.alert("Há versões diferentes desta tentativa. As respostas foram conservadas; a retoma precisa de resolução segura.");return;}
+    if(progress.integrityPendingConflict){window.alert(fqaPendingNotice(progress));return;}
     const items=saved.itemIds.map(physicsChemistryItemById).filter(Boolean);
     if(items.length!==saved.itemIds.length){
       window.alert("Não foi possível recuperar esta sessão porque faltam perguntas. O teu progresso continua guardado.");
       return;
     }
-    setSession({sessionId:saved.sessionId,kind:saved.kind,label:saved.label,domain:saved.domain,items,current:Math.min(saved.current,items.length-1)});
-    setResults((saved.results||[]).map((result,index)=>restoreFqaResultView(items[index],result)));setAnswer(saved.currentAnswer??null);setFeedback(restoreFqaResultView(items[Math.min(saved.current,items.length-1)],saved.currentResult||saved.results?.[saved.current])||null);
+    setSession({sessionId:saved.sessionId,kind:saved.kind,label:saved.label,domain:saved.domain,items,current:Math.min(saved.current,items.length-1),startedAt:saved.startedAt});
+    setResults(saved.results||[]);setAnswer(saved.currentAnswer??null);setFeedback(restoreFqaResultView(items[Math.min(saved.current,items.length-1)],saved.currentResult||saved.results?.[saved.current],saved,Math.min(saved.current,items.length-1))||null);
   }
 
   useEffect(()=>{
@@ -207,10 +209,10 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   if(progress.integrityRecoveryBlocked)return <Shell><div className="notice warning" role="alert"><b>Não foi possível recuperar o histórico de Física e Química A com segurança.</b><span>Os dados originais foram conservados. Não iniciámos nem repusemos nenhuma tentativa.</span><button onClick={()=>go("subjectManager")}>Voltar às disciplinas</button></div></Shell>;
 
   if(session?.finished){
-    const deterministic=results.filter(result=>result?.final===true&&typeof result.correct==="boolean");
-    const correct=deterministic.filter(result=>result.correct).length;
-    const pending=results.filter(result=>result&&result.final!==true&&result.status!=="unanswered").length;
-    const unanswered=results.filter(result=>result?.status==="unanswered").length;
+    const retained=progress.sessions.find(row=>row.sessionId===session.sessionId);
+    const assessment=fqaAssessmentPresentation(retained||{...session,itemIds:session.items.map(item=>item.id),results},progress);
+    const pending=assessment.provisional;
+    const unanswered=assessment.unanswered;
     const title=session.kind==="mission"?"Missão concluída":session.kind==="diagnostic"?"Diagnóstico concluído":"Treino concluído";
     const primaryLabel=session.kind==="diagnostic"?"Ir para o menu inicial":"Voltar ao menu inicial";
     const primaryTarget="home";
@@ -223,10 +225,11 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       </div>
       <div className="subjectStats">
         <div><b>{session.items.length}</b><span>itens</span></div>
-        <div><b>{deterministic.length?correct+"/"+deterministic.length:"—"}</b><span>respostas objetivas corretas</span></div>
+        <div><b>{assessment.objectiveCorrectLabel}</b><span>respostas objetivas corretas</span></div>
         <div><b>{pending}</b><span>respostas ainda por critérios</span></div>
       </div>
       {pending>0&&<div className="notice warning"><b>Resultado académico incompleto</b><span>A app avaliou automaticamente o que conseguiu nas respostas abertas e por etapas. Os resultados não determinísticos mantêm indicação provisória e de confiança.</span></div>}
+      {assessment.excluded>0&&<div className="notice" role="status"><b>Resultados sem avaliação verificável</b><span>{assessment.excluded} respostas foram conservadas sem contar como acertos, erros ou correções concluídas.</span></div>}
       {unanswered>0&&<div className="notice"><b>{unanswered+" "+(unanswered===1?"resposta em branco":"respostas em branco")}</b><span>Ficam registadas como ausência de resposta, sem inventar evidência de domínio.</span></div>}
       <button className="primary" onClick={()=>{setSession(null);setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});go(primaryTarget)}}>{primaryLabel}</button>
       {session.kind!=="diagnostic"&&<button className="secondary" onClick={()=>{const kind=session.kind;setSession(null);setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});go(kind==="mission"?"progress":"train")}}>{session.kind==="mission"?"Ver progresso detalhado":"Treinar outra coisa"}</button>}
@@ -245,7 +248,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       <div className="questionCard">
         <PhysicsChemistryStimulus item={item}/>
         <h2>{item.prompt}</h2>
-        {item.responseType==="multiple-choice"&&<div className="opts">{item.options.map((option,index)=><button type="button" key={option} disabled={!!feedback} className={answerOptionState({index,selectedIndex:answer,correctIndex:item.answerIndex,submitted:!!feedback?.final})} onClick={()=>setAnswer(index)}><b>{String.fromCharCode(65+index)}</b>{option}</button>)}</div>}
+        {item.responseType==="multiple-choice"&&<div className="opts">{item.options.map((option,index)=><button type="button" key={option} disabled={!!feedback} className={answerOptionState({index,selectedIndex:answer,correctIndex:item.answerIndex,submitted:!!feedback?.final&&!feedback.historicalAssessmentUnverified})} onClick={()=>setAnswer(index)}><b>{String.fromCharCode(65+index)}</b>{option}</button>)}</div>}
         {item.responseType==="stepwise"&&<PhysicsChemistryStepwiseEditor item={item} value={answer} onChange={setAnswer} disabled={!!feedback}/>} 
         {item.responseType==="restricted-response"&&<div className="fqaRestricted"><div className="notice"><b>Resposta científica</b><span>Explica o raciocínio com linguagem científica e articula os elementos pedidos.</span></div><textarea disabled={!!feedback} value={typeof answer==="string"?answer:""} onChange={event=>setAnswer(event.target.value)} rows={8} placeholder="Escreve a tua resposta..."/></div>}
         {!feedback?<button className="primary" disabled={!answerReady(item)} onClick={submit}>Responder</button>:<>
@@ -396,7 +399,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     const overall=totalSignals?Math.round(positiveSignals/totalSignals*100):null;
     return <Shell className="wideStudentShell progressPage">{sharedTop}<div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1></div>
       <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{overall??"—"}<em>{overall!==null?"/100":""}</em></b><div className="bar"><i style={{width:(overall??0)+"%"}}/></div><span>Índice parcial</span></div><p><small>OBJETIVO</small><b>{subjectGoal(s,SUBJECT_ID)} valores</b><span>O índice não prevê a tua nota de exame.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
-      <p className="muted" role="status">{progress.academicProjection?.insufficient?"Informação insuficiente para estimar a preparação. ":"Índice parcial baseado nas sessões identificáveis conservadas. "}As avaliações científicas automáticas não validadas ficam fora dos indicadores. O histórico de atividade e as respostas existentes são preservados.</p>
+      <p className="muted" role="status">{progress.academicProjection?.insufficient?"Informação insuficiente para estimar a preparação. ":"Índice parcial baseado nas sessões verificáveis desta execução. "}As avaliações científicas automáticas não validadas ficam fora dos indicadores. Ao recarregar a aplicação, avaliações sem autenticação duradoura deixam de contar. O histórico, as respostas e o XP são preservados, sem substituir avaliações excluídas por zero.</p>
       <div className="progressOverview">{rows.map(row=><div key={row.id}><span>{row.shortTitle}</span><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><b>{row.percent??"—"}</b></div>)}</div>
       <div className="progressActions"><button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada</button><button className="secondary" onClick={()=>go("profileSettings")}>Ano e percurso escolar</button></div>
       <details className="progressDetails"><summary>Ver detalhe por matéria →</summary>
@@ -412,7 +415,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   }
 
   return <main className="learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>
-    {progress.integrityPendingConflict&&<div className="notice warning" role="alert">Há versões diferentes de uma tentativa. As respostas foram conservadas; a retoma precisa de resolução segura.</div>}
+    {progress.integrityPendingConflict&&<div className="notice warning" role="alert">{fqaPendingNotice(progress)}</div>}
     {unrecoverableSession&&<div className="notice warning"><b>Sessão impossível de recuperar</b><span>Uma ou mais perguntas deixaram de estar disponíveis. A tentativa será arquivada sem pontuação adicional.</span><button className="secondary" onClick={recoverUnrecoverableSession}>Resolver sessão irrecuperável</button></div>}
     <div className="learnIntro"><div className="mobileMainTitle"><p>Olá 👋</p><h1>O teu próximo passo.</h1></div><span>{missionDone?"Missão feita. Podes continuar por tua conta.":progress.diagnosticDone?"Uma recomendação curta, escolhida a partir do teu percurso.":"Primeiro, vamos encontrar o melhor ponto de partida."}</span></div>
     <section className="adaptivePath" aria-label="Caminho adaptativo de Física e Química A">

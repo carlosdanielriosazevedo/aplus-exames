@@ -1,15 +1,19 @@
 import {recordErrorPatternEvidence} from "./recurringErrorMemory.js";
 import {physicsChemistryItemById} from "../data/physicsChemistryFoundation.js";
 import {canonicalSubjectId} from "./subjectWorkspace.js";
+import {fqaProgressForCloud} from "./fqaCloudProjection.js";
 
 export const FQA_SUBJECT="physics-chemistry-a";
-export const FQA_ACADEMIC_POLICY=1;
+export const FQA_ACADEMIC_POLICY=2;
 const list=value=>Array.isArray(value)?value:[];
 const record=value=>!!value&&typeof value==="object"&&!Array.isArray(value);
 export const FQA_PRIVATE_RESPONSE_FIELDS=new Set(["answers","answer","currentAnswer","responseText","previousResponseText","studentEvidence"]);
-const ADMINISTRATIVE_FIELDS=new Set(["updatedAt","lastActivityAt","_savedAt","integrityPrivacyOmissions"]);
+const ADMINISTRATIVE_FIELDS=new Set(["updatedAt","lastActivityAt","_savedAt","integrityPrivacyOmissions","label","integrityOriginalLabel","domain"]);
 const privateBit=field=>1<<[...FQA_PRIVATE_RESPONSE_FIELDS].indexOf(field);
 const wasRedacted=(object,field)=>Number.isInteger(object?.integrityPrivacyOmissions)&&!!(object.integrityPrivacyOmissions&privateBit(field));
+const unprovenPrivate=value=>Array.isArray(value)?value.some(unprovenPrivate):record(value)&&(
+  [...FQA_PRIVATE_RESPONSE_FIELDS].some(field=>value[field]===undefined&&wasRedacted(value,field))||
+  Object.entries(value).some(([field,nested])=>!ADMINISTRATIVE_FIELDS.has(field)&&unprovenPrivate(nested)));
 
 function privateFields(value,legacyRead){
   if(Array.isArray(value))return value.map(row=>privateFields(row,legacyRead));
@@ -25,7 +29,7 @@ function privateFields(value,legacyRead){
   if(mask)out.integrityPrivacyOmissions=mask;
   return out;
 }
-export const redactFqaProgress=progress=>privateFields(progress,false);
+export const redactFqaProgress=fqaProgressForCloud;
 export const readFqaCloudProgress=progress=>privateFields(progress,true);
 export function stableAcademicValue(value){
   if(Array.isArray(value))return value.map(stableAcademicValue);
@@ -34,6 +38,69 @@ export function stableAcademicValue(value){
 }
 const key=value=>JSON.stringify(stableAcademicValue(value));
 const unique=rows=>[...new Map(rows.map(row=>[key(row),row])).values()];
+// Runtime observations are deliberately outside serializable state. A local
+// fingerprint/flag cannot mint them. They expire on a full reload; this is not
+// a server receipt, a human attestation or protection from arbitrary client code.
+const engineObservations=new WeakMap();
+const activeContexts=new Map();
+const completedObservations=new Map();
+const SESSION_KINDS=new Set(["diagnostic","mission","training","mini_exam","full_exam","practice_exam"]);
+const contextKey=session=>key({sessionId:session?.sessionId,kind:session?.kind,itemIds:session?.itemIds});
+const eventKey=session=>key({context:contextKey(session),startedAt:session?.startedAt,completedAt:session?.completedAt,results:list(session?.results).map(result=>record(result)?resultContract(result):null)});
+const observationKey=(item,result)=>key({item:itemFingerprint(item),result:resultContract(result)});
+
+export function observeFqaEngineResult(item,result,session,index=0){
+  const position=session&&{...session,itemIds:session.itemIds||session.items?.map(row=>row.id)};
+  const context=contextFor(position);
+  if(context&&item&&record(result)&&position.itemIds[index]===item.id)engineObservations.set(result,{result:observationKey(item,result),identity:context.identity,startedAt:context.startedAt,index});
+  return result;
+}
+
+export function beginFqaRuntimeContext({sessionId,kind,itemIds,startedAt}){
+  if(typeof sessionId!=="string"||!sessionId||!SESSION_KINDS.has(kind)||!Array.isArray(itemIds)||!itemIds.length||!itemIds.every(id=>!!physicsChemistryItemById(id))||!Number.isFinite(startedAt))return false;
+  const existing=activeContexts.get(sessionId),identity=contextKey({sessionId,kind,itemIds});
+  if(existing)return existing.identity===identity&&existing.startedAt===startedAt;
+  activeContexts.set(sessionId,{identity,startedAt,results:new Map()});
+  return true;
+}
+
+function contextFor(session){
+  const context=activeContexts.get(session?.sessionId);
+  return context&&context.identity===contextKey(session)&&(session.startedAt===undefined||session.startedAt===context.startedAt)?context:null;
+}
+
+function observedEngine(item,result,session,index){
+  const context=contextFor(session),observation=engineObservations.get(result);
+  return !!context&&observation?.identity===context.identity&&observation.startedAt===context.startedAt&&observation.index===index&&observation.result===observationKey(item,result);
+}
+
+export function observeFqaPendingResults(position,results){
+  const context=contextFor(position);
+  if(!context)return;
+  list(results).forEach((result,index)=>{
+    const item=physicsChemistryItemById(position.itemIds[index]);
+    if(item&&record(result)&&observedEngine(item,result,position,index))context.results.set(index,observationKey(item,result));
+  });
+}
+
+export function observeFqaCompletion(session,items,results){
+  const context=contextFor(session);
+  if(!context||!Number.isFinite(session.completedAt))return;
+  const verified=new Set();
+  list(results).forEach((result,index)=>{
+    const item=items[index];
+    if(!item||item.id!==session.itemIds[index]||!record(result))return;
+    const observed=observationKey(item,result);
+    if(observedEngine(item,result,session,index)||context.results.get(index)===observed)verified.add(index);
+  });
+  if(verified.size)completedObservations.set(eventKey(session),verified);
+}
+
+function observedResult(item,result,session,index){
+  if(!record(session)||!SESSION_KINDS.has(session.kind)||session.itemIds?.[index]!==item?.id)return false;
+  if(Number.isFinite(session.completedAt))return completedObservations.get(eventKey(session))?.has(index)===true;
+  return observedEngine(item,result,session,index)||contextFor(session)?.results.get(index)===observationKey(item,result);
+}
 const history=progress=>{
   if(!record(progress))return progress===undefined?[]:[{integrityMalformedRoot:progress}];
   const {integrityHistory:_history,academicProjection:_projection,...original}=progress;
@@ -42,15 +109,27 @@ const history=progress=>{
   return archives.some(row=>key(metadata(row))===key(metadata(original)))?archives:unique([...archives,original]);
 };
 
-function compatible(a,b){
-  if(a===undefined||b===undefined)return a===b;
-  if(a===null||b===null||typeof a!=="object"||typeof b!=="object")return key(a)===key(b);
-  if(Array.isArray(a)||Array.isArray(b))return Array.isArray(a)&&Array.isArray(b)&&a.length===b.length&&a.every((v,i)=>compatible(v,b[i]));
-  return [...new Set([...Object.keys(a),...Object.keys(b)])].every(k=>
-    ADMINISTRATIVE_FIELDS.has(k)||
-    (FQA_PRIVATE_RESPONSE_FIELDS.has(k)&&((a[k]===undefined&&wasRedacted(a,k))||(b[k]===undefined&&wasRedacted(b,k))))||
-    compatible(a[k],b[k]));
+export function compareFqaAttemptVersions(a,b){
+  if(a===undefined||b===undefined)return a===b?"equal":"different";
+  if(a===null||b===null||typeof a!=="object"||typeof b!=="object")return key(a)===key(b)?"equal":"different";
+  if(Array.isArray(a)||Array.isArray(b)){
+    if(!Array.isArray(a)||!Array.isArray(b)||a.length!==b.length)return "different";
+    const comparisons=a.map((value,index)=>compareFqaAttemptVersions(value,b[index]));
+    return comparisons.includes("different")?"different":comparisons.includes("unknown")?"unknown":"equal";
+  }
+  let unknown=unprovenPrivate(a)||unprovenPrivate(b);
+  for(const field of new Set([...Object.keys(a),...Object.keys(b)])){
+    if(ADMINISTRATIVE_FIELDS.has(field))continue;
+    if(FQA_PRIVATE_RESPONSE_FIELDS.has(field)&&((a[field]===undefined&&wasRedacted(a,field))||(b[field]===undefined&&wasRedacted(b,field)))){unknown=true;continue}
+    const comparison=compareFqaAttemptVersions(a[field],b[field]);
+    if(comparison==="different")return "different";
+    if(comparison==="unknown")unknown=true;
+  }
+  return unknown?"unknown":"equal";
 }
+// Unknown transport omissions are not a known contradiction between completed
+// facts. They never establish equality or authorize a paused continuation.
+const nonContradictory=(a,b)=>compareFqaAttemptVersions(a,b)!=="different";
 
 // Only fill fields deliberately omitted by cloud privacy. Unknown missing fields,
 // identity, position, submitted results and original clocks are not wildcards.
@@ -74,11 +153,38 @@ function completePrivatePending(position){
     (!position.currentResult||Object.hasOwn(position.currentResult,"responseText"));
 }
 
+export function fqaSessionLabel(kind){
+  switch(kind){
+    case "diagnostic":return "Diagnóstico";
+    case "mission":return "Missão";
+    case "training":return "Treino livre";
+    case "mini_exam":return "Mini-exame";
+    case "full_exam":return "Exame completo";
+    case "practice_exam":return "Prova de treino";
+    default:return "Sessão de Física e Química A";
+  }
+}
+
+export function fqaPendingNotice(progress){
+  if(!progress?.integrityPendingConflict)return null;
+  if(progress.integrityPendingConflictKind==="privacy-unproven")return "Não foi possível confirmar esta retoma. A cópia cloud não contém as respostas privadas necessárias para demonstrar equivalência. As respostas locais foram conservadas e a tentativa não foi reiniciada. A retoma precisa de resolução segura; conserva também a cópia no dispositivo de origem, se estiver disponível.";
+  return "Há versões diferentes de uma tentativa. As respostas foram conservadas; a retoma precisa de resolução segura.";
+}
+
 export function normalizeFqaProgress(progress){
   const source=record(progress)?progress:{};
   const out={...source,subjectId:FQA_SUBJECT};
   let changed=!record(progress)||source.subjectId!==FQA_SUBJECT,blocked=source.integrityRecoveryBlocked===true||(progress!==undefined&&!record(progress));
   const recoveryFields=record(source.integrityRecoveryFields)?{...source.integrityRecoveryFields}:{};
+  for(const field of ["integrityRecoveryBlocked","integrityPendingConflict"]){
+    if(Object.hasOwn(source,field)&&typeof source[field]!=="boolean"){
+      recoveryFields[field]=source[field];out[field]=true;blocked=true;changed=true;
+    }
+  }
+  if(source.integrityPendingConflictKind!=null&&!["semantic-v1","legacy-unresolved","privacy-unproven"].includes(source.integrityPendingConflictKind)){
+    recoveryFields.integrityPendingConflictKind=source.integrityPendingConflictKind;
+    out.integrityPendingConflictKind="legacy-unresolved";blocked=true;changed=true;
+  }
   if(source.subjectId!==undefined&&source.subjectId!==FQA_SUBJECT){recoveryFields.subjectId=source.subjectId;blocked=true}
   for(const field of ["sessions","missionHistory","completedSessionIds","interruptedTechnicalSessions","integrityHistory","integrityPendingVariants","integrityConflictedSessionIds"]){
     const original=source[field];
@@ -111,7 +217,15 @@ export function normalizeFqaProgress(progress){
       changed=true;blocked=true;
     }
     else if(position.results===undefined){out.lastPosition={...position,results:[]};changed=true}
+    if(record(out.lastPosition)&&(typeof position.label!=="string"||!position.label.trim())){
+      out.lastPosition={...out.lastPosition,label:fqaSessionLabel(position.kind),
+        ...(Object.hasOwn(position,"label")&&!Object.hasOwn(position,"integrityOriginalLabel")?{integrityOriginalLabel:position.label}:{})};
+      changed=true;
+    }
   }else if(position===undefined){out.lastPosition=null;changed=true}
+  if(record(out.lastPosition)&&unprovenPrivate(out.lastPosition)&&!source.integrityPendingConflict){
+    out.integrityPendingConflict=true;out.integrityPendingConflictKind="privacy-unproven";changed=true;
+  }
   if(!changed)return source;
   const {integrityHistory:_archive,...original}=source;
   out.integrityHistory=unique([...history(progress),...(record(progress)?[original]:[]),...list(out.integrityHistory)]);
@@ -125,7 +239,7 @@ function sessionConflicts(sources){
     if(!row?.sessionId)continue;
     const variants=groups.get(row.sessionId)||[];variants.push(row);groups.set(row.sessionId,variants);
   }
-  return [...new Set([...sources.flatMap(p=>list(p?.integrityConflictedSessionIds)),...[...groups].filter(([,rows])=>rows.some(a=>rows.some(b=>!compatible(a,b)))).map(([id])=>id)])].sort();
+  return [...new Set([...sources.flatMap(p=>list(p?.integrityConflictedSessionIds)),...[...groups].filter(([,rows])=>rows.some(a=>rows.some(b=>!nonContradictory(a,b)))).map(([id])=>id)])].sort();
 }
 
 // Whole source variants remain recoverable; no timestamp can discard a response.
@@ -144,11 +258,12 @@ export function mergeFqaHistory(left,right){
   const blockedIds=new Set([...completedIds,...interrupted.map(s=>s?.sessionId)]);
   const positions=unique(current.flatMap(p=>[p.lastPosition,...list(p.integrityPendingVariants)]).filter(Boolean));
   const pending=unique([left,right].flatMap(p=>[p.lastPosition,...(p.integrityPendingConflict?list(p.integrityPendingVariants):[])]).filter(p=>p&&!blockedIds.has(p.sessionId)));
-  const semanticConflict=pending.some(a=>pending.some(b=>!compatible(a,b)));
+  const semanticConflict=pending.some(a=>pending.some(b=>compareFqaAttemptVersions(a,b)==="different"));
+  const privacyUnproven=pending.some(unprovenPrivate);
   const unresolved=[left,right].some(p=>p.integrityPendingConflict&&(
-    p.integrityPendingConflictKind==="semantic-v1"||p.integrityPendingConflictKind==="legacy-unresolved"||
+    p.integrityPendingConflictKind==="semantic-v1"||p.integrityPendingConflictKind==="legacy-unresolved"||p.integrityPendingConflictKind==="privacy-unproven"||
     !list(p.integrityPendingVariants).length||!list(p.integrityPendingVariants).every(completePrivatePending)));
-  const pendingConflict=semanticConflict||unresolved;
+  const pendingConflict=semanticConflict||privacyUnproven||unresolved;
   let lastPosition=pending.find(p=>key(p)===key(newer.lastPosition))||null;
   if(lastPosition&&!pendingConflict)for(const variant of pending)lastPosition=restorePrivateFields(lastPosition,variant);
   return {...newer,subjectId:FQA_SUBJECT,integrityHistory:sources,
@@ -160,7 +275,7 @@ export function mergeFqaHistory(left,right){
     lastPosition,
     integrityRecoveryBlocked:left.integrityRecoveryBlocked||right.integrityRecoveryBlocked||false,
     integrityPendingConflict:pendingConflict,
-    integrityPendingConflictKind:semanticConflict||[left,right].some(p=>p.integrityPendingConflict&&p.integrityPendingConflictKind==="semantic-v1")?"semantic-v1":unresolved?"legacy-unresolved":null,
+    integrityPendingConflictKind:semanticConflict||[left,right].some(p=>p.integrityPendingConflict&&p.integrityPendingConflictKind==="semantic-v1")?"semantic-v1":privacyUnproven||[left,right].some(p=>p.integrityPendingConflictKind==="privacy-unproven")?"privacy-unproven":unresolved?"legacy-unresolved":null,
     lastActivityAt:Math.max(+left.lastActivityAt||0,+right.lastActivityAt||0)||null};
 }
 
@@ -193,15 +308,15 @@ function resultContract(result){
     gradingMode:result.gradingMode,requiresReview:!!result.requiresReview,penalty:result.penalty||0,
     steps:list(result.steps).map(s=>({id:s?.id,status:s?.status,points:s?.points,maxPoints:s?.maxPoints,errorType:s?.errorType||null}))};
 }
-export function verifiedFqaAcademicResult(item,result){
-  return fqaResultEligibility(item,result).eligible?resultContract(result):null;
+export function verifiedFqaAcademicResult(item,result,session,index=0){
+  return fqaResultEligibility(item,result,session,index).eligible?resultContract(result):null;
 }
 // Historical display/completion facts remain available, but replay never carries
 // unsigned diagnostic extensions back into recommendations. An unverified saved
 // assessment stays submitted and is explicitly not presented as a validated grade.
-export function restoreFqaResultView(item,snapshot){
+export function restoreFqaResultView(item,snapshot,session,index=0){
   if(!record(snapshot))return snapshot===null?null:undefined;
-  const verified=fqaResultEligibility(item,snapshot).eligible;
+  const verified=fqaResultEligibility(item,snapshot,session,index).eligible;
   const contract=resultContract(snapshot);
   return {...contract,
     steps:contract.steps.map(step=>({...step,...(verified?{expected:list(item.steps).find(row=>row.id===step.id)?.expected}:{} )})),
@@ -214,7 +329,7 @@ export function stampFqaResult(item,result){
   return {...result,academicProvenance:{policyVersion:1,source:"fqa-recorded-engine-v1",itemFingerprint:itemFingerprint(item),resultFingerprint:fingerprint(resultContract(result))}};
 }
 
-export function fqaResultEligibility(item,result){
+export function fqaResultContractEligibility(item,result){
   const excluded=reason=>({eligible:false,policyVersion:FQA_ACADEMIC_POLICY,reason});
   if(!item||!result)return excluded("missing_source");
   // No human attestation verifier exists in this release. Flags and free-form
@@ -226,6 +341,45 @@ export function fqaResultEligibility(item,result){
   if(item.responseType==="multiple-choice"&&result.final===true&&result.gradingMode==="deterministic"&&typeof result.correct==="boolean"&&result.maxPoints===(item.maxPoints||10)&&result.points===(result.correct?result.maxPoints:0))return {eligible:true,policyVersion:1,lane:"recorded-objective",itemId:item.id,reason:"catalog_and_result_contract"};
   if(item.responseType==="stepwise"&&result.gradingMode==="structured-provisional"&&!result.requiresReview&&Number.isFinite(result.provisionalPoints)&&result.maxPoints===item.maxPoints&&result.provisionalPoints>=0&&result.provisionalPoints<=result.maxPoints&&list(result.steps).every(record)&&list(result.steps).length>0&&list(result.steps).length===list(item.steps).length&&new Set(result.steps.map(s=>s.id)).size===result.steps.length&&Math.abs(result.steps.reduce((sum,s)=>sum+(s.points||0),0)-(result.penalty||0)-result.provisionalPoints)<0.11&&item.steps.every(step=>list(result.steps).some(row=>row?.id===step.id&&row.maxPoints===step.points&&Number.isFinite(row.points)&&row.points>=0&&row.points<=row.maxPoints)))return {eligible:true,policyVersion:1,lane:"recorded-structured",itemId:item.id,reason:"catalog_and_result_contract"};
   return excluded("unverifiable_result_contract");
+}
+
+export function fqaResultEligibility(item,result,session,index=0){
+  const contract=fqaResultContractEligibility(item,result);
+  if(!contract.eligible)return contract;
+  if(!observedResult(item,result,session,index))return {eligible:false,policyVersion:FQA_ACADEMIC_POLICY,reason:"unverified_session_context"};
+  return {...contract,policyVersion:FQA_ACADEMIC_POLICY,context:"current-runtime-observation",kind:session.kind};
+}
+
+export function fqaExamResultPresentation(item,result,session,index=0){
+  const unanswered=!result||result.status==="unanswered";
+  const eligibility=fqaResultEligibility(item,result,session,index);
+  if(!eligibility.eligible)return {eligible:false,points:null,provisional:false,pending:!unanswered,label:unanswered?"Sem resposta":"Sem avaliação verificável"};
+  const maximum=Number.isFinite(item.examPoints)?item.examPoints:result.maxPoints;
+  if(eligibility.lane==="recorded-objective")return {eligible:true,points:result.correct?maximum:0,provisional:false,pending:false,label:result.correct?"Correto":"A rever"};
+  return {eligible:true,points:Math.round(result.provisionalPoints/result.maxPoints*maximum*10)/10,provisional:true,pending:false,label:"Provisório"};
+}
+
+// Every academic presentation uses the same eligibility boundary as indicators.
+// Submitted/answered is a historical fact; correct/incorrect/completed grading
+// is never inferred from untrusted flags on that historical record.
+export function fqaAssessmentPresentation(session,progress){
+  const results=list(session?.results),ids=list(session?.itemIds);
+  const unsafe=progress?.integrityRecoveryBlocked||list(progress?.integrityConflictedSessionIds).includes(session?.sessionId);
+  let answered=0,unanswered=0,objective=0,correct=0,provisional=0,excluded=0;
+  results.forEach((result,index)=>{
+    if(!record(result))return;
+    if(result.status==="unanswered"){unanswered++;return}
+    answered++;
+    const item=physicsChemistryItemById(ids[index]),eligibility=fqaResultEligibility(item,result,session,index);
+    if(unsafe||!eligibility.eligible){excluded++;return}
+    if(eligibility.lane==="recorded-objective"){objective++;if(result.correct===true)correct++}
+    else provisional++;
+  });
+  const total=results.length;
+  const summary=!total?"Sessão concluída":excluded?`${answered}/${total} respostas registadas · ${excluded} sem avaliação verificável`:
+    provisional?`${answered}/${total} respostas registadas · ${provisional} com avaliação automática provisória`:
+    objective?`${objective}/${total} respostas com avaliação verificável`:`${answered}/${total} respostas registadas`;
+  return {total,answered,unanswered,objective,correct,provisional,excluded,objectiveCorrectLabel:objective?`${correct}/${objective}`:"—",summary};
 }
 
 // This is a read-only projection, never a replacement for persisted history.
@@ -244,12 +398,12 @@ export function projectFqaAcademicProgress(progress={}){
   for(const [sessionId,variants] of [...groups].sort(([a,ar],[b,br])=>(+ar[0]?.completedAt||0)-(+br[0]?.completedAt||0)||String(a).localeCompare(String(b)))){
     // Missing private text in a cloud copy is not a divergent answer. Conflicting
     // present values, marks, identities or event metadata do block all variants.
-    if(sources.some(p=>list(p.integrityConflictedSessionIds).includes(sessionId))||variants.some(a=>variants.some(b=>!compatible(a,b)))){conflicts++;continue}
+    if(sources.some(p=>list(p.integrityConflictedSessionIds).includes(sessionId))||variants.some(a=>variants.some(b=>!nonContradictory(a,b)))){conflicts++;continue}
     const session=variants[0];
     if(!Number.isFinite(session.completedAt)||!Array.isArray(session.itemIds)||!Array.isArray(session.results))continue;
     if(session.itemIds.length!==session.results.length){excluded+=session.itemIds.length;continue}
     session.itemIds.forEach((itemId,index)=>{
-      const result=session.results[index],item=physicsChemistryItemById(itemId),eligibility=fqaResultEligibility(item,result);
+      const result=session.results[index],item=physicsChemistryItemById(itemId),eligibility=fqaResultEligibility(item,result,session,index);
       if(!eligibility.eligible){if(result?.status!=="unanswered")excluded++;return}
       const verified=resultContract(result);
       errorPatterns=recordErrorPatternEvidence(errorPatterns,item,verified,session.completedAt);
@@ -263,7 +417,7 @@ export function projectFqaAcademicProgress(progress={}){
       provenance.push({sessionId,itemId,index,completedAt:session.completedAt,...eligibility});
     });
   }
-  return {...progress,competence,errorPatterns,academicProjection:{policyVersion:1,coverage:"retained-identifiable-events-only",excluded,conflicts,provenance,insufficient:!provenance.length}};
+  return {...progress,competence,errorPatterns,academicProjection:{policyVersion:FQA_ACADEMIC_POLICY,coverage:"current-runtime-verified-contexts-only",excluded,conflicts,provenance,insufficient:!provenance.length}};
 }
 
 export function academicProgressFor(state,subjectId){

@@ -1,5 +1,6 @@
 "use client";
 import {FQA_SUBJECT,mergeFqaHistory,prepareFqaAcademicState,FQA_PRIVATE_RESPONSE_FIELDS,redactFqaProgress,readFqaCloudProgress} from "./fqaAcademicIntegrity.js";
+import {canonicalSubjectId} from "./subjectWorkspace.js";
 
 import {createClient} from "@neondatabase/neon-js";
 import {createInternalNeonAuth} from "@neondatabase/neon-js/auth";
@@ -140,6 +141,8 @@ function stripStudentResponseText(value){
 
 export function studentStateForCloud(input){
   const s=prepareFqaAcademicState(input);
+  const progressMap=s.subjectProgress&&typeof s.subjectProgress==="object"&&!Array.isArray(s.subjectProgress)?s.subjectProgress:{};
+  const subjectProgress=Object.fromEntries(Object.entries(progressMap).filter(([id])=>["math-a","portuguese",FQA_SUBJECT].includes(canonicalSubjectId(id))&&(canonicalSubjectId(id)!==FQA_SUBJECT||id===FQA_SUBJECT)));
   return stripStudentResponseText({
     schema:"aplus-student-state-v8",
     goal:s.goal,
@@ -162,7 +165,7 @@ export function studentStateForCloud(input){
     lastExam:s.lastExam||null,
     betaParticipant:s.betaParticipant||null,
     learningHypotheses:s.learningHypotheses||[],
-    subjectProgress:s.subjectProgress?.[FQA_SUBJECT]?{...s.subjectProgress,[FQA_SUBJECT]:redactFqaProgress(s.subjectProgress[FQA_SUBJECT])}:s.subjectProgress||{},
+    subjectProgress:subjectProgress[FQA_SUBJECT]?{...subjectProgress,[FQA_SUBJECT]:redactFqaProgress(subjectProgress[FQA_SUBJECT])}:subjectProgress,
     subjectProgressModelVersion:s.subjectProgressModelVersion||4,
     evidenceModelVersion:2,
     pedagogicalIdVersion:s.pedagogicalIdVersion||1,

@@ -389,7 +389,8 @@ export default function App(){
   },[s,hydrated]);
 
   useEffect(()=>{
-    const mathActive=(s.activeSubjectId==="math-a"||(!s.activeSubjectId&&MATH_ENGINE_SCREENS.has(screen)));
+    // Parent reads cross-subject summaries even when the active subject is FQA.
+    const mathActive=(screen==="parent"||s.activeSubjectId==="math-a"||(!s.activeSubjectId&&MATH_ENGINE_SCREENS.has(screen)));
     if(!hydrated||!mathActive||!MATH_ENGINE_SCREENS.has(screen)){
       if(mathEngineModule&&!mathEngineReady)setMathEngineReady(true);
       return;
@@ -484,9 +485,9 @@ export default function App(){
     }}>Continuar</button></Shell>;
   }
 
-  const mathSurface=(s.activeSubjectId==="math-a"||(!s.activeSubjectId&&MATH_ENGINE_SCREENS.has(screen)))&&MATH_ENGINE_SCREENS.has(screen);
+  const mathSurface=(screen==="parent"||s.activeSubjectId==="math-a"||(!s.activeSubjectId&&MATH_ENGINE_SCREENS.has(screen)))&&MATH_ENGINE_SCREENS.has(screen);
   const diagnosticSurface=["diag","diagRun","diagResult"].includes(screen)&&s.activeSubjectId==="math-a";
-  if(mathSurface&&(!mathEngineReady||(diagnosticSurface&&!diagnosticRecoveryReady)))return <Shell><Logo/><div className="cloudLoading">A preparar Matemática A…</div></Shell>;
+  if(mathSurface&&(!mathEngineReady||(diagnosticSurface&&!diagnosticRecoveryReady)))return <Shell><Logo/><div className="cloudLoading">{screen==="parent"?"A preparar o acompanhamento…":"A preparar Matemática A…"}</div></Shell>;
 
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;

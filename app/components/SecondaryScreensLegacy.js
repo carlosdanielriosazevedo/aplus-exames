@@ -1,5 +1,5 @@
 "use client";
-import {academicProgressFor} from "../lib/fqaAcademicIntegrity";
+import {academicProgressFor,fqaAssessmentPresentation} from "../lib/fqaAcademicIntegrity";
 import {useEffect,useState} from "react";
 import {Back,BrandName,Shell,StudentNav,StudentTop} from "./chrome";
 import {AVAILABLE_SUBJECT_IDS,SECONDARY_EXAM_SUBJECTS,examCodesLabel} from "../data/subjects";
@@ -320,7 +320,8 @@ export function Parent({s,setS,go,prepIndex,measuredThemes}){
   });
   const maxTrendDays=Math.max(1,...studyTrend.map(row=>row.activeDays));
 
-  function sessionReviewSummary(session){
+  function sessionReviewSummary(session,subjectId,progress){
+    if(subjectId==="physics-chemistry-a")return fqaAssessmentPresentation(session,progress).summary;
     const results=Array.isArray(session?.results)?session.results:[];
     const answered=results.filter(result=>result?.status&&result.status!=="unanswered").length;
     const final=results.filter(result=>result?.final).length;
@@ -340,13 +341,14 @@ export function Parent({s,setS,go,prepIndex,measuredThemes}){
     })),
     ...visibleSubjectIds.filter(id=>id!==DEFAULT_SUBJECT_ID).flatMap(id=>{
       const subject=subjectById(id)?.shortName||subjectById(id)?.name||id;
-      return (subjectProgressFor(s,id).sessions||[])
+      const progress=id==="physics-chemistry-a"?academicProgressFor(s,id):subjectProgressFor(s,id);
+      return (progress.sessions||[])
         .filter(row=>["mini_exam","full_exam","practice_exam"].includes(row.kind))
         .map(row=>({
           id:row.sessionId||`${id}-${row.completedAt}`,subject,
           kind:row.kind==="mini_exam"?"Mini-exame":"Exame Completo",
           at:row.completedAt||0,
-          result:sessionReviewSummary(row),
+          result:sessionReviewSummary(row,id,progress),
           detail:"Mostramos o estado da correção; não inventamos uma nota quando existem respostas abertas ou provisórias."
         }));
     })

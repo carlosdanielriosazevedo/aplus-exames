@@ -1,4 +1,4 @@
-import {FQA_SUBJECT,mergeFqaHistory,prepareFqaAcademicState,normalizeFqaProgress,verifiedFqaAcademicResult} from "./fqaAcademicIntegrity.js";
+import {FQA_SUBJECT,FQA_ACADEMIC_POLICY,mergeFqaHistory,prepareFqaAcademicState,normalizeFqaProgress,verifiedFqaAcademicResult,beginFqaRuntimeContext,observeFqaPendingResults,observeFqaCompletion} from "./fqaAcademicIntegrity.js";
 import {canonicalSubjectId} from "./subjectWorkspace.js";
 import {missionCompletedToday,recordStudyActivity} from "./engagement.js";
 import {recordCompetitiveActivity} from "./competition.js";
@@ -161,7 +161,7 @@ function putProgress(state,subjectId,progress){
   if(subjectId===FQA_SUBJECT){
     const prepared=prepareFqaAcademicState(state);
     const original=prepared.subjectProgress?.[FQA_SUBJECT];
-    progress={...progress,integrityHistory:original?.integrityHistory||progress.integrityHistory||[],academicIntegrityPolicy:1};
+    progress={...progress,integrityHistory:original?.integrityHistory||progress.integrityHistory||[],academicIntegrityPolicy:FQA_ACADEMIC_POLICY};
   }
   return {...state,subjectProgress:{...(state.subjectProgress||{}),[subjectId]:normalizeProgress(progress,subjectId)},subjectProgressModelVersion:MODEL_VERSION};
 }
@@ -195,12 +195,14 @@ export function beginSubjectSession(state,{subjectId,kind,label,domain=null,item
   // Uma tentativa em curso não pode ser substituída, nem por chamadas diretas ao motor.
   if(progress.integrityPendingConflict||progress.integrityRecoveryBlocked||progress.lastPosition||(subjectId==="portuguese"&&state.subjectSettings?.portuguese?.miniExamDraft))return state;
   const id=sessionId||createSubjectSessionId(subjectId,kind,startedAt);
+  if(subjectId===FQA_SUBJECT)beginFqaRuntimeContext({sessionId:id,kind,itemIds:items.map(item=>item.id),startedAt});
   return putProgress(state,subjectId,{...progress,lastPosition:{sessionId:id,kind,label,domain,itemIds:items.map(item=>item.id),current:0,results:[],startedAt,updatedAt:startedAt},lastActivityAt:startedAt});
 }
 
 export function advanceSubjectSession(state,subjectId,{sessionId=null,current,results,currentResult=null,currentAnswer=null,updatedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
   if(progress.integrityPendingConflict||progress.integrityRecoveryBlocked||!progress.lastPosition||(sessionId&&sessionId!==progress.lastPosition.sessionId))return state;
+  if(subjectId===FQA_SUBJECT)observeFqaPendingResults(progress.lastPosition,results);
   return putProgress(state,subjectId,{...progress,lastPosition:{...progress.lastPosition,current,results:results.map(compactResult),currentResult:compactResult(currentResult),currentAnswer,updatedAt},lastActivityAt:updatedAt});
 }
 
@@ -212,7 +214,7 @@ function subjectSessionXp(kind,results=[]){
   return 0;
 }
 
-export function recordSubjectSession(state,{subjectId,kind,label,domain=null,items,results,sessionId=null,completedAt=Date.now()}){
+export function recordSubjectSession(state,{subjectId,kind,label,domain=null,items,results,sessionId=null,startedAt=null,completedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
   if(progress.integrityPendingConflict||progress.integrityRecoveryBlocked)return state;
   const completionId=sessionId||progress.lastPosition?.sessionId||null;
@@ -221,14 +223,19 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
   // Não atribuir XP nem evidência a uma conclusão concorrente com uma tentativa pendente.
   if(progress.lastPosition&&completionId!==progress.lastPosition.sessionId)return state;
   if(completionId&&((progress.completedSessionIds||[]).includes(completionId)||progress.sessions.some(row=>row.sessionId===completionId)))return state;
+  const originalStart=progress.lastPosition?.startedAt??startedAt;
+  const session={sessionId:completionId,kind,label,domain,itemIds:items.map(item=>item.id),results:results.map(compactResult),completedAt,...(subjectId===FQA_SUBJECT&&Number.isFinite(originalStart)?{startedAt:originalStart}:{})};
+  if(subjectId===FQA_SUBJECT)observeFqaCompletion(session,items,results);
   const competence={...progress.competence};
   let errorPatterns=normalizeErrorPatterns(progress.errorPatterns);
   const recordsAcademicEvidence=kind!=="training";
   items.forEach((item,index)=>{
-    const result=results[index];
-    if(!result||result.status==="unanswered")return;
-    const memoryResult=subjectId===FQA_SUBJECT?verifiedFqaAcademicResult(item,result):result;
+    const rawResult=results[index];
+    if(!rawResult||rawResult.status==="unanswered")return;
+    const memoryResult=subjectId===FQA_SUBJECT?verifiedFqaAcademicResult(item,rawResult,session,index):rawResult;
     if(memoryResult)errorPatterns=recordErrorPatternEvidence(errorPatterns,item,memoryResult,completedAt);
+    const result=subjectId===FQA_SUBJECT?memoryResult:rawResult;
+    if(!result)return;
     if(!recordsAcademicEvidence||(subjectId===FQA_SUBJECT&&item.responseType==="restricted-response"))return;
     const id=item.competencyId||`${item.domain}:general`;
     const previous=normalizeCompetenceRow(competence[id]);
@@ -267,7 +274,6 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
       lastAnsweredAt:completedAt
     };
   });
-  const session={sessionId:completionId,kind,label,domain,itemIds:items.map(item=>item.id),results:results.map(compactResult),completedAt};
   let completed=putProgress(state,subjectId,{...progress,completedSessionIds:[...new Set([...(progress.completedSessionIds||[]),...progress.sessions.map(row=>row.sessionId).filter(Boolean),...(completionId?[completionId]:[])])],diagnosticDone:progress.diagnosticDone||kind==="diagnostic",diagnosticCompletedAt:kind==="diagnostic"?completedAt:progress.diagnosticCompletedAt,sessions:subjectId===FQA_SUBJECT?[...progress.sessions,session]:[...progress.sessions,session].slice(-MAX_SESSIONS),missionHistory:kind==="mission"?(subjectId===FQA_SUBJECT?[...progress.missionHistory,session]:[...progress.missionHistory,session].slice(-MAX_SESSIONS)):progress.missionHistory,competence,errorPatterns,errorMemoryVersion:1,lastPosition:null,lastActivityAt:completedAt});
   const alreadyCompletedMission=kind==="mission"&&missionCompletedToday(state,completedAt);
   const activityKind=alreadyCompletedMission?"training":kind;
