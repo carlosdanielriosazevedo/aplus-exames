@@ -212,7 +212,7 @@ BEGIN
     (OLD.auth_user_id, OLD.revision, OLD.state_json, OLD.last_device_id,
      coalesce(OLD.updated_at,now()));
   RETURN NEW;
-END
+END;
 $snapshot$;
 REVOKE ALL ON FUNCTION public.snapshot_student_cloud_state() FROM PUBLIC, authenticated, anonymous;
 
