@@ -94,6 +94,8 @@ answer hashes, persistent keys or response-equivalence identifiers are collected
   is copied into that exact slot, with the original shorter array archived.
   Earlier gaps are not filled speculatively and contradictory result copies block
   continuation. Display projections never replace raw submitted-result storage.
+  Completion still freezes the raw final feedback; the sanitized feedback view is
+  derived only for rendering and is never written back over that raw result.
   A structurally readable frontier remains visible on the home screen despite
   missing prior results. This read-only permission does not permit resume,
   completion, new XP or clearing guards; navigation remains available.

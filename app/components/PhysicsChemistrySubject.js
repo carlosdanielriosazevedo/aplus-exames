@@ -1,6 +1,6 @@
 "use client";
 import {academicProgressFor,restoreFqaResultView,fqaAssessmentPresentation,fqaPendingNotice,fqaRecoveryState} from "../lib/fqaAcademicIntegrity";
-import {useEffect,useRef,useState} from "react";
+import {useEffect,useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import StudyModeHub from "./StudyModeHub";
 import PausedActivityEyebrow from "./PausedActivityEyebrow";
@@ -69,12 +69,13 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   const [session,setSession]=useState(null);
   const [answer,setAnswer]=useState(null);
   const [feedback,setFeedback]=useState(null);
-  const submittedResult=useRef(null);
   const [results,setResults]=useState([]);
   const [rubricAssessment,setRubricAssessment]=useState({});
   const [examDrafts,setExamDrafts]=useState([]);
   const progress={...subjectProgressFor(s,SUBJECT_ID),...academicProgressFor(s,SUBJECT_ID)};
   const recovery=fqaRecoveryState(progress);
+  const feedbackContext=session?{...session,itemIds:session.items.map(item=>item.id)}:null;
+  const feedbackView=session&&feedback?restoreFqaResultView(session.items[session.current],feedback,feedbackContext,session.current):null;
   const scopedItems=completedFqaCourse?PHYSICS_CHEMISTRY_A_ITEMS:physicsChemistryScope(PHYSICS_CHEMISTRY_A_ITEMS,currentYear,taughtUnitIds);
   const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
   const scopedCoverage=physicsChemistryCoverage(scopedItems);
@@ -105,7 +106,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       return advanceSubjectSession(prev,SUBJECT_ID,{sessionId:session.sessionId,
         current:session.current,
         results,
-        currentResult:feedback?submittedResult.current:null,
+        currentResult:feedback,
         currentAnswer:answer
       });
     });
@@ -125,7 +126,6 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     if(examDrafts.length){go(examDrafts[0].route);return}
     const sessionId=createSubjectSessionId(SUBJECT_ID,kind);
     const startedAt=Date.now();
-    submittedResult.current=null;
     setSession({sessionId,kind,label,domain,items,current:0,startedAt});
     setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});
     setS(prev=>beginSubjectSession(prev,{subjectId:SUBJECT_ID,sessionId,kind,label,domain,items,startedAt}));
@@ -156,24 +156,21 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     const item=session.items[session.current];
     if(!answerReady(item))return;
     const result=gradePhysicsChemistryResponse(item,answer,session);
-    submittedResult.current=result;
     const nextResults=[...results,result];
-    const context={...session,itemIds:session.items.map(row=>row.id)};
-    setFeedback(restoreFqaResultView(item,result,context,session.current));setResults(nextResults);
+    setFeedback(result);setResults(nextResults);
     setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{sessionId:session.sessionId,current:session.current,results:nextResults,currentResult:result,currentAnswer:answer}));
   }
 
   function next(){
     if(!feedback)return;
     if(session.current>=session.items.length-1){
-      const finalResults=results;
+      const finalResults=feedback?[...results.slice(0,-1),feedback]:results;
       setResults(finalResults);
       setS(prev=>recordSubjectSession(prev,{subjectId:SUBJECT_ID,kind:session.kind,label:session.label,domain:session.domain,items:session.items,results:finalResults,sessionId:session.sessionId}));
       setSession(current=>({...current,finished:true}));
       return;
     }
     const current=session.current+1;
-    submittedResult.current=null;
     setSession(prev=>({...prev,current}));
     setAnswer(null);setFeedback(null);setRubricAssessment({});
     setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{sessionId:session.sessionId,current,results,currentResult:null,currentAnswer:null}));
@@ -199,8 +196,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       return;
     }
     setSession({sessionId:saved.sessionId,kind:saved.kind,label:saved.label,domain:saved.domain,items,current:Math.min(saved.current,items.length-1),startedAt:saved.startedAt});
-    submittedResult.current=saved.currentResult||saved.results?.[saved.current]||null;
-    setResults(saved.results||[]);setAnswer(saved.currentAnswer??null);setFeedback(restoreFqaResultView(items[Math.min(saved.current,items.length-1)],saved.currentResult||saved.results?.[saved.current],saved,Math.min(saved.current,items.length-1))||null);
+    setResults(saved.results||[]);setAnswer(saved.currentAnswer??null);setFeedback(saved.currentResult||saved.results?.[saved.current]||null);
   }
 
   useEffect(()=>{
@@ -256,24 +252,24 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       <div className="questionCard">
         <PhysicsChemistryStimulus item={item}/>
         <h2>{item.prompt}</h2>
-        {item.responseType==="multiple-choice"&&<div className="opts">{item.options.map((option,index)=><button type="button" key={option} disabled={!!feedback} className={answerOptionState({index,selectedIndex:answer,correctIndex:item.answerIndex,submitted:!!feedback?.final&&!feedback.historicalAssessmentUnverified})} onClick={()=>setAnswer(index)}><b>{String.fromCharCode(65+index)}</b>{option}</button>)}</div>}
+        {item.responseType==="multiple-choice"&&<div className="opts">{item.options.map((option,index)=><button type="button" key={option} disabled={!!feedback} className={answerOptionState({index,selectedIndex:answer,correctIndex:item.answerIndex,submitted:!!feedbackView?.final&&!feedbackView.historicalAssessmentUnverified})} onClick={()=>setAnswer(index)}><b>{String.fromCharCode(65+index)}</b>{option}</button>)}</div>}
         {item.responseType==="stepwise"&&<PhysicsChemistryStepwiseEditor item={item} value={answer} onChange={setAnswer} disabled={!!feedback}/>} 
         {item.responseType==="restricted-response"&&<div className="fqaRestricted"><div className="notice"><b>Resposta científica</b><span>Explica o raciocínio com linguagem científica e articula os elementos pedidos.</span></div><textarea disabled={!!feedback} value={typeof answer==="string"?answer:""} onChange={event=>setAnswer(event.target.value)} rows={8} placeholder="Escreve a tua resposta..."/></div>}
         {!feedback?<button className="primary" disabled={!answerReady(item)} onClick={submit}>Responder</button>:<>
-          {feedback.historicalAssessmentUnverified&&<div className="notice" role="status"><b>Resposta guardada sem avaliação verificável.</b><span>A resposta continua submetida. A avaliação histórica foi conservada, mas não é apresentada como classificação validada.</span></div>}
-          {!feedback.historicalAssessmentUnverified&&item.responseType==="multiple-choice"&&<div className={"feedback answerFeedback "+(feedback.correct?"good":"bad")}><b>{feedback.correct?"✓ Muito bem!":"Não é essa."}</b><span>{feedback.correct?item.explanation:<>A resposta correta é:<strong>{item.options[item.answerIndex]}</strong>{item.explanation&&<small>{item.explanation}</small>}</>}</span></div>}
-          {!feedback.historicalAssessmentUnverified&&item.responseType==="stepwise"&&<><PhysicsChemistryStepwiseReview item={item} result={feedback}/><ScoreLossExplanation result={feedback}/></>}
-          {!feedback.historicalAssessmentUnverified&&item.responseType==="restricted-response"&&<div className="fqaConstructedReview">
-            <div className="notice"><b>Avaliação automática provisória</b><span>{feedback.note}</span></div>
-            {Number.isFinite(feedback.provisionalPoints)&&<><div className="autoAssessmentScore"><b>{String(feedback.provisionalPoints).replace(".",",")} / {feedback.maxPoints} pontos</b><small>estimativa provisória · confiança {feedback.autoAssessmentConfidence??"—"}%</small></div><ScoreLossExplanation result={feedback}/></>}
-            {feedback.feedbackSummary&&<div className="automaticFeedbackPanel">
-              {feedback.feedbackSummary.strengths.length>0&&<section className="automaticFeedbackGood"><b>O que fizeste bem</b>{feedback.feedbackSummary.strengths.map(row=><div key={row.id}><strong>✓ {row.label}</strong>{row.evidence&&<blockquote>“{row.evidence}”</blockquote>}<span>{row.message}</span></div>)}</section>}
-              {feedback.feedbackSummary.gaps.length>0&&<section className="automaticFeedbackImprove"><b>O que falta melhorar</b>{feedback.feedbackSummary.gaps.map(row=><div key={row.id}><strong>{row.message}</strong><span>{row.label}</span>{row.evidence&&<blockquote>Na tua resposta: “{row.evidence}”</blockquote>}</div>)}</section>}
-              {feedback.feedbackSummary.errorDiagnosis&&feedback.feedbackSummary.errorDiagnosis.code!=="correct_or_near_correct"&&<p className="automaticFeedbackNext"><b>{feedback.feedbackSummary.errorDiagnosis.label}:</b> {feedback.feedbackSummary.errorDiagnosis.message}</p>}
-              {feedback.feedbackSummary.diagnosticCard?.preserveCorrectWork&&<p className="automaticFeedbackNext"><b>Mantém:</b> {feedback.feedbackSummary.diagnosticCard.whatYouKnow}</p>}
-              <p className="automaticFeedbackNext"><b>Para subir este resultado:</b> {feedback.feedbackSummary.nextAction}</p>
+          {feedbackView.historicalAssessmentUnverified&&<div className="notice" role="status"><b>Resposta guardada sem avaliação verificável.</b><span>A resposta continua submetida. A avaliação histórica foi conservada, mas não é apresentada como classificação validada.</span></div>}
+          {!feedbackView.historicalAssessmentUnverified&&item.responseType==="multiple-choice"&&<div className={"feedback answerFeedback "+(feedbackView.correct?"good":"bad")}><b>{feedbackView.correct?"✓ Muito bem!":"Não é essa."}</b><span>{feedbackView.correct?item.explanation:<>A resposta correta é:<strong>{item.options[item.answerIndex]}</strong>{item.explanation&&<small>{item.explanation}</small>}</>}</span></div>}
+          {!feedbackView.historicalAssessmentUnverified&&item.responseType==="stepwise"&&<><PhysicsChemistryStepwiseReview item={item} result={feedbackView}/><ScoreLossExplanation result={feedbackView}/></>}
+          {!feedbackView.historicalAssessmentUnverified&&item.responseType==="restricted-response"&&<div className="fqaConstructedReview">
+            <div className="notice"><b>Avaliação automática provisória</b><span>{feedbackView.note}</span></div>
+            {Number.isFinite(feedbackView.provisionalPoints)&&<><div className="autoAssessmentScore"><b>{String(feedbackView.provisionalPoints).replace(".",",")} / {feedbackView.maxPoints} pontos</b><small>estimativa provisória · confiança {feedbackView.autoAssessmentConfidence??"—"}%</small></div><ScoreLossExplanation result={feedbackView}/></>}
+            {feedbackView.feedbackSummary&&<div className="automaticFeedbackPanel">
+              {feedbackView.feedbackSummary.strengths.length>0&&<section className="automaticFeedbackGood"><b>O que fizeste bem</b>{feedbackView.feedbackSummary.strengths.map(row=><div key={row.id}><strong>✓ {row.label}</strong>{row.evidence&&<blockquote>“{row.evidence}”</blockquote>}<span>{row.message}</span></div>)}</section>}
+              {feedbackView.feedbackSummary.gaps.length>0&&<section className="automaticFeedbackImprove"><b>O que falta melhorar</b>{feedbackView.feedbackSummary.gaps.map(row=><div key={row.id}><strong>{row.message}</strong><span>{row.label}</span>{row.evidence&&<blockquote>Na tua resposta: “{row.evidence}”</blockquote>}</div>)}</section>}
+              {feedbackView.feedbackSummary.errorDiagnosis&&feedbackView.feedbackSummary.errorDiagnosis.code!=="correct_or_near_correct"&&<p className="automaticFeedbackNext"><b>{feedbackView.feedbackSummary.errorDiagnosis.label}:</b> {feedbackView.feedbackSummary.errorDiagnosis.message}</p>}
+              {feedbackView.feedbackSummary.diagnosticCard?.preserveCorrectWork&&<p className="automaticFeedbackNext"><b>Mantém:</b> {feedbackView.feedbackSummary.diagnosticCard.whatYouKnow}</p>}
+              <p className="automaticFeedbackNext"><b>Para subir este resultado:</b> {feedbackView.feedbackSummary.nextAction}</p>
             </div>}
-            <details className="automaticCriteriaDetails"><summary>Ver critérios detalhados</summary><div className="automaticCriteriaList">{(feedback.criteria||[]).map(criterion=><div key={criterion.id} className={"automaticCriterion "+criterion.status}><div><b>{criterion.label}</b><span>{criterion.status==="observed"?"✓ Detetado":criterion.status==="partial"?"◐ Parcial":"○ Não detetado"}</span></div>{(criterion.observations||[]).map(observation=><small key={observation.id}>{observation.status==="observed"?"✓":observation.status==="partial"?"◐":"○"} {observation.label}</small>)}</div>)}</div></details>
+            <details className="automaticCriteriaDetails"><summary>Ver critérios detalhados</summary><div className="automaticCriteriaList">{(feedbackView.criteria||[]).map(criterion=><div key={criterion.id} className={"automaticCriterion "+criterion.status}><div><b>{criterion.label}</b><span>{criterion.status==="observed"?"✓ Detetado":criterion.status==="partial"?"◐ Parcial":"○ Não detetado"}</span></div>{(criterion.observations||[]).map(observation=><small key={observation.id}>{observation.status==="observed"?"✓":observation.status==="partial"?"◐":"○"} {observation.label}</small>)}</div>)}</div></details>
             <p className="muted">A resposta fica fechada depois de submetida. Lê a correção com atenção e usa o feedback para responder melhor numa próxima questão. Uma formulação diferente pode estar correta; por isso, respostas abertas continuam assinaladas como provisórias quando a confiança não é suficiente.</p>
           </div>}
           <button className="primary" onClick={next}>{position===session.items.length?"Ver resultado":"Seguinte"}</button>
