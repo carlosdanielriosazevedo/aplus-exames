@@ -65,6 +65,8 @@ The added Vitest test is a static guard, **not** a real RLS or privacy audit.
 
 The dedicated workflow `.github/workflows/neon-rls-synthetic.yml` starts a **fresh disposable PostgreSQL 16 container**, creates roles and only three hardcoded synthetic identities, applies migration 009 using the synthetic DB owner, and asserts SQL-level RLS isolation, parental access/revocation, direct-write denial, CAS idempotency and historical snapshot insertion. There is **no Neon connection, secret or copied data**. Its `request.jwt.claim.sub` is a fixture variable, **not** a cryptographically verified JWT. Passing this workflow demonstrates migration SQL and PostgreSQL role-policy behavior only.
 
+**Important CAS limitation:** the smoke test proves that a write carrying `WHERE revision = expected` rejects a stale revision. Existing `student_cloud_state` RLS does **not** force an authenticated client to include that predicate or increment revisions sequentially. An altered client can still submit a different UPDATE shape to its own row. Server-enforced CAS and durable academic receipts require a separate, server-controlled write contract; do not infer that migration 009 solves this.
+
 The general release-recovery gate intentionally fails if a release candidate includes a database/API migration; this security-only PR should **not** weaken or bypass that gate. It needs its separate migration-specific approval and a later authorized integration/release plan.
 
 **Decision:** GO to review this Draft; NO-GO to run SQL, use real accounts, merge #450 or ship the app. This proposal is separate from the academic-integrity work.
