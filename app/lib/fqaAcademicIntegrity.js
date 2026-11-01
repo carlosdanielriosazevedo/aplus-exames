@@ -222,8 +222,29 @@ export function normalizeFqaProgress(progress){
         ...(Object.hasOwn(position,"label")&&!Object.hasOwn(position,"integrityOriginalLabel")?{integrityOriginalLabel:position.label}:{})};
       changed=true;
     }
+    if(valid&&!blocked&&Array.isArray(out.lastPosition.results)){
+      const saved=out.lastPosition,results=saved.results;
+      if(saved.current>results.length||results.length>saved.current+1||(record(saved.currentResult)&&results[saved.current]===null)){
+        if(!Object.hasOwn(recoveryFields,"lastPosition"))recoveryFields.lastPosition=position;
+        blocked=true;changed=true;
+      }else if(record(saved.currentResult)){
+        if(results.length===saved.current){
+          // This exact submitted result is present; no earlier missing response
+          // or grade is inferred. The original shorter array stays archived.
+          out.lastPosition={...saved,results:[...results,saved.currentResult]};changed=true;
+        }else{
+          const comparison=compareFqaAttemptVersions(results[saved.current],saved.currentResult);
+          if(comparison!=="equal"){
+            const kind=comparison==="different"?"semantic-v1":out.integrityPendingConflictKind==="semantic-v1"?"semantic-v1":"privacy-unproven";
+            if(out.integrityPendingConflict!==true||out.integrityPendingConflictKind!==kind)changed=true;
+            out.integrityPendingConflict=true;
+            out.integrityPendingConflictKind=kind;
+          }
+        }
+      }
+    }
   }else if(position===undefined){out.lastPosition=null;changed=true}
-  if(record(out.lastPosition)&&unprovenPrivate(out.lastPosition)&&!source.integrityPendingConflict){
+  if(record(out.lastPosition)&&unprovenPrivate(out.lastPosition)&&!out.integrityPendingConflict){
     out.integrityPendingConflict=true;out.integrityPendingConflictKind="privacy-unproven";changed=true;
   }
   if(!changed)return source;

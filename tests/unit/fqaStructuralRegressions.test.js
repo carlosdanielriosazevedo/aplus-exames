@@ -89,6 +89,37 @@ describe("#450 opaque local recovery has no implicit cloud representation", () =
 });
 
 describe("#450 labels are display metadata, never a recovery bypass", () => {
+  test("an explicitly submitted current result is recovered into a contiguous result list without dropping fields", () => {
+    const submitted={...grade,responseText:"Synthetic retained submission",legacyEvidence:{preserve:["original"]}};
+    const original=progress({lastPosition:{...pause(),currentResult:submitted,results:[]}});
+    const normalized=normalizeFqaProgress(original);
+    expect(normalized.lastPosition.results).toEqual([submitted]);
+    expect(normalized.lastPosition.startedAt).toBe(original.lastPosition.startedAt);
+    expect(normalized.integrityHistory.some(row=>row.lastPosition?.results?.length===0&&row.lastPosition?.currentResult?.legacyEvidence)).toBe(true);
+    expect(normalized.integrityRecoveryBlocked).not.toBe(true);
+    expect(normalizeFqaProgress(normalized)).toEqual(normalized);
+  });
+
+  test("a gap before the current question cannot be filled speculatively or rewarded", () => {
+    const position={...pause(),itemIds:[objective.id,objective.id],current:1,results:[],currentResult:{...grade,responseText:"Synthetic current only"}};
+    const normalized=prepareFqaAcademicState(state({lastPosition:position}));
+    expect(normalized.subjectProgress[ID].integrityRecoveryBlocked).toBe(true);
+    expect(normalized.subjectProgress[ID].integrityRecoveryFields.lastPosition).toEqual(position);
+    expect(normalized.subjectProgress[ID].lastPosition.results).toEqual([]);
+    expect(advanceSubjectSession(normalized,ID,{current:1,results:[]})).toBe(normalized);
+    expect(normalized.xp).toBe(430);
+  });
+
+  test("contradictory submitted-result copies remain separate and block unsafe continuation", () => {
+    const a={...grade,responseText:"Synthetic submitted A"},b={...grade,responseText:"Synthetic submitted B"};
+    const normalized=prepareFqaAcademicState(state({lastPosition:{...pause(),results:[a],currentResult:b}}));
+    expect(normalized.subjectProgress[ID].integrityPendingConflict).toBe(true);
+    expect(normalized.subjectProgress[ID].integrityPendingConflictKind).toBe("semantic-v1");
+    expect(normalized.subjectProgress[ID].lastPosition.results[0]).toEqual(a);
+    expect(normalized.subjectProgress[ID].lastPosition.currentResult).toEqual(b);
+    expect(advanceSubjectSession(normalized,ID,{current:0,results:[b]})).toBe(normalized);
+    expect(prepareFqaAcademicState(normalized)).toEqual(normalized);
+  });
   test.each([undefined, null, 42, ""])("normalizes label %j and preserves its original", label => {
     const original = progress({lastPosition: {...pause(), label}}), copy = structuredClone(original);
     const normalized = normalizeFqaProgress(original);

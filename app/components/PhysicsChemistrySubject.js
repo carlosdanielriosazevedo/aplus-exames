@@ -1,6 +1,6 @@
 "use client";
 import {academicProgressFor,restoreFqaResultView,fqaAssessmentPresentation,fqaPendingNotice} from "../lib/fqaAcademicIntegrity";
-import {useEffect,useState} from "react";
+import {useEffect,useRef,useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import StudyModeHub from "./StudyModeHub";
 import PausedActivityEyebrow from "./PausedActivityEyebrow";
@@ -69,6 +69,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   const [session,setSession]=useState(null);
   const [answer,setAnswer]=useState(null);
   const [feedback,setFeedback]=useState(null);
+  const submittedResult=useRef(null);
   const [results,setResults]=useState([]);
   const [rubricAssessment,setRubricAssessment]=useState({});
   const [examDrafts,setExamDrafts]=useState([]);
@@ -103,7 +104,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       return advanceSubjectSession(prev,SUBJECT_ID,{sessionId:session.sessionId,
         current:session.current,
         results,
-        currentResult:feedback,
+        currentResult:feedback?submittedResult.current:null,
         currentAnswer:answer
       });
     });
@@ -123,6 +124,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     if(examDrafts.length){go(examDrafts[0].route);return}
     const sessionId=createSubjectSessionId(SUBJECT_ID,kind);
     const startedAt=Date.now();
+    submittedResult.current=null;
     setSession({sessionId,kind,label,domain,items,current:0,startedAt});
     setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});
     setS(prev=>beginSubjectSession(prev,{subjectId:SUBJECT_ID,sessionId,kind,label,domain,items,startedAt}));
@@ -153,6 +155,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     const item=session.items[session.current];
     if(!answerReady(item))return;
     const result=gradePhysicsChemistryResponse(item,answer,session);
+    submittedResult.current=result;
     const nextResults=[...results,result];
     const context={...session,itemIds:session.items.map(row=>row.id)};
     setFeedback(restoreFqaResultView(item,result,context,session.current));setResults(nextResults);
@@ -169,6 +172,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       return;
     }
     const current=session.current+1;
+    submittedResult.current=null;
     setSession(prev=>({...prev,current}));
     setAnswer(null);setFeedback(null);setRubricAssessment({});
     setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{sessionId:session.sessionId,current,results,currentResult:null,currentAnswer:null}));
@@ -193,6 +197,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       return;
     }
     setSession({sessionId:saved.sessionId,kind:saved.kind,label:saved.label,domain:saved.domain,items,current:Math.min(saved.current,items.length-1),startedAt:saved.startedAt});
+    submittedResult.current=saved.currentResult||saved.results?.[saved.current]||null;
     setResults(saved.results||[]);setAnswer(saved.currentAnswer??null);setFeedback(restoreFqaResultView(items[Math.min(saved.current,items.length-1)],saved.currentResult||saved.results?.[saved.current],saved,Math.min(saved.current,items.length-1))||null);
   }
 

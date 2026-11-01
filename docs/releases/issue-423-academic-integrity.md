@@ -90,6 +90,10 @@ answer hashes, persistent keys or response-equivalence identifiers are collected
 - Completed/interrupted identities cannot restart or receive duplicate XP.
 - Missing/malformed collections normalize before component reads. Original
   values remain recoverable; structural ambiguity retains its guard.
+- An explicitly stored current submission missing from a contiguous result array
+  is copied into that exact slot, with the original shorter array archived.
+  Earlier gaps are not filled speculatively and contradictory result copies block
+  continuation. Display projections never replace raw submitted-result storage.
 - Missing/null/numeric labels receive a safe display label; originals remain
   recoverable and existing guards are never cleared.
 - Cloud admits known event structures, catalogue item/step IDs, bounded identity

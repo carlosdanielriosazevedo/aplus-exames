@@ -180,6 +180,17 @@ test("an unverified saved objective cannot disclose a correct or incorrect optio
  await expect(page.getByRole("button",{name:"Responder",exact:true})).toHaveCount(0);
 });
 
+test("a truncated result array retains the explicitly submitted current result on completion and reload",async({page})=>{
+ const state=syntheticState(),now=Date.now();const result={status:"final",final:true,correct:true,points:10,maxPoints:10,responseText:"Synthetic truncated submitted response",legacyEvidence:{preserve:"Synthetic original evidence"}};
+ state.subjectProgress[id].lastPosition={sessionId:"synthetic-truncated-result",kind:"mission",label:"Missão",itemIds:["FQA-R-MEC-01"],current:0,results:[],currentResult:result,currentAnswer:result.responseText,startedAt:now-5000,updatedAt:now};
+ await page.addInitScript(state=>{if(!localStorage.getItem("synthetic-423-seeded")){localStorage.setItem("a25",JSON.stringify(state));localStorage.setItem("synthetic-423-seeded","1")}},state);
+ await page.goto("/");await page.getByRole("button",{name:"Continuar sessão",exact:true}).last().click();await page.getByRole("button",{name:"Ver resultado",exact:true}).click();
+ const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25")));
+ expect(saved.subjectProgress[id].sessions.at(-1).results[0].responseText).toBe(result.responseText);
+ expect(JSON.stringify(saved.subjectProgress[id].integrityHistory)).toContain(result.legacyEvidence.preserve);expect(saved.xp).toBe(259);
+ await page.reload();const loaded=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25")));expect(loaded.subjectProgress[id].sessions.at(-1).results[0].responseText).toBe(result.responseText);expect(loaded.xp).toBe(259);
+});
+
 for(const full of [false,true]){
  test(`${full?"full":"mini"} exam review excludes fresh unvalidated science without a zero score`,async({page})=>{
   const state=syntheticState(),now=Date.now();

@@ -104,7 +104,7 @@ test("partially malformed step results are rejected without throwing",()=>{
 });
 
 test("two valid positions at different question indices remain a real conflict",()=>{
- const first=position();first.itemIds=[item.id,item.id];const second={...first,current:1};const merged=mergeFqaHistory(state({lastPosition:first}).subjectProgress[ID],state({lastPosition:second}).subjectProgress[ID]);expect(merged.integrityPendingConflict).toBe(true);expect(merged.integrityPendingConflictKind).toBe("semantic-v1");
+ const first=position();first.itemIds=[item.id,item.id];const second={...first,current:1,results:[grade]};const merged=mergeFqaHistory(state({lastPosition:first}).subjectProgress[ID],state({lastPosition:second}).subjectProgress[ID]);expect(merged.integrityPendingConflict).toBe(true);expect(merged.integrityPendingConflictKind).toBe("semantic-v1");expect(merged.integrityRecoveryBlocked).not.toBe(true);
 });
 
 test("a partially malformed cloud schema does not throw during a protected merge",()=>{
