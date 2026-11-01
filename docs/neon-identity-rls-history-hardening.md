@@ -63,4 +63,8 @@ The SQL transaction rolls back automatically on an error **during execution**. A
 
 The added Vitest test is a static guard, **not** a real RLS or privacy audit.
 
+The dedicated workflow `.github/workflows/neon-rls-synthetic.yml` starts a **fresh disposable PostgreSQL 16 container**, creates roles and only three hardcoded synthetic identities, applies migration 009 using the synthetic DB owner, and asserts SQL-level RLS isolation, parental access/revocation, direct-write denial, CAS idempotency and historical snapshot insertion. There is **no Neon connection, secret or copied data**. Its `request.jwt.claim.sub` is a fixture variable, **not** a cryptographically verified JWT. Passing this workflow demonstrates migration SQL and PostgreSQL role-policy behavior only.
+
+The general release-recovery gate intentionally fails if a release candidate includes a database/API migration; this security-only PR should **not** weaken or bypass that gate. It needs its separate migration-specific approval and a later authorized integration/release plan.
+
 **Decision:** GO to review this Draft; NO-GO to run SQL, use real accounts, merge #450 or ship the app. This proposal is separate from the academic-integrity work.
