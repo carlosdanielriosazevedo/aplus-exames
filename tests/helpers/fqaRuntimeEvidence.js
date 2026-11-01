@@ -18,10 +18,6 @@ export function recordedFqaState({sessionId, items, responses, kind = "mission",
   return state;
 }
 
-export function correctFqaStructuredResult(item) {
-  return gradePhysicsChemistryResponse(item, correctFqaResponse(item));
-}
-
 export function correctFqaResponse(item) {
   if (item.responseType === "multiple-choice") return item.answerIndex;
   if (item.responseType === "restricted-response") return "Synthetic scientific response";

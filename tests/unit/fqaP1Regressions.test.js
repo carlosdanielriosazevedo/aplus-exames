@@ -132,6 +132,6 @@ test("verified resumed steps use catalog references, never stored free-form refe
 });
 
 test("real verified training errors still feed memory without creating competence",()=>{
- const items=PHYSICS_CHEMISTRY_A_ITEMS.filter(row=>row.responseType==="stepwise").slice(0,2);const results=items.map(item=>gradePhysicsChemistryResponse(item,{steps:Object.fromEntries(item.steps.map(step=>[step.id,{work:"",result:String(step.value),unit:step.unit||""}]))}));
+ const items=PHYSICS_CHEMISTRY_A_ITEMS.filter(row=>row.responseType==="stepwise").slice(0,2);
  const at=Date.now();const completed=recordedFqaState({kind:"training",items,responses:items.map(item=>({steps:Object.fromEntries(item.steps.map(step=>[step.id,{work:"",result:String(step.value),unit:step.unit||""}]))})),sessionId:"synthetic-verified-training",completedAt:at});const projection=academicProgressFor(completed,ID);expect(Object.values(projection.errorPatterns).some(row=>row.status==="recurring")).toBe(true);expect(projection.competence).toEqual({});expect(completed.subjectProgress[ID].sessions.at(-1).results.every(row=>row.academicProvenance)).toBe(true);
 });

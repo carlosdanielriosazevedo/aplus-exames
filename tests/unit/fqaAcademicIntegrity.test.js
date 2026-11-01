@@ -1,6 +1,6 @@
 import {test,expect} from "vitest";
 import {FQA_SUBJECT as ID,academicProgressFor,fqaResultEligibility,fqaResultContractEligibility,mergeFqaHistory,prepareFqaAcademicState,projectFqaAcademicProgress,stampFqaResult} from "../../app/lib/fqaAcademicIntegrity.js";
-import {recordedFqaSession,correctFqaStructuredResult} from "../helpers/fqaRuntimeEvidence.js";
+import {recordedFqaSession} from "../helpers/fqaRuntimeEvidence.js";
 import {PHYSICS_CHEMISTRY_A_ITEMS} from "../../app/data/physicsChemistryFoundation.js";
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../../app/data/physicsChemistryExamBlueprint.js";
 import {gradePhysicsChemistryResponse} from "../../app/lib/physicsChemistryEngine.js";
@@ -14,7 +14,7 @@ const objective=PHYSICS_CHEMISTRY_A_ITEMS.find(x=>x.responseType==="multiple-cho
 const science=PHYSICS_CHEMISTRY_A_ITEMS.filter(x=>x.responseType==="restricted-response");
 const result=gradePhysicsChemistryResponse(objective,objective.answerIndex);
 const session=(id="s",item=objective,r=result)=>({sessionId:id,kind:"mission",itemIds:[item.id],results:[r],completedAt:100});
-const liveSession=(sessionId="s",items=[objective],results=null,kind="mission")=>recordedFqaSession({sessionId,items,kind,completedAt:100});
+const liveSession=(sessionId="s",items=[objective],kind="mission")=>recordedFqaSession({sessionId,items,kind,completedAt:100});
 const state=progress=>({xp:234,streak:7,engagement:{days:{synthetic:{xp:234}}},competition:{points:20},subjectProgress:{[ID]:{sessions:[],missionHistory:[],competence:{},errorPatterns:{},...progress}}});
 const store=()=>{const m=new Map();return {getItem:k=>m.get(k)??null,setItem:(k,v)=>m.set(k,String(v)),removeItem:k=>m.delete(k)}};
 function withStorage(run){const before={localStorage:globalThis.localStorage,sessionStorage:globalThis.sessionStorage,window:globalThis.window};try{globalThis.localStorage=store();globalThis.sessionStorage=store();globalThis.window={localStorage:globalThis.localStorage};return run()}finally{for(const [k,v] of Object.entries(before))if(v===undefined)delete globalThis[k];else globalThis[k]=v}}
@@ -70,7 +70,7 @@ test.each(["aplus-student-state-v1","aplus-student-state-v2","aplus-student-stat
 });
 
 test("cloud copies missing private text do not create false conflicts",()=>{
- const a=state({sessions:[{...liveSession(),results:[{...result,responseText:"sintético"}]}]});const merged=safeCloudMerge(a,studentStateForCloud(a));expect(academicProgressFor(merged,ID).academicProjection.conflicts).toBe(0);expect(academicProgressFor(merged,ID).competence[objective.competencyId].correct).toBe(1);
+ const observed=liveSession();observed.results[0].responseText="sintético";const a=state({sessions:[observed]});const merged=safeCloudMerge(a,studentStateForCloud(a));expect(academicProgressFor(merged,ID).academicProjection.conflicts).toBe(0);expect(academicProgressFor(merged,ID).competence[objective.competencyId].correct).toBe(1);
 });
 
 test("old queue and recovery snapshots preserve originals and use current policy on serialization",()=>withStorage(()=>{
@@ -124,7 +124,7 @@ test("different local storage copies preserve both answers",()=>withStorage(()=>
 test("structured records require a catalog match and coherent step totals",()=>{
  const item=PHYSICS_CHEMISTRY_A_ITEMS.find(x=>x.responseType==="stepwise");
  const r=stampFqaResult(item,{gradingMode:"structured-provisional",maxPoints:item.maxPoints,provisionalPoints:item.maxPoints,requiresReview:false,steps:item.steps.map(x=>({id:x.id,points:x.points,maxPoints:x.points}))});expect(fqaResultContractEligibility(item,r).eligible).toBe(true);expect(fqaResultContractEligibility(item,{...r,provisionalPoints:1}).eligible).toBe(false);expect(fqaResultEligibility(item,r).eligible).toBe(false);
- const mixed=state({sessions:[liveSession("mixed",[objective,item,science[0]],[result,correctFqaStructuredResult(item),{provisionalPoints:10}],"mini_exam")]});const p=academicProgressFor(mixed,ID);expect(p.academicProjection.provenance).toHaveLength(2);expect(p.academicProjection.excluded).toBe(1);
+ const mixed=state({sessions:[liveSession("mixed",[objective,item,science[0]],"mini_exam")]});const p=academicProgressFor(mixed,ID);expect(p.academicProjection.provenance).toHaveLength(2);expect(p.academicProjection.excluded).toBe(1);
 });
 
 test("legacy objective totals without source provenance remain archived, not silently validated",()=>{
@@ -157,7 +157,6 @@ test("new scientific completion retains legitimate mission XP and leaves existin
 
 test("full exam operational wrappers preserve the catalog provenance of objective results",()=>{
  const items=[...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.mandatoryItems,...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.optionalItems].filter(x=>x.responseType==="multiple-choice");
- const results=items.map(item=>gradePhysicsChemistryResponse(item,item.answerIndex));
- const raw=state({sessions:[liveSession("synthetic-full-exam",items,results,"full_exam")]});
+ const raw=state({sessions:[liveSession("synthetic-full-exam",items,"full_exam")]});
  expect(academicProgressFor(raw,ID).academicProjection.provenance).toHaveLength(items.length);
 });
