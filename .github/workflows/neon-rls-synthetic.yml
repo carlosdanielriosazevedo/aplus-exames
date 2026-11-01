@@ -1,0 +1,55 @@
+name: Neon RLS synthetic migration smoke
+
+on:
+  push:
+    branches:
+      - codex/neon-rls-history-hardening
+    paths:
+      - db/migrations/009_v5_8_neon_rls_history_hardening.sql
+      - tests/sql/neon_rls_*.sql
+      - .github/workflows/neon-rls-synthetic.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - db/migrations/009_v5_8_neon_rls_history_hardening.sql
+      - tests/sql/neon_rls_*.sql
+      - .github/workflows/neon-rls-synthetic.yml
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-postgres:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: neondb
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: synthetic-ci-only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d neondb"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGHOST: 127.0.0.1
+      PGPORT: '5432'
+      PGDATABASE: neondb
+      PGUSER: postgres
+      PGPASSWORD: synthetic-ci-only
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate disposable PostgreSQL instance
+        run: |
+          test "$PGHOST" = "127.0.0.1"
+          test "$PGDATABASE" = "neondb"
+          command -v psql
+          psql -v ON_ERROR_STOP=1 -c 'select current_database(), current_user, version();'
+      - name: Apply migration and assert RLS using synthetic identities
+        run: |
+          psql -v ON_ERROR_STOP=1 -f tests/sql/neon_rls_synthetic_run.sql
