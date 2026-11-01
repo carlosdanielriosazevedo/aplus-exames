@@ -64,12 +64,21 @@ for(const forbidden of ["password","identity","cloudMeta","cloudSync","authUserI
   assert.ok(!payloadSource.includes(forbidden),`Payload cloud passou a incluir campo proibido: ${forbidden}.`);
 }
 assert.ok(payloadSource.includes('schema:"aplus-student-state-v8"'),"Payload cloud perdeu a versão explícita de schema.");
-assert.ok(payloadSource.includes("subjectProgress:s.subjectProgress||{}"),"Payload cloud deixou de transportar o progresso por disciplina necessário à retoma multi-dispositivo.");
+assert.ok(payloadSource.includes("const subjectProgress=")&&payloadSource.includes("redactFqaProgress"),"Payload cloud deixou de projetar o progresso por disciplina através da fronteira de privacidade.");
 assert.ok(payloadSource.includes("subjectProgressModelVersion:s.subjectProgressModelVersion||4"),"Payload cloud perdeu a versão do progresso por disciplina.");
-assert.ok(cloudSource.includes('"currentAnswer"'),"A limpeza de texto livre do aluno deve abranger respostas ainda não submetidas.");
-assert.ok(cloudSource.includes("subjectProgress:remote.subjectProgress??local.subjectProgress"),"Carregar cloud deve restaurar o progresso por disciplina quando existe remotamente.");
+const {FQA_PRIVATE_RESPONSE_FIELDS}=await import("../app/lib/fqaAcademicIntegrity.js");
+assert.ok(FQA_PRIVATE_RESPONSE_FIELDS.has("currentAnswer")&&cloudSource.includes("...FQA_PRIVATE_RESPONSE_FIELDS"),"A limpeza de texto livre do aluno deve abranger respostas ainda não submetidas.");
+assert.ok(cloudSource.includes("remote.subjectProgress??local.subjectProgress")&&cloudSource.includes("mergeFqaHistory(local.subjectProgress?.[FQA_SUBJECT],readFqaCloudProgress(remote.subjectProgress?.[FQA_SUBJECT]))"),"Carregar cloud deve restaurar disciplinas e preservar variantes FQA antes de projetar a evidência.");
 assert.ok((cloudSource.match(/\.from\("student_cloud_state"\)/g)||[]).length>=4,"Cobertura esperada das operações de student_cloud_state diminuiu inesperadamente.");
 assert.ok(!cloudSource.includes('.from("student_cloud_state").delete('),"DELETE direto de progresso exige revisão explícita de segurança.");
+
+const {studentStateForCloud}=await import("../app/lib/cloud.js");
+const privacyProbe=studentStateForCloud({subjectProgress:{"physics-chemistry-a":{sessions:[{sessionId:"synthetic-privacy-audit",results:[{responseText:"SYNTHETIC_PRIVATE_RESPONSE"}]}]}}});
+assert.ok(!JSON.stringify(privacyProbe).includes("SYNTHETIC_PRIVATE_RESPONSE"),"O arquivo FQA não pode exportar texto privado.");
+const transportProbe=studentStateForCloud({subjectProgress:{"physics-chemistry-a":{sessions:[{sessionId:"synthetic-known-history",kind:"mission",itemIds:["FQA-R-MEC-01"],completedAt:100,results:[{status:"final",final:true,points:8,maxPoints:10,responseText:"SYNTHETIC_PRIVATE_RESPONSE"}]}]}}});
+assert.equal(transportProbe.subjectProgress["physics-chemistry-a"].sessions[0].sessionId,"synthetic-known-history","A allowlist tem de manter identidades históricas reconhecidas.");
+assert.equal(transportProbe.subjectProgress["physics-chemistry-a"].sessions[0].results[0].points,8,"Preservar um facto histórico de pontuação no transporte não o torna elegível.");
+assert.ok(!JSON.stringify(transportProbe).includes("SYNTHETIC_PRIVATE_RESPONSE"),"A allowlist não pode transportar respostas do aluno.");
 
 const walk=dir=>readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?walk(new URL(`${entry.name}/`,dir)):[new URL(entry.name,dir)]);
 

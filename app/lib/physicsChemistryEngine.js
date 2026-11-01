@@ -1,3 +1,4 @@
+import {projectFqaAcademicProgress,stampFqaResult,normalizeFqaProgress,observeFqaEngineResult} from "./fqaAcademicIntegrity.js";
 import {STUDY_SESSION_MIN_QUESTIONS,STUDY_SESSION_MAX_QUESTIONS,DEFAULT_MISSION_QUESTIONS} from "./sessionPolicy.js";
 import {PHYSICS_CHEMISTRY_A_DOMAINS} from "../data/physicsChemistryFoundation.js";
 import {PHYSICS_CHEMISTRY_A_SUBTOPICS} from "../data/physicsChemistryTaxonomy.js";
@@ -28,7 +29,11 @@ function gradeStructuredStep(step,value){
   return {id:step.id,status:correct?"correct":"incorrect",correct,points:correct?step.points:0,maxPoints:step.points,expected:step.expected,answer:value};
 }
 
-export function gradePhysicsChemistryResponse(item,value){
+export function gradePhysicsChemistryResponse(item,value,session){
+  return observeFqaEngineResult(item,stampFqaResult(item,gradeRecordedPhysicsChemistryResponse(item,value)),session,session?.index??session?.current??0);
+}
+
+function gradeRecordedPhysicsChemistryResponse(item,value){
   if(item.responseType==="multiple-choice"){
     if(!Number.isInteger(value))return {status:"unanswered",final:true,correct:null,points:0,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode};
     const correct=Number(value)===item.answerIndex;
@@ -76,6 +81,7 @@ export function buildPhysicsChemistryDiagnostic(items=[]){
 }
 
 export function buildAdaptivePhysicsChemistryMission(items=[],{progress={},domain=null,subtopicId=null,year=null,level="auto",size=DEFAULT_MISSION_QUESTIONS}={}){
+  progress=normalizeFqaProgress(progress);
   const bounded=Math.max(STUDY_SESSION_MIN_QUESTIONS,Math.min(STUDY_SESSION_MAX_QUESTIONS,size));
   let pool=items.filter(item=>(!domain||item.domain===domain)&&(!subtopicId||item.subtopicId===subtopicId)&&(!year||item.year===year));
   const sessions=progress.sessions||[];
@@ -85,7 +91,7 @@ export function buildAdaptivePhysicsChemistryMission(items=[],{progress={},domai
   const templateExposure=new Map();
   for(const id of sessions.flatMap(row=>row.itemIds||[])){exposure.set(id,(exposure.get(id)||0)+1);const templateId=itemById.get(id)?.templateId;if(templateId)templateExposure.set(templateId,(templateExposure.get(templateId)||0)+1)}
   const unseen=pool.filter(item=>(exposure.get(item.id)||0)===0);if(unseen.length>=bounded)pool=unseen;
-  const competence=progress.competence||{};
+  const competence=projectFqaAcademicProgress(progress).competence;
   const explicitDifficulty={basic:1,mid:2,adv:3,challenge:4}[level]||null;
   pool=[...pool].sort((a,b)=>{const seenA=exposure.get(a.id)||0,seenB=exposure.get(b.id)||0;if(seenA!==seenB)return seenA-seenB;const familyA=a.templateId?(templateExposure.get(a.templateId)||0):0;const familyB=b.templateId?(templateExposure.get(b.templateId)||0):0;if(familyA!==familyB)return familyA-familyB;if(recent.has(a.id)!==recent.has(b.id))return recent.has(a.id)?1:-1;if(explicitDifficulty){const da=Math.abs((a.difficultyTarget||2)-explicitDifficulty);const db=Math.abs((b.difficultyTarget||2)-explicitDifficulty);if(da!==db)return da-db}const ra=competence[a.competencyId]||{},rb=competence[b.competencyId]||{};const aa=ra.deterministicAttempts||0,ab=rb.deterministicAttempts||0,pa=aa?(ra.correct||0)/aa:0.5,pb=ab?(rb.correct||0)/ab:0.5;return pa-pb||aa-ab||String(a.id).localeCompare(String(b.id))});
   const selected=[];

@@ -1,4 +1,6 @@
 "use client";
+import {FQA_SUBJECT,mergeFqaHistory,prepareFqaAcademicState,FQA_PRIVATE_RESPONSE_FIELDS,redactFqaProgress,readFqaCloudProgress} from "./fqaAcademicIntegrity.js";
+import {canonicalSubjectId} from "./subjectWorkspace.js";
 
 import {createClient} from "@neondatabase/neon-js";
 import {createInternalNeonAuth} from "@neondatabase/neon-js/auth";
@@ -127,9 +129,7 @@ export async function cloudSignOut(){
   return client.signOut();
 }
 
-const STUDENT_RESPONSE_TEXT_KEYS=new Set([
-  "answers","answer","currentAnswer","responseText","previousResponseText","studentEvidence"
-]);
+const STUDENT_RESPONSE_TEXT_KEYS=new Set([...FQA_PRIVATE_RESPONSE_FIELDS,"integrityMalformedRoot"]);
 
 function stripStudentResponseText(value){
   if(Array.isArray(value))return value.map(stripStudentResponseText);
@@ -139,7 +139,10 @@ function stripStudentResponseText(value){
     .map(([key,nested])=>[key,stripStudentResponseText(nested)]));
 }
 
-export function studentStateForCloud(s){
+export function studentStateForCloud(input){
+  const s=prepareFqaAcademicState(input);
+  const progressMap=s.subjectProgress&&typeof s.subjectProgress==="object"&&!Array.isArray(s.subjectProgress)?s.subjectProgress:{};
+  const subjectProgress=Object.fromEntries(Object.entries(progressMap).filter(([id])=>["math-a","portuguese",FQA_SUBJECT].includes(canonicalSubjectId(id))&&(canonicalSubjectId(id)!==FQA_SUBJECT||id===FQA_SUBJECT)));
   return stripStudentResponseText({
     schema:"aplus-student-state-v8",
     goal:s.goal,
@@ -162,7 +165,7 @@ export function studentStateForCloud(s){
     lastExam:s.lastExam||null,
     betaParticipant:s.betaParticipant||null,
     learningHypotheses:s.learningHypotheses||[],
-    subjectProgress:s.subjectProgress||{},
+    subjectProgress:subjectProgress[FQA_SUBJECT]?{...subjectProgress,[FQA_SUBJECT]:redactFqaProgress(subjectProgress[FQA_SUBJECT])}:subjectProgress,
     subjectProgressModelVersion:s.subjectProgressModelVersion||4,
     evidenceModelVersion:2,
     pedagogicalIdVersion:s.pedagogicalIdVersion||1,
@@ -194,7 +197,7 @@ export function mergeStudentCloudState(local,remote){
     lastExam:remote.lastExam??local.lastExam,
     betaParticipant:remote.betaParticipant??local.betaParticipant,
     learningHypotheses:remote.learningHypotheses??local.learningHypotheses,
-    subjectProgress:remote.subjectProgress??local.subjectProgress,
+    subjectProgress:(local.subjectProgress?.[FQA_SUBJECT]||remote.subjectProgress?.[FQA_SUBJECT])?{...(remote.subjectProgress??local.subjectProgress),[FQA_SUBJECT]:mergeFqaHistory(local.subjectProgress?.[FQA_SUBJECT],readFqaCloudProgress(remote.subjectProgress?.[FQA_SUBJECT]))}:remote.subjectProgress??local.subjectProgress,
     subjectProgressModelVersion:remote.subjectProgressModelVersion??local.subjectProgressModelVersion??4,
     pedagogicalIdVersion:remote.pedagogicalIdVersion??local.pedagogicalIdVersion??1,
     pedagogicalMemoryVersion:remote.pedagogicalMemoryVersion??local.pedagogicalMemoryVersion??2
