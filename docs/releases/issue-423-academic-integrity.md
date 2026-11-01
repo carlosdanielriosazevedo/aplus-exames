@@ -94,6 +94,9 @@ answer hashes, persistent keys or response-equivalence identifiers are collected
   is copied into that exact slot, with the original shorter array archived.
   Earlier gaps are not filled speculatively and contradictory result copies block
   continuation. Display projections never replace raw submitted-result storage.
+  A structurally readable frontier remains visible on the home screen despite
+  missing prior results. This read-only permission does not permit resume,
+  completion, new XP or clearing guards; navigation remains available.
 - Missing/null/numeric labels receive a safe display label; originals remain
   recoverable and existing guards are never cleared.
 - Cloud admits known event structures, catalogue item/step IDs, bounded identity

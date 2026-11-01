@@ -171,6 +171,17 @@ export function fqaPendingNotice(progress){
   return "Há versões diferentes de uma tentativa. As respostas foram conservadas; a retoma precisa de resolução segura.";
 }
 
+export function fqaRecoveryState(progress){
+  const blocked=progress?.integrityRecoveryBlocked===true;
+  const position=progress?.lastPosition,fields=Object.keys(record(progress?.integrityRecoveryFields)?progress.integrityRecoveryFields:{});
+  // A readable frontier may be displayed even when missing earlier submissions
+  // forbid continuation. Display permission never grants a write/resume permit.
+  const readablePosition=blocked&&fields.length===1&&fields[0]==="lastPosition"&&record(position)&&
+    SESSION_KINDS.has(position.kind)&&Array.isArray(position.itemIds)&&position.itemIds.length>0&&position.itemIds.every(id=>!!physicsChemistryItemById(id))&&
+    Number.isInteger(position.current)&&position.current>=0&&position.current<position.itemIds.length&&Number.isFinite(position.startedAt);
+  return {blocked,readablePosition,message:"Não foi possível recuperar o histórico de Física e Química A com segurança. Os dados originais foram conservados. Podes consultar a posição guardada e mudar de disciplina; a retoma e a conclusão estão bloqueadas até existir uma resolução segura."};
+}
+
 export function normalizeFqaProgress(progress){
   const source=record(progress)?progress:{};
   const out={...source,subjectId:FQA_SUBJECT};

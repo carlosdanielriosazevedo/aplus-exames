@@ -1,5 +1,5 @@
 "use client";
-import {academicProgressFor,restoreFqaResultView,fqaAssessmentPresentation,fqaPendingNotice} from "../lib/fqaAcademicIntegrity";
+import {academicProgressFor,restoreFqaResultView,fqaAssessmentPresentation,fqaPendingNotice,fqaRecoveryState} from "../lib/fqaAcademicIntegrity";
 import {useEffect,useRef,useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import StudyModeHub from "./StudyModeHub";
@@ -74,6 +74,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   const [rubricAssessment,setRubricAssessment]=useState({});
   const [examDrafts,setExamDrafts]=useState([]);
   const progress={...subjectProgressFor(s,SUBJECT_ID),...academicProgressFor(s,SUBJECT_ID)};
+  const recovery=fqaRecoveryState(progress);
   const scopedItems=completedFqaCourse?PHYSICS_CHEMISTRY_A_ITEMS:physicsChemistryScope(PHYSICS_CHEMISTRY_A_ITEMS,currentYear,taughtUnitIds);
   const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
   const scopedCoverage=physicsChemistryCoverage(scopedItems);
@@ -190,6 +191,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   function resume(){
     const saved=progress.lastPosition;
     if(!saved)return;
+    if(recovery.blocked){window.alert(recovery.message);return;}
     if(progress.integrityPendingConflict){window.alert(fqaPendingNotice(progress));return;}
     const items=saved.itemIds.map(physicsChemistryItemById).filter(Boolean);
     if(items.length!==saved.itemIds.length){
@@ -211,7 +213,8 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     setS(prev=>resetSubjectProgress(prev,SUBJECT_ID));setSession(null);setResults([]);setAnswer(null);setFeedback(null);setRubricAssessment({});
   }
 
-  if(progress.integrityRecoveryBlocked)return <Shell><div className="notice warning" role="alert"><b>Não foi possível recuperar o histórico de Física e Química A com segurança.</b><span>Os dados originais foram conservados. Não iniciámos nem repusemos nenhuma tentativa.</span><button onClick={()=>go("subjectManager")}>Voltar às disciplinas</button></div></Shell>;
+  if(session&&(recovery.blocked||progress.integrityPendingConflict))return <Shell><div className="notice warning" role="alert">{fqaPendingNotice(progress)||recovery.message}<button onClick={()=>go("subjectManager")}>Voltar às disciplinas</button></div></Shell>;
+  if(recovery.blocked&&!recovery.readablePosition)return <Shell><div className="notice warning" role="alert"><b>Não foi possível recuperar o histórico de Física e Química A com segurança.</b><span>Os dados originais foram conservados. Não iniciámos nem repusemos nenhuma tentativa.</span><button onClick={()=>go("subjectManager")}>Voltar às disciplinas</button></div></Shell>;
 
   if(session?.finished){
     const retained=progress.sessions.find(row=>row.sessionId===session.sessionId);
@@ -420,6 +423,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   }
 
   return <main className="learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>
+    {recovery.blocked&&<div className="notice warning" role="alert">{recovery.message}<button onClick={()=>go("subjectManager")}>Voltar às disciplinas</button></div>}
     {progress.integrityPendingConflict&&<div className="notice warning" role="alert">{fqaPendingNotice(progress)}</div>}
     {unrecoverableSession&&<div className="notice warning"><b>Sessão impossível de recuperar</b><span>Uma ou mais perguntas deixaram de estar disponíveis. A tentativa será arquivada sem pontuação adicional.</span><button className="secondary" onClick={recoverUnrecoverableSession}>Resolver sessão irrecuperável</button></div>}
     <div className="learnIntro"><div className="mobileMainTitle"><p>Olá 👋</p><h1>O teu próximo passo.</h1></div><span>{missionDone?"Missão feita. Podes continuar por tua conta.":progress.diagnosticDone?"Uma recomendação curta, escolhida a partir do teu percurso.":"Primeiro, vamos encontrar o melhor ponto de partida."}</span></div>

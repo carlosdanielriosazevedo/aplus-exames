@@ -1,5 +1,5 @@
 import {describe, expect, test, vi} from "vitest";
-import {FQA_SUBJECT as ID, normalizeFqaProgress, prepareFqaAcademicState, academicProgressFor, fqaAssessmentPresentation, restoreFqaResultView} from "../../app/lib/fqaAcademicIntegrity.js";
+import {FQA_SUBJECT as ID, normalizeFqaProgress, prepareFqaAcademicState, academicProgressFor, fqaAssessmentPresentation, restoreFqaResultView, fqaRecoveryState} from "../../app/lib/fqaAcademicIntegrity.js";
 import {studentStateForCloud, mergeStudentCloudState} from "../../app/lib/cloud.js";
 import {PHYSICS_CHEMISTRY_A_ITEMS as items} from "../../app/data/physicsChemistryFoundation.js";
 import {gradePhysicsChemistryResponse} from "../../app/lib/physicsChemistryEngine.js";
@@ -106,8 +106,14 @@ describe("#450 labels are display metadata, never a recovery bypass", () => {
     expect(normalized.subjectProgress[ID].integrityRecoveryBlocked).toBe(true);
     expect(normalized.subjectProgress[ID].integrityRecoveryFields.lastPosition).toEqual(position);
     expect(normalized.subjectProgress[ID].lastPosition.results).toEqual([]);
+    expect(fqaRecoveryState(normalized.subjectProgress[ID])).toMatchObject({blocked:true,readablePosition:true});
     expect(advanceSubjectSession(normalized,ID,{current:1,results:[]})).toBe(normalized);
     expect(normalized.xp).toBe(430);
+  });
+
+  test("read-only frontier permission does not extend to malformed history collections",()=>{
+    const normalized=prepareFqaAcademicState(state({sessions:null,lastPosition:{...pause()}}));
+    expect(fqaRecoveryState(normalized.subjectProgress[ID])).toMatchObject({blocked:true,readablePosition:false});
   });
 
   test("contradictory submitted-result copies remain separate and block unsafe continuation", () => {

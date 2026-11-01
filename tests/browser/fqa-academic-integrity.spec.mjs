@@ -191,6 +191,16 @@ test("a truncated result array retains the explicitly submitted current result o
  await page.reload();const loaded=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25")));expect(loaded.subjectProgress[id].sessions.at(-1).results[0].responseText).toBe(result.responseText);expect(loaded.xp).toBe(259);
 });
 
+test("a readable frontier with missing prior results permits navigation but never continuation or new XP",async({page})=>{
+ const state=syntheticState(),now=Date.now();const ids=PHYSICS_CHEMISTRY_A_ITEMS.filter(row=>row.responseType==="multiple-choice").slice(0,3).map(row=>row.id);
+ state.subjectProgress[id].lastPosition={sessionId:"synthetic-read-only-frontier",kind:"mission",label:"Missão",itemIds:ids,current:2,results:[],currentAnswer:null,startedAt:now-5000,updatedAt:now};
+ await page.addInitScript(state=>{if(!localStorage.getItem("synthetic-423-seeded")){localStorage.setItem("a25",JSON.stringify(state));localStorage.setItem("synthetic-423-seeded","1")}},state);
+ await page.goto("/");await expect(page.locator(".learnHome")).toBeVisible();await expect(page.locator(".pausedActivityEyebrow")).toBeVisible();
+ page.once("dialog",dialog=>dialog.dismiss());await page.getByRole("button",{name:"Continuar sessão",exact:true}).last().click();await expect(page.getByRole("button",{name:"Responder",exact:true})).toHaveCount(0);
+ await page.getByRole("button",{name:"Progresso",exact:true}).last().click();await expect(page.getByRole("heading",{name:"Como estás a evoluir."})).toBeVisible();
+ const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25")));expect(saved.xp).toBe(234);expect(saved.subjectProgress[id].integrityRecoveryBlocked).toBe(true);expect(saved.subjectProgress[id].lastPosition.results).toEqual([]);expect(saved.subjectProgress[id].lastPosition.startedAt).toBe(now-5000);
+});
+
 for(const full of [false,true]){
  test(`${full?"full":"mini"} exam review excludes fresh unvalidated science without a zero score`,async({page})=>{
   const state=syntheticState(),now=Date.now();
