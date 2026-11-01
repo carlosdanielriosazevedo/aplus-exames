@@ -30,7 +30,7 @@ BEGIN
     WHERE p.oid='public.snapshot_student_cloud_state()'::regprocedure
       AND pg_get_userbyid(p.proowner)='neondb_owner'
   ) THEN RAISE EXCEPTION 'Snapshot function owner is not verified'; END IF;
-END
+END;
 $preflight$;
 
 -- Pre-existing direct grants survive GRANTs in migration 007; clear them.
@@ -254,7 +254,7 @@ BEGIN
     SELECT 1 FROM pg_proc WHERE oid='public.snapshot_student_cloud_state()'::regprocedure
     AND prosecdef AND pg_get_userbyid(proowner)='neondb_owner'
   ) THEN RAISE EXCEPTION 'History snapshot trigger function not securely owned'; END IF;
-END
+END;
 $postflight$;
 
 UPDATE public.app_schema_meta SET schema_version=9,
@@ -266,6 +266,6 @@ BEGIN
                WHERE singleton=true AND schema_version=9) THEN
    RAISE EXCEPTION 'Schema marker update failed';
  END IF;
-END
+END;
 $versioncheck$;
 COMMIT;
