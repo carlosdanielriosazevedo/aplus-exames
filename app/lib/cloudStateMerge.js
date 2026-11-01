@@ -1,4 +1,4 @@
-import {FQA_SUBJECT,mergeFqaHistory,prepareFqaAcademicState} from "./fqaAcademicIntegrity.js";
+import {FQA_SUBJECT,mergeFqaHistory,prepareFqaAcademicState,readFqaCloudProgress} from "./fqaAcademicIntegrity.js";
 function mergeByStableId(local=[],remote=[],idFn=x=>x?.id){
   const map=new Map();
   for(const item of [...(remote||[]),...(local||[])]){
@@ -35,7 +35,9 @@ function mergeSubjectProgressMaps(local={},remote={}){
 }
 
 export function safeCloudMerge(local,remote){
-  local=prepareFqaAcademicState(local);remote=prepareFqaAcademicState(remote);
+  local=prepareFqaAcademicState(local);
+  if(typeof remote?.schema==="string"&&remote.schema.startsWith("aplus-student-state-v")&&remote.subjectProgress?.[FQA_SUBJECT])remote={...remote,subjectProgress:{...remote.subjectProgress,[FQA_SUBJECT]:readFqaCloudProgress(remote.subjectProgress[FQA_SUBJECT])}};
+  remote=prepareFqaAcademicState(remote);
   if(!remote)return local;
   const localEvidence=local?.scores||{};
   const remoteEvidence=remote?.scores||{};

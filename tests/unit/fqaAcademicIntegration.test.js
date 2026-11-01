@@ -33,3 +33,18 @@ test("stale device cannot overwrite a newer revision and merge preserves respons
  expect(JSON.stringify(loaded)).toContain("A synthetic");expect(JSON.stringify(loaded)).toContain("B synthetic");expect(academicProgressFor(loaded,id).academicProjection.conflicts).toBe(1);
  const resolved=await saveStudentCloudState(loaded,{expectedRevision:2,knownRemote:true,deviceId:"device-A"});expect(resolved.ok).toBe(true);expect(fixture.remote.revision).toBe(3);expect(academicProgressFor(fixture.remote.state_json,id).competence).toEqual({});
 });
+
+test("save/load roundtrip reconciles administrative pending changes and restores local-only text",async()=>{
+ const local=state("synthetic completed text");local.subjectProgress[id].lastPosition={sessionId:"synthetic-cloud-pause",kind:"mission",itemIds:["FQA-R-MEC-01"],current:0,results:[],currentAnswer:"synthetic local-only pending",startedAt:100,updatedAt:200};
+ expect((await saveStudentCloudState(local,{expectedRevision:1,knownRemote:true,deviceId:"device-A"})).ok).toBe(true);
+ const remote=fixture.remote.state_json;remote.subjectProgress[id].lastActivityAt=500;remote.subjectProgress[id].lastPosition.updatedAt=500;
+ expect(JSON.stringify(remote)).not.toContain("synthetic local-only pending");const loaded=mergeStudentCloudState(local,remote);
+ expect(loaded.subjectProgress[id].integrityPendingConflict).toBe(false);expect(loaded.subjectProgress[id].lastPosition.currentAnswer).toBe("synthetic local-only pending");expect(loaded.subjectProgress[id].lastPosition.startedAt).toBe(100);expect(loaded.xp).toBe(234);
+});
+
+test("malformed historical collections remain archived over a cloud save/load",async()=>{
+ const local=state("synthetic completed text");local.subjectProgress[id].sessions=null;
+ expect((await saveStudentCloudState(local,{expectedRevision:1,knownRemote:true,deviceId:"device-A"})).ok).toBe(true);
+ const remote=fixture.remote.state_json;expect(remote.subjectProgress[id].sessions).toEqual([]);expect(remote.subjectProgress[id].integrityRecoveryFields.sessions).toBeNull();
+ const loaded=mergeStudentCloudState(local,remote);expect(loaded.subjectProgress[id].integrityRecoveryBlocked).toBe(true);expect(loaded.subjectProgress[id].integrityRecoveryFields.sessions).toBeNull();expect(loaded.xp).toBe(234);expect(fixture.writes).toHaveLength(1);
+});

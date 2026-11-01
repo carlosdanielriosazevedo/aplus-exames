@@ -117,3 +117,64 @@ actual stored version tags 29/31; no previous preservation check is dropped.
 
 Candidate for independent technical audit only. NO-GO for merge, deployment or
 production data migration until audit and rollout limitations above are resolved.
+
+## P1 audit corrections against 15ef98b
+
+The three reproduced P1 findings are addressed in the same Draft PR #450.
+
+### Semantic paused-session comparison
+
+Only `updatedAt`, `lastActivityAt`, `_savedAt` and privacy-omission bookkeeping are
+administrative. Identity, original start, item order, question position, submitted
+results and all present answers remain material. Missing arbitrary fields are not
+wildcards. Local absence of an answer differs from a present local answer.
+
+Cloud serialization records a numeric omission mask, containing field identities
+only, wherever private fields were removed. A schema-identified legacy cloud read
+can mark missing private fields at ingress. Known local private text is restored
+only between compatible variants; every original remains archived. Present but
+different values conflict even when an omission mask is present.
+
+A semantic conflict marker survives cloud stripping. Old true flags are rechecked
+only when complete original private fields prove that the difference was purely
+administrative. If privacy has erased the evidence required to decide, the flag
+stays `legacy-unresolved`: no automatic continuation, reset or guessed response.
+This unresolved legacy case is an explicit safety boundary, not a resolved audit
+finding or permission to discard either variant.
+
+### Complete academic-consumer boundary
+
+Progress, parental competence inputs and adaptive mission ordering consume only
+the projection. Error-memory replay and new FQA error accumulation now receive
+only the verified result contract. Free-form `errorDiagnosis`,
+`feedbackSummary`, `diagnosticCard`, `criteria`, `stepResults`, step labels/reasons/
+messages/loss text and other undeclared extensions are never passed through.
+Step error types are usable only because they are bound by the existing result
+fingerprint; changing a bound field invalidates eligibility. The stored originals
+are not scrubbed or retrospectively regraded. A fingerprint still is not a human
+attestation or an authentication scheme against a client executing arbitrary code.
+
+### Incomplete-state recovery
+
+FQA readers normalize absent collections to safe structures. Invalid fields,
+entries, malformed progress roots and interrupted attempts remain recoverable in
+original archives/recovery fields. Structural ambiguity sets
+`integrityRecoveryBlocked`, which prevents begin, advance, completion, reset,
+technical archive and exam-exit writes. The UI presents a recovery notice and a
+safe return to subject selection, without resetting data or clocks. Repeated
+normalization is idempotent. Malformed root values are local recovery material,
+excluded from outgoing cloud state.
+
+Regression coverage includes both merge orders, timestamp-only changes, cloud
+omissions, local absence versus a real answer, changed identity/position/clocks,
+old unresolved flags, adversarial assessment metadata across all error-signal
+inputs, coherent/broken step contracts, old versions, missing and wrongly typed
+collections, malformed roots, storage reload, cloud CAS save/load and browser
+recovery. No prior tests or acceptance thresholds have been removed or relaxed.
+Validation counts and the final SHA are recorded in the updated PR description.
+
+The restored-feedback path is also covered: saved unsigned diagnostic extensions
+are not replayed as advice. Saved core completion facts and original response
+bytes remain archived; unknown assessments are displayed as unverified and the
+submitted answer stays locked. Newly computed scientific grading/calibration
+remains #422, not a claim of resolution by this PR.

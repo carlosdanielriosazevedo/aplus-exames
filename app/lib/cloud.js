@@ -1,5 +1,5 @@
 "use client";
-import {FQA_SUBJECT,mergeFqaHistory,prepareFqaAcademicState} from "./fqaAcademicIntegrity.js";
+import {FQA_SUBJECT,mergeFqaHistory,prepareFqaAcademicState,FQA_PRIVATE_RESPONSE_FIELDS,redactFqaProgress,readFqaCloudProgress} from "./fqaAcademicIntegrity.js";
 
 import {createClient} from "@neondatabase/neon-js";
 import {createInternalNeonAuth} from "@neondatabase/neon-js/auth";
@@ -128,9 +128,7 @@ export async function cloudSignOut(){
   return client.signOut();
 }
 
-const STUDENT_RESPONSE_TEXT_KEYS=new Set([
-  "answers","answer","currentAnswer","responseText","previousResponseText","studentEvidence"
-]);
+const STUDENT_RESPONSE_TEXT_KEYS=new Set([...FQA_PRIVATE_RESPONSE_FIELDS,"integrityMalformedRoot"]);
 
 function stripStudentResponseText(value){
   if(Array.isArray(value))return value.map(stripStudentResponseText);
@@ -164,7 +162,7 @@ export function studentStateForCloud(input){
     lastExam:s.lastExam||null,
     betaParticipant:s.betaParticipant||null,
     learningHypotheses:s.learningHypotheses||[],
-    subjectProgress:s.subjectProgress||{},
+    subjectProgress:s.subjectProgress?.[FQA_SUBJECT]?{...s.subjectProgress,[FQA_SUBJECT]:redactFqaProgress(s.subjectProgress[FQA_SUBJECT])}:s.subjectProgress||{},
     subjectProgressModelVersion:s.subjectProgressModelVersion||4,
     evidenceModelVersion:2,
     pedagogicalIdVersion:s.pedagogicalIdVersion||1,
@@ -196,7 +194,7 @@ export function mergeStudentCloudState(local,remote){
     lastExam:remote.lastExam??local.lastExam,
     betaParticipant:remote.betaParticipant??local.betaParticipant,
     learningHypotheses:remote.learningHypotheses??local.learningHypotheses,
-    subjectProgress:(local.subjectProgress?.[FQA_SUBJECT]||remote.subjectProgress?.[FQA_SUBJECT])?{...(remote.subjectProgress??local.subjectProgress),[FQA_SUBJECT]:mergeFqaHistory(local.subjectProgress?.[FQA_SUBJECT],remote.subjectProgress?.[FQA_SUBJECT])}:remote.subjectProgress??local.subjectProgress,
+    subjectProgress:(local.subjectProgress?.[FQA_SUBJECT]||remote.subjectProgress?.[FQA_SUBJECT])?{...(remote.subjectProgress??local.subjectProgress),[FQA_SUBJECT]:mergeFqaHistory(local.subjectProgress?.[FQA_SUBJECT],readFqaCloudProgress(remote.subjectProgress?.[FQA_SUBJECT]))}:remote.subjectProgress??local.subjectProgress,
     subjectProgressModelVersion:remote.subjectProgressModelVersion??local.subjectProgressModelVersion??4,
     pedagogicalIdVersion:remote.pedagogicalIdVersion??local.pedagogicalIdVersion??1,
     pedagogicalMemoryVersion:remote.pedagogicalMemoryVersion??local.pedagogicalMemoryVersion??2

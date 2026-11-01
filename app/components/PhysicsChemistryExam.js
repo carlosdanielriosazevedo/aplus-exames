@@ -90,7 +90,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
   function finish({force=false}={}){if(force){setReview(true);return;}setSubmitCheck(true);}
 
   function saveReviewAndExit(){
-    if(s.subjectProgress?.[SUBJECT_ID]?.integrityPendingConflict)return;
+    if(s.subjectProgress?.[SUBJECT_ID]?.integrityPendingConflict||s.subjectProgress?.[SUBJECT_ID]?.integrityRecoveryBlocked)return;
     if(!recordedRef.current){
       recordedRef.current=true;
       setS(prev=>recordSubjectSession(prev,{
@@ -106,7 +106,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
     go("exams");
   }
 
-  if(s.subjectProgress?.[SUBJECT_ID]?.integrityPendingConflict)return <Shell><div role="alert">Há versões diferentes de uma tentativa. Foram conservadas e precisam de resolução segura antes de continuar.</div><button onClick={()=>go("exams")}>Voltar</button></Shell>;
+  if(s.subjectProgress?.[SUBJECT_ID]?.integrityPendingConflict||s.subjectProgress?.[SUBJECT_ID]?.integrityRecoveryBlocked)return <Shell><div role="alert">Há versões diferentes de uma tentativa. Foram conservadas e precisam de resolução segura antes de continuar.</div><button onClick={()=>go("exams")}>Voltar</button></Shell>;
 
   if(recoveryBlocked)return <Shell><div role="alert">Não foi possível recuperar esta prova. As respostas guardadas foram conservadas.</div></Shell>;
 

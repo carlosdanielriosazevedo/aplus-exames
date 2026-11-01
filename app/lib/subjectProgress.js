@@ -1,4 +1,4 @@
-import {FQA_SUBJECT,mergeFqaHistory,prepareFqaAcademicState} from "./fqaAcademicIntegrity.js";
+import {FQA_SUBJECT,mergeFqaHistory,prepareFqaAcademicState,normalizeFqaProgress,verifiedFqaAcademicResult} from "./fqaAcademicIntegrity.js";
 import {canonicalSubjectId} from "./subjectWorkspace.js";
 import {missionCompletedToday,recordStudyActivity} from "./engagement.js";
 import {recordCompetitiveActivity} from "./competition.js";
@@ -140,7 +140,7 @@ function mergeProgress(left,right,subjectId){
 
 function normalizeProgress(progress,subjectId){
   const empty=emptySubjectProgress(subjectId);
-  if(subjectId===FQA_SUBJECT)return {...empty,...(progress||{}),subjectId};
+  if(subjectId===FQA_SUBJECT)return {...empty,...normalizeFqaProgress(progress)};
   const competence=Object.fromEntries(Object.entries(progress?.competence&&typeof progress.competence==="object"?progress.competence:{}).map(([id,row])=>[id,normalizeCompetenceRow(row)]));
   return {...empty,...(progress||{}),subjectId,version:MODEL_VERSION,sessions:Array.isArray(progress?.sessions)?progress.sessions.slice(-MAX_SESSIONS):[],missionHistory:Array.isArray(progress?.missionHistory)?progress.missionHistory.slice(-MAX_SESSIONS):[],competence,errorPatterns:normalizeErrorPatterns(progress?.errorPatterns),errorMemoryVersion:1,lastPosition:progress?.lastPosition||null};
 }
@@ -193,14 +193,14 @@ export function createSubjectSessionId(subjectId,kind,at=Date.now()){
 export function beginSubjectSession(state,{subjectId,kind,label,domain=null,items,sessionId=null,startedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
   // Uma tentativa em curso não pode ser substituída, nem por chamadas diretas ao motor.
-  if(progress.integrityPendingConflict||progress.lastPosition||(subjectId==="portuguese"&&state.subjectSettings?.portuguese?.miniExamDraft))return state;
+  if(progress.integrityPendingConflict||progress.integrityRecoveryBlocked||progress.lastPosition||(subjectId==="portuguese"&&state.subjectSettings?.portuguese?.miniExamDraft))return state;
   const id=sessionId||createSubjectSessionId(subjectId,kind,startedAt);
   return putProgress(state,subjectId,{...progress,lastPosition:{sessionId:id,kind,label,domain,itemIds:items.map(item=>item.id),current:0,results:[],startedAt,updatedAt:startedAt},lastActivityAt:startedAt});
 }
 
 export function advanceSubjectSession(state,subjectId,{sessionId=null,current,results,currentResult=null,currentAnswer=null,updatedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
-  if(progress.integrityPendingConflict||!progress.lastPosition||(sessionId&&sessionId!==progress.lastPosition.sessionId))return state;
+  if(progress.integrityPendingConflict||progress.integrityRecoveryBlocked||!progress.lastPosition||(sessionId&&sessionId!==progress.lastPosition.sessionId))return state;
   return putProgress(state,subjectId,{...progress,lastPosition:{...progress.lastPosition,current,results:results.map(compactResult),currentResult:compactResult(currentResult),currentAnswer,updatedAt},lastActivityAt:updatedAt});
 }
 
@@ -214,7 +214,7 @@ function subjectSessionXp(kind,results=[]){
 
 export function recordSubjectSession(state,{subjectId,kind,label,domain=null,items,results,sessionId=null,completedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
-  if(progress.integrityPendingConflict)return state;
+  if(progress.integrityPendingConflict||progress.integrityRecoveryBlocked)return state;
   const completionId=sessionId||progress.lastPosition?.sessionId||null;
   // Sessões arquivadas por erro técnico nunca podem receber recompensa tardia.
   if(completionId&&(progress.interruptedTechnicalSessions||[]).some(row=>row.sessionId===completionId))return state;
@@ -227,7 +227,8 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
   items.forEach((item,index)=>{
     const result=results[index];
     if(!result||result.status==="unanswered")return;
-    if(!(subjectId===FQA_SUBJECT&&item.responseType==="restricted-response"))errorPatterns=recordErrorPatternEvidence(errorPatterns,item,result,completedAt);
+    const memoryResult=subjectId===FQA_SUBJECT?verifiedFqaAcademicResult(item,result):result;
+    if(memoryResult)errorPatterns=recordErrorPatternEvidence(errorPatterns,item,memoryResult,completedAt);
     if(!recordsAcademicEvidence||(subjectId===FQA_SUBJECT&&item.responseType==="restricted-response"))return;
     const id=item.competencyId||`${item.domain}:general`;
     const previous=normalizeCompetenceRow(competence[id]);
@@ -285,7 +286,7 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
  */
 export function quarantineUnrecoverableSubjectSession(state,subjectId,availableItemIds,at=Date.now()){
   const progress=subjectProgressFor(state,subjectId);
-  if(progress.integrityPendingConflict)return state;
+  if(progress.integrityPendingConflict||progress.integrityRecoveryBlocked)return state;
   const pending=progress.lastPosition;
   if(!pending||!Array.isArray(pending.itemIds)||!pending.itemIds.length)return state;
   const available=new Set(availableItemIds);
@@ -308,7 +309,7 @@ export function quarantineUnrecoverableSubjectSession(state,subjectId,availableI
 
 export function resetSubjectProgress(state,subjectId){
   const progress=subjectProgressFor(state,subjectId);
-  if(progress.lastPosition||progress.integrityPendingConflict)return state;
+  if(progress.lastPosition||progress.integrityPendingConflict||progress.integrityRecoveryBlocked)return state;
   const subjectProgress={...(state.subjectProgress||{})};
   delete subjectProgress[subjectId];
   return {...state,subjectProgress,subjectProgressModelVersion:MODEL_VERSION};

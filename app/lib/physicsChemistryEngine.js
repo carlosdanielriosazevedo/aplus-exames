@@ -1,4 +1,4 @@
-import {projectFqaAcademicProgress,stampFqaResult} from "./fqaAcademicIntegrity.js";
+import {projectFqaAcademicProgress,stampFqaResult,normalizeFqaProgress} from "./fqaAcademicIntegrity.js";
 import {STUDY_SESSION_MIN_QUESTIONS,STUDY_SESSION_MAX_QUESTIONS,DEFAULT_MISSION_QUESTIONS} from "./sessionPolicy.js";
 import {PHYSICS_CHEMISTRY_A_DOMAINS} from "../data/physicsChemistryFoundation.js";
 import {PHYSICS_CHEMISTRY_A_SUBTOPICS} from "../data/physicsChemistryTaxonomy.js";
@@ -81,6 +81,7 @@ export function buildPhysicsChemistryDiagnostic(items=[]){
 }
 
 export function buildAdaptivePhysicsChemistryMission(items=[],{progress={},domain=null,subtopicId=null,year=null,level="auto",size=DEFAULT_MISSION_QUESTIONS}={}){
+  progress=normalizeFqaProgress(progress);
   const bounded=Math.max(STUDY_SESSION_MIN_QUESTIONS,Math.min(STUDY_SESSION_MAX_QUESTIONS,size));
   let pool=items.filter(item=>(!domain||item.domain===domain)&&(!subtopicId||item.subtopicId===subtopicId)&&(!year||item.year===year));
   const sessions=progress.sessions||[];

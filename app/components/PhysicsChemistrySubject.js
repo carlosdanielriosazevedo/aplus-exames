@@ -1,5 +1,5 @@
 "use client";
-import {academicProgressFor} from "../lib/fqaAcademicIntegrity";
+import {academicProgressFor,restoreFqaResultView} from "../lib/fqaAcademicIntegrity";
 import {useEffect,useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import StudyModeHub from "./StudyModeHub";
@@ -191,7 +191,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       return;
     }
     setSession({sessionId:saved.sessionId,kind:saved.kind,label:saved.label,domain:saved.domain,items,current:Math.min(saved.current,items.length-1)});
-    setResults(saved.results||[]);setAnswer(saved.currentAnswer??null);setFeedback(saved.currentResult||null);
+    setResults((saved.results||[]).map((result,index)=>restoreFqaResultView(items[index],result)));setAnswer(saved.currentAnswer??null);setFeedback(restoreFqaResultView(items[Math.min(saved.current,items.length-1)],saved.currentResult||saved.results?.[saved.current])||null);
   }
 
   useEffect(()=>{
@@ -203,6 +203,8 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     if(!window.confirm("Repor apenas o progresso de Física e Química A?"))return;
     setS(prev=>resetSubjectProgress(prev,SUBJECT_ID));setSession(null);setResults([]);setAnswer(null);setFeedback(null);setRubricAssessment({});
   }
+
+  if(progress.integrityRecoveryBlocked)return <Shell><div className="notice warning" role="alert"><b>Não foi possível recuperar o histórico de Física e Química A com segurança.</b><span>Os dados originais foram conservados. Não iniciámos nem repusemos nenhuma tentativa.</span><button onClick={()=>go("subjectManager")}>Voltar às disciplinas</button></div></Shell>;
 
   if(session?.finished){
     const deterministic=results.filter(result=>result?.final===true&&typeof result.correct==="boolean");
@@ -247,9 +249,10 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
         {item.responseType==="stepwise"&&<PhysicsChemistryStepwiseEditor item={item} value={answer} onChange={setAnswer} disabled={!!feedback}/>} 
         {item.responseType==="restricted-response"&&<div className="fqaRestricted"><div className="notice"><b>Resposta científica</b><span>Explica o raciocínio com linguagem científica e articula os elementos pedidos.</span></div><textarea disabled={!!feedback} value={typeof answer==="string"?answer:""} onChange={event=>setAnswer(event.target.value)} rows={8} placeholder="Escreve a tua resposta..."/></div>}
         {!feedback?<button className="primary" disabled={!answerReady(item)} onClick={submit}>Responder</button>:<>
-          {item.responseType==="multiple-choice"&&<div className={"feedback answerFeedback "+(feedback.correct?"good":"bad")}><b>{feedback.correct?"✓ Muito bem!":"Não é essa."}</b><span>{feedback.correct?item.explanation:<>A resposta correta é:<strong>{item.options[item.answerIndex]}</strong>{item.explanation&&<small>{item.explanation}</small>}</>}</span></div>}
-          {item.responseType==="stepwise"&&<><PhysicsChemistryStepwiseReview item={item} result={feedback}/><ScoreLossExplanation result={feedback}/></>} 
-          {item.responseType==="restricted-response"&&<div className="fqaConstructedReview">
+          {feedback.historicalAssessmentUnverified&&<div className="notice" role="status"><b>Resposta guardada sem avaliação verificável.</b><span>A resposta continua submetida. A avaliação histórica foi conservada, mas não é apresentada como classificação validada.</span></div>}
+          {!feedback.historicalAssessmentUnverified&&item.responseType==="multiple-choice"&&<div className={"feedback answerFeedback "+(feedback.correct?"good":"bad")}><b>{feedback.correct?"✓ Muito bem!":"Não é essa."}</b><span>{feedback.correct?item.explanation:<>A resposta correta é:<strong>{item.options[item.answerIndex]}</strong>{item.explanation&&<small>{item.explanation}</small>}</>}</span></div>}
+          {!feedback.historicalAssessmentUnverified&&item.responseType==="stepwise"&&<><PhysicsChemistryStepwiseReview item={item} result={feedback}/><ScoreLossExplanation result={feedback}/></>}
+          {!feedback.historicalAssessmentUnverified&&item.responseType==="restricted-response"&&<div className="fqaConstructedReview">
             <div className="notice"><b>Avaliação automática provisória</b><span>{feedback.note}</span></div>
             {Number.isFinite(feedback.provisionalPoints)&&<><div className="autoAssessmentScore"><b>{String(feedback.provisionalPoints).replace(".",",")} / {feedback.maxPoints} pontos</b><small>estimativa provisória · confiança {feedback.autoAssessmentConfidence??"—"}%</small></div><ScoreLossExplanation result={feedback}/></>}
             {feedback.feedbackSummary&&<div className="automaticFeedbackPanel">
