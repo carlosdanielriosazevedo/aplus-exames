@@ -178,3 +178,11 @@ are not replayed as advice. Saved core completion facts and original response
 bytes remain archived; unknown assessments are displayed as unverified and the
 submitted answer stays locked. Newly computed scientific grading/calibration
 remains #422, not a claim of resolution by this PR.
+
+The first remote correction run exposed an older learning-feedback audit fixture
+that expected unsigned FQA results to populate memory. Its positive requirement is
+retained using real catalog stepwise items and actual engine outputs; a negative
+assertion now ensures unsigned results are excluded. A matching unit regression
+checks that verified training errors still feed memory without creating academic
+competence. No application code or acceptance threshold was changed for this CI
+fixture correction.

@@ -3,6 +3,8 @@ import "../app/lib/recurringErrorRuntime.js";
 import {buildScoreExplainability,SCORE_EXPLAINABILITY_SCHEMA} from "../app/lib/scoreExplainability.js";
 import {recordErrorPatternEvidence,recurringErrorPatterns,extractErrorSignals} from "../app/lib/recurringErrorMemory.js";
 import {recordSubjectSession,subjectProgressFor} from "../app/lib/subjectProgress.js";
+import {PHYSICS_CHEMISTRY_A_ITEMS} from "../app/data/physicsChemistryFoundation.js";
+import {gradePhysicsChemistryResponse} from "../app/lib/physicsChemistryEngine.js";
 
 const now=Date.now();
 
@@ -58,13 +60,23 @@ stale=recordErrorPatternEvidence(stale,item1,unitError,staleTime-1000);
 stale=recordErrorPatternEvidence(stale,item2,unitError,staleTime);
 assert.equal(recurringErrorPatterns(stale,now).length,0,"stale patterns must not be surfaced");
 
+// Keep the positive training-memory contract, using real catalog items and
+// actual engine outputs with verifiable provenance. Unsigned synthetic results
+// exercise the lower-level classifier above, not the academic trust boundary.
+const trainingItems=PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.responseType==="stepwise").slice(0,2);
+assert.equal(trainingItems.length,2);
+const trainingResults=trainingItems.map(item=>gradePhysicsChemistryResponse(item,{steps:Object.fromEntries(item.steps.map(step=>[step.id,{result:String(step.value),work:"",unit:step.unit||""}]))}));
+assert.ok(trainingResults.every(result=>result.academicProvenance&&result.steps.some(step=>step.errorType)),"training fixture must contain actual verifiable engine error evidence");
 let state={subjectProgress:{},engagement:null,competition:null,xp:0};
 state=recordSubjectSession(state,{
   subjectId:"physics-chemistry-a",kind:"training",label:"Treino",domain:"waves",
-  items:[item1,item2],results:[unitError,unitError],sessionId:"test-session",completedAt:now
+  items:trainingItems,results:trainingResults,sessionId:"test-session",completedAt:now
 });
 const progress=subjectProgressFor(state,"physics-chemistry-a");
 assert.equal(recurringErrorPatterns(progress.errorPatterns,now).length,1,"training should feed recurring-error memory");
 assert.equal(Object.keys(progress.competence).length,0,"training must still not create academic competence evidence");
+
+const unverified=recordSubjectSession({subjectProgress:{},xp:0},{subjectId:"physics-chemistry-a",kind:"training",label:"Treino não verificado",items:[item1,item2],results:[unitError,unitError],sessionId:"unsigned-test-session",completedAt:now});
+assert.equal(recurringErrorPatterns(subjectProgressFor(unverified,"physics-chemistry-a").errorPatterns,now).length,0,"unsigned training results must not become alleged academic error evidence");
 
 console.log("Learning feedback intelligence audit: OK");
