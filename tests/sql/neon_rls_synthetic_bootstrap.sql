@@ -13,6 +13,7 @@ $auth$;
 GRANT USAGE ON SCHEMA auth TO anonymous,authenticated;
 GRANT EXECUTE ON FUNCTION auth.user_id() TO anonymous,authenticated;
 GRANT USAGE,CREATE ON SCHEMA public TO neondb_owner;
+GRANT USAGE ON SCHEMA auth TO neondb_owner;
 
 SET ROLE neondb_owner;
 
