@@ -7,12 +7,14 @@ on:
     paths:
       - db/migrations/009_v5_8_neon_rls_history_hardening.sql
       - tests/sql/neon_rls_*.sql
+      - scripts/neon-identity-jwt-readonly.mjs
       - .github/workflows/neon-rls-synthetic.yml
   pull_request:
     branches: [main]
     paths:
       - db/migrations/009_v5_8_neon_rls_history_hardening.sql
       - tests/sql/neon_rls_*.sql
+      - scripts/neon-identity-jwt-readonly.mjs
       - .github/workflows/neon-rls-synthetic.yml
 
 permissions:
@@ -44,6 +46,8 @@ jobs:
       PGPASSWORD: synthetic-ci-only
     steps:
       - uses: actions/checkout@v4
+      - name: Syntax-check staged real-JWT read-only smoke (no network requests)
+        run: node --check scripts/neon-identity-jwt-readonly.mjs
       - name: Validate disposable PostgreSQL instance
         run: |
           test "$PGHOST" = "127.0.0.1"
