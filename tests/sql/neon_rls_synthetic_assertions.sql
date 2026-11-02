@@ -14,10 +14,18 @@ BEGIN
  SELECT count(*) INTO n FROM public.student_cloud_state;
  IF n<>1 THEN RAISE EXCEPTION 'A can see % cloud rows, expected 1',n; END IF;
 
- UPDATE public.app_users SET display_name='Test A updated'
- WHERE id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
- GET DIAGNOSTICS n=ROW_COUNT;
- IF n<>1 THEN RAISE EXCEPTION 'Permitted display name update failed'; END IF;
+ BEGIN
+   UPDATE public.app_users SET display_name='forged client name'
+   WHERE id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+   RAISE EXCEPTION 'Client could modify server-authoritative app_users row';
+ EXCEPTION WHEN insufficient_privilege THEN NULL;
+ END;
+ BEGIN
+   INSERT INTO public.app_users(id,auth_user_id,display_name,email_snapshot)
+   VALUES('ffffffff-ffff-4fff-8fff-ffffffffffff','synthetic-student-a','Fake','forged@example.invalid');
+   RAISE EXCEPTION 'Client could insert forged app_users row';
+ EXCEPTION WHEN insufficient_privilege THEN NULL;
+ END;
  UPDATE public.student_profiles SET school_year='12.º'
  WHERE user_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
  GET DIAGNOSTICS n=ROW_COUNT;
