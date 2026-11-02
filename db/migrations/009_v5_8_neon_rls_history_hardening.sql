@@ -225,9 +225,9 @@ DECLARE
 BEGIN
   SELECT count(*) INTO invalid_count
   FROM (VALUES
-    ('app_users',true,true,true,false,3),
+    ('app_users',true,true,false,false,3),
     ('app_user_roles',true,false,false,false,1),
-    ('student_profiles',true,true,true,false,3),
+    ('student_profiles',true,true,false,false,3),
     ('parent_invites',true,false,false,false,1),
     ('student_parent_links',true,false,false,false,1),
     ('parent_link_change_requests',true,false,false,false,1),
