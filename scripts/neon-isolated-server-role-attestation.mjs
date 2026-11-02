@@ -5,6 +5,10 @@
 import {neon} from "@neondatabase/serverless";
 
 async function main(){
+  if(process.env.VERCEL_ENV==="production")
+    throw Error("Attestation is forbidden in Vercel Production");
+  if(process.env.VERCEL_PROJECT_ID && process.env.VERCEL_PROJECT_ID!=="prj_8n5XwTMF651SAfsykIDji93oZp3r")
+    throw Error("Attestation requires isolated Vercel project");
   if(process.env.CONFIRM_SYNTHETIC_NEON_READONLY!=="YES")
     throw Error("Explicit synthetic-only read-only approval required");
   const raw=process.env.DATABASE_URL;
