@@ -65,9 +65,11 @@ revoke all on table student_parent_links from anonymous;
 revoke all on table parent_link_change_requests from anonymous;
 
 -- O browser autenticado pode gerir apenas o seu registo base e o seu perfil de aluno.
-grant select, insert, update on table app_users to authenticated;
+grant select, insert on table app_users to authenticated;
+grant update (display_name,email_snapshot,updated_at) on table app_users to authenticated;
 grant select on table app_user_roles to authenticated;
-grant select, insert, update on table student_profiles to authenticated;
+grant select, insert on table student_profiles to authenticated;
+grant update (school_year,recent_grade,goal,syllabus_progress,exam_timing,updated_at) on table student_profiles to authenticated;
 
 -- As tabelas parentais são apenas legíveis pelas duas partes da ligação.
 -- Escritas ficam deliberadamente sem grant para authenticated: serão feitas por
@@ -240,6 +242,16 @@ BEGIN
     OR (SELECT count(*)::integer FROM pg_policies p WHERE p.schemaname='public'
         AND p.tablename=expected.table_name) <> expected.policies;
   IF invalid_count<>0 THEN RAISE EXCEPTION 'RLS/grant postconditions failed for % tables',invalid_count; END IF;
+  -- RLS restricts rows; column privileges protect structural identity fields.
+  IF has_column_privilege('authenticated','public.app_users','id','UPDATE')
+     OR has_column_privilege('authenticated','public.app_users','auth_user_id','UPDATE')
+     OR has_column_privilege('authenticated','public.app_users','created_at','UPDATE')
+     OR has_column_privilege('authenticated','public.student_profiles','user_id','UPDATE')
+     OR has_column_privilege('authenticated','public.student_profiles','created_at','UPDATE')
+     OR NOT has_column_privilege('authenticated','public.app_users','display_name','UPDATE')
+     OR NOT has_column_privilege('authenticated','public.student_profiles','school_year','UPDATE')
+  THEN RAISE EXCEPTION 'Unsafe or incomplete column-level UPDATE privileges'; END IF;
+
   IF EXISTS(
     SELECT 1 FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
     WHERE n.nspname='public' AND c.relname IN
