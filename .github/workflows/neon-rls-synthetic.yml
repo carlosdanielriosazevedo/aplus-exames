@@ -151,11 +151,27 @@ jobs:
           test "$actual" = "9"
           echo "PASS: migration rejects reapplication and preserves version 9"
 
+      - name: Prove pilot migration 010 refuses Neon-like connections without CI flag
+        run: |
+          set +e
+          psql -v ON_ERROR_STOP=1 > /tmp/pilot-010-refusal.log 2>&1 <<'SQL'
+          SET ROLE neondb_owner;
+          \i db/migrations/010_v5_9_verified_pilot_sessions.sql
+          SQL
+          code=$?
+          set -e
+          test "$code" -ne 0
+          grep -q 'CI-only isolation flag required' /tmp/pilot-010-refusal.log
+          version="$(psql -v ON_ERROR_STOP=1 -Atc 'SELECT schema_version FROM public.app_schema_meta WHERE singleton=true')"
+          test "$version" = "9"
+          echo "PASS: schema 010 rejects missing isolated CI flag without writes"
       - name: Test proposed schema 010 and seven-answer synthetic pilot (NO Neon)
         run: |
           psql -v ON_ERROR_STOP=1 <<'SQL'
           SET ROLE neondb_owner;
+          SET app.synthetic_verified_pilot_ci='ONLY_DISPOSABLE';
           \i db/migrations/010_v5_9_verified_pilot_sessions.sql
+          RESET app.synthetic_verified_pilot_ci;
           RESET ROLE;
           \i tests/sql/neon_verified_pilot_assertions.sql
           SQL
