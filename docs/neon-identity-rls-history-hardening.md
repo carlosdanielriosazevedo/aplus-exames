@@ -173,6 +173,65 @@ The ordinary Beta CI release gate correctly disallows mixing schema
 changes into an application release. No Neon migration, data writes,
 production deployment, or merge are authorized by this attestation.
 
+## CAS bypass remediation staged in Draft — NOT DEPLOYED
+
+**Finding confirmed on isolated Neon schema 8** (read-only catalog, 2026-11-02):
+`authenticated` has direct `INSERT, UPDATE, DELETE` on
+`public.student_cloud_state`. Its UPDATE policy only checks
+`auth.user_id() = auth_user_id`, not the expected revision. Existing
+`app/lib/cloud.js` did include `.eq("revision", expectedRevision)`
+but a modified client could omit it. The previous `009` migration
+did not originally revoke those grants.
+
+**Mitigation prepared in this Draft:**
+
+1. `app/lib/cloud.js` sends GET/POST to same-origin
+   `/api/cloud/state`, **no direct Data API writes or deletes**.
+   The client continues to strip answer texts.
+2. `app/api/cloud/state/route.js` requires an authenticated Neon
+   server session, rejects cross-origin POST, bounds request size and
+   returns privacy-safe errors. It derives the `auth_user_id` solely
+   from the authenticated session; the request cannot select another
+   account. The endpoint deliberately does not require an
+   `app_user_roles` row because the current `ensureAppUser()` flow
+   does not guarantee role provisioning on first login.
+3. `app/lib/server/cloud-state-store.js` uses a one-statement
+   `INSERT ... ON CONFLICT DO NOTHING` for initial state, and a
+   one-statement `UPDATE ... WHERE auth_user_id=$sessionUser AND
+   revision=$expected` that increments revision server-side for
+   existing state. A stale write is returned as a conflict with the
+   current remote row, preserving the old UI conflict contract.
+4. `009` explicitly REVOKEs all inherited prior direct grants on
+   `student_cloud_state`, regrants SELECT for the ownership RLS
+   policy, drops client INSERT/UPDATE/DELETE policies and verifies
+   resulting privileges. Existing `student_cloud_state_history`
+   remains server-triggered and client READ-ONLY.
+5. Disposable PostgreSQL tests exercise client attempts to UPDATE
+   without CAS, DELETE and upsert; legitimate owner CAS, replayed
+   initial INSERT, stale writes and OLD-state snapshots. Offline
+   Node tests also check payload, authorization wiring and server SQL
+   contract. **These do not prove real signed JWT behavior.**
+
+**Critical deployment ordering:** The API/client build and role
+attestation must be independently validated in the isolated Preview.
+Applying `009` before a compatible API is live intentionally breaks
+legacy browser cloud writes. Conversely, deploying the API alone before
+the grants are revoked does not prevent malicious direct Data API
+writes. A coordinated migration-specific release, approved rollback
+strategy and actual signed-JWT tests are required; the ordinary Beta
+CI must remain blocked for direct database-change release.
+
+**Unresolved academic-integrity risk:** CAS is a concurrency and
+history invariant, **not** proof that `state_json` is truthful. A
+modified authenticated client can still submit fabricated XP, exam
+results, or completion entries to the new endpoint. Do **not** label
+this change anti-cheat, reward-authoritative or completion-immutable.
+Before real users and monetization, introduce server-verified
+completion receipts and idempotent server-calculated rewards, plus
+monotonic/immutable session validation. Independent verification of
+session/auth authorization, privileged server `DATABASE_URL`,
+parental access, and Neon Auth JWT isolation remains mandatory.
+
 ## Rollback / independent gate
 
 The SQL transaction rolls back automatically on an error **during execution**. After commit, a blind rollback to the previous broad grants would knowingly reintroduce unsafe access and is prohibited. Prefer fix-forward with a reviewed compatible migration, and preserve historical data. Test application-level compatibility and login before any rollout.
@@ -183,7 +242,7 @@ The added Vitest test is a static guard, **not** a real RLS or privacy audit.
 
 The dedicated workflow `.github/workflows/neon-rls-synthetic.yml` starts a **fresh disposable PostgreSQL 16 container**, creates roles and only three hardcoded synthetic identities, applies migration 009 using the synthetic DB owner, and asserts SQL-level RLS isolation, parental access/revocation, direct-write denial, CAS idempotency and historical snapshot insertion. There is **no Neon connection, secret or copied data**. Its `request.jwt.claim.sub` is a fixture variable, **not** a cryptographically verified JWT. Passing this workflow demonstrates migration SQL and PostgreSQL role-policy behavior only.
 
-**Important CAS limitation:** the smoke test proves that a write carrying `WHERE revision = expected` rejects a stale revision. Existing `student_cloud_state` RLS does **not** force an authenticated client to include that predicate or increment revisions sequentially. An altered client can still submit a different UPDATE shape to its own row. Server-enforced CAS and durable academic receipts require a separate, server-controlled write contract; do not infer that migration 009 solves this.
+**Important CAS limitation and staged fix:** original schema 8 still allows browser-initiated cloud writes without a CAS condition. The revised `009` Draft now includes direct-write revocation and a new server-side CAS endpoint, as detailed above. Nothing has been applied to Neon or deployed, and CAS still does not authenticate claimed XP/completions.
 
 The general release-recovery gate intentionally fails if a release candidate includes a database/API migration; this security-only PR should **not** weaken or bypass that gate. It needs its separate migration-specific approval and a later authorized integration/release plan.
 
