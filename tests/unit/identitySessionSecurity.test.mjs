@@ -1,21 +1,23 @@
 import {beforeEach,afterEach,describe,it,expect,vi} from "vitest";
-const mocks=vi.hoisted(()=>({getSession:vi.fn(),handler:vi.fn()}));
+const mocks=vi.hoisted(()=>({getSession:vi.fn(),handler:vi.fn(),getServerAuth:vi.fn()}));
 vi.mock("../../app/lib/server/auth.js",()=>({
   serverAuthConfigured:()=>true,
-  getServerAuth:()=>({getSession:mocks.getSession,handler:mocks.handler})
+  getServerAuth:()=>mocks.getServerAuth()
 }));
 vi.mock("next/server",()=>({
   NextResponse:{json:(body,options={})=>({
     body,status:options.status??200
   })}
 }));
-import {requireSession} from "../../app/lib/server/identity.js";
+import {requireSession,authErrorResponse} from "../../app/lib/server/identity.js";
 import {GET as authGET,POST as authPOST} from "../../app/api/auth/[...path]/route.js";
 
 let errorSpy;
 beforeEach(()=>{
   mocks.getSession.mockReset();
   mocks.handler.mockReset();
+  mocks.getServerAuth.mockReset();
+  mocks.getServerAuth.mockImplementation(()=>({getSession:mocks.getSession,handler:mocks.handler}));
   errorSpy=vi.spyOn(console,"error").mockImplementation(()=>{});
 });
 afterEach(()=>errorSpy.mockRestore());
@@ -31,6 +33,26 @@ describe("provider exception handling",()=>{
     expect(errorSpy).toHaveBeenCalled();
     expect(JSON.stringify(errorSpy.mock.calls)).not.toContain("SECRET_NEON_COOKIE");
     expect(JSON.stringify(errorSpy.mock.calls)).not.toContain("SECRET_DB");
+  });
+  it("fails closed when the provider cannot be constructed",async()=>{
+    mocks.getServerAuth.mockImplementation(()=>{
+      throw new Error("SECRET_NEON_PROVIDER_CONFIG");
+    });
+    await expect(requireSession()).rejects.toMatchObject({
+      status:503,code:"AUTH_PROVIDER_UNAVAILABLE"
+    });
+    expect(JSON.stringify(errorSpy.mock.calls)).not.toContain("SECRET_NEON_PROVIDER_CONFIG");
+  });
+  it("never reflects arbitrary database or provider codes via authErrorResponse",()=>{
+    expect(authErrorResponse({code:"SECRET_DB",status:418})).toEqual({
+      status:500,body:{ok:false,error:"INTERNAL_ERROR"}
+    });
+    expect(authErrorResponse({code:"UNAUTHORIZED",status:599})).toEqual({
+      status:401,body:{ok:false,error:"UNAUTHORIZED"}
+    });
+    expect(authErrorResponse({code:"DATABASE_NOT_CONFIGURED",status:599})).toEqual({
+      status:503,body:{ok:false,error:"DATABASE_NOT_CONFIGURED"}
+    });
   });
   it("uses only the session subject for successful verified lookups",async()=>{
     mocks.getSession.mockResolvedValue({data:{user:{id:"synthetic-a"},session:{}}});
