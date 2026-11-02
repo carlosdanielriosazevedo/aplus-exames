@@ -315,8 +315,9 @@ unless all of these conditions hold simultaneously: explicit
 `VERCEL_ENV=preview`, exact isolated Vercel project ID and exact
 isolated Neon hostname/database name allowlist. The route never
 uses browser-provided account IDs. It requires the Neon Auth server
-session, uses `ensureAppUser` to guarantee the owner identity, and
-rejects cross-origin POSTs.
+session, provisions `app_users` via `ensureAppUser` **only on the
+explicit POST start**, and rejects cross-origin POSTs. GET is read-only
+and never provisions a user account.
 
 - POST `{"action":"start"}`: `INSERT ON CONFLICT DO NOTHING`
   creates at most one attempt per student+pilot. Subsequent requests
