@@ -19,6 +19,8 @@ on:
       - tests/scripts/cloud-server-cas-contract.mjs
       - tests/unit/cloudStateRoute.test.mjs
       - tests/unit/cloudStateClient.test.mjs
+      - scripts/cloud-reliability-audit.mjs
+      - scripts/cloud-resume-product-contract-audit.mjs
       - tests/unit/neonIdentityRlsMigration.test.mjs
       - tests/scripts/mock-neon-jwt-fetch.mjs
       - .github/workflows/neon-rls-synthetic.yml
@@ -39,6 +41,8 @@ on:
       - tests/scripts/cloud-server-cas-contract.mjs
       - tests/unit/cloudStateRoute.test.mjs
       - tests/unit/cloudStateClient.test.mjs
+      - scripts/cloud-reliability-audit.mjs
+      - scripts/cloud-resume-product-contract-audit.mjs
       - tests/unit/neonIdentityRlsMigration.test.mjs
       - tests/scripts/mock-neon-jwt-fetch.mjs
       - .github/workflows/neon-rls-synthetic.yml
@@ -89,6 +93,8 @@ jobs:
         run: |
           npm ci --ignore-scripts --no-audit --no-fund
           npx vitest run tests/unit/cloudStateRoute.test.mjs tests/unit/cloudStateClient.test.mjs tests/unit/neonIdentityRlsMigration.test.mjs tests/unit/betaSyncValidation.test.js tests/unit/stateTortureCloudMerge.test.js --maxWorkers=2
+          node scripts/cloud-reliability-audit.mjs
+          node scripts/cloud-resume-product-contract-audit.mjs
       - name: Audit isolated Preview build artifact and offline preflight
         run: |
           node --check audits/neon-preview-attestation/attest.mjs
