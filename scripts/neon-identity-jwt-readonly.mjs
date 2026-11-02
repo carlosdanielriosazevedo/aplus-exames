@@ -53,6 +53,14 @@ async function main(){
   requireConfigured();
   const subjects=Object.values(roles).map(subject);
   assert.equal(new Set(subjects).size,3,"Synthetic actor JWTs must be distinct");
+  // Fail closed: never request identity/parental rows against unpatched schema 8.
+  // Query only the public schema marker using a real signed test-account JWT.
+  // The marker has a SELECT-true policy for authenticated in migration 008.
+  const marker=await query("/app_schema_meta?select=schema_version&singleton=eq.true",roles["student A"]);
+  assert.equal(marker.length,1,"Missing or inaccessible migration schema marker");
+  assert.equal(Number(marker[0]?.schema_version),9,
+    "Refusing identity reads until reviewed migration 009 is applied");
+
   console.log("Starting synthetic Neon Data API JWT read-only checks");
   // A denied response (401/403) and a successful empty list are both secure.
   const anonResponse=await fetch(url+"/app_users?select=id",{
