@@ -64,9 +64,10 @@ revoke all on table parent_invites from anonymous;
 revoke all on table student_parent_links from anonymous;
 revoke all on table parent_link_change_requests from anonymous;
 
--- O browser autenticado pode gerir apenas o seu registo base e o seu perfil de aluno.
-grant select, insert on table app_users to authenticated;
-grant update (display_name,updated_at) on table app_users to authenticated;
+-- The app_users identity is server-authoritative (ensureAppUser() on DATABASE_URL).
+-- Browser clients read their own entry but MUST NOT insert/update even their own row.
+-- This prevents client-forged email_snapshot, generated IDs and timestamps.
+grant select on table app_users to authenticated;
 grant select on table app_user_roles to authenticated;
 grant select, insert on table student_profiles to authenticated;
 grant update (school_year,recent_grade,goal,syllabus_progress,exam_timing,updated_at) on table student_profiles to authenticated;
@@ -78,22 +79,15 @@ grant select on table parent_invites to authenticated;
 grant select on table student_parent_links to authenticated;
 grant select on table parent_link_change_requests to authenticated;
 
--- app_users: cada sessão vê/cria/edita apenas o próprio utilizador.
+-- app_users: user sees only their row; writes are server-only.
 drop policy if exists "app_users_select_self" on app_users;
 create policy "app_users_select_self"
 on app_users for select to authenticated
 using (auth_user_id = (select auth.user_id()));
 
+-- Historical policies may exist from 007; remove them, not just grants.
 drop policy if exists "app_users_insert_self" on app_users;
-create policy "app_users_insert_self"
-on app_users for insert to authenticated
-with check (auth_user_id = (select auth.user_id()));
-
 drop policy if exists "app_users_update_self" on app_users;
-create policy "app_users_update_self"
-on app_users for update to authenticated
-using (auth_user_id = (select auth.user_id()))
-with check (auth_user_id = (select auth.user_id()));
 
 -- Roles: o utilizador pode ler os próprios roles, mas nunca autoatribuir reviewer/admin.
 drop policy if exists "app_user_roles_select_self" on app_user_roles;
@@ -225,7 +219,7 @@ DECLARE
 BEGIN
   SELECT count(*) INTO invalid_count
   FROM (VALUES
-    ('app_users',true,true,false,false,3),
+    ('app_users',true,false,false,false,1),
     ('app_user_roles',true,false,false,false,1),
     ('student_profiles',true,true,false,false,3),
     ('parent_invites',true,false,false,false,1),
@@ -249,7 +243,7 @@ BEGIN
      OR has_column_privilege('authenticated','public.app_users','email_snapshot','UPDATE')
      OR has_column_privilege('authenticated','public.student_profiles','user_id','UPDATE')
      OR has_column_privilege('authenticated','public.student_profiles','created_at','UPDATE')
-     OR NOT has_column_privilege('authenticated','public.app_users','display_name','UPDATE')
+     OR has_column_privilege('authenticated','public.app_users','display_name','UPDATE')
      OR NOT has_column_privilege('authenticated','public.student_profiles','school_year','UPDATE')
   THEN RAISE EXCEPTION 'Unsafe or incomplete column-level UPDATE privileges'; END IF;
 
