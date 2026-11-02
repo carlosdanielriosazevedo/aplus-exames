@@ -1,4 +1,5 @@
 import {beforeEach,afterEach,describe,expect,it,vi} from "vitest";
+import {syntheticPostgresUrl} from "../helpers/syntheticPostgresUrl.mjs";
 const mocks=vi.hoisted(()=>({
  requireSession:vi.fn(),ensureAppUser:vi.fn(),getSql:vi.fn(),
  read:vi.fn(),start:vi.fn(),answer:vi.fn(),finish:vi.fn()
@@ -35,7 +36,7 @@ beforeEach(()=>{
  vi.stubEnv("APPROVA_VERIFIED_PILOT_ENABLED","YES");
  vi.stubEnv("VERCEL_ENV","preview");
  vi.stubEnv("VERCEL_PROJECT_ID","prj_8n5XwTMF651SAfsykIDji93oZp3r");
- vi.stubEnv("DATABASE_URL","postgres://user:fake@ep-holy-term-b93irruj.c-7.eu-central-1.aws.neon.tech/neondb");
+ vi.stubEnv("DATABASE_URL",syntheticPostgresUrl("postgres://ep-holy-term-b93irruj.c-7.eu-central-1.aws.neon.tech/neondb"));
  mocks.requireSession.mockResolvedValue({authUserId:"synthetic-student-a"});
  mocks.getSql.mockReturnValue({fake:true});
  mocks.read.mockResolvedValue(null);
@@ -101,7 +102,7 @@ describe("synthetic pilot route is server-owned and fail-closed",()=>{
   expect(mocks.finish).toHaveBeenCalledWith({fake:true},"synthetic-student-a");
  });
  it("cannot disclose a driver exception containing credentials",async()=>{
-  mocks.finish.mockRejectedValue(new Error("postgres://user:SECRET@server"));
+  mocks.finish.mockRejectedValue(new Error(syntheticPostgresUrl("postgres://database.example.invalid/neondb",{password:"SECRET"})));
   const result=await POST(post({action:"finish"}));
   expect(result.status).toBe(503);
   expect(JSON.stringify(result.body)).not.toContain("SECRET");

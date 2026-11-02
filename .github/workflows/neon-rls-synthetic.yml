@@ -14,10 +14,11 @@ on:
       - scripts/neon-isolated-server-role-attestation.mjs
       - audits/neon-preview-attestation/**
       - tests/scripts/neon-preview-build-attest-contract.mjs
+      - tests/helpers/syntheticPostgresUrl.mjs
       - tests/scripts/neon-jwt-smoke-contract.mjs
       - app/api/cloud/state/route.js
       - app/api/health/route.js
-      - app/api/auth/[...path]/route.js
+      - app/api/auth/**
       - app/lib/server/db.js
       - app/lib/server/identity.js
       - tests/unit/dbHealthSecurity.test.mjs
@@ -54,10 +55,11 @@ on:
       - scripts/neon-isolated-server-role-attestation.mjs
       - audits/neon-preview-attestation/**
       - tests/scripts/neon-preview-build-attest-contract.mjs
+      - tests/helpers/syntheticPostgresUrl.mjs
       - tests/scripts/neon-jwt-smoke-contract.mjs
       - app/api/cloud/state/route.js
       - app/api/health/route.js
-      - app/api/auth/[...path]/route.js
+      - app/api/auth/**
       - app/lib/server/db.js
       - app/lib/server/identity.js
       - tests/unit/dbHealthSecurity.test.mjs
@@ -209,3 +211,38 @@ jobs:
           receipts="$(psql -v ON_ERROR_STOP=1 -Atc "SELECT count(*) FROM public.verified_completion_receipts WHERE auth_user_id='synthetic-race-student'")"
           test "$receipts" = "1"
           echo "PASS: two concurrent submissions, identical verified XP, one immutable receipt"
+
+  adversarial-history:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        schema: [permissive-policy, wrong-function, after-statement, filtered-update, disabled, missing]
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: neondb
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: synthetic-ci-only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -h 127.0.0.1 -U postgres -d neondb"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGHOST: 127.0.0.1
+      PGPORT: '5432'
+      PGDATABASE: neondb
+      PGUSER: postgres
+      PGPASSWORD: synthetic-ci-only
+    steps:
+      - uses: actions/checkout@v4
+      - name: Repair adulterated schema and assert history isolation (disposable PostgreSQL only)
+        run: |
+          test "$PGHOST" = "127.0.0.1"
+          test "$PGDATABASE" = "neondb"
+          psql -v ON_ERROR_STOP=1 -v scenario='${{ matrix.schema }}' -f tests/sql/neon_rls_synthetic_adversarial.sql

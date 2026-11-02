@@ -1,5 +1,6 @@
 import {describe,it,expect} from "vitest";
 import {readFileSync} from "node:fs";
+import {syntheticPostgresUrl} from "../helpers/syntheticPostgresUrl.mjs";
 import {PILOT_BANK,PILOT_KEY,pilotEnabled,validatePilotCommand,publicPilotSession}
   from "../../app/lib/server/preview-verified-pilot.js";
 
@@ -7,7 +8,7 @@ const env={
  APPROVA_VERIFIED_PILOT_ENABLED:"YES",
  VERCEL_ENV:"preview",
  VERCEL_PROJECT_ID:"prj_8n5XwTMF651SAfsykIDji93oZp3r",
- DATABASE_URL:"postgresql://synthetic:fake@ep-holy-term-b93irruj.c-7.eu-central-1.aws.neon.tech/neondb"
+ DATABASE_URL:syntheticPostgresUrl("postgresql://ep-holy-term-b93irruj.c-7.eu-central-1.aws.neon.tech/neondb")
 };
 describe("synthetic pilot hard-lock",()=>{
   it("is disabled unless explicit opt-in, exact isolated Preview and approved Neon host",()=>{
@@ -16,8 +17,8 @@ describe("synthetic pilot hard-lock",()=>{
       {...env,APPROVA_VERIFIED_PILOT_ENABLED:""},
       {...env,VERCEL_ENV:"production"},
       {...env,VERCEL_PROJECT_ID:"prj_H0nD83gkRwu7Id05OhzL4CC60s4M"},
-      {...env,DATABASE_URL:"postgres://x:secret@unknown.db.example/neondb"},
-      {...env,DATABASE_URL:"postgres://x:secret@ep-holy-term-b93irruj.c-7.eu-central-1.aws.neon.tech/prod"},
+      {...env,DATABASE_URL:syntheticPostgresUrl("postgres://unknown.db.example.invalid/neondb")},
+      {...env,DATABASE_URL:syntheticPostgresUrl("postgres://ep-holy-term-b93irruj.c-7.eu-central-1.aws.neon.tech/wrong-database")},
       {...env,DATABASE_URL:undefined},
       {...env,VERCEL_PROJECT_ID:undefined}
     ];

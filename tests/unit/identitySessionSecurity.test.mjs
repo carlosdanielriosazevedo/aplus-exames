@@ -1,4 +1,5 @@
 import {beforeEach,afterEach,describe,it,expect,vi} from "vitest";
+import {syntheticPostgresUrl} from "../helpers/syntheticPostgresUrl.mjs";
 const mocks=vi.hoisted(()=>({getSession:vi.fn(),handler:vi.fn(),getServerAuth:vi.fn()}));
 vi.mock("../../app/lib/server/auth.js",()=>({
   serverAuthConfigured:()=>true,
@@ -25,7 +26,7 @@ afterEach(()=>errorSpy.mockRestore());
 describe("provider exception handling",()=>{
   it("does not log cookie/DSN material when getSession fails",async()=>{
     mocks.getSession.mockRejectedValue(new Error(
-      "invalid session SECRET_NEON_COOKIE and postgresql://user:SECRET_DB@host"
+      `invalid session SECRET_NEON_COOKIE and ${syntheticPostgresUrl("postgresql://database.example.invalid/neondb",{password:"SECRET_DB"})}`
     ));
     await expect(requireSession()).rejects.toMatchObject({
       status:401,code:"UNAUTHORIZED"

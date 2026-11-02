@@ -20,11 +20,6 @@ BEGIN
     OR to_regprocedure('public.snapshot_student_cloud_state()') IS NULL THEN
     RAISE EXCEPTION 'Cloud history objects missing';
   END IF;
-  IF NOT EXISTS(
-    SELECT 1 FROM pg_trigger t JOIN pg_class c ON c.oid=t.tgrelid
-    WHERE t.tgname='trg_student_cloud_state_snapshot'
-      AND c.oid='public.student_cloud_state'::regclass AND t.tgenabled='O'
-  ) THEN RAISE EXCEPTION 'Snapshot trigger missing or disabled'; END IF;
   IF NOT EXISTS (
     SELECT 1 FROM pg_proc p
     WHERE p.oid='public.snapshot_student_cloud_state()'::regprocedure
@@ -32,6 +27,11 @@ BEGIN
   ) THEN RAISE EXCEPTION 'Snapshot function owner is not verified'; END IF;
 END;
 $preflight$;
+
+-- Rebuild policy/trigger definitions while writes are blocked. Existing history
+-- rows are retained; no UPDATE can run between removing and recreating a trigger.
+LOCK TABLE public.student_cloud_state, public.student_cloud_state_history
+  IN ACCESS EXCLUSIVE MODE;
 
 -- Pre-existing direct grants survive GRANTs in migration 007; clear them.
 REVOKE ALL ON TABLE
@@ -217,6 +217,12 @@ using (
 -- A trigger executes as its tightly restricted owner to record OLD rows.
 REVOKE ALL ON TABLE public.student_cloud_state_history FROM authenticated, anonymous, PUBLIC;
 GRANT SELECT ON TABLE public.student_cloud_state_history TO authenticated;
+ALTER TABLE public.student_cloud_state_history ENABLE ROW LEVEL SECURITY;
+-- Never trust the expression of a pre-existing policy with this name.
+DROP POLICY IF EXISTS "student_cloud_history_select_own" ON public.student_cloud_state_history;
+CREATE POLICY "student_cloud_history_select_own"
+ON public.student_cloud_state_history FOR SELECT TO authenticated
+USING ((SELECT auth.user_id()) = auth_user_id);
 
 CREATE OR REPLACE FUNCTION public.snapshot_student_cloud_state()
 RETURNS trigger
@@ -234,6 +240,13 @@ BEGIN
 END;
 $snapshot$;
 REVOKE ALL ON FUNCTION public.snapshot_student_cloud_state() FROM PUBLIC, authenticated, anonymous;
+
+-- A matching trigger name does not prove the function, timing, level or filter.
+-- Repair missing/disabled/misbound definitions instead of inheriting them.
+DROP TRIGGER IF EXISTS trg_student_cloud_state_snapshot ON public.student_cloud_state;
+CREATE TRIGGER trg_student_cloud_state_snapshot
+BEFORE UPDATE ON public.student_cloud_state
+FOR EACH ROW EXECUTE FUNCTION public.snapshot_student_cloud_state();
 
 -- Server-authenticated assessment receipts are the future authority for XP.
 -- Browser-provided state_json.xp, ranking and completed-session claims remain
@@ -358,6 +371,15 @@ BEGIN
     SELECT 1 FROM pg_proc WHERE oid='public.snapshot_student_cloud_state()'::regprocedure
     AND prosecdef AND pg_get_userbyid(proowner)='neondb_owner'
   ) THEN RAISE EXCEPTION 'History snapshot trigger function not securely owned'; END IF;
+  IF NOT EXISTS(
+    SELECT 1 FROM pg_trigger
+    WHERE tgrelid='public.student_cloud_state'::regclass
+      AND tgname='trg_student_cloud_state_snapshot'
+      AND tgfoid='public.snapshot_student_cloud_state()'::regprocedure
+      -- PostgreSQL trigger bits: ROW (1) | BEFORE (2) | UPDATE (16).
+      AND tgtype=19 AND tgenabled='O' AND NOT tgisinternal
+      AND tgnargs=0 AND tgqual IS NULL AND tgattr=''::int2vector
+  ) THEN RAISE EXCEPTION 'History snapshot trigger definition unsafe'; END IF;
 END;
 $postflight$;
 

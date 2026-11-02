@@ -3,6 +3,7 @@ import {spawnSync} from "node:child_process";
 import {readFileSync,existsSync,mkdtempSync,rmSync} from "node:fs";
 import {tmpdir} from "node:os";
 import {resolve,join} from "node:path";
+import {syntheticPostgresUrl} from "../helpers/syntheticPostgresUrl.mjs";
 
 const root=resolve("audits/neon-preview-attestation");
 const source=readFileSync(join(root,"attest.mjs"),"utf8");
@@ -42,11 +43,11 @@ try{
   assert(run({VERCEL_ENV:"preview",VERCEL_TARGET_ENV:"production"}).includes("WRONG_TARGET"));
   assert(run({VERCEL_PROJECT_ID:"prj_wrong"}).includes("WRONG_PROJECT"));
   assert(run({}).includes("PREVIEW_SECRET_UNAVAILABLE"));
-  const unrelated="postgresql://foo:bar@production-database.example.invalid/neondb";
+  const unrelated=syntheticPostgresUrl("postgresql://unrelated.example.invalid/neondb");
   const log=run({DATABASE_URL:unrelated});
   assert(log.includes("WRONG_DATABASE_TARGET"));
   assert(!log.includes(unrelated),"Database URL was exposed");
-  const wrongDb="postgresql://foo:bar@ep-holy-term-b93irruj.c-7.eu-central-1.aws.neon.tech/production";
+  const wrongDb=syntheticPostgresUrl("postgresql://ep-holy-term-b93irruj.c-7.eu-central-1.aws.neon.tech/wrong-database");
   assert(run({DATABASE_URL:wrongDb}).includes("WRONG_DATABASE_TARGET"));
   const malformed="not-a-database-url";
   assert(run({DATABASE_URL:malformed}).includes("MALFORMED_SECRET"));

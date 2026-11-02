@@ -1,4 +1,5 @@
 import {beforeEach,describe,it,expect,vi} from "vitest";
+import {syntheticPostgresUrl} from "../helpers/syntheticPostgresUrl.mjs";
 const mocks=vi.hoisted(()=>({health:vi.fn(),getSql:vi.fn()}));
 vi.mock("next/server",()=>({
   NextResponse:{json:(body,options={})=>({
@@ -14,7 +15,7 @@ beforeEach(()=>{
   vi.clearAllMocks();
   mocks.health.mockResolvedValue({
     configured:true,reachable:false,provider:"neon-postgres",
-    error:"connection failed: postgresql://user:SECRET_DO_NOT_LOG@host/neondb",
+    error:`connection failed: ${syntheticPostgresUrl("postgresql://database.example.invalid/neondb",{password:"SECRET_DO_NOT_LOG"})}`,
     debugConnection:"SECRET_DO_NOT_LOG"
   });
 });
