@@ -78,7 +78,34 @@ BEGIN
   IF (SELECT coalesce(sum(verified_xp),0) FROM public.verified_completion_receipts
       WHERE auth_user_id='synthetic-student-b')<>0
   THEN RAISE EXCEPTION 'Cross-user reward total leaked'; END IF;
-  RAISE NOTICE 'PASS: verified rewards are server-only, deduped, immutable and owner-filtered';
+
+  BEGIN
+    INSERT INTO public.verified_completion_receipts
+      (auth_user_id,completion_id,kind,verified_xp,grading_version,evidence_sha256)
+    VALUES ('nonexistent-auth-user','invalid-owner','mission',50,'test-only-v1',repeat('a',64));
+    RAISE EXCEPTION 'Accepted verified reward for a nonexistent identity';
+  EXCEPTION WHEN foreign_key_violation THEN NULL;
+  END;
+
+  -- Future GDPR deletion must be possible only under an explicit owner scope.
+  PERFORM set_config('app.verified_receipt_erasure','YES',true);
+  BEGIN
+    UPDATE public.verified_completion_receipts SET verified_xp=99
+    WHERE auth_user_id='synthetic-student-a';
+    RAISE EXCEPTION 'Account erasure scope allowed receipt UPDATE';
+  EXCEPTION WHEN raise_exception THEN
+    IF SQLERRM<>'Verified completion receipts are immutable' THEN RAISE; END IF;
+  END;
+  DELETE FROM public.verified_completion_receipts
+  WHERE auth_user_id='synthetic-student-a';
+  GET DIAGNOSTICS affected=ROW_COUNT;
+  IF affected<>1 THEN RAISE EXCEPTION 'Authorized data erasure did not delete receipt'; END IF;
+  IF EXISTS(SELECT 1 FROM public.verified_completion_receipts
+            WHERE auth_user_id='synthetic-student-a') THEN
+    RAISE EXCEPTION 'Account erasure retained personal reward record';
+  END IF;
+
+  RAISE NOTICE 'PASS: rewards server-only, deduped, immutable; explicit owner erasure works';
 END;
 $trusted$;
 RESET ROLE;
