@@ -13,6 +13,14 @@ BEGIN
  IF n<>1 THEN RAISE EXCEPTION 'A can see % roles, expected 1',n; END IF;
  SELECT count(*) INTO n FROM public.student_cloud_state;
  IF n<>1 THEN RAISE EXCEPTION 'A can see % cloud rows, expected 1',n; END IF;
+ SELECT count(id) INTO n FROM public.parent_invites;
+ IF n<>1 THEN RAISE EXCEPTION 'Student A must see their one invitation only'; END IF;
+ BEGIN
+   PERFORM token_hash FROM public.parent_invites;
+   RAISE EXCEPTION 'Client could read hashed invitation token';
+ EXCEPTION WHEN insufficient_privilege THEN NULL;
+ END;
+
 
  BEGIN
    UPDATE public.app_users SET display_name='forged client name'
@@ -125,6 +133,8 @@ BEGIN
  IF n<>1 THEN RAISE EXCEPTION 'B cannot isolate app users'; END IF;
  SELECT count(*) INTO n FROM public.student_cloud_state_history;
  IF n<>0 THEN RAISE EXCEPTION 'B can see A cloud history'; END IF;
+ SELECT count(id) INTO n FROM public.parent_invites;
+ IF n<>0 THEN RAISE EXCEPTION 'B could see A parent invite'; END IF;
  UPDATE public.student_cloud_state
  SET revision=revision+1
  WHERE auth_user_id='synthetic-student-a' AND revision=1;
@@ -152,6 +162,8 @@ BEGIN
  IF n<>1 THEN RAISE EXCEPTION 'Parent should see only linked A profile; got %',n; END IF;
  SELECT count(*) INTO n FROM public.student_parent_links;
  IF n<>1 THEN RAISE EXCEPTION 'Parent cannot see own link'; END IF;
+ SELECT count(id) INTO n FROM public.parent_invites;
+ IF n<>0 THEN RAISE EXCEPTION 'Parent P should not enumerate student-issued invitations'; END IF;
  SELECT count(*) INTO n FROM public.parent_link_change_requests;
  IF n<>1 THEN RAISE EXCEPTION 'Parent cannot see own link-change requests'; END IF;
 END;
