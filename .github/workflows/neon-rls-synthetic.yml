@@ -9,6 +9,8 @@ on:
       - tests/sql/neon_rls_*.sql
       - scripts/neon-identity-jwt-readonly.mjs
       - scripts/neon-isolated-server-role-attestation.mjs
+      - audits/neon-preview-attestation/**
+      - tests/scripts/neon-preview-build-attest-contract.mjs
       - tests/scripts/neon-jwt-smoke-contract.mjs
       - tests/scripts/mock-neon-jwt-fetch.mjs
       - .github/workflows/neon-rls-synthetic.yml
@@ -19,6 +21,8 @@ on:
       - tests/sql/neon_rls_*.sql
       - scripts/neon-identity-jwt-readonly.mjs
       - scripts/neon-isolated-server-role-attestation.mjs
+      - audits/neon-preview-attestation/**
+      - tests/scripts/neon-preview-build-attest-contract.mjs
       - tests/scripts/neon-jwt-smoke-contract.mjs
       - tests/scripts/mock-neon-jwt-fetch.mjs
       - .github/workflows/neon-rls-synthetic.yml
@@ -58,6 +62,10 @@ jobs:
         run: node --check scripts/neon-isolated-server-role-attestation.mjs
       - name: Test fail-closed JWT smoke contract with offline mock
         run: node tests/scripts/neon-jwt-smoke-contract.mjs
+      - name: Audit isolated Preview build artifact and offline preflight
+        run: |
+          node --check audits/neon-preview-attestation/attest.mjs
+          node tests/scripts/neon-preview-build-attest-contract.mjs
       - name: Validate disposable PostgreSQL instance
         run: |
           test "$PGHOST" = "127.0.0.1"
