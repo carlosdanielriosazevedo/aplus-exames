@@ -30,4 +30,6 @@ RESET ROLE;
 \ir neon_rls_synthetic_assertions.sql
 \echo 'Running server-authoritative insert/CAS and replay assertions'
 \ir neon_rls_synthetic_server_cas.sql
+\echo 'Checking server-only append-only verified receipt authority'
+\ir neon_rls_synthetic_rewards.sql
 \echo 'PASS: PostgreSQL synthetic RLS migration smoke'
