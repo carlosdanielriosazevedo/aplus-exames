@@ -162,11 +162,13 @@ BEGIN
  IF n<>0 THEN RAISE EXCEPTION 'B can see A cloud history'; END IF;
  SELECT count(id) INTO n FROM public.parent_invites;
  IF n<>0 THEN RAISE EXCEPTION 'B could see A parent invite'; END IF;
- UPDATE public.student_cloud_state
- SET revision=revision+1
- WHERE auth_user_id='synthetic-student-a' AND revision=1;
- GET DIAGNOSTICS n=ROW_COUNT;
- IF n<>0 THEN RAISE EXCEPTION 'B could update A cloud state'; END IF;
+ BEGIN
+   UPDATE public.student_cloud_state
+   SET revision=revision+1
+   WHERE auth_user_id='synthetic-student-a' AND revision=1;
+   RAISE EXCEPTION 'B could directly update student cloud state';
+ EXCEPTION WHEN insufficient_privilege THEN NULL;
+ END;
 END;
 $assert_b$;
 RESET ROLE;
