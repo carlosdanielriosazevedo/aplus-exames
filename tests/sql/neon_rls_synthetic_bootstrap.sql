@@ -18,7 +18,10 @@ GRANT USAGE ON SCHEMA auth TO neondb_owner;
 SET ROLE neondb_owner;
 
 CREATE TABLE public.app_users(
-  id uuid PRIMARY KEY, auth_user_id text NOT NULL UNIQUE, display_name text
+  id uuid PRIMARY KEY, auth_user_id text NOT NULL UNIQUE,
+  display_name text, email_snapshot text,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  updated_at timestamptz NOT NULL DEFAULT now()
 );
 CREATE TABLE public.app_user_roles(
   user_id uuid NOT NULL REFERENCES public.app_users(id),role text NOT NULL,
@@ -26,7 +29,10 @@ CREATE TABLE public.app_user_roles(
 );
 CREATE TABLE public.student_profiles(
   user_id uuid PRIMARY KEY REFERENCES public.app_users(id),
-  school_year text
+  school_year text, recent_grade smallint, goal smallint,
+  syllabus_progress text, exam_timing text,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  updated_at timestamptz NOT NULL DEFAULT now()
 );
 CREATE TABLE public.parent_invites(
   id uuid PRIMARY KEY,student_user_id uuid NOT NULL REFERENCES public.app_users(id)
