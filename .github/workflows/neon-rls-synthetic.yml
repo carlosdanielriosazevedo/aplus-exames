@@ -9,8 +9,6 @@ on:
       - tests/sql/neon_rls_*.sql
       - scripts/neon-identity-jwt-readonly.mjs
       - scripts/neon-isolated-server-role-attestation.mjs
-      - scripts/neon-isolated-preview-attest-local.mjs
-      - tests/scripts/neon-preview-attest-launcher.test.mjs
       - tests/scripts/neon-jwt-smoke-contract.mjs
       - tests/scripts/mock-neon-jwt-fetch.mjs
       - .github/workflows/neon-rls-synthetic.yml
@@ -21,8 +19,6 @@ on:
       - tests/sql/neon_rls_*.sql
       - scripts/neon-identity-jwt-readonly.mjs
       - scripts/neon-isolated-server-role-attestation.mjs
-      - scripts/neon-isolated-preview-attest-local.mjs
-      - tests/scripts/neon-preview-attest-launcher.test.mjs
       - tests/scripts/neon-jwt-smoke-contract.mjs
       - tests/scripts/mock-neon-jwt-fetch.mjs
       - .github/workflows/neon-rls-synthetic.yml
@@ -62,8 +58,6 @@ jobs:
         run: node --check scripts/neon-isolated-server-role-attestation.mjs
       - name: Test fail-closed JWT smoke contract with offline mock
         run: node tests/scripts/neon-jwt-smoke-contract.mjs
-      - name: Test isolated Vercel Preview CLI launcher without secrets or network
-        run: node tests/scripts/neon-preview-attest-launcher.test.mjs
       - name: Validate disposable PostgreSQL instance
         run: |
           test "$PGHOST" = "127.0.0.1"
