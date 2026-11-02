@@ -62,7 +62,7 @@ assert.ok(cloudStore.includes("revision=${expectedRevision}"),"CAS atómico tem 
 assert.ok(cloudStore.includes("revision=revision+1"),"Revisão tem de ser incrementada pelo servidor.");
 assert.ok(cloudStore.includes("on conflict (auth_user_id) do nothing"),"Primeiro INSERT não pode substituir uma linha existente.");
 assert.ok(cloudMigration.includes("REVOKE ALL ON TABLE public.student_cloud_state FROM authenticated, anonymous, PUBLIC"),"Data API não pode continuar a escrever diretamente o progresso.");
-assert.ok(!/auth_user_id\\s*:\\s*s(?:\\.|\\[)/.test(cloudSource),"auth_user_id passou a poder vir do estado controlado pelo cliente.");
+assert.ok(!/auth_user_id\s*:\s*s(?:\.|\[)/.test(cloudSource),"auth_user_id passou a poder vir do estado controlado pelo cliente.");
 const payloadStart=cloudSource.indexOf("export function studentStateForCloud");
 const payloadEnd=cloudSource.indexOf("export function mergeStudentCloudState");
 assert.ok(payloadStart>=0&&payloadEnd>payloadStart,"Não foi possível localizar a allowlist do estado cloud.");
