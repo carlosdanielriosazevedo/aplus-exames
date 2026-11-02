@@ -57,6 +57,12 @@ Using only three dedicated synthetic Neon Auth identities A (student), B (studen
 
 Inspect HTTP responses and DB counts only for synthetic rows. Do not infer JWT isolation from tests run as `neondb_owner`, which has BYPASSRLS in the inspected project.
 
+## Prepared real Neon JWT read-only test — NOT EXECUTED
+
+The opt-in script `scripts/neon-identity-jwt-readonly.mjs` is pinned to the **existing isolated** Neon Data API host and performs **GET requests only**. It requires explicit `CONFIRM_SYNTHETIC_NEON_READONLY=YES`, a verified synthetic target, and three independently signed **synthetic test-account** JWTs supplied at runtime via environment variables (`NEON_SYNTHETIC_JWT_A`, `NEON_SYNTHETIC_JWT_B`, `NEON_SYNTHETIC_JWT_P`), plus `NEON_SYNTHETIC_DATA_API_URL`. It makes no request unless all safeguards pass. Never commit these tokens, inject real-user JWTs, or paste credentials into a PR, CI log, chat, or file.
+
+The test checks unauthenticated denial or empty results; and that each signed token sees only its own `app_users` row and roles. It is **not** yet an end-to-end validation of protected writes, parent relationships, JWT expiry, session renewal or cloud CAS, and must not run against the current schema 8 with RLS off. The tested endpoint currently has Neon Auth and Data API provisioned, but no matching authenticated test execution has been performed. A new empty independently approved synthetic environment or a fully validated existing isolated dataset is needed first, along with an explicit migration approval.
+
 ## Rollback / independent gate
 
 The SQL transaction rolls back automatically on an error **during execution**. After commit, a blind rollback to the previous broad grants would knowingly reintroduce unsafe access and is prohibited. Prefer fix-forward with a reviewed compatible migration, and preserve historical data. Test application-level compatibility and login before any rollout.
