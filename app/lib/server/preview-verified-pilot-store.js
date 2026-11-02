@@ -4,9 +4,13 @@ import {PILOT_KEY,publicPilotSession} from "./preview-verified-pilot.js";
 
 export async function readPreviewPilot(sql,subject){
   const rows=await sql`
-    SELECT session_id,answers,completed_at
-    FROM public.preview_verified_math_sessions
-    WHERE auth_user_id=${subject} AND assessment_key=${PILOT_KEY}
+    SELECT s.session_id,s.answers,s.completed_at,r.verified_xp
+    FROM public.preview_verified_math_sessions AS s
+    LEFT JOIN public.verified_completion_receipts AS r
+      ON r.auth_user_id=s.auth_user_id
+     AND r.completion_id=s.assessment_key
+     AND r.grading_version='synthetic-preview-math-v1'
+    WHERE s.auth_user_id=${subject} AND s.assessment_key=${PILOT_KEY}
     LIMIT 1
   `;
   return rows[0]||null;
