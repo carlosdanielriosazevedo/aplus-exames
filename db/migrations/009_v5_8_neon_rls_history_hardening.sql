@@ -79,7 +79,11 @@ grant update (school_year,recent_grade,goal,syllabus_progress,exam_timing)
 -- As tabelas parentais são apenas legíveis pelas duas partes da ligação.
 -- Escritas ficam deliberadamente sem grant para authenticated: serão feitas por
 -- endpoints server-side depois de validar sessão, role, token e transição de estado.
-grant select on table parent_invites to authenticated;
+-- Invitation token hashes are server-only; clients may read safe invitation metadata.
+-- Do not grant table-wide SELECT (which would expose token_hash via Data API).
+grant select (id,student_user_id,target_email,status,expires_at,
+  accepted_by_user_id,created_at,accepted_at)
+  on table parent_invites to authenticated;
 grant select on table student_parent_links to authenticated;
 grant select on table parent_link_change_requests to authenticated;
 
@@ -226,7 +230,7 @@ BEGIN
     ('app_users',true,false,false,false,1),
     ('app_user_roles',true,false,false,false,1),
     ('student_profiles',true,false,false,false,3),
-    ('parent_invites',true,false,false,false,1),
+    ('parent_invites',false,false,false,false,1),
     ('student_parent_links',true,false,false,false,1),
     ('parent_link_change_requests',true,false,false,false,1),
     ('student_cloud_state_history',true,false,false,false,1)
@@ -240,6 +244,10 @@ BEGIN
     OR (SELECT count(*)::integer FROM pg_policies p WHERE p.schemaname='public'
         AND p.tablename=expected.table_name) <> expected.policies;
   IF invalid_count<>0 THEN RAISE EXCEPTION 'RLS/grant postconditions failed for % tables',invalid_count; END IF;
+  IF has_column_privilege('authenticated','public.parent_invites','token_hash','SELECT')
+     OR NOT has_column_privilege('authenticated','public.parent_invites','id','SELECT')
+     OR NOT has_column_privilege('authenticated','public.parent_invites','status','SELECT')
+  THEN RAISE EXCEPTION 'Invitation token hashes exposed to authenticated'; END IF;
   -- RLS restricts rows; column privileges protect structural identity fields.
   IF has_column_privilege('authenticated','public.app_users','id','UPDATE')
      OR has_column_privilege('authenticated','public.app_users','auth_user_id','UPDATE')
