@@ -82,6 +82,7 @@ describe("ledger summation does not trust student_cloud_state",()=>{
     expect(recorded[0].query).toContain("verified_completion_receipts");
     expect(recorded[0].query).not.toContain("student_cloud_state");
     expect(recorded[0].query).toContain("where auth_user_id=?");
+    expect(recorded[0].query).toContain("grading_version not like 'synthetic-%'");
     expect(recorded[0].values).toEqual(["signed-student-a"]);
   });
 
