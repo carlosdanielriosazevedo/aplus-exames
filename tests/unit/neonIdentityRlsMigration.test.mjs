@@ -15,17 +15,20 @@ test("Neon identity migration uses transaction, strict preflight and postflight"
 
 test("Neon identity migration revokes previous grants before regranting minimum rights",()=>{
   const revocation=sql.indexOf("REVOKE ALL ON TABLE");
-  const firstGrant=sql.indexOf("grant select, insert on table app_users");
+  const firstGrant=sql.indexOf("grant select on table app_users to authenticated");
   expect(revocation).toBeGreaterThan(-1);
   expect(firstGrant).toBeGreaterThan(revocation);
   for(const table of ["app_users","app_user_roles","student_profiles","parent_invites","student_parent_links","parent_link_change_requests"]){
     expect(sql).toContain("alter table "+table+" enable row level security;");
   }
-  for(const policy of ["app_users_select_self","app_users_insert_self","app_users_update_self","app_user_roles_select_self","student_profiles_select_authorized","student_profiles_insert_self","student_profiles_update_self","parent_invites_select_student","student_parent_links_select_party","parent_link_change_requests_select_party"]){
+  for(const policy of ["app_users_select_self","app_user_roles_select_self","student_profiles_select_authorized","student_profiles_insert_self","student_profiles_update_self","parent_invites_select_student","student_parent_links_select_party","parent_link_change_requests_select_party"]){
     expect(sql).toContain("create policy \""+policy+"\"");
   }
   expect(sql).toMatch(/FROM authenticated, anonymous, PUBLIC/);
-  expect(sql).toContain("grant update (display_name,updated_at) on table app_users to authenticated;");
+  expect(sql).toContain('grant select on table app_users to authenticated;');
+  expect(sql).toContain('drop policy if exists "app_users_insert_self" on app_users;');
+  expect(sql).toContain('drop policy if exists "app_users_update_self" on app_users;');
+  expect(sql).toContain("('app_users',true,false,false,false,1)");
   expect(sql).toContain("grant update (school_year,recent_grade,goal,syllabus_progress,exam_timing,updated_at) on table student_profiles to authenticated;");
   expect(sql).toContain("Unsafe or incomplete column-level UPDATE privileges");
 });
