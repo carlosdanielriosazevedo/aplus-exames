@@ -15,8 +15,13 @@ const allow=process.env.CONFIRM_SYNTHETIC_NEON_READONLY==="YES";
 
 function requireConfigured(){
   if(!allow)throw new Error("Set CONFIRM_SYNTHETIC_NEON_READONLY=YES only after verifying data provenance.");
-  if(!url || !url.startsWith("https://") || !url.includes("/rest/v1"))
-    throw new Error("A synthetic Neon Data API HTTPS endpoint is required.");
+  // Exact-host allowlist prevents this script from accidentally querying production.
+  const expectedHost="ep-holy-term-b93irruj.apirest.c-7.eu-central-1.aws.neon.tech";
+  let parsed;
+  try{parsed=new URL(url);}catch{throw new Error("Invalid Neon Data API URL");}
+  if(parsed.protocol!=="https:" || parsed.hostname!==expectedHost ||
+      parsed.pathname!=="/neondb/rest/v1" || parsed.search || parsed.hash)
+    throw new Error("Only the verified synthetic Neon Data API endpoint is permitted.");
   for(const [name,jwt] of Object.entries(roles)){
     if(typeof jwt!=="string" || jwt.split(".").length!==3)
       throw new Error("Missing/invalid-format test token for "+name+" (token not printed)");
@@ -49,8 +54,19 @@ async function main(){
   const subjects=Object.values(roles).map(subject);
   assert.equal(new Set(subjects).size,3,"Synthetic actor JWTs must be distinct");
   console.log("Starting synthetic Neon Data API JWT read-only checks");
-  const anonymous=await query("/app_users?select=id",null);
-  assert.equal(anonymous.length,0,"Anonymous access exposed identity rows");
+  // A denied response (401/403) and a successful empty list are both secure.
+  const anonResponse=await fetch(url+"/app_users?select=id",{
+    method:"GET",headers:{"accept":"application/json"},cache:"no-store",
+    redirect:"error",signal:AbortSignal.timeout(12000)
+  });
+  if(anonResponse.status===200){
+    const anonRows=await anonResponse.json();
+    assert(Array.isArray(anonRows) && anonRows.length===0,
+      "Anonymous access exposed identity rows");
+  }else{
+    assert([401,403].includes(anonResponse.status),
+      "Unexpected anonymous response HTTP "+anonResponse.status);
+  }
   const ids=[];
   for(const [name,token] of Object.entries(roles)){
     const expected=subject(token);
