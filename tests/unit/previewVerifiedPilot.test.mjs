@@ -60,6 +60,15 @@ describe("synthetic pilot hard-lock",()=>{
     expect(JSON.stringify(state)).not.toContain("forgedId");
     expect(state).not.toHaveProperty("answers");
   });
+  it("shows a completed award only when the trusted receipt was joined",()=>{
+    const completed={session_id:"synthetic-uuid",completed_at:"2026-11-02T12:00:00Z",
+      answers:{q1:1,q2:0},verified_xp:10};
+    const row=publicPilotSession(completed);
+    expect(row.completed).toBe(true);
+    expect(row.verifiedXp).toBe(10);
+    expect(()=>publicPilotSession({...completed,verified_xp:null})).toThrow();
+    expect(()=>publicPilotSession({...completed,verified_xp:-1})).toThrow();
+  });
 });
 
 describe("disposable SQL grading cannot drift from seven-item bank",()=>{
