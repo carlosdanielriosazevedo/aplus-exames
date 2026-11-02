@@ -13,6 +13,9 @@ on:
       - tests/scripts/neon-preview-build-attest-contract.mjs
       - tests/scripts/neon-jwt-smoke-contract.mjs
       - app/api/cloud/state/route.js
+      - app/api/cloud/rewards/route.js
+      - app/lib/server/verified-rewards.js
+      - tests/unit/verifiedRewardsRoute.test.mjs
       - app/lib/cloud.js
       - app/lib/server/cloud-state-validation.js
       - app/lib/server/cloud-state-store.js
@@ -35,6 +38,9 @@ on:
       - tests/scripts/neon-preview-build-attest-contract.mjs
       - tests/scripts/neon-jwt-smoke-contract.mjs
       - app/api/cloud/state/route.js
+      - app/api/cloud/rewards/route.js
+      - app/lib/server/verified-rewards.js
+      - tests/unit/verifiedRewardsRoute.test.mjs
       - app/lib/cloud.js
       - app/lib/server/cloud-state-validation.js
       - app/lib/server/cloud-state-store.js
@@ -87,12 +93,14 @@ jobs:
           node --check app/api/cloud/state/route.js
           node --check app/lib/server/cloud-state-store.js
           node --check app/lib/server/cloud-state-validation.js
+          node --check app/lib/server/verified-rewards.js
+          node --check app/api/cloud/rewards/route.js
           node --check app/lib/cloud.js
           node tests/scripts/cloud-server-cas-contract.mjs
       - name: Verify Next API boundary with mocked auth/session and no network
         run: |
           npm ci --ignore-scripts --no-audit --no-fund
-          npx vitest run tests/unit/cloudStateRoute.test.mjs tests/unit/cloudStateClient.test.mjs tests/unit/neonIdentityRlsMigration.test.mjs tests/unit/betaSyncValidation.test.js tests/unit/stateTortureCloudMerge.test.js --maxWorkers=2
+          npx vitest run tests/unit/cloudStateRoute.test.mjs tests/unit/cloudStateClient.test.mjs tests/unit/verifiedRewardsRoute.test.mjs tests/unit/neonIdentityRlsMigration.test.mjs tests/unit/betaSyncValidation.test.js tests/unit/stateTortureCloudMerge.test.js --maxWorkers=2
           node scripts/cloud-reliability-audit.mjs
           node scripts/cloud-resume-product-contract-audit.mjs
       - name: Audit isolated Preview build artifact and offline preflight
