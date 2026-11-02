@@ -8,6 +8,7 @@ on:
       - db/migrations/009_v5_8_neon_rls_history_hardening.sql
       - db/migrations/010_v5_9_verified_pilot_sessions.sql
       - tests/sql/neon_verified_pilot_assertions.sql
+      - tests/sql/neon_verified_pilot_concurrency_setup.sql
       - tests/sql/neon_rls_*.sql
       - scripts/neon-identity-jwt-readonly.mjs
       - scripts/neon-isolated-server-role-attestation.mjs
@@ -40,6 +41,7 @@ on:
       - db/migrations/009_v5_8_neon_rls_history_hardening.sql
       - db/migrations/010_v5_9_verified_pilot_sessions.sql
       - tests/sql/neon_verified_pilot_assertions.sql
+      - tests/sql/neon_verified_pilot_concurrency_setup.sql
       - tests/sql/neon_rls_*.sql
       - scripts/neon-identity-jwt-readonly.mjs
       - scripts/neon-isolated-server-role-attestation.mjs
@@ -178,3 +180,18 @@ jobs:
           schema="$(psql -v ON_ERROR_STOP=1 -Atc 'SELECT schema_version FROM public.app_schema_meta WHERE singleton=true')"
           test "$schema" = "10"
           echo "PASS: preview-only pilot graded on disposable PostgreSQL; schema=10"
+
+      - name: Race two synthetic finalizers against one immutable receipt
+        run: |
+          psql -v ON_ERROR_STOP=1 -f tests/sql/neon_verified_pilot_concurrency_setup.sql
+          psql -X -v ON_ERROR_STOP=1 -Atq -c "SET ROLE neondb_owner; SELECT verified_xp FROM public.finish_preview_verified_math('synthetic-race-student')" > /tmp/pilot-race-a.out 2>&1 &
+          first=$!
+          psql -X -v ON_ERROR_STOP=1 -Atq -c "SET ROLE neondb_owner; SELECT verified_xp FROM public.finish_preview_verified_math('synthetic-race-student')" > /tmp/pilot-race-b.out 2>&1 &
+          second=$!
+          wait "$first"
+          wait "$second"
+          grep -qx '35' /tmp/pilot-race-a.out
+          grep -qx '35' /tmp/pilot-race-b.out
+          receipts="$(psql -v ON_ERROR_STOP=1 -Atc "SELECT count(*) FROM public.verified_completion_receipts WHERE auth_user_id='synthetic-race-student'")"
+          test "$receipts" = "1"
+          echo "PASS: two concurrent submissions, identical verified XP, one immutable receipt"
