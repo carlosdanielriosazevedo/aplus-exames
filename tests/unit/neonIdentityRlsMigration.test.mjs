@@ -29,7 +29,11 @@ test("Neon identity migration revokes previous grants before regranting minimum 
   expect(sql).toContain('drop policy if exists "app_users_insert_self" on app_users;');
   expect(sql).toContain('drop policy if exists "app_users_update_self" on app_users;');
   expect(sql).toContain("('app_users',true,false,false,false,1)");
-  expect(sql).toContain("grant update (school_year,recent_grade,goal,syllabus_progress,exam_timing,updated_at) on table student_profiles to authenticated;");
+  expect(sql).toContain("grant insert (user_id,school_year,recent_grade,goal,syllabus_progress,exam_timing)");
+  expect(sql).toContain("grant update (school_year,recent_grade,goal,syllabus_progress,exam_timing)");
+  expect(sql).toContain("('student_profiles',true,false,false,false,3)");
+  expect(sql).toContain("'public.student_profiles','created_at','INSERT'");
+  expect(sql).toContain("'public.student_profiles','updated_at','UPDATE'");
   expect(sql).toContain("Unsafe or incomplete column-level UPDATE privileges");
 });
 
