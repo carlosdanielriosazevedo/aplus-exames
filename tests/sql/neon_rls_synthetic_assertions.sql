@@ -50,6 +50,18 @@ BEGIN
  EXCEPTION WHEN insufficient_privilege THEN NULL;
  END;
  BEGIN
+   UPDATE public.student_profiles SET updated_at=now()-interval '5 years'
+   WHERE user_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+   RAISE EXCEPTION 'Client could forge profile updated_at';
+ EXCEPTION WHEN insufficient_privilege THEN NULL;
+ END;
+ BEGIN
+   INSERT INTO public.student_profiles(user_id,created_at)
+   VALUES('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',now()-interval '5 years');
+   RAISE EXCEPTION 'Client could forge profile created_at on INSERT';
+ EXCEPTION WHEN insufficient_privilege THEN NULL;
+ END;
+ BEGIN
    UPDATE public.student_profiles SET user_id='dddddddd-dddd-4ddd-8ddd-dddddddddddd'
    WHERE user_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
    RAISE EXCEPTION 'Client could change student profile owner';
