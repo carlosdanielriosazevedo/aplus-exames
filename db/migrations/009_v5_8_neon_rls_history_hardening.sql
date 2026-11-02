@@ -40,6 +40,21 @@ REVOKE ALL ON TABLE
   public.parent_link_change_requests
 FROM authenticated, anonymous, PUBLIC;
 
+-- Security boundary for cloud progress: the browser may read its own row but
+-- MUST NOT write/delete it through Data API. All writes use /api/cloud/state,
+-- a session-authorized server handler with an atomic revision precondition.
+-- Deploy the compatible API/client BEFORE applying this database migration;
+-- migration without a compatible running API intentionally blocks old clients.
+REVOKE ALL ON TABLE public.student_cloud_state FROM authenticated, anonymous, PUBLIC;
+GRANT SELECT ON TABLE public.student_cloud_state TO authenticated;
+DROP POLICY IF EXISTS "student_cloud_state_select_own" ON public.student_cloud_state;
+CREATE POLICY "student_cloud_state_select_own"
+ON public.student_cloud_state FOR SELECT TO authenticated
+USING ((SELECT auth.user_id()) = auth_user_id);
+DROP POLICY IF EXISTS "student_cloud_state_insert_own" ON public.student_cloud_state;
+DROP POLICY IF EXISTS "student_cloud_state_update_own" ON public.student_cloud_state;
+DROP POLICY IF EXISTS "student_cloud_state_delete_own" ON public.student_cloud_state;
+
 -- APProva+ v5.6 — fronteiras reais de autorização para identidade/parental
 --
 -- Objetivo: impedir que um utilizador autenticado leia ou altere dados de outra
@@ -233,6 +248,7 @@ BEGIN
     ('parent_invites',false,false,false,false,1),
     ('student_parent_links',true,false,false,false,1),
     ('parent_link_change_requests',true,false,false,false,1),
+    ('student_cloud_state',true,false,false,false,1),
     ('student_cloud_state_history',true,false,false,false,1)
   ) AS expected(table_name,can_select,can_insert,can_update,can_delete,policies)
   LEFT JOIN pg_class c ON c.oid=to_regclass('public.'||expected.table_name)
@@ -267,7 +283,8 @@ BEGIN
     SELECT 1 FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
     WHERE n.nspname='public' AND c.relname IN
       ('app_users','app_user_roles','student_profiles','parent_invites',
-       'student_parent_links','parent_link_change_requests','student_cloud_state_history')
+       'student_parent_links','parent_link_change_requests','student_cloud_state',
+       'student_cloud_state_history')
       AND (has_table_privilege('anonymous',c.oid,'SELECT')
         OR has_table_privilege('anonymous',c.oid,'INSERT')
         OR has_table_privilege('anonymous',c.oid,'UPDATE')
