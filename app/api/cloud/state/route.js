@@ -26,7 +26,7 @@ export async function GET(){
     {ok:false,code:"DATABASE_NOT_CONFIGURED"},{status:503,headers});
   try{
     const data=await readCloudRow(getSql(),auth.value.authUserId);
-    return NextResponse.json({ok:true,data},{headers});
+    return NextResponse.json({ok:true,authority:"client-reported",data},{headers});
   }catch{
     // Do not leak SQL messages, credentials, connection details, or personal data.
     return NextResponse.json({ok:false,code:"CLOUD_READ_FAILED"},{status:503,headers});
@@ -58,7 +58,8 @@ export async function POST(request){
 
   try{
     const result=await writeCloudRow(getSql(),auth.value.authUserId,valid);
-    return NextResponse.json(result,{status:result.conflict?409:200,headers});
+    return NextResponse.json({...result,authority:"client-reported"},
+      {status:result.conflict?409:200,headers});
   }catch{
     return NextResponse.json({ok:false,code:"CLOUD_WRITE_FAILED"},{status:503,headers});
   }
