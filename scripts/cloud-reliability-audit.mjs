@@ -83,9 +83,14 @@ const walk=dir=>readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDir
 // Estado FINAL das migrations: CREATE adiciona; DROP remove. A ordem do nome do ficheiro é o contrato.
 const migrationUrls=walk(new URL("../db/migrations/",import.meta.url)).filter(url=>url.pathname.endsWith(".sql")).sort((a,b)=>a.pathname.localeCompare(b.pathname));
 const finalTables=new Set();
+const definedSqlFunctions=new Set();
+const functionDdlRe=/\\bcreate\\s+(?:or\\s+replace\\s+)?function\\s+(?:public\\.)?"?([a-zA-Z_][a-zA-Z0-9_]*)"?\\s*\\(/giu;
 const ddlRe=/\b(create|drop)\s+table\s+(?:if\s+(?:not\s+)?exists\s+)?(?:public\.)?"?([a-zA-Z_][a-zA-Z0-9_]*)"?/giu;
 for(const url of migrationUrls){
   const sql=readFileSync(url,"utf8");
+  for(const match of sql.matchAll(functionDdlRe)){
+    definedSqlFunctions.add(match[1].toLowerCase());
+  }
   for(const match of sql.matchAll(ddlRe)){
     const table=match[2].toLowerCase();
     if(match[1].toLowerCase()==="create")finalTables.add(table);else finalTables.delete(table);
@@ -102,7 +107,7 @@ for(const url of serverUrls){
   for(const tagged of source.matchAll(/sql`([\s\S]*?)`/gu)){
     for(const match of tagged[1].matchAll(sqlRefRe)){
       const table=(match[1]||match[2]).toLowerCase();
-      if(!finalTables.has(table)&&!CTE_ALLOWLIST.has(table))missing.push(`${table} ← ${fileURLToPath(url)}`);
+      if(!finalTables.has(table)&&!definedSqlFunctions.has(table)&&!CTE_ALLOWLIST.has(table))missing.push(`${table} ← ${fileURLToPath(url)}`);
     }
   }
 }
