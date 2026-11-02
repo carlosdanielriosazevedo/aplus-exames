@@ -7,6 +7,11 @@ DO $preflight$
 BEGIN
   IF current_database()<>'neondb' OR current_user<>'neondb_owner'
   THEN RAISE EXCEPTION 'Preview pilot requires approved owner and database'; END IF;
+  -- This SQL is a disposable CI protocol prototype, NOT an executable Neon
+  -- rollout candidate. Explicit opt-in is required even in an owner session.
+  IF current_setting('app.synthetic_verified_pilot_ci',true)
+       IS DISTINCT FROM 'ONLY_DISPOSABLE'
+  THEN RAISE EXCEPTION 'CI-only isolation flag required'; END IF;
   IF NOT EXISTS(
     SELECT 1 FROM public.app_schema_meta
     WHERE singleton=true AND schema_version=9
