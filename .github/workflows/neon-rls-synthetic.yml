@@ -17,6 +17,8 @@ on:
       - app/lib/server/cloud-state-validation.js
       - app/lib/server/cloud-state-store.js
       - tests/scripts/cloud-server-cas-contract.mjs
+      - tests/unit/cloudStateRoute.test.mjs
+      - tests/unit/neonIdentityRlsMigration.test.mjs
       - tests/scripts/mock-neon-jwt-fetch.mjs
       - .github/workflows/neon-rls-synthetic.yml
   pull_request:
@@ -34,6 +36,8 @@ on:
       - app/lib/server/cloud-state-validation.js
       - app/lib/server/cloud-state-store.js
       - tests/scripts/cloud-server-cas-contract.mjs
+      - tests/unit/cloudStateRoute.test.mjs
+      - tests/unit/neonIdentityRlsMigration.test.mjs
       - tests/scripts/mock-neon-jwt-fetch.mjs
       - .github/workflows/neon-rls-synthetic.yml
 
@@ -79,6 +83,10 @@ jobs:
           node --check app/lib/server/cloud-state-validation.js
           node --check app/lib/cloud.js
           node tests/scripts/cloud-server-cas-contract.mjs
+      - name: Verify Next API boundary with mocked auth/session and no network
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npx vitest run tests/unit/cloudStateRoute.test.mjs tests/unit/neonIdentityRlsMigration.test.mjs --maxWorkers=2
       - name: Audit isolated Preview build artifact and offline preflight
         run: |
           node --check audits/neon-preview-attestation/attest.mjs
