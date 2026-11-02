@@ -7,14 +7,21 @@ SET ROLE neondb_owner;
 RESET ROLE;
 \echo 'Checking trusted server owner can maintain app identity after migration'
 SET ROLE neondb_owner;
-UPDATE public.app_users SET display_name='Server approved name'
-WHERE auth_user_id='synthetic-student-a';
+-- Mirror ensureAppUser()'s INSERT ... ON CONFLICT DO UPDATE under the DB owner role.
+INSERT INTO public.app_users (id,auth_user_id,display_name,email_snapshot)
+VALUES ('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa','synthetic-student-a',
+        'Server approved name','synthetic-verified@example.invalid')
+ON CONFLICT (auth_user_id) DO UPDATE SET
+  display_name=excluded.display_name,
+  email_snapshot=excluded.email_snapshot,
+  updated_at=now();
 DO $server_maintain$
 BEGIN
  IF NOT EXISTS(
   SELECT 1 FROM public.app_users
   WHERE auth_user_id='synthetic-student-a'
    AND display_name='Server approved name'
+   AND email_snapshot='synthetic-verified@example.invalid'
  ) THEN RAISE EXCEPTION 'Server identity maintenance failed'; END IF;
 END;
 $server_maintain$;
