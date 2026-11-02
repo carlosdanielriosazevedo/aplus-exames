@@ -5,7 +5,8 @@ export const runtime="nodejs";
 export const dynamic="force-dynamic";
 
 function unavailable(error){
-  console.error("Neon Auth handler unavailable",error);
+  // Do not write the provider exception to logs: it may contain auth secrets.
+  console.error("Neon Auth handler unavailable");
   return NextResponse.json({ok:false,error:error?.code||"AUTH_SERVER_NOT_CONFIGURED"},{status:Number(error?.status)||503});
 }
 
