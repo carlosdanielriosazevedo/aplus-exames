@@ -335,8 +335,10 @@ and never provisions a user account.
   Duplicate finishes return the same receipt; mismatched receipt
   state aborts the transaction. The synthetic award is 5 XP per
   correct answer, limited to 35. **It must not enter real ranking.**
-- GET returns only the own session status and answered question IDs,
-  without correct keys or score claims. Answers are selected-choice
+- GET returns only the own session status, answered question IDs and
+  (only after completion) the XP from a matching, trusted reward receipt.
+  It never reveals correct keys or client-claimed grades. A completed
+  attempt without its receipt fails closed. Answers are selected-choice
   integers only; no free-text response is sent.
 
 **Evidence required:** CI must prove client roles cannot read/write
