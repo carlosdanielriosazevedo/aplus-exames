@@ -69,8 +69,12 @@ revoke all on table parent_link_change_requests from anonymous;
 -- This prevents client-forged email_snapshot, generated IDs and timestamps.
 grant select on table app_users to authenticated;
 grant select on table app_user_roles to authenticated;
-grant select, insert on table student_profiles to authenticated;
-grant update (school_year,recent_grade,goal,syllabus_progress,exam_timing,updated_at) on table student_profiles to authenticated;
+-- Users can edit their educational preferences, but not timestamps or row identity.
+grant select on table student_profiles to authenticated;
+grant insert (user_id,school_year,recent_grade,goal,syllabus_progress,exam_timing)
+  on table student_profiles to authenticated;
+grant update (school_year,recent_grade,goal,syllabus_progress,exam_timing)
+  on table student_profiles to authenticated;
 
 -- As tabelas parentais são apenas legíveis pelas duas partes da ligação.
 -- Escritas ficam deliberadamente sem grant para authenticated: serão feitas por
@@ -221,7 +225,7 @@ BEGIN
   FROM (VALUES
     ('app_users',true,false,false,false,1),
     ('app_user_roles',true,false,false,false,1),
-    ('student_profiles',true,true,false,false,3),
+    ('student_profiles',true,false,false,false,3),
     ('parent_invites',true,false,false,false,1),
     ('student_parent_links',true,false,false,false,1),
     ('parent_link_change_requests',true,false,false,false,1),
@@ -243,6 +247,10 @@ BEGIN
      OR has_column_privilege('authenticated','public.app_users','email_snapshot','UPDATE')
      OR has_column_privilege('authenticated','public.student_profiles','user_id','UPDATE')
      OR has_column_privilege('authenticated','public.student_profiles','created_at','UPDATE')
+     OR has_column_privilege('authenticated','public.student_profiles','updated_at','UPDATE')
+     OR has_column_privilege('authenticated','public.student_profiles','created_at','INSERT')
+     OR has_column_privilege('authenticated','public.student_profiles','updated_at','INSERT')
+     OR NOT has_column_privilege('authenticated','public.student_profiles','user_id','INSERT')
      OR has_column_privilege('authenticated','public.app_users','display_name','UPDATE')
      OR NOT has_column_privilege('authenticated','public.student_profiles','school_year','UPDATE')
   THEN RAISE EXCEPTION 'Unsafe or incomplete column-level UPDATE privileges'; END IF;
