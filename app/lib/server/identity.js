@@ -35,8 +35,9 @@ export async function requireSession(){
   let result;
   try{
     result=await auth.getSession();
-  }catch(error){
-    console.error("server auth session validation failed",error);
+  }catch{
+    // Provider errors may contain cookies, tokens or sensitive response metadata.
+    console.error("server auth session validation failed");
     throw securityError("Unauthorized",401,"UNAUTHORIZED");
   }
   const session=result?.data||null;
