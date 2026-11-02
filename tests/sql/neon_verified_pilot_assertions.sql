@@ -95,6 +95,13 @@ BEGIN
       WHERE auth_user_id='synthetic-student-a')<>'1'
     THEN RAISE EXCEPTION 'Pilot lost immutable answer'; END IF;
 
+  -- Even a valid synthetic completion must never contribute to official XP.
+  IF (SELECT coalesce(sum(verified_xp),0)
+      FROM public.verified_completion_receipts
+      WHERE auth_user_id='synthetic-student-a'
+        AND grading_version NOT LIKE 'synthetic-%')<>0
+  THEN RAISE EXCEPTION 'Synthetic XP contaminated official totals'; END IF;
+
   -- B never sees A's verified award and cannot finalize A by having B's cookie:
   -- server methods always source p_auth_user_id from the verified session.
   INSERT INTO public.preview_verified_math_sessions(auth_user_id)
