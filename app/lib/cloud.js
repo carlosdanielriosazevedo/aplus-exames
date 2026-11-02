@@ -201,34 +201,31 @@ export function mergeStudentCloudState(local,remote){
   };
 }
 
-function cloudSchemaOutdated(error){
-  const message=String(error?.message||error||"");
-  return /revision|last_device_id/i.test(message) && /column|does not exist|schema/i.test(message);
-}
-
-function outdatedSchemaError(){
-  const error=new Error("A cloud precisa da migration v4.9 antes de sincronizar com segurança.");
-  error.code="CLOUD_SCHEMA_OUTDATED";
-  return error;
+// The client never sends direct Data API INSERT/UPDATE/DELETE for cloud state.
+// The server authenticates the cookie and supplies the row owner from the session.
+async function callCloudStateApi(method,payload=null){
+  const response=await fetch("/api/cloud/state",{
+    method,
+    credentials:"include",
+    cache:"no-store",
+    ...(payload?{
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(payload)
+    }:{})
+  });
+  const result=await response.json().catch(()=>null);
+  if(response.status===409&&result?.conflict)return result;
+  if(!response.ok||!result?.ok)
+    throw new Error("Não foi possível sincronizar o progresso. Verifica a sessão e tenta novamente.");
+  return result;
 }
 
 export async function loadStudentCloudState(){
-  const client=getCloudClient();
-  if(!client)throw new Error("Cloud ainda não configurada.");
+  if(!cloudConfiguration().configured)throw new Error("Cloud ainda não configurada.");
   const session=await getCloudSession();
   if(!session.user)throw new Error("É necessário iniciar sessão.");
-
-  const result=await client
-    .from("student_cloud_state")
-    .select("state_json,updated_at,revision,last_device_id")
-    .eq("auth_user_id",session.user.id)
-    .maybeSingle();
-
-  if(result?.error){
-    if(cloudSchemaOutdated(result.error))throw outdatedSchemaError();
-    throw new Error(result.error.message||"Erro ao carregar progresso.");
-  }
-  if(!result?.data)return null;
+  const result=await callCloudStateApi("GET");
+  if(!result.data)return null;
   return {
     ...result.data,
     revision:Number(result.data.revision)||0,
@@ -236,79 +233,18 @@ export async function loadStudentCloudState(){
   };
 }
 
-async function currentRemoteRow(client,authUserId){
-  const result=await client
-    .from("student_cloud_state")
-    .select("state_json,updated_at,revision,last_device_id")
-    .eq("auth_user_id",authUserId)
-    .maybeSingle();
-
-  if(result?.error){
-    if(cloudSchemaOutdated(result.error))throw outdatedSchemaError();
-    throw new Error(result.error.message||"Erro ao verificar revisão da cloud.");
-  }
-  return result?.data?{
-    ...result.data,
-    revision:Number(result.data.revision)||0,
-    last_device_id:result.data.last_device_id||null
-  }:null;
-}
-
 export async function saveStudentCloudState(s,{expectedRevision=0,deviceId=null,knownRemote=false}={}){
-  const client=getCloudClient();
-  if(!client)throw new Error("Cloud ainda não configurada.");
+  if(!cloudConfiguration().configured)throw new Error("Cloud ainda não configurada.");
   const session=await getCloudSession();
   if(!session.user)throw new Error("É necessário iniciar sessão.");
-
-  const nextRevision=Math.max(0,Number(expectedRevision)||0)+1;
-  const row={
-    auth_user_id:session.user.id,
-    state_json:studentStateForCloud(s),
-    revision:nextRevision,
-    last_device_id:deviceId||null,
-    updated_at:new Date().toISOString()
-  };
-
-  if((Number(expectedRevision)||0)===0 && !knownRemote){
-    const existing=await currentRemoteRow(client,session.user.id);
-    if(existing){
-      return {ok:false,conflict:true,remote:existing};
-    }
-
-    const inserted=await client
-      .from("student_cloud_state")
-      .insert(row)
-      .select("updated_at,revision,last_device_id")
-      .single();
-
-    if(inserted?.error){
-      if(cloudSchemaOutdated(inserted.error))throw outdatedSchemaError();
-      const remote=await currentRemoteRow(client,session.user.id);
-      if(remote)return {ok:false,conflict:true,remote};
-      throw new Error(inserted.error.message||"Erro ao guardar progresso.");
-    }
-    return {ok:true,conflict:false,data:inserted?.data||row};
-  }
-
-  const updated=await client
-    .from("student_cloud_state")
-    .update(row)
-    .eq("auth_user_id",session.user.id)
-    .eq("revision",Number(expectedRevision)||0)
-    .select("updated_at,revision,last_device_id")
-    .maybeSingle();
-
-  if(updated?.error){
-    if(cloudSchemaOutdated(updated.error))throw outdatedSchemaError();
-    throw new Error(updated.error.message||"Erro ao guardar progresso.");
-  }
-
-  if(!updated?.data){
-    const remote=await currentRemoteRow(client,session.user.id);
-    return {ok:false,conflict:true,remote};
-  }
-
-  return {ok:true,conflict:false,data:updated.data};
+  const revision=Number(expectedRevision);
+  // Only the server decides the owner and increments revision atomically.
+  return callCloudStateApi("POST",{
+    operation:revision===0&&!knownRemote?"insert":"update",
+    expectedRevision:revision,
+    state:studentStateForCloud(s),
+    deviceId
+  });
 }
 
 export async function overwriteStudentCloudState(s,{remoteRevision,deviceId=null}={}){
