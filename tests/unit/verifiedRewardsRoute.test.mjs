@@ -1,5 +1,6 @@
 import {beforeEach,describe,expect,it,vi} from "vitest";
-import {readVerifiedRewardTotals} from "../../app/lib/server/verified-rewards.js";
+// Import the real pure query separately; route uses the mocked module below.
+const {readVerifiedRewardTotals}=await vi.importActual("../../app/lib/server/verified-rewards.js");
 import {validateCloudWrite} from "../../app/lib/server/cloud-state-validation.js";
 
 const mocks=vi.hoisted(()=>({
