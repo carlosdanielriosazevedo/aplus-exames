@@ -30,6 +30,12 @@ BEGIN
  EXCEPTION WHEN insufficient_privilege THEN NULL;
  END;
  BEGIN
+   UPDATE public.app_users SET email_snapshot='forged@example.invalid'
+   WHERE auth_user_id='synthetic-student-a';
+   RAISE EXCEPTION 'Client could forge provider email snapshot';
+ EXCEPTION WHEN insufficient_privilege THEN NULL;
+ END;
+ BEGIN
    UPDATE public.app_users SET created_at=now()-interval '2 years'
    WHERE auth_user_id='synthetic-student-a';
    RAISE EXCEPTION 'Client could backdate app user created_at';
