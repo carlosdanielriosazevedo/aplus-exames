@@ -74,5 +74,11 @@ describe("provider exception handling",()=>{
       expect(JSON.stringify(result)).not.toContain("SECRET_DB");
     }
     expect(JSON.stringify(errorSpy.mock.calls)).not.toContain("SECRET_NEON_COOKIE");
+    mocks.handler.mockImplementation(()=>{
+      throw Object.assign(new Error("bad config"),{code:"AUTH_SERVER_NOT_CONFIGURED"});
+    });
+    const known=await authGET();
+    expect(known.status).toBe(503);
+    expect(known.body.error).toBe("AUTH_SERVER_NOT_CONFIGURED");
   });
 });
