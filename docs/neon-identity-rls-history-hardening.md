@@ -74,50 +74,52 @@ The test checks unauthenticated denial or empty results; and that each signed to
 - Added `scripts/neon-isolated-server-role-attestation.mjs`: **read-only**, opt-in, and pinned to the isolated Neon DB host and database. It only queries role privileges and prints role/capability booleans (never a DSN, credential or personal record). It is syntax-checked in CI but **has not been run with Vercel environment secrets**. Run it only with scoped permission from the isolated Preview project after validating its `DATABASE_URL` target; it does not attest production.
 - Additional exposure found: table-wide SELECT on `parent_invites` would expose `token_hash` to the originating student's Data API session. Migration 009 now grants SELECT to a safe column subset, explicitly excluding `token_hash`, with synthetic negative access tests.
 
-## Local Preview attestation without exporting the DATABASE_URL
+## Limitation of Vercel Preview Secrets — correction (2026-11-02)
 
-Vercel's official CLI supports `vercel env run -e preview -- <command>`: it makes
-Preview variables available to a child process **without writing a local .env file**.
-Unlike the Work executor, this requires a local Vercel CLI login authorized for
-the isolated project. The secret is still delivered to the local process memory;
-this procedure does not mean the credentials never leave Vercel.
+**Do not attempt the previously proposed Windows `vercel env run -e preview` workaround
+for `DATABASE_URL`.** The CLI command itself exists, but the actual Vercel variable
+has the **Secret** type. Vercel's current Secret model restricts retrieving values
+after saving: Production/Preview Secrets are supplied to deployments and are not
+available to local variable-pull workflows. Thus CLI login, a verified local
+`.vercel/project.json` and an offline-mocked successful CLI invocation do **not**
+prove that the original Preview Secret will reach the child process.
+The local launcher and its mock tests have been removed to avoid implying otherwise.
 
-**Windows PowerShell procedure, manually supervised, no deployment:**
+Sources checked (2026-11-02):
+- Vercel changelog, *Environment variables now use Config and Secret types* (2026-08-24):
+  https://vercel.com/changelog/environment-variables-now-use-config-and-secret-types
+- Vercel CLI environment command, `env run` syntax:
+  https://vercel.com/docs/cli/env
+- Vercel-maintained plugin's environment reference on non-retrievable Preview Secrets:
+  https://github.com/vercel/vercel-plugin/blob/main/commands/env.md
 
-1. On a trusted computer, in a new checkout of **PR #453**, install the repository
-   dependencies **before** injecting any Preview environment variables:
-   `npm ci --ignore-scripts`.
-2. Ensure the official Vercel CLI is installed (`vercel --version`); authenticate
-   interactively with `vercel login` if necessary. **Do not paste any tokens.**
-3. Run `vercel link` from the checkout root; select the **existing**
-   `applus-beta-synthetic-isolated` project. Cancel if the tool offers to
-   create a new project or selects `aplus-exames` production. Linking only
-   changes the local `.vercel/project.json` association. Do not use
-   `vercel deploy`, `vercel pull`, or `vercel env pull`.
-4. Run `node scripts/neon-isolated-preview-attest-local.mjs` from the checkout root.
-   This launcher validates the linked project ID, rejects existing local
-   `DATABASE_URL` and non-Preview context, then **only** executes
-   `vercel env run -e preview -- node scripts/neon-isolated-server-role-attestation.mjs`.
-   It sets `VERCEL_ENV=preview` and `VERCEL_PROJECT_ID` based on the
-   verified link/explicit CLI target. These are **execution assertions**,
-   **not** independently signed runtime claims from Vercel.
-5. Record only the final role, `bypassesRls`, `isSuperuser`,
-   `canInsertAppUsers`, `canUpdateAppUsers` and any sanitized failure
-   message in the PR. Never include `DATABASE_URL`, its password, a
-   Preview env dump, full CLI debug output or session credentials.
+**Evidence currently available:** Preview `DATABASE_URL` exists in the correct isolated
+Vercel project, but its effective host, database and role remain **unverified**.
+Public Auth/Data API URLs matching the authorized Neon endpoint cannot prove the
+`DATABASE_URL` secret matches. Neon management-API role observations also do not
+establish the credential used by the Vercel runtime.
 
-The attestation script validates the exact approved Neon host and
-`/neondb` path **before** invoking Neon SQL and performs one read-only
-catalog/role query. Unexpected SQL-driver exceptions are deliberately
-redacted. A successful result supports the origin of the secret **as selected
-by the locally verified CLI Preview project**, not proof of any already-running
-deployment's injected configuration. It also does not establish user
-data provenance, authenticated JWT/RLS correctness or approval to migrate.
+**Only viable further attestation of that exact Secret:** in an independently approved
+isolated **Preview deployment** using the Secret supplied by Vercel at runtime.
+Design requirements before authorizing such a deployment:
+1. Prove project ID `prj_8n5XwTMF651SAfsykIDji93oZp3r`, Preview environment,
+   source commit, and intended isolated Neon target independently.
+2. Gate any diagnostic endpoint behind strong server-side authorization and Vercel
+   deployment protection, or use a strictly controlled deployment-runtime execution
+   without an internet-exposed endpoint; avoid a public route which exposes the
+   Postgres administrative role/capabilities.
+3. Validate the exact approved Neon hostname and `/neondb` database path before
+   any SQL; perform **only** a read-only role/privilege catalog query; redact errors
+   and never emit DSNs, tokens or user records.
+4. Explicitly review deployment cost, access, logs, cleanup and noninterference
+   with production. This is a **proposed** separate release/test operation, not
+   authorization to create a deployment.
+5. Record identity/privilege results in PR #453, then request independent
+   security review before considering a data-changing SQL migration.
 
-If the CLI cannot authenticate, the preview variable is unavailable, the
-linked project is incorrect, or the host does not match the allowlist,
-**stop**. Do not replace the Vercel secret with a freshly generated Neon
-connection string, because that would test different credentials.
+The staged `scripts/neon-isolated-server-role-attestation.mjs` remains available
+for a future **properly authenticated Preview runtime**, but has **not** been
+executed with the Vercel Secret. The Beta CI release guard must remain enabled.
 
 ## Rollback / independent gate
 
