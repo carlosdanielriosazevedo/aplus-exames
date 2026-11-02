@@ -28,4 +28,6 @@ $server_maintain$;
 RESET ROLE;
 \echo 'Running synthetic authorization, CAS and history assertions'
 \ir neon_rls_synthetic_assertions.sql
+\echo 'Running server-authoritative insert/CAS and replay assertions'
+\ir neon_rls_synthetic_server_cas.sql
 \echo 'PASS: PostgreSQL synthetic RLS migration smoke'
