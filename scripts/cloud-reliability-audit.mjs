@@ -84,7 +84,7 @@ const walk=dir=>readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDir
 const migrationUrls=walk(new URL("../db/migrations/",import.meta.url)).filter(url=>url.pathname.endsWith(".sql")).sort((a,b)=>a.pathname.localeCompare(b.pathname));
 const finalTables=new Set();
 const definedSqlFunctions=new Set();
-const functionDdlRe=/\\bcreate\\s+(?:or\\s+replace\\s+)?function\\s+(?:public\\.)?"?([a-zA-Z_][a-zA-Z0-9_]*)"?\\s*\\(/giu;
+const functionDdlRe=/\bcreate\s+(?:or\s+replace\s+)?function\s+(?:public\.)?"?([a-zA-Z_][a-zA-Z0-9_]*)"?\s*\(/giu;
 const ddlRe=/\b(create|drop)\s+table\s+(?:if\s+(?:not\s+)?exists\s+)?(?:public\.)?"?([a-zA-Z_][a-zA-Z0-9_]*)"?/giu;
 for(const url of migrationUrls){
   const sql=readFileSync(url,"utf8");
