@@ -8,6 +8,7 @@ on:
       - db/migrations/009_v5_8_neon_rls_history_hardening.sql
       - tests/sql/neon_rls_*.sql
       - scripts/neon-identity-jwt-readonly.mjs
+      - scripts/neon-isolated-server-role-attestation.mjs
       - tests/scripts/neon-jwt-smoke-contract.mjs
       - tests/scripts/mock-neon-jwt-fetch.mjs
       - .github/workflows/neon-rls-synthetic.yml
@@ -17,6 +18,7 @@ on:
       - db/migrations/009_v5_8_neon_rls_history_hardening.sql
       - tests/sql/neon_rls_*.sql
       - scripts/neon-identity-jwt-readonly.mjs
+      - scripts/neon-isolated-server-role-attestation.mjs
       - tests/scripts/neon-jwt-smoke-contract.mjs
       - tests/scripts/mock-neon-jwt-fetch.mjs
       - .github/workflows/neon-rls-synthetic.yml
@@ -52,6 +54,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Syntax-check staged real-JWT read-only smoke (no network requests)
         run: node --check scripts/neon-identity-jwt-readonly.mjs
+      - name: Syntax-check isolated server role attestation (no database connection)
+        run: node --check scripts/neon-isolated-server-role-attestation.mjs
       - name: Test fail-closed JWT smoke contract with offline mock
         run: node tests/scripts/neon-jwt-smoke-contract.mjs
       - name: Validate disposable PostgreSQL instance
