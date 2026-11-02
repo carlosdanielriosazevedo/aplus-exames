@@ -63,6 +63,13 @@ The opt-in script `scripts/neon-identity-jwt-readonly.mjs` is pinned to the **ex
 
 The test checks unauthenticated denial or empty results; and that each signed token sees only its own `app_users` row and roles. It is **not** yet an end-to-end validation of protected writes, parent relationships, JWT expiry, session renewal or cloud CAS, and must not run against the current schema 8 with RLS off. The tested endpoint currently has Neon Auth and Data API provisioned, but no matching authenticated test execution has been performed. A new empty independently approved synthetic environment or a fully validated existing isolated dataset is needed first, along with an explicit migration approval.
 
+## Vercel/Neon connection audit — read-only 2026-11-02
+
+- Confirmed Vercel **production project** `aplus-exames` has `DATABASE_URL` configured for Production. Confirmed Vercel **isolated preview project** `applus-beta-synthetic-isolated` has `DATABASE_URL`, `NEON_AUTH_COOKIE_SECRET`, `NEXT_PUBLIC_NEON_AUTH_URL` and `NEXT_PUBLIC_NEON_DATA_API_URL` configured for Preview. **Only variable names, targets and types were inspected, never decrypted values.** The presence of a variable does NOT prove its connection points to the intended project, branch or Postgres role.
+- On isolated Neon project `steep-fog-69048956`, branch `br-noisy-unit-b9p6cf1u`, read-only PostgreSQL catalog queries confirmed `neondb_owner` has BYPASSRLS while `authenticator`, `authenticated` and `anonymous` do not. This is not an attestation of the role actually used by Vercel.
+- Added `scripts/neon-isolated-server-role-attestation.mjs`: **read-only**, opt-in, and pinned to the isolated Neon DB host and database. It only queries role privileges and prints role/capability booleans (never a DSN, credential or personal record). It is syntax-checked in CI but **has not been run with Vercel environment secrets**. Run it only with scoped permission from the isolated Preview project after validating its `DATABASE_URL` target; it does not attest production.
+- Additional exposure found: table-wide SELECT on `parent_invites` would expose `token_hash` to the originating student's Data API session. Migration 009 now grants SELECT to a safe column subset, explicitly excluding `token_hash`, with synthetic negative access tests.
+
 ## Rollback / independent gate
 
 The SQL transaction rolls back automatically on an error **during execution**. After commit, a blind rollback to the previous broad grants would knowingly reintroduce unsafe access and is prohibited. Prefer fix-forward with a reviewed compatible migration, and preserve historical data. Test application-level compatibility and login before any rollout.
