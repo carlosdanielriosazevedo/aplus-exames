@@ -24,7 +24,9 @@ async function main(){
     SELECT current_user::text AS role_name,
            current_database()::text AS db_name,
            r.rolbypassrls AS bypasses_rls,
-           r.rolsuper AS superuser
+           r.rolsuper AS superuser,
+           has_table_privilege(current_user,'public.app_users','INSERT') AS can_insert_app_users,
+           has_table_privilege(current_user,'public.app_users','UPDATE') AS can_update_app_users
     FROM pg_roles r WHERE r.rolname=current_user
   `;
   if(rows.length!==1||rows[0].db_name!=="neondb")
@@ -38,6 +40,8 @@ async function main(){
     role,
     bypassesRls:Boolean(rows[0].bypasses_rls),
     isSuperuser:Boolean(rows[0].superuser),
+    canInsertAppUsers:Boolean(rows[0].can_insert_app_users),
+    canUpdateAppUsers:Boolean(rows[0].can_update_app_users),
     advisory:"Role attestation only. Does not test JWT, API authorization, or production DB target."
   }));
 }
