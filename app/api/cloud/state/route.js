@@ -1,5 +1,5 @@
 import {NextResponse} from "next/server";
-import {requireCapability,authErrorResponse} from "../../../lib/server/identity";
+import {requireSession,authErrorResponse} from "../../../lib/server/identity";
 import {sameOriginRequest} from "../../../lib/server/csrf";
 import {getSql,databaseConfigured} from "../../../lib/server/db";
 import {readCloudRow,writeCloudRow} from "../../../lib/server/cloud-state-store";
@@ -9,8 +9,10 @@ export const runtime="nodejs";
 export const dynamic="force-dynamic";
 const headers={"Cache-Control":"no-store"};
 
-async function student(){
-  try{return {ok:true,value:await requireCapability("progress")};}
+async function authenticated(){
+  // Newly provisioned app_users may not yet have an app_user_roles row.
+  // Identity is still enforced by the verified session and SQL owner predicate.
+  try{return {ok:true,value:await requireSession()};}
   catch(error){
     const failure=authErrorResponse(error);
     return {ok:false,response:NextResponse.json(failure.body,{status:failure.status,headers})};
@@ -18,7 +20,7 @@ async function student(){
 }
 
 export async function GET(){
-  const auth=await student();
+  const auth=await authenticated();
   if(!auth.ok)return auth.response;
   if(!databaseConfigured())return NextResponse.json(
     {ok:false,code:"DATABASE_NOT_CONFIGURED"},{status:503,headers});
@@ -34,7 +36,7 @@ export async function GET(){
 export async function POST(request){
   const csrf=sameOriginRequest(request);
   if(!csrf.ok)return NextResponse.json({ok:false,code:csrf.code},{status:403,headers});
-  const auth=await student();
+  const auth=await authenticated();
   if(!auth.ok)return auth.response;
   if(!databaseConfigured())return NextResponse.json(
     {ok:false,code:"DATABASE_NOT_CONFIGURED"},{status:503,headers});
