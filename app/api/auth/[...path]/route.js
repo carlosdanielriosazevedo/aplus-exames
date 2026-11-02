@@ -4,10 +4,11 @@ import {getServerAuth} from "../../../lib/server/auth";
 export const runtime="nodejs";
 export const dynamic="force-dynamic";
 
-function unavailable(error){
+function unavailable(){
   // Do not write the provider exception to logs: it may contain auth secrets.
   console.error("Neon Auth handler unavailable");
-  return NextResponse.json({ok:false,error:error?.code||"AUTH_SERVER_NOT_CONFIGURED"},{status:Number(error?.status)||503});
+  // A thrown provider error has no trusted public error code or HTTP status.
+  return NextResponse.json({ok:false,error:"AUTH_HANDLER_UNAVAILABLE"},{status:503});
 }
 
 export async function GET(request,context){
