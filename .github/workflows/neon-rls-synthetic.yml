@@ -53,3 +53,20 @@ jobs:
       - name: Apply migration and assert RLS using synthetic identities
         run: |
           psql -v ON_ERROR_STOP=1 -f tests/sql/neon_rls_synthetic_run.sql
+      - name: Verify migration reapplication fails closed
+        run: |
+          set +e
+          psql -v ON_ERROR_STOP=1 > /tmp/neon-rls-reapply.log 2>&1 <<'SQL'
+          SET ROLE neondb_owner;
+          \i db/migrations/009_v5_8_neon_rls_history_hardening.sql
+          SQL
+          result=$?
+          set -e
+          if [ "$result" -eq 0 ]; then
+            echo "ERROR: migration unexpectedly accepted reapplication"
+            exit 1
+          fi
+          grep -q "Expected applied schema version 8" /tmp/neon-rls-reapply.log
+          actual="$(psql -v ON_ERROR_STOP=1 -Atc 'SELECT schema_version FROM public.app_schema_meta WHERE singleton=true')"
+          test "$actual" = "9"
+          echo "PASS: migration rejects reapplication and preserves version 9"
