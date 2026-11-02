@@ -25,7 +25,7 @@ test("Neon identity migration revokes previous grants before regranting minimum 
     expect(sql).toContain("create policy \""+policy+"\"");
   }
   expect(sql).toMatch(/FROM authenticated, anonymous, PUBLIC/);
-  expect(sql).toContain("grant update (display_name,email_snapshot,updated_at) on table app_users to authenticated;");
+  expect(sql).toContain("grant update (display_name,updated_at) on table app_users to authenticated;");
   expect(sql).toContain("grant update (school_year,recent_grade,goal,syllabus_progress,exam_timing,updated_at) on table student_profiles to authenticated;");
   expect(sql).toContain("Unsafe or incomplete column-level UPDATE privileges");
 });
