@@ -14,6 +14,34 @@ BEGIN
  SELECT count(*) INTO n FROM public.student_cloud_state;
  IF n<>1 THEN RAISE EXCEPTION 'A can see % cloud rows, expected 1',n; END IF;
 
+ UPDATE public.app_users SET display_name='Test A updated'
+ WHERE id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+ GET DIAGNOSTICS n=ROW_COUNT;
+ IF n<>1 THEN RAISE EXCEPTION 'Permitted display name update failed'; END IF;
+ UPDATE public.student_profiles SET school_year='12.º'
+ WHERE user_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+ GET DIAGNOSTICS n=ROW_COUNT;
+ IF n<>1 THEN RAISE EXCEPTION 'Permitted school year update failed'; END IF;
+
+ BEGIN
+   UPDATE public.app_users SET id='dddddddd-dddd-4ddd-8ddd-dddddddddddd'
+   WHERE auth_user_id='synthetic-student-a';
+   RAISE EXCEPTION 'Client could change app user structural ID';
+ EXCEPTION WHEN insufficient_privilege THEN NULL;
+ END;
+ BEGIN
+   UPDATE public.app_users SET created_at=now()-interval '2 years'
+   WHERE auth_user_id='synthetic-student-a';
+   RAISE EXCEPTION 'Client could backdate app user created_at';
+ EXCEPTION WHEN insufficient_privilege THEN NULL;
+ END;
+ BEGIN
+   UPDATE public.student_profiles SET user_id='dddddddd-dddd-4ddd-8ddd-dddddddddddd'
+   WHERE user_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+   RAISE EXCEPTION 'Client could change student profile owner';
+ EXCEPTION WHEN insufficient_privilege THEN NULL;
+ END;
+
  UPDATE public.student_profiles SET school_year='12.º'
  WHERE user_id='bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb';
  GET DIAGNOSTICS n=ROW_COUNT;
