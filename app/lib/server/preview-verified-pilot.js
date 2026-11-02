@@ -50,10 +50,15 @@ export function validatePilotCommand(body){
 export function publicPilotSession(row){
   if(!row)return {started:false,completed:false,answered:[],questions:PILOT_BANK};
   const answers=row.answers||{};
+  const completed=Boolean(row.completed_at);
+  if(completed&&(!Number.isInteger(Number(row.verified_xp))||row.verified_xp===null||
+    Number(row.verified_xp)<0))
+    throw Error("Completed synthetic pilot has no trusted award");
   return {
-    started:true,completed:Boolean(row.completed_at),
+    started:true,completed,
     sessionId:row.session_id,
     answered:Object.keys(answers).filter(x=>ids.has(x)).sort(),
+    ...(completed?{verifiedXp:Number(row.verified_xp)}:{}),
     questions:PILOT_BANK
   };
 }
