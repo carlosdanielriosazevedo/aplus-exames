@@ -17,7 +17,7 @@ Status: **Draft only. SQL not executed. No permission to merge or deploy.**
 `db/migrations/009_v5_8_neon_rls_history_hardening.sql` is a full **single-transaction** corrective migration, derived from migration 007 and with a separate repair of the cloud history trigger.
 
 1. Confirm database, role, schema 8, trigger/function existence and function ownership; abort on mismatch.
-2. Revoke accumulated grants to authenticated/anonymous/PUBLIC on six identity and parent tables; apply precise grants and the ten RLS policies.
+2. Revoke accumulated grants to authenticated/anonymous/PUBLIC on six identity and parent tables; apply **least-privilege** grants and identity/parental RLS policies. `app_users` becomes client read-only; account creation and provider-derived email updates remain server-authoritative via `ensureAppUser()` using `DATABASE_URL`. `student_profiles` permits edits to educational fields but forbids client-controlled identity keys and technical timestamps.
 3. Strip direct writes to history. Restore only SELECT-own permission for `authenticated`.
 4. Make `snapshot_student_cloud_state()` a `SECURITY DEFINER` trigger function under a verified owner, with hardened `search_path`, explicit schema-qualified INSERT of **OLD** fields only and no direct EXECUTE grant to untrusted roles.
 5. Verify RLS flags, grants, policy counts, role access, function ownership; update schema marker to 9. Any check failure rolls back the transaction.
@@ -62,6 +62,8 @@ Inspect HTTP responses and DB counts only for synthetic rows. Do not infer JWT i
 The SQL transaction rolls back automatically on an error **during execution**. After commit, a blind rollback to the previous broad grants would knowingly reintroduce unsafe access and is prohibited. Prefer fix-forward with a reviewed compatible migration, and preserve historical data. Test application-level compatibility and login before any rollout.
 
 The added Vitest test is a static guard, **not** a real RLS or privacy audit.
+
+**Security regression tested:** client cannot insert/update `app_users`, including forged provider email or creation timestamps; owner-based server flow can update its legitimate identity row; the client may update education fields in `student_profiles` but cannot choose immutable timestamps. Live Neon Auth user sign-in, end-to-end Data API JWT verification, session expiry and cross-user consent must still be tested separately.
 
 The dedicated workflow `.github/workflows/neon-rls-synthetic.yml` starts a **fresh disposable PostgreSQL 16 container**, creates roles and only three hardcoded synthetic identities, applies migration 009 using the synthetic DB owner, and asserts SQL-level RLS isolation, parental access/revocation, direct-write denial, CAS idempotency and historical snapshot insertion. There is **no Neon connection, secret or copied data**. Its `request.jwt.claim.sub` is a fixture variable, **not** a cryptographically verified JWT. Passing this workflow demonstrates migration SQL and PostgreSQL role-policy behavior only.
 
