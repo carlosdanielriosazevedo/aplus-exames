@@ -70,3 +70,17 @@ test("Cloud-state direct browser writes are revoked before server CAS rollout",(
   expect(handler).toContain("requireSession()");
   expect(handler).toContain("sameOriginRequest(request)");
 });
+
+test("Verified reward ledger is server-only, append-only and SQL migration is not duplicated",()=>{
+  expect(sql).toContain("CREATE TABLE public.verified_completion_receipts");
+  expect(sql).toContain("PRIMARY KEY (auth_user_id,completion_id)");
+  expect(sql).toContain("ALTER TABLE public.verified_completion_receipts ENABLE ROW LEVEL SECURITY");
+  expect(sql).toContain("REVOKE ALL ON TABLE public.verified_completion_receipts");
+  expect(sql).toContain("CREATE TRIGGER trg_reject_verified_receipt_mutation");
+  expect(sql).toContain("Verified reward ledger privileges or immutability unsafe");
+  expect(sql).toContain("evidence_sha256 ~ '^[0-9a-f]{64}$'");
+  expect((sql.match(/DO \\$postflight\\$/g)||[]).length).toBe(1);
+  expect((sql.match(/CREATE TABLE public\\.verified_completion_receipts/g)||[]).length).toBe(1);
+  expect((sql.match(/\\bCOMMIT;/g)||[]).length).toBe(1);
+  expect(sql.trimEnd().endsWith("COMMIT;")).toBe(true);
+});
