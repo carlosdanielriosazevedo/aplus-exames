@@ -6,6 +6,8 @@ on:
       - codex/neon-rls-history-hardening
     paths:
       - db/migrations/009_v5_8_neon_rls_history_hardening.sql
+      - db/migrations/010_v5_9_verified_pilot_sessions.sql
+      - tests/sql/neon_verified_pilot_assertions.sql
       - tests/sql/neon_rls_*.sql
       - scripts/neon-identity-jwt-readonly.mjs
       - scripts/neon-isolated-server-role-attestation.mjs
@@ -14,6 +16,11 @@ on:
       - tests/scripts/neon-jwt-smoke-contract.mjs
       - app/api/cloud/state/route.js
       - app/api/cloud/rewards/route.js
+      - app/api/internal/verified-pilot/route.js
+      - app/lib/server/preview-verified-pilot.js
+      - app/lib/server/preview-verified-pilot-store.js
+      - tests/unit/previewVerifiedPilot.test.mjs
+      - tests/unit/previewVerifiedPilotRoute.test.mjs
       - app/lib/server/verified-rewards.js
       - tests/unit/verifiedRewardsRoute.test.mjs
       - app/lib/cloud.js
@@ -31,6 +38,8 @@ on:
     branches: [main]
     paths:
       - db/migrations/009_v5_8_neon_rls_history_hardening.sql
+      - db/migrations/010_v5_9_verified_pilot_sessions.sql
+      - tests/sql/neon_verified_pilot_assertions.sql
       - tests/sql/neon_rls_*.sql
       - scripts/neon-identity-jwt-readonly.mjs
       - scripts/neon-isolated-server-role-attestation.mjs
@@ -39,6 +48,11 @@ on:
       - tests/scripts/neon-jwt-smoke-contract.mjs
       - app/api/cloud/state/route.js
       - app/api/cloud/rewards/route.js
+      - app/api/internal/verified-pilot/route.js
+      - app/lib/server/preview-verified-pilot.js
+      - app/lib/server/preview-verified-pilot-store.js
+      - tests/unit/previewVerifiedPilot.test.mjs
+      - tests/unit/previewVerifiedPilotRoute.test.mjs
       - app/lib/server/verified-rewards.js
       - tests/unit/verifiedRewardsRoute.test.mjs
       - app/lib/cloud.js
@@ -95,12 +109,15 @@ jobs:
           node --check app/lib/server/cloud-state-validation.js
           node --check app/lib/server/verified-rewards.js
           node --check app/api/cloud/rewards/route.js
+          node --check app/lib/server/preview-verified-pilot.js
+          node --check app/lib/server/preview-verified-pilot-store.js
+          node --check app/api/internal/verified-pilot/route.js
           node --check app/lib/cloud.js
           node tests/scripts/cloud-server-cas-contract.mjs
       - name: Verify Next API boundary with mocked auth/session and no network
         run: |
           npm ci --ignore-scripts --no-audit --no-fund
-          npx vitest run tests/unit/cloudStateRoute.test.mjs tests/unit/cloudStateClient.test.mjs tests/unit/verifiedRewardsRoute.test.mjs tests/unit/neonIdentityRlsMigration.test.mjs tests/unit/betaSyncValidation.test.js tests/unit/stateTortureCloudMerge.test.js --maxWorkers=2
+          npx vitest run tests/unit/cloudStateRoute.test.mjs tests/unit/cloudStateClient.test.mjs tests/unit/verifiedRewardsRoute.test.mjs tests/unit/previewVerifiedPilot.test.mjs tests/unit/previewVerifiedPilotRoute.test.mjs tests/unit/neonIdentityRlsMigration.test.mjs tests/unit/betaSyncValidation.test.js tests/unit/stateTortureCloudMerge.test.js --maxWorkers=2
           node scripts/cloud-reliability-audit.mjs
           node scripts/cloud-resume-product-contract-audit.mjs
       - name: Audit isolated Preview build artifact and offline preflight
@@ -133,3 +150,15 @@ jobs:
           actual="$(psql -v ON_ERROR_STOP=1 -Atc 'SELECT schema_version FROM public.app_schema_meta WHERE singleton=true')"
           test "$actual" = "9"
           echo "PASS: migration rejects reapplication and preserves version 9"
+
+      - name: Test proposed schema 010 and seven-answer synthetic pilot (NO Neon)
+        run: |
+          psql -v ON_ERROR_STOP=1 <<'SQL'
+          SET ROLE neondb_owner;
+          \i db/migrations/010_v5_9_verified_pilot_sessions.sql
+          RESET ROLE;
+          \i tests/sql/neon_verified_pilot_assertions.sql
+          SQL
+          schema="$(psql -v ON_ERROR_STOP=1 -Atc 'SELECT schema_version FROM public.app_schema_meta WHERE singleton=true')"
+          test "$schema" = "10"
+          echo "PASS: preview-only pilot graded on disposable PostgreSQL; schema=10"
