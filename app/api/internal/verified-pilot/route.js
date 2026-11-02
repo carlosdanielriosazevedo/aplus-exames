@@ -15,11 +15,11 @@ const headers={"Cache-Control":"no-store"};
 function reply(body,status=200){
   return NextResponse.json(body,{status,headers});
 }
-async function session(){
+async function session({provision=false}={}){
   try{
     const auth=await requireSession();
-    // Owner-only app identity: app_user_roles may be empty for a new student.
-    await ensureAppUser(auth);
+    // Only first START may provision identity; GET never silently writes.
+    if(provision)await ensureAppUser(auth);
     return {ok:true,subject:auth.authUserId};
   }catch(error){
     const {status,body}=authErrorResponse(error);
@@ -57,7 +57,7 @@ export async function POST(request){
   }
   const parsed=validatePilotCommand(body);
   if(!parsed.ok)return reply({ok:false,code:parsed.code},400);
-  const auth=await session();
+  const auth=await session({provision:parsed.action==="start"});
   if(!auth.ok)return auth.response;
 
   try{
