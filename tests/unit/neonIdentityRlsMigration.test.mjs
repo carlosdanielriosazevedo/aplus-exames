@@ -55,3 +55,18 @@ test("Every PL/pgSQL block terminates correctly before its dollar-quote",()=>{
       .toContain("END;\n$"+tag+"$;");
   }
 });
+
+test("Cloud-state direct browser writes are revoked before server CAS rollout",()=>{
+  expect(sql).toContain("REVOKE ALL ON TABLE public.student_cloud_state FROM authenticated, anonymous, PUBLIC");
+  expect(sql).toContain("GRANT SELECT ON TABLE public.student_cloud_state TO authenticated");
+  for(const type of ["insert","update","delete"]){
+    expect(sql).toContain('DROP POLICY IF EXISTS "student_cloud_state_'+type+'_own"');
+  }
+  expect(sql).toContain("('student_cloud_state',true,false,false,false,1)");
+  const browser=readFileSync(new URL("../../app/lib/cloud.js",import.meta.url),"utf8");
+  const handler=readFileSync(new URL("../../app/api/cloud/state/route.js",import.meta.url),"utf8");
+  expect(browser).not.toContain('.from("student_cloud_state")');
+  expect(browser).toContain('fetch("/api/cloud/state"');
+  expect(handler).toContain("requireSession()");
+  expect(handler).toContain("sameOriginRequest(request)");
+});
