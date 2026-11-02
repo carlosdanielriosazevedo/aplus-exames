@@ -35,6 +35,9 @@ test("Neon identity migration revokes previous grants before regranting minimum 
   expect(sql).toContain("'public.student_profiles','created_at','INSERT'");
   expect(sql).toContain("'public.student_profiles','updated_at','UPDATE'");
   expect(sql).toContain("Unsafe or incomplete column-level UPDATE privileges");
+  expect(sql).toContain("grant select (id,student_user_id,target_email,status,expires_at,");
+  expect(sql).toContain("Invitation token hashes exposed to authenticated");
+  expect(sql).toContain("('parent_invites',false,false,false,false,1)");
 });
 
 test("Cloud history requires privileged trigger, no direct authenticated writes",()=>{
