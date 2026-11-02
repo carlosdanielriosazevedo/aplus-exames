@@ -12,6 +12,11 @@ on:
       - audits/neon-preview-attestation/**
       - tests/scripts/neon-preview-build-attest-contract.mjs
       - tests/scripts/neon-jwt-smoke-contract.mjs
+      - app/api/cloud/state/route.js
+      - app/lib/cloud.js
+      - app/lib/server/cloud-state-validation.js
+      - app/lib/server/cloud-state-store.js
+      - tests/scripts/cloud-server-cas-contract.mjs
       - tests/scripts/mock-neon-jwt-fetch.mjs
       - .github/workflows/neon-rls-synthetic.yml
   pull_request:
@@ -24,6 +29,11 @@ on:
       - audits/neon-preview-attestation/**
       - tests/scripts/neon-preview-build-attest-contract.mjs
       - tests/scripts/neon-jwt-smoke-contract.mjs
+      - app/api/cloud/state/route.js
+      - app/lib/cloud.js
+      - app/lib/server/cloud-state-validation.js
+      - app/lib/server/cloud-state-store.js
+      - tests/scripts/cloud-server-cas-contract.mjs
       - tests/scripts/mock-neon-jwt-fetch.mjs
       - .github/workflows/neon-rls-synthetic.yml
 
@@ -62,6 +72,13 @@ jobs:
         run: node --check scripts/neon-isolated-server-role-attestation.mjs
       - name: Test fail-closed JWT smoke contract with offline mock
         run: node tests/scripts/neon-jwt-smoke-contract.mjs
+      - name: Validate server CAS route and adversarial client-write contract
+        run: |
+          node --check app/api/cloud/state/route.js
+          node --check app/lib/server/cloud-state-store.js
+          node --check app/lib/server/cloud-state-validation.js
+          node --check app/lib/cloud.js
+          node tests/scripts/cloud-server-cas-contract.mjs
       - name: Audit isolated Preview build artifact and offline preflight
         run: |
           node --check audits/neon-preview-attestation/attest.mjs
