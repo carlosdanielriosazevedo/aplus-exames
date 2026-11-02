@@ -5,6 +5,22 @@ const MAX_REVISION=2_147_483_646;
 const FORBIDDEN_RESPONSE_FIELDS=new Set([
   "answers","answer","currentAnswer","responseText","previousResponseText","studentEvidence"
 ]);
+const CLIENT_CLOUD_FIELDS=new Set([
+  "schema","goal","profile","scores","xp","streak","engagement",
+  "engagementModelVersion","competition","competitionModelVersion",
+  "dailyMission","dailyMissionModelVersion","diagnosticDone",
+  "diagnosticAnswers","missionHistory","freeTrainingSignals","examHistory",
+  "lastMission","lastExam","betaParticipant","learningHypotheses",
+  "subjectProgress","subjectProgressModelVersion","evidenceModelVersion",
+  "pedagogicalIdVersion","pedagogicalMemoryVersion"
+]);
+// Keep server-issued identity/authority data out of any client snapshot,
+// including nested payloads intended to masquerade as official ranking data.
+const RESERVED_SERVER_FIELDS=new Set([
+  "verifiedXp","verifiedRewards","verifiedCompletionReceipts","officialXp",
+  "officialRankingXp","rewardReceipt","rewardReceipts","serverVerifiedXp",
+  "rewardAuthority","verifiedReceiptCount"
+]);
 
 export function validateCloudWrite(payload){
   if(!payload||typeof payload!=="object"||Array.isArray(payload))
@@ -21,6 +37,8 @@ export function validateCloudWrite(payload){
   if(!state||typeof state!=="object"||Array.isArray(state)
     ||state.schema!=="aplus-student-state-v8")
     return {ok:false,code:"INVALID_STATE"};
+  if(Object.keys(state).some(key=>!CLIENT_CLOUD_FIELDS.has(key)))
+    return {ok:false,code:"UNKNOWN_CLOUD_FIELD"};
 
   // The browser's own answer-text stripping is not a security boundary.
   // Reject snapshots containing response texts anywhere in nested JSON.
@@ -32,6 +50,7 @@ export function validateCloudWrite(payload){
     if(!value||typeof value!=="object")continue;
     for(const [key,child] of Object.entries(value)){
       if(FORBIDDEN_RESPONSE_FIELDS.has(key))return {ok:false,code:"RESPONSE_TEXT_NOT_ALLOWED"};
+      if(RESERVED_SERVER_FIELDS.has(key))return {ok:false,code:"FORGED_REWARD_AUTHORITY"};
       if(child&&typeof child==="object")stack.push({value:child,depth:depth+1});
     }
   }
