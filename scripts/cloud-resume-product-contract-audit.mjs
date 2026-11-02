@@ -64,8 +64,17 @@ assert.match(account,/queueCloudSave\(s,\{reason:"save_failed"/u,"falha ao guard
 assert.match(account,/Falhou anteriormente sem apagar o progresso local\./u,"a fila pendente deve comunicar preservação do progresso local");
 assert.match(account,/Tentar novamente/u,"deve existir retry explícito da gravação pendente");
 
-// Escrita cloud continua protegida por revisão otimista/CAS.
-assert.match(cloud,/\.eq\("revision",Number\(expectedRevision\)\|\|0\)/u,"gravações cloud devem manter compare-and-swap por revisão");
-assert.match(cloud,/return \{ok:false,conflict:true,remote/u,"avanço remoto deve regressar como conflito e não ser sobrescrito");
+// Escrita cloud preserva o contrato CAS no servidor, não na Data API do browser.
+const cloudStore=readFileSync(new URL("../app/lib/server/cloud-state-store.js",import.meta.url),"utf8");
+const cloudApi=readFileSync(new URL("../app/api/cloud/state/route.js",import.meta.url),"utf8");
+const migration009=readFileSync(new URL("../db/migrations/009_v5_8_neon_rls_history_hardening.sql",import.meta.url),"utf8");
+assert.match(cloud,/fetch\("\/api\/cloud\/state"/u,"sync do aluno deve usar o endpoint autorizado");
+assert.match(cloudStore,/revision=\$\{expectedRevision\}/u,"server CAS deve exigir revisão anterior de forma atómica");
+assert.match(cloudStore,/revision=revision\+1/u,"o servidor deve incrementar a revisão");
+assert.match(cloudStore,/on conflict \(auth_user_id\) do nothing/u,"a primeira gravação não pode sobrescrever estado existente");
+assert.match(cloudStore,/return \{ok:false,conflict:true,remote/u,"conflito deve preservar o snapshot remoto");
+assert.match(cloudApi,/requireSession\(\)/u,"session autenticada é obrigatória para gravações");
+assert.match(migration009,/REVOKE ALL ON TABLE public\.student_cloud_state FROM authenticated, anonymous, PUBLIC/u,
+  "Data API deve perder INSERT, UPDATE e DELETE diretos");
 
 console.log("✓ cloud resume product contract: progresso concluído sincronizável · sessão inacabada local com fallback seguro · logout seguro · snapshots · conflitos explícitos · retry offline · CAS por revisão");
