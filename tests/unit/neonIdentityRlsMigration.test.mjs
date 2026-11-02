@@ -77,6 +77,9 @@ test("Verified reward ledger is server-only, append-only and SQL migration is no
   expect(sql).toContain("ALTER TABLE public.verified_completion_receipts ENABLE ROW LEVEL SECURITY");
   expect(sql).toContain("REVOKE ALL ON TABLE public.verified_completion_receipts");
   expect(sql).toContain("CREATE TRIGGER trg_reject_verified_receipt_mutation");
+  expect(sql).toContain("REFERENCES public.app_users(auth_user_id) ON DELETE CASCADE");
+  expect(sql).toContain("app.verified_receipt_erasure");
+  expect(sql).toContain("AND current_user='neondb_owner'");
   expect(sql).toContain("Verified reward ledger privileges or immutability unsafe");
   expect(sql).toContain("evidence_sha256 ~ '^[0-9a-f]{64}$'");
   expect((sql.match(/DO \$postflight\$/g)||[]).length).toBe(1);
