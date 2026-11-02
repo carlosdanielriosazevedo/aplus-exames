@@ -110,6 +110,7 @@ describe("synthetic pilot route is server-owned and fail-closed",()=>{
   const result=await GET();
   expect(result.status).toBe(200);
   expect(result.body.started).toBe(false);
+  expect(mocks.ensureAppUser).not.toHaveBeenCalled();
   expect(mocks.start).not.toHaveBeenCalled();
  });
 });
