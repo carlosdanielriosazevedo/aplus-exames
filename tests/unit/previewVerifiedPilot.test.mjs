@@ -1,4 +1,5 @@
 import {describe,it,expect} from "vitest";
+import {readFileSync} from "node:fs";
 import {PILOT_BANK,PILOT_KEY,pilotEnabled,validatePilotCommand,publicPilotSession}
   from "../../app/lib/server/preview-verified-pilot.js";
 
@@ -58,5 +59,28 @@ describe("synthetic pilot hard-lock",()=>{
     expect(state.started).toBe(true);
     expect(JSON.stringify(state)).not.toContain("forgedId");
     expect(state).not.toHaveProperty("answers");
+  });
+});
+
+describe("disposable SQL grading cannot drift from seven-item bank",()=>{
+  const sql=readFileSync(new URL("../../db/migrations/010_v5_9_verified_pilot_sessions.sql",import.meta.url),"utf8");
+  it("requires an explicit disposable CI opt-in, schema 9, and no client grants",()=>{
+    expect(sql).toContain("CI-only isolation flag required");
+    expect(sql).toContain("current_setting('app.synthetic_verified_pilot_ci',true)");
+    expect(sql).toContain("schema_version=9");
+    expect(sql).toContain("REVOKE ALL ON TABLE public.preview_verified_math_sessions");
+    expect(sql).toContain("REVOKE ALL ON FUNCTION public.finish_preview_verified_math(text)");
+    expect(sql.trimEnd().endsWith("COMMIT;")).toBe(true);
+  });
+  it("grades all questions using hardcoded server-side correct choices",()=>{
+    const keys=[...sql.matchAll(/saved->>'(q[1-7])'='([012])'/g)]
+      .map(([,id,index])=>[id,Number(index)]);
+    expect(keys).toEqual([
+      ["q1",1],["q2",0],["q3",2],["q4",0],
+      ["q5",2],["q6",1],["q7",0]
+    ]);
+    expect(keys.map(([id])=>id)).toEqual(PILOT_BANK.map(q=>q.id));
+    expect(sql).toContain("verified_completion_receipts");
+    expect(sql).toContain("ON CONFLICT(auth_user_id,completion_id) DO NOTHING");
   });
 });
