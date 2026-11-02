@@ -103,6 +103,7 @@ describe("trusted cloud-state HTTP boundary",()=>{
     });
     const result=await POST(post(payload));
     expect(result.status).toBe(409);
+    expect(result.body.authority).toBe("client-reported");
     expect(result.body.remote.revision).toBe(9);
     expect(result.headers["Cache-Control"]).toBe("no-store");
   });
@@ -112,6 +113,7 @@ describe("trusted cloud-state HTTP boundary",()=>{
     const result=await GET();
     expect(result.status).toBe(200);
     expect(mocks.readCloudRow.mock.calls[0][1]).toBe("verified-session-subject");
+    expect(result.body.authority).toBe("client-reported");
     expect(result.body.data.revision).toBe(4);
   });
 });
