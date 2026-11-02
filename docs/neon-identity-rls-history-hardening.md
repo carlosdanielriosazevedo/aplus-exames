@@ -248,9 +248,12 @@ cloud-save concurrency and from #450 FQ A academic grading.
   Each future receipt requires kind, award, verifier version, and digest
   of trusted grading evidence. No `authenticated`, `anonymous`, or
   `PUBLIC` privilege or RLS policy permits reading/creating receipts via
-  the Data API. A BEFORE UPDATE/DELETE trigger refuses edits even from
-  the application DB owner; administrative corrections need another
-  reviewed migration.
+  the Data API. A BEFORE UPDATE/DELETE trigger refuses edits, except
+  `DELETE` in a transaction explicitly scoped by the database owner using
+  `SET LOCAL app.verified_receipt_erasure = 'YES'` for lawful account
+  erasure. UPDATE remains forbidden, including in that scope.
+  A foreign key to `app_users(auth_user_id)` prevents orphan awards.
+  Administrative reward corrections need a separate reviewed migration.
 - `GET /api/cloud/rewards` authenticates via Neon Auth server session,
   derives the owner from that session, and returns XP summed **only** from
   the immutable server-owned ledger. It never reads claimed XP from
