@@ -50,6 +50,19 @@ async function main(){
   }));
 }
 main().catch(error=>{
-  console.error("FAIL: "+String(error.message||error));
+  // Database drivers can include connection metadata in exception messages.
+  // Do not print unknown errors, URLs, usernames, passwords or stack traces.
+  const safeErrors=new Set([
+    "Attestation requires explicitly selected Vercel Preview",
+    "Attestation requires explicitly selected isolated Vercel project",
+    "Explicit synthetic-only read-only approval required",
+    "DATABASE_URL missing (value not printed)",
+    "Invalid DATABASE_URL (value not printed)",
+    "Refusing non-isolated Neon database host or database name",
+    "Unexpected database role attestation result"
+  ]);
+  const message=error instanceof Error ? error.message : "";
+  console.error("FAIL: "+(safeErrors.has(message)?message:
+    "SQL connectivity/role attestation failed (details redacted)"));
   process.exitCode=1;
 });
