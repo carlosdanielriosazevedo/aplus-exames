@@ -35,7 +35,11 @@ CREATE TABLE public.student_profiles(
   updated_at timestamptz NOT NULL DEFAULT now()
 );
 CREATE TABLE public.parent_invites(
-  id uuid PRIMARY KEY,student_user_id uuid NOT NULL REFERENCES public.app_users(id)
+  id uuid PRIMARY KEY,student_user_id uuid NOT NULL REFERENCES public.app_users(id),
+  target_email text,token_hash text NOT NULL,status text NOT NULL DEFAULT 'pending',
+  expires_at timestamptz NOT NULL DEFAULT now()+interval '2 days',
+  accepted_by_user_id uuid REFERENCES public.app_users(id),
+  created_at timestamptz NOT NULL DEFAULT now(),accepted_at timestamptz
 );
 CREATE TABLE public.student_parent_links(
   id uuid PRIMARY KEY, student_user_id uuid NOT NULL REFERENCES public.app_users(id),
@@ -108,6 +112,10 @@ INSERT INTO public.app_user_roles(user_id,role) VALUES
  ('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa','student'),
  ('bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb','student'),
  ('cccccccc-cccc-4ccc-8ccc-cccccccccccc','parent');
+INSERT INTO public.parent_invites(id,student_user_id,target_email,token_hash,status)
+VALUES('ffffeeee-dddd-4ccc-8bbb-aaaaaaaaaaaa',
+'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',
+'synthetic-parent@example.invalid','synthetic-sha256-placeholder','pending');
 INSERT INTO public.student_cloud_state(auth_user_id,revision,state_json,last_device_id) VALUES
  ('synthetic-student-a',0,'{"test":"a"}'::jsonb,'device-a'),
  ('synthetic-student-b',0,'{"test":"b"}'::jsonb,'device-b');
