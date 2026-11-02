@@ -235,6 +235,143 @@ END;
 $snapshot$;
 REVOKE ALL ON FUNCTION public.snapshot_student_cloud_state() FROM PUBLIC, authenticated, anonymous;
 
+-- Future server-validated rewards have their own append-only authority table.
+-- Existing state_json.xp, competition and session arrays remain CLIENT-REPORTED;
+-- this table is NOT populated by cloud snapshot sync or by a public HTTP route.
+-- Creation of a real receipt requires later reviewed server-side grading.
+CREATE TABLE public.verified_completion_receipts (
+  auth_user_id text NOT NULL,
+  completion_id text NOT NULL
+    CHECK (length(completion_id) BETWEEN 1 AND 160),
+  kind text NOT NULL CHECK
+    (kind IN ('diagnostic','mission','training','mini_exam','full_exam')),
+  verified_xp integer NOT NULL CHECK (verified_xp BETWEEN 0 AND 500),
+  grading_version text NOT NULL CHECK
+    (length(grading_version) BETWEEN 1 AND 100),
+  evidence_sha256 text NOT NULL CHECK
+    (evidence_sha256 ~ '^[0-9a-f]{64}
+DO $postflight$
+DECLARE
+  invalid_count integer;
+BEGIN
+  SELECT count(*) INTO invalid_count
+  FROM (VALUES
+    ('app_users',true,false,false,false,1),
+    ('app_user_roles',true,false,false,false,1),
+    ('student_profiles',true,false,false,false,3),
+    ('parent_invites',false,false,false,false,1),
+    ('student_parent_links',true,false,false,false,1),
+    ('parent_link_change_requests',true,false,false,false,1),
+    ('student_cloud_state',true,false,false,false,1),
+    ('student_cloud_state_history',true,false,false,false,1)
+  ) AS expected(table_name,can_select,can_insert,can_update,can_delete,policies)
+  LEFT JOIN pg_class c ON c.oid=to_regclass('public.'||expected.table_name)
+  WHERE c.oid IS NULL OR NOT c.relrowsecurity
+    OR has_table_privilege('authenticated',c.oid,'SELECT') IS DISTINCT FROM expected.can_select
+    OR has_table_privilege('authenticated',c.oid,'INSERT') IS DISTINCT FROM expected.can_insert
+    OR has_table_privilege('authenticated',c.oid,'UPDATE') IS DISTINCT FROM expected.can_update
+    OR has_table_privilege('authenticated',c.oid,'DELETE') IS DISTINCT FROM expected.can_delete
+    OR (SELECT count(*)::integer FROM pg_policies p WHERE p.schemaname='public'
+        AND p.tablename=expected.table_name) <> expected.policies;
+  IF invalid_count<>0 THEN RAISE EXCEPTION 'RLS/grant postconditions failed for % tables',invalid_count; END IF;
+  IF NOT EXISTS(
+    SELECT 1 FROM pg_class c
+    WHERE c.oid='public.verified_completion_receipts'::regclass
+      AND c.relrowsecurity
+      AND pg_get_userbyid(c.relowner)='neondb_owner'
+  ) OR has_table_privilege('authenticated','public.verified_completion_receipts','SELECT')
+    OR has_table_privilege('authenticated','public.verified_completion_receipts','INSERT')
+    OR has_table_privilege('authenticated','public.verified_completion_receipts','UPDATE')
+    OR has_table_privilege('authenticated','public.verified_completion_receipts','DELETE')
+    OR has_table_privilege('anonymous','public.verified_completion_receipts','SELECT')
+    OR has_table_privilege('anonymous','public.verified_completion_receipts','INSERT')
+    OR EXISTS(SELECT 1 FROM pg_policies
+              WHERE schemaname='public' AND tablename='verified_completion_receipts')
+    OR NOT EXISTS(
+      SELECT 1 FROM pg_trigger
+      WHERE tgrelid='public.verified_completion_receipts'::regclass
+        AND tgname='trg_reject_verified_receipt_mutation'
+        AND tgenabled='O'
+    )
+  THEN RAISE EXCEPTION 'Verified reward ledger privileges or immutability unsafe'; END IF;
+  IF has_column_privilege('authenticated','public.parent_invites','token_hash','SELECT')
+     OR NOT has_column_privilege('authenticated','public.parent_invites','id','SELECT')
+     OR NOT has_column_privilege('authenticated','public.parent_invites','status','SELECT')
+  THEN RAISE EXCEPTION 'Invitation token hashes exposed to authenticated'; END IF;
+  -- RLS restricts rows; column privileges protect structural identity fields.
+  IF has_column_privilege('authenticated','public.app_users','id','UPDATE')
+     OR has_column_privilege('authenticated','public.app_users','auth_user_id','UPDATE')
+     OR has_column_privilege('authenticated','public.app_users','created_at','UPDATE')
+     OR has_column_privilege('authenticated','public.app_users','email_snapshot','UPDATE')
+     OR has_column_privilege('authenticated','public.student_profiles','user_id','UPDATE')
+     OR has_column_privilege('authenticated','public.student_profiles','created_at','UPDATE')
+     OR has_column_privilege('authenticated','public.student_profiles','updated_at','UPDATE')
+     OR has_column_privilege('authenticated','public.student_profiles','created_at','INSERT')
+     OR has_column_privilege('authenticated','public.student_profiles','updated_at','INSERT')
+     OR NOT has_column_privilege('authenticated','public.student_profiles','user_id','INSERT')
+     OR has_column_privilege('authenticated','public.app_users','display_name','UPDATE')
+     OR NOT has_column_privilege('authenticated','public.student_profiles','school_year','UPDATE')
+  THEN RAISE EXCEPTION 'Unsafe or incomplete column-level UPDATE privileges'; END IF;
+
+  IF EXISTS(
+    SELECT 1 FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND c.relname IN
+      ('app_users','app_user_roles','student_profiles','parent_invites',
+       'student_parent_links','parent_link_change_requests','student_cloud_state',
+       'student_cloud_state_history')
+      AND (has_table_privilege('anonymous',c.oid,'SELECT')
+        OR has_table_privilege('anonymous',c.oid,'INSERT')
+        OR has_table_privilege('anonymous',c.oid,'UPDATE')
+        OR has_table_privilege('anonymous',c.oid,'DELETE'))
+  ) THEN RAISE EXCEPTION 'Anonymous privileges remain'; END IF;
+  IF NOT EXISTS(
+    SELECT 1 FROM pg_proc WHERE oid='public.snapshot_student_cloud_state()'::regprocedure
+    AND prosecdef AND pg_get_userbyid(proowner)='neondb_owner'
+  ) THEN RAISE EXCEPTION 'History snapshot trigger function not securely owned'; END IF;
+END;
+$postflight$;
+
+UPDATE public.app_schema_meta SET schema_version=9,
+  migration_name='009_v5_8_neon_rls_history_hardening',updated_at=now()
+WHERE singleton=true AND schema_version=8;
+DO $versioncheck$
+BEGIN
+ IF NOT EXISTS(SELECT 1 FROM public.app_schema_meta
+               WHERE singleton=true AND schema_version=9) THEN
+   RAISE EXCEPTION 'Schema marker update failed';
+ END IF;
+END;
+$versioncheck$;
+COMMIT;
+),
+  verified_at timestamptz NOT NULL DEFAULT now(),
+  PRIMARY KEY (auth_user_id,completion_id)
+);
+ALTER TABLE public.verified_completion_receipts ENABLE ROW LEVEL SECURITY;
+-- No authenticated/anonymous RLS policy: nobody can enumerate or mint
+-- receipts through the Neon Data API, even for their own identity.
+REVOKE ALL ON TABLE public.verified_completion_receipts
+  FROM authenticated, anonymous, PUBLIC;
+
+-- Append-only: a successful receipt cannot be rewritten or erased, even by
+-- a mistaken application-owner UPDATE/DELETE. A separate reviewed migration
+-- is required for administrative corrections.
+CREATE FUNCTION public.reject_verified_receipt_mutation()
+RETURNS trigger
+LANGUAGE plpgsql
+SET search_path=pg_catalog,pg_temp
+AS $immutable_reward$
+BEGIN
+  RAISE EXCEPTION 'Verified completion receipts are immutable';
+END;
+$immutable_reward$;
+REVOKE ALL ON FUNCTION public.reject_verified_receipt_mutation()
+  FROM PUBLIC, authenticated, anonymous;
+CREATE TRIGGER trg_reject_verified_receipt_mutation
+BEFORE UPDATE OR DELETE ON public.verified_completion_receipts
+FOR EACH ROW
+EXECUTE FUNCTION public.reject_verified_receipt_mutation();
+
 -- Abort if any direct grants or RLS flags drifted.
 DO $postflight$
 DECLARE
