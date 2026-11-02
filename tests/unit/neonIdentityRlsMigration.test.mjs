@@ -15,7 +15,7 @@ test("Neon identity migration uses transaction, strict preflight and postflight"
 
 test("Neon identity migration revokes previous grants before regranting minimum rights",()=>{
   const revocation=sql.indexOf("REVOKE ALL ON TABLE");
-  const firstGrant=sql.indexOf("grant select, insert, update on table app_users");
+  const firstGrant=sql.indexOf("grant select, insert on table app_users");
   expect(revocation).toBeGreaterThan(-1);
   expect(firstGrant).toBeGreaterThan(revocation);
   for(const table of ["app_users","app_user_roles","student_profiles","parent_invites","student_parent_links","parent_link_change_requests"]){
@@ -25,6 +25,9 @@ test("Neon identity migration revokes previous grants before regranting minimum 
     expect(sql).toContain("create policy \""+policy+"\"");
   }
   expect(sql).toMatch(/FROM authenticated, anonymous, PUBLIC/);
+  expect(sql).toContain("grant update (display_name,email_snapshot,updated_at) on table app_users to authenticated;");
+  expect(sql).toContain("grant update (school_year,recent_grade,goal,syllabus_progress,exam_timing,updated_at) on table student_profiles to authenticated;");
+  expect(sql).toContain("Unsafe or incomplete column-level UPDATE privileges");
 });
 
 test("Cloud history requires privileged trigger, no direct authenticated writes",()=>{
