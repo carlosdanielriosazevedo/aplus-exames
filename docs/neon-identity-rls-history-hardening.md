@@ -93,15 +93,13 @@ Sources checked (2026-11-02):
 - Vercel-maintained plugin's environment reference on non-retrievable Preview Secrets:
   https://github.com/vercel/vercel-plugin/blob/main/commands/env.md
 
-**Evidence currently available:** Preview `DATABASE_URL` exists in the correct isolated
-Vercel project, but its effective host, database and role remain **unverified**.
+**Historical state before the authorized 2026-11-02 Preview build:** Preview `DATABASE_URL` existed in the isolated Vercel project but its effective host/database/role were **unverified at that time**. See the attestation section below for the subsequently observed result.
 Public Auth/Data API URLs matching the authorized Neon endpoint cannot prove the
 `DATABASE_URL` secret matches. Neon management-API role observations also do not
 establish the credential used by the Vercel runtime.
 
-**Only viable further attestation of that exact Secret:** in an independently approved
-isolated **Preview deployment** using the Secret supplied by Vercel at runtime.
-Design requirements before authorizing such a deployment:
+**Approved diagnostic route (subsequently used):** an isolated **Preview deployment** with the original Secret supplied by Vercel at build time.
+Pre-deployment design requirements that were considered:
 1. Prove project ID `prj_8n5XwTMF651SAfsykIDji93oZp3r`, Preview environment,
    source commit, and intended isolated Neon target independently.
 2. Gate any diagnostic endpoint behind strong server-side authorization and Vercel
@@ -117,9 +115,63 @@ Design requirements before authorizing such a deployment:
 5. Record identity/privilege results in PR #453, then request independent
    security review before considering a data-changing SQL migration.
 
-The staged `scripts/neon-isolated-server-role-attestation.mjs` remains available
-for a future **properly authenticated Preview runtime**, but has **not** been
-executed with the Vercel Secret. The Beta CI release guard must remain enabled.
+The staged `scripts/neon-isolated-server-role-attestation.mjs` remains unexecuted with the Vercel Secret; the **separate build-only** `audits/neon-preview-attestation/attest.mjs` produced the observed read-only attestation instead. The Beta CI release guard must remain enabled.
+
+## Vercel Preview runtime attestation — confirmed 2026-11-02 (read-only)
+
+**Scope:** ONE authorized, build-only Preview deployment of the isolated Vercel
+project `applus-beta-synthetic-isolated`
+(`prj_8n5XwTMF651SAfsykIDji93oZp3r`), deployment
+`dpl_2CgyxcpU5MUFKoN1PAKyVR14wKTw`. GitHub source of the submitted
+three-file attestation package: PR #453 commit
+`567ce21e80e59b8022ebb1b0fa4e05498206105f`.
+Vercel's deployment API independently confirmed READY, `target=null`
+(Preview), exact project ID and source file tree containing only
+`attest.mjs`, `package.json`, `vercel.json`.
+
+**User-observed Build Logs screenshot (2026-11-02 15:03; not retrieved via
+the build-events connector):** install succeeded and build ran
+`node attest.mjs`. The `ATTESTATION_RESULT` line displayed these
+non-secret, aggregate role findings:
+
+| Field | Observed result |
+| --- | --- |
+| `project` | `isolated-preview` |
+| `database` | `neondb` |
+| `role` | `neondb_owner` |
+| `bypassRls` | `true` |
+| `superuser` | `false` |
+| `insertAppUsers` | `true` |
+| `updateAppUsers` | `true` |
+
+The attestation script validates the exact allowlisted isolated Neon
+PostgreSQL endpoint and database name **before** opening the connection;
+therefore a successful marker supports the actual Preview build's
+`DATABASE_URL` pointing at the allowlisted isolated endpoint and provides
+a SQL-attested runtime role. The role privileges support the trusted
+server-side `ensureAppUser()` upsert design. No credentials or user
+records appear in the screenshot; the SQL is a read-only catalog SELECT.
+
+**Evidence caveat:** build logs were supplied as a screenshot by the owner;
+the Vercel build-events API returned 404 and did not independently return
+the line. The independent Vercel deployment metadata and source-file
+inspection support its association but do not themselves prove SQL results.
+This proves the **one attestation Preview build**, not every existing or
+future Preview deployment, not the production runtime, and not any Neon
+Data API JWT's permissions. `neondb_owner` has BYPASSRLS: this is a
+trusted-server privilege and must never be distributed to browsers or used
+to evaluate end-user row isolation.
+
+**Gates now closed:** Preview `DATABASE_URL` endpoint allowlist and actual
+PostgreSQL role/identity-upsert grants, subject to the stated evidence source.
+
+**Gates still OPEN:** verify no server-secret exposure to browser,
+independent migration/RLS security review, provenance of fully synthetic
+test identities/data, authorized SQL migration of isolated schema 8→9,
+and signed Neon Auth JWT end-to-end isolation tests after that migration.
+The ordinary Beta CI release gate correctly disallows mixing schema
+changes into an application release. No Neon migration, data writes,
+production deployment, or merge are authorized by this attestation.
 
 ## Rollback / independent gate
 
