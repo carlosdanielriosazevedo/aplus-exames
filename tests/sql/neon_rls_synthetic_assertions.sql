@@ -13,6 +13,28 @@ BEGIN
  IF n<>1 THEN RAISE EXCEPTION 'A can see % roles, expected 1',n; END IF;
  SELECT count(*) INTO n FROM public.student_cloud_state;
  IF n<>1 THEN RAISE EXCEPTION 'A can see % cloud rows, expected 1',n; END IF;
+ -- Adversarial bypass attempts: the old Data API could issue these queries.
+ -- Even an own-row write without CAS must now fail at the privilege boundary.
+ BEGIN
+   UPDATE public.student_cloud_state
+   SET state_json='{"test":"forged-no-cas"}'::jsonb,revision=99
+   WHERE auth_user_id='synthetic-student-a';
+   RAISE EXCEPTION 'Direct own-row cloud UPDATE bypassed server CAS';
+ EXCEPTION WHEN insufficient_privilege THEN NULL;
+ END;
+ BEGIN
+   DELETE FROM public.student_cloud_state WHERE auth_user_id='synthetic-student-a';
+   RAISE EXCEPTION 'Direct cloud DELETE bypassed server ownership barrier';
+ EXCEPTION WHEN insufficient_privilege THEN NULL;
+ END;
+ BEGIN
+   INSERT INTO public.student_cloud_state(auth_user_id,revision,state_json)
+   VALUES('synthetic-student-a',1,'{}'::jsonb)
+   ON CONFLICT (auth_user_id) DO UPDATE SET revision=0,state_json=excluded.state_json;
+   RAISE EXCEPTION 'Direct cloud upsert could overwrite progress';
+ EXCEPTION WHEN insufficient_privilege THEN NULL;
+ END;
+
  SELECT count(id) INTO n FROM public.parent_invites;
  IF n<>1 THEN RAISE EXCEPTION 'Student A must see their one invitation only'; END IF;
  BEGIN
@@ -102,7 +124,10 @@ BEGIN
 END;
 $assert_a$;
 
--- A legitimate cloud update should write exactly one OLD-state snapshot.
+-- Authorized server owner performs CAS and creates OLD-state history.
+-- Client direct writes remain forbidden even for the row's own user.
+RESET ROLE;
+SET ROLE neondb_owner;
 DO $cas$
 DECLARE n integer;
 BEGIN
@@ -124,6 +149,8 @@ BEGIN
  IF n<>1 THEN RAISE EXCEPTION 'Stale CAS fabricated snapshot'; END IF;
 END;
 $cas$;
+RESET ROLE;
+SET ROLE authenticated;
 
 SELECT set_config('request.jwt.claim.sub','synthetic-student-b',false);
 DO $assert_b$
