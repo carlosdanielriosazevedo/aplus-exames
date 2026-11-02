@@ -9,6 +9,8 @@ export async function readVerifiedRewardTotals(sql,authUserId){
            count(*)::bigint as receipt_count
     from public.verified_completion_receipts
     where auth_user_id=${authUserId}
+      -- CI/Preview receipts must never contribute to official totals.
+      and grading_version not like 'synthetic-%'
   `;
   const count=Number(rows[0]?.receipt_count??0);
   const xp=Number(rows[0]?.verified_xp??0);
