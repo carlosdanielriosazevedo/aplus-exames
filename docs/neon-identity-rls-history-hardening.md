@@ -287,6 +287,76 @@ the changes are not merged into this Draft. A later merge/rebase must
 reconcile the pedagogical and cloud projections with tests before any
 publication. The ordinary release safety gate stays enabled.
 
+## Seven-question server-graded preview protocol — CI prototype only
+
+**Scope and safety boundary (2026-11-02):** This Draft contains a
+separate `db/migrations/010_v5_9_verified_pilot_sessions.sql` with
+a hard preflight requiring `app.synthetic_verified_pilot_ci =
+'ONLY_DISPOSABLE'`, owner `neondb_owner`, and schema version 9.
+**It is NOT approved for any Neon deployment, including the isolated
+Neon project.** GitHub Actions runs it only after 009's disposable
+PostgreSQL assertions and the 009 reapply-fail-closed check. Applying
+010 changes the version marker to 10 in disposable CI; the staged
+real-JWT read-only identity smoke still expects exactly version 9,
+so any future 010 rollout needs a separately reviewed schema/version
+compatibility plan.
+
+**Pilot content:** seven original elementary mathematics choice
+questions, deliberately NOT a Portuguese national-exam assessment.
+`app/lib/server/preview-verified-pilot.js` supplies only the stem,
+options and question IDs. Correct options are present in the
+server-only SQL function in migration 010. This protects against
+client-provided grade fields, **not** determined attackers who can
+read the source repository or discover correct answers elsewhere.
+
+**Protocol:** the route `/api/internal/verified-pilot` is disabled
+unless all of these conditions hold simultaneously: explicit
+`APPROVA_VERIFIED_PILOT_ENABLED=YES`, Vercel
+`VERCEL_ENV=preview`, exact isolated Vercel project ID and exact
+isolated Neon hostname/database name allowlist. The route never
+uses browser-provided account IDs. It requires the Neon Auth server
+session, uses `ensureAppUser` to guarantee the owner identity, and
+rejects cross-origin POSTs.
+
+- POST `{"action":"start"}`: `INSERT ON CONFLICT DO NOTHING`
+  creates at most one attempt per student+pilot. Subsequent requests
+  continue the same immutable session; no restart.
+- POST `{"action":"answer","questionId":"q1","choiceIndex":1}`:
+  PostgreSQL conditionally appends an answer only if that question
+  was never answered and the session remains unfinished. Replaying
+  or changing a submitted answer cannot overwrite it.
+- POST `{"action":"finish"}`: an owner-only PostgreSQL function
+  atomically transitions to complete only when all seven answers
+  exist, computes the seven deterministic results **inside SQL**
+  from the stored answers, and appends one unique
+  `verified_completion_receipts` row. The receipt's SHA-256
+  reflects those stored choices, not a claimed client score.
+  Duplicate finishes return the same receipt; mismatched receipt
+  state aborts the transaction. The synthetic award is 5 XP per
+  correct answer, limited to 35. **It must not enter real ranking.**
+- GET returns only the own session status and answered question IDs,
+  without correct keys or score claims. Answers are selected-choice
+  integers only; no free-text response is sent.
+
+**Evidence required:** CI must prove client roles cannot read/write
+sessions or execute the finalizer; first-start idempotence;
+no answer rewrites; incomplete finish denied; all seven original
+question keys synchronized with grading SQL; one exact-once reward;
+no cross-user award leak; owner-only receipt. Unit tests cover
+feature gate, requests with wrong identities/grades, CSRF and
+session absence. No real Neon Auth JWT and no browser E2E is
+involved in these synthetic tests.
+
+**Explicit limitations:** The pilot is not wired into real
+diagnósticos, missões, treinos or mini-exames, and it cannot
+correct Portuguese or FQ A free responses. Questions and answer
+keys are visible in repository source. There are no official
+test blueprints, cheating heuristics, proctoring, rate limits or
+validated account-consent flows. This proves a **server-side award
+protocol in a disposable experiment**; it does not prove that
+real pupils deserve XP or that the production app is antifraud.
+PR #450 pedagogical integrity changes remain separate.
+
 ## Rollback / independent gate
 
 The SQL transaction rolls back automatically on an error **during execution**. After commit, a blind rollback to the previous broad grants would knowingly reintroduce unsafe access and is prohibited. Prefer fix-forward with a reviewed compatible migration, and preserve historical data. Test application-level compatibility and login before any rollout.
