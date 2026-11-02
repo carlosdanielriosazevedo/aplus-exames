@@ -31,7 +31,12 @@ export function assertRoleCapability(role,capability){
 
 export async function requireSession(){
   if(!serverAuthConfigured())throw securityError("Auth server not configured",503,"AUTH_SERVER_NOT_CONFIGURED");
-  const auth=getServerAuth();
+  let auth;
+  try{auth=getServerAuth();}
+  catch{
+    console.error("server auth provider initialization failed");
+    throw securityError("Auth provider unavailable",503,"AUTH_PROVIDER_UNAVAILABLE");
+  }
   let result;
   try{
     result=await auth.getSession();
@@ -109,9 +114,17 @@ export async function requireCapability(capability){
 }
 
 export function authErrorResponse(error){
-  const status=Number(error?.status)||500;
-  const code=error?.code||"INTERNAL_ERROR";
-  return {status,body:{ok:false,error:code}};
+  // Never reflect arbitrary provider, driver or application exception codes.
+  const allowed={
+    UNAUTHORIZED:401,
+    FORBIDDEN:403,
+    AUTH_SERVER_NOT_CONFIGURED:503,
+    AUTH_PROVIDER_UNAVAILABLE:503,
+    DATABASE_NOT_CONFIGURED:503
+  };
+  const code=typeof error?.code==="string"&&Object.hasOwn(allowed,error.code)
+    ?error.code:"INTERNAL_ERROR";
+  return {status:allowed[code]??500,body:{ok:false,error:code}};
 }
 
 export function authConfiguration(){
