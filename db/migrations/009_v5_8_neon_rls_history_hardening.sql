@@ -239,7 +239,8 @@ REVOKE ALL ON FUNCTION public.snapshot_student_cloud_state() FROM PUBLIC, authen
 -- Browser-provided state_json.xp, ranking and completed-session claims remain
 -- UNVERIFIED. No browser or cloud-sync endpoint is authorized to mint receipts.
 CREATE TABLE public.verified_completion_receipts (
-  auth_user_id text NOT NULL,
+  auth_user_id text NOT NULL
+    REFERENCES public.app_users(auth_user_id) ON DELETE CASCADE,
   completion_id text NOT NULL CHECK (length(completion_id) BETWEEN 1 AND 160),
   kind text NOT NULL CHECK
     (kind IN ('diagnostic','mission','training','mini_exam','full_exam')),
@@ -254,13 +255,20 @@ ALTER TABLE public.verified_completion_receipts ENABLE ROW LEVEL SECURITY;
 REVOKE ALL ON TABLE public.verified_completion_receipts
   FROM authenticated, anonymous, PUBLIC;
 
--- Even a mistaken owner UPDATE/DELETE cannot rewrite a receipt.
+-- No receipt UPDATE is allowed. DELETE is possible only in an explicitly
+-- authorized DB-owner account-erasure transaction (GDPR compliance).
+-- A normal server mistake or direct Data API call never gets this exception.
 CREATE FUNCTION public.reject_verified_receipt_mutation()
 RETURNS trigger
 LANGUAGE plpgsql
 SET search_path=pg_catalog,pg_temp
 AS $immutable_reward$
 BEGIN
+  IF TG_OP='DELETE'
+     AND current_user='neondb_owner'
+     AND current_setting('app.verified_receipt_erasure',true)='YES' THEN
+    RETURN OLD;
+  END IF;
   RAISE EXCEPTION 'Verified completion receipts are immutable';
 END;
 $immutable_reward$;
