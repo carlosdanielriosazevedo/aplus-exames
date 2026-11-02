@@ -232,6 +232,58 @@ monotonic/immutable session validation. Independent verification of
 session/auth authorization, privileged server `DATABASE_URL`,
 parental access, and Neon Auth JWT isolation remains mandatory.
 
+## Verified XP is NOT client XP — reward receipt foundation (staged, not active)
+
+**Observed 2026-11-02:** `app/lib/subjectProgress.js` and
+`app/lib/competition.js` calculate study/competitive XP client-side.
+`app/lib/cloud.js` persists those values inside client-reported
+`state_json`. A modified browser can forge them; session authentication,
+ownership RLS and atomic CAS **do not establish that an exam was completed
+or that XP was earned**. This is a distinct security boundary from #453
+cloud-save concurrency and from #450 FQ A academic grading.
+
+**Staged in migration 009, still unexecuted:**
+- `verified_completion_receipts` is a new, append-only owner-only
+  PostgreSQL table, keyed uniquely by `(auth_user_id,completion_id)`.
+  Each future receipt requires kind, award, verifier version, and digest
+  of trusted grading evidence. No `authenticated`, `anonymous`, or
+  `PUBLIC` privilege or RLS policy permits reading/creating receipts via
+  the Data API. A BEFORE UPDATE/DELETE trigger refuses edits even from
+  the application DB owner; administrative corrections need another
+  reviewed migration.
+- `GET /api/cloud/rewards` authenticates via Neon Auth server session,
+  derives the owner from that session, and returns XP summed **only** from
+  the immutable server-owned ledger. It never reads claimed XP from
+  `student_cloud_state.state_json`, and does not offer POST/PUT/DELETE.
+  New identities with no receipts return zero verified XP, not an estimate.
+- `app/lib/server/cloud-state-validation.js` now rejects unexpected
+  top-level cloud fields and reserved server-authority names, including
+  nested attempts to impersonate `verifiedXp` or `rewardReceipts`.
+  Ordinary `xp`, competitive XP, and progress are still permitted
+  as explicitly **unverified client-reported state** to preserve personal
+  progress and offline cloud merge; they are **not** reward receipts.
+- Disposable SQL fixtures attempt forged client INSERT/SELECT, owner
+  replayed receipt (unique constraint), receipt UPDATE and DELETE,
+  cross-account aggregation. Mocked HTTP/unit tests require a real
+  session, account-owner filtering, no SQL error leakage, and zero XP
+  on a ledger without receipts. CI does not connect to Neon.
+
+**Deliberately NOT implemented / still NO-GO:** no code creates a
+receipt and no claimed completion is trusted merely because it arrives
+at an authenticated endpoint. Server-verified assessment starts,
+server-known item/answer keys, scoring, evidence retention and
+idempotent awarding must be independently designed and tested first.
+Do not use `state_json.xp`, `competition.weeks[*].xp`, or the demo
+leaderboard as the official/paid ranking. Do not backfill receipts by
+copying unverified client XP. The `verified_completion_receipts` table
+is intentionally empty until a future audited trusted grader exists.
+
+**Integration dependency:** PR #450 modifies `app/lib/cloud.js`,
+`app/lib/subjectProgress.js` and academic integrity for FQ A;
+the changes are not merged into this Draft. A later merge/rebase must
+reconcile the pedagogical and cloud projections with tests before any
+publication. The ordinary release safety gate stays enabled.
+
 ## Rollback / independent gate
 
 The SQL transaction rolls back automatically on an error **during execution**. After commit, a blind rollback to the previous broad grants would knowingly reintroduce unsafe access and is prohibited. Prefer fix-forward with a reviewed compatible migration, and preserve historical data. Test application-level compatibility and login before any rollout.
