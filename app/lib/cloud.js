@@ -3,6 +3,7 @@
 import {createClient} from "@neondatabase/neon-js";
 import {createInternalNeonAuth} from "@neondatabase/neon-js/auth";
 import {BetterAuthReactAdapter} from "@neondatabase/neon-js/auth/react/adapters";
+import {assertCloudSnapshot,snapshotError} from "./cloudSnapshotValidation.js";
 
 let authInternalSingleton=null;
 let dataSingleton=null;
@@ -140,6 +141,7 @@ function stripStudentResponseText(value){
 }
 
 export function studentStateForCloud(s){
+  assertCloudSnapshot(s,{local:true,privateFields:false});
   return stripStudentResponseText({
     schema:"aplus-student-state-v8",
     goal:s.goal,
@@ -171,7 +173,9 @@ export function studentStateForCloud(s){
 }
 
 export function mergeStudentCloudState(local,remote){
-  if(!remote || !["aplus-student-state-v1","aplus-student-state-v2","aplus-student-state-v3","aplus-student-state-v4","aplus-student-state-v5","aplus-student-state-v6","aplus-student-state-v7","aplus-student-state-v8"].includes(remote.schema))return local;
+  if(!remote)return local;
+  assertCloudSnapshot(local,{local:true,privateFields:false});
+  assertCloudSnapshot(remote,{legacy:true,privateFields:false});
   return {
     ...local,
     goal:remote.goal??local.goal,
@@ -215,8 +219,10 @@ async function callCloudStateApi(method,payload=null){
   });
   const result=await response.json().catch(()=>null);
   if(response.status===409&&result?.conflict)return result;
-  if(!response.ok||!result?.ok)
+  if(!response.ok||!result?.ok){
+    if(result?.code==="CLOUD_SNAPSHOT_RECOVERY_REQUIRED")throw snapshotError();
     throw new Error("Não foi possível sincronizar o progresso. Verifica a sessão e tenta novamente.");
+  }
   return result;
 }
 
@@ -226,6 +232,7 @@ export async function loadStudentCloudState(){
   if(!session.user)throw new Error("É necessário iniciar sessão.");
   const result=await callCloudStateApi("GET");
   if(!result.data)return null;
+  assertCloudSnapshot(result.data.state_json,{legacy:true,privateFields:false});
   return {
     ...result.data,
     revision:Number(result.data.revision)||0,
@@ -233,7 +240,7 @@ export async function loadStudentCloudState(){
   };
 }
 
-export async function saveStudentCloudState(s,{expectedRevision=0,deviceId=null,knownRemote=false}={}){
+export async function saveStudentCloudState(s,{expectedRevision=0,deviceId=null,knownRemote=false,recovery=null}={}){
   if(!cloudConfiguration().configured)throw new Error("Cloud ainda não configurada.");
   const session=await getCloudSession();
   if(!session.user)throw new Error("É necessário iniciar sessão.");
@@ -243,8 +250,23 @@ export async function saveStudentCloudState(s,{expectedRevision=0,deviceId=null,
     operation:revision===0&&!knownRemote?"insert":"update",
     expectedRevision:revision,
     state:studentStateForCloud(s),
-    deviceId
+    deviceId,...(recovery?{recovery}:{})
   });
+}
+
+export async function verifyRecoveryAccount(accountId){
+  const response=await fetch("/api/auth/session",{credentials:"include",cache:"no-store"});
+  const session=await response.json().catch(()=>null);
+  if(!response.ok||!session?.ok||!accountId||session.user?.id!==accountId)throw snapshotError("CLOUD_RECOVERY_ACCOUNT_CHANGED");
+}
+export async function exportStudentCloudOriginal(accountId){
+  await verifyRecoveryAccount(accountId);
+  const response=await fetch("/api/cloud/state?recovery=original&account="+encodeURIComponent(accountId),{credentials:"include",cache:"no-store"});
+  if(!response.ok)throw snapshotError("CLOUD_RECOVERY_EXPORT_FAILED");
+  const original=await response.json();
+  if(original?.format!=="aplus-cloud-recovery-v1"||!original.data||original.accountId!==accountId)throw snapshotError("CLOUD_RECOVERY_EXPORT_FAILED");
+  await verifyRecoveryAccount(accountId);
+  return original;
 }
 
 export async function overwriteStudentCloudState(s,{remoteRevision,deviceId=null}={}){

@@ -1,12 +1,14 @@
 // Offline contract test. No database, network, or secrets.
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
+import {pathToFileURL} from "node:url";
+import {resolve} from "node:path";
 
 async function loadPureModule(path){
   const source=readFileSync(path,"utf8");
   return import("data:text/javascript;base64,"+Buffer.from(source).toString("base64"));
 }
-const {validateCloudWrite}=await loadPureModule("app/lib/server/cloud-state-validation.js");
+const {validateCloudWrite}=await import(pathToFileURL(resolve("app/lib/server/cloud-state-validation.js")));
 const {writeCloudRow}=await loadPureModule("app/lib/server/cloud-state-store.js");
 const validState={schema:"aplus-student-state-v8",xp:4,subjectProgress:{}};
 const payload=(operation,expectedRevision,state=validState)=>({

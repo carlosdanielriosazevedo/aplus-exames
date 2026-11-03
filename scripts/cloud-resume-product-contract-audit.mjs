@@ -40,14 +40,17 @@ assert.doesNotMatch(cloud,/sessionDraft|active-session/u,"a cloud de progresso n
 for(const handler of ["loadCloud","resolveKeepRemote","resolveMerge"]){
   assert.ok(account.includes(`async function ${handler}(){\n    if(hasPendingAssessment(s))`),`${handler} deve bloquear a carga durante uma avaliação`);
 }
-assert.ok((account.match(/setS\(prev=>preservePendingAssessment\(prev,/gu)||[]).length>=3,"a aplicação tardia de uma resposta cloud também deve respeitar a tentativa atual");
+assert.ok((account.match(/setS\(prev=>prev!==s\?prev:preservePendingAssessment\(prev,/gu)||[]).length>=3,"uma resposta tardia não pode substituir uma tentativa nem progresso alterado durante o pedido");
 
 // Logout nunca deve apagar o estudo local.
 assert.match(account,/Sessão terminada\. O progresso local continua neste dispositivo\./u,"logout deve informar e preservar o progresso local");
 assert.doesNotMatch(account,/async function signout\(\)[\s\S]{0,700}clearLocalState/u,"logout não pode limpar silenciosamente o estado local");
 
 // Carregar cloud é uma ação explícita e cria rede de segurança antes de aplicar estado remoto.
-assert.match(account,/saveLocalSnapshot\(s,\{label:"Antes de carregar da cloud"\}\);[\s\S]*mergeStudentCloudState\(s,row\.state_json\)/u,"carregar cloud deve criar snapshot antes de aplicar estado remoto");
+assert.match(account,/preserveCloudOriginals\(\{local:s,remote:row,label:"Antes de carregar da cloud"\}\);[\s\S]*mergeStudentCloudState\(s,row\.state_json\)/u,"carregar cloud deve preservar ambos os originais antes de aplicar estado remoto");
+const recovery=readFileSync(new URL("../app/lib/cloudRecovery.js",import.meta.url),"utf8");
+assert.match(recovery,/CLOUD_RECOVERY_STORAGE_UNAVAILABLE/u,"sem arquivo durável, a recuperação deve bloquear");
+assert.doesNotMatch(recovery.split("export function listCloudOriginals")[0],/\.slice\(|removeItem\(/u,"o arquivo de recuperação não pode truncar cópias antigas");
 assert.match(account,/Carregar progresso online/u,"a ação de carga deve usar linguagem clara para o aluno");
 assert.match(account,/Detalhes e cópias de segurança/u,"a UI deve manter acesso aos detalhes de segurança sem os impor como linguagem principal");
 

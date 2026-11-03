@@ -36,6 +36,20 @@ on:
       - app/lib/server/verified-rewards.js
       - tests/unit/verifiedRewardsRoute.test.mjs
       - app/lib/cloud.js
+      - app/lib/cloudSnapshotValidation.js
+      - app/lib/cloudSnapshotPreservation.js
+      - app/lib/cloudStateMerge.js
+      - app/lib/cloudRecovery.js
+      - app/lib/persistence.js
+      - app/clientApp.js
+      - app/components/AccountCloud.js
+      - app/components/CloudSnapshotRecovery.js
+      - app/components/LocalSnapshotRecovery.js
+      - tests/unit/cloudSnapshot*.test.mjs
+      - tests/fixtures/cloudSnapshotBrowserEntry.jsx
+      - tests/scripts/cloud-snapshot-*.mjs
+      - tests/scripts/cloud-snapshot-*.sh
+      - tests/sql/cloud_snapshot_recovery_*.sql
       - app/lib/server/cloud-state-validation.js
       - app/lib/server/cloud-state-store.js
       - tests/scripts/cloud-server-cas-contract.mjs
@@ -80,6 +94,20 @@ on:
       - app/lib/server/verified-rewards.js
       - tests/unit/verifiedRewardsRoute.test.mjs
       - app/lib/cloud.js
+      - app/lib/cloudSnapshotValidation.js
+      - app/lib/cloudSnapshotPreservation.js
+      - app/lib/cloudStateMerge.js
+      - app/lib/cloudRecovery.js
+      - app/lib/persistence.js
+      - app/clientApp.js
+      - app/components/AccountCloud.js
+      - app/components/CloudSnapshotRecovery.js
+      - app/components/LocalSnapshotRecovery.js
+      - tests/unit/cloudSnapshot*.test.mjs
+      - tests/fixtures/cloudSnapshotBrowserEntry.jsx
+      - tests/scripts/cloud-snapshot-*.mjs
+      - tests/scripts/cloud-snapshot-*.sh
+      - tests/sql/cloud_snapshot_recovery_*.sql
       - app/lib/server/cloud-state-validation.js
       - app/lib/server/cloud-state-store.js
       - tests/scripts/cloud-server-cas-contract.mjs
@@ -128,6 +156,49 @@ jobs:
         with:
           name: f6-auth-sdk-${{ github.run_id }}-${{ github.sha }}
           path: /tmp/f6-evidence
+          retention-days: 7
+          if-no-files-found: warn
+
+  snapshot-recovery-security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DATABASE_URL: ''
+      NEON_AUTH_BASE_URL: ''
+      NEON_AUTH_COOKIE_SECRET: ''
+      NEXT_PUBLIC_NEON_AUTH_URL: ''
+      NEXT_PUBLIC_NEON_DATA_API_URL: ''
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Fetch immutable F5 reference for synthetic compatibility (read only)
+        run: git fetch --no-tags origin 3e6e8e9b4477f1e3bd50ab3c996e264bfed5370a
+      - name: Install locked dependencies and isolated Chromium test runner
+        run: |
+          npm ci --legacy-peer-deps --no-audit --no-fund
+          mkdir -p /tmp/f7-browser /tmp/f7-evidence
+          npm install --prefix /tmp/f7-browser --ignore-scripts --no-audit --no-fund playwright@1.55.0
+          node /tmp/f7-browser/node_modules/playwright/cli.js install --with-deps chromium
+      - name: Adversarial snapshots, real producers, recovery and CAS contracts
+        run: |
+          npx vitest run tests/unit/cloudSnapshotSafety.test.mjs tests/unit/cloudSnapshotRecoveryRoute.test.mjs tests/unit/cloudSnapshotProducers.test.mjs tests/unit/stateTortureCloudMerge.test.js | tee /tmp/f7-evidence/adversarial.log
+          node tests/scripts/cloud-server-cas-contract.mjs | tee /tmp/f7-evidence/cas.log
+          node scripts/cloud-resume-product-contract-audit.mjs | tee /tmp/f7-evidence/recovery.log
+      - name: Chromium actual recovery UI/API and pinned F5 A/B compatibility
+        env:
+          F7_PLAYWRIGHT_MODULE: /tmp/f7-browser/node_modules/playwright/index.mjs
+        run: node tests/scripts/cloud-snapshot-browser-contract.mjs | tee /tmp/f7-evidence/chromium.log
+      - name: Preserve F7 isolated evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: f7-snapshot-security-${{ github.run_id }}-${{ github.sha }}
+          path: /tmp/f7-evidence
           retention-days: 7
           if-no-files-found: warn
 
@@ -193,6 +264,8 @@ jobs:
       - name: Apply migration and assert RLS using synthetic identities
         run: |
           psql -v ON_ERROR_STOP=1 -f tests/sql/neon_rls_synthetic_run.sql
+      - name: F7 concurrent recovery and exact original retention (disposable PostgreSQL)
+        run: bash tests/scripts/cloud-snapshot-postgres-contract.sh
       - name: Verify migration reapplication fails closed
         run: |
           set +e

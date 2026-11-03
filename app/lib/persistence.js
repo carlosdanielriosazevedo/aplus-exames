@@ -1,5 +1,6 @@
 import {pilotTelemetryAllowed} from "./pilotConsentClient.js";
 import {browserStores,readStorageRows,removeStorageKey,writeStorageFallback} from "./browserStorage.js";
+import {validateCloudSnapshot} from "./cloudSnapshotValidation.js";
 
 export const STORAGE_KEY="a25";
 export const FRIENDS_STORAGE_KEY="a25-friends-beta";
@@ -44,14 +45,17 @@ export function clearLocalPilotTelemetry(){
 export function loadLocalStateStatus(initial,emptyScores,storageKey=STORAGE_KEY){
   const {rows,readable}=readStorageRows(storageKey);
   if(!readable)return {state:null,found:false,error:true};
-  const parsed=[];
+  const parsed=[];let malformed=false;
   for(const [store,raw] of rows)try{
     const value=withoutLegacyBetaQueues(JSON.parse(raw));
-    if(value&&typeof value==="object")parsed.push([store,value]);else store.removeItem(storageKey);
-  }catch{try{store.removeItem(storageKey)}catch{}}
-  if(!parsed.length)return {state:null,found:false,error:false};
+    if(value&&typeof value==="object"&&!Array.isArray(value))parsed.push([store,value]);else malformed=true;
+  }catch{malformed=true;}
+  if(malformed)return {state:null,found:true,error:true};
+  if(!parsed.length)return {state:null,found:rows.length>0,error:rows.length>0};
+  if(parsed.some(([,value])=>value._savedAt!==undefined&&(typeof value._savedAt!=="number"||!Number.isFinite(value._savedAt))))return {state:null,found:true,error:true};
   parsed.sort((a,b)=>(b[1]?._savedAt||0)-(a[1]?._savedAt||0));
   const x=parsed[0][1],scores=emptyScores();
+  if(!validateCloudSnapshot(x,{local:true,privateFields:false}).ok)return {state:null,found:true,error:true};
   Object.keys(scores).forEach(id=>{if(x.scores?.[id])scores[id]={...scores[id],...x.scores[id]}});
   return {state:{...initial,...x,scores,betaSessions:[],betaEvents:[],_stateVersion:APP_STATE_VERSION},found:true,error:false};
 }
