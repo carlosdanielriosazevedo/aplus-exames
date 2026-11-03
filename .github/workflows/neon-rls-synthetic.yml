@@ -21,6 +21,9 @@ on:
       - app/api/auth/**
       - app/lib/server/db.js
       - app/lib/server/identity.js
+      - app/lib/server/auth.js
+      - tests/helpers/neonAuthSdkFixture.mjs
+      - tests/unit/neonAuthRealSdkSecurity.test.mjs
       - tests/unit/dbHealthSecurity.test.mjs
       - tests/unit/healthSecurityRoute.test.mjs
       - tests/unit/identitySessionSecurity.test.mjs
@@ -62,6 +65,9 @@ on:
       - app/api/auth/**
       - app/lib/server/db.js
       - app/lib/server/identity.js
+      - app/lib/server/auth.js
+      - tests/helpers/neonAuthSdkFixture.mjs
+      - tests/unit/neonAuthRealSdkSecurity.test.mjs
       - tests/unit/dbHealthSecurity.test.mjs
       - tests/unit/healthSecurityRoute.test.mjs
       - tests/unit/identitySessionSecurity.test.mjs
@@ -89,6 +95,42 @@ permissions:
   contents: read
 
 jobs:
+  auth-sdk-security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DATABASE_URL: ''
+      NEON_AUTH_BASE_URL: ''
+      NEON_AUTH_COOKIE_SECRET: ''
+      NEXT_PUBLIC_NEON_AUTH_URL: ''
+      NEXT_PUBLIC_NEON_DATA_API_URL: ''
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install locked dependencies
+        run: npm ci --legacy-peer-deps --no-audit --no-fund
+      - name: Prepare evidence directory
+        run: mkdir -p /tmp/f6-evidence
+      - name: Unit tests including the real installed Neon Auth SDK
+        run: npm run test:unit | tee /tmp/f6-evidence/unit.log
+      - name: Technical Gate including Syntax and Source Hygiene
+        run: npm run technical:gate | tee /tmp/f6-evidence/technical.log
+      - name: Build without external services
+        run: npm run build | tee /tmp/f6-evidence/build.log
+      - name: Preserve F6 isolated evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: f6-auth-sdk-${{ github.run_id }}-${{ github.sha }}
+          path: /tmp/f6-evidence
+          retention-days: 7
+          if-no-files-found: warn
+
   synthetic-postgres:
     runs-on: ubuntu-latest
     timeout-minutes: 10

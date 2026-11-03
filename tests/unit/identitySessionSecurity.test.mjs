@@ -56,7 +56,7 @@ describe("provider exception handling",()=>{
     });
   });
   it("uses only the session subject for successful verified lookups",async()=>{
-    mocks.getSession.mockResolvedValue({data:{user:{id:"synthetic-a"},session:{}}});
+    mocks.getSession.mockResolvedValue({data:{user:{id:"synthetic-a"},session:{id:"synthetic-session",userId:"synthetic-a",expiresAt:new Date(Date.now()+60_000).toISOString()}}});
     const auth=await requireSession();
     expect(auth.authUserId).toBe("synthetic-a");
   });
@@ -67,7 +67,7 @@ describe("provider exception handling",()=>{
       });
     });
     for(const handle of [authGET,authPOST]){
-      const result=await handle();
+      const result=await handle(new Request("https://isolated.example.invalid/api/auth/token"),{params:Promise.resolve({path:["token"]})});
       expect(result.status).toBe(503);
       expect(result.body).toEqual({
         ok:false,error:"AUTH_HANDLER_UNAVAILABLE"
@@ -78,7 +78,7 @@ describe("provider exception handling",()=>{
     mocks.handler.mockImplementation(()=>{
       throw Object.assign(new Error("bad config"),{code:"AUTH_SERVER_NOT_CONFIGURED"});
     });
-    const known=await authGET();
+    const known=await authGET(new Request("https://isolated.example.invalid/api/auth/token"),{params:Promise.resolve({path:["token"]})});
     expect(known.status).toBe(503);
     expect(known.body.error).toBe("AUTH_SERVER_NOT_CONFIGURED");
   });
