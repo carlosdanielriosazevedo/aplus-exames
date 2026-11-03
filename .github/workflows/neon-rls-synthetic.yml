@@ -50,6 +50,8 @@ on:
       - tests/unit/p1RecoveryAuthorization.test.mjs
       - tests/fixtures/recoveryAuthorizationBrowserEntry.jsx
       - tests/scripts/recovery-authorization-browser-contract.mjs
+      - tests/helpers/confirmedBrowserReload.mjs
+      - tests/unit/recoveryBrowserWorkflow.test.mjs
       - app/lib/persistence.js
       - app/clientApp.js
       - app/components/AccountCloud.js
@@ -118,6 +120,8 @@ on:
       - tests/unit/p1RecoveryAuthorization.test.mjs
       - tests/fixtures/recoveryAuthorizationBrowserEntry.jsx
       - tests/scripts/recovery-authorization-browser-contract.mjs
+      - tests/helpers/confirmedBrowserReload.mjs
+      - tests/unit/recoveryBrowserWorkflow.test.mjs
       - app/lib/persistence.js
       - app/clientApp.js
       - app/components/AccountCloud.js
@@ -180,6 +184,7 @@ jobs:
           if-no-files-found: warn
 
   snapshot-recovery-security:
+    name: Chromium F7 snapshot recovery
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -213,11 +218,6 @@ jobs:
         env:
           F7_PLAYWRIGHT_MODULE: /tmp/f7-browser/node_modules/playwright/index.mjs
         run: node tests/scripts/cloud-snapshot-browser-contract.mjs | tee /tmp/f7-evidence/chromium.log
-      - name: P1 authorization before hydration, reads and downloads (two tabs)
-        env:
-          F7_PLAYWRIGHT_MODULE: /tmp/f7-browser/node_modules/playwright/index.mjs
-          P1_EVIDENCE_DIR: /tmp/f7-evidence/p1
-        run: node tests/scripts/recovery-authorization-browser-contract.mjs | tee /tmp/f7-evidence/p1-chromium.log
       - name: Preserve F7 isolated evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -226,6 +226,78 @@ jobs:
           path: /tmp/f7-evidence
           retention-days: 7
           if-no-files-found: warn
+
+  p1-recovery-security:
+    name: Chromium P1 account isolation
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      completed: ${{ steps.p1-verdict.outputs.completed }}
+    env:
+      DATABASE_URL: ''
+      NEON_AUTH_BASE_URL: ''
+      NEON_AUTH_COOKIE_SECRET: ''
+      NEXT_PUBLIC_NEON_AUTH_URL: ''
+      NEXT_PUBLIC_NEON_DATA_API_URL: ''
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install locked dependencies and isolated Chromium test runner
+        run: |
+          npm ci --legacy-peer-deps --no-audit --no-fund
+          mkdir -p /tmp/p1-browser /tmp/p1-evidence
+          npm install --prefix /tmp/p1-browser --ignore-scripts --no-audit --no-fund playwright@1.55.0
+          node /tmp/p1-browser/node_modules/playwright/cli.js install --with-deps chromium
+      - name: Chromium P1 before hydration, A/B reads, downloads and legitimate recovery
+        env:
+          F7_PLAYWRIGHT_MODULE: /tmp/p1-browser/node_modules/playwright/index.mjs
+          P1_EVIDENCE_DIR: /tmp/p1-evidence
+        run: node tests/scripts/recovery-authorization-browser-contract.mjs | tee /tmp/p1-evidence/chromium.log
+      - name: Require completed P1 evidence
+        id: p1-verdict
+        if: always()
+        env:
+          P1_REPORT: /tmp/p1-evidence/p1-browser-evidence.json
+        run: |
+          node --input-type=module - <<'JS'
+          import assert from 'node:assert/strict';
+          import {readFileSync,appendFileSync} from 'node:fs';
+          const report=JSON.parse(readFileSync(process.env.P1_REPORT,'utf8'));
+          assert.equal(report.result,'P1_FIXED_BROWSER_CONTRACT_PASS');
+          for(const field of ['foreignReadsDenied','foreignDownloadDenied','forgedIdentifierDenied','legacyQuarantined','unavailableExpiredRevokedDenied','lateResponseDenied','silentCookieChangeDenied','networkAbortDenied','legitimateARecovery','originalAUnchanged','accountBUnchanged','localRepairPassed','cloudRepairPassed'])assert.equal(report[field],true,field);
+          assert.deepEqual(report.pageErrors,[]);
+          appendFileSync(process.env.GITHUB_OUTPUT,'completed=true\n');
+          JS
+      - name: Preserve P1 isolated evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p1-recovery-security-${{ github.run_id }}-${{ github.sha }}
+          path: /tmp/p1-evidence
+          retention-days: 7
+          if-no-files-found: warn
+
+  recovery-browser-validation:
+    name: Require F7 and P1 Chromium
+    needs: [snapshot-recovery-security, p1-recovery-security]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail closed unless both browser contracts completed successfully
+        env:
+          F7_RESULT: ${{ needs.snapshot-recovery-security.result }}
+          P1_RESULT: ${{ needs.p1-recovery-security.result }}
+          P1_COMPLETED: ${{ needs.p1-recovery-security.outputs.completed }}
+        run: |
+          node - <<'JS'
+          console.log(`F7=${process.env.F7_RESULT} P1=${process.env.P1_RESULT} P1_COMPLETED=${process.env.P1_COMPLETED}`);
+          if(process.env.F7_RESULT!=='success'||process.env.P1_RESULT!=='success'||process.env.P1_COMPLETED!=='true')process.exit(1);
+          JS
 
   synthetic-postgres:
     runs-on: ubuntu-latest

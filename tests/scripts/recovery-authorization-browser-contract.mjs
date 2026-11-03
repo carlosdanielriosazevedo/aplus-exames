@@ -3,6 +3,7 @@ import {createRequire} from 'node:module';
 import {createServer} from 'node:http';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {pathToFileURL,fileURLToPath} from 'node:url';
+import {confirmedBrowserReload} from '../helpers/confirmedBrowserReload.mjs';
 const source=fileURLToPath(new URL('../../',import.meta.url));
 const root=process.env.P1_EVIDENCE_DIR||'/tmp/p1-recovery-evidence';
 await mkdir(root,{recursive:true});
@@ -79,7 +80,7 @@ try{
  assert.equal(await b.evaluate(async()=>{const context=await probe.accounts.openVerifiedAccount();probe.workspace.selectAccountWorkspace(context);return context.subject;}),'B');
  const rawB=JSON.stringify({cloudAccount:{version:1,accountId:'B'},xp:5,scores:{},missionHistory:[],examHistory:[]});
  await b.evaluate(raw=>localStorage.setItem(probe.workspace.accountStorageKey('a25','B'),raw),rawB);
- await a.bringToFront();await a.waitForTimeout(300);
+ await a.bringToFront();
  await a.getByText('Confirma a conta para continuar.',{exact:true}).waitFor();
  assert.equal(await exportButton.count(),0);
  const denied=await a.evaluate(async()=>{
@@ -97,6 +98,7 @@ try{
  assert.equal(await b.evaluate(()=>localStorage.getItem(probe.workspace.accountStorageKey('a25','A'))),rawA); // Explicit architecture limit: raw shared storage remains plaintext.
  assert.equal(await a.evaluate(()=>localStorage.getItem(probe.workspace.accountStorageKey('a25','A'))),rawA);
  console.log('PASS P1 negative: same App/error path locks after A/logout/B; direct reads, list, server export, forged JSON and alternate download deny before storage/Blob access');
+ await a.screenshot({path:root+'/fixed-recovery-after-account-B.png',fullPage:true});
  // A returns legitimately; the account namespace never changes in the old tab.
  await b.evaluate(()=>probe.f5Cloud.cloudSignOut());await account(ctx,'A');await verified(b,'A');
  await a.bringToFront();await exportButton.waitFor();
@@ -138,12 +140,12 @@ try{
  assert.equal(await silent.evaluate(async()=>{try{await probe.recovery.readLocalRecoveryOriginals();return false;}catch{return true;}}),true);
  await silent.unroute('**/api/auth/session');
  console.log('PASS silent cookie change and actual network abort: no epoch event is required to deny recovery or download');
- await a.screenshot({path:root+'/fixed-recovery-after-account-B.png',fullPage:true});await ctx.close();
+ await ctx.close();
  // Positive guard control using the same literal App and normal hydration.
  const control=await browser.newContext();await account(control,'A');const normal=await open(control,'valid-A-control');
  await normal.evaluate(()=>mountActualApp());
  await normal.waitForFunction(()=>probe.workspace.workspaceAccountId()==='A');
- await normal.waitForTimeout(500);
+ await normal.waitForFunction(()=>JSON.parse(localStorage.getItem('a25-account-v1:A:a25')||'null')?.cloudAccount?.accountId==='A');
  const other=await open(control,'B-control');await other.evaluate(()=>probe.f5Cloud.cloudSignOut());await account(control,'B');
  assert.equal(await other.evaluate(async()=>{const context=await probe.accounts.openVerifiedAccount();return context.subject;}),'B');
  await normal.bringToFront();await normal.getByText('Confirma a conta para continuar.',{exact:true}).waitFor();
@@ -162,10 +164,13 @@ try{
  assert.equal(await localPage.evaluate(()=>localStorage.getItem(probe.workspace.accountStorageKey('a25'))),repairRaw);
  authHit=0;holdIndex=1;const repairStarted=new Promise(resolve=>{holdAuth=resolve;});await localPage.getByRole('button',{name:'Confirmar recuperação local',exact:true}).click();await repairStarted;
  const change=await open(recoveryContext,'repair-B');await change.evaluate(()=>probe.f5Cloud.cloudSignOut());await account(recoveryContext,'B');await change.evaluate(()=>probe.accounts.openVerifiedAccount());releaseAuth();
- await localPage.waitForTimeout(100);assert.equal(await localPage.evaluate(()=>localStorage.getItem(probe.workspace.accountStorageKey('a25','A'))),repairRaw);
+ await localPage.waitForFunction(()=>[...document.querySelectorAll('button')].some(button=>/Verificar conta e exportar|Exportar progresso local original/.test(button.textContent)&&!button.disabled));
+ assert.equal(await localPage.evaluate(()=>localStorage.getItem(probe.workspace.accountStorageKey('a25','A'))),repairRaw);
  await change.evaluate(()=>probe.f5Cloud.cloudSignOut());await account(recoveryContext,'A');await change.evaluate(()=>probe.accounts.openVerifiedAccount());
  localBundle=await download(localPage,localPage.getByRole('button',{name:/Verificar conta e exportar|Exportar progresso local original/}));await choose(localBundle);
- await localPage.getByRole('button',{name:'Confirmar recuperação local',exact:true}).click();await localPage.waitForFunction(()=>window.probe&&Array.isArray(JSON.parse(localStorage.getItem('a25-account-v1:A:a25')).missionHistory));
+ await confirmedBrowserReload(localPage,
+  ()=>localPage.getByRole('button',{name:'Confirmar recuperação local',exact:true}).click(),
+  ()=>window.probe&&Array.isArray(JSON.parse(localStorage.getItem('a25-account-v1:A:a25')).missionHistory));
  const recovered=await localPage.evaluate(async()=>{const proof=await probe.accounts.openVerifiedAccount();probe.workspace.selectAccountWorkspace(proof);const records=await probe.recovery.listCloudOriginals();const originals=[];for(const item of records)if(!item.quarantined)originals.push(await probe.recovery.readCloudOriginal(item));return {state:JSON.parse(localStorage.getItem(probe.workspace.accountStorageKey('a25'))),originals};});
  assert.equal(recovered.state.xp,55);assert.deepEqual(recovered.state.examHistory,repairState.examHistory);assert.ok(recovered.originals.some(entry=>entry.local?.records?.some(row=>row.raw===repairRaw)));await recoveryContext.close();
  console.log('PASS actual local repair: auth outage and in-flight A->B cannot write; A re-authenticates and repairs a reviewed envelope with exact raw original, XP, grade and answers retained');
@@ -196,8 +201,9 @@ try{
  const graderOwn=await download(graderA,graderButton);assert.equal(graderOwn.cases[0].student_response,'synthetic private validation A');
  let foreignGraderDownloads=0;graderA.on('download',()=>foreignGraderDownloads++);
  await account(graderContext,'B');
+ const rejectedExport=graderA.waitForResponse(response=>new URL(response.url()).pathname==='/api/auth/session'&&response.status()===403);
  await graderA.evaluate(()=>{document.querySelectorAll('button').forEach(button=>{if(button.textContent==='Exportar respostas para validação')button.click();});});
- await graderA.waitForTimeout(100);assert.equal(foreignGraderDownloads,0);
+ await (await rejectedExport).finished();assert.equal(foreignGraderDownloads,0);
  const graderB=await open(graderContext,'grader-B');await graderB.evaluate(()=>mountGraderConsent());
  await graderB.getByRole('heading',{name:'Ajuda-nos a validar o corretor',exact:true}).waitFor();
  assert.equal(await graderB.getByRole('button',{name:'Exportar respostas para validação',exact:true}).count(),0);
@@ -219,7 +225,9 @@ try{
  assert.equal(await signedOut.evaluate(()=>window.preAuthAcademicReads),0);
  await signedOut.locator('input[type="email"]').fill('synthetic-a@example.invalid');
  await signedOut.locator('input[type="password"]').fill('synthetic-browser-password');
- await signedOut.getByRole('button',{name:'Entrar',exact:true}).last().click();
+ await confirmedBrowserReload(signedOut,
+  ()=>signedOut.getByRole('button',{name:'Entrar',exact:true}).last().click(),
+  ()=>window.probe?.workspace.workspaceAccountId()==='A');
  const recoveredLogin=await download(signedOut,signedOut.getByRole('button',{name:'Exportar progresso local original',exact:true}));
  assert.equal(recoveredLogin.records.find(row=>row.key==='a25').raw,rawA);await loginContext.close();
  console.log('PASS legitimate sign-in through actual AccountCloud: no workspace or academic read before authentication; verified A recovers its exact unfinished state after login and reload');

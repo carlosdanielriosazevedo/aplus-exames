@@ -8,6 +8,7 @@ import {execFileSync} from "node:child_process";
 import {readFile} from "node:fs/promises";
 import path from "node:path";
 import {realNeonAuthFixture} from "../helpers/neonAuthSdkFixture.mjs";
+import {confirmedBrowserReload} from "../helpers/confirmedBrowserReload.mjs";
 const F5="3e6e8e9b4477f1e3bd50ab3c996e264bfed5370a";
 const gitFile=file=>execFileSync("git",["show",`${F5}:${file}`],{encoding:"utf8"});
 const {assertRequestAccount}=await import("data:text/javascript;base64,"+Buffer.from(gitFile("app/lib/server/account-binding.js")).toString("base64"));
@@ -138,7 +139,9 @@ try{
   const localExport=await downloaded(page,()=>page.getByRole("button",{name:"Exportar progresso local original",exact:true}).click());
   assert.equal(localExport.records.find(x=>x.key==="a25").raw,raw);
   await page.locator('input[type="file"]').setInputFiles({name:"local-reviewed.json",mimeType:"application/json",buffer:Buffer.from(JSON.stringify({...localExport,repairedState:{...localOriginal,missionHistory:[]}}))});
-  await page.getByRole("button",{name:"Confirmar recuperação local",exact:true}).click();await page.waitForLoadState();await page.waitForFunction(()=>window.f7&&JSON.parse(localStorage.getItem("a25-account-v1:A:a25")).missionHistory instanceof Array);
+  await confirmedBrowserReload(page,
+    ()=>page.getByRole("button",{name:"Confirmar recuperação local",exact:true}).click(),
+    ()=>window.f7&&Array.isArray(JSON.parse(localStorage.getItem("a25-account-v1:A:a25")).missionHistory));
   assert.ok(await page.evaluate(async value=>{const proof=await f7.f5Accounts.openVerifiedAccount();f7.f5Workspace.selectAccountWorkspace(proof);for(const handle of await f7.recovery.listCloudOriginals())if(!handle.quarantined&&(await f7.recovery.readCloudOriginal(handle)).local?.records?.some(row=>row.raw===value))return true;return false;},raw));await closeContext(context);
   console.log("PASS F7 local recovery: raw bytes, XP and grades retained; corrected file applied only after export and confirmation");
 
