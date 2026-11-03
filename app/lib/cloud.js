@@ -3,9 +3,10 @@
 import {createClient} from "@neondatabase/neon-js";
 import {createInternalNeonAuth} from "@neondatabase/neon-js/auth";
 import {BetterAuthReactAdapter} from "@neondatabase/neon-js/auth/react/adapters";
+import {openVerifiedAccount,verifyAccountContext,assertAccountContext,assertAccountState,
+  accountFetch,accountOwner,accountError,beginAccountMutation,endAccountMutation} from "./cloudAccountSession.js";
 
 let authInternalSingleton=null;
-let dataSingleton=null;
 
 export function cloudConfiguration(){
   const authUrl=process.env.NEXT_PUBLIC_NEON_AUTH_URL;
@@ -36,42 +37,6 @@ export function getCloudAuthClient(){
   return getInternalAuth()?.adapter||null;
 }
 
-async function currentDataApiJwt(){
-  if(typeof window==="undefined")return null;
-  try{
-    const response=await fetch("/api/auth/token",{
-      method:"GET",
-      credentials:"include",
-      cache:"no-store"
-    });
-    if(!response.ok)return null;
-    const body=await response.json().catch(()=>null);
-    const token=body?.token||body?.data?.token||null;
-    return typeof token==="string" && token.split(".").length===3 ? token : null;
-  }catch{
-    return null;
-  }
-}
-
-export function getCloudClient(){
-  const cfg=cloudConfiguration();
-  if(!cfg.configured)return null;
-  if(dataSingleton)return dataSingleton;
-  dataSingleton=createClient({
-    dataApi:{
-      url:cfg.dataApiUrl,
-      getToken:currentDataApiJwt
-    }
-  });
-  return dataSingleton;
-}
-
-function unwrap(result){
-  if(!result)return null;
-  if(result.data!==undefined)return result.data;
-  return result;
-}
-
 async function provisionServerIdentity(){
   try{
     const response=await fetch("/api/auth/session",{
@@ -90,14 +55,10 @@ async function provisionServerIdentity(){
 }
 
 export async function getCloudSession(){
-  const client=getCloudAuthClient();
-  if(!client)return {configured:false,user:null,error:null};
+  if(!cloudConfiguration().configured)return {configured:false,user:null,error:null};
   try{
-    const raw=await client.getSession();
-    const data=unwrap(raw);
-    const user=data?.user || raw?.data?.user || null;
-    const identity=user ? await provisionServerIdentity() : null;
-    return {configured:true,user,error:raw?.error||null,raw,identity};
+    const accountContext=await openVerifiedAccount();
+    return {configured:true,user:accountContext.user,accountContext,error:null};
   }catch(error){
     return {configured:true,user:null,error:String(error?.message||error)};
   }
@@ -106,7 +67,10 @@ export async function getCloudSession(){
 export async function cloudSignIn({email,password}){
   const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
-  const result=await client.signIn.email({email,password});
+  const epoch=beginAccountMutation();
+  let result;
+  try{result=await client.signIn.email({email,password});}
+  finally{endAccountMutation(epoch);}
   if(result?.error)throw new Error(result.error.message||"Não foi possível iniciar sessão.");
   await provisionServerIdentity();
   return result;
@@ -115,16 +79,20 @@ export async function cloudSignIn({email,password}){
 export async function cloudSignUp({name,email,password}){
   const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
-  const result=await client.signUp.email({name,email,password});
+  const epoch=beginAccountMutation();
+  let result;
+  try{result=await client.signUp.email({name,email,password});}
+  finally{endAccountMutation(epoch);}
   if(result?.error)throw new Error(result.error.message||"Não foi possível criar a conta.");
   await provisionServerIdentity();
   return result;
 }
 
 export async function cloudSignOut(){
+  const epoch=beginAccountMutation();
   const client=getCloudAuthClient();
-  if(!client)return;
-  return client.signOut();
+  try{if(client)return await client.signOut();}
+  finally{endAccountMutation(epoch);}
 }
 
 const STUDENT_RESPONSE_TEXT_KEYS=new Set([
@@ -212,28 +180,51 @@ function outdatedSchemaError(){
   return error;
 }
 
-export async function loadStudentCloudState(){
-  const client=getCloudClient();
-  if(!client)throw new Error("Cloud ainda não configurada.");
-  const session=await getCloudSession();
-  if(!session.user)throw new Error("É necessário iniciar sessão.");
+async function operationAccount(accountContext,state=null){
+  if(!cloudConfiguration().configured)throw new Error("Cloud ainda não configurada.");
+  const owner=state?accountOwner(state):null;
+  if(state&&!owner)throw accountError("CLOUD_ACCOUNT_UNPROVEN");
+  const context=accountContext||await openVerifiedAccount({expectedAccountId:owner});
+  if(state)assertAccountState(state,context);else assertAccountContext(context);
+  await verifyAccountContext(context);
+  return context;
+}
 
-  const result=await client
-    .from("student_cloud_state")
-    .select("state_json,updated_at,revision,last_device_id")
-    .eq("auth_user_id",session.user.id)
-    .maybeSingle();
-
-  if(result?.error){
-    if(cloudSchemaOutdated(result.error))throw outdatedSchemaError();
-    throw new Error(result.error.message||"Erro ao carregar progresso.");
-  }
-  if(!result?.data)return null;
-  return {
-    ...result.data,
-    revision:Number(result.data.revision)||0,
-    last_device_id:result.data.last_device_id||null
-  };
+// Main still uses Data API; #453 introduces this API. Only a genuine 404 may
+// choose the legacy transport. An auth/network/schema error never falls back.
+async function serverCloudRow(context){
+  const response=await accountFetch(context,"/api/cloud/state",{method:"GET"});
+  if(response.status===404)return {available:false};
+  const body=await response.json().catch(()=>null);
+  assertAccountContext(context);
+  if(!response.ok||!body?.ok)throw accountError();
+  return {available:true,data:body.data||null};
+}
+async function accountDataClient(context){
+  const response=await accountFetch(context,"/api/auth/token",{method:"GET"});
+  const body=await response.json().catch(()=>null);
+  const token=body?.token||body?.data?.token;
+  let subject;
+  try{subject=JSON.parse(atob(token.split(".")[1].replace(/-/g,"+").replace(/_/g,"/"))).sub;}catch{}
+  assertAccountContext(context);
+  // This is an identity consistency check. Neon Data API verifies the JWT's
+  // signature; decoding a payload does not authenticate it here.
+  if(!response.ok||subject!==context.subject)throw accountError();
+  // Freeze this token for this operation. A later session must never replace it.
+  return createClient({dataApi:{url:cloudConfiguration().dataApiUrl,getToken:async()=>{
+    assertAccountContext(context);return token;
+  }}});
+}
+async function finishAccountOperation(context,result){
+  await verifyAccountContext(context);
+  return {...result,accountContext:context};
+}
+export async function loadStudentCloudState({accountContext=null}={}){
+  const context=await operationAccount(accountContext);
+  const api=await serverCloudRow(context);
+  const row=api.available?api.data:await currentRemoteRow(await accountDataClient(context),context.subject);
+  await verifyAccountContext(context);
+  return row?{...row,accountContext:context}:null;
 }
 
 async function currentRemoteRow(client,authUserId){
@@ -254,27 +245,38 @@ async function currentRemoteRow(client,authUserId){
   }:null;
 }
 
-export async function saveStudentCloudState(s,{expectedRevision=0,deviceId=null,knownRemote=false}={}){
-  const client=getCloudClient();
-  if(!client)throw new Error("Cloud ainda não configurada.");
-  const session=await getCloudSession();
-  if(!session.user)throw new Error("É necessário iniciar sessão.");
+export async function saveStudentCloudState(s,{expectedRevision=0,deviceId=null,knownRemote=false,accountContext=null}={}){
+  const snapshot=JSON.parse(JSON.stringify(s));
+  const context=await operationAccount(accountContext,snapshot);
+  const api=await serverCloudRow(context);
+  if(api.available){
+    const response=await accountFetch(context,"/api/cloud/state",{method:"POST",
+      headers:{"Content-Type":"application/json"},body:JSON.stringify({
+        operation:Number(expectedRevision)===0&&!knownRemote?"insert":"update",
+        expectedRevision:Number(expectedRevision),state:studentStateForCloud(snapshot),deviceId
+      })});
+    const result=await response.json().catch(()=>null);
+    if(!(response.status===409&&result?.conflict)&&(!response.ok||!result?.ok))throw accountError();
+    return finishAccountOperation(context,result);
+  }
+  const client=await accountDataClient(context);
 
   const nextRevision=Math.max(0,Number(expectedRevision)||0)+1;
   const row={
-    auth_user_id:session.user.id,
-    state_json:studentStateForCloud(s),
+    auth_user_id:context.subject,
+    state_json:studentStateForCloud(snapshot),
     revision:nextRevision,
     last_device_id:deviceId||null,
     updated_at:new Date().toISOString()
   };
 
   if((Number(expectedRevision)||0)===0 && !knownRemote){
-    const existing=await currentRemoteRow(client,session.user.id);
+    const existing=await currentRemoteRow(client,context.subject);
     if(existing){
-      return {ok:false,conflict:true,remote:existing};
+      return finishAccountOperation(context,{ok:false,conflict:true,remote:existing});
     }
 
+    assertAccountContext(context);
     const inserted=await client
       .from("student_cloud_state")
       .insert(row)
@@ -283,17 +285,18 @@ export async function saveStudentCloudState(s,{expectedRevision=0,deviceId=null,
 
     if(inserted?.error){
       if(cloudSchemaOutdated(inserted.error))throw outdatedSchemaError();
-      const remote=await currentRemoteRow(client,session.user.id);
-      if(remote)return {ok:false,conflict:true,remote};
+      const remote=await currentRemoteRow(client,context.subject);
+      if(remote)return finishAccountOperation(context,{ok:false,conflict:true,remote});
       throw new Error(inserted.error.message||"Erro ao guardar progresso.");
     }
-    return {ok:true,conflict:false,data:inserted?.data||row};
+    return finishAccountOperation(context,{ok:true,conflict:false,data:inserted?.data||row});
   }
 
+  assertAccountContext(context);
   const updated=await client
     .from("student_cloud_state")
     .update(row)
-    .eq("auth_user_id",session.user.id)
+    .eq("auth_user_id",context.subject)
     .eq("revision",Number(expectedRevision)||0)
     .select("updated_at,revision,last_device_id")
     .maybeSingle();
@@ -304,17 +307,18 @@ export async function saveStudentCloudState(s,{expectedRevision=0,deviceId=null,
   }
 
   if(!updated?.data){
-    const remote=await currentRemoteRow(client,session.user.id);
-    return {ok:false,conflict:true,remote};
+    const remote=await currentRemoteRow(client,context.subject);
+    return finishAccountOperation(context,{ok:false,conflict:true,remote});
   }
 
-  return {ok:true,conflict:false,data:updated.data};
+  return finishAccountOperation(context,{ok:true,conflict:false,data:updated.data});
 }
 
-export async function overwriteStudentCloudState(s,{remoteRevision,deviceId=null}={}){
+export async function overwriteStudentCloudState(s,{remoteRevision,deviceId=null,accountContext=null}={}){
   return saveStudentCloudState(s,{
     expectedRevision:Number(remoteRevision)||0,
     deviceId,
+    accountContext,
     knownRemote:true
   });
 }

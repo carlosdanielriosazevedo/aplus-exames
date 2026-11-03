@@ -1,0 +1,77 @@
+name: F5 Account Isolation (isolated)
+
+on:
+  push:
+    branches: [codex/f5-account-isolation]
+  pull_request:
+    branches: [main]
+    paths:
+      - 'app/lib/**'
+      - 'app/components/AccountCloud.js'
+      - 'app/clientApp.js'
+      - 'app/api/**'
+      - 'app/piloto/**'
+      - 'app/definicoes/**'
+      - 'tests/f5/**'
+      - 'tests/unit/f5AccountIsolation.test.mjs'
+      - 'scripts/*cloud*audit.mjs'
+      - 'scripts/*autosync*audit.mjs'
+      - 'scripts/beta-feedback-analytics-audit.mjs'
+      - '.github/workflows/f5-account-isolation.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  isolated-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      DATABASE_URL: ''
+      NEON_AUTH_BASE_URL: ''
+      NEON_AUTH_COOKIE_SECRET: ''
+      NEXT_PUBLIC_NEON_AUTH_URL: ''
+      NEXT_PUBLIC_NEON_DATA_API_URL: ''
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install repository dependencies
+        run: npm ci --legacy-peer-deps --no-audit --no-fund
+      - name: Fetch immutable audit references (read only)
+        run: git fetch --no-tags --depth=1 origin 118021d48ae354ec28b029c132d943d5a20b1c4f cfdc051a1f4300cecaac46e146a9646c4c781aeb
+      - name: Prepare evidence directory
+        run: mkdir -p /tmp/f5-evidence
+      - name: Unit tests including account races and quarantine
+        run: npm run test:unit | tee /tmp/f5-evidence/unit.log
+      - name: Reproduce main defect and validate actual PR 453 transport
+        run: node tests/f5/transport-contract.mjs | tee /tmp/f5-evidence/transport.log
+      - name: Install isolated Chromium runtime
+        run: |
+          npm install --prefix /tmp/f5-playwright --no-save --no-package-lock --legacy-peer-deps --no-audit --no-fund @playwright/test@1.55.0
+          /tmp/f5-playwright/node_modules/.bin/playwright install --with-deps chromium
+      - name: Real two-tab synthetic account isolation
+        run: node tests/f5/browser-contract.mjs | tee /tmp/f5-evidence/browser.log
+        env:
+          F5_PLAYWRIGHT_MODULE: /tmp/f5-playwright/node_modules/playwright/index.mjs
+      - name: Resume and autosync contracts
+        run: |
+          node scripts/cloud-resume-product-contract-audit.mjs | tee /tmp/f5-evidence/resume.log
+          node scripts/closed-beta-autosync-audit.mjs | tee /tmp/f5-evidence/autosync.log
+          node scripts/beta-feedback-analytics-audit.mjs | tee /tmp/f5-evidence/pilot-feedback.log
+      - name: Technical Gate (includes syntax and Source Hygiene)
+        run: npm run technical:gate | tee /tmp/f5-evidence/technical.log
+      - name: Full isolated build
+        run: npm run build | tee /tmp/f5-evidence/build.log
+      - name: Preserve development evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: f5-isolated-${{ github.run_id }}-${{ github.sha }}
+          path: /tmp/f5-evidence
+          retention-days: 7
+          if-no-files-found: warn
