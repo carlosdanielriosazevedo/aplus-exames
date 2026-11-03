@@ -10,13 +10,13 @@ A investigação encontrou riscos semelhantes em `examHistory`, `scores.evidence
 
 ## Contrato e limites
 
-`cloudSnapshotValidation.js` é partilhado pelo servidor, serializer, leitura local e merge. Valida os campos consumidos por cada estrutura; por exemplo, `observations` é contador nas hipóteses e array nas rubricas. Objetos de progresso e linhas de evidência não podem ser nulos; arrays de resultados podem conservar os `null` legítimos produzidos por tentativas incompletas. Campos opcionais ausentes são aceites sem inventar progresso. Extensões aninhadas JSON continuam sujeitas aos limites gerais; não recebem autoridade adicional.
+`cloudSnapshotValidation.js` é partilhado pelo servidor, serializer, leitura local e merge. Valida os campos consumidos por cada estrutura; por exemplo, `observations` é contador nas hipóteses e array nas rubricas. `signal` é numérico na evidência e nulo/objeto no plano ou conclusão de Missão. Objetos de progresso e linhas de evidência não podem ser nulos; arrays de resultados podem conservar os `null` legítimos produzidos por tentativas incompletas. Campos opcionais ausentes são aceites sem inventar progresso. Extensões aninhadas JSON continuam sujeitas aos limites gerais; não recebem autoridade adicional.
 
 Limites por snapshot: 2.000.000 bytes UTF-8, 25.000 nós incluindo primitivas, profundidade 40, 10.000 elementos por array, 2.000 propriedades por objeto e 65.536 unidades de texto por string. Rejeitam-se números não finitos ou fora do intervalo seguro de JavaScript, valores inválidos para cada campo, estruturas cíclicas/não JSON, arrays esparsos e chaves de protótipo. O resultado combinado volta a ser validado; se exceder o orçamento, a operação bloqueia sem truncar os inputs.
 
 Novas gravações continuam limitadas a v8 e à allowlist de campos. Leituras e revisão aceitam v1–v8 estruturalmente compatíveis e modelos antigos conhecidos. Versões desconhecidas exigem revisão. Testes usam também os produtores reais de mini-exames, sessões de Português/FQ A, rubricas, hipóteses e planos diários.
 
-As respostas privadas continuam removidas pelo serializer e proibidas na API de escrita. Uma leitura/exportação autenticada pode conservar respostas históricas já existentes do próprio utilizador. Campos de XP oficialmente verificado, recibos e outra autoridade oficial continuam proibidos mesmo quando aninhados. XP do snapshot mantém a classificação `client-reported`; a correção não altera avaliação, recompensas oficiais ou conteúdos.
+As respostas privadas continuam removidas pelo serializer e proibidas na API de escrita. Uma leitura/exportação autenticada pode conservar respostas históricas já existentes do próprio utilizador, incluindo o formato antigo de dicionário de respostas. O teste de privacidade legado mantém-se inalterado. Campos de XP oficialmente verificado, recibos e outra autoridade oficial continuam proibidos mesmo quando aninhados. XP do snapshot mantém a classificação `client-reported`; a correção não altera avaliação, recompensas oficiais ou conteúdos.
 
 ## Quarentena e revisão
 
@@ -50,7 +50,7 @@ O CI especializado mantém os testes F1–F4/F6 e acrescenta os testes F7, Chrom
 
 ## Validação local antes da publicação
 
-1.033/1.033 testes unitários, incluindo 94 novos testes F7 e os 29 testes F6 do SDK real; 673 ficheiros no Syntax Audit; Source Hygiene e Technical Gate GO; build e budgets aprovados; actionlint 1.7.12 aprovado. Chromium executou os cinco grupos de contratos acima. PostgreSQL 16 aprovou os sete cenários nominal/adulterados, o novo contrato F7 de rollback/CAS/histórico e as regressões 010. Os contratos CAS, navegação e recuperação passaram. Todos os transportes e identidades são sintéticos. O CI do commit final é verificado separadamente e registado na PR.
+1.041/1.041 testes unitários, incluindo 102 novos testes F7 e os 29 testes F6 do SDK real; 673 ficheiros no Syntax Audit; Source Hygiene e Technical Gate GO; build e budgets aprovados; actionlint 1.7.12 aprovado. Chromium executou os cinco grupos de contratos acima. PostgreSQL 16 aprovou os sete cenários nominal/adulterados, o novo contrato F7 de rollback/CAS/histórico e as regressões 010. Os contratos CAS, navegação e recuperação passaram. Todos os transportes e identidades são sintéticos. O CI do commit final é verificado separadamente e registado na PR.
 
 ## Bloqueios e decisão delimitada
 

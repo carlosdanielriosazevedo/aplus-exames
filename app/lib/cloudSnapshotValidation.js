@@ -9,7 +9,7 @@ export const CLOUD_FIELDS=new Set([
 export const SNAPSHOT_LIMITS=Object.freeze({nodes:25000,depth:40,array:10000,keys:2000,string:65536,bytes:2_000_000});
 const PRIVATE_FIELDS=new Set(["answers","answer","currentAnswer","responseText","previousResponseText","studentEvidence"]);
 const AUTHORITY_FIELDS=new Set(["verifiedXp","verifiedRewards","verifiedCompletionReceipts","officialXp","officialRankingXp","rewardReceipt","rewardReceipts","serverVerifiedXp","rewardAuthority","verifiedReceiptCount"]);
-const POISON_KEYS=new Set(["__proto__","prototype","constructor"]);
+const POISON_KEYS=new Set(["__proto__","prototype","constructor","toString","valueOf"]);
 const object=x=>!!x&&typeof x==="object"&&!Array.isArray(x)&&(Object.getPrototypeOf(x)===Object.prototype||Object.getPrototypeOf(x)===null);
 const number=x=>typeof x==="number"&&Number.isFinite(x)&&Math.abs(x)<=Number.MAX_SAFE_INTEGER;
 const count=x=>number(x)&&x>=0;
@@ -32,6 +32,11 @@ Object.assign(common,{
   themeId:nullable(text),subjectId:nullable(text),source:nullable(text),kind:nullable(text),
   label:nullable(text),key:nullable(text),status:nullable(text),scope:nullable(text),
   message:nullable(text),signature:nullable(text),focus:nullable(text),
+  reason:nullable(text),detail:nullable(text),planReason:nullable(text),
+  stopTitle:nullable(text),stopDetail:nullable(text),stopCode:nullable(text),decisionSource:nullable(text),
+  alternatives:rows,unlocks:rows,detour:nullable(x=>row(x)),answers:nullable(x=>Array.isArray(x)||object(x)),
+  totalCount:integer,interactionCount:integer,targetCount:integer,estimatedSeconds:count,
+  ratio:x=>count(x)&&x<=1,decisionUtility:nullable(number),
   at:stamp,updatedAt:stamp,startedAt:stamp,completedAt:stamp,firstAt:stamp,lastAt:stamp,lastAnsweredAt:stamp,resolvedAt:stamp,staleAt:stamp,openedAt:stamp,
   total:count,answered:count,points:nullable(count),maxPoints:nullable(count),
   provisionalPoints:nullable(count),current:integer,index:integer,revision:integer,
@@ -47,12 +52,12 @@ Object.assign(common,{
   elapsedSeconds:count,correctCount:count,earnedPoints:count,pendingPoints:count,
   score20:nullable(x=>count(x)&&x<=20),score20Upper:nullable(x=>count(x)&&x<=20),reviewRequired:boolean,
   responseText:text,previousResponseText:text,
-  signal:x=>count(x)&&x<=100,strength:x=>count(x)&&x<=1,weight:count,
+  signal:nullable(row),strength:x=>count(x)&&x<=1,weight:count,
   reasons:list(x=>text(x)||row(x))
 });
 const scoreSummary=fields({domain:nullable(x=>count(x)&&x<=100),conf:x=>count(x)&&x<=100,evidenceCount:integer});
 const resultRow=fields({...common,correct:nullable(boolean)});
-const evidenceRow=fields({...common,correct:nullable(boolean)});
+const evidenceRow=fields({...common,correct:nullable(boolean),signal:x=>count(x)&&x<=100});
 const score=fields({domain:nullable(x=>count(x)&&x<=100),conf:x=>count(x)&&x<=100,evidence:list(evidenceRow),diagnostics:object});
 const competence=fields({domainId:nullable(text),label:nullable(text),attempts:count,correct:count,points:count,maxPoints:count,
   deterministicAttempts:count,structuredAttempts:count,structuredScoredAttempts:count,

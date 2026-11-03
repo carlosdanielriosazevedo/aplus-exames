@@ -17,6 +17,15 @@ describe("F7 compatibility with real snapshot producers",()=>{
     const completed=applyMiniExam(base(),[question],[0],30),wire=accepted(completed);
     expect(completed.lastExam.answers).toEqual([0]);expect(wire.lastExam.answers).toBeUndefined();expect(wire.examHistory[0].score20).toBe(completed.lastExam.score20);
   });
+  it.each([null,{themeId,focus:"synthetic focus",ratio:.9,at:1000,confirmed:false,originSessionId:"synthetic-training"}])("accepts the completed Mission signal format %j without weakening numeric evidence",signal=>{
+    // clientApp's Mission completion stores plan.signal || null, unlike the
+    // numeric signal created by applyEvidence. Keep both contracts distinct.
+    const history={type:"confirmation",themeId,focus:"synthetic focus",at:1001,completionId:"synthetic-mission",totalCount:5};
+    const state={...base(),missionHistory:[history],lastMission:{...history,signal},freeTrainingSignals:signal?[signal]:[]};
+    const wire=accepted(state);expect(wire.lastMission.signal).toEqual(signal);
+    const bad={...wire,scores:{[themeId]:{evidence:[{signal:{ratio:.9}}]}}};
+    expect(validateCloudWrite({operation:"insert",expectedRevision:0,state:bad}).ok).toBe(false);
+  });
   it("accepts causal hypotheses and frozen daily plans from the current engine",()=>{
     const event={targetThemeId:themeId,targetFocus:"synthetic target",dependency:{themeId,focus:"synthetic base"},verdict:{code:"prerequisite_suspected"},at:1000};
     const state=base();state.learningHypotheses=recordLearningHypothesis([],event);
