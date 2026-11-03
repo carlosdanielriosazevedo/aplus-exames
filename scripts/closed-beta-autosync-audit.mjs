@@ -13,12 +13,15 @@ assert.match(persistence,/withoutPilotTelemetry\(clean\)/u,"local persistence mu
 assert.match(persistence,/pilotSyncInFlight/u,"pilot autosync must prevent concurrent requests");
 assert.match(persistence,/pilotSyncSignature/u,"pilot autosync must deduplicate unchanged telemetry");
 assert.match(persistence,/schedulePilotSync\(persisted\)/u,"local persistence must schedule only the consent-filtered pilot state");
-assert.match(persistence,/fetch\("\/api\/pilot\/sync"/u,"client must use the pilot sync endpoint");
-assert.match(persistence,/credentials:"include"/u,"pilot sync must send the authenticated cookie explicitly");
+assert.match(persistence,/accountFetch\(context,"\/api\/pilot\/sync"/u,"client must bind pilot sync to its verified origin account");
+const accountSession=readFileSync(new URL("../app/lib/cloudAccountSession.js",import.meta.url),"utf8");
+assert.match(accountSession,/credentials:"include"/u,"bound requests must send the authenticated cookie explicitly");
+assert.match(accountSession,/headers:accountRequestHeaders\(context,options.headers\)/u,"bound requests must declare the expected account");
+assert.match(persistence,/openVerifiedAccount\(\{expectedAccountId:owner\}\)/u,"pilot sync must verify the state's origin account");
 assert.match(persistence,/betaSessions:_betaSessions,betaEvents:_betaEvents/u,"legacy raw beta queues must be stripped before local persistence");
 assert.match(persistence,/schema:"aplus-pilot-v1"/u,"pilot envelope must be explicitly versioned");
 
-assert.match(route,/requireSession\(\)/u,"pilot sync must remain authenticated server-side");
+assert.match(route,/requireSession\(\{accountBound:true\}\)/u,"pilot sync must require authentication and the origin-account precondition server-side");
 assert.match(route,/sameOriginRequest\(request\)/u,"pilot sync must enforce same-origin CSRF protection");
 assert.match(route,/MAX_BYTES=250_000/u,"pilot sync must keep a tight payload-size cap");
 assert.match(ingest,/activePilotConsent/u,"pilot ingest must require registered consent");

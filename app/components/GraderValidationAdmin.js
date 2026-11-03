@@ -1,16 +1,18 @@
 "use client";
 
+import {downloadWorkspaceJson} from "../lib/cloudRecovery.js";
+import {beginRecoveryAccess,revalidateRecoveryAccess} from "../lib/recoveryAccess.js";
+import {useRecoveryViewGuard} from "../lib/useRecoveryViewGuard.js";
 import {useMemo,useState} from "react";
 import {datasetReadiness,exportBlindTeacherPack,importValidationExports} from "../lib/graderValidationDataset.js";
 
-function downloadJson(filename,data){
-  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;a.download=filename;a.click();URL.revokeObjectURL(url);
+async function downloadJson(filename,data){
+  try{await downloadWorkspaceJson(()=>data,filename);}
+  catch{window.alert("Exportação bloqueada. Confirma a conta de origem.");}
 }
 
 export default function GraderValidationAdmin(){
+  const accessGuard=useRecoveryViewGuard();
   const [exports,setExports]=useState([]);
   const [message,setMessage]=useState("");
 
@@ -18,6 +20,7 @@ export default function GraderValidationAdmin(){
   const readiness=useMemo(()=>datasetReadiness(merged.rows),[merged.rows]);
 
   async function importFiles(files){
+    let access;try{access=await beginRecoveryAccess({select:true});}catch{setMessage("Acesso bloqueado.");return;}
     const list=[...(files||[])];
     if(!list.length)return;
     const parsed=[];
@@ -25,6 +28,7 @@ export default function GraderValidationAdmin(){
     for(const file of list){
       try{parsed.push(JSON.parse(await file.text()))}catch{unreadable++}
     }
+    try{await revalidateRecoveryAccess(access);}catch{setMessage("Acesso bloqueado.");return;}
     setExports(prev=>[...prev,...parsed]);
     setMessage(`${parsed.length} exportação(ões) lida(s)${unreadable?` · ${unreadable} ficheiro(s) inválido(s)`:""}.`);
   }
@@ -35,6 +39,7 @@ export default function GraderValidationAdmin(){
     downloadJson(`aplus-professor-${split}-${new Date().toISOString().slice(0,10)}.json`,exportBlindTeacherPack(rows));
   }
 
+  if(!accessGuard.ready)return <p>Confirma a conta para aceder aos dados da revisão.</p>;
   return <main style={{maxWidth:900,margin:"0 auto",padding:"36px 20px 80px",fontFamily:"system-ui,sans-serif",lineHeight:1.55}}>
     <p style={{fontSize:12,fontWeight:800,letterSpacing:1}}>APProva+ · GOLD SET INTERNO</p>
     <h1>Agregar respostas reais</h1>
