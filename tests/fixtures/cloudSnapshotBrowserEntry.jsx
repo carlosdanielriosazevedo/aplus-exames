@@ -1,3 +1,4 @@
+import {createClient} from "@neondatabase/neon-js";
 import {useEffect,useState} from "react";
 import {createRoot} from "react-dom/client";
 import {AccountCloud} from "../../app/components/AccountCloud.js";
@@ -10,7 +11,7 @@ import * as f5Cloud from "f5:app/lib/cloud.js";
 import * as f5Reliability from "f5:app/lib/cloudReliability.js";
 import * as f5Persistence from "f5:app/lib/persistence.js";
 
-window.f7={recovery,persistence,f5Accounts,f5Workspace,f5Cloud,f5Reliability,f5Persistence};
+window.f7={probeDataApiFallback:()=>createClient(),recovery,persistence,f5Accounts,f5Workspace,f5Cloud,f5Reliability,f5Persistence};
 window.mountAccount=initial=>{
   const container=document.createElement("main");document.body.append(container);
   function Harness(){

@@ -19,7 +19,7 @@ const result=await build({entryPoints:["tests/fixtures/cloudSnapshotBrowserEntry
     b.onResolve({filter:/^@neondatabase\/neon-js/},a=>({path:a.path,namespace:"sdk"}));
     b.onLoad({filter:/.*/,namespace:"sdk"},a=>({loader:"js",contents:a.path.endsWith("adapters")?"export const BetterAuthReactAdapter=()=>({});":a.path.endsWith("/auth")?
       "export const createInternalNeonAuth=()=>({adapter:{getSession:async()=>({data:await(await fetch('/api/auth/session')).json()}),signOut:async()=>fetch('/test/logout',{method:'POST'})}});":
-      "export const createClient=()=>{throw Error('F5 attempted an unsafe Data API fallback')};"}));
+      "export const createClient=()=>{globalThis.__f7DataFallbacks=(globalThis.__f7DataFallbacks||0)+1;throw Error('F5 attempted an unsafe Data API fallback')};"}));
     b.onResolve({filter:/^f5:/},a=>({path:a.path.slice(3),namespace:"f5"}));
     b.onResolve({filter:/.*/,namespace:"f5"},a=>{
       if(!a.path.startsWith("."))return;
@@ -86,8 +86,17 @@ const browser=await chromium.launch({headless:true,...(process.env.F7_CHROMIUM_P
 const account=async(context,value)=>context.addCookies([{name:"synthetic-account",value,url:origin}]);
 const open=async(context)=>{const page=await context.newPage();await page.goto(origin);await page.waitForFunction(()=>window.f7);return page;};
 const mount=async(page,initial=state())=>{await page.evaluate(value=>mountAccount(value),initial);await page.getByRole("button",{name:"↑ Guardar online",exact:true}).waitFor();};
+async function closeContext(context){
+  for(const page of context.pages())assert.equal(await page.evaluate(()=>globalThis.__f7DataFallbacks||0),0,"No recovery/client path may attempt the Data API fallback");
+  await context.close();
+}
 async function downloaded(page,action){const event=page.waitForEvent("download");await action();const download=await event;return JSON.parse(await readFile(await download.path(),"utf8"));}
 try{
+  // Negative control: the transport double must register a forbidden fallback
+  // even when the calling recovery code catches its rejection.
+  const control=await browser.newContext(),probe=await open(control);
+  assert.equal(await probe.evaluate(()=>{try{f7.probeDataApiFallback();}catch{}return globalThis.__f7DataFallbacks||0;}),1);
+  await control.close();
   let context=await browser.newContext();await account(context,"A");let page=await open(context);rows.set("A",invalid());await mount(page);
   const original=structuredClone(rows.get("A"));
   await page.getByRole("button",{name:"↓ Carregar progresso online",exact:true}).click();
@@ -103,7 +112,7 @@ try{
   assert.equal(rows.get("A").revision,3);assert.deepEqual(history.at(-1).row,original);
   assert.equal(JSON.stringify(rows.get("A").state_json).includes("synthetic old answer"),false);
   assert.ok(await page.evaluate(()=>f7.recovery.listCloudOriginals().some(x=>JSON.stringify(x).includes("synthetic old answer"))));
-  await context.close();
+  await closeContext(context);
   console.log("PASS F7 actual UI/API: malformed snapshot quarantined; exact original exported; reviewed CAS repair preserves OLD history, local answers and all backup copies");
 
   context=await browser.newContext();await account(context,"A");page=await open(context);rows.set("A",{revision:4,state_json:{schema:"aplus-student-state-v8",...state(99)}});await mount(page);
@@ -112,7 +121,7 @@ try{
   assert.equal(await page.evaluate(()=>studyState.xp),20);
   const quotaExport=await downloaded(page,()=>page.getByRole("button",{name:"Exportar snapshot original",exact:true}).click());
   assert.equal(quotaExport.data.state_json.xp,99);assert.equal(await page.locator('input[type="file"]').count(),0);
-  await context.close();
+  await closeContext(context);
   console.log("PASS F7 storage failure: no volatile fallback authorizes replacement; current local XP stays unchanged");
 
   context=await browser.newContext();await account(context,"A");page=await open(context);await mount(page);
@@ -123,7 +132,7 @@ try{
   assert.equal(await page.evaluate(()=>studyState.xp),25);assert.equal(await page.evaluate(()=>studyState.subjectProgress.portuguese.lastPosition.currentAnswer),"synthetic pending answer");
   const before=requests.filter(x=>x.url==="/api/cloud/state").length;
   await page.getByRole("button",{name:"↓ Carregar progresso online",exact:true}).click();
-  assert.equal(requests.filter(x=>x.url==="/api/cloud/state").length,before);await context.close();
+  assert.equal(requests.filter(x=>x.url==="/api/cloud/state").length,before);await closeContext(context);
   console.log("PASS F7 delayed response and assessment: new completed work and an unfinished answer are never replaced");
 
   context=await browser.newContext();await account(context,"A");page=await open(context);
@@ -135,7 +144,7 @@ try{
   assert.equal(localExport.records.find(x=>x.key==="a25").raw,raw);
   await page.locator('input[type="file"]').setInputFiles({name:"local-reviewed.json",mimeType:"application/json",buffer:Buffer.from(JSON.stringify({...localOriginal,missionHistory:[]}))});
   await page.getByRole("button",{name:"Confirmar recuperação local",exact:true}).click();await page.waitForLoadState();await page.waitForFunction(()=>window.f7&&JSON.parse(localStorage.getItem("a25")).missionHistory instanceof Array);
-  assert.ok(await page.evaluate(value=>f7.recovery.listCloudOriginals().some(x=>x.local?.records?.some(row=>row.raw===value)),raw));await context.close();
+  assert.ok(await page.evaluate(value=>f7.recovery.listCloudOriginals().some(x=>x.local?.records?.some(row=>row.raw===value)),raw));await closeContext(context);
   console.log("PASS F7 local recovery: raw bytes, XP and grades retained; corrected file applied only after export and confirmation");
 
   context=await browser.newContext();await account(context,"A");const a=await open(context);
@@ -151,7 +160,7 @@ try{
   for(const [key,value] of Object.entries(rawA))assert.equal(preserved[key],value);
   await account(context,"A");const resumed=await open(context);rows.set("A",invalid());
   assert.equal(await resumed.evaluate(async()=>{const f=f7;const proof=await f.f5Accounts.openVerifiedAccount();f.f5Workspace.selectAccountWorkspace(proof);try{await f.f5Cloud.loadStudentCloudState({accountContext:proof});return false;}catch{return f.recovery.listCloudOriginals().length===1;}}),true);
-  assert.equal(rows.get("B").state_json.xp,5);await context.close();
+  assert.equal(rows.get("B").state_json.xp,5);await closeContext(context);
   console.log("PASS F5 compatibility at "+F5+": real client/queue/workspace modules, A/B tabs, quarantine, same-account resume and account-scoped F7 archives; no A state enters B and no Data API fallback bypasses F7");
 }finally{
   releaseRead?.();await browser.close();server.closeAllConnections();await new Promise(resolve=>server.close(resolve));serverBundle.close();globalThis.fetch=previousFetch;delete globalThis.__f6Fixture;
