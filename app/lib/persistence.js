@@ -1,5 +1,7 @@
 import {pilotTelemetryAllowed} from "./pilotConsentClient.js";
 import {browserStores,readStorageRows,removeStorageKey,writeStorageFallback} from "./browserStorage.js";
+import {workspaceAccountId} from "./accountWorkspace.js";
+import {accountOwner,openVerifiedAccount,assertAccountState,accountFetch,verifyAccountContext} from "./cloudAccountSession.js";
 
 export const STORAGE_KEY="a25";
 export const FRIENDS_STORAGE_KEY="a25-friends-beta";
@@ -47,11 +49,12 @@ export function loadLocalStateStatus(initial,emptyScores,storageKey=STORAGE_KEY)
   const parsed=[];
   for(const [store,raw] of rows)try{
     const value=withoutLegacyBetaQueues(JSON.parse(raw));
-    if(value&&typeof value==="object")parsed.push([store,value]);else store.removeItem(storageKey);
-  }catch{try{store.removeItem(storageKey)}catch{}}
-  if(!parsed.length)return {state:null,found:false,error:false};
+    if(value&&typeof value==="object")parsed.push([store,value]);
+  }catch{}
+  if(!parsed.length)return {state:null,found:rows.length>0,error:rows.length>0};
   parsed.sort((a,b)=>(b[1]?._savedAt||0)-(a[1]?._savedAt||0));
   const x=parsed[0][1],scores=emptyScores();
+  if(workspaceAccountId()&&accountOwner(x)!==workspaceAccountId())return {state:null,found:true,error:true};
   Object.keys(scores).forEach(id=>{if(x.scores?.[id])scores[id]={...scores[id],...x.scores[id]}});
   return {state:{...initial,...x,scores,betaSessions:[],betaEvents:[],_stateVersion:APP_STATE_VERSION},found:true,error:false};
 }
@@ -71,7 +74,7 @@ function schedulePilotSync(state){
   pilotSyncTimer=window.setTimeout(async()=>{
     pilotSyncTimer=null;
     if(pilotSyncInFlight||Date.now()<pilotSyncRetryAfter||!pilotTelemetryAllowed())return;
-    const signature=pilotSyncSignature(state);
+    const signature=accountOwner(state)+"|"+pilotSyncSignature(state);
     if(signature===pilotSyncLastSignature)return;
     pilotSyncInFlight=true;
     try{
@@ -83,6 +86,7 @@ function schedulePilotSync(state){
 }
 
 export function saveLocalState(state,storageKey=null){
+  if(workspaceAccountId()&&accountOwner(state)!==workspaceAccountId())return false;
   const key=storageKey||(state?.betaMode==="friends_beta"?FRIENDS_STORAGE_KEY:STORAGE_KEY);
   const clean=withoutLegacyBetaQueues(state),persisted=pilotTelemetryAllowed()?clean:withoutPilotTelemetry(clean);
   let payload;
@@ -111,10 +115,16 @@ export async function backendHealth(){
 
 export async function syncStateToBackend(state){
   if(!pilotTelemetryAllowed())return {ok:false,status:403,code:"PILOT_CONSENT_REQUIRED"};
-  const payload=buildSyncEnvelope(state);
   try{
-    const r=await fetch("/api/pilot/sync",{method:"POST",credentials:"include",headers:{"content-type":"application/json"},body:JSON.stringify(payload)});
+    state=JSON.parse(JSON.stringify(state));
+    const owner=accountOwner(state);
+    if(!owner)return {ok:false,status:409,code:"CLOUD_ACCOUNT_UNPROVEN"};
+    const context=await openVerifiedAccount({expectedAccountId:owner});
+    assertAccountState(state,context);
+    const payload=buildSyncEnvelope(state);
+    const r=await accountFetch(context,"/api/pilot/sync",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(payload)});
     let body={};try{body=await r.json()}catch{}
+    await verifyAccountContext(context);
     return {ok:r.ok,status:r.status,...body};
   }catch(error){return {ok:false,status:0,error:String(error)}}
 }

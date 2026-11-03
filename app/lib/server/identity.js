@@ -5,6 +5,8 @@
 
 import {getServerAuth,serverAuthConfigured} from "./auth";
 import {getSql,databaseConfigured} from "./db";
+import {headers} from "next/headers";
+import {assertRequestAccount} from "./account-binding.js";
 
 const ROLE_CAPABILITIES={
   student:new Set(["study","progress","exams","manage_parent_link"]),
@@ -29,7 +31,7 @@ export function assertRoleCapability(role,capability){
   return true;
 }
 
-export async function requireSession(){
+export async function requireSession({accountBound=false}={}){
   if(!serverAuthConfigured())throw securityError("Auth server not configured",503,"AUTH_SERVER_NOT_CONFIGURED");
   const auth=getServerAuth();
   let result;
@@ -42,6 +44,7 @@ export async function requireSession(){
   const session=result?.data||null;
   const user=session?.user||null;
   if(!user?.id)throw securityError("Unauthorized",401,"UNAUTHORIZED");
+  assertRequestAccount(await headers(),String(user.id),{required:accountBound});
   return {
     authUserId:String(user.id),
     user,

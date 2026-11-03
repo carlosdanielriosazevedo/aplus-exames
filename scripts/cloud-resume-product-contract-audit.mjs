@@ -47,7 +47,7 @@ assert.match(account,/Sessão terminada\. O progresso local continua neste dispo
 assert.doesNotMatch(account,/async function signout\(\)[\s\S]{0,700}clearLocalState/u,"logout não pode limpar silenciosamente o estado local");
 
 // Carregar cloud é uma ação explícita e cria rede de segurança antes de aplicar estado remoto.
-assert.match(account,/saveLocalSnapshot\(s,\{label:"Antes de carregar da cloud"\}\);[\s\S]*mergeStudentCloudState\(s,row\.state_json\)/u,"carregar cloud deve criar snapshot antes de aplicar estado remoto");
+assert.match(account,/saveLocalSnapshot\(s,\{label:"Antes de carregar da cloud",accountContext:context\}\);\s*if\(!backup\.persisted\)throw[\s\S]*mergeStudentCloudState\(s,row\.state_json\)/u,"carregar cloud deve preservar um snapshot vinculado à conta antes de aplicar estado remoto");
 assert.match(account,/Carregar progresso online/u,"a ação de carga deve usar linguagem clara para o aluno");
 assert.match(account,/Detalhes e cópias de segurança/u,"a UI deve manter acesso aos detalhes de segurança sem os impor como linguagem principal");
 
@@ -66,6 +66,6 @@ assert.match(account,/Tentar novamente/u,"deve existir retry explícito da grava
 
 // Escrita cloud continua protegida por revisão otimista/CAS.
 assert.match(cloud,/\.eq\("revision",Number\(expectedRevision\)\|\|0\)/u,"gravações cloud devem manter compare-and-swap por revisão");
-assert.match(cloud,/return \{ok:false,conflict:true,remote/u,"avanço remoto deve regressar como conflito e não ser sobrescrito");
+assert.match(cloud,/finishAccountOperation\(context,\{ok:false,conflict:true,remote/u,"avanço remoto deve regressar como conflito, sujeito à verificação final da conta");
 
 console.log("✓ cloud resume product contract: progresso concluído sincronizável · sessão inacabada local com fallback seguro · logout seguro · snapshots · conflitos explícitos · retry offline · CAS por revisão");
