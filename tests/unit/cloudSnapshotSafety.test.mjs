@@ -2,7 +2,9 @@ import {afterEach,beforeEach,describe,it,expect,vi} from "vitest";
 import {validateCloudSnapshot,SNAPSHOT_LIMITS} from "../../app/lib/cloudSnapshotValidation.js";
 import {validateCloudWrite} from "../../app/lib/server/cloud-state-validation.js";
 import {safeCloudMerge,stableSnapshotJson} from "../../app/lib/cloudStateMerge.js";
-import {preserveCloudOriginals,listCloudOriginals,assertLocalRecoveryCopy} from "../../app/lib/cloudRecovery.js";
+import {preserveCloudOriginals,listCloudOriginals,readCloudOriginal,assertLocalRecoveryCopy} from "../../app/lib/cloudRecovery.js";
+import {openVerifiedAccount} from "../../app/lib/cloudAccountSession.js";
+import {selectAccountWorkspace,accountStorageKey} from "../../app/lib/accountWorkspace.js";
 import {loadLocalStateStatus} from "../../app/lib/persistence.js";
 
 const snapshot=(extra={})=>({schema:"aplus-student-state-v8",xp:37,profile:{schoolYear:"12.º",optionalTopics:[]},
@@ -14,6 +16,8 @@ function storage(){const data=new Map();return {data,get length(){return data.si
 let local,session;
 beforeEach(()=>{local=storage();session=storage();vi.stubGlobal("localStorage",local);vi.stubGlobal("sessionStorage",session);});
 afterEach(()=>{vi.unstubAllGlobals();});
+async function authorize(){vi.stubGlobal("fetch",vi.fn(async()=>Response.json({ok:true,user:{id:"A"}})));const context=await openVerifiedAccount();selectAccountWorkspace(context);return context;}
+const owned=extra=>({...snapshot(extra),cloudAccount:{version:1,accountId:"A"}});
 
 describe("F7 structural contract and preservation",()=>{
   it.each([{},null,"history",42,true])("rejects malformed history %j without changing input",value=>{
@@ -117,38 +121,42 @@ describe("F7 deterministic merging and durable originals",()=>{
     const merged=safeCloudMerge(a,b);expect(merged.subjectProgress.portuguese.lastPosition).toBe(null);
     expect(merged.cloudRecoveryArchive.entries[0].data).toEqual(pending);expect(a.subjectProgress.portuguese.lastPosition).toEqual(pending);
   });
-  it("keeps every original, including legacy queues and more than eight backups",()=>{
+  it("keeps every original, including legacy queues and more than eight backups",async()=>{
+    await authorize();
     const legacy=' [{"id":"old","state":{"xp":91,"answers":["old"]}}] ';
     local.setItem("a25-cloud-snapshots-v1",legacy);local.setItem("a25-cloud-pending-v1",legacy);
-    const a=snapshot(),bad=snapshot({missionHistory:{},lastExam:{answers:["synthetic old answer"]}});
-    for(let i=0;i<12;i++)preserveCloudOriginals({local:a,remote:bad,label:"copy "+i});
-    expect(listCloudOriginals()).toHaveLength(12);
-    expect(listCloudOriginals().every(x=>JSON.stringify(x.remote)===JSON.stringify(bad))).toBe(true);
+    const a=owned(),bad=snapshot({missionHistory:{},lastExam:{answers:["synthetic old answer"]}});
+    for(let i=0;i<12;i++)await preserveCloudOriginals({local:a,remote:bad,label:"copy "+i});
+    expect(await listCloudOriginals()).toHaveLength(12);
+    for(const item of await listCloudOriginals())expect((await readCloudOriginal(item)).remote).toEqual(bad);
     expect(local.getItem("a25-cloud-snapshots-v1")).toBe(legacy);expect(local.getItem("a25-cloud-pending-v1")).toBe(legacy);
   });
-  it("keeps backup contents with malformed metadata exportable without coercion errors",()=>{
-    preserveCloudOriginals({local:snapshot(),remote:snapshot()});
-    const key=preserveCloudOriginals({local:snapshot(),remote:snapshot()});
+  it("keeps backup contents with malformed metadata exportable without coercion errors",async()=>{
+    await authorize();
+    await preserveCloudOriginals({local:owned(),remote:snapshot()});
+    const handle=await preserveCloudOriginals({local:owned(),remote:snapshot()});
+    const key=accountStorageKey(handle.id);
     const entry=JSON.parse(local.getItem(key));entry.createdAt={valueOf:{},toString:{}};entry.label={legacy:"synthetic metadata"};
     const raw=JSON.stringify(entry);local.setItem(key,raw);
-    expect(listCloudOriginals()).toHaveLength(2);expect(local.getItem(key)).toBe(raw);
-    expect(listCloudOriginals().find(copy=>copy.key===key)).toEqual(entry);
+    expect(await listCloudOriginals()).toHaveLength(2);expect(local.getItem(key)).toBe(raw);
+    const listed=(await listCloudOriginals()).find(copy=>copy.id===handle.id);expect(await readCloudOriginal(listed)).toEqual(entry);
   });
-  it("fails closed if only volatile or session fallback storage is writable",()=>{
+  it("fails closed if only volatile or session fallback storage is writable",async()=>{
+    await authorize();
     vi.stubGlobal("window",{});local.setItem=()=>{throw Error("synthetic quota");};
-    expect(()=>preserveCloudOriginals({local:snapshot(),remote:snapshot()})).toThrow(expect.objectContaining({code:"CLOUD_RECOVERY_STORAGE_UNAVAILABLE"}));
+    await expect(preserveCloudOriginals({local:owned(),remote:snapshot()})).rejects.toThrow(expect.objectContaining({code:"CLOUD_RECOVERY_STORAGE_UNAVAILABLE"}));
     expect(session.length).toBe(0);
   });
   it("preserves malformed persisted JSON and structurally incompatible local progress byte-for-byte",()=>{
     for(const raw of ["{broken",JSON.stringify(snapshot({missionHistory:{}}))]){
-      local.setItem("a25",raw);expect(loadLocalStateStatus({},()=>({}))).toMatchObject({found:true,error:true,state:null});
-      expect(local.getItem("a25")).toBe(raw);
+      local.setItem(accountStorageKey("a25"),raw);expect(loadLocalStateStatus({},()=>({}))).toMatchObject({found:true,error:true,state:null});
+      expect(local.getItem(accountStorageKey("a25"))).toBe(raw);
     }
   });
   it("does not hide an unreadable local copy behind a readable fallback",()=>{
-    local.setItem("a25","{invalid");session.setItem("a25",JSON.stringify(snapshot()));
+    local.setItem(accountStorageKey("a25"),"{invalid");session.setItem(accountStorageKey("a25"),JSON.stringify(owned()));
     expect(loadLocalStateStatus({},()=>({}))).toMatchObject({error:true,state:null});
-    expect(local.getItem("a25")).toBe("{invalid");
+    expect(local.getItem(accountStorageKey("a25"))).toBe("{invalid");
   });
   it("refuses a union exceeding the budget without truncating histories",()=>{
     const a=snapshot({missionHistory:Array.from({length:6000},(_,i)=>({id:"a"+i}))}),b=snapshot({missionHistory:Array.from({length:6000},(_,i)=>({id:"b"+i}))});

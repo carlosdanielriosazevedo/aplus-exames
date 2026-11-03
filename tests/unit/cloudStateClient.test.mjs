@@ -27,7 +27,7 @@ beforeEach(()=>{
   mocked.authSession.mockResolvedValue({data:{user:{id:"synthetic-auth-a"}}});
   mocked.authFactory.mockReturnValue({adapter:{getSession:mocked.authSession}});
   network=vi.fn(async(url,options={})=>{
-    if(url==="/api/auth/session")return {ok:true,status:200,json:async()=>({ok:true})};
+    if(url==="/api/auth/session")return {ok:true,status:200,json:async()=>({ok:true,user:{id:"synthetic-auth-a"}})};
     if(url==="/api/cloud/state"){
       if(options.method==="GET")return {ok:true,status:200,
         json:async()=>({ok:true,data:remote})};
@@ -43,7 +43,7 @@ afterEach(()=>{
   vi.unstubAllGlobals();
   vi.clearAllMocks();
 });
-const student={xp:8,profile:{year:12},subjectProgress:{}};
+const student={cloudAccount:{version:1,accountId:"synthetic-auth-a"},xp:8,profile:{year:12},subjectProgress:{}};
 
 describe("cloud browser transport after server CAS transition",()=>{
   it("loads own state through server route, not a direct Data API call",async()=>{
@@ -55,7 +55,7 @@ describe("cloud browser transport after server CAS transition",()=>{
 
   it("uses initial non-overwriting insert and preserves response contract",async()=>{
     const outcome=await saveStudentCloudState(student,{expectedRevision:0,deviceId:"one"});
-    expect(outcome).toEqual({ok:true,conflict:false,data:{revision:8}});
+    expect(outcome).toMatchObject({ok:true,conflict:false,data:{revision:8}});
     const [,settings]=network.mock.calls.find(([path])=>path==="/api/cloud/state");
     expect(settings.method).toBe("POST");
     expect(settings.credentials).toBe("include");
@@ -75,7 +75,7 @@ describe("cloud browser transport after server CAS transition",()=>{
 
   it("preserves stale-write remote for the existing conflict UI",async()=>{
     network.mockImplementation(async(url,options={})=>{
-      if(url==="/api/auth/session")return {ok:true,status:200,json:async()=>({ok:true})};
+      if(url==="/api/auth/session")return {ok:true,status:200,json:async()=>({ok:true,user:{id:"synthetic-auth-a"}})};
       if(url==="/api/cloud/state"&&options.method==="POST")
         return {ok:false,status:409,json:async()=>({
           ok:false,conflict:true,remote

@@ -1,5 +1,5 @@
-// Actual F7 UI/API + real installed server SDK; all identities/transports/SQL
-// are synthetic. F5 modules are read verbatim from its immutable audit commit.
+// Actual combined F5/F7 UI/API + real installed server SDK. All identities,
+// transports and SQL are synthetic; original pinned branches remain untouched.
 import assert from "node:assert/strict";
 import {build} from "esbuild";
 import {createServer} from "node:http";
@@ -20,15 +20,7 @@ const result=await build({entryPoints:["tests/fixtures/cloudSnapshotBrowserEntry
     b.onLoad({filter:/.*/,namespace:"sdk"},a=>({loader:"js",contents:a.path.endsWith("adapters")?"export const BetterAuthReactAdapter=()=>({});":a.path.endsWith("/auth")?
       "export const createInternalNeonAuth=()=>({adapter:{getSession:async()=>({data:await(await fetch('/api/auth/session')).json()}),signOut:async()=>fetch('/test/logout',{method:'POST'})}});":
       "export const createClient=()=>{globalThis.__f7DataFallbacks=(globalThis.__f7DataFallbacks||0)+1;throw Error('F5 attempted an unsafe Data API fallback')};"}));
-    b.onResolve({filter:/^f5:/},a=>({path:a.path.slice(3),namespace:"f5"}));
-    b.onResolve({filter:/.*/,namespace:"f5"},a=>{
-      if(!a.path.startsWith("."))return;
-      const file=path.posix.normalize(path.posix.join(path.posix.dirname(a.importer),a.path));
-      if(file==="app/lib/cloudStateMerge.js")return {path:path.resolve(file)};
-      return {path:file,namespace:"f5"};
-    });
-    b.onLoad({filter:/.*/,namespace:"f5"},a=>({contents:gitFile(a.path),loader:"js"}));
-    b.onResolve({filter:/browserStorage\.js$/},a=>a.namespace!=="f5"&&path.resolve(a.resolveDir,a.path)===path.resolve("app/lib/browserStorage.js")?{path:"app/lib/browserStorage.js",namespace:"f5"}:undefined);
+
   }}]});
 const bundle=result.outputFiles[0].text,rows=new Map(),history=[],requests=[];
 const state=(xp=20)=>({xp,goal:15,profile:{schoolYear:"12.º",optionalTopics:[]},scores:{},subjectProgress:{},missionHistory:[],examHistory:[],freeTrainingSignals:[],learningHypotheses:[],lastExam:null,lastMission:null});
@@ -85,7 +77,7 @@ const origin=`http://127.0.0.1:${server.address().port}`;
 const browser=await chromium.launch({headless:true,...(process.env.F7_CHROMIUM_PATH?{executablePath:process.env.F7_CHROMIUM_PATH}:{}),args:["--no-sandbox"]});
 const account=async(context,value)=>context.addCookies([{name:"synthetic-account",value,url:origin}]);
 const open=async(context)=>{const page=await context.newPage();await page.goto(origin);await page.waitForFunction(()=>window.f7);return page;};
-const mount=async(page,initial=state())=>{await page.evaluate(value=>mountAccount(value),initial);await page.getByRole("button",{name:"↑ Guardar online",exact:true}).waitFor();};
+const mount=async(page,initial=state())=>{await page.evaluate(async value=>{const proof=await f7.f5Accounts.openVerifiedAccount();f7.f5Workspace.selectAccountWorkspace(proof);mountAccount(f7.f5Accounts.newAccountState(value,proof));},initial);await page.getByRole("button",{name:"↑ Guardar online",exact:true}).waitFor();};
 async function closeContext(context){
   for(const page of context.pages())assert.equal(await page.evaluate(()=>globalThis.__f7DataFallbacks||0),0,"No recovery/client path may attempt the Data API fallback");
   await context.close();
@@ -104,7 +96,7 @@ try{
   assert.equal(await page.evaluate(()=>studyState.xp),20);assert.deepEqual(rows.get("A"),original);
   const exported=await downloaded(page,()=>page.getByRole("button",{name:"Exportar snapshot original",exact:true}).click());
   assert.deepEqual(exported.data,original);
-  await page.evaluate(()=>{const copy=f7.recovery.listCloudOriginals()[0];copy.label={legacy:"synthetic metadata"};copy.createdAt={valueOf:{},toString:{}};localStorage.setItem(copy.key,JSON.stringify(copy));});
+  await page.evaluate(async()=>{const handle=(await f7.recovery.listCloudOriginals())[0],copy=await f7.recovery.readCloudOriginal(handle);copy.label={legacy:"synthetic metadata"};copy.createdAt={valueOf:{},toString:{}};localStorage.setItem(f7.f5Workspace.accountStorageKey(copy.key),JSON.stringify(copy));});
   await downloaded(page,()=>page.getByRole("button",{name:"Exportar snapshot original",exact:true}).click());
   await page.locator("summary").filter({hasText:"Originais preservados"}).click();
   const metadataExport=await downloaded(page,()=>page.getByRole("button",{name:"Exportar cópia · Original com metadados incompatíveis",exact:true}).click());
@@ -116,12 +108,12 @@ try{
   await page.waitForFunction(()=>studyState.xp===37);
   assert.equal(rows.get("A").revision,3);assert.deepEqual(history.at(-1).row,original);
   assert.equal(JSON.stringify(rows.get("A").state_json).includes("synthetic old answer"),false);
-  assert.ok(await page.evaluate(()=>f7.recovery.listCloudOriginals().some(x=>JSON.stringify(x).includes("synthetic old answer"))));
+  assert.ok(await page.evaluate(async()=>{for(const handle of await f7.recovery.listCloudOriginals())if(!handle.quarantined&&JSON.stringify(await f7.recovery.readCloudOriginal(handle)).includes("synthetic old answer"))return true;return false;}));
   await closeContext(context);
   console.log("PASS F7 actual UI/API: malformed snapshot quarantined; exact original exported; reviewed CAS repair preserves OLD history, local answers and all backup copies");
 
   context=await browser.newContext();await account(context,"A");page=await open(context);rows.set("A",{revision:4,state_json:{schema:"aplus-student-state-v8",...state(99)}});await mount(page);
-  await page.evaluate(()=>{const setter=Storage.prototype.setItem;Storage.prototype.setItem=function(key,value){if(key.includes("a25-cloud-recovery-v1:"))throw Error("synthetic quota");return setter.call(this,key,value);};});
+  await page.evaluate(()=>{const setter=Storage.prototype.setItem;Storage.prototype.setItem=function(key,value){if(key.includes("a25-cloud-recovery-v2:"))throw Error("synthetic quota");return setter.call(this,key,value);};});
   await page.getByRole("button",{name:"↓ Carregar progresso online",exact:true}).click();await page.getByText("Este progresso precisa de revisão.",{exact:false}).first().waitFor();
   assert.equal(await page.evaluate(()=>studyState.xp),20);
   const quotaExport=await downloaded(page,()=>page.getByRole("button",{name:"Exportar snapshot original",exact:true}).click());
@@ -141,32 +133,30 @@ try{
   console.log("PASS F7 delayed response and assessment: new completed work and an unfinished answer are never replaced");
 
   context=await browser.newContext();await account(context,"A");page=await open(context);
-  const localOriginal={schema:"aplus-student-state-v8",...state(55),missionHistory:{},examHistory:[{id:"retained-local-exam",score20:16}]};
-  const raw="  "+JSON.stringify(localOriginal)+"  ";await page.evaluate(value=>{localStorage.setItem("a25",value);mountLocalRecovery();},raw);
-  await page.getByRole("button",{name:"Tentar novamente",exact:true}).waitFor();
-  await page.getByRole("button",{name:"Ir para o início",exact:true}).waitFor();
+  const localOriginal={schema:"aplus-student-state-v8",cloudAccount:{version:1,accountId:"A"},...state(55),missionHistory:{},examHistory:[{id:"retained-local-exam",score20:16}]};
+  const raw="  "+JSON.stringify(localOriginal)+"  ";await page.evaluate(async value=>{const proof=await f7.f5Accounts.openVerifiedAccount();f7.f5Workspace.selectAccountWorkspace(proof);localStorage.setItem(f7.f5Workspace.accountStorageKey("a25"),value);mountLocalRecovery();},raw);
   const localExport=await downloaded(page,()=>page.getByRole("button",{name:"Exportar progresso local original",exact:true}).click());
   assert.equal(localExport.records.find(x=>x.key==="a25").raw,raw);
-  await page.locator('input[type="file"]').setInputFiles({name:"local-reviewed.json",mimeType:"application/json",buffer:Buffer.from(JSON.stringify({...localOriginal,missionHistory:[]}))});
-  await page.getByRole("button",{name:"Confirmar recuperação local",exact:true}).click();await page.waitForLoadState();await page.waitForFunction(()=>window.f7&&JSON.parse(localStorage.getItem("a25")).missionHistory instanceof Array);
-  assert.ok(await page.evaluate(value=>f7.recovery.listCloudOriginals().some(x=>x.local?.records?.some(row=>row.raw===value)),raw));await closeContext(context);
+  await page.locator('input[type="file"]').setInputFiles({name:"local-reviewed.json",mimeType:"application/json",buffer:Buffer.from(JSON.stringify({...localExport,repairedState:{...localOriginal,missionHistory:[]}}))});
+  await page.getByRole("button",{name:"Confirmar recuperação local",exact:true}).click();await page.waitForLoadState();await page.waitForFunction(()=>window.f7&&JSON.parse(localStorage.getItem("a25-account-v1:A:a25")).missionHistory instanceof Array);
+  assert.ok(await page.evaluate(async value=>{const proof=await f7.f5Accounts.openVerifiedAccount();f7.f5Workspace.selectAccountWorkspace(proof);for(const handle of await f7.recovery.listCloudOriginals())if(!handle.quarantined&&(await f7.recovery.readCloudOriginal(handle)).local?.records?.some(row=>row.raw===value))return true;return false;},raw));await closeContext(context);
   console.log("PASS F7 local recovery: raw bytes, XP and grades retained; corrected file applied only after export and confirmation");
 
   context=await browser.newContext();await account(context,"A");const a=await open(context);
-  await a.evaluate(async()=>{const f=f7;window.proof=await f.f5Accounts.openVerifiedAccount();f.f5Workspace.selectAccountWorkspace(proof);window.owned=f.f5Accounts.newAccountState({xp:123,scores:{},subjectProgress:{},missionHistory:[],examHistory:[]},proof);f.f5Persistence.saveLocalState(owned);f.f5Reliability.queueCloudSave(owned,{accountContext:proof});f.recovery.preserveCloudOriginals({local:owned,remote:{answers:["synthetic A answer"]}});localStorage.setItem("a25-cloud-pending-v1",'[{"state":{"xp":444}}]');});
+  await a.evaluate(async()=>{const f=f7;window.proof=await f.f5Accounts.openVerifiedAccount();f.f5Workspace.selectAccountWorkspace(proof);window.owned=f.f5Accounts.newAccountState({xp:123,scores:{},subjectProgress:{},missionHistory:[],examHistory:[]},proof);f.f5Persistence.saveLocalState(owned);f.f5Reliability.queueCloudSave(owned,{accountContext:proof});await f.recovery.preserveCloudOriginals({local:owned,remote:{answers:["synthetic A answer"]}});localStorage.setItem("a25-cloud-pending-v1",'[{"state":{"xp":444}}]');});
   const rawA=await a.evaluate(()=>Object.fromEntries(Object.entries(localStorage).filter(([k])=>k.includes("a25-cloud-pending")||k.includes("a25-cloud-recovery"))));
   await a.evaluate(()=>f7.f5Cloud.cloudSignOut());await account(context,"B");const b=await open(context);
   await b.evaluate(async()=>{const f=f7;window.proof=await f.f5Accounts.openVerifiedAccount();f.f5Workspace.selectAccountWorkspace(proof);window.owned=f.f5Accounts.newAccountState({xp:5,scores:{},subjectProgress:{},missionHistory:[],examHistory:[]},proof);});
-  assert.equal(await b.evaluate(()=>f7.recovery.listCloudOriginals().length),0);
+  assert.equal(await b.evaluate(async()=>(await f7.recovery.listCloudOriginals()).length),0);
   assert.ok(await b.evaluate(()=>f7.f5Reliability.listPendingCloudSaves(proof).every(x=>x.quarantined)));
   rows.delete("B");await b.evaluate(()=>f7.f5Cloud.saveStudentCloudState(owned,{accountContext:proof}));assert.equal(rows.get("B").state_json.xp,5);
   assert.equal(await a.evaluate(async()=>{try{await f7.f5Cloud.saveStudentCloudState(owned,{accountContext:proof});return false;}catch{return true;}}),true);
   const preserved=await b.evaluate(()=>Object.fromEntries(Object.entries(localStorage)));
   for(const [key,value] of Object.entries(rawA))assert.equal(preserved[key],value);
   await account(context,"A");const resumed=await open(context);rows.set("A",invalid());
-  assert.equal(await resumed.evaluate(async()=>{const f=f7;const proof=await f.f5Accounts.openVerifiedAccount();f.f5Workspace.selectAccountWorkspace(proof);try{await f.f5Cloud.loadStudentCloudState({accountContext:proof});return false;}catch{return f.recovery.listCloudOriginals().length===1;}}),true);
+  assert.equal(await resumed.evaluate(async()=>{const f=f7;const proof=await f.f5Accounts.openVerifiedAccount();f.f5Workspace.selectAccountWorkspace(proof);try{await f.f5Cloud.loadStudentCloudState({accountContext:proof});return false;}catch{return (await f.recovery.listCloudOriginals()).length===1;}}),true);
   assert.equal(rows.get("B").state_json.xp,5);await closeContext(context);
-  console.log("PASS F5 compatibility at "+F5+": real client/queue/workspace modules, A/B tabs, quarantine, same-account resume and account-scoped F7 archives; no A state enters B and no Data API fallback bypasses F7");
+  console.log("PASS F5 compatibility at "+F5+": combined client/queue/workspace modules, A/B tabs, quarantine, same-account resume and account-scoped F7 archives; no A state enters B and no Data API fallback bypasses F7");
 }finally{
   releaseRead?.();await browser.close();server.closeAllConnections();await new Promise(resolve=>server.close(resolve));serverBundle.close();globalThis.fetch=previousFetch;delete globalThis.__f6Fixture;
   for(const [name,value] of [["NEON_AUTH_BASE_URL",previousEnv.url],["NEON_AUTH_COOKIE_SECRET",previousEnv.secret]])if(value===undefined)delete process.env[name];else process.env[name]=value;

@@ -40,6 +40,16 @@ on:
       - app/lib/cloudSnapshotPreservation.js
       - app/lib/cloudStateMerge.js
       - app/lib/cloudRecovery.js
+      - app/lib/recoveryAccess.js
+      - app/lib/useRecoveryViewGuard.js
+      - app/lib/graderValidationCapture.js
+      - app/lib/graderValidationDataset.js
+      - app/components/Grader*.js
+      - app/components/InternalDashboards.js
+      - app/components/ReviewerDashboard.js
+      - tests/unit/p1RecoveryAuthorization.test.mjs
+      - tests/fixtures/recoveryAuthorizationBrowserEntry.jsx
+      - tests/scripts/recovery-authorization-browser-contract.mjs
       - app/lib/persistence.js
       - app/clientApp.js
       - app/components/AccountCloud.js
@@ -98,6 +108,16 @@ on:
       - app/lib/cloudSnapshotPreservation.js
       - app/lib/cloudStateMerge.js
       - app/lib/cloudRecovery.js
+      - app/lib/recoveryAccess.js
+      - app/lib/useRecoveryViewGuard.js
+      - app/lib/graderValidationCapture.js
+      - app/lib/graderValidationDataset.js
+      - app/components/Grader*.js
+      - app/components/InternalDashboards.js
+      - app/components/ReviewerDashboard.js
+      - tests/unit/p1RecoveryAuthorization.test.mjs
+      - tests/fixtures/recoveryAuthorizationBrowserEntry.jsx
+      - tests/scripts/recovery-authorization-browser-contract.mjs
       - app/lib/persistence.js
       - app/clientApp.js
       - app/components/AccountCloud.js
@@ -193,6 +213,11 @@ jobs:
         env:
           F7_PLAYWRIGHT_MODULE: /tmp/f7-browser/node_modules/playwright/index.mjs
         run: node tests/scripts/cloud-snapshot-browser-contract.mjs | tee /tmp/f7-evidence/chromium.log
+      - name: P1 authorization before hydration, reads and downloads (two tabs)
+        env:
+          F7_PLAYWRIGHT_MODULE: /tmp/f7-browser/node_modules/playwright/index.mjs
+          P1_EVIDENCE_DIR: /tmp/f7-evidence/p1
+        run: node tests/scripts/recovery-authorization-browser-contract.mjs | tee /tmp/f7-evidence/p1-chromium.log
       - name: Preserve F7 isolated evidence
         if: always()
         uses: actions/upload-artifact@v4

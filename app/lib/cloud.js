@@ -3,8 +3,12 @@
 import {createClient} from "@neondatabase/neon-js";
 import {createInternalNeonAuth} from "@neondatabase/neon-js/auth";
 import {BetterAuthReactAdapter} from "@neondatabase/neon-js/auth/react/adapters";
+import {readServerRecoveryOriginal} from "./cloudRecovery.js";
+import {beginRecoveryAccess} from "./recoveryAccess.js";
 import {assertCloudSnapshot,snapshotError} from "./cloudSnapshotValidation.js";
 
+import {openVerifiedAccount,verifyAccountContext,assertAccountContext,assertAccountState,accountOwner,accountError,accountRequestHeaders,beginAccountMutation,endAccountMutation} from "./cloudAccountSession.js";
+import {workspaceAccountId} from "./accountWorkspace.js";
 let authInternalSingleton=null;
 let dataSingleton=null;
 
@@ -91,14 +95,10 @@ async function provisionServerIdentity(){
 }
 
 export async function getCloudSession(){
-  const client=getCloudAuthClient();
-  if(!client)return {configured:false,user:null,error:null};
+  if(!cloudConfiguration().configured)return {configured:false,user:null,error:null};
   try{
-    const raw=await client.getSession();
-    const data=unwrap(raw);
-    const user=data?.user || raw?.data?.user || null;
-    const identity=user ? await provisionServerIdentity() : null;
-    return {configured:true,user,error:raw?.error||null,raw,identity};
+    const accountContext=await openVerifiedAccount();
+    return {configured:true,user:accountContext.user,accountContext,error:null};
   }catch(error){
     return {configured:true,user:null,error:String(error?.message||error)};
   }
@@ -107,7 +107,10 @@ export async function getCloudSession(){
 export async function cloudSignIn({email,password}){
   const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
-  const result=await client.signIn.email({email,password});
+  const epoch=beginAccountMutation();
+  let result;
+  try{result=await client.signIn.email({email,password});}
+  finally{endAccountMutation(epoch);}
   if(result?.error)throw new Error(result.error.message||"Não foi possível iniciar sessão.");
   await provisionServerIdentity();
   return result;
@@ -116,16 +119,20 @@ export async function cloudSignIn({email,password}){
 export async function cloudSignUp({name,email,password}){
   const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
-  const result=await client.signUp.email({name,email,password});
+  const epoch=beginAccountMutation();
+  let result;
+  try{result=await client.signUp.email({name,email,password});}
+  finally{endAccountMutation(epoch);}
   if(result?.error)throw new Error(result.error.message||"Não foi possível criar a conta.");
   await provisionServerIdentity();
   return result;
 }
 
 export async function cloudSignOut(){
+  const epoch=beginAccountMutation();
   const client=getCloudAuthClient();
-  if(!client)return;
-  return client.signOut();
+  try{if(client)return await client.signOut();}
+  finally{endAccountMutation(epoch);}
 }
 
 const STUDENT_RESPONSE_TEXT_KEYS=new Set([
@@ -207,30 +214,38 @@ export function mergeStudentCloudState(local,remote){
 
 // The client never sends direct Data API INSERT/UPDATE/DELETE for cloud state.
 // The server authenticates the cookie and supplies the row owner from the session.
-async function callCloudStateApi(method,payload=null){
+async function operationAccount(context,state=null){
+  if(state&&!accountOwner(state))throw accountError("CLOUD_ACCOUNT_UNPROVEN");
+  if(context)assertAccountContext(context);
+  const owner=workspaceAccountId()||accountOwner(state)||context?.subject||null;
+  context=context||await openVerifiedAccount({expectedAccountId:owner});
+  if(owner&&context.subject!==owner)throw accountError();
+  if(state)assertAccountState(state,context);else assertAccountContext(context);
+  await verifyAccountContext(context);return context;
+}
+async function callCloudStateApi(method,payload=null,context){
+  assertAccountContext(context);
   const response=await fetch("/api/cloud/state",{
     method,
     credentials:"include",
     cache:"no-store",
-    ...(payload?{
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(payload)
-    }:{})
+    headers:accountRequestHeaders(context,payload?{"Content-Type":"application/json"}:{}),
+    ...(payload?{body:JSON.stringify(payload)}:{})
   });
   const result=await response.json().catch(()=>null);
-  if(response.status===409&&result?.conflict)return result;
+  await verifyAccountContext(context);
+  if(response.status===409&&result?.conflict)return {...result,accountContext:context};
   if(!response.ok||!result?.ok){
     if(result?.code==="CLOUD_SNAPSHOT_RECOVERY_REQUIRED")throw snapshotError();
     throw new Error("Não foi possível sincronizar o progresso. Verifica a sessão e tenta novamente.");
   }
-  return result;
+  return {...result,accountContext:context};
 }
 
-export async function loadStudentCloudState(){
+export async function loadStudentCloudState({accountContext=null}={}){
   if(!cloudConfiguration().configured)throw new Error("Cloud ainda não configurada.");
-  const session=await getCloudSession();
-  if(!session.user)throw new Error("É necessário iniciar sessão.");
-  const result=await callCloudStateApi("GET");
+  const context=await operationAccount(accountContext);
+  const result=await callCloudStateApi("GET",null,context);
   if(!result.data)return null;
   assertCloudSnapshot(result.data.state_json,{legacy:true,privateFields:false});
   return {
@@ -240,39 +255,31 @@ export async function loadStudentCloudState(){
   };
 }
 
-export async function saveStudentCloudState(s,{expectedRevision=0,deviceId=null,knownRemote=false,recovery=null}={}){
+export async function saveStudentCloudState(s,{expectedRevision=0,deviceId=null,knownRemote=false,recovery=null,accountContext=null}={}){
   if(!cloudConfiguration().configured)throw new Error("Cloud ainda não configurada.");
-  const session=await getCloudSession();
-  if(!session.user)throw new Error("É necessário iniciar sessão.");
+  const snapshot=JSON.parse(JSON.stringify(s));
+  const context=await operationAccount(accountContext,snapshot);
   const revision=Number(expectedRevision);
   // Only the server decides the owner and increments revision atomically.
   return callCloudStateApi("POST",{
     operation:revision===0&&!knownRemote?"insert":"update",
     expectedRevision:revision,
-    state:studentStateForCloud(s),
+    state:studentStateForCloud(snapshot),
     deviceId,...(recovery?{recovery}:{})
-  });
+  },context);
 }
 
 export async function verifyRecoveryAccount(accountId){
-  const response=await fetch("/api/auth/session",{credentials:"include",cache:"no-store"});
-  const session=await response.json().catch(()=>null);
-  if(!response.ok||!session?.ok||!accountId||session.user?.id!==accountId)throw snapshotError("CLOUD_RECOVERY_ACCOUNT_CHANGED");
+  await beginRecoveryAccess({expected:accountId});
 }
 export async function exportStudentCloudOriginal(accountId){
-  await verifyRecoveryAccount(accountId);
-  const response=await fetch("/api/cloud/state?recovery=original&account="+encodeURIComponent(accountId),{credentials:"include",cache:"no-store"});
-  if(!response.ok)throw snapshotError("CLOUD_RECOVERY_EXPORT_FAILED");
-  const original=await response.json();
-  if(original?.format!=="aplus-cloud-recovery-v1"||!original.data||original.accountId!==accountId)throw snapshotError("CLOUD_RECOVERY_EXPORT_FAILED");
-  await verifyRecoveryAccount(accountId);
-  return original;
+  return readServerRecoveryOriginal(accountId);
 }
 
-export async function overwriteStudentCloudState(s,{remoteRevision,deviceId=null}={}){
+export async function overwriteStudentCloudState(s,{remoteRevision,deviceId=null,accountContext=null}={}){
   return saveStudentCloudState(s,{
     expectedRevision:Number(remoteRevision)||0,
     deviceId,
-    knownRemote:true
+    knownRemote:true,accountContext
   });
 }

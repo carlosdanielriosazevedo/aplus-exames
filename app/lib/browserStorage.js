@@ -1,3 +1,5 @@
+import {accountStorage} from "./accountWorkspace.js";
+
 const STORAGE_NAMES=["localStorage","sessionStorage"];
 const volatileMemory=new Map();
 let volatileActive=false;
@@ -21,13 +23,13 @@ export function browserStores(){
   const stores=[];
   for(const name of STORAGE_NAMES)try{
     const store=globalThis[name];
-    if(store)stores.push(store);
+    if(store)stores.push(accountStorage(store));
   }catch{}
   // Last-resort same-tab storage is a browser resilience layer. Keep it out of
   // single-store server/audit harnesses so genuine persistence fault injection
   // can still fail closed there. In a real browser, window exists even when
   // both Web Storage getters/writes are blocked.
-  if(typeof window!=="undefined"||stores.length>1)stores.push(volatileStorage);
+  if(typeof window!=="undefined"||stores.length>1)stores.push(accountStorage(volatileStorage));
   return stores;
 }
 
@@ -47,7 +49,7 @@ export function writeStorageFallback(key,payload){
   for(let i=0;i<stores.length;i++)try{
     stores[i].setItem(key,payload);
     for(let j=i+1;j<stores.length;j++)try{stores[j].removeItem(key)}catch{}
-    announceStorageMode(stores[i]===volatileStorage);
+    announceStorageMode(stores[i]===volatileStorage||stores[i].source===volatileStorage);
     return true;
   }catch{}
   return false;

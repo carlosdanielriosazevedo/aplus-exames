@@ -59,6 +59,10 @@ import {
   activeParentLink,requestLinkRemoval,confirmLinkRemoval,demoIdentity
 } from "./lib/identity";
 import {migrateCloudSync} from "./lib/cloudReliability";
+import {openVerifiedAccount,newAccountState,accountContextCurrent} from "./lib/cloudAccountSession.js";
+import {downloadOwnedState} from "./lib/cloudRecovery.js";
+import {useAccountWorkspaceGuard} from "./lib/useAccountWorkspaceGuard.js";
+import {selectAccountWorkspace} from "./lib/accountWorkspace.js";
 import {
   TESTER_SEGMENTS,PUBLIC_ENTRY_SEGMENTS,friendsBetaRequested,activateFriendsBeta,markFriendsBetaConsent,
   isFriendsBeta,friendsBetaReport,testerSegmentInfo,currentTesterSegment,
@@ -268,6 +272,8 @@ export default function App(){
   const [recoveryStorageKey,setRecoveryStorageKey]=useState("a25");
   const [mathEngineReady,setMathEngineReady]=useState(()=>!!mathEngineModule);
   const [diagnosticRecoveryReady,setDiagnosticRecoveryReady]=useState(()=>!!diagnosticRecoveryModule);
+  const [accountProtectionReady,setAccountProtectionReady]=useState(false);
+  const accountGuard=useAccountWorkspaceGuard(accountProtectionReady);
 
   useEffect(()=>{
     if(typeof window==="undefined"||!("scrollRestoration" in window.history))return;
@@ -282,6 +288,13 @@ export default function App(){
     (async()=>{
     const requested=typeof window!=="undefined"&&friendsBetaRequested(window.location.search);
     const storageKey=requested?FRIENDS_STORAGE_KEY:undefined;
+    let accountContext=null;
+    if(process.env.NEXT_PUBLIC_NEON_AUTH_URL&&process.env.NEXT_PUBLIC_NEON_DATA_API_URL){
+      try{accountContext=await openVerifiedAccount();}catch{}
+      if(!live)return;
+      if(accountContext){selectAccountWorkspace(accountContext);setAccountProtectionReady(true);}
+      else{setScreen("accountVerificationRequired");return;}
+    }
     const loaded=loadLocalStateStatus(initial,emptyScores,storageKey);
     if(loaded.error){setRecoveryStorageKey(storageKey||"a25");setScreen("storageRecoveryError");return}
     const x=loaded.state;
@@ -301,7 +314,7 @@ export default function App(){
       :x;
     const base=migratedX
       ?migrateProductAnalytics(migrateCloudSync(migrateDailyMission(migrateCompetition(migrateEngagement(migratedX)))))
-      :migrateProductAnalytics(migrateCloudSync(initial));
+      :migrateProductAnalytics(migrateCloudSync(accountContext?newAccountState(initial,accountContext):initial));
     const subjectReady=normalizeSubjectWorkspace(base);
     const betaState=requested?activateFriendsBeta(subjectReady):subjectReady;
     const next=recordAppOpen(betaState,{source:"initial_load"});
@@ -340,6 +353,7 @@ export default function App(){
       }
     }
 
+    if(accountContext&&!accountContextCurrent(accountContext)){window.location.reload();return;}
     setS(recoveredState);
 
     if(draft?.kind==="training" && draft.cfg)setTrainingCfg(draft.cfg);
@@ -465,6 +479,19 @@ export default function App(){
     setScreen(x);
   };
 
+  if(accountProtectionReady&&accountGuard.locked)return <Shell><Logo/>
+    <div className="notice"><b>Confirma a conta para continuar.</b><span>O progresso e as respostas desta aba ficaram preservados separadamente. Não acrescentaremos estudo à conta anterior durante uma troca de sessão.</span></div>
+    {screen==="account"
+      ?<AccountCloud s={initial} setS={()=>window.location.reload()} go={()=>window.location.reload()}/>
+      :<button onClick={()=>go("account")}>Gerir conta e progresso</button>}
+    <button className="secondary" onClick={accountGuard.recheck}>Voltar a verificar a mesma conta</button>
+  </Shell>;
+
+  if(screen==="accountVerificationRequired")return <Shell><Logo/>
+    <div className="notice"><b>Confirma a sessão para recuperar o progresso.</b><span>Os dados não foram lidos nem atribuídos a outra conta.</span><button onClick={()=>window.location.reload()}>Voltar a verificar a sessão</button></div>
+    <AccountCloud s={initial} setS={()=>window.location.reload()} go={()=>window.location.reload()}/>
+  </Shell>;
+
   // Resolve pending attempts before mounting an assessment, including popstate.
   const assessmentRoutes=["diag","diagRun","mission","trainingSetup","trainingRun","miniExamIntro","miniExamRun","miniExamReview","portugueseMiniExam","physicsChemistryMini1","physicsChemistryMini2","physicsChemistryExam"];
   if(hydrated&&assessmentRoutes.includes(screen)){
@@ -561,7 +588,8 @@ export default function App(){
     clearSessionDraft(s.betaMode||"internal");
     clearCompletionRegistry();
     setRecoveredSession(null);
-    setS(isFriendsBeta(s)?activateFriendsBeta(initial):initial);go("welcome");
+    const fresh={...initial,...(s.cloudAccount?{cloudAccount:s.cloudAccount}:{})};
+    setS(isFriendsBeta(s)?activateFriendsBeta(fresh):fresh);go("welcome");
   }}/>;
 }
 
@@ -579,15 +607,9 @@ function FriendsBetaPanel({s}){
   const segment=testerSegmentInfo(currentTesterSegment(s));
   const fx=friendsFeedbackSummary(s);
 
-  function downloadReport(){
-    const payload=friendsBetaReport(s);
-    const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement("a");
-    a.href=url;
-    a.download=`teste-amigos-${s.betaParticipant?.code||"participante"}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+  async function downloadReport(){
+    try{await downloadOwnedState(s,`teste-amigos-${s.betaParticipant?.code||"participante"}.json`,friendsBetaReport);}
+    catch{window.alert("Exportação bloqueada. Confirma a conta de origem; os dados não foram alterados.");}
   }
 
   return <div className="friendsBetaPanel">

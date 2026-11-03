@@ -5,6 +5,7 @@ vi.mock("../../app/lib/server/auth.js",()=>({
   serverAuthConfigured:()=>true,
   getServerAuth:()=>mocks.getServerAuth()
 }));
+vi.mock("next/headers",()=>({headers:async()=>new Headers()}));
 vi.mock("next/server",()=>({
   NextResponse:{json:(body,options={})=>({
     body,status:options.status??200

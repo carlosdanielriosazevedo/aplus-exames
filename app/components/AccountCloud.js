@@ -19,6 +19,8 @@ import {migrateEngagement} from "../lib/engagement";
 import {migratePedagogicalIds,recalibrateAllScores,prepIndex,measuredThemes} from "../lib/engine";
 import {demoIdentity} from "../lib/identity";
 import {academicScopeThemes} from "../lib/curriculumScope";
+import {currentVerifiedAccount} from "../lib/cloudAccountSession.js";
+import {beginRecoveryAccess} from "../lib/recoveryAccess.js";
 import {preserveCloudOriginals} from "../lib/cloudRecovery.js";
 import CloudSnapshotRecovery from "./CloudSnapshotRecovery.js";
 
@@ -59,9 +61,9 @@ export function AccountCloud({s,setS,go}){
   const sync=cloudSyncMeta(s);
   const deviceId=sync.deviceId||getOrCreateDeviceId();
 
-  function refreshLocalSafety(){
-    setPending(listPendingCloudSaves());
-    setSnapshots(listLocalSnapshots());
+  async function refreshLocalSafety(context=currentVerifiedAccount()){
+    try{await beginRecoveryAccess();setPending(listPendingCloudSaves(context));setSnapshots(listLocalSnapshots(context));}
+    catch{setPending([]);setSnapshots([]);}
   }
 
   useEffect(()=>{refreshLocalSafety()},[]);
@@ -72,7 +74,7 @@ export function AccountCloud({s,setS,go}){
       return;
     }
     const result=await getCloudSession();
-    setSession({loading:false,user:result.user||null,error:result.error||null});
+    setSession({loading:false,user:result.user||null,error:result.error||null,accountContext:result.accountContext});
     if(result.user){
       setS(prev=>({...migrateCloudSync(prev),identity:{
         mode:"authenticated",
@@ -180,7 +182,7 @@ export function AccountCloud({s,setS,go}){
       }else if(error?.code==="CLOUD_SCHEMA_OUTDATED"){
         setMessage({ok:false,text:"O progresso online está temporariamente indisponível. O progresso deste dispositivo não foi alterado."});
       }else{
-        queueCloudSave(s,{reason:"save_failed",expectedRevision:currentSync.baseRevision});
+        queueCloudSave(s,{reason:"save_failed",expectedRevision:currentSync.baseRevision,accountContext:currentVerifiedAccount()});
         refreshLocalSafety();
         setMessage({ok:false,text:"Não foi possível guardar online. Guardámos uma tentativa neste dispositivo para poderes repetir mais tarde; o teu estudo continua disponível aqui."});
       }
@@ -196,7 +198,7 @@ export function AccountCloud({s,setS,go}){
       if(!row?.state_json){
         setMessage({ok:true,text:"Esta conta ainda não tem progresso guardado online. Usa “Guardar online” quando quiseres criar a primeira cópia."});
       }else{
-        preserveCloudOriginals({local:s,remote:row,label:"Antes de carregar da cloud"});
+        await preserveCloudOriginals({local:s,remote:row,label:"Antes de carregar da cloud"});
         const merged=mergeStudentCloudState(s,row.state_json);
         let recalibrated=normalizeAfterCloud(merged);
         recalibrated=markCloudLoaded(recalibrated,{
@@ -222,7 +224,7 @@ export function AccountCloud({s,setS,go}){
     setBusy(true);setMessage(null);
     try{
       unchanged(s);
-      preserveCloudOriginals({local:s,remote:conflictRemote,label:"Conflito · antes de manter a cloud"});
+      await preserveCloudOriginals({local:s,remote:conflictRemote,label:"Conflito · antes de manter a cloud"});
       const merged=mergeStudentCloudState(s,conflictRemote.state_json);
       let next=normalizeAfterCloud(merged);
       next=markCloudLoaded(next,{
@@ -242,7 +244,7 @@ export function AccountCloud({s,setS,go}){
     if(!conflictRemote)return;
     setBusy(true);setMessage(null);
     try{
-      preserveCloudOriginals({local:s,remote:conflictRemote,label:"Conflito · antes de substituir a cloud"});
+      await preserveCloudOriginals({local:s,remote:conflictRemote,label:"Conflito · antes de substituir a cloud"});
       const result=await overwriteStudentCloudState(s,{
         remoteRevision:conflictRemote.revision,
         deviceId
@@ -267,7 +269,7 @@ export function AccountCloud({s,setS,go}){
     if(!conflictRemote?.state_json)return;
     setBusy(true);setMessage(null);
     try{
-      preserveCloudOriginals({local:s,remote:conflictRemote,label:"Conflito · antes de combinar"});
+      await preserveCloudOriginals({local:s,remote:conflictRemote,label:"Conflito · antes de combinar"});
       const combined=safeCloudMerge(s,conflictRemote.state_json);
       let next=normalizeAfterCloud(combined);
       next=markCloudLoaded(next,{
@@ -299,7 +301,7 @@ export function AccountCloud({s,setS,go}){
   }
 
   async function retryPending(){
-    const item=pending[0];
+    const item=pending.find(row=>!row.quarantined);
     if(!item)return;
     setBusy(true);setMessage(null);
     try{
@@ -311,7 +313,7 @@ export function AccountCloud({s,setS,go}){
       if(result?.conflict){
         registerConflict(result.remote);return;
       }
-      removePendingCloudSave(item.id);
+      removePendingCloudSave(item.id,result.accountContext);
       const revision=Number(result?.data?.revision)||item.expectedRevision+1;
       setS(prev=>markCloudSaved(prev,{revision,deviceId,savedState:item.state}));
       refreshLocalSafety();
