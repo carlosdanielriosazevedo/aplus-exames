@@ -77,6 +77,6 @@ export default function CloudSnapshotRecovery({s,setS,accountId,normalizeAfterCl
       <button disabled={busy||!candidate||!confirmed||hasPendingAssessment(s)} onClick={recover}>Recuperar cópia validada</button>
     </>}
     {message&&<p role="status">{message}</p>}
-    <details><summary>Originais preservados ({copies.length})</summary>{copies.map(copy=><button key={copy.key} onClick={()=>exportCopy(copy)}>Exportar cópia · {copy.label}</button>)}</details>
+    <details><summary>Originais preservados ({copies.length})</summary>{copies.map(copy=><button key={copy.key} onClick={()=>exportCopy(copy)}>Exportar cópia · {typeof copy.label==="string"?copy.label:"Original com metadados incompatíveis"}</button>)}</details>
   </section>;
 }

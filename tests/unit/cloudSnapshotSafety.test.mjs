@@ -86,6 +86,14 @@ describe("F7 deterministic merging and durable originals",()=>{
     for(const bad of [{...corrected,xp:0},{...corrected,examHistory:[]},{...corrected,identity:{authUserId:"B"}}])expect(()=>assertLocalRecoveryCopy(original,bad)).toThrow();
     expect(()=>assertLocalRecoveryCopy({...original,missionHistory:{unrecognised:"synthetic old answer"}},corrected)).toThrow();
   });
+  it.each([{},null])("quarantines malformed local recovery archives %j without a TypeError or deletion",entries=>{
+    const local=snapshot({cloudRecoveryArchive:{version:1,entries}}),before=JSON.stringify(local);
+    expect(validateCloudSnapshot(local,{local:true,privateFields:false}).ok).toBe(false);
+    expect(()=>safeCloudMerge(local,snapshot())).toThrow(expect.objectContaining({code:"CLOUD_SNAPSHOT_RECOVERY_REQUIRED"}));
+    expect(JSON.stringify(local)).toBe(before);
+    const validArchive=snapshot({cloudRecoveryArchive:{version:1,entries:[{kind:"pending-position",data:{currentAnswer:"synthetic unfinished answer"}}]}});
+    expect(validateCloudSnapshot(validArchive,{local:true,privateFields:false}).ok).toBe(true);
+  });
   it("unions distinct histories, id-less records and shared-session evidence without dropping any",()=>{
     const a=snapshot({examHistory:[{score20:14,at:1}],missionHistory:[{at:1,label:"A"}],
       scores:{t1:{evidence:[{completionId:"same-session",itemId:"q1",at:1}]}}});
@@ -117,6 +125,14 @@ describe("F7 deterministic merging and durable originals",()=>{
     expect(listCloudOriginals()).toHaveLength(12);
     expect(listCloudOriginals().every(x=>JSON.stringify(x.remote)===JSON.stringify(bad))).toBe(true);
     expect(local.getItem("a25-cloud-snapshots-v1")).toBe(legacy);expect(local.getItem("a25-cloud-pending-v1")).toBe(legacy);
+  });
+  it("keeps backup contents with malformed metadata exportable without coercion errors",()=>{
+    preserveCloudOriginals({local:snapshot(),remote:snapshot()});
+    const key=preserveCloudOriginals({local:snapshot(),remote:snapshot()});
+    const entry=JSON.parse(local.getItem(key));entry.createdAt={valueOf:{},toString:{}};entry.label={legacy:"synthetic metadata"};
+    const raw=JSON.stringify(entry);local.setItem(key,raw);
+    expect(listCloudOriginals()).toHaveLength(2);expect(local.getItem(key)).toBe(raw);
+    expect(listCloudOriginals().find(copy=>copy.key===key)).toEqual(entry);
   });
   it("fails closed if only volatile or session fallback storage is writable",()=>{
     vi.stubGlobal("window",{});local.setItem=()=>{throw Error("synthetic quota");};

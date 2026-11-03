@@ -104,6 +104,11 @@ try{
   assert.equal(await page.evaluate(()=>studyState.xp),20);assert.deepEqual(rows.get("A"),original);
   const exported=await downloaded(page,()=>page.getByRole("button",{name:"Exportar snapshot original",exact:true}).click());
   assert.deepEqual(exported.data,original);
+  await page.evaluate(()=>{const copy=f7.recovery.listCloudOriginals()[0];copy.label={legacy:"synthetic metadata"};copy.createdAt={valueOf:{},toString:{}};localStorage.setItem(copy.key,JSON.stringify(copy));});
+  await downloaded(page,()=>page.getByRole("button",{name:"Exportar snapshot original",exact:true}).click());
+  await page.locator("summary").filter({hasText:"Originais preservados"}).click();
+  const metadataExport=await downloaded(page,()=>page.getByRole("button",{name:"Exportar cópia · Original com metadados incompatíveis",exact:true}).click());
+  assert.deepEqual(metadataExport.label,{legacy:"synthetic metadata"});assert.deepEqual(metadataExport.createdAt,{valueOf:{},toString:{}});
   const corrected=structuredClone(exported);corrected.data.state_json.missionHistory=[];
   await page.locator('input[type="file"]').setInputFiles({name:"reviewed.json",mimeType:"application/json",buffer:Buffer.from(JSON.stringify(corrected))});
   await page.getByText("Revisei a cópia e confirmo a combinação.",{exact:false}).locator("..").locator('input[type="checkbox"]').check();

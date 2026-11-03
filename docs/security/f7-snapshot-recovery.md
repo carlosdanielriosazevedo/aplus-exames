@@ -12,7 +12,7 @@ A investigação encontrou riscos semelhantes em `examHistory`, `scores.evidence
 
 `cloudSnapshotValidation.js` é partilhado pelo servidor, serializer, leitura local e merge. Valida os campos consumidos por cada estrutura; por exemplo, `observations` é contador nas hipóteses e array nas rubricas. `signal` é numérico na evidência e nulo/objeto no plano ou conclusão de Missão. Objetos de progresso e linhas de evidência não podem ser nulos; arrays de resultados podem conservar os `null` legítimos produzidos por tentativas incompletas. Campos opcionais ausentes são aceites sem inventar progresso. Extensões aninhadas JSON continuam sujeitas aos limites gerais; não recebem autoridade adicional.
 
-Limites por snapshot: 2.000.000 bytes UTF-8, 25.000 nós incluindo primitivas, profundidade 40, 10.000 elementos por array, 2.000 propriedades por objeto e 65.536 unidades de texto por string. Rejeitam-se números não finitos ou fora do intervalo seguro de JavaScript, valores inválidos para cada campo, estruturas cíclicas/não JSON, arrays esparsos e chaves de protótipo. O resultado combinado volta a ser validado; se exceder o orçamento, a operação bloqueia sem truncar os inputs.
+Limites por snapshot: 2.000.000 bytes UTF-8, 25.000 nós incluindo primitivas, profundidade 40, 10.000 elementos por array, 2.000 propriedades por objeto e 65.536 unidades de texto por string. Rejeitam-se números não finitos ou fora do intervalo seguro de JavaScript, valores inválidos para cada campo, estruturas cíclicas/não JSON, arrays esparsos e chaves de protótipo. O arquivo local `cloudRecoveryArchive` também exige versão e array de entradas válidos, dentro dos mesmos limites; não é um campo permitido no transporte cloud. O resultado combinado volta a ser validado; se exceder o orçamento, a operação bloqueia sem truncar os inputs.
 
 Novas gravações continuam limitadas a v8 e à allowlist de campos. Leituras e revisão aceitam v1–v8 estruturalmente compatíveis e modelos antigos conhecidos. Versões desconhecidas exigem revisão. Testes usam também os produtores reais de mini-exames, sessões de Português/FQ A, rubricas, hipóteses e planos diários.
 
@@ -30,7 +30,7 @@ Dados locais inválidos ou JSON ilegível não são removidos. Uma cópia ilegí
 
 ## Preservação e merge
 
-Antes de cargas, escolhas de conflito e reparações, ambos os originais ficam em chaves únicas `a25-cloud-recovery-v1:*`, sem rotação nem eliminação. A escrita é verificada por leitura e exige localStorage durável; o fallback volátil não autoriza substituição. Se faltar espaço, pode exportar-se o original, mas a substituição permanece bloqueada. Filas e backups antigos não são apagados. O arquivo pode atingir a quota: é uma limitação explícita, não uma razão para descartar dados.
+Antes de cargas, escolhas de conflito e reparações, ambos os originais ficam em chaves únicas `a25-cloud-recovery-v1:*`, sem rotação nem eliminação. A escrita é verificada por leitura e exige localStorage durável; o fallback volátil não autoriza substituição. Se faltar espaço, pode exportar-se o original, mas a substituição permanece bloqueada. Filas e backups antigos não são apagados. Metadados incompatíveis de backups são apresentados de forma segura sem alterar o conteúdo exportável. O arquivo pode atingir a quota: é uma limitação explícita, não uma razão para descartar dados.
 
 O merge não modifica os inputs, conserva registos sem ID, separa evidência por item e usa ordem cronológica com desempate estável. Cópias complementares do mesmo registo, incluindo uma cópia de rede sem respostas privadas, são reconciliadas sem perder os campos locais. Valores incompatíveis para o mesmo registo exigem revisão (`CLOUD_MERGE_REVIEW_REQUIRED`). O XP local não diminui durante a combinação. Posições pendentes ultrapassadas e campos remotos não adotados ficam arquivados localmente com o conteúdo completo. Recalibração, preferências e escolhas explícitas existentes conservam os seus contratos; os originais completos permanecem exportáveis.
 
@@ -50,7 +50,7 @@ O CI especializado mantém os testes F1–F4/F6 e acrescenta os testes F7, Chrom
 
 ## Validação local antes da publicação
 
-1.041/1.041 testes unitários, incluindo 102 novos testes F7 e os 29 testes F6 do SDK real; 673 ficheiros no Syntax Audit; Source Hygiene e Technical Gate GO; build e budgets aprovados; actionlint 1.7.12 aprovado. Chromium executou os cinco grupos de contratos acima. PostgreSQL 16 aprovou os sete cenários nominal/adulterados, o novo contrato F7 de rollback/CAS/histórico e as regressões 010. Os contratos CAS, navegação e recuperação passaram. Todos os transportes e identidades são sintéticos. O CI do commit final é verificado separadamente e registado na PR.
+1.044/1.044 testes unitários, incluindo 105 novos testes F7 e os 29 testes F6 do SDK real; 673 ficheiros no Syntax Audit; Source Hygiene e Technical Gate GO; build e budgets aprovados; actionlint 1.7.12 aprovado. Chromium executou os cinco grupos de contratos acima. PostgreSQL 16 aprovou os sete cenários nominal/adulterados, o novo contrato F7 de rollback/CAS/histórico e as regressões 010. Os contratos CAS, navegação e recuperação passaram. Todos os transportes e identidades são sintéticos. O CI do commit final é verificado separadamente e registado na PR.
 
 ## Bloqueios e decisão delimitada
 

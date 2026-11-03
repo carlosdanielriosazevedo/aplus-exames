@@ -85,7 +85,8 @@ const hypothesis=fields({...common,observations:count,history:rows,
   prerequisiteThemeId:nullable(text),prerequisiteFocus:nullable(text),prerequisiteMicrocompetencyId:nullable(text),
   lifecycleStatus:text,supportsPrerequisite:count,supportsTarget:count,recentPrerequisite:count,recentTarget:count,
   recentObservations:count,reopenCount:integer,openedAt:stamp,lastTransitionAt:stamp,resolvedAt:stamp,staleAt:stamp});
-const root={goal:x=>count(x)&&x<=20,profile:nullable(profile),scores:dictionary(score),
+const archive=x=>fields({version:v=>v===1,entries:rows})(x)&&x.version===1&&Array.isArray(x.entries);
+const root={cloudRecoveryArchive:archive,goal:x=>count(x)&&x<=20,profile:nullable(profile),scores:dictionary(score),
   xp:integer,streak:integer,diagnosticDone:boolean,diagnosticAnswers:integer,
   missionHistory:rows,examHistory:rows,freeTrainingSignals:rows,learningHypotheses:list(hypothesis),
   lastMission:nullable(row),lastExam:nullable(row),betaParticipant:nullable(fields({code:nullable(text),cohort:nullable(text),joinedAt:stamp})),
@@ -97,7 +98,7 @@ export function validateCloudSnapshot(input,{legacy=false,local=false,privateFie
   const fail=code=>({ok:false,code});
   try{
     if(!object(input))return fail("INVALID_STATE");
-    const state=local?Object.fromEntries(Object.entries(input).filter(([key])=>CLOUD_FIELDS.has(key))):input;
+    const state=local?Object.fromEntries(Object.entries(input).filter(([key])=>CLOUD_FIELDS.has(key)||key==="cloudRecoveryArchive")):input;
     if(local&&state.schema!==undefined&&!/^aplus-student-state-v[1-8]$/.test(state.schema))return fail("INVALID_STATE");
     if(!local&&!new RegExp(legacy?"^aplus-student-state-v[1-8]$":"^aplus-student-state-v8$").test(state.schema||""))return fail("INVALID_STATE");
     if(!local&&Object.keys(state).some(key=>!CLOUD_FIELDS.has(key)))return fail("UNKNOWN_CLOUD_FIELD");

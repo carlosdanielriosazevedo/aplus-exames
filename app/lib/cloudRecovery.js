@@ -37,7 +37,8 @@ export function listCloudOriginals(){
       if(entry.key===key&&entry.format==="aplus-local-cloud-recovery-v1")entries.set(key,entry);
     }catch{}
   }
-  return [...entries.values()].sort((a,b)=>b.createdAt-a.createdAt||(a.key<b.key?-1:1));
+  const time=entry=>typeof entry.createdAt==="number"&&Number.isFinite(entry.createdAt)?entry.createdAt:0;
+  return [...entries.values()].sort((a,b)=>time(b)-time(a)||(a.key<b.key?-1:1));
 }
 export function downloadRecoveryJson(value,name="approva-progresso-original.json"){
   const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:"application/json"}));
