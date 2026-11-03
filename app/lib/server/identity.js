@@ -31,17 +31,33 @@ export function assertRoleCapability(role,capability){
 
 export async function requireSession(){
   if(!serverAuthConfigured())throw securityError("Auth server not configured",503,"AUTH_SERVER_NOT_CONFIGURED");
-  const auth=getServerAuth();
+  let auth;
+  try{auth=getServerAuth();}
+  catch{
+    console.error("server auth provider initialization failed");
+    throw securityError("Auth provider unavailable",503,"AUTH_PROVIDER_UNAVAILABLE");
+  }
   let result;
   try{
+    // getServerAuth's facade always revalidates upstream, including reads of
+    // private data and all privileged writes. It never authorizes from cache.
     result=await auth.getSession();
-  }catch(error){
-    console.error("server auth session validation failed",error);
+  }catch{
+    // Provider errors may contain cookies, tokens or sensitive response metadata.
+    console.error("server auth session validation failed");
     throw securityError("Unauthorized",401,"UNAUTHORIZED");
   }
   const session=result?.data||null;
+  if(result?.error&&Number(result.error.status)>=500&&Number(result.error.status)<=599)
+    throw securityError("Auth provider unavailable",503,"AUTH_PROVIDER_UNAVAILABLE");
   const user=session?.user||null;
-  if(!user?.id)throw securityError("Unauthorized",401,"UNAUTHORIZED");
+  const details=session?.session;
+  const expiry=typeof details?.expiresAt==="string"||details?.expiresAt instanceof Date
+    ?new Date(details.expiresAt).getTime():NaN;
+  if(result?.error||typeof user?.id!=="string"||!user.id
+    ||typeof details?.id!=="string"||!details.id||details.userId!==user.id
+    ||!Number.isFinite(expiry)||expiry<=Date.now())
+    throw securityError("Unauthorized",401,"UNAUTHORIZED");
   return {
     authUserId:String(user.id),
     user,
@@ -108,9 +124,17 @@ export async function requireCapability(capability){
 }
 
 export function authErrorResponse(error){
-  const status=Number(error?.status)||500;
-  const code=error?.code||"INTERNAL_ERROR";
-  return {status,body:{ok:false,error:code}};
+  // Never reflect arbitrary provider, driver or application exception codes.
+  const allowed={
+    UNAUTHORIZED:401,
+    FORBIDDEN:403,
+    AUTH_SERVER_NOT_CONFIGURED:503,
+    AUTH_PROVIDER_UNAVAILABLE:503,
+    DATABASE_NOT_CONFIGURED:503
+  };
+  const code=typeof error?.code==="string"&&Object.hasOwn(allowed,error.code)
+    ?error.code:"INTERNAL_ERROR";
+  return {status:allowed[code]??500,body:{ok:false,error:code}};
 }
 
 export function authConfiguration(){
