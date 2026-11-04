@@ -20,8 +20,18 @@ export const COMPLETION_PENDING_LEASE_MS=15_000;
 let lastCompletionBlock=null;
 let tabOwner=null;
 
+const OWNER_KEY="a25-completion-owner-v1";
+// Identificador do separador. Fica em sessionStorage para sobreviver a um
+// recarregamento do mesmo separador (retoma imediata após interrupção) e ser
+// diferente noutro separador.
 function owner(){
-  if(!tabOwner)tabOwner=`tab-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,10)}`;
+  if(tabOwner)return tabOwner;
+  try{
+    const saved=globalThis.sessionStorage?.getItem(OWNER_KEY);
+    if(saved&&/^tab-[a-z0-9-]{6,64}$/.test(saved))return tabOwner=saved;
+  }catch{}
+  tabOwner=`tab-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,10)}`;
+  try{globalThis.sessionStorage?.setItem(OWNER_KEY,tabOwner)}catch{}
   return tabOwner;
 }
 
@@ -83,7 +93,10 @@ export function completionRegistryStatus(){
  * "already_completed" só é devolvido quando a conclusão está comprovada
  * (recibo confirmado ou avaliação já presente no estado académico).
  */
-export function reserveSessionCompletion(sessionId,{isRecorded=()=>false,now=Date.now()}={}){
+export function reserveSessionCompletion(sessionId,options={}){
+  const {now=Date.now()}=options;
+  const proofProvided=typeof options.isRecorded==="function";
+  const isRecorded=proofProvided?options.isRecorded:()=>false;
   // Sem ID não tentamos inventar idempotência: mantemos compatibilidade com sessões antigas.
   if(!sessionId)return {status:"reserved",reason:"no_session_id"};
   const read=readRegistry();
@@ -103,6 +116,9 @@ export function reserveSessionCompletion(sessionId,{isRecorded=()=>false,now=Dat
     return {status:"already_completed",reason:"recorded_in_state"};
   }
   if(row?.status==="committed")return {status:"already_completed",reason:"committed_receipt"};
+  // Recibo no formato antigo: só pode ser retomado quando quem chama consegue
+  // provar, pelo estado académico, que a avaliação nunca foi gravada.
+  if(row&&row.status===undefined&&!proofProvided)return {status:"already_completed",reason:"legacy_receipt"};
   if(row?.status==="pending"&&row.owner!==owner()&&now-(row.at||0)<COMPLETION_PENDING_LEASE_MS){
     return block(sessionId,"completion_in_progress");
   }

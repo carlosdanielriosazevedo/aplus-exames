@@ -97,12 +97,22 @@ describe("D3 · protocolo de duas fases",()=>{
     expect(r.reserveSessionCompletion("s1").status).toBe("already_completed");
   });
 
-  it("interrupção depois da reserva e antes de gravar a avaliação: retoma permitida",async()=>{
+  it("interrupção depois da reserva e antes de gravar: retoma imediata no mesmo separador",async()=>{
     let r=await reliability();
     expect(r.reserveSessionCompletion("s2",{now:1000}).status).toBe("reserved");
-    // novo documento (reload): novo dono, recibo pendente do anterior
+    // reload do mesmo separador: sessionStorage conserva o dono
     vi.resetModules();r=await reliability();
-    expect(r.reserveSessionCompletion("s2",{isRecorded:()=>false,now:1000+r.COMPLETION_PENDING_LEASE_MS+1}))
+    expect(r.reserveSessionCompletion("s2",{isRecorded:()=>false,now:1001}))
+      .toEqual({status:"reserved",reason:"own_pending"});
+  });
+
+  it("interrupção depois da reserva: outro separador espera o prazo e depois retoma",async()=>{
+    let r=await reliability();
+    expect(r.reserveSessionCompletion("s2b",{now:1000}).status).toBe("reserved");
+    // separador diferente (sessionStorage próprio)
+    session.map.clear();vi.resetModules();r=await reliability();
+    expect(r.reserveSessionCompletion("s2b",{isRecorded:()=>false,now:1001}).status).toBe("blocked");
+    expect(r.reserveSessionCompletion("s2b",{isRecorded:()=>false,now:1000+r.COMPLETION_PENDING_LEASE_MS+1}))
       .toEqual({status:"reserved",reason:"stale_pending"});
   });
 
