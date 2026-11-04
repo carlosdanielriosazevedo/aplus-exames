@@ -128,7 +128,13 @@ for(const viewport of [{width:390,height:844},{width:1366,height:768}]){
       const submit=page.getByRole("button",{name:"Entregar Mini-exame",exact:true});
       await expect(submit).toBeVisible({timeout:30_000});
       await submit.click();
-      await page.waitForTimeout(1500);
+      // O aviso não promete que as respostas estão guardadas: estão só no separador.
+      const blocked=page.locator("[data-completion-block]");
+      await expect(blocked).toHaveAttribute("data-storage-risk","tab",{timeout:20_000});
+      await expect(blocked).toContainText("Se o fechares antes de a avaliação ficar guardada de forma segura, perdes estas respostas.");
+      await expect(blocked).not.toContainText("continuam guardadas");
+      await expect(blocked).not.toContainText("A tua sessão está guardada");
+      await page.waitForTimeout(500);
       let stores=await readStores(page);
       expect(mathEntries(stores.session.a25,sid),"conclusão gravada só no separador").toBe(0);
       expect(stores.session[MATH_DRAFT],"rascunho do separador apagado").toBeTruthy();

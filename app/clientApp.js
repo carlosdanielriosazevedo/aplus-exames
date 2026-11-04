@@ -43,7 +43,7 @@ import {
 import {clearLocalState,FRIENDS_STORAGE_KEY} from "./lib/persistence";
 import {
   guardedLoadLocalStateStatus as loadLocalStateStatus,guardedSaveLocalState as saveLocalState,
-  saveLocalStateDurably,durabilityFailureReason,lastStateIntegrityBlock,STATE_INTEGRITY_EVENT
+  saveLocalStateDurably,durabilityFailureReason,lastStateIntegrityBlock,lastStorageTier,STATE_INTEGRITY_EVENT
 } from "./lib/stateIntegrity";
 import {
   saveSessionDraft,loadSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen
@@ -2100,6 +2100,22 @@ const COMPLETION_BLOCK_COPY={
   registry_unavailable:"O browser está a bloquear o armazenamento permanente, por isso a avaliação não pôde ser dada como concluída. Permite o armazenamento de dados deste site e volta a entregar."
 };
 
+// Onde estão de facto as respostas desta sessão. Só se promete que estão
+// guardadas quando a última gravação ficou em armazenamento permanente.
+function completionStorageTier(reason){
+  if(reason==="state_memory_only")return "memory";
+  if(reason==="state_tab_only")return "tab";
+  const tier=lastStorageTier();
+  return tier==="durable"||tier==="tab"||tier==="memory"?tier:"unknown";
+}
+
+const COMPLETION_STORAGE_RISK={
+  durable:"As respostas desta sessão continuam guardadas neste dispositivo.",
+  tab:"Atenção: as respostas desta sessão estão guardadas só neste separador. Se o fechares antes de a avaliação ficar guardada de forma segura, perdes estas respostas.",
+  memory:"Atenção: as respostas desta sessão estão só na memória do browser. Se atualizares ou fechares esta página antes de a avaliação ficar guardada de forma segura, perdes estas respostas.",
+  unknown:"Não conseguimos confirmar que as respostas desta sessão estão guardadas de forma permanente. Evita fechar ou atualizar esta página até a avaliação ficar guardada."
+};
+
 function CompletionBlocked({s,go}){
   const [message,setMessage]=useState(null);
   const block=lastCompletionBlockReason();
@@ -2110,9 +2126,11 @@ function CompletionBlocked({s,go}){
     if(result.ok){clearCompletionBlock();go("home");return}
     setMessage("Não foi possível reparar o registo. Nenhum dado foi apagado.");
   }
-  return <Shell><Logo/><div className="notice warning" data-completion-block={reason}>
-    <b>A tua sessão está guardada, mas ainda não foi concluída</b>
-    <span>{COMPLETION_BLOCK_COPY[reason]||"Não foi possível guardar o registo de conclusão neste dispositivo."} As tuas respostas não foram apagadas.</span>
+  const tier=completionStorageTier(reason);
+  return <Shell><Logo/><div className="notice warning" data-completion-block={reason} data-storage-risk={tier}>
+    <b>{tier==="durable"?"A tua sessão está guardada, mas ainda não foi concluída":"Esta avaliação ainda não está guardada de forma segura"}</b>
+    <span>{COMPLETION_BLOCK_COPY[reason]||"Não foi possível guardar o registo de conclusão neste dispositivo."}</span>
+    <span>{COMPLETION_STORAGE_RISK[tier]}</span>
   </div>
   {message&&<p className="notice warning">{message}</p>}
   {corrupt?<><button className="primary" onClick={repair}>Guardar cópia e reparar</button>

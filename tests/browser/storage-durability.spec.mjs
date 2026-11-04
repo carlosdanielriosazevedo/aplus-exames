@@ -143,6 +143,12 @@ for(const viewport of [{width:390,height:844},{width:1366,height:768}]){
       await seed(page,fixture(`synthetic-notice-${viewport.width}-${tier}`),fault);
       await openReview(page);
       await expect(page.locator(`[data-storage-tier="${tier}"]`)).toBeVisible({timeout:10_000});
+      // Ao entregar, o ecrã de bloqueio diz onde estão de facto as respostas.
+      await submit(page).click();
+      const blocked=page.locator("[data-completion-block]");
+      await expect(blocked).toHaveAttribute("data-storage-risk",tier,{timeout:20_000});
+      await expect(blocked).toContainText(tier==="memory"?"Se atualizares ou fechares esta página":"Se o fechares antes de a avaliação ficar guardada");
+      await expect(blocked).not.toContainText("A tua sessão está guardada");
       await context.close();
     });
 
