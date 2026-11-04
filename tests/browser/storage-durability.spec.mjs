@@ -94,34 +94,33 @@ for(const viewport of [{width:390,height:844},{width:1366,height:768}]){
     for(const [label,fault] of [
       ["localStorage cheio (só separador)",{localLarge:true}],
       ["localStorage e sessionStorage cheios (só memória)",{localLarge:true,sessionLarge:true}]
-    ])test(`${label}: nunca confirma sem durabilidade nem perde a avaliação`,async({browser})=>{
+    ])test(`${label}: prova comportamental — a avaliação nunca se perde`,async({browser},testInfo)=>{
+      // Prova só por dados: o resultado não depende de nenhum aviso visual.
       const context=await browser.newContext({viewport});
       await installFaults(context);
       let page=await context.newPage();
       const sid=`synthetic-durable-${viewport.width}-${label.length}`;
       await seed(page,fixture(sid),fault);
       await openReview(page);
-      // O aluno é avisado de que o progresso não está a ser guardado de forma permanente.
-      await expect(page.locator(`[data-storage-tier="${fault.sessionLarge?"memory":"tab"}"]`)).toBeVisible({timeout:10_000});
       await submit(page).click();
       await page.waitForTimeout(1500);
-      const after=await snapshot(page,sid);
-      // Nunca: mostrar como concluída sem cópia durável
-      if(!after.blocked)expect(after.localEntries,"conclusão mostrada sem estar em localStorage").toBe(1);
-      // Nunca: apagar o rascunho durável sem avaliação durável
-      if(after.localEntries===0)expect(after.localDraft,"rascunho durável apagado sem avaliação durável").toBe(true);
-      expect(after.committed&&after.localEntries===0,"recibo confirmado sem avaliação durável").toBe(false);
-      // Reload no mesmo separador: nada perdido nem duplicado
+      const evidence={};
+      evidence.afterSubmit=await snapshot(page,sid);
       await page.reload();await page.waitForTimeout(2000);
-      const reloaded=await snapshot(page,sid);
-      expect(reloaded.localEntries+(reloaded.localDraft?1:0),"avaliação e rascunho desapareceram após reload").toBeGreaterThan(0);
-      // Fechar o separador e abrir outro
+      evidence.afterReload=await snapshot(page,sid);
       page=await reopenInNewTab(context,page);
-      const reopened=await snapshot(page,sid);
-      expect(reopened.localEntries+(reopened.localDraft?1:0),"avaliação e rascunho desapareceram após fechar o separador").toBeGreaterThan(0);
-      // Armazenamento recuperado: concluir uma única vez, XP uma vez
+      evidence.afterTabClose=await snapshot(page,sid);
+      await testInfo.attach("evidence.json",{body:JSON.stringify(evidence,null,1),contentType:"application/json"});
+      const {afterSubmit,afterReload,afterTabClose}=evidence;
+      // Integridade dos dados (todas avaliadas, mesmo que uma falhe):
+      expect.soft(afterSubmit.result&&afterSubmit.localEntries===0,`resultado mostrado sem avaliação em localStorage: ${JSON.stringify(afterSubmit)}`).toBe(false);
+      expect.soft(afterSubmit.localEntries===0&&!afterSubmit.localDraft,`rascunho durável apagado sem avaliação durável: ${JSON.stringify(afterSubmit)}`).toBe(false);
+      expect.soft(afterSubmit.committed&&afterSubmit.localEntries===0,`recibo confirmado sem avaliação durável: ${JSON.stringify(afterSubmit)}`).toBe(false);
+      expect.soft(afterReload.localEntries+(afterReload.localDraft?1:0),`avaliação e rascunho perdidos após reload: ${JSON.stringify(afterReload)}`).toBeGreaterThan(0);
+      expect(afterTabClose.localEntries+(afterTabClose.localDraft?1:0),`AVALIAÇÃO PERDIDA após fechar o separador: ${JSON.stringify(afterTabClose)}`).toBeGreaterThan(0);
+      // Armazenamento recuperado: concluir uma única vez, XP uma vez.
       await page.evaluate(FAULT=>window.__real.local.removeItem(FAULT),FAULT);
-      if(reopened.localEntries===0){
+      if(afterTabClose.localEntries===0){
         await openReview(page);
         await submit(page).click();
         await expect.poll(async()=>(await snapshot(page,sid)).localEntries,{timeout:20_000}).toBe(1);
@@ -130,6 +129,20 @@ for(const viewport of [{width:390,height:844},{width:1366,height:768}]){
       const final=await snapshot(page,sid);
       expect(final.localEntries).toBe(1);
       expect(final.committed).toBe(true);
+      expect(final.localXp).toBeGreaterThanOrEqual(100);
+      await context.close();
+    });
+
+    for(const [label,fault,tier] of [
+      ["só separador",{localLarge:true},"tab"],
+      ["só memória",{localLarge:true,sessionLarge:true},"memory"]
+    ])test(`aviso ao aluno (complementar, não prova de integridade): ${label}`,async({browser})=>{
+      const context=await browser.newContext({viewport});
+      await installFaults(context);
+      const page=await context.newPage();
+      await seed(page,fixture(`synthetic-notice-${viewport.width}-${tier}`),fault);
+      await openReview(page);
+      await expect(page.locator(`[data-storage-tier="${tier}"]`)).toBeVisible({timeout:10_000});
       await context.close();
     });
 
