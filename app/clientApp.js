@@ -54,7 +54,7 @@ import {
 } from "./lib/curriculumScope";
 import {
   reserveSessionCompletion,commitSessionCompletion,abandonSessionReservation,stateRecordsCompletion,
-  repairCompletionRegistry,lastCompletionBlockReason,clearCompletionBlock,
+  repairCompletionRegistry,lastCompletionBlockReason,clearCompletionBlock,markCompletionBlocked,
   clearCompletionRegistry,latestOpenSessionId
 } from "./lib/reliability";
 import {
@@ -1362,7 +1362,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     if(!saveLocalState(finished)){
       abandonSessionReservation(sessionId);
       completingRef.current=false;
-      go("completionBlocked");
+      go(completionSaveFailedScreen(sessionId));
       return;
     }
     commitSessionCompletion(sessionId);
@@ -1732,7 +1732,7 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
       if(!saveLocalState(trainingCompleted)){
         abandonSessionReservation(sessionId);
         completingRef.current=false;
-        go("completionBlocked");
+        go(completionSaveFailedScreen(sessionId));
         return;
       }
       commitSessionCompletion(sessionId);
@@ -2053,7 +2053,7 @@ function MiniExamReview({session,setSession,s,setS,go}){
     if(!saveLocalState(updated)){
       abandonSessionReservation(session.sessionId);
       submittingRef.current=false;
-      go("completionBlocked");
+      go(completionSaveFailedScreen(session.sessionId));
       return;
     }
     commitSessionCompletion(session.sessionId);
@@ -2068,6 +2068,14 @@ function MiniExamReview({session,setSession,s,setS,go}){
     {unanswered>0&&<div className="notice warning"><b>{unanswered} {unanswered===1?"questão por responder":"questões por responder"}</b><span>Podes entregar assim, mas as não-respostas contam para o resultado. Pedagogicamente recebem um peso ligeiramente menor do que uma resposta explicitamente errada.</span></div>}
     <button className="primary" onClick={submit}>Entregar Mini-exame</button>
   </Shell>
+}
+
+// A avaliação não pôde ser gravada: a reserva já foi desfeita e o rascunho fica.
+// Se a gravação foi recusada pela proteção D2, prevalece o ecrã de recuperação.
+function completionSaveFailedScreen(sessionId){
+  if(lastStateIntegrityBlock())return "storageRecoveryError";
+  markCompletionBlocked(sessionId,"state_write_failed");
+  return "completionBlocked";
 }
 
 function StorageRecoveryNotice(){

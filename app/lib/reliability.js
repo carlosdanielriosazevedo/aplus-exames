@@ -80,6 +80,7 @@ function block(sessionId,reason){
 }
 
 export function lastCompletionBlockReason(){return lastCompletionBlock}
+export function markCompletionBlocked(sessionId,reason){return block(sessionId,reason)}
 export function clearCompletionBlock(){lastCompletionBlock=null}
 
 export function completionRegistryStatus(){
