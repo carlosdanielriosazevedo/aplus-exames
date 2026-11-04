@@ -67,8 +67,7 @@ export function guardedLoadLocalStateStatus(initial,emptyScores,storageKey=STORA
   return loadLocalStateStatus(initial,emptyScores,storageKey);
 }
 
-export function guardedSaveLocalState(state,storageKey=null){
-  const key=stateKey(state,storageKey);
+function rawGuardedSave(state,storageKey,key){
   const integrity=inspectStoredState(key);
   if(!integrity.ok){
     announce({...integrity,operation:"save"});
@@ -80,6 +79,11 @@ export function guardedSaveLocalState(state,storageKey=null){
     trusted.set(key,new Set(rows.map(([,raw])=>raw)));
   }
   return ok;
+}
+
+// Todas as gravações normais indicam também o nível de armazenamento atingido.
+export function guardedSaveLocalState(state,storageKey=null){
+  return saveLocalStateWithTier(state,storageKey).ok;
 }
 
 // Limpeza de telemetria piloto após retirada de consentimento.
@@ -112,4 +116,75 @@ export function guardedClearLocalPilotTelemetry(){
   return {ok:false,skipped:blocked.map(([key,v])=>({key,reason:v.reason}))};
 }
 
-export function resetStateIntegrityCache(){trusted.clear();lastBlock=null}
+export function resetStateIntegrityCache(){trusted.clear();lastBlock=null;lastTier=null}
+
+// ---------------------------------------------------------------------------
+// Durabilidade da gravação.
+//
+// writeStorageFallback (congelado pelo #385) grava no primeiro armazenamento que
+// aceitar: localStorage → sessionStorage → memória, e devolve sempre sucesso.
+// Aqui distinguimos onde a gravação ficou de facto:
+//   "durable": localStorage (sobrevive a reload e ao fecho do separador);
+//   "tab":     sessionStorage (sobrevive a reload; perde-se ao fechar o separador);
+//   "memory":  só memória (perde-se no reload);
+//   "failed":  nada foi gravado.
+// Em "tab"/"memory", a cópia anterior em localStorage continua lá e reaparece
+// quando o separador é fechado.
+export const STORAGE_TIER_EVENT="approva:storage-tier";
+let lastTier=null;
+export function lastStorageTier(){return lastTier}
+
+const baseStore=store=>store?.source||store;
+function tierOf(store){
+  const base=baseStore(store);
+  try{if(base&&base===globalThis.localStorage)return "durable"}catch{}
+  try{if(base&&base===globalThis.sessionStorage)return "tab"}catch{}
+  return "memory";
+}
+function readAll(key){
+  return browserStores().map(store=>{try{return store.getItem(key)}catch{return undefined}});
+}
+function announceTier(tier,key){
+  lastTier=tier;
+  if(typeof window!=="undefined")try{
+    window.dispatchEvent(new CustomEvent(STORAGE_TIER_EVENT,{detail:{tier,key}}));
+  }catch{}
+}
+
+// Grava e indica em que nível de armazenamento a gravação ficou.
+export function saveLocalStateWithTier(state,storageKey=null){
+  const key=stateKey(state,storageKey);
+  const stores=browserStores();
+  const before=readAll(key);
+  if(!rawGuardedSave(state,storageKey,key))return {ok:false,tier:"failed",key,before,stores};
+  const after=readAll(key);
+  const index=after.findIndex((raw,i)=>raw!==null&&raw!==undefined&&raw!==before[i]);
+  const tier=index<0?"failed":tierOf(stores[index]);
+  announceTier(tier,key);
+  return {ok:tier!=="failed",tier,key,before,stores};
+}
+
+export function durabilityFailureReason(tier){
+  return tier==="tab"?"state_tab_only":tier==="memory"?"state_memory_only":"state_write_failed";
+}
+
+// Gravação exigida antes de confirmar uma avaliação ou apagar o seu rascunho.
+// Se não ficar em localStorage, repõe exatamente o que havia nos níveis não
+// duráveis (para que a conclusão não pareça feita após um reload) e falha.
+export function saveLocalStateDurably(state,storageKey=null){
+  const result=saveLocalStateWithTier(state,storageKey);
+  if(result.tier==="durable")return {ok:true,tier:"durable"};
+  if(result.tier!=="failed"){
+    result.stores.forEach((store,i)=>{
+      if(tierOf(store)==="durable")return;
+      try{
+        const previous=result.before[i];
+        if(previous===null||previous===undefined)store.removeItem(result.key);
+        else store.setItem(result.key,previous);
+      }catch{}
+    });
+    const {rows}=readStorageRows(result.key);
+    trusted.set(result.key,new Set(rows.map(([,raw])=>raw)));
+  }
+  return {ok:false,tier:result.tier};
+}

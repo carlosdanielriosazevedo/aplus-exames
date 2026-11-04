@@ -247,8 +247,36 @@ try{
       const a=clientApp.indexOf(start),b=clientApp.indexOf(end,a+1);
       check(a>=0&&b>a,`completion block found: ${start}`);
       const body=clientApp.slice(a,b);
-      const reserve=body.indexOf("reserveSessionCompletion("),save=body.lastIndexOf("saveLocalState("),commit=body.indexOf("commitSessionCompletion("),clear=body.lastIndexOf("clearSessionDraft(");
+      const reserve=body.indexOf("reserveSessionCompletion("),save=Math.max(body.lastIndexOf("saveLocalState("),body.lastIndexOf("saveLocalStateDurably(")),commit=body.indexOf("commitSessionCompletion("),clear=body.lastIndexOf("clearSessionDraft(");
       check(reserve>=0&&reserve<save&&save<commit&&commit<clear,`order reserve → save → commit → clear draft: ${start}`);
+    }
+  });
+
+  await group("durable-completion","negative-control",({check})=>{
+    check(typeof integrity?.saveLocalStateDurably==="function","candidate exposes durable save");
+    reset();integrity.resetStateIntegrityCache?.();
+    const big=extra=>({xp:1,betaMode:"internal",pad:"x".repeat(500),...extra});
+    check(integrity.saveLocalStateDurably(big()).ok===true,"durable save with working localStorage");
+    const realSet=localStorage.setItem;
+    localStorage.setItem=(k,v)=>{if(String(v).length>200)throw Object.assign(Error("quota"),{name:"QuotaExceededError"});return realSet(k,v)};
+    try{
+      const beforeLocal=localStorage.getItem("a25"),beforeSession=sessionStorage.getItem("a25");
+      const result=integrity.saveLocalStateDurably(big({completed:true}));
+      check(result.ok===false&&result.tier==="tab","tab-only save is not accepted as durable");
+      check(localStorage.getItem("a25")===beforeLocal&&sessionStorage.getItem("a25")===beforeSession,"non-durable completion rolled back exactly");
+    }finally{localStorage.setItem=realSet}
+    const clientApp=candidateFile("app/clientApp.js")||"";
+    for(const [start,end] of [["function closeMission(","function next()"],["function TrainingRun(","if(done){"],["function MiniExamReview(","return <Shell><Back go={go} to=\"miniExamRun\"/>"],["function finish(nextState,nextDraft){","function next(){"]]){
+      const a=clientApp.indexOf(start),b=clientApp.indexOf(end,a+1);
+      const body=a>=0&&b>a?clientApp.slice(a,b):"";
+      const durable=body.indexOf("saveLocalStateDurably("),clear=body.lastIndexOf("clearSessionDraft(");
+      check(durable>=0&&durable<clear,`durable save before clearing the draft: ${start}`);
+    }
+    check(/saveFinalState:state=>saveLocalStateDurably\(state\)\.ok/.test(clientApp),"diagnostic recovery completion requires durable save");
+    for(const file of ["app/components/PhysicsChemistryExam.js","app/components/PhysicsChemistryMiniExam.js"]){
+      const source=candidateFile(file)||"";
+      const durable=source.indexOf("saveLocalStateDurably("),clear=source.indexOf("clearPhysicsChemistryExamDraft(",source.indexOf("function saveReviewAndExit"));
+      check(durable>=0&&durable<clear,`${file}: durable save before clearing the exam draft`);
     }
   });
 

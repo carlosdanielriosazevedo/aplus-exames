@@ -43,7 +43,7 @@ import {
 import {clearLocalState,FRIENDS_STORAGE_KEY} from "./lib/persistence";
 import {
   guardedLoadLocalStateStatus as loadLocalStateStatus,guardedSaveLocalState as saveLocalState,
-  lastStateIntegrityBlock,STATE_INTEGRITY_EVENT
+  saveLocalStateDurably,durabilityFailureReason,lastStateIntegrityBlock,STATE_INTEGRITY_EVENT
 } from "./lib/stateIntegrity";
 import {
   saveSessionDraft,loadSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen
@@ -328,7 +328,7 @@ export default function App(){
       validDraft=null;
     }else if(draft?.kind==="diagnostic"){
       const recovery=recoverDiagnosticTransaction({
-        state:next,draft,saveState:saveLocalState,saveDraft:saveSessionDraft,
+        state:next,draft,saveState:saveLocalState,saveFinalState:state=>saveLocalStateDurably(state).ok,saveDraft:saveSessionDraft,
         clearDraft:()=>clearSessionDraft(next.betaMode||"internal"),
         startState:ensureDiagnosticStarted,completeState:finalizeDiagnosticState
       });
@@ -873,7 +873,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   const [ready,setReady]=useState(false);
   function retryRecovery(){
     const recoveryState=reconcileDiagnosticRuntimeSessions(s,draft?.sessionId||null);
-    const result=recoverDiagnosticTransaction({state:recoveryState,draft,saveState:saveLocalState,saveDraft:saveSessionDraft,
+    const result=recoverDiagnosticTransaction({state:recoveryState,draft,saveState:saveLocalState,saveFinalState:state=>saveLocalStateDurably(state).ok,saveDraft:saveSessionDraft,
       clearDraft:()=>clearSessionDraft(s.betaMode||"internal"),startState:ensureDiagnosticStarted,completeState:finalizeDiagnosticState});
     if(!result.ok){
       reportDiagnosticFlowIssue("recovery",result.reason||"unknown");
@@ -907,7 +907,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
 
   function finish(nextState,nextDraft){
     const final=finalizeDiagnosticState(nextState,nextDraft);
-    if(!final.ok||!saveLocalState(final.state)){setSaveError(true);setDraft(nextDraft);return}
+    if(!final.ok||!saveLocalStateDurably(final.state).ok){setSaveError(true);setDraft(nextDraft);return}
     clearSessionDraft(s.betaMode||"internal");setS(final.state);go("diagResult");
   }
 
@@ -1359,10 +1359,11 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
       type:plan.type,
       totalCount:newTotal
     },{at:activityAt});
-    if(!saveLocalState(finished)){
+    const durable=saveLocalStateDurably(finished);
+    if(!durable.ok){
       abandonSessionReservation(sessionId);
       completingRef.current=false;
-      go(completionSaveFailedScreen(sessionId));
+      go(completionSaveFailedScreen(sessionId,durable.tier));
       return;
     }
     commitSessionCompletion(sessionId);
@@ -1729,10 +1730,11 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
       };
       // Persistir a avaliação antes de confirmar o recibo e apagar o rascunho.
       const trainingCompleted=completeTraining(s);
-      if(!saveLocalState(trainingCompleted)){
+      const durable=saveLocalStateDurably(trainingCompleted);
+      if(!durable.ok){
         abandonSessionReservation(sessionId);
         completingRef.current=false;
-        go(completionSaveFailedScreen(sessionId));
+        go(completionSaveFailedScreen(sessionId,durable.tier));
         return;
       }
       commitSessionCompletion(sessionId);
@@ -2050,10 +2052,11 @@ function MiniExamReview({session,setSession,s,setS,go}){
       at:activityAt
     });
     updated=refreshLearningHypotheses(updated,activityAt);
-    if(!saveLocalState(updated)){
+    const durable=saveLocalStateDurably(updated);
+    if(!durable.ok){
       abandonSessionReservation(session.sessionId);
       submittingRef.current=false;
-      go(completionSaveFailedScreen(session.sessionId));
+      go(completionSaveFailedScreen(session.sessionId,durable.tier));
       return;
     }
     commitSessionCompletion(session.sessionId);
@@ -2072,9 +2075,9 @@ function MiniExamReview({session,setSession,s,setS,go}){
 
 // A avaliação não pôde ser gravada: a reserva já foi desfeita e o rascunho fica.
 // Se a gravação foi recusada pela proteção D2, prevalece o ecrã de recuperação.
-function completionSaveFailedScreen(sessionId){
+function completionSaveFailedScreen(sessionId,tier="failed"){
   if(lastStateIntegrityBlock())return "storageRecoveryError";
-  markCompletionBlocked(sessionId,"state_write_failed");
+  markCompletionBlocked(sessionId,durabilityFailureReason(tier));
   return "completionBlocked";
 }
 
@@ -2090,7 +2093,10 @@ function StorageRecoveryNotice(){
 const COMPLETION_BLOCK_COPY={
   completion_in_progress:"Esta sessão está a ser concluída noutro separador. Fecha os outros separadores da APProva+ e tenta de novo.",
   registry_corrupt:"O registo de sessões concluídas deste dispositivo está danificado. Não o apagámos. Podes guardar uma cópia e repará-lo: as sessões já concluídas continuam protegidas contra XP repetido.",
-  state_write_failed:"Não foi possível guardar a avaliação neste dispositivo."
+  state_write_failed:"Não foi possível guardar a avaliação neste dispositivo.",
+  state_tab_only:"O browser só deixou guardar a avaliação neste separador, não de forma permanente. Para não a perderes, não a demos como concluída. Liberta espaço no browser ou sai do modo privado e volta a entregar.",
+  state_memory_only:"O browser não deixou guardar a avaliação de forma permanente. Para não a perderes, não a demos como concluída. Mantém este separador aberto, liberta espaço no browser ou sai do modo privado e volta a entregar.",
+  registry_unavailable:"O browser está a bloquear o armazenamento permanente, por isso a avaliação não pôde ser dada como concluída. Permite o armazenamento de dados deste site e volta a entregar."
 };
 
 function CompletionBlocked({s,go}){
