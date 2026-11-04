@@ -7,6 +7,7 @@ const setup=readFileSync(new URL("../app/components/SetupScreens.js",import.meta
 const fqa=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
 const ptExam=readFileSync(new URL("../app/components/PortuguesePassageMiniExam.js",import.meta.url),"utf8");
 const cloud=readFileSync(new URL("../app/lib/cloudReliability.js",import.meta.url),"utf8");
+const localRecovery=readFileSync(new URL("../app/components/LocalSnapshotRecovery.js",import.meta.url),"utf8");
 const cloudMerge=readFileSync(new URL("../app/lib/cloudStateMerge.js",import.meta.url),"utf8");
 
 assert.match(chrome,/function safePrevious[\s\S]*window\.history\.back\(\)/u,"Voltar sem destino explícito deve respeitar o histórico real da app.");
@@ -23,7 +24,8 @@ assert.match(chrome,/ROOT_SCREENS/u,"As raízes da navegação não devem ganhar
 assert.match(chrome,/FOCUS_SCREENS/u,"Sessões focadas não devem receber um segundo botão Voltar além do cabeçalho seguro.");
 
 assert.match(page,/screen==="diagRecoveryError"[\s\S]*Não foi possível recuperar esta sessão/u,"O recovery do diagnóstico deve continuar coberto pela saída segura global.");
-assert.match(page,/screen==="storageRecoveryError"[\s\S]*Não foi possível ler o progresso guardado/u,"Falhas de leitura local devem continuar cobertas pela saída segura global.");
+assert.match(page,/screen==="storageRecoveryError"[\s\S]*<LocalSnapshotRecovery storageKey=\{recoveryStorageKey\}/u,"Falhas de leitura devem usar a recuperação controlada do armazenamento correto.");
+assert.match(localRecovery,/<Shell>[\s\S]*Não foi possível ler o progresso guardado/u,"Falhas de leitura local devem continuar cobertas pela saída segura global.");
 assert.match(page,/window\.history\.pushState/u,"A navegação interna deve continuar a criar histórico do browser.");
 assert.match(page,/window\.addEventListener\("popstate"/u,"A app deve continuar a responder ao retroceder do browser/sistema.");
 
@@ -38,7 +40,7 @@ assert.match(ptExam,/onDraftChange/u,"Mini-exames de Português devem continuar 
 assert.match(cloud,/export \{safeCloudMerge\} from "\.\/cloudStateMerge\.js"/u,"O merge pesado deve ficar isolado num módulo separado do bootstrap inicial.");
 assert.doesNotMatch(cloud,/function mergeSubjectProgressMaps\(/u,"O módulo carregado no arranque não deve conter o merge pesado por disciplina.");
 assert.match(cloudMerge,/function mergeSubjectProgressMaps\(/u,"O merge de progresso por disciplina deve permanecer implementado.");
-assert.match(cloudMerge,/subjectProgress:mergeSubjectProgressMaps\(local\?\.subjectProgress,remote\?\.subjectProgress\)/u,"O merge cloud não pode deixar o mapa local de progresso por disciplina apagar o progresso remoto.");
+assert.match(cloudMerge,/const subjectProgress=mergeSubjectProgressMaps\(local\?\.subjectProgress,remote\?\.subjectProgress,positions\);[\s\S]*subjectProgress,/u,"O merge cloud não pode deixar o mapa local de progresso por disciplina apagar o progresso remoto.");
 assert.match(cloudMerge,/newest=localAt>=remoteAt\?l:r/u,"A sessão/pausa deve ser decidida pelo estado de atividade mais recente.");
 assert.match(cloudMerge,/let lastPosition=newest\?\.lastPosition\|\|null/u,"A retoma deve nascer do dispositivo com atividade mais recente, não de uma pausa antiga do outro dispositivo.");
 assert.match(cloudMerge,/sessions\.some\(row=>row\?\.completedAt&&row\.sessionId===lastPosition\.sessionId\)\)lastPosition=null/u,"Uma sessão concluída noutro dispositivo nunca pode ressuscitar como sessão em pausa.");

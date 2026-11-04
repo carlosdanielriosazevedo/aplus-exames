@@ -1,4 +1,5 @@
 "use client";
+import {downloadOwnedState} from "../lib/cloudRecovery.js";
 import {useEffect,useState} from "react";
 import {Back,Shell} from "./chrome";
 import {QUESTION_BANK} from "../data/content";
@@ -53,15 +54,9 @@ export function BetaDashboard({s,setS,go}){
     setSyncing(false);
   }
 
-  function download(){
-    const payload=exportBetaPayload(s);
-    const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement("a");
-    a.href=url;
-    a.download=`aplus-beta-${s.betaParticipant?.code||"participante"}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+  async function download(){
+    try{await downloadOwnedState(s,`aplus-beta-${s.betaParticipant?.code||"participante"}.json`,exportBetaPayload);}
+    catch{setSyncMessage("Exportação bloqueada. Confirma a conta de origem.");}
   }
 
   async function importFriendReports(files){

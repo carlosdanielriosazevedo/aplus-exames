@@ -1,20 +1,33 @@
 "use client";
 
-import {useState} from "react";
+import {useEffect,useRef,useState} from "react";
 import Link from "next/link";
 import styles from "../piloto/pilot.module.css";
 import {setPilotTelemetryAllowed} from "../lib/pilotConsentClient";
-import {clearLocalPilotTelemetry} from "../lib/persistence";
+import {guardedClearLocalPilotTelemetry as clearLocalPilotTelemetry} from "../lib/stateIntegrity";
+import {openVerifiedAccount,accountFetch,verifyAccountContext,assertAccountContext} from "../lib/cloudAccountSession.js";
+import {selectAccountWorkspace} from "../lib/accountWorkspace.js";
 
 export default function SettingsPage(){
   const [busy,setBusy]=useState(false);
   const [message,setMessage]=useState("");
+  const account=useRef(null);
+  useEffect(()=>{
+    let live=true;
+    openVerifiedAccount().then(context=>{
+      if(!live)return;
+      selectAccountWorkspace(context);account.current=context;
+    }).catch(()=>{if(live)setMessage("Confirma a sessão antes de gerir os dados do piloto.");});
+    return ()=>{live=false;};
+  },[]);
 
   async function stopPilotParticipation(){
     setBusy(true);setMessage("");
     try{
-      const response=await fetch("/api/pilot/consent",{method:"DELETE",credentials:"include"});
+      const context=assertAccountContext(account.current);
+      const response=await accountFetch(context,"/api/pilot/consent",{method:"DELETE"});
       const body=await response.json().catch(()=>({}));
+      await verifyAccountContext(context);
       if(!response.ok||!body.ok)throw new Error(body.code||"Não foi possível retirar o consentimento.");
       setPilotTelemetryAllowed(false);
       setMessage("Participação no piloto terminada. A recolha e o envio de novos dados ficaram bloqueados. Os dados já recolhidos mantêm-se até serem apagados ou até ao fim do prazo de retenção.");
@@ -25,8 +38,10 @@ export default function SettingsPage(){
   async function erasePilotData(){
     setBusy(true);setMessage("");
     try{
-      const response=await fetch("/api/pilot/data",{method:"DELETE",credentials:"include"});
+      const context=assertAccountContext(account.current);
+      const response=await accountFetch(context,"/api/pilot/data",{method:"DELETE"});
       const body=await response.json().catch(()=>({}));
+      await verifyAccountContext(context);
       if(!response.ok||!body.ok)throw new Error(body.code||"Não foi possível apagar os dados do piloto.");
       setPilotTelemetryAllowed(false);
       clearLocalPilotTelemetry();

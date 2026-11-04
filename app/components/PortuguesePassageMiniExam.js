@@ -215,7 +215,12 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
         const selected=new Set([...classification.mandatoryItemIds,...classification.selectedOptionalItemIds]);
         results=results.map(result=>({...result,countsForExamScore:selected.has(result.itemId)}));
       }
-      onComplete?.({items:exam.items,results,answers,sessionId:attemptId});
+      // onComplete devolve false quando a avaliação não ficou gravada de forma
+      // durável: não sair, para conservar respostas e rascunho.
+      if(onComplete?.({items:exam.items,results,answers,sessionId:attemptId})===false){
+        completedRef.current=false;
+        return;
+      }
     }
     onExit?.();
   };
