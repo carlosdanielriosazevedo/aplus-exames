@@ -1106,8 +1106,9 @@ function Home({s,setS,go,reset}){
 
     if(decision.mode==="resume"){
       const resumeKey=`a25-daily-mission-resume:${decision.sessionId||"unknown"}`;
-      if(sessionStorage.getItem(resumeKey))return;
-      sessionStorage.setItem(resumeKey,"1");
+      let alreadyShown=false;
+      try{alreadyShown=!!window.sessionStorage.getItem(resumeKey);if(!alreadyShown)window.sessionStorage.setItem(resumeKey,"1")}catch{}
+      if(alreadyShown)return;
       setMissionModalMode("resume");
       setShowMissionModal(true);
       setS(prev=>{

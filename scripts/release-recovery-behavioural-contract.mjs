@@ -280,6 +280,28 @@ try{
     }
   });
 
+  await group("storage-blocked-startup","negative-control",async({check})=>{
+    const sources=["app/lib/cloudReliability.js","app/lib/graderValidationDataset.js","app/lib/graderValidationCapture.js","app/lib/portugueseWritingMemory.js"];
+    for(const file of sources){
+      const source=candidateFile(file)||"";
+      check(!/typeof\s+(localStorage|sessionStorage)\b/.test(source),`${file}: no typeof localStorage (throws when storage is blocked)`);
+      check(!/=\s*typeof window!=="undefined"\?window\.localStorage/.test(source),`${file}: no unsafe default storage parameter`);
+    }
+    const app=candidateFile("app/clientApp.js")||"";
+    check(!/\n\s*if\(sessionStorage\.getItem\(resumeKey\)\)/.test(app),"clientApp: daily mission resume key access is protected");
+  });
+
+  await group("portuguese-durable-completion","negative-control",({check})=>{
+    const route=candidateFile("app/components/PortuguesePassageMiniExamRoute.js")||"";
+    const exam=candidateFile("app/components/PortuguesePassageMiniExam.js")||"";
+    const subject=candidateFile("app/components/PortugueseSubject.js")||"";
+    check(/saveLocalStateDurably\(next\)/.test(route),"Portuguese mini-exam completion requires durable save");
+    check(/onComplete\?\.\([^)]*\)\)===false/.test(exam)||/===false\)\{\s*completedRef\.current=false/.test(exam),"mini-exam keeps the attempt when completion is not durable");
+    const a=subject.indexOf("if(session.current===session.items.length-1){"),b=subject.indexOf("setSession(current=>({...current,finished:true}))",a);
+    const body=a>=0&&b>a?subject.slice(a,b):"";
+    check(/saveLocalStateDurably\(completed\)/.test(body),"Portuguese session completion requires durable save before finishing");
+  });
+
   // ---- Exceção documentada -----------------------------------------------
   await group("raw-recovery-gap","documented-exception",async({check})=>{
     const source=candidateFile("app/lib/cloudRecovery.js");
