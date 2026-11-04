@@ -199,7 +199,12 @@ for(const viewport of [{width:390,height:844},{width:1366,height:768}]){
     ])test(`D2 · ${label2}: não carrega, não grava, não apaga`,async({page})=>{
       await seed(page,{state:raw,draft:null});
       await page.goto("/");
-      await expect(page.locator(`[data-recovery-reason="${reason}"]`)).toBeVisible({timeout:30_000});
+      // Versão futura: aviso D2 sem escrita. JSON ilegível: na base #455 segue o
+      // percurso F7 (LocalSnapshotRecovery), que também não escreve sem revisão.
+      const screen=reason==="state_version_future"
+        ?page.locator(`[data-recovery-reason="${reason}"]`)
+        :page.getByText("Não foi possível ler o progresso guardado",{exact:true});
+      await expect(screen).toBeVisible({timeout:30_000});
       await page.waitForTimeout(2500);
       expect(await page.evaluate(()=>localStorage.getItem("a25"))).toBe(raw);
       await page.reload();
