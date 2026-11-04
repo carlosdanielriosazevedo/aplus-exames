@@ -206,8 +206,12 @@ for(const viewport of [{width:390,height:844},{width:1366,height:768}]){
       page=await context.newPage();
       await page.goto("/");await page.waitForTimeout(2500);
       evidence.afterTabClose=await readStores(page);
-      const summary=stage=>({completed:completed(evidence[stage].local.a25,sid),pending:pending(evidence[stage].local.a25,sid)});
+      const summary=stage=>({completed:completed(evidence[stage].local.a25,sid),pending:pending(evidence[stage].local.a25,sid),
+        completedOnlyInTab:completed(evidence[stage].session.a25,sid)>0&&completed(evidence[stage].local.a25,sid)===0});
       await testInfo.attach("evidence.json",{body:JSON.stringify({afterFinish:summary("afterFinish"),afterTabClose:summary("afterTabClose")},null,1),contentType:"application/json"});
+      // Confirmação falsa: a conclusão foi gravada e apresentada só no separador.
+      const finished=summary("afterFinish");
+      expect.soft(finished.completedOnlyInTab,`CONFIRMAÇÃO FALSA: conclusão só em sessionStorage: ${JSON.stringify(finished)}`).toBe(false);
       const closed=summary("afterTabClose");
       expect(closed.completed+(closed.pending?1:0),`AVALIAÇÃO PERDIDA após fechar o separador: ${JSON.stringify(closed)}`).toBeGreaterThan(0);
       expect(closed.completed).toBeLessThanOrEqual(1);
