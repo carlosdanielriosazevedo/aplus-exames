@@ -112,7 +112,7 @@ export function appendClosedBetaValidationCase(row,{consent=false}={}){
 
 export function clearLocalValidationDataset(){
   const store=validationDataStorage();if(!store)return false;
-  store.removeItem(GRADER_VALIDATION_STORAGE_KEY);
+  try{store.removeItem(GRADER_VALIDATION_STORAGE_KEY)}catch{return false}
   return true;
 }
 

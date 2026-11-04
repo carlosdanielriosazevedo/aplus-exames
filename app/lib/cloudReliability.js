@@ -1,6 +1,7 @@
-
 "use client";
 import {accountOwner,accountSubject,accountContextCurrent,assertAccountContext} from "./cloudAccountSession.js";
+
+import {safeLocalStorage} from "./safeStorage.js";
 
 export {safeCloudMerge} from "./cloudStateMerge.js";
 
@@ -61,12 +62,12 @@ function randomId(prefix="id"){
 }
 
 export function getOrCreateDeviceId(){
-  if(typeof localStorage==="undefined")return "device-server";
+  const store=safeLocalStorage();if(!store)return "device-server";
   try{
-    const existing=localStorage.getItem(DEVICE_KEY);
+    const existing=store.getItem(DEVICE_KEY);
     if(existing)return existing;
     const next=randomId("device");
-    localStorage.setItem(DEVICE_KEY,next);
+    store.setItem(DEVICE_KEY,next);
     return next;
   }catch{
     return "device-unavailable";

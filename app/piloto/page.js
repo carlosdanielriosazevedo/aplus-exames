@@ -5,7 +5,7 @@ import Link from "next/link";
 import styles from "./pilot.module.css";
 import {pilotConsentText} from "../lib/pilotCopy";
 import {setPilotTelemetryAllowed} from "../lib/pilotConsentClient";
-import {clearLocalPilotTelemetry} from "../lib/persistence";
+import {guardedClearLocalPilotTelemetry as clearLocalPilotTelemetry} from "../lib/stateIntegrity";
 import {openVerifiedAccount,accountFetch,verifyAccountContext,assertAccountContext} from "../lib/cloudAccountSession.js";
 import {selectAccountWorkspace} from "../lib/accountWorkspace.js";
 

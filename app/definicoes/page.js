@@ -4,7 +4,7 @@ import {useEffect,useRef,useState} from "react";
 import Link from "next/link";
 import styles from "../piloto/pilot.module.css";
 import {setPilotTelemetryAllowed} from "../lib/pilotConsentClient";
-import {clearLocalPilotTelemetry} from "../lib/persistence";
+import {guardedClearLocalPilotTelemetry as clearLocalPilotTelemetry} from "../lib/stateIntegrity";
 import {openVerifiedAccount,accountFetch,verifyAccountContext,assertAccountContext} from "../lib/cloudAccountSession.js";
 import {selectAccountWorkspace} from "../lib/accountWorkspace.js";
 

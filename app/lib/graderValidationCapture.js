@@ -14,12 +14,12 @@ function hashText(text){
 
 export function graderValidationConsent(){
   const store=validationDataStorage();if(!store)return false;
-  return store.getItem(GRADER_VALIDATION_CONSENT_KEY)==="accepted";
+  try{return store.getItem(GRADER_VALIDATION_CONSENT_KEY)==="accepted"}catch{return false}
 }
 
 export function setGraderValidationConsent(accepted){
   const store=validationDataStorage();if(!store)return false;
-  store.setItem(GRADER_VALIDATION_CONSENT_KEY,accepted?"accepted":"declined");
+  try{store.setItem(GRADER_VALIDATION_CONSENT_KEY,accepted?"accepted":"declined")}catch{return false}
   return true;
 }
 

@@ -41,9 +41,11 @@ import {betaEvent,sessionStart,sessionFinish,betaSummary} from "./lib/beta";
 import {
   migrateProductAnalytics,recordAppOpen,recordMilestone,recordProductEvent
 } from "./lib/productAnalytics";
+import {clearLocalState,FRIENDS_STORAGE_KEY} from "./lib/persistence";
 import {
-  loadLocalStateStatus,saveLocalState,clearLocalState,FRIENDS_STORAGE_KEY
-} from "./lib/persistence";
+  guardedLoadLocalStateStatus as loadLocalStateStatus,guardedSaveLocalState as saveLocalState,
+  saveLocalStateDurably,durabilityFailureReason,lastStateIntegrityBlock,lastStorageTier,STATE_INTEGRITY_EVENT
+} from "./lib/stateIntegrity";
 import {
   saveSessionDraft,loadSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen
 } from "./lib/sessionDraft";
@@ -52,7 +54,9 @@ import {
   academicScopeThemes,diagnosticBlueprintForProfile,currentYearThemes,normalizeTaughtSubtopics
 } from "./lib/curriculumScope";
 import {
-  claimSessionCompletion,clearCompletionRegistry,latestOpenSessionId
+  reserveSessionCompletion,commitSessionCompletion,abandonSessionReservation,stateRecordsCompletion,
+  repairCompletionRegistry,lastCompletionBlockReason,clearCompletionBlock,markCompletionBlocked,
+  clearCompletionRegistry,latestOpenSessionId
 } from "./lib/reliability";
 import {
   ROLES,normalizeIdentity,can,defaultScreenForRole,createParentInvite,
@@ -339,7 +343,7 @@ export default function App(){
       validDraft=null;
     }else if(draft?.kind==="diagnostic"){
       const recovery=recoverDiagnosticTransaction({
-        state:next,draft,saveState:saveLocalState,saveDraft:saveSessionDraft,
+        state:next,draft,saveState:saveLocalState,saveFinalState:state=>saveLocalStateDurably(state).ok,saveDraft:saveSessionDraft,
         clearDraft:()=>clearSessionDraft(next.betaMode||"internal"),
         startState:ensureDiagnosticStarted,completeState:finalizeDiagnosticState
       });
@@ -403,6 +407,15 @@ export default function App(){
   useEffect(()=>{
     if(hydrated)saveLocalState(s);
   },[s,hydrated]);
+
+  // D2: outra versão (ou outro separador) gravou dados que esta versão não pode
+  // gerir com segurança. Parar de gravar e mostrar a recuperação.
+  useEffect(()=>{
+    if(typeof window==="undefined")return;
+    const onBlocked=()=>{setHydrated(false);setScreen("storageRecoveryError")};
+    window.addEventListener(STATE_INTEGRITY_EVENT,onBlocked);
+    return ()=>window.removeEventListener(STATE_INTEGRITY_EVENT,onBlocked);
+  },[]);
 
   useEffect(()=>{
     const mathActive=(s.activeSubjectId==="math-a"||(!s.activeSubjectId&&MATH_ENGINE_SCREENS.has(screen)));
@@ -547,7 +560,10 @@ export default function App(){
   if(screen==="diag"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="diagnostic"/>;
   if(screen==="diag")return <DiagIntro s={s} setS={setS} go={go}/>;
   if(screen==="diagRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível recuperar esta sessão</b><span>O estado académico não foi alterado. O progresso guardado foi conservado para uma nova tentativa.</span></div></Shell>;
-  if(screen==="storageRecoveryError")return <LocalSnapshotRecovery storageKey={recoveryStorageKey}/>;
+  // D2: versões futuras/inválidas nunca entram no percurso F7 (que pode aplicar
+  // uma cópia revista); só o aviso sem escrita. JSON ilegível continua no F7.
+  if(screen==="storageRecoveryError")return ["state_version_future","state_version_invalid"].includes(lastStateIntegrityBlock()?.reason)?<StorageRecoveryNotice/>:<LocalSnapshotRecovery storageKey={recoveryStorageKey}/>;
+  if(screen==="completionBlocked")return <CompletionBlocked s={s} go={go}/>;
   if(screen==="diagRun")return <DiagRun s={s} setS={setS} go={go} recoveredDraft={recoveredSession?.kind==="diagnostic"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="diagResult")return <DiagResult s={s} setS={setS} go={go}/>;
   if(screen==="mission")return <Mission s={s} setS={setS} go={go} recoveredDraft={recoveredSession?.kind==="mission"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
@@ -883,7 +899,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   const [ready,setReady]=useState(false);
   function retryRecovery(){
     const recoveryState=reconcileDiagnosticRuntimeSessions(s,draft?.sessionId||null);
-    const result=recoverDiagnosticTransaction({state:recoveryState,draft,saveState:saveLocalState,saveDraft:saveSessionDraft,
+    const result=recoverDiagnosticTransaction({state:recoveryState,draft,saveState:saveLocalState,saveFinalState:state=>saveLocalStateDurably(state).ok,saveDraft:saveSessionDraft,
       clearDraft:()=>clearSessionDraft(s.betaMode||"internal"),startState:ensureDiagnosticStarted,completeState:finalizeDiagnosticState});
     if(!result.ok){
       reportDiagnosticFlowIssue("recovery",result.reason||"unknown");
@@ -917,7 +933,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
 
   function finish(nextState,nextDraft){
     const final=finalizeDiagnosticState(nextState,nextDraft);
-    if(!final.ok||!saveLocalState(final.state)){setSaveError(true);setDraft(nextDraft);return}
+    if(!final.ok||!saveLocalStateDurably(final.state).ok){setSaveError(true);setDraft(nextDraft);return}
     clearSessionDraft(s.betaMode||"internal");setS(final.state);go("diagResult");
   }
 
@@ -1116,8 +1132,9 @@ function Home({s,setS,go,reset}){
 
     if(decision.mode==="resume"){
       const resumeKey=`a25-daily-mission-resume:${decision.sessionId||"unknown"}`;
-      if(sessionStorage.getItem(resumeKey))return;
-      sessionStorage.setItem(resumeKey,"1");
+      let alreadyShown=false;
+      try{alreadyShown=!!window.sessionStorage.getItem(resumeKey);if(!alreadyShown)window.sessionStorage.setItem(resumeKey,"1")}catch{}
+      if(alreadyShown)return;
       setMissionModalMode("resume");
       setShowMissionModal(true);
       setS(prev=>{
@@ -1292,9 +1309,15 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     if(completingRef.current)return;
     completingRef.current=true;
 
-    if(!claimSessionCompletion(sessionId)){
+    const reservation=reserveSessionCompletion(sessionId,{isRecorded:()=>stateRecordsCompletion(s,sessionId)});
+    if(reservation.status==="already_completed"){
       clearSessionDraft(s.betaMode||"internal");
       go("missionResult");
+      return;
+    }
+    if(reservation.status!=="reserved"){
+      completingRef.current=false;
+      go("completionBlocked");
       return;
     }
 
@@ -1363,6 +1386,14 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
       type:plan.type,
       totalCount:newTotal
     },{at:activityAt});
+    const durable=saveLocalStateDurably(finished);
+    if(!durable.ok){
+      abandonSessionReservation(sessionId);
+      completingRef.current=false;
+      go(completionSaveFailedScreen(sessionId,durable.tier));
+      return;
+    }
+    commitSessionCompletion(sessionId);
     clearSessionDraft(s.betaMode||"internal");
     setS(finished);go("missionResult");
   }
@@ -1676,15 +1707,21 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
       if(completingRef.current)return;
       completingRef.current=true;
 
-      if(!claimSessionCompletion(sessionId)){
+      const reservation=reserveSessionCompletion(sessionId,{isRecorded:()=>stateRecordsCompletion(s,sessionId)});
+      if(reservation.status==="already_completed"){
         clearSessionDraft(s.betaMode||"internal");
         setDone(true);
+        return;
+      }
+      if(reservation.status!=="reserved"){
+        completingRef.current=false;
+        go("completionBlocked");
         return;
       }
 
       const ratio=newCorrect/questions.length;
       const potential=ratio>=.75 && cfg.level!=="basic" && !questions.some(item=>item.practiceOnly);
-      setS(prev=>{
+      const completeTraining=prev=>{
         const sessions=[...(prev.betaSessions||[])];
         const openIdx=[...sessions].map(x=>x.kind==="training"&&!x.finishedAt).lastIndexOf(true);
         if(openIdx>=0)sessions[openIdx]=sessionFinish(sessions[openIdx],{themeId:cfg.themeId,focus:cfg.focus,correct:newCorrect,total:questions.length,earnedPoints:newEarnedPoints,maxPoints,reviewRequired:newHasIncomplete});
@@ -1717,7 +1754,18 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
           at:activityAt
         });
         return completed;
-      });
+      };
+      // Persistir a avaliação antes de confirmar o recibo e apagar o rascunho.
+      const trainingCompleted=completeTraining(s);
+      const durable=saveLocalStateDurably(trainingCompleted);
+      if(!durable.ok){
+        abandonSessionReservation(sessionId);
+        completingRef.current=false;
+        go(completionSaveFailedScreen(sessionId,durable.tier));
+        return;
+      }
+      commitSessionCompletion(sessionId);
+      setS(trainingCompleted);
       clearSessionDraft(s.betaMode||"internal");
       setDone(true);return;
     }
@@ -1993,9 +2041,15 @@ function MiniExamReview({session,setSession,s,setS,go}){
     if(submittingRef.current)return;
     submittingRef.current=true;
 
-    if(!claimSessionCompletion(session.sessionId)){
+    const reservation=reserveSessionCompletion(session.sessionId,{isRecorded:()=>stateRecordsCompletion(s,session.sessionId)});
+    if(reservation.status==="already_completed"){
       clearSessionDraft(s.betaMode||"internal");
       go("miniExamResult");
+      return;
+    }
+    if(reservation.status!=="reserved"){
+      submittingRef.current=false;
+      go("completionBlocked");
       return;
     }
 
@@ -2025,6 +2079,14 @@ function MiniExamReview({session,setSession,s,setS,go}){
       at:activityAt
     });
     updated=refreshLearningHypotheses(updated,activityAt);
+    const durable=saveLocalStateDurably(updated);
+    if(!durable.ok){
+      abandonSessionReservation(session.sessionId);
+      submittingRef.current=false;
+      go(completionSaveFailedScreen(session.sessionId,durable.tier));
+      return;
+    }
+    commitSessionCompletion(session.sessionId);
     clearSessionDraft(s.betaMode||"internal");
     setS(updated);go("miniExamResult");
   }
@@ -2036,6 +2098,71 @@ function MiniExamReview({session,setSession,s,setS,go}){
     {unanswered>0&&<div className="notice warning"><b>{unanswered} {unanswered===1?"questão por responder":"questões por responder"}</b><span>Podes entregar assim, mas as não-respostas contam para o resultado. Pedagogicamente recebem um peso ligeiramente menor do que uma resposta explicitamente errada.</span></div>}
     <button className="primary" onClick={submit}>Entregar Mini-exame</button>
   </Shell>
+}
+
+// A avaliação não pôde ser gravada: a reserva já foi desfeita e o rascunho fica.
+// Se a gravação foi recusada pela proteção D2, prevalece o ecrã de recuperação.
+function completionSaveFailedScreen(sessionId,tier="failed"){
+  if(lastStateIntegrityBlock())return "storageRecoveryError";
+  markCompletionBlocked(sessionId,durabilityFailureReason(tier));
+  return "completionBlocked";
+}
+
+function StorageRecoveryNotice(){
+  const block=lastStateIntegrityBlock();
+  const future=block?.reason==="state_version_future";
+  return <Shell><Logo/><div className="notice warning" data-recovery-reason={block?.reason||"state_unreadable"}>
+    <b>{future?"O teu progresso foi guardado por uma versão mais recente da APProva+":"Não foi possível ler o progresso guardado"}</b>
+    <span>{future?"Para não perder nada, esta versão não vai alterar os teus dados. Fecha e volta a abrir a app para carregar a versão mais recente.":"Nenhum dado foi substituído. Reabre a app para tentar novamente."}</span>
+  </div></Shell>;
+}
+
+const COMPLETION_BLOCK_COPY={
+  completion_in_progress:"Esta sessão está a ser concluída noutro separador. Fecha os outros separadores da APProva+ e tenta de novo.",
+  registry_corrupt:"O registo de sessões concluídas deste dispositivo está danificado. Não o apagámos. Podes guardar uma cópia e repará-lo: as sessões já concluídas continuam protegidas contra XP repetido.",
+  state_write_failed:"Não foi possível guardar a avaliação neste dispositivo.",
+  state_tab_only:"O browser só deixou guardar a avaliação neste separador, não de forma permanente. Para não a perderes, não a demos como concluída. Liberta espaço no browser ou sai do modo privado e volta a entregar.",
+  state_memory_only:"O browser não deixou guardar a avaliação de forma permanente. Para não a perderes, não a demos como concluída. Mantém este separador aberto, liberta espaço no browser ou sai do modo privado e volta a entregar.",
+  registry_unavailable:"O browser está a bloquear o armazenamento permanente, por isso a avaliação não pôde ser dada como concluída. Permite o armazenamento de dados deste site e volta a entregar."
+};
+
+// Onde estão de facto as respostas desta sessão. Só se promete que estão
+// guardadas quando a última gravação ficou em armazenamento permanente.
+function completionStorageTier(reason){
+  if(reason==="state_memory_only")return "memory";
+  if(reason==="state_tab_only")return "tab";
+  const tier=lastStorageTier();
+  return tier==="durable"||tier==="tab"||tier==="memory"?tier:"unknown";
+}
+
+const COMPLETION_STORAGE_RISK={
+  durable:"As respostas desta sessão continuam guardadas neste dispositivo.",
+  tab:"Atenção: as respostas desta sessão estão guardadas só neste separador. Se o fechares antes de a avaliação ficar guardada de forma segura, perdes estas respostas.",
+  memory:"Atenção: as respostas desta sessão estão só na memória do browser. Se atualizares ou fechares esta página antes de a avaliação ficar guardada de forma segura, perdes estas respostas.",
+  unknown:"Não conseguimos confirmar que as respostas desta sessão estão guardadas de forma permanente. Evita fechar ou atualizar esta página até a avaliação ficar guardada."
+};
+
+function CompletionBlocked({s,go}){
+  const [message,setMessage]=useState(null);
+  const block=lastCompletionBlockReason();
+  const reason=block?.reason||"registry_write_failed";
+  const corrupt=reason==="registry_corrupt";
+  function repair(){
+    const result=repairCompletionRegistry(s);
+    if(result.ok){clearCompletionBlock();go("home");return}
+    setMessage("Não foi possível reparar o registo. Nenhum dado foi apagado.");
+  }
+  const tier=completionStorageTier(reason);
+  return <Shell><Logo/><div className="notice warning" data-completion-block={reason} data-storage-risk={tier}>
+    <b>{tier==="durable"?"A tua sessão está guardada, mas ainda não foi concluída":"Esta avaliação ainda não está guardada de forma segura"}</b>
+    <span>{COMPLETION_BLOCK_COPY[reason]||"Não foi possível guardar o registo de conclusão neste dispositivo."}</span>
+    <span>{COMPLETION_STORAGE_RISK[tier]}</span>
+  </div>
+  {message&&<p className="notice warning">{message}</p>}
+  {corrupt?<><button className="primary" onClick={repair}>Guardar cópia e reparar</button>
+    <button className="secondary" onClick={()=>go("home")}>Voltar ao início</button></>
+    :<button className="primary" onClick={()=>{clearCompletionBlock();go("home")}}>Voltar ao início</button>}
+  </Shell>;
 }
 
 function MiniExamResult({s,setS,go}){
