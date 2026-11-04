@@ -4,7 +4,7 @@ import {useState} from "react";
 import Link from "next/link";
 import styles from "../piloto/pilot.module.css";
 import {setPilotTelemetryAllowed} from "../lib/pilotConsentClient";
-import {clearLocalPilotTelemetry} from "../lib/persistence";
+import {guardedClearLocalPilotTelemetry as clearLocalPilotTelemetry} from "../lib/stateIntegrity";
 
 export default function SettingsPage(){
   const [busy,setBusy]=useState(false);
