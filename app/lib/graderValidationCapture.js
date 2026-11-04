@@ -1,4 +1,5 @@
 import {appendClosedBetaValidationCase,loadLocalValidationDataset,makeGraderValidationCase} from "./graderValidationDataset.js";
+import {safeLocalStorage} from "./safeStorage.js";
 
 export const GRADER_VALIDATION_CONSENT_KEY="aplus-grader-validation-consent-v1";
 export const GRADER_VALIDATION_SUBJECTS=["mathematics","portuguese","physics-chemistry-a"];
@@ -13,13 +14,13 @@ function hashText(text){
 }
 
 export function graderValidationConsent(){
-  if(typeof localStorage==="undefined")return false;
-  return localStorage.getItem(GRADER_VALIDATION_CONSENT_KEY)==="accepted";
+  const store=safeLocalStorage();if(!store)return false;
+  try{return store.getItem(GRADER_VALIDATION_CONSENT_KEY)==="accepted"}catch{return false}
 }
 
 export function setGraderValidationConsent(accepted){
-  if(typeof localStorage==="undefined")return false;
-  localStorage.setItem(GRADER_VALIDATION_CONSENT_KEY,accepted?"accepted":"declined");
+  const store=safeLocalStorage();if(!store)return false;
+  try{store.setItem(GRADER_VALIDATION_CONSENT_KEY,accepted?"accepted":"declined")}catch{return false}
   return true;
 }
 

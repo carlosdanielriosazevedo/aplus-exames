@@ -6,6 +6,8 @@ import ExamSubmissionCheck from "./ExamSubmissionCheck";
 import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
+import {saveLocalStateDurably,durabilityFailureReason,lastStateIntegrityBlock} from "../lib/stateIntegrity";
+import {markCompletionBlocked} from "../lib/reliability";
 import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";
 import {hasPhysicsChemistryExamDraft,clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";
 
@@ -77,10 +79,18 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
 
   function saveReviewAndExit(){
     if(!recordedRef.current){
-      recordedRef.current=true;
-      setS(prev=>recordSubjectSession(prev,{
+      // A avaliação tem de ficar gravada de forma durável antes de apagar o rascunho.
+      const next=recordSubjectSession(s,{
         subjectId:SUBJECT_ID,kind:"mini_exam",label:exam.label,items:exam.items,results,sessionId:exam.id+"-"+startedAt
-      }));
+      });
+      const durable=saveLocalStateDurably(next);
+      if(!durable.ok){
+        markCompletionBlocked(null,durabilityFailureReason(durable.tier));
+        go(lastStateIntegrityBlock()?"storageRecoveryError":"completionBlocked");
+        return;
+      }
+      recordedRef.current=true;
+      setS(next);
     }
     clearPhysicsChemistryExamDraft(exam.id);
     go("exams");

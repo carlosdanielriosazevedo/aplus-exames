@@ -1,3 +1,4 @@
+import {safeLocalStorage} from "./safeStorage.js";
 export const GRADER_VALIDATION_DATASET_SCHEMA="aplus-grader-validation-dataset-v1";
 export const GRADER_VALIDATION_STORAGE_KEY="aplus-grader-validation-local-v1";
 export const GRADER_VALIDATION_EXPORT_SCHEMA="aplus-grader-validation-export-v1";
@@ -82,9 +83,9 @@ export function thresholdTuningCases(rows=[]){
 }
 
 export function loadLocalValidationDataset(){
-  if(typeof localStorage==="undefined")return [];
+  const store=safeLocalStorage();if(!store)return [];
   try{
-    const parsed=JSON.parse(localStorage.getItem(GRADER_VALIDATION_STORAGE_KEY)||"[]");
+    const parsed=JSON.parse(store.getItem(GRADER_VALIDATION_STORAGE_KEY)||"[]");
     return Array.isArray(parsed)?parsed:[];
   }catch{return []}
 }
@@ -92,18 +93,18 @@ export function loadLocalValidationDataset(){
 export function appendClosedBetaValidationCase(row,{consent=false}={}){
   if(!consent)return {ok:false,code:"VALIDATION_CONSENT_REQUIRED",count:loadLocalValidationDataset().length};
   if(row?.source!=="closed_beta_real")return {ok:false,code:"REAL_BETA_SOURCE_REQUIRED",count:loadLocalValidationDataset().length};
-  if(typeof localStorage==="undefined")return {ok:false,code:"LOCAL_STORAGE_UNAVAILABLE",count:0};
+  const store=safeLocalStorage();if(!store)return {ok:false,code:"LOCAL_STORAGE_UNAVAILABLE",count:0};
   const current=loadLocalValidationDataset();
   const byId=new Map(current.map(x=>[x.case_id,x]));
   byId.set(row.case_id,row);
   const next=[...byId.values()];
-  localStorage.setItem(GRADER_VALIDATION_STORAGE_KEY,JSON.stringify(next));
+  try{store.setItem(GRADER_VALIDATION_STORAGE_KEY,JSON.stringify(next))}catch{return {ok:false,code:"LOCAL_STORAGE_UNAVAILABLE",count:current.length}}
   return {ok:true,count:next.length};
 }
 
 export function clearLocalValidationDataset(){
-  if(typeof localStorage==="undefined")return false;
-  localStorage.removeItem(GRADER_VALIDATION_STORAGE_KEY);
+  const store=safeLocalStorage();if(!store)return false;
+  try{store.removeItem(GRADER_VALIDATION_STORAGE_KEY)}catch{return false}
   return true;
 }
 

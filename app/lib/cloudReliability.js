@@ -1,5 +1,6 @@
-
 "use client";
+
+import {safeLocalStorage} from "./safeStorage.js";
 
 export {safeCloudMerge} from "./cloudStateMerge.js";
 
@@ -16,12 +17,12 @@ function randomId(prefix="id"){
 }
 
 export function getOrCreateDeviceId(){
-  if(typeof localStorage==="undefined")return "device-server";
+  const store=safeLocalStorage();if(!store)return "device-server";
   try{
-    const existing=localStorage.getItem(DEVICE_KEY);
+    const existing=store.getItem(DEVICE_KEY);
     if(existing)return existing;
     const next=randomId("device");
-    localStorage.setItem(DEVICE_KEY,next);
+    store.setItem(DEVICE_KEY,next);
     return next;
   }catch{
     return "device-unavailable";
@@ -166,19 +167,19 @@ function createLocalSnapshot(state,{label="snapshot",at=Date.now()}={}){
 
 export function saveLocalSnapshot(state,{label="Antes de sincronizar",at=Date.now()}={}){
   const snapshot=createLocalSnapshot(state,{label,at});
-  if(typeof localStorage==="undefined")return snapshot;
+  const store=safeLocalStorage();if(!store)return snapshot;
   try{
-    const list=JSON.parse(localStorage.getItem(SNAPSHOT_KEY)||"[]");
+    const list=JSON.parse(store.getItem(SNAPSHOT_KEY)||"[]");
     const next=[snapshot,...(Array.isArray(list)?list:[])].slice(0,MAX_SNAPSHOTS);
-    localStorage.setItem(SNAPSHOT_KEY,JSON.stringify(next));
+    store.setItem(SNAPSHOT_KEY,JSON.stringify(next));
   }catch{}
   return snapshot;
 }
 
 export function listLocalSnapshots(){
-  if(typeof localStorage==="undefined")return [];
+  const store=safeLocalStorage();if(!store)return [];
   try{
-    const list=JSON.parse(localStorage.getItem(SNAPSHOT_KEY)||"[]");
+    const list=JSON.parse(store.getItem(SNAPSHOT_KEY)||"[]");
     return Array.isArray(list)?list:[];
   }catch{return []}
 }
@@ -199,28 +200,28 @@ export function queueCloudSave(state,{
     fingerprint:stateFingerprint(state),
     state
   };
-  if(typeof localStorage==="undefined")return item;
+  const store=safeLocalStorage();if(!store)return item;
   try{
-    const list=JSON.parse(localStorage.getItem(PENDING_KEY)||"[]");
+    const list=JSON.parse(store.getItem(PENDING_KEY)||"[]");
     const arr=Array.isArray(list)?list:[];
     const dedup=arr.filter(x=>x.fingerprint!==item.fingerprint);
-    localStorage.setItem(PENDING_KEY,JSON.stringify([item,...dedup].slice(0,MAX_PENDING)));
+    store.setItem(PENDING_KEY,JSON.stringify([item,...dedup].slice(0,MAX_PENDING)));
   }catch{}
   return item;
 }
 
 export function listPendingCloudSaves(){
-  if(typeof localStorage==="undefined")return [];
+  const store=safeLocalStorage();if(!store)return [];
   try{
-    const list=JSON.parse(localStorage.getItem(PENDING_KEY)||"[]");
+    const list=JSON.parse(store.getItem(PENDING_KEY)||"[]");
     return Array.isArray(list)?list:[];
   }catch{return []}
 }
 
 export function removePendingCloudSave(id){
-  if(typeof localStorage==="undefined")return;
+  const store=safeLocalStorage();if(!store)return;
   try{
     const next=listPendingCloudSaves().filter(x=>x.id!==id);
-    localStorage.setItem(PENDING_KEY,JSON.stringify(next));
+    store.setItem(PENDING_KEY,JSON.stringify(next));
   }catch{}
 }
