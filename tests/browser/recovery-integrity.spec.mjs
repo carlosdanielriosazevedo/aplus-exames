@@ -44,7 +44,11 @@ async function installCrashSwitch(page){
 
 async function seed(page,{state,draft,registry=undefined,extra={}}){
   await page.goto("/");
-  await page.evaluate(({state,draft,registry,extra,DRAFT,REGISTRY})=>{
+  await page.evaluate(async({state,draft,registry,extra,DRAFT,REGISTRY})=>{
+    // Ponto de partida limpo: também o registo do escritor (IndexedDB, P1-A),
+    // como ao limpar os dados do site. Limpar só o localStorage deixaria o
+    // registo a exigir um selo apagado.
+    await new Promise(resolve=>{const r=indexedDB.deleteDatabase("approva-state-writer-v1");r.onsuccess=r.onerror=r.onblocked=()=>resolve();});
     localStorage.clear();sessionStorage.clear();
     localStorage.setItem("a25",typeof state==="string"?state:JSON.stringify(state));
     if(draft)localStorage.setItem(DRAFT,JSON.stringify(draft));
@@ -110,8 +114,18 @@ for(const viewport of [{width:390,height:844},{width:1366,height:768}]){
       await page.evaluate(crash=>{if(crash.now)window.__crashNow();else window.__crash={key:crash.key,nth:crash.nth}},crash);
       await submitButton(page).click();
       await page.waitForTimeout(800);
+      const atCrash=await read(page,sid);
       // o separador "morre": recarregar
       await page.goto("/");
+      // P1-A (auditoria #459): depois de o armazenamento "morrer" não há selo final
+      // do escritor — é um fim abrupto. Sem prova, a nova sessão não grava: mostra a
+      // retenção e só continua por decisão explícita, depois de guardar uma cópia.
+      await expect(page.locator("[data-state-writer='recovery-hold']")).toBeVisible({timeout:30_000});
+      const held=await read(page,sid);
+      expect({raw:held.raw,draft:held.draft,registry:held.registry},"nada gravado antes da decisão").toEqual({raw:atCrash.raw,draft:atCrash.draft,registry:atCrash.registry});
+      await page.getByRole("button",{name:"Continuar neste separador",exact:true}).click();
+      await page.getByRole("button",{name:"Guardar cópia e continuar aqui",exact:true}).click();
+      await expect(page.locator("[data-state-writer='recovery-hold']")).toHaveCount(0,{timeout:30_000});
       const review=submitButton(page);
       // Se o rascunho sobreviveu à interrupção, a app tem de reabrir a revisão.
       if((await read(page,sid)).draft){
