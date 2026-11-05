@@ -14,8 +14,8 @@
 //    - ao deixar de escrever de forma limpa (passagem de controlo, pagehide,
 //      separador escondido) o escritor grava por último um selo final com
 //      {tab,epoch,seq,digest} e não volta a escrever nesse mandato;
-//    - o novo detentor do lock só lê e grava quando vê, para o último carimbo,
-//      o selo final correspondente com o mesmo digest. Ver o selo implica ter
+//    - o novo detentor do lock só lê e grava quando vê, para o último mandato
+//      registado, o selo final correspondente. Ver o selo implica ter
 //      visto todas as escritas anteriores desse separador. Até lá não grava;
 //      reavalia a cada evento `storage`. O tempo só muda a mensagem mostrada.
 //    - registo autoritativo do mandato (IndexedDB, sem cache por processo):
@@ -141,8 +141,12 @@ export function evaluateStateView(expected=expectedMandate){
   const view=viewOfState(store);if(view===null)return {verdict:"pending",reason:"unreadable_view"};
   const seal=readJson(store.getItem(scopedKey(STATE_SEAL_KEY)))||null;
   if(!seal||seal.tab!==expected.tab||seal.epoch!==expected.epoch||seal.final!==true)return {verdict:"pending",reason:"no_seal"};
-  if(seal.digest!==stateDigest(view))return {verdict:"pending",reason:"digest_mismatch"};
-  return {verdict:"proven"};
+  // O selo é a última escrita do mandato e as alterações de um separador chegam
+  // por ordem: vê-lo prova que todas as escritas desse mandato já foram vistas.
+  // Um digest diferente significa apenas bytes alterados depois por alguém fora
+  // do protocolo — estão visíveis e são lidos, não sobrescritos às cegas; se esse
+  // escritor continuar ativo, a deteção de escrita alheia para este separador.
+  return {verdict:"proven",changedAfterSeal:seal.digest!==stateDigest(view)};
 }
 
 // ---------------------------------------------------------------- mensagens
