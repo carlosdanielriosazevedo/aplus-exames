@@ -228,6 +228,31 @@ try{
     await b.locator("[data-state-writer='observer']").waitFor({timeout:20_000});
     await c.close();
   });
+  await scenario("[P1-A] contas sem Web Locks: só consulta, isolamento A/B e nenhuma gravação",async()=>{
+    const c=await browser.newContext();
+    await c.addInitScript(()=>{try{Object.defineProperty(Navigator.prototype,"locks",{configurable:true,get:()=>undefined})}catch{}});
+    const ownA=JSON.stringify({schema:"aplus-student-state-v8",cloudAccount:{version:1,accountId:"RA"},xp:3131,selectedSubjectIds:["portuguese"],missionHistory:[],examHistory:[],profile:{},scores:{},_stateVersion:31,_savedAt:5});
+    const ownB=JSON.stringify({schema:"aplus-student-state-v8",cloudAccount:{version:1,accountId:"RB"},xp:4747,selectedSubjectIds:["math-a"],missionHistory:[],examHistory:[],profile:{},scores:{},_stateVersion:31,_savedAt:5});
+    await signIn(c,"RA");
+    const a=await open(c,"readonly-A");
+    await a.evaluate(([x,y])=>{localStorage.setItem("a25-account-v1:RA:a25",x);localStorage.setItem("a25-account-v1:RB:a25",y);},[ownA,ownB]);
+    const before=await dump(a);
+    await a.evaluate(()=>mountActualApp());
+    await a.locator("[data-state-writer='readonly']").waitFor({timeout:20_000});
+    const textA=await visibleText(a);
+    assert.ok(textA.includes("3131")&&!textA.includes("4747"),"A vê só o seu progresso");
+    await a.evaluate(()=>probe.cloud.cloudSignOut());await signIn(c,"RB");
+    const b=await open(c,"readonly-B");await b.evaluate(()=>mountActualApp());
+    await b.locator("[data-state-writer='readonly']").waitFor({timeout:20_000});
+    const textB=await visibleText(b);
+    assert.ok(textB.includes("4747")&&!textB.includes("3131"),"B vê só o seu progresso");
+    await b.evaluate(()=>{document.dispatchEvent(new Event("visibilitychange"));window.dispatchEvent(new Event("focus"));});
+    await b.waitForTimeout(1200);
+    const after=await dump(b);
+    for(const [key,value] of Object.entries(before))if(!key.includes("auth-epoch"))assert.equal(after[key],value,"alterado sem Web Locks: "+key);
+    assert.deepEqual(Object.keys(after).filter(k=>!k.includes("auth-epoch")&&!(k in before)),[],"chaves novas sem Web Locks");
+    await c.close();
+  });
 }finally{
   await browser.close();server.close();
 }

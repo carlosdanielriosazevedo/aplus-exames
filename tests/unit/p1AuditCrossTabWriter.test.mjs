@@ -56,7 +56,7 @@ function use(tab){
   vi.stubGlobal("window",tab.win);vi.stubGlobal("document",tab.doc);vi.stubGlobal("sessionStorage",tab.session);
 }
 const settle=(ms=0)=>new Promise(resolve=>setTimeout(resolve,ms));
-const fast={reloadWaitMs:60,requestTimeoutMs:400,leaseTtlMs:60_000,heartbeatMs:60_000,claimSettleMs:20,noAnswerMs:120};
+const fast={reloadWaitMs:60,requestTimeoutMs:400,fenceMessageWaitMs:150,settleStepMs:10,settleStableSteps:2,settleMaxMs:400};
 
 async function openTab(name,{coordinated=true,session=null}={}){
   const tab={name,win:new EventTarget(),doc:new EventTarget(),session:session||storage(),closed:false,suspended:false,mem:null};
@@ -236,53 +236,77 @@ describe("P1-A · exclusão, passagem de controlo e recuperação",()=>{
   });
 });
 
-describe("P1-A · sem Web Locks (concessão em localStorage)",()=>{
+describe("P1-A · sem Web Locks: só leitura, nenhuma gravação académica",()=>{
   beforeEach(()=>vi.stubGlobal("navigator",{}));
+  const everything=()=>JSON.stringify([...local.data.entries()].filter(([k])=>!k.includes("auth-epoch")).sort());
 
-  it("a segunda aba fica observadora; passagem cooperativa preserva o progresso",async()=>{
+  it("duas abas: ambas só leitura; nenhuma grava estado, rascunho ou conclusão; bytes intactos",async()=>{
     await seedStored();
-    const a=await openTab("A");hydrate(a);a.mem={...a.mem,xp:210};
-    const b=await openTab("B");
-    expect([mode(a),mode(b)]).toEqual(["writer","observer"]);
-    expect(b.w.stateWriterStatus().method).toBe("lease");
-    expect(save(b,{...seed,xp:1})).toBe(false);
-    use(b);const request=b.w.requestStateWriter();
-    await settle(20);use(a);a.w.completeStateWriterRelease();
-    expect((await request).mode).toBe("writer");
-    hydrate(b);expect(b.mem.xp).toBe(210);
+    const a=await openTab("A"),b=await openTab("B");
+    expect([mode(a),mode(b)]).toEqual(["readonly","readonly"]);
+    expect(a.w.stateWriterStatus().reason).toBe("no_web_locks");
+    const before=everything();
+    hydrate(a);hydrate(b);
+    expect(a.mem.xp).toBe(100); // a consulta lê o progresso
+    expect(save(a,{...a.mem,xp:150,missionHistory:[{id:"synthetic-A-mission"}]})).toBe(false);
+    use(a);expect(a.i.saveLocalStateDurably({...a.mem,xp:150}).ok).toBe(false);
+    expect(save(b,{...b.mem,productAnalytics:{appOpenCount:2}})).toBe(false);
+    use(a);expect(a.drafts.saveSessionDraft({kind:"mission",betaMode:"internal",sessionId:"synthetic-ro",responses:[]})).toBe(false);
+    use(a);expect(a.r.reserveSessionCompletion("synthetic-ro").status).not.toBe("reserved");
+    await settle(5);
+    expect(everything(),"nenhum byte alterado").toBe(before);
   });
 
-  it("escritor suspenso perde a concessão; ao retomar não grava e guarda uma cópia",async()=>{
+  it("alterações simultâneas em três abas não alteram nada",async()=>{
     await seedStored();
-    const a=await openTab("A");hydrate(a);save(a,{...a.mem,xp:220});
-    const b=await openTab("B");
-    a.suspended=true;
-    use(b);expect((await b.w.requestStateWriter()).mode).toBe("writer");
-    hydrate(b);save(b,{...b.mem,xp:230});
-    a.suspended=false;a.mem={...a.mem,xp:225};
-    use(a);a.doc.dispatchEvent(new Event("visibilitychange"));
-    expect(mode(a)).toBe("conflict");
-    expect(save(a,{...a.mem,xp:226})).toBe(false);
-    expect(stored().xp).toBe(230);
-    expect(JSON.parse(local.getItem(a.w.stateWriterStatus().conflictCopy.key)).state.xp).toBe(225);
+    const tabsRO=[await openTab("A"),await openTab("B"),await openTab("C")];
+    const before=everything();
+    tabsRO.forEach(hydrate);
+    const results=tabsRO.map((t,i)=>save(t,{...t.mem,xp:200+i}));
+    expect(results).toEqual([false,false,false]);
+    await settle(5);
+    expect(everything()).toBe(before);
+    expect(tabsRO.map(mode)).toEqual(["readonly","readonly","readonly"]);
   });
 
-  it("arranque simultâneo: no máximo um escritor confirmado",async()=>{
+  it("uma única aba também fica só leitura (não há forma fiável de provar que está sozinha)",async()=>{
     await seedStored();
-    const a=await openTab("A",{coordinated:false}),b=await openTab("B",{coordinated:false});
-    const start=tab=>{use(tab);return tab.w.startStateWriter({scope:ACCOUNT});};
-    await Promise.all([start(a),start(b)]);
-    expect(a.w.stateWriterStatus().tabId).not.toBe(b.w.stateWriterStatus().tabId);
-    expect([a,b].filter(tab=>mode(tab)==="writer").length).toBe(1);
-  });
-
-  it("sem localStorage nem Web Locks cada aba é isolada e pode gravar no seu armazenamento",async()=>{
-    local.blocked=true;
     const a=await openTab("A");
-    expect(a.w.stateWriterStatus().method).toBe("isolated");
-    expect(mode(a)).toBe("writer");
+    const before=everything();hydrate(a);
+    expect(mode(a)).toBe("readonly");
+    expect(save(a,{...a.mem,xp:300})).toBe(false);
+    expect(everything()).toBe(before);
+  });
+
+  it("Web Locks expostos mas recusados pelo browser: só leitura",async()=>{
+    vi.stubGlobal("navigator",{locks:{request:()=>Promise.reject(new DOMException("synthetic","SecurityError"))}});
+    await seedStored();
+    const a=await openTab("A");
+    expect(mode(a)).toBe("readonly");
+    expect(a.w.stateWriterStatus().reason).toBe("locks_unavailable");
+    expect(save(a,{...seed,xp:5})).toBe(false);
+  });
+
+  it("sem localStorage acessível nem Web Locks: cada aba isolada grava só no seu sessionStorage",async()=>{
+    const descriptor=Object.getOwnPropertyDescriptor(globalThis,"localStorage");
+    const a=await openTab("A");
+    use(a);a.w.resetStateWriterForTests();
+    Object.defineProperty(globalThis,"localStorage",{configurable:true,get(){throw new DOMException("synthetic","SecurityError")}});
+    try{
+      use2(a);
+      const status=await a.w.startStateWriter({scope:ACCOUNT});
+      expect(status.method).toBe("isolated");expect(status.mode).toBe("writer");
+      expect(a.i.guardedSaveLocalState({...seed,xp:7})).toBe(true);
+      expect(local.getItem(STATE_KEY)).toBe(null); // nada no armazenamento partilhado
+      expect(JSON.parse(a.session.getItem(STATE_KEY)).xp).toBe(7);
+    }finally{
+      if(descriptor)Object.defineProperty(globalThis,"localStorage",descriptor);else delete globalThis.localStorage;
+    }
   });
 });
+
+// use() sem voltar a definir localStorage (o teste acima torna-o inacessível).
+function use2(tab){current=tab;vi.stubGlobal("window",tab.win);vi.stubGlobal("document",tab.doc);vi.stubGlobal("sessionStorage",tab.session);}
 
 describe("P1-A · páginas piloto/definições",()=>{
   it("limpeza da telemetria é adiada para o escritor quando a app está aberta",async()=>{

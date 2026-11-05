@@ -11,7 +11,7 @@ import {
 } from "./persistence.js";
 import {browserStores,readStorageRows} from "./browserStorage.js";
 import {safeLocalStorage} from "./safeStorage.js";
-import {stateWriterCoordinated,stateWritesAllowed,confirmStateWriter,reportForeignStateWrite,withExclusiveStateWrite,noteStateWritten,reconcileStateTabCopies} from "./stateWriter.js";
+import {stateWriterCoordinated,stateWritesAllowed,confirmStateWriter,reportForeignStateWrite,withExclusiveStateWrite,reconcileStateTabCopies} from "./stateWriter.js";
 
 export const STATE_INTEGRITY_EVENT="approva:state-integrity-blocked";
 const PILOT_TELEMETRY_FIELDS=["pilotAggregates","pilotItemResults","betaFeedback","betaSessions","betaEvents"];
@@ -95,9 +95,6 @@ function rawGuardedSave(state,storageKey,key){
   if(ok){
     const {rows}=readStorageRows(key);
     trusted.set(key,new Set(rows.map(([,raw])=>raw)));
-    // P1-A sem Web Locks: guardar os bytes escritos numa cópia do separador.
-    const local=safeLocalStorage(),durable=local&&rows.find(([store])=>(store?.source||store)===local);
-    if(durable&&!noteStateWritten(key,durable[1],state))return false;
   }
   return ok;
 }
@@ -140,8 +137,8 @@ export function guardedClearLocalPilotTelemetry(){
 // P1-A: páginas fora da app (piloto/definições) só reescrevem o estado se
 // nenhum separador da app for o escritor. Se houver escritor, este volta a
 // gravar e, com o consentimento já retirado, grava sem telemetria piloto.
-// P1-A: na hidratação, cópias de separadores que não correspondem ao estado
-// guardado passam a cópias de conflito (nunca apagadas) e são assinaladas.
+// P1-A: na hidratação, cópias de separador deixadas pela versão experimental
+// anterior que não correspondem ao estado passam a cópias de conflito e são assinaladas.
 export function reconcileTabCopiesAtHydration(storageKey=STORAGE_KEY){
   const {rows}=readStorageRows(storageKey);
   const local=safeLocalStorage(),durable=local&&rows.find(([store])=>(store?.source||store)===local);

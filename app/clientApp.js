@@ -286,6 +286,8 @@ export default function App(){
   const [hydrationRun,setHydrationRun]=useState(0);
   const legacyChoice=useRef(false);
   const [tabCopyNotice,setTabCopyNotice]=useState(false);
+  // P1-A: sem exclusão fiável entre separadores, só consulta (nada é gravado).
+  const [readOnlyView,setReadOnlyView]=useState(null);
   const stateRef=useRef(s);stateRef.current=s;
   const hydratedRef=useRef(false);hydratedRef.current=hydrated;
 
@@ -317,6 +319,18 @@ export default function App(){
     });
     if(!live)return;
     setWriter(writerStatus);
+    if(writerStatus.mode==="readonly"){
+      // Só leitura: carregar para mostrar, sem migrar, recuperar nem gravar.
+      const read=loadLocalStateStatus(initial,emptyScores,storageKey);
+      let pendingAttempt=false;
+      try{
+        const x=read.state;
+        pendingAttempt=!!(x&&(loadSessionDraftStatus(x.betaMode||"internal").draft||pendingPhysicsChemistryExam()||x.subjectSettings?.portuguese?.miniExamDraft||
+          Object.values(x.subjectProgress||{}).some(p=>p?.lastPosition)));
+      }catch{pendingAttempt=false}
+      setReadOnlyView({state:read.error?null:read.state,error:!!read.error,pendingAttempt});
+      return;
+    }
     if(writerStatus.mode!=="writer")return;
     const loaded=loadLocalStateStatus(initial,emptyScores,storageKey);
     if(loaded.error){setRecoveryStorageKey(storageKey||"a25");setScreen("storageRecoveryError");return}
@@ -539,6 +553,7 @@ export default function App(){
     <button className="secondary" onClick={accountGuard.recheck}>Voltar a verificar a mesma conta</button>
   </Shell>;
 
+  if(writer.mode==="readonly")return <ReadOnlyConsult view={readOnlyView}/>;
   if(writer.mode==="acquiring")return <Shell><Logo/><div className="cloudLoading" data-state-writer="acquiring">A abrir o teu progresso…</div></Shell>;
   if(writer.mode==="observer")return <StateWriterElsewhere writer={writer} onContinue={async()=>{
     const next=await requestStateWriter();setWriter(next);
@@ -2168,8 +2183,35 @@ function StateWriterElsewhere({writer,onContinue}){
     <b>A APProva+ está aberta noutro separador.</b>
     <span>Para não perderes progresso, só um separador guarda o teu estudo de cada vez. Este separador não leu nem alterou nada.</span>
     {writer.reason==="no_answer"&&<span role="alert">O outro separador não respondeu. Volta a ele ou fecha-o e tenta de novo.</span>}
+    {writer.reason==="sync_pending"&&<span role="alert">O progresso do outro separador ainda está a chegar. Não alterámos nada; tenta de novo dentro de instantes.</span>}
   </div>
   <button className="primary" disabled={waiting} onClick={async()=>{setBusy(true);try{await onContinue()}finally{setBusy(false)}}}>{waiting?"A passar para este separador…":"Continuar neste separador"}</button>
+  </Shell>;
+}
+
+// P1-A: este browser não oferece exclusão fiável entre separadores (Web Locks).
+// Falha segura: o aluno consulta o progresso, mas nada é gravado nem iniciado.
+// Texto provisório, a aprovar pelo product owner.
+const READ_ONLY_SUBJECTS={"math-a":"Matemática A","portuguese":"Português","physics-chemistry-a":"Física e Química A"};
+function ReadOnlyConsult({view}){
+  const x=view?.state||null;
+  const count=value=>Array.isArray(value)?value.length:0;
+  const xp=Number.isFinite(Number(x?.xp))?Number(x.xp):0;
+  const subjects=(Array.isArray(x?.selectedSubjectIds)?x.selectedSubjectIds:[]).map(id=>READ_ONLY_SUBJECTS[id]).filter(Boolean);
+  const studied=count(x?.missionHistory)+count(x?.examHistory)+Object.values(x?.subjectProgress||{}).reduce((n,p)=>n+count(p?.sessions),0);
+  return <Shell><Logo/><div className="notice" role="status" data-state-writer="readonly">
+    <b>Este navegador só permite consultar o teu progresso.</b>
+    <span>Para guardar o teu estudo sem risco de perderes progresso, a APProva+ precisa de uma versão mais recente do navegador. Atualiza-o ou abre a APProva+ no Chrome, Edge, Firefox ou Safari atualizados.</span>
+    {view?.pendingAttempt&&<span data-readonly-pending="true">Tens uma tentativa por terminar. Está guardada e vais poder continuá-la num navegador atualizado.</span>}
+  </div>
+  {view===null?<div className="cloudLoading">A abrir o teu progresso…</div>
+    :view.error?<p role="status">Não foi possível ler o progresso guardado neste dispositivo. Nada foi alterado.</p>
+    :<dl className="readOnlySummary" data-readonly-summary="true">
+      <div><dt>XP</dt><dd>{xp}</dd></div>
+      <div><dt>Sessões e avaliações concluídas</dt><dd>{studied}</dd></div>
+      <div><dt>Disciplinas</dt><dd>{subjects.length?subjects.join(", "):"Ainda nenhuma"}</dd></div>
+    </dl>}
+  <button className="primary" onClick={()=>window.location.reload()}>Voltar a verificar</button>
   </Shell>;
 }
 

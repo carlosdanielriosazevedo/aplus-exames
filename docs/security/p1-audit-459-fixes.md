@@ -20,8 +20,9 @@ uma avaliação e grava de forma durável; B, desatualizada, volta a ficar ativa
 | Passagem de controlo cooperativa | O observador pede ("Continuar neste separador"); o escritor grava o estado atual, desmonta o estudo, liberta e recarrega como observador. Se não responder em 8 s, nada é forçado. Pedidos antigos (> 6 s) são ignorados. |
 | Reload | O novo documento espera até 1,5 s pelo lock libertado pelo anterior. |
 | `pageshow` com `persisted` (bfcache) | Recarrega para voltar a arbitrar. |
-| Sem Web Locks | Concessão em `localStorage` (TTL 30 s, batimento 5 s, assentamento 600 ms, ping de presença 400 ms, libertada em `pagehide`). **Não é exclusão**: o `localStorage` do Chromium propaga entre processos de forma assíncrona e dois separadores podem ficar escritores. Garantia efetiva (falha segura): cada gravação do estado guarda também os bytes exatos em `a25-state-tabcopy-v1:<aba>`; se essa cópia falhar, o separador deixa de escrever. Na hidratação seguinte, cópias iguais ao estado guardado são removidas; cópias diferentes passam a cópias de conflito e o aluno vê um aviso. Nenhuma sobrescrita apaga progresso sem cópia nem sem aviso — mas a recuperação dessa cópia ainda não existe (P2). |
-| Sem `localStorage` gravável | Cada aba só grava no seu `sessionStorage`/memória: não há partilha, logo não há sobrescrita. |
+| Sem Web Locks (ou Web Locks recusados) com `localStorage` acessível | **Só consulta** (branch `experimental/p1a-no-weblocks-readonly`). Não existe exclusão fiável entre escritores, por isso nenhum separador escreve: nem estado, nem rascunhos, nem conclusões, e nenhuma avaliação abre. O aluno vê um resumo lido do seu progresso e a indicação de atualizar o navegador. Substitui a concessão em `localStorage` da #460, que era apenas deteção. |
+| Barreira de escrita (com Web Locks) | O Chromium não ordena a concessão do lock em relação à propagação do `localStorage` entre processos. Na passagem de controlo, o escritor anuncia o resumo exato do que gravou antes de libertar; o novo escritor só lê/grava quando a sua vista coincide e fica estável (até 2,5 s); se não convergir, liberta o lock e fica observador (`sync_pending`) sem gravar. Após fecho abrupto (sem anúncio) espera 200 ms de estabilidade. |
+| Sem `localStorage` acessível | Cada aba só grava no seu `sessionStorage`/memória: não há partilha, logo não há sobrescrita. |
 | Defesa em profundidade (todos os modos) | Bytes do estado que este separador não leu nem escreveu (evento `storage` ou verificação antes de gravar em `stateIntegrity.rawGuardedSave`) → bloqueio + cópia `a25-state-conflict-v1:<aba>:<instante>` na área da conta. Cobre separadores de versões anteriores sem lock. Esta verificação é comparação-depois-escrita e por isso **nunca é o mecanismo principal**. |
 | `/piloto`, `/definicoes` | A limpeza local de telemetria só reescreve o estado se nenhum separador da app for escritor; caso contrário pede-lhe que volte a gravar (sem telemetria, porque o consentimento já foi retirado). |
 
@@ -71,6 +72,19 @@ progresso de A sem cópia (`finalXp 100`, nenhuma cópia com 150). Corrigido com
 por separador e a reconciliação na hidratação; o ping de presença reduz a janela.
 Limites que continuam: uma falha do processo entre a gravação do estado e a da cópia
 (mesma tarefa síncrona) não é coberta; o modo concessão grava o estado duas vezes (quota).
+
+## Branch `experimental/p1a-no-weblocks-readonly` (sobre `9f18020`, PR #460 congelada)
+
+Reproduzido em `9f18020` com o modelo de propagação assíncrona (`tests/unit/p1AuditStoragePropagation.test.mjs`):
+sem Web Locks havia dois escritores; **com Web Locks**, na passagem de controlo e após fecho abrupto,
+o novo escritor lia o estado antigo (`expected 100 to be 150`) e sobrescrevia a conclusão de A.
+Corrigido com o modo só de consulta e com a barreira de escrita.
+
+Limite residual (com Web Locks): após um fecho abrupto sem anúncio, se a propagação do último
+`localStorage` do separador terminado demorar mais do que a janela de estabilidade (200 ms) depois
+de outro separador obter o lock, este pode ler o estado antigo. Quando os bytes chegam, a deteção
+de escrita alheia bloqueia-o — mas a gravação que já tiver feito não é desfeita. Exige fecho abrupto
+e atraso de propagação acima de 200 ms; não observado.
 
 ## Provas
 

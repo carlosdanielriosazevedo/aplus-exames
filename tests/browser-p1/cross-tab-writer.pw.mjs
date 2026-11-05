@@ -149,25 +149,29 @@ test.describe("P1-A · um único separador grava o progresso",()=>{
     await context.close();
   });
 
-  test("sem Web Locks: concessão em localStorage com observador e passagem de controlo",async({browser})=>{
+  test("sem Web Locks: só consulta — nenhuma aba grava, nenhum byte muda, nenhuma avaliação abre",async({browser})=>{
     const context=await browser.newContext();
     await context.addInitScript(()=>{try{Object.defineProperty(Navigator.prototype,"locks",{configurable:true,get:()=>undefined})}catch{}});
-    const sid="synthetic-cross-tab-lease";
+    const sid="synthetic-cross-tab-readonly";
     const fixture=mathFixture(sid);
     const a=await context.newPage();
     await seed(a,{[STATE]:fixture.state,[DRAFT]:fixture.draft});
+    const before=await local(a);
     await a.goto("/");
-    await expect(submit(a)).toBeVisible({timeout:30_000});
+    const readonly=page=>page.locator("[data-state-writer='readonly']");
+    await expect(readonly(a)).toBeVisible({timeout:30_000});
+    await expect(a.locator("[data-readonly-summary='true']")).toContainText("100");      // consulta: XP lido
+    await expect(a.locator("[data-readonly-pending='true']")).toBeVisible();             // tentativa por terminar preservada
+    await expect(submit(a)).toHaveCount(0);                                              // nenhuma avaliação abre
     const b=await context.newPage();await b.goto("/");
-    await expect(b.getByText(OBSERVER)).toBeVisible({timeout:20_000});
-    await reactivate(b);
-    await b.getByRole("button",{name:"Continuar neste separador",exact:true}).click();
-    await expect(submit(b)).toBeVisible({timeout:20_000});
-    await expect(a.getByText(OBSERVER)).toBeVisible({timeout:20_000});
-    await submit(b).click();
-    await expect.poll(async()=>completions((await local(b))[STATE],sid),{timeout:20_000}).toBe(1);
-    await reactivate(a);await a.waitForTimeout(800);
-    expect(completions((await local(b))[STATE],sid)).toBe(1);
+    await expect(readonly(b)).toBeVisible({timeout:30_000});
+    await reactivate(a);await reactivate(b);await a.waitForTimeout(1200);
+    await b.reload();await expect(readonly(b)).toBeVisible({timeout:30_000});
+    await b.getByRole("button",{name:"Voltar a verificar",exact:true}).click();
+    await expect(readonly(b)).toBeVisible({timeout:30_000});await b.waitForTimeout(800);
+    const after=await local(a);
+    const strip=stores=>Object.fromEntries(Object.entries(stores).filter(([k])=>!k.includes("auth-epoch")&&!k.includes("writer-signal")));
+    expect(strip(after),"nenhuma gravação sem Web Locks").toEqual(strip(before));
     await context.close();
   });
 });
