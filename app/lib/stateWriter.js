@@ -1,25 +1,34 @@
 // P1-A — Um único separador escreve o progresso de cada área (conta ou global).
 //
-// localStorage não tem compare-and-swap atómico; comparar revisões e depois
-// gravar deixa sempre uma janela em que dois separadores se sobrepõem. Por isso
-// a exclusão é feita fora do armazenamento:
-//
-// 1. Web Locks: o separador que detém o lock exclusivo
+// 1. Exclusão: Web Locks. O separador que detém o lock exclusivo
 //    `approva-state-writer-v1:<área>` é o único escritor. O browser liberta o
-//    lock quando o separador fecha, falha ou recarrega (recuperação após fecho
-//    abrupto). Nunca usamos `steal`: um escritor suspenso não perde o lock sem
-//    saber e não pode gravar depois de outro ter começado.
-// 2. Passagem de controlo cooperativa: o separador que quer escrever pede; o
-//    escritor grava o estado atual, deixa de escrever, liberta o lock e
-//    recarrega como observador. Se não responder, nada é forçado.
-// 3. Sem Web Locks (ou com Web Locks indisponíveis) e com localStorage
-//    partilhado entre separadores, NÃO existe mecanismo fiável de exclusão:
-//    qualquer concessão em localStorage é apenas deteção, porque a propagação
-//    entre processos é assíncrona. Falha segura: modo só de leitura. O
-//    separador pode ler e mostrar o progresso, mas não grava estado, rascunhos
-//    nem conclusões, e não abre avaliações.
-// 4. Sem localStorage acessível, cada separador só tem o seu sessionStorage e a
-//    sua memória: nada é partilhado, logo não há sobrescrita entre separadores.
+//    lock quando o separador fecha, falha ou recarrega. Nunca usamos `steal`.
+//
+// 2. Prova de leitura atual (sem esperas fixas). O lock não está ordenado em
+//    relação à propagação do localStorage entre processos: quem obtém o lock pode
+//    ainda não ver a última escrita do anterior. Mas as alterações do localStorage
+//    de uma mesma origem feitas por um separador chegam aos outros pela ordem em
+//    que foram feitas. Por isso:
+//    - cada gravação do estado leva um carimbo `_writer:{tab,epoch,seq}` dentro
+//      do próprio valor (mesmo setItem, atómico);
+//    - ao deixar de escrever de forma limpa (passagem de controlo, pagehide,
+//      separador escondido) o escritor grava por último um selo final com
+//      {tab,epoch,seq,digest} e não volta a escrever nesse mandato;
+//    - o novo detentor do lock só lê e grava quando vê, para o último carimbo,
+//      o selo final correspondente com o mesmo digest. Ver o selo implica ter
+//      visto todas as escritas anteriores desse separador. Até lá não grava;
+//      reavalia a cada evento `storage`. O tempo só muda a mensagem mostrada.
+//    - registo autoritativo do mandato (IndexedDB, sem cache por processo):
+//      cada escritor regista {tab,epoch} e espera pela confirmação ANTES da sua
+//      primeira gravação. Quem obtém o lock lê o registo e sabe qual mandato
+//      tem de ver selado — mesmo que nenhuma escrita desse mandato lhe tenha
+//      ainda chegado. Cada retoma começa um mandato novo (selos antigos nunca
+//      servem de prova para escritas posteriores).
+//    - sem selo (o separador anterior terminou de forma abrupta) não há prova:
+//      o novo separador não grava, preserva uma cópia de recuperação e só
+//      continua por decisão explícita do aluno (adoptAfterUncleanEnd).
+//
+// 3. Sem Web Locks não existe exclusão fiável: modo só de consulta (nada grava).
 //
 // Em todos os modos, um separador que não é escritor não grava (accountWorkspace.js).
 // Mesmo formato de accountWorkspace.accountStorageKey (sem importar: evita ciclo).
@@ -28,8 +37,9 @@ const accountStorageKey=(key,subject)=>subject?`a25-account-v1:${encodeURICompon
 export const STATE_WRITER_EVENT="approva:state-writer";
 export const STATE_CONFLICT_PREFIX="a25-state-conflict-v1:";
 // Cópias de separador gravadas pela versão experimental anterior (concessão).
-// Já não são criadas; as existentes continuam a ser reconciliadas, nunca apagadas às cegas.
+// Já não são criadas; as existentes continuam a ser reconciliadas.
 export const STATE_TAB_COPY_PREFIX="a25-state-tabcopy-v1:";
+export const STATE_SEAL_KEY="a25-state-writer-seal-v1";
 const LOCK_PREFIX="approva-state-writer-v1:";
 const SIGNAL_KEY="a25-state-writer-signal-v1";
 const CHANNEL="approva-state-writer-v1";
@@ -38,26 +48,51 @@ const WATCHED_STATE_KEYS=["a25","a25-friends-beta"];
 export const STATE_WRITER_TIMING={
   reloadWaitMs:1_500,     // um reload liberta o lock antes de o novo documento pedir
   requestTimeoutMs:8_000, // espera por uma passagem de controlo pedida
-  // Barreira de escrita: o Chromium não ordena a concessão do lock em relação à
-  // propagação do localStorage entre processos. Depois de obter o lock, o novo
-  // escritor espera que a sua vista do estado coincida com a anunciada pelo
-  // escritor anterior e fique estável; só então lê e grava.
-  fenceMessageWaitMs:1_000,
-  settleStepMs:100,
-  settleStableSteps:2,
-  settleMaxMs:2_500
+  holdNoticeMs:3_000      // só para a mensagem: depois disto explica a retenção
 };
 
 const tabId=`writer-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,10)}`;
 let status={mode:"inactive",scope:null,method:null,reason:null,conflictCopy:null};
 let options={flush:()=>true,snapshot:()=>null};
-let releaseLock=null,channel=null,listening=false,starting=null,releaseTimer=null,releaseFence=null;
-const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+let releaseLock=null,channel=null,listening=false,starting=null,releaseTimer=null,holdTimer=null;
+let epoch=null,seq=0,lastStamp=null,hadMandate=false,expectedMandate=undefined;
+
+// ---------------------------------------------------------------- registo do mandato
+const REGISTER_DB="approva-state-writer-v1",REGISTER_STORE="mandates";
+function idbRequest(request){return new Promise((resolve,reject)=>{request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error);});}
+const indexedDbRegister={
+  async open(){
+    const factory=(()=>{try{return globalThis.indexedDB||null}catch{return null}})();
+    if(!factory)throw new Error("indexedDB unavailable");
+    const request=factory.open(REGISTER_DB,1);
+    request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains(REGISTER_STORE))request.result.createObjectStore(REGISTER_STORE);};
+    return idbRequest(request);
+  },
+  async read(key){
+    const db=await this.open();
+    try{return (await idbRequest(db.transaction(REGISTER_STORE,"readonly").objectStore(REGISTER_STORE).get(key)))??null}finally{db.close();}
+  },
+  async write(key,value){
+    const db=await this.open();
+    try{
+      await new Promise((resolve,reject)=>{
+        const tx=db.transaction(REGISTER_STORE,"readwrite");
+        tx.objectStore(REGISTER_STORE).put(value,key);
+        tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error("aborted"));
+      });
+    }finally{db.close();}
+  }
+};
+let mandateRegister=indexedDbRegister;
+// Apenas para testes unitários (registo partilhado e autoritativo simulado).
+export function setMandateRegisterForTests(adapter){mandateRegister=adapter||indexedDbRegister;}
+const registerKey=()=>`mandate:${status.scope||"global"}`;
 
 const hasWindow=()=>typeof window!=="undefined";
 function locks(){try{return hasWindow()&&globalThis.navigator?.locks?.request?globalThis.navigator.locks:null}catch{return null}}
 function rawLocal(){try{return globalThis.localStorage||null}catch{return null}}
 const scopedKey=key=>accountStorageKey(key,status.scope&&status.scope!=="global"?status.scope:null);
+const newEpoch=()=>`e-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,8)}`;
 
 function emit(){
   if(!hasWindow())return;
@@ -72,6 +107,44 @@ export function stateWritesAllowed(){return status.mode==="inactive"||status.mod
 export function stateWriterCoordinated(){return status.mode!=="inactive"}
 export function stateWriterReadOnly(){return status.mode==="readonly"}
 
+// ---------------------------------------------------------------- carimbos e selo
+// Chamado por stateIntegrity imediatamente antes de gravar o estado.
+export function stampStateWrite(state){
+  if(status.mode!=="writer"||!state||typeof state!=="object")return state;
+  seq+=1;lastStamp={tab:tabId,epoch,seq};
+  return {...state,_writer:lastStamp};
+}
+function viewOfState(store=rawLocal()){
+  if(!store)return "[]";
+  try{return JSON.stringify(WATCHED_STATE_KEYS.map(key=>store.getItem(scopedKey(key))))}catch{return null}
+}
+export function stateDigest(view=viewOfState()){
+  if(view===null)return null;
+  let h=2166136261;for(let i=0;i<view.length;i++){h^=view.charCodeAt(i);h=Math.imul(h,16777619);}
+  return `sd1-${(h>>>0).toString(16)}-${view.length}`;
+}
+function readJson(raw){try{return JSON.parse(raw)}catch{return undefined}}
+// Escreve o selo final deste mandato. Depois disto este separador não grava
+// mais nada até voltar a obter (e provar) o lock.
+function writeSeal(stamp=lastStamp){
+  const store=rawLocal();if(!store||!stamp)return false;
+  const seal={tab:stamp.tab,epoch:stamp.epoch,seq:stamp.seq,digest:stateDigest(viewOfState(store)),final:true,at:Date.now()};
+  try{store.setItem(scopedKey(STATE_SEAL_KEY),JSON.stringify(seal));return true}catch{return false}
+}
+// "proven": a vista local inclui todas as gravações do último mandato
+// registado (o selo final desse mandato está visível e coincide com a vista).
+export function evaluateStateView(expected=expectedMandate){
+  const store=rawLocal();if(!store)return {verdict:"proven"};
+  if(expected===undefined)return {verdict:"pending",reason:"register_unread"};
+  if(expected===null)return {verdict:"proven"}; // nunca houve escritor coordenado
+  if(expected.tab===tabId&&lastStamp&&expected.epoch===lastStamp.epoch)return {verdict:"proven",own:true};
+  const view=viewOfState(store);if(view===null)return {verdict:"pending",reason:"unreadable_view"};
+  const seal=readJson(store.getItem(scopedKey(STATE_SEAL_KEY)))||null;
+  if(!seal||seal.tab!==expected.tab||seal.epoch!==expected.epoch||seal.final!==true)return {verdict:"pending",reason:"no_seal"};
+  if(seal.digest!==stateDigest(view))return {verdict:"pending",reason:"digest_mismatch"};
+  return {verdict:"proven"};
+}
+
 // ---------------------------------------------------------------- mensagens
 function post(message){
   const body={...message,scope:status.scope,from:tabId,at:Date.now(),nonce:Math.random().toString(36).slice(2)};
@@ -83,15 +156,13 @@ function onMessage(message){
   // Um pedido que o requerente já está prestes a abandonar é ignorado: assim o
   // escritor nunca liberta quando já ninguém está à espera.
   if(Date.now()-Number(message.at||0)>STATE_WRITER_TIMING.requestTimeoutMs*0.75)return;
-  if(message.type==="handoff-released"&&typeof message.digest==="string")releaseFence={digest:message.digest,at:Date.now()};
-  else if(message.type==="handoff-request")handleHandoffRequest();
+  if(message.type==="handoff-request")handleHandoffRequest();
   else if(message.type==="flush-request"&&status.mode==="writer"){try{options.flush()}catch{}}
 }
 
 // ---------------------------------------------------------------- Web Locks
 function lockName(){return LOCK_PREFIX+encodeURIComponent(status.scope||"global")}
-// Devolve true (lock obtido), false (ocupado/expirado) ou "unavailable"
-// (o browser expõe a API mas recusa-a, p. ex. contexto sem permissão).
+// true (obtido), false (ocupado/expirado) ou "unavailable" (API recusada).
 function lockAcquire(wait){
   const api=locks();
   if(!api)return Promise.resolve("unavailable");
@@ -107,7 +178,7 @@ function lockAcquire(wait){
     try{
       pending=api.request(lockName(),request,lock=>{
         if(!lock){done(false);return undefined;}
-        if(settled){return undefined;} // pedido expirou entretanto: devolver já
+        if(settled){return undefined;}
         done(true);
         return new Promise(release=>{releaseLock=release;});
       });
@@ -115,47 +186,62 @@ function lockAcquire(wait){
     Promise.resolve(pending).catch(error=>done(error?.name==="AbortError"?false:"unavailable"));
   });
 }
+function releaseHeldLock(){const release=releaseLock;releaseLock=null;try{release?.()}catch{}}
 
-// ---------------------------------------------------------------- barreira
-function viewOfState(){
-  const store=rawLocal();if(!store)return "[]";
-  try{return JSON.stringify(WATCHED_STATE_KEYS.map(key=>store.getItem(scopedKey(key))))}catch{return null}
-}
-export function stateDigest(view=viewOfState()){
-  if(view===null)return null;
-  let h=2166136261;for(let i=0;i<view.length;i++){h^=view.charCodeAt(i);h=Math.imul(h,16777619);}
-  return `sd1-${(h>>>0).toString(16)}-${view.length}`;
-}
-// true: a vista local do estado está alinhada (pronta para ler/gravar).
-async function settleAfterAcquire({expectFence=false}={}){
-  const T=STATE_WRITER_TIMING,deadline=Date.now()+T.settleMaxMs;
-  if(expectFence){
-    const until=Date.now()+T.fenceMessageWaitMs;
-    while(!releaseFence&&Date.now()<until)await sleep(T.settleStepMs);
+// Lock obtido: ler o registo autoritativo e provar a leitura antes de escrever.
+async function verifyMandate(){
+  if(holdTimer){clearTimeout(holdTimer);holdTimer=null;}
+  if(status.mode!=="verifying"){
+    set({mode:"verifying",reason:"waiting_proof"});
+    try{expectedMandate=await mandateRegister.read(registerKey());}
+    catch{
+      // Sem registo autoritativo não há prova possível: só consulta.
+      releaseHeldLock();set({mode:"readonly",reason:"register_unavailable"});return false;
+    }
+    if(status.mode!=="verifying")return false;
   }
-  const fence=releaseFence&&Date.now()-releaseFence.at<T.settleMaxMs+T.requestTimeoutMs?releaseFence.digest:null;
-  let previous=viewOfState(),stable=0;
-  while(Date.now()<deadline){
-    await sleep(T.settleStepMs);
-    const current=viewOfState();
-    stable=current!==null&&current===previous?stable+1:0;previous=current;
-    if(stable>=T.settleStableSteps&&(!fence||stateDigest(current)===fence)){releaseFence=null;return true;}
-  }
+  const result=evaluateStateView();
+  if(result.verdict==="proven"){await startMandate();return status.mode==="writer";}
+  holdTimer=setTimeout(()=>{if(status.mode==="verifying")set({reason:"recovery_hold"});},STATE_WRITER_TIMING.holdNoticeMs);
   return false;
 }
-async function becomeWriter(options={}){
-  if(await settleAfterAcquire(options)){set({mode:"writer",reason:null});return true;}
-  // A vista não convergiu: nunca ler/gravar sobre bytes possivelmente antigos.
-  const release=releaseLock;releaseLock=null;try{release?.()}catch{}
-  set({mode:"observer",reason:"sync_pending"});
-  return false;
+async function startMandate(){
+  if(holdTimer){clearTimeout(holdTimer);holdTimer=null;}
+  // Este documento já escreveu e o último mandato registado não é o seu:
+  // a memória está desatualizada. Recarregar em vez de gravar o que tem.
+  const ownLast=expectedMandate&&lastStamp&&expectedMandate.tab===tabId&&expectedMandate.epoch===lastStamp.epoch;
+  if(hadMandate&&!ownLast){
+    releaseHeldLock();set({mode:"released",reason:"stale_memory"});
+    try{window.location.reload()}catch{}
+    return;
+  }
+  // Mandato novo, registado e confirmado antes da primeira gravação.
+  const next=newEpoch();
+  try{await mandateRegister.write(registerKey(),{tab:tabId,epoch:next,at:Date.now()});}
+  catch{releaseHeldLock();set({mode:"readonly",reason:"register_unavailable"});return;}
+  if(status.mode!=="verifying")return;
+  epoch=next;seq=0;lastStamp={tab:tabId,epoch,seq:0};expectedMandate={tab:tabId,epoch};
+  hadMandate=true;
+  set({mode:"writer",reason:null});
+}
+
+// Decisão explícita do aluno depois de um fim abrupto do separador anterior.
+// Não há prova de que nenhuma escrita está ainda a caminho: antes de continuar
+// guarda-se uma cópia durável dos bytes atuais; qualquer escrita tardia que
+// chegue depois é detetada, este separador para e os bytes recebidos são guardados.
+export function adoptAfterUncleanEnd(){
+  if(status.mode!=="verifying")return stateWriterStatus();
+  const copy=preserveRaw("unclean_end_adoption",viewOfState());
+  if(!copy){set({reason:"recovery_hold",conflictCopy:null});return stateWriterStatus();}
+  set({conflictCopy:copy});
+  void startMandate();
+  return stateWriterStatus();
 }
 
 // ---------------------------------------------------------------- conflito
-function preserveConflictCopy(state){
-  if(!state||typeof state!=="object")return null;
-  const key=scopedKey(`${STATE_CONFLICT_PREFIX}${tabId}:${Date.now()}`);
-  let raw;try{raw=JSON.stringify({format:"aplus-state-conflict-copy-v1",tab:tabId,at:Date.now(),reason:status.reason,state})}catch{return null}
+function preserveRaw(reason,payload){
+  const key=scopedKey(`${STATE_CONFLICT_PREFIX}${tabId}:${Date.now()}:${Math.random().toString(36).slice(2,6)}`);
+  let raw;try{raw=JSON.stringify({format:"aplus-state-conflict-copy-v1",tab:tabId,at:Date.now(),reason,...payload})}catch{return null}
   for(const store of [rawLocal(),(()=>{try{return globalThis.sessionStorage}catch{return null}})()])try{
     if(!store)continue;
     store.setItem(key,raw);
@@ -163,9 +249,12 @@ function preserveConflictCopy(state){
   }catch{}
   return null;
 }
-function lose(reason,state=null){
+function lose(reason,state=null,foreign=null){
   if(status.mode==="conflict")return;
-  const copy=preserveConflictCopy(state||safeSnapshot());
+  // Guardar o que este separador tinha e, se conhecidos, os bytes alheios recebidos.
+  const copy=preserveRaw(reason,{state:state||safeSnapshot()});
+  if(foreign)preserveRaw(`${reason}:received`,{key:foreign.key,raw:foreign.raw});
+  releaseHeldLock();
   set({mode:"conflict",reason,conflictCopy:copy});
 }
 function safeSnapshot(){try{return options.snapshot()}catch{return null}}
@@ -201,15 +290,30 @@ export function reportForeignStateWrite(state,reason="foreign_write"){
 function onStorage(event){
   if(!event||typeof event.key!=="string")return;
   if(event.key===scopedKey(SIGNAL_KEY)){try{onMessage(JSON.parse(event.newValue||"null"))}catch{}return;}
+  if(status.mode==="verifying"){
+    if(event.key===scopedKey(STATE_SEAL_KEY)||WATCHED_STATE_KEYS.some(key=>event.key===scopedKey(key)))void verifyMandate();
+    return;
+  }
   if(status.mode!=="writer")return;
-  if(WATCHED_STATE_KEYS.some(key=>event.key===scopedKey(key)))lose("foreign_write");
+  if(WATCHED_STATE_KEYS.some(key=>event.key===scopedKey(key)))lose("foreign_write",null,{key:event.key,raw:event.newValue});
 }
-function onVisible(){
-  if(document.visibilityState==="visible"&&status.mode==="observer")void tryBecomeWriter({quiet:true});
+// Separador escondido (troca de separador/app, antes de descarte no telemóvel):
+// selar e libertar. Ao voltar, o lock é pedido de novo e a leitura provada.
+function onVisibility(){
+  if(document.visibilityState==="hidden"){pauseMandate();return;}
+  onResume();
+}
+function pauseMandate(){
+  if(status.mode==="writer"){writeSeal();releaseHeldLock();set({mode:"paused",reason:"hidden"});}
+  else if(status.mode==="verifying"){if(holdTimer){clearTimeout(holdTimer);holdTimer=null;}releaseHeldLock();expectedMandate=undefined;set({mode:"observer",reason:"hidden"});}
+}
+function onResume(){if(document.visibilityState!=="hidden"&&(status.mode==="paused"||status.mode==="observer"))void tryBecomeWriter({quiet:true});}
+function onPageHide(){
+  if(status.mode==="writer"){writeSeal();set({mode:"released",reason:"pagehide"});}
+  releaseHeldLock();
 }
 function onPageShow(event){
-  // Um documento restaurado da cache de navegação não volta a disputar o lock
-  // sozinho: recarregar repõe a arbitragem.
+  // Documento restaurado da cache de navegação: recarregar repõe a arbitragem.
   if(event?.persisted&&status.mode!=="inactive")try{window.location.reload()}catch{}
 }
 function listen(){
@@ -218,7 +322,10 @@ function listen(){
   try{if(typeof BroadcastChannel!=="undefined"){channel=new BroadcastChannel(CHANNEL);channel.onmessage=event=>onMessage(event.data);}}catch{channel=null}
   window.addEventListener("storage",onStorage);
   window.addEventListener("pageshow",onPageShow);
-  document.addEventListener("visibilitychange",onVisible);
+  window.addEventListener("pagehide",onPageHide);
+  document.addEventListener("visibilitychange",onVisibility);
+  document.addEventListener("freeze",pauseMandate);
+  document.addEventListener("resume",onResume);
 }
 
 // ---------------------------------------------------------------- ciclo de vida
@@ -228,8 +335,8 @@ async function acquire({initial}){
     const result=await lockAcquire(initial?STATE_WRITER_TIMING.reloadWaitMs:0);
     if(result!=="unavailable")return result;
   }
-  // Sem localStorage acessível nada é partilhado entre separadores.
-  if(!rawLocal()){set({method:"isolated"});return true;}
+  // Sem Web Locks não há exclusão fiável, nem com localStorage nem só com
+  // sessionStorage (este não é gravação durável): só consulta.
   set({method:"none"});
   return "readonly";
 }
@@ -239,13 +346,12 @@ export function startStateWriter({scope="global",flush,snapshot}={}){
   if(typeof snapshot==="function")options.snapshot=snapshot;
   if(!hasWindow())return Promise.resolve(stateWriterStatus());
   if(status.scope&&status.scope!==scope)return Promise.resolve(stateWriterStatus());
-  if(["writer","observer","conflict","releasing","readonly"].includes(status.mode))return Promise.resolve(stateWriterStatus());
+  if(["writer","observer","conflict","releasing","readonly","verifying","paused"].includes(status.mode))return Promise.resolve(stateWriterStatus());
   if(starting)return starting;
   status={...status,scope,mode:"acquiring",reason:null};
   listen();emit();
   starting=acquire({initial:true}).then(async result=>{
-    if(result===true&&status.method==="locks")await becomeWriter();
-    else if(result===true)set({mode:"writer",reason:null});
+    if(result===true){expectedMandate=undefined;await verifyMandate();}
     else if(result==="readonly")set({mode:"readonly",reason:locks()?"locks_unavailable":"no_web_locks"});
     else set({mode:"observer",reason:"other_tab"});
     starting=null;
@@ -255,23 +361,29 @@ export function startStateWriter({scope="global",flush,snapshot}={}){
 }
 
 async function tryBecomeWriter({quiet=false}={}){
-  if(status.mode!=="observer")return stateWriterStatus();
-  const result=await lockAcquire(0);
-  if(result===true)await becomeWriter();
-  else if(!quiet)set({reason:"other_tab"});
+  if(status.mode!=="observer"&&status.mode!=="paused")return stateWriterStatus();
+  // Ao voltar a ficar visível, o lock acabado de libertar (por este ou por
+  // outro separador escondido) pode ainda não estar disponível: esperar um pouco.
+  const result=await lockAcquire(status.mode==="paused"||status.reason==="hidden"?STATE_WRITER_TIMING.reloadWaitMs:0);
+  if(result===true){expectedMandate=undefined;await verifyMandate();}
+  else{
+    if(status.mode==="paused")set({mode:"observer",reason:"other_tab"});
+    else if(!quiet)set({reason:"other_tab"});
+  }
   return stateWriterStatus();
 }
 
 // Ação explícita do aluno no separador observador: "Continuar neste separador".
 export async function requestStateWriter(){
-  if(status.mode!=="observer")return stateWriterStatus();
+  if(status.mode==="verifying"){await verifyMandate();return stateWriterStatus();}
+  if(status.mode!=="observer"&&status.mode!=="paused")return stateWriterStatus();
   const immediate=await tryBecomeWriter({quiet:true});
-  if(immediate.mode==="writer")return immediate;
+  if(immediate.mode==="writer"||immediate.mode==="verifying")return immediate;
   set({reason:"waiting"});
   post({type:"handoff-request"});
   const result=await lockAcquire(STATE_WRITER_TIMING.requestTimeoutMs);
   if(status.mode!=="observer")return stateWriterStatus();
-  if(result===true)await becomeWriter({expectFence:true});
+  if(result===true){expectedMandate=undefined;await verifyMandate();}
   else set({reason:"no_answer"});
   return stateWriterStatus();
 }
@@ -289,10 +401,9 @@ function handleHandoffRequest(){
 export function completeStateWriterRelease(){
   if(status.mode!=="releasing")return;
   if(releaseTimer){clearTimeout(releaseTimer);releaseTimer=null;}
-  // Anunciar exatamente o que este separador gravou por último, antes de libertar.
-  post({type:"handoff-released",digest:stateDigest()});
-  const release=releaseLock;releaseLock=null;
-  try{release?.()}catch{}
+  writeSeal(); // último: depois do flush e antes de libertar
+  post({type:"handoff-released"});
+  releaseHeldLock();
   set({mode:"released"});
   try{window.location.reload()}catch{}
 }
@@ -300,32 +411,41 @@ export function completeStateWriterRelease(){
 // Outras páginas (piloto/definições) que precisam de alterar o estado só o
 // fazem se nenhum separador da app for escritor; caso contrário pedem ao
 // escritor que volte a gravar (aplica, por exemplo, a retirada de telemetria).
-// Sem Web Locks nenhum separador da app escreve (só leitura), por isso a
-// página pode aplicar a limpeza, que só remove telemetria.
+// Ao escrever com o lock, voltam a selar o valor para o próximo escritor o poder provar.
 export async function withExclusiveStateWrite(scope,write){
   if(!hasWindow())return {ok:false,deferred:false};
   const previous=status.scope;status.scope=scope||"global";
   try{
     const api=locks();
-    if(api){
-      let result={ok:false,deferred:true};
-      try{
-        await api.request(lockName(),{mode:"exclusive",ifAvailable:true},lock=>{
-          if(lock)result={ok:true,deferred:false,value:write()};
-        });
-      }catch{return {ok:true,deferred:false,value:write()};}
-      if(result.deferred)post({type:"flush-request"});
-      return result;
-    }
-    return {ok:true,deferred:false,value:write()};
+    if(!api)return {ok:true,deferred:false,value:write()}; // sem Web Locks a app só consulta
+    let result={ok:false,deferred:true};
+    try{
+      await api.request(lockName(),{mode:"exclusive",ifAvailable:true},async lock=>{
+        if(!lock)return;
+        // Com o lock: só escrever se a vista estiver provada para o último mandato;
+        // depois de escrever, voltar a selar esse mandato com o novo digest.
+        let mandate=null;
+        try{mandate=await mandateRegister.read(registerKey());}catch{result={ok:false,deferred:true};return;}
+        if(evaluateStateView(mandate).verdict!=="proven"){result={ok:false,deferred:true};return;}
+        const value=write();
+        if(mandate){
+          const store=rawLocal(),stamp=store&&WATCHED_STATE_KEYS.map(key=>readJson(store.getItem(scopedKey(key)))?._writer).find(w=>w&&w.tab===mandate.tab&&w.epoch===mandate.epoch);
+          writeSeal({tab:mandate.tab,epoch:mandate.epoch,seq:stamp?.seq||0});
+        }
+        result={ok:true,deferred:false,value};
+      });
+    }catch{return {ok:true,deferred:false,value:write()};}
+    if(result.deferred)post({type:"flush-request"});
+    return result;
   }finally{if(status.mode==="inactive")status.scope=previous;}
 }
 
 // Apenas para testes unitários.
 export function resetStateWriterForTests(){
-  try{releaseLock?.()}catch{}
-  releaseLock=null;starting=null;
+  releaseHeldLock();starting=null;
   if(releaseTimer){clearTimeout(releaseTimer);releaseTimer=null;}
+  if(holdTimer){clearTimeout(holdTimer);holdTimer=null;}
   status={mode:"inactive",scope:null,method:null,reason:null,conflictCopy:null};
   options={flush:()=>true,snapshot:()=>null};
+  epoch=null;seq=0;lastStamp=null;hadMandate=false;expectedMandate=undefined;
 }

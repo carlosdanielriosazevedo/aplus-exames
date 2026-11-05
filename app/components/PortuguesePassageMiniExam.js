@@ -35,7 +35,7 @@ function formatRemainingTime(totalSeconds){
   return [hours,minutes,seconds].map(value=>String(value).padStart(2,"0")).join(":");
 }
 
-export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialDraft=null,onDraftChange=null,onExit=null,onComplete=null}){
+export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialDraft=null,onDraftChange=null,onExit=null,onComplete=null,persistWritingMemory=true}){
   const [index,setIndex]=useState(()=>initialDraft?.index||0);
   const [answers,setAnswers]=useState(()=>initialDraft?.answers||{});
   const [review,setReview]=useState(()=>!!initialDraft?.review);
@@ -123,7 +123,8 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
 
   const rememberAssessment=(row,assessment)=>setWritingMemory(current=>{
     const next=recordPortugueseWritingMemory(current,{attemptId,item:row,assessment});
-    savePortugueseWritingMemory(next);
+    // Sem coordenação de escritor (protótipo público), não gravar no dispositivo.
+    if(persistWritingMemory)savePortugueseWritingMemory(next);
     return next;
   });
   const setAnswer=value=>setAnswers(current=>({...current,[item.id]:value}));

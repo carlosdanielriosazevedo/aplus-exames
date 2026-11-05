@@ -67,8 +67,8 @@ import {migrateCloudSync} from "./lib/cloudReliability";
 import {openVerifiedAccount,newAccountState,accountContextCurrent} from "./lib/cloudAccountSession.js";
 import {downloadOwnedState} from "./lib/cloudRecovery.js";
 import {useAccountWorkspaceGuard} from "./lib/useAccountWorkspaceGuard.js";
-import {selectAccountWorkspace,workspaceAccountId,legacyWorkspacePresent} from "./lib/accountWorkspace.js";
-import {startStateWriter,requestStateWriter,completeStateWriterRelease,stateWriterStatus,STATE_WRITER_EVENT} from "./lib/stateWriter.js";
+import {selectAccountWorkspace,workspaceAccountId,legacyWorkspacePresent,accountStorageKey} from "./lib/accountWorkspace.js";
+import {startStateWriter,requestStateWriter,completeStateWriterRelease,stateWriterStatus,adoptAfterUncleanEnd,STATE_WRITER_EVENT} from "./lib/stateWriter.js";
 import {
   TESTER_SEGMENTS,PUBLIC_ENTRY_SEGMENTS,friendsBetaRequested,activateFriendsBeta,markFriendsBetaConsent,
   isFriendsBeta,friendsBetaReport,testerSegmentInfo,currentTesterSegment,
@@ -322,11 +322,19 @@ export default function App(){
     if(writerStatus.mode==="readonly"){
       // Só leitura: carregar para mostrar, sem migrar, recuperar nem gravar.
       const read=loadLocalStateStatus(initial,emptyScores,storageKey);
+      // Só se promete uma tentativa guardada quando existe em armazenamento
+      // durável (localStorage). sessionStorage/memória não contam.
       let pendingAttempt=false;
       try{
-        const x=read.state;
-        pendingAttempt=!!(x&&(loadSessionDraftStatus(x.betaMode||"internal").draft||pendingPhysicsChemistryExam()||x.subjectSettings?.portuguese?.miniExamDraft||
-          Object.values(x.subjectProgress||{}).some(p=>p?.lastPosition)));
+        const durable=globalThis.localStorage;
+        const owner=workspaceAccountId();
+        const raw=key=>durable?.getItem(accountStorageKey(key,owner))??null;
+        const parsed=value=>{try{return JSON.parse(value)}catch{return null}};
+        const durableState=parsed(raw(storageKey||"a25"));
+        pendingAttempt=!!(raw("a25-active-session-v1")||raw("a25-friends-active-session-v1")||
+          ["fqa-mini-1","fqa-mini-2","fqa-full-715"].some(id=>raw(`applus:fqa-exam-draft:v1:${id}`))||
+          durableState?.subjectSettings?.portuguese?.miniExamDraft||
+          Object.values(durableState?.subjectProgress||{}).some(p=>p?.lastPosition));
       }catch{pendingAttempt=false}
       setReadOnlyView({state:read.error?null:read.state,error:!!read.error,pendingAttempt});
       return;
@@ -445,10 +453,19 @@ export default function App(){
 
   useEffect(()=>{
     if(typeof window==="undefined")return;
+    let previous=stateWriterStatus().mode;
     const onWriter=event=>{
       const next=event.detail||stateWriterStatus();
       setWriter(next);
-      if(next.mode!=="writer")setHydrated(false);
+      if(next.mode==="writer"){
+        // Promoção (aba voltou a ficar visível, passagem, recuperação): hidratar;
+        // retoma do próprio mandato: gravar o que ficou em memória enquanto escondida.
+        if(!hydratedRef.current)setHydrationRun(n=>n+1);
+        else if(previous==="paused"||previous==="verifying")saveLocalState(stateRef.current);
+      }else if(!["paused","verifying"].includes(next.mode)||!hydratedRef.current){
+        if(next.mode!=="paused")setHydrated(false);
+      }
+      previous=next.mode;
     };
     window.addEventListener(STATE_WRITER_EVENT,onWriter);
     return ()=>window.removeEventListener(STATE_WRITER_EVENT,onWriter);
@@ -554,6 +571,7 @@ export default function App(){
   </Shell>;
 
   if(writer.mode==="readonly")return <ReadOnlyConsult view={readOnlyView}/>;
+  if(writer.mode==="verifying"&&(writer.reason==="recovery_hold"||!hydrated))return <StateWriterVerifying writer={writer} onRetry={async()=>{setWriter(await requestStateWriter())}} onAdopt={()=>setWriter(adoptAfterUncleanEnd())}/>;
   if(writer.mode==="acquiring")return <Shell><Logo/><div className="cloudLoading" data-state-writer="acquiring">A abrir o teu progresso…</div></Shell>;
   if(writer.mode==="observer")return <StateWriterElsewhere writer={writer} onContinue={async()=>{
     const next=await requestStateWriter();setWriter(next);
@@ -2202,7 +2220,7 @@ function ReadOnlyConsult({view}){
   return <Shell><Logo/><div className="notice" role="status" data-state-writer="readonly">
     <b>Este navegador só permite consultar o teu progresso.</b>
     <span>Para guardar o teu estudo sem risco de perderes progresso, a APProva+ precisa de uma versão mais recente do navegador. Atualiza-o ou abre a APProva+ no Chrome, Edge, Firefox ou Safari atualizados.</span>
-    {view?.pendingAttempt&&<span data-readonly-pending="true">Tens uma tentativa por terminar. Está guardada e vais poder continuá-la num navegador atualizado.</span>}
+    {view?.pendingAttempt&&<span data-readonly-pending="true">Há uma tentativa por terminar guardada neste dispositivo. Para a continuares, abre a APProva+ num navegador atualizado neste mesmo dispositivo.</span>}
   </div>
   {view===null?<div className="cloudLoading">A abrir o teu progresso…</div>
     :view.error?<p role="status">Não foi possível ler o progresso guardado neste dispositivo. Nada foi alterado.</p>
@@ -2212,6 +2230,23 @@ function ReadOnlyConsult({view}){
       <div><dt>Disciplinas</dt><dd>{subjects.length?subjects.join(", "):"Ainda nenhuma"}</dd></div>
     </dl>}
   <button className="primary" onClick={()=>window.location.reload()}>Voltar a verificar</button>
+  </Shell>;
+}
+
+// P1-A: este separador já tem o lock mas ainda não consegue provar que vê a
+// última gravação do separador anterior. Nada é lido para escrita nem gravado.
+function StateWriterVerifying({writer,onRetry,onAdopt}){
+  const [confirming,setConfirming]=useState(false);
+  if(writer.reason!=="recovery_hold")return <Shell><Logo/><div className="cloudLoading" role="status" data-state-writer="verifying">A confirmar o teu progresso…</div></Shell>;
+  return <Shell><Logo/><div className="notice warning" role="alert" data-state-writer="recovery-hold">
+    <b>A APProva+ fechou de forma inesperada noutro separador.</b>
+    <span>Para não arriscar o teu progresso, este separador ainda não guarda nada. Se a outra janela ainda estiver aberta, volta a ela.</span>
+    {confirming&&<span data-recovery-confirm="true">Vamos guardar primeiro uma cópia do progresso deste dispositivo. Se ainda chegar alguma gravação do separador que fechou, este separador para e guarda-a também.</span>}
+  </div>
+  <button className="primary" onClick={onRetry}>Verificar de novo</button>
+  {confirming
+    ?<button className="secondary" onClick={onAdopt}>Guardar cópia e continuar aqui</button>
+    :<button className="secondary" onClick={()=>setConfirming(true)}>Continuar neste separador</button>}
   </Shell>;
 }
 

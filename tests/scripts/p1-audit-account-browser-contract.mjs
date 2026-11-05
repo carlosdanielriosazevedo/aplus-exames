@@ -85,60 +85,70 @@ const LEGACY_PROTOTYPE_KEY="applus:portuguese-prototype-draft:v1";
 try{
   // ------------------------------------------------------------------ P1-B
   const ctx=await browser.newContext();
-  let draftA=null;
-  await scenario("[P1-B] A grava respostas do protótipo só na área de A",async()=>{
+  const answersEverywhere=(stores,text)=>Object.keys(stores).filter(k=>stores[k].includes(text));
+  await scenario("[P1-B] A responde no protótipo: nada é gravado em nenhuma chave (persistência bloqueada)",async()=>{
     await signIn(ctx,"A");
     const a=await open(ctx,"prototype-A");
+    const before=await dump(a);
     await a.evaluate(()=>mountPrototype());
+    await a.locator("[data-prototype-persistence='blocked']").waitFor({timeout:20_000});
     await typeFirstOpenAnswer(a,ANSWER_A);
-    const stores=await dump(a);
-    const keys=keyWith(stores,ANSWER_A);
-    assert.deepEqual(keys,["a25-account-v1:A:applus:portuguese-prototype-draft:v2"],"chaves com a resposta de A: "+JSON.stringify(keys));
-    draftA=stores[keys[0]];
+    const after=await dump(a);
+    assert.deepEqual(answersEverywhere(after,ANSWER_A),[],"resposta de A gravada");
+    for(const [key,value] of Object.entries(before))if(!key.includes("auth-epoch"))assert.equal(after[key],value,"alterado: "+key);
     await a.evaluate(()=>probe.cloud.cloudSignOut());await a.close();
   });
-  await scenario("[P1-B] B no mesmo dispositivo não vê nem herda as respostas de A",async()=>{
+  await scenario("[P1-B] B no mesmo dispositivo não vê as respostas de A",async()=>{
     await signIn(ctx,"B");
     const b=await open(ctx,"prototype-B");
-    const before=await dump(b);
     await b.evaluate(()=>mountPrototype());
     await b.locator(".ptx-question-nav, textarea, .ptx-options").first().waitFor({timeout:20_000});
     await b.waitForTimeout(500);
     assert.ok(!(await visibleText(b)).includes(ANSWER_A),"resposta de A visível para B");
-    await typeFirstOpenAnswer(b,ANSWER_B);
-    const after=await dump(b);
-    assert.deepEqual(keyWith(after,ANSWER_B),["a25-account-v1:B:applus:portuguese-prototype-draft:v2"]);
-    for(const [key,value] of Object.entries(before))if(!key.includes("auth-epoch"))assert.equal(after[key],value,"B alterou "+key);
     await b.evaluate(()=>probe.cloud.cloudSignOut());await b.close();
   });
-  await scenario("[P1-B] tentativa global antiga (sem dono) nunca é aberta e fica intacta",async()=>{
-    assert.ok(draftA,"pré-condição: rascunho de A");
-    const legacy=draftA.split(ANSWER_A).join(ANSWER_LEGACY);
+  await scenario("[P1-B] mesma conta em dois separadores: nenhum sobrescreve o outro (nada é gravado)",async()=>{
+    await signIn(ctx,"A");
+    const one=await open(ctx,"prototype-A-1"),two=await open(ctx,"prototype-A-2");
+    const before=await dump(one);
+    await one.evaluate(()=>mountPrototype());await two.evaluate(()=>mountPrototype());
+    await typeFirstOpenAnswer(one,"RESPOSTA-SINTETICA-SEPARADOR-1");
+    await typeFirstOpenAnswer(two,"RESPOSTA-SINTETICA-SEPARADOR-2");
+    const after=await dump(one);
+    assert.deepEqual(answersEverywhere(after,"RESPOSTA-SINTETICA-SEPARADOR"),[]);
+    for(const [key,value] of Object.entries(before))if(!key.includes("auth-epoch"))assert.equal(after[key],value,"alterado: "+key);
+    assert.ok((await visibleText(one)).includes("SEPARADOR-1")&&!(await visibleText(one)).includes("SEPARADOR-2"));
+    await one.close();await two.close();
+  });
+  await scenario("[P1-B] tentativas já guardadas (por conta e globais) nunca são abertas e ficam intactas",async()=>{
+    const ownSaved=JSON.stringify({version:2,examId:"mini-1",attemptId:"synthetic-own",index:0,answers:{q:ANSWER_A},startedAt:1,updatedAt:1});
+    const legacy=JSON.stringify({version:2,examId:"mini-1",attemptId:"synthetic-legacy",index:0,answers:{q:ANSWER_LEGACY},startedAt:1,updatedAt:1});
     for(const id of ["A","B"]){
       await signIn(ctx,id);
       const page=await open(ctx,"prototype-legacy-"+id);
-      await page.evaluate(([k,v])=>{if(localStorage.getItem(k)===null)localStorage.setItem(k,v)},[LEGACY_PROTOTYPE_KEY,legacy]);
+      await page.evaluate(([k1,v1,k2,v2])=>{localStorage.setItem(k1,v1);localStorage.setItem(k2,v2);},[LEGACY_PROTOTYPE_KEY,legacy,"a25-account-v1:A:applus:portuguese-prototype-draft:v2",ownSaved]);
       await page.evaluate(()=>mountPrototype());
       await page.locator("[data-prototype-legacy='preserved']").waitFor({timeout:20_000});
       const text=await visibleText(page);
-      assert.ok(!text.includes(ANSWER_LEGACY),"tentativa sem dono mostrada a "+id);
-      if(id==="A")assert.ok(text.includes(ANSWER_A),"A perdeu a sua própria tentativa");
-      if(id==="B")assert.ok(text.includes(ANSWER_B)&&!text.includes(ANSWER_A),"B não recuperou só a sua tentativa");
-      assert.equal(await page.evaluate(k=>localStorage.getItem(k),LEGACY_PROTOTYPE_KEY),legacy,"bytes antigos alterados");
+      assert.ok(!text.includes(ANSWER_LEGACY)&&!text.includes(ANSWER_A),"tentativa guardada aberta para "+id);
+      if(id==="A")await page.locator("[data-prototype-saved='preserved']").waitFor();
+      else assert.equal(await page.locator("[data-prototype-saved='preserved']").count(),0,"B informado sobre a tentativa de A");
+      assert.equal(await page.evaluate(k=>localStorage.getItem(k),LEGACY_PROTOTYPE_KEY),legacy);
+      assert.equal(await page.evaluate(()=>localStorage.getItem("a25-account-v1:A:applus:portuguese-prototype-draft:v2")),ownSaved);
       await page.evaluate(()=>probe.cloud.cloudSignOut());await page.close();
     }
   });
-  await scenario("[P1-B] sem sessão comprovada: nada é lido nem gravado no dispositivo",async()=>{
+  await scenario("[P1-B] sem sessão comprovada: o protótipo não abre e nada é lido nem gravado",async()=>{
     await signIn(ctx,null);
     const page=await open(ctx,"prototype-unverified");
+    await page.evaluate(()=>localStorage.setItem("approva.portuguese-writing-memory.v1",JSON.stringify([{note:"MEMORIA-GLOBAL-SINTETICA"}])));
     const before=await dump(page);
     await page.evaluate(()=>mountPrototype());
     await page.locator("[data-prototype-mode='unverified']").waitFor({timeout:20_000});
     const text=await visibleText(page);
-    assert.ok(![ANSWER_A,ANSWER_B,ANSWER_LEGACY].some(x=>text.includes(x)),"respostas mostradas sem sessão");
-    await typeFirstOpenAnswer(page,"RESPOSTA-SEM-SESSAO");
+    assert.ok(![ANSWER_A,ANSWER_LEGACY,"MEMORIA-GLOBAL-SINTETICA"].some(x=>text.includes(x)));
+    assert.equal(await page.locator("textarea, .ptx-options").count(),0);
     const after=await dump(page);
-    assert.deepEqual(keyWith(after,"RESPOSTA-SEM-SESSAO"),[]);
     for(const [key,value] of Object.entries(before))if(!key.includes("auth-epoch"))assert.equal(after[key],value);
     await page.close();
   });
@@ -147,6 +157,7 @@ try{
     const a=await open(ctx,"prototype-switch-A");
     await a.evaluate(()=>mountPrototype());
     await a.locator("textarea, .ptx-options").first().waitFor({timeout:20_000});
+    await typeFirstOpenAnswer(a,ANSWER_A);
     const other=await open(ctx,"prototype-switch-B");
     await other.evaluate(()=>probe.cloud.cloudSignOut());await signIn(ctx,"B");
     await other.evaluate(async()=>{await probe.accounts.openVerifiedAccount();});

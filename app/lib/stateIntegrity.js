@@ -11,7 +11,7 @@ import {
 } from "./persistence.js";
 import {browserStores,readStorageRows} from "./browserStorage.js";
 import {safeLocalStorage} from "./safeStorage.js";
-import {stateWriterCoordinated,stateWritesAllowed,confirmStateWriter,reportForeignStateWrite,withExclusiveStateWrite,reconcileStateTabCopies} from "./stateWriter.js";
+import {stateWriterCoordinated,stateWritesAllowed,confirmStateWriter,reportForeignStateWrite,withExclusiveStateWrite,reconcileStateTabCopies,stampStateWrite} from "./stateWriter.js";
 
 export const STATE_INTEGRITY_EVENT="approva:state-integrity-blocked";
 const PILOT_TELEMETRY_FIELDS=["pilotAggregates","pilotItemResults","betaFeedback","betaSessions","betaEvents"];
@@ -85,6 +85,9 @@ function rawGuardedSave(state,storageKey,key){
     if(!stateWritesAllowed())return false;
     if(foreignStateRows(key)){reportForeignStateWrite(state);return false;}
     if(!confirmStateWriter(state))return false;
+    // Carimbo do escritor dentro do próprio valor (mesmo setItem): permite ao
+    // próximo escritor provar que leu esta escrita (selo final, stateWriter.js).
+    state=stampStateWrite(state);
   }
   const integrity=inspectStoredState(key);
   if(!integrity.ok){

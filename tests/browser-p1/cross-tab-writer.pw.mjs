@@ -127,6 +127,51 @@ test.describe("P1-A · um único separador grava o progresso",()=>{
     await context.close();
   });
 
+  test("fim abrupto do escritor (terminado sem selo): B não grava sem prova; recuperação explícita mantém a conclusão de A",async({browser})=>{
+    const context=await browser.newContext();
+    const sid="synthetic-cross-tab-crash";
+    const fixture=mathFixture(sid);
+    const a=await context.newPage();
+    // A termina como num crash: os seus handlers de pagehide/freeze/visibilidade
+    // nunca correm (nenhum selo final). Page.crash não serve: no Chromium headless
+    // os dois separadores partilham o processo e terminariam ambos.
+    await a.addInitScript(()=>{
+      const original=EventTarget.prototype.addEventListener;
+      EventTarget.prototype.addEventListener=function(type,...rest){
+        if(["pagehide","freeze","visibilitychange"].includes(type)&&(this===window||this===document))return;
+        return original.call(this,type,...rest);
+      };
+    });
+    await seed(a,{[STATE]:fixture.state,[DRAFT]:fixture.draft});
+    await a.goto("/");
+    await expect(submit(a)).toBeVisible({timeout:30_000});
+    const b=await context.newPage();await b.goto("/");
+    await expect(b.getByText(OBSERVER)).toBeVisible({timeout:20_000});
+    await submit(a).click();
+    await expect.poll(async()=>completions((await local(b))[STATE],sid),{timeout:20_000}).toBe(1);
+    const xpA=parse((await local(b))[STATE]).xp;
+    await a.close({runBeforeUnload:false});                      // sem selo; o browser liberta o lock
+    await b.getByRole("button",{name:"Continuar neste separador",exact:true}).click();
+    const hold=b.locator("[data-state-writer='recovery-hold']");
+    await expect(hold).toBeVisible({timeout:20_000});
+    const before=await local(b);
+    await reactivate(b);await b.waitForTimeout(1500);
+    let now=await local(b);
+    expect(now[STATE],"sem prova, B não grava").toBe(before[STATE]);
+    await b.getByRole("button",{name:"Verificar de novo",exact:true}).click();
+    await expect(hold).toBeVisible();                              // continua sem selo
+    await b.getByRole("button",{name:"Continuar neste separador",exact:true}).click();
+    await b.getByRole("button",{name:"Guardar cópia e continuar aqui",exact:true}).click();
+    await expect(hold).toHaveCount(0,{timeout:20_000});
+    await b.waitForTimeout(1500);
+    now=await local(b);
+    expect(completions(now[STATE],sid),"conclusão de A mantida, sem duplicar").toBe(1);
+    expect(parse(now[STATE]).xp,"XP de A mantido").toBe(xpA);
+    const copies=Object.keys(now).filter(k=>k.startsWith("a25-state-conflict-v1:"));
+    expect(copies.length,"cópia de recuperação antes de continuar").toBeGreaterThan(0);
+    await context.close();
+  });
+
   test("escrita de um separador de versão anterior: o escritor para e guarda uma cópia",async({browser})=>{
     const context=await browser.newContext();
     const fixture=mathFixture("synthetic-cross-tab-old");
@@ -143,9 +188,9 @@ test.describe("P1-A · um único separador grava o progresso",()=>{
     await reactivate(a);await a.waitForTimeout(800);
     const stores=await local(a);
     expect(stores[STATE]).toBe(foreign); // nada foi substituído
-    const copies=Object.keys(stores).filter(k=>k.startsWith("a25-state-conflict-v1:"));
-    expect(copies).toHaveLength(1);
-    expect(parse(stores[copies[0]]).state.xp).toBe(100); // e o progresso deste separador ficou preservado
+    const copies=Object.keys(stores).filter(k=>k.startsWith("a25-state-conflict-v1:")).map(k=>parse(stores[k]));
+    expect(copies.find(c=>c.reason==="foreign_write")?.state?.xp,"progresso deste separador preservado").toBe(100);
+    expect(parse(copies.find(c=>c.reason==="foreign_write:received")?.raw)?.xp,"bytes recebidos preservados").toBe(999);
     await context.close();
   });
 
