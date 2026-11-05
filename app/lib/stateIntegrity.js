@@ -10,7 +10,7 @@ import {
   loadLocalStateStatus,saveLocalState,clearLocalPilotTelemetry
 } from "./persistence.js";
 import {browserStores,readStorageRows} from "./browserStorage.js";
-import {stateWriterCoordinated,stateWritesAllowed,confirmStateWriter,reportForeignStateWrite,withExclusiveStateWrite} from "./stateWriter.js";
+import {stateWriterCoordinated,stateWritesAllowed,confirmStateWriter,reportForeignStateWrite,withExclusiveStateWrite,noteStateWritten,reconcileStateTabCopies} from "./stateWriter.js";
 
 export const STATE_INTEGRITY_EVENT="approva:state-integrity-blocked";
 const PILOT_TELEMETRY_FIELDS=["pilotAggregates","pilotItemResults","betaFeedback","betaSessions","betaEvents"];
@@ -94,6 +94,9 @@ function rawGuardedSave(state,storageKey,key){
   if(ok){
     const {rows}=readStorageRows(key);
     trusted.set(key,new Set(rows.map(([,raw])=>raw)));
+    // P1-A sem Web Locks: guardar os bytes escritos numa cópia do separador.
+    const durable=rows.find(([store])=>(store?.source||store)===globalThis.localStorage);
+    if(durable&&!noteStateWritten(key,durable[1],state))return false;
   }
   return ok;
 }
@@ -136,6 +139,14 @@ export function guardedClearLocalPilotTelemetry(){
 // P1-A: páginas fora da app (piloto/definições) só reescrevem o estado se
 // nenhum separador da app for o escritor. Se houver escritor, este volta a
 // gravar e, com o consentimento já retirado, grava sem telemetria piloto.
+// P1-A: na hidratação, cópias de separadores que não correspondem ao estado
+// guardado passam a cópias de conflito (nunca apagadas) e são assinaladas.
+export function reconcileTabCopiesAtHydration(storageKey=STORAGE_KEY){
+  const {rows}=readStorageRows(storageKey);
+  const durable=rows.find(([store])=>(store?.source||store)===globalThis.localStorage);
+  return reconcileStateTabCopies(storageKey,durable?durable[1]:null);
+}
+
 export async function coordinatedClearLocalPilotTelemetry(scope="global"){
   const result=await withExclusiveStateWrite(scope,()=>guardedClearLocalPilotTelemetry());
   return result.ok?result.value:{ok:false,deferred:true,skipped:[]};

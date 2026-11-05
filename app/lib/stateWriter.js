@@ -24,6 +24,8 @@ const accountStorageKey=(key,subject)=>subject?`a25-account-v1:${encodeURICompon
 
 export const STATE_WRITER_EVENT="approva:state-writer";
 export const STATE_CONFLICT_PREFIX="a25-state-conflict-v1:";
+// Sem Web Locks: cópia durável dos bytes que cada separador gravou por último.
+export const STATE_TAB_COPY_PREFIX="a25-state-tabcopy-v1:";
 const LOCK_PREFIX="approva-state-writer-v1:";
 const LEASE_KEY="a25-state-writer-lease-v1";
 const SIGNAL_KEY="a25-state-writer-signal-v1";
@@ -35,14 +37,15 @@ export const STATE_WRITER_TIMING={
   requestTimeoutMs:8_000, // espera por uma passagem de controlo pedida
   leaseTtlMs:30_000,      // sem Web Locks: validade da concessão
   heartbeatMs:5_000,
-  claimSettleMs:300,
+  claimSettleMs:600,
+  presenceWaitMs:400,     // sem Web Locks: espera por um escritor vivo antes de assumir
   noAnswerMs:3_000
 };
 
 const tabId=`writer-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,10)}`;
 let status={mode:"inactive",scope:null,method:null,reason:null,conflictCopy:null};
 let options={flush:()=>true,snapshot:()=>null};
-let releaseLock=null,heartbeat=null,channel=null,listening=false,starting=null,releaseTimer=null;
+let releaseLock=null,heartbeat=null,channel=null,listening=false,starting=null,releaseTimer=null,presence=null;
 
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const hasWindow=()=>typeof window!=="undefined";
@@ -79,7 +82,9 @@ function onMessage(message){
   // Um pedido que o requerente já está prestes a abandonar é ignorado: assim o
   // escritor nunca liberta quando já ninguém está à espera.
   if(Date.now()-Number(message.at||0)>STATE_WRITER_TIMING.requestTimeoutMs*0.75)return;
-  if(message.type==="handoff-request")handleHandoffRequest();
+  if(message.type==="writer-ping"&&status.mode==="writer")post({type:"writer-pong"});
+  else if(message.type==="writer-pong"&&presence)presence();
+  else if(message.type==="handoff-request")handleHandoffRequest();
   else if(message.type==="flush-request"&&status.mode==="writer"){try{options.flush()}catch{}}
 }
 
@@ -115,8 +120,20 @@ function writeLease(){
   catch{return false}
 }
 function leaseOwned(){return readLease()?.tab===tabId}
+// Um escritor vivo responde ao ping. Reduz a janela de arranque simultâneo,
+// mas não a fecha: a propagação entre processos pode atrasar mensagens e bytes.
+function writerAnswers(){
+  return new Promise(resolve=>{
+    const timer=setTimeout(()=>{presence=null;resolve(false);},STATE_WRITER_TIMING.presenceWaitMs);
+    presence=()=>{clearTimeout(timer);presence=null;resolve(true);};
+    post({type:"writer-ping"});
+  });
+}
 async function leaseAcquire({force=false}={}){
-  const current=readLease();
+  let current=readLease();
+  if(current&&current.tab!==tabId&&current.exp>Date.now()&&!force)return false;
+  if(!force&&await writerAnswers())return false;
+  current=readLease();
   if(current&&current.tab!==tabId&&current.exp>Date.now()&&!force)return false;
   if(!writeLease())return false;
   await sleep(STATE_WRITER_TIMING.claimSettleMs);
@@ -162,6 +179,41 @@ export function confirmStateWriter(state){
   }
   return true;
 }
+// Sem Web Locks a exclusão não é garantida. Para que uma sobrescrita por um
+// segundo escritor nunca apague progresso sem cópia, cada gravação do estado
+// neste modo guarda também os bytes exatos numa chave própria do separador.
+// Se essa cópia não puder ser gravada, o separador deixa de escrever.
+export function noteStateWritten(storageKey,raw,state){
+  if(status.mode!=="writer"||status.method!=="lease"||typeof raw!=="string")return true;
+  const key=scopedKey(`${STATE_TAB_COPY_PREFIX}${tabId}`);
+  let body;try{body=JSON.stringify({format:"aplus-state-tab-copy-v1",tab:tabId,storageKey,at:Date.now(),raw})}catch{body=null}
+  try{
+    const store=rawLocal();
+    if(body&&store){store.setItem(key,body);if(store.getItem(key)===body)return true;}
+  }catch{}
+  lose("tab_copy_failed",state);
+  return false;
+}
+// Na hidratação (já como escritor): cópias de separadores iguais ao estado
+// guardado foram substituídas de forma legítima e são removidas; cópias
+// diferentes são progresso que pode ter sido sobrescrito e passam a cópias de
+// conflito, nunca apagadas. Devolve as que ficaram preservadas.
+export function reconcileStateTabCopies(storageKey,currentRaw){
+  const store=rawLocal();if(!store)return [];
+  const prefix=scopedKey(STATE_TAB_COPY_PREFIX),found=[],preserved=[];
+  try{for(let i=0;i<store.length;i++){const key=store.key(i);if(typeof key==="string"&&key.startsWith(prefix))found.push(key);}}catch{return []}
+  for(const key of found)try{
+    const raw=store.getItem(key);let copy=null;try{copy=JSON.parse(raw)}catch{}
+    if(copy&&copy.storageKey!==storageKey)continue;
+    if(copy&&copy.tab===tabId)continue;
+    if(copy&&typeof copy.raw==="string"&&copy.raw===currentRaw){store.removeItem(key);continue;}
+    const target=key.replace(prefix,scopedKey(STATE_CONFLICT_PREFIX))+`:${Date.now()}`;
+    store.setItem(target,raw);
+    if(store.getItem(target)===raw){store.removeItem(key);preserved.push(target);}
+  }catch{}
+  return preserved;
+}
+
 // Bytes do estado alterados por outro separador desde a última leitura/escrita.
 export function reportForeignStateWrite(state,reason="foreign_write"){
   if(status.mode==="writer")lose(reason,state);
@@ -188,12 +240,21 @@ function onPageShow(event){
   // sozinho: recarregar repõe a arbitragem.
   if(event?.persisted&&status.mode!=="inactive")try{window.location.reload()}catch{}
 }
+// Sem Web Locks: um separador que fecha deixa de escrever e liberta a concessão
+// (a cópia do separador fica, para a reconciliação da próxima abertura).
+function onPageHide(){
+  if(status.mode!=="writer"||status.method!=="lease"||!leaseOwned())return;
+  stopHeartbeat();
+  try{rawLocal()?.removeItem(scopedKey(LEASE_KEY))}catch{}
+  status={...status,mode:"released",reason:"pagehide"};
+}
 function listen(){
   if(listening||!hasWindow())return;
   listening=true;
   try{if(typeof BroadcastChannel!=="undefined"){channel=new BroadcastChannel(CHANNEL);channel.onmessage=event=>onMessage(event.data);}}catch{channel=null}
   window.addEventListener("storage",onStorage);
   window.addEventListener("pageshow",onPageShow);
+  window.addEventListener("pagehide",onPageHide);
   document.addEventListener("visibilitychange",onVisible);
 }
 

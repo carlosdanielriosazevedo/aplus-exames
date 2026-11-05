@@ -44,7 +44,8 @@ import {
 import {clearLocalState,FRIENDS_STORAGE_KEY} from "./lib/persistence";
 import {
   guardedLoadLocalStateStatus as loadLocalStateStatus,guardedSaveLocalState as saveLocalState,
-  saveLocalStateDurably,durabilityFailureReason,lastStateIntegrityBlock,lastStorageTier,STATE_INTEGRITY_EVENT
+  saveLocalStateDurably,durabilityFailureReason,lastStateIntegrityBlock,lastStorageTier,STATE_INTEGRITY_EVENT,
+  reconcileTabCopiesAtHydration
 } from "./lib/stateIntegrity";
 import {
   saveSessionDraft,loadSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen
@@ -284,6 +285,7 @@ export default function App(){
   const [writer,setWriter]=useState(()=>stateWriterStatus());
   const [hydrationRun,setHydrationRun]=useState(0);
   const legacyChoice=useRef(false);
+  const [tabCopyNotice,setTabCopyNotice]=useState(false);
   const stateRef=useRef(s);stateRef.current=s;
   const hydratedRef=useRef(false);hydratedRef.current=hydrated;
 
@@ -321,6 +323,9 @@ export default function App(){
     // P1-C: progresso anterior ao isolamento por conta (F5) nunca é atribuído
     // automaticamente. Em vez de um perfil vazio silencioso, avisar e encaminhar.
     if(accountContext&&!loaded.found&&!legacyChoice.current&&legacyWorkspacePresent()){setScreen("legacyProgressFound");return}
+    // P1-A sem Web Locks: progresso de outro separador que pode ter sido
+    // sobrescrito fica preservado como cópia de conflito e é assinalado.
+    if(reconcileTabCopiesAtHydration(storageKey||"a25").length)setTabCopyNotice(true);
     const x=loaded.state;
     const draftPreview=x?loadSessionDraftStatus(x.betaMode||"internal").draft:null;
     const needsMathAtHydration=!!x&&(
@@ -541,6 +546,10 @@ export default function App(){
   }}/>;
   if(writer.mode==="releasing"||writer.mode==="released")return <Shell><Logo/><div className="notice" role="status" data-state-writer="released"><b>Continuaste noutro separador.</b><span>Este separador deixou de guardar progresso.</span></div></Shell>;
   if(writer.mode==="conflict")return <StateWriterConflict writer={writer}/>;
+  if(tabCopyNotice)return <Shell><Logo/><div className="notice warning" role="alert" data-state-writer="tab-copy-preserved">
+    <b>Encontrámos progresso de outro separador que pode não ter ficado guardado.</b>
+    <span>Guardámos uma cópia neste dispositivo e não apagámos nada. A recuperação dessa cópia ainda não está disponível na app.</span>
+  </div><button className="primary" onClick={()=>setTabCopyNotice(false)}>Continuar</button></Shell>;
   if(screen==="legacyProgressFound")return <LegacyProgressFound onContinue={()=>{legacyChoice.current=true;setHydrationRun(n=>n+1);}}/>;
 
   if(screen==="accountVerificationRequired")return <Shell><Logo/>

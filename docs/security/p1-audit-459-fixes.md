@@ -20,7 +20,7 @@ uma avaliação e grava de forma durável; B, desatualizada, volta a ficar ativa
 | Passagem de controlo cooperativa | O observador pede ("Continuar neste separador"); o escritor grava o estado atual, desmonta o estudo, liberta e recarrega como observador. Se não responder em 8 s, nada é forçado. Pedidos antigos (> 6 s) são ignorados. |
 | Reload | O novo documento espera até 1,5 s pelo lock libertado pelo anterior. |
 | `pageshow` com `persisted` (bfcache) | Recarrega para voltar a arbitrar. |
-| Sem Web Locks | Concessão em `localStorage` (TTL 30 s, batimento 5 s, assentamento 300 ms). **Não é exclusão garantida**: cada gravação confirma primeiro a concessão; perda da concessão (evento `storage`, visibilidade, gravação) bloqueia logo o separador e guarda uma cópia. Pedido sem resposta em 3 s → o requerente assume (o escritor suspenso, ao retomar, fica bloqueado). |
+| Sem Web Locks | Concessão em `localStorage` (TTL 30 s, batimento 5 s, assentamento 600 ms, ping de presença 400 ms, libertada em `pagehide`). **Não é exclusão**: o `localStorage` do Chromium propaga entre processos de forma assíncrona e dois separadores podem ficar escritores. Garantia efetiva (falha segura): cada gravação do estado guarda também os bytes exatos em `a25-state-tabcopy-v1:<aba>`; se essa cópia falhar, o separador deixa de escrever. Na hidratação seguinte, cópias iguais ao estado guardado são removidas; cópias diferentes passam a cópias de conflito e o aluno vê um aviso. Nenhuma sobrescrita apaga progresso sem cópia nem sem aviso — mas a recuperação dessa cópia ainda não existe (P2). |
 | Sem `localStorage` gravável | Cada aba só grava no seu `sessionStorage`/memória: não há partilha, logo não há sobrescrita. |
 | Defesa em profundidade (todos os modos) | Bytes do estado que este separador não leu nem escreveu (evento `storage` ou verificação antes de gravar em `stateIntegrity.rawGuardedSave`) → bloqueio + cópia `a25-state-conflict-v1:<aba>:<instante>` na área da conta. Cobre separadores de versões anteriores sem lock. Esta verificação é comparação-depois-escrita e por isso **nunca é o mecanismo principal**. |
 | `/piloto`, `/definicoes` | A limpeza local de telemetria só reescreve o estado se nenhum separador da app for escritor; caso contrário pede-lhe que volte a gravar (sem telemetria, porque o consentimento já foi retirado). |
@@ -61,6 +61,16 @@ própria abre normalmente, sem aviso.
 **Decisão pendente do product owner:** o processo de recuperação autorizada (como se
 prova a titularidade do progresso antigo) não existe ainda; a interface apenas
 preserva e encaminha.
+
+## Revisão antes da publicação — defeito encontrado e corrigido
+
+Modelo com propagação assíncrona entre processos (`tests/unit/p1AuditLeasePropagation.test.mjs`)
+mostrou, em `fb23746`, que sem Web Locks dois separadores podiam ficar escritores e que,
+se A concluísse e fechasse antes de a escrita chegar a B, a gravação de B apagava o
+progresso de A sem cópia (`finalXp 100`, nenhuma cópia com 150). Corrigido com as cópias
+por separador e a reconciliação na hidratação; o ping de presença reduz a janela.
+Limites que continuam: uma falha do processo entre a gravação do estado e a da cópia
+(mesma tarefa síncrona) não é coberta; o modo concessão grava o estado duas vezes (quota).
 
 ## Provas
 
