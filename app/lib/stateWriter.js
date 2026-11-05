@@ -44,6 +44,22 @@ const LOCK_PREFIX="approva-state-writer-v1:";
 const SIGNAL_KEY="a25-state-writer-signal-v1";
 const CHANNEL="approva-state-writer-v1";
 const WATCHED_STATE_KEYS=["a25","a25-friends-beta"];
+// Todas as chaves académicas da área (mesma lista que accountWorkspace usa para
+// o legado): a cópia de recuperação guarda-as byte a byte antes de continuar.
+const ACADEMIC_KEYS=["a25","a25-friends-beta","a25-active-session-v1","a25-friends-active-session-v1",
+  "applus:fqa-exam-draft:v1:fqa-mini-1","applus:fqa-exam-draft:v1:fqa-mini-2","applus:fqa-exam-draft:v1:fqa-full-715",
+  "a25-completed-sessions-v1","approva.portuguese-writing-memory.v1"];
+function academicSnapshot(){
+  const result={};
+  for(const name of ["localStorage","sessionStorage"]){
+    let store=null;try{store=globalThis[name]}catch{}
+    if(!store)continue;
+    const rows={};
+    for(const key of ACADEMIC_KEYS)try{const raw=store.getItem(scopedKey(key));if(raw!==null&&raw!==undefined)rows[scopedKey(key)]=raw;}catch{}
+    result[name]=rows;
+  }
+  return result;
+}
 
 export const STATE_WRITER_TIMING={
   reloadWaitMs:1_500,     // um reload liberta o lock antes de o novo documento pedir
@@ -239,8 +255,11 @@ async function startMandate(){
 // chegue depois é detetada, este separador para e os bytes recebidos são guardados.
 export function adoptAfterUncleanEnd(){
   if(status.mode!=="verifying")return stateWriterStatus();
-  const copy=preserveRaw("unclean_end_adoption",viewOfState());
-  if(!copy){set({reason:"recovery_hold",conflictCopy:null});return stateWriterStatus();}
+  // Cópia byte a byte de todas as chaves académicas visíveis (estado, rascunhos,
+  // registo de conclusões, memória de escrita) antes de qualquer gravação.
+  const copy=preserveRaw("unclean_end_adoption",{academic:academicSnapshot()});
+  // Sem cópia durável (localStorage disponível mas sem espaço, etc.) não se continua.
+  if(!copy||(rawLocal()&&!copy.durable)){set({reason:"recovery_hold",conflictCopy:copy||null});return stateWriterStatus();}
   set({conflictCopy:copy});
   void startMandate();
   return stateWriterStatus();

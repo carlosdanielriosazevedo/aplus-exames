@@ -199,6 +199,62 @@ describe("P1-A · Web Locks: fim abrupto (sem selo)",()=>{
   });
 });
 
+describe("P1-A · recuperação explícita: nada é eliminado ou substituído sem cópia",()=>{
+  const ACADEMIC=["a25","a25-active-session-v1","applus:fqa-exam-draft:v1:fqa-mini-1","a25-completed-sessions-v1","approva.portuguese-writing-memory.v1"].map(k=>`a25-account-v1:${ACCOUNT}:${k}`);
+  async function crashWithEverything(extraState={}){
+    reset(true);
+    const {a,b}=await writerThenObserver();
+    use(a);a.i.saveLocalStateDurably({...a.mem,xp:150,...extraState});
+    const others={
+      [ACADEMIC[1]]:JSON.stringify({kind:"mission",betaMode:"internal",sessionId:"synthetic-pending",responses:[{answer:"synthetic"}],savedAt:1}),
+      [ACADEMIC[2]]:JSON.stringify({itemIds:["q1"],answers:{q1:"synthetic"},startedAt:1,index:0}),
+      [ACADEMIC[3]]:JSON.stringify([{id:"synthetic-pending",status:"pending",at:1,owner:"tab-x"}]),
+      [ACADEMIC[4]]:JSON.stringify([{attemptId:"synthetic",criterionId:"c1",status:"weak",at:1}])
+    };
+    for(const [k,v] of Object.entries(others)){canonical.set(k,v);for(const t of tabs)t.local.data.set(k,v);}
+    a.closed=true;locksApi.crash();deliverBytes();
+    use(b);await b.w.requestStateWriter();await wait(80);
+    expect(b.w.stateWriterStatus().reason).toBe("recovery_hold");
+    return {b,before:Object.fromEntries(ACADEMIC.map(k=>[k,canonical.get(k)??null]))};
+  }
+  it("a cópia guarda byte a byte todas as chaves académicas antes de continuar; depois, nada do original fica irrecuperável",async()=>{
+    const {b,before}=await crashWithEverything();
+    use(b);const adopted=b.w.adoptAfterUncleanEnd();await wait(5);
+    expect(adopted.conflictCopy?.durable).toBe(true);
+    const copy=JSON.parse(canonical.get(adopted.conflictCopy.key));
+    for(const [key,raw] of Object.entries(before))expect(copy.academic.localStorage[key],"na cópia: "+key).toBe(raw);
+    // A sessão continua e altera o estado e o rascunho (comportamento normal de retoma).
+    hydrate(b);save(b,{...b.mem,xp:151});
+    use(b);b.drafts.clearSessionDraft("internal");
+    for(const [key,raw] of Object.entries(before)){
+      const now=canonical.get(key)??null;
+      expect(now===raw||copy.academic.localStorage[key]===raw,"original recuperável: "+key).toBe(true);
+    }
+  });
+  it("sem cópia durável (localStorage sem espaço para a cópia) não continua e não grava",async()=>{
+    const {b,before}=await crashWithEverything();
+    b.quotaFull=true;
+    const realSet=b.local.setItem;b.local.setItem=(k,v)=>{if(k.includes("a25-state-conflict-v1:"))throw new DOMException("synthetic quota","QuotaExceededError");return realSet(k,v);};
+    use(b);const result=b.w.adoptAfterUncleanEnd();await wait(5);
+    expect(result.mode).toBe("verifying");expect(result.reason).toBe("recovery_hold");
+    expect(save(b,{...seed,xp:1})).toBe(false);
+    for(const [key,raw] of Object.entries(before))expect(canonical.get(key)??null).toBe(raw);
+  });
+  it("estado de versão futura: depois de continuar, a proteção D2 continua a impedir leitura e gravação",async()=>{
+    reset(true);
+    const {a,b}=await writerThenObserver();
+    const future=JSON.stringify({...seed,xp:999,_stateVersion:999,_savedAt:5});
+    canonical.set(STATE_KEY,future);for(const t of tabs)t.local.data.set(STATE_KEY,future);
+    a.closed=true;locksApi.crash();
+    use(b);await b.w.requestStateWriter();await wait(80);
+    use(b);b.w.adoptAfterUncleanEnd();await wait(5);
+    expect(mode(b)).toBe("writer");
+    use(b);expect(b.i.guardedLoadLocalStateStatus({},()=>({}))).toMatchObject({error:true,reason:"state_version_future"});
+    expect(save(b,{...seed,xp:1})).toBe(false);
+    expect(canonical.get(STATE_KEY)).toBe(future);
+  });
+});
+
 describe("P1-A · Web Locks: suspensão e troca de separador",()=>{
   it("A escondida sela e liberta; B visível prova e escreve; A ao voltar recarrega (memória antiga)",async()=>{
     reset(true);

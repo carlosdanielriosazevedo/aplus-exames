@@ -93,6 +93,28 @@ Limites que continuam:
 - Protótipo `/portugues-mini-exame`: persistência bloqueada (nada gravado; tentativas guardadas
   intactas) até ser integrado neste protocolo.
 
+## Estado do P1-A: não resolvido definitivamente
+
+Riscos que continuam abertos (branch `experimental/p1a-no-weblocks-readonly`):
+
+- **Gravações tardias depois de uma recuperação explícita.** Sem selo não há prova; se o aluno
+  escolher "Guardar cópia e continuar aqui" e ainda chegar uma gravação do separador que terminou,
+  este separador para e guarda os bytes recebidos como cópia — mas o progresso visível fica sem ela
+  até existir recuperação na app.
+- **Encerramentos abruptos** (crash, processo terminado, Chromium fechado sem `pagehide`) obrigam a
+  essa decisão explícita. Falta verificar em dispositivos reais se o fecho normal do Chrome/Safari
+  sela (`pagehide`/`visibilitychange`).
+- **Cópias sem interface de recuperação**: `a25-state-conflict-v1:*` (conflitos, adoções, bytes
+  recebidos) e as cópias de separador antigas reconciliadas. Ficam no dispositivo; a app ainda não as
+  mostra nem restaura. Uma cópia de recuperação não significa que o progresso tenha sido restaurado.
+- **Separadores de versões anteriores** (sem protocolo) só são detetados.
+- **IndexedDB indisponível** com Web Locks: só consulta.
+
+O que a recuperação explícita garante (testado): antes de qualquer gravação, guarda byte a byte todas
+as chaves académicas da área (estado, rascunhos, rascunhos FQ A, registo de conclusões, memória de
+escrita) numa cópia durável; sem cópia durável não continua; depois de continuar, nenhum byte original
+fica irrecuperável; estados de versão futura continuam protegidos pela D2 (não são lidos nem gravados).
+
 ## Provas
 
 - Unitários: `tests/unit/p1AuditCrossTabWriter.test.mjs` (15 cenários: duas e três abas,

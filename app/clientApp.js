@@ -580,8 +580,8 @@ export default function App(){
   if(writer.mode==="releasing"||writer.mode==="released")return <Shell><Logo/><div className="notice" role="status" data-state-writer="released"><b>Continuaste noutro separador.</b><span>Este separador deixou de guardar progresso.</span></div></Shell>;
   if(writer.mode==="conflict")return <StateWriterConflict writer={writer}/>;
   if(tabCopyNotice)return <Shell><Logo/><div className="notice warning" role="alert" data-state-writer="tab-copy-preserved">
-    <b>Encontrámos progresso de outro separador que pode não ter ficado guardado.</b>
-    <span>Guardámos uma cópia neste dispositivo e não apagámos nada. A recuperação dessa cópia ainda não está disponível na app.</span>
+    <b>Encontrámos dados de outro separador que podem não estar no progresso atual.</b>
+    <span>Foram guardados como cópia de recuperação neste dispositivo; nada foi apagado. A cópia não foi restaurada: o progresso que vês pode não os incluir, e a app ainda não permite recuperá-los.</span>
   </div><button className="primary" onClick={()=>setTabCopyNotice(false)}>Continuar</button></Shell>;
   if(screen==="legacyProgressFound")return <LegacyProgressFound onContinue={()=>{legacyChoice.current=true;setHydrationRun(n=>n+1);}}/>;
 
@@ -2199,7 +2199,7 @@ function StateWriterElsewhere({writer,onContinue}){
   const waiting=busy||writer.reason==="waiting";
   return <Shell><Logo/><div className="notice" role="status" data-state-writer="observer">
     <b>A APProva+ está aberta noutro separador.</b>
-    <span>Para não perderes progresso, só um separador guarda o teu estudo de cada vez. Este separador não leu nem alterou nada.</span>
+    <span>Para proteger o teu progresso, só um separador guarda o teu estudo de cada vez. Este separador não leu nem alterou nada.</span>
     {writer.reason==="no_answer"&&<span role="alert">O outro separador não respondeu. Volta a ele ou fecha-o e tenta de novo.</span>}
     {writer.reason==="sync_pending"&&<span role="alert">O progresso do outro separador ainda está a chegar. Não alterámos nada; tenta de novo dentro de instantes.</span>}
   </div>
@@ -2219,8 +2219,8 @@ function ReadOnlyConsult({view}){
   const studied=count(x?.missionHistory)+count(x?.examHistory)+Object.values(x?.subjectProgress||{}).reduce((n,p)=>n+count(p?.sessions),0);
   return <Shell><Logo/><div className="notice" role="status" data-state-writer="readonly">
     <b>Este navegador só permite consultar o teu progresso.</b>
-    <span>Para guardar o teu estudo sem risco de perderes progresso, a APProva+ precisa de uma versão mais recente do navegador. Atualiza-o ou abre a APProva+ no Chrome, Edge, Firefox ou Safari atualizados.</span>
-    {view?.pendingAttempt&&<span data-readonly-pending="true">Há uma tentativa por terminar guardada neste dispositivo. Para a continuares, abre a APProva+ num navegador atualizado neste mesmo dispositivo.</span>}
+    <span>Para guardar o teu estudo, a APProva+ precisa de uma versão mais recente do navegador. Atualiza-o ou abre a APProva+ no Chrome, Edge, Firefox ou Safari atualizados. Neste navegador não é guardado nem alterado nada.</span>
+    {view?.pendingAttempt&&<span data-readonly-pending="true">Encontrámos neste dispositivo dados de uma tentativa por terminar. Não foram alterados. Só num navegador atualizado, neste mesmo dispositivo, será possível verificar se podem ser retomados.</span>}
   </div>
   {view===null?<div className="cloudLoading">A abrir o teu progresso…</div>
     :view.error?<p role="status">Não foi possível ler o progresso guardado neste dispositivo. Nada foi alterado.</p>
@@ -2239,9 +2239,9 @@ function StateWriterVerifying({writer,onRetry,onAdopt}){
   const [confirming,setConfirming]=useState(false);
   if(writer.reason!=="recovery_hold")return <Shell><Logo/><div className="cloudLoading" role="status" data-state-writer="verifying">A confirmar o teu progresso…</div></Shell>;
   return <Shell><Logo/><div className="notice warning" role="alert" data-state-writer="recovery-hold">
-    <b>A APProva+ fechou de forma inesperada noutro separador.</b>
-    <span>Para não arriscar o teu progresso, este separador ainda não guarda nada. Se a outra janela ainda estiver aberta, volta a ela.</span>
-    {confirming&&<span data-recovery-confirm="true">Vamos guardar primeiro uma cópia do progresso deste dispositivo. Se ainda chegar alguma gravação do separador que fechou, este separador para e guarda-a também.</span>}
+    <b>Não foi possível confirmar a gravação do outro separador.</b>
+    <span>Por isso, este separador ainda não guarda nada. Se a outra janela ainda estiver aberta, volta a ela.</span>
+    {confirming&&<span data-recovery-confirm="true">Antes de continuares, guardamos uma cópia de recuperação dos dados que este separador vê agora. A cópia não restaura nada: se a última gravação do outro separador não estiver aqui, continuas sem ela. Se essa gravação ainda chegar, este separador para e guarda-a também como cópia.</span>}
   </div>
   <button className="primary" onClick={onRetry}>Verificar de novo</button>
   {confirming
@@ -2256,7 +2256,7 @@ function StateWriterConflict({writer}){
   return <Shell><Logo/><div className="notice warning" role="alert" data-state-writer="conflict" data-conflict-copy={copy?(copy.durable?"durable":"tab"):"none"}>
     <b>Este separador deixou de guardar progresso.</b>
     <span>O teu progresso foi alterado noutro separador ou por outra versão da APProva+. Não substituímos nada.</span>
-    <span>{copy?"Guardámos neste dispositivo uma cópia do que estava neste separador.":"Não foi possível guardar uma cópia deste separador. Mantém-no aberto até recarregares o progresso noutro separador."}</span>
+    <span>{copy?"Guardámos neste dispositivo uma cópia de recuperação do que estava neste separador. A cópia não foi restaurada e a app ainda não permite recuperá-la.":"Não foi possível guardar uma cópia deste separador. Mantém-no aberto até recarregares o progresso noutro separador."}</span>
   </div>
   <button className="primary" onClick={()=>window.location.reload()}>Recarregar o progresso</button>
   </Shell>;
