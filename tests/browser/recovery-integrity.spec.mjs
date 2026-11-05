@@ -182,11 +182,19 @@ for(const viewport of [{width:390,height:844},{width:1366,height:768}]){
       const other=await context.newPage();
       await other.setViewportSize(viewport);
       await openReview(page);
-      await openReview(other);
-      await Promise.all([submitButton(page).click(),submitButton(other).click()]);
+      // P1-A (auditoria #459): só um separador escreve. A segunda aba não chega a
+      // poder entregar; tenta e reativa enquanto a primeira conclui.
+      await other.goto("/");
+      await expect(other.locator("[data-state-writer='observer']")).toBeVisible({timeout:30_000});
+      await expect(submitButton(other)).toHaveCount(0);
+      await Promise.all([submitButton(page).click(),other.evaluate(()=>{document.dispatchEvent(new Event("visibilitychange"));window.dispatchEvent(new Event("focus"))})]);
       await page.waitForTimeout(1500);
       await expect.poll(async()=>(await read(page,sid)).entries,{timeout:20_000}).toBe(1);
-      // a outra aba não pode reaplicar nem apagar a conclusão
+      // a outra aba não pode reaplicar nem apagar a conclusão (nem depois de passar a escrever)
+      await other.getByRole("button",{name:"Continuar neste separador",exact:true}).click();
+      await expect(other.locator("[data-state-writer='observer']")).toHaveCount(0,{timeout:20_000});
+      await other.waitForTimeout(1500);
+      expect((await read(other,sid)).entries).toBe(1);
       await other.reload();await page.reload();
       await page.waitForTimeout(1500);
       expect((await read(page,sid)).entries).toBe(1);

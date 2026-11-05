@@ -68,6 +68,7 @@ function snapshot(page,sid){
       sessionDraft:session.getItem(DRAFT)!==null,
       committed:registry.some(x=>x.id===sid&&x.status!=="pending"),
       blocked:document.querySelector("[data-completion-block]")?.getAttribute("data-completion-block")||null,
+      observer:!!document.querySelector("[data-state-writer='observer']"),
       result:/Mini-exame/i.test(document.querySelector("h1")?.textContent||"")&&!document.querySelector("[data-completion-block]")
     };
   },{sid,DRAFT,REGISTRY});
@@ -159,12 +160,18 @@ for(const viewport of [{width:390,height:844},{width:1366,height:768}]){
       const sid=`synthetic-durable-tabs-${viewport.width}`;
       await seed(a,fixture(sid),{localLarge:true});
       const b=await context.newPage();
-      await openReview(a);await openReview(b);
-      await Promise.all([submit(a).click(),submit(b).click()]);
+      await openReview(a);
+      // P1-A (auditoria #459): só um separador escreve; B é observador e não entrega.
+      await b.goto("/");
+      await expect(b.locator("[data-state-writer='observer']")).toBeVisible({timeout:30_000});
+      await expect(submit(b)).toHaveCount(0);
+      await Promise.all([submit(a).click(),b.evaluate(()=>{document.dispatchEvent(new Event("visibilitychange"));window.dispatchEvent(new Event("focus"))})]);
       await a.waitForTimeout(1500);
       for(const page of [a,b]){
         const snap=await snapshot(page,sid);
-        if(!snap.blocked)expect(snap.localEntries).toBe(1);
+        // Um separador observador (P1-A) não confirma nada: não mostra resultado.
+        if(snap.observer)expect(snap.result).toBe(false);
+        else if(!snap.blocked)expect(snap.localEntries).toBe(1);
         expect(snap.localEntries+(snap.localDraft?1:0)).toBeGreaterThan(0);
         expect(snap.localEntries).toBeLessThanOrEqual(1);
       }
