@@ -4,9 +4,11 @@ import {useEffect,useRef,useState} from "react";
 import Link from "next/link";
 import styles from "../piloto/pilot.module.css";
 import {setPilotTelemetryAllowed} from "../lib/pilotConsentClient";
-import {guardedClearLocalPilotTelemetry as clearLocalPilotTelemetry} from "../lib/stateIntegrity";
+import {coordinatedClearLocalPilotTelemetry} from "../lib/stateIntegrity";
 import {openVerifiedAccount,accountFetch,verifyAccountContext,assertAccountContext} from "../lib/cloudAccountSession.js";
-import {selectAccountWorkspace} from "../lib/accountWorkspace.js";
+import {selectAccountWorkspace,workspaceAccountId} from "../lib/accountWorkspace.js";
+
+const clearLocalPilotTelemetry=()=>coordinatedClearLocalPilotTelemetry(workspaceAccountId()||"global");
 
 export default function SettingsPage(){
   const [busy,setBusy]=useState(false);
@@ -44,7 +46,7 @@ export default function SettingsPage(){
       await verifyAccountContext(context);
       if(!response.ok||!body.ok)throw new Error(body.code||"Não foi possível apagar os dados do piloto.");
       setPilotTelemetryAllowed(false);
-      clearLocalPilotTelemetry();
+      await clearLocalPilotTelemetry();
       setMessage("Dados do piloto apagados. O consentimento ficou revogado e a recolha está bloqueada. O registo técnico do consentimento é mantido apenas como prova da concessão e revogação.");
     }catch(error){setMessage(String(error?.message||error))}
     finally{setBusy(false)}

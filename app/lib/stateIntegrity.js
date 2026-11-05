@@ -10,6 +10,7 @@ import {
   loadLocalStateStatus,saveLocalState,clearLocalPilotTelemetry
 } from "./persistence.js";
 import {browserStores,readStorageRows} from "./browserStorage.js";
+import {stateWriterCoordinated,stateWritesAllowed,confirmStateWriter,reportForeignStateWrite,withExclusiveStateWrite} from "./stateWriter.js";
 
 export const STATE_INTEGRITY_EVENT="approva:state-integrity-blocked";
 const PILOT_TELEMETRY_FIELDS=["pilotAggregates","pilotItemResults","betaFeedback","betaSessions","betaEvents"];
@@ -67,7 +68,23 @@ export function guardedLoadLocalStateStatus(initial,emptyScores,storageKey=STORA
   return loadLocalStateStatus(initial,emptyScores,storageKey);
 }
 
+// P1-A (defesa em profundidade): com coordenação ativa, bytes do estado que
+// este separador não leu nem escreveu significam outro escritor (por exemplo,
+// um separador de uma versão anterior sem lock). Não se grava por cima: o
+// separador bloqueia e guarda uma cópia do que tinha (stateWriter.js).
+function foreignStateRows(key){
+  const known=trusted.get(key);
+  if(!known)return false;
+  const {rows}=readStorageRows(key);
+  return rows.some(([,raw])=>!known.has(raw));
+}
+
 function rawGuardedSave(state,storageKey,key){
+  if(stateWriterCoordinated()){
+    if(!stateWritesAllowed())return false;
+    if(foreignStateRows(key)){reportForeignStateWrite(state);return false;}
+    if(!confirmStateWriter(state))return false;
+  }
   const integrity=inspectStoredState(key);
   if(!integrity.ok){
     announce({...integrity,operation:"save"});
@@ -114,6 +131,14 @@ export function guardedClearLocalPilotTelemetry(){
   }
   for(const [key,verdict] of blocked)announce({...verdict,key,operation:"clear_pilot_telemetry"});
   return {ok:false,skipped:blocked.map(([key,v])=>({key,reason:v.reason}))};
+}
+
+// P1-A: páginas fora da app (piloto/definições) só reescrevem o estado se
+// nenhum separador da app for o escritor. Se houver escritor, este volta a
+// gravar e, com o consentimento já retirado, grava sem telemetria piloto.
+export async function coordinatedClearLocalPilotTelemetry(scope="global"){
+  const result=await withExclusiveStateWrite(scope,()=>guardedClearLocalPilotTelemetry());
+  return result.ok?result.value:{ok:false,deferred:true,skipped:[]};
 }
 
 export function resetStateIntegrityCache(){trusted.clear();lastBlock=null;lastTier=null}

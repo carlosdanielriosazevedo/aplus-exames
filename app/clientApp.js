@@ -66,7 +66,8 @@ import {migrateCloudSync} from "./lib/cloudReliability";
 import {openVerifiedAccount,newAccountState,accountContextCurrent} from "./lib/cloudAccountSession.js";
 import {downloadOwnedState} from "./lib/cloudRecovery.js";
 import {useAccountWorkspaceGuard} from "./lib/useAccountWorkspaceGuard.js";
-import {selectAccountWorkspace} from "./lib/accountWorkspace.js";
+import {selectAccountWorkspace,workspaceAccountId,legacyWorkspacePresent} from "./lib/accountWorkspace.js";
+import {startStateWriter,requestStateWriter,completeStateWriterRelease,stateWriterStatus,STATE_WRITER_EVENT} from "./lib/stateWriter.js";
 import {
   TESTER_SEGMENTS,PUBLIC_ENTRY_SEGMENTS,friendsBetaRequested,activateFriendsBeta,markFriendsBetaConsent,
   isFriendsBeta,friendsBetaReport,testerSegmentInfo,currentTesterSegment,
@@ -278,6 +279,13 @@ export default function App(){
   const [diagnosticRecoveryReady,setDiagnosticRecoveryReady]=useState(()=>!!diagnosticRecoveryModule);
   const [accountProtectionReady,setAccountProtectionReady]=useState(false);
   const accountGuard=useAccountWorkspaceGuard(accountProtectionReady);
+  // P1-A: só o separador escritor hidrata e grava. hydrationRun volta a correr
+  // a hidratação depois de uma passagem de controlo ou de uma escolha explícita.
+  const [writer,setWriter]=useState(()=>stateWriterStatus());
+  const [hydrationRun,setHydrationRun]=useState(0);
+  const legacyChoice=useRef(false);
+  const stateRef=useRef(s);stateRef.current=s;
+  const hydratedRef=useRef(false);hydratedRef.current=hydrated;
 
   useEffect(()=>{
     if(typeof window==="undefined"||!("scrollRestoration" in window.history))return;
@@ -299,8 +307,20 @@ export default function App(){
       if(accountContext){selectAccountWorkspace(accountContext);setAccountProtectionReady(true);}
       else{setScreen("accountVerificationRequired");return;}
     }
+    // P1-A: escolher o escritor antes de ler. Um observador não lê nem grava.
+    const writerStatus=await startStateWriter({
+      scope:workspaceAccountId()||"global",
+      flush:()=>!hydratedRef.current||saveLocalState(stateRef.current),
+      snapshot:()=>hydratedRef.current?stateRef.current:null
+    });
+    if(!live)return;
+    setWriter(writerStatus);
+    if(writerStatus.mode!=="writer")return;
     const loaded=loadLocalStateStatus(initial,emptyScores,storageKey);
     if(loaded.error){setRecoveryStorageKey(storageKey||"a25");setScreen("storageRecoveryError");return}
+    // P1-C: progresso anterior ao isolamento por conta (F5) nunca é atribuído
+    // automaticamente. Em vez de um perfil vazio silencioso, avisar e encaminhar.
+    if(accountContext&&!loaded.found&&!legacyChoice.current&&legacyWorkspacePresent()){setScreen("legacyProgressFound");return}
     const x=loaded.state;
     const draftPreview=x?loadSessionDraftStatus(x.betaMode||"internal").draft:null;
     const needsMathAtHydration=!!x&&(
@@ -402,7 +422,21 @@ export default function App(){
     setHydrated(true);
     })();
     return ()=>{live=false};
+  },[hydrationRun]);
+
+  useEffect(()=>{
+    if(typeof window==="undefined")return;
+    const onWriter=event=>{
+      const next=event.detail||stateWriterStatus();
+      setWriter(next);
+      if(next.mode!=="writer")setHydrated(false);
+    };
+    window.addEventListener(STATE_WRITER_EVENT,onWriter);
+    return ()=>window.removeEventListener(STATE_WRITER_EVENT,onWriter);
   },[]);
+
+  // A superfície de estudo já foi desmontada: libertar o escritor e recarregar.
+  useEffect(()=>{if(writer.mode==="releasing")completeStateWriterRelease();},[writer.mode]);
 
   useEffect(()=>{
     if(hydrated)saveLocalState(s);
@@ -499,6 +533,15 @@ export default function App(){
       :<button onClick={()=>go("account")}>Gerir conta e progresso</button>}
     <button className="secondary" onClick={accountGuard.recheck}>Voltar a verificar a mesma conta</button>
   </Shell>;
+
+  if(writer.mode==="acquiring")return <Shell><Logo/><div className="cloudLoading" data-state-writer="acquiring">A abrir o teu progresso…</div></Shell>;
+  if(writer.mode==="observer")return <StateWriterElsewhere writer={writer} onContinue={async()=>{
+    const next=await requestStateWriter();setWriter(next);
+    if(next.mode==="writer")setHydrationRun(n=>n+1);
+  }}/>;
+  if(writer.mode==="releasing"||writer.mode==="released")return <Shell><Logo/><div className="notice" role="status" data-state-writer="released"><b>Continuaste noutro separador.</b><span>Este separador deixou de guardar progresso.</span></div></Shell>;
+  if(writer.mode==="conflict")return <StateWriterConflict writer={writer}/>;
+  if(screen==="legacyProgressFound")return <LegacyProgressFound onContinue={()=>{legacyChoice.current=true;setHydrationRun(n=>n+1);}}/>;
 
   if(screen==="accountVerificationRequired")return <Shell><Logo/>
     <div className="notice"><b>Confirma a sessão para recuperar o progresso.</b><span>Os dados não foram lidos nem atribuídos a outra conta.</span><button onClick={()=>window.location.reload()}>Voltar a verificar a sessão</button></div>
@@ -2106,6 +2149,45 @@ function completionSaveFailedScreen(sessionId,tier="failed"){
   if(lastStateIntegrityBlock())return "storageRecoveryError";
   markCompletionBlocked(sessionId,durabilityFailureReason(tier));
   return "completionBlocked";
+}
+
+// P1-A: outro separador é o escritor desta área. Nada foi lido nem gravado aqui.
+function StateWriterElsewhere({writer,onContinue}){
+  const [busy,setBusy]=useState(false);
+  const waiting=busy||writer.reason==="waiting";
+  return <Shell><Logo/><div className="notice" role="status" data-state-writer="observer">
+    <b>A APProva+ está aberta noutro separador.</b>
+    <span>Para não perderes progresso, só um separador guarda o teu estudo de cada vez. Este separador não leu nem alterou nada.</span>
+    {writer.reason==="no_answer"&&<span role="alert">O outro separador não respondeu. Volta a ele ou fecha-o e tenta de novo.</span>}
+  </div>
+  <button className="primary" disabled={waiting} onClick={async()=>{setBusy(true);try{await onContinue()}finally{setBusy(false)}}}>{waiting?"A passar para este separador…":"Continuar neste separador"}</button>
+  </Shell>;
+}
+
+// P1-A: foi detetada outra escrita no progresso. Este separador parou de gravar.
+function StateWriterConflict({writer}){
+  const copy=writer.conflictCopy;
+  return <Shell><Logo/><div className="notice warning" role="alert" data-state-writer="conflict" data-conflict-copy={copy?(copy.durable?"durable":"tab"):"none"}>
+    <b>Este separador deixou de guardar progresso.</b>
+    <span>O teu progresso foi alterado noutro separador ou por outra versão da APProva+. Não substituímos nada.</span>
+    <span>{copy?"Guardámos neste dispositivo uma cópia do que estava neste separador.":"Não foi possível guardar uma cópia deste separador. Mantém-no aberto até recarregares o progresso noutro separador."}</span>
+  </div>
+  <button className="primary" onClick={()=>window.location.reload()}>Recarregar o progresso</button>
+  </Shell>;
+}
+
+// P1-C: existe progresso de uma versão anterior sem conta associada. Não é
+// lido, mostrado, migrado nem atribuído a esta conta; os dados ficam intactos.
+function LegacyProgressFound({onContinue}){
+  const [details,setDetails]=useState(false);
+  return <Shell><Logo/><div className="notice" role="status" data-legacy-progress="detected">
+    <b>Encontrámos progresso de uma versão anterior neste dispositivo.</b>
+    <span>Foi guardado antes de cada conta ter a sua área própria, por isso não sabemos a quem pertence. Não o abrimos nesta conta e não o apagámos.</span>
+    {details&&<span data-legacy-progress="recovery">Se esse progresso é teu, não o percas: não limpes os dados do browser. A recuperação só é feita depois de confirmarmos a quem pertence; fala com a equipa da beta da APProva+.</span>}
+  </div>
+  <button className="primary" onClick={onContinue}>Começar nesta conta sem esse progresso</button>
+  {!details&&<button className="secondary" onClick={()=>setDetails(true)}>O progresso antigo é meu</button>}
+  </Shell>;
 }
 
 function StorageRecoveryNotice(){
