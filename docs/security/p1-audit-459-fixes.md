@@ -73,6 +73,17 @@ preserva e encaminha.
 - Chromium com contas: `tests/scripts/p1-audit-account-browser-contract.mjs`
   (`P1_SOURCE_ROOT=<árvore>` permite correr a mesma prova contra o SHA original).
 
+### Testes existentes adaptados (commit separado `test(P1-A)`)
+
+`recovery-integrity.spec.mjs` e `storage-durability.spec.mjs` ("duas abas a entregar a
+mesma sessão", 390 e 1366 px) partiam de duas abas ativas a entregar em simultâneo —
+o cenário que a P1-A elimina. As asserções de invariante ficam iguais (uma conclusão,
+sem duplicação, sem confirmação falsa); acrescenta-se a pré-condição "a segunda aba é
+observadora e não pode entregar" e, em recovery-integrity, a verificação depois da
+passagem de controlo. A corrida D3 com dois donos (que ainda pode ocorrer com um
+separador de versão anterior ou sem Web Locks) continua coberta em
+`tests/unit/recoveryIntegrity.test.mjs`. Revisão independente recomendada.
+
 ## Trabalho P2 ainda necessário
 
 - Restauro F7 (`LocalSnapshotRecovery.js`) continua a gravar com `persistence.saveLocalState`
