@@ -331,6 +331,28 @@ describe("P1-A · sem Web Locks: só leitura, nenhuma gravação académica",()=
 // use() sem voltar a definir localStorage (o teste acima torna-o inacessível).
 function use2(tab){use(tab);}
 
+describe("P1-A · mandato sem armazenamento partilhado",()=>{
+  it("localStorage bloqueado: o mandato regista local:false; ao recuperar o armazenamento, o seguinte não fica retido",async()=>{
+    const descriptor=Object.getOwnPropertyDescriptor(globalThis,"localStorage");
+    const a=await openTab("A",{coordinated:false});
+    Object.defineProperty(globalThis,"localStorage",{configurable:true,get(){throw new DOMException("synthetic","SecurityError")}});
+    try{
+      use(a);const status=await a.w.startStateWriter({scope:ACCOUNT});
+      expect(status.mode).toBe("writer");
+      expect([...register.map.values()][0].local).toBe(false);
+      expect(a.i.guardedSaveLocalState({...seed,xp:7})).toBe(true);   // só no sessionStorage deste separador
+    }finally{
+      if(descriptor)Object.defineProperty(globalThis,"localStorage",descriptor);else delete globalThis.localStorage;
+    }
+    // armazenamento partilhado volta a meio do mandato: o escritor para
+    use(a);expect(a.i.guardedSaveLocalState({...seed,xp:8})).toBe(false);
+    expect(mode(a)).toBe("conflict");
+    use(a);a.w.resetStateWriterForTests();await settle(5);
+    const b=await openTab("B");
+    expect(mode(b),"sem escritas partilhadas possíveis, não há o que provar").toBe("writer");
+  });
+});
+
 describe("P1-A · página sem escritor (protótipo de Português)",()=>{
   it("bloqueio da página: nenhuma gravação académica, incluindo memória de escrita",async()=>{
     await seedStored();

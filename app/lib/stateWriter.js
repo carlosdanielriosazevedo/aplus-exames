@@ -55,7 +55,7 @@ const tabId=`writer-${Date.now().toString(36)}-${Math.random().toString(36).slic
 let status={mode:"inactive",scope:null,method:null,reason:null,conflictCopy:null};
 let options={flush:()=>true,snapshot:()=>null};
 let releaseLock=null,channel=null,listening=false,starting=null,releaseTimer=null,holdTimer=null;
-let epoch=null,seq=0,lastStamp=null,hadMandate=false,expectedMandate=undefined;
+let epoch=null,seq=0,lastStamp=null,hadMandate=false,expectedMandate=undefined,mandateLocal=null;
 
 // ---------------------------------------------------------------- registo do mandato
 const REGISTER_DB="approva-state-writer-v1",REGISTER_STORE="mandates";
@@ -138,6 +138,9 @@ export function evaluateStateView(expected=expectedMandate){
   if(expected===undefined)return {verdict:"pending",reason:"register_unread"};
   if(expected===null)return {verdict:"proven"}; // nunca houve escritor coordenado
   if(expected.tab===tabId&&lastStamp&&expected.epoch===lastStamp.epoch)return {verdict:"proven",own:true};
+  // Um mandato sem acesso ao localStorage só gravou no sessionStorage do seu
+  // separador: não pode haver escritas partilhadas suas ainda a caminho.
+  if(expected.local===false)return {verdict:"proven",reason:"previous_mandate_without_shared_storage"};
   const view=viewOfState(store);if(view===null)return {verdict:"pending",reason:"unreadable_view"};
   const seal=readJson(store.getItem(scopedKey(STATE_SEAL_KEY)))||null;
   if(!seal||seal.tab!==expected.tab||seal.epoch!==expected.epoch||seal.final!==true)return {verdict:"pending",reason:"no_seal"};
@@ -221,10 +224,11 @@ async function startMandate(){
   }
   // Mandato novo, registado e confirmado antes da primeira gravação.
   const next=newEpoch();
-  try{await mandateRegister.write(registerKey(),{tab:tabId,epoch:next,at:Date.now()});}
+  const local=!!rawLocal();
+  try{await mandateRegister.write(registerKey(),{tab:tabId,epoch:next,at:Date.now(),local});}
   catch{releaseHeldLock();set({mode:"readonly",reason:"register_unavailable"});return;}
   if(status.mode!=="verifying")return;
-  epoch=next;seq=0;lastStamp={tab:tabId,epoch,seq:0};expectedMandate={tab:tabId,epoch};
+  epoch=next;seq=0;lastStamp={tab:tabId,epoch,seq:0};expectedMandate={tab:tabId,epoch,local};mandateLocal=local;
   hadMandate=true;
   set({mode:"writer",reason:null});
 }
@@ -264,9 +268,13 @@ function lose(reason,state=null,foreign=null){
 function safeSnapshot(){try{return options.snapshot()}catch{return null}}
 
 // Chamado por stateIntegrity antes de cada gravação do estado.
-export function confirmStateWriter(){
+export function confirmStateWriter(state){
   if(status.mode==="inactive")return true;
-  return status.mode==="writer";
+  if(status.mode!=="writer")return false;
+  // Mandato registado sem localStorage: se ele aparecer a meio, parar em vez de
+  // gravar em armazenamento partilhado sem registo.
+  if(mandateLocal===false&&rawLocal()){lose("shared_storage_appeared",state);return false;}
+  return true;
 }
 // Na hidratação (já como escritor): cópias de separador da versão anterior
 // iguais ao estado guardado são removidas; diferentes passam a cópias de
@@ -459,5 +467,5 @@ export function resetStateWriterForTests(){
   if(holdTimer){clearTimeout(holdTimer);holdTimer=null;}
   status={mode:"inactive",scope:null,method:null,reason:null,conflictCopy:null};
   options={flush:()=>true,snapshot:()=>null};
-  epoch=null;seq=0;lastStamp=null;hadMandate=false;expectedMandate=undefined;
+  epoch=null;seq=0;lastStamp=null;hadMandate=false;expectedMandate=undefined;mandateLocal=null;
 }
