@@ -331,6 +331,21 @@ describe("P1-A · sem Web Locks: só leitura, nenhuma gravação académica",()=
 // use() sem voltar a definir localStorage (o teste acima torna-o inacessível).
 function use2(tab){use(tab);}
 
+describe("P1-A · página sem escritor (protótipo de Português)",()=>{
+  it("bloqueio da página: nenhuma gravação académica, incluindo memória de escrita",async()=>{
+    await seedStored();
+    const page=await openTab("prototipo",{coordinated:false});
+    use(page);page.w.blockAcademicWritesOnThisPage("prototype_without_writer");
+    const memory=await import("../../app/lib/portugueseWritingMemory.js");
+    use(page);
+    const before=JSON.stringify([...local.data.entries()].sort());
+    expect(memory.savePortugueseWritingMemory([{attemptId:"synthetic",criterionId:"c1",status:"weak",at:1}])).toBe(false);
+    expect(page.i.guardedSaveLocalState({...seed,xp:9})).toBe(false);
+    expect(page.drafts.saveSessionDraft({kind:"mission",betaMode:"internal",sessionId:"x",responses:[]})).toBe(false);
+    expect(JSON.stringify([...local.data.entries()].sort())).toBe(before);
+  });
+});
+
 describe("P1-A · páginas piloto/definições",()=>{
   it("limpeza da telemetria é adiada para o escritor quando a app está aberta",async()=>{
     await seedStored();

@@ -440,6 +440,14 @@ export async function withExclusiveStateWrite(scope,write){
   }finally{if(status.mode==="inactive")status.scope=previous;}
 }
 
+// Páginas sem coordenação de escritor (p. ex. o protótipo público de Português):
+// bloquear todas as gravações académicas desta página (accountWorkspace recusa).
+export function blockAcademicWritesOnThisPage(reason="page_without_writer"){
+  if(status.mode!=="inactive")return stateWriterStatus();
+  status={...status,mode:"readonly",method:"page",reason};
+  return stateWriterStatus();
+}
+
 // Apenas para testes unitários.
 export function resetStateWriterForTests(){
   releaseHeldLock();starting=null;

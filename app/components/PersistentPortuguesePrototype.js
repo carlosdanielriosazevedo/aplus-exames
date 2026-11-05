@@ -4,6 +4,7 @@ import PortuguesePassageMiniExam from "./PortuguesePassageMiniExam";
 import {openVerifiedAccount} from "../lib/cloudAccountSession.js";
 import {selectAccountWorkspace,accountStorageKey,workspaceAccountId} from "../lib/accountWorkspace.js";
 import {useAccountWorkspaceGuard} from "../lib/useAccountWorkspaceGuard.js";
+import {blockAcademicWritesOnThisPage} from "../lib/stateWriter.js";
 
 // Chave histórica, global ao dispositivo, e chave por conta da #460.
 // P1-B: a chave global nunca é aberta noutra conta.
@@ -24,6 +25,8 @@ export default function PersistentPortuguesePrototype({exam}){
   const guard=useAccountWorkspaceGuard(view?.mode==="account");
   useEffect(()=>{
     let live=true;
+    // Nada desta página grava no dispositivo (rascunho, memória de escrita…).
+    blockAcademicWritesOnThisPage("prototype_without_writer");
     (async()=>{
       let mode="device",saved=false;
       const legacy=accountsEnabled()&&present(PROTOTYPE_LEGACY_KEY);
@@ -57,6 +60,6 @@ export default function PersistentPortuguesePrototype({exam}){
     <p role="status" data-prototype-notice="no-persistence">Neste protótipo as respostas não são guardadas: se fechares ou recarregares a página, perdes as respostas desta tentativa.</p>
     {view.saved&&<p role="status" data-prototype-saved="preserved">Há uma tentativa anterior guardada neste dispositivo. Não foi aberta nem alterada.</p>}
     {view.legacy&&<p role="status" data-prototype-legacy="preserved">Há uma tentativa antiga deste mini-exame guardada neste dispositivo sem conta associada. Não a abrimos nesta conta e não a apagámos.</p>}
-    <PortuguesePassageMiniExam exam={exam} examId="mini-1" initialDraft={null} onDraftChange={null} persistWritingMemory={false}/>
+    <PortuguesePassageMiniExam exam={exam} examId="mini-1" initialDraft={null} onDraftChange={null}/>
   </div>;
 }
