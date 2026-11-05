@@ -46,15 +46,22 @@ assert.deepEqual(combined.dailyMission,local.dailyMission);
 assert.equal(combined.scores.t1.conf,0);
 
 const cloudSource=readFileSync("app/lib/cloud.js","utf8");
-assert.ok(cloudSource.includes('.eq("revision",Number(expectedRevision)||0)'),"Save cloud perdeu compare-and-swap por revisão.");
+const cloudApi=readFileSync("app/api/cloud/state/route.js","utf8");
+const cloudStore=readFileSync("app/lib/server/cloud-state-store.js","utf8");
+const cloudMigration=readFileSync("db/migrations/009_v5_8_neon_rls_history_hardening.sql","utf8");
+assert.ok(cloudSource.includes('fetch("/api/cloud/state"'),"A cloud tem de sincronizar pelo endpoint autenticado.");
 assert.ok(cloudSource.includes("knownRemote"),"Revision 0 deixou de distinguir primeira gravação de base remota conhecida.");
-assert.ok(cloudSource.includes("CLOUD_SCHEMA_OUTDATED"),"Cloud deixou de bloquear sync quando a migration de revisões não está aplicada.");
+assert.ok(cloudSource.includes("if(!response.ok||!result?.ok)"),"Erro de schema/rede não pode ser tratado como gravação bem-sucedida.");
 assert.ok(cloudSource.includes('fetch("/api/auth/token"'),"Data API deixou de obter o JWT pela sessão da app.");
-assert.ok(cloudSource.includes('credentials:"include"'),"Pedido do token deixou de enviar a sessão autenticada.");
-assert.ok(cloudSource.includes("getToken:currentDataApiJwt"),"Data API deixou de exigir o JWT atual.");
-assert.ok(cloudSource.includes("auth_user_id:session.user.id"),"Escrita cloud deixou de fixar auth_user_id ao utilizador autenticado.");
-assert.ok(cloudSource.includes('.eq("auth_user_id",session.user.id)'),"Leitura/escrita cloud perdeu o filtro pelo utilizador autenticado.");
-assert.ok(cloudSource.includes("currentRemoteRow(client,session.user.id)"),"Verificação de revisão remota deixou de usar o utilizador autenticado.");
+assert.ok(cloudSource.includes('credentials:"include"'),"Pedidos cloud devem enviar apenas cookies da sessão autenticada.");
+assert.ok(cloudSource.includes("getToken:currentDataApiJwt"),"Leituras legadas Data API devem exigir JWT atual.");
+assert.ok(cloudApi.includes("requireSession()"),"O servidor tem de validar a sessão antes de usar a ligação privilegiada.");
+assert.ok(cloudApi.includes("sameOriginRequest(request)"),"O POST tem de validar a origem contra CSRF.");
+assert.ok(cloudStore.includes("auth_user_id=${authUserId}"),"O SQL deve usar somente o sujeito da sessão validada.");
+assert.ok(cloudStore.includes("revision=${expectedRevision}"),"CAS atómico tem de exigir a revisão anterior.");
+assert.ok(cloudStore.includes("revision=revision+1"),"Revisão tem de ser incrementada pelo servidor.");
+assert.ok(cloudStore.includes("on conflict (auth_user_id) do nothing"),"Primeiro INSERT não pode substituir uma linha existente.");
+assert.ok(cloudMigration.includes("REVOKE ALL ON TABLE public.student_cloud_state FROM authenticated, anonymous, PUBLIC"),"Data API não pode continuar a escrever diretamente o progresso.");
 assert.ok(!/auth_user_id\s*:\s*s(?:\.|\[)/.test(cloudSource),"auth_user_id passou a poder vir do estado controlado pelo cliente.");
 const payloadStart=cloudSource.indexOf("export function studentStateForCloud");
 const payloadEnd=cloudSource.indexOf("export function mergeStudentCloudState");
@@ -68,7 +75,7 @@ assert.ok(payloadSource.includes("subjectProgress:s.subjectProgress||{}"),"Paylo
 assert.ok(payloadSource.includes("subjectProgressModelVersion:s.subjectProgressModelVersion||4"),"Payload cloud perdeu a versão do progresso por disciplina.");
 assert.ok(cloudSource.includes('"currentAnswer"'),"A limpeza de texto livre do aluno deve abranger respostas ainda não submetidas.");
 assert.ok(cloudSource.includes("subjectProgress:remote.subjectProgress??local.subjectProgress"),"Carregar cloud deve restaurar o progresso por disciplina quando existe remotamente.");
-assert.ok((cloudSource.match(/\.from\("student_cloud_state"\)/g)||[]).length>=4,"Cobertura esperada das operações de student_cloud_state diminuiu inesperadamente.");
+assert.ok(!cloudSource.includes('.from("student_cloud_state")'),"Browser continua a executar Data API diretamente para student_cloud_state.");
 assert.ok(!cloudSource.includes('.from("student_cloud_state").delete('),"DELETE direto de progresso exige revisão explícita de segurança.");
 
 const walk=dir=>readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?walk(new URL(`${entry.name}/`,dir)):[new URL(entry.name,dir)]);
@@ -76,9 +83,14 @@ const walk=dir=>readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDir
 // Estado FINAL das migrations: CREATE adiciona; DROP remove. A ordem do nome do ficheiro é o contrato.
 const migrationUrls=walk(new URL("../db/migrations/",import.meta.url)).filter(url=>url.pathname.endsWith(".sql")).sort((a,b)=>a.pathname.localeCompare(b.pathname));
 const finalTables=new Set();
+const definedSqlFunctions=new Set();
+const functionDdlRe=/\bcreate\s+(?:or\s+replace\s+)?function\s+(?:public\.)?"?([a-zA-Z_][a-zA-Z0-9_]*)"?\s*\(/giu;
 const ddlRe=/\b(create|drop)\s+table\s+(?:if\s+(?:not\s+)?exists\s+)?(?:public\.)?"?([a-zA-Z_][a-zA-Z0-9_]*)"?/giu;
 for(const url of migrationUrls){
   const sql=readFileSync(url,"utf8");
+  for(const match of sql.matchAll(functionDdlRe)){
+    definedSqlFunctions.add(match[1].toLowerCase());
+  }
   for(const match of sql.matchAll(ddlRe)){
     const table=match[2].toLowerCase();
     if(match[1].toLowerCase()==="create")finalTables.add(table);else finalTables.delete(table);
@@ -95,7 +107,7 @@ for(const url of serverUrls){
   for(const tagged of source.matchAll(/sql`([\s\S]*?)`/gu)){
     for(const match of tagged[1].matchAll(sqlRefRe)){
       const table=(match[1]||match[2]).toLowerCase();
-      if(!finalTables.has(table)&&!CTE_ALLOWLIST.has(table))missing.push(`${table} ← ${fileURLToPath(url)}`);
+      if(!finalTables.has(table)&&!definedSqlFunctions.has(table)&&!CTE_ALLOWLIST.has(table))missing.push(`${table} ← ${fileURLToPath(url)}`);
     }
   }
 }

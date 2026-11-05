@@ -1,3 +1,6 @@
+import {scopedLocalStorage,workspaceAccountId} from "./accountWorkspace.js";
+import {currentVerifiedAccount} from "./cloudAccountSession.js";
+
 export const GRADER_VALIDATION_DATASET_SCHEMA="aplus-grader-validation-dataset-v1";
 export const GRADER_VALIDATION_STORAGE_KEY="aplus-grader-validation-local-v1";
 export const GRADER_VALIDATION_EXPORT_SCHEMA="aplus-grader-validation-export-v1";
@@ -81,29 +84,35 @@ export function thresholdTuningCases(rows=[]){
   return calibrationCases(rows);
 }
 
+export function validationDataStorage(){
+  const owner=workspaceAccountId();
+  return owner&&currentVerifiedAccount()?.subject===owner?scopedLocalStorage():null;
+}
 export function loadLocalValidationDataset(){
-  if(typeof localStorage==="undefined")return [];
-  try{
-    const parsed=JSON.parse(localStorage.getItem(GRADER_VALIDATION_STORAGE_KEY)||"[]");
-    return Array.isArray(parsed)?parsed:[];
-  }catch{return []}
+  const store=validationDataStorage();if(!store)return [];
+  const raw=store.getItem(GRADER_VALIDATION_STORAGE_KEY);if(raw===null)return [];
+  const value=JSON.parse(raw);
+  if(value?.format!=="aplus-owned-validation-v1"||value.accountId!==workspaceAccountId()||!Array.isArray(value.cases)||!value.cases.every(row=>row&&typeof row==="object"&&typeof row.case_id==="string"&&typeof row.student_response==="string"))
+    throw new Error("VALIDATION_ORIGIN_UNPROVEN");
+  return value.cases;
 }
 
 export function appendClosedBetaValidationCase(row,{consent=false}={}){
-  if(!consent)return {ok:false,code:"VALIDATION_CONSENT_REQUIRED",count:loadLocalValidationDataset().length};
-  if(row?.source!=="closed_beta_real")return {ok:false,code:"REAL_BETA_SOURCE_REQUIRED",count:loadLocalValidationDataset().length};
-  if(typeof localStorage==="undefined")return {ok:false,code:"LOCAL_STORAGE_UNAVAILABLE",count:0};
-  const current=loadLocalValidationDataset();
+  if(!consent)return {ok:false,code:"VALIDATION_CONSENT_REQUIRED",count:0};
+  if(row?.source!=="closed_beta_real")return {ok:false,code:"REAL_BETA_SOURCE_REQUIRED",count:0};
+  const store=validationDataStorage();if(!store)return {ok:false,code:"VALIDATION_ORIGIN_UNPROVEN",count:0};
+  let current;try{current=loadLocalValidationDataset();}catch{return {ok:false,code:"VALIDATION_ORIGIN_UNPROVEN",count:0};}
   const byId=new Map(current.map(x=>[x.case_id,x]));
   byId.set(row.case_id,row);
   const next=[...byId.values()];
-  localStorage.setItem(GRADER_VALIDATION_STORAGE_KEY,JSON.stringify(next));
+  try{store.setItem(GRADER_VALIDATION_STORAGE_KEY,JSON.stringify({format:"aplus-owned-validation-v1",accountId:workspaceAccountId(),cases:next}));}
+  catch{return {ok:false,code:"LOCAL_STORAGE_UNAVAILABLE",count:current.length};}
   return {ok:true,count:next.length};
 }
 
 export function clearLocalValidationDataset(){
-  if(typeof localStorage==="undefined")return false;
-  localStorage.removeItem(GRADER_VALIDATION_STORAGE_KEY);
+  const store=validationDataStorage();if(!store)return false;
+  try{store.removeItem(GRADER_VALIDATION_STORAGE_KEY)}catch{return false}
   return true;
 }
 
