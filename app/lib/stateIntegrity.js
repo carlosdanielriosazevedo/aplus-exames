@@ -10,6 +10,7 @@ import {
   loadLocalStateStatus,saveLocalState,clearLocalPilotTelemetry
 } from "./persistence.js";
 import {browserStores,readStorageRows} from "./browserStorage.js";
+import {safeLocalStorage} from "./safeStorage.js";
 import {stateWriterCoordinated,stateWritesAllowed,confirmStateWriter,reportForeignStateWrite,withExclusiveStateWrite,noteStateWritten,reconcileStateTabCopies} from "./stateWriter.js";
 
 export const STATE_INTEGRITY_EVENT="approva:state-integrity-blocked";
@@ -95,7 +96,7 @@ function rawGuardedSave(state,storageKey,key){
     const {rows}=readStorageRows(key);
     trusted.set(key,new Set(rows.map(([,raw])=>raw)));
     // P1-A sem Web Locks: guardar os bytes escritos numa cópia do separador.
-    const durable=rows.find(([store])=>(store?.source||store)===globalThis.localStorage);
+    const local=safeLocalStorage(),durable=local&&rows.find(([store])=>(store?.source||store)===local);
     if(durable&&!noteStateWritten(key,durable[1],state))return false;
   }
   return ok;
@@ -143,7 +144,7 @@ export function guardedClearLocalPilotTelemetry(){
 // guardado passam a cópias de conflito (nunca apagadas) e são assinaladas.
 export function reconcileTabCopiesAtHydration(storageKey=STORAGE_KEY){
   const {rows}=readStorageRows(storageKey);
-  const durable=rows.find(([store])=>(store?.source||store)===globalThis.localStorage);
+  const local=safeLocalStorage(),durable=local&&rows.find(([store])=>(store?.source||store)===local);
   return reconcileStateTabCopies(storageKey,durable?durable[1]:null);
 }
 
