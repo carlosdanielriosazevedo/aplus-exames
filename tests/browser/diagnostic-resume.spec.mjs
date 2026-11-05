@@ -529,6 +529,15 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
     context=await chromium.launchPersistentContext(directory,options);
     page=context.pages()[0];
     await page.goto(testInfo.project.use.baseURL+"/");
+    // P1-A (auditoria #459): fechar o Chromium assim não corre pagehide nem
+    // visibilitychange — não há selo final, tal como num crash. Sem prova, a nova
+    // sessão não grava: mostra a retenção e só continua por decisão explícita,
+    // depois de guardar uma cópia. A tentativa tem de estar intacta antes e depois.
+    const hold=page.locator("[data-state-writer='recovery-hold']");
+    await expect(hold).toBeVisible({timeout:30_000});
+    expect(await snapshot(page),"nada gravado antes da decisão").toEqual(before);
+    await page.getByRole("button",{name:"Continuar neste separador",exact:true}).click();
+    await page.getByRole("button",{name:"Guardar cópia e continuar aqui",exact:true}).click();
     await expect(page.locator(".sessionTop, .studentTop").first()).toBeVisible({timeout:30_000});
     await expect.poll(()=>snapshot(page)).toEqual(before);
    }finally{await context.close();rmSync(directory,{recursive:true,force:true})}
