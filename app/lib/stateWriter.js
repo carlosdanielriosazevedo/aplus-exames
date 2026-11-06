@@ -51,7 +51,7 @@ export const STATE_WRITER_TIMING={
 };
 
 const tabId=`writer-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,10)}`;
-const blankStatus=()=>({mode:"inactive",scope:null,method:null,reason:null,conflictCopy:null,receivedCopy:null,legacy:null});
+const blankStatus=()=>({mode:"inactive",scope:null,method:null,reason:null,conflictCopy:null,receivedCopy:null,legacy:null,unsaved:null});
 let status=blankStatus();
 let options={flush:()=>true,snapshot:()=>null};
 let releaseLock=null,channel=null,listening=false,starting=null,releaseTimer=null,holdTimer=null;
@@ -59,6 +59,10 @@ let epoch=null,seq=0,lastStamp=null,hadMandate=false,expectedMandate=undefined,m
 let exclusiveDepth=0;
 // Últimos bytes de cada chave académica canónica vistos/escritos por este escritor.
 const lastKnown=new Map();
+// Conjunto deste separador no momento em que parou de gravar por falha de leitura
+// (inclui a gravação que falhou). Fica em memória para poder ser descarregado
+// mesmo que nenhuma cópia caiba no armazenamento.
+let unsavedSet=null;
 
 // ---------------------------------------------------------------- registo do mandato
 const REGISTER_DB="approva-state-writer-v2",REGISTER_STORE="mandates";
@@ -133,22 +137,56 @@ function resetBaseline(store=rawLocal()){
 // que (1) não há diário de restauro pendente e (2) os bytes atuais são os últimos
 // que este escritor viu. Leitura impossível, chave fora da linha de base ou
 // diário presente/ilegível = recusa.
-export function confirmAcademicWrite(full,store=rawLocal()){
+// next: bytes que o chamador vai gravar (null = remoção; undefined = desconhecido).
+export function confirmAcademicWrite(full,store=rawLocal(),next=undefined){
   // Sem coordenação e fora do espaço canónico (servidor, harness #385): formato anterior.
   if(status.mode==="inactive"&&exclusiveDepth===0)return true;
   if(status.mode!=="writer"&&status.mode!=="inactive")return false;
   const journal=restoreJournalState(scope(),store);
-  if(journal.state!=="none"){if(status.mode==="writer")haltForPendingRestore(journal);return false;}
+  if(journal.state!=="none"){
+    if(status.mode==="writer"){
+      // Diário ilegível = falha de leitura, não um restauro (a mensagem não pode dizer que houve um).
+      const readFailure=journal.reason==="journal_unreadable"||journal.reason==="storage_unavailable";
+      haltWriting({reason:readFailure?"storage_read_failed":"restore_incomplete",restore:{status:"blocked",reason:journal.reason||"journal_pending"},full,next});
+    }
+    return false;
+  }
   // Escrita exclusiva de outra página: com o lock e a vista provada (withExclusiveStateWrite).
   if(status.mode==="inactive")return true;
   if(!lastKnown.has(full))return false;
-  let current=null;try{current=store.getItem(full)}catch{return false}
+  let current=null;try{current=store.getItem(full)}catch{haltWriting({reason:"storage_read_failed",full,next});return false}
   if((current??null)!==lastKnown.get(full)){lose("foreign_write");return false;}
   return true;
 }
-function haltForPendingRestore(journal){
-  releaseHeldLock();
-  set({mode:"readonly",reason:"restore_incomplete",restore:{status:"blocked",reason:journal.reason||"journal_pending"}});
+// Parar de gravar por falha de leitura ou diário detetado a meio da sessão, sem
+// perder em silêncio o que ainda não foi gravado (auditoria, X7): o conjunto deste
+// separador (últimos bytes vistos + estado em memória + a gravação que falhou) é
+// guardado numa cópia — durável se couber, senão só neste separador — e fica
+// descarregável a partir da memória. O separador sela (o próximo prova a vista sem
+// retenção) e passa a só consulta. unsaved.tier:
+//   "saved"   o guardado já é igual ao deste separador (nada por gravar);
+//   "durable" a diferença ficou numa cópia de recuperação neste dispositivo;
+//   "tab"     só numa cópia temporária deste separador (perde-se ao fechar);
+//   "failed"  não coube em lado nenhum: só em memória, descarregável.
+function haltWriting({reason,restore=null,full=null,next=undefined}){
+  if(status.mode!=="writer")return;
+  const keys=knownSet();
+  const short=full?ACADEMIC_KEYS.find(key=>canonicalKey(key,scope())===full):null;
+  if(short&&next!==undefined)keys[short]=next===null?null:String(next);
+  unsavedSet=keys;
+  let stored=null;try{stored=canonicalSet(scope(),rawLocal())}catch{stored=null}
+  let copy=null,tier="saved";
+  if(!stored||!sameSet(stored,keys)){
+    copy=writeRecoveryCopy({scope:scope(),reason:`write_halted:${reason}`,keys,tab:tabId,dedupe:"reason"});
+    tier=copy?(copy.durable?"durable":"tab"):"failed";
+  }
+  writeSeal();releaseHeldLock();
+  set({mode:"readonly",reason,restore,unsaved:{tier,copy:copy?.key||null,key:short||null,at:Date.now()}});
+}
+// Descarregar o conjunto deste separador depois de uma paragem (mesmo sem cópia).
+export function exportUnsavedTabSet(){
+  if(!unsavedSet)return null;
+  return JSON.stringify({format:"aplus-state-recovery-copy-v2",exportedAt:new Date().toISOString(),id:null,reason:"unsaved_tab_export",at:Date.now(),scope:scope(),keys:unsavedSet},null,2);
 }
 export function noteAcademicWrite(full,raw){if(status.mode==="writer"&&lastKnown.has(full))lastKnown.set(full,raw??null);}
 // Conjunto "deste separador": os últimos bytes que viu/escreveu, com o estado
@@ -605,5 +643,5 @@ export function resetStateWriterForTests(){
   if(holdTimer){clearTimeout(holdTimer);holdTimer=null;}
   status=blankStatus();
   options={flush:()=>true,snapshot:()=>null};
-  epoch=null;seq=0;lastStamp=null;hadMandate=false;expectedMandate=undefined;mandateLocal=null;exclusiveDepth=0;lastKnown.clear();
+  epoch=null;seq=0;lastStamp=null;hadMandate=false;expectedMandate=undefined;mandateLocal=null;exclusiveDepth=0;lastKnown.clear();unsavedSet=null;
 }

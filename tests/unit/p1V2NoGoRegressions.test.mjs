@@ -314,14 +314,19 @@ describe("NO-GO #462 · r4 — quota cheia em retenção",()=>{
 
 describe("NO-GO #462 · r5 — fail-closed nas 9 chaves académicas (M4)",()=>{
   it("leitura falhada, chave fora da linha de base ou diário presente: nenhuma das 9 chaves é gravada",async()=>{
-    const {a}=await prepareWith();
+    let {a}=await prepareWith();
     for(const k of KEYS){
       const bytes=canonical.get(C(k))??null;
       a.getFault=key=>key===C(k)?"throw":null;
       use(a);expect(()=>a.ws.scopedLocalStorage().setItem(k,"synthetic"),`leitura falhada: ${k}`).toThrow();
       a.getFault=null;
       expect(canonical.get(C(k))??null,`bytes de ${k}`).toBe(bytes);
-      expect(mode(a)).toBe("writer");
+      // Correções residuais (X7): a leitura falhada pára o separador (já não continua
+      // como escritor em silêncio) e a gravação recusada fica numa cópia.
+      use(a);const st=a.w.stateWriterStatus();
+      expect(st.mode,`paragem: ${k}`).toBe("readonly");expect(st.reason).toBe("storage_read_failed");
+      expect(JSON.parse(canonical.get(st.unsaved.copy)).keys[k],`gravação recusada guardada: ${k}`).toBe("synthetic");
+      closeClean(a);a=await open(`A-${k}`);expect(mode(a)).toBe("writer");
     }
     use(a);expect(()=>a.ws.accountStorage(a.local,"synthetic-other").setItem("a25","{}"),"outra área sem lock").toThrow();
     expect(canonical.has("a25-ws-v2:acct:synthetic-other:a25")).toBe(false);

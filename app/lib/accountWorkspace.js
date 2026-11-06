@@ -35,17 +35,19 @@ export function accountStorage(store,subject=selected){
   const guard=()=>{if(!stateWritesAllowed())throw writeBlocked();};
   // P1-A v2: antes de cada escrita académica em armazenamento partilhado, os
   // bytes atuais têm de ser os últimos que este separador viu ou escreveu.
-  const confirm=key=>{
+  // next: os bytes a gravar (null = remoção), para que uma paragem por falha de
+  // leitura os guarde em cópia em vez de os perder (stateWriter.haltWriting).
+  const confirm=(key,next)=>{
     if(!isAcademicKey(key)||!isDurable(store))return null;
     const full=accountStorageKey(key,subject);
-    if(!confirmAcademicWrite(full,store))throw foreignBytes();
+    if(!confirmAcademicWrite(full,store,next))throw foreignBytes();
     return full;
   };
   return {
     source:store,
     getItem:key=>store.getItem(accountStorageKey(key,subject)),
-    setItem:(key,value)=>{guard();const full=confirm(key);const result=store.setItem(accountStorageKey(key,subject),value);if(full)noteAcademicWrite(full,String(value));return result;},
-    removeItem:key=>{guard();const full=confirm(key);const result=store.removeItem(accountStorageKey(key,subject));if(full)noteAcademicWrite(full,null);return result;}
+    setItem:(key,value)=>{guard();const full=confirm(key,String(value));const result=store.setItem(accountStorageKey(key,subject),value);if(full)noteAcademicWrite(full,String(value));return result;},
+    removeItem:key=>{guard();const full=confirm(key,null);const result=store.removeItem(accountStorageKey(key,subject));if(full)noteAcademicWrite(full,null);return result;}
   };
 }
 export function scopedLocalStorage(){
