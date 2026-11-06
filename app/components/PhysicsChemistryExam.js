@@ -7,6 +7,8 @@ import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./P
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
+import {saveLocalStateDurably,durabilityFailureReason,lastStateIntegrityBlock} from "../lib/stateIntegrity";
+import {markCompletionBlocked} from "../lib/reliability";
 import {hasPhysicsChemistryExamDraft,clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";
 
 const SUBJECT_ID="physics-chemistry-a";
@@ -91,15 +93,23 @@ export default function PhysicsChemistryExam({s,setS,go}){
 
   function saveReviewAndExit(){
     if(!recordedRef.current){
-      recordedRef.current=true;
-      setS(prev=>recordSubjectSession(prev,{
+      // A avaliação tem de ficar gravada de forma durável antes de apagar o rascunho.
+      const next=recordSubjectSession(s,{
         subjectId:SUBJECT_ID,
         kind:"full_exam",
         label:blueprint.label,
         items:rows,
         results,
         sessionId:"fqa-full-"+startedAt
-      }));
+      });
+      const durable=saveLocalStateDurably(next);
+      if(!durable.ok){
+        markCompletionBlocked(null,durabilityFailureReason(durable.tier));
+        go(lastStateIntegrityBlock()?"storageRecoveryError":"completionBlocked");
+        return;
+      }
+      recordedRef.current=true;
+      setS(next);
     }
     clearPhysicsChemistryExamDraft(examId);
     go("exams");

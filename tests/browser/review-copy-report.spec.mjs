@@ -21,5 +21,5 @@ test("content report records a problem without promising human review",async({pa
   const receipt=page.locator(".reportThanks");
   await expect(receipt).toHaveText("✓ Obrigado. O problema ficou registado.");
   await expect(receipt).not.toContainText(/sinalizad.*revisão|revisão humana/i);
-  await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem("a25"))?.contentReports?.length)).toBe(1);
+  await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem("a25-ws-v2:global:a25"))?.contentReports?.length)).toBe(1);
 });
