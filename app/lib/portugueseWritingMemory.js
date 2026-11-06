@@ -1,3 +1,5 @@
+import {scopedLocalStorage} from "./accountWorkspace.js";
+
 export const PORTUGUESE_WRITING_MEMORY_KEY="approva.portuguese-writing-memory.v1";
 export const PORTUGUESE_WRITING_MEMORY_LIMIT=40;
 export const PORTUGUESE_WRITING_PROFILE_MIN_ATTEMPTS=3;
@@ -153,12 +155,12 @@ export function assessmentMovement(previous={},current={}){
   });
 }
 
-export function loadPortugueseWritingMemory(storage=typeof window!=="undefined"?window.localStorage:null){
+export function loadPortugueseWritingMemory(storage=scopedLocalStorage()){
   if(!storage)return [];
   try{return normalizePortugueseWritingMemory(JSON.parse(storage.getItem(PORTUGUESE_WRITING_MEMORY_KEY)||"[]"));}catch{return []}
 }
 
-export function savePortugueseWritingMemory(memory,storage=typeof window!=="undefined"?window.localStorage:null){
+export function savePortugueseWritingMemory(memory,storage=scopedLocalStorage()){
   if(!storage)return false;
   try{storage.setItem(PORTUGUESE_WRITING_MEMORY_KEY,JSON.stringify(normalizePortugueseWritingMemory(memory)));return true}catch{return false}
 }

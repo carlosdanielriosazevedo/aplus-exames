@@ -1,5 +1,5 @@
 "use client";
-import {useEffect,useState} from "react";
+import {useEffect,useRef,useState} from "react";
 import {hasPendingAssessment,preservePendingAssessment} from "../lib/pendingAssessment";
 import {Back,BrandName,Shell} from "./chrome";
 import {
@@ -8,7 +8,7 @@ import {
 } from "../lib/cloud";
 import {
   getOrCreateDeviceId,shortDeviceId,cloudSyncMeta,migrateCloudSync,
-  markCloudLoaded,markCloudSaved,cloudConflict,saveLocalSnapshot,
+  markCloudLoaded,markCloudSaved,cloudConflict,
   listLocalSnapshots,queueCloudSave,listPendingCloudSaves,removePendingCloudSave,
   safeCloudMerge
 } from "../lib/cloudReliability";
@@ -19,6 +19,10 @@ import {migrateEngagement} from "../lib/engagement";
 import {migratePedagogicalIds,recalibrateAllScores,prepIndex,measuredThemes} from "../lib/engine";
 import {demoIdentity} from "../lib/identity";
 import {academicScopeThemes} from "../lib/curriculumScope";
+import {currentVerifiedAccount} from "../lib/cloudAccountSession.js";
+import {beginRecoveryAccess} from "../lib/recoveryAccess.js";
+import {preserveCloudOriginals} from "../lib/cloudRecovery.js";
+import CloudSnapshotRecovery from "./CloudSnapshotRecovery.js";
 
 export function AccountCloud({s,setS,go}){
   const cfg=cloudConfiguration();
@@ -43,13 +47,23 @@ export function AccountCloud({s,setS,go}){
   const [conflictRemote,setConflictRemote]=useState(null);
   const [pending,setPending]=useState([]);
   const [snapshots,setSnapshots]=useState([]);
+  const [recoveryRequired,setRecoveryRequired]=useState(false);
+  const stateRef=useRef(s);stateRef.current=s;
+  function recoveryFailure(error){
+    if(error?.code?.startsWith("CLOUD_"))setRecoveryRequired(true);
+    setMessage({ok:false,text:String(error?.message||error)});
+  }
+  function unchanged(source){
+    if(stateRef.current!==source||hasPendingAssessment(stateRef.current))
+      throw new Error("O progresso local mudou durante o pedido. Conservámos a versão atual e não a substituímos.");
+  }
 
   const sync=cloudSyncMeta(s);
   const deviceId=sync.deviceId||getOrCreateDeviceId();
 
-  function refreshLocalSafety(){
-    setPending(listPendingCloudSaves());
-    setSnapshots(listLocalSnapshots());
+  async function refreshLocalSafety(context=currentVerifiedAccount()){
+    try{await beginRecoveryAccess();setPending(listPendingCloudSaves(context));setSnapshots(listLocalSnapshots(context));}
+    catch{setPending([]);setSnapshots([]);}
   }
 
   useEffect(()=>{refreshLocalSafety()},[]);
@@ -60,7 +74,7 @@ export function AccountCloud({s,setS,go}){
       return;
     }
     const result=await getCloudSession();
-    setSession({loading:false,user:result.user||null,error:result.error||null});
+    setSession({loading:false,user:result.user||null,error:result.error||null,accountContext:result.accountContext});
     if(result.user){
       setS(prev=>({...migrateCloudSync(prev),identity:{
         mode:"authenticated",
@@ -163,10 +177,12 @@ export function AccountCloud({s,setS,go}){
       });
       setMessage({ok:true,text:`Progresso guardado online com segurança.`});
     }catch(error){
-      if(error?.code==="CLOUD_SCHEMA_OUTDATED"){
+      if(error?.code?.startsWith("CLOUD_SNAPSHOT")||error?.code?.startsWith("CLOUD_RECOVERY")){
+        recoveryFailure(error);
+      }else if(error?.code==="CLOUD_SCHEMA_OUTDATED"){
         setMessage({ok:false,text:"O progresso online está temporariamente indisponível. O progresso deste dispositivo não foi alterado."});
       }else{
-        queueCloudSave(s,{reason:"save_failed",expectedRevision:currentSync.baseRevision});
+        queueCloudSave(s,{reason:"save_failed",expectedRevision:currentSync.baseRevision,accountContext:currentVerifiedAccount()});
         refreshLocalSafety();
         setMessage({ok:false,text:"Não foi possível guardar online. Guardámos uma tentativa neste dispositivo para poderes repetir mais tarde; o teu estudo continua disponível aqui."});
       }
@@ -178,10 +194,11 @@ export function AccountCloud({s,setS,go}){
     setBusy(true);setMessage(null);setConflictRemote(null);
     try{
       const row=await loadStudentCloudState();
+      unchanged(s);
       if(!row?.state_json){
         setMessage({ok:true,text:"Esta conta ainda não tem progresso guardado online. Usa “Guardar online” quando quiseres criar a primeira cópia."});
       }else{
-        saveLocalSnapshot(s,{label:"Antes de carregar da cloud"});
+        await preserveCloudOriginals({local:s,remote:row,label:"Antes de carregar da cloud"});
         const merged=mergeStudentCloudState(s,row.state_json);
         let recalibrated=normalizeAfterCloud(merged);
         recalibrated=markCloudLoaded(recalibrated,{
@@ -189,11 +206,12 @@ export function AccountCloud({s,setS,go}){
           remoteDeviceId:row.last_device_id,
           remoteState:row.state_json
         });
-        setS(prev=>preservePendingAssessment(prev,{...recalibrated,cloudMeta:{...(recalibrated.cloudMeta||{}),lastLoadedAt:Date.now(),lastRemoteUpdatedAt:row.updated_at}}));
+        setS(prev=>prev!==s?prev:preservePendingAssessment(prev,{...recalibrated,cloudMeta:{...(recalibrated.cloudMeta||{}),lastLoadedAt:Date.now(),lastRemoteUpdatedAt:row.updated_at}}));
         refreshLocalSafety();
         setMessage({ok:true,text:`Progresso online carregado. Criámos primeiro uma cópia de segurança neste dispositivo.`});
       }
     }catch(error){
+      if(error?.code?.startsWith("CLOUD_"))setRecoveryRequired(true);
       setMessage({ok:false,text:error?.code==="CLOUD_SCHEMA_OUTDATED"
         ?"O progresso online está temporariamente indisponível. Não carregámos nem alterámos o progresso deste dispositivo."
         :String(error?.message||error)});
@@ -205,7 +223,8 @@ export function AccountCloud({s,setS,go}){
     if(!conflictRemote?.state_json)return;
     setBusy(true);setMessage(null);
     try{
-      saveLocalSnapshot(s,{label:"Conflito · antes de manter a cloud"});
+      unchanged(s);
+      await preserveCloudOriginals({local:s,remote:conflictRemote,label:"Conflito · antes de manter a cloud"});
       const merged=mergeStudentCloudState(s,conflictRemote.state_json);
       let next=normalizeAfterCloud(merged);
       next=markCloudLoaded(next,{
@@ -213,18 +232,19 @@ export function AccountCloud({s,setS,go}){
         remoteDeviceId:conflictRemote.last_device_id,
         remoteState:conflictRemote.state_json
       });
-      setS(prev=>preservePendingAssessment(prev,next));
+      setS(prev=>prev!==s?prev:preservePendingAssessment(prev,next));
       setConflictRemote(null);
       refreshLocalSafety();
       setMessage({ok:true,text:`Usámos o progresso online mais recente. A versão anterior deste dispositivo ficou guardada numa cópia de segurança.`});
-    }finally{setBusy(false)}
+    }catch(error){recoveryFailure(error);}
+    finally{setBusy(false)}
   }
 
   async function resolveKeepLocal(){
     if(!conflictRemote)return;
     setBusy(true);setMessage(null);
     try{
-      saveLocalSnapshot(s,{label:"Conflito · antes de substituir a cloud"});
+      await preserveCloudOriginals({local:s,remote:conflictRemote,label:"Conflito · antes de substituir a cloud"});
       const result=await overwriteStudentCloudState(s,{
         remoteRevision:conflictRemote.revision,
         deviceId
@@ -240,7 +260,7 @@ export function AccountCloud({s,setS,go}){
       refreshLocalSafety();
       setMessage({ok:true,text:`Mantivemos o progresso deste dispositivo. A versão anterior ficou preservada numa cópia de segurança.`});
     }catch(error){
-      setMessage({ok:false,text:String(error?.message||error)});
+      recoveryFailure(error);
     }finally{setBusy(false)}
   }
 
@@ -249,7 +269,7 @@ export function AccountCloud({s,setS,go}){
     if(!conflictRemote?.state_json)return;
     setBusy(true);setMessage(null);
     try{
-      saveLocalSnapshot(s,{label:"Conflito · antes de combinar"});
+      await preserveCloudOriginals({local:s,remote:conflictRemote,label:"Conflito · antes de combinar"});
       const combined=safeCloudMerge(s,conflictRemote.state_json);
       let next=normalizeAfterCloud(combined);
       next=markCloudLoaded(next,{
@@ -262,6 +282,7 @@ export function AccountCloud({s,setS,go}){
         remoteRevision:conflictRemote.revision,
         deviceId
       });
+      unchanged(s);
       if(result?.conflict){
         registerConflict(result.remote);
         setMessage({ok:false,text:"O progresso online mudou novamente antes de concluirmos a combinação. Nada foi substituído."});
@@ -270,17 +291,17 @@ export function AccountCloud({s,setS,go}){
 
       const revision=Number(result?.data?.revision)||Number(conflictRemote.revision)+1;
       next=markCloudSaved(next,{revision,deviceId,savedState:next});
-      setS(prev=>preservePendingAssessment(prev,next));
+      setS(prev=>prev!==s?prev:preservePendingAssessment(prev,next));
       setConflictRemote(null);
       refreshLocalSafety();
       setMessage({ok:true,text:`Combinámos o progresso dos dois dispositivos e guardámos a nova versão online.`});
     }catch(error){
-      setMessage({ok:false,text:String(error?.message||error)});
+      recoveryFailure(error);
     }finally{setBusy(false)}
   }
 
   async function retryPending(){
-    const item=pending[0];
+    const item=pending.find(row=>!row.quarantined);
     if(!item)return;
     setBusy(true);setMessage(null);
     try{
@@ -292,13 +313,13 @@ export function AccountCloud({s,setS,go}){
       if(result?.conflict){
         registerConflict(result.remote);return;
       }
-      removePendingCloudSave(item.id);
+      removePendingCloudSave(item.id,result.accountContext);
       const revision=Number(result?.data?.revision)||item.expectedRevision+1;
       setS(prev=>markCloudSaved(prev,{revision,deviceId,savedState:item.state}));
       refreshLocalSafety();
       setMessage({ok:true,text:`Tentativa pendente guardada online com sucesso.`});
     }catch(error){
-      setMessage({ok:false,text:String(error?.message||error)});
+      recoveryFailure(error);
     }finally{setBusy(false)}
   }
 
@@ -381,6 +402,7 @@ export function AccountCloud({s,setS,go}){
       </div>}
 
       <div className="notice"><b>O que acontece entre dispositivos?</b><span>Se encontrares progresso diferente noutro dispositivo, a APProva+ bloqueia a substituição automática e pede-te para escolher. Assim, nenhuma versão desaparece sem aviso.</span></div>
+      {recoveryRequired&&<CloudSnapshotRecovery key={s.cloudAccount?.accountId||user.id} s={s} setS={setS} accountId={s.cloudAccount?.accountId||user.id} normalizeAfterCloud={normalizeAfterCloud}/>}
 
       <button className="secondary" onClick={signout} disabled={busy}>Terminar sessão</button>
     </>}

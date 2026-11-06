@@ -6,11 +6,15 @@ import {useEffect,useState} from "react";
 const ClientApp=dynamic(()=>import("./clientApp"),{ssr:false,loading:({error})=>error?<Loading failed/>:<Loading/>});
 const STORAGE_KEYS=["a25","a25-friends-beta"];
 const ENTRY_KEY="a25-onboarding-entry";
+// P1-A v2: o progresso desta versão vive no espaço canónico (academicKeys.js).
+// Só leitura: decide se a app arranca para um aluno que regressa.
+const CANONICAL_STATE=/^a25-ws-v2:[^~]*:(a25|a25-friends-beta)$/;
 
 function storedProgress(){
   for(const name of ["localStorage","sessionStorage"])try{
     const store=window[name];
     if(STORAGE_KEYS.some(key=>store?.getItem(key))||(name==="sessionStorage"&&store?.getItem(ENTRY_KEY)==="1"))return true;
+    for(let i=0;i<(store?.length||0);i++){const key=store.key(i);if(typeof key==="string"&&CANONICAL_STATE.test(key)&&store.getItem(key))return true;}
   }catch{}
   return false;
 }
