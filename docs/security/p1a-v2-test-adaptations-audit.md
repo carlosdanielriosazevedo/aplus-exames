@@ -101,3 +101,10 @@ Método: a app passa a gravar em `a25-ws-vX:` enquanto os testes continuam a ler
 | Chromium 111, 124, 548 (`diagnostic-resume`), 121 (`storage-hardening`), 174 (math-a), unit "reload", "escritor bloqueado" | testam UI ou máquina de estados; não leem bytes | — |
 
 Depois dos reforços, os 4 testes que eram vazios **falham** sob o mutante. Os testes de ausência ("nada escrito", "nenhuma chave de B2") continuam a passar sob o mutante, e é esse o comportamento correto: comparam o armazenamento inteiro, e a app mutante também não escreve nada nesses cenários.
+
+## NO-GO #462 (branch local `experimental/p1a-v2-no-go-fixes`)
+Duas adaptações em `tests/unit/p1V2CanonicalWorkspace.test.mjs`. Nenhum valor esperado foi alterado e não se retirou nenhuma asserção:
+1. **"separador de versão anterior".** As missões das fixtures passam a ter `completionId`. Antes, os recibos `committed` não correspondiam a nenhuma avaliação segundo `stateRecordsCompletion` (recibos órfãos), e a nova verificação D3 recusaria o restauro.
+2. **"cópias da #461 (v1)".** O restauro de uma cópia v1 parcial passa a esperar `partial_copy` e "nada alterado" (alteração pedida). Acrescenta-se o restauro de uma cópia v1 completa, com o mesmo valor (66 XP).
+
+Testes novos: `p1V2NoGoRegressions` (14), `p1V2RollbackR2Lab` (5), `browser-p1/v2-quota-hold` (1). Gate de mutação: `tests/scripts/p1-v2-mutation-gate.mjs` (17 mutantes).

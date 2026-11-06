@@ -50,3 +50,7 @@ O `main` não tem áreas por conta. Num rollback para o `main`, os alunos com co
 ## 5. Limites
 - O gate não prova ausência de defeitos noutras funcionalidades da build de ponte; prova só a compatibilidade de armazenamento.
 - R3 não está implementado. Qualquer implementação precisa da mesma matriz de interrupções do restauro (9 escritas × quota/erro/fecho/reload).
+
+## 6. Estado (NO-GO #462, branch local `experimental/p1a-v2-no-go-fixes`)
+- R2: **laboratório** implementado (`app/lib/rollbackR2.js`, `tests/unit/p1V2RollbackR2Lab.test.mjs`); build R2 **não** implementada. Ver `p1a-v2-rollback-r2.md`.
+- R1 e R3: continuam só plano. O `main` continua a **não** ser candidata.
