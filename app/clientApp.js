@@ -68,7 +68,7 @@ import {openVerifiedAccount,newAccountState,accountContextCurrent} from "./lib/c
 import {downloadOwnedState} from "./lib/cloudRecovery.js";
 import {useAccountWorkspaceGuard} from "./lib/useAccountWorkspaceGuard.js";
 import {selectAccountWorkspace,workspaceAccountId,legacyWorkspacePresent,accountStorageKey} from "./lib/accountWorkspace.js";
-import {startStateWriter,requestStateWriter,completeStateWriterRelease,stateWriterStatus,adoptAfterUncleanEnd,acknowledgeLegacyNotice,STATE_WRITER_EVENT} from "./lib/stateWriter.js";
+import {startStateWriter,requestStateWriter,completeStateWriterRelease,stateWriterStatus,adoptAfterUncleanEnd,acknowledgeLegacyNotice,exportUnsavedTabSet,STATE_WRITER_EVENT} from "./lib/stateWriter.js";
 import {
   TESTER_SEGMENTS,PUBLIC_ENTRY_SEGMENTS,friendsBetaRequested,activateFriendsBeta,markFriendsBetaConsent,
   isFriendsBeta,friendsBetaReport,testerSegmentInfo,currentTesterSegment,
@@ -94,7 +94,7 @@ import {
   expectedResponseLabel,studentResponseLabel,examScoreLabel,stepFeedback
 } from "./lib/constructedResponseView";
 import {captureMathematicsValidationCase} from "./lib/graderValidationCapture";
-import {recoveryCopiesForView,restoreRecoveryCopy,exportRecoveryCopy,deleteRecoveryCopy,keepCurrentAndDiscardJournal} from "./lib/stateRecovery.js";
+import {recoveryCopiesForView,restoreRecoveryCopy,exportRecoveryCopy,deleteRecoveryCopy,keepCurrentAndDiscardJournal,exportCurrentSet} from "./lib/stateRecovery.js";
 
 
 let constructedResponseGraderPromise=null;
@@ -581,7 +581,7 @@ export default function App(){
   // NO-GO #462 (fase 2): o cofre de cópias (consultar, descarregar, libertar espaço)
   // abre também em retenção, só consulta e conflito. Restaurar continua a exigir escritor.
   if(recoveryOpen&&["readonly","verifying","conflict"].includes(writer.mode))return <RecoveryCopies writer={writer} onClose={()=>setRecoveryOpen(false)}/>;
-  if(writer.mode==="readonly")return <ReadOnlyConsult view={readOnlyView} reason={writer.reason} restore={writer.restore} onOpenCopies={()=>setRecoveryOpen(true)}/>;
+  if(writer.mode==="readonly")return <ReadOnlyConsult view={readOnlyView} reason={writer.reason} restore={writer.restore} unsaved={writer.unsaved} onOpenCopies={()=>setRecoveryOpen(true)}/>;
   if(writer.mode==="verifying"&&(writer.reason==="recovery_hold"||!hydrated))return <StateWriterVerifying writer={writer} onRetry={async()=>{setWriter(await requestStateWriter())}} onAdopt={()=>setWriter(adoptAfterUncleanEnd())} onOpenCopies={()=>setRecoveryOpen(true)}/>;
   if(writer.mode==="acquiring")return <Shell><Logo/><div className="cloudLoading" data-state-writer="acquiring">A abrir o teu progresso…</div></Shell>;
   if(writer.mode==="observer")return <StateWriterElsewhere writer={writer} onContinue={async()=>{
@@ -2240,17 +2240,44 @@ const READ_ONLY_REASON={
   legacy_import_failed:["Não há espaço neste dispositivo para preparar o teu progresso nesta versão.","Nada foi alterado nem apagado. O espaço é próprio da APProva+ neste browser: apagar dados de outros sites não ajuda. Descarrega cópias de recuperação antigas e apaga-as deste dispositivo, e volta a verificar. Até lá, podes consultar o progresso, mas nada é guardado."],
   shared_storage_full:["Não há espaço neste dispositivo para guardar o teu progresso em segurança.","Nada foi alterado nem apagado. Descarrega cópias de recuperação antigas e apaga-as deste dispositivo para libertar espaço, e volta a verificar. Até lá, podes consultar o progresso, mas nada é guardado."],
   restore_incomplete:["Uma restauração do teu progresso ficou a meio e ainda não pôde ser concluída.","Nada foi apagado: o progresso anterior e a cópia escolhida continuam guardados. Enquanto isto não for resolvido, nada é gravado. Se falta espaço, descarrega e apaga cópias antigas que não estejam em uso e volta a verificar; a restauração é concluída ou desfeita automaticamente."],
+  storage_read_failed:["Este browser falhou ao ler o progresso guardado e este separador parou de gravar.","O que já estava guardado neste dispositivo não foi alterado. Vê abaixo o que aconteceu à última alteração e descarrega-a se for preciso. Depois volta a verificar."],
   register_unavailable:["Este browser não deixou guardar o registo de segurança do progresso.","Nada foi alterado. Isto acontece, por exemplo, em algumas janelas privadas ou com o armazenamento do site bloqueado. Permite o armazenamento de dados deste site e volta a verificar."]
 };
-function ReadOnlyConsult({view,reason=null,restore=null,onOpenCopies}){
+// Descarregar um ficheiro JSON (cópias, progresso guardado, progresso deste separador).
+function downloadJsonFile(json,name){
+  if(!json)return false;
+  try{const url=URL.createObjectURL(new Blob([json],{type:"application/json"}));const a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);return true}catch{return false}
+}
+// Correções residuais (X7): o que aconteceu à última alteração quando o separador parou.
+const UNSAVED_TIER={
+  saved:"Não ficou nada por gravar: o progresso guardado neste dispositivo já inclui a última alteração.",
+  durable:"A última alteração não foi gravada no progresso. Ficou guardada numa cópia de recuperação neste dispositivo e podes restaurá-la depois de voltares a verificar.",
+  tab:"A última alteração não foi gravada no progresso. Ficou só numa cópia temporária deste separador: perde-se se o fechares. Descarrega-a agora.",
+  failed:"A última alteração não pôde ser gravada em lado nenhum. Ainda está neste separador: descarrega-a agora e não feches o separador antes disso."
+};
+function ReadOnlyConsult({view,reason=null,restore=null,unsaved=null,onOpenCopies}){
   const [discard,setDiscard]=useState(null);
-  const unresolvable=reason==="restore_incomplete"&&["stale_journal","unresolvable","journal_corrupt"].includes(restore?.reason);
+  const [exportedNow,setExportedNow]=useState(null);
+  // "Manter o progresso atual" só onde a função o aceita (diário antigo ou corrompido).
+  const unresolvable=reason==="restore_incomplete"&&["stale_journal","journal_corrupt"].includes(restore?.reason);
+  const stuck=reason==="restore_incomplete"&&["unresolvable","no_space_for_found_copy"].includes(restore?.reason);
   const custom=READ_ONLY_REASON[reason]||null;
+  // Paragem a meio da sessão: o resumo do arranque não existe; ler o que está guardado.
+  if(view===null&&unsaved){try{const current=recoveryCopiesForView().current;view={summaryOnly:true,state:current.readable?{xp:current.xp}:null,completed:current.completed};}catch{view={error:true}}}
   const x=view?.state||null;
   const count=value=>Array.isArray(value)?value.length:0;
   const xp=Number.isFinite(Number(x?.xp))?Number(x.xp):0;
   const subjects=(Array.isArray(x?.selectedSubjectIds)?x.selectedSubjectIds:[]).map(id=>READ_ONLY_SUBJECTS[id]).filter(Boolean);
-  const studied=count(x?.missionHistory)+count(x?.examHistory)+Object.values(x?.subjectProgress||{}).reduce((n,p)=>n+count(p?.sessions),0);
+  const studied=view?.summaryOnly?(view.completed??0):count(x?.missionHistory)+count(x?.examHistory)+Object.values(x?.subjectProgress||{}).reduce((n,p)=>n+count(p?.sessions),0);
+  const downloadCurrent=()=>{const json=exportCurrentSet();if(downloadJsonFile(json,`approva-progresso-guardado-${Date.now()}.json`))try{setExportedNow(JSON.parse(json).fingerprints)}catch{}};
+  const keep=()=>{const r=keepCurrentAndDiscardJournal(undefined,{exportedFingerprints:exportedNow});setDiscard(r.ok?"ok":(r.reason||"failed"));};
+  const DISCARD={
+    ok:"O progresso atual foi mantido. Volta a verificar para continuar.",
+    no_space_for_backup:"Não há espaço para guardar primeiro uma cópia do progresso atual, e nada foi alterado. Descarrega o progresso guardado (botão abaixo): esse ficheiro fica como a tua cópia. Depois carrega outra vez em «Manter o progresso atual». Também podes apagar cópias antigas que não estejam em uso, depois de as descarregares.",
+    export_mismatch:"O progresso guardado mudou desde que o descarregaste. Descarrega-o outra vez antes de continuar. Nada foi alterado.",
+    journal_not_cleared:"Este browser não deixou terminar a operação. Nada do teu progresso foi alterado; tenta de novo.",
+    failed:"Não foi possível. Nada foi alterado."
+  };
   return <Shell><Logo/><div className="notice" role="status" data-state-writer="readonly">
     <b>{custom?custom[0]:"Este navegador só permite consultar o teu progresso."}</b>
     <span data-readonly-reason={reason||"no_web_locks"}>{custom?custom[1]:"Para guardar o teu estudo, a APProva+ precisa de uma versão mais recente do navegador. Atualiza-o ou abre a APProva+ no Chrome, Edge, Firefox ou Safari atualizados. Neste navegador não é guardado nem alterado nada."}</span>
@@ -2264,10 +2291,14 @@ function ReadOnlyConsult({view,reason=null,restore=null,onOpenCopies}){
       <div><dt>Disciplinas</dt><dd>{subjects.length?subjects.join(", "):"Ainda nenhuma"}</dd></div>
     </dl>}
   {unresolvable&&<span role="alert" data-restore-unresolvable={restore.reason}>O progresso gravado já não corresponde à restauração que ficou a meio. Não o substituímos. Podes manter o progresso atual: guardamos primeiro uma cópia dele, e a cópia escolhida e a de antes do restauro continuam guardadas.</span>}
-  {discard&&<p role="alert" data-restore-discard={discard}>{discard==="ok"?"O progresso atual foi mantido. Volta a verificar para continuar.":"Não foi possível: nada foi alterado. Liberta espaço apagando cópias antigas e tenta de novo."}</p>}
+  {stuck&&<span role="alert" data-restore-stuck={restore.reason}>A restauração não pôde ser concluída nem desfeita, normalmente por falta de espaço. Nada foi apagado e nada é gravado até isto ficar resolvido. Descarrega e apaga cópias antigas que não estejam em uso, e volta a verificar.</span>}
+  {unsaved&&<p role="alert" data-unsaved-tier={unsaved.tier}><b>{unsaved.tier==="saved"?"Progresso guardado.":unsaved.tier==="durable"?"Gravação falhada — alteração guardada em cópia.":unsaved.tier==="tab"?"Gravação falhada — alteração só temporária.":"Gravação falhada — alteração por guardar."}</b> {UNSAVED_TIER[unsaved.tier]||UNSAVED_TIER.failed}</p>}
+  {discard&&<p role="alert" data-restore-discard={discard}>{DISCARD[discard]||DISCARD.failed}</p>}
   <button className="primary" onClick={()=>window.location.reload()}>Voltar a verificar</button>
+  {unsaved&&unsaved.tier!=="saved"&&<button className="secondary" data-download-unsaved="true" onClick={()=>downloadJsonFile(exportUnsavedTabSet(),`approva-progresso-deste-separador-${Date.now()}.json`)}>Descarregar o progresso deste separador</button>}
+  <button className="secondary" data-download-current="true" onClick={downloadCurrent}>Descarregar o progresso guardado</button>
   {onOpenCopies&&<button className="secondary" onClick={onOpenCopies}>Ver e descarregar cópias de recuperação</button>}
-  {unresolvable&&<button className="secondary" onClick={()=>setDiscard(keepCurrentAndDiscardJournal().ok?"ok":"failed")}>Manter o progresso atual</button>}
+  {unresolvable&&<button className="secondary" onClick={keep}>Manter o progresso atual</button>}
   </Shell>;
 }
 
@@ -2312,6 +2343,7 @@ const RECOVERY_REASONS={
   restore_target:"Cópia escolhida para uma restauração",
   journal_resolution_found:"O que estava gravado quando uma restauração foi interrompida",
   journal_discarded_current:"Progresso mantido depois de uma restauração por resolver",
+  write_halted:"Alteração que não pôde ser gravada (o separador parou de gravar)",
   unclean_end_adoption:"Antes de continuares depois de um fecho inesperado",
   foreign_write:"Conflito entre separadores",
   conflict:"Cópia de uma versão experimental anterior",
@@ -2329,11 +2361,11 @@ function RecoveryCopies({onClose,writer=null}){
   const date=at=>at?new Date(at).toLocaleString("pt-PT"):"data desconhecida";
   const download=copy=>{
     const json=exportRecoveryCopy(copy.id);if(!json)return;
-    try{const url=URL.createObjectURL(new Blob([json],{type:"application/json"}));const a=document.createElement("a");a.href=url;a.download=`approva-copia-${copy.at||"sem-data"}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch{}
+    if(!downloadJsonFile(json,`approva-copia-${copy.at||"sem-data"}.json`))return; // só se a descarga foi pedida ao browser
     setExported(prev=>({...prev,[copy.id]:true}));
   };
   const FAIL={not_writer:"Este separador não está a guardar o progresso. Fecha os outros separadores e tenta de novo.",state_version_future:"Esta cópia foi gravada por uma versão mais recente e não pode ser restaurada por esta.",state_unreadable:"Esta cópia não é legível.",state_version_invalid:"Esta cópia não é legível.",copy_empty:"Esta cópia está vazia.",no_space_for_backup:"Não há espaço para guardar primeiro o progresso atual. Nada foi alterado.",restore_write_failed:"Não foi possível restaurar. O progresso atual foi reposto.",restore_incomplete:"A restauração ficou a meio. Este separador parou de gravar; ao reabrir, a restauração é concluída ou desfeita.",copy_not_found:"Esta cópia já não existe.",partial_copy:"Esta cópia só tem parte do progresso (versão experimental anterior). Restaurá-la misturaria momentos diferentes; podes descarregá-la.",d3_orphan_receipts:"Esta cópia tem avaliações marcadas como concluídas sem o resultado. Não pode ser restaurada; podes descarregá-la.",d3_registry_unreadable:"O registo de conclusões desta cópia não é legível. Não pode ser restaurada; podes descarregá-la.",restore_pending:"Há uma restauração por resolver. Recarrega a app.",journal_not_cleared:"A restauração foi aplicada, mas este browser não deixou terminar o registo. Este separador parou de gravar; recarrega."};
-  const DELETE_FAIL={copy_in_use:"Esta cópia é necessária a uma restauração por resolver e não pode ser apagada.",export_first:"Descarrega primeiro esta cópia.",legacy_copy_kept:"As cópias da versão experimental anterior não são apagadas."};
+  const DELETE_FAIL={copy_not_found:"Esta cópia já não existe.",delete_failed:"O browser não deixou apagar esta cópia. Nada foi alterado.",copy_in_use:"Esta cópia é necessária a uma restauração por resolver e não pode ser apagada.",export_first:"Descarrega primeiro esta cópia.",legacy_copy_kept:"As cópias da versão experimental anterior não são apagadas."};
   return <Shell><Logo/><div className="notice" role="status" data-recovery-copies="true">
     <b>Cópias de recuperação deste dispositivo</b>
     <span>Progresso atual: {view.current.readable?`${view.current.xp} XP · ${view.current.completed} sessões e avaliações concluídas`:"sem progresso legível"}.</span>
@@ -2350,7 +2382,7 @@ function RecoveryCopies({onClose,writer=null}){
         <button className="secondary" onClick={()=>setConfirm(null)}>Cancelar</button></>
       :<button className="primary" onClick={()=>setConfirm(copy.id)}>Restaurar esta cópia</button>}
     <button className="secondary" onClick={()=>download(copy)}>Descarregar</button>
-    {copy.format==="aplus-state-recovery-copy-v2"&&exported[copy.id]&&<button className="secondary" onClick={()=>{const r=deleteRecoveryCopy(copy.id,{exported:true});setMessage(r.ok?"Cópia apagada deste dispositivo.":(DELETE_FAIL[r.reason]||"Não foi possível apagar a cópia."));refresh();}}>Apagar esta cópia</button>}
+    {copy.format==="aplus-state-recovery-copy-v2"&&exported[copy.id]&&<button className="secondary" onClick={()=>{const r=deleteRecoveryCopy(copy.id,{exported:true});setMessage(r.ok?(r.temporary?"Cópia temporária apagada deste separador. Não liberta espaço no dispositivo.":"Cópia apagada deste dispositivo."):(DELETE_FAIL[r.reason]||"Não foi possível apagar a cópia."));refresh();}}>Apagar esta cópia</button>}
   </li>)}</ul>
   {!canRestore&&<p data-recovery-readonly="true">Este separador não está a guardar o progresso: podes consultar, descarregar e apagar cópias já descarregadas (para libertar espaço). Restaurar só é possível no separador que guarda o progresso.</p>}
   <button className="secondary" onClick={onClose}>{canRestore?"Voltar ao estudo":"Voltar"}</button>
