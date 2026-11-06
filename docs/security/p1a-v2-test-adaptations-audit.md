@@ -108,3 +108,15 @@ Duas adaptações em `tests/unit/p1V2CanonicalWorkspace.test.mjs`. Nenhum valor 
 2. **"cópias da #461 (v1)".** O restauro de uma cópia v1 parcial passa a esperar `partial_copy` e "nada alterado" (alteração pedida). Acrescenta-se o restauro de uma cópia v1 completa, com o mesmo valor (66 XP).
 
 Testes novos: `p1V2NoGoRegressions` (14), `p1V2RollbackR2Lab` (5), `browser-p1/v2-quota-hold` (1). Gate de mutação: `tests/scripts/p1-v2-mutation-gate.mjs` (17 mutantes).
+
+## Correções residuais da auditoria independente (branch local `experimental/p1a-v2-residual-fixes`)
+Uma adaptação em `tests/unit/p1V2NoGoRegressions.test.mjs`, no teste r5 ("leitura falhada…").
+- **Antes:** depois de cada leitura falhada, o teste esperava `mode === "writer"`. Isto é a perda silenciosa X7: a gravação era recusada, o separador continuava e nada ficava guardado.
+- **Agora**, para cada uma das 9 chaves, o teste exige:
+  - bytes intactos (a asserção original mantém-se);
+  - `readonly` com `storage_read_failed`;
+  - a gravação recusada presente na cópia `write_halted`;
+  - um escritor novo antes da chave seguinte.
+- A parte "outra área" e "diário presente" não foi alterada.
+
+Testes novos: `p1V2ResidualFixes` (18). O gate de mutação passa a ter 39 mutantes.
