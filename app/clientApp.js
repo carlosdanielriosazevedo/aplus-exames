@@ -94,7 +94,7 @@ import {
   expectedResponseLabel,studentResponseLabel,examScoreLabel,stepFeedback
 } from "./lib/constructedResponseView";
 import {captureMathematicsValidationCase} from "./lib/graderValidationCapture";
-import {recoveryCopiesForView,restoreRecoveryCopy,exportRecoveryCopy,deleteRecoveryCopy} from "./lib/stateRecovery.js";
+import {recoveryCopiesForView,restoreRecoveryCopy,exportRecoveryCopy,deleteRecoveryCopy,keepCurrentAndDiscardJournal} from "./lib/stateRecovery.js";
 
 
 let constructedResponseGraderPromise=null;
@@ -578,19 +578,22 @@ export default function App(){
     <button className="secondary" onClick={accountGuard.recheck}>Voltar a verificar a mesma conta</button>
   </Shell>;
 
-  if(writer.mode==="readonly")return <ReadOnlyConsult view={readOnlyView} reason={writer.reason}/>;
-  if(writer.mode==="verifying"&&(writer.reason==="recovery_hold"||!hydrated))return <StateWriterVerifying writer={writer} onRetry={async()=>{setWriter(await requestStateWriter())}} onAdopt={()=>setWriter(adoptAfterUncleanEnd())}/>;
+  // NO-GO #462 (fase 2): o cofre de cópias (consultar, descarregar, libertar espaço)
+  // abre também em retenção, só consulta e conflito. Restaurar continua a exigir escritor.
+  if(recoveryOpen&&["readonly","verifying","conflict"].includes(writer.mode))return <RecoveryCopies writer={writer} onClose={()=>setRecoveryOpen(false)}/>;
+  if(writer.mode==="readonly")return <ReadOnlyConsult view={readOnlyView} reason={writer.reason} restore={writer.restore} onOpenCopies={()=>setRecoveryOpen(true)}/>;
+  if(writer.mode==="verifying"&&(writer.reason==="recovery_hold"||!hydrated))return <StateWriterVerifying writer={writer} onRetry={async()=>{setWriter(await requestStateWriter())}} onAdopt={()=>setWriter(adoptAfterUncleanEnd())} onOpenCopies={()=>setRecoveryOpen(true)}/>;
   if(writer.mode==="acquiring")return <Shell><Logo/><div className="cloudLoading" data-state-writer="acquiring">A abrir o teu progresso…</div></Shell>;
   if(writer.mode==="observer")return <StateWriterElsewhere writer={writer} onContinue={async()=>{
     const next=await requestStateWriter();setWriter(next);
     if(next.mode==="writer")setHydrationRun(n=>n+1);
   }}/>;
   if(writer.mode==="releasing"||writer.mode==="released")return <Shell><Logo/><div className="notice" role="status" data-state-writer="released"><b>Continuaste noutro separador.</b><span>Este separador deixou de guardar progresso.</span></div></Shell>;
-  if(writer.mode==="conflict")return <StateWriterConflict writer={writer}/>;
-  if(recoveryOpen&&writer.mode==="writer")return <RecoveryCopies onClose={()=>setRecoveryOpen(false)}/>;
+  if(writer.mode==="conflict")return <StateWriterConflict writer={writer} onOpenCopies={()=>setRecoveryOpen(true)}/>;
+  if(recoveryOpen&&writer.mode==="writer")return <RecoveryCopies writer={writer} onClose={()=>setRecoveryOpen(false)}/>;
   if(writer.mode==="writer"&&writer.restore&&!restoreNoticeSeen)return <Shell><Logo/><div className="notice" role="status" data-restore-result={writer.restore.status}>
     <b>{["completed","completed_forward"].includes(writer.restore.status)?"A restauração do teu progresso foi concluída.":"A restauração não chegou a ser aplicada."}</b>
-    <span>{["completed","completed_forward"].includes(writer.restore.status)?"Foi interrompida e foi completada agora, com a cópia que escolheste. O progresso anterior continua guardado como cópia.":"Foi interrompida e o progresso anterior foi reposto por inteiro. A cópia que escolheste continua guardada."}</span>
+    <span>{["completed","completed_forward"].includes(writer.restore.status)?(writer.restore.status==="completed"?"Foi concluída com a cópia que escolheste. O progresso de antes do restauro continua guardado como cópia.":"Foi interrompida e foi completada agora, com a cópia que escolheste. O que estava gravado no momento da interrupção ficou guardado primeiro como uma nova cópia."):(writer.restore.status==="not_applied"?"Foi interrompida antes de mudar o teu progresso. A cópia que escolheste continua guardada.":"Foi interrompida e o progresso de antes do restauro foi reposto. O que estava gravado no momento da interrupção ficou guardado primeiro como uma nova cópia.")}</span>
   </div><button className="primary" onClick={()=>setRestoreNoticeSeen(true)}>Continuar</button></Shell>;
   if(legacyNotice)return <Shell><Logo/><div className="notice warning" role="alert" data-state-writer="legacy-progress">
     <b>Uma versão anterior da APProva+ gravou progresso neste dispositivo.</b>
@@ -2234,12 +2237,14 @@ function StateWriterElsewhere({writer,onContinue}){
 const READ_ONLY_SUBJECTS={"math-a":"Matemática A","portuguese":"Português","physics-chemistry-a":"Física e Química A"};
 // P1-A v2: motivo verdadeiro do modo só de consulta (não é sempre o browser).
 const READ_ONLY_REASON={
-  legacy_import_failed:["Não há espaço neste dispositivo para preparar o teu progresso nesta versão.","Nada foi alterado nem apagado. Liberta espaço no browser (por exemplo, dados de outros sites) e volta a verificar. Até lá, podes consultar o progresso, mas nada é guardado."],
-  shared_storage_full:["Não há espaço neste dispositivo para guardar o teu progresso em segurança.","Nada foi alterado nem apagado. Liberta espaço no browser e volta a verificar. Até lá, podes consultar o progresso, mas nada é guardado."],
-  restore_incomplete:["Uma restauração do teu progresso ficou a meio e ainda não pôde ser concluída.","Nada foi apagado: o progresso anterior e a cópia escolhida continuam guardados. Normalmente falta espaço no browser. Liberta espaço e volta a verificar; a restauração é concluída ou desfeita automaticamente."],
+  legacy_import_failed:["Não há espaço neste dispositivo para preparar o teu progresso nesta versão.","Nada foi alterado nem apagado. O espaço é próprio da APProva+ neste browser: apagar dados de outros sites não ajuda. Descarrega cópias de recuperação antigas e apaga-as deste dispositivo, e volta a verificar. Até lá, podes consultar o progresso, mas nada é guardado."],
+  shared_storage_full:["Não há espaço neste dispositivo para guardar o teu progresso em segurança.","Nada foi alterado nem apagado. Descarrega cópias de recuperação antigas e apaga-as deste dispositivo para libertar espaço, e volta a verificar. Até lá, podes consultar o progresso, mas nada é guardado."],
+  restore_incomplete:["Uma restauração do teu progresso ficou a meio e ainda não pôde ser concluída.","Nada foi apagado: o progresso anterior e a cópia escolhida continuam guardados. Enquanto isto não for resolvido, nada é gravado. Se falta espaço, descarrega e apaga cópias antigas que não estejam em uso e volta a verificar; a restauração é concluída ou desfeita automaticamente."],
   register_unavailable:["Este browser não deixou guardar o registo de segurança do progresso.","Nada foi alterado. Isto acontece, por exemplo, em algumas janelas privadas ou com o armazenamento do site bloqueado. Permite o armazenamento de dados deste site e volta a verificar."]
 };
-function ReadOnlyConsult({view,reason=null}){
+function ReadOnlyConsult({view,reason=null,restore=null,onOpenCopies}){
+  const [discard,setDiscard]=useState(null);
+  const unresolvable=reason==="restore_incomplete"&&["stale_journal","unresolvable","journal_corrupt"].includes(restore?.reason);
   const custom=READ_ONLY_REASON[reason]||null;
   const x=view?.state||null;
   const count=value=>Array.isArray(value)?value.length:0;
@@ -2258,29 +2263,36 @@ function ReadOnlyConsult({view,reason=null}){
       <div><dt>Sessões e avaliações concluídas</dt><dd>{studied}</dd></div>
       <div><dt>Disciplinas</dt><dd>{subjects.length?subjects.join(", "):"Ainda nenhuma"}</dd></div>
     </dl>}
+  {unresolvable&&<span role="alert" data-restore-unresolvable={restore.reason}>O progresso gravado já não corresponde à restauração que ficou a meio. Não o substituímos. Podes manter o progresso atual: guardamos primeiro uma cópia dele, e a cópia escolhida e a de antes do restauro continuam guardadas.</span>}
+  {discard&&<p role="alert" data-restore-discard={discard}>{discard==="ok"?"O progresso atual foi mantido. Volta a verificar para continuar.":"Não foi possível: nada foi alterado. Liberta espaço apagando cópias antigas e tenta de novo."}</p>}
   <button className="primary" onClick={()=>window.location.reload()}>Voltar a verificar</button>
+  {onOpenCopies&&<button className="secondary" onClick={onOpenCopies}>Ver e descarregar cópias de recuperação</button>}
+  {unresolvable&&<button className="secondary" onClick={()=>setDiscard(keepCurrentAndDiscardJournal().ok?"ok":"failed")}>Manter o progresso atual</button>}
   </Shell>;
 }
 
 // P1-A: este separador já tem o lock mas ainda não consegue provar que vê a
 // última gravação do separador anterior. Nada é lido para escrita nem gravado.
-function StateWriterVerifying({writer,onRetry,onAdopt}){
+function StateWriterVerifying({writer,onRetry,onAdopt,onOpenCopies}){
   const [confirming,setConfirming]=useState(false);
+  const [attempted,setAttempted]=useState(false);
   if(writer.reason!=="recovery_hold")return <Shell><Logo/><div className="cloudLoading" role="status" data-state-writer="verifying">A confirmar o teu progresso…</div></Shell>;
   return <Shell><Logo/><div className="notice warning" role="alert" data-state-writer="recovery-hold">
     <b>Não foi possível confirmar a gravação do outro separador.</b>
     <span>Por isso, este separador ainda não guarda nada. Se a outra janela ainda estiver aberta, volta a ela.</span>
     {confirming&&<span data-recovery-confirm="true">Antes de continuares, guardamos uma cópia de recuperação dos dados que este separador vê agora. A cópia não restaura nada: se a última gravação do outro separador não estiver aqui, continuas sem ela. Se essa gravação ainda chegar, este separador para e guarda-a também como cópia.</span>}
   </div>
+  {attempted&&writer.reason==="recovery_hold"&&<span role="alert" data-recovery-no-space="true">Não houve espaço para guardar a cópia. Podes descarregar cópias antigas e apagá-las deste dispositivo para libertar espaço.</span>}
   <button className="primary" onClick={onRetry}>Verificar de novo</button>
+  <button className="secondary" onClick={onOpenCopies}>Ver e descarregar cópias de recuperação</button>
   {confirming
-    ?<button className="secondary" onClick={onAdopt}>Guardar cópia e continuar aqui</button>
+    ?<button className="secondary" onClick={()=>{setAttempted(true);onAdopt();}}>Guardar cópia e continuar aqui</button>
     :<button className="secondary" onClick={()=>setConfirming(true)}>Continuar neste separador</button>}
   </Shell>;
 }
 
 // P1-A: foi detetada outra escrita no progresso. Este separador parou de gravar.
-function StateWriterConflict({writer}){
+function StateWriterConflict({writer,onOpenCopies}){
   const copy=writer.conflictCopy;
   return <Shell><Logo/><div className="notice warning" role="alert" data-state-writer="conflict" data-conflict-copy={copy?(copy.durable?"durable":"tab"):"none"}>
     <b>Este separador deixou de guardar progresso.</b>
@@ -2288,7 +2300,7 @@ function StateWriterConflict({writer}){
     <span>{copy?"Guardámos neste dispositivo uma cópia do que estava neste separador"+(writer.receivedCopy?" e outra do que foi gravado noutro separador":"")+". Nada foi aplicado. Depois de recarregares, podes compará-las e restaurar a que quiseres.":"Não foi possível guardar uma cópia deste separador. Mantém-no aberto até recarregares o progresso noutro separador."}</span>
   </div>
   <button className="primary" onClick={()=>window.location.reload()}>Recarregar o progresso</button>
-  {copy&&<button className="secondary" onClick={()=>{window.location.href="/?recuperacao=1"}}>Recarregar e ver as cópias</button>}
+  {copy&&<button className="secondary" onClick={onOpenCopies}>Ver e descarregar as cópias</button>}
   </Shell>;
 }
 
@@ -2297,6 +2309,9 @@ function StateWriterConflict({writer}){
 const RECOVERY_REASONS={
   legacy_version_write:"Gravado por uma versão anterior da app",
   before_restore:"Progresso antes de uma restauração",
+  restore_target:"Cópia escolhida para uma restauração",
+  journal_resolution_found:"O que estava gravado quando uma restauração foi interrompida",
+  journal_discarded_current:"Progresso mantido depois de uma restauração por resolver",
   unclean_end_adoption:"Antes de continuares depois de um fecho inesperado",
   foreign_write:"Conflito entre separadores",
   conflict:"Cópia de uma versão experimental anterior",
@@ -2304,7 +2319,8 @@ const RECOVERY_REASONS={
 };
 const recoveryReason=reason=>{const key=String(reason||"").split(":")[0];const base=RECOVERY_REASONS[key]||"Cópia de recuperação";
   return String(reason||"").endsWith(":received")?base+" (o que foi gravado noutro separador)":String(reason||"").endsWith(":this_tab")?base+" (o que estava neste separador)":base;};
-function RecoveryCopies({onClose}){
+function RecoveryCopies({onClose,writer=null}){
+  const canRestore=writer?.mode==="writer";
   const [view,setView]=useState(()=>recoveryCopiesForView());
   const [confirm,setConfirm]=useState(null);
   const [exported,setExported]=useState({});
@@ -2316,7 +2332,8 @@ function RecoveryCopies({onClose}){
     try{const url=URL.createObjectURL(new Blob([json],{type:"application/json"}));const a=document.createElement("a");a.href=url;a.download=`approva-copia-${copy.at||"sem-data"}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch{}
     setExported(prev=>({...prev,[copy.id]:true}));
   };
-  const FAIL={not_writer:"Este separador não está a guardar o progresso. Fecha os outros separadores e tenta de novo.",state_version_future:"Esta cópia foi gravada por uma versão mais recente e não pode ser restaurada por esta.",state_unreadable:"Esta cópia não é legível.",state_version_invalid:"Esta cópia não é legível.",copy_empty:"Esta cópia está vazia.",no_space_for_backup:"Não há espaço para guardar primeiro o progresso atual. Nada foi alterado.",restore_write_failed:"Não foi possível restaurar. O progresso atual foi reposto.",restore_incomplete:"A restauração ficou a meio. Este separador parou de gravar; ao reabrir, a restauração é concluída ou desfeita.",copy_not_found:"Esta cópia já não existe."};
+  const FAIL={not_writer:"Este separador não está a guardar o progresso. Fecha os outros separadores e tenta de novo.",state_version_future:"Esta cópia foi gravada por uma versão mais recente e não pode ser restaurada por esta.",state_unreadable:"Esta cópia não é legível.",state_version_invalid:"Esta cópia não é legível.",copy_empty:"Esta cópia está vazia.",no_space_for_backup:"Não há espaço para guardar primeiro o progresso atual. Nada foi alterado.",restore_write_failed:"Não foi possível restaurar. O progresso atual foi reposto.",restore_incomplete:"A restauração ficou a meio. Este separador parou de gravar; ao reabrir, a restauração é concluída ou desfeita.",copy_not_found:"Esta cópia já não existe.",partial_copy:"Esta cópia só tem parte do progresso (versão experimental anterior). Restaurá-la misturaria momentos diferentes; podes descarregá-la.",d3_orphan_receipts:"Esta cópia tem avaliações marcadas como concluídas sem o resultado. Não pode ser restaurada; podes descarregá-la.",d3_registry_unreadable:"O registo de conclusões desta cópia não é legível. Não pode ser restaurada; podes descarregá-la.",restore_pending:"Há uma restauração por resolver. Recarrega a app.",journal_not_cleared:"A restauração foi aplicada, mas este browser não deixou terminar o registo. Este separador parou de gravar; recarrega."};
+  const DELETE_FAIL={copy_in_use:"Esta cópia é necessária a uma restauração por resolver e não pode ser apagada.",export_first:"Descarrega primeiro esta cópia.",legacy_copy_kept:"As cópias da versão experimental anterior não são apagadas."};
   return <Shell><Logo/><div className="notice" role="status" data-recovery-copies="true">
     <b>Cópias de recuperação deste dispositivo</b>
     <span>Progresso atual: {view.current.readable?`${view.current.xp} XP · ${view.current.completed} sessões e avaliações concluídas`:"sem progresso legível"}.</span>
@@ -2327,15 +2344,16 @@ function RecoveryCopies({onClose}){
   <ul className="recoveryCopyList">{view.copies.map(copy=><li key={copy.id} data-recovery-copy={copy.id} data-recovery-reason={String(copy.reason||"")}>
     <b>{recoveryReason(copy.reason)}</b>
     <span>{date(copy.at)} · {copy.summary.readable?`${copy.summary.xp} XP · ${copy.summary.completed} concluídas`:"estado não legível"}{copy.partial?" · cópia parcial":""}{copy.durable?"":" · só neste separador"}</span>
-    {confirm===copy.id
+    {!canRestore?null:confirm===copy.id
       ?<><span role="alert">O progresso atual vai ser substituído por esta cópia e guardado primeiro como uma nova cópia.</span>
         <button className="primary" onClick={()=>{const result=restoreRecoveryCopy(copy.id);if(!result.ok){setMessage(FAIL[result.reason]||"Não foi possível restaurar.");setConfirm(null);refresh();}}}>Confirmar e restaurar</button>
         <button className="secondary" onClick={()=>setConfirm(null)}>Cancelar</button></>
       :<button className="primary" onClick={()=>setConfirm(copy.id)}>Restaurar esta cópia</button>}
     <button className="secondary" onClick={()=>download(copy)}>Descarregar</button>
-    {copy.format==="aplus-state-recovery-copy-v2"&&exported[copy.id]&&<button className="secondary" onClick={()=>{const r=deleteRecoveryCopy(copy.id,{exported:true});setMessage(r.ok?"Cópia apagada deste dispositivo.":"Não foi possível apagar a cópia.");refresh();}}>Apagar esta cópia</button>}
+    {copy.format==="aplus-state-recovery-copy-v2"&&exported[copy.id]&&<button className="secondary" onClick={()=>{const r=deleteRecoveryCopy(copy.id,{exported:true});setMessage(r.ok?"Cópia apagada deste dispositivo.":(DELETE_FAIL[r.reason]||"Não foi possível apagar a cópia."));refresh();}}>Apagar esta cópia</button>}
   </li>)}</ul>
-  <button className="secondary" onClick={onClose}>Voltar ao estudo</button>
+  {!canRestore&&<p data-recovery-readonly="true">Este separador não está a guardar o progresso: podes consultar, descarregar e apagar cópias já descarregadas (para libertar espaço). Restaurar só é possível no separador que guarda o progresso.</p>}
+  <button className="secondary" onClick={onClose}>{canRestore?"Voltar ao estudo":"Voltar"}</button>
   </Shell>;
 }
 
