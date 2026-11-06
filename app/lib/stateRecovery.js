@@ -14,12 +14,13 @@
 // Descarregar: JSON da cópia (dados do próprio aluno, neste dispositivo).
 // Apagar: só cópias v2, só depois de descarregadas, por decisão explícita.
 import {ACADEMIC_KEYS,STATE_KEYS,canonicalKey} from "./academicKeys.js";
-import {listRecoveryCopies,findRecoveryCopy,writeRecoveryCopy,canonicalSet,summarizeSet,sameSet,writeSetExact,restoreJournalKey,clearRestoreJournal,restoreJournalState,copyInUse,readCopyKeys,RECOVERY_FORMAT} from "./recoveryCopies.js";
+import {listRecoveryCopies,findRecoveryCopy,writeRecoveryCopy,canonicalSet,summarizeSet,sameSet,writeSetExact,restoreJournalKey,clearRestoreJournal,restoreJournalState,copyInUse,readCopyKeys,discardOwnCopy,setFingerprints,RECOVERY_FORMAT} from "./recoveryCopies.js";
 import {stateWriterStatus,releaseAfterRestore,releaseAfterIncompleteRestore,noteRestoredWrites} from "./stateWriter.js";
 import {classifyStoredState} from "./stateIntegrity.js";
 import {recordedCompletionIds} from "./reliability.js";
 
 function local(){try{return globalThis.localStorage||null}catch{return null}}
+function session(){try{return globalThis.sessionStorage||null}catch{return null}}
 const scopeNow=()=>stateWriterStatus().scope||"global";
 
 export function recoveryCopiesForView(scope=scopeNow()){
@@ -79,20 +80,33 @@ export function restoreRecoveryCopy(id,{reload=true}={}){
   if(sameSet(target,before))return {ok:true,unchanged:true,restored:id};
   // Alvo e segurança: cópias próprias deste restauro (nunca reutilizadas), para
   // que nenhuma cópia escolhida ou apagável pelo aluno sustente o diário.
+  // Um restauro que não chega a começar não deixa cópias para trás (nem duráveis
+  // nem só no separador): ocupariam a quota sem nada referir (auditoria, X3).
+  const abandon=(...copies)=>{for(const c of copies)if(c?.key)discardOwnCopy(scope,c.key);return {ok:false,reason:"no_space_for_backup"};};
   const pinned=writeRecoveryCopy({scope,reason:"restore_target",keys:target,tab:writer.tabId,extra:{source:id}});
-  if(!pinned||!pinned.durable)return {ok:false,reason:"no_space_for_backup"};
+  if(!pinned||!pinned.durable)return abandon(pinned);
   const backup=writeRecoveryCopy({scope,reason:"before_restore",keys:before,tab:writer.tabId,extra:{restoring:id}});
-  if(!backup||!backup.durable)return {ok:false,reason:"no_space_for_backup"};
+  if(!backup||!backup.durable)return abandon(backup,pinned);
   const journalId=`j-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,8)}`;
   const journalRaw=JSON.stringify({id:journalId,phase:"writing",target:pinned.key,backup:backup.key,source:id,at:Date.now()});
   try{store.setItem(restoreJournalKey(scope),journalRaw);if(store.getItem(restoreJournalKey(scope))!==journalRaw)throw new Error("journal");}
-  catch{return {ok:false,reason:"no_space_for_backup"};}
+  catch{
+    // Diário não gravado (ou gravado com outros bytes): só se apagam as cópias se
+    // nenhum diário legível as referir.
+    return abandon(backup,pinned);
+  }
   try{writeSetExact(store,scope,target);}
   catch{
     for(const key of ACADEMIC_KEYS)try{writeSetExact(store,scope,before,[key]);}catch{}
     noteRestoredWrites();
     // Só continua a gravar se o conjunto anterior estiver reposto E o diário apagado (provado).
-    if(sameSet(canonicalSet(scope,store),before)&&clearRestoreJournal(scope,store))return {ok:false,reason:"restore_write_failed",backup:backup.key};
+    if(sameSet(canonicalSet(scope,store),before)&&clearRestoreJournal(scope,store)){
+      // Reposto e diário apagado: o alvo fixado é igual à cópia escolhida (que
+      // continua guardada) e fica órfão: apagado. A segurança fica (restaurar é
+      // sempre reversível: o conjunto anterior continua em cópia).
+      discardOwnCopy(scope,pinned.key);
+      return {ok:false,reason:"restore_write_failed",backup:backup.key};
+    }
     releaseAfterIncompleteRestore({reload});
     return {ok:false,reason:"restore_incomplete",backup:backup.key,target:pinned.key};
   }
@@ -105,6 +119,15 @@ export function restoreRecoveryCopy(id,{reload=true}={}){
   }
   if(reload)releaseAfterRestore();
   return {ok:true,backup:backup.key,restored:id,target:pinned.key};
+}
+
+// Exportação do conjunto atual (as 9 chaves gravadas), sem gravar nada: disponível
+// em qualquer modo, incluindo só consulta e retenção. As impressões digitais
+// permitem provar depois que foram estes os bytes descarregados.
+export function exportCurrentSet(scope=scopeNow()){
+  const store=local();
+  const keys=canonicalSet(scope,store);
+  return JSON.stringify({format:RECOVERY_FORMAT,exportedAt:new Date().toISOString(),id:null,reason:"current_export",at:Date.now(),scope,keys,fingerprints:setFingerprints(keys)},null,2);
 }
 
 export function exportRecoveryCopy(id,scope=scopeNow()){
@@ -124,14 +147,24 @@ export function deleteRecoveryCopy(id,{exported=false}={},scope=scopeNow()){
   const store=local();
   if(!store)return {ok:false,reason:"storage_unavailable"};
   if(copyInUse(scope,id,store))return {ok:false,reason:"copy_in_use"};
-  try{store.removeItem(id);return store.getItem(id)===null?{ok:true}:{ok:false,reason:"delete_failed"}}catch{return {ok:false,reason:"delete_failed"}}
+  // Apagar no nível onde a cópia está (durável e/ou só neste separador) e provar
+  // por releitura. Uma cópia só no separador não liberta espaço do dispositivo.
+  const where=[[store,false],[session(),true]].filter(([s])=>{try{return !!s&&s.getItem(id)!==null}catch{return false}});
+  if(!where.length)return {ok:false,reason:"copy_not_found"};
+  try{for(const [s] of where)s.removeItem(id);}catch{return {ok:false,reason:"delete_failed"}}
+  const gone=where.every(([s])=>{try{return s.getItem(id)===null}catch{return false}});
+  if(!gone)return {ok:false,reason:"delete_failed"};
+  return {ok:true,temporary:where.every(([,temp])=>temp)};
 }
 
 // Decisão explícita do aluno perante um diário que não pode ser resolvido
 // automaticamente (bytes mais recentes que o diário, ou cópias em falta):
 // manter o progresso atual. Só depois de o conjunto atual ficar numa cópia
 // durável; o alvo e a segurança do diário continuam guardados.
-export function keepCurrentAndDiscardJournal(scope=scopeNow()){
+// Sem espaço para essa cópia (quota cheia e nenhuma cópia apagável), a decisão só
+// é aceite se o aluno tiver descarregado exatamente os bytes atuais
+// (exportCurrentSet → exportedFingerprints); nada académico é apagado.
+export function keepCurrentAndDiscardJournal(scope=scopeNow(),{exportedFingerprints=null}={}){
   const store=local();
   if(!store)return {ok:false,reason:"storage_unavailable"};
   const read=restoreJournalState(scope,store);
@@ -142,8 +175,16 @@ export function keepCurrentAndDiscardJournal(scope=scopeNow()){
     const foreign=ACADEMIC_KEYS.some(k=>{const v=current[k]??null;return !(target&&(target[k]??null)===v)&&!(backup&&(backup[k]??null)===v);});
     if(!foreign&&(target||backup))return {ok:false,reason:"resolvable"};
   }
-  const keep=writeRecoveryCopy({scope,reason:"journal_discarded_current",keys:canonicalSet(scope,store),extra:{journal:read.journal?.id||null}});
-  if(!keep||!keep.durable)return {ok:false,reason:"no_space_for_backup"};
+  const current=canonicalSet(scope,store);
+  const keep=writeRecoveryCopy({scope,reason:"journal_discarded_current",keys:current,dedupe:"reason",extra:{journal:read.journal?.id||null}});
+  if(!keep||!keep.durable){
+    if(keep?.key)discardOwnCopy(scope,keep.key);
+    if(!exportedFingerprints)return {ok:false,reason:"no_space_for_backup"};
+    const now=setFingerprints(current);
+    if(!ACADEMIC_KEYS.every(k=>(exportedFingerprints?.[k]??null)===now[k]))return {ok:false,reason:"export_mismatch"};
+    if(!clearRestoreJournal(scope,store))return {ok:false,reason:"journal_not_cleared"};
+    return {ok:true,copy:null,exportedOnly:true};
+  }
   if(!clearRestoreJournal(scope,store))return {ok:false,reason:"journal_not_cleared",copy:keep.key};
   return {ok:true,copy:keep.key};
 }

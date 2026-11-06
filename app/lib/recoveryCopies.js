@@ -35,7 +35,9 @@ function keysOf(store){const out=[];try{for(let i=0;i<store.length;i++){const k=
 // Grava uma cópia. Primeiro em localStorage (durável); se não couber, em
 // sessionStorage (não durável: o chamador decide se isso basta).
 // dedupe: se a cópia v2 mais recente deste âmbito tem exatamente o mesmo
-// conjunto, reutiliza-a (evita acumular cópias iguais).
+// conjunto, reutiliza-a (evita acumular cópias iguais). dedupe:"reason" só
+// reutiliza uma cópia durável com o mesmo motivo (cópias de sistema repetidas
+// em reaberturas sucessivas; correções residuais da auditoria, X4).
 // id fixo: substitui a cópia com esse id (usado só para "legado mais recente",
 // cujos bytes continuam intactos nas próprias chaves legadas).
 export function writeRecoveryCopy({scope,reason,keys,tab=null,dedupe=false,id=null,extra={}}){
@@ -43,7 +45,7 @@ export function writeRecoveryCopy({scope,reason,keys,tab=null,dedupe=false,id=nu
   if(id&&copyInUse(scope,recoveryPrefix(scope)+id))return null;
   if(dedupe&&!id){
     // Nunca reutilizar a cópia rotativa "legado mais recente": é substituída.
-    const same=listV2(scope).filter(c=>c.store===local()&&!c.body.rolling&&sameSet(c.body.keys,keys))[0];
+    const same=listV2(scope).filter(c=>c.store===local()&&!c.body.rolling&&(dedupe!=="reason"||c.body.reason===reason)&&sameSet(c.body.keys,keys))[0];
     if(same)return {key:same.key,durable:true,reused:true};
   }
   const at=Date.now();
@@ -147,13 +149,40 @@ export function restoreJournalState(scope,store=local()){
 export function readRestoreJournal(scope,store=local()){const s=restoreJournalState(scope,store);return s.state==="pending"?s.journal:null;}
 // Devolve true só se a releitura provar que o diário desapareceu.
 export function clearRestoreJournal(scope,store=local()){try{store.removeItem(restoreJournalKey(scope));return store.getItem(restoreJournalKey(scope))===null}catch{return false}}
-// Cópias necessárias a um restauro pendente (alvo e segurança). Diário ilegível
-// ou leitura impossível: todas as cópias deste âmbito contam como necessárias.
+// Cópias necessárias a um restauro pendente (alvo e segurança).
+// Diário ilegível ou corrompido (não se sabe que cópias refere): contam como
+// necessárias todas as cópias que um restauro pode referir, ou seja, as que o
+// próprio restauro cria (restore_target, before_restore), as ilegíveis, e
+// qualquer cópia cujo id apareça nos bytes do diário. As restantes (conflitos,
+// adoções, legado, cópias antigas) nunca sustentam um diário e podem ser apagadas
+// depois de descarregadas — sem isto, diário corrompido + quota cheia não tinha
+// saída (auditoria, X1).
+export const RESTORE_COPY_REASONS=Object.freeze(["restore_target","before_restore"]);
+function copyBody(id){
+  for(const store of [local(),session()]){
+    let raw=null;try{raw=store?.getItem(id)??null}catch{return undefined}
+    if(raw!==null)return json(raw);
+  }
+  return null;
+}
 export function copyInUse(scope,id,store=local()){
   const s=restoreJournalState(scope,store);
   if(s.state==="none")return false;
-  if(s.state==="unknown")return true;
-  return id===s.journal.target||id===s.journal.backup;
+  if(s.state==="pending")return id===s.journal.target||id===s.journal.backup;
+  if(typeof s.raw==="string"&&typeof id==="string"&&s.raw.includes(id))return true;
+  const body=copyBody(id);
+  if(body===null)return false;
+  if(!body||typeof body!=="object")return true;
+  return RESTORE_COPY_REASONS.includes(String(body.reason||""));
+}
+// Apaga uma cópia criada por este próprio processo e que nenhum diário refere
+// (cópias de um restauro que não chegou a começar). Remove-a dos dois níveis.
+export function discardOwnCopy(scope,key){
+  if(typeof key!=="string"||!key.startsWith(recoveryPrefix(scope)))return false;
+  if(copyInUse(scope,key))return false;
+  let gone=true;
+  for(const store of [local(),session()])try{if(!store)continue;store.removeItem(key);if(store.getItem(key)!==null)gone=false;}catch{gone=false}
+  return gone;
 }
 // Resolução no início do mandato (antes de qualquer leitura para hidratação).
 // Regras (P1-1/P1-2 da auditoria da #462):
@@ -176,7 +205,8 @@ export function resolveRestoreJournal(scope,store=local()){
   // Bytes que não pertencem a nenhum dos dois conjuntos: não é um restauro a meio.
   const foreign=ACADEMIC_KEYS.filter(k=>{const v=current[k]??null;return !(target&&(target[k]??null)===v)&&!(backup&&(backup[k]??null)===v);});
   if(foreign.length)return {status:"blocked",reason:"stale_journal",foreign,journal};
-  const keep=writeRecoveryCopy({scope,reason:"journal_resolution_found",keys:current,extra:{journal:journal.id||null}});
+  // Uma só cópia por conjunto encontrado: reaberturas sucessivas em retenção não a repetem.
+  const keep=writeRecoveryCopy({scope,reason:"journal_resolution_found",keys:current,dedupe:"reason",extra:{journal:journal.id||null}});
   if(!keep||!keep.durable)return {status:"blocked",reason:"no_space_for_found_copy",journal};
   for(const [set,status] of [[target,"completed_forward"],[backup,"rolled_back"]]){
     if(!set)continue;
