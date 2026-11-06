@@ -207,6 +207,26 @@ describe("P1-A v2 · importação sem espaço e progresso só no separador",()=>
   });
 });
 
+describe("P1-A v2 · escrita de outra página sem Web Locks (limpeza de telemetria)",()=>{
+  it("sem Web Locks: apps em consulta, página limpa a telemetria — nenhum byte académico muda e o legado fica intacto",async()=>{
+    reset(false);
+    const withTelemetry=JSON.stringify({...seed,xp:100,pilotAggregates:[{n:1}],betaEvents:[{e:1}],_stateVersion:31,_savedAt:1});
+    canonical.set(LEGACY_STATE_KEY,withTelemetry);
+    const a=makeTab("A");await boot(a);expect(mode(a)).toBe("readonly");
+    const legacyBefore=legacyBytes();
+    const page=makeTab("definicoes");
+    await inTab(page,async()=>{use(page);vi.resetModules();vi.stubGlobal("navigator",{});
+      const accounts=await import("../../app/lib/cloudAccountSession.js");const ws=await import("../../app/lib/accountWorkspace.js");
+      const integrity=await import("../../app/lib/stateIntegrity.js");const w=await import("../../app/lib/stateWriter.js");w.setMandateRegisterForTests(register);
+      use(page);ws.selectAccountWorkspace(await accounts.openVerifiedAccount());
+      use(page);page.result=await integrity.coordinatedClearLocalPilotTelemetry(ACCOUNT);});
+    deliverBytes();
+    expect(legacyBytes(),"a nova versão nunca escreve o legado").toBe(legacyBefore);
+    expect([...canonical.keys()].filter(k=>k.includes(`:acct:${ACCOUNT}:`)&&!k.includes(":~")),"nenhum estado criado em nenhum espaço").toEqual([]);
+    use(a);expect(tryEveryWrite(a)).toEqual([false,false,false,false,false,false]);
+  });
+});
+
 describe("P1-A v2 · registo IndexedDB ausente, divergente ou com falha",()=>{
   it("registo perdido com dados canónicos: retenção imediata; nenhuma chave académica é escrita; recuperação só com cópia",async()=>{
     reset(true);
@@ -354,11 +374,14 @@ describe("P1-A v2 · recuperação: guardas e acumulação",()=>{
     use(a);a.i.saveLocalStateDurably({...a.mem,xp:150});deliverBytes();
     use(a);const good=a.copies.writeRecoveryCopy({scope:ACCOUNT,reason:"synthetic",keys:{a25:JSON.stringify({...seed,xp:77,_stateVersion:31})}});
     const before=canonBytes();
+    expect(stored().xp,"pré-condição: o estado lido é o que a app escreveu").toBe(150);
+    const all=everything();
     const real=a.local.setItem;a.local.setItem=(k,v)=>{if(k.includes(":~recovery:"))throw new DOMException("synthetic quota","QuotaExceededError");return real(k,v);};
     use(a);const result=a.rec.restoreRecoveryCopy(good.key,{reload:false});
     a.local.setItem=real;
     expect(result.reason).toBe("no_space_for_backup");
     expect(canonBytes()).toBe(before);
+    expect(everything(),"nada muda em nenhuma chave").toBe(all);
   });
 
   it("cópias da #461 (v1) aparecem, são restauráveis e não podem ser apagadas; v2 só depois de descarregar",async()=>{

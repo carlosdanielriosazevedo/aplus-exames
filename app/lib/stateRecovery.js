@@ -14,8 +14,8 @@
 // Descarregar: JSON da cópia (dados do próprio aluno, neste dispositivo).
 // Apagar: só cópias v2, só depois de descarregadas, por decisão explícita.
 import {ACADEMIC_KEYS,STATE_KEYS,canonicalKey} from "./academicKeys.js";
-import {listRecoveryCopies,findRecoveryCopy,writeRecoveryCopy,canonicalSet,summarizeSet,RECOVERY_FORMAT} from "./recoveryCopies.js";
-import {stateWriterStatus,releaseAfterRestore,noteRestoredWrites} from "./stateWriter.js";
+import {listRecoveryCopies,findRecoveryCopy,writeRecoveryCopy,canonicalSet,summarizeSet,sameSet,writeSetExact,restoreJournalKey,clearRestoreJournal,RECOVERY_FORMAT} from "./recoveryCopies.js";
+import {stateWriterStatus,releaseAfterRestore,releaseAfterIncompleteRestore,noteRestoredWrites} from "./stateWriter.js";
 import {classifyStoredState} from "./stateIntegrity.js";
 
 function local(){try{return globalThis.localStorage||null}catch{return null}}
@@ -38,14 +38,6 @@ export function validateCopyForRestore(copy){
   return {ok:true};
 }
 
-function writeSetExact(store,scope,set,keys){
-  for(const key of keys){
-    const full=canonicalKey(key,scope),raw=set?.[key]??null;
-    if(raw===null)store.removeItem(full);else store.setItem(full,raw);
-    if((store.getItem(full)??null)!==raw)throw new Error(`verify:${key}`);
-  }
-}
-
 export function restoreRecoveryCopy(id,{reload=true}={}){
   const writer=stateWriterStatus();
   if(writer.mode!=="writer")return {ok:false,reason:"not_writer"};
@@ -54,21 +46,34 @@ export function restoreRecoveryCopy(id,{reload=true}={}){
   const copy=findRecoveryCopy(scope,id);
   const valid=validateCopyForRestore(copy);
   if(!valid.ok)return valid;
-  // Cópias parciais (v1) só substituem as chaves que contêm.
-  const keys=copy.partial?ACADEMIC_KEYS.filter(k=>k in copy.keys):ACADEMIC_KEYS;
   const before=canonicalSet(scope,store);
+  // Conjunto-alvo completo (9 chaves). Cópias parciais (v1) só substituem as
+  // chaves que contêm; as restantes ficam como estão.
+  const target=Object.fromEntries(ACADEMIC_KEYS.map(k=>[k,copy.partial&&!(k in copy.keys)?before[k]:(copy.keys[k]??null)]));
+  if(sameSet(target,before))return {ok:true,unchanged:true,restored:id};
+  // Alvo fixado (imutável: a cópia de origem pode ser a rotativa do legado) e segurança.
+  const pinned=writeRecoveryCopy({scope,reason:"restore_target",keys:target,tab:writer.tabId,dedupe:true,extra:{source:id}});
+  if(!pinned||!pinned.durable)return {ok:false,reason:"no_space_for_backup"};
   const backup=writeRecoveryCopy({scope,reason:"before_restore",keys:before,tab:writer.tabId,dedupe:true,extra:{restoring:id}});
   if(!backup||!backup.durable)return {ok:false,reason:"no_space_for_backup"};
-  try{writeSetExact(store,scope,copy.keys,keys);}
-  catch(error){
-    // Repor chave a chave: uma chave que falhe não impede as restantes.
+  const journalRaw=JSON.stringify({phase:"writing",target:pinned.key,backup:backup.key,source:id,at:Date.now()});
+  try{store.setItem(restoreJournalKey(scope),journalRaw);if(store.getItem(restoreJournalKey(scope))!==journalRaw)throw new Error("journal");}
+  catch{return {ok:false,reason:"no_space_for_backup"};}
+  try{writeSetExact(store,scope,target);}
+  catch{
+    // Repor chave a chave; só se o conjunto anterior ficar exatamente reposto é que
+    // o separador continua. Caso contrário para de gravar e o diário é resolvido
+    // na próxima abertura (completar para o alvo ou repor a segurança).
     for(const key of ACADEMIC_KEYS)try{writeSetExact(store,scope,before,[key]);}catch{}
     noteRestoredWrites();
-    return {ok:false,reason:"restore_write_failed",backup:backup.key};
+    if(sameSet(canonicalSet(scope,store),before)){clearRestoreJournal(scope,store);return {ok:false,reason:"restore_write_failed",backup:backup.key};}
+    releaseAfterIncompleteRestore({reload});
+    return {ok:false,reason:"restore_incomplete",backup:backup.key,target:pinned.key};
   }
+  clearRestoreJournal(scope,store); // se falhar, a próxima abertura vê o alvo aplicado e conclui
   noteRestoredWrites();
   if(reload)releaseAfterRestore();
-  return {ok:true,backup:backup.key,restored:id};
+  return {ok:true,backup:backup.key,restored:id,target:pinned.key};
 }
 
 export function exportRecoveryCopy(id,scope=scopeNow()){

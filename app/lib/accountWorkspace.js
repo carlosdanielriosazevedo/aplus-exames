@@ -58,7 +58,11 @@ export const LEGACY_WORKSPACE_KEYS=ACADEMIC_KEYS;
 export function legacyWorkspacePresent(){
   for(const name of ["localStorage","sessionStorage"])try{
     const store=globalThis[name];
-    if(LEGACY_WORKSPACE_KEYS.some(key=>{try{return store?.getItem(key)!==null&&store?.getItem(key)!==undefined}catch{return false}}))return true;
+    const present=key=>{try{return store?.getItem(key)!==null&&store?.getItem(key)!==undefined}catch{return false}};
+    if(LEGACY_WORKSPACE_KEYS.some(present))return true;
+    // P1-A v2: progresso gravado sem conta pela nova versão (espaço canónico
+    // global) também não tem dono comprovado: nunca é atribuído, mas é assinalado.
+    if(LEGACY_WORKSPACE_KEYS.some(key=>present(canonicalKey(key,"global"))))return true;
   }catch{}
   return false;
 }

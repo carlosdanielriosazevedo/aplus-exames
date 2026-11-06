@@ -103,12 +103,14 @@ test("P1-A v2 · IndexedDB recusa gravar o registo: só consulta, nada importado
   });
   const a=await context.newPage();
   await seedLegacy(a,mathFixture("synthetic-v2-idb"));
-  const before=academic(await local(a));
+  // Anti-vacuidade: o armazenamento inteiro (exceto chaves técnicas), não só os prefixos conhecidos.
+  const everything=stores=>Object.fromEntries(Object.entries(stores).filter(([k])=>!k.includes("auth-epoch")&&k!=="a25-device-id-v1"));
+  const before=everything(await local(a));
   await a.goto("/");
   await expect(a.locator("[data-readonly-reason='register_unavailable']")).toBeVisible({timeout:30_000});
   await expect(submit(a)).toHaveCount(0);
   await a.waitForTimeout(1000);
-  expect(academic(await local(a)),"nenhum byte académico alterado, nada importado").toEqual(before);
+  expect(everything(await local(a)),"nenhum byte alterado em nenhuma chave, nada importado").toEqual(before);
   await context.close();
 });
 
@@ -161,5 +163,57 @@ test("P1-A v2 · escritor alheio no rascunho canónico: o escritor para e os doi
   const copies=Object.entries(stores).filter(([k])=>k.startsWith(G("~recovery:"))).map(([,v])=>parse(v));
   expect(copies.some(c=>c.keys["a25-active-session-v1"]===mine),"rascunho deste separador guardado").toBe(true);
   expect(copies.some(c=>c.keys["a25-active-session-v1"]===foreign),"rascunho recebido guardado").toBe(true);
+  await context.close();
+});
+
+test("P1-A v2 · restauro interrompido a meio (armazenamento morre após 4 das 9 escritas): a abertura seguinte conclui-o; nunca fica misto",async({browser})=>{
+  const context=await browser.newContext();
+  const sid="synthetic-v2-restore-crash";
+  const fixture=mathFixture(sid);
+  const a=await context.newPage();
+  await seedLegacy(a,fixture);
+  await a.goto("/");
+  await expect(submit(a)).toBeVisible({timeout:30_000});
+  await submit(a).click();
+  await expect.poll(async()=>completions((await local(a))[G("a25")],sid),{timeout:20_000}).toBe(1);
+  // versão anterior grava progresso diferente → cópia restaurável
+  const old=await context.newPage();await old.goto("/?recuperar=inicio");
+  await old.evaluate(raw=>localStorage.setItem("a25",raw),JSON.stringify({...fixture.state,xp:4444,missionHistory:[{id:"synthetic-old-restore"}],_savedAt:Date.now()}));
+  await old.close();
+  await expect(a.locator("[data-state-writer='legacy-progress']")).toBeVisible({timeout:10_000});
+  await a.getByRole("button",{name:"Ver cópias de recuperação",exact:true}).click();
+  const stores=await local(a);
+  const legacyCopy=Object.entries(stores).filter(([k])=>k.startsWith(G("~recovery:"))).map(([k,v])=>({k,...parse(v)})).find(c=>c.reason==="legacy_version_write");
+  const KEYS=Object.keys(legacyCopy.keys);
+  const before=Object.fromEntries(KEYS.map(k=>[k,stores[G(k)]??null]));
+  // o armazenamento "morre" depois da 4.ª escrita académica do restauro
+  await a.evaluate(keys=>{const set=Storage.prototype.setItem,remove=Storage.prototype.removeItem;let n=0,dead=false;
+    const academic=k=>keys.some(x=>k==="a25-ws-v2:global:"+x);
+    Storage.prototype.setItem=function(k,v){if(dead)return;set.call(this,k,v);if(academic(k)&&++n>=4)dead=true;};
+    Storage.prototype.removeItem=function(k){if(dead)return;remove.call(this,k);if(academic(k)&&++n>=4)dead=true;};},KEYS);
+  const item=a.locator(`[data-recovery-copy='${legacyCopy.k}']`);
+  await item.getByRole("button",{name:"Restaurar esta cópia",exact:true}).click();
+  await item.getByRole("button",{name:"Confirmar e restaurar",exact:true}).click();
+  await a.waitForTimeout(1500);
+  const mid=await local(a);
+  const midSet=Object.fromEntries(KEYS.map(k=>[k,mid[G(k)]??null]));
+  expect(KEYS.some(k=>midSet[k]!==before[k])&&KEYS.some(k=>midSet[k]!==legacyCopy.keys[k]),"o armazenamento ficou de facto a meio").toBe(true);
+  expect(mid[G("~restore-journal")],"diário gravado antes das escritas").toBeTruthy();
+  await a.close();
+  // reabertura: sem selo → retenção → recuperação explícita → diário resolvido antes de hidratar
+  const b=await context.newPage();await b.goto("/");
+  const hold=b.locator("[data-state-writer='recovery-hold']");
+  await hold.or(b.locator("[data-restore-result]")).first().waitFor({timeout:30_000});
+  if(await hold.count()){
+    await b.getByRole("button",{name:"Continuar neste separador",exact:true}).click();
+    await b.getByRole("button",{name:"Guardar cópia e continuar aqui",exact:true}).click();
+  }
+  await expect(b.locator("[data-restore-result]")).toHaveAttribute("data-restore-result",/^completed/,{timeout:30_000});
+  const after=await local(b);
+  for(const k of KEYS)expect(after[G(k)]??null,"conjunto restaurado por inteiro: "+k).toBe(legacyCopy.keys[k]??null);
+  expect(after[G("~restore-journal")]??null).toBe(null);
+  const backup=Object.entries(after).filter(([k])=>k.startsWith(G("~recovery:"))).map(([,v])=>parse(v)).find(c=>c.reason==="before_restore");
+  for(const k of KEYS)expect(backup.keys[k]??null,"progresso anterior guardado: "+k).toBe(before[k]);
+  expect(completions(backup.keys.a25,sid)).toBe(1);
   await context.close();
 });

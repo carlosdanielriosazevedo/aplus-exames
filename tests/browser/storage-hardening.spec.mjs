@@ -184,6 +184,9 @@ for(const viewport of [{width:390,height:844},{width:1366,height:768}]){
       await a.goto("/");
       await expect(a.getByRole("button",{name:"Entregar Mini-exame",exact:true})).toBeVisible({timeout:30_000});
       const before=await readStores(a);
+      // Anti-vacuidade (v2): o rascunho e o estado lidos são os que a app tem no separador.
+      expect(before.session[MATH_DRAFT],"pré-condição: rascunho canónico do separador").toBeTruthy();
+      expect(before.session.a25,"pré-condição: estado canónico do separador").toBeTruthy();
       const b=await context.newPage();
       const errorsB=collectErrors(b);
       await b.goto("/");

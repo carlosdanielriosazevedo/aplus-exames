@@ -83,3 +83,21 @@ Nos contratos com contas, só mudam as leituras do progresso gravado pela app co
 | X15 escrita de versão antiga sem cópia | detetado | "separador do main" |
 
 Os 23 testes modificados pela #461 (`3cd901a`, `2fd5329`) continuam a **não** detetar o R1 (recuperação sem cópia), tal como na auditoria. A deteção vem dos testes P1 e unitários.
+
+## Revisão de vacuidade (mutante de prefixo)
+
+Método: a app passa a gravar em `a25-ws-vX:` enquanto os testes continuam a ler `a25-ws-v2:`. Um teste adaptado que **continue a passar** não depende dos bytes que a app grava, por isso cada sobrevivente foi inspecionado.
+
+| Sobrevivente | Classificação | Ação |
+|---|---|---|
+| unit "observador não grava estado, rascunho nem registo" | **vazio quanto ao prefixo** (comparava só chaves v2, nulas sob o mutante) | pré-condições não nulas + comparação do armazenamento inteiro |
+| unit "sem espaço para guardar o atual antes de restaurar" | **vazio quanto ao prefixo** | pré-condição + armazenamento inteiro |
+| unit "sem cópia durável (localStorage sem espaço)" | **vazio quanto ao prefixo** | pré-condição + armazenamento inteiro |
+| Chromium `storage-hardening` "bloqueado em duas abas" | **vazio quanto ao prefixo** (`undefined === undefined`) | pré-condições: rascunho e estado canónicos presentes |
+| Chromium "IndexedDB recusa gravar" | parcial (só os prefixos conhecidos) | armazenamento inteiro |
+| contrato "legado bruto e global v2 em simultâneo" | parcial (só `a25-ws-v2:acct:B2:`) | qualquer espaço (`:acct:B2:`, F5) + conteúdo |
+| contrato "sem sessão" | parcial (só `a25-ws-v2:`) | armazenamento inteiro |
+| 9 unitários "sem Web Locks / IndexedDB / página bloqueada", Chromium "sem Web Locks", 6 P1-B, "ilegível" | legítimos: já comparavam o armazenamento inteiro ou o legado | — |
+| Chromium 111, 124, 548 (`diagnostic-resume`), 121 (`storage-hardening`), 174 (math-a), unit "reload", "escritor bloqueado" | testam UI ou máquina de estados; não leem bytes | — |
+
+Depois dos reforços, os 4 testes que eram vazios **falham** sob o mutante. Os testes de ausência ("nada escrito", "nenhuma chave de B2") continuam a passar sob o mutante, e é esse o comportamento correto: comparam o armazenamento inteiro, e a app mutante também não escreve nada nesses cenários.

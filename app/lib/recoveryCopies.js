@@ -108,3 +108,44 @@ export function listRecoveryCopies(scope){
   })).sort((a,b)=>(b.at||0)-(a.at||0));
 }
 export function findRecoveryCopy(scope,id){return listRecoveryCopies(scope).find(copy=>copy.id===id)||null;}
+
+// ---------------------------------------------------------------- diário de restauro
+// O localStorage não tem transações: um restauro são 9 escritas independentes e
+// um fecho abrupto a meio deixaria estado de um conjunto com recibos D3 de outro.
+// Garantia oferecida (não é atomicidade): antes da 1.ª escrita fica gravado um
+// diário com o conjunto-alvo FIXADO (cópia imutável) e a cópia de segurança. No
+// início de qualquer mandato, antes de qualquer leitura para hidratação, um
+// diário pendente é resolvido: conjunto igual ao alvo ou à segurança → concluído;
+// misto → completar para o alvo; se não for possível → repor a segurança; se
+// nada for possível → o escritor fica só em consulta (nada é gravado por cima).
+export const restoreJournalKey=scope=>workspaceKey("restore-journal",scope);
+export function readCopyKeys(scope,key,store=local()){
+  if(typeof key!=="string"||!key.startsWith(recoveryPrefix(scope)))return null;
+  const body=json(store?.getItem(key)??"null");
+  return body&&body.format===RECOVERY_FORMAT&&body.keys?Object.fromEntries(ACADEMIC_KEYS.map(k=>[k,body.keys[k]??null])):null;
+}
+// Escreve o conjunto inteiro (9 chaves) e confirma cada uma por releitura.
+export function writeSetExact(store,scope,set,keys=ACADEMIC_KEYS){
+  for(const key of keys){
+    const full=canonicalKey(key,scope),raw=set?.[key]??null;
+    if(raw===null)store.removeItem(full);else store.setItem(full,raw);
+    if((store.getItem(full)??null)!==raw)throw new Error(`verify:${key}`);
+  }
+}
+export function readRestoreJournal(scope,store=local()){return json(store?.getItem(restoreJournalKey(scope))??"null")||null;}
+export function clearRestoreJournal(scope,store=local()){try{store.removeItem(restoreJournalKey(scope));return store.getItem(restoreJournalKey(scope))===null}catch{return false}}
+export function resolveRestoreJournal(scope,store=local()){
+  if(!store)return {status:"none"};
+  const journal=readRestoreJournal(scope,store);
+  if(!journal)return {status:"none"};
+  const target=readCopyKeys(scope,journal.target,store),backup=readCopyKeys(scope,journal.backup,store);
+  const current=canonicalSet(scope,store);
+  const finish=status=>{clearRestoreJournal(scope,store);return {status,journal};};
+  if(target&&sameSet(current,target))return finish("completed");
+  if(backup&&sameSet(current,backup))return finish("not_applied");
+  for(const [set,status] of [[target,"completed_forward"],[backup,"rolled_back"]]){
+    if(!set)continue;
+    try{writeSetExact(store,scope,set);if(sameSet(canonicalSet(scope,store),set))return finish(status);}catch{}
+  }
+  return {status:"blocked",journal};
+}

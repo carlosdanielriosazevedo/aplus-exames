@@ -31,7 +31,7 @@
 //
 // 4. Sem Web Locks não existe exclusão fiável: modo só de consulta.
 import {ACADEMIC_KEYS,STATE_KEYS,canonicalKey,workspaceKey,legacyKey,fingerprint} from "./academicKeys.js";
-import {writeRecoveryCopy,canonicalSet,legacySet,setIsEmpty,setFingerprints,sameSet} from "./recoveryCopies.js";
+import {writeRecoveryCopy,canonicalSet,legacySet,setIsEmpty,setFingerprints,sameSet,resolveRestoreJournal} from "./recoveryCopies.js";
 
 export const STATE_WRITER_EVENT="approva:state-writer";
 // Prefixos das cópias da versão experimental anterior (só listadas, nunca escritas).
@@ -252,8 +252,21 @@ function syncLegacy(){
   // nas próprias chaves legadas, que esta versão nunca altera).
   const copy=writeRecoveryCopy({scope:scope(),reason:"legacy_version_write",keys:legacy,tab:tabId,id:"legacy-latest",extra:{rolling:true,changed}});
   if(!copy||!copy.durable)return {status:"changed",copy:copy||null,changed};
-  writeMarkerRaw({...marker,fp:fps,lastChangeAt:Date.now()});
+  writeMarkerRaw({...marker,fp:fps,lastChangeAt:Date.now(),noticePending:true});
   return {status:"changed",copy,changed};
+}
+// O aviso de escrita de uma versão anterior fica pendente até o aluno o ver num
+// separador escritor (pode ter sido detetado num separador bloqueado ou fechado).
+function pendingLegacyNotice(store=rawLocal()){
+  const marker=readJson(store?.getItem(wsKey(IMPORT_MARKER))??"null");
+  if(!marker?.noticePending)return null;
+  return {status:"changed",pending:true,copy:{key:workspaceKey("recovery:legacy-latest",scope()),durable:true}};
+}
+export function acknowledgeLegacyNotice(){
+  if(status.mode!=="writer")return false;
+  const store=rawLocal(),key=wsKey(IMPORT_MARKER),marker=readJson(store?.getItem(key)??"null");
+  if(!marker?.noticePending)return true;
+  try{const {noticePending,...rest}=marker;store.setItem(key,JSON.stringify({...rest,noticeAcknowledgedAt:Date.now()}));set({legacy:{status:"current"}});return true}catch{return false}
 }
 
 // ---------------------------------------------------------------- mensagens
@@ -330,6 +343,13 @@ async function startMandate(){
   if(local&&!writeMarker({tab:tabId,epoch:next},store)){releaseHeldLock();set({mode:"readonly",reason:"shared_storage_full"});return;}
   epoch=next;seq=0;lastStamp={tab:tabId,epoch,seq:0};expectedMandate={tab:tabId,epoch,local};mandateLocal=local;
   hadMandate=true;
+  // Restauro interrompido (fecho abrupto, quota, erro): resolver ANTES de qualquer
+  // leitura para hidratação. Sem resolução possível, não se grava por cima.
+  let restore={status:"none"};
+  if(store){
+    try{restore=resolveRestoreJournal(scope(),store);}catch{restore={status:"blocked"};}
+    if(restore.status==="blocked"){resetBaseline(store);writeSeal();releaseHeldLock();set({mode:"readonly",reason:"restore_incomplete",restore});return;}
+  }
   resetBaseline(store);
   let legacy=null;
   try{legacy=syncLegacy();}
@@ -337,7 +357,8 @@ async function startMandate(){
     // Importação incompleta: selar (para o próximo poder provar) e só consultar.
     writeSeal();releaseHeldLock();set({mode:"readonly",reason:"legacy_import_failed"});return;
   }
-  set({mode:"writer",reason:null,proof:null,legacy});
+  if(legacy?.status==="current")legacy=pendingLegacyNotice(store)||legacy;
+  set({mode:"writer",reason:null,proof:null,legacy,restore:restore.status==="none"?null:{status:restore.status}});
 }
 
 // Decisão explícita do aluno quando não há prova (fim abrupto, registo perdido
@@ -510,6 +531,15 @@ export function releaseAfterRestore(){
   resetBaseline();
   writeSeal();releaseHeldLock();set({mode:"released",reason:"restored"});
   try{window.location.reload()}catch{}
+  return true;
+}
+// Restauro que não pôde ser concluído nem desfeito: parar de gravar já; o
+// diário é resolvido na próxima abertura (stateWriter.startMandate).
+export function releaseAfterIncompleteRestore({reload=true}={}){
+  if(status.mode!=="writer")return false;
+  resetBaseline();
+  writeSeal();releaseHeldLock();set({mode:"released",reason:"restore_incomplete"});
+  if(reload)try{window.location.reload()}catch{}
   return true;
 }
 // Restauração escreve diretamente no canónico: manter a linha de base coerente.

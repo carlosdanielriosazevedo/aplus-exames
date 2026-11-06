@@ -144,6 +144,10 @@ describe("P1-A · exclusão, passagem de controlo e recuperação",()=>{
     const a=await openTab("A");hydrate(a);
     use(a);expect(a.drafts.saveSessionDraft({kind:"mission",betaMode:"internal",sessionId:"synthetic-A",responses:[{id:"q1"}]})).toBe(true);
     const draftBefore=local.getItem(DRAFT_KEY),registryBefore=local.getItem(REGISTRY_KEY),stateBefore=local.getItem(STATE_KEY);
+    // Anti-vacuidade (v2): as chaves lidas têm de ser as que A escreveu, e nada muda em lado nenhum.
+    expect(draftBefore,"rascunho de A na chave lida").not.toBeNull();expect(stateBefore).not.toBeNull();
+    const all=()=>JSON.stringify([...local.data.entries()].filter(([k])=>!k.includes("auth-epoch")&&!k.includes("writer-signal")).sort());
+    const allBefore=all();
     const b=await openTab("B");
     expect(mode(b)).toBe("observer");
     expect(save(b,{...seed,xp:1})).toBe(false);
@@ -153,6 +157,7 @@ describe("P1-A · exclusão, passagem de controlo e recuperação",()=>{
     expect(local.getItem(DRAFT_KEY)).toBe(draftBefore);
     expect(local.getItem(REGISTRY_KEY)).toBe(registryBefore);
     expect(local.getItem(STATE_KEY)).toBe(stateBefore);
+    expect(all(),"nenhuma escrita do observador em nenhuma chave").toBe(allBefore);
   });
 
   it("passagem cooperativa: A grava o estado atual, liberta e B lê o progresso de A",async()=>{

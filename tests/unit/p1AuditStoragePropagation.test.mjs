@@ -240,11 +240,14 @@ describe("P1-A · recuperação explícita: nada é eliminado ou substituído se
   it("sem cópia durável (localStorage sem espaço para a cópia) não continua e não grava",async()=>{
     const {b,before}=await crashWithEverything();
     b.quotaFull=true;
+    expect(stored().xp,"pré-condição: o estado lido é o que A escreveu").toBe(150);
+    const all=everything();
     const realSet=b.local.setItem;b.local.setItem=(k,v)=>{if(k.includes(":~recovery:"))throw new DOMException("synthetic quota","QuotaExceededError");return realSet(k,v);};
     use(b);const result=b.w.adoptAfterUncleanEnd();await wait(5);
     expect(result.mode).toBe("verifying");expect(result.reason).toBe("recovery_hold");
     expect(save(b,{...seed,xp:1})).toBe(false);
     for(const [key,raw] of Object.entries(before))expect(canonical.get(key)??null).toBe(raw);
+    expect(everything(),"nada gravado em nenhuma chave").toBe(all);
   });
   it("estado de versão futura: depois de continuar, a proteção D2 continua a impedir leitura e gravação",async()=>{
     reset(true);

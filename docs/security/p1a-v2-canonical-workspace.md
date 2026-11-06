@@ -19,6 +19,9 @@ Por isso, as 9 chaves académicas passam a viver em `a25-ws-v2:<global|acct:cont
 | IndexedDB com falha | `verifyMandate/startMandate` | Leitura ou escrita falhada → só consulta, nada escrito |
 | Sem espaço para importar | `startMandate` | Só consulta, com o motivo verdadeiro. Nada é apagado. Com espaço, importa |
 | Recuperação | `recoveryCopies.js`, `stateRecovery.js`, ecrã "Cópias de recuperação" | Restaurar só como escritor; valida D2; guarda o atual (`before_restore`, durável) primeiro; escreve o conjunto inteiro; confirma por releitura; desfaz chave a chave se falhar; recarrega sem gravar a memória antiga. Descarregar (JSON). Apagar só cópias v2 e só depois de descarregar. As cópias v1 da #461 são listadas e restauráveis |
+| Restauro interrompido | `recoveryCopies.resolveRestoreJournal` (no início de cada mandato) | **Não é atómico** (o localStorage não tem transações). Antes da 1.ª das 9 escritas grava-se um diário com o conjunto-alvo fixado e a cópia de segurança. Na abertura seguinte, antes de hidratar: igual ao alvo ou à segurança → concluído; misto → completar para o alvo; senão → repor a segurança; senão → só consulta (`restore_incomplete`), sem gravar por cima. Provado após cada uma das 9 escritas × quota/erro/fecho abrupto/reload |
+| Progresso v2 sem conta + primeira conta (P1-C) | `legacyWorkspacePresent` | `a25-ws-v2:global:*` conta como progresso sem dono: aviso, nunca atribuído |
+| Aviso de versão anterior | marcador `noticePending` | Fica pendente até o aluno o ver num separador escritor (não se perde num separador bloqueado ou fechado) |
 | Acumulação | `writeRecoveryCopy({dedupe})` | Um conjunto idêntico a uma cópia existente reutiliza-a |
 | `withExclusiveStateWrite` | | Sem recurso "escrever sem lock" quando há erro; `write()` nunca corre duas vezes |
 
@@ -30,6 +33,10 @@ Por isso, as 9 chaves académicas passam a viver em `a25-ws-v2:<global|acct:cont
 5. Sem espaço no momento da atualização, o aluno fica em consulta até libertar espaço.
 6. A confirmação por releitura do localStorage prova a cache do renderer, não a persistência em disco.
 
+## Documentos relacionados
+- `p1a-v2-rollback-plan.md`: plano de rollback e gate de candidata (`tests/scripts/rollback-candidate-probe.mjs`).
+- `p1a-v2-key-inventory.md`: as 9 chaves, chaves e rotas fora delas, e escritas sem guarda.
+
 ## Testes
-- Novos: `tests/unit/p1V2CanonicalWorkspace.test.mjs` (16) e `tests/browser-p1/v2-legacy-tab.pw.mjs` (Chromium: separador do `main` real, restauração pela UI, reversível). Mais um teste em `storage-durability.spec.mjs` (armazenamento cheio no primeiro arranque).
+- Novos: `tests/unit/p1V2CanonicalWorkspace.test.mjs`, `p1V2RestoreInterruption.test.mjs` (37: 9 escritas × 4 falhas + quota persistente), `p1V2KeyInventory.test.mjs`; Chromium `tests/browser-p1/v2-legacy-tab.pw.mjs` (6) e o contrato com contas `tests/scripts/p1-v2-account-isolation-browser-contract.mjs` (5). Mais um teste em `storage-durability.spec.mjs` (armazenamento cheio no primeiro arranque).
 - Adaptações aos testes existentes: `docs/security/p1a-v2-test-adaptations-audit.md`.
