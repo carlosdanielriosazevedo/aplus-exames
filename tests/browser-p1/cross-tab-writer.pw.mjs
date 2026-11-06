@@ -4,9 +4,12 @@
 import {test,expect} from "@playwright/test";
 import {buildMiniExam,emptyScores} from "../../app/lib/engine.js";
 
-const STATE="a25";
-const DRAFT="a25-active-session-v1";
-const REGISTRY="a25-completed-sessions-v1";
+// P1-A v2: o progresso vive no espaço canónico; o seed() grava as chaves
+// brutas (estado anterior), que o primeiro escritor importa. Só muda ONDE se lê.
+const STATE="a25-ws-v2:global:a25";
+const DRAFT="a25-ws-v2:global:a25-active-session-v1";
+const REGISTRY="a25-ws-v2:global:a25-completed-sessions-v1";
+const legacyName=key=>key.replace(/^a25-ws-v2:global:/,"");
 const OBSERVER=/A APProva\+ está aberta noutro separador\./;
 const parse=raw=>{try{return JSON.parse(raw)}catch{return null}};
 
@@ -26,7 +29,7 @@ const completions=(raw,sid)=>(parse(raw)?.examHistory||[]).filter(x=>x.completio
 const local=page=>page.evaluate(()=>Object.fromEntries(Object.keys(localStorage).map(k=>[k,localStorage.getItem(k)])));
 async function seed(page,entries){
   await page.goto("/?recuperar=inicio");
-  await page.evaluate(entries=>{localStorage.clear();sessionStorage.clear();for(const [k,v] of Object.entries(entries))localStorage.setItem(k,v);},entries);
+  await page.evaluate(entries=>{localStorage.clear();sessionStorage.clear();for(const [k,v] of Object.entries(entries))localStorage.setItem(k,v);},Object.fromEntries(Object.entries(entries).map(([k,v])=>[legacyName(k),v])));
 }
 // O separador volta a ficar ativo (o que no browser real dispara recordAppOpen).
 const reactivate=page=>page.evaluate(()=>{document.dispatchEvent(new Event("visibilitychange"));window.dispatchEvent(new Event("focus"));});
@@ -167,12 +170,18 @@ test.describe("P1-A · um único separador grava o progresso",()=>{
     now=await local(b);
     expect(completions(now[STATE],sid),"conclusão de A mantida, sem duplicar").toBe(1);
     expect(parse(now[STATE]).xp,"XP de A mantido").toBe(xpA);
-    const copies=Object.keys(now).filter(k=>k.startsWith("a25-state-conflict-v1:"));
+    const copies=Object.keys(now).filter(k=>k.startsWith("a25-ws-v2:global:~recovery:")).map(k=>parse(now[k])).filter(c=>String(c.reason).startsWith("unclean_end_adoption"));
     expect(copies.length,"cópia de recuperação antes de continuar").toBeGreaterThan(0);
+    // A cópia contém de facto o conjunto que B via (com a conclusão de A), não só um registo.
+    expect(completions(copies[0].keys.a25,sid),"conclusão de A na cópia").toBe(1);
+    expect(copies[0].keys["a25-completed-sessions-v1"],"recibos na cópia").toBe(before[REGISTRY]??null);
     await context.close();
   });
 
-  test("escrita de um separador de versão anterior: o escritor para e guarda uma cópia",async({browser})=>{
+  // v2: uma versão anterior escreve nas chaves brutas e não toca no canónico
+  // (v2-legacy-tab.pw.mjs). Mantém-se a premissa original: um escritor sem
+  // coordenação a gravar a MESMA chave que o escritor usa.
+  test("escrita de um escritor sem coordenação na mesma chave: o escritor para e guarda as duas cópias",async({browser})=>{
     const context=await browser.newContext();
     const fixture=mathFixture("synthetic-cross-tab-old");
     const a=await context.newPage();
@@ -182,15 +191,15 @@ test.describe("P1-A · um único separador grava o progresso",()=>{
     const old=await context.newPage();
     await old.goto("/?recuperar=inicio"); // landing: não arranca a app
     const foreign=JSON.stringify({...parse(fixture.state),xp:999,_savedAt:Date.now()});
-    await old.evaluate(raw=>localStorage.setItem("a25",raw),foreign);
+    await old.evaluate(([key,raw])=>localStorage.setItem(key,raw),[STATE,foreign]);
     await expect(a.locator("[data-state-writer='conflict']")).toBeVisible({timeout:10_000});
     await expect(a.locator("[data-state-writer='conflict']")).toHaveAttribute("data-conflict-copy","durable");
     await reactivate(a);await a.waitForTimeout(800);
     const stores=await local(a);
     expect(stores[STATE]).toBe(foreign); // nada foi substituído
-    const copies=Object.keys(stores).filter(k=>k.startsWith("a25-state-conflict-v1:")).map(k=>parse(stores[k]));
-    expect(copies.find(c=>c.reason==="foreign_write")?.state?.xp,"progresso deste separador preservado").toBe(100);
-    expect(parse(copies.find(c=>c.reason==="foreign_write:received")?.raw)?.xp,"bytes recebidos preservados").toBe(999);
+    const copies=Object.keys(stores).filter(k=>k.startsWith("a25-ws-v2:global:~recovery:")).map(k=>parse(stores[k]));
+    expect(parse(copies.find(c=>c.reason==="foreign_write:this_tab")?.keys?.a25)?.xp,"progresso deste separador preservado").toBe(100);
+    expect(parse(copies.find(c=>c.reason==="foreign_write:received")?.keys?.a25)?.xp,"bytes recebidos preservados").toBe(999);
     await context.close();
   });
 

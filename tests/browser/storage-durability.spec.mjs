@@ -43,27 +43,35 @@ async function installFaults(context){
   },{FAULT});
 }
 
+// P1-A v2: o progresso vive no espaço canónico. O estado anterior (chaves brutas)
+// é importado pela nova versão com espaço livre; só depois o armazenamento enche
+// (a falha ao entregar, que é o que estes testes provam). O caso "já cheio no
+// primeiro arranque" tem um teste próprio no fim deste ficheiro.
+const C=key=>`a25-ws-v2:global:${key}`;
 async function seed(page,{state,draft},fault){
   await page.goto("/");
-  await page.evaluate(({state,draft,fault,DRAFT,FAULT})=>{
+  await page.evaluate(({state,draft,DRAFT,FAULT})=>{
     const {local,session}=window.__real;
     local.clear();session.clear();
     local.setItem("a25",JSON.stringify(state));
     local.setItem(DRAFT,JSON.stringify(draft));
-    local.setItem(FAULT,JSON.stringify(fault));
-  },{state,draft,fault,DRAFT,FAULT});
+    local.removeItem(FAULT);
+  },{state,draft,DRAFT,FAULT});
+  await page.goto("/");
+  await expect.poll(()=>page.evaluate(key=>window.__real.local.getItem(key)!==null,C("a25")),{timeout:30_000}).toBe(true);
+  await page.evaluate(({fault,FAULT})=>window.__real.local.setItem(FAULT,JSON.stringify(fault)),{fault,FAULT});
 }
 
 function snapshot(page,sid){
-  return page.evaluate(({sid,DRAFT,REGISTRY})=>{
+  return page.evaluate(({sid,DRAFT,REGISTRY,STATE})=>{
     const {local,session}=window.__real;
     const parse=raw=>{try{return JSON.parse(raw)}catch{return null}};
     const entries=raw=>(parse(raw)?.examHistory||[]).filter(x=>x.completionId===sid).length;
     const registry=parse(local.getItem(REGISTRY))||[];
     return {
-      localEntries:entries(local.getItem("a25")),
-      sessionEntries:entries(session.getItem("a25")),
-      localXp:parse(local.getItem("a25"))?.xp??null,
+      localEntries:entries(local.getItem(STATE)),
+      sessionEntries:entries(session.getItem(STATE)),
+      localXp:parse(local.getItem(STATE))?.xp??null,
       localDraft:local.getItem(DRAFT)!==null,
       sessionDraft:session.getItem(DRAFT)!==null,
       committed:registry.some(x=>x.id===sid&&x.status!=="pending"),
@@ -71,7 +79,7 @@ function snapshot(page,sid){
       observer:!!document.querySelector("[data-state-writer='observer']"),
       result:/Mini-exame/i.test(document.querySelector("h1")?.textContent||"")&&!document.querySelector("[data-completion-block]")
     };
-  },{sid,DRAFT,REGISTRY});
+  },{sid,DRAFT:C(DRAFT),REGISTRY:C(REGISTRY),STATE:C("a25")});
 }
 
 const submit=page=>page.getByRole("button",{name:"Entregar Mini-exame",exact:true});
@@ -179,3 +187,34 @@ for(const viewport of [{width:390,height:844},{width:1366,height:768}]){
     });
   });
 }
+
+// P1-A v2: o armazenamento já está cheio no primeiro arranque da nova versão.
+// A importação do estado anterior não cabe: a app fica só em consulta, com o
+// motivo verdadeiro, e não apaga nem altera nada. Com espaço, importa e continua.
+test("armazenamento cheio no primeiro arranque: só consulta, estado anterior intacto; com espaço, importa e conclui uma vez",async({browser})=>{
+  const context=await browser.newContext({viewport:{width:390,height:844}});
+  await installFaults(context);
+  const page=await context.newPage();
+  const sid="synthetic-v2-import-full";
+  const {state,draft}=fixture(sid);
+  await page.goto("/");
+  await page.evaluate(({state,draft,DRAFT,FAULT})=>{
+    const {local,session}=window.__real;local.clear();session.clear();
+    local.setItem("a25",JSON.stringify(state));local.setItem(DRAFT,JSON.stringify(draft));
+    local.setItem(FAULT,JSON.stringify({localLarge:true}));
+  },{state,draft,DRAFT,FAULT});
+  const legacyBefore=await page.evaluate(DRAFT=>[window.__real.local.getItem("a25"),window.__real.local.getItem(DRAFT)],DRAFT);
+  await page.goto("/");
+  await expect(page.locator("[data-readonly-reason='legacy_import_failed']")).toBeVisible({timeout:30_000});
+  await expect(submit(page)).toHaveCount(0);
+  const legacyAfter=await page.evaluate(DRAFT=>[window.__real.local.getItem("a25"),window.__real.local.getItem(DRAFT)],DRAFT);
+  expect(legacyAfter,"estado anterior e tentativa intactos").toEqual(legacyBefore);
+  await page.evaluate(FAULT=>window.__real.local.removeItem(FAULT),FAULT);
+  await openReview(page);
+  await submit(page).click();
+  await expect.poll(async()=>(await snapshot(page,sid)).localEntries,{timeout:20_000}).toBe(1);
+  const final=await snapshot(page,sid);
+  expect(final.committed).toBe(true);
+  expect(final.localXp).toBeGreaterThan(100);
+  await context.close();
+});

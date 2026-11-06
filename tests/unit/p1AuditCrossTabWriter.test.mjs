@@ -16,9 +16,14 @@ const TAB_GLOBALS={window:t=>t?.win,document:t=>t?.doc,sessionStorage:t=>t?.sess
 const savedGlobals={};
 
 const ACCOUNT="synthetic-A";
-const STATE_KEY=`a25-account-v1:${ACCOUNT}:a25`;
-const DRAFT_KEY=`a25-account-v1:${ACCOUNT}:a25-active-session-v1`;
-const REGISTRY_KEY=`a25-account-v1:${ACCOUNT}:a25-completed-sessions-v1`;
+// P1-A v2: o progresso vive no espaço canónico próprio; as sementes do
+// "estado anterior" continuam nas chaves legadas e são importadas pelo
+// primeiro escritor provado (adaptação: só muda ONDE se lê).
+const LEGACY_STATE_KEY=`a25-account-v1:${ACCOUNT}:a25`;
+const STATE_KEY=`a25-ws-v2:acct:${ACCOUNT}:a25`;
+const DRAFT_KEY=`a25-ws-v2:acct:${ACCOUNT}:a25-active-session-v1`;
+const REGISTRY_KEY=`a25-ws-v2:acct:${ACCOUNT}:a25-completed-sessions-v1`;
+const copyState=key=>JSON.parse(JSON.parse(local.getItem(key)).keys.a25);
 
 let local,tabs,current,channels,lockApi;
 function storage({shared=false}={}){
@@ -235,18 +240,20 @@ describe("P1-A · exclusão, passagem de controlo e recuperação",()=>{
     expect(stored().xp).toBe(140);
   });
 
-  it("escrita alheia (separador de versão anterior sem coordenação) bloqueia o escritor e preserva a sua cópia",async()=>{
+  it("escrita alheia (escritor sem coordenação na mesma chave canónica) bloqueia o escritor e preserva a sua cópia",async()=>{
     await seedStored();
     const a=await openTab("A");hydrate(a);a.mem={...a.mem,xp:160};
     const old=await openTab("versao-antiga",{coordinated:false});
-    use(old);old.i.guardedSaveLocalState({...seed,xp:90,missionHistory:[{id:"synthetic-old"}]});
+    // v2: uma versão anterior já não escreve aqui (ver o teste seguinte); simula-se
+    // um escritor sem coordenação que grava os mesmos bytes na chave canónica.
+    use(old);local.setItem(STATE_KEY,JSON.stringify({...seed,xp:90,missionHistory:[{id:"synthetic-old"}],_stateVersion:31,_savedAt:Date.now()}));
     await settle(5);
     expect(mode(a)).toBe("conflict");
     expect(save(a,{...a.mem,xp:161})).toBe(false);
     expect(stored().xp).toBe(90); // nada foi substituído
     const copy=a.w.stateWriterStatus().conflictCopy;
     expect(copy?.durable).toBe(true);
-    expect(JSON.parse(local.getItem(copy.key)).state.xp).toBe(160); // e nada se perdeu
+    expect(copyState(copy.key).xp).toBe(160); // e nada se perdeu
   });
 
   it("bytes alheios sem evento (corrida) também bloqueiam antes de gravar",async()=>{
@@ -256,7 +263,7 @@ describe("P1-A · exclusão, passagem de controlo e recuperação",()=>{
     expect(save(a,{...a.mem,xp:170})).toBe(false);
     expect(stored().xp).toBe(77);
     expect(mode(a)).toBe("conflict");
-    expect(JSON.parse(local.getItem(a.w.stateWriterStatus().conflictCopy.key)).state.xp).toBe(170);
+    expect(copyState(a.w.stateWriterStatus().conflictCopy.key).xp).toBe(170);
   });
 });
 
@@ -321,6 +328,7 @@ describe("P1-A · sem Web Locks: só leitura, nenhuma gravação académica",()=
       expect(status.mode).toBe("readonly");
       expect(a.i.guardedSaveLocalState({...seed,xp:7})).toBe(false);
       expect(a.session.getItem(STATE_KEY)).toBe(null); // sessionStorage não é gravação durável
+      expect(a.session.getItem(LEGACY_STATE_KEY)).toBe(null);
       expect(a.drafts.saveSessionDraft({kind:"mission",betaMode:"internal",sessionId:"x",responses:[]})).toBe(false);
     }finally{
       if(descriptor)Object.defineProperty(globalThis,"localStorage",descriptor);else delete globalThis.localStorage;

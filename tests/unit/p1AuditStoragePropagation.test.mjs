@@ -22,7 +22,11 @@ afterEach(()=>{for(const name of Object.keys(GLOBALS)){if(saved[name])Object.def
 const inTab=(t,fn)=>als.run(t,fn);
 
 const ACCOUNT="synthetic-A";
-const STATE_KEY=`a25-account-v1:${ACCOUNT}:a25`;
+// P1-A v2: a semente do estado anterior fica na chave legada (importada pelo
+// primeiro escritor provado); as leituras do progresso usam a chave canónica.
+const LEGACY_STATE_KEY=`a25-account-v1:${ACCOUNT}:a25`;
+const STATE_KEY=`a25-ws-v2:acct:${ACCOUNT}:a25`;
+const copyBodies=()=>[...canonical.entries()].filter(([k])=>k.includes(":~recovery:")).map(([,v])=>JSON.parse(v));
 let canonical,tabs,pendingBytes,pendingMessages,channels;
 
 function view(tab,snapshot){
@@ -87,12 +91,10 @@ function hydrate(t){return inTab(t,()=>{use(t);const loaded=t.i.guardedLoadLocal
 function saveDurably(t,next){return inTab(t,()=>{t.mem=next;return t.i.saveLocalStateDurably(next).ok;});}
 function save(t,next){return inTab(t,()=>{t.mem=next;return t.i.guardedSaveLocalState(next);});}
 const stored=()=>JSON.parse(canonical.get(STATE_KEY));
-const conflictCopies=()=>[...canonical.keys()].filter(k=>k.includes("a25-state-conflict-v1:")).map(k=>{
-  const body=JSON.parse(canonical.get(k));return body.state?.xp??JSON.parse(body.raw).xp;
-});
+const conflictCopies=()=>copyBodies().map(body=>JSON.parse(body.keys.a25||"null")?.xp);
 const seed={schema:"aplus-student-state-v8",cloudAccount:{version:1,accountId:ACCOUNT},xp:100,missionHistory:[],examHistory:[],profile:{},scores:{},_stateVersion:31,_savedAt:1};
 
-function reset(withLocks){register=makeRegister();canonical=new Map([[STATE_KEY,JSON.stringify(seed)]]);tabs=[];pendingBytes=[];pendingMessages=[];channels=new Set();lagMessages=false;locksApi=withLocks?lockManager():null;}
+function reset(withLocks){register=makeRegister();canonical=new Map([[LEGACY_STATE_KEY,JSON.stringify(seed)]]);tabs=[];pendingBytes=[];pendingMessages=[];channels=new Set();lagMessages=false;locksApi=withLocks?lockManager():null;}
 const later=(fn,ms)=>setTimeout(fn,ms);
 const everything=()=>JSON.stringify([...canonical.entries()].filter(([k])=>!k.includes("auth-epoch")&&!k.includes("writer-signal")).sort());
 afterEach(()=>{for(const t of tabs){try{use(t);t.w?.resetStateWriterForTests()}catch{}}vi.unstubAllGlobals();});
@@ -113,7 +115,9 @@ describe("P1-A · sem Web Locks com propagação lenta: nenhuma gravação",()=>
     expect(save(b,{...b.mem,xp:101})).toBe(false);
     deliverBytes();deliverMessages();
     expect(everything()).toBe(before);
-    expect(stored().xp).toBe(100);
+    // v2: sem Web Locks nada é importado nem criado no espaço canónico.
+    expect(JSON.parse(canonical.get(LEGACY_STATE_KEY)).xp).toBe(100);
+    expect([...canonical.keys()].some(k=>k.startsWith("a25-ws-v2:"))).toBe(false);
   });
 });
 
@@ -194,13 +198,14 @@ describe("P1-A · Web Locks: fim abrupto (sem selo)",()=>{
     expect(save(b,{...b.mem,xp:101})).toBe(true);                 // decisão explícita do aluno
     deliverBytes();                                               // escrita tardia de A
     expect(mode(b)).toBe("conflict");
-    const received=[...canonical.entries()].filter(([k])=>k.includes("a25-state-conflict-v1:")).map(([,v])=>JSON.parse(v)).find(x=>x.reason==="foreign_write:received");
-    expect(JSON.parse(received.raw).xp,"bytes de A preservados").toBe(150);
+    const received=copyBodies().find(x=>x.reason==="foreign_write:received");
+    expect(JSON.parse(received.keys.a25).xp,"bytes de A preservados").toBe(150);
   });
 });
 
 describe("P1-A · recuperação explícita: nada é eliminado ou substituído sem cópia",()=>{
-  const ACADEMIC=["a25","a25-active-session-v1","applus:fqa-exam-draft:v1:fqa-mini-1","a25-completed-sessions-v1","approva.portuguese-writing-memory.v1"].map(k=>`a25-account-v1:${ACCOUNT}:${k}`);
+  const ACADEMIC_SHORT=["a25","a25-active-session-v1","applus:fqa-exam-draft:v1:fqa-mini-1","a25-completed-sessions-v1","approva.portuguese-writing-memory.v1"];
+  const ACADEMIC=ACADEMIC_SHORT.map(k=>`a25-ws-v2:acct:${ACCOUNT}:${k}`);
   async function crashWithEverything(extraState={}){
     reset(true);
     const {a,b}=await writerThenObserver();
@@ -222,19 +227,20 @@ describe("P1-A · recuperação explícita: nada é eliminado ou substituído se
     use(b);const adopted=b.w.adoptAfterUncleanEnd();await wait(5);
     expect(adopted.conflictCopy?.durable).toBe(true);
     const copy=JSON.parse(canonical.get(adopted.conflictCopy.key));
-    for(const [key,raw] of Object.entries(before))expect(copy.academic.localStorage[key],"na cópia: "+key).toBe(raw);
+    const inCopy=key=>copy.keys[ACADEMIC_SHORT[ACADEMIC.indexOf(key)]];
+    for(const [key,raw] of Object.entries(before))expect(inCopy(key),"na cópia: "+key).toBe(raw);
     // A sessão continua e altera o estado e o rascunho (comportamento normal de retoma).
     hydrate(b);save(b,{...b.mem,xp:151});
     use(b);b.drafts.clearSessionDraft("internal");
     for(const [key,raw] of Object.entries(before)){
       const now=canonical.get(key)??null;
-      expect(now===raw||copy.academic.localStorage[key]===raw,"original recuperável: "+key).toBe(true);
+      expect(now===raw||inCopy(key)===raw,"original recuperável: "+key).toBe(true);
     }
   });
   it("sem cópia durável (localStorage sem espaço para a cópia) não continua e não grava",async()=>{
     const {b,before}=await crashWithEverything();
     b.quotaFull=true;
-    const realSet=b.local.setItem;b.local.setItem=(k,v)=>{if(k.includes("a25-state-conflict-v1:"))throw new DOMException("synthetic quota","QuotaExceededError");return realSet(k,v);};
+    const realSet=b.local.setItem;b.local.setItem=(k,v)=>{if(k.includes(":~recovery:"))throw new DOMException("synthetic quota","QuotaExceededError");return realSet(k,v);};
     use(b);const result=b.w.adoptAfterUncleanEnd();await wait(5);
     expect(result.mode).toBe("verifying");expect(result.reason).toBe("recovery_hold");
     expect(save(b,{...seed,xp:1})).toBe(false);

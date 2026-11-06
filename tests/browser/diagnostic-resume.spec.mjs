@@ -135,12 +135,12 @@ test("Matemática A · depois de duas respostas o draft é retomado após reload
   await seed(page,prepared.state,prepared.draft);
   await page.goto("/");
   await expect(page.getByRole("button",{name:"Guardar e sair",exact:true})).toBeVisible({timeout:30_000});
-  let saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-active-session-v1")));
+  let saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-ws-v2:global:a25-active-session-v1")));
   expect(saved.responses).toHaveLength(2);
 
   await page.reload();
   await expect(page.getByRole("button",{name:"Guardar e sair",exact:true})).toBeVisible({timeout:30_000});
-  saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-active-session-v1")));
+  saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-ws-v2:global:a25-active-session-v1")));
   expect(saved.responses).toHaveLength(2);
   await expectNoSubjectSelector(page);
 });
@@ -152,7 +152,7 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
     const submit=page.getByRole("button",{name:"Responder",exact:true});
     await expect(submit).toBeVisible({timeout:30_000});
     const snapshot=await page.evaluate(id=>{
-      const saved=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+      const saved=JSON.parse(localStorage.getItem("a25-ws-v2:global:a25")||"null")?.subjectProgress?.[id]?.lastPosition;
       return {current:saved?.current,results:saved?.results?.length,itemId:saved?.itemIds?.[saved?.current]};
     },subjectId);
     expect(snapshot.current).toBe(2);
@@ -162,7 +162,7 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
     await page.reload();
     await expect(submit).toBeVisible({timeout:30_000});
     const restored=await page.evaluate(id=>{
-      const saved=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+      const saved=JSON.parse(localStorage.getItem("a25-ws-v2:global:a25")||"null")?.subjectProgress?.[id]?.lastPosition;
       return {current:saved?.current,results:saved?.results?.length,itemId:saved?.itemIds?.[saved?.current]};
     },subjectId);
     expect(restored).toEqual(snapshot);
@@ -188,7 +188,7 @@ for(const subject of SUBJECTS){
     else{
       await expect(reopened.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
       const recovered=await reopened.evaluate(id=>{
-        const position=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+        const position=JSON.parse(localStorage.getItem("a25-ws-v2:global:a25")||"null")?.subjectProgress?.[id]?.lastPosition;
         return {current:position?.current,results:position?.results?.length};
       },subject.id);
       expect(recovered).toEqual({current:2,results:2});
@@ -244,8 +244,8 @@ for(const subject of [
       await next.click();
     }
     const snapshot=await page.evaluate(()=>({
-      state:JSON.parse(localStorage.getItem("a25")||"null"),
-      draft:JSON.parse(localStorage.getItem("a25-active-session-v1")||"null")
+      state:JSON.parse(localStorage.getItem("a25-ws-v2:global:a25")||"null"),
+      draft:JSON.parse(localStorage.getItem("a25-ws-v2:global:a25-active-session-v1")||"null")
     }));
     expect(snapshot.state?.selectedSubjectIds).toContain(subject.id);
     const savedPosition=snapshot.draft
@@ -258,8 +258,8 @@ for(const subject of [
     await expect(restoredSubmit).toBeVisible({timeout:30_000});
     await expectNoSubjectSelector(page);
     const reloadState=await page.evaluate(id=>{
-      const draft=JSON.parse(localStorage.getItem("a25-active-session-v1")||"null");
-      const state=JSON.parse(localStorage.getItem("a25")||"null");
+      const draft=JSON.parse(localStorage.getItem("a25-ws-v2:global:a25-active-session-v1")||"null");
+      const state=JSON.parse(localStorage.getItem("a25-ws-v2:global:a25")||"null");
       const saved=state?.subjectProgress?.[id]?.lastPosition;
       return draft?.kind==="diagnostic"&&id==="math-a"
         ?{itemId:draft.current?.id,responses:draft.responses?.length}
@@ -272,8 +272,8 @@ for(const subject of [
     await expect(reopened.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
     await expectNoSubjectSelector(reopened);
     const reopenedPosition=await reopened.evaluate(id=>{
-      const draft=JSON.parse(localStorage.getItem("a25-active-session-v1")||"null");
-      const state=JSON.parse(localStorage.getItem("a25")||"null");
+      const draft=JSON.parse(localStorage.getItem("a25-ws-v2:global:a25-active-session-v1")||"null");
+      const state=JSON.parse(localStorage.getItem("a25-ws-v2:global:a25")||"null");
       const saved=state?.subjectProgress?.[id]?.lastPosition;
       return draft?.kind==="diagnostic"&&id==="math-a"
         ?{itemId:draft.current?.id,responses:draft.responses?.length}
@@ -286,7 +286,7 @@ for(const subject of [
       await expect(reopened.locator(".learnHome").getByRole("button",{name:"Continuar sessão",exact:true})).toBeVisible({timeout:30_000});
       await expect(reopened.getByRole("button",{name:"Começar diagnóstico",exact:true})).toHaveCount(0);
       const pausedPosition=await reopened.evaluate(id=>{
-        const saved=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+        const saved=JSON.parse(localStorage.getItem("a25-ws-v2:global:a25")||"null")?.subjectProgress?.[id]?.lastPosition;
         return {itemId:saved?.itemIds?.[saved.current],responses:saved?.results?.length,sessionId:saved?.sessionId};
       },subject.id);
       expect(pausedPosition.itemId).toBe(savedPosition.itemId);
@@ -294,7 +294,7 @@ for(const subject of [
       await reopened.locator(".learnHome").getByRole("button",{name:"Continuar sessão",exact:true}).click();
       await expect(reopened.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
       const continuedPosition=await reopened.evaluate(id=>{
-        const saved=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+        const saved=JSON.parse(localStorage.getItem("a25-ws-v2:global:a25")||"null")?.subjectProgress?.[id]?.lastPosition;
         return {itemId:saved?.itemIds?.[saved.current],responses:saved?.results?.length,sessionId:saved?.sessionId};
       },subject.id);
       expect(continuedPosition).toEqual(pausedPosition);
@@ -314,13 +314,13 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
     await page.locator(".learnHome").getByRole("button",{name:"Continuar sessão",exact:true}).click();
     await expect(page.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
     const before=await page.evaluate(id=>{
-      const position=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+      const position=JSON.parse(localStorage.getItem("a25-ws-v2:global:a25")||"null")?.subjectProgress?.[id]?.lastPosition;
       return {sessionId:position?.sessionId,kind:position?.kind,current:position?.current,results:position?.results?.length};
     },subjectId);
     expect(before).toMatchObject({kind:"mission",current:2,results:2});
     await page.reload();
     const after=await page.evaluate(id=>{
-      const position=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+      const position=JSON.parse(localStorage.getItem("a25-ws-v2:global:a25")||"null")?.subjectProgress?.[id]?.lastPosition;
       return {sessionId:position?.sessionId,kind:position?.kind,current:position?.current,results:position?.results?.length};
     },subjectId);
     expect(after).toEqual(before);
@@ -341,7 +341,7 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
     page.once("dialog",dialog=>dialog.dismiss());
     await recover.click();
     const before=await page.evaluate(id=>{
-      const st=JSON.parse(localStorage.getItem("a25")||"null");
+      const st=JSON.parse(localStorage.getItem("a25-ws-v2:global:a25")||"null");
       return {xp:st.xp,pending:st.subjectProgress[id].lastPosition?.sessionId,archives:st.subjectProgress[id].interruptedTechnicalSessions||[]};
     },subjectId);
     expect(before.pending).toBe(`resume-${subjectId}`);
@@ -350,7 +350,7 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
     await recover.click();
     await expect(recover).toHaveCount(0);
     const after=await page.evaluate(id=>{
-      const st=JSON.parse(localStorage.getItem("a25")||"null");
+      const st=JSON.parse(localStorage.getItem("a25-ws-v2:global:a25")||"null");
       return {xp:st.xp,pending:st.subjectProgress[id].lastPosition,archives:st.subjectProgress[id].interruptedTechnicalSessions||[]};
     },subjectId);
     expect(after.xp).toBe(50);
@@ -370,7 +370,7 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
       await seed(page,state);
       await page.goto("/");
       await expect(page.getByRole("button",{name:kind==="diagnostic"?"Responder":"Continuar sessão",exact:true})).toBeVisible({timeout:30_000});
-      const read=()=>page.evaluate(id=>JSON.parse(localStorage.getItem("a25")).subjectProgress[id].lastPosition,subjectId);
+      const read=()=>page.evaluate(id=>JSON.parse(localStorage.getItem("a25-ws-v2:global:a25")).subjectProgress[id].lastPosition,subjectId);
       const before=await read();
       await page.evaluate(({subjectId})=>window.dispatchEvent(new PopStateEvent("popstate",{state:{...window.history.state,approvaSessionGuard:true,approvaScreen:subjectId==="portuguese"?"portugueseMiniExam":"physicsChemistryExam",approvaSubjectId:subjectId}})),{subjectId});
       await expect(page.getByText("Tens uma avaliação em curso",{exact:true})).toBeVisible();
@@ -401,15 +401,15 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
       const route=subjectId==="portuguese"?"portugueseMiniExam":mode==="full"?"physicsChemistryExam":mode==="mini2"?"physicsChemistryMini2":"physicsChemistryMini1";
       if(subjectId==="portuguese"){
         await page.evaluate(mode=>{
-          const s=JSON.parse(localStorage.getItem("a25"));
+          const s=JSON.parse(localStorage.getItem("a25-ws-v2:global:a25"));
           s.subjectSettings.portuguese.selectedMiniExamId=mode==="full"?"full-1":"mini-1";
-          localStorage.setItem("a25",JSON.stringify(s));
+          localStorage.setItem("a25-ws-v2:global:a25",JSON.stringify(s));
         },mode);
         await page.reload();
         await expect(page.locator(".adaptivePath")).toBeVisible({timeout:30_000});
       }
       await page.evaluate(({route,subjectId})=>window.dispatchEvent(new PopStateEvent("popstate",{state:{...window.history.state,approvaSessionGuard:true,approvaScreen:route,approvaSubjectId:subjectId}})),{route,subjectId});
-      const key=subjectId==="portuguese"?"a25":`applus:fqa-exam-draft:v1:${mode==="full"?"fqa-full-715":mode==="mini2"?"fqa-mini-2":"fqa-mini-1"}`;
+      const key=subjectId==="portuguese"?"a25-ws-v2:global:a25":`a25-ws-v2:global:applus:fqa-exam-draft:v1:${mode==="full"?"fqa-full-715":mode==="mini2"?"fqa-mini-2":"fqa-mini-1"}`;
       const read=()=>page.evaluate(({key,subjectId})=>{
         const value=JSON.parse(localStorage.getItem(key)||"null");
         return subjectId==="portuguese"?value?.subjectSettings?.portuguese?.miniExamDraft:value;
@@ -446,7 +446,7 @@ for(const kind of ["diagnostic","mission","training","mini_exam"]){
   await seed(page,state,draft);
   await page.goto("/");
   await expect(page.locator(".sessionTop, .examQuestion").first()).toBeVisible({timeout:30_000});
-  const key="a25-active-session-v1";
+  const key="a25-ws-v2:global:a25-active-session-v1";
   const read=()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
   await expect.poll(read).toBeTruthy();
   const id=kind==="mini_exam"?draft.session.sessionId:draft.sessionId;
@@ -515,9 +515,9 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
     }
     if(!exam||subjectId==="math-a")await expect(page.locator(".sessionTop")).toBeVisible({timeout:30_000});
     const snapshot=page=>page.evaluate(({subjectId,exam,kind})=>{
-     const state=JSON.parse(localStorage.getItem("a25"));
-     const draft=subjectId==="math-a"?JSON.parse(localStorage.getItem("a25-active-session-v1")||"null")
-      :exam?(subjectId==="portuguese"?state.subjectSettings.portuguese.miniExamDraft:JSON.parse(localStorage.getItem("applus:fqa-exam-draft:v1:"+(kind==="full_exam"?"fqa-full-715":kind==="mini_exam_2"?"fqa-mini-2":"fqa-mini-1"))||"null")):state.subjectProgress[subjectId].lastPosition;
+     const state=JSON.parse(localStorage.getItem("a25-ws-v2:global:a25"));
+     const draft=subjectId==="math-a"?JSON.parse(localStorage.getItem("a25-ws-v2:global:a25-active-session-v1")||"null")
+      :exam?(subjectId==="portuguese"?state.subjectSettings.portuguese.miniExamDraft:JSON.parse(localStorage.getItem("a25-ws-v2:global:applus:fqa-exam-draft:v1:"+(kind==="full_exam"?"fqa-full-715":kind==="mini_exam_2"?"fqa-mini-2":"fqa-mini-1"))||"null")):state.subjectProgress[subjectId].lastPosition;
      if(!draft)return null;
      const attempt=draft.session||draft;
      return {id:attempt.sessionId||attempt.attemptId||attempt.startedAt,current:attempt.current??attempt.index??attempt.i??null,itemId:attempt.current?.id||null,itemIds:attempt.itemIds||attempt.questions?.map(row=>row.id)||null,answers:attempt.answers||attempt.responses||attempt.results||null,answer:attempt.currentAnswer??attempt.sel??null,startedAt:attempt.startedAt||null,xp:state.xp||0};
@@ -558,7 +558,7 @@ test("math-a · diagnóstico legado incompatível é conservado sem oferecer rei
  const {state,draft}=mathStateAfterTwoAnswers();draft.version=1;
  await seed(page,state,draft);await page.goto("/");
  await expect(page.getByText("Não foi possível recuperar esta sessão",{exact:true})).toBeVisible({timeout:30_000});
- const preserved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-active-session-v1")));
+ const preserved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-ws-v2:global:a25-active-session-v1")));
  expect(preserved).toEqual(draft);
  await expect(page.getByRole("button",{name:/Começar.*novo|Recomeçar/u})).toHaveCount(0);
 });

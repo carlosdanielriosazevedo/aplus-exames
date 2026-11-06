@@ -34,18 +34,32 @@ function collectErrors(page){
   page.on("pageerror",error=>errors.push(String(error?.message||error)));
   return errors;
 }
+// P1-A v2: as sementes são o estado anterior (chaves brutas), importado pela
+// nova versão; com quota cheia simulada, importa-se primeiro com espaço livre e
+// só depois o armazenamento enche (a falha ao concluir, que é o que se prova).
 async function prepare(page,{fault={},local={},session={}}){
   await page.goto("/");
-  await page.evaluate(({fault,local,session,FAULT})=>{
+  const importFirst=!!fault.localLarge;
+  await page.evaluate(({fault,local,session,FAULT,importFirst})=>{
     const real=window.__real;
     real.local.clear();real.session.clear();
-    real.local.setItem(FAULT,JSON.stringify(fault));
+    if(importFirst)real.local.removeItem(FAULT);else real.local.setItem(FAULT,JSON.stringify(fault));
     for(const [k,v] of Object.entries(local))real.local.setItem(k,v);
     for(const [k,v] of Object.entries(session))real.session.setItem(k,v);
-  },{fault,local,session,FAULT});
+  },{fault,local,session,FAULT,importFirst});
+  if(importFirst){
+    await page.goto("/");
+    await expect.poll(()=>page.evaluate(()=>window.__real.local.getItem("a25-ws-v2:global:~legacy-import")!==null),{timeout:30_000}).toBe(true);
+    await page.evaluate(({fault,FAULT})=>window.__real.local.setItem(FAULT,JSON.stringify(fault)),{fault,FAULT});
+  }
 }
+// Vista do progresso da app: chaves canónicas pelo nome curto; legado em "legacy:<chave>".
 const readStores=page=>page.evaluate(()=>{
-  const dump=store=>Object.fromEntries(Object.keys(store).map(k=>[k,store.getItem(k)]));
+  const PREFIX="a25-ws-v2:global:";
+  const ACADEMIC=["a25","a25-friends-beta","a25-active-session-v1","a25-friends-active-session-v1","applus:fqa-exam-draft:v1:fqa-mini-1","applus:fqa-exam-draft:v1:fqa-mini-2","applus:fqa-exam-draft:v1:fqa-full-715","a25-completed-sessions-v1","approva.portuguese-writing-memory.v1"];
+  const dump=store=>{const out={};for(const k of Object.keys(store)){const v=store.getItem(k);
+    if(k.startsWith(PREFIX)&&!k.startsWith(PREFIX+"~"))out[k.slice(PREFIX.length)]=v;
+    else if(ACADEMIC.includes(k))out["legacy:"+k]=v;else out[k]=v;}return out;};
   return {local:dump(window.__real.local),session:dump(window.__real.session)};
 });
 const parse=raw=>{try{return JSON.parse(raw)}catch{return null}};

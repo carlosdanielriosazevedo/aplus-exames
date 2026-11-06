@@ -145,7 +145,7 @@ try{
  const control=await browser.newContext();await account(control,'A');const normal=await open(control,'valid-A-control');
  await normal.evaluate(()=>mountActualApp());
  await normal.waitForFunction(()=>probe.workspace.workspaceAccountId()==='A');
- await normal.waitForFunction(()=>JSON.parse(localStorage.getItem('a25-account-v1:A:a25')||'null')?.cloudAccount?.accountId==='A');
+ await normal.waitForFunction(()=>JSON.parse(localStorage.getItem('a25-ws-v2:acct:A:a25')||'null')?.cloudAccount?.accountId==='A');
  const other=await open(control,'B-control');await other.evaluate(()=>probe.f5Cloud.cloudSignOut());await account(control,'B');
  assert.equal(await other.evaluate(async()=>{const context=await probe.accounts.openVerifiedAccount();return context.subject;}),'B');
  await normal.bringToFront();await normal.getByText('Confirma a conta para continuar.',{exact:true}).waitFor();

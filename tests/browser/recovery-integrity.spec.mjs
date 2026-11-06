@@ -7,6 +7,10 @@ import {buildMiniExam,emptyScores} from "../../app/lib/engine.js";
 const REGISTRY="a25-completed-sessions-v1";
 const DRAFT="a25-active-session-v1";
 const QUARANTINE_PREFIX="a25-completed-sessions-v1-quarantine-";
+// P1-A v2: as sementes (estado anterior) ficam nas chaves brutas e são importadas
+// pelo primeiro escritor; leituras, interrupções e escritas a meio da sessão
+// usam as chaves canónicas da app. Só muda ONDE se lê/escreve.
+const C=key=>`a25-ws-v2:global:${key}`;
 
 function answerFor(question){
   if(question.response?.type==="choice"||question.a!==undefined&&!question.response)return question.a;
@@ -48,7 +52,7 @@ async function seed(page,{state,draft,registry=undefined,extra={}}){
     // Ponto de partida limpo: também o registo do escritor (IndexedDB, P1-A),
     // como ao limpar os dados do site. Limpar só o localStorage deixaria o
     // registo a exigir um selo apagado.
-    await new Promise(resolve=>{const r=indexedDB.deleteDatabase("approva-state-writer-v1");r.onsuccess=r.onerror=r.onblocked=()=>resolve();});
+    for(const name of ["approva-state-writer-v1","approva-state-writer-v2"])await new Promise(resolve=>{const r=indexedDB.deleteDatabase(name);r.onsuccess=r.onerror=r.onblocked=()=>resolve();});
     localStorage.clear();sessionStorage.clear();
     localStorage.setItem("a25",typeof state==="string"?state:JSON.stringify(state));
     if(draft)localStorage.setItem(DRAFT,JSON.stringify(draft));
@@ -65,8 +69,8 @@ async function openReview(page){
 }
 
 function read(page,sessionId){
-  return page.evaluate(({sessionId,DRAFT,REGISTRY,QUARANTINE_PREFIX})=>{
-    const raw=localStorage.getItem("a25");
+  return page.evaluate(({sessionId,DRAFT,REGISTRY,QUARANTINE_PREFIX,STATE})=>{
+    const raw=localStorage.getItem(STATE);
     let state=null;try{state=JSON.parse(raw)}catch{}
     const quarantine=Object.keys(localStorage).filter(k=>k.startsWith(QUARANTINE_PREFIX)).map(k=>localStorage.getItem(k));
     return {
@@ -77,7 +81,7 @@ function read(page,sessionId){
       registry:localStorage.getItem(REGISTRY),
       quarantine
     };
-  },{sessionId,DRAFT,REGISTRY,QUARANTINE_PREFIX});
+  },{sessionId,DRAFT:C(DRAFT),REGISTRY:C(REGISTRY),QUARANTINE_PREFIX,STATE:C("a25")});
 }
 
 async function completeOnce(page,sessionId){
@@ -102,9 +106,9 @@ for(const viewport of [{width:390,height:844},{width:1366,height:768}]){
 
     for(const [point,crash] of [
       ["antes de qualquer escrita",{now:true}],
-      ["depois da reserva do recibo",{key:REGISTRY,nth:1}],
-      ["depois de gravar a avaliação",{key:"a25",nth:1}],
-      ["depois de confirmar o recibo",{key:REGISTRY,nth:2}]
+      ["depois da reserva do recibo",{key:C(REGISTRY),nth:1}],
+      ["depois de gravar a avaliação",{key:C("a25"),nth:1}],
+      ["depois de confirmar o recibo",{key:C(REGISTRY),nth:2}]
     ])test(`D3 · interrupção ${point}: retoma sem perda nem XP duplicado`,async({page})=>{
       const sid=`synthetic-d3-${viewport.width}-${point.length}`;
       const expectedXp=await baselineXp(page,sid+"-baseline");
@@ -160,7 +164,7 @@ for(const viewport of [{width:390,height:844},{width:1366,height:768}]){
       await openReview(page);
       const first=await completeOnce(page,sid);
       // o registo desaparece e o rascunho reaparece (ex.: restauro parcial)
-      await page.evaluate(({draft,DRAFT,REGISTRY})=>{localStorage.removeItem(REGISTRY);localStorage.setItem(DRAFT,JSON.stringify({...draft,savedAt:Date.now()}))},{draft,DRAFT,REGISTRY});
+      await page.evaluate(({draft,DRAFT,REGISTRY})=>{localStorage.removeItem(REGISTRY);localStorage.setItem(DRAFT,JSON.stringify({...draft,savedAt:Date.now()}))},{draft,DRAFT:C(DRAFT),REGISTRY:C(REGISTRY)});
       await openReview(page);
       await submitButton(page).click();
       await expect.poll(async()=>(await read(page,sid)).draft,{timeout:20_000}).toBe(false);
@@ -228,10 +232,10 @@ for(const viewport of [{width:390,height:844},{width:1366,height:768}]){
         :page.getByText("Não foi possível ler o progresso guardado",{exact:true});
       await expect(screen).toBeVisible({timeout:30_000});
       await page.waitForTimeout(2500);
-      expect(await page.evaluate(()=>localStorage.getItem("a25"))).toBe(raw);
+      expect(await page.evaluate(key=>localStorage.getItem(key),C("a25"))).toBe(raw);
       await page.reload();
       await page.waitForTimeout(1500);
-      expect(await page.evaluate(()=>localStorage.getItem("a25"))).toBe(raw);
+      expect(await page.evaluate(key=>localStorage.getItem(key),C("a25"))).toBe(raw);
     });
   });
 }

@@ -184,14 +184,14 @@ try{
     await page.locator("[data-legacy-progress='detected']").waitFor({timeout:20_000});
     const text=await visibleText(page);
     assert.ok(!text.includes("7771")&&!text.includes("synthetic-legacy-mission-secret")&&!text.includes("synthetic legacy answer"),"conteúdo antigo revelado");
-    assert.equal(await page.evaluate(()=>localStorage.getItem("a25-account-v1:B:a25")),null,"perfil criado antes da escolha");
+    assert.equal(await page.evaluate(()=>localStorage.getItem("a25-ws-v2:acct:B:a25")),null,"perfil criado antes da escolha");
     await legacyIntact(page);
     // Rótulo de identidade antigo (authUserId=B) não é prova: nada é atribuído.
     await page.getByRole("button",{name:"O progresso antigo é meu",exact:true}).click();
     await page.locator("[data-legacy-progress='recovery']").waitFor();
     await page.getByRole("button",{name:"Começar nesta conta sem esse progresso",exact:true}).click();
-    await page.waitForFunction(()=>!!localStorage.getItem("a25-account-v1:B:a25"),null,{timeout:20_000});
-    const own=JSON.parse(await page.evaluate(()=>localStorage.getItem("a25-account-v1:B:a25")));
+    await page.waitForFunction(()=>!!localStorage.getItem("a25-ws-v2:acct:B:a25"),null,{timeout:20_000});
+    const own=JSON.parse(await page.evaluate(()=>localStorage.getItem("a25-ws-v2:acct:B:a25")));
     assert.equal(own.cloudAccount?.accountId,"B");
     assert.notEqual(own.xp,7771);assert.ok(!JSON.stringify(own).includes("synthetic-legacy-mission-secret"),"progresso antigo atribuído a B");
     await legacyIntact(page);
@@ -207,9 +207,9 @@ try{
     const ownA=JSON.stringify({schema:"aplus-student-state-v8",cloudAccount:{version:1,accountId:"A"},xp:4242,diagnosticDone:false,missionHistory:[],examHistory:[],profile:{schoolYear:"12.º"},scores:{},_stateVersion:31,_savedAt:2});
     await seedLegacy(page,{"a25-account-v1:A:a25":ownA});
     await page.evaluate(()=>mountActualApp());
-    await page.waitForFunction(()=>JSON.parse(localStorage.getItem("a25-account-v1:A:a25")||"null")?._savedAt>2,null,{timeout:20_000});
+    await page.waitForFunction(()=>JSON.parse(localStorage.getItem("a25-ws-v2:acct:A:a25")||"null")?._savedAt>2,null,{timeout:20_000});
     assert.equal(await page.locator("[data-legacy-progress='detected']").count(),0);
-    const own=JSON.parse(await page.evaluate(()=>localStorage.getItem("a25-account-v1:A:a25")));
+    const own=JSON.parse(await page.evaluate(()=>localStorage.getItem("a25-ws-v2:acct:A:a25")));
     assert.equal(own.xp,4242);assert.ok(!JSON.stringify(own).includes("synthetic-legacy-mission-secret"));
     await legacyIntact(page);
     await c.close();
@@ -227,14 +227,14 @@ try{
     const c=await browser.newContext();await signIn(c,"D");
     const page=await open(c,"legacy-none");
     await page.evaluate(()=>mountActualApp());
-    await page.waitForFunction(()=>!!localStorage.getItem("a25-account-v1:D:a25"),null,{timeout:20_000});
+    await page.waitForFunction(()=>!!localStorage.getItem("a25-ws-v2:acct:D:a25"),null,{timeout:20_000});
     assert.equal(await page.locator("[data-legacy-progress='detected']").count(),0);
     await c.close();
   });
   await scenario("[P1-A] contas: duas abas da mesma conta — só uma escreve",async()=>{
     const c=await browser.newContext();await signIn(c,"E");
     const a=await open(c,"writer-E-1");await a.evaluate(()=>mountActualApp());
-    await a.waitForFunction(()=>!!localStorage.getItem("a25-account-v1:E:a25"),null,{timeout:20_000});
+    await a.waitForFunction(()=>!!localStorage.getItem("a25-ws-v2:acct:E:a25"),null,{timeout:20_000});
     const b=await open(c,"writer-E-2");await b.evaluate(()=>mountActualApp());
     await b.locator("[data-state-writer='observer']").waitFor({timeout:20_000});
     await c.close();

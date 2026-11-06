@@ -1,65 +1,48 @@
 // P1-A — Um único separador escreve o progresso de cada área (conta ou global).
 //
-// 1. Exclusão: Web Locks. O separador que detém o lock exclusivo
-//    `approva-state-writer-v1:<área>` é o único escritor. O browser liberta o
-//    lock quando o separador fecha, falha ou recarrega. Nunca usamos `steal`.
+// v2 (correção do NO-GO da #461):
+// 0. Armazenamento canónico próprio (academicKeys.js). Separadores de versões
+//    anteriores escrevem nas chaves legadas e nunca tocam no canónico. O legado é
+//    importado uma vez, dentro de um mandato provado; alterações posteriores
+//    ficam numa cópia restaurável (recoveryCopies.js / stateRecovery.js).
 //
-// 2. Prova de leitura atual (sem esperas fixas). O lock não está ordenado em
-//    relação à propagação do localStorage entre processos: quem obtém o lock pode
-//    ainda não ver a última escrita do anterior. Mas as alterações do localStorage
-//    de uma mesma origem feitas por um separador chegam aos outros pela ordem em
-//    que foram feitas. Por isso:
-//    - cada gravação do estado leva um carimbo `_writer:{tab,epoch,seq}` dentro
-//      do próprio valor (mesmo setItem, atómico);
-//    - ao deixar de escrever de forma limpa (passagem de controlo, pagehide,
-//      separador escondido) o escritor grava por último um selo final com
-//      {tab,epoch,seq,digest} e não volta a escrever nesse mandato;
-//    - o novo detentor do lock só lê e grava quando vê, para o último mandato
-//      registado, o selo final correspondente. Ver o selo implica ter
-//      visto todas as escritas anteriores desse separador. Até lá não grava;
-//      reavalia a cada evento `storage`. O tempo só muda a mensagem mostrada.
-//    - registo autoritativo do mandato (IndexedDB, sem cache por processo):
-//      cada escritor regista {tab,epoch} e espera pela confirmação ANTES da sua
-//      primeira gravação. Quem obtém o lock lê o registo e sabe qual mandato
-//      tem de ver selado — mesmo que nenhuma escrita desse mandato lhe tenha
-//      ainda chegado. Cada retoma começa um mandato novo (selos antigos nunca
-//      servem de prova para escritas posteriores).
-//    - sem selo (o separador anterior terminou de forma abrupta) não há prova:
-//      o novo separador não grava, preserva uma cópia de recuperação e só
-//      continua por decisão explícita do aluno (adoptAfterUncleanEnd).
+// 1. Exclusão: Web Locks (`approva-state-writer-v2:<área>`). Nunca usamos `steal`.
 //
-// 3. Sem Web Locks não existe exclusão fiável: modo só de consulta (nada grava).
+// 2. Prova de leitura atual, sem esperas fixas:
+//    - cada gravação do estado leva um carimbo `_writer:{tab,epoch,seq}`;
+//    - ao deixar de escrever de forma limpa, o escritor grava por último o
+//      marcador do mandato e o selo final {tab,epoch,seq}; as alterações do
+//      localStorage de um separador chegam aos outros pela ordem em que foram feitas;
+//    - DUAS testemunhas do mandato: o registo autoritativo (IndexedDB) e o
+//      marcador no localStorage, gravado depois de o registo ser confirmado e
+//      antes da primeira escrita. O novo detentor do lock só escreve quando:
+//        a) há registo, o selo desse mandato (tab+epoch) está visível e o
+//           marcador coincide com o registo; ou
+//        b) não há registo, nem marcador, nem dados canónicos (primeira utilização).
+//      Registo ausente com dados/marcador presentes ("register_missing") ou
+//      marcador diferente do registo ("register_mismatch") = sem prova: retenção.
+//    - sem prova: não grava; só continua por decisão explícita do aluno, depois
+//      de guardar uma cópia durável do conjunto académico (adoptAfterUncleanEnd).
 //
-// Em todos os modos, um separador que não é escritor não grava (accountWorkspace.js).
-// Mesmo formato de accountWorkspace.accountStorageKey (sem importar: evita ciclo).
-const accountStorageKey=(key,subject)=>subject?`a25-account-v1:${encodeURIComponent(subject)}:${key}`:key;
+// 3. Todas as chaves académicas são vigiadas (evento `storage`) e cada escrita
+//    académica confirma que os bytes atuais são os últimos que este separador
+//    viu (confirmAcademicWrite). Diferença = outro escritor: para e guarda os
+//    dois conjuntos (o deste separador e o recebido), ambos restauráveis.
+//
+// 4. Sem Web Locks não existe exclusão fiável: modo só de consulta.
+import {ACADEMIC_KEYS,STATE_KEYS,canonicalKey,workspaceKey,legacyKey,fingerprint} from "./academicKeys.js";
+import {writeRecoveryCopy,canonicalSet,legacySet,setIsEmpty,setFingerprints,sameSet} from "./recoveryCopies.js";
 
 export const STATE_WRITER_EVENT="approva:state-writer";
+// Prefixos das cópias da versão experimental anterior (só listadas, nunca escritas).
 export const STATE_CONFLICT_PREFIX="a25-state-conflict-v1:";
-// Cópias de separador gravadas pela versão experimental anterior (concessão).
-// Já não são criadas; as existentes continuam a ser reconciliadas.
 export const STATE_TAB_COPY_PREFIX="a25-state-tabcopy-v1:";
-export const STATE_SEAL_KEY="a25-state-writer-seal-v1";
-const LOCK_PREFIX="approva-state-writer-v1:";
-const SIGNAL_KEY="a25-state-writer-signal-v1";
-const CHANNEL="approva-state-writer-v1";
-const WATCHED_STATE_KEYS=["a25","a25-friends-beta"];
-// Todas as chaves académicas da área (mesma lista que accountWorkspace usa para
-// o legado): a cópia de recuperação guarda-as byte a byte antes de continuar.
-const ACADEMIC_KEYS=["a25","a25-friends-beta","a25-active-session-v1","a25-friends-active-session-v1",
-  "applus:fqa-exam-draft:v1:fqa-mini-1","applus:fqa-exam-draft:v1:fqa-mini-2","applus:fqa-exam-draft:v1:fqa-full-715",
-  "a25-completed-sessions-v1","approva.portuguese-writing-memory.v1"];
-function academicSnapshot(){
-  const result={};
-  for(const name of ["localStorage","sessionStorage"]){
-    let store=null;try{store=globalThis[name]}catch{}
-    if(!store)continue;
-    const rows={};
-    for(const key of ACADEMIC_KEYS)try{const raw=store.getItem(scopedKey(key));if(raw!==null&&raw!==undefined)rows[scopedKey(key)]=raw;}catch{}
-    result[name]=rows;
-  }
-  return result;
-}
+export const STATE_SEAL_KEY="writer-seal";
+const MANDATE_MARKER="writer-mandate";
+const IMPORT_MARKER="legacy-import";
+const SIGNAL_NAME="writer-signal";
+const LOCK_PREFIX="approva-state-writer-v2:";
+const CHANNEL="approva-state-writer-v2";
 
 export const STATE_WRITER_TIMING={
   reloadWaitMs:1_500,     // um reload liberta o lock antes de o novo documento pedir
@@ -68,13 +51,17 @@ export const STATE_WRITER_TIMING={
 };
 
 const tabId=`writer-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,10)}`;
-let status={mode:"inactive",scope:null,method:null,reason:null,conflictCopy:null};
+const blankStatus=()=>({mode:"inactive",scope:null,method:null,reason:null,conflictCopy:null,receivedCopy:null,legacy:null});
+let status=blankStatus();
 let options={flush:()=>true,snapshot:()=>null};
 let releaseLock=null,channel=null,listening=false,starting=null,releaseTimer=null,holdTimer=null;
 let epoch=null,seq=0,lastStamp=null,hadMandate=false,expectedMandate=undefined,mandateLocal=null;
+let exclusiveDepth=0;
+// Últimos bytes de cada chave académica canónica vistos/escritos por este escritor.
+const lastKnown=new Map();
 
 // ---------------------------------------------------------------- registo do mandato
-const REGISTER_DB="approva-state-writer-v1",REGISTER_STORE="mandates";
+const REGISTER_DB="approva-state-writer-v2",REGISTER_STORE="mandates";
 function idbRequest(request){return new Promise((resolve,reject)=>{request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error);});}
 const indexedDbRegister={
   async open(){
@@ -92,7 +79,8 @@ const indexedDbRegister={
     const db=await this.open();
     try{
       await new Promise((resolve,reject)=>{
-        const tx=db.transaction(REGISTER_STORE,"readwrite");
+        // "strict": o registo é a prova; não aceitar uma confirmação só em memória.
+        let tx;try{tx=db.transaction(REGISTER_STORE,"readwrite",{durability:"strict"})}catch{tx=db.transaction(REGISTER_STORE,"readwrite")}
         tx.objectStore(REGISTER_STORE).put(value,key);
         tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error("aborted"));
       });
@@ -107,8 +95,10 @@ const registerKey=()=>`mandate:${status.scope||"global"}`;
 const hasWindow=()=>typeof window!=="undefined";
 function locks(){try{return hasWindow()&&globalThis.navigator?.locks?.request?globalThis.navigator.locks:null}catch{return null}}
 function rawLocal(){try{return globalThis.localStorage||null}catch{return null}}
-const scopedKey=key=>accountStorageKey(key,status.scope&&status.scope!=="global"?status.scope:null);
+const scope=()=>status.scope||"global";
+const wsKey=name=>workspaceKey(name,scope());
 const newEpoch=()=>`e-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,8)}`;
+function readJson(raw){try{return JSON.parse(raw)}catch{return undefined}}
 
 function emit(){
   if(!hasWindow())return;
@@ -117,14 +107,51 @@ function emit(){
 function set(next){status={...status,...next};emit();}
 
 export function stateWriterStatus(){return {...status,tabId}}
-// Sem coordenação ativa (servidor, testes, outras páginas) a escrita segue o
-// comportamento anterior. Com coordenação, só o escritor grava.
 export function stateWritesAllowed(){return status.mode==="inactive"||status.mode==="writer"}
 export function stateWriterCoordinated(){return status.mode!=="inactive"}
 export function stateWriterReadOnly(){return status.mode==="readonly"}
+// Espaço canónico ativo: coordenação ativa ou escrita exclusiva de outra página.
+export function stateWriterNamespaceActive(){return status.mode!=="inactive"||exclusiveDepth>0}
+// Só consulta (sem Web Locks, página sem escritor): enquanto o espaço canónico
+// deste âmbito nunca tiver sido inicializado, mostrar o progresso legado.
+// Nada é gravado neste modo, por isso ler o legado não cria divergência.
+export function stateWriterReadsLegacy(area=status.scope||"global"){
+  if(status.mode!=="readonly")return false;
+  // Importação nunca concluída (ausente ou interrompida): o canónico pode estar parcial.
+  try{return readJson(rawLocal()?.getItem(workspaceKey(IMPORT_MARKER,area))??"null")?.status!=="done"}catch{return true}
+}
 
-// ---------------------------------------------------------------- carimbos e selo
-// Chamado por stateIntegrity imediatamente antes de gravar o estado.
+// ---------------------------------------------------------------- linha de base académica
+function canonicalFullKeys(){return ACADEMIC_KEYS.map(key=>canonicalKey(key,scope()));}
+function resetBaseline(store=rawLocal()){
+  lastKnown.clear();
+  if(!store)return;
+  for(const full of canonicalFullKeys()){let raw=null;try{raw=store.getItem(full)}catch{}lastKnown.set(full,raw??null);}
+}
+// Chamado por accountWorkspace antes de cada escrita académica em localStorage.
+export function confirmAcademicWrite(full,store=rawLocal()){
+  if(status.mode==="inactive")return true;
+  if(status.mode!=="writer")return false;
+  if(!lastKnown.has(full))return true;
+  let current=null;try{current=store.getItem(full)}catch{return true}
+  if((current??null)!==lastKnown.get(full)){lose("foreign_write");return false;}
+  return true;
+}
+export function noteAcademicWrite(full,raw){if(status.mode==="writer"&&lastKnown.has(full))lastKnown.set(full,raw??null);}
+// Conjunto "deste separador": os últimos bytes que viu/escreveu, com o estado
+// em memória (pode incluir a última alteração ainda não gravada).
+function knownSet(){
+  const set={};for(const key of ACADEMIC_KEYS)set[key]=lastKnown.get(canonicalKey(key,scope()))??null;
+  const snap=safeSnapshot();
+  if(snap&&typeof snap==="object")try{
+    const key=snap.betaMode==="friends_beta"?"a25-friends-beta":"a25";
+    const previous=readJson(set[key]||"null");
+    set[key]=JSON.stringify({...snap,_stateVersion:previous?._stateVersion??snap._stateVersion,_savedAt:Date.now()});
+  }catch{}
+  return set;
+}
+
+// ---------------------------------------------------------------- carimbos, marcador e selo
 export function stampStateWrite(state){
   if(status.mode!=="writer"||!state||typeof state!=="object")return state;
   seq+=1;lastStamp={tab:tabId,epoch,seq};
@@ -132,52 +159,111 @@ export function stampStateWrite(state){
 }
 function viewOfState(store=rawLocal()){
   if(!store)return "[]";
-  try{return JSON.stringify(WATCHED_STATE_KEYS.map(key=>store.getItem(scopedKey(key))))}catch{return null}
+  try{return JSON.stringify(STATE_KEYS.map(key=>store.getItem(canonicalKey(key,scope()))))}catch{return null}
 }
 export function stateDigest(view=viewOfState()){
   if(view===null)return null;
-  let h=2166136261;for(let i=0;i<view.length;i++){h^=view.charCodeAt(i);h=Math.imul(h,16777619);}
-  return `sd1-${(h>>>0).toString(16)}-${view.length}`;
+  return fingerprint(view);
 }
-function readJson(raw){try{return JSON.parse(raw)}catch{return undefined}}
-// Escreve o selo final deste mandato. Depois disto este separador não grava
-// mais nada até voltar a obter (e provar) o lock.
+function writeMarker(mandate,store=rawLocal()){
+  if(!store)return false;
+  const raw=JSON.stringify({tab:mandate.tab,epoch:mandate.epoch});
+  try{store.setItem(wsKey(MANDATE_MARKER),raw);return store.getItem(wsKey(MANDATE_MARKER))===raw}catch{return false}
+}
+// Marcador e selo final deste mandato (por esta ordem: o selo é a última escrita).
 function writeSeal(stamp=lastStamp){
   const store=rawLocal();if(!store||!stamp)return false;
+  if(!writeMarker(stamp,store))return false;
   const seal={tab:stamp.tab,epoch:stamp.epoch,seq:stamp.seq,digest:stateDigest(viewOfState(store)),final:true,at:Date.now()};
-  try{store.setItem(scopedKey(STATE_SEAL_KEY),JSON.stringify(seal));return true}catch{return false}
+  try{store.setItem(wsKey(STATE_SEAL_KEY),JSON.stringify(seal));return true}catch{return false}
 }
-// "proven": a vista local inclui todas as gravações do último mandato
-// registado (o selo final desse mandato está visível e coincide com a vista).
+function canonicalPresent(store){
+  try{
+    if(store.getItem(wsKey(MANDATE_MARKER))!==null||store.getItem(wsKey(IMPORT_MARKER))!==null)return true;
+    return canonicalFullKeys().some(full=>store.getItem(full)!==null);
+  }catch{return true}
+}
+// "proven": a vista local inclui todas as gravações do último mandato registado.
 export function evaluateStateView(expected=expectedMandate){
   const store=rawLocal();if(!store)return {verdict:"proven"};
   if(expected===undefined)return {verdict:"pending",reason:"register_unread"};
-  if(expected===null)return {verdict:"proven"}; // nunca houve escritor coordenado
+  if(expected===null){
+    // Sem registo: só é primeira utilização se também não houver marcador nem dados.
+    if(canonicalPresent(store))return {verdict:"pending",reason:"register_missing"};
+    return {verdict:"proven",reason:"fresh"};
+  }
   if(expected.tab===tabId&&lastStamp&&expected.epoch===lastStamp.epoch)return {verdict:"proven",own:true};
-  // Um mandato sem acesso ao localStorage só gravou no sessionStorage do seu
-  // separador: não pode haver escritas partilhadas suas ainda a caminho.
   if(expected.local===false)return {verdict:"proven",reason:"previous_mandate_without_shared_storage"};
   const view=viewOfState(store);if(view===null)return {verdict:"pending",reason:"unreadable_view"};
-  const seal=readJson(store.getItem(scopedKey(STATE_SEAL_KEY)))||null;
+  const seal=readJson(store.getItem(wsKey(STATE_SEAL_KEY)))||null;
   if(!seal||seal.tab!==expected.tab||seal.epoch!==expected.epoch||seal.final!==true)return {verdict:"pending",reason:"no_seal"};
-  // O selo é a última escrita do mandato e as alterações de um separador chegam
-  // por ordem: vê-lo prova que todas as escritas desse mandato já foram vistas.
-  // Um digest diferente significa apenas bytes alterados depois por alguém fora
-  // do protocolo — estão visíveis e são lidos, não sobrescritos às cegas; se esse
-  // escritor continuar ativo, a deteção de escrita alheia para este separador.
+  // O marcador é escrito antes do selo: com o selo visível, tem de coincidir.
+  const marker=readJson(store.getItem(wsKey(MANDATE_MARKER)))||null;
+  if(!marker||marker.tab!==expected.tab||marker.epoch!==expected.epoch)return {verdict:"pending",reason:"register_mismatch"};
   return {verdict:"proven",changedAfterSeal:seal.digest!==stateDigest(view)};
+}
+
+// ---------------------------------------------------------------- legado (versões anteriores)
+// Importação única para o espaço canónico, ou deteção de escrita de uma versão anterior.
+// Só corre como escritor provado (ou depois de recuperação explícita).
+// sessionStorage (só deste separador): importar as chaves legadas do separador
+// uma vez, para o progresso guardado só no separador (armazenamento bloqueado ou
+// cheio) não desaparecer. Melhor esforço: nunca sobrescreve chaves canónicas.
+function importSessionLegacy(){
+  let ss=null;try{ss=globalThis.sessionStorage||null}catch{ss=null}
+  if(!ss)return;
+  try{
+    const marker=wsKey(IMPORT_MARKER);
+    if(ss.getItem(marker)!==null)return;
+    const legacy=legacySet(scope(),ss);
+    if(setIsEmpty(canonicalSet(scope(),ss)))for(const key of ACADEMIC_KEYS)if(legacy[key]!==null)ss.setItem(canonicalKey(key,scope()),legacy[key]);
+    ss.setItem(marker,JSON.stringify({status:"done",at:Date.now(),tier:"tab"}));
+  }catch{}
+}
+function syncLegacy(){
+  importSessionLegacy();
+  const store=rawLocal();if(!store)return {status:"no_shared_storage"};
+  const markerKey=wsKey(IMPORT_MARKER),marker=readJson(store.getItem(markerKey));
+  const legacy=legacySet(scope(),store),fps=setFingerprints(legacy);
+  const writeMarkerRaw=value=>{const raw=JSON.stringify(value);store.setItem(markerKey,raw);if(store.getItem(markerKey)!==raw)throw new Error("marker");};
+  if(!marker||marker.status!=="done"){
+    const canonical=canonicalSet(scope(),store);
+    if(!marker&&!setIsEmpty(canonical)){
+      // Dados canónicos sem marcador (marcador apagado à parte): nunca importar por cima.
+      const copy=setIsEmpty(legacy)?null:writeRecoveryCopy({scope:scope(),reason:"legacy_version_write",keys:legacy,tab:tabId,id:"legacy-latest",extra:{rolling:true}});
+      writeMarkerRaw({status:"done",at:Date.now(),fp:fps,adopted:true});
+      return {status:setIsEmpty(legacy)?"current":"changed",copy:copy||null};
+    }
+    writeMarkerRaw({status:"importing",at:Date.now(),fp:fps});
+    let count=0;
+    for(const key of ACADEMIC_KEYS){
+      const full=canonicalKey(key,scope()),raw=legacy[key];
+      if(raw===null)store.removeItem(full);else{store.setItem(full,raw);count++;}
+      if((store.getItem(full)??null)!==raw)throw new Error("import");
+      lastKnown.set(full,raw);
+    }
+    writeMarkerRaw({status:"done",at:Date.now(),fp:fps,imported:count});
+    return {status:count?"imported":"empty",count};
+  }
+  const changed=ACADEMIC_KEYS.filter(key=>(marker.fp?.[key]??null)!==fps[key]);
+  if(!changed.length)return {status:"current"};
+  // Uma versão anterior gravou no legado. O canónico não é tocado; guarda-se o
+  // conjunto legado como cópia restaurável (rotativa: os bytes continuam também
+  // nas próprias chaves legadas, que esta versão nunca altera).
+  const copy=writeRecoveryCopy({scope:scope(),reason:"legacy_version_write",keys:legacy,tab:tabId,id:"legacy-latest",extra:{rolling:true,changed}});
+  if(!copy||!copy.durable)return {status:"changed",copy:copy||null,changed};
+  writeMarkerRaw({...marker,fp:fps,lastChangeAt:Date.now()});
+  return {status:"changed",copy,changed};
 }
 
 // ---------------------------------------------------------------- mensagens
 function post(message){
   const body={...message,scope:status.scope,from:tabId,at:Date.now(),nonce:Math.random().toString(36).slice(2)};
   try{if(channel){channel.postMessage(body);return;}}catch{}
-  try{rawLocal()?.setItem(scopedKey(SIGNAL_KEY),JSON.stringify(body))}catch{}
+  try{rawLocal()?.setItem(wsKey(SIGNAL_NAME),JSON.stringify(body))}catch{}
 }
 function onMessage(message){
   if(!message||message.scope!==status.scope||message.from===tabId)return;
-  // Um pedido que o requerente já está prestes a abandonar é ignorado: assim o
-  // escritor nunca liberta quando já ninguém está à espera.
   if(Date.now()-Number(message.at||0)>STATE_WRITER_TIMING.requestTimeoutMs*0.75)return;
   if(message.type==="handoff-request")handleHandoffRequest();
   else if(message.type==="flush-request"&&status.mode==="writer"){try{options.flush()}catch{}}
@@ -185,7 +271,6 @@ function onMessage(message){
 
 // ---------------------------------------------------------------- Web Locks
 function lockName(){return LOCK_PREFIX+encodeURIComponent(status.scope||"global")}
-// true (obtido), false (ocupado/expirado) ou "unavailable" (API recusada).
 function lockAcquire(wait){
   const api=locks();
   if(!api)return Promise.resolve("unavailable");
@@ -211,125 +296,111 @@ function lockAcquire(wait){
 }
 function releaseHeldLock(){const release=releaseLock;releaseLock=null;try{release?.()}catch{}}
 
-// Lock obtido: ler o registo autoritativo e provar a leitura antes de escrever.
 async function verifyMandate(){
   if(holdTimer){clearTimeout(holdTimer);holdTimer=null;}
   if(status.mode!=="verifying"){
     set({mode:"verifying",reason:"waiting_proof"});
     try{expectedMandate=await mandateRegister.read(registerKey());}
-    catch{
-      // Sem registo autoritativo não há prova possível: só consulta.
-      releaseHeldLock();set({mode:"readonly",reason:"register_unavailable"});return false;
-    }
+    catch{releaseHeldLock();set({mode:"readonly",reason:"register_unavailable"});return false;}
     if(status.mode!=="verifying")return false;
   }
   const result=evaluateStateView();
   if(result.verdict==="proven"){await startMandate();return status.mode==="writer";}
-  holdTimer=setTimeout(()=>{if(status.mode==="verifying")set({reason:"recovery_hold"});},STATE_WRITER_TIMING.holdNoticeMs);
+  const proof=result.reason;
+  // Registo perdido ou divergente não se resolve sozinho: mostrar logo a retenção.
+  const immediate=proof==="register_missing"||proof==="register_mismatch";
+  if(immediate)set({reason:"recovery_hold",proof});
+  else{set({proof});holdTimer=setTimeout(()=>{if(status.mode==="verifying")set({reason:"recovery_hold"});},STATE_WRITER_TIMING.holdNoticeMs);}
   return false;
 }
 async function startMandate(){
   if(holdTimer){clearTimeout(holdTimer);holdTimer=null;}
-  // Este documento já escreveu e o último mandato registado não é o seu:
-  // a memória está desatualizada. Recarregar em vez de gravar o que tem.
   const ownLast=expectedMandate&&lastStamp&&expectedMandate.tab===tabId&&expectedMandate.epoch===lastStamp.epoch;
   if(hadMandate&&!ownLast){
     releaseHeldLock();set({mode:"released",reason:"stale_memory"});
     try{window.location.reload()}catch{}
     return;
   }
-  // Mandato novo, registado e confirmado antes da primeira gravação.
   const next=newEpoch();
-  const local=!!rawLocal();
+  const store=rawLocal(),local=!!store;
   try{await mandateRegister.write(registerKey(),{tab:tabId,epoch:next,at:Date.now(),local});}
   catch{releaseHeldLock();set({mode:"readonly",reason:"register_unavailable"});return;}
   if(status.mode!=="verifying")return;
+  // Segunda testemunha, antes de qualquer escrita deste mandato.
+  if(local&&!writeMarker({tab:tabId,epoch:next},store)){releaseHeldLock();set({mode:"readonly",reason:"shared_storage_full"});return;}
   epoch=next;seq=0;lastStamp={tab:tabId,epoch,seq:0};expectedMandate={tab:tabId,epoch,local};mandateLocal=local;
   hadMandate=true;
-  set({mode:"writer",reason:null});
+  resetBaseline(store);
+  let legacy=null;
+  try{legacy=syncLegacy();}
+  catch{
+    // Importação incompleta: selar (para o próximo poder provar) e só consultar.
+    writeSeal();releaseHeldLock();set({mode:"readonly",reason:"legacy_import_failed"});return;
+  }
+  set({mode:"writer",reason:null,proof:null,legacy});
 }
 
-// Decisão explícita do aluno depois de um fim abrupto do separador anterior.
-// Não há prova de que nenhuma escrita está ainda a caminho: antes de continuar
-// guarda-se uma cópia durável dos bytes atuais; qualquer escrita tardia que
-// chegue depois é detetada, este separador para e os bytes recebidos são guardados.
+// Decisão explícita do aluno quando não há prova (fim abrupto, registo perdido
+// ou divergente). Antes de continuar guarda-se uma cópia durável do conjunto
+// académico canónico; qualquer escrita tardia que chegue depois é detetada em
+// todas as chaves académicas, e os dois conjuntos são guardados.
 export function adoptAfterUncleanEnd(){
   if(status.mode!=="verifying")return stateWriterStatus();
-  // Cópia byte a byte de todas as chaves académicas visíveis (estado, rascunhos,
-  // registo de conclusões, memória de escrita) antes de qualquer gravação.
-  const copy=preserveRaw("unclean_end_adoption",{academic:academicSnapshot()});
-  // Sem cópia durável (localStorage disponível mas sem espaço, etc.) não se continua.
-  if(!copy||(rawLocal()&&!copy.durable)){set({reason:"recovery_hold",conflictCopy:copy||null});return stateWriterStatus();}
+  const store=rawLocal();
+  let copy=null;
+  if(store){
+    const session=(()=>{try{return canonicalSet(scope(),globalThis.sessionStorage)}catch{return null}})();
+    copy=writeRecoveryCopy({scope:scope(),reason:`unclean_end_adoption:${status.proof||"no_seal"}`,keys:canonicalSet(scope(),store),tab:tabId,dedupe:true,extra:{session}});
+    if(!copy||!copy.durable){set({reason:"recovery_hold",conflictCopy:copy||null});return stateWriterStatus();}
+  }
   set({conflictCopy:copy});
   void startMandate();
   return stateWriterStatus();
 }
 
 // ---------------------------------------------------------------- conflito
-function preserveRaw(reason,payload){
-  const key=scopedKey(`${STATE_CONFLICT_PREFIX}${tabId}:${Date.now()}:${Math.random().toString(36).slice(2,6)}`);
-  let raw;try{raw=JSON.stringify({format:"aplus-state-conflict-copy-v1",tab:tabId,at:Date.now(),reason,...payload})}catch{return null}
-  for(const store of [rawLocal(),(()=>{try{return globalThis.sessionStorage}catch{return null}})()])try{
-    if(!store)continue;
-    store.setItem(key,raw);
-    if(store.getItem(key)===raw)return {key,durable:store===rawLocal()};
-  }catch{}
-  return null;
-}
-function lose(reason,state=null,foreign=null){
+function lose(reason){
   if(status.mode==="conflict")return;
-  // Guardar o que este separador tinha e, se conhecidos, os bytes alheios recebidos.
-  const copy=preserveRaw(reason,{state:state||safeSnapshot()});
-  if(foreign)preserveRaw(`${reason}:received`,{key:foreign.key,raw:foreign.raw});
+  const store=rawLocal();
+  const mine=knownSet(),received=store?canonicalSet(scope(),store):null;
+  const copy=writeRecoveryCopy({scope:scope(),reason:`${reason}:this_tab`,keys:mine,tab:tabId,dedupe:true});
+  const receivedCopy=received&&!sameSet(mine,received)?writeRecoveryCopy({scope:scope(),reason:`${reason}:received`,keys:received,tab:tabId,dedupe:true}):null;
   releaseHeldLock();
-  set({mode:"conflict",reason,conflictCopy:copy});
+  set({mode:"conflict",reason,conflictCopy:copy,receivedCopy});
 }
 function safeSnapshot(){try{return options.snapshot()}catch{return null}}
 
-// Chamado por stateIntegrity antes de cada gravação do estado.
 export function confirmStateWriter(state){
   if(status.mode==="inactive")return true;
   if(status.mode!=="writer")return false;
-  // Mandato registado sem localStorage: se ele aparecer a meio, parar em vez de
-  // gravar em armazenamento partilhado sem registo.
-  if(mandateLocal===false&&rawLocal()){lose("shared_storage_appeared",state);return false;}
+  if(mandateLocal===false&&rawLocal()){lose("shared_storage_appeared");return false;}
   return true;
 }
-// Na hidratação (já como escritor): cópias de separador da versão anterior
-// iguais ao estado guardado são removidas; diferentes passam a cópias de
-// conflito, nunca apagadas. Devolve as que ficaram preservadas.
-export function reconcileStateTabCopies(storageKey,currentRaw){
-  const store=rawLocal();if(!store)return [];
-  const prefix=scopedKey(STATE_TAB_COPY_PREFIX),found=[],preserved=[];
-  try{for(let i=0;i<store.length;i++){const key=store.key(i);if(typeof key==="string"&&key.startsWith(prefix))found.push(key);}}catch{return []}
-  for(const key of found)try{
-    const raw=store.getItem(key);let copy=null;try{copy=JSON.parse(raw)}catch{}
-    if(copy&&copy.storageKey!==storageKey)continue;
-    if(copy&&typeof copy.raw==="string"&&copy.raw===currentRaw){store.removeItem(key);continue;}
-    const target=key.replace(prefix,scopedKey(STATE_CONFLICT_PREFIX))+`:${Date.now()}`;
-    store.setItem(target,raw);
-    if(store.getItem(target)===raw){store.removeItem(key);preserved.push(target);}
-  }catch{}
-  return preserved;
-}
+// v2: as cópias de separador da versão anterior ficam onde estão (legado, nunca
+// escrito) e aparecem na lista de recuperação. Nada a reconciliar aqui.
+export function reconcileStateTabCopies(){return [];}
 
-// Bytes do estado alterados por outro separador desde a última leitura/escrita.
 export function reportForeignStateWrite(state,reason="foreign_write"){
-  if(status.mode==="writer")lose(reason,state);
+  if(status.mode==="writer")lose(reason);
 }
 
+const isCanonicalAcademic=key=>canonicalFullKeys().includes(key);
+const isLegacyAcademic=key=>ACADEMIC_KEYS.some(k=>legacyKey(k,scope())===key);
 function onStorage(event){
   if(!event||typeof event.key!=="string")return;
-  if(event.key===scopedKey(SIGNAL_KEY)){try{onMessage(JSON.parse(event.newValue||"null"))}catch{}return;}
+  if(event.key===wsKey(SIGNAL_NAME)){try{onMessage(JSON.parse(event.newValue||"null"))}catch{}return;}
   if(status.mode==="verifying"){
-    if(event.key===scopedKey(STATE_SEAL_KEY)||WATCHED_STATE_KEYS.some(key=>event.key===scopedKey(key)))void verifyMandate();
+    if(event.key===wsKey(STATE_SEAL_KEY)||event.key===wsKey(MANDATE_MARKER)||isCanonicalAcademic(event.key))void verifyMandate();
     return;
   }
   if(status.mode!=="writer")return;
-  if(WATCHED_STATE_KEYS.some(key=>event.key===scopedKey(key)))lose("foreign_write",null,{key:event.key,raw:event.newValue});
+  if(isCanonicalAcademic(event.key)){lose("foreign_write");return;}
+  if(isLegacyAcademic(event.key)){
+    // Uma versão anterior está a gravar no legado: guardar e avisar, sem parar.
+    let legacy=null;try{legacy=syncLegacy()}catch{legacy={status:"changed",copy:null}}
+    if(legacy.status==="changed")set({legacy});
+  }
 }
-// Separador escondido (troca de separador/app, antes de descarte no telemóvel):
-// selar e libertar. Ao voltar, o lock é pedido de novo e a leitura provada.
 function onVisibility(){
   if(document.visibilityState==="hidden"){pauseMandate();return;}
   onResume();
@@ -344,7 +415,6 @@ function onPageHide(){
   releaseHeldLock();
 }
 function onPageShow(event){
-  // Documento restaurado da cache de navegação: recarregar repõe a arbitragem.
   if(event?.persisted&&status.mode!=="inactive")try{window.location.reload()}catch{}
 }
 function listen(){
@@ -366,20 +436,18 @@ async function acquire({initial}){
     const result=await lockAcquire(initial?STATE_WRITER_TIMING.reloadWaitMs:0);
     if(result!=="unavailable")return result;
   }
-  // Sem Web Locks não há exclusão fiável, nem com localStorage nem só com
-  // sessionStorage (este não é gravação durável): só consulta.
   set({method:"none"});
   return "readonly";
 }
 
-export function startStateWriter({scope="global",flush,snapshot}={}){
+export function startStateWriter({scope:area="global",flush,snapshot}={}){
   if(typeof flush==="function")options.flush=flush;
   if(typeof snapshot==="function")options.snapshot=snapshot;
   if(!hasWindow())return Promise.resolve(stateWriterStatus());
-  if(status.scope&&status.scope!==scope)return Promise.resolve(stateWriterStatus());
+  if(status.scope&&status.scope!==area)return Promise.resolve(stateWriterStatus());
   if(["writer","observer","conflict","releasing","readonly","verifying","paused"].includes(status.mode))return Promise.resolve(stateWriterStatus());
   if(starting)return starting;
-  status={...status,scope,mode:"acquiring",reason:null};
+  status={...status,scope:area,mode:"acquiring",reason:null};
   listen();emit();
   starting=acquire({initial:true}).then(async result=>{
     if(result===true){expectedMandate=undefined;await verifyMandate();}
@@ -393,8 +461,6 @@ export function startStateWriter({scope="global",flush,snapshot}={}){
 
 async function tryBecomeWriter({quiet=false}={}){
   if(status.mode!=="observer"&&status.mode!=="paused")return stateWriterStatus();
-  // Ao voltar a ficar visível, o lock acabado de libertar (por este ou por
-  // outro separador escondido) pode ainda não estar disponível: esperar um pouco.
   const result=await lockAcquire(status.mode==="paused"||status.reason==="hidden"?STATE_WRITER_TIMING.reloadWaitMs:0);
   if(result===true){expectedMandate=undefined;await verifyMandate();}
   else{
@@ -404,7 +470,6 @@ async function tryBecomeWriter({quiet=false}={}){
   return stateWriterStatus();
 }
 
-// Ação explícita do aluno no separador observador: "Continuar neste separador".
 export async function requestStateWriter(){
   if(status.mode==="verifying"){await verifyMandate();return stateWriterStatus();}
   if(status.mode!=="observer"&&status.mode!=="paused")return stateWriterStatus();
@@ -425,54 +490,64 @@ function handleHandoffRequest(){
   try{flushed=options.flush()!==false}catch{flushed=false}
   if(!flushed){post({type:"handoff-refused"});return;}
   set({mode:"releasing",reason:"handoff"});
-  // A app desmonta a superfície de estudo e chama completeStateWriterRelease.
   releaseTimer=setTimeout(completeStateWriterRelease,1_000);
 }
 
 export function completeStateWriterRelease(){
   if(status.mode!=="releasing")return;
   if(releaseTimer){clearTimeout(releaseTimer);releaseTimer=null;}
-  writeSeal(); // último: depois do flush e antes de libertar
+  writeSeal();
   post({type:"handoff-released"});
   releaseHeldLock();
   set({mode:"released"});
   try{window.location.reload()}catch{}
 }
 
-// Outras páginas (piloto/definições) que precisam de alterar o estado só o
-// fazem se nenhum separador da app for escritor; caso contrário pedem ao
-// escritor que volte a gravar (aplica, por exemplo, a retirada de telemetria).
-// Ao escrever com o lock, voltam a selar o valor para o próximo escritor o poder provar.
-export async function withExclusiveStateWrite(scope,write){
+// Depois de uma restauração (stateRecovery.js): a memória da app está
+// desatualizada. Selar, libertar e recarregar sem voltar a gravar nada.
+export function releaseAfterRestore(){
+  if(status.mode!=="writer")return false;
+  resetBaseline();
+  writeSeal();releaseHeldLock();set({mode:"released",reason:"restored"});
+  try{window.location.reload()}catch{}
+  return true;
+}
+// Restauração escreve diretamente no canónico: manter a linha de base coerente.
+export function noteRestoredWrites(){if(status.mode==="writer")resetBaseline();}
+
+// Outras páginas (piloto/definições) só alteram o estado com o lock e com a
+// vista provada; caso contrário pedem ao escritor que volte a gravar.
+// v2: nunca escrevem sem o lock por causa de um erro (sem recurso "cego").
+export async function withExclusiveStateWrite(area,write){
   if(!hasWindow())return {ok:false,deferred:false};
-  const previous=status.scope;status.scope=scope||"global";
+  const previous=status.scope;
+  if(status.mode==="inactive")status.scope=area||"global";
+  else if(status.scope!==(area||"global"))return {ok:false,deferred:true};
+  exclusiveDepth++;
   try{
     const api=locks();
-    if(!api)return {ok:true,deferred:false,value:write()}; // sem Web Locks a app só consulta
+    if(!api)return {ok:true,deferred:false,value:write()}; // sem Web Locks a app não grava (só consulta)
     let result={ok:false,deferred:true};
     try{
       await api.request(lockName(),{mode:"exclusive",ifAvailable:true},async lock=>{
         if(!lock)return;
-        // Com o lock: só escrever se a vista estiver provada para o último mandato;
-        // depois de escrever, voltar a selar esse mandato com o novo digest.
         let mandate=null;
-        try{mandate=await mandateRegister.read(registerKey());}catch{result={ok:false,deferred:true};return;}
-        if(evaluateStateView(mandate).verdict!=="proven"){result={ok:false,deferred:true};return;}
-        const value=write();
+        try{mandate=await mandateRegister.read(registerKey());}catch{return;}
+        if(evaluateStateView(mandate).verdict!=="proven")return;
+        let value;
+        try{value=write();}catch{result={ok:false,deferred:false,error:true};return;}
         if(mandate){
-          const store=rawLocal(),stamp=store&&WATCHED_STATE_KEYS.map(key=>readJson(store.getItem(scopedKey(key)))?._writer).find(w=>w&&w.tab===mandate.tab&&w.epoch===mandate.epoch);
+          const store=rawLocal(),stamp=store&&STATE_KEYS.map(key=>readJson(store.getItem(canonicalKey(key,scope())))?._writer).find(w=>w&&w.tab===mandate.tab&&w.epoch===mandate.epoch);
           writeSeal({tab:mandate.tab,epoch:mandate.epoch,seq:stamp?.seq||0});
         }
         result={ok:true,deferred:false,value};
       });
-    }catch{return {ok:true,deferred:false,value:write()};}
+    }catch{return {ok:false,deferred:true};}
     if(result.deferred)post({type:"flush-request"});
     return result;
-  }finally{if(status.mode==="inactive")status.scope=previous;}
+  }finally{exclusiveDepth--;if(status.mode==="inactive")status.scope=previous;}
 }
 
-// Páginas sem coordenação de escritor (p. ex. o protótipo público de Português):
-// bloquear todas as gravações académicas desta página (accountWorkspace recusa).
 export function blockAcademicWritesOnThisPage(reason="page_without_writer"){
   if(status.mode!=="inactive")return stateWriterStatus();
   status={...status,mode:"readonly",method:"page",reason};
@@ -484,7 +559,7 @@ export function resetStateWriterForTests(){
   releaseHeldLock();starting=null;
   if(releaseTimer){clearTimeout(releaseTimer);releaseTimer=null;}
   if(holdTimer){clearTimeout(holdTimer);holdTimer=null;}
-  status={mode:"inactive",scope:null,method:null,reason:null,conflictCopy:null};
+  status=blankStatus();
   options={flush:()=>true,snapshot:()=>null};
-  epoch=null;seq=0;lastStamp=null;hadMandate=false;expectedMandate=undefined;mandateLocal=null;
+  epoch=null;seq=0;lastStamp=null;hadMandate=false;expectedMandate=undefined;mandateLocal=null;exclusiveDepth=0;lastKnown.clear();
 }
