@@ -134,13 +134,14 @@ describe("P1-A v2 · separador de versão anterior (main escreve as chaves legad
   it("o canónico não muda, o escritor continua, e o progresso da versão antiga é restaurável — e reversível",async()=>{
     reset(true);
     const {a}=await writerThenObserver();
-    use(a);expect(a.i.saveLocalStateDurably({...a.mem,xp:150,missionHistory:[{id:"v2-mission"}]}).ok).toBe(true);
+    use(a);expect(a.i.saveLocalStateDurably({...a.mem,xp:150,missionHistory:[{id:"v2-mission",completionId:"v2-mission"}]}).ok).toBe(true);
     use(a);a.ws.scopedLocalStorage().setItem(REGISTRY,JSON.stringify([{id:"v2-mission",status:"committed",at:1}]));
     deliverBytes();
     const canonBefore=canonBytes();
     // Separador do main: grava o estado inteiro da memória nas chaves legadas.
     const old=makeTab("main-antigo");
-    const oldState=JSON.stringify({...seed,xp:90,missionHistory:[{id:"old-mission"}],_stateVersion:31,_savedAt:5});
+    // NO-GO #462 (D3): o recibo "committed" tem de corresponder a uma avaliação do estado (completionId).
+    const oldState=JSON.stringify({...seed,xp:90,missionHistory:[{id:"old-mission",completionId:"old-mission"}],_stateVersion:31,_savedAt:5});
     inTab(old,()=>{old.local.setItem(L("a25"),oldState);old.local.setItem(L(REGISTRY),JSON.stringify([{id:"old-mission",status:"committed",at:2}]));});
     deliverBytes();await wait(5);
     expect(mode(a),"o escritor não para").toBe("writer");
@@ -397,7 +398,16 @@ describe("P1-A v2 · recuperação: guardas e acumulação",()=>{
     use(a);expect(a.rec.deleteRecoveryCopy(v2.key).reason).toBe("export_first");
     use(a);expect(JSON.parse(a.rec.exportRecoveryCopy(v2.key)).keys.a25).toBe("{}");
     use(a);expect(a.rec.deleteRecoveryCopy(v2.key,{exported:true}).ok).toBe(true);
-    use(a);expect(a.rec.restoreRecoveryCopy(entry.id,{reload:false}).ok).toBe(true);
+    // NO-GO #462 (P2-2): uma cópia v1 parcial nunca é misturada com o conjunto atual.
+    const before=JSON.stringify(KEYS.map(k=>canonical.get(C(k))??null));
+    use(a);expect(entry.partial).toBe(true);
+    use(a);expect(a.rec.restoreRecoveryCopy(entry.id,{reload:false}).reason).toBe("partial_copy");
+    expect(JSON.stringify(KEYS.map(k=>canonical.get(C(k))??null)),"nada alterado").toBe(before);
+    // Uma cópia v1 completa (as 9 chaves) continua restaurável.
+    const full=Object.fromEntries(KEYS.map(k=>[L(k),null]));full[L("a25")]=JSON.stringify({...seed,xp:66,_stateVersion:31});full[L(REGISTRY)]="[]";
+    setEverywhere(`a25-account-v1:${ACCOUNT}:a25-state-conflict-v1:old:6:cd`,JSON.stringify({format:"aplus-state-conflict-copy-v1",tab:"old",at:6,reason:"unclean_end_adoption",academic:{localStorage:full}}));
+    use(a);const complete=a.rec.recoveryCopiesForView(ACCOUNT).copies.find(c=>c.format==="v1"&&!c.partial);
+    use(a);expect(a.rec.restoreRecoveryCopy(complete.id,{reload:false}).ok).toBe(true);
     expect(stored().xp).toBe(66);
   });
 });

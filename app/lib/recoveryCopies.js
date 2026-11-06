@@ -39,6 +39,8 @@ function keysOf(store){const out=[];try{for(let i=0;i<store.length;i++){const k=
 // id fixo: substitui a cópia com esse id (usado só para "legado mais recente",
 // cujos bytes continuam intactos nas próprias chaves legadas).
 export function writeRecoveryCopy({scope,reason,keys,tab=null,dedupe=false,id=null,extra={}}){
+  // Nunca substituir uma cópia de que um restauro pendente depende (ex.: a rotativa).
+  if(id&&copyInUse(scope,recoveryPrefix(scope)+id))return null;
   if(dedupe&&!id){
     // Nunca reutilizar a cópia rotativa "legado mais recente": é substituída.
     const same=listV2(scope).filter(c=>c.store===local()&&!c.body.rolling&&sameSet(c.body.keys,keys))[0];
@@ -132,20 +134,53 @@ export function writeSetExact(store,scope,set,keys=ACADEMIC_KEYS){
     if((store.getItem(full)??null)!==raw)throw new Error(`verify:${key}`);
   }
 }
-export function readRestoreJournal(scope,store=local()){return json(store?.getItem(restoreJournalKey(scope))??"null")||null;}
+// Leitura do diário, fail-closed: {state:"none"} só quando a leitura prova que
+// não há diário. Leitura impossível ou diário ilegível = "unknown" (nunca "none").
+export function restoreJournalState(scope,store=local()){
+  if(!store)return {state:"unknown",reason:"storage_unavailable"};
+  let raw;try{raw=store.getItem(restoreJournalKey(scope))}catch{return {state:"unknown",reason:"journal_unreadable"}}
+  if(raw===null||raw===undefined)return {state:"none"};
+  const journal=json(raw);
+  if(!journal||typeof journal!=="object")return {state:"unknown",reason:"journal_corrupt",raw};
+  return {state:"pending",journal};
+}
+export function readRestoreJournal(scope,store=local()){const s=restoreJournalState(scope,store);return s.state==="pending"?s.journal:null;}
+// Devolve true só se a releitura provar que o diário desapareceu.
 export function clearRestoreJournal(scope,store=local()){try{store.removeItem(restoreJournalKey(scope));return store.getItem(restoreJournalKey(scope))===null}catch{return false}}
+// Cópias necessárias a um restauro pendente (alvo e segurança). Diário ilegível
+// ou leitura impossível: todas as cópias deste âmbito contam como necessárias.
+export function copyInUse(scope,id,store=local()){
+  const s=restoreJournalState(scope,store);
+  if(s.state==="none")return false;
+  if(s.state==="unknown")return true;
+  return id===s.journal.target||id===s.journal.backup;
+}
+// Resolução no início do mandato (antes de qualquer leitura para hidratação).
+// Regras (P1-1/P1-2 da auditoria da #462):
+//   - nunca há gravações académicas enquanto o diário existir: se não for possível
+//     provar que foi apagado, o resultado é "blocked" (o escritor fica só em consulta);
+//   - um diário antigo nunca substitui progresso mais recente: cada chave atual tem
+//     de ser igual à do alvo ou à da segurança; qualquer outro byte = "stale" → blocked;
+//   - antes de reescrever um conjunto misto, o conjunto encontrado é guardado como
+//     cópia durável; sem essa cópia nada é reescrito.
 export function resolveRestoreJournal(scope,store=local()){
-  if(!store)return {status:"none"};
-  const journal=readRestoreJournal(scope,store);
-  if(!journal)return {status:"none"};
+  const read=restoreJournalState(scope,store);
+  if(read.state==="none")return {status:"none"};
+  if(read.state==="unknown")return {status:"blocked",reason:read.reason};
+  const journal=read.journal;
   const target=readCopyKeys(scope,journal.target,store),backup=readCopyKeys(scope,journal.backup,store);
   const current=canonicalSet(scope,store);
-  const finish=status=>{clearRestoreJournal(scope,store);return {status,journal};};
+  const finish=status=>clearRestoreJournal(scope,store)?{status,journal}:{status:"blocked",reason:"journal_not_cleared",resolved:status,journal};
   if(target&&sameSet(current,target))return finish("completed");
   if(backup&&sameSet(current,backup))return finish("not_applied");
+  // Bytes que não pertencem a nenhum dos dois conjuntos: não é um restauro a meio.
+  const foreign=ACADEMIC_KEYS.filter(k=>{const v=current[k]??null;return !(target&&(target[k]??null)===v)&&!(backup&&(backup[k]??null)===v);});
+  if(foreign.length)return {status:"blocked",reason:"stale_journal",foreign,journal};
+  const keep=writeRecoveryCopy({scope,reason:"journal_resolution_found",keys:current,extra:{journal:journal.id||null}});
+  if(!keep||!keep.durable)return {status:"blocked",reason:"no_space_for_found_copy",journal};
   for(const [set,status] of [[target,"completed_forward"],[backup,"rolled_back"]]){
     if(!set)continue;
-    try{writeSetExact(store,scope,set);if(sameSet(canonicalSet(scope,store),set))return finish(status);}catch{}
+    try{writeSetExact(store,scope,set);if(sameSet(canonicalSet(scope,store),set)){const done=finish(status);return {...done,found:keep.key};}}catch{}
   }
-  return {status:"blocked",journal};
+  return {status:"blocked",reason:"unresolvable",journal,found:keep.key};
 }

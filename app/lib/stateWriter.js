@@ -31,7 +31,7 @@
 //
 // 4. Sem Web Locks não existe exclusão fiável: modo só de consulta.
 import {ACADEMIC_KEYS,STATE_KEYS,canonicalKey,workspaceKey,legacyKey,fingerprint} from "./academicKeys.js";
-import {writeRecoveryCopy,canonicalSet,legacySet,setIsEmpty,setFingerprints,sameSet,resolveRestoreJournal} from "./recoveryCopies.js";
+import {writeRecoveryCopy,canonicalSet,legacySet,setIsEmpty,setFingerprints,sameSet,resolveRestoreJournal,restoreJournalState} from "./recoveryCopies.js";
 
 export const STATE_WRITER_EVENT="approva:state-writer";
 // Prefixos das cópias da versão experimental anterior (só listadas, nunca escritas).
@@ -129,13 +129,26 @@ function resetBaseline(store=rawLocal()){
   for(const full of canonicalFullKeys()){let raw=null;try{raw=store.getItem(full)}catch{}lastKnown.set(full,raw??null);}
 }
 // Chamado por accountWorkspace antes de cada escrita académica em localStorage.
+// Fail-closed (auditoria da #462, P2-1): só devolve true quando a leitura provou
+// que (1) não há diário de restauro pendente e (2) os bytes atuais são os últimos
+// que este escritor viu. Leitura impossível, chave fora da linha de base ou
+// diário presente/ilegível = recusa.
 export function confirmAcademicWrite(full,store=rawLocal()){
+  // Sem coordenação e fora do espaço canónico (servidor, harness #385): formato anterior.
+  if(status.mode==="inactive"&&exclusiveDepth===0)return true;
+  if(status.mode!=="writer"&&status.mode!=="inactive")return false;
+  const journal=restoreJournalState(scope(),store);
+  if(journal.state!=="none"){if(status.mode==="writer")haltForPendingRestore(journal);return false;}
+  // Escrita exclusiva de outra página: com o lock e a vista provada (withExclusiveStateWrite).
   if(status.mode==="inactive")return true;
-  if(status.mode!=="writer")return false;
-  if(!lastKnown.has(full))return true;
-  let current=null;try{current=store.getItem(full)}catch{return true}
+  if(!lastKnown.has(full))return false;
+  let current=null;try{current=store.getItem(full)}catch{return false}
   if((current??null)!==lastKnown.get(full)){lose("foreign_write");return false;}
   return true;
+}
+function haltForPendingRestore(journal){
+  releaseHeldLock();
+  set({mode:"readonly",reason:"restore_incomplete",restore:{status:"blocked",reason:journal.reason||"journal_pending"}});
 }
 export function noteAcademicWrite(full,raw){if(status.mode==="writer"&&lastKnown.has(full))lastKnown.set(full,raw??null);}
 // Conjunto "deste separador": os últimos bytes que viu/escreveu, com o estado
@@ -348,7 +361,7 @@ async function startMandate(){
   let restore={status:"none"};
   if(store){
     try{restore=resolveRestoreJournal(scope(),store);}catch{restore={status:"blocked"};}
-    if(restore.status==="blocked"){resetBaseline(store);writeSeal();releaseHeldLock();set({mode:"readonly",reason:"restore_incomplete",restore});return;}
+    if(restore.status==="blocked"){resetBaseline(store);writeSeal();releaseHeldLock();set({mode:"readonly",reason:"restore_incomplete",restore:{status:"blocked",reason:restore.reason||null,foreign:restore.foreign||null}});return;}
   }
   resetBaseline(store);
   let legacy=null;
@@ -358,7 +371,7 @@ async function startMandate(){
     writeSeal();releaseHeldLock();set({mode:"readonly",reason:"legacy_import_failed"});return;
   }
   if(legacy?.status==="current")legacy=pendingLegacyNotice(store)||legacy;
-  set({mode:"writer",reason:null,proof:null,legacy,restore:restore.status==="none"?null:{status:restore.status}});
+  set({mode:"writer",reason:null,proof:null,legacy,restore:restore.status==="none"?null:{status:restore.status,found:restore.found||null}});
 }
 
 // Decisão explícita do aluno quando não há prova (fim abrupto, registo perdido
@@ -556,7 +569,8 @@ export async function withExclusiveStateWrite(area,write){
   exclusiveDepth++;
   try{
     const api=locks();
-    if(!api)return {ok:true,deferred:false,value:write()}; // sem Web Locks a app não grava (só consulta)
+    // Sem Web Locks não há exclusão: a app não grava (só consulta), e esta página também não.
+    if(!api)return {ok:false,deferred:false,reason:"no_web_locks"};
     let result={ok:false,deferred:true};
     try{
       await api.request(lockName(),{mode:"exclusive",ifAvailable:true},async lock=>{
