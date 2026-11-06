@@ -210,7 +210,21 @@ test("P1-A v2 · restauro interrompido a meio (armazenamento morre após 4 das 9
   }
   await expect(b.locator("[data-restore-result]")).toHaveAttribute("data-restore-result",/^completed/,{timeout:30_000});
   const after=await local(b);
-  for(const k of KEYS)expect(after[G(k)]??null,"conjunto restaurado por inteiro: "+k).toBe(legacyCopy.keys[k]??null);
+  // Depois de concluir, a app hidrata e volta a gravar o estado (migrações normais),
+  // por isso "a25" compara-se pelo conteúdo académico; as outras 8 chaves (incluindo
+  // os recibos D3, onde um conjunto misto se veria) comparam-se byte a byte.
+  // a app também retoma o rascunho e volta a gravá-lo (savedAt novo): compara-se o conteúdo.
+  const REWRITTEN=["a25","a25-active-session-v1"];
+  for(const k of KEYS.filter(k=>!REWRITTEN.includes(k)))expect(after[G(k)]??null,"conjunto restaurado por inteiro: "+k).toBe(legacyCopy.keys[k]??null);
+  const draftT=parse(legacyCopy.keys["a25-active-session-v1"]),draftR=parse(after[G("a25-active-session-v1")]);
+  expect(draftR?.session?.sessionId??null,"rascunho restaurado: sessão").toBe(draftT?.session?.sessionId??null);
+  expect(JSON.stringify(draftR?.session?.answers??null),"rascunho restaurado: respostas").toBe(JSON.stringify(draftT?.session?.answers??null));
+  const target=parse(legacyCopy.keys.a25),restored=parse(after[G("a25")]);
+  expect(restored.xp,"XP do conjunto restaurado").toBe(target.xp);
+  expect((restored.missionHistory||[]).map(x=>x.id),"histórico do conjunto restaurado").toEqual((target.missionHistory||[]).map(x=>x.id));
+  expect(completions(after[G("a25")],sid),"sem a conclusão do conjunto anterior").toBe(completions(legacyCopy.keys.a25,sid));
+  const pinned=Object.entries(after).filter(([k])=>k.startsWith(G("~recovery:"))).map(([,v])=>parse(v)).find(c=>c.reason==="restore_target");
+  for(const k of KEYS)expect(pinned.keys[k]??null,"alvo fixado = cópia escolhida: "+k).toBe(legacyCopy.keys[k]??null);
   expect(after[G("~restore-journal")]??null).toBe(null);
   const backup=Object.entries(after).filter(([k])=>k.startsWith(G("~recovery:"))).map(([,v])=>parse(v)).find(c=>c.reason==="before_restore");
   for(const k of KEYS)expect(backup.keys[k]??null,"progresso anterior guardado: "+k).toBe(before[k]);
