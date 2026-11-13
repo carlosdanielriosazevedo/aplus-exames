@@ -25,7 +25,11 @@ jobs:
             8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8 \
             /tmp/actionlint_1.7.12_linux_amd64.tar.gz | sha256sum --check
           tar -xzf /tmp/actionlint_1.7.12_linux_amd64.tar.gz -C /tmp actionlint
-          /tmp/actionlint -no-color .github/workflows/approva-agent-pilot.yml
+          # actionlint v1.7.12 predates the current codex-action@v1 input schema;
+          # the permission-profile input is verified against the official action.yml.
+          /tmp/actionlint -no-color \
+            -ignore 'input "permission-profile" is not defined in action "openai/codex-action@v1"' \
+            .github/workflows/approva-agent-pilot.yml
 
       - name: Node
         uses: actions/setup-node@v4
