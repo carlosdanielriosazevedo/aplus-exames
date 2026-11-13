@@ -7,7 +7,7 @@ Relacionado com a [issue #464](https://github.com/carlosdanielriosazevedo/aplus-
 - Workflow `.github/workflows/approva-agent-pilot.yml` com acionamento manual por issue e cron nos dias úteis, mas cron **desligado** enquanto `APPROVA_AGENT_ENABLED` não estiver definida como `true`.
 - Só seleciona issues **abertas**, **escritas pelo proprietário** e com etiqueta `agent-ready`; no máximo uma por execução.
 - Codex executa com perfil `:workspace`, checkout sem credenciais persistentes e sem permissões de escrita GitHub; o job seguinte abre a PR com um token separado.
-- O primeiro piloto limita as alterações a `docs/engineering/` e `tests/unit/`. Tentativas de alterar outros ficheiros reprovam, em vez de serem silenciosamente ignoradas.
+- O primeiro piloto limita as alterações a `docs/engineering/` (documentação não executável). Tentativas de alterar outros ficheiros reprovam, em vez de serem silenciosamente ignoradas.
 - Exige testes unitários e Technical Gate antes de criar o patch; entrega um relatório e abre uma **PR Draft** (sem auto-merge).
 - Se não houver issue elegível, não chama a API; se faltar um segredo, não funciona nem contorna a proteção.
 
@@ -30,4 +30,5 @@ Relacionado com a [issue #464](https://github.com/carlosdanielriosazevedo/aplus-
 
 ## Critério de sucesso do primeiro ciclo
 
-Uma issue técnica pequena gera uma PR Draft com alteração relevante, relatório, testes verdes e nenhuma interação para aprovar comandos individuais. Depois disso alarga-se o tipo de tarefas e adicionam-se gates de auto-merge e deploy testado, mantendo as decisões de produto com o proprietário.
+Uma issue técnica pequena de documentação gera uma PR Draft com alteração relevante, relatório, testes verdes e nenhuma interação para aprovar comandos individuais. Depois disso alarga-se o tipo de tarefas e adicionam-se gates de auto-merge e deploy testado, mantendo as decisões de produto com o proprietário.
+> **Verificação importante:** um Beta CI aprovado não valida automaticamente a sintaxe de um novo workflow GitHub Actions. Validar o workflow autonomamente antes de integrar a PR; não assumir que o CI atual demonstra que o agente arranca.
