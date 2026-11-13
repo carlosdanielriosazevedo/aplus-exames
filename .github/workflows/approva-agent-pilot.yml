@@ -1,0 +1,228 @@
+name: APProva+ agent pilot
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "Issue técnica autorizada com etiqueta agent-ready (vazio = próxima da fila)"
+        type: string
+        required: false
+  schedule:
+    - cron: "17 7 * * 1-5"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: approva-agent-pilot
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    permissions:
+      contents: read
+      issues: read
+      pull-requests: read
+    # The scheduled pilot is OFF until the repo variable is explicitly enabled.
+    if: "${{ github.event_name == 'workflow_dispatch' || vars.APPROVA_AGENT_ENABLED == 'true' }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    outputs:
+      issue: "${{ steps.task.outputs.issue }}"
+    steps:
+      - name: Checkout trusted main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Select one owner-authorized issue
+        id: task
+        shell: bash
+        env:
+          GH_TOKEN: "${{ github.token }}"
+          REPO: "${{ github.repository }}"
+          REPO_OWNER: "${{ github.repository_owner }}"
+          EVENT_NAME: "${{ github.event_name }}"
+          INPUT_ISSUE: "${{ inputs.issue_number }}"
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ -n "$INPUT_ISSUE" ]; then
+            issue="$INPUT_ISSUE"
+          else
+            issue=""
+            while IFS= read -r candidate; do
+              [ -n "$candidate" ] || continue
+              existing="$(gh pr list -R "$REPO" --state all --head "bot/approva-pilot-issue-${candidate}" --json number --jq 'length')"
+              if [ "$existing" = "0" ]; then
+                issue="$candidate"
+                break
+              fi
+            done < <(gh issue list -R "$REPO" --state open --label agent-ready --limit 100 --json number,author \
+              | jq -r --arg owner "$REPO_OWNER" '[.[] | select(.author.login == $owner)] | sort_by(.number) | .[].number')
+          fi
+          if [ -z "$issue" ]; then
+            echo "No eligible agent-ready issue; no API request made."
+            exit 0
+          fi
+          if ! [[ "$issue" =~ ^[1-9][0-9]*$ ]]; then
+            echo "::error::Invalid issue number."
+            exit 1
+          fi
+          existing="$(gh pr list -R "$REPO" --state all --head "bot/approva-pilot-issue-${issue}" --json number --jq 'length')"
+          if [ "$existing" != "0" ]; then
+            echo "Issue #$issue already has a pilot PR: skipping repeat API usage."
+            exit 0
+          fi
+          gh issue view "$issue" -R "$REPO" --json number,title,body,state,author,labels > agent-issue.json
+          jq -e --arg owner "$REPO_OWNER" \
+            '.state == "OPEN" and .author.login == $owner and any(.labels[]; .name == "agent-ready") and ((.body // "") | length <= 6000)' \
+            agent-issue.json >/dev/null || { echo "::error::Issue must be open, owner-authored, agent-ready, with body <= 6000 characters."; exit 1; }
+          jq -r '"Issue #\(.number) — \(.title)\n\n\(.body // "")"' agent-issue.json > agent-task.txt
+          printf 'issue=%s\n' "$issue" >> "$GITHUB_OUTPUT"
+
+      - name: Node matching Beta CI
+        if: "${{ steps.task.outputs.issue != '' }}"
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies without privileged credentials
+        if: "${{ steps.task.outputs.issue != '' }}"
+        run: npm ci --legacy-peer-deps --no-audit --no-fund
+        timeout-minutes: 8
+
+      - name: Let Codex implement the bounded pilot task
+        id: codex
+        if: "${{ steps.task.outputs.issue != '' }}"
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: "${{ secrets.OPENAI_API_KEY }}"
+          permission-profile: ":workspace"
+          prompt-file: .github/codex/prompts/agent-pilot.md
+          output-file: codex-summary.txt
+
+      - name: Run technical checks
+        if: "${{ steps.task.outputs.issue != '' }}"
+        run: |
+          npm run test:unit
+          npm run technical:gate
+        timeout-minutes: 15
+
+      - name: Validate changes and create reviewable patch
+        if: "${{ steps.task.outputs.issue != '' }}"
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp codex-summary.txt /tmp/approva-agent-summary.txt
+          rm -f agent-issue.json agent-task.txt codex-summary.txt
+          git add -N -A
+          python3 - <<'PY'
+          import os, subprocess, sys
+          changed = [x for x in subprocess.check_output(["git", "diff", "--name-only", "--no-renames", "-z"]).decode().split("\0") if x]
+          allowed = ("docs/engineering/",)
+          bad = [p for p in changed if not p.startswith(allowed) or os.path.islink(p)]
+          if bad:
+              sys.exit("Pilot rejected forbidden or symlink changes: " + repr(bad))
+          if not changed:
+              sys.exit("Codex produced no eligible changes; nothing to submit")
+          print("Allowed changes:", changed)
+          PY
+          git diff --no-ext-diff --binary > agent.patch
+          cp /tmp/approva-agent-summary.txt agent-summary.txt
+          test -s agent.patch
+          test "$(wc -c < agent.patch)" -le 200000
+
+      - name: Store patch and report, without granting write permissions to Codex
+        if: "${{ steps.task.outputs.issue != '' }}"
+        uses: actions/upload-artifact@v4
+        with:
+          name: approva-agent-patch
+          path: |
+            agent.patch
+            agent-summary.txt
+          retention-days: 3
+          if-no-files-found: error
+
+  propose:
+    needs: generate
+    if: "${{ needs.generate.result == 'success' && needs.generate.outputs.issue != '' }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout main without credentials
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Receive isolated patch
+        uses: actions/download-artifact@v4
+        with:
+          name: approva-agent-patch
+          path: agent-artifacts
+
+      - name: Validate and apply patch without executing generated code
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s agent-artifacts/agent.patch
+          test "$(wc -c < agent-artifacts/agent.patch)" -le 200000
+          python3 - <<'PY'
+          import subprocess, sys
+          lines = subprocess.check_output(["git", "apply", "--numstat", "agent-artifacts/agent.patch"], text=True).splitlines()
+          paths = []
+          for line in lines:
+              parts = line.split("\t", 2)
+              if len(parts) != 3: sys.exit("Invalid patch metadata")
+              path = parts[2]
+              if any(ch in path for ch in ("\n", "\r", "\\", "{", "}")): sys.exit("Unsafe path")
+              if not path.startswith(("docs/engineering/",)): sys.exit("Forbidden path " + path)
+              paths.append(path)
+          if not paths: sys.exit("Empty patch")
+          print("Validated paths:", paths)
+          PY
+          git apply --check agent-artifacts/agent.patch
+          git apply agent-artifacts/agent.patch
+
+      - name: Require separate PR token (normal GITHUB_TOKEN does not trigger CI)
+        shell: bash
+        env:
+          AGENT_TOKEN: "${{ secrets.APPROVA_AGENT_PR_TOKEN }}"
+        run: |
+          if [ -z "$AGENT_TOKEN" ]; then
+            echo "::error::Set APPROVA_AGENT_PR_TOKEN in GitHub Actions secrets (scoped GitHub App token or fine-grained PAT)."
+            exit 1
+          fi
+
+      - name: Create DRAFT pilot pull request
+        id: pr
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: "${{ secrets.APPROVA_AGENT_PR_TOKEN }}"
+          branch: "bot/approva-pilot-issue-${{ needs.generate.outputs.issue }}"
+          base: main
+          draft: true
+          add-paths: |
+            docs/engineering/**
+          commit-message: "test(agent): pilot issue #${{ needs.generate.outputs.issue }}"
+          title: "agent pilot: issue #${{ needs.generate.outputs.issue }}"
+          body: |
+            Generated by APProva+ agent pilot from issue #${{ needs.generate.outputs.issue }}.
+            Documentation-only pilot; no executable test files. No product features or production changes.
+            Full Beta CI and independent review are required. No auto-merge enabled by this workflow.
+          delete-branch: false
+
+      - name: Summary
+        if: always()
+        env:
+          PR_URL: "${{ steps.pr.outputs.pull-request-url }}"
+          ISSUE: "${{ needs.generate.outputs.issue }}"
+        run: |
+          {
+            echo "Pilot issue: #$ISSUE"
+            echo "Draft PR: $PR_URL"
+            echo "No production deploy or merge was requested by this workflow."
+          } >> "$GITHUB_STEP_SUMMARY"
