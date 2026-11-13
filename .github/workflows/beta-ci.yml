@@ -15,6 +15,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Validate APProva+ agent workflow syntax
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 2 --connect-timeout 10 --max-time 90 \
+            https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz \
+            --output /tmp/actionlint_1.7.12_linux_amd64.tar.gz
+          printf '%s  %s\n' \
+            8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8 \
+            /tmp/actionlint_1.7.12_linux_amd64.tar.gz | sha256sum --check
+          tar -xzf /tmp/actionlint_1.7.12_linux_amd64.tar.gz -C /tmp actionlint
+          /tmp/actionlint -no-color .github/workflows/approva-agent-pilot.yml
+
       - name: Node
         uses: actions/setup-node@v4
         with:
