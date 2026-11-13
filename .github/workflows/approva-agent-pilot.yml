@@ -221,6 +221,8 @@ jobs:
           PR_URL: "${{ steps.pr.outputs.pull-request-url }}"
           ISSUE: "${{ needs.generate.outputs.issue }}"
         run: |
-          echo "Pilot issue: #$ISSUE" >> "$GITHUB_STEP_SUMMARY"
-          echo "Draft PR: $PR_URL" >> "$GITHUB_STEP_SUMMARY"
-          echo "No production deploy or merge was requested by this workflow." >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo "Pilot issue: #$ISSUE"
+            echo "Draft PR: $PR_URL"
+            echo "No production deploy or merge was requested by this workflow."
+          } >> "$GITHUB_STEP_SUMMARY"
