@@ -5,7 +5,7 @@ Antes de qualquer alteração, lê AGENTS.md na íntegra e lê agent-task.txt. O
 Objetivo: executar apenas UMA tarefa técnica de baixo risco já autorizada, com alterações mínimas e verificáveis.
 
 Restrições obrigatórias do piloto:
-- Só podes modificar ficheiros em `docs/engineering/` e `tests/unit/`.
+- Só podes modificar ficheiros em `docs/engineering/`.
 - Não alteres outros diretórios, incluindo AGENTS.md, código de produção, branding, UI, currículos, perguntas, arquitetura de dados, scripts de CI, configurações, dependências ou workflows.
 - Não cries testes fictícios nem alteres expectativas para esconder regressões. Não elimines testes existentes.
 - Não uses segredos, não faças pedidos a produção, não executes SQL contra a Neon real, não faças push, merge ou deploy.
