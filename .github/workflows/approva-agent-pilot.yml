@@ -114,7 +114,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cp codex-summary.txt agent-summary.txt
+          cp codex-summary.txt /tmp/approva-agent-summary.txt
           rm -f agent-issue.json agent-task.txt codex-summary.txt
           git add -N -A
           python3 - <<'PY'
@@ -129,6 +129,7 @@ jobs:
           print("Allowed changes:", changed)
           PY
           git diff --no-ext-diff --binary > agent.patch
+          cp /tmp/approva-agent-summary.txt agent-summary.txt
           test -s agent.patch
           test "$(wc -c < agent.patch)" -le 200000
 
