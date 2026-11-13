@@ -81,6 +81,12 @@ jobs:
           jq -r '"Issue #\(.number) — \(.title)\n\n\(.body // "")"' agent-issue.json > agent-task.txt
           printf 'issue=%s\n' "$issue" >> "$GITHUB_OUTPUT"
 
+      - name: Node matching Beta CI
+        if: "${{ steps.task.outputs.issue != '' }}"
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Install dependencies without privileged credentials
         if: "${{ steps.task.outputs.issue != '' }}"
         run: npm ci --legacy-peer-deps --no-audit --no-fund
