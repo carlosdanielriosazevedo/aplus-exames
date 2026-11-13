@@ -1,0 +1,41 @@
+name: APProva+ PR token preflight
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/approva-pr-token-preflight.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Validate PR token without revealing it
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.APPROVA_AGENT_PR_TOKEN }}
+          TARGET_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::error::APPROVA_AGENT_PR_TOKEN is missing or empty."
+            exit 1
+          fi
+          if ! gh api user --jq .login >/dev/null 2>/dev/null; then
+            echo "::error::GitHub rejected APPROVA_AGENT_PR_TOKEN. Regenerate a fine-grained token; check validity and repository selection."
+            exit 1
+          fi
+          if ! push_access="$(gh api "repos/$TARGET_REPO" --jq '.permissions.push // false' 2>/dev/null)"; then
+            echo "::error::The token cannot access the APProva+ repository."
+            exit 1
+          fi
+          if [ "$push_access" != "true" ]; then
+            echo "::error::The token can authenticate but lacks repository Contents: Read and write."
+            exit 1
+          fi
+          echo "PR token authenticated with repository push access. No secrets were printed; no writes were made."
