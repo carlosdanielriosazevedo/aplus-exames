@@ -12,7 +12,7 @@ Quando o texto crescia, a chama e o troféu moviam-se. Medir apenas o botão
 exterior não detetava esse deslocamento.
 
 Cada emoji passa a ter um `span` decorativo com `aria-hidden`, numa coluna de
-dimensão fixa: 16 px em mobile e 20 px em desktop. Uma segunda coluna reserva
+dimensão fixa: 15 px em mobile e 20 px em desktop. Uma segunda coluna reserva
 o espaço restante para o número, alinhado ao início. Mantêm-se os botões,
 respetivas áreas de interação, nomes acessíveis e slots exteriores existentes.
 A largura real do número pode crescer; não se trunca nem se abrevia o valor.
@@ -27,6 +27,23 @@ O browser local é Chromium 154, com movimento reduzido e modo interno.
 |---|---:|---:|
 | 320, 360, 390, 759 px | 6,859375 px | 17,15625 px |
 | 761, 1440 px | 8,578125 px | 21,453125 px |
+
+### Correção após o Beta CI 43641848149
+
+O Beta CI falhou com `value/valueText: outside button` e `local overflow` no XP
+(≤760 px). Causa: com 72 px de slot, 1 + 1 px de borda, 4 + 4 px de padding,
+16 px de ícone e 4 px de gap, a coluna do número tinha 42 px. «123456» a 12 px
+negrito mede 46,5 px em Inter, mas 50,1 px em DejaVu Sans Bold, a fonte de recurso
+do runner (Inter não está instalada nem é servida pela app). Localmente a Inter
+escondia o defeito: o botão excedia só 1 px, dentro da tolerância.
+Reproduzido localmente rejeitando a Inter no fontconfig (as mesmas 4 falhas de
+`workspace-shell-surfaces`).
+
+Correção, só ≤760 px: coluna logo/ações 12 → 8 px, slot XP 72 → 76 px, padding
+interno 4 → 3 px, gap ícone/número 4 → 2 px e célula do ícone 16 → 15 px (o glifo
+mede 15 px). O número passa a ter 51 px no XP e 27 px na sequência (365 em DejaVu:
+25 px). O logo mantém a coluna de 100 px a 320 px (texto: 97,6 px em DejaVu).
+Testes e tolerâncias não foram alterados.
 
 ## Contrato de testes
 

@@ -211,8 +211,8 @@
 }
 @media(max-width:760px){
   :root{
-    --student-subject-slot:260px;--student-counter-slot:52px;--student-xp-slot:72px;--student-menu-slot:44px;
-    --student-counter-icon-slot:16px;
+    --student-subject-slot:260px;--student-counter-slot:52px;--student-xp-slot:76px;--student-menu-slot:44px;
+    --student-counter-icon-slot:15px;
     --student-mascot-width:clamp(68px,21vw,90px);--student-mascot-height:100px;--student-title-height:72px;--student-copy-height:63px;
   }
   .learnHome>.studentSurface,.light:has(.studentTop)>.panel{padding-top:25px}
@@ -223,6 +223,11 @@
   .studentTop .subjectSwitcher i{display:block}
   .studentTop .studentTopActions{grid-column:2;grid-row:1;gap:4px!important}
   .studentTop .studentTopActions>button[aria-label],.studentTop .studentMenu>summary{height:42px}
+  /* Six-digit XP must fit with wide fallback fonts (DejaVu Sans Bold: 50.1 px at
+     12 px), not only Inter. The 4 px come from the logo/actions column gap; the
+     rest from tighter internal spacing. Number columns: XP 51 px, streak 27 px. */
+  .studentTop.studentTop{column-gap:8px}
+  .studentTop .studentTopActions>button[aria-label]{padding:0 3px!important;column-gap:2px}
   .studentTop .studentTopActions>button>b{font-size:12px}
   .learnIntro .mobileMainTitle>h1{font-size:clamp(23px,6vw,29px)}
   /* Restore shared mobile copy color after legacy Home/Training overrides. */
