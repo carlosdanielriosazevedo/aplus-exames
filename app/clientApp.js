@@ -2,6 +2,7 @@
 import {pendingPhysicsChemistryExam} from "./lib/physicsChemistryExamDraft";
 import {hasPendingAssessment} from "./lib/pendingAssessment";
 import {useEffect,useMemo,useRef,useState} from "react";
+import {flushSync} from "react-dom";
 import dynamic from "next/dynamic";
 import {insertMathText} from "./lib/mathInput";
 import {answerOptionState,conciseMathExplanation} from "./lib/feedbackCopy";
@@ -10,7 +11,7 @@ import {
   TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,microcompetencyId
 } from "./data/content";
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
-import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon,StudySessionHeader} from "./components/chrome";
+import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,StudySessionHeader,StudentStateProvider} from "./components/chrome";
 import StudyModeHub from "./components/StudyModeHub";
 import PausedActivityEyebrow from "./components/PausedActivityEyebrow";
 import {Welcome} from "./components/Welcome";
@@ -23,6 +24,13 @@ const BetaDashboard=dynamic(()=>import("./components/InternalDashboards").then(m
 const QualityPanel=dynamic(()=>import("./components/InternalDashboards").then(module=>module.QualityPanel),{ssr:false});
 const PortuguesePassageMiniExamRoute=dynamic(()=>import("./components/PortuguesePassageMiniExamRoute"),{ssr:false});
 const PhysicsChemistrySubject=dynamic(()=>import("./components/PhysicsChemistrySubject"),{ssr:false});
+let loadedPhysicsChemistrySubject=null,loadedPortugueseSubject=null;
+function PhysicsChemistryWorkspace(props){const Component=loadedPhysicsChemistrySubject||PhysicsChemistrySubject;return <Component {...props}/>}
+async function loadSubjectWorkspace(subjectId){
+  if(subjectId==="portuguese")loadedPortugueseSubject=(await import("./components/PortugueseSubject")).default;
+  else if(subjectId==="physics-chemistry-a")loadedPhysicsChemistrySubject=(await import("./components/PhysicsChemistrySubject")).default;
+  else if(subjectId==="math-a")await loadMathEngine();
+}
 const PhysicsChemistryExam=dynamic(()=>import("./components/PhysicsChemistryExam"),{ssr:false});
 const PhysicsChemistryMiniExam=dynamic(()=>import("./components/PhysicsChemistryMiniExam"),{ssr:false});
 const Ranking=dynamic(()=>import("./components/SecondaryScreens").then(module=>module.Ranking),{ssr:false});
@@ -464,6 +472,8 @@ export default function App(){
   };
 
   // Resolve pending attempts before mounting an assessment, including popstate.
+  return <StudentStateProvider value={s}>{renderScreen()}</StudentStateProvider>;
+  function renderScreen(){
   const assessmentRoutes=["diag","diagRun","mission","trainingSetup","trainingRun","miniExamIntro","miniExamRun","miniExamReview","portugueseMiniExam","physicsChemistryMini1","physicsChemistryMini2","physicsChemistryExam"];
   if(hydrated&&assessmentRoutes.includes(screen)){
     const subject=s.activeSubjectId||"math-a";
@@ -490,14 +500,14 @@ export default function App(){
 
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
-  if(screen==="subjectManager")return <SubjectManager s={s} setS={setS} go={go}/>;
-  if(screen==="resumeSubjectDiagnostic"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="home" autoResumeDiagnostic/>;
-  if(screen==="resumeSubjectDiagnostic"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="home" autoResumeDiagnostic/>;
+  if(screen==="subjectManager")return <SubjectManager s={s} setS={setS} go={go} prepareSubject={async id=>{await loadSubjectWorkspace(id);if(id==="math-a")setMathEngineReady(true)}}/>;
+  if(screen==="resumeSubjectDiagnostic"&&s.activeSubjectId==="portuguese")return <PortugueseWorkspace s={s} setS={setS} go={go} view="home" autoResumeDiagnostic/>;
+  if(screen==="resumeSubjectDiagnostic"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistryWorkspace s={s} setS={setS} go={go} view="home" autoResumeDiagnostic/>;
 
-  if(["home","train","progress","exams"].includes(screen)&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view={screen}/>;
-  if(["home","train","progress","exams"].includes(screen)&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view={screen}/>;
-  if(screen==="reviewMatter"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="reviewMatter"/>;
-  if(screen==="reviewMatter"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="reviewMatter"/>;
+  if(["home","train","progress","exams"].includes(screen)&&s.activeSubjectId==="portuguese")return <PortugueseWorkspace s={s} setS={setS} go={go} view={screen}/>;
+  if(["home","train","progress","exams"].includes(screen)&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistryWorkspace s={s} setS={setS} go={go} view={screen}/>;
+  if(screen==="reviewMatter"&&s.activeSubjectId==="portuguese")return <PortugueseWorkspace s={s} setS={setS} go={go} view="reviewMatter"/>;
+  if(screen==="reviewMatter"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistryWorkspace s={s} setS={setS} go={go} view="reviewMatter"/>;
   if(screen==="physicsChemistryExam"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistryExam s={s} setS={setS} go={go}/>;
   if(screen==="physicsChemistryMini1"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistryMiniExam modelId="fqa-mini-1" s={s} setS={setS} go={go}/>;
   if(screen==="physicsChemistryMini2"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistryMiniExam modelId="fqa-mini-2" s={s} setS={setS} go={go}/>;
@@ -505,17 +515,17 @@ export default function App(){
   if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExamRoute s={s} setS={setS} go={go} onExit={()=>go("exams")}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go} initialProfile={initial.profile}/>;
   if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing initialProfile={initial.profile}/>;
-  if(screen==="curriculumOnboard"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="curriculumOnboard"/>;
-  if(screen==="curriculumOnboard"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="curriculumOnboard"/>;
-  if(screen==="curriculumSettings"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="curriculum"/>;
-  if(screen==="curriculumSettings"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="curriculum"/>;
+  if(screen==="curriculumOnboard"&&s.activeSubjectId==="portuguese")return <PortugueseWorkspace s={s} setS={setS} go={go} view="curriculumOnboard"/>;
+  if(screen==="curriculumOnboard"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistryWorkspace s={s} setS={setS} go={go} view="curriculumOnboard"/>;
+  if(screen==="curriculumSettings"&&s.activeSubjectId==="portuguese")return <PortugueseWorkspace s={s} setS={setS} go={go} view="curriculum"/>;
+  if(screen==="curriculumSettings"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistryWorkspace s={s} setS={setS} go={go} view="curriculum"/>;
   if(screen==="curriculumOnboard")return <TaughtCurriculum s={s} setS={setS} go={go} onboarding/>;
   if(screen==="curriculumSettings")return <TaughtCurriculum s={s} setS={setS} go={go}/>;
   if(screen==="goalOnboard")return <GoalScreen s={s} setS={setS} go={go} onboarding/>;
   if(screen==="goalSettings")return <GoalScreen s={s} setS={setS} go={go}/>;
   if(screen==="apronsoIntro")return <ApronsoIntro setS={setS} go={go}/>;
-  if(screen==="diag"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="diagnostic"/>;
-  if(screen==="diag"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="diagnostic"/>;
+  if(screen==="diag"&&s.activeSubjectId==="portuguese")return <PortugueseWorkspace s={s} setS={setS} go={go} view="diagnostic"/>;
+  if(screen==="diag"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistryWorkspace s={s} setS={setS} go={go} view="diagnostic"/>;
   if(screen==="diag")return <DiagIntro s={s} setS={setS} go={go}/>;
   if(screen==="diagRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível recuperar esta sessão</b><span>O estado académico não foi alterado. O progresso guardado foi conservado para uma nova tentativa.</span></div></Shell>;
   if(screen==="storageRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível ler o progresso guardado</b><span>Nenhum dado foi substituído. Reabre a app para tentar novamente.</span></div></Shell>;
@@ -524,8 +534,8 @@ export default function App(){
   if(screen==="mission")return <Mission s={s} setS={setS} go={go} recoveredDraft={recoveredSession?.kind==="mission"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="missionResult")return <MissionResult s={s} setS={setS} go={go}/>;
   if(screen==="train")return <TrainHub s={s} go={go}/>;
-  if(screen==="trainingSetup"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="trainingSetup"/>;
-  if(screen==="trainingSetup"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="trainingSetup"/>;
+  if(screen==="trainingSetup"&&s.activeSubjectId==="portuguese")return <PortugueseWorkspace s={s} setS={setS} go={go} view="trainingSetup"/>;
+  if(screen==="trainingSetup"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistryWorkspace s={s} setS={setS} go={go} view="trainingSetup"/>;
   if(screen==="trainingSetup")return <Train s={s} setS={setS} go={go} start={cfg=>{setTrainingCfg(cfg);go("trainingRun")}}/>;
   if(screen==="trainingRun")return <TrainingRun s={s} setS={setS} go={go} cfg={trainingCfg} recoveredDraft={recoveredSession?.kind==="training"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="progress")return <Progress s={s} go={go}/>;
@@ -561,6 +571,7 @@ export default function App(){
     setRecoveredSession(null);
     setS(isFriendsBeta(s)?activateFriendsBeta(initial):initial);go("welcome");
   }}/>;
+  }
 }
 
 function FriendsBetaDisclaimer({s,compact=false}){
@@ -712,14 +723,20 @@ function SubjectSelection({s,setS,go}){
 }
 
 
-function SubjectManager({s,setS,go}){
+function SubjectManager({s,setS,go,prepareSubject}){
+  const opening=useRef(false),live=useRef(true);
+  useEffect(()=>{live.current=true;return()=>{live.current=false}},[]);
   const selected=uniqueSubjectIds(s.selectedSubjectIds||[],AVAILABLE_SUBJECT_IDS);
   const active=subjectById(s.activeSubjectId);
   const subjectHomeScreen=id=>"home";
 
-  function activate(subject){
-    if(!subject.available)return;
+  async function activate(subject){
+    if(!subject.available||opening.current)return;
+    opening.current=true;
     const isNew=!selected.includes(subject.id);
+    try{await prepareSubject(subject.id)}catch{opening.current=false;if(live.current)window.alert("Não foi possível abrir a disciplina. Tenta novamente.");return}
+    if(!live.current)return;
+    flushSync(()=>{
     setS(prev=>activateSubjectState(normalizeSubjectWorkspace({
       ...prev,
       selectedSubjectIds:[...(prev.selectedSubjectIds||[]),subject.id],
@@ -727,6 +744,7 @@ function SubjectManager({s,setS,go}){
       ...(isNew?{onboardingSubjectIds:[subject.id],onboardingReturnSubjectId:subject.id,subjectOnboardingMode:"add"}:{})
     }),subject.id));
     go(isNew?"onboard":subjectHomeScreen(subject.id));
+    });
   }
 
   return <Shell><Back go={go} to={subjectHomeScreen(active.id)}/><p className="eyebrow">AS TUAS DISCIPLINAS</p><h1>O que queres estudar?</h1>
@@ -745,6 +763,7 @@ function SubjectManager({s,setS,go}){
 }
 
 const PortugueseSubject=dynamic(()=>import("./components/PortugueseSubject"),{ssr:false});
+function PortugueseWorkspace(props){const Component=loadedPortugueseSubject||PortugueseSubject;return <Component {...props}/>}
 
 const PRE_DIAGNOSTIC_TOUR_STEPS=[
   {mascot:"welcome",eyebrow:"PASSO 1 DE 4",title:"Conhece o Apronso",text:<>Sou o teu parceiro de estudo na <BrandName/>. Vou ajudar-te a perceber o que estudar e acompanhar-te até aos exames.</>},
@@ -1196,7 +1215,7 @@ function Home({s,setS,go,reset}){
       :showMissionModal&&<DailyMissionModal s={s} plan={plan} mode={missionModalMode} onStart={()=>startDailyMission("daily_modal")} onDismiss={dismissMissionModal}/>}
     <section className="wrap studentSurface">
     <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button>{!hasPendingAssessment(s)&&<button onClick={reset}>Recomeçar protótipo</button>}</>}</div></details></StudentTop>
-    <FriendsBetaRibbon s={s}/><div className="learnIntro"><div className="mobileMainTitle"><p>Olá 👋</p><h1>O teu próximo passo.</h1></div><span>{missionDone?"Missão feita. Podes continuar por tua conta.":"Uma recomendação curta, escolhida a partir do teu percurso."}</span></div>
+    <div className="learnIntro"><div className="mobileMainTitle"><p>Olá 👋</p><h1>O teu próximo passo.</h1></div><span>{missionDone?"Missão feita. Podes continuar por tua conta.":"Uma recomendação curta, escolhida a partir do teu percurso."}</span></div>
 
 
     {!s.diagnosticDone?<section className="adaptivePath" aria-label="Caminho adaptativo de Matemática A">
