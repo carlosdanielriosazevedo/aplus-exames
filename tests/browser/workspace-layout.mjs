@@ -64,12 +64,18 @@ function measureInBrowser(selectors){
       overflow:document.documentElement.scrollWidth>innerWidth};
 }
 async function measure(page){return page.evaluate(measureInBrowser,selectors)}
+// Same 2 px limit and the same expect() failure, but expect() runs only when
+// the plain check fails: thousands of passing expect() steps per test made the
+// counter probes exceed the Beta CI global timeout. NaN still fails.
 function sameBox(actual,expected,label){
-  for(const key of ["x","y","width","height"])expect(Math.abs(actual[key]-expected[key]),`${label}: ${key}`).toBeLessThanOrEqual(2);
+  for(const key of ["x","y","width","height"]){
+    const delta=Math.abs(actual[key]-expected[key]);
+    if(!(delta<=2))expect(delta,`${label}: ${key}`).toBeLessThanOrEqual(2);
+  }
 }
 function sameAnchors(actual,expected,label){
   actual.anchors.forEach((anchor,i)=>{
-    expect(Boolean(anchor),`${label}: presence ${selectors[i]}`).toBe(Boolean(expected.anchors[i]));
+    if(Boolean(anchor)!==Boolean(expected.anchors[i]))expect(Boolean(anchor),`${label}: presence ${selectors[i]}`).toBe(Boolean(expected.anchors[i]));
     if(anchor)sameBox(anchor,expected.anchors[i],`${label}: ${selectors[i]}`);
   });
   counterContract.compareCounters(actual.counters,expected.counters,label);

@@ -45,6 +45,28 @@ mede 15 px). O número passa a ter 51 px no XP e 27 px na sequência (365 em Dej
 25 px). O logo mantém a coluna de 100 px a 320 px (texto: 97,6 px em DejaVu).
 Testes e tolerâncias não foram alterados.
 
+### Timeout global no Beta CI 43651467243
+
+Sem falha visual: 245 testes aprovados, 12 por executar e matriz incompleta,
+porque a suite ultrapassou o `globalTimeout` de 600 s (que inclui o build do
+`webServer`). Causa: as sondas de contadores introduzidas em `ad2741f` fazem
+11 comparações por estado através de `sameAnchors`, e cada caixa passava por
+4 chamadas `expect()` do Playwright. Com milhares de passos `expect()` bem-sucedidos,
+cada teste de `stable-workspace-slots` passou de 4,3–4,8 s para 7,3–7,5 s.
+O ficheiro corre em série num worker (6,4 min) e acumulou o atraso.
+
+Correção: `sameBox` e a presença em `sameAnchors` calculam primeiro a condição
+e só chamam o mesmo `expect()` quando ela falha. O limite (2 px), a mensagem e
+o tratamento de NaN não mudam. Verificado com casos negativos: delta 2,01 px,
+NaN, presença, âncora e ícone deslocados continuam a falhar. Cada teste passa
+a 3,6–3,7 s. Não se alteraram `globalTimeout`, workers, timeouts, retries,
+tolerâncias nem cobertura.
+
+Reprodução equivalente ao CI (configuração do repositório, build no `webServer`,
+2 workers, Playwright 1.55.0, fontes de fallback sem Inter): 257/257 em 7,2 min,
+WORKSPACE MATRIX PASS, 24/24 casos de recuperação, 12/12 ecrãs auxiliares,
+1854 artefactos e desvio máximo de 0 px em ícones, origens numéricas e topo.
+
 ## Contrato de testes
 
 A matriz existente continua a ter 48 sementes: seis larguras, movimento normal
