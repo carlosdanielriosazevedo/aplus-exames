@@ -29,7 +29,8 @@ jobs:
           # the permission-profile input is verified against the official action.yml.
           /tmp/actionlint -no-color \
             -ignore 'input "permission-profile" is not defined in action "openai/codex-action@v1"' \
-            .github/workflows/approva-agent-pilot.yml
+            .github/workflows/approva-agent-pilot.yml \
+            .github/workflows/approva-agent-ui.yml
 
       - name: Node
         uses: actions/setup-node@v4

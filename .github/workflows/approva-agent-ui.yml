@@ -1,0 +1,236 @@
+name: APProva+ UI development agent
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "Autorizada: 468 (layout) ou 469 (Apronso); vazio = próxima elegível"
+        required: false
+        type: string
+  schedule:
+    - cron: "27 8 * * 1-5"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: approva-agent-ui
+  cancel-in-progress: false
+
+jobs:
+  credential-check:
+    if: "${{ github.event_name == 'workflow_dispatch' || vars.APPROVA_UI_AGENT_ENABLED == 'true' }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    permissions:
+      contents: read
+    steps:
+      - name: Refuse costly Codex run unless PR credential is valid
+        env:
+          GH_TOKEN: "${{ secrets.APPROVA_AGENT_PR_TOKEN }}"
+          REPO: "${{ github.repository }}"
+        run: |
+          set -euo pipefail
+          test -n "$GH_TOKEN" || { echo "::error::APPROVA_AGENT_PR_TOKEN missing"; exit 1; }
+          if ! gh api user --jq .login >/dev/null 2>&1; then
+            echo "::error::GitHub rejects the scoped PR token. Correct the secret before generating code."
+            exit 1
+          fi
+          rights="$(gh api "repos/$REPO" --jq '.permissions.push // false' 2>/dev/null)" || {
+            echo "::error::PR token cannot access the repository"
+            exit 1
+          }
+          test "$rights" = "true" || { echo "::error::PR token lacks Contents: write"; exit 1; }
+          echo "PR token preflight approved; no credentials revealed."
+
+  generate:
+    needs: credential-check
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      issues: read
+      pull-requests: read
+    outputs:
+      issue: "${{ steps.task.outputs.issue }}"
+    steps:
+      - name: Checkout main without persistent credentials
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Select only owner-approved UI issues
+        id: task
+        env:
+          GH_TOKEN: "${{ github.token }}"
+          REPO: "${{ github.repository }}"
+          OWNER: "${{ github.repository_owner }}"
+          REQUESTED: "${{ inputs.issue_number }}"
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -n "$REQUESTED" ]; then
+            case "$REQUESTED" in 468|469) issue="$REQUESTED";; *) echo "::error::Issue not in approved pilot scope"; exit 1;; esac
+          else
+            issue=""
+            if [ "$(gh issue view 468 -R "$REPO" --json state --jq .state)" = "OPEN" ]; then
+              issue=468
+            elif [ "$(gh issue view 469 -R "$REPO" --json state --jq .state)" = "OPEN" ]; then
+              issue=469
+            fi
+          fi
+          if [ -z "$issue" ]; then echo "No UI issue ready; no API usage"; exit 0; fi
+          if [ "$issue" = "469" ] && [ "$(gh issue view 468 -R "$REPO" --json state --jq .state)" != "CLOSED" ]; then
+            echo "::error::Issue #468 must be integrated and closed before #469"
+            exit 1
+          fi
+          count="$(gh pr list -R "$REPO" --state all --head "bot/approva-ui-issue-$issue" --json number --jq 'length')"
+          if [ "$count" != "0" ]; then echo "UI pilot PR already exists for #$issue; no API usage"; exit 0; fi
+          gh issue view "$issue" -R "$REPO" --json number,title,body,state,author,labels > agent-issue.json
+          jq -e --arg owner "$OWNER" '.state == "OPEN" and .author.login == $owner and any(.labels[]; .name == "agent-ui-approved") and ((.body // "") | length <= 12000)' agent-issue.json >/dev/null || {
+            echo "::error::Issue is not owner-authorized"; exit 1;
+          }
+          jq -r '"Issue #\(.number): \(.title)\n\n\(.body // "")"' agent-issue.json > agent-task.txt
+          printf 'issue=%s\n' "$issue" >> "$GITHUB_OUTPUT"
+      - name: Node 20
+        if: "${{ steps.task.outputs.issue != '' }}"
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install declared dependencies
+        if: "${{ steps.task.outputs.issue != '' }}"
+        run: npm ci --legacy-peer-deps --no-audit --no-fund
+        timeout-minutes: 8
+      - name: Implement the approved UI task with Codex
+        if: "${{ steps.task.outputs.issue != '' }}"
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: "${{ secrets.OPENAI_API_KEY }}"
+          permission-profile: ":workspace"
+          prompt-file: .github/codex/prompts/ui-agent.md
+          output-file: agent-summary.txt
+      - name: Run local gates before proposing
+        if: "${{ steps.task.outputs.issue != '' }}"
+        run: |
+          npm run syntax:audit
+          npm run test:unit
+          npm run technical:gate
+        timeout-minutes: 18
+      - name: Reject changes outside the approved UI allowlist
+        if: "${{ steps.task.outputs.issue != '' }}"
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp agent-summary.txt /tmp/approva-ui-agent-summary.txt
+          rm -f agent-issue.json agent-task.txt agent-summary.txt
+          git add -N -A
+          python3 - <<'PY'
+          import os, subprocess, sys
+          changes = [p for p in subprocess.check_output(["git","diff","--name-only","--no-renames","-z"]).decode().split("\0") if p]
+          allowed = {
+            "app/components/chrome.js", "app/components/StudyModeHub.js",
+            "app/components/PhysicsChemistrySubject.js", "app/clientApp.js",
+            "app/apronso-parity.css", "app/globals.css", "app/public-release.css",
+          }
+          def ok(p):
+              return p in allowed or (p.startswith("tests/browser/") and p.endswith(".spec.mjs")) or (
+                  p.startswith("tests/unit/") and p.endswith((".test.js",".test.mjs")))
+          invalid = [p for p in changes if not ok(p) or os.path.islink(p)]
+          if invalid: sys.exit("Unauthorized file changes: "+repr(invalid))
+          if not changes: sys.exit("Agent made no eligible changes; no PR")
+          statuses = subprocess.check_output(["git","diff","--name-status","--no-renames","-z"]).decode().split("\0")
+          if "D" in statuses: sys.exit("Pilot cannot delete files")
+          print("UI-only changes verified:", changes)
+          PY
+          git diff --no-ext-diff --binary > agent.patch
+          test -s agent.patch
+          test "$(wc -c < agent.patch)" -le 250000
+          cp /tmp/approva-ui-agent-summary.txt agent-summary.txt
+      - name: Export verified patch only
+        if: "${{ steps.task.outputs.issue != '' }}"
+        uses: actions/upload-artifact@v4
+        with:
+          name: approva-ui-agent-patch
+          path: |
+            agent.patch
+            agent-summary.txt
+          retention-days: 3
+          if-no-files-found: error
+
+  propose:
+    needs: [credential-check,generate]
+    if: "${{ needs.generate.result == 'success' && needs.generate.outputs.issue != '' }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout main without credentials
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Download patch
+        uses: actions/download-artifact@v4
+        with:
+          name: approva-ui-agent-patch
+          path: agent-artifacts
+      - name: Validate exact code allowlist and apply patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s agent-artifacts/agent.patch
+          test "$(wc -c < agent-artifacts/agent.patch)" -le 250000
+          python3 - <<'PY'
+          import subprocess,sys
+          patch="agent-artifacts/agent.patch"
+          lines=subprocess.check_output(["git","apply","--numstat",patch],text=True).splitlines()
+          approved={"app/components/chrome.js","app/components/StudyModeHub.js","app/components/PhysicsChemistrySubject.js","app/clientApp.js","app/apronso-parity.css","app/globals.css","app/public-release.css"}
+          for line in lines:
+              bits=line.split("\t",2)
+              if len(bits)!=3: sys.exit("Invalid patch metadata")
+              a,b,p=bits
+              if a=="-" or b=="-" or any(x in p for x in ("\n","\r","\\","..","{","}")): sys.exit("Unsafe patch path/type")
+              ok=p in approved or (p.startswith("tests/browser/") and p.endswith(".spec.mjs")) or (
+                 p.startswith("tests/unit/") and p.endswith((".test.js",".test.mjs")))
+              if not ok: sys.exit("Unauthorized path: "+p)
+          if not lines: sys.exit("Empty patch")
+          PY
+          git apply --check agent-artifacts/agent.patch
+          git apply agent-artifacts/agent.patch
+      - name: Create draft UI PR (no merge and no deploy)
+        id: pr
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: "${{ secrets.APPROVA_AGENT_PR_TOKEN }}"
+          branch: "bot/approva-ui-issue-${{ needs.generate.outputs.issue }}"
+          base: main
+          draft: true
+          add-paths: |
+            app/components/chrome.js
+            app/components/StudyModeHub.js
+            app/components/PhysicsChemistrySubject.js
+            app/clientApp.js
+            app/apronso-parity.css
+            app/globals.css
+            app/public-release.css
+            tests/browser/**
+            tests/unit/**
+          commit-message: "feat(ui): agent implementation of issue #${{ needs.generate.outputs.issue }}"
+          title: "feat(ui): agent implementation of issue #${{ needs.generate.outputs.issue }}"
+          body: |
+            Implements #${{ needs.generate.outputs.issue }} (product owner approved).
+            Automated, isolated UI implementation only. Beta CI + independent visual review required.
+            Does not auto-merge. No production, Neon or secrets access from Codex.
+            Review before integration; preserve AGENTS.md locked Android branding.
+      - name: Summary
+        if: always()
+        env:
+          PR_URL: "${{ steps.pr.outputs.pull-request-url }}"
+          ISSUE: "${{ needs.generate.outputs.issue }}"
+        run: |
+          {
+            echo "Issue: #$ISSUE"
+            echo "UI agent PR: $PR_URL"
+            echo "Production deploy: none requested"
+          } >> "$GITHUB_STEP_SUMMARY"
