@@ -1,6 +1,6 @@
 import {test,expect} from "@playwright/test";
 import {configuredState,subjects,names,selectors,measure,sameBox,sameAnchors,settle,readable,stressCopy} from "./workspace-layout.mjs";
-import {transition,checkFrames,evidence} from "./workspace-evidence.mjs";
+import {transition,checkFrames,evidence,capture as captureScreenshot} from "./workspace-evidence.mjs";
 for(const width of [320,360,390,759,761,1440])for(const reducedMotion of ["reduce","no-preference"])for(const beta of [false,true])for(const xp of [1,123456]){
   test(`workspace slots · ${width}px · ${reducedMotion} · ${beta?"private":"internal"} · XP ${xp}`,async({page},testInfo)=>{
     await page.setViewportSize({width,height:900});
@@ -52,9 +52,9 @@ for(const width of [320,360,390,759,761,1440])for(const reducedMotion of ["reduc
         const fits=await page.locator('.studentTopActions>button').evaluateAll(buttons=>buttons.every(button=>button.scrollWidth<=button.clientWidth));
         expect(fits).toBe(true);
         const capture=xp===123456&&reducedMotion==="reduce";
-        const long=await stressCopy(page,layout,capture?async()=>testInfo.attach(`${subject}-${tab}-long`,{body:await page.screenshot({fullPage:true}),contentType:"image/png"}):null);
+        const long=await stressCopy(page,layout,capture?()=>captureScreenshot(page,testInfo,`${subject}-${tab}-long`,{fullPage:true}):null);
         measurements.push({subject,tab,xp,...layout,long,frames});
-        await testInfo.attach(`${subject}-${tab}`,{body:await page.screenshot(),contentType:"image/png"});
+        await captureScreenshot(page,testInfo,`${subject}-${tab}`);
       }
       const next=subjects[(subjects.indexOf(subject)+1)%subjects.length];
       await page.locator(".studentTop .subjectSwitcher").click();

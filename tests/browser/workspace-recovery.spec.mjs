@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
 import {configuredState,measure,sameAnchors,sameBox,settle,readable} from './workspace-layout.mjs';
-import {transition,checkFrames,evidence} from './workspace-evidence.mjs';
+import {transition,checkFrames,evidence,capture} from './workspace-evidence.mjs';
 
 const missing='ITEM-NOT-IN-CATALOG-WORKSPACE-RECOVERY';
 for(const width of [320,360,390,759,761,1440])for(const reducedMotion of ['reduce','no-preference'])for(const beta of [false,true]){
@@ -38,7 +38,7 @@ for(const width of [320,360,390,759,761,1440])for(const reducedMotion of ['reduc
         page.once('dialog',dialog=>dialog.dismiss());await recover.press('Enter');
         expect((await persisted()).progress.lastPosition).toEqual(position);
         await expect(alert).toBeVisible();
-        await testInfo.attach(`${subject}-${tab}-recovery`,{body:await page.screenshot({fullPage:true}),contentType:'image/png'});
+        await capture(page,testInfo,`${subject}-${tab}-recovery`,{fullPage:true});
         rows.push({subject,tab,layout,frames,notice});
       }
       // Accept in both menus across the motion matrix; cancel in BOTH above.

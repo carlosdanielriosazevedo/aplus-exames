@@ -52,3 +52,9 @@ export async function evidence(testInfo,name,value){
   writeFileSync(path,JSON.stringify(value,null,2));
   await testInfo.attach(name,{path,contentType:"application/json"});
 }
+
+export async function capture(page,testInfo,name,options={}){
+  const path=testInfo.outputPath(`${name}.png`);
+  await page.screenshot({...options,path});
+  await testInfo.attach(name,{path,contentType:'image/png'});
+}

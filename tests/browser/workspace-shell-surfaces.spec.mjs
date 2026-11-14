@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
 import {configuredState,measure,sameAnchors,settle,readable} from './workspace-layout.mjs';
-import {evidence} from './workspace-evidence.mjs';
+import {evidence,capture} from './workspace-evidence.mjs';
 
 for(const width of [320,360,390,759,761,1440])for(const beta of [false,true]){
   test(`shared shell surfaces · ${width}px · ${beta?'private saved':'internal'}`,async({context},testInfo)=>{
@@ -22,7 +22,7 @@ for(const width of [320,360,390,759,761,1440])for(const beta of [false,true]){
         expect(await page.evaluate(()=>window.__shellDocument)).toBe(identity);
         rows.push({subject,name,hasTop,layout:await measure(page)});
         await evidence(testInfo,`${subject}-${name}-raw`,rows.at(-1));
-        await testInfo.attach(`${subject}-${name}`,{body:await page.screenshot({fullPage:true}),contentType:'image/png'});
+        await capture(page,testInfo,`${subject}-${name}`,{fullPage:true});
       }
       await page.getByRole('button',{name:'Progresso',exact:true}).last().click();await check('progress');
       if(!beta){await page.getByRole('button',{name:'Ranking',exact:true}).last().click();await check('ranking')}
