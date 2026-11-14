@@ -3,11 +3,11 @@ import {defineConfig,devices} from "@playwright/test";
 export default defineConfig({
   testDir:"./tests/browser",
   fullyParallel:false,
-  workers:1,
+  workers:2,
   timeout:120_000,
   globalTimeout:10*60_000,
   expect:{timeout:10_000},
-  reporter:[["list"],["./tests/browser/test-begin-reporter.cjs"]],
+  reporter:[["list"],["./tests/browser/test-begin-reporter.cjs"],["./tests/browser/workspace-matrix-reporter.cjs"]],
   use:{
     ...devices["Desktop Chrome"],
     baseURL:"http://127.0.0.1:3000",

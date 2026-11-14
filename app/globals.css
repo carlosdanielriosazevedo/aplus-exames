@@ -1930,30 +1930,6 @@ button,input,select,textarea{max-width:100%}
 .mobileMainTitle{display:contents}
 .mobileHeadingApronso{display:none!important}
 @media(max-width:760px){
-  .learnHome>.studentSurface>.learnIntro .mobileMainTitle,
-  .trainHub>.panel>.sectionIntro .mobileMainTitle{
-    display:block;position:relative;box-sizing:border-box;min-width:0;
-    padding-right:clamp(72px,22vw,94px);
-  }
-  .learnHome>.studentSurface>.learnIntro .mobileMainTitle>p,
-  .trainHub>.panel>.sectionIntro .mobileMainTitle>p{
-    margin:0!important;padding:0;line-height:20px;
-  }
-  .learnHome>.studentSurface>.learnIntro .mobileMainTitle>h1,
-  .trainHub>.panel>.sectionIntro .mobileMainTitle>h1{
-    margin:5px 0 0!important;font-size:clamp(23px,6vw,29px);
-    line-height:1.1;overflow-wrap:normal;
-  }
-  .learnHome>.studentSurface>.learnIntro .mobileHeadingApronso,
-  .trainHub>.panel>.sectionIntro .mobileHeadingApronso{
-    display:block!important;position:absolute;right:0;bottom:0;
-    width:clamp(68px,21vw,90px);height:clamp(76px,24vw,100px);
-    object-fit:contain;object-position:center bottom;pointer-events:none;
-  }
-  .learnHome>.studentSurface>.learnIntro>span{
-    display:block;width:100%;max-width:none!important;margin-top:9px;
-    padding:0;color:var(--app-muted)!important;font-size:14px;line-height:1.5;
-  }
   /* The guide text belongs below Treinar, left-aligned and free of a card. */
   .trainHub .apronsoNudge{
     display:block!important;position:static!important;width:100%;

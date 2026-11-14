@@ -1,9 +1,12 @@
 // Componentes de apresentação extraídos de app/page.js (sem estado próprio,
 // sem lógica de negócio). Primeiro passo de divisão do monólito.
-import {Children,cloneElement,isValidElement,useState,useEffect,useRef} from "react";
+import {Children,cloneElement,isValidElement,useState,useEffect,useRef,createContext,useContext} from "react";
 import {isFriendsBeta, friendsBetaRequested} from "../lib/friendsBeta";
 import {engagementSummary} from "../lib/engagement";
 import {SECONDARY_EXAM_SUBJECTS} from "../data/subjects";
+
+const StudentStateContext=createContext(null);
+export const StudentStateProvider=StudentStateContext.Provider;
 
 export const BrandName = ({className=""}) => (
   <span className={`brandName ${className}`.trim()} aria-label="APProva+">
@@ -93,8 +96,20 @@ function augmentStudentMenu(children,go,s,subjectId){
   parts[index]=cloneElement(body,body.props,[...Children.toArray(body.props.children),...extras]);
   return cloneElement(children,children.props,parts);
 }
-export function StudentTop({s,go,children}){const daily=engagementSummary(s),subject=SECONDARY_EXAM_SUBJECTS.find(row=>row.id===s.activeSubjectId)||SECONDARY_EXAM_SUBJECTS[0],pattern=latestPattern(s.subjectProgress?.[subject.id]),menu=children?augmentStudentMenu(children,go,s,subject.id):<details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button type="button" onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button type="button" onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button type="button" onClick={()=>go("goalSettings")}>Objetivo da disciplina</button><button type="button" onClick={()=>go("apronsoIntro")}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button type="button" onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button type="button" onClick={()=>go("account")}>Conta e progresso</button>}<button type="button" onClick={()=>go("parent")}>Área dos pais</button></div></details>;return <><header className="studentTop"><div className="studentTopIdentity"><Logo/><button type="button" className="subjectSwitcher" onClick={()=>go("subjectManager")} aria-label={`Mudar de disciplina. Disciplina atual: ${subject.name}`}><span aria-hidden="true">{subject.icon}</span><b>{subject.shortName||subject.name}</b><i aria-hidden="true">⌄</i></button></div><div className="studentTopActions"><button type="button" onClick={()=>go("home")} aria-label={`Sequência: ${daily.streak} dias`}>🔥 <b>{daily.streak}</b></button>{!isFriendsBeta(s)&&<button type="button" onClick={()=>go("ranking")} aria-label={`${s.xp} XP`}>🏆 <b>{s.xp}</b></button>}{menu}</div></header>{pattern&&<aside className="apronsoPatternInsight" aria-label="Padrão de aprendizagem identificado pelo Apronso"><b>🦉 O Apronso reparou num padrão</b><span><strong>{pattern.label}</strong> apareceu em {pattern.count} respostas. {pattern.status==="improving"?"Já estás a mostrar recuperação; vou continuar a confirmar.":pattern.message}</span><small>Isto é uma hipótese baseada no teu histórico, não uma conclusão definitiva. Deixa de ser destacada quando houver recuperação consistente.</small></aside>}</>}
+export function StudentTop({s,go,children}){
+  const daily=engagementSummary(s),subject=SECONDARY_EXAM_SUBJECTS.find(row=>row.id===s.activeSubjectId)||SECONDARY_EXAM_SUBJECTS[0],pattern=latestPattern(s.subjectProgress?.[subject.id]);
+  const menu=children?augmentStudentMenu(children,go,s,subject.id):<details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button type="button" onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button type="button" onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button type="button" onClick={()=>go("goalSettings")}>Objetivo da disciplina</button><button type="button" onClick={()=>go("apronsoIntro")}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button type="button" onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button type="button" onClick={()=>go("account")}>Conta e progresso</button>}<button type="button" onClick={()=>go("parent")}>Área dos pais</button></div></details>;
+  return <>
+    <header className="studentTop"><div className="studentTopIdentity"><Logo/><button type="button" className="subjectSwitcher" onClick={()=>go("subjectManager")} aria-label={`Mudar de disciplina. Disciplina atual: ${subject.name}`}><span aria-hidden="true">{subject.icon}</span><b>{subject.shortName||subject.name}</b><i aria-hidden="true">⌄</i></button></div><div className="studentTopActions"><button type="button" onClick={()=>go("home")} aria-label={`Sequência: ${daily.streak} dias`}><span className="studentCounterIcon" aria-hidden="true">🔥</span><b>{daily.streak}</b></button>{!isFriendsBeta(s)&&<button type="button" onClick={()=>go("ranking")} aria-label={`${s.xp} XP`}><span className="studentCounterIcon" aria-hidden="true">🏆</span><b>{s.xp}</b></button>}{menu}</div></header>
+    <FriendsBetaRibbon s={s}/>
+    {pattern&&<aside className="apronsoPatternInsight" aria-label="Padrão de aprendizagem identificado pelo Apronso"><b>🦉 O Apronso reparou num padrão</b><span><strong>{pattern.label}</strong> apareceu em {pattern.count} respostas. {pattern.status==="improving"?"Já estás a mostrar recuperação; vou continuar a confirmar.":pattern.message}</span><small>Isto é uma hipótese baseada no teu histórico, não uma conclusão definitiva. Deixa de ser destacada quando houver recuperação consistente.</small></aside>}
+  </>;
+}
 export function FriendsBetaRibbon({s}){const [queryActive,setQueryActive]=useState(false);useEffect(()=>setQueryActive(friendsBetaRequested(window.location.search)),[]);if(!(isFriendsBeta(s)||queryActive))return null;return <div className="friendsBetaRibbon"><b>🧪 TESTE PRIVADO</b><span>Conteúdo ainda em revisão · resultados provisórios</span></div>}
+
+export function UnrecoverableSessionNotice({onRecover}){
+  return <div className="notice warning sessionRecoveryNotice" role="alert" aria-label="Sessão impossível de recuperar"><b>Sessão impossível de recuperar</b><span>Uma ou mais perguntas deixaram de estar disponíveis. A tentativa será arquivada sem pontuação adicional.</span><button type="button" className="secondary" onClick={onRecover}>Resolver sessão irrecuperável</button></div>;
+}
 
 const ROOT_SCREENS=new Set(["welcome","home","train","ranking","progress","exams"]);
 const FOCUS_SCREENS=new Set(["diagRun","mission","trainingRun","miniExamRun","miniExamReview","portugueseMiniExam","physicsChemistryExam","physicsChemistryMini1","physicsChemistryMini2"]);
@@ -126,21 +141,34 @@ function goSafeScreen(screen){
   window.history.replaceState(state,"");
   window.dispatchEvent(new PopStateEvent("popstate",{state}));
 }
+function afterStudentTop(children,content){
+  return Children.map(children,child=>{
+    if(!isValidElement(child))return child;
+    if(child.type===StudentTop)return <>{child}{content}</>;
+    let nestedTop=false;
+    if(child.props?.children)walk(child.props.children,node=>{if(node.type===StudentTop)nestedTop=true});
+    return nestedTop?cloneElement(child,child.props,afterStudentTop(child.props.children,content)):child;
+  });
+}
 export const Shell=({children,className=""})=>{
+  const studentState=useContext(StudentStateContext);
   const screen=currentScreen();
+  let hasStudentTop=false;
+  walk(children,child=>{if(child.type===StudentTop)hasStudentTop=true});
   const text=childText(children);
   const fatalRecovery=/Não foi possível (?:recuperar esta sessão|ler o progresso guardado)/u.test(text);
   const diagnosticRecovery=/Não foi possível recuperar esta sessão/u.test(text)||(/Estamos a confirmar o teu progresso/u.test(text)&&/Tentar novamente/u.test(text));
   const diagnosticStartFailure=/Não foi possível guardar o progresso/u.test(text);
   const autoBack=!!screen&&!ROOT_SCREENS.has(screen)&&!FOCUS_SCREENS.has(screen)&&!hasBack(children);
+  const back=autoBack&&<button className="back" type="button" onClick={()=>{
+    if(window.history.length>1)window.history.back();else goSafeStart();
+  }}>← Voltar</button>;
   const recoveryAnnouncement=diagnosticStartFailure?"Não foi possível guardar o progresso. Podes tentar novamente ou voltar ao menu inicial.":diagnosticRecovery?"Não foi possível recuperar esta sessão. Podes tentar novamente. A tentativa guardada mantém-se.":fatalRecovery?"Ocorreu um problema ao recuperar o progresso. Podes tentar novamente ou voltar ao início.":"";
-  return <main className={`light ${className}`.trim()}><FriendsBetaRibbon/>
+  return <main className={`light ${className}`.trim()}>{!hasStudentTop&&<FriendsBetaRibbon s={studentState}/>}
     <section className="panel">
       {recoveryAnnouncement&&<p className="srOnly" role="alert">{recoveryAnnouncement}</p>}
-      {autoBack&&<button className="back" type="button" onClick={()=>{
-        if(window.history.length>1)window.history.back();else goSafeStart();
-      }}>← Voltar</button>}
-      {children}
+      {!hasStudentTop&&back}
+      {hasStudentTop&&back?afterStudentTop(children,back):children}
       {diagnosticStartFailure&&<div className="recoveryActions" role="group" aria-label="Sair do diagnóstico" style={{display:"grid",gap:10,marginTop:18}}>
         <button className="secondary" type="button" onClick={()=>goSafeScreen("home")}>Ir para o menu inicial</button>
       </div>}
