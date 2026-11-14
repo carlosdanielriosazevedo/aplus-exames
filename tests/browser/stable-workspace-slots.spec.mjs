@@ -87,11 +87,11 @@ async function readable(page){
 }
 async function stressCopy(page,layout,capture){
   const original=await page.evaluate(()=>{
-    const selectors=['.mobileMainTitle>p','.mobileMainTitle>h1','.learnIntro>span','.studentTop .subjectSwitcher b'];
+    const selectors=['.mobileMainTitle>p','.mobileMainTitle>h1','.learnIntro>span','.studentTop .subjectSwitcher b','.studentTopActions>button:first-child b'];
     const text=["Uma saudação e um contexto suficientemente longos para ocupar várias linhas sem esconder informação",
       "Um título muito mais longo para confirmar que todo o conteúdo pode crescer sem deslocar as âncoras persistentes",
       "Uma explicação longa, com informação essencial que deve continuar completamente legível em todos os tamanhos de ecrã, incluindo palavras como interdisciplinaridade e uma sequência sem espaços ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.",
-      "Física e Química A"];
+      "Física e Química A","1"];
     return selectors.map((selector,i)=>{const el=document.querySelector(selector),value=el.textContent;el.textContent=text[i];return {selector,value}});
   });
   const long=await measure(page);
@@ -109,7 +109,7 @@ async function stressCopy(page,layout,capture){
   return long;
 }
 
-for(const width of [320,360,390,759,761,1440])for(const reducedMotion of ["reduce","no-preference"])for(const beta of [false,true])for(const xp of [1,123456]){
+for(const width of [320,360,390,759,761,1440])for(const reducedMotion of ["reduce","no-preference"])for(const beta of [false,true])for(const xp of beta?[123456]:[1,123456]){
   test(`workspace slots · ${width}px · ${reducedMotion} · ${beta?"private":"internal"} · XP ${xp}`,async({page},testInfo)=>{
     await page.setViewportSize({width,height:900});
     await page.emulateMedia({reducedMotion});
@@ -120,7 +120,7 @@ for(const width of [320,360,390,759,761,1440])for(const reducedMotion of ["reduc
     state.engagement={version:1,streak:xp===1?1:365,longestStreak:365,lastActiveDay:new Date().toLocaleDateString("en-CA")};
     if(beta){state.betaMode="friends_beta";state.betaParticipant={code:"AMG-TEST01"};state.betaTesterMeta={segment:"student",consentAt:Date.now()}}
     // Cover both the query entry and a saved private-beta state without query.
-    const queryBeta=beta&&xp===1,key=queryBeta?"a25-friends-beta":"a25";
+    const queryBeta=beta&&reducedMotion==="reduce",key=queryBeta?"a25-friends-beta":"a25";
     await page.addInitScript(({state,key})=>{localStorage.setItem(key,JSON.stringify(state));window.__workspaceDocument=crypto.randomUUID()},{state,key});
     const errors=[];page.on("pageerror",error=>errors.push(error.message));
     await page.goto(queryBeta?"/?beta=friends":"/");
@@ -161,12 +161,6 @@ for(const width of [320,360,390,759,761,1440])for(const reducedMotion of ["reduc
         const long=await stressCopy(page,layout,capture?async()=>testInfo.attach(`${subject}-${tab}-long`,{body:await page.screenshot({fullPage:true}),contentType:"image/png"}):null);
         measurements.push({subject,tab,xp,...layout,long});
         if(capture)await testInfo.attach(`${subject}-${tab}`,{body:await page.screenshot(),contentType:"image/png"});
-      }
-      for(const tab of beta?["Progresso"]:["Ranking","Progresso"]){
-        await page.getByRole("button",{name:tab,exact:true}).last().click();
-        await expect(page.locator(".studentTop")).toBeVisible();
-        await expect(page.getByRole("button",{name:tab,exact:true}).last()).toHaveAttribute("aria-current","page");
-        await settle(page);sameAnchors(await measure(page),reference,`${subject}/${tab}`);await readable(page);
       }
       const next=subjects[(subjects.indexOf(subject)+1)%subjects.length];
       await page.locator(".studentTop .subjectSwitcher").click();

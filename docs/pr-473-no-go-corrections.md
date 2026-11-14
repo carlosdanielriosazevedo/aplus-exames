@@ -17,6 +17,8 @@ de cor anterior; os seus resultados não certificam esta revisão.
   duas linhas no intervalo desktop 761–1000 px, impedindo o salto observado
   imediatamente acima do breakpoint. Títulos e explicações extensos podem
   aumentar a altura sem cortes nem deslocar o topo ou a célula do Apronso.
+  O slot XP desse intervalo herda os 108 px do desktop: os anteriores 84 px
+  não continham seis dígitos e o troféu no Chromium 140 do runner.
 - `StudentTop` é a fonte comum da faixa privada, com o estado `s` disponível.
   As três páginas Aprender deixam de a duplicar. `Shell` conserva a faixa
   exterior apenas em páginas sem `StudentTop`. A faixa partilha a largura e
@@ -48,15 +50,33 @@ tolerância para a aceitar.
 
 ## Regressão e gates
 
-`stable-workspace-slots.spec.mjs` passa a ter 48 cenários de workspace:
-320/360/390/759/761/1440 px × movimento normal/reduzido × interno/privado ×
-XP 1/123456 e streak 1/365. Cada cenário troca realmente entre as três
-disciplinas e abas; Ranking/Progresso verificam o topo quando disponíveis.
+`stable-workspace-slots.spec.mjs` passa a ter 36 cenários de workspace:
+320/360/390/759/761/1440 px × movimento normal/reduzido, com duas sementes
+internas (XP 1/123456, streak 1/365) e uma privada (XP oculto, streak 365→1
+durante o stress de texto). Cada cenário troca realmente entre as três
+disciplinas e abas. A beta por query é testada com movimento reduzido; o
+estado privado sem query com movimento normal, em todas as larguras.
+Os testes existentes de Ranking/Progresso continuam intactos.
 Uma identidade aleatória do documento comprova que não houve reload.
 
 Mantêm-se os nove cenários de diagnóstico e todos os outros testes existentes.
 Não se alteram as tolerâncias originais de 2 px, os timeouts, retries, gates,
-workflows ou baselines. A suite completa contém 221 testes.
+workflows ou baselines. A suite completa contém 209 testes.
+
+A primeira execução integral, com repetição adicional dos mesmos controlos
+de Ranking/Progresso e duas sementes privadas sem XP, atingiu o limite global:
+189 PASS, 32 não executados, zero falhas de asserção; resultado INCOMPLETO.
+Foi eliminada a repetição desses percursos na matriz nova, preservando os
+testes anteriores e a cobertura de valores/disciplinas/larguras/movimento da
+issue. Não se aumentou o orçamento global de 600 s nem se aceitou esse timeout
+como PASS. O stress privado mede os dois comprimentos do streak sem precisar
+de uma segunda inicialização idêntica com XP oculto.
+
+O primeiro Beta CI remoto desta correção, run `43625567753`, completou os
+221 testes em 8,5 min: 219 PASS, dois FAIL na asserção estrita de conteúdo
+dentro do botão XP, ambos a 761 px com XP 123456. O slot foi corrigido;
+a asserção não foi alterada. Os passos posteriores desse run foram SKIPPED.
+Este run continua registado como FAIL, não como prova da revisão seguinte.
 
 O teste mede a caixa inteira do hero e os slots, incluindo a faixa opcional.
 A posição do pseudo-elemento de Aprender é medida por uma sonda invisível
@@ -94,6 +114,9 @@ O download do Chromium 140 do Playwright recebeu 403 da política de rede.
 A configuração local externa apenas seleciona o browser/ffmpeg instalados,
 o destino dos artefactos e o servidor já compilado; preserva todos os limites
 e as asserções. O workflow remoto mantém o seu browser e configuração originais.
+A confirmação local integral pode ser dividida com `--shard=1/2` e
+`--shard=2/2`: todos os testes correm uma vez, sem aumentar os timeouts.
+O Beta CI remoto corre a suite inteira numa única passagem, sem sharding.
 DATABASE_URL, Auth e Data API ficam vazios; os dados são sintéticos e locais.
 
 As medições cobrem os tamanhos indicados, não todos os browsers ou dispositivos

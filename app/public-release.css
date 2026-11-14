@@ -198,7 +198,7 @@
 }
 .learnIntro.learnIntro>span{min-height:var(--student-copy-height);max-width:none!important;margin:9px 0 0;font-size:14px;line-height:1.5}
 @media(min-width:761px) and (max-width:1000px){
-  :root{--student-logo-slot:120px;--student-subject-slot:210px;--student-counter-slot:64px;--student-xp-slot:84px;--student-menu-slot:48px;--student-copy-height:42px}
+  :root{--student-logo-slot:120px;--student-subject-slot:210px;--student-counter-slot:64px;--student-menu-slot:48px;--student-copy-height:42px}
 }
 @media(max-width:760px){
   :root{
