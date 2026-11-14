@@ -205,6 +205,8 @@
   .studentTop .studentTopActions>button[aria-label],.studentTop .studentMenu>summary{height:42px}
   .studentTop .studentTopActions>button>b{font-size:12px}
   .learnIntro .mobileMainTitle>h1{font-size:clamp(23px,6vw,29px)}
+  /* Restore shared mobile copy color after legacy Home/Training overrides. */
+  .learnIntro.learnIntro>span{color:var(--app-muted)!important}
 }
 
 /* The training hub already owns an image; use the same grid cell as the home
