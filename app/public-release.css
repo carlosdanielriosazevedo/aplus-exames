@@ -163,6 +163,10 @@
 .studentTop .studentMenu>summary{box-sizing:border-box;width:var(--student-menu-slot);min-width:0;height:48px;padding:0}
 /* Keep the menu in its slot even in the beta variant without an XP button. */
 .studentTop .studentTopActions>button:first-child{grid-column:1;grid-row:1}
+.studentTop+.friendsBetaRibbon{
+  box-sizing:border-box;width:100%;min-width:0;
+  margin:0 0 var(--student-top-gap);flex-wrap:wrap;overflow-wrap:anywhere;
+}
 .learnHome>.studentSurface>.learnIntro,
 .trainHub>.panel>.trainIntro{
   display:grid;grid-template-columns:minmax(0,1fr);width:100%;max-width:none;
@@ -171,7 +175,7 @@
 .learnIntro.learnIntro::after{content:none;display:none}
 .learnIntro .mobileMainTitle.mobileMainTitle{
   display:grid;grid-template-columns:minmax(0,1fr) var(--student-mascot-width);
-  grid-template-rows:23px minmax(var(--student-title-height),auto);
+  grid-template-rows:minmax(23px,max-content) minmax(var(--student-title-height),auto);
   column-gap:16px;position:static;padding:0;min-width:0;
   min-height:var(--student-mascot-height);align-content:start;
 }
@@ -179,6 +183,12 @@
 .learnIntro .mobileMainTitle>h1{
   grid-column:1;grid-row:2;margin:5px 0 0!important;
   font-size:clamp(30px,7vw,42px);line-height:1.1;overflow-wrap:anywhere;
+}
+/* Reserve the same top-aligned cell for both renderers. Long titles can grow
+   below it without moving Apronso. Contextual motion belongs to issue #469. */
+.learnIntro .mobileMainTitle.mobileMainTitle::after,
+.trainHub .mobileMainTitle>.mobileHeadingApronso{
+  align-self:start;justify-self:end;animation:none;transform:none;
 }
 .learnHome>.studentSurface>.learnIntro .mobileMainTitle.mobileMainTitle::after{
   content:"";display:block;position:static;right:auto;bottom:0;grid-column:2;grid-row:1/3;
@@ -188,7 +198,7 @@
 }
 .learnIntro.learnIntro>span{min-height:var(--student-copy-height);max-width:none!important;margin:9px 0 0;font-size:14px;line-height:1.5}
 @media(min-width:761px) and (max-width:1000px){
-  :root{--student-logo-slot:120px;--student-subject-slot:210px;--student-counter-slot:64px;--student-xp-slot:84px;--student-menu-slot:48px}
+  :root{--student-logo-slot:120px;--student-subject-slot:210px;--student-counter-slot:64px;--student-xp-slot:84px;--student-menu-slot:48px;--student-copy-height:42px}
 }
 @media(max-width:760px){
   :root{

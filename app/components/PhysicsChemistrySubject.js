@@ -1,6 +1,6 @@
 "use client";
 import {useEffect,useState} from "react";
-import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
+import {Apronso,ApronsoNudge,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import StudyModeHub from "./StudyModeHub";
 import PausedActivityEyebrow from "./PausedActivityEyebrow";
 import PhysicsChemistryLearnPanel from "./PhysicsChemistryLearnPanel";
@@ -405,7 +405,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       {progress.lastPosition&&<button className="primary" onClick={resume}>Retomar sessão em pausa</button>}{sharedNav}</Shell>;
   }
 
-  return <main className="learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>
+  return <main className="learnHome"><section className="wrap studentSurface">{sharedTop}
     {unrecoverableSession&&<div className="notice warning"><b>Sessão impossível de recuperar</b><span>Uma ou mais perguntas deixaram de estar disponíveis. A tentativa será arquivada sem pontuação adicional.</span><button className="secondary" onClick={recoverUnrecoverableSession}>Resolver sessão irrecuperável</button></div>}
     <div className="learnIntro"><div className="mobileMainTitle"><p>Olá 👋</p><h1>O teu próximo passo.</h1></div><span>{missionDone?"Missão feita. Podes continuar por tua conta.":progress.diagnosticDone?"Uma recomendação curta, escolhida a partir do teu percurso.":"Primeiro, vamos encontrar o melhor ponto de partida."}</span></div>
     <section className="adaptivePath" aria-label="Caminho adaptativo de Física e Química A">

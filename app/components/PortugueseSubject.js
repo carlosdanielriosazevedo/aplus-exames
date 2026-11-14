@@ -1,6 +1,6 @@
 "use client";
 import {useEffect,useState} from "react";
-import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
+import {Apronso,ApronsoNudge,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import PortugueseLearnPanel from "./PortugueseLearnPanel";
 import PausedActivityEyebrow from "./PausedActivityEyebrow";
 import StudyModeHub from "./StudyModeHub";
@@ -153,7 +153,7 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
   const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("goalSettings")}>Objetivo: {subjectGoal(s,"portuguese")} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{(progress.sessions.length>0||progress.lastPosition||miniExamDraft)&&<button onClick={resetPortuguese}>Repor progresso de Português</button>}</div></details></StudentTop>;
   const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go}/>;
   function sharedShell(content){
-    if(view==="home")return <main className="learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>{content}{sharedNav}</section></main>;
+    if(view==="home")return <main className="learnHome"><section className="wrap studentSurface">{sharedTop}{content}{sharedNav}</section></main>;
     return <Shell>{sharedTop}{content}{sharedNav}</Shell>;
   }
 

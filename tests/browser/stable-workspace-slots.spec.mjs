@@ -15,67 +15,171 @@ function configuredState(subjectId){
 }
 
 const subjects=["math-a","portuguese","physics-chemistry-a"];
-const selectors=[".studentTop .logo",".studentTop .subjectSwitcher",".studentTop .subjectSwitcher>span",'.studentTop button[aria-label^="Sequência:"]','.studentTop button[aria-label$=" XP"]',".studentTop .studentMenu>summary"];
+const names={"math-a":"Matemática A",portuguese:"Português","physics-chemistry-a":"Física e Química A"};
+const selectors=[".studentTop",".studentTop .logo",".studentTop .subjectSwitcher",".studentTop .subjectSwitcher>span",'.studentTop button[aria-label^="Sequência:"]','.studentTop button[aria-label$=" XP"]',".studentTop .studentMenu>summary",".friendsBetaRibbon"];
 async function measure(page){
   return page.evaluate(selectors=>{
     const box=el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height}};
-    const hero=document.querySelector(".learnIntro"),heading=hero.querySelector(".mobileMainTitle");
-    const image=heading.querySelector("img"),pseudo=getComputedStyle(heading,"::after"),r=heading.getBoundingClientRect();
-    const mascot=image?box(image):{x:r.right-parseFloat(pseudo.width),y:r.y,width:parseFloat(pseudo.width),height:parseFloat(pseudo.height)};
-    return {anchors:selectors.map(selector=>box(document.querySelector(selector))),
+    const textBox=el=>{const range=document.createRange();range.selectNodeContents(el);return box(range)};
+    const anchors=selectors.map(selector=>{const el=document.querySelector(selector);return el?box(el):null});
+    const hero=document.querySelector(".learnIntro");
+    if(!hero)return {anchors};
+    const heading=hero.querySelector(".mobileMainTitle"),image=heading.querySelector("img");
+    const style=getComputedStyle(image||heading,image?null:"::after");
+    let mascot;
+    if(image)mascot=box(image);
+    else{
+      // A pseudo-element has no DOMRect API. Lay out a probe with its actual
+      // computed styles in the SAME grid cell, then remove it. Never infer its
+      // y from the heading: that hid the old end-alignment bug on long titles.
+      const probe=document.createElement("i");
+      for(const property of style)probe.style.setProperty(property,style.getPropertyValue(property));
+      probe.style.visibility="hidden";
+      heading.append(probe);mascot=box(probe);probe.remove();
+    }
+    return {anchors,hero:box(hero),heading:box(heading),
       title:box(heading.querySelector("h1")),label:box(heading.querySelector("p")),copy:box(hero.querySelector(":scope>span")),mascot,
+      text:{title:textBox(heading.querySelector("h1")),label:textBox(heading.querySelector("p")),copy:textBox(hero.querySelector(":scope>span"))},
+      motion:{animation:style.animationName,transform:style.transform},
       overflow:document.documentElement.scrollWidth>innerWidth};
   },selectors);
 }
 function sameBox(actual,expected,label){
   for(const key of ["x","y","width","height"])expect(Math.abs(actual[key]-expected[key]),`${label}: ${key}`).toBeLessThanOrEqual(2);
 }
-for(const width of [320,360,390,1440])for(const reducedMotion of ["reduce","no-preference"]){
-  test(`workspace slots · ${width}px · ${reducedMotion}`,async({page},testInfo)=>{
+function sameAnchors(actual,expected,label){
+  actual.anchors.forEach((anchor,i)=>{
+    expect(Boolean(anchor),`${label}: presence ${selectors[i]}`).toBe(Boolean(expected.anchors[i]));
+    if(anchor)sameBox(anchor,expected.anchors[i],`${label}: ${selectors[i]}`);
+  });
+}
+async function settle(page){
+  await page.evaluate(async()=>{
+    await document.fonts.ready;
+    await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));
+    const mascot=new Image();mascot.src="/mascot/apronso-welcome.webp";await mascot.decode();
+    window.scrollTo(0,0);
+    await new Promise(requestAnimationFrame);
+  });
+}
+async function readable(page){
+  const problems=await page.evaluate(()=>{
+    const problems=[];
+    // Check line boxes and clipping ancestors, not only document.scrollWidth:
+    // overflow-x:clip can hide a regression while that document check passes.
+    for(const el of document.querySelectorAll('.studentTop .subjectSwitcher b,.studentTopActions>button,.friendsBetaRibbon b,.friendsBetaRibbon span,.learnIntro p,.learnIntro h1,.learnIntro>span')){
+      const range=document.createRange();range.selectNodeContents(el);
+      for(const line of range.getClientRects()){
+        if(line.left < -2||line.right > innerWidth+2)problems.push(`${el.className||el.tagName}: outside viewport`);
+        for(let parent=el;parent;parent=parent.parentElement){
+          const r=parent.getBoundingClientRect(),s=getComputedStyle(parent);
+          if(s.display==="contents")continue;
+          if(line.left<r.left-2||line.right>r.right+2)problems.push(`${el.tagName}: outside ${parent.className||parent.tagName}`);
+          if(/hidden|clip|auto|scroll/.test(s.overflowY)&&(line.top<r.top-2||line.bottom>r.bottom+2))problems.push(`${el.tagName}: vertically clipped`);
+        }
+      }
+      if(el.scrollWidth>el.clientWidth+2)problems.push(`${el.tagName}: local horizontal overflow`);
+    }
+    return problems;
+  });
+  expect(problems,"All essential text is readable, including inside clipped ancestors").toEqual([]);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)).toBe(false);
+}
+async function stressCopy(page,layout,capture){
+  const original=await page.evaluate(()=>{
+    const selectors=['.mobileMainTitle>p','.mobileMainTitle>h1','.learnIntro>span','.studentTop .subjectSwitcher b'];
+    const text=["Uma saudação e um contexto suficientemente longos para ocupar várias linhas sem esconder informação",
+      "Um título muito mais longo para confirmar que todo o conteúdo pode crescer sem deslocar as âncoras persistentes",
+      "Uma explicação longa, com informação essencial que deve continuar completamente legível em todos os tamanhos de ecrã, incluindo palavras como interdisciplinaridade e uma sequência sem espaços ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.",
+      "Física e Química A"];
+    return selectors.map((selector,i)=>{const el=document.querySelector(selector),value=el.textContent;el.textContent=text[i];return {selector,value}});
+  });
+  const long=await measure(page);
+  sameAnchors(long,layout,"long copy");sameBox(long.mascot,layout.mascot,"long copy: mascot");
+  expect(long.title.y).toBeGreaterThanOrEqual(long.label.y+long.label.height-2);
+  expect(long.copy.y).toBeGreaterThanOrEqual(long.title.y+long.title.height-2);
+  expect(long.text.title.y).toBeGreaterThanOrEqual(long.text.label.y+long.text.label.height-2);
+  expect(long.text.copy.y).toBeGreaterThanOrEqual(long.text.title.y+long.text.title.height-2);
+  expect(long.copy.y).toBeGreaterThanOrEqual(long.mascot.y+long.mascot.height-2);
+  await readable(page);
+  await capture?.();
+  await page.evaluate(rows=>rows.forEach(({selector,value})=>{document.querySelector(selector).textContent=value}),original);
+  const restored=await measure(page);
+  for(const slot of ["hero","heading","title","label","copy","mascot"])sameBox(restored[slot],layout[slot],`restored: ${slot}`);
+  return long;
+}
+
+for(const width of [320,360,390,759,761,1440])for(const reducedMotion of ["reduce","no-preference"])for(const beta of [false,true])for(const xp of [1,123456]){
+  test(`workspace slots · ${width}px · ${reducedMotion} · ${beta?"private":"internal"} · XP ${xp}`,async({page},testInfo)=>{
     await page.setViewportSize({width,height:900});
     await page.emulateMedia({reducedMotion});
-    await page.goto("/");
+    const state=configuredState("math-a");state.xp=xp;
+    state.selectedSubjectIds=subjects;state.diagnosticDone=true;
+    state.subjectSettings=Object.assign({},...subjects.map(id=>configuredState(id).subjectSettings));
+    state.subjectProgress=Object.assign({},...subjects.map(id=>configuredState(id).subjectProgress));
+    state.engagement={version:1,streak:xp===1?1:365,longestStreak:365,lastActiveDay:new Date().toLocaleDateString("en-CA")};
+    if(beta){state.betaMode="friends_beta";state.betaParticipant={code:"AMG-TEST01"};state.betaTesterMeta={segment:"student",consentAt:Date.now()}}
+    // Cover both the query entry and a saved private-beta state without query.
+    const queryBeta=beta&&xp===1,key=queryBeta?"a25-friends-beta":"a25";
+    await page.addInitScript(({state,key})=>{localStorage.setItem(key,JSON.stringify(state));window.__workspaceDocument=crypto.randomUUID()},{state,key});
+    const errors=[];page.on("pageerror",error=>errors.push(error.message));
+    await page.goto(queryBeta?"/?beta=friends":"/");
+    await expect(page.locator(".studentTop")).toBeVisible();
+    const documentId=await page.evaluate(()=>window.__workspaceDocument);
     let reference;
     const measurements=[];
-    for(const subject of subjects)for(const xp of [1,123456]){
-      const state=configuredState(subject);state.xp=xp;
-      state.selectedSubjectIds=subjects;state.diagnosticDone=true;
-      state.subjectSettings=Object.assign({},...subjects.map(id=>configuredState(id).subjectSettings));
-      state.subjectProgress=Object.assign({},...subjects.map(id=>configuredState(id).subjectProgress));
-      state.engagement={version:1,streak:xp===1?1:365,longestStreak:365,lastActiveDay:new Date().toLocaleDateString("en-CA")};
-      await page.evaluate(state=>localStorage.setItem("a25",JSON.stringify(state)),state);
-      await page.reload();
+    for(const subject of subjects){
+      await expect(page.locator(".studentTop .subjectSwitcher")).toHaveAttribute("aria-label",`Mudar de disciplina. Disciplina atual: ${names[subject]}`);
       for(const tab of ["Aprender","Treinar"]){
         await page.getByRole("button",{name:tab,exact:true}).last().click();
-        await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));window.scrollTo(0,0)});
+        await expect(page.getByRole("button",{name:tab,exact:true}).last()).toHaveAttribute("aria-current","page");
+        await expect(page.locator(".friendsBetaRibbon")).toHaveCount(beta?1:0);
+        await expect(page.locator('.studentTop button[aria-label$=" XP"]')).toHaveCount(beta?0:1);
+        await expect(page.locator('.studentTop button[aria-label^="Sequência:"]')).toHaveAttribute("aria-label",`Sequência: ${xp===1?1:365} dias`);
+        if(!beta)await expect(page.getByRole("button",{name:`${xp} XP`,exact:true})).toBeVisible();
+        await settle(page);
         const layout=await measure(page);reference??=layout;
         expect(layout.overflow).toBe(false);
-        layout.anchors.forEach((anchor,i)=>sameBox(anchor,reference.anchors[i],`${subject}/${tab}/${xp}: anchor ${i}`));
-        for(const slot of ["title","label","copy","mascot"])sameBox(layout[slot],reference[slot],`${subject}/${tab}: ${slot}`);
+        for(const box of [...layout.anchors.filter(Boolean),layout.mascot]){
+          expect(box.x).toBeGreaterThanOrEqual(0);
+          expect(box.x+box.width).toBeLessThanOrEqual(width+1);
+        }
+        sameAnchors(layout,reference,`${subject}/${tab}/${xp}`);
+        for(const slot of ["hero","heading","title","label","copy","mascot"])sameBox(layout[slot],reference[slot],`${subject}/${tab}: ${slot}`);
+        expect(layout.motion).toEqual({animation:"none",transform:"none"});
+        // Sample live frames with normal motion enabled; screenshots must not
+        // freeze the image and accidentally hide an animation mismatch.
+        for(let frame=0;frame<3;frame++){
+          await page.evaluate(()=>new Promise(requestAnimationFrame));
+          sameBox((await measure(page)).mascot,layout.mascot,`${subject}/${tab}: live mascot`);
+        }
+        await readable(page);
         // Every value stays inside its button, including six-digit XP.
         const fits=await page.locator('.studentTopActions>button').evaluateAll(buttons=>buttons.every(button=>button.scrollWidth<=button.clientWidth));
         expect(fits).toBe(true);
-        measurements.push({subject,tab,xp,...layout});
-        if(xp===123456)await testInfo.attach(`${subject}-${tab}`,{body:await page.screenshot({animations:"disabled"}),contentType:"image/png"});
-        await page.locator('.learnIntro h1').evaluate(el=>el.textContent="Um título muito mais longo para confirmar que o conteúdo pode crescer sem deslocar as âncoras persistentes");
-        const long=await measure(page);
-        long.anchors.forEach((anchor,i)=>sameBox(anchor,layout.anchors[i],`long title: anchor ${i}`));
-        sameBox(long.mascot,layout.mascot,"long title: mascot");
-        expect(long.overflow).toBe(false);
-        // Restore the real title before navigating, including Aprender → Aprender.
-        await page.reload();
+        const capture=xp===123456&&reducedMotion==="reduce";
+        const long=await stressCopy(page,layout,capture?async()=>testInfo.attach(`${subject}-${tab}-long`,{body:await page.screenshot({fullPage:true}),contentType:"image/png"}):null);
+        measurements.push({subject,tab,xp,...layout,long});
+        if(capture)await testInfo.attach(`${subject}-${tab}`,{body:await page.screenshot(),contentType:"image/png"});
       }
-      if(xp===123456){
-        const next=subjects[(subjects.indexOf(subject)+1)%subjects.length];
-        const names={"math-a":"Matemática A",portuguese:"Português","physics-chemistry-a":"Física e Química A"};
-        await page.locator(".studentTop .subjectSwitcher").click();
-        await page.locator(".subjectWorkspaceCard").filter({has:page.getByText(names[next],{exact:true})}).click();
-        await expect(page.locator(".learnIntro")).toBeVisible();
-        const switched=await measure(page);
-        switched.anchors.forEach((anchor,i)=>sameBox(anchor,reference.anchors[i],`subject switch: anchor ${i}`));
-        expect(switched.overflow).toBe(false);
+      for(const tab of beta?["Progresso"]:["Ranking","Progresso"]){
+        await page.getByRole("button",{name:tab,exact:true}).last().click();
+        await expect(page.locator(".studentTop")).toBeVisible();
+        await expect(page.getByRole("button",{name:tab,exact:true}).last()).toHaveAttribute("aria-current","page");
+        await settle(page);sameAnchors(await measure(page),reference,`${subject}/${tab}`);await readable(page);
       }
+      const next=subjects[(subjects.indexOf(subject)+1)%subjects.length];
+      await page.locator(".studentTop .subjectSwitcher").click();
+      await page.locator(".subjectWorkspaceCard").filter({has:page.getByText(names[next],{exact:true})}).click();
+      await expect(page.locator(".learnIntro")).toBeVisible();
+      await settle(page);
+      const switched=await measure(page);
+      sameAnchors(switched,reference,"real subject switch");
+      for(const slot of ["hero","heading","title","label","copy","mascot"])sameBox(switched[slot],reference[slot],`real subject switch: ${slot}`);
+      expect(switched.overflow).toBe(false);
+      expect(await page.evaluate(()=>window.__workspaceDocument),"Navigation must preserve the live document").toBe(documentId);
     }
+    expect(errors).toEqual([]);
     await testInfo.attach("anchor-measurements",{body:JSON.stringify(measurements,null,2),contentType:"application/json"});
   });
 }
