@@ -1,6 +1,6 @@
 "use client";
 import {useEffect,useState} from "react";
-import {Apronso,ApronsoNudge,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
+import {Apronso,ApronsoNudge,Shell,StudentNav,StudentTop,StudySessionHeader,UnrecoverableSessionNotice} from "./chrome";
 import StudyModeHub from "./StudyModeHub";
 import PausedActivityEyebrow from "./PausedActivityEyebrow";
 import PhysicsChemistryLearnPanel from "./PhysicsChemistryLearnPanel";
@@ -180,6 +180,8 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     go("home");
   }
 
+  const recoveryNotice=unrecoverableSession?<UnrecoverableSessionNotice onRecover={recoverUnrecoverableSession}/>:null;
+
   function resume(){
     const saved=progress.lastPosition;
     if(!saved)return;
@@ -347,7 +349,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     </Shell>;
   }
 
-  if(view==="train")return <Shell className="wideStudentShell trainHub">{sharedTop}<StudyModeHub subjectId={SUBJECT_ID} go={go}/>{sharedNav}</Shell>;
+  if(view==="train")return <Shell className="wideStudentShell trainHub">{sharedTop}<StudyModeHub subjectId={SUBJECT_ID} go={go} recoveryNotice={recoveryNotice}/>{sharedNav}</Shell>;
   if(view==="reviewMatter")return <Shell className="wideStudentShell reviewStudyPage">{sharedTop}<PhysicsChemistryLearnPanel schoolYear={currentYear}/>{sharedNav}</Shell>;
 
   if(view==="exams")return <Shell className="wideStudentShell examHub">{sharedTop}<div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Física e Química A · 715</h1><p className="muted">Escolhe entre um treino mais curto e o Exame Completo com a estrutura 15 obrigatórios + 8 opcionais, contando os 4 melhores opcionais.</p></div>
@@ -406,8 +408,8 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   }
 
   return <main className="learnHome"><section className="wrap studentSurface">{sharedTop}
-    {unrecoverableSession&&<div className="notice warning"><b>Sessão impossível de recuperar</b><span>Uma ou mais perguntas deixaram de estar disponíveis. A tentativa será arquivada sem pontuação adicional.</span><button className="secondary" onClick={recoverUnrecoverableSession}>Resolver sessão irrecuperável</button></div>}
     <div className="learnIntro"><div className="mobileMainTitle"><p>Olá 👋</p><h1>O teu próximo passo.</h1></div><span>{missionDone?"Missão feita. Podes continuar por tua conta.":progress.diagnosticDone?"Uma recomendação curta, escolhida a partir do teu percurso.":"Primeiro, vamos encontrar o melhor ponto de partida."}</span></div>
+    {recoveryNotice}
     <section className="adaptivePath" aria-label="Caminho adaptativo de Física e Química A">
       <div className={`pathNode ${progress.diagnosticDone?"done":"current"}`}><span>{progress.diagnosticDone?"✓":"●"}</span><div><small>{progress.diagnosticDone?"ÚLTIMO PASSO":"PRIMEIRO PASSO"}</small><b>{progress.diagnosticDone?"Diagnóstico concluído":"Conhecer o teu ponto de partida"}</b></div></div>
       <div className="pathLine active"/>
