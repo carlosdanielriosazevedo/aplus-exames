@@ -1,4 +1,5 @@
 import {expect} from "@playwright/test";
+import counterContract from "./workspace-matrix-contract.cjs";
 function configuredState(subjectId){
  const now=Date.now();
  return {
@@ -21,8 +22,26 @@ function measureInBrowser(selectors){
     const box=el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height}};
     const textBox=el=>{const range=document.createRange();range.selectNodeContents(el);return box(range)};
     const anchors=selectors.map(selector=>{const el=document.querySelector(selector);return el?box(el):null});
+    const counters=Object.fromEntries([['streak','[aria-label^="Sequência:"]'],['xp','[aria-label$=" XP"]']].map(([name,selector])=>{
+      const button=document.querySelector(`.studentTopActions>button${selector}`);
+      if(!button)return [name,null];
+      const value=button.querySelector('b'),icon=button.querySelector('.studentCounterIcon');
+      // The text-node fallback also records the uncorrected HEAD as a genuine
+      // before measurement. A Range measures the glyph, not just its fixed cell.
+      const node=icon?.firstChild||[...button.childNodes].find(n=>n.nodeType===Node.TEXT_NODE&&n.textContent.trim());
+      const range=document.createRange();range.setStart(node,0);range.setEnd(node,2);
+      const row={button:box(button),icon:icon?box(icon):box(range),iconGlyph:box(range),value:box(value),valueText:textBox(value),text:value.textContent,problems:[]};
+      for(const key of ['icon','iconGlyph','value','valueText']){
+        const r=row[key],b=row.button;
+        if(r.x<b.x-2||r.x+r.width>b.x+b.width+2||r.y<b.y-2||r.y+r.height>b.y+b.height+2)row.problems.push(`${key}: outside button`);
+        if(r.x< -2||r.x+r.width>innerWidth+2)row.problems.push(`${key}: outside viewport`);
+      }
+      if(row.iconGlyph.x+row.iconGlyph.width>row.valueText.x+2)row.problems.push('icon overlaps number');
+      if(value.scrollWidth>value.clientWidth+2||button.scrollWidth>button.clientWidth+2)row.problems.push('local overflow');
+      return [name,row];
+    }));
     const hero=document.querySelector(".learnIntro");
-    if(!hero)return {anchors,surfaceVisible:(document.querySelector('main')?.getBoundingClientRect().height||0)>0};
+    if(!hero)return {anchors,counters,surfaceVisible:(document.querySelector('main')?.getBoundingClientRect().height||0)>0};
     const heading=hero.querySelector(".mobileMainTitle"),image=heading.querySelector("img");
     const style=getComputedStyle(image||heading,image?null:"::after");
     let mascot;
@@ -38,7 +57,7 @@ function measureInBrowser(selectors){
     }
     const ribbon=document.querySelector('.friendsBetaRibbon');
     const contextBand=ribbon?box(ribbon).height+parseFloat(getComputedStyle(ribbon).marginBottom):0;
-    return {anchors,contextBand,hero:box(hero),heading:box(heading),
+    return {anchors,counters,contextBand,hero:box(hero),heading:box(heading),
       title:box(heading.querySelector("h1")),label:box(heading.querySelector("p")),copy:box(hero.querySelector(":scope>span")),mascot,
       text:{title:textBox(heading.querySelector("h1")),label:textBox(heading.querySelector("p")),copy:textBox(hero.querySelector(":scope>span"))},
       motion:{animation:style.animationName,transform:style.transform},
@@ -53,6 +72,7 @@ function sameAnchors(actual,expected,label){
     expect(Boolean(anchor),`${label}: presence ${selectors[i]}`).toBe(Boolean(expected.anchors[i]));
     if(anchor)sameBox(anchor,expected.anchors[i],`${label}: ${selectors[i]}`);
   });
+  counterContract.compareCounters(actual.counters,expected.counters,label);
 }
 async function settle(page){
   await page.evaluate(async()=>{

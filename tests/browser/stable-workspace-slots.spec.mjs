@@ -1,6 +1,6 @@
 import {test,expect} from "@playwright/test";
 import {configuredState,subjects,names,selectors,measure,sameBox,sameAnchors,settle,readable,stressCopy} from "./workspace-layout.mjs";
-import {transition,checkFrames,evidence,capture as captureScreenshot} from "./workspace-evidence.mjs";
+import {transition,checkFrames,counterValueFrames,evidence,capture as captureScreenshot} from "./workspace-evidence.mjs";
 for(const width of [320,360,390,759,761,1440])for(const reducedMotion of ["reduce","no-preference"])for(const beta of [false,true])for(const xp of [1,123456]){
   test(`workspace slots · ${width}px · ${reducedMotion} · ${beta?"private":"internal"} · XP ${xp}`,async({page},testInfo)=>{
     await page.setViewportSize({width,height:900});
@@ -32,6 +32,8 @@ for(const width of [320,360,390,759,761,1440])for(const reducedMotion of ["reduc
         if(!beta)await expect(page.getByRole("button",{name:`${xp} XP`,exact:true})).toBeVisible();
         await settle(page);
         const layout=await measure(page);reference??=layout;
+        const counterFrames=await counterValueFrames(page,layout);
+        await evidence(testInfo,`counter-frames-${subject}-${tab}`,counterFrames);
         checkFrames(frames,layout,`${subject}/${tab}: first frames`);
         expect(layout.overflow).toBe(false);
         for(const box of [...layout.anchors.filter(Boolean),layout.mascot]){
@@ -53,7 +55,7 @@ for(const width of [320,360,390,759,761,1440])for(const reducedMotion of ["reduc
         expect(fits).toBe(true);
         const capture=xp===123456&&reducedMotion==="reduce";
         const long=await stressCopy(page,layout,capture?()=>captureScreenshot(page,testInfo,`${subject}-${tab}-long`,{fullPage:true}):null);
-        measurements.push({subject,tab,xp,...layout,long,frames});
+        measurements.push({subject,tab,xp,...layout,long,frames,counterFrames});
         await captureScreenshot(page,testInfo,`${subject}-${tab}`);
       }
       const next=subjects[(subjects.indexOf(subject)+1)%subjects.length];

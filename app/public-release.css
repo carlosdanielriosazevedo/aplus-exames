@@ -128,6 +128,7 @@
   --student-counter-slot:88px;
   --student-xp-slot:108px;
   --student-menu-slot:54px;
+  --student-counter-icon-slot:20px;
   --student-top-gap:24px;
   --student-mascot-width:126px;
   --student-mascot-height:142px;
@@ -154,10 +155,18 @@
   display:grid;grid-template-columns:var(--student-counter-slot) var(--student-xp-slot) var(--student-menu-slot);
   gap:8px!important;margin:0;padding:0;align-items:start;justify-self:end;
 }
+/* Separate icon and number columns keep both origins independent of digit count. */
 .studentTop .studentTopActions>button[aria-label]{
-  display:inline-flex!important;box-sizing:border-box;width:100%;min-width:0;max-width:none;
+  display:grid!important;grid-template-columns:var(--student-counter-icon-slot) minmax(0,1fr);
+  column-gap:4px;justify-content:stretch;justify-items:start;
+  box-sizing:border-box;width:100%;min-width:0;max-width:none;
   height:48px;padding:0 4px!important;flex:none;
 }
+.studentTop .studentCounterIcon{
+  display:grid;place-items:center;width:var(--student-counter-icon-slot);height:var(--student-counter-icon-slot);
+  line-height:1;
+}
+.studentTop .studentTopActions>button>b{justify-self:start}
 .studentTop .studentTopActions>button[aria-label$=" XP"]{grid-column:2}
 .studentTop .studentMenu{grid-column:3;grid-row:1}
 .studentTop .studentMenu>summary{box-sizing:border-box;width:var(--student-menu-slot);min-width:0;height:48px;padding:0}
@@ -203,6 +212,7 @@
 @media(max-width:760px){
   :root{
     --student-subject-slot:260px;--student-counter-slot:52px;--student-xp-slot:72px;--student-menu-slot:44px;
+    --student-counter-icon-slot:16px;
     --student-mascot-width:clamp(68px,21vw,90px);--student-mascot-height:100px;--student-title-height:72px;--student-copy-height:63px;
   }
   .learnHome>.studentSurface,.light:has(.studentTop)>.panel{padding-top:25px}

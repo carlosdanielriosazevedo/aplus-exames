@@ -2,6 +2,35 @@ import {writeFileSync} from "node:fs";
 import {expect} from "@playwright/test";
 import {measureInBrowser,selectors,sameAnchors,sameBox} from "./workspace-layout.mjs";
 
+// The seeded cases exercise real React renders. This additional presentation
+// stress changes the two numbers independently in the same live DOM, records
+// the mutation/microtask/first RAFs, and restores the original accessible names.
+// It neither changes academic state nor claims to award XP through a study flow.
+export async function counterValueFrames(page,reference){
+  const frames=await page.evaluate(async({source,selectors})=>{
+    const measure=new Function('selectors',`return (${source})(selectors)`),frames=[];
+    const streak=document.querySelector('.studentTopActions>button[aria-label^="Sequência:"]');
+    const xp=document.querySelector('.studentTopActions>button[aria-label$=" XP"]');
+    const originals=[streak,xp].filter(Boolean).map(button=>({button,text:button.querySelector('b').textContent,label:button.getAttribute('aria-label')}));
+    const sample=phase=>frames.push({phase,layout:measure(selectors)});
+    try{
+      for(const [streakValue,xpValue] of [[365,1],[1,123456]]){
+        streak.querySelector('b').textContent=String(streakValue);streak.setAttribute('aria-label',`Sequência: ${streakValue} dias`);
+        if(xp){xp.querySelector('b').textContent=String(xpValue);xp.setAttribute('aria-label',`${xpValue} XP`)}
+        const name=`streak-${streakValue}-xp-${xp?xpValue:'hidden'}`;
+        sample(`${name}/mutation`);await Promise.resolve();sample(`${name}/microtask`);
+        for(let i=1;i<=3;i++){await new Promise(requestAnimationFrame);sample(`${name}/raf-${i}`)}
+      }
+    }finally{
+      for(const {button,text,label} of originals){button.querySelector('b').textContent=text;button.setAttribute('aria-label',label)}
+      sample('restored');
+    }
+    return frames;
+  },{source:measureInBrowser.toString(),selectors});
+  for(const frame of frames)sameAnchors(frame.layout,reference,`counter values/${frame.phase}`);
+  return frames;
+}
+
 // Install BEFORE the real click. These samples run in the event microtask and
 // the first three animation frames, independently of fonts/decode/settle().
 export async function transition(page,click,{targetScreen=null}={}){

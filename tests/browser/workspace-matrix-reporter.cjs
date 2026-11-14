@@ -1,7 +1,7 @@
 const {mkdirSync,readFileSync,writeFileSync,existsSync,statSync}=require('node:fs');
 const {join,relative}=require('node:path');
 const assert=require('node:assert/strict');
-const {validateMatrix}=require('./workspace-matrix-contract.cjs');
+const {validateMatrix,compareCounters}=require('./workspace-matrix-contract.cjs');
 function requirePng(images,name,label){
   const file=images.find(image=>image.name===name);
   assert.ok(file&&existsSync(file.path),`Missing persistent PNG: ${label}/${name}`);
@@ -50,7 +50,30 @@ class WorkspaceMatrixReporter{
         requirePng(c.images,`${subject}-${name}`,`${c.width}/${c.beta}`);
       }
       const summary=validateMatrix(this.cases,{partial});
+      let counterFrameCount=0;const frameDeltas=[];
+      for(const c of this.cases)for(const row of c.measurements){
+        assert.equal(row.counterFrames.length,11,'Independent numeric mutations, microtasks, first three RAFs and restoration required');
+        for(const frame of row.counterFrames){
+          frameDeltas.push({width:c.width,...compareCounters(frame.layout.counters,row.counters,`${c.width}/${row.subject}/${row.tab}/${frame.phase}`)});
+          counterFrameCount++;
+        }
+      }
+      const before=JSON.parse(readFileSync(join(process.cwd(),'docs/measurements/pr-473-counter-before.json'),'utf8'));
+      assert.equal(before.sourceHead,'a51f0260036416909c56491fb234b86ca522fae8','Historical baseline must identify the audited HEAD');
+      assert.equal(before.rows.length,72,'Historical baseline: six widths × three subjects × two menus × two values');
+      writeFileSync(join(dir,'counter-before.json'),JSON.stringify(before,null,2));
+      writeFileSync(join(dir,'counter-measurements.json'),JSON.stringify({tolerancePx:2,caseCount:this.cases.length,counterFrameCount,
+        rows:this.cases.flatMap(c=>c.measurements.map(row=>({width:c.width,motion:c.reducedMotion,beta:c.beta,xp:c.xp,subject:row.subject,tab:row.tab,
+          counters:row.counters,frames:row.counterFrames.map(frame=>({phase:frame.phase,counters:frame.layout.counters}))})))},null,2));
+      writeFileSync(join(dir,'counter-comparison.json'),JSON.stringify({status:'PASS',partial,tolerancePx:2,counterFrameCount,
+        widths:[320,360,390,759,761,1440].filter(width=>summary.comparisons.some(row=>row.width===width)).map(width=>{
+          const rows=summary.comparisons.filter(row=>row.width===width),frames=frameDeltas.filter(row=>row.width===width),old=before.rows.filter(row=>row.width===width);
+          const oldDelta=name=>Math.max(...old.filter(row=>row.xp===1).map(row=>Math.abs(row.counters[name].iconGlyph.x-old.find(other=>other.subject===row.subject&&other.tab===row.tab&&other.xp===123456).counters[name].iconGlyph.x)));
+          return {width,before:{maxFlameDeltaX:oldDelta('streak'),maxTrophyDeltaX:oldDelta('xp')},
+            after:{maxIconDelta:Math.max(...[...rows,...frames].map(row=>row.maxIcon)),maxNumberAnchorDelta:Math.max(...[...rows,...frames].map(row=>row.maxNumberAnchor))}};
+        })},null,2));
       writeFileSync(join(dir,'cross-state-comparison.json'),JSON.stringify(summary,null,2));
+      console.log(`COUNTER ANCHORS: PASS (${counterFrameCount} numeric samples; max icon ${Math.max(...[...summary.comparisons,...frameDeltas].map(row=>row.maxIcon))} px; max number origin ${Math.max(...[...summary.comparisons,...frameDeltas].map(row=>row.maxNumberAnchor))} px)`);
       console.log(`WORKSPACE MATRIX: PASS (${this.cases.length} raw cases; ${partial?'partial':'complete'})`);
     }catch(error){
       writeFileSync(join(dir,'cross-state-comparison.json'),JSON.stringify({status:'FAIL',error:String(error),partial},null,2));
