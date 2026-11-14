@@ -9,6 +9,9 @@ class WorkspaceMatrixReporter{
     }
   }
   onEnd(result){
+    // CI lists discovered tests before executing them. Discovery has no
+    // measurements; the subsequent execution still requires all 48 cases.
+    if(process.argv.includes('--list'))return;
     const dir=join(this.config.projects[0].outputDir,'workspace-matrix');mkdirSync(dir,{recursive:true});
     writeFileSync(join(dir,'raw-cases.json'),JSON.stringify(this.cases,null,2));
     // A focused run or a local shard is explicitly partial. Full CI must have
