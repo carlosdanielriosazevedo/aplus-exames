@@ -1,6 +1,8 @@
 name: APProva+ UI development agent
 
 on:
+  issue_comment:
+    types: [created]
   workflow_dispatch:
     inputs:
       issue_number:
@@ -19,7 +21,7 @@ concurrency:
 
 jobs:
   credential-check:
-    if: "${{ github.event_name == 'workflow_dispatch' || vars.APPROVA_UI_AGENT_ENABLED == 'true' }}"
+    if: "${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && vars.APPROVA_UI_AGENT_ENABLED == 'true') || (github.event_name == 'issue_comment' && github.actor == github.repository_owner && (github.event.issue.number == 468 || github.event.issue.number == 469) && github.event.issue.pull_request == null && github.event.comment.body == '/approva-ui-run') }}"
     runs-on: ubuntu-latest
     timeout-minutes: 4
     permissions:
@@ -66,10 +68,14 @@ jobs:
           REPO: "${{ github.repository }}"
           OWNER: "${{ github.repository_owner }}"
           REQUESTED: "${{ inputs.issue_number }}"
+          EVENT_TYPE: "${{ github.event_name }}"
+          COMMENT_ISSUE: "${{ github.event.issue.number }}"
         shell: bash
         run: |
           set -euo pipefail
-          if [ -n "$REQUESTED" ]; then
+          if [ "$EVENT_TYPE" = "issue_comment" ]; then
+            case "$COMMENT_ISSUE" in 468|469) issue="$COMMENT_ISSUE";; *) echo "::error::Unexpected issue"; exit 1;; esac
+          elif [ -n "$REQUESTED" ]; then
             case "$REQUESTED" in 468|469) issue="$REQUESTED";; *) echo "::error::Issue not in approved pilot scope"; exit 1;; esac
           else
             issue=""
