@@ -44,7 +44,7 @@ aviso de recuperação, título, botão Voltar ou frame em branco.
 | Recuperação | 6 larguras × 2 movimentos × 2 modos × Português/FQ A × 2 menus = 96 estados com aviso |
 | Ação de recuperação | cancelamento por teclado nos dois menus; confirmação em Treinar/reduzido e Aprender/normal, em todas as larguras e modos; arquivo completo preservado, sem XP/competência/sessões concluídas adicionais |
 | Após confirmação | comparação com o mesmo hero sem aviso, sem reload, incluindo primeiros frames |
-| StudentTop/Shell auxiliares | 6 larguras × interno/reduzido e privado guardado/normal × 3 disciplinas: Progresso, Ranking quando disponível, Exames, Rever matéria, Praticar e seletor de disciplinas |
+| StudentTop/Shell auxiliares | 6 larguras × interno/reduzido e privado guardado/normal × 3 disciplinas: Progresso, Ranking (incluindo privado), Exames, Rever matéria, Praticar e seletor de disciplinas |
 | Regressão anterior | todos os testes anteriores, incluindo os nove diagnósticos, mantidos; helpers apenas extraídos para reutilização |
 
 Larguras: **320, 360, 390, 759, 761, 1440 px**. Altura da matriz: 900 px.
@@ -69,6 +69,13 @@ No artefacto `release-browser-<merge SHA>` do Beta CI:
   há falha), `recovery-raw.json`, `shell-surfaces-raw.json` e capturas anexadas;
 - captura normal para cada estado do workspace; textos longos nas duas abas,
   três disciplinas e seis larguras, incluindo beta; recuperação e auxiliares.
+
+As capturas são gravadas por `page.screenshot({path})` antes de serem anexadas.
+Buffers de anexos isolados não são prova de publicação no artefacto. O reporter
+exige os nomes de imagens de cada cenário, lê os ficheiros e valida a assinatura
+PNG. `workspace-matrix/artifacts.json` cataloga caminhos e tamanhos, assim como
+os JSONs brutos de recuperação e dos auxiliares; a ausência de um percurso ou
+imagem obrigatório falha a execução completa.
 
 Os artefactos têm a retenção existente de três dias. As medições agregadas são
 uma nova verificação adicional; não substituem as asserções dos testes.

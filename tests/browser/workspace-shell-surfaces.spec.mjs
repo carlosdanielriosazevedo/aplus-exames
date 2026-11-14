@@ -25,7 +25,7 @@ for(const width of [320,360,390,759,761,1440])for(const beta of [false,true]){
         await capture(page,testInfo,`${subject}-${name}`,{fullPage:true});
       }
       await page.getByRole('button',{name:'Progresso',exact:true}).last().click();await check('progress');
-      if(!beta){await page.getByRole('button',{name:'Ranking',exact:true}).last().click();await check('ranking')}
+      await page.getByRole('button',{name:'Ranking',exact:true}).last().click();await check('ranking');
       for(const [label,screen,top] of [['Praticar','practice-setup',false],['Exames','exams',true],['Rever matéria','review',true]]){
         await page.getByRole('button',{name:'Treinar',exact:true}).last().click();
         await page.locator('.trainChoices').getByRole('button',{name:new RegExp(label)}).click();
