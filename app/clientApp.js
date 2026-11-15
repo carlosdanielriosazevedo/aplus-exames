@@ -20,6 +20,9 @@ import {miniExamReviewItemLabel,CONTENT_REPORT_SAVED_MESSAGE} from "./lib/scoreR
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
 const AccountCloud=dynamic(()=>import("./components/AccountCloud").then(module=>module.AccountCloud),{ssr:false});
 const CloudSyncLayer=dynamic(()=>import("./components/CloudSyncLayer"),{ssr:false});
+// Conta obrigatória para estudar (beta pública). Ativa apenas quando a variável
+// pública está definida, para poder ser ligada/desligada sem alterar código.
+const REQUIRE_ACCOUNT=process.env.NEXT_PUBLIC_APPROVA_REQUIRE_ACCOUNT==="1"&&!!process.env.NEXT_PUBLIC_NEON_AUTH_URL;
 const MathReviewMatter=dynamic(()=>import("./components/MathReviewMatter"),{ssr:false});
 const BetaDashboard=dynamic(()=>import("./components/InternalDashboards").then(module=>module.BetaDashboard),{ssr:false});
 const QualityPanel=dynamic(()=>import("./components/InternalDashboards").then(module=>module.QualityPanel),{ssr:false});
@@ -269,6 +272,23 @@ export default function App(){
   const [mathEngineReady,setMathEngineReady]=useState(()=>!!mathEngineModule);
   const [diagnosticRecoveryReady,setDiagnosticRecoveryReady]=useState(()=>!!diagnosticRecoveryModule);
   const [cloudHint,setCloudHint]=useState(false);
+  const [accountGate,setAccountGate]=useState(REQUIRE_ACCOUNT?"checking":"open");
+
+  useEffect(()=>{
+    if(!hydrated||!REQUIRE_ACCOUNT||typeof window==="undefined")return;
+    let live=true;
+    const check=async()=>{
+      try{
+        const response=await fetch("/api/auth/session",{credentials:"include",cache:"no-store"});
+        if(!live)return;
+        // Falha do serviço de autenticação: não bloquear o estudo (fica local).
+        setAccountGate(response.status===401?"required":"open");
+      }catch{if(live)setAccountGate("open")}
+    };
+    check();
+    window.addEventListener(AUTH_CHANGED_EVENT,check);
+    return ()=>{live=false;window.removeEventListener(AUTH_CHANGED_EVENT,check)};
+  },[hydrated]);
 
   // A sincronização automática só é carregada depois de ter havido sessão
   // iniciada neste dispositivo; visitantes anónimos não fazem pedidos extra.
@@ -477,6 +497,10 @@ export default function App(){
   };
 
   const view=(()=>{
+  if(REQUIRE_ACCOUNT&&hydrated&&screen!=="welcome"&&!isFriendsBeta(s)){
+    if(accountGate==="checking")return <Shell><Logo/><div className="cloudLoading">A verificar sessão…</div></Shell>;
+    if(accountGate==="required")return <AccountCloud s={s} setS={setS} go={go} gate/>;
+  }
   // Resolve pending attempts before mounting an assessment, including popstate.
   const assessmentRoutes=["diag","diagRun","mission","trainingSetup","trainingRun","miniExamIntro","miniExamRun","miniExamReview","portugueseMiniExam","physicsChemistryMini1","physicsChemistryMini2","physicsChemistryExam"];
   if(hydrated&&assessmentRoutes.includes(screen)){
