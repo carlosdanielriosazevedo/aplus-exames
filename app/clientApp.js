@@ -3,6 +3,7 @@ import {pendingPhysicsChemistryExam} from "./lib/physicsChemistryExamDraft";
 import {hasPendingAssessment} from "./lib/pendingAssessment";
 import {useEffect,useMemo,useRef,useState} from "react";
 import {AUTH_CHANGED_EVENT,cloudSessionHinted} from "./lib/cloudSessionHint";
+import ContentReportButton from "./components/ContentReportButton";
 import dynamic from "next/dynamic";
 import {insertMathText} from "./lib/mathInput";
 import {answerOptionState,conciseMathExplanation} from "./lib/feedbackCopy";
@@ -2188,28 +2189,7 @@ function BetaSessionFeedback({s,setS,kind}){
 }
 
 function ReportButton({item,s,setS,compact=false}){
-  const [open,setOpen]=useState(false),[sent,setSent]=useState(false);
-  const categories=[
-    ["wrong","A resposta parece errada"],
-    ["unclear","Enunciado confuso"],
-    ["difficulty","Dificuldade desajustada"],
-    ["typo","Erro/typo"],
-    ["other","Outro problema"]
-  ];
-  function send(category,label){
-    const report={
-      id:`rep-${Date.now()}-${Math.random().toString(16).slice(2)}`,
-      itemId:item.id,templateId:item.templateId||null,generated:!!item.generated,
-      themeId:item.themeId,focus:item.focus||null,category,label,at:Date.now()
-    };
-    setS(prev=>({...prev,contentReports:[...(prev.contentReports||[]),report]}));
-    setSent(true);setOpen(false);
-  }
-  if(sent)return <div className="reportThanks">{CONTENT_REPORT_SAVED_MESSAGE}</div>;
-  return <div className={"reportBox "+(compact?"compact":"")}>
-    <button className="reportToggle" onClick={()=>setOpen(!open)}>⚑ Reportar problema nesta pergunta</button>
-    {open&&<div className="reportChoices">{categories.map(([v,l])=><button key={v} onClick={()=>send(v,l)}>{l}</button>)}</div>}
-  </div>
+  return <ContentReportButton item={item} s={s} setS={setS} subjectId="math-a" compact={compact}/>;
 }
 
 
