@@ -1,6 +1,7 @@
 import {readFileSync,readdirSync} from "node:fs";
 import {join} from "node:path";
 import {describe,expect,it} from "vitest";
+import {PORTUGUESE_ITEMS,PORTUGUESE_ALL_ITEMS,isRetiredPortugueseItem,portugueseItemById} from "../../app/data/portugueseContent.js";
 import {PHYSICS_CHEMISTRY_A_ITEMS,PHYSICS_CHEMISTRY_A_ALL_ITEMS,isRetiredPhysicsChemistryItem,physicsChemistryItemById} from "../../app/data/physicsChemistryFoundation.js";
 
 const ROOT="content/vnext/math-a";
@@ -27,5 +28,15 @@ describe("guardas de qualidade do conteúdo",()=>{
     const retired=PHYSICS_CHEMISTRY_A_ALL_ITEMS.filter(isRetiredPhysicsChemistryItem);
     expect(retired.length).toBe(1548);
     expect(physicsChemistryItemById(retired[0].id)?.id).toBe(retired[0].id);
+  });
+  it("Português: nenhuma pergunta ativa encadeia várias perguntas nem usa variantes retiradas",()=>{
+    const bad=PORTUGUESE_ITEMS.filter(q=>((q.prompt||"").match(/\?/gu)||[]).length>1&&q.domain==="educacao-literaria").map(q=>q.id);
+    expect(bad).toEqual([]);
+    expect(PORTUGUESE_ITEMS.some(isRetiredPortugueseItem)).toBe(false);
+  });
+  it("Português: variantes retiradas continuam acessíveis para retomar sessões antigas",()=>{
+    const retired=PORTUGUESE_ALL_ITEMS.filter(isRetiredPortugueseItem);
+    expect(retired.length).toBe(900);
+    expect(portugueseItemById(retired[0].id)?.id).toBe(retired[0].id);
   });
 });
