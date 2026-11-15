@@ -58,6 +58,9 @@ import {
   activeParentLink,requestLinkRemoval,confirmLinkRemoval,demoIdentity
 } from "./lib/identity";
 import {migrateCloudSync} from "./lib/cloudReliability";
+import {openVerifiedAccount,newAccountState,accountContextCurrent} from "./lib/cloudAccountSession.js";
+import {useAccountWorkspaceGuard} from "./lib/useAccountWorkspaceGuard.js";
+import {selectAccountWorkspace} from "./lib/accountWorkspace.js";
 import {
   TESTER_SEGMENTS,PUBLIC_ENTRY_SEGMENTS,friendsBetaRequested,activateFriendsBeta,markFriendsBetaConsent,
   isFriendsBeta,friendsBetaReport,testerSegmentInfo,currentTesterSegment,
@@ -266,6 +269,7 @@ export default function App(){
   const [hydrated,setHydrated]=useState(false);
   const [mathEngineReady,setMathEngineReady]=useState(()=>!!mathEngineModule);
   const [diagnosticRecoveryReady,setDiagnosticRecoveryReady]=useState(()=>!!diagnosticRecoveryModule);
+  const accountGuard=useAccountWorkspaceGuard(hydrated);
 
   useEffect(()=>{
     if(typeof window==="undefined"||!("scrollRestoration" in window.history))return;
@@ -280,6 +284,12 @@ export default function App(){
     (async()=>{
     const requested=typeof window!=="undefined"&&friendsBetaRequested(window.location.search);
     const storageKey=requested?FRIENDS_STORAGE_KEY:undefined;
+    let accountContext=null;
+    if(process.env.NEXT_PUBLIC_NEON_AUTH_URL&&process.env.NEXT_PUBLIC_NEON_DATA_API_URL){
+      try{accountContext=await openVerifiedAccount();}catch{}
+      if(!live)return;
+      if(accountContext)selectAccountWorkspace(accountContext);
+    }
     const loaded=loadLocalStateStatus(initial,emptyScores,storageKey);
     if(loaded.error){setScreen("storageRecoveryError");return}
     const x=loaded.state;
@@ -299,7 +309,7 @@ export default function App(){
       :x;
     const base=migratedX
       ?migrateProductAnalytics(migrateCloudSync(migrateDailyMission(migrateCompetition(migrateEngagement(migratedX)))))
-      :migrateProductAnalytics(migrateCloudSync(initial));
+      :migrateProductAnalytics(migrateCloudSync(accountContext?newAccountState(initial,accountContext):initial));
     const subjectReady=normalizeSubjectWorkspace(base);
     const betaState=requested?activateFriendsBeta(subjectReady):subjectReady;
     const next=recordAppOpen(betaState,{source:"initial_load"});
@@ -338,6 +348,7 @@ export default function App(){
       }
     }
 
+    if(accountContext&&!accountContextCurrent(accountContext)){window.location.reload();return;}
     setS(recoveredState);
 
     if(draft?.kind==="training" && draft.cfg)setTrainingCfg(draft.cfg);
@@ -463,6 +474,12 @@ export default function App(){
     setScreen(x);
   };
 
+  if(hydrated&&accountGuard.locked&&screen!=="account")return <Shell><Logo/>
+    <div className="notice"><b>Confirma a conta para continuar.</b><span>O progresso e as respostas desta aba ficaram preservados separadamente. Não acrescentaremos estudo à conta anterior durante uma troca de sessão.</span></div>
+    <button onClick={()=>go("account")}>Gerir conta e progresso</button>
+    <button className="secondary" onClick={accountGuard.recheck}>Voltar a verificar a mesma conta</button>
+  </Shell>;
+
   // Resolve pending attempts before mounting an assessment, including popstate.
   const assessmentRoutes=["diag","diagRun","mission","trainingSetup","trainingRun","miniExamIntro","miniExamRun","miniExamReview","portugueseMiniExam","physicsChemistryMini1","physicsChemistryMini2","physicsChemistryExam"];
   if(hydrated&&assessmentRoutes.includes(screen)){
@@ -559,7 +576,8 @@ export default function App(){
     clearSessionDraft(s.betaMode||"internal");
     clearCompletionRegistry();
     setRecoveredSession(null);
-    setS(isFriendsBeta(s)?activateFriendsBeta(initial):initial);go("welcome");
+    const fresh={...initial,...(s.cloudAccount?{cloudAccount:s.cloudAccount}:{})};
+    setS(isFriendsBeta(s)?activateFriendsBeta(fresh):fresh);go("welcome");
   }}/>;
 }
 

@@ -1,9 +1,10 @@
+import {scopedLocalStorage} from "./accountWorkspace.js";
 
 const COMPLETED_KEY="a25-completed-sessions-v1";
 
 function readCompleted(){
   try{
-    const raw=localStorage.getItem(COMPLETED_KEY);
+    const raw=scopedLocalStorage()?.getItem(COMPLETED_KEY);
     const rows=raw?JSON.parse(raw):[];
     return Array.isArray(rows)?rows:[];
   }catch{return []}
@@ -11,7 +12,9 @@ function readCompleted(){
 
 function writeCompleted(rows){
   try{
-    localStorage.setItem(COMPLETED_KEY,JSON.stringify(rows));
+    const store=scopedLocalStorage();
+    if(!store)return false;
+    store.setItem(COMPLETED_KEY,JSON.stringify(rows));
     return true;
   }catch{return false}
 }
@@ -36,7 +39,7 @@ export function wasSessionCompleted(sessionId){
 }
 
 export function clearCompletionRegistry(){
-  try{localStorage.removeItem(COMPLETED_KEY)}catch{}
+  try{scopedLocalStorage()?.removeItem(COMPLETED_KEY)}catch{}
 }
 
 export function latestOpenSessionId(state,kind){

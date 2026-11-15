@@ -1,5 +1,5 @@
 "use client";
-import {useEffect,useState} from "react";
+import {useEffect,useRef,useState} from "react";
 import {hasPendingAssessment,preservePendingAssessment} from "../lib/pendingAssessment";
 import {Back,BrandName,Shell} from "./chrome";
 import {
@@ -19,6 +19,9 @@ import {migrateEngagement} from "../lib/engagement";
 import {migratePedagogicalIds,recalibrateAllScores,prepIndex,measuredThemes} from "../lib/engine";
 import {demoIdentity} from "../lib/identity";
 import {academicScopeThemes} from "../lib/curriculumScope";
+import {openVerifiedAccount,assertAccountState,accountContextCurrent,accountOwner,accountError,subscribeAccountChanges} from "../lib/cloudAccountSession.js";
+import {workspaceAccountId,legacyWorkspacePresent} from "../lib/accountWorkspace.js";
+import {saveLocalState} from "../lib/persistence.js";
 
 export function AccountCloud({s,setS,go}){
   const cfg=cloudConfiguration();
@@ -46,10 +49,37 @@ export function AccountCloud({s,setS,go}){
 
   const sync=cloudSyncMeta(s);
   const deviceId=sync.deviceId||getOrCreateDeviceId();
+  const stateRef=useRef(s);
+  const live=useRef(true);
+  stateRef.current=s;
+  useEffect(()=>{
+    live.current=true;
+    const unsubscribe=subscribeAccountChanges(()=>{
+      setConflictRemote(null);
+      setSession({loading:false,user:null,error:null});
+    });
+    return ()=>{live.current=false;unsubscribe();};
+  },[]);
 
-  function refreshLocalSafety(){
-    setPending(listPendingCloudSaves());
-    setSnapshots(listLocalSnapshots());
+  function assertCurrent(context,state=stateRef.current){
+    if(!live.current||workspaceAccountId()!==context?.subject)throw accountError();
+    assertAccountState(state,context);
+  }
+  async function beginOperation(){
+    const owner=accountOwner(s);
+    if(!owner)throw accountError("CLOUD_ACCOUNT_UNPROVEN");
+    const context=await openVerifiedAccount({expectedAccountId:owner});
+    assertCurrent(context);
+    return context;
+  }
+  function accountUpdate(previous,context,next){
+    try{assertCurrent(context,previous);return typeof next==="function"?next(previous):next;}
+    catch{return previous;}
+  }
+
+  function refreshLocalSafety(context=session.accountContext){
+    setPending(listPendingCloudSaves(context));
+    setSnapshots(listLocalSnapshots(context));
   }
 
   useEffect(()=>{refreshLocalSafety()},[]);
@@ -60,16 +90,22 @@ export function AccountCloud({s,setS,go}){
       return;
     }
     const result=await getCloudSession();
-    setSession({loading:false,user:result.user||null,error:result.error||null});
-    if(result.user){
-      setS(prev=>({...migrateCloudSync(prev),identity:{
+    if(!live.current)return;
+    const context=result.accountContext;
+    if(context&&!accountContextCurrent(context))return;
+    const workspaceMismatch=!!result.user&&workspaceAccountId()!==result.user.id;
+    setSession({loading:false,user:result.user||null,error:result.error||null,accountContext:context,workspaceMismatch});
+    setConflictRemote(null);
+    refreshLocalSafety(context);
+    if(result.user&&!workspaceMismatch){
+      setS(prev=>accountUpdate(prev,context,previous=>({...migrateCloudSync(previous),identity:{
         mode:"authenticated",
         authUserId:result.user.id,
         displayName:result.user.name||result.user.email?.split("@")[0]||"Aluno",
         email:result.user.email||"",
         roles:["student"],
         activeRole:"student"
-      }}));
+      }})));
     }
   }
 
@@ -93,6 +129,7 @@ export function AccountCloud({s,setS,go}){
   async function submit(){
     setBusy(true);setMessage(null);
     try{
+      if(!saveLocalState(stateRef.current))throw new Error("Não foi possível preservar o progresso local. A conta não foi alterada.");
       if(mode==="signup"){
         await cloudSignUp({name:name.trim()||"Aluno",email:email.trim(),password});
         setMessage({ok:true,text:"Conta criada. Se receberes um email de confirmação, confirma-o antes de entrares."});
@@ -104,6 +141,14 @@ export function AccountCloud({s,setS,go}){
     }catch(error){
       setMessage({ok:false,text:String(error?.message||error)});
     }finally{setBusy(false)}
+  }
+
+  function openAccountWorkspace(){
+    if(!session.accountContext||!accountContextCurrent(session.accountContext))return;
+    if(!saveLocalState(stateRef.current)){
+      setMessage({ok:false,text:"Não foi possível preservar o progresso local. Nenhum dado foi substituído."});return;
+    }
+    window.location.reload();
   }
 
   function saveRankingIdentity(){
@@ -131,44 +176,50 @@ export function AccountCloud({s,setS,go}){
     finally{setBusy(false)}
   }
 
-  function registerConflict(remote){
-    setConflictRemote(remote||null);
-    setS(prev=>cloudConflict(prev,{
+  function registerConflict(remote,context){
+    assertCurrent(context);
+    setConflictRemote(remote?{...remote,accountContext:context}:null);
+    setS(prev=>accountUpdate(prev,context,previous=>cloudConflict(previous,{
       remoteRevision:remote?.revision,
       remoteDeviceId:remote?.last_device_id,
       remoteUpdatedAt:remote?.updated_at,
       remoteState:remote?.state_json
-    }));
+    })));
     setMessage({ok:false,text:"Existe progresso online mais recente. Não substituímos nada automaticamente."});
   }
 
   async function saveCloud(){
     setBusy(true);setMessage(null);setConflictRemote(null);
     const currentSync=cloudSyncMeta(s);
+    let context;
     try{
+      context=await beginOperation();
       const result=await saveStudentCloudState(s,{
         expectedRevision:currentSync.baseRevision,
         deviceId,
-        knownRemote:!!currentSync.baseFingerprint
+        knownRemote:!!currentSync.baseFingerprint,accountContext:context
       });
+      assertCurrent(context);
       if(result?.conflict){
-        registerConflict(result.remote);return;
+        registerConflict(result.remote,context);return;
       }
 
       const now=Date.now();
       const revision=Number(result?.data?.revision)||currentSync.baseRevision+1;
-      setS(prev=>{
-        let next=markCloudSaved(prev,{revision,deviceId,savedState:prev,at:now});
+      setS(prev=>accountUpdate(prev,context,previous=>{
+        let next=markCloudSaved(previous,{revision,deviceId,savedState:s,at:now});
         return {...next,cloudMeta:{...(next.cloudMeta||{}),lastSavedAt:now,lastRemoteUpdatedAt:result?.data?.updated_at||new Date(now).toISOString()}};
-      });
+      }));
       setMessage({ok:true,text:`Progresso guardado online com segurança.`});
     }catch(error){
       if(error?.code==="CLOUD_SCHEMA_OUTDATED"){
         setMessage({ok:false,text:"O progresso online está temporariamente indisponível. O progresso deste dispositivo não foi alterado."});
       }else{
-        queueCloudSave(s,{reason:"save_failed",expectedRevision:currentSync.baseRevision});
+        const queued=queueCloudSave(s,{reason:"save_failed",expectedRevision:currentSync.baseRevision,accountContext:context});
         refreshLocalSafety();
-        setMessage({ok:false,text:"Não foi possível guardar online. Guardámos uma tentativa neste dispositivo para poderes repetir mais tarde; o teu estudo continua disponível aqui."});
+        setMessage({ok:false,text:queued.persisted
+          ?"Não foi possível guardar online. Guardámos uma tentativa neste dispositivo para poderes repetir mais tarde; o teu estudo continua disponível aqui."
+          :"Não foi possível guardar online nem criar a tentativa pendente. O progresso atual não foi substituído; verifica o armazenamento deste dispositivo."});
       }
     }finally{setBusy(false)}
   }
@@ -177,11 +228,14 @@ export function AccountCloud({s,setS,go}){
     if(hasPendingAssessment(s)){setMessage({ok:false,text:"Há uma avaliação em curso. Continua e conclui a tentativa antes de carregar progresso online."});return}
     setBusy(true);setMessage(null);setConflictRemote(null);
     try{
-      const row=await loadStudentCloudState();
+      const context=await beginOperation();
+      const row=await loadStudentCloudState({accountContext:context});
+      assertCurrent(context);
       if(!row?.state_json){
         setMessage({ok:true,text:"Esta conta ainda não tem progresso guardado online. Usa “Guardar online” quando quiseres criar a primeira cópia."});
       }else{
-        saveLocalSnapshot(s,{label:"Antes de carregar da cloud"});
+        const backup=saveLocalSnapshot(s,{label:"Antes de carregar da cloud",accountContext:context});
+        if(!backup.persisted)throw new Error("Não foi possível preservar a cópia local. Nenhum progresso foi substituído.");
         const merged=mergeStudentCloudState(s,row.state_json);
         let recalibrated=normalizeAfterCloud(merged);
         recalibrated=markCloudLoaded(recalibrated,{
@@ -189,7 +243,7 @@ export function AccountCloud({s,setS,go}){
           remoteDeviceId:row.last_device_id,
           remoteState:row.state_json
         });
-        setS(prev=>preservePendingAssessment(prev,{...recalibrated,cloudMeta:{...(recalibrated.cloudMeta||{}),lastLoadedAt:Date.now(),lastRemoteUpdatedAt:row.updated_at}}));
+        setS(prev=>preservePendingAssessment(prev,accountUpdate(prev,context,{...recalibrated,cloudMeta:{...(recalibrated.cloudMeta||{}),lastLoadedAt:Date.now(),lastRemoteUpdatedAt:row.updated_at}})));
         refreshLocalSafety();
         setMessage({ok:true,text:`Progresso online carregado. Criámos primeiro uma cópia de segurança neste dispositivo.`});
       }
@@ -205,7 +259,12 @@ export function AccountCloud({s,setS,go}){
     if(!conflictRemote?.state_json)return;
     setBusy(true);setMessage(null);
     try{
-      saveLocalSnapshot(s,{label:"Conflito · antes de manter a cloud"});
+      const context=conflictRemote.accountContext;
+      assertCurrent(context);
+      await openVerifiedAccount({expectedAccountId:context.subject});
+      assertCurrent(context);
+      const backup=saveLocalSnapshot(s,{label:"Conflito · antes de manter a cloud",accountContext:context});
+      if(!backup.persisted)throw new Error("Não foi possível preservar a cópia local. Nenhum progresso foi substituído.");
       const merged=mergeStudentCloudState(s,conflictRemote.state_json);
       let next=normalizeAfterCloud(merged);
       next=markCloudLoaded(next,{
@@ -213,29 +272,34 @@ export function AccountCloud({s,setS,go}){
         remoteDeviceId:conflictRemote.last_device_id,
         remoteState:conflictRemote.state_json
       });
-      setS(prev=>preservePendingAssessment(prev,next));
+      setS(prev=>preservePendingAssessment(prev,accountUpdate(prev,context,next)));
       setConflictRemote(null);
       refreshLocalSafety();
       setMessage({ok:true,text:`Usámos o progresso online mais recente. A versão anterior deste dispositivo ficou guardada numa cópia de segurança.`});
-    }finally{setBusy(false)}
+    }catch(error){setMessage({ok:false,text:String(error?.message||error)})}
+    finally{setBusy(false)}
   }
 
   async function resolveKeepLocal(){
     if(!conflictRemote)return;
     setBusy(true);setMessage(null);
     try{
-      saveLocalSnapshot(s,{label:"Conflito · antes de substituir a cloud"});
+      const context=conflictRemote.accountContext;
+      assertCurrent(context);
+      const backup=saveLocalSnapshot(s,{label:"Conflito · antes de substituir a cloud",accountContext:context});
+      if(!backup.persisted)throw new Error("Não foi possível preservar a cópia local. Nenhum progresso foi substituído.");
       const result=await overwriteStudentCloudState(s,{
         remoteRevision:conflictRemote.revision,
-        deviceId
+        deviceId,accountContext:context
       });
+      assertCurrent(context);
       if(result?.conflict){
-        registerConflict(result.remote);
+        registerConflict(result.remote,context);
         setMessage({ok:false,text:"O progresso online mudou novamente enquanto escolhias. Bloqueámos a gravação para não perder nenhuma versão."});
         return;
       }
       const revision=Number(result?.data?.revision)||Number(conflictRemote.revision)+1;
-      setS(prev=>markCloudSaved(prev,{revision,deviceId,savedState:prev}));
+      setS(prev=>accountUpdate(prev,context,previous=>markCloudSaved(previous,{revision,deviceId,savedState:s})));
       setConflictRemote(null);
       refreshLocalSafety();
       setMessage({ok:true,text:`Mantivemos o progresso deste dispositivo. A versão anterior ficou preservada numa cópia de segurança.`});
@@ -249,7 +313,10 @@ export function AccountCloud({s,setS,go}){
     if(!conflictRemote?.state_json)return;
     setBusy(true);setMessage(null);
     try{
-      saveLocalSnapshot(s,{label:"Conflito · antes de combinar"});
+      const context=conflictRemote.accountContext;
+      assertCurrent(context);
+      const backup=saveLocalSnapshot(s,{label:"Conflito · antes de combinar",accountContext:context});
+      if(!backup.persisted)throw new Error("Não foi possível preservar a cópia local. Nenhum progresso foi substituído.");
       const combined=safeCloudMerge(s,conflictRemote.state_json);
       let next=normalizeAfterCloud(combined);
       next=markCloudLoaded(next,{
@@ -260,17 +327,18 @@ export function AccountCloud({s,setS,go}){
 
       const result=await overwriteStudentCloudState(next,{
         remoteRevision:conflictRemote.revision,
-        deviceId
+        deviceId,accountContext:context
       });
+      assertCurrent(context);
       if(result?.conflict){
-        registerConflict(result.remote);
+        registerConflict(result.remote,context);
         setMessage({ok:false,text:"O progresso online mudou novamente antes de concluirmos a combinação. Nada foi substituído."});
         return;
       }
 
       const revision=Number(result?.data?.revision)||Number(conflictRemote.revision)+1;
       next=markCloudSaved(next,{revision,deviceId,savedState:next});
-      setS(prev=>preservePendingAssessment(prev,next));
+      setS(prev=>preservePendingAssessment(prev,accountUpdate(prev,context,next)));
       setConflictRemote(null);
       refreshLocalSafety();
       setMessage({ok:true,text:`Combinámos o progresso dos dois dispositivos e guardámos a nova versão online.`});
@@ -280,21 +348,24 @@ export function AccountCloud({s,setS,go}){
   }
 
   async function retryPending(){
-    const item=pending[0];
+    const item=pending.find(row=>!row.quarantined);
     if(!item)return;
     setBusy(true);setMessage(null);
     try{
+      const context=await beginOperation();
+      if(item.accountId!==context.subject)throw accountError();
       const result=await saveStudentCloudState(item.state,{
         expectedRevision:item.expectedRevision,
         deviceId:item.deviceId||deviceId,
-        knownRemote:!!item.knownRemote
+        knownRemote:!!item.knownRemote,accountContext:context
       });
+      assertCurrent(context);
       if(result?.conflict){
-        registerConflict(result.remote);return;
+        registerConflict(result.remote,context);return;
       }
-      removePendingCloudSave(item.id);
+      removePendingCloudSave(item.id,context);
       const revision=Number(result?.data?.revision)||item.expectedRevision+1;
-      setS(prev=>markCloudSaved(prev,{revision,deviceId,savedState:item.state}));
+      setS(prev=>accountUpdate(prev,context,previous=>markCloudSaved(previous,{revision,deviceId,savedState:item.state})));
       refreshLocalSafety();
       setMessage({ok:true,text:`Tentativa pendente guardada online com sucesso.`});
     }catch(error){
@@ -303,6 +374,7 @@ export function AccountCloud({s,setS,go}){
   }
 
   const user=session.user;
+  const accountReady=!!user&&!session.workspaceMismatch&&accountContextCurrent(session.accountContext);
   const localIndex=prepIndex(s);
   const lastRemoteDevice=sync.lastRemoteDeviceId?shortDeviceId(sync.lastRemoteDeviceId):"—";
 
@@ -332,6 +404,11 @@ export function AccountCloud({s,setS,go}){
       <div className="signedAccount">
         <div><span>Conta autenticada</span><b>{user.name||"Aluno"}</b><small>{user.email}</small></div><strong>● online</strong>
       </div>
+
+      {session.workspaceMismatch&&<div className="notice"><b>O progresso desta aba foi preservado separadamente.</b><span>Para abrir o progresso da conta autenticada, muda de espaço de estudo. As tentativas anteriores ficam guardadas na conta de origem.</span><button onClick={openAccountWorkspace} disabled={busy}>Abrir progresso desta conta</button></div>}
+
+      {accountReady&&<>
+      {legacyWorkspacePresent()&&<div className="notice"><b>Há progresso antigo guardado em separado.</b><span>Os dados sem conta de origem confirmada continuam neste dispositivo. Não são enviados nem associados automaticamente à conta atual.</span></div>}
 
       <div className="rankingIdentityCard">
         <div><small>DADOS PARA O RANKING</small><b>Indica o teu ano e escola</b><span>O login continua disponível sem estes dados. Para aderires ao ranking da escola, precisamos do ano, da escola e da tua autorização explícita.</span></div>
@@ -366,7 +443,8 @@ export function AccountCloud({s,setS,go}){
 
       {pending.length>0&&<div className="pendingCloudSave">
         <div><b>⟳ Há uma gravação por repetir</b><span>Falhou anteriormente sem apagar o progresso local.</span></div>
-        <button onClick={retryPending} disabled={busy}>Tentar novamente</button>
+        <button onClick={retryPending} disabled={busy||!pending.some(row=>!row.quarantined)}>Tentar novamente</button>
+        {pending.some(row=>row.quarantined)&&<small>Há dados antigos ou de outra conta preservados em quarentena. Não serão enviados por esta sessão.</small>}
       </div>}
 
       {conflictRemote&&<div className="cloudConflictCard">
@@ -381,6 +459,7 @@ export function AccountCloud({s,setS,go}){
       </div>}
 
       <div className="notice"><b>O que acontece entre dispositivos?</b><span>Se encontrares progresso diferente noutro dispositivo, a APProva+ bloqueia a substituição automática e pede-te para escolher. Assim, nenhuma versão desaparece sem aviso.</span></div>
+      </>}
 
       <button className="secondary" onClick={signout} disabled={busy}>Terminar sessão</button>
     </>}
