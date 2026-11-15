@@ -1,5 +1,5 @@
 // Contrato de browser da sincronização automática (rotas de sessão e cloud simuladas; dados sintéticos).
-// Uso: NEXT_PUBLIC_NEON_AUTH_URL=https://auth.example.invalid npx next build && ... npx next start -p 3100
+// Uso: build com a variável de auth pública definida para um host fictício (ex.: auth.example.invalid), depois "npx next start -p 3100"
 //      APPROVA_BASE_URL=http://localhost:3100/ node tests/scripts/cloud-autosync-browser-contract.cjs
 const {chromium}=require('playwright');
 const assert=require('node:assert/strict');
