@@ -1,0 +1,37 @@
+name: Recovery contract (shadow)
+
+# Contrato comportamental #385 em MODO SOMBRA: informativo, nunca bloqueia.
+# O contrato original (scripts/release-recovery-compatibility.mjs, no Beta CI)
+# continua inalterado e obrigatório.
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  shadow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Pinned recovery objects
+        run: git fetch --no-tags --depth=1 origin 98e811f8be6139f15e89de38c5b5e335dc631bdc 94ee6db5409e213494e275e28d8da01d3a2b4623 6098805c1eea0ddec17c596d20414713d1cae7c6
+      - name: Behavioural recovery contract (shadow)
+        run: node scripts/release-recovery-behavioural-contract.mjs --json | tee recovery-shadow.json
+      - name: Shadow evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: recovery-shadow-${{ github.sha }}
+          path: recovery-shadow.json
+          retention-days: 7
+          if-no-files-found: ignore

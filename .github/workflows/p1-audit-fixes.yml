@@ -1,0 +1,75 @@
+name: P1 audit fixes (isolated)
+
+# Provas das correções P1 da auditoria independente da #459. Sem segredos, sem
+# deployment, sem base de dados real. Dados exclusivamente sintéticos.
+on:
+  push:
+    branches: [experimental/p1-audit-459-fixes]
+  pull_request:
+    branches: [main]
+    paths:
+      - 'app/lib/stateWriter.js'
+      - 'app/lib/stateIntegrity.js'
+      - 'app/lib/accountWorkspace.js'
+      - 'app/clientApp.js'
+      - 'app/components/PersistentPortuguesePrototype.js'
+      - 'app/piloto/**'
+      - 'app/definicoes/**'
+      - 'tests/browser-p1/**'
+      - 'tests/unit/p1AuditCrossTabWriter.test.mjs'
+      - 'tests/scripts/p1-audit-account-browser-contract.mjs'
+      - 'tests/fixtures/p1AuditAccountBrowserEntry.jsx'
+      - 'playwright.p1-audit.config.mjs'
+      - '.github/workflows/p1-audit-fixes.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  p1-audit-fixes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      DATABASE_URL: ''
+      NEON_AUTH_BASE_URL: ''
+      NEON_AUTH_COOKIE_SECRET: ''
+      NEXT_PUBLIC_NEON_AUTH_URL: ''
+      NEXT_PUBLIC_NEON_DATA_API_URL: ''
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install repository dependencies
+        run: npm ci --legacy-peer-deps --no-audit --no-fund
+      - name: Unit tests (inclui P1-A entre separadores)
+        run: npm run test:unit
+      - name: Install isolated Chromium runtime
+        run: |
+          npm install --prefix /tmp/p1-playwright --no-save --no-package-lock --legacy-peer-deps --no-audit --no-fund @playwright/test@1.55.0
+          ln -s /tmp/p1-playwright/node_modules/@playwright node_modules/@playwright
+          ln -s /tmp/p1-playwright/node_modules/playwright node_modules/playwright
+          ln -s /tmp/p1-playwright/node_modules/playwright-core node_modules/playwright-core
+          /tmp/p1-playwright/node_modules/.bin/playwright install --with-deps chromium
+      - name: Chromium P1-A (build de produção, separadores reais)
+        run: /tmp/p1-playwright/node_modules/.bin/playwright test --config=playwright.p1-audit.config.mjs
+      - name: Chromium P1-B/P1-C (modo com contas, componentes reais)
+        run: node tests/scripts/p1-audit-account-browser-contract.mjs
+        env:
+          P1_PLAYWRIGHT_MODULE: /tmp/p1-playwright/node_modules/playwright/index.mjs
+      - name: Technical Gate
+        run: npm run technical:gate
+      - name: Full production build
+        run: npm run build
+      - name: Evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p1-audit-fixes-${{ github.run_id }}-${{ github.sha }}
+          path: test-results
+          retention-days: 3
+          if-no-files-found: ignore

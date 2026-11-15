@@ -18,6 +18,7 @@ import ScoreLossExplanation from "./components/ScoreLossExplanation";
 import {miniExamReviewItemLabel,CONTENT_REPORT_SAVED_MESSAGE} from "./lib/scoreReviewCopy";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
 const AccountCloud=dynamic(()=>import("./components/AccountCloud").then(module=>module.AccountCloud),{ssr:false});
+const LocalSnapshotRecovery=dynamic(()=>import("./components/LocalSnapshotRecovery"),{ssr:false});
 const MathReviewMatter=dynamic(()=>import("./components/MathReviewMatter"),{ssr:false});
 const BetaDashboard=dynamic(()=>import("./components/InternalDashboards").then(module=>module.BetaDashboard),{ssr:false});
 const QualityPanel=dynamic(()=>import("./components/InternalDashboards").then(module=>module.QualityPanel),{ssr:false});
@@ -40,9 +41,12 @@ import {betaEvent,sessionStart,sessionFinish,betaSummary} from "./lib/beta";
 import {
   migrateProductAnalytics,recordAppOpen,recordMilestone,recordProductEvent
 } from "./lib/productAnalytics";
+import {clearLocalState,FRIENDS_STORAGE_KEY} from "./lib/persistence";
 import {
-  loadLocalStateStatus,saveLocalState,clearLocalState,FRIENDS_STORAGE_KEY
-} from "./lib/persistence";
+  guardedLoadLocalStateStatus as loadLocalStateStatus,guardedSaveLocalState as saveLocalState,
+  saveLocalStateDurably,durabilityFailureReason,lastStateIntegrityBlock,lastStorageTier,STATE_INTEGRITY_EVENT,
+  reconcileTabCopiesAtHydration
+} from "./lib/stateIntegrity";
 import {
   saveSessionDraft,loadSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen
 } from "./lib/sessionDraft";
@@ -51,13 +55,20 @@ import {
   academicScopeThemes,diagnosticBlueprintForProfile,currentYearThemes,normalizeTaughtSubtopics
 } from "./lib/curriculumScope";
 import {
-  claimSessionCompletion,clearCompletionRegistry,latestOpenSessionId
+  reserveSessionCompletion,commitSessionCompletion,abandonSessionReservation,stateRecordsCompletion,
+  repairCompletionRegistry,lastCompletionBlockReason,clearCompletionBlock,markCompletionBlocked,
+  clearCompletionRegistry,latestOpenSessionId
 } from "./lib/reliability";
 import {
   ROLES,normalizeIdentity,can,defaultScreenForRole,createParentInvite,
   activeParentLink,requestLinkRemoval,confirmLinkRemoval,demoIdentity
 } from "./lib/identity";
 import {migrateCloudSync} from "./lib/cloudReliability";
+import {openVerifiedAccount,newAccountState,accountContextCurrent} from "./lib/cloudAccountSession.js";
+import {downloadOwnedState} from "./lib/cloudRecovery.js";
+import {useAccountWorkspaceGuard} from "./lib/useAccountWorkspaceGuard.js";
+import {selectAccountWorkspace,workspaceAccountId,legacyWorkspacePresent,accountStorageKey} from "./lib/accountWorkspace.js";
+import {startStateWriter,requestStateWriter,completeStateWriterRelease,stateWriterStatus,adoptAfterUncleanEnd,acknowledgeLegacyNotice,exportUnsavedTabSet,STATE_WRITER_EVENT} from "./lib/stateWriter.js";
 import {
   TESTER_SEGMENTS,PUBLIC_ENTRY_SEGMENTS,friendsBetaRequested,activateFriendsBeta,markFriendsBetaConsent,
   isFriendsBeta,friendsBetaReport,testerSegmentInfo,currentTesterSegment,
@@ -83,6 +94,7 @@ import {
   expectedResponseLabel,studentResponseLabel,examScoreLabel,stepFeedback
 } from "./lib/constructedResponseView";
 import {captureMathematicsValidationCase} from "./lib/graderValidationCapture";
+import {recoveryCopiesForView,restoreRecoveryCopy,exportRecoveryCopy,deleteRecoveryCopy,keepCurrentAndDiscardJournal,exportCurrentSet} from "./lib/stateRecovery.js";
 
 
 let constructedResponseGraderPromise=null;
@@ -264,8 +276,25 @@ export default function App(){
   const [examSession,setExamSession]=useState(null);
   const [recoveredSession,setRecoveredSession]=useState(null);
   const [hydrated,setHydrated]=useState(false);
+  const [recoveryStorageKey,setRecoveryStorageKey]=useState("a25");
   const [mathEngineReady,setMathEngineReady]=useState(()=>!!mathEngineModule);
   const [diagnosticRecoveryReady,setDiagnosticRecoveryReady]=useState(()=>!!diagnosticRecoveryModule);
+  const [accountProtectionReady,setAccountProtectionReady]=useState(false);
+  const accountGuard=useAccountWorkspaceGuard(accountProtectionReady);
+  // P1-A: só o separador escritor hidrata e grava. hydrationRun volta a correr
+  // a hidratação depois de uma passagem de controlo ou de uma escolha explícita.
+  const [writer,setWriter]=useState(()=>stateWriterStatus());
+  const [hydrationRun,setHydrationRun]=useState(0);
+  const legacyChoice=useRef(false);
+  const [tabCopyNotice,setTabCopyNotice]=useState(false);
+  // P1-A v2: uma versão anterior gravou progresso (guardado, não aplicado).
+  const [legacyNotice,setLegacyNotice]=useState(false);
+  const [recoveryOpen,setRecoveryOpen]=useState(false);
+  const [restoreNoticeSeen,setRestoreNoticeSeen]=useState(false);
+  // P1-A: sem exclusão fiável entre separadores, só consulta (nada é gravado).
+  const [readOnlyView,setReadOnlyView]=useState(null);
+  const stateRef=useRef(s);stateRef.current=s;
+  const hydratedRef=useRef(false);hydratedRef.current=hydrated;
 
   useEffect(()=>{
     if(typeof window==="undefined"||!("scrollRestoration" in window.history))return;
@@ -280,8 +309,52 @@ export default function App(){
     (async()=>{
     const requested=typeof window!=="undefined"&&friendsBetaRequested(window.location.search);
     const storageKey=requested?FRIENDS_STORAGE_KEY:undefined;
+    let accountContext=null;
+    if(process.env.NEXT_PUBLIC_NEON_AUTH_URL&&process.env.NEXT_PUBLIC_NEON_DATA_API_URL){
+      try{accountContext=await openVerifiedAccount();}catch{}
+      if(!live)return;
+      if(accountContext){selectAccountWorkspace(accountContext);setAccountProtectionReady(true);}
+      else{setScreen("accountVerificationRequired");return;}
+    }
+    // P1-A: escolher o escritor antes de ler. Um observador não lê nem grava.
+    const writerStatus=await startStateWriter({
+      scope:workspaceAccountId()||"global",
+      flush:()=>!hydratedRef.current||saveLocalState(stateRef.current),
+      snapshot:()=>hydratedRef.current?stateRef.current:null
+    });
+    if(!live)return;
+    setWriter(writerStatus);
+    if(writerStatus.mode==="readonly"){
+      // Só leitura: carregar para mostrar, sem migrar, recuperar nem gravar.
+      const read=loadLocalStateStatus(initial,emptyScores,storageKey);
+      // Só se promete uma tentativa guardada quando existe em armazenamento
+      // durável (localStorage). sessionStorage/memória não contam.
+      let pendingAttempt=false;
+      try{
+        const durable=globalThis.localStorage;
+        const owner=workspaceAccountId();
+        const raw=key=>durable?.getItem(accountStorageKey(key,owner))??null;
+        const parsed=value=>{try{return JSON.parse(value)}catch{return null}};
+        const durableState=parsed(raw(storageKey||"a25"));
+        pendingAttempt=!!(raw("a25-active-session-v1")||raw("a25-friends-active-session-v1")||
+          ["fqa-mini-1","fqa-mini-2","fqa-full-715"].some(id=>raw(`applus:fqa-exam-draft:v1:${id}`))||
+          durableState?.subjectSettings?.portuguese?.miniExamDraft||
+          Object.values(durableState?.subjectProgress||{}).some(p=>p?.lastPosition));
+      }catch{pendingAttempt=false}
+      setReadOnlyView({state:read.error?null:read.state,error:!!read.error,pendingAttempt});
+      return;
+    }
+    if(writerStatus.mode!=="writer")return;
+    if(stateWriterStatus().legacy?.status==="changed")setLegacyNotice(true);
+    try{if(new URLSearchParams(window.location.search).has("recuperacao"))setRecoveryOpen(true);}catch{}
     const loaded=loadLocalStateStatus(initial,emptyScores,storageKey);
-    if(loaded.error){setScreen("storageRecoveryError");return}
+    if(loaded.error){setRecoveryStorageKey(storageKey||"a25");setScreen("storageRecoveryError");return}
+    // P1-C: progresso anterior ao isolamento por conta (F5) nunca é atribuído
+    // automaticamente. Em vez de um perfil vazio silencioso, avisar e encaminhar.
+    if(accountContext&&!loaded.found&&!legacyChoice.current&&legacyWorkspacePresent()){setScreen("legacyProgressFound");return}
+    // P1-A sem Web Locks: progresso de outro separador que pode ter sido
+    // sobrescrito fica preservado como cópia de conflito e é assinalado.
+    if(reconcileTabCopiesAtHydration(storageKey||"a25").length)setTabCopyNotice(true);
     const x=loaded.state;
     const draftPreview=x?loadSessionDraftStatus(x.betaMode||"internal").draft:null;
     const needsMathAtHydration=!!x&&(
@@ -299,7 +372,7 @@ export default function App(){
       :x;
     const base=migratedX
       ?migrateProductAnalytics(migrateCloudSync(migrateDailyMission(migrateCompetition(migrateEngagement(migratedX)))))
-      :migrateProductAnalytics(migrateCloudSync(initial));
+      :migrateProductAnalytics(migrateCloudSync(accountContext?newAccountState(initial,accountContext):initial));
     const subjectReady=normalizeSubjectWorkspace(base);
     const betaState=requested?activateFriendsBeta(subjectReady):subjectReady;
     const next=recordAppOpen(betaState,{source:"initial_load"});
@@ -324,7 +397,7 @@ export default function App(){
       validDraft=null;
     }else if(draft?.kind==="diagnostic"){
       const recovery=recoverDiagnosticTransaction({
-        state:next,draft,saveState:saveLocalState,saveDraft:saveSessionDraft,
+        state:next,draft,saveState:saveLocalState,saveFinalState:state=>saveLocalStateDurably(state).ok,saveDraft:saveSessionDraft,
         clearDraft:()=>clearSessionDraft(next.betaMode||"internal"),
         startState:ensureDiagnosticStarted,completeState:finalizeDiagnosticState
       });
@@ -338,6 +411,7 @@ export default function App(){
       }
     }
 
+    if(accountContext&&!accountContextCurrent(accountContext)){window.location.reload();return;}
     setS(recoveredState);
 
     if(draft?.kind==="training" && draft.cfg)setTrainingCfg(draft.cfg);
@@ -382,11 +456,44 @@ export default function App(){
     setHydrated(true);
     })();
     return ()=>{live=false};
+  },[hydrationRun]);
+
+  useEffect(()=>{
+    if(typeof window==="undefined")return;
+    let previous=stateWriterStatus().mode,lastLegacy=stateWriterStatus().legacy;
+    const onWriter=event=>{
+      const next=event.detail||stateWriterStatus();
+      setWriter(next);
+      if(next.mode==="writer"&&next.legacy?.status==="changed"&&next.legacy!==lastLegacy){lastLegacy=next.legacy;setLegacyNotice(true);}
+      if(next.mode==="writer"){
+        // Promoção (aba voltou a ficar visível, passagem, recuperação): hidratar;
+        // retoma do próprio mandato: gravar o que ficou em memória enquanto escondida.
+        if(!hydratedRef.current)setHydrationRun(n=>n+1);
+        else if(previous==="paused"||previous==="verifying")saveLocalState(stateRef.current);
+      }else if(!["paused","verifying"].includes(next.mode)||!hydratedRef.current){
+        if(next.mode!=="paused")setHydrated(false);
+      }
+      previous=next.mode;
+    };
+    window.addEventListener(STATE_WRITER_EVENT,onWriter);
+    return ()=>window.removeEventListener(STATE_WRITER_EVENT,onWriter);
   },[]);
+
+  // A superfície de estudo já foi desmontada: libertar o escritor e recarregar.
+  useEffect(()=>{if(writer.mode==="releasing")completeStateWriterRelease();},[writer.mode]);
 
   useEffect(()=>{
     if(hydrated)saveLocalState(s);
   },[s,hydrated]);
+
+  // D2: outra versão (ou outro separador) gravou dados que esta versão não pode
+  // gerir com segurança. Parar de gravar e mostrar a recuperação.
+  useEffect(()=>{
+    if(typeof window==="undefined")return;
+    const onBlocked=()=>{setHydrated(false);setScreen("storageRecoveryError")};
+    window.addEventListener(STATE_INTEGRITY_EVENT,onBlocked);
+    return ()=>window.removeEventListener(STATE_INTEGRITY_EVENT,onBlocked);
+  },[]);
 
   useEffect(()=>{
     const mathActive=(s.activeSubjectId==="math-a"||(!s.activeSubjectId&&MATH_ENGINE_SCREENS.has(screen)));
@@ -463,6 +570,50 @@ export default function App(){
     setScreen(x);
   };
 
+  if(accountProtectionReady&&accountGuard.locked)return <Shell><Logo/>
+    <div className="notice"><b>Confirma a conta para continuar.</b><span>O progresso e as respostas desta aba ficaram preservados separadamente. Não acrescentaremos estudo à conta anterior durante uma troca de sessão.</span></div>
+    {screen==="account"
+      ?<AccountCloud s={initial} setS={()=>window.location.reload()} go={()=>window.location.reload()}/>
+      :<button onClick={()=>go("account")}>Gerir conta e progresso</button>}
+    <button className="secondary" onClick={accountGuard.recheck}>Voltar a verificar a mesma conta</button>
+  </Shell>;
+
+  // NO-GO #462 (fase 2): o cofre de cópias (consultar, descarregar, libertar espaço)
+  // abre também em retenção, só consulta e conflito. Restaurar continua a exigir escritor.
+  if(recoveryOpen&&["readonly","verifying","conflict"].includes(writer.mode))return <RecoveryCopies writer={writer} onClose={()=>setRecoveryOpen(false)}/>;
+  if(writer.mode==="readonly")return <ReadOnlyConsult view={readOnlyView} reason={writer.reason} restore={writer.restore} unsaved={writer.unsaved} onOpenCopies={()=>setRecoveryOpen(true)}/>;
+  if(writer.mode==="verifying"&&(writer.reason==="recovery_hold"||!hydrated))return <StateWriterVerifying writer={writer} onRetry={async()=>{setWriter(await requestStateWriter())}} onAdopt={()=>setWriter(adoptAfterUncleanEnd())} onOpenCopies={()=>setRecoveryOpen(true)}/>;
+  if(writer.mode==="acquiring")return <Shell><Logo/><div className="cloudLoading" data-state-writer="acquiring">A abrir o teu progresso…</div></Shell>;
+  if(writer.mode==="observer")return <StateWriterElsewhere writer={writer} onContinue={async()=>{
+    const next=await requestStateWriter();setWriter(next);
+    if(next.mode==="writer")setHydrationRun(n=>n+1);
+  }}/>;
+  if(writer.mode==="releasing"||writer.mode==="released")return <Shell><Logo/><div className="notice" role="status" data-state-writer="released"><b>Continuaste noutro separador.</b><span>Este separador deixou de guardar progresso.</span></div></Shell>;
+  if(writer.mode==="conflict")return <StateWriterConflict writer={writer} onOpenCopies={()=>setRecoveryOpen(true)}/>;
+  if(recoveryOpen&&writer.mode==="writer")return <RecoveryCopies writer={writer} onClose={()=>setRecoveryOpen(false)}/>;
+  if(writer.mode==="writer"&&writer.restore&&!restoreNoticeSeen)return <Shell><Logo/><div className="notice" role="status" data-restore-result={writer.restore.status}>
+    <b>{["completed","completed_forward"].includes(writer.restore.status)?"A restauração do teu progresso foi concluída.":"A restauração não chegou a ser aplicada."}</b>
+    <span>{["completed","completed_forward"].includes(writer.restore.status)?(writer.restore.status==="completed"?"Foi concluída com a cópia que escolheste. O progresso de antes do restauro continua guardado como cópia.":"Foi interrompida e foi completada agora, com a cópia que escolheste. O que estava gravado no momento da interrupção ficou guardado primeiro como uma nova cópia."):(writer.restore.status==="not_applied"?"Foi interrompida antes de mudar o teu progresso. A cópia que escolheste continua guardada.":"Foi interrompida e o progresso de antes do restauro foi reposto. O que estava gravado no momento da interrupção ficou guardado primeiro como uma nova cópia.")}</span>
+  </div><button className="primary" onClick={()=>setRestoreNoticeSeen(true)}>Continuar</button></Shell>;
+  if(legacyNotice)return <Shell><Logo/><div className="notice warning" role="alert" data-state-writer="legacy-progress">
+    <b>Uma versão anterior da APProva+ gravou progresso neste dispositivo.</b>
+    {writer.legacy?.copy?.durable
+      ?<span>Não foi aplicado ao teu progresso atual e nada foi substituído. Ficou guardado como cópia de recuperação: podes compará-lo e restaurá-lo.</span>
+      :<span data-legacy-copy="none">Não foi aplicado ao teu progresso atual e nada foi substituído. Não houve espaço para guardar uma cópia, mas esses dados continuam intactos neste dispositivo. Liberta espaço no browser e volta a abrir a app para o poderes restaurar.</span>}
+  </div>
+  <button className="primary" onClick={()=>{acknowledgeLegacyNotice();setLegacyNotice(false);setRecoveryOpen(true);}}>Ver cópias de recuperação</button>
+  <button className="secondary" onClick={()=>{acknowledgeLegacyNotice();setLegacyNotice(false);}}>Continuar com o progresso atual</button></Shell>;
+  if(tabCopyNotice)return <Shell><Logo/><div className="notice warning" role="alert" data-state-writer="tab-copy-preserved">
+    <b>Encontrámos dados de outro separador que podem não estar no progresso atual.</b>
+    <span>Foram guardados como cópia de recuperação neste dispositivo; nada foi apagado. A cópia não foi restaurada: o progresso que vês pode não os incluir, e a app ainda não permite recuperá-los.</span>
+  </div><button className="primary" onClick={()=>setTabCopyNotice(false)}>Continuar</button></Shell>;
+  if(screen==="legacyProgressFound")return <LegacyProgressFound onContinue={()=>{legacyChoice.current=true;setHydrationRun(n=>n+1);}}/>;
+
+  if(screen==="accountVerificationRequired")return <Shell><Logo/>
+    <div className="notice"><b>Confirma a sessão para recuperar o progresso.</b><span>Os dados não foram lidos nem atribuídos a outra conta.</span><button onClick={()=>window.location.reload()}>Voltar a verificar a sessão</button></div>
+    <AccountCloud s={initial} setS={()=>window.location.reload()} go={()=>window.location.reload()}/>
+  </Shell>;
+
   // Resolve pending attempts before mounting an assessment, including popstate.
   const assessmentRoutes=["diag","diagRun","mission","trainingSetup","trainingRun","miniExamIntro","miniExamRun","miniExamReview","portugueseMiniExam","physicsChemistryMini1","physicsChemistryMini2","physicsChemistryExam"];
   if(hydrated&&assessmentRoutes.includes(screen)){
@@ -518,7 +669,10 @@ export default function App(){
   if(screen==="diag"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="diagnostic"/>;
   if(screen==="diag")return <DiagIntro s={s} setS={setS} go={go}/>;
   if(screen==="diagRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível recuperar esta sessão</b><span>O estado académico não foi alterado. O progresso guardado foi conservado para uma nova tentativa.</span></div></Shell>;
-  if(screen==="storageRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível ler o progresso guardado</b><span>Nenhum dado foi substituído. Reabre a app para tentar novamente.</span></div></Shell>;
+  // D2: versões futuras/inválidas nunca entram no percurso F7 (que pode aplicar
+  // uma cópia revista); só o aviso sem escrita. JSON ilegível continua no F7.
+  if(screen==="storageRecoveryError")return ["state_version_future","state_version_invalid"].includes(lastStateIntegrityBlock()?.reason)?<StorageRecoveryNotice/>:<LocalSnapshotRecovery storageKey={recoveryStorageKey}/>;
+  if(screen==="completionBlocked")return <CompletionBlocked s={s} go={go}/>;
   if(screen==="diagRun")return <DiagRun s={s} setS={setS} go={go} recoveredDraft={recoveredSession?.kind==="diagnostic"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="diagResult")return <DiagResult s={s} setS={setS} go={go}/>;
   if(screen==="mission")return <Mission s={s} setS={setS} go={go} recoveredDraft={recoveredSession?.kind==="mission"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
@@ -559,7 +713,8 @@ export default function App(){
     clearSessionDraft(s.betaMode||"internal");
     clearCompletionRegistry();
     setRecoveredSession(null);
-    setS(isFriendsBeta(s)?activateFriendsBeta(initial):initial);go("welcome");
+    const fresh={...initial,...(s.cloudAccount?{cloudAccount:s.cloudAccount}:{})};
+    setS(isFriendsBeta(s)?activateFriendsBeta(fresh):fresh);go("welcome");
   }}/>;
 }
 
@@ -577,15 +732,9 @@ function FriendsBetaPanel({s}){
   const segment=testerSegmentInfo(currentTesterSegment(s));
   const fx=friendsFeedbackSummary(s);
 
-  function downloadReport(){
-    const payload=friendsBetaReport(s);
-    const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement("a");
-    a.href=url;
-    a.download=`teste-amigos-${s.betaParticipant?.code||"participante"}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+  async function downloadReport(){
+    try{await downloadOwnedState(s,`teste-amigos-${s.betaParticipant?.code||"participante"}.json`,friendsBetaReport);}
+    catch{window.alert("Exportação bloqueada. Confirma a conta de origem; os dados não foram alterados.");}
   }
 
   return <div className="friendsBetaPanel">
@@ -859,7 +1008,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   const [ready,setReady]=useState(false);
   function retryRecovery(){
     const recoveryState=reconcileDiagnosticRuntimeSessions(s,draft?.sessionId||null);
-    const result=recoverDiagnosticTransaction({state:recoveryState,draft,saveState:saveLocalState,saveDraft:saveSessionDraft,
+    const result=recoverDiagnosticTransaction({state:recoveryState,draft,saveState:saveLocalState,saveFinalState:state=>saveLocalStateDurably(state).ok,saveDraft:saveSessionDraft,
       clearDraft:()=>clearSessionDraft(s.betaMode||"internal"),startState:ensureDiagnosticStarted,completeState:finalizeDiagnosticState});
     if(!result.ok){
       reportDiagnosticFlowIssue("recovery",result.reason||"unknown");
@@ -893,7 +1042,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
 
   function finish(nextState,nextDraft){
     const final=finalizeDiagnosticState(nextState,nextDraft);
-    if(!final.ok||!saveLocalState(final.state)){setSaveError(true);setDraft(nextDraft);return}
+    if(!final.ok||!saveLocalStateDurably(final.state).ok){setSaveError(true);setDraft(nextDraft);return}
     clearSessionDraft(s.betaMode||"internal");setS(final.state);go("diagResult");
   }
 
@@ -1092,8 +1241,9 @@ function Home({s,setS,go,reset}){
 
     if(decision.mode==="resume"){
       const resumeKey=`a25-daily-mission-resume:${decision.sessionId||"unknown"}`;
-      if(sessionStorage.getItem(resumeKey))return;
-      sessionStorage.setItem(resumeKey,"1");
+      let alreadyShown=false;
+      try{alreadyShown=!!window.sessionStorage.getItem(resumeKey);if(!alreadyShown)window.sessionStorage.setItem(resumeKey,"1")}catch{}
+      if(alreadyShown)return;
       setMissionModalMode("resume");
       setShowMissionModal(true);
       setS(prev=>{
@@ -1268,9 +1418,15 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     if(completingRef.current)return;
     completingRef.current=true;
 
-    if(!claimSessionCompletion(sessionId)){
+    const reservation=reserveSessionCompletion(sessionId,{isRecorded:()=>stateRecordsCompletion(s,sessionId)});
+    if(reservation.status==="already_completed"){
       clearSessionDraft(s.betaMode||"internal");
       go("missionResult");
+      return;
+    }
+    if(reservation.status!=="reserved"){
+      completingRef.current=false;
+      go("completionBlocked");
       return;
     }
 
@@ -1339,6 +1495,14 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
       type:plan.type,
       totalCount:newTotal
     },{at:activityAt});
+    const durable=saveLocalStateDurably(finished);
+    if(!durable.ok){
+      abandonSessionReservation(sessionId);
+      completingRef.current=false;
+      go(completionSaveFailedScreen(sessionId,durable.tier));
+      return;
+    }
+    commitSessionCompletion(sessionId);
     clearSessionDraft(s.betaMode||"internal");
     setS(finished);go("missionResult");
   }
@@ -1652,15 +1816,21 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
       if(completingRef.current)return;
       completingRef.current=true;
 
-      if(!claimSessionCompletion(sessionId)){
+      const reservation=reserveSessionCompletion(sessionId,{isRecorded:()=>stateRecordsCompletion(s,sessionId)});
+      if(reservation.status==="already_completed"){
         clearSessionDraft(s.betaMode||"internal");
         setDone(true);
+        return;
+      }
+      if(reservation.status!=="reserved"){
+        completingRef.current=false;
+        go("completionBlocked");
         return;
       }
 
       const ratio=newCorrect/questions.length;
       const potential=ratio>=.75 && cfg.level!=="basic" && !questions.some(item=>item.practiceOnly);
-      setS(prev=>{
+      const completeTraining=prev=>{
         const sessions=[...(prev.betaSessions||[])];
         const openIdx=[...sessions].map(x=>x.kind==="training"&&!x.finishedAt).lastIndexOf(true);
         if(openIdx>=0)sessions[openIdx]=sessionFinish(sessions[openIdx],{themeId:cfg.themeId,focus:cfg.focus,correct:newCorrect,total:questions.length,earnedPoints:newEarnedPoints,maxPoints,reviewRequired:newHasIncomplete});
@@ -1693,7 +1863,18 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
           at:activityAt
         });
         return completed;
-      });
+      };
+      // Persistir a avaliação antes de confirmar o recibo e apagar o rascunho.
+      const trainingCompleted=completeTraining(s);
+      const durable=saveLocalStateDurably(trainingCompleted);
+      if(!durable.ok){
+        abandonSessionReservation(sessionId);
+        completingRef.current=false;
+        go(completionSaveFailedScreen(sessionId,durable.tier));
+        return;
+      }
+      commitSessionCompletion(sessionId);
+      setS(trainingCompleted);
       clearSessionDraft(s.betaMode||"internal");
       setDone(true);return;
     }
@@ -1969,9 +2150,15 @@ function MiniExamReview({session,setSession,s,setS,go}){
     if(submittingRef.current)return;
     submittingRef.current=true;
 
-    if(!claimSessionCompletion(session.sessionId)){
+    const reservation=reserveSessionCompletion(session.sessionId,{isRecorded:()=>stateRecordsCompletion(s,session.sessionId)});
+    if(reservation.status==="already_completed"){
       clearSessionDraft(s.betaMode||"internal");
       go("miniExamResult");
+      return;
+    }
+    if(reservation.status!=="reserved"){
+      submittingRef.current=false;
+      go("completionBlocked");
       return;
     }
 
@@ -2001,6 +2188,14 @@ function MiniExamReview({session,setSession,s,setS,go}){
       at:activityAt
     });
     updated=refreshLearningHypotheses(updated,activityAt);
+    const durable=saveLocalStateDurably(updated);
+    if(!durable.ok){
+      abandonSessionReservation(session.sessionId);
+      submittingRef.current=false;
+      go(completionSaveFailedScreen(session.sessionId,durable.tier));
+      return;
+    }
+    commitSessionCompletion(session.sessionId);
     clearSessionDraft(s.betaMode||"internal");
     setS(updated);go("miniExamResult");
   }
@@ -2012,6 +2207,257 @@ function MiniExamReview({session,setSession,s,setS,go}){
     {unanswered>0&&<div className="notice warning"><b>{unanswered} {unanswered===1?"questão por responder":"questões por responder"}</b><span>Podes entregar assim, mas as não-respostas contam para o resultado. Pedagogicamente recebem um peso ligeiramente menor do que uma resposta explicitamente errada.</span></div>}
     <button className="primary" onClick={submit}>Entregar Mini-exame</button>
   </Shell>
+}
+
+// A avaliação não pôde ser gravada: a reserva já foi desfeita e o rascunho fica.
+// Se a gravação foi recusada pela proteção D2, prevalece o ecrã de recuperação.
+function completionSaveFailedScreen(sessionId,tier="failed"){
+  if(lastStateIntegrityBlock())return "storageRecoveryError";
+  markCompletionBlocked(sessionId,durabilityFailureReason(tier));
+  return "completionBlocked";
+}
+
+// P1-A: outro separador é o escritor desta área. Nada foi lido nem gravado aqui.
+function StateWriterElsewhere({writer,onContinue}){
+  const [busy,setBusy]=useState(false);
+  const waiting=busy||writer.reason==="waiting";
+  return <Shell><Logo/><div className="notice" role="status" data-state-writer="observer">
+    <b>A APProva+ está aberta noutro separador.</b>
+    <span>Para proteger o teu progresso, só um separador guarda o teu estudo de cada vez. Este separador não leu nem alterou nada.</span>
+    {writer.reason==="no_answer"&&<span role="alert">O outro separador não respondeu. Volta a ele ou fecha-o e tenta de novo.</span>}
+    {writer.reason==="sync_pending"&&<span role="alert">O progresso do outro separador ainda está a chegar. Não alterámos nada; tenta de novo dentro de instantes.</span>}
+  </div>
+  <button className="primary" disabled={waiting} onClick={async()=>{setBusy(true);try{await onContinue()}finally{setBusy(false)}}}>{waiting?"A passar para este separador…":"Continuar neste separador"}</button>
+  </Shell>;
+}
+
+// P1-A: este browser não oferece exclusão fiável entre separadores (Web Locks).
+// Falha segura: o aluno consulta o progresso, mas nada é gravado nem iniciado.
+// Texto provisório, a aprovar pelo product owner.
+const READ_ONLY_SUBJECTS={"math-a":"Matemática A","portuguese":"Português","physics-chemistry-a":"Física e Química A"};
+// P1-A v2: motivo verdadeiro do modo só de consulta (não é sempre o browser).
+const READ_ONLY_REASON={
+  legacy_import_failed:["Não há espaço neste dispositivo para preparar o teu progresso nesta versão.","Nada foi alterado nem apagado. O espaço é próprio da APProva+ neste browser: apagar dados de outros sites não ajuda. Descarrega cópias de recuperação antigas e apaga-as deste dispositivo, e volta a verificar. Até lá, podes consultar o progresso, mas nada é guardado."],
+  shared_storage_full:["Não há espaço neste dispositivo para guardar o teu progresso em segurança.","Nada foi alterado nem apagado. Descarrega cópias de recuperação antigas e apaga-as deste dispositivo para libertar espaço, e volta a verificar. Até lá, podes consultar o progresso, mas nada é guardado."],
+  restore_incomplete:["Uma restauração do teu progresso ficou a meio e ainda não pôde ser concluída.","Nada foi apagado: o progresso anterior e a cópia escolhida continuam guardados. Enquanto isto não for resolvido, nada é gravado. Se falta espaço, descarrega e apaga cópias antigas que não estejam em uso e volta a verificar; a restauração é concluída ou desfeita automaticamente."],
+  storage_read_failed:["Este browser falhou ao ler o progresso guardado e este separador parou de gravar.","O que já estava guardado neste dispositivo não foi alterado. Vê abaixo o que aconteceu à última alteração e descarrega-a se for preciso. Depois volta a verificar."],
+  register_unavailable:["Este browser não deixou guardar o registo de segurança do progresso.","Nada foi alterado. Isto acontece, por exemplo, em algumas janelas privadas ou com o armazenamento do site bloqueado. Permite o armazenamento de dados deste site e volta a verificar."]
+};
+// Descarregar um ficheiro JSON (cópias, progresso guardado, progresso deste separador).
+function downloadJsonFile(json,name){
+  if(!json)return false;
+  try{const url=URL.createObjectURL(new Blob([json],{type:"application/json"}));const a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);return true}catch{return false}
+}
+// Correções residuais (X7): o que aconteceu à última alteração quando o separador parou.
+const UNSAVED_TIER={
+  saved:"Não ficou nada por gravar: o progresso guardado neste dispositivo já inclui a última alteração.",
+  durable:"A última alteração não foi gravada no progresso. Ficou guardada numa cópia de recuperação neste dispositivo e podes restaurá-la depois de voltares a verificar.",
+  tab:"A última alteração não foi gravada no progresso. Ficou só numa cópia temporária deste separador: perde-se se o fechares. Descarrega-a agora.",
+  failed:"A última alteração não pôde ser gravada em lado nenhum. Ainda está neste separador: descarrega-a agora e não feches o separador antes disso."
+};
+function ReadOnlyConsult({view,reason=null,restore=null,unsaved=null,onOpenCopies}){
+  const [discard,setDiscard]=useState(null);
+  const [exportedNow,setExportedNow]=useState(null);
+  // "Manter o progresso atual" só onde a função o aceita (diário antigo ou corrompido).
+  const unresolvable=reason==="restore_incomplete"&&["stale_journal","journal_corrupt"].includes(restore?.reason);
+  const stuck=reason==="restore_incomplete"&&["unresolvable","no_space_for_found_copy"].includes(restore?.reason);
+  const custom=READ_ONLY_REASON[reason]||null;
+  // Paragem a meio da sessão: o resumo do arranque não existe; ler o que está guardado.
+  if(view===null&&unsaved){try{const current=recoveryCopiesForView().current;view={summaryOnly:true,state:current.readable?{xp:current.xp}:null,completed:current.completed};}catch{view={error:true}}}
+  const x=view?.state||null;
+  const count=value=>Array.isArray(value)?value.length:0;
+  const xp=Number.isFinite(Number(x?.xp))?Number(x.xp):0;
+  const subjects=(Array.isArray(x?.selectedSubjectIds)?x.selectedSubjectIds:[]).map(id=>READ_ONLY_SUBJECTS[id]).filter(Boolean);
+  const studied=view?.summaryOnly?(view.completed??0):count(x?.missionHistory)+count(x?.examHistory)+Object.values(x?.subjectProgress||{}).reduce((n,p)=>n+count(p?.sessions),0);
+  const downloadCurrent=()=>{const json=exportCurrentSet();if(downloadJsonFile(json,`approva-progresso-guardado-${Date.now()}.json`))try{setExportedNow(JSON.parse(json).fingerprints)}catch{}};
+  const keep=()=>{const r=keepCurrentAndDiscardJournal(undefined,{exportedFingerprints:exportedNow});setDiscard(r.ok?"ok":(r.reason||"failed"));};
+  const DISCARD={
+    ok:"O progresso atual foi mantido. Volta a verificar para continuar.",
+    no_space_for_backup:"Não há espaço para guardar primeiro uma cópia do progresso atual, e nada foi alterado. Descarrega o progresso guardado (botão abaixo): esse ficheiro fica como a tua cópia. Depois carrega outra vez em «Manter o progresso atual». Também podes apagar cópias antigas que não estejam em uso, depois de as descarregares.",
+    export_mismatch:"O progresso guardado mudou desde que o descarregaste. Descarrega-o outra vez antes de continuar. Nada foi alterado.",
+    journal_not_cleared:"Este browser não deixou terminar a operação. Nada do teu progresso foi alterado; tenta de novo.",
+    failed:"Não foi possível. Nada foi alterado."
+  };
+  return <Shell><Logo/><div className="notice" role="status" data-state-writer="readonly">
+    <b>{custom?custom[0]:"Este navegador só permite consultar o teu progresso."}</b>
+    <span data-readonly-reason={reason||"no_web_locks"}>{custom?custom[1]:"Para guardar o teu estudo, a APProva+ precisa de uma versão mais recente do navegador. Atualiza-o ou abre a APProva+ no Chrome, Edge, Firefox ou Safari atualizados. Neste navegador não é guardado nem alterado nada."}</span>
+    {view?.pendingAttempt&&<span data-readonly-pending="true">Encontrámos neste dispositivo dados de uma tentativa por terminar. Não foram alterados. Só num navegador atualizado, neste mesmo dispositivo, será possível verificar se podem ser retomados.</span>}
+  </div>
+  {view===null?<div className="cloudLoading">A abrir o teu progresso…</div>
+    :view.error?<p role="status">Não foi possível ler o progresso guardado neste dispositivo. Nada foi alterado.</p>
+    :<dl className="readOnlySummary" data-readonly-summary="true">
+      <div><dt>XP</dt><dd>{xp}</dd></div>
+      <div><dt>Sessões e avaliações concluídas</dt><dd>{studied}</dd></div>
+      <div><dt>Disciplinas</dt><dd>{subjects.length?subjects.join(", "):"Ainda nenhuma"}</dd></div>
+    </dl>}
+  {unresolvable&&<span role="alert" data-restore-unresolvable={restore.reason}>O progresso gravado já não corresponde à restauração que ficou a meio. Não o substituímos. Podes manter o progresso atual: guardamos primeiro uma cópia dele, e a cópia escolhida e a de antes do restauro continuam guardadas.</span>}
+  {stuck&&<span role="alert" data-restore-stuck={restore.reason}>A restauração não pôde ser concluída nem desfeita, normalmente por falta de espaço. Nada foi apagado e nada é gravado até isto ficar resolvido. Descarrega e apaga cópias antigas que não estejam em uso, e volta a verificar.</span>}
+  {unsaved&&<p role="alert" data-unsaved-tier={unsaved.tier}><b>{unsaved.tier==="saved"?"Progresso guardado.":unsaved.tier==="durable"?"Gravação falhada — alteração guardada em cópia.":unsaved.tier==="tab"?"Gravação falhada — alteração só temporária.":"Gravação falhada — alteração por guardar."}</b> {UNSAVED_TIER[unsaved.tier]||UNSAVED_TIER.failed}</p>}
+  {discard&&<p role="alert" data-restore-discard={discard}>{DISCARD[discard]||DISCARD.failed}</p>}
+  <button className="primary" onClick={()=>window.location.reload()}>Voltar a verificar</button>
+  {unsaved&&unsaved.tier!=="saved"&&<button className="secondary" data-download-unsaved="true" onClick={()=>downloadJsonFile(exportUnsavedTabSet(),`approva-progresso-deste-separador-${Date.now()}.json`)}>Descarregar o progresso deste separador</button>}
+  <button className="secondary" data-download-current="true" onClick={downloadCurrent}>Descarregar o progresso guardado</button>
+  {onOpenCopies&&<button className="secondary" onClick={onOpenCopies}>Ver e descarregar cópias de recuperação</button>}
+  {unresolvable&&<button className="secondary" onClick={keep}>Manter o progresso atual</button>}
+  </Shell>;
+}
+
+// P1-A: este separador já tem o lock mas ainda não consegue provar que vê a
+// última gravação do separador anterior. Nada é lido para escrita nem gravado.
+function StateWriterVerifying({writer,onRetry,onAdopt,onOpenCopies}){
+  const [confirming,setConfirming]=useState(false);
+  const [attempted,setAttempted]=useState(false);
+  if(writer.reason!=="recovery_hold")return <Shell><Logo/><div className="cloudLoading" role="status" data-state-writer="verifying">A confirmar o teu progresso…</div></Shell>;
+  return <Shell><Logo/><div className="notice warning" role="alert" data-state-writer="recovery-hold">
+    <b>Não foi possível confirmar a gravação do outro separador.</b>
+    <span>Por isso, este separador ainda não guarda nada. Se a outra janela ainda estiver aberta, volta a ela.</span>
+    {confirming&&<span data-recovery-confirm="true">Antes de continuares, guardamos uma cópia de recuperação dos dados que este separador vê agora. A cópia não restaura nada: se a última gravação do outro separador não estiver aqui, continuas sem ela. Se essa gravação ainda chegar, este separador para e guarda-a também como cópia.</span>}
+  </div>
+  {attempted&&writer.reason==="recovery_hold"&&<span role="alert" data-recovery-no-space="true">Não houve espaço para guardar a cópia. Podes descarregar cópias antigas e apagá-las deste dispositivo para libertar espaço.</span>}
+  <button className="primary" onClick={onRetry}>Verificar de novo</button>
+  <button className="secondary" onClick={onOpenCopies}>Ver e descarregar cópias de recuperação</button>
+  {confirming
+    ?<button className="secondary" onClick={()=>{setAttempted(true);onAdopt();}}>Guardar cópia e continuar aqui</button>
+    :<button className="secondary" onClick={()=>setConfirming(true)}>Continuar neste separador</button>}
+  </Shell>;
+}
+
+// P1-A: foi detetada outra escrita no progresso. Este separador parou de gravar.
+function StateWriterConflict({writer,onOpenCopies}){
+  const copy=writer.conflictCopy;
+  return <Shell><Logo/><div className="notice warning" role="alert" data-state-writer="conflict" data-conflict-copy={copy?(copy.durable?"durable":"tab"):"none"}>
+    <b>Este separador deixou de guardar progresso.</b>
+    <span>O teu progresso foi alterado noutro separador ou por outra versão da APProva+. Não substituímos nada.</span>
+    <span>{copy?"Guardámos neste dispositivo uma cópia do que estava neste separador"+(writer.receivedCopy?" e outra do que foi gravado noutro separador":"")+". Nada foi aplicado. Depois de recarregares, podes compará-las e restaurar a que quiseres.":"Não foi possível guardar uma cópia deste separador. Mantém-no aberto até recarregares o progresso noutro separador."}</span>
+  </div>
+  <button className="primary" onClick={()=>window.location.reload()}>Recarregar o progresso</button>
+  {copy&&<button className="secondary" onClick={onOpenCopies}>Ver e descarregar as cópias</button>}
+  </Shell>;
+}
+
+// P1-A v2: percurso de recuperação autorizado (stateRecovery.js). Só o
+// separador escritor restaura; o progresso atual é sempre guardado antes.
+const RECOVERY_REASONS={
+  legacy_version_write:"Gravado por uma versão anterior da app",
+  before_restore:"Progresso antes de uma restauração",
+  restore_target:"Cópia escolhida para uma restauração",
+  journal_resolution_found:"O que estava gravado quando uma restauração foi interrompida",
+  journal_discarded_current:"Progresso mantido depois de uma restauração por resolver",
+  write_halted:"Alteração que não pôde ser gravada (o separador parou de gravar)",
+  unclean_end_adoption:"Antes de continuares depois de um fecho inesperado",
+  foreign_write:"Conflito entre separadores",
+  conflict:"Cópia de uma versão experimental anterior",
+  tab_copy:"Cópia de separador de uma versão experimental anterior"
+};
+const recoveryReason=reason=>{const key=String(reason||"").split(":")[0];const base=RECOVERY_REASONS[key]||"Cópia de recuperação";
+  return String(reason||"").endsWith(":received")?base+" (o que foi gravado noutro separador)":String(reason||"").endsWith(":this_tab")?base+" (o que estava neste separador)":base;};
+function RecoveryCopies({onClose,writer=null}){
+  const canRestore=writer?.mode==="writer";
+  const [view,setView]=useState(()=>recoveryCopiesForView());
+  const [confirm,setConfirm]=useState(null);
+  const [exported,setExported]=useState({});
+  const [message,setMessage]=useState(null);
+  const refresh=()=>setView(recoveryCopiesForView());
+  const date=at=>at?new Date(at).toLocaleString("pt-PT"):"data desconhecida";
+  const download=copy=>{
+    const json=exportRecoveryCopy(copy.id);if(!json)return;
+    if(!downloadJsonFile(json,`approva-copia-${copy.at||"sem-data"}.json`))return; // só se a descarga foi pedida ao browser
+    setExported(prev=>({...prev,[copy.id]:true}));
+  };
+  const FAIL={not_writer:"Este separador não está a guardar o progresso. Fecha os outros separadores e tenta de novo.",state_version_future:"Esta cópia foi gravada por uma versão mais recente e não pode ser restaurada por esta.",state_unreadable:"Esta cópia não é legível.",state_version_invalid:"Esta cópia não é legível.",copy_empty:"Esta cópia está vazia.",no_space_for_backup:"Não há espaço para guardar primeiro o progresso atual. Nada foi alterado.",restore_write_failed:"Não foi possível restaurar. O progresso atual foi reposto.",restore_incomplete:"A restauração ficou a meio. Este separador parou de gravar; ao reabrir, a restauração é concluída ou desfeita.",copy_not_found:"Esta cópia já não existe.",partial_copy:"Esta cópia só tem parte do progresso (versão experimental anterior). Restaurá-la misturaria momentos diferentes; podes descarregá-la.",d3_orphan_receipts:"Esta cópia tem avaliações marcadas como concluídas sem o resultado. Não pode ser restaurada; podes descarregá-la.",d3_registry_unreadable:"O registo de conclusões desta cópia não é legível. Não pode ser restaurada; podes descarregá-la.",restore_pending:"Há uma restauração por resolver. Recarrega a app.",journal_not_cleared:"A restauração foi aplicada, mas este browser não deixou terminar o registo. Este separador parou de gravar; recarrega."};
+  const DELETE_FAIL={copy_not_found:"Esta cópia já não existe.",delete_failed:"O browser não deixou apagar esta cópia. Nada foi alterado.",copy_in_use:"Esta cópia é necessária a uma restauração por resolver e não pode ser apagada.",export_first:"Descarrega primeiro esta cópia.",legacy_copy_kept:"As cópias da versão experimental anterior não são apagadas."};
+  return <Shell><Logo/><div className="notice" role="status" data-recovery-copies="true">
+    <b>Cópias de recuperação deste dispositivo</b>
+    <span>Progresso atual: {view.current.readable?`${view.current.xp} XP · ${view.current.completed} sessões e avaliações concluídas`:"sem progresso legível"}.</span>
+    <span>Restaurar uma cópia substitui o progresso atual, que fica guardado primeiro como uma nova cópia (podes voltar atrás).</span>
+  </div>
+  {message&&<p role="alert" data-recovery-message="true">{message}</p>}
+  {!view.copies.length&&<p>Não há cópias de recuperação neste dispositivo.</p>}
+  <ul className="recoveryCopyList">{view.copies.map(copy=><li key={copy.id} data-recovery-copy={copy.id} data-recovery-reason={String(copy.reason||"")}>
+    <b>{recoveryReason(copy.reason)}</b>
+    <span>{date(copy.at)} · {copy.summary.readable?`${copy.summary.xp} XP · ${copy.summary.completed} concluídas`:"estado não legível"}{copy.partial?" · cópia parcial":""}{copy.durable?"":" · só neste separador"}</span>
+    {!canRestore?null:confirm===copy.id
+      ?<><span role="alert">O progresso atual vai ser substituído por esta cópia e guardado primeiro como uma nova cópia.</span>
+        <button className="primary" onClick={()=>{const result=restoreRecoveryCopy(copy.id);if(!result.ok){setMessage(FAIL[result.reason]||"Não foi possível restaurar.");setConfirm(null);refresh();}}}>Confirmar e restaurar</button>
+        <button className="secondary" onClick={()=>setConfirm(null)}>Cancelar</button></>
+      :<button className="primary" onClick={()=>setConfirm(copy.id)}>Restaurar esta cópia</button>}
+    <button className="secondary" onClick={()=>download(copy)}>Descarregar</button>
+    {copy.format==="aplus-state-recovery-copy-v2"&&exported[copy.id]&&<button className="secondary" onClick={()=>{const r=deleteRecoveryCopy(copy.id,{exported:true});setMessage(r.ok?(r.temporary?"Cópia temporária apagada deste separador. Não liberta espaço no dispositivo.":"Cópia apagada deste dispositivo."):(DELETE_FAIL[r.reason]||"Não foi possível apagar a cópia."));refresh();}}>Apagar esta cópia</button>}
+  </li>)}</ul>
+  {!canRestore&&<p data-recovery-readonly="true">Este separador não está a guardar o progresso: podes consultar, descarregar e apagar cópias já descarregadas (para libertar espaço). Restaurar só é possível no separador que guarda o progresso.</p>}
+  <button className="secondary" onClick={onClose}>{canRestore?"Voltar ao estudo":"Voltar"}</button>
+  </Shell>;
+}
+
+// P1-C: existe progresso de uma versão anterior sem conta associada. Não é
+// lido, mostrado, migrado nem atribuído a esta conta; os dados ficam intactos.
+function LegacyProgressFound({onContinue}){
+  const [details,setDetails]=useState(false);
+  return <Shell><Logo/><div className="notice" role="status" data-legacy-progress="detected">
+    <b>Encontrámos progresso de uma versão anterior neste dispositivo.</b>
+    <span>Foi guardado antes de cada conta ter a sua área própria, por isso não sabemos a quem pertence. Não o abrimos nesta conta e não o apagámos.</span>
+    {details&&<span data-legacy-progress="recovery">Se esse progresso é teu, não o percas: não limpes os dados do browser. A recuperação só é feita depois de confirmarmos a quem pertence; fala com a equipa da beta da APProva+.</span>}
+  </div>
+  <button className="primary" onClick={onContinue}>Começar nesta conta sem esse progresso</button>
+  {!details&&<button className="secondary" onClick={()=>setDetails(true)}>O progresso antigo é meu</button>}
+  </Shell>;
+}
+
+function StorageRecoveryNotice(){
+  const block=lastStateIntegrityBlock();
+  const future=block?.reason==="state_version_future";
+  return <Shell><Logo/><div className="notice warning" data-recovery-reason={block?.reason||"state_unreadable"}>
+    <b>{future?"O teu progresso foi guardado por uma versão mais recente da APProva+":"Não foi possível ler o progresso guardado"}</b>
+    <span>{future?"Para não perder nada, esta versão não vai alterar os teus dados. Fecha e volta a abrir a app para carregar a versão mais recente.":"Nenhum dado foi substituído. Reabre a app para tentar novamente."}</span>
+  </div></Shell>;
+}
+
+const COMPLETION_BLOCK_COPY={
+  completion_in_progress:"Esta sessão está a ser concluída noutro separador. Fecha os outros separadores da APProva+ e tenta de novo.",
+  registry_corrupt:"O registo de sessões concluídas deste dispositivo está danificado. Não o apagámos. Podes guardar uma cópia e repará-lo: as sessões já concluídas continuam protegidas contra XP repetido.",
+  state_write_failed:"Não foi possível guardar a avaliação neste dispositivo.",
+  state_tab_only:"O browser só deixou guardar a avaliação neste separador, não de forma permanente. Para não a perderes, não a demos como concluída. Liberta espaço no browser ou sai do modo privado e volta a entregar.",
+  state_memory_only:"O browser não deixou guardar a avaliação de forma permanente. Para não a perderes, não a demos como concluída. Mantém este separador aberto, liberta espaço no browser ou sai do modo privado e volta a entregar.",
+  registry_unavailable:"O browser está a bloquear o armazenamento permanente, por isso a avaliação não pôde ser dada como concluída. Permite o armazenamento de dados deste site e volta a entregar."
+};
+
+// Onde estão de facto as respostas desta sessão. Só se promete que estão
+// guardadas quando a última gravação ficou em armazenamento permanente.
+function completionStorageTier(reason){
+  if(reason==="state_memory_only")return "memory";
+  if(reason==="state_tab_only")return "tab";
+  const tier=lastStorageTier();
+  return tier==="durable"||tier==="tab"||tier==="memory"?tier:"unknown";
+}
+
+const COMPLETION_STORAGE_RISK={
+  durable:"As respostas desta sessão continuam guardadas neste dispositivo.",
+  tab:"Atenção: as respostas desta sessão estão guardadas só neste separador. Se o fechares antes de a avaliação ficar guardada de forma segura, perdes estas respostas.",
+  memory:"Atenção: as respostas desta sessão estão só na memória do browser. Se atualizares ou fechares esta página antes de a avaliação ficar guardada de forma segura, perdes estas respostas.",
+  unknown:"Não conseguimos confirmar que as respostas desta sessão estão guardadas de forma permanente. Evita fechar ou atualizar esta página até a avaliação ficar guardada."
+};
+
+function CompletionBlocked({s,go}){
+  const [message,setMessage]=useState(null);
+  const block=lastCompletionBlockReason();
+  const reason=block?.reason||"registry_write_failed";
+  const corrupt=reason==="registry_corrupt";
+  function repair(){
+    const result=repairCompletionRegistry(s);
+    if(result.ok){clearCompletionBlock();go("home");return}
+    setMessage("Não foi possível reparar o registo. Nenhum dado foi apagado.");
+  }
+  const tier=completionStorageTier(reason);
+  return <Shell><Logo/><div className="notice warning" data-completion-block={reason} data-storage-risk={tier}>
+    <b>{tier==="durable"?"A tua sessão está guardada, mas ainda não foi concluída":"Esta avaliação ainda não está guardada de forma segura"}</b>
+    <span>{COMPLETION_BLOCK_COPY[reason]||"Não foi possível guardar o registo de conclusão neste dispositivo."}</span>
+    <span>{COMPLETION_STORAGE_RISK[tier]}</span>
+  </div>
+  {message&&<p className="notice warning">{message}</p>}
+  {corrupt?<><button className="primary" onClick={repair}>Guardar cópia e reparar</button>
+    <button className="secondary" onClick={()=>go("home")}>Voltar ao início</button></>
+    :<button className="primary" onClick={()=>{clearCompletionBlock();go("home")}}>Voltar ao início</button>}
+  </Shell>;
 }
 
 function MiniExamResult({s,setS,go}){

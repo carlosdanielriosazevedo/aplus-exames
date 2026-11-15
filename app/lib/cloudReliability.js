@@ -1,13 +1,59 @@
-
 "use client";
+import {accountOwner,accountSubject,accountContextCurrent,assertAccountContext} from "./cloudAccountSession.js";
+
+import {safeLocalStorage} from "./safeStorage.js";
 
 export {safeCloudMerge} from "./cloudStateMerge.js";
 
 const DEVICE_KEY="a25-device-id-v1";
 const SNAPSHOT_KEY="a25-cloud-snapshots-v1";
 const PENDING_KEY="a25-cloud-pending-v1";
-const MAX_SNAPSHOTS=8;
-const MAX_PENDING=20;
+const SNAPSHOT_V2="a25-cloud-snapshot-v2:";
+const PENDING_V2="a25-cloud-pending-v2:";
+const knownKeys=new Set();
+
+function stores(){
+  const result=[];
+  for(const key of ["localStorage","sessionStorage"])try{if(globalThis[key])result.push(globalThis[key]);}catch{}
+  return result;
+}
+function origin(state,context){
+  try{const subject=accountSubject(context);return accountOwner(state)===subject?subject:null;}catch{return null;}
+}
+function persistEntry(prefix,item){
+  const key=prefix+item.id;
+  knownKeys.add(key);
+  const raw=JSON.stringify(item);
+  for(const store of stores())try{
+    if(store.getItem(key)!==null)continue;
+    store.setItem(key,raw);return true;
+  }catch{}
+  return false;
+}
+function entries(prefix){
+  const result=new Map();
+  for(const store of stores()){
+    const keys=new Set(knownKeys);
+    try{for(let i=0;i<store.length;i++)keys.add(store.key(i));}catch{}
+    for(const key of keys)if(typeof key==="string"&&key.startsWith(prefix))try{
+      const raw=store.getItem(key);
+      if(raw){const item=JSON.parse(raw);if(item?.id)result.set(item.id,item);}
+    }catch{}
+  }
+  return [...result.values()].sort((a,b)=>b.at-a.at);
+}
+function legacyEntries(key){
+  for(const store of stores())try{
+    const raw=store.getItem(key);
+    if(raw){const list=JSON.parse(raw);return Array.isArray(list)?list.map((_,i)=>({id:`legacy-${key}-${i}`,quarantined:true})): [{id:`legacy-${key}`,quarantined:true}];}
+  }catch{return [{id:`legacy-${key}-unreadable`,quarantined:true}];}
+  return [];
+}
+function visible(item,context){
+  if(accountContextCurrent(context)&&item.accountId===context.subject&&accountOwner(item.state)===context.subject)return item;
+  // Never expose another account's academic snapshot to the current account UI.
+  return {id:item.id,quarantined:true};
+}
 
 function randomId(prefix="id"){
   const cryptoObj=typeof crypto!=="undefined"?crypto:null;
@@ -16,12 +62,12 @@ function randomId(prefix="id"){
 }
 
 export function getOrCreateDeviceId(){
-  if(typeof localStorage==="undefined")return "device-server";
+  const store=safeLocalStorage();if(!store)return "device-server";
   try{
-    const existing=localStorage.getItem(DEVICE_KEY);
+    const existing=store.getItem(DEVICE_KEY);
     if(existing)return existing;
     const next=randomId("device");
-    localStorage.setItem(DEVICE_KEY,next);
+    store.setItem(DEVICE_KEY,next);
     return next;
   }catch{
     return "device-unavailable";
@@ -164,29 +210,21 @@ function createLocalSnapshot(state,{label="snapshot",at=Date.now()}={}){
   };
 }
 
-export function saveLocalSnapshot(state,{label="Antes de sincronizar",at=Date.now()}={}){
-  const snapshot=createLocalSnapshot(state,{label,at});
-  if(typeof localStorage==="undefined")return snapshot;
-  try{
-    const list=JSON.parse(localStorage.getItem(SNAPSHOT_KEY)||"[]");
-    const next=[snapshot,...(Array.isArray(list)?list:[])].slice(0,MAX_SNAPSHOTS);
-    localStorage.setItem(SNAPSHOT_KEY,JSON.stringify(next));
-  }catch{}
+export function saveLocalSnapshot(state,{label="Antes de sincronizar",at=Date.now(),accountContext=null}={}){
+  const snapshot={...createLocalSnapshot(JSON.parse(JSON.stringify(state)),{label,at}),accountId:origin(state,accountContext)};
+  snapshot.persisted=persistEntry(SNAPSHOT_V2,snapshot);
   return snapshot;
 }
 
-export function listLocalSnapshots(){
-  if(typeof localStorage==="undefined")return [];
-  try{
-    const list=JSON.parse(localStorage.getItem(SNAPSHOT_KEY)||"[]");
-    return Array.isArray(list)?list:[];
-  }catch{return []}
+export function listLocalSnapshots(accountContext=null){
+  return [...entries(SNAPSHOT_V2).map(x=>visible(x,accountContext)),...legacyEntries(SNAPSHOT_KEY)];
 }
 
 export function queueCloudSave(state,{
   reason="network_failure",
   expectedRevision=null,
-  at=Date.now()
+  at=Date.now(),
+  accountContext=null
 }={}){
   const meta=cloudSyncMeta(state);
   const item={
@@ -197,30 +235,26 @@ export function queueCloudSave(state,{
     knownRemote:!!meta.baseFingerprint,
     deviceId:meta.deviceId||getOrCreateDeviceId(),
     fingerprint:stateFingerprint(state),
-    state
+    state:JSON.parse(JSON.stringify(state)),
+    accountId:origin(state,accountContext)
   };
-  if(typeof localStorage==="undefined")return item;
-  try{
-    const list=JSON.parse(localStorage.getItem(PENDING_KEY)||"[]");
-    const arr=Array.isArray(list)?list:[];
-    const dedup=arr.filter(x=>x.fingerprint!==item.fingerprint);
-    localStorage.setItem(PENDING_KEY,JSON.stringify([item,...dedup].slice(0,MAX_PENDING)));
-  }catch{}
+  // Immutable per-entry keys avoid cross-tab read/modify/write loss. No legacy
+  // queue, old snapshot, or other account entry is trimmed or deduplicated away.
+  item.persisted=persistEntry(PENDING_V2,item);
   return item;
 }
 
-export function listPendingCloudSaves(){
-  if(typeof localStorage==="undefined")return [];
-  try{
-    const list=JSON.parse(localStorage.getItem(PENDING_KEY)||"[]");
-    return Array.isArray(list)?list:[];
-  }catch{return []}
+export function listPendingCloudSaves(accountContext=null){
+  return [...entries(PENDING_V2).map(x=>visible(x,accountContext)),...legacyEntries(PENDING_KEY)];
 }
 
-export function removePendingCloudSave(id){
-  if(typeof localStorage==="undefined")return;
-  try{
-    const next=listPendingCloudSaves().filter(x=>x.id!==id);
-    localStorage.setItem(PENDING_KEY,JSON.stringify(next));
+export function removePendingCloudSave(id,accountContext){
+  assertAccountContext(accountContext);
+  if(typeof id!=="string"||id.startsWith("legacy-"))return false;
+  let removed=false;
+  for(const store of stores())try{
+    const key=PENDING_V2+id,raw=store.getItem(key),item=raw&&JSON.parse(raw);
+    if(item?.accountId===accountContext.subject&&accountOwner(item.state)===accountContext.subject){store.removeItem(key);removed=true;}
   }catch{}
+  return removed;
 }
