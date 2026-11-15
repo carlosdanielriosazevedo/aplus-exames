@@ -17,6 +17,7 @@ const DEBOUNCE_MS=8000;
 const COPY={
   // "A guardar"/"Guardado" não aparecem durante o estudo (silêncio = está tudo
   // bem); o estado detalhado está no ecrã Conta e progresso.
+  paused:{icon:"⏸",text:"A gravação online está em pausa por manutenção. O progresso continua guardado neste dispositivo."},
   offline:{icon:"!",text:"Sem ligação. O progresso está guardado neste dispositivo e vamos tentar de novo."},
   conflict:{icon:"⚠",text:"Há progresso diferente noutro dispositivo. Nada foi substituído.",action:"Resolver"},
   blocked_other_account:{icon:"⚠",text:"Este dispositivo tem progresso de outra conta. Não vamos misturar os dados.",action:"Ver conta"},
@@ -98,6 +99,12 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
       setStatus("conflict");return {status:"conflict"};
     }catch(error){
       if(error?.status===401){setAccount(null);setStatus(null);rememberCloudSession(false);return {status:"signed_out"}}
+      if(error?.code==="CLOUD_WRITES_DISABLED"){
+        setStatus("paused");
+        clearTimeout(timer.current);
+        timer.current=setTimeout(()=>cycle(),retryDelayMs(3));
+        return {status:"paused"};
+      }
       if(error?.retryable||error?.code==="CLOUD_NETWORK_ERROR"){
         setStatus("offline");
         clearTimeout(timer.current);

@@ -22,6 +22,7 @@ const AccountCloud=dynamic(()=>import("./components/AccountCloud").then(module=>
 const CloudSyncLayer=dynamic(()=>import("./components/CloudSyncLayer"),{ssr:false});
 // Conta obrigatória para estudar (beta pública). Ativa apenas quando a variável
 // pública está definida, para poder ser ligada/desligada sem alterar código.
+const MAINTENANCE_MESSAGE=String(process.env.NEXT_PUBLIC_APPROVA_MAINTENANCE_MESSAGE||"").trim().slice(0,240);
 const REQUIRE_ACCOUNT=process.env.NEXT_PUBLIC_APPROVA_REQUIRE_ACCOUNT==="1"&&!!process.env.NEXT_PUBLIC_NEON_AUTH_URL;
 const MathReviewMatter=dynamic(()=>import("./components/MathReviewMatter"),{ssr:false});
 const BetaDashboard=dynamic(()=>import("./components/InternalDashboards").then(module=>module.BetaDashboard),{ssr:false});
@@ -601,7 +602,7 @@ export default function App(){
   }}/>;
   })();
 
-  return <>{view}{hydrated&&cloudHint&&!isFriendsBeta(s)&&<CloudSyncLayer s={s} setS={setS} hydrated={hydrated} screen={screen} go={go}/>}</>;
+  return <>{MAINTENANCE_MESSAGE&&<div role="status" style={{position:"sticky",top:0,zIndex:9500,background:"#fff8e8",borderBottom:"1px solid #f0dfae",color:"#6b4e00",padding:"8px 14px",fontSize:13,textAlign:"center"}}>{MAINTENANCE_MESSAGE}</div>}{view}{hydrated&&cloudHint&&!isFriendsBeta(s)&&<CloudSyncLayer s={s} setS={setS} hydrated={hydrated} screen={screen} go={go}/>}</>;
 }
 
 function FriendsBetaDisclaimer({s,compact=false}){
