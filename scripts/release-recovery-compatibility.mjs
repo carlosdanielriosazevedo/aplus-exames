@@ -28,7 +28,12 @@ try{
  modules.recovery=Object.fromEntries(await Promise.all(files.filter(f=>!["browserStorage.js","pilotConsentClient.js"].includes(f)).map(async f=>[f,await import(pathToFileURL(resolve("app/lib",f)))])));
  // Candidate must retain the pinned safety storage implementation.
  check(git("diff",safety,"--",...files.map(f=>`app/lib/${f}`))==="","candidate must preserve #385 storage guards");
- check(git("diff",production,"--","app/api","db")==="","no database/API migration in release");
+ // db/ continua congelado. Em app/api só são aceites as adições explicitamente
+// aprovadas pelo product owner (PR #474: progresso via servidor, sem migração SQL).
+check(git("diff",production,"--","db")==="","no database migration in release");
+const APPROVED_API_ADDITIONS=new Set(["app/api/cloud/state/route.js"]);
+const apiChanges=git("diff","--name-status",production,"--","app/api").split("\n").filter(Boolean).map(line=>line.split("\t"));
+check(apiChanges.every(([status,file])=>status==="A"&&APPROVED_API_ADDITIONS.has(file)),"only approved API additions; existing API routes unchanged");
  for(const mode of ["internal","friends_beta"]){
   const key=mode==="internal"?"a25-active-session-v1":"a25-friends-active-session-v1";
   for(const kind of ["training","mission","mini_exam","diagnostic"]){
