@@ -1,4 +1,4 @@
-import {appendClosedBetaValidationCase,loadLocalValidationDataset,makeGraderValidationCase} from "./graderValidationDataset.js";
+import {appendClosedBetaValidationCase,loadLocalValidationDataset,makeGraderValidationCase,validationDataStorage} from "./graderValidationDataset.js";
 
 export const GRADER_VALIDATION_CONSENT_KEY="aplus-grader-validation-consent-v1";
 export const GRADER_VALIDATION_SUBJECTS=["mathematics","portuguese","physics-chemistry-a"];
@@ -13,13 +13,13 @@ function hashText(text){
 }
 
 export function graderValidationConsent(){
-  if(typeof localStorage==="undefined")return false;
-  return localStorage.getItem(GRADER_VALIDATION_CONSENT_KEY)==="accepted";
+  const store=validationDataStorage();if(!store)return false;
+  return store.getItem(GRADER_VALIDATION_CONSENT_KEY)==="accepted";
 }
 
 export function setGraderValidationConsent(accepted){
-  if(typeof localStorage==="undefined")return false;
-  localStorage.setItem(GRADER_VALIDATION_CONSENT_KEY,accepted?"accepted":"declined");
+  const store=validationDataStorage();if(!store)return false;
+  store.setItem(GRADER_VALIDATION_CONSENT_KEY,accepted?"accepted":"declined");
   return true;
 }
 
@@ -64,7 +64,8 @@ export function captureRealValidationCase({subject,item,response,result,response
   const family=responseFamily||item.responseType||item.response?.type||"unknown";
   const prompt=question||item.prompt||item.q||"";
   const resolvedMaxPoints=maxPoints??item.maxPoints??item.points??result?.maxPoints??100;
-  if(alreadyCaptured({subject,itemId:item.id,response}))return {ok:false,code:"ALREADY_CAPTURED"};
+  try{if(alreadyCaptured({subject,itemId:item.id,response}))return {ok:false,code:"ALREADY_CAPTURED"};}
+  catch{return {ok:false,code:"VALIDATION_ORIGIN_UNPROVEN"};}
   const split=validationSplitForRealResponse({subject,itemId:item.id,response});
   const row=makeGraderValidationCase({
     source:"closed_beta_real",

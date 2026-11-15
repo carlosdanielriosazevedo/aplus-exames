@@ -1,8 +1,10 @@
+import {scopedLocalStorage} from "./accountWorkspace.js";
+
 const PREFIX="applus:fqa-exam-draft:v1:";
 
 function storage(){
   if(typeof window==="undefined")return null;
-  try{return window.localStorage}catch{return null}
+  return scopedLocalStorage();
 }
 
 export function loadPhysicsChemistryExamDraft(examId,itemIds=[]){

@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import {openVerifiedAccount} from "../app/lib/cloudAccountSession.js";
+import {selectAccountWorkspace,accountStorageKey} from "../app/lib/accountWorkspace.js";
 import {
   GRADER_VALIDATION_CONSENT_KEY,
   GRADER_VALIDATION_SUBJECTS,
@@ -24,11 +26,15 @@ global.localStorage={
   setItem:(key,value)=>store.set(key,String(value)),
   removeItem:key=>store.delete(key)
 };
+const previousFetch=globalThis.fetch;
+globalThis.fetch=async()=>Response.json({ok:true,user:{id:"synthetic-grader-owner"}});
+selectAccountWorkspace(await openVerifiedAccount());
+globalThis.fetch=previousFetch;
 
 assert.deepEqual(GRADER_VALIDATION_SUBJECTS,["mathematics","portuguese","physics-chemistry-a"]);
 assert.equal(graderValidationConsent(),false,"consentimento deve começar desligado");
 setGraderValidationConsent(true);
-assert.equal(localStorage.getItem(GRADER_VALIDATION_CONSENT_KEY),"accepted");
+assert.equal(localStorage.getItem(accountStorageKey(GRADER_VALIDATION_CONSENT_KEY)),"accepted");
 assert.equal(graderValidationConsent(),true);
 
 const fqaItem={id:"fqa-real-validation-audit",prompt:"Justifica cientificamente a conclusão.",responseType:"restricted-response",maxPoints:10,gradingMode:"rubric"};
@@ -99,5 +105,5 @@ const denied=capturePhysicsChemistryValidationCase({item:{...fqaItem,id:"fqa-den
 assert.equal(denied.code,"VALIDATION_CONSENT_REQUIRED");
 assert.equal(loadLocalValidationDataset().length,3);
 
-assert.ok(localStorage.getItem(GRADER_VALIDATION_STORAGE_KEY),"dataset deve ficar separado no storage próprio");
+assert.ok(localStorage.getItem(accountStorageKey(GRADER_VALIDATION_STORAGE_KEY)),"dataset deve ficar separado no storage próprio da conta verificada");
 console.log("REAL GRADER CAPTURE · THREE SUBJECTS: GO");

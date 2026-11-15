@@ -1,33 +1,42 @@
 "use client";
 
+import {downloadWorkspaceJson} from "../lib/cloudRecovery.js";
+import {beginRecoveryAccess,revalidateRecoveryAccess} from "../lib/recoveryAccess.js";
+import {useRecoveryViewGuard} from "../lib/useRecoveryViewGuard.js";
 import {useEffect,useState} from "react";
 import {graderValidationConsent,setGraderValidationConsent} from "../lib/graderValidationCapture.js";
 import {datasetReadiness,exportValidationDataset,loadLocalValidationDataset} from "../lib/graderValidationDataset.js";
 
 const SUBJECT_LABELS={mathematics:"Matemática A",portuguese:"Português","physics-chemistry-a":"Física e Química A"};
 
-function downloadJson(filename,data){
-  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");a.href=url;a.download=filename;a.click();URL.revokeObjectURL(url);
+async function downloadJson(filename,data){
+  try{await downloadWorkspaceJson(()=>data,filename);}
+  catch{window.alert("Exportação bloqueada. Confirma a conta de origem.");}
 }
 
 export default function GraderValidationConsent(){
+  const accessGuard=useRecoveryViewGuard();
   const [accepted,setAccepted]=useState(false);
   const [ready,setReady]=useState(false);
   const [summary,setSummary]=useState(null);
 
-  function refresh(){setSummary(datasetReadiness(loadLocalValidationDataset()))}
-  useEffect(()=>{setAccepted(graderValidationConsent());refresh();setReady(true)},[]);
+  async function refresh(){try{const access=await beginRecoveryAccess({select:true});const rows=loadLocalValidationDataset();await revalidateRecoveryAccess(access);setSummary(datasetReadiness(rows));}catch{setSummary(null);}}
+  useEffect(()=>{
+    if(!accessGuard.ready){setReady(false);return;}
+    let live=true;
+    void beginRecoveryAccess().then(()=>{if(live){setAccepted(graderValidationConsent());void refresh();setReady(true);}}).catch(()=>{if(live)setReady(false);});
+    return()=>{live=false;};
+  },[accessGuard.ready]);
 
-  function choose(value){setGraderValidationConsent(value);setAccepted(value);refresh()}
-  function exportData(){
+  async function choose(value){try{await beginRecoveryAccess({select:true});setGraderValidationConsent(value);setAccepted(value);await refresh();}catch{setSummary(null);}}
+  async function exportData(){
+    try{await beginRecoveryAccess();}catch{return;}
     const rows=loadLocalValidationDataset();
     if(!rows.length)return;
     downloadJson(`aplus-validacao-respostas-${new Date().toISOString().slice(0,10)}.json`,exportValidationDataset(rows));
   }
 
-  if(!ready)return null;
+  if(!ready||!accessGuard.ready)return <p>Confirma a conta para aceder às respostas guardadas.</p>;
   const total=summary?.realCases||0;
   return <main style={{maxWidth:760,margin:"0 auto",padding:"40px 20px",fontFamily:"system-ui,sans-serif",lineHeight:1.6}}>
     <p style={{fontSize:12,fontWeight:800,letterSpacing:1}}>APProva+ · CLOSED BETA</p>
