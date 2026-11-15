@@ -1,3 +1,4 @@
+import {FQA_SUBJECT,FQA_ACADEMIC_POLICY,mergeFqaHistory,prepareFqaAcademicState,normalizeFqaProgress,verifiedFqaAcademicResult,beginFqaRuntimeContext,observeFqaPendingResults,observeFqaCompletion} from "./fqaAcademicIntegrity.js";
 import {canonicalSubjectId} from "./subjectWorkspace.js";
 import {missionCompletedToday,recordStudyActivity} from "./engagement.js";
 import {recordCompetitiveActivity} from "./competition.js";
@@ -117,6 +118,7 @@ function mergeErrorPatterns(left={},right={}){
 }
 
 function mergeProgress(left,right,subjectId){
+  if(subjectId===FQA_SUBJECT)return normalizeProgress(mergeFqaHistory(left,right),subjectId);
   if(!left)return normalizeProgress(right,subjectId);
   const a=normalizeProgress(left,subjectId),b=normalizeProgress(right,subjectId);
   const newest=(a.lastActivityAt||0)>=(b.lastActivityAt||0)?a:b;
@@ -138,6 +140,7 @@ function mergeProgress(left,right,subjectId){
 
 function normalizeProgress(progress,subjectId){
   const empty=emptySubjectProgress(subjectId);
+  if(subjectId===FQA_SUBJECT)return {...empty,...normalizeFqaProgress(progress)};
   const competence=Object.fromEntries(Object.entries(progress?.competence&&typeof progress.competence==="object"?progress.competence:{}).map(([id,row])=>[id,normalizeCompetenceRow(row)]));
   return {...empty,...(progress||{}),subjectId,version:MODEL_VERSION,sessions:Array.isArray(progress?.sessions)?progress.sessions.slice(-MAX_SESSIONS):[],missionHistory:Array.isArray(progress?.missionHistory)?progress.missionHistory.slice(-MAX_SESSIONS):[],competence,errorPatterns:normalizeErrorPatterns(progress?.errorPatterns),errorMemoryVersion:1,lastPosition:progress?.lastPosition||null};
 }
@@ -149,18 +152,23 @@ export function migrateSubjectProgress(state){
     const id=canonicalSubjectId(storedId);
     normalized[id]=mergeProgress(normalized[id],progress,id);
   }
-  return {...state,subjectProgress:normalized,subjectProgressModelVersion:MODEL_VERSION};
+  return prepareFqaAcademicState({...state,subjectProgress:normalized,subjectProgressModelVersion:MODEL_VERSION});
 }
 
 export function subjectProgressFor(state,subjectId){return normalizeProgress(state?.subjectProgress?.[subjectId],subjectId)}
 
 function putProgress(state,subjectId,progress){
+  if(subjectId===FQA_SUBJECT){
+    const prepared=prepareFqaAcademicState(state);
+    const original=prepared.subjectProgress?.[FQA_SUBJECT];
+    progress={...progress,integrityHistory:original?.integrityHistory||progress.integrityHistory||[],academicIntegrityPolicy:FQA_ACADEMIC_POLICY};
+  }
   return {...state,subjectProgress:{...(state.subjectProgress||{}),[subjectId]:normalizeProgress(progress,subjectId)},subjectProgressModelVersion:MODEL_VERSION};
 }
 
 function compactResult(result){
   if(!result)return null;
-  const compact={status:result.status,final:!!result.final,correct:result.correct??null,points:Number.isFinite(result.points)?result.points:null,maxPoints:Number.isFinite(result.maxPoints)?result.maxPoints:null,provisionalPoints:Number.isFinite(result.provisionalPoints)?result.provisionalPoints:null,penalty:Number.isFinite(result.penalty)?result.penalty:0,type1Count:Number.isFinite(result.type1Count)?result.type1Count:0,type2Count:Number.isFinite(result.type2Count)?result.type2Count:0,requiresReview:!!result.requiresReview,gradingMode:result.gradingMode||null,classificationMode:result.classificationMode||null,countsForExamScore:typeof result.countsForExamScore==="boolean"?result.countsForExamScore:null,responseText:result.responseText||""};
+  const compact={...(result.academicProvenance?{academicProvenance:result.academicProvenance}:{}),status:result.status,final:!!result.final,correct:result.correct??null,points:Number.isFinite(result.points)?result.points:null,maxPoints:Number.isFinite(result.maxPoints)?result.maxPoints:null,provisionalPoints:Number.isFinite(result.provisionalPoints)?result.provisionalPoints:null,penalty:Number.isFinite(result.penalty)?result.penalty:0,type1Count:Number.isFinite(result.type1Count)?result.type1Count:0,type2Count:Number.isFinite(result.type2Count)?result.type2Count:0,requiresReview:!!result.requiresReview,gradingMode:result.gradingMode||null,classificationMode:result.classificationMode||null,countsForExamScore:typeof result.countsForExamScore==="boolean"?result.countsForExamScore:null,responseText:result.responseText||""};
   if(result.final)return compact;
   if(result.gradingMode==="structured-provisional")return {...compact,steps:Array.isArray(result.steps)?result.steps.map(step=>({id:step.id,status:step.status,points:Number.isFinite(step.points)?step.points:null,maxPoints:Number.isFinite(step.maxPoints)?step.maxPoints:null,errorType:step.errorType||null})):[]};
   return {...compact,rubricId:result.rubricId||null,rubricCompleted:!!result.rubricCompleted,revisionCount:Number.isFinite(result.revisionCount)?result.revisionCount:0,previousResponseText:result.previousResponseText||"",revisionHistory:Array.isArray(result.revisionHistory)?result.revisionHistory.map(row=>({revision:Number.isFinite(row?.revision)?row.revision:0,responseText:String(row?.responseText||""),rubricCompleted:!!row?.rubricCompleted,rubricObservationEvidence:Array.isArray(row?.rubricObservationEvidence)?row.rubricObservationEvidence.map(observation=>({criterionId:observation.criterionId,observationId:observation.observationId,evidence:observation.evidence||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})):[]})):[],rubricEvidence:(result.criteria||[]).map(criterion=>({criterionId:criterion.id,evidence:criterion.status||"pending"})),rubricObservationEvidence:(result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,evidence:observation.status||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})))};}
@@ -185,14 +193,16 @@ export function createSubjectSessionId(subjectId,kind,at=Date.now()){
 export function beginSubjectSession(state,{subjectId,kind,label,domain=null,items,sessionId=null,startedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
   // Uma tentativa em curso não pode ser substituída, nem por chamadas diretas ao motor.
-  if(progress.lastPosition||(subjectId==="portuguese"&&state.subjectSettings?.portuguese?.miniExamDraft))return state;
+  if(progress.integrityPendingConflict||progress.integrityRecoveryBlocked||progress.lastPosition||(subjectId==="portuguese"&&state.subjectSettings?.portuguese?.miniExamDraft))return state;
   const id=sessionId||createSubjectSessionId(subjectId,kind,startedAt);
+  if(subjectId===FQA_SUBJECT)beginFqaRuntimeContext({sessionId:id,kind,itemIds:items.map(item=>item.id),startedAt});
   return putProgress(state,subjectId,{...progress,lastPosition:{sessionId:id,kind,label,domain,itemIds:items.map(item=>item.id),current:0,results:[],startedAt,updatedAt:startedAt},lastActivityAt:startedAt});
 }
 
 export function advanceSubjectSession(state,subjectId,{sessionId=null,current,results,currentResult=null,currentAnswer=null,updatedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
-  if(!progress.lastPosition||(sessionId&&sessionId!==progress.lastPosition.sessionId))return state;
+  if(progress.integrityPendingConflict||progress.integrityRecoveryBlocked||!progress.lastPosition||(sessionId&&sessionId!==progress.lastPosition.sessionId))return state;
+  if(subjectId===FQA_SUBJECT)observeFqaPendingResults(progress.lastPosition,results);
   return putProgress(state,subjectId,{...progress,lastPosition:{...progress.lastPosition,current,results:results.map(compactResult),currentResult:compactResult(currentResult),currentAnswer,updatedAt},lastActivityAt:updatedAt});
 }
 
@@ -204,22 +214,29 @@ function subjectSessionXp(kind,results=[]){
   return 0;
 }
 
-export function recordSubjectSession(state,{subjectId,kind,label,domain=null,items,results,sessionId=null,completedAt=Date.now()}){
+export function recordSubjectSession(state,{subjectId,kind,label,domain=null,items,results,sessionId=null,startedAt=null,completedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
+  if(progress.integrityPendingConflict||progress.integrityRecoveryBlocked)return state;
   const completionId=sessionId||progress.lastPosition?.sessionId||null;
   // Sessões arquivadas por erro técnico nunca podem receber recompensa tardia.
   if(completionId&&(progress.interruptedTechnicalSessions||[]).some(row=>row.sessionId===completionId))return state;
   // Não atribuir XP nem evidência a uma conclusão concorrente com uma tentativa pendente.
   if(progress.lastPosition&&completionId!==progress.lastPosition.sessionId)return state;
   if(completionId&&((progress.completedSessionIds||[]).includes(completionId)||progress.sessions.some(row=>row.sessionId===completionId)))return state;
+  const originalStart=progress.lastPosition?.startedAt??startedAt;
+  const session={sessionId:completionId,kind,label,domain,itemIds:items.map(item=>item.id),results:results.map(compactResult),completedAt,...(subjectId===FQA_SUBJECT&&Number.isFinite(originalStart)?{startedAt:originalStart}:{})};
+  if(subjectId===FQA_SUBJECT)observeFqaCompletion(session,items,results);
   const competence={...progress.competence};
   let errorPatterns=normalizeErrorPatterns(progress.errorPatterns);
   const recordsAcademicEvidence=kind!=="training";
   items.forEach((item,index)=>{
-    const result=results[index];
-    if(!result||result.status==="unanswered")return;
-    errorPatterns=recordErrorPatternEvidence(errorPatterns,item,result,completedAt);
-    if(!recordsAcademicEvidence)return;
+    const rawResult=results[index];
+    if(!rawResult||rawResult.status==="unanswered")return;
+    const memoryResult=subjectId===FQA_SUBJECT?verifiedFqaAcademicResult(item,rawResult,session,index):rawResult;
+    if(memoryResult)errorPatterns=recordErrorPatternEvidence(errorPatterns,item,memoryResult,completedAt);
+    const result=subjectId===FQA_SUBJECT?memoryResult:rawResult;
+    if(!result)return;
+    if(!recordsAcademicEvidence||(subjectId===FQA_SUBJECT&&item.responseType==="restricted-response"))return;
     const id=item.competencyId||`${item.domain}:general`;
     const previous=normalizeCompetenceRow(competence[id]);
     if(result.final){
@@ -257,8 +274,7 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
       lastAnsweredAt:completedAt
     };
   });
-  const session={sessionId:completionId,kind,label,domain,itemIds:items.map(item=>item.id),results:results.map(compactResult),completedAt};
-  let completed=putProgress(state,subjectId,{...progress,completedSessionIds:[...new Set([...(progress.completedSessionIds||[]),...progress.sessions.map(row=>row.sessionId).filter(Boolean),...(completionId?[completionId]:[])])],diagnosticDone:progress.diagnosticDone||kind==="diagnostic",diagnosticCompletedAt:kind==="diagnostic"?completedAt:progress.diagnosticCompletedAt,sessions:[...progress.sessions,session].slice(-MAX_SESSIONS),missionHistory:kind==="mission"?[...progress.missionHistory,session].slice(-MAX_SESSIONS):progress.missionHistory,competence,errorPatterns,errorMemoryVersion:1,lastPosition:null,lastActivityAt:completedAt});
+  let completed=putProgress(state,subjectId,{...progress,completedSessionIds:[...new Set([...(progress.completedSessionIds||[]),...progress.sessions.map(row=>row.sessionId).filter(Boolean),...(completionId?[completionId]:[])])],diagnosticDone:progress.diagnosticDone||kind==="diagnostic",diagnosticCompletedAt:kind==="diagnostic"?completedAt:progress.diagnosticCompletedAt,sessions:subjectId===FQA_SUBJECT?[...progress.sessions,session]:[...progress.sessions,session].slice(-MAX_SESSIONS),missionHistory:kind==="mission"?(subjectId===FQA_SUBJECT?[...progress.missionHistory,session]:[...progress.missionHistory,session].slice(-MAX_SESSIONS)):progress.missionHistory,competence,errorPatterns,errorMemoryVersion:1,lastPosition:null,lastActivityAt:completedAt});
   const alreadyCompletedMission=kind==="mission"&&missionCompletedToday(state,completedAt);
   const activityKind=alreadyCompletedMission?"training":kind;
   const xpEarned=subjectSessionXp(activityKind,results);
@@ -276,6 +292,7 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
  */
 export function quarantineUnrecoverableSubjectSession(state,subjectId,availableItemIds,at=Date.now()){
   const progress=subjectProgressFor(state,subjectId);
+  if(progress.integrityPendingConflict||progress.integrityRecoveryBlocked)return state;
   const pending=progress.lastPosition;
   if(!pending||!Array.isArray(pending.itemIds)||!pending.itemIds.length)return state;
   const available=new Set(availableItemIds);
@@ -291,13 +308,14 @@ export function quarantineUnrecoverableSubjectSession(state,subjectId,availableI
   return putProgress(state,subjectId,{
     ...progress,
     lastPosition:null,
-    interruptedTechnicalSessions:[...(progress.interruptedTechnicalSessions||[]),archived].slice(-MAX_SESSIONS),
+    interruptedTechnicalSessions:subjectId===FQA_SUBJECT?[...(progress.interruptedTechnicalSessions||[]),archived]:[...(progress.interruptedTechnicalSessions||[]),archived].slice(-MAX_SESSIONS),
     lastActivityAt:at
   });
 }
 
 export function resetSubjectProgress(state,subjectId){
-  if(subjectProgressFor(state,subjectId).lastPosition)return state;
+  const progress=subjectProgressFor(state,subjectId);
+  if(progress.lastPosition||progress.integrityPendingConflict||progress.integrityRecoveryBlocked)return state;
   const subjectProgress={...(state.subjectProgress||{})};
   delete subjectProgress[subjectId];
   return {...state,subjectProgress,subjectProgressModelVersion:MODEL_VERSION};

@@ -17,6 +17,12 @@ globalThis.localStorage=storage();globalThis.sessionStorage=storage();
 globalThis.window={localStorage,sessionStorage};
 let checks=0;
 const check=(condition,message)=>{assert.ok(condition,message);checks++};
+function preservedField(actual,expected,field){
+ if(field!=="subjectProgress"){assert.deepEqual(actual[field],expected[field]);return}
+ for(const [subject,row] of Object.entries(expected.subjectProgress||{})){
+  for(const [key,value] of Object.entries(row))assert.deepEqual(actual.subjectProgress[subject][key],value);
+ }
+}
 try{
  const modules={};
  for(const [name,ref] of Object.entries({production,safety,combined})){
@@ -26,8 +32,9 @@ try{
   modules[name]=Object.fromEntries(await Promise.all(files.filter(f=>!["browserStorage.js","pilotConsentClient.js"].includes(f)).map(async f=>[f,await import(pathToFileURL(join(sub,f)))])));
  }
  modules.recovery=Object.fromEntries(await Promise.all(files.filter(f=>!["browserStorage.js","pilotConsentClient.js"].includes(f)).map(async f=>[f,await import(pathToFileURL(resolve("app/lib",f)))])));
- // Candidate must retain the pinned safety storage implementation.
- check(git("diff",safety,"--",...files.map(f=>`app/lib/${f}`))==="","candidate must preserve #385 storage guards");
+ // #423 changes full-state reading additively. Draft/clock/storage guards remain byte-identical;
+ // full-state preservation is verified behaviourally below, including the original fields.
+ check(git("diff",safety,"--",...files.filter(f=>f!=="persistence.js").map(f=>`app/lib/${f}`))==="","candidate must preserve #385 draft/clock/storage guards");
  check(git("diff",production,"--","app/api","db")==="","no database/API migration in release");
  for(const mode of ["internal","friends_beta"]){
   const key=mode==="internal"?"a25-active-session-v1":"a25-friends-active-session-v1";
@@ -110,12 +117,13 @@ try{
     const rawDraft=JSON.stringify({kind:"training",savedAt:1,responses:["Preservar"]});
     localStorage.setItem(draftKey,rawDraft);
     check(modules[origin]["persistence.js"].saveLocalState(synthetic,stateKey),"old writer saves full state");
+    localStorage.setItem(stateKey,JSON.stringify({...JSON.parse(localStorage.getItem(stateKey)),_stateVersion:version}));
     const upgraded=modules.recovery["persistence.js"].loadLocalStateStatus({},()=>({synthetic:{score:0,evidence:[]}}),stateKey);
     check(upgraded.found&&!upgraded.error,"candidate reads saved full state");
-    for(const field of ["xp","diagnosticDone","diagnosticResponses","selectedSubjectIds","activeSubjectId","profile","subjectSettings","subjectProgress","scores"]){assert.deepEqual(upgraded.state[field],synthetic[field]);checks++}
+    for(const field of ["xp","diagnosticDone","diagnosticResponses","selectedSubjectIds","activeSubjectId","profile","subjectSettings","subjectProgress","scores"]){preservedField(upgraded.state,synthetic,field);checks++}
     check(modules.recovery["persistence.js"].saveLocalState(upgraded.state,stateKey),"candidate writes upgraded state");
     const recovered=modules.combined["persistence.js"].loadLocalStateStatus({},()=>({synthetic:{score:0,evidence:[]}}),stateKey);
-    for(const field of ["xp","diagnosticResponses","subjectProgress","subjectSettings","scores"]){assert.deepEqual(recovered.state[field],synthetic[field]);checks++}
+    for(const field of ["xp","diagnosticResponses","subjectProgress","subjectSettings","scores"]){preservedField(recovered.state,synthetic,field);checks++}
     check(localStorage.getItem(draftKey)===rawDraft,"saving full state cannot remove pending attempt");
    }
   }

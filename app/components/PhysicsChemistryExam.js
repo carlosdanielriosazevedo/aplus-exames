@@ -7,6 +7,7 @@ import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./P
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
+import {beginFqaRuntimeContext,fqaExamResultPresentation,restoreFqaResultView} from "../lib/fqaAcademicIntegrity";
 import {hasPhysicsChemistryExamDraft,clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";
 
 const SUBJECT_ID="physics-chemistry-a";
@@ -15,17 +16,6 @@ function answered(item,value){
   if(item.responseType==="multiple-choice")return Number.isInteger(value);
   if(item.responseType==="stepwise")return Object.values(value?.steps||{}).some(row=>row&&typeof row==="object"?Object.values(row).some(part=>String(part??"").trim()):String(row??"").trim());
   return String(value??"").trim().length>0;
-}
-
-function examPointsFor(item,result){
-  if(!result||result.status==="unanswered")return {points:0,provisional:false,pending:false};
-  if(item.responseType==="multiple-choice")return {points:result.correct?item.examPoints:0,provisional:false,pending:false};
-  if(["stepwise","restricted-response"].includes(item.responseType)){
-    const raw=Number(result.provisionalPoints)||0;
-    const max=Number(result.maxPoints)||1;
-    return {points:Math.round(raw/max*item.examPoints*10)/10,provisional:true,pending:!!result.requiresReview};
-  }
-  return {points:0,provisional:true,pending:true};
 }
 
 function Stimulus({item}){return <PhysicsChemistryStimulus item={item}/>;}
@@ -55,14 +45,21 @@ export default function PhysicsChemistryExam({s,setS,go}){
   const item=rows[current];
   const filled=rows.filter(row=>answered(row,answers[row.id])).length;
 
-  const baseResults=useMemo(()=>rows.map(row=>gradePhysicsChemistryResponse(row,answers[row.id])),[rows,answers]);
+  const baseResults=useMemo(()=>{
+    const context={sessionId:"fqa-full-"+startedAt,kind:"full_exam",itemIds,startedAt};
+    if(!recoveryBlocked)beginFqaRuntimeContext(context);
+    return rows.map((row,index)=>gradePhysicsChemistryResponse(row,answers[row.id],{...context,index}));
+  },[rows,answers,itemIds,startedAt,recoveryBlocked]);
   const results=baseResults;
-  const scored=useMemo(()=>rows.map((row,index)=>({...examPointsFor(row,results[index]),item:row,result:results[index]})),[rows,results]);
+  const academicContext={sessionId:"fqa-full-"+startedAt,kind:"full_exam",itemIds,startedAt};
+  const scored=rows.map((row,index)=>({...fqaExamResultPresentation(row,results[index],academicContext,index),item:row,result:results[index]}));
   const mandatory=scored.slice(0,blueprint.mandatoryItems.length);
   const optional=scored.slice(blueprint.mandatoryItems.length);
-  const mandatoryKnown=mandatory.reduce((sum,row)=>sum+row.points,0);
-  const bestOptional=[...optional].sort((a,b)=>b.points-a.points).slice(0,blueprint.optionalCounted);
-  const optionalKnown=bestOptional.reduce((sum,row)=>sum+row.points,0);
+  const eligibleMandatory=mandatory.filter(row=>row.eligible);
+  const mandatoryKnown=eligibleMandatory.length?eligibleMandatory.reduce((sum,row)=>sum+row.points,0):null;
+  const bestOptional=optional.filter(row=>row.eligible).sort((a,b)=>b.points-a.points).slice(0,blueprint.optionalCounted);
+  const optionalKnown=bestOptional.length?bestOptional.reduce((sum,row)=>sum+row.points,0):null;
+  const known=mandatoryKnown===null&&optionalKnown===null?null:(mandatoryKnown??0)+(optionalKnown??0);
   const pendingOpen=scored.filter(row=>row.pending).length;
   const hasProvisional=scored.some(row=>row.provisional);
   const baseSeconds=blueprint.durationMinutes*60;
@@ -90,6 +87,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
   function finish({force=false}={}){if(force){setReview(true);return;}setSubmitCheck(true);}
 
   function saveReviewAndExit(){
+    if(s.subjectProgress?.[SUBJECT_ID]?.integrityPendingConflict||s.subjectProgress?.[SUBJECT_ID]?.integrityRecoveryBlocked)return;
     if(!recordedRef.current){
       recordedRef.current=true;
       setS(prev=>recordSubjectSession(prev,{
@@ -98,12 +96,15 @@ export default function PhysicsChemistryExam({s,setS,go}){
         label:blueprint.label,
         items:rows,
         results,
+        startedAt,
         sessionId:"fqa-full-"+startedAt
       }));
     }
     clearPhysicsChemistryExamDraft(examId);
     go("exams");
   }
+
+  if(s.subjectProgress?.[SUBJECT_ID]?.integrityPendingConflict||s.subjectProgress?.[SUBJECT_ID]?.integrityRecoveryBlocked)return <Shell><div role="alert">Há versões diferentes de uma tentativa. Foram conservadas e precisam de resolução segura antes de continuar.</div><button onClick={()=>go("exams")}>Voltar</button></Shell>;
 
   if(recoveryBlocked)return <Shell><div role="alert">Não foi possível recuperar esta prova. As respostas guardadas foram conservadas.</div></Shell>;
 
@@ -124,21 +125,23 @@ export default function PhysicsChemistryExam({s,setS,go}){
     <button className="back" onClick={saveReviewAndExit}>← Guardar revisão e voltar aos exames</button>
     <p className="eyebrow">EXAME COMPLETO · PROVA 715</p>
     <h1>Revisão do Exame Completo</h1>
-    <div className="notice"><b>{"Subtotal provisório já corrigível: "+(mandatoryKnown+optionalKnown).toFixed(1)+" / 200"}</b><span>{pendingOpen?pendingOpen+" resposta(s) aberta(s) têm confiança reduzida. ":""}{hasProvisional?"As respostas abertas e problemas por etapas usam classificação provisória quando a correção não é totalmente determinística.":""}</span></div>
+    <div className="notice"><b>{"Subtotal provisório já corrigível: "+(known===null?"Informação insuficiente":known.toFixed(1)+" pontos em itens elegíveis")}</b><span>{pendingOpen?pendingOpen+" resposta(s) sem avaliação verificável ficaram excluídas, sem nota zero. ":""}{hasProvisional?"Provisório: os problemas por etapas elegíveis mantêm avaliação automática.":""}</span></div>
     <div className="fqaExamScoreGrid">
-      <div><small>Obrigatórios</small><b>{mandatoryKnown.toFixed(1)} / 160</b></div>
-      <div><small>Opcionais</small><b>{optionalKnown.toFixed(1)} / 40</b><span>Contam os 4 melhores.</span></div>
+      <div><small>Obrigatórios elegíveis</small><b>{mandatoryKnown===null?"—":mandatoryKnown.toFixed(1)+" pontos"}</b></div>
+      <div><small>Opcionais elegíveis</small><b>{optionalKnown===null?"—":optionalKnown.toFixed(1)+" pontos"}</b><span>Contam os 4 melhores entre os itens com avaliação verificável.</span></div>
       <div><small>Respondidas</small><b>{filled} / {rows.length}</b></div>
     </div>
-    <p className="muted">Este subtotal é uma estimativa provisória sempre que inclui respostas abertas ou etapas cuja correção não é totalmente determinística.</p>
+    <p className="muted">Este subtotal abrange apenas itens elegíveis. Não é uma classificação global do exame; não reconstruímos pontuações excluídas.</p>
     <div className="fqaExamReviewList">{rows.map((row,index)=>{
-      const result=results[index],score=scored[index],value=answers[row.id];
-      const resultLabel=row.responseType==="multiple-choice"?(result.correct?"Correto":"A rever"):result.status==="unanswered"?"Sem resposta":"Provisório";
+      const result=restoreFqaResultView(row,results[index],academicContext,index),score=scored[index],value=answers[row.id];
+      const resultLabel=score.label;
       return <details id={"fqa-review-"+row.id} key={row.id} className="reviewChapter"><summary><div><small>{row.examSection==="mandatory"?"OBRIGATÓRIO":"OPCIONAL"} · {row.examPoints} pts</small><b>{index+1}. {row.prompt}</b></div><span>{resultLabel}</span></summary><div className="reviewChapterBody">
         <Stimulus item={row}/>
-        {row.responseType==="multiple-choice"&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p><p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p><p>{row.explanation}</p></>}
-        {row.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={row} result={result}/>} 
-        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p>{Number.isFinite(result.provisionalPoints)&&<div className="autoAssessmentScore"><b>{String(result.provisionalPoints).replace(".",",")} / {result.maxPoints} pontos-base</b><small>estimativa provisória · confiança {result.autoAssessmentConfidence??"—"}%</small></div>}{result.feedbackSummary&&<div className="automaticFeedbackPanel">
+        {!score.eligible&&<div className="notice"><b>{resultLabel}</b><span>A resposta foi conservada sem contar como acerto, erro ou correção concluída.</span></div>}
+        {row.responseType==="multiple-choice"&&score.eligible&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p><p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p><p>{row.explanation}</p></>}
+        {row.responseType==="stepwise"&&score.eligible&&<PhysicsChemistryStepwiseReview item={row} result={result}/>}
+        {row.responseType==="restricted-response"&&<p><b>A tua resposta:</b> {value||"Sem resposta"}</p>}
+        {row.responseType==="restricted-response"&&score.eligible&&<>{Number.isFinite(result.provisionalPoints)&&<div className="autoAssessmentScore"><b>{String(result.provisionalPoints).replace(".",",")} / {result.maxPoints} pontos-base</b><small>estimativa provisória · confiança {result.autoAssessmentConfidence??"—"}%</small></div>}{result.feedbackSummary&&<div className="automaticFeedbackPanel">
     {result.feedbackSummary.strengths.length>0&&<section className="automaticFeedbackGood"><b>O que fizeste bem</b>{result.feedbackSummary.strengths.map(row=><div key={row.id}><strong>✓ {row.label}</strong>{row.evidence&&<blockquote>“{row.evidence}”</blockquote>}</div>)}</section>}
     {result.feedbackSummary.gaps.length>0&&<section className="automaticFeedbackImprove"><b>O que faltou</b>{result.feedbackSummary.gaps.map(row=><div key={row.id}><strong>{row.message}</strong><span>{row.label}</span></div>)}</section>}
     {result.feedbackSummary.errorDiagnosis&&result.feedbackSummary.errorDiagnosis.code!=="correct_or_near_correct"&&<p className="automaticFeedbackNext"><b>{result.feedbackSummary.errorDiagnosis.label}:</b> {result.feedbackSummary.errorDiagnosis.message}</p>}
@@ -147,7 +150,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
   </div>}<div className="automaticCriteriaList">{(result.criteria||[]).map(criterion=><div className={"automaticCriterion "+criterion.status} key={criterion.id}><div><b>{criterion.label}</b><span>{criterion.status==="observed"?"✓ Detetado":criterion.status==="partial"?"◐ Parcial":"○ Não detetado"}</span></div></div>)}</div></>}
       </div></details>;
     })}</div>
-    {pendingOpen>0&&<div className="notice warning"><b>{pendingOpen} resposta(s) com confiança reduzida</b><span>A app já atribuiu uma estimativa provisória. Não é necessário o aluno preencher uma grelha de autoavaliação.</span></div>}
+    {pendingOpen>0&&<div className="notice warning"><b>{pendingOpen} resposta(s) sem avaliação verificável</b><span>Uma avaliação com confiança reduzida não se torna evidência académica. Não é necessário preencher uma grelha de autoavaliação.</span></div>}
     <button className="primary" onClick={saveReviewAndExit}>Guardar revisão e terminar</button>
   </Shell>;
 

@@ -6,6 +6,7 @@ import ExamSubmissionCheck from "./ExamSubmissionCheck";
 import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
+import {beginFqaRuntimeContext,fqaAssessmentPresentation,fqaExamResultPresentation,restoreFqaResultView} from "../lib/fqaAcademicIntegrity";
 import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";
 import {hasPhysicsChemistryExamDraft,clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";
 
@@ -60,12 +61,16 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
     savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review,rubricAssessments,markedForReview});
   },[answers,exam.id,index,itemIds,markedForReview,review,rubricAssessments,startedAt]);
 
-  const baseResults=useMemo(()=>exam.items.map(row=>gradePhysicsChemistryResponse(row,answers[row.id])),[exam.items,answers]);
+  const baseResults=useMemo(()=>{
+    const context={sessionId:exam.id+"-"+startedAt,kind:"mini_exam",itemIds,startedAt};
+    if(!recoveryBlocked)beginFqaRuntimeContext(context);
+    return exam.items.map((row,index)=>gradePhysicsChemistryResponse(row,answers[row.id],{...context,index}));
+  },[exam.id,exam.items,answers,itemIds,startedAt,recoveryBlocked]);
   const results=baseResults;
-  const deterministic=exam.items.map((row,i)=>({item:row,result:results[i]})).filter(row=>row.item.responseType==="multiple-choice");
-  const deterministicCorrect=deterministic.filter(row=>row.result.correct).length;
-  const provisional=results.filter(row=>["structured-provisional","auto-assessed-provisional"].includes(row.gradingMode)||row.status==="auto-assessed-provisional").length;
-  const openPending=results.filter(row=>row.requiresReview).length;
+  const academicContext={sessionId:exam.id+"-"+startedAt,kind:"mini_exam",itemIds,startedAt};
+  const assessment=fqaAssessmentPresentation({...academicContext,results});
+  const provisional=assessment.provisional;
+  const openPending=assessment.excluded;
 
   function answer(value){setAnswers(current=>({...current,[item.id]:value}))}
   function respond(){
@@ -76,15 +81,18 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   function finish({force=false}={}){if(force){setReview(true);return;}setSubmitCheck(true);}
 
   function saveReviewAndExit(){
+    if(s.subjectProgress?.[SUBJECT_ID]?.integrityPendingConflict||s.subjectProgress?.[SUBJECT_ID]?.integrityRecoveryBlocked)return;
     if(!recordedRef.current){
       recordedRef.current=true;
       setS(prev=>recordSubjectSession(prev,{
-        subjectId:SUBJECT_ID,kind:"mini_exam",label:exam.label,items:exam.items,results,sessionId:exam.id+"-"+startedAt
+        subjectId:SUBJECT_ID,kind:"mini_exam",label:exam.label,items:exam.items,results,startedAt,sessionId:exam.id+"-"+startedAt
       }));
     }
     clearPhysicsChemistryExamDraft(exam.id);
     go("exams");
   }
+
+  if(s.subjectProgress?.[SUBJECT_ID]?.integrityPendingConflict||s.subjectProgress?.[SUBJECT_ID]?.integrityRecoveryBlocked)return <Shell><div role="alert">Há versões diferentes de uma tentativa. Foram conservadas e precisam de resolução segura antes de continuar.</div><button onClick={()=>go("exams")}>Voltar</button></Shell>;
 
   if(recoveryBlocked)return <Shell><div role="alert">Não foi possível recuperar esta prova. As respostas guardadas foram conservadas.</div></Shell>;
 
@@ -106,18 +114,20 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
     <h1>Rever o mini-exame</h1>
     <div className="fqaExamScoreGrid">
       <div><small>Respondidas</small><b>{answeredCount} / {exam.itemCount}</b></div>
-      <div><small>Escolha múltipla</small><b>{deterministicCorrect} / {deterministic.length}</b><span>corretas</span></div>
-      <div><small>Construídas</small><b>{provisional}</b><span>{openPending?"inclui avaliações de confiança reduzida":"correção provisória"}</span></div>
+      <div><small>Escolha múltipla elegível</small><b>{assessment.objectiveCorrectLabel}</b><span>corretas</span></div>
+      <div><small>Etapas elegíveis</small><b>{provisional||"—"}</b><span>avaliações automáticas provisórias</span></div>
     </div>
-    <div className="notice"><b>Correção automática maximizada</b><span>A app corrige escolhas, etapas e respostas científicas automaticamente sempre que consegue. Nas respostas abertas, a pontuação continua provisória quando a interpretação tem incerteza.</span></div>
+    <div className="notice"><b>Correção automática maximizada</b><span>Avaliação automática apenas nos itens elegíveis. A pontuação continua provisória quando a interpretação tem incerteza; respostas científicas não validadas ficam conservadas sem pontuação apresentada.</span></div>
     <div className="fqaExamReviewList">{exam.items.map((row,rowIndex)=>{
-      const value=answers[row.id],result=results[rowIndex];
-      const resultLabel=row.responseType==="multiple-choice"?(result.correct?"Correta":"A rever"):result.status==="unanswered"?"Sem resposta":"Avaliação automática";
+      const value=answers[row.id],result=restoreFqaResultView(row,results[rowIndex],academicContext,rowIndex);
+      const score=fqaExamResultPresentation(row,results[rowIndex],academicContext,rowIndex),resultLabel=score.label;
       return <details id={"fqa-review-"+row.id} className="reviewChapter" key={row.id}><summary><div><small>{row.year} · {row.responseType==="multiple-choice"?"SELEÇÃO":"CONSTRUÇÃO"}</small><b>{rowIndex+1}. {row.prompt}</b></div><span>{resultLabel}</span></summary><div className="reviewChapterBody">
         <PhysicsChemistryStimulus item={row}/>
-        {row.responseType==="multiple-choice"&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p>{!result.correct&&<p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p>}<p>{row.explanation}</p></>}
-        {row.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={row} result={result}/>} 
-        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p>{Number.isFinite(result.provisionalPoints)&&<div className="autoAssessmentScore"><b>{String(result.provisionalPoints).replace(".",",")} / {result.maxPoints} pontos</b><small>estimativa provisória · confiança {result.autoAssessmentConfidence??"—"}%</small></div>}{result.feedbackSummary&&<div className="automaticFeedbackPanel">
+        {!score.eligible&&<div className="notice"><b>{resultLabel}</b><span>A resposta foi conservada sem contar como acerto, erro ou correção concluída.</span></div>}
+        {row.responseType==="multiple-choice"&&score.eligible&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p>{!result.correct&&<p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p>}<p>{row.explanation}</p></>}
+        {row.responseType==="stepwise"&&score.eligible&&<PhysicsChemistryStepwiseReview item={row} result={result}/>}
+        {row.responseType==="restricted-response"&&<p><b>A tua resposta:</b> {value||"Sem resposta"}</p>}
+        {row.responseType==="restricted-response"&&score.eligible&&<>{Number.isFinite(result.provisionalPoints)&&<div className="autoAssessmentScore"><b>{String(result.provisionalPoints).replace(".",",")} / {result.maxPoints} pontos</b><small>estimativa provisória · confiança {result.autoAssessmentConfidence??"—"}%</small></div>}{result.feedbackSummary&&<div className="automaticFeedbackPanel">
     {result.feedbackSummary.strengths.length>0&&<section className="automaticFeedbackGood"><b>O que fizeste bem</b>{result.feedbackSummary.strengths.map(row=><div key={row.id}><strong>✓ {row.label}</strong>{row.evidence&&<blockquote>“{row.evidence}”</blockquote>}</div>)}</section>}
     {result.feedbackSummary.gaps.length>0&&<section className="automaticFeedbackImprove"><b>O que faltou</b>{result.feedbackSummary.gaps.map(row=><div key={row.id}><strong>{row.message}</strong><span>{row.label}</span></div>)}</section>}
     {result.feedbackSummary.errorDiagnosis&&result.feedbackSummary.errorDiagnosis.code!=="correct_or_near_correct"&&<p className="automaticFeedbackNext"><b>{result.feedbackSummary.errorDiagnosis.label}:</b> {result.feedbackSummary.errorDiagnosis.message}</p>}
@@ -126,7 +136,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   </div>}<div className="automaticCriteriaList">{(result.criteria||[]).map(criterion=><div className={"automaticCriterion "+criterion.status} key={criterion.id}><div><b>{criterion.label}</b><span>{criterion.status==="observed"?"✓ Detetado":criterion.status==="partial"?"◐ Parcial":"○ Não detetado"}</span></div></div>)}</div><p className="muted">Uma formulação cientificamente equivalente pode ser válida. O aluno não precisa de preencher uma autoavaliação.</p></>}
       </div></details>;
     })}</div>
-    {openPending>0&&<div className="notice warning"><b>{openPending} avaliação(ões) com confiança reduzida</b><span>A app já as avaliou provisoriamente; não precisas de completar nenhuma grelha manual.</span></div>}
+    {openPending>0&&<div className="notice warning"><b>{openPending} resposta(s) sem avaliação verificável</b><span>Avaliações de confiança reduzida ficam excluídas, sem nota zero; não precisas de completar nenhuma grelha manual.</span></div>}
     <button className="primary" onClick={saveReviewAndExit}>Guardar revisão e terminar</button>
   </Shell>;
 
