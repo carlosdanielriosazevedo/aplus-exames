@@ -370,7 +370,7 @@ export function AccountCloud({s,setS,go,gate=false}){
   const localIndex=prepIndex(s);
   const lastRemoteDevice=sync.lastRemoteDeviceId?shortDeviceId(sync.lastRemoteDeviceId):"—";
 
-  return <Shell>{gate?<button className="back" type="button" onClick={()=>go("welcome")}>← Início</button>:<Back go={go}/>}<p className="eyebrow">CONTA <BrandName/> · PROGRESSO ONLINE</p>
+  return <Shell>{gate?<Back go={go} to="welcome"/>:<Back go={go}/>}<p className="eyebrow">CONTA <BrandName/> · PROGRESSO ONLINE</p>
     <h1>{gate?"Entra ou cria a tua conta para começar.":"O teu progresso, seguro em todos os teus dispositivos."}</h1>
     {gate&&<p className="muted">A conta guarda o teu progresso para o encontrares no telemóvel e no computador. Só pedimos nome, email e palavra-passe.</p>}
     <p className="muted">A APProva+ guarda primeiro o estudo neste dispositivo. Quando guardas online, verifica se existe progresso mais recente noutro dispositivo e nunca o substitui sem te perguntar.</p>
