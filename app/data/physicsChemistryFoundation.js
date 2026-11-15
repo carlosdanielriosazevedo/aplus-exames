@@ -127,7 +127,18 @@ function balancePhysicsChemistryChoicePosition(item){
   return {...item,options,answerIndex:options.indexOf(correct)};
 }
 
-export const PHYSICS_CHEMISTRY_A_ITEMS=[
+// Vagas 4–6 de variantes (FQA-V4/V5/V6) retiradas do uso com alunos em
+// 2026-11-15 (decisão do product owner): enunciados encadeados e incoerentes que
+// revelavam a resposta («…por que razão a resposta «X» é adequada…») e opções
+// genéricas sem conteúdo científico. Continuam disponíveis apenas para retomar
+// ou rever sessões antigas que as contenham; nunca são selecionadas.
+export const PHYSICS_CHEMISTRY_A_RETIRED_ITEM_PREFIXES=Object.freeze(["FQA-V4-","FQA-V5-","FQA-V6-"]);
+export function isRetiredPhysicsChemistryItem(item){
+  const id=String(item?.id||"");
+  return PHYSICS_CHEMISTRY_A_RETIRED_ITEM_PREFIXES.some(prefix=>id.startsWith(prefix));
+}
+
+export const PHYSICS_CHEMISTRY_A_ALL_ITEMS=[
   ...PHYSICS_CHEMISTRY_A_SELECTION_ITEMS,
   ...PHYSICS_CHEMISTRY_A_CONSTRUCTED_ITEMS.map(item=>({...item,sourceOrigin:"original",reviewStatus:"prototype"})),
   ...PHYSICS_CHEMISTRY_A_DATA_ITEMS,
@@ -142,5 +153,8 @@ export const PHYSICS_CHEMISTRY_A_ITEMS=[
   ...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE3,...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE4,...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE5,...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE6
 ].map(item=>({...item,subtopicId:item.subtopicId||physicsChemistrySubtopicIdForItem(item)})).map(balancePhysicsChemistryChoicePosition);
 
-export function physicsChemistryItemById(id){return PHYSICS_CHEMISTRY_A_ITEMS.find(item=>item.id===id)||null}
+// Banco usado pela app para selecionar perguntas (diagnóstico, missões, treino).
+export const PHYSICS_CHEMISTRY_A_ITEMS=PHYSICS_CHEMISTRY_A_ALL_ITEMS.filter(item=>!isRetiredPhysicsChemistryItem(item));
+
+export function physicsChemistryItemById(id){return PHYSICS_CHEMISTRY_A_ALL_ITEMS.find(item=>item.id===id)||null}
 export function physicsChemistryDomainById(id){return PHYSICS_CHEMISTRY_A_DOMAINS.find(row=>row.id===id)||null}

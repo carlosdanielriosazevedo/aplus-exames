@@ -376,7 +376,7 @@
         "-3"
       ],
       "a": 1,
-      "sol": "(1-4)/(1--2)=-1.",
+      "sol": "(1-4)/(1+2)=-1.",
       "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
       "contexts": [
         "mission",
@@ -457,7 +457,7 @@
         "3"
       ],
       "a": 0,
-      "sol": "(4-1)/(2--1)=1.",
+      "sol": "(4-1)/(2+1)=1.",
       "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
       "contexts": [
         "mission",
@@ -538,7 +538,7 @@
         "-2"
       ],
       "a": 3,
-      "sol": "(1-9)/(1--3)=-2.",
+      "sol": "(1-9)/(1+3)=-2.",
       "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
       "contexts": [
         "mission",
@@ -1097,7 +1097,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se f(1)=5 e a taxa média em [1,4] e 3, quanto vale f(4)?",
+      "q": "Se f(1)=5 e a taxa média em [1,4] é 3, quanto vale f(4)?",
       "o": [
         "14",
         "15",
@@ -1124,7 +1124,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se f(0)=2 e a taxa média em [0,5] e 4, quanto vale f(5)?",
+      "q": "Se f(0)=2 e a taxa média em [0,5] é 4, quanto vale f(5)?",
       "o": [
         "23",
         "22",
@@ -1151,7 +1151,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se f(2)=7 e a taxa média em [2,6] e -1, quanto vale f(6)?",
+      "q": "Se f(2)=7 e a taxa média em [2,6] é -1, quanto vale f(6)?",
       "o": [
         "4",
         "2",
@@ -1178,7 +1178,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se f(-1)=3 e a taxa média em [-1,3] e 2, quanto vale f(3)?",
+      "q": "Se f(-1)=3 e a taxa média em [-1,3] é 2, quanto vale f(3)?",
       "o": [
         "12",
         "10",
@@ -1186,7 +1186,7 @@
         "11"
       ],
       "a": 3,
-      "sol": "[f(3)-3]/(3--1)=2, logo f(3)=11.",
+      "sol": "[f(3)-3]/(3+1)=2, logo f(3)=11.",
       "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
       "contexts": [
         "mission",
@@ -1205,7 +1205,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se f(4)=10 e a taxa média em [4,7] e 5, quanto vale f(7)?",
+      "q": "Se f(4)=10 e a taxa média em [4,7] é 5, quanto vale f(7)?",
       "o": [
         "25",
         "26",
@@ -1232,7 +1232,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se f(0)=-2 e a taxa média em [0,2] e 6, quanto vale f(2)?",
+      "q": "Se f(0)=-2 e a taxa média em [0,2] é 6, quanto vale f(2)?",
       "o": [
         "11",
         "10",
@@ -1240,7 +1240,7 @@
         "4"
       ],
       "a": 1,
-      "sol": "[f(2)--2]/(2-0)=6, logo f(2)=10.",
+      "sol": "[f(2)+2]/(2-0)=6, logo f(2)=10.",
       "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
       "contexts": [
         "mission",
@@ -1259,7 +1259,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se f(3)=8 e a taxa média em [3,5] e -2, quanto vale f(5)?",
+      "q": "Se f(3)=8 e a taxa média em [3,5] é -2, quanto vale f(5)?",
       "o": [
         "5",
         "3",
@@ -1286,7 +1286,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se f(1)=1 e a taxa média em [1,3] e 7, quanto vale f(3)?",
+      "q": "Se f(1)=1 e a taxa média em [1,3] é 7, quanto vale f(3)?",
       "o": [
         "16",
         "14",
@@ -1313,7 +1313,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se f(2)=4 e a taxa média em [2,8] e 0.5, quanto vale f(8)?",
+      "q": "Se f(2)=4 e a taxa média em [2,8] é 0.5, quanto vale f(8)?",
       "o": [
         "7",
         "8",
@@ -1340,7 +1340,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se f(-2)=6 e a taxa média em [-2,2] e 3, quanto vale f(2)?",
+      "q": "Se f(-2)=6 e a taxa média em [-2,2] é 3, quanto vale f(2)?",
       "o": [
         "19",
         "18",
@@ -1348,7 +1348,7 @@
         "9"
       ],
       "a": 1,
-      "sol": "[f(2)-6]/(2--2)=3, logo f(2)=18.",
+      "sol": "[f(2)-6]/(2+2)=3, logo f(2)=18.",
       "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
       "contexts": [
         "mission",

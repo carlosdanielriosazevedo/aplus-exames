@@ -2114,7 +2114,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "q": "Para f(x)=x^2, a tangente em x=1 tem equação",
     "o": [
       "y=2x+1",
-      "y=1x+2",
+      "y=x+2",
       "y=2x-1",
       "x=1"
     ],
