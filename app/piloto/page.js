@@ -5,7 +5,7 @@ import Link from "next/link";
 import styles from "./pilot.module.css";
 import {pilotConsentText} from "../lib/pilotCopy";
 import {setPilotTelemetryAllowed} from "../lib/pilotConsentClient";
-import {clearLocalPilotTelemetry} from "../lib/persistence";
+import {guardedClearLocalPilotTelemetry as clearLocalPilotTelemetry} from "../lib/stateIntegrity";
 
 export default function PilotConsentPage(){
   const [ageConfirmed,setAgeConfirmed]=useState(false);
