@@ -11,6 +11,8 @@ const hub=readFileSync(new URL("../app/components/StudyModeHub.js",import.meta.u
 const chrome=readFileSync(new URL("../app/components/chrome.js",import.meta.url),"utf8");
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 const cloud=readFileSync(new URL("../app/lib/cloud.js",import.meta.url),"utf8");
+const cloudRoute=readFileSync(new URL("../app/api/cloud/state/route.js",import.meta.url),"utf8");
+const cloudStore=readFileSync(new URL("../app/lib/server/cloud-state-store.js",import.meta.url),"utf8");
 
 // Shared release-candidate contract: the normal student journey must stay navigable.
 assert.match(chrome,/STUDENT_NAV\s*=\s*\[\["home","Aprender"\],\["train","Treinar"\],\["ranking","Ranking"\],\["progress","Progresso"\]\]/u,"RC: the four primary student areas must remain available.");
@@ -66,10 +68,13 @@ assert.match(css,/@media\(max-width:760px\)[\s\S]*input,select,textarea\{font-si
 
 // Cross-device resume contract: state stays user-scoped, allowlisted, versioned and conflict-aware.
 assert.match(cloud,/schema:"aplus-student-state-v8"/u,"RC cloud: cloud state must remain explicitly versioned.");
-assert.match(cloud,/auth_user_id:session\.user\.id/u,"RC cloud: writes must stay scoped to the authenticated user.");
-assert.match(cloud,/\.eq\("auth_user_id",session\.user\.id\)/u,"RC cloud: reads/updates must stay scoped to the authenticated user.");
+// O browser já não escreve na base de dados: o dono vem da sessão verificada no servidor.
+assert.doesNotMatch(cloud,/\.from\("student_cloud_state"\)/u,"RC cloud: the browser must not access student_cloud_state directly.");
+assert.match(cloudRoute,/readCloudRow\(sql,auth\.value\.authUserId\)/u,"RC cloud: reads must stay scoped to the authenticated user.");
+assert.match(cloudRoute,/writeCloudRow\(sql,auth\.value\.authUserId,valid\)/u,"RC cloud: writes must stay scoped to the authenticated user.");
+assert.match(cloudStore,/where auth_user_id=\$\{authUserId\}/u,"RC cloud: SQL must filter by the session owner.");
 assert.match(cloud,/studentStateForCloud\(s\)/u,"RC cloud: only the explicit student-state allowlist may be persisted.");
-assert.match(cloud,/\.eq\("revision",Number\(expectedRevision\)\|\|0\)/u,"RC cloud: optimistic revision checks must protect cross-device writes.");
+assert.match(cloudStore,/and revision=\$\{expectedRevision\}/u,"RC cloud: optimistic revision checks must protect cross-device writes.");
 assert.match(cloud,/conflict:true/u,"RC cloud: revision conflicts must stay explicit to the caller.");
 
 console.log("✓ release candidate journey: Matemática A, Português e FQ A preserve diagnóstico → Aprender → Praticar/Missão → exames → revisão → Progresso, with mobile and cloud-resume invariants");

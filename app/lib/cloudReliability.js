@@ -64,7 +64,11 @@ export function cloudSyncMeta(state){
     lastSyncedAt:raw.lastSyncedAt||null,
     lastConflictAt:raw.lastConflictAt||null,
     lastConflict:raw.lastConflict||null,
-    pendingCount:Number(raw.pendingCount)||0
+    pendingCount:Number(raw.pendingCount)||0,
+    // Ligação do progresso local a uma conta e impressão do último payload
+    // sincronizado automaticamente. Têm de sobreviver às ações manuais.
+    accountId:typeof raw.accountId==="string"&&raw.accountId?raw.accountId:null,
+    payloadFingerprint:typeof raw.payloadFingerprint==="string"?raw.payloadFingerprint:null
   };
 }
 

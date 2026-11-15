@@ -2,6 +2,7 @@
 import {pendingPhysicsChemistryExam} from "./lib/physicsChemistryExamDraft";
 import {hasPendingAssessment} from "./lib/pendingAssessment";
 import {useEffect,useMemo,useRef,useState} from "react";
+import {AUTH_CHANGED_EVENT,cloudSessionHinted} from "./lib/cloudSessionHint";
 import dynamic from "next/dynamic";
 import {insertMathText} from "./lib/mathInput";
 import {answerOptionState,conciseMathExplanation} from "./lib/feedbackCopy";
@@ -18,6 +19,7 @@ import ScoreLossExplanation from "./components/ScoreLossExplanation";
 import {miniExamReviewItemLabel,CONTENT_REPORT_SAVED_MESSAGE} from "./lib/scoreReviewCopy";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
 const AccountCloud=dynamic(()=>import("./components/AccountCloud").then(module=>module.AccountCloud),{ssr:false});
+const CloudSyncLayer=dynamic(()=>import("./components/CloudSyncLayer"),{ssr:false});
 const MathReviewMatter=dynamic(()=>import("./components/MathReviewMatter"),{ssr:false});
 const BetaDashboard=dynamic(()=>import("./components/InternalDashboards").then(module=>module.BetaDashboard),{ssr:false});
 const QualityPanel=dynamic(()=>import("./components/InternalDashboards").then(module=>module.QualityPanel),{ssr:false});
@@ -266,6 +268,17 @@ export default function App(){
   const [hydrated,setHydrated]=useState(false);
   const [mathEngineReady,setMathEngineReady]=useState(()=>!!mathEngineModule);
   const [diagnosticRecoveryReady,setDiagnosticRecoveryReady]=useState(()=>!!diagnosticRecoveryModule);
+  const [cloudHint,setCloudHint]=useState(false);
+
+  // A sincronização automática só é carregada depois de ter havido sessão
+  // iniciada neste dispositivo; visitantes anónimos não fazem pedidos extra.
+  useEffect(()=>{
+    if(!hydrated||typeof window==="undefined")return;
+    const update=()=>setCloudHint(cloudSessionHinted());
+    update();
+    window.addEventListener(AUTH_CHANGED_EVENT,update);
+    return ()=>window.removeEventListener(AUTH_CHANGED_EVENT,update);
+  },[hydrated]);
 
   useEffect(()=>{
     if(typeof window==="undefined"||!("scrollRestoration" in window.history))return;
@@ -463,6 +476,7 @@ export default function App(){
     setScreen(x);
   };
 
+  const view=(()=>{
   // Resolve pending attempts before mounting an assessment, including popstate.
   const assessmentRoutes=["diag","diagRun","mission","trainingSetup","trainingRun","miniExamIntro","miniExamRun","miniExamReview","portugueseMiniExam","physicsChemistryMini1","physicsChemistryMini2","physicsChemistryExam"];
   if(hydrated&&assessmentRoutes.includes(screen)){
@@ -561,6 +575,9 @@ export default function App(){
     setRecoveredSession(null);
     setS(isFriendsBeta(s)?activateFriendsBeta(initial):initial);go("welcome");
   }}/>;
+  })();
+
+  return <>{view}{hydrated&&cloudHint&&!isFriendsBeta(s)&&<CloudSyncLayer s={s} setS={setS} hydrated={hydrated} screen={screen} go={go}/>}</>;
 }
 
 function FriendsBetaDisclaimer({s,compact=false}){

@@ -6,6 +6,9 @@ const account=readFileSync(new URL("../app/components/AccountCloud.js",import.me
 const cloud=readFileSync(new URL("../app/lib/cloud.js",import.meta.url),"utf8");
 const drafts=readFileSync(new URL("../app/lib/sessionDraft.js",import.meta.url),"utf8");
 const browserStorage=readFileSync(new URL("../app/lib/browserStorage.js",import.meta.url),"utf8");
+const store=readFileSync(new URL("../app/lib/server/cloud-state-store.js",import.meta.url),"utf8");
+const autosync=readFileSync(new URL("../app/lib/cloudAutosync.js",import.meta.url),"utf8");
+const layer=readFileSync(new URL("../app/components/CloudSyncLayer.js",import.meta.url),"utf8");
 
 // Sessões inacabadas continuam deliberadamente locais nesta fase. Se o
 // localStorage do browser estiver indisponível, sessionStorage é uma rede de
@@ -65,7 +68,15 @@ assert.match(account,/Falhou anteriormente sem apagar o progresso local\./u,"a f
 assert.match(account,/Tentar novamente/u,"deve existir retry explícito da gravação pendente");
 
 // Escrita cloud continua protegida por revisão otimista/CAS.
-assert.match(cloud,/\.eq\("revision",Number\(expectedRevision\)\|\|0\)/u,"gravações cloud devem manter compare-and-swap por revisão");
+assert.match(store,/and revision=\$\{expectedRevision\}/u,"gravações cloud devem manter compare-and-swap por revisão (no servidor)");
+
+// Sincronização automática: mesmas garantias que as ações manuais.
+assert.match(autosync,/blocked_other_account/u,"progresso de outra conta no mesmo dispositivo nunca é sincronizado");
+assert.match(autosync,/needs_adoption/u,"progresso anónimo só vai para a conta com confirmação explícita");
+assert.match(autosync,/if\(pendingAssessment\)return \{action:"wait_assessment"\}/u,"o online nunca substitui uma avaliação em curso");
+assert.match(autosync,/return \{action:"conflict"\}/u,"alterações locais por guardar + online mais recente = conflito explícito");
+assert.match(layer,/saveLocalSnapshot\(state,\{label:"Antes de aplicar progresso de outro dispositivo"\}\);[\s\S]*setS\(prev=>preservePendingAssessment\(prev,next\)\)/u,"aplicar o online cria cópia local antes e respeita a tentativa atual");
+assert.doesNotMatch(layer,/clearLocalState/u,"a sincronização automática nunca apaga o estado local");
 assert.match(cloud,/return \{ok:false,conflict:true,remote/u,"avanço remoto deve regressar como conflito e não ser sobrescrito");
 
 console.log("✓ cloud resume product contract: progresso concluído sincronizável · sessão inacabada local com fallback seguro · logout seguro · snapshots · conflitos explícitos · retry offline · CAS por revisão");
