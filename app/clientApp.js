@@ -18,6 +18,7 @@ import ScoreLossExplanation from "./components/ScoreLossExplanation";
 import {miniExamReviewItemLabel,CONTENT_REPORT_SAVED_MESSAGE} from "./lib/scoreReviewCopy";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
 const AccountCloud=dynamic(()=>import("./components/AccountCloud").then(module=>module.AccountCloud),{ssr:false});
+const LocalSnapshotRecovery=dynamic(()=>import("./components/LocalSnapshotRecovery"),{ssr:false});
 const MathReviewMatter=dynamic(()=>import("./components/MathReviewMatter"),{ssr:false});
 const BetaDashboard=dynamic(()=>import("./components/InternalDashboards").then(module=>module.BetaDashboard),{ssr:false});
 const QualityPanel=dynamic(()=>import("./components/InternalDashboards").then(module=>module.QualityPanel),{ssr:false});
@@ -264,6 +265,7 @@ export default function App(){
   const [examSession,setExamSession]=useState(null);
   const [recoveredSession,setRecoveredSession]=useState(null);
   const [hydrated,setHydrated]=useState(false);
+  const [recoveryStorageKey,setRecoveryStorageKey]=useState("a25");
   const [mathEngineReady,setMathEngineReady]=useState(()=>!!mathEngineModule);
   const [diagnosticRecoveryReady,setDiagnosticRecoveryReady]=useState(()=>!!diagnosticRecoveryModule);
 
@@ -281,7 +283,7 @@ export default function App(){
     const requested=typeof window!=="undefined"&&friendsBetaRequested(window.location.search);
     const storageKey=requested?FRIENDS_STORAGE_KEY:undefined;
     const loaded=loadLocalStateStatus(initial,emptyScores,storageKey);
-    if(loaded.error){setScreen("storageRecoveryError");return}
+    if(loaded.error){setRecoveryStorageKey(storageKey||"a25");setScreen("storageRecoveryError");return}
     const x=loaded.state;
     const draftPreview=x?loadSessionDraftStatus(x.betaMode||"internal").draft:null;
     const needsMathAtHydration=!!x&&(
@@ -518,7 +520,7 @@ export default function App(){
   if(screen==="diag"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="diagnostic"/>;
   if(screen==="diag")return <DiagIntro s={s} setS={setS} go={go}/>;
   if(screen==="diagRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível recuperar esta sessão</b><span>O estado académico não foi alterado. O progresso guardado foi conservado para uma nova tentativa.</span></div></Shell>;
-  if(screen==="storageRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível ler o progresso guardado</b><span>Nenhum dado foi substituído. Reabre a app para tentar novamente.</span></div></Shell>;
+  if(screen==="storageRecoveryError")return <LocalSnapshotRecovery storageKey={recoveryStorageKey}/>;
   if(screen==="diagRun")return <DiagRun s={s} setS={setS} go={go} recoveredDraft={recoveredSession?.kind==="diagnostic"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="diagResult")return <DiagResult s={s} setS={setS} go={go}/>;
   if(screen==="mission")return <Mission s={s} setS={setS} go={go} recoveredDraft={recoveredSession?.kind==="mission"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;

@@ -1,0 +1,363 @@
+name: Neon RLS synthetic migration smoke
+
+on:
+  push:
+    branches:
+      - codex/neon-rls-history-hardening
+    paths:
+      - db/migrations/009_v5_8_neon_rls_history_hardening.sql
+      - db/migrations/010_v5_9_verified_pilot_sessions.sql
+      - tests/sql/neon_verified_pilot_assertions.sql
+      - tests/sql/neon_verified_pilot_concurrency_setup.sql
+      - tests/sql/neon_rls_*.sql
+      - scripts/neon-identity-jwt-readonly.mjs
+      - scripts/neon-isolated-server-role-attestation.mjs
+      - audits/neon-preview-attestation/**
+      - tests/scripts/neon-preview-build-attest-contract.mjs
+      - tests/helpers/syntheticPostgresUrl.mjs
+      - tests/scripts/neon-jwt-smoke-contract.mjs
+      - app/api/cloud/state/route.js
+      - app/api/health/route.js
+      - app/api/auth/**
+      - app/lib/server/db.js
+      - app/lib/server/identity.js
+      - app/lib/server/auth.js
+      - tests/helpers/neonAuthSdkFixture.mjs
+      - tests/unit/neonAuthRealSdkSecurity.test.mjs
+      - tests/unit/dbHealthSecurity.test.mjs
+      - tests/unit/healthSecurityRoute.test.mjs
+      - tests/unit/identitySessionSecurity.test.mjs
+      - app/api/cloud/rewards/route.js
+      - app/api/internal/verified-pilot/route.js
+      - app/lib/server/preview-verified-pilot.js
+      - app/lib/server/preview-verified-pilot-store.js
+      - tests/unit/previewVerifiedPilot.test.mjs
+      - tests/unit/previewVerifiedPilotRoute.test.mjs
+      - app/lib/server/verified-rewards.js
+      - tests/unit/verifiedRewardsRoute.test.mjs
+      - app/lib/cloud.js
+      - app/lib/cloudSnapshotValidation.js
+      - app/lib/cloudSnapshotPreservation.js
+      - app/lib/cloudStateMerge.js
+      - app/lib/cloudRecovery.js
+      - app/lib/persistence.js
+      - app/clientApp.js
+      - app/components/AccountCloud.js
+      - app/components/CloudSnapshotRecovery.js
+      - app/components/LocalSnapshotRecovery.js
+      - tests/unit/cloudSnapshot*.test.mjs
+      - tests/fixtures/cloudSnapshotBrowserEntry.jsx
+      - tests/scripts/cloud-snapshot-*.mjs
+      - tests/scripts/cloud-snapshot-*.sh
+      - tests/sql/cloud_snapshot_recovery_*.sql
+      - app/lib/server/cloud-state-validation.js
+      - app/lib/server/cloud-state-store.js
+      - tests/scripts/cloud-server-cas-contract.mjs
+      - tests/unit/cloudStateRoute.test.mjs
+      - tests/unit/cloudStateClient.test.mjs
+      - scripts/cloud-reliability-audit.mjs
+      - scripts/cloud-resume-product-contract-audit.mjs
+      - tests/unit/neonIdentityRlsMigration.test.mjs
+      - tests/scripts/mock-neon-jwt-fetch.mjs
+      - .github/workflows/neon-rls-synthetic.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - db/migrations/009_v5_8_neon_rls_history_hardening.sql
+      - db/migrations/010_v5_9_verified_pilot_sessions.sql
+      - tests/sql/neon_verified_pilot_assertions.sql
+      - tests/sql/neon_verified_pilot_concurrency_setup.sql
+      - tests/sql/neon_rls_*.sql
+      - scripts/neon-identity-jwt-readonly.mjs
+      - scripts/neon-isolated-server-role-attestation.mjs
+      - audits/neon-preview-attestation/**
+      - tests/scripts/neon-preview-build-attest-contract.mjs
+      - tests/helpers/syntheticPostgresUrl.mjs
+      - tests/scripts/neon-jwt-smoke-contract.mjs
+      - app/api/cloud/state/route.js
+      - app/api/health/route.js
+      - app/api/auth/**
+      - app/lib/server/db.js
+      - app/lib/server/identity.js
+      - app/lib/server/auth.js
+      - tests/helpers/neonAuthSdkFixture.mjs
+      - tests/unit/neonAuthRealSdkSecurity.test.mjs
+      - tests/unit/dbHealthSecurity.test.mjs
+      - tests/unit/healthSecurityRoute.test.mjs
+      - tests/unit/identitySessionSecurity.test.mjs
+      - app/api/cloud/rewards/route.js
+      - app/api/internal/verified-pilot/route.js
+      - app/lib/server/preview-verified-pilot.js
+      - app/lib/server/preview-verified-pilot-store.js
+      - tests/unit/previewVerifiedPilot.test.mjs
+      - tests/unit/previewVerifiedPilotRoute.test.mjs
+      - app/lib/server/verified-rewards.js
+      - tests/unit/verifiedRewardsRoute.test.mjs
+      - app/lib/cloud.js
+      - app/lib/cloudSnapshotValidation.js
+      - app/lib/cloudSnapshotPreservation.js
+      - app/lib/cloudStateMerge.js
+      - app/lib/cloudRecovery.js
+      - app/lib/persistence.js
+      - app/clientApp.js
+      - app/components/AccountCloud.js
+      - app/components/CloudSnapshotRecovery.js
+      - app/components/LocalSnapshotRecovery.js
+      - tests/unit/cloudSnapshot*.test.mjs
+      - tests/fixtures/cloudSnapshotBrowserEntry.jsx
+      - tests/scripts/cloud-snapshot-*.mjs
+      - tests/scripts/cloud-snapshot-*.sh
+      - tests/sql/cloud_snapshot_recovery_*.sql
+      - app/lib/server/cloud-state-validation.js
+      - app/lib/server/cloud-state-store.js
+      - tests/scripts/cloud-server-cas-contract.mjs
+      - tests/unit/cloudStateRoute.test.mjs
+      - tests/unit/cloudStateClient.test.mjs
+      - scripts/cloud-reliability-audit.mjs
+      - scripts/cloud-resume-product-contract-audit.mjs
+      - tests/unit/neonIdentityRlsMigration.test.mjs
+      - tests/scripts/mock-neon-jwt-fetch.mjs
+      - .github/workflows/neon-rls-synthetic.yml
+
+permissions:
+  contents: read
+
+jobs:
+  auth-sdk-security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DATABASE_URL: ''
+      NEON_AUTH_BASE_URL: ''
+      NEON_AUTH_COOKIE_SECRET: ''
+      NEXT_PUBLIC_NEON_AUTH_URL: ''
+      NEXT_PUBLIC_NEON_DATA_API_URL: ''
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install locked dependencies
+        run: npm ci --legacy-peer-deps --no-audit --no-fund
+      - name: Prepare evidence directory
+        run: mkdir -p /tmp/f6-evidence
+      - name: Unit tests including the real installed Neon Auth SDK
+        run: npm run test:unit | tee /tmp/f6-evidence/unit.log
+      - name: Technical Gate including Syntax and Source Hygiene
+        run: npm run technical:gate | tee /tmp/f6-evidence/technical.log
+      - name: Build without external services
+        run: npm run build | tee /tmp/f6-evidence/build.log
+      - name: Preserve F6 isolated evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: f6-auth-sdk-${{ github.run_id }}-${{ github.sha }}
+          path: /tmp/f6-evidence
+          retention-days: 7
+          if-no-files-found: warn
+
+  snapshot-recovery-security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DATABASE_URL: ''
+      NEON_AUTH_BASE_URL: ''
+      NEON_AUTH_COOKIE_SECRET: ''
+      NEXT_PUBLIC_NEON_AUTH_URL: ''
+      NEXT_PUBLIC_NEON_DATA_API_URL: ''
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Fetch immutable F5 reference for synthetic compatibility (read only)
+        run: git fetch --no-tags origin 3e6e8e9b4477f1e3bd50ab3c996e264bfed5370a
+      - name: Install locked dependencies and isolated Chromium test runner
+        run: |
+          npm ci --legacy-peer-deps --no-audit --no-fund
+          mkdir -p /tmp/f7-browser /tmp/f7-evidence
+          npm install --prefix /tmp/f7-browser --ignore-scripts --no-audit --no-fund playwright@1.55.0
+          node /tmp/f7-browser/node_modules/playwright/cli.js install --with-deps chromium
+      - name: Adversarial snapshots, real producers, recovery and CAS contracts
+        run: |
+          npx vitest run tests/unit/cloudSnapshotSafety.test.mjs tests/unit/cloudSnapshotRecoveryRoute.test.mjs tests/unit/cloudSnapshotProducers.test.mjs tests/unit/stateTortureCloudMerge.test.js | tee /tmp/f7-evidence/adversarial.log
+          node tests/scripts/cloud-server-cas-contract.mjs | tee /tmp/f7-evidence/cas.log
+          node scripts/cloud-resume-product-contract-audit.mjs | tee /tmp/f7-evidence/recovery.log
+      - name: Chromium actual recovery UI/API and pinned F5 A/B compatibility
+        env:
+          F7_PLAYWRIGHT_MODULE: /tmp/f7-browser/node_modules/playwright/index.mjs
+        run: node tests/scripts/cloud-snapshot-browser-contract.mjs | tee /tmp/f7-evidence/chromium.log
+      - name: Preserve F7 isolated evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: f7-snapshot-security-${{ github.run_id }}-${{ github.sha }}
+          path: /tmp/f7-evidence
+          retention-days: 7
+          if-no-files-found: warn
+
+  synthetic-postgres:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: neondb
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: synthetic-ci-only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d neondb"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGHOST: 127.0.0.1
+      PGPORT: '5432'
+      PGDATABASE: neondb
+      PGUSER: postgres
+      PGPASSWORD: synthetic-ci-only
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax-check staged real-JWT read-only smoke (no network requests)
+        run: node --check scripts/neon-identity-jwt-readonly.mjs
+      - name: Syntax-check isolated server role attestation (no database connection)
+        run: node --check scripts/neon-isolated-server-role-attestation.mjs
+      - name: Test fail-closed JWT smoke contract with offline mock
+        run: node tests/scripts/neon-jwt-smoke-contract.mjs
+      - name: Validate server CAS route and adversarial client-write contract
+        run: |
+          node --check app/api/cloud/state/route.js
+          node --check app/lib/server/cloud-state-store.js
+          node --check app/lib/server/cloud-state-validation.js
+          node --check app/lib/server/verified-rewards.js
+          node --check app/api/cloud/rewards/route.js
+          node --check app/lib/server/preview-verified-pilot.js
+          node --check app/lib/server/preview-verified-pilot-store.js
+          node --check app/api/internal/verified-pilot/route.js
+          node --check app/lib/cloud.js
+          node tests/scripts/cloud-server-cas-contract.mjs
+      - name: Verify Next API boundary with mocked auth/session and no network
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npx vitest run tests/unit/cloudStateRoute.test.mjs tests/unit/cloudStateClient.test.mjs tests/unit/verifiedRewardsRoute.test.mjs tests/unit/previewVerifiedPilot.test.mjs tests/unit/previewVerifiedPilotRoute.test.mjs tests/unit/neonIdentityRlsMigration.test.mjs tests/unit/dbHealthSecurity.test.mjs tests/unit/healthSecurityRoute.test.mjs tests/unit/identitySessionSecurity.test.mjs tests/unit/betaSyncValidation.test.js tests/unit/stateTortureCloudMerge.test.js --maxWorkers=2
+          node scripts/cloud-reliability-audit.mjs
+          node scripts/cloud-resume-product-contract-audit.mjs
+      - name: Audit isolated Preview build artifact and offline preflight
+        run: |
+          node --check audits/neon-preview-attestation/attest.mjs
+          node tests/scripts/neon-preview-build-attest-contract.mjs
+      - name: Validate disposable PostgreSQL instance
+        run: |
+          test "$PGHOST" = "127.0.0.1"
+          test "$PGDATABASE" = "neondb"
+          command -v psql
+          psql -v ON_ERROR_STOP=1 -c 'select current_database(), current_user, version();'
+      - name: Apply migration and assert RLS using synthetic identities
+        run: |
+          psql -v ON_ERROR_STOP=1 -f tests/sql/neon_rls_synthetic_run.sql
+      - name: F7 concurrent recovery and exact original retention (disposable PostgreSQL)
+        run: bash tests/scripts/cloud-snapshot-postgres-contract.sh
+      - name: Verify migration reapplication fails closed
+        run: |
+          set +e
+          psql -v ON_ERROR_STOP=1 > /tmp/neon-rls-reapply.log 2>&1 <<'SQL'
+          SET ROLE neondb_owner;
+          \i db/migrations/009_v5_8_neon_rls_history_hardening.sql
+          SQL
+          result=$?
+          set -e
+          if [ "$result" -eq 0 ]; then
+            echo "ERROR: migration unexpectedly accepted reapplication"
+            exit 1
+          fi
+          grep -q "Expected applied schema version 8" /tmp/neon-rls-reapply.log
+          actual="$(psql -v ON_ERROR_STOP=1 -Atc 'SELECT schema_version FROM public.app_schema_meta WHERE singleton=true')"
+          test "$actual" = "9"
+          echo "PASS: migration rejects reapplication and preserves version 9"
+
+      - name: Prove pilot migration 010 refuses Neon-like connections without CI flag
+        run: |
+          set +e
+          psql -v ON_ERROR_STOP=1 > /tmp/pilot-010-refusal.log 2>&1 <<'SQL'
+          SET ROLE neondb_owner;
+          \i db/migrations/010_v5_9_verified_pilot_sessions.sql
+          SQL
+          code=$?
+          set -e
+          test "$code" -ne 0
+          grep -q 'CI-only isolation flag required' /tmp/pilot-010-refusal.log
+          version="$(psql -v ON_ERROR_STOP=1 -Atc 'SELECT schema_version FROM public.app_schema_meta WHERE singleton=true')"
+          test "$version" = "9"
+          echo "PASS: schema 010 rejects missing isolated CI flag without writes"
+      - name: Test proposed schema 010 and seven-answer synthetic pilot (NO Neon)
+        run: |
+          psql -v ON_ERROR_STOP=1 <<'SQL'
+          SET ROLE neondb_owner;
+          SET app.synthetic_verified_pilot_ci='ONLY_DISPOSABLE';
+          \i db/migrations/010_v5_9_verified_pilot_sessions.sql
+          RESET app.synthetic_verified_pilot_ci;
+          RESET ROLE;
+          \i tests/sql/neon_verified_pilot_assertions.sql
+          SQL
+          schema="$(psql -v ON_ERROR_STOP=1 -Atc 'SELECT schema_version FROM public.app_schema_meta WHERE singleton=true')"
+          test "$schema" = "10"
+          echo "PASS: preview-only pilot graded on disposable PostgreSQL; schema=10"
+
+      - name: Race two synthetic finalizers against one immutable receipt
+        run: |
+          psql -v ON_ERROR_STOP=1 -f tests/sql/neon_verified_pilot_concurrency_setup.sql
+          psql -X -v ON_ERROR_STOP=1 -Atq -c "SET ROLE neondb_owner; SELECT verified_xp FROM public.finish_preview_verified_math('synthetic-race-student')" > /tmp/pilot-race-a.out 2>&1 &
+          first=$!
+          psql -X -v ON_ERROR_STOP=1 -Atq -c "SET ROLE neondb_owner; SELECT verified_xp FROM public.finish_preview_verified_math('synthetic-race-student')" > /tmp/pilot-race-b.out 2>&1 &
+          second=$!
+          wait "$first"
+          wait "$second"
+          grep -qx '35' /tmp/pilot-race-a.out
+          grep -qx '35' /tmp/pilot-race-b.out
+          receipts="$(psql -v ON_ERROR_STOP=1 -Atc "SELECT count(*) FROM public.verified_completion_receipts WHERE auth_user_id='synthetic-race-student'")"
+          test "$receipts" = "1"
+          echo "PASS: two concurrent submissions, identical verified XP, one immutable receipt"
+
+  adversarial-history:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        schema: [permissive-policy, wrong-function, after-statement, filtered-update, disabled, missing]
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: neondb
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: synthetic-ci-only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -h 127.0.0.1 -U postgres -d neondb"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGHOST: 127.0.0.1
+      PGPORT: '5432'
+      PGDATABASE: neondb
+      PGUSER: postgres
+      PGPASSWORD: synthetic-ci-only
+    steps:
+      - uses: actions/checkout@v4
+      - name: Repair adulterated schema and assert history isolation (disposable PostgreSQL only)
+        run: |
+          test "$PGHOST" = "127.0.0.1"
+          test "$PGDATABASE" = "neondb"
+          psql -v ON_ERROR_STOP=1 -v scenario='${{ matrix.schema }}' -f tests/sql/neon_rls_synthetic_adversarial.sql
