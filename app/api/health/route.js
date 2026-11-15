@@ -36,6 +36,7 @@ export async function GET(){
     schemaMigration,
     pilotSmokeApiVersion:preview?1:null,
     dataApiUrl:preview?(process.env.NEXT_PUBLIC_NEON_DATA_API_URL||null):null,
-    database:db
+    // Explicit public projection; do not pass through driver metadata/errors.
+    database:{configured:db.configured,reachable:db.reachable,provider:db.provider}
   },{headers:{"Cache-Control":"no-store"}});
 }

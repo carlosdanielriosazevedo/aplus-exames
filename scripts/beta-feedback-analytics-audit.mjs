@@ -28,7 +28,7 @@ assert.match(ingest,/ITEM_ID_RE/u,"itemId tem de ser validado por formato.");
 assert.match(ingest,/enforcePilotRateLimit/u,"O sync precisa de rate limit persistente por utilizador.");
 assert.doesNotMatch(ingest,/student_answer|response_text|answer_text/iu,"Resultados por item não podem persistir texto de resposta.");
 
-assert.match(route,/requireSession\(\)/u,"O sync do piloto deve permanecer autenticado.");
+assert.match(route,/requireSession\(\{accountBound:true\}\)/u,"O sync do piloto deve exigir sessão autenticada e conta de origem correspondente.");
 assert.match(route,/sameOriginRequest\(request\)/u,"O sync do piloto deve rejeitar pedidos cross-site.");
 assert.match(ingest,/activePilotConsent/u,"O sync deve exigir consentimento registado.");
 assert.match(ingest,/CONSENT_REQUIRED/u,"Ausência de consentimento deve bloquear a recolha.");

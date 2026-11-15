@@ -40,14 +40,17 @@ assert.doesNotMatch(cloud,/sessionDraft|active-session/u,"a cloud de progresso n
 for(const handler of ["loadCloud","resolveKeepRemote","resolveMerge"]){
   assert.ok(account.includes(`async function ${handler}(){\n    if(hasPendingAssessment(s))`),`${handler} deve bloquear a carga durante uma avaliação`);
 }
-assert.ok((account.match(/setS\(prev=>preservePendingAssessment\(prev,/gu)||[]).length>=3,"a aplicação tardia de uma resposta cloud também deve respeitar a tentativa atual");
+assert.ok((account.match(/setS\(prev=>prev!==s\?prev:preservePendingAssessment\(prev,/gu)||[]).length>=3,"uma resposta tardia não pode substituir uma tentativa nem progresso alterado durante o pedido");
 
 // Logout nunca deve apagar o estudo local.
 assert.match(account,/Sessão terminada\. O progresso local continua neste dispositivo\./u,"logout deve informar e preservar o progresso local");
 assert.doesNotMatch(account,/async function signout\(\)[\s\S]{0,700}clearLocalState/u,"logout não pode limpar silenciosamente o estado local");
 
 // Carregar cloud é uma ação explícita e cria rede de segurança antes de aplicar estado remoto.
-assert.match(account,/saveLocalSnapshot\(s,\{label:"Antes de carregar da cloud"\}\);[\s\S]*mergeStudentCloudState\(s,row\.state_json\)/u,"carregar cloud deve criar snapshot antes de aplicar estado remoto");
+assert.match(account,/preserveCloudOriginals\(\{local:s,remote:row,label:"Antes de carregar da cloud"\}\);[\s\S]*mergeStudentCloudState\(s,row\.state_json\)/u,"carregar cloud deve preservar ambos os originais antes de aplicar estado remoto");
+const recovery=readFileSync(new URL("../app/lib/cloudRecovery.js",import.meta.url),"utf8");
+assert.match(recovery,/CLOUD_RECOVERY_STORAGE_UNAVAILABLE/u,"sem arquivo durável, a recuperação deve bloquear");
+assert.doesNotMatch(recovery.split("export function listCloudOriginals")[0],/\.slice\(|removeItem\(/u,"o arquivo de recuperação não pode truncar cópias antigas");
 assert.match(account,/Carregar progresso online/u,"a ação de carga deve usar linguagem clara para o aluno");
 assert.match(account,/Detalhes e cópias de segurança/u,"a UI deve manter acesso aos detalhes de segurança sem os impor como linguagem principal");
 
@@ -64,8 +67,17 @@ assert.match(account,/queueCloudSave\(s,\{reason:"save_failed"/u,"falha ao guard
 assert.match(account,/Falhou anteriormente sem apagar o progresso local\./u,"a fila pendente deve comunicar preservação do progresso local");
 assert.match(account,/Tentar novamente/u,"deve existir retry explícito da gravação pendente");
 
-// Escrita cloud continua protegida por revisão otimista/CAS.
-assert.match(cloud,/\.eq\("revision",Number\(expectedRevision\)\|\|0\)/u,"gravações cloud devem manter compare-and-swap por revisão");
-assert.match(cloud,/return \{ok:false,conflict:true,remote/u,"avanço remoto deve regressar como conflito e não ser sobrescrito");
+// Escrita cloud preserva o contrato CAS no servidor, não na Data API do browser.
+const cloudStore=readFileSync(new URL("../app/lib/server/cloud-state-store.js",import.meta.url),"utf8");
+const cloudApi=readFileSync(new URL("../app/api/cloud/state/route.js",import.meta.url),"utf8");
+const migration009=readFileSync(new URL("../db/migrations/009_v5_8_neon_rls_history_hardening.sql",import.meta.url),"utf8");
+assert.match(cloud,/fetch\("\/api\/cloud\/state"/u,"sync do aluno deve usar o endpoint autorizado");
+assert.match(cloudStore,/revision=\$\{expectedRevision\}/u,"server CAS deve exigir revisão anterior de forma atómica");
+assert.match(cloudStore,/revision=revision\+1/u,"o servidor deve incrementar a revisão");
+assert.match(cloudStore,/on conflict \(auth_user_id\) do nothing/u,"a primeira gravação não pode sobrescrever estado existente");
+assert.match(cloudStore,/return \{ok:false,conflict:true,remote/u,"conflito deve preservar o snapshot remoto");
+assert.match(cloudApi,/requireSession\(\)/u,"session autenticada é obrigatória para gravações");
+assert.match(migration009,/REVOKE ALL ON TABLE public\.student_cloud_state FROM authenticated, anonymous, PUBLIC/u,
+  "Data API deve perder INSERT, UPDATE e DELETE diretos");
 
 console.log("✓ cloud resume product contract: progresso concluído sincronizável · sessão inacabada local com fallback seguro · logout seguro · snapshots · conflitos explícitos · retry offline · CAS por revisão");

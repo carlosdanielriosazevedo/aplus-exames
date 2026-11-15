@@ -12,7 +12,7 @@ export async function DELETE(request){
 
   let authenticated;
   try{
-    authenticated=await requireSession();
+    authenticated=await requireSession({accountBound:true});
   }catch(error){
     const failure=authErrorResponse(error);
     return NextResponse.json(failure.body,{status:failure.status,headers:{"Cache-Control":"no-store"}});

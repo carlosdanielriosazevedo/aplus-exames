@@ -1,5 +1,6 @@
 // ReviewerDashboard: painel interno de revisão editorial de conteúdo,
 // extraído de app/page.js. Sem alterações de comportamento.
+import {downloadOwnedText} from "../lib/cloudRecovery.js";
 import {useState, useEffect, useMemo} from "react";
 import {QUESTION_BANK, TAXONOMY} from "../data/content";
 import {theme} from "../lib/engine";
@@ -211,14 +212,9 @@ export function ReviewerDashboard({s,setS,go}){
     return `"${s.replace(/"/g,'""')}"`;
   }
 
-  function downloadCsv(csv,fileName){
-    const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement("a");
-    a.href=url;
-    a.download=fileName;
-    a.click();
-    URL.revokeObjectURL(url);
+  async function downloadCsv(csv,fileName){
+    try{await downloadOwnedText(s,()=>"\ufeff"+csv,fileName,"text/csv;charset=utf-8");}
+    catch{window.alert("Exportação bloqueada. Confirma a conta de origem.");}
   }
 
   function exportPriorityPack(){
