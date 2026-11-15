@@ -1,5 +1,8 @@
 "use client";
 
+import {downloadWorkspaceJson} from "../lib/cloudRecovery.js";
+import {beginRecoveryAccess,revalidateRecoveryAccess} from "../lib/recoveryAccess.js";
+import {useRecoveryViewGuard} from "../lib/useRecoveryViewGuard.js";
 import {useMemo,useState} from "react";
 import {graderValidationCaseFingerprint} from "../lib/graderValidationDataset";
 
@@ -16,14 +19,13 @@ const DIAGNOSES=[
   ["other","Outro"]
 ];
 
-function downloadJson(filename,data){
-  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;a.download=filename;a.click();URL.revokeObjectURL(url);
+async function downloadJson(filename,data){
+  try{await downloadWorkspaceJson(()=>data,filename);}
+  catch{window.alert("Exportação bloqueada. Confirma a conta de origem.");}
 }
 
 export default function GraderTeacherValidation(){
+  const accessGuard=useRecoveryViewGuard();
   const [pack,setPack]=useState(null);
   const [reviewer,setReviewer]=useState("");
   const [index,setIndex]=useState(0);
@@ -38,12 +40,14 @@ export default function GraderTeacherValidation(){
   async function importPack(file){
     setMessage("");
     try{
+      const access=await beginRecoveryAccess({select:true});
       const data=JSON.parse(await file.text());
       if(data?.schema!=="aplus-grader-teacher-pack-v1"||data?.blind!==true||!Array.isArray(data.cases))throw new Error("Pack incompatível ou não cego.");
       const leaked=data.cases.some(x=>x.grader_snapshot||x.systemDecision||x.graderDecision||x.policyScore);
       if(leaked)throw new Error("O pack contém informação do corretor e não pode ser usado numa revisão cega.");
       const modified=data.cases.some(x=>graderValidationCaseFingerprint(x)!==x.case_fingerprint);
       if(modified)throw new Error("O conteúdo de pelo menos um caso foi alterado depois de o pack ser criado.");
+      await revalidateRecoveryAccess(access);
       setPack(data);setIndex(0);setLabels({});setMessage(`${data.cases.length} casos carregados.`);
     }catch(error){setMessage(`Não foi possível importar: ${error.message}`)}
   }
@@ -81,6 +85,7 @@ export default function GraderTeacherValidation(){
     });
   }
 
+  if(!accessGuard.ready)return <p>Confirma a conta para aceder aos dados da revisão.</p>;
   return <main style={{maxWidth:920,margin:"0 auto",padding:"32px 20px 80px",fontFamily:"system-ui,sans-serif"}}>
     <p style={{fontWeight:800,letterSpacing:1,fontSize:12}}>APProva+ · VALIDAÇÃO CEGA DO CORRETOR</p>
     <h1>Revisão independente por professor</h1>

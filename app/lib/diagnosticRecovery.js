@@ -188,7 +188,7 @@ export function transactDiagnosticAnswer({state,draft,sel,saveDraft,saveState,no
   return {ok:true,state:applied.state,draft:advanced,completed:advanced.phase==="completion_pending"};
 }
 
-export function recoverDiagnosticTransaction({state,draft,saveState,saveDraft,clearDraft,startState,completeState,now=Date.now()}){
+export function recoverDiagnosticTransaction({state,draft,saveState,saveFinalState=saveState,saveDraft,clearDraft,startState,completeState,now=Date.now()}){
   if(state?.diagnosticDone&&(state.betaSessions||[]).some(x=>x.id===draft?.sessionId&&x.kind==="diagnostic"&&x.finishedAt)){
     clearDraft();return {ok:true,state,draft:null,completed:true};
   }
@@ -227,7 +227,8 @@ export function recoverDiagnosticTransaction({state,draft,saveState,saveDraft,cl
   }else if(!saveState(nextState))return {ok:false,reason:"reconciled_state_write_failed",state,draft};
   if(draft.phase==="completion_pending"){
     const final=completeState(nextState,draft);if(!final.ok)return {ok:false,reason:final.reason,state:nextState,draft};
-    if(!saveState(final.state))return {ok:false,reason:"completion_state_write_failed",state:nextState,draft};
+    // A conclusão só apaga o rascunho depois de uma gravação durável.
+    if(!saveFinalState(final.state))return {ok:false,reason:"completion_state_write_failed",state:nextState,draft};
     clearDraft();return {ok:true,state:final.state,draft:null,completed:true};
   }
   return {ok:true,state:nextState,draft,completed:false};

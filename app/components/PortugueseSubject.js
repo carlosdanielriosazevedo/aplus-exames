@@ -10,6 +10,8 @@ import {portugueseLiteraryWorkById,portugueseLiteraryWorksForYear} from "../data
 import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence,portugueseRevisionCompare,portugueseRevisionEvidenceCompare,rubricObservationEvidenceSnapshot} from "../lib/portugueseEngine";
 import {portugueseObservationGuidance} from "../lib/portugueseObservationGuidance";
 import {portugueseWordLimitFeedback} from "../lib/portugueseWordLimit";
+import {saveLocalStateDurably,durabilityFailureReason,lastStateIntegrityBlock} from "../lib/stateIntegrity";
+import {markCompletionBlocked} from "../lib/reliability";
 import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor,quarantineUnrecoverableSubjectSession} from "../lib/subjectProgress";
 import {clearPortugueseMiniExamDraft} from "../lib/portugueseMiniExamDraft";
 import {engagementSummary,missionCompletedToday} from "../lib/engagement";
@@ -446,7 +448,16 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
     if(feedback&&!feedback.final&&!feedback.rubricCompleted)return;
     const nextResults=[...results,feedback];
     if(session.current===session.items.length-1){
-      setS(prev=>recordSubjectSession(prev,{subjectId:"portuguese",sessionId:session.sessionId,kind:session.kind,label:session.label,domain:session.domain,items:session.items,results:nextResults}));
+      // Só dar a sessão como concluída depois de uma gravação durável; caso
+      // contrário a posição e a resposta ficam para retomar.
+      const completed=recordSubjectSession(s,{subjectId:"portuguese",sessionId:session.sessionId,kind:session.kind,label:session.label,domain:session.domain,items:session.items,results:nextResults});
+      const durable=saveLocalStateDurably(completed);
+      if(!durable.ok){
+        markCompletionBlocked(session.sessionId||null,durabilityFailureReason(durable.tier));
+        go(lastStateIntegrityBlock()?"storageRecoveryError":"completionBlocked");
+        return;
+      }
+      setS(completed);
       setResults(nextResults);setSession(current=>({...current,finished:true}));return;
     }
     setS(prev=>advanceSubjectSession(prev,"portuguese",{sessionId:session.sessionId,current:session.current+1,results:nextResults,currentAnswer:null}));

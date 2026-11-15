@@ -1,11 +1,15 @@
 "use client";
 
-import {useEffect,useState} from "react";
+import {useEffect,useRef,useState} from "react";
 import Link from "next/link";
 import styles from "./pilot.module.css";
 import {pilotConsentText} from "../lib/pilotCopy";
 import {setPilotTelemetryAllowed} from "../lib/pilotConsentClient";
-import {clearLocalPilotTelemetry} from "../lib/persistence";
+import {coordinatedClearLocalPilotTelemetry} from "../lib/stateIntegrity";
+import {openVerifiedAccount,accountFetch,verifyAccountContext,assertAccountContext} from "../lib/cloudAccountSession.js";
+import {selectAccountWorkspace,workspaceAccountId} from "../lib/accountWorkspace.js";
+
+const clearLocalPilotTelemetry=()=>coordinatedClearLocalPilotTelemetry(workspaceAccountId()||"global");
 
 export default function PilotConsentPage(){
   const [ageConfirmed,setAgeConfirmed]=useState(false);
@@ -13,15 +17,20 @@ export default function PilotConsentPage(){
   const [status,setStatus]=useState({loading:true,active:false,consent:null});
   const [busy,setBusy]=useState(false);
   const [message,setMessage]=useState("");
+  const account=useRef(null);
 
   async function refresh(){
     try{
-      const response=await fetch("/api/pilot/consent",{credentials:"include",cache:"no-store"});
+      const context=await openVerifiedAccount();
+      selectAccountWorkspace(context);
+      account.current=context;
+      const response=await accountFetch(context,"/api/pilot/consent");
       const body=await response.json().catch(()=>({}));
+      await verifyAccountContext(context);
       const active=response.ok&&body.active===true;
       setStatus({loading:false,active,consent:body.consent||null});
       setPilotTelemetryAllowed(active);
-      if(!active)clearLocalPilotTelemetry();
+      if(!active)await clearLocalPilotTelemetry();
     }catch{
       setStatus({loading:false,active:false,consent:null});
       setPilotTelemetryAllowed(false);
@@ -33,13 +42,15 @@ export default function PilotConsentPage(){
   async function grant(){
     setBusy(true);setMessage("");
     try{
-      clearLocalPilotTelemetry();
+      const context=assertAccountContext(account.current);
       setPilotTelemetryAllowed(false);
-      const response=await fetch("/api/pilot/consent",{
-        method:"POST",credentials:"include",headers:{"content-type":"application/json"},
+      await clearLocalPilotTelemetry();
+      const response=await accountFetch(context,"/api/pilot/consent",{
+        method:"POST",headers:{"content-type":"application/json"},
         body:JSON.stringify({ageConfirmed,accepted})
       });
       const body=await response.json().catch(()=>({}));
+      await verifyAccountContext(context);
       if(!response.ok||!body.active)throw new Error(body.code||"Não foi possível registar o consentimento.");
       setPilotTelemetryAllowed(true);
       setStatus({loading:false,active:true,consent:body.consent||null});
@@ -53,20 +64,22 @@ export default function PilotConsentPage(){
   async function revoke(){
     setBusy(true);setMessage("");
     try{
-      const response=await fetch("/api/pilot/consent",{method:"DELETE",credentials:"include"});
+      const context=assertAccountContext(account.current);
+      const response=await accountFetch(context,"/api/pilot/consent",{method:"DELETE"});
       const body=await response.json().catch(()=>({}));
+      await verifyAccountContext(context);
       if(!response.ok||!body.ok)throw new Error(body.code||"Não foi possível retirar o consentimento.");
       setPilotTelemetryAllowed(false);
-      clearLocalPilotTelemetry();
+      await clearLocalPilotTelemetry();
       setStatus({loading:false,active:false,consent:{...(status.consent||{}),revokedAt:new Date().toISOString()}});
       setMessage("Consentimento retirado. A recolha fica bloqueada imediatamente.");
     }catch(error){setMessage(String(error?.message||error))}
     finally{setBusy(false)}
   }
 
-  function decline(){
+  async function decline(){
     setPilotTelemetryAllowed(false);
-    clearLocalPilotTelemetry();
+    try{await clearLocalPilotTelemetry();}catch{}
     window.location.href="/";
   }
 

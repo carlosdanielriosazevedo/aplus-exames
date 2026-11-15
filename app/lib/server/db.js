@@ -18,7 +18,8 @@ export async function databaseHealth(){
     const sql=getSql();
     await sql`select 1 as ok`;
     return {configured:true,reachable:true,provider:"neon-postgres"};
-  }catch(error){
-    return {configured:true,reachable:false,provider:"neon-postgres",error:String(error).slice(0,240)};
+  }catch{
+    // Never return raw driver errors: they can include connection strings or credentials.
+    return {configured:true,reachable:false,provider:"neon-postgres"};
   }
 }
