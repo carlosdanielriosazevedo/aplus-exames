@@ -17,6 +17,7 @@ import {missionCompletedToday} from "../lib/engagement";
 import {loadPhysicsChemistryExamDraft,physicsChemistryDraftAgeLabel} from "../lib/physicsChemistryExamDraft";
 import {answerOptionState} from "../lib/feedbackCopy";
 import ScoreLossExplanation from "./ScoreLossExplanation";
+import ContentReportButton from "./ContentReportButton";
 
 const SUBJECT_ID="physics-chemistry-a";
 const SCHOOL_YEARS=["10.º","11.º"];
@@ -260,6 +261,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
             <details className="automaticCriteriaDetails"><summary>Ver critérios detalhados</summary><div className="automaticCriteriaList">{(feedback.criteria||[]).map(criterion=><div key={criterion.id} className={"automaticCriterion "+criterion.status}><div><b>{criterion.label}</b><span>{criterion.status==="observed"?"✓ Detetado":criterion.status==="partial"?"◐ Parcial":"○ Não detetado"}</span></div>{(criterion.observations||[]).map(observation=><small key={observation.id}>{observation.status==="observed"?"✓":observation.status==="partial"?"◐":"○"} {observation.label}</small>)}</div>)}</div></details>
             <p className="muted">A resposta fica fechada depois de submetida. Lê a correção com atenção e usa o feedback para responder melhor numa próxima questão. Uma formulação diferente pode estar correta; por isso, respostas abertas continuam assinaladas como provisórias quando a confiança não é suficiente.</p>
           </div>}
+          <ContentReportButton item={item} s={s} setS={setS} subjectId="physics-chemistry-a" compact/>
           <button className="primary" onClick={next}>{position===session.items.length?"Ver resultado":"Seguinte"}</button>
         </>}
       </div>

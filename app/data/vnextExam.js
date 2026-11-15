@@ -3084,15 +3084,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Reta tangente e interpretação geométrica",
-    "q": "Se a tangente em (0,-3) tem declive 4, uma reta normal ao gráfico nesse ponto e",
+    "q": "Se a tangente em (0,-3) tem declive 4, uma reta normal ao gráfico nesse ponto é",
     "o": [
-      "y=4x+-3",
-      "y=-4x+-3",
-      "y=(-1/4)x-3",
+      "y=4x-3",
+      "y=-4x-3",
+      "y=-(1/4)x-3",
       "x=0"
     ],
     "a": 2,
-    "sol": "O declive normal e -1/4; usando o ponto obtém-se y=(-1/4)x-3.",
+    "sol": "O declive da normal é -1/4; usando o ponto obtém-se y=-(1/4)x-3.",
     "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
     "contexts": [
       "exam"
@@ -3106,30 +3106,30 @@ export const VNEXT_EXAM_QUESTIONS=[
     "productionEligible": false
   },
   {
-    "id": "EX-VN11CD-TAN-014",
+    "id": "EX-VN11CD-TAN-016",
     "themeId": "11-cd",
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Reta tangente e interpretação geométrica",
-    "q": "Para f(x)=x^2+1, a tangente em x=0 tem equação",
+    "q": "Para f(x)=x^3, a tangente em x=1 tem equação",
     "o": [
-      "y=0x+1",
-      "y=1",
-      "y=1x+0",
-      "x=0"
+      "y=3x+1",
+      "y=x+3",
+      "x=1",
+      "y=3x-2"
     ],
-    "a": 1,
-    "sol": "Usa-se y-1=0(x-0), que simplifica para y=1.",
+    "a": 3,
+    "sol": "Usa-se y-1=3(x-1), que simplifica para y=3x-2.",
     "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
     "contexts": [
       "exam"
     ],
-    "signature": "exam:11-cd-tangente:11-cd-tangente:equacao-tangente:14",
+    "signature": "exam:11-cd-tangente:11-cd-tangente:equacao-tangente:16",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
-    "sourceQuestionId": "VN11CD-TAN-014",
+    "sourceQuestionId": "VN11CD-TAN-016",
     "sourceFile": "content/vnext/math-a/11/11-cd-tangente.json",
     "optionOrderVersion": 1,
     "productionEligible": false
@@ -3164,30 +3164,30 @@ export const VNEXT_EXAM_QUESTIONS=[
     "productionEligible": false
   },
   {
-    "id": "EX-VN11CD-TM-044",
+    "id": "EX-VN11CD-TM-045",
     "themeId": "11-cd",
     "subtopicId": "11-cd-taxa-media",
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "taxa média de variação",
-    "q": "Se f(-1)=3 e a taxa média em [-1,3] e 2, quanto vale f(3)?",
+    "q": "Se f(4)=10 e a taxa média em [4,7] é 5, quanto vale f(7)?",
     "o": [
-      "12",
-      "10",
-      "5",
-      "11"
+      "25",
+      "26",
+      "24",
+      "15"
     ],
-    "a": 3,
-    "sol": "[f(3)-3]/(3--1)=2, logo f(3)=11.",
+    "a": 0,
+    "sol": "[f(7)-10]/(7-4)=5, logo f(7)=25.",
     "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "exam"
     ],
-    "signature": "exam:11-cd-taxa-media:11-cd-taxa-media:inversa:44",
+    "signature": "exam:11-cd-taxa-media:11-cd-taxa-media:inversa:45",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
-    "sourceQuestionId": "VN11CD-TM-044",
+    "sourceQuestionId": "VN11CD-TM-045",
     "sourceFile": "content/vnext/math-a/11/11-cd-taxa-media.json",
     "optionOrderVersion": 1,
     "productionEligible": false

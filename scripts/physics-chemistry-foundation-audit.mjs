@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {
+  PHYSICS_CHEMISTRY_A_ALL_ITEMS,isRetiredPhysicsChemistryItem,
   PHYSICS_CHEMISTRY_A_DOMAINS,
   PHYSICS_CHEMISTRY_A_ITEMS,
   PHYSICS_CHEMISTRY_A_REFERENCE_SOURCES
@@ -23,7 +24,17 @@ const authorities=new Set(PHYSICS_CHEMISTRY_A_REFERENCE_SOURCES.map(row=>row.aut
 assert.ok(authorities.has("DGE")&&authorities.has("IAVE"),"A fundação deve distinguir currículo DGE de referência IAVE.");
 assert.ok(PHYSICS_CHEMISTRY_A_REFERENCE_SOURCES.filter(row=>row.authority==="DGE").every(row=>row.status==="in-force"),"As fontes curriculares DGE devem estar marcadas como vigentes.");
 
-assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.length>=2145,"O banco deve manter pelo menos 2145 itens após seis vagas de profundidade de treino.");
+// 2026-11-15: as vagas 4–6 (1548 variantes) foram retiradas do uso com alunos por
+// revelarem a resposta no enunciado e não terem conteúdo científico nas opções.
+// Os dados ficam preservados (retoma/revisão de sessões antigas); a seleção usa
+// apenas o banco ativo. Os mínimos de volume passam a refletir o banco limpo.
+assert.ok(PHYSICS_CHEMISTRY_A_ALL_ITEMS.length>=2145,"Os dados históricos (incluindo vagas retiradas) devem continuar disponíveis para retomar sessões antigas.");
+assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.length>=597,"O banco ativo deve manter pelo menos 597 itens limpos.");
+assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.every(item=>!isRetiredPhysicsChemistryItem(item)),"Nenhuma variante retirada (V4–V6) pode ser selecionada para alunos.");
+for(const item of PHYSICS_CHEMISTRY_A_ITEMS){
+  assert.doesNotMatch(String(item.prompt||""),/por que razão a resposta «/u,item.id+": o enunciado não pode revelar a resposta.");
+  assert.ok((String(item.prompt||"").match(/\?/gu)||[]).length<=1,item.id+": o enunciado não pode encadear várias perguntas.");
+}
 assert.equal(new Set(PHYSICS_CHEMISTRY_A_ITEMS.map(item=>item.id)).size,PHYSICS_CHEMISTRY_A_ITEMS.length,"IDs de FQ A devem ser únicos.");
 for(const item of PHYSICS_CHEMISTRY_A_ITEMS){
   const domain=PHYSICS_CHEMISTRY_A_DOMAINS.find(row=>row.id===item.domain);
@@ -49,7 +60,7 @@ for(const item of PHYSICS_CHEMISTRY_A_ITEMS){
 }
 
 const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
-assert.ok(coverage.total>=2145);
+assert.ok(coverage.total>=597,"O banco ativo deve manter pelo menos 597 itens limpos.");
 assert.equal(coverage.missionReady,true,"O banco global deve suportar uma missão de pelo menos 7 perguntas.");
 for(const domain of PHYSICS_CHEMISTRY_A_DOMAINS)assert.ok(coverage.byDomain[domain.id]>=11,domain.id+": cada grande domínio deve ter pelo menos 11 itens após a vaga de dados.");
 assert.equal(PHYSICS_CHEMISTRY_A_SUBTOPICS.length,43,"A taxonomia deve representar 43 submatérias curriculares.");
@@ -78,22 +89,22 @@ assert.equal(deepenedSubtopicsWave3.size,14,"A terceira vaga deve aprofundar as 
 const allDeepenedAfterWave3=new Set([...allDeepened,...deepenedSubtopicsWave3]);
 assert.equal(allDeepenedAfterWave3.size,43,"Depois da terceira vaga, as 43 submatérias devem ter profundidade reforçada.");
 for(const id of allDeepenedAfterWave3)assert.ok((coverage.bySubtopic[id]||0)>=13,id+": todas as submatérias devem oferecer pelo menos 13 itens antes de repetir.");
-const depthWave4=PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.generated===true&&String(item.id).startsWith("FQA-V4-"));
+const depthWave4=PHYSICS_CHEMISTRY_A_ALL_ITEMS.filter(item=>item.generated===true&&String(item.id).startsWith("FQA-V4-"));
 assert.equal(depthWave4.length,258,"A quarta vaga deve acrescentar 258 variantes de raciocínio, seis por cada submatéria.");
 assert.equal(new Set(depthWave4.map(item=>item.id)).size,depthWave4.length,"As variantes da quarta vaga devem ter IDs únicos.");
 assert.equal(new Set(depthWave4.map(item=>item.subtopicId)).size,43,"A quarta vaga deve cobrir as 43 submatérias.");
-for(const subtopic of PHYSICS_CHEMISTRY_A_SUBTOPICS)assert.ok((coverage.bySubtopic[subtopic.id]||0)>=19,subtopic.id+": todas as submatérias devem oferecer pelo menos 19 itens antes de repetir.");
-const depthWave5=PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.generated===true&&String(item.id).startsWith("FQA-V5-"));
+for(const subtopic of PHYSICS_CHEMISTRY_A_SUBTOPICS)assert.ok((coverage.bySubtopic[subtopic.id]||0)>=13,subtopic.id+": todas as submatérias devem oferecer pelo menos 13 itens limpos antes de repetir (banco ativo).");
+const depthWave5=PHYSICS_CHEMISTRY_A_ALL_ITEMS.filter(item=>item.generated===true&&String(item.id).startsWith("FQA-V5-"));
 assert.equal(depthWave5.length,516,"A quinta vaga deve acrescentar 516 variantes, doze por cada submatéria.");
 assert.equal(new Set(depthWave5.map(item=>item.id)).size,depthWave5.length,"As variantes da quinta vaga devem ter IDs únicos.");
 assert.equal(new Set(depthWave5.map(item=>item.subtopicId)).size,43,"A quinta vaga deve cobrir as 43 submatérias.");
-for(const subtopic of PHYSICS_CHEMISTRY_A_SUBTOPICS)assert.ok((coverage.bySubtopic[subtopic.id]||0)>=31,subtopic.id+": todas as submatérias devem oferecer pelo menos 31 itens antes de repetir.");
-const depthWave6=PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.generated===true&&String(item.id).startsWith("FQA-V6-"));
+for(const subtopic of PHYSICS_CHEMISTRY_A_SUBTOPICS)assert.ok((coverage.bySubtopic[subtopic.id]||0)>=13,subtopic.id+": todas as submatérias devem oferecer pelo menos 13 itens limpos antes de repetir (banco ativo).");
+const depthWave6=PHYSICS_CHEMISTRY_A_ALL_ITEMS.filter(item=>item.generated===true&&String(item.id).startsWith("FQA-V6-"));
 assert.equal(depthWave6.length,774,"A sexta vaga deve acrescentar 774 variantes, dezoito por cada submatéria.");
 assert.equal(new Set(depthWave6.map(item=>item.id)).size,depthWave6.length,"As variantes da sexta vaga devem ter IDs únicos.");
 assert.equal(new Set(depthWave6.map(item=>item.subtopicId)).size,43,"A sexta vaga deve cobrir as 43 submatérias.");
 assert.equal(new Set(depthWave6.map(item=>item.templateId)).size,depthWave6.length,"A sexta vaga deve preservar famílias/templateId distintos por fonte e tarefa cognitiva.");
-for(const subtopic of PHYSICS_CHEMISTRY_A_SUBTOPICS)assert.ok((coverage.bySubtopic[subtopic.id]||0)>=49,subtopic.id+": todas as submatérias devem oferecer pelo menos 49 itens antes de repetir.");
+for(const subtopic of PHYSICS_CHEMISTRY_A_SUBTOPICS)assert.ok((coverage.bySubtopic[subtopic.id]||0)>=13,subtopic.id+": todas as submatérias devem oferecer pelo menos 13 itens limpos antes de repetir (banco ativo).");
 assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.stimulus?.type==="table").length>=15,"FQ A deve conter pelo menos quinze itens com tabelas/dados.");
 assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.responseType==="stepwise").length>=14,"FQ A deve conter pelo menos catorze problemas por etapas.");
 assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.responseType==="restricted-response").length>=14,"FQ A deve conter pelo menos catorze respostas científicas/experimentais abertas.");
@@ -220,4 +231,4 @@ assert.match(learn,/Aqui não há perguntas, pontuação nem avaliação/u,"Reve
 assert.match(learn,/Trabalho prático associado nas AE/u,"Rever Matéria deve tornar visível o trabalho prático previsto nas AE.");
 assert.doesNotMatch(learn,/Responder|buildAdaptivePhysicsChemistryMission/u,"Rever matéria não deve iniciar treino.");
 
-console.log("✓ FQ A: AE março 2026 · 21 atividades práticas · 43 submatérias · 2145+ itens · tabelas + gráficos + diagramas · ≥14 problemas por etapas · ≥14 respostas abertas · mínimo 7/submatéria · blueprint 715 15+8/4");
+console.log("✓ FQ A: AE março 2026 · 21 atividades práticas · 43 submatérias · 597+ itens ativos limpos (V4–V6 retiradas) · tabelas + gráficos + diagramas · ≥14 problemas por etapas · ≥14 respostas abertas · mínimo 7/submatéria · blueprint 715 15+8/4");

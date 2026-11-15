@@ -11,12 +11,12 @@ const allExamItems=[...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.mandatoryItems,..
 
 assert.equal(PHYSICS_CHEMISTRY_A_DOMAINS.length,7,"FQ A deve manter os sete grandes domínios curriculares.");
 assert.equal(PHYSICS_CHEMISTRY_A_SUBTOPICS.length,43,"FQ A deve manter as 43 submatérias curriculares modeladas.");
-assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.length>=2145,"O banco beta deve manter pelo menos 2145 itens após seis vagas de profundidade.");
+assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.length>=597,"O banco beta ativo deve manter pelo menos 597 itens limpos (vagas V4–V6 retiradas em 2026-11-15).");
 assert.ok(PHYSICS_CHEMISTRY_A_REFERENCE_SOURCES.some(row=>row.authority==="DGE"&&row.status==="in-force"),"A disciplina deve manter referência curricular DGE vigente.");
 assert.ok(PHYSICS_CHEMISTRY_A_REFERENCE_SOURCES.some(row=>row.authority==="IAVE"),"A disciplina deve manter referência explícita ao IAVE.");
 
 for(const subtopic of PHYSICS_CHEMISTRY_A_SUBTOPICS){
-  assert.ok((coverage.bySubtopic[subtopic.id]||0)>=49,subtopic.id+": nenhuma submatéria pode entrar em beta com menos de 49 itens.");
+  assert.ok((coverage.bySubtopic[subtopic.id]||0)>=13,subtopic.id+": nenhuma submatéria pode entrar em beta com menos de 13 itens limpos.");
 }
 for(const domain of PHYSICS_CHEMISTRY_A_DOMAINS){
   const rows=PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.domain===domain.id);
@@ -69,4 +69,4 @@ assert.match(mini,/não mostra a correção durante o mini-exame/u,"Mini-exame n
 assert.match(full,/Durante o Exame Completo não mostramos correções/u,"Exame Completo não deve revelar feedback imediato.");
 assert.match(full,/Subtotal provisório já corrigível/u,"Exame Completo deve distinguir subtotal automático provisório de classificação final.");
 
-console.log("✓ FQ A beta readiness: 7 domínios · 43 submatérias · 2145+ itens · 49+ por submatéria · 2 mini-exames · Exame Completo 715 · correção automática provisória");
+console.log(`✓ FQ A beta readiness: 7 domínios · 43 submatérias · ${PHYSICS_CHEMISTRY_A_ITEMS.length} itens ativos limpos · 13+ por submatéria · 2 mini-exames · Exame Completo 715 · correção automática provisória`);

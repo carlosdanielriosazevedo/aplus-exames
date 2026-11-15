@@ -46,15 +46,16 @@ assert.deepEqual(combined.dailyMission,local.dailyMission);
 assert.equal(combined.scores.t1.conf,0);
 
 const cloudSource=readFileSync("app/lib/cloud.js","utf8");
-assert.ok(cloudSource.includes('.eq("revision",Number(expectedRevision)||0)'),"Save cloud perdeu compare-and-swap por revisão.");
+const storeSource=readFileSync("app/lib/server/cloud-state-store.js","utf8");
+const routeSource=readFileSync("app/api/cloud/state/route.js","utf8");
+assert.ok(storeSource.includes("revision=${expectedRevision}"),"Save cloud perdeu compare-and-swap por revisão no servidor.");
+assert.ok(storeSource.includes("on conflict (auth_user_id) do nothing"),"Primeira gravação passou a poder substituir um snapshot existente.");
 assert.ok(cloudSource.includes("knownRemote"),"Revision 0 deixou de distinguir primeira gravação de base remota conhecida.");
-assert.ok(cloudSource.includes("CLOUD_SCHEMA_OUTDATED"),"Cloud deixou de bloquear sync quando a migration de revisões não está aplicada.");
-assert.ok(cloudSource.includes('fetch("/api/auth/token"'),"Data API deixou de obter o JWT pela sessão da app.");
-assert.ok(cloudSource.includes('credentials:"include"'),"Pedido do token deixou de enviar a sessão autenticada.");
-assert.ok(cloudSource.includes("getToken:currentDataApiJwt"),"Data API deixou de exigir o JWT atual.");
-assert.ok(cloudSource.includes("auth_user_id:session.user.id"),"Escrita cloud deixou de fixar auth_user_id ao utilizador autenticado.");
-assert.ok(cloudSource.includes('.eq("auth_user_id",session.user.id)'),"Leitura/escrita cloud perdeu o filtro pelo utilizador autenticado.");
-assert.ok(cloudSource.includes("currentRemoteRow(client,session.user.id)"),"Verificação de revisão remota deixou de usar o utilizador autenticado.");
+assert.ok(cloudSource.includes('fetch("/api/cloud/state"'),"Progresso cloud deixou de passar pela rota servidor.");
+assert.ok(cloudSource.includes('credentials:"include"'),"Pedido cloud deixou de enviar a sessão autenticada.");
+assert.ok(!cloudSource.includes(".from(\"student_cloud_state\")"),"O browser voltou a aceder diretamente à tabela student_cloud_state.");
+assert.ok(routeSource.includes("auth.value.authUserId"),"Rota cloud deixou de derivar o dono da linha da sessão verificada.");
+assert.ok(routeSource.includes("sameOriginRequest(request)"),"Rota cloud perdeu a proteção CSRF.");
 assert.ok(!/auth_user_id\s*:\s*s(?:\.|\[)/.test(cloudSource),"auth_user_id passou a poder vir do estado controlado pelo cliente.");
 const payloadStart=cloudSource.indexOf("export function studentStateForCloud");
 const payloadEnd=cloudSource.indexOf("export function mergeStudentCloudState");
@@ -68,7 +69,7 @@ assert.ok(payloadSource.includes("subjectProgress:s.subjectProgress||{}"),"Paylo
 assert.ok(payloadSource.includes("subjectProgressModelVersion:s.subjectProgressModelVersion||4"),"Payload cloud perdeu a versão do progresso por disciplina.");
 assert.ok(cloudSource.includes('"currentAnswer"'),"A limpeza de texto livre do aluno deve abranger respostas ainda não submetidas.");
 assert.ok(cloudSource.includes("subjectProgress:remote.subjectProgress??local.subjectProgress"),"Carregar cloud deve restaurar o progresso por disciplina quando existe remotamente.");
-assert.ok((cloudSource.match(/\.from\("student_cloud_state"\)/g)||[]).length>=4,"Cobertura esperada das operações de student_cloud_state diminuiu inesperadamente.");
+assert.equal((cloudSource.match(/\.from\("student_cloud_state"\)/g)||[]).length,0,"O browser não pode aceder diretamente a student_cloud_state; usar /api/cloud/state.");
 assert.ok(!cloudSource.includes('.from("student_cloud_state").delete('),"DELETE direto de progresso exige revisão explícita de segurança.");
 
 const walk=dir=>readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?walk(new URL(`${entry.name}/`,dir)):[new URL(entry.name,dir)]);

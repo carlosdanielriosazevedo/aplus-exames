@@ -1,13 +1,26 @@
 import assert from "node:assert/strict";
 import {PORTUGUESE_LITERARY_WORKS} from "../app/data/portugueseLiteraryWorks.js";
 import {PORTUGUESE_LITERARY_ITEMS} from "../app/data/portugueseLiteraryQuestions.js";
+import {isRetiredPortugueseItem} from "../app/data/portugueseRetired.js";
 import {PORTUGUESE_LITERARY_TRAINING_VARIANTS} from "../app/data/portugueseLiteraryTrainingVariants.js";
 import {PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE3} from "../app/data/portugueseLiteraryTrainingVariantsWave3.js";
 import {PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE4} from "../app/data/portugueseLiteraryTrainingVariantsWave4.js";
 import {PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE5} from "../app/data/portugueseLiteraryTrainingVariantsWave5.js";
 import {PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE6} from "../app/data/portugueseLiteraryTrainingVariantsWave6.js";
 
-const LITERARY_POOL=[...PORTUGUESE_LITERARY_ITEMS,...PORTUGUESE_LITERARY_TRAINING_VARIANTS,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE3,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE4,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE5,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE6];
+const LITERARY_ALL=[...PORTUGUESE_LITERARY_ITEMS,...PORTUGUESE_LITERARY_TRAINING_VARIANTS,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE3,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE4,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE5,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE6];
+// 2026-11-15: variantes V2–V6 retiradas do uso com alunos (encadeavam perguntas,
+// respostas genéricas iguais para todas as obras, distratores autodenunciados).
+// Mantêm-se as verificações estruturais sobre os dados; a cobertura por obra e o
+// equilíbrio de respostas passam a ser medidos no banco ativo.
+const LITERARY_POOL=LITERARY_ALL.filter(item=>!isRetiredPortugueseItem(item));
+assert.equal(LITERARY_ALL.length-LITERARY_POOL.length,900,"As 900 variantes V2–V6 devem estar fora do banco ativo.");
+for(const item of LITERARY_POOL){
+  assert.ok((String(item.prompt||"").match(/\?/gu)||[]).length<=1,`${item.id}: enunciado literário não pode encadear várias perguntas.`);
+}
+const promptWorks=new Map();
+for(const item of LITERARY_POOL){const set=promptWorks.get(item.prompt)||new Set();set.add(item.literaryWorkId);promptWorks.set(item.prompt,set)}
+for(const [prompt,works] of promptWorks)assert.ok(works.size<=5,`enunciado-modelo repetido em ${works.size} obras: «${prompt.slice(0,80)}»`);
 
 const workById=new Map(PORTUGUESE_LITERARY_WORKS.map(work=>[work.id,work]));
 const counts={};
@@ -30,7 +43,7 @@ for(const item of LITERARY_POOL){
 
 for(const work of PORTUGUESE_LITERARY_WORKS){
   const items=LITERARY_POOL.filter(item=>item.literaryWorkId===work.id);
-  assert.ok(items.length>=50,`${work.id}: cada obra deve manter pelo menos 50 itens, alinhando a profundidade com a escala de Matemática A`);
+  assert.ok(items.length>=14,`${work.id}: cada obra deve manter pelo menos 14 itens ativos sólidos`);
   const represented=new Set(items.map(item=>item.competencyId));
   for(const competencyId of work.readyCompetencyIds||[]){
     assert.ok(represented.has(competencyId),`${work.id}: falta a competência declarada ${competencyId}`);

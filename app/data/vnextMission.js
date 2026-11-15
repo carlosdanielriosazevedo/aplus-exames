@@ -7206,11 +7206,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "o": [
       "y=-2x-1",
       "y=-2x+1",
-      "y=1x+-2",
+      "y=x-2",
       "x=-1"
     ],
     "a": 0,
-    "sol": "Usa-se y-1=-2(x--1), que simplifica para y=-2x-1.",
+    "sol": "Usa-se y-1=-2(x+1), que simplifica para y=-2x-1.",
     "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
     "contexts": [
       "mission"
@@ -7434,7 +7434,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "taxa média de variação",
-    "q": "Se f(1)=5 e a taxa média em [1,4] e 3, quanto vale f(4)?",
+    "q": "Se f(1)=5 e a taxa média em [1,4] é 3, quanto vale f(4)?",
     "o": [
       "14",
       "15",

@@ -2,6 +2,8 @@
 import {pendingPhysicsChemistryExam} from "./lib/physicsChemistryExamDraft";
 import {hasPendingAssessment} from "./lib/pendingAssessment";
 import {useEffect,useMemo,useRef,useState} from "react";
+import {AUTH_CHANGED_EVENT,cloudSessionHinted} from "./lib/cloudSessionHint";
+import ContentReportButton from "./components/ContentReportButton";
 import dynamic from "next/dynamic";
 import {insertMathText} from "./lib/mathInput";
 import {answerOptionState,conciseMathExplanation} from "./lib/feedbackCopy";
@@ -18,6 +20,11 @@ import ScoreLossExplanation from "./components/ScoreLossExplanation";
 import {miniExamReviewItemLabel,CONTENT_REPORT_SAVED_MESSAGE} from "./lib/scoreReviewCopy";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
 const AccountCloud=dynamic(()=>import("./components/AccountCloud").then(module=>module.AccountCloud),{ssr:false});
+const CloudSyncLayer=dynamic(()=>import("./components/CloudSyncLayer"),{ssr:false});
+// Conta obrigatória para estudar (beta pública). Ativa apenas quando a variável
+// pública está definida, para poder ser ligada/desligada sem alterar código.
+const MAINTENANCE_MESSAGE=String(process.env.NEXT_PUBLIC_APPROVA_MAINTENANCE_MESSAGE||"").trim().slice(0,240);
+const REQUIRE_ACCOUNT=process.env.NEXT_PUBLIC_APPROVA_REQUIRE_ACCOUNT==="1"&&!!process.env.NEXT_PUBLIC_NEON_AUTH_URL;
 const MathReviewMatter=dynamic(()=>import("./components/MathReviewMatter"),{ssr:false});
 const BetaDashboard=dynamic(()=>import("./components/InternalDashboards").then(module=>module.BetaDashboard),{ssr:false});
 const QualityPanel=dynamic(()=>import("./components/InternalDashboards").then(module=>module.QualityPanel),{ssr:false});
@@ -266,6 +273,34 @@ export default function App(){
   const [hydrated,setHydrated]=useState(false);
   const [mathEngineReady,setMathEngineReady]=useState(()=>!!mathEngineModule);
   const [diagnosticRecoveryReady,setDiagnosticRecoveryReady]=useState(()=>!!diagnosticRecoveryModule);
+  const [cloudHint,setCloudHint]=useState(false);
+  const [accountGate,setAccountGate]=useState(REQUIRE_ACCOUNT?"checking":"open");
+
+  useEffect(()=>{
+    if(!hydrated||!REQUIRE_ACCOUNT||typeof window==="undefined")return;
+    let live=true;
+    const check=async()=>{
+      try{
+        const response=await fetch("/api/auth/session",{credentials:"include",cache:"no-store"});
+        if(!live)return;
+        // Falha do serviço de autenticação: não bloquear o estudo (fica local).
+        setAccountGate(response.status===401?"required":"open");
+      }catch{if(live)setAccountGate("open")}
+    };
+    check();
+    window.addEventListener(AUTH_CHANGED_EVENT,check);
+    return ()=>{live=false;window.removeEventListener(AUTH_CHANGED_EVENT,check)};
+  },[hydrated]);
+
+  // A sincronização automática só é carregada depois de ter havido sessão
+  // iniciada neste dispositivo; visitantes anónimos não fazem pedidos extra.
+  useEffect(()=>{
+    if(!hydrated||typeof window==="undefined")return;
+    const update=()=>setCloudHint(cloudSessionHinted());
+    update();
+    window.addEventListener(AUTH_CHANGED_EVENT,update);
+    return ()=>window.removeEventListener(AUTH_CHANGED_EVENT,update);
+  },[hydrated]);
 
   useEffect(()=>{
     if(typeof window==="undefined"||!("scrollRestoration" in window.history))return;
@@ -463,6 +498,11 @@ export default function App(){
     setScreen(x);
   };
 
+  const view=(()=>{
+  if(REQUIRE_ACCOUNT&&hydrated&&screen!=="welcome"&&!isFriendsBeta(s)){
+    if(accountGate==="checking")return <Shell><Logo/><div className="cloudLoading">A verificar sessão…</div></Shell>;
+    if(accountGate==="required")return <AccountCloud s={s} setS={setS} go={go} gate/>;
+  }
   // Resolve pending attempts before mounting an assessment, including popstate.
   const assessmentRoutes=["diag","diagRun","mission","trainingSetup","trainingRun","miniExamIntro","miniExamRun","miniExamReview","portugueseMiniExam","physicsChemistryMini1","physicsChemistryMini2","physicsChemistryExam"];
   if(hydrated&&assessmentRoutes.includes(screen)){
@@ -561,6 +601,9 @@ export default function App(){
     setRecoveredSession(null);
     setS(isFriendsBeta(s)?activateFriendsBeta(initial):initial);go("welcome");
   }}/>;
+  })();
+
+  return <>{MAINTENANCE_MESSAGE&&<div role="status" style={{position:"sticky",top:0,zIndex:9500,background:"#fff8e8",borderBottom:"1px solid #f0dfae",color:"#6b4e00",padding:"8px 14px",fontSize:13,textAlign:"center"}}>{MAINTENANCE_MESSAGE}</div>}{view}{hydrated&&cloudHint&&!isFriendsBeta(s)&&<CloudSyncLayer s={s} setS={setS} hydrated={hydrated} screen={screen} go={go}/>}</>;
 }
 
 function FriendsBetaDisclaimer({s,compact=false}){
@@ -2146,28 +2189,7 @@ function BetaSessionFeedback({s,setS,kind}){
 }
 
 function ReportButton({item,s,setS,compact=false}){
-  const [open,setOpen]=useState(false),[sent,setSent]=useState(false);
-  const categories=[
-    ["wrong","A resposta parece errada"],
-    ["unclear","Enunciado confuso"],
-    ["difficulty","Dificuldade desajustada"],
-    ["typo","Erro/typo"],
-    ["other","Outro problema"]
-  ];
-  function send(category,label){
-    const report={
-      id:`rep-${Date.now()}-${Math.random().toString(16).slice(2)}`,
-      itemId:item.id,templateId:item.templateId||null,generated:!!item.generated,
-      themeId:item.themeId,focus:item.focus||null,category,label,at:Date.now()
-    };
-    setS(prev=>({...prev,contentReports:[...(prev.contentReports||[]),report]}));
-    setSent(true);setOpen(false);
-  }
-  if(sent)return <div className="reportThanks">{CONTENT_REPORT_SAVED_MESSAGE}</div>;
-  return <div className={"reportBox "+(compact?"compact":"")}>
-    <button className="reportToggle" onClick={()=>setOpen(!open)}>⚑ Reportar problema nesta pergunta</button>
-    {open&&<div className="reportChoices">{categories.map(([v,l])=><button key={v} onClick={()=>send(v,l)}>{l}</button>)}</div>}
-  </div>
+  return <ContentReportButton item={item} s={s} setS={setS} subjectId="math-a" compact={compact}/>;
 }
 
 

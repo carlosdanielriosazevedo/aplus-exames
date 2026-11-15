@@ -290,7 +290,7 @@
       "q": "Para f(x)=x^2, a tangente em x=1 tem equação",
       "o": [
         "y=2x+1",
-        "y=1x+2",
+        "y=x+2",
         "y=2x-1",
         "x=1"
       ],
@@ -345,11 +345,11 @@
       "o": [
         "y=-2x-1",
         "y=-2x+1",
-        "y=1x+-2",
+        "y=x-2",
         "x=-1"
       ],
       "a": 0,
-      "sol": "Usa-se y-1=-2(x--1), que simplifica para y=-2x-1.",
+      "sol": "Usa-se y-1=-2(x+1), que simplifica para y=-2x-1.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -370,13 +370,13 @@
       "cognitive": "Aplicacao",
       "q": "Para f(x)=x^2+1, a tangente em x=0 tem equação",
       "o": [
-        "y=0x+1",
+        "y=x+1",
         "y=1",
-        "y=1x+0",
+        "y=2x+1",
         "x=0"
       ],
       "a": 1,
-      "sol": "Usa-se y-1=0(x-0), que simplifica para y=1.",
+      "sol": "Usa-se y-1=0(x-0), ou seja, y=1.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -397,13 +397,13 @@
       "cognitive": "Aplicacao",
       "q": "Para f(x)=x^2-4x, a tangente em x=2 tem equação",
       "o": [
-        "y=0x+-4",
-        "y=-4x+0",
+        "y=-4x+4",
+        "y=-4x",
         "y=-4",
         "x=2"
       ],
       "a": 2,
-      "sol": "Usa-se y--4=0(x-2), que simplifica para y=-4.",
+      "sol": "Usa-se y+4=0(x-2), ou seja, y=-4.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -425,7 +425,7 @@
       "q": "Para f(x)=x^3, a tangente em x=1 tem equação",
       "o": [
         "y=3x+1",
-        "y=1x+3",
+        "y=x+3",
         "x=1",
         "y=3x-2"
       ],
@@ -533,7 +533,7 @@
       "q": "Para f(x)=-2x+5, a tangente em x=1 tem equação",
       "o": [
         "y=-2x+3",
-        "y=3x+-2",
+        "y=3x-2",
         "x=1",
         "y=-2x+5"
       ],
@@ -586,13 +586,13 @@
       "cognitive": "Aplicacao",
       "q": "Para f(x)=x^3-x, a tangente em x=1 tem equação",
       "o": [
-        "y=2x+0",
+        "y=2x",
         "y=2x-2",
-        "y=0x+2",
+        "y=2",
         "x=1"
       ],
       "a": 1,
-      "sol": "Usa-se y-0=2(x-1), que simplifica para y=2x-2.",
+      "sol": "Usa-se y=2(x-1), que simplifica para y=2x-2.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -613,13 +613,13 @@
       "cognitive": "Aplicacao",
       "q": "Para f(x)=x^2-1, a tangente em x=0 tem equação",
       "o": [
-        "y=0x+-1",
-        "y=-1x+0",
+        "y=x-1",
+        "y=-x",
         "y=-1",
         "x=0"
       ],
       "a": 2,
-      "sol": "Usa-se y--1=0(x-0), que simplifica para y=-1.",
+      "sol": "Usa-se y+1=0(x-0), ou seja, y=-1.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -722,12 +722,12 @@
       "q": "Sabendo que f(1)=4 e f'(1)=-2, qual é a reta tangente?",
       "o": [
         "y=-2x+4",
-        "y=4x+-2",
+        "y=4x-2",
         "y=-2x+6",
         "x=1"
       ],
       "a": 2,
-      "sol": "y-4=-2(x-1)",
+      "sol": "y-4=-2(x-1), logo y=-2x+6.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -748,13 +748,13 @@
       "cognitive": "Raciocinio",
       "q": "Sabendo que f(0)=-3 e f'(0)=4, qual é a reta tangente?",
       "o": [
-        "y=4x+-3",
+        "y=4x+3",
         "y=-3x+4",
         "x=0",
         "y=4x-3"
       ],
       "a": 3,
-      "sol": "y--3=4(x-0)",
+      "sol": "y+3=4(x-0), logo y=4x-3.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -781,7 +781,7 @@
         "x=-1"
       ],
       "a": 0,
-      "sol": "y-2=5(x--1)",
+      "sol": "y-2=5(x+1), logo y=5x+7.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -802,13 +802,13 @@
       "cognitive": "Raciocinio",
       "q": "Sabendo que f(3)=1 e f'(3)=0, qual é a reta tangente?",
       "o": [
-        "y=0x+1",
+        "y=x+1",
         "y=1",
-        "y=1x+0",
+        "y=x",
         "x=3"
       ],
       "a": 1,
-      "sol": "y-1=0(x-3)",
+      "sol": "y-1=0(x-3), logo y=1.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -856,13 +856,13 @@
       "cognitive": "Raciocinio",
       "q": "Sabendo que f(-2)=6 e f'(-2)=-1, qual é a reta tangente?",
       "o": [
-        "y=-1x+6",
-        "y=6x+-1",
+        "y=-x+6",
+        "y=6x-1",
         "x=-2",
         "y=-x+4"
       ],
       "a": 3,
-      "sol": "y-6=-1(x--2)",
+      "sol": "y-6=-(x+2), logo y=-x+4.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -884,12 +884,12 @@
       "q": "Sabendo que f(5)=-1 e f'(5)=3, qual é a reta tangente?",
       "o": [
         "y=3x-16",
-        "y=3x+-1",
-        "y=-1x+3",
+        "y=3x-1",
+        "y=-x+3",
         "x=5"
       ],
       "a": 0,
-      "sol": "y--1=3(x-5)",
+      "sol": "y+1=3(x-5), logo y=3x-16.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -910,13 +910,13 @@
       "cognitive": "Raciocinio",
       "q": "Sabendo que f(1)=0 e f'(1)=7, qual é a reta tangente?",
       "o": [
-        "y=7x+0",
+        "y=7x",
         "y=7x-7",
-        "y=0x+7",
+        "y=7",
         "x=1"
       ],
       "a": 1,
-      "sol": "y-0=7(x-1)",
+      "sol": "y=7(x-1), logo y=7x-7.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -938,12 +938,12 @@
       "q": "Sabendo que f(2)=8 e f'(2)=-4, qual é a reta tangente?",
       "o": [
         "y=-4x+8",
-        "y=8x+-4",
+        "y=8x-4",
         "y=-4x+16",
         "x=2"
       ],
       "a": 2,
-      "sol": "y-8=-4(x-2)",
+      "sol": "y-8=-4(x-2), logo y=-4x+16.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -1097,7 +1097,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se a tangente em (2,5) tem declive 3, uma reta normal ao gráfico nesse ponto e",
+      "q": "Se a tangente em (2,5) tem declive 3, uma reta normal ao gráfico nesse ponto é",
       "o": [
         "y=(-1/3)x+17/3",
         "y=3x+5",
@@ -1124,7 +1124,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se a tangente em (1,4) tem declive -2, uma reta normal ao gráfico nesse ponto e",
+      "q": "Se a tangente em (1,4) tem declive -2, uma reta normal ao gráfico nesse ponto é",
       "o": [
         "y=-2x+4",
         "y=(1/2)x+7/2",
@@ -1151,15 +1151,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se a tangente em (0,-3) tem declive 4, uma reta normal ao gráfico nesse ponto e",
+      "q": "Se a tangente em (0,-3) tem declive 4, uma reta normal ao gráfico nesse ponto é",
       "o": [
-        "y=4x+-3",
-        "y=-4x+-3",
-        "y=(-1/4)x-3",
+        "y=4x-3",
+        "y=-4x-3",
+        "y=-(1/4)x-3",
         "x=0"
       ],
       "a": 2,
-      "sol": "O declive normal e -1/4; usando o ponto obtém-se y=(-1/4)x-3.",
+      "sol": "O declive da normal é -1/4; usando o ponto obtém-se y=-(1/4)x-3.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -1178,15 +1178,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se a tangente em (-1,2) tem declive 1, uma reta normal ao gráfico nesse ponto e",
+      "q": "Se a tangente em (-1,2) tem declive 1, uma reta normal ao gráfico nesse ponto é",
       "o": [
-        "y=1x+2",
-        "y=-1x+2",
+        "y=x+2",
+        "y=-x+2",
         "x=-1",
         "y=-x+1"
       ],
       "a": 3,
-      "sol": "O declive normal e -1/1; usando o ponto obtém-se y=-x+1.",
+      "sol": "O declive da normal é -1; usando o ponto obtém-se y=-x+1.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -1205,15 +1205,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se a tangente em (3,1) tem declive -1, uma reta normal ao gráfico nesse ponto e",
+      "q": "Se a tangente em (3,1) tem declive -1, uma reta normal ao gráfico nesse ponto é",
       "o": [
         "y=x-2",
-        "y=-1x+1",
-        "y=1x+1",
+        "y=-x+1",
+        "y=x+1",
         "x=3"
       ],
       "a": 0,
-      "sol": "O declive normal e -1/-1; usando o ponto obtém-se y=x-2.",
+      "sol": "O declive da normal é 1; usando o ponto obtém-se y=x-2.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
