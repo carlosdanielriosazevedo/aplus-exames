@@ -21,7 +21,7 @@ import {normalizeAfterCloud} from "../lib/cloudApply";
 import {flushCloudNow,rememberCloudSession,bindCloudAccount,profilesDiffer} from "../lib/cloudAutosync";
 import {CLOUD_ACCOUNT_HINT_KEY} from "../lib/cloudSessionHint";
 import {queueSignupConsent,flushPendingConsent} from "../lib/consentClient";
-import {activeStateAccount,archiveActiveAccount,switchDeviceToAccount,purgeAccountFromDevice} from "../lib/accountDeviceStorage";
+import {activeStateAccount,archiveActiveAccount,switchDeviceToAccount,purgeAccountFromDevice,hasAcademicData} from "../lib/accountDeviceStorage";
 
 // O ranking ainda usa participantes simulados: não pedimos ano, distrito nem
 // escola a alunos (muitos menores) para uma funcionalidade que ainda não existe.
@@ -166,6 +166,11 @@ export function AccountCloud({s,setS,go,gate=false}){
         if(switched.reload){setHintAndReload();return}
         if(!switched.ok){
           setMessage({ok:false,text:"Não foi possível separar o progresso de outra conta neste dispositivo (pouco espaço no browser). Por segurança, não vamos guardar nem misturar dados até isto ser resolvido."});
+        }
+        // Conta acabada de criar neste dispositivo: o estudo feito aqui é de quem a
+        // criou. Liga-o já à conta (sem a pergunta "é teu?", que é para contas antigas).
+        if(mode==="signup"&&switched.ok&&!activeStateAccount()&&hasAcademicData()){
+          setS(prev=>bindCloudAccount(prev,userId,{adopted:true}));
         }
       }
       await refreshSession();

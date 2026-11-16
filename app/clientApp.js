@@ -409,9 +409,11 @@ export default function App(){
       if(pausedDiagnostic)setScreen("resumeSubjectDiagnostic");
       else if(activeSubjectDiagnosticDone(recoveredState)||subjectPaused)setScreen("home");
       else{
-        let fromLanding=false;
+        let fromLanding=false,openAccount=false;
         try{fromLanding=window.sessionStorage.getItem("a25-onboarding-entry")==="1"}catch{}
-        setScreen(activeSubjectConfigured?"home":(fromLanding?"subjectOnboard":"welcome"));
+        // "Já tens conta? Entrar" no ecrã inicial: ir direto à conta, sem onboarding.
+        try{openAccount=window.sessionStorage.getItem("approva-open-account")==="1";window.sessionStorage.removeItem("approva-open-account")}catch{}
+        setScreen(openAccount?"account":activeSubjectConfigured?"home":(fromLanding?"subjectOnboard":"welcome"));
       }
     }
     setHydrated(true);
