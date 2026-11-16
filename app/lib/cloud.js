@@ -72,19 +72,49 @@ export async function getCloudSession(){
   }
 }
 
+// O adaptador pode devolver {error} ou lançar uma exceção: as duas formas passam
+// pelas mensagens em português (nunca texto técnico em inglês para o aluno).
+async function authCall(kind,run){
+  let result;
+  try{result=await run()}
+  catch(error){return {error:{code:error?.code||error?.error?.code,status:error?.status||error?.error?.status,message:error?.message}}}
+  return result;
+}
+
 export async function cloudSignIn({email,password}){
   const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
-  const result=await client.signIn.email({email,password});
+  const result=await authCall("signin",()=>client.signIn.email({email,password}));
   if(result?.error)throw new Error(authErrorMessage("signin",result.error));
   await provisionServerIdentity();
   return result;
 }
 
+// Recuperação da palavra-passe com código de 6 dígitos enviado por email
+// (plugin email OTP do Better Auth/Neon Auth). Não revela se o email tem conta.
+export async function cloudRequestPasswordReset({email}){
+  const client=getCloudAuthClient();
+  if(!client)throw new Error("Neon Auth ainda não está configurado.");
+  const result=await authCall("reset_request",()=>client.forgetPassword?.emailOtp
+    ?client.forgetPassword.emailOtp({email})
+    :client.emailOtp.sendVerificationOtp({email,type:"forget-password"}));
+  // Email sem conta: a mesma resposta que com conta (não revelar quem está registado).
+  if(result?.error&&!/USER_NOT_FOUND/i.test(String(result.error.code||"")))throw new Error(authErrorMessage("reset_request",result.error));
+  return {ok:true};
+}
+
+export async function cloudResetPassword({email,otp,password}){
+  const client=getCloudAuthClient();
+  if(!client)throw new Error("Neon Auth ainda não está configurado.");
+  const result=await authCall("reset",()=>client.emailOtp.resetPassword({email,otp,password}));
+  if(result?.error)throw new Error(authErrorMessage("reset",result.error));
+  return {ok:true};
+}
+
 export async function cloudSignUp({name,email,password}){
   const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
-  const result=await client.signUp.email({name,email,password});
+  const result=await authCall("signup",()=>client.signUp.email({name,email,password}));
   if(result?.error)throw new Error(authErrorMessage("signup",result.error));
   await provisionServerIdentity();
   return result;

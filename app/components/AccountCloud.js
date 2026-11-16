@@ -3,7 +3,7 @@ import {useEffect,useState} from "react";
 import {hasPendingAssessment,preservePendingAssessment} from "../lib/pendingAssessment";
 import {Back,BrandName,Shell} from "./chrome";
 import {
-  cloudConfiguration,getCloudSession,cloudSignIn,cloudSignUp,cloudSignOut,
+  cloudConfiguration,getCloudSession,cloudSignIn,cloudSignUp,cloudSignOut,cloudRequestPasswordReset,cloudResetPassword,
   loadStudentCloudState,saveStudentCloudState,overwriteStudentCloudState,mergeStudentCloudState
 } from "../lib/cloud";
 import {
@@ -54,6 +54,8 @@ export function AccountCloud({s,setS,go,gate=false}){
   const [signupAge,setSignupAge]=useState(false);
   const [signupTerms,setSignupTerms]=useState(false);
   const [forgetDevice,setForgetDevice]=useState(false);
+  const [resetStep,setResetStep]=useState("request");
+  const [resetCode,setResetCode]=useState("");
   const [rankingYear,setRankingYear]=useState(["10.º","11.º","12.º","Já terminei o secundário"].includes(s.profile?.schoolYear)?s.profile.schoolYear:"");
   const rankingProfile=s.competition?.profile||{};
   const initialRankingSchool=schoolsForRegion(rankingProfile.region||"").find(row=>row.id===rankingProfile.schoolId||row.name===rankingProfile.school);
@@ -118,6 +120,27 @@ export function AccountCloud({s,setS,go,gate=false}){
     // pode voltar a ser escrito no armazenamento depois da troca.
     try{localStorage.setItem(CLOUD_ACCOUNT_HINT_KEY,"1")}catch{}
     window.location.reload();
+  }
+
+  // "Esqueci-me da palavra-passe": 1) pedir código; 2) código + nova palavra-passe.
+  async function requestReset(){
+    setBusy(true);setMessage(null);
+    try{
+      await cloudRequestPasswordReset({email:email.trim()});
+      setResetStep("code");
+      // A mesma resposta exista ou não conta com este email.
+      setMessage({ok:true,text:"Se existir uma conta com este email, enviámos um código de 6 dígitos. Procura também no spam."});
+    }catch(error){setMessage({ok:false,text:String(error?.message||error)})}
+    finally{setBusy(false)}
+  }
+  async function confirmReset(){
+    setBusy(true);setMessage(null);
+    try{
+      await cloudResetPassword({email:email.trim(),otp:resetCode.trim(),password});
+      setMode("signin");setResetStep("request");setResetCode("");setPassword("");
+      setMessage({ok:true,text:"Palavra-passe alterada. Já podes entrar com a nova palavra-passe."});
+    }catch(error){setMessage({ok:false,text:String(error?.message||error)})}
+    finally{setBusy(false)}
   }
 
   async function submit(){
@@ -425,7 +448,20 @@ export function AccountCloud({s,setS,go,gate=false}){
 
     {cfg.configured&&!session.loading&&!user&&<>
       <div className="authTabs"><button className={mode==="signin"?"sel":""} onClick={()=>setMode("signin")}>Entrar</button><button className={mode==="signup"?"sel":""} onClick={()=>setMode("signup")}>Criar conta</button></div>
-      <div className="realAuthForm">
+      {mode==="reset"?<div className="realAuthForm">
+        <b className="resetTitle">Recuperar a palavra-passe</b>
+        <label>Email<input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="nome@email.pt" disabled={resetStep==="code"}/></label>
+        {resetStep==="request"
+          ?<button disabled={busy||!email.trim()} onClick={requestReset}>{busy?"A enviar…":"Enviar código por email"}</button>
+          :<>
+            <label>Código de 6 dígitos<input inputMode="numeric" autoComplete="one-time-code" value={resetCode} onChange={e=>setResetCode(e.target.value.replace(/\D/g,"").slice(0,6))} placeholder="123456"/></label>
+            <label>Nova palavra-passe<input type="password" autoComplete="new-password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Pelo menos 8 caracteres"/></label>
+            <button disabled={busy||resetCode.length!==6||password.length<8} onClick={confirmReset}>{busy?"A processar…":"Mudar palavra-passe"}</button>
+            <button type="button" className="linkButton" disabled={busy} onClick={requestReset}>Enviar novo código</button>
+          </>}
+        <button type="button" className="linkButton" onClick={()=>{setMode("signin");setResetStep("request");setResetCode("");setMessage(null)}}>Voltar a «Entrar»</button>
+      </div>
+      :<div className="realAuthForm">
         {mode==="signup"&&<label>Nome<input value={name} onChange={e=>setName(e.target.value)} placeholder="Nome"/></label>}
         <label>Email<input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="nome@email.pt"/></label>
         <label>Palavra-passe<input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="••••••••"/></label>
@@ -434,7 +470,8 @@ export function AccountCloud({s,setS,go,gate=false}){
           <label className="rankConsent"><input type="checkbox" checked={signupTerms} onChange={e=>setSignupTerms(e.target.checked)}/><span>Li e aceito os <a href="/termos" target="_blank" rel="noopener">termos</a> e a <a href="/privacidade" target="_blank" rel="noopener">política de privacidade</a>.</span></label>
         </>}
         <button disabled={busy||!email.trim()||password.length<8||(mode==="signup"&&!(signupAge&&signupTerms))} onClick={submit}>{busy?"A processar…":mode==="signup"?"Criar conta":"Entrar"}</button>
-      </div>
+        {mode==="signin"&&<button type="button" className="linkButton" onClick={()=>{setMode("reset");setResetStep("request");setMessage(null)}}>Esqueci-me da palavra-passe</button>}
+      </div>}
       <small className="cloudPrivacy">A palavra-passe é tratada pelo serviço de autenticação. A APProva+ não a guarda nos dados de progresso.</small>
     </>}
 
