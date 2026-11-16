@@ -47,7 +47,12 @@ function versionSummary(state){
 
 export function AccountCloud({s,setS,go,gate=false}){
   const cfg=cloudConfiguration();
-  const [mode,setMode]=useState("signin");
+  // "Criar conta" vindo do convite "Guarda o teu plano" abre já o separador certo.
+  const [mode,setMode]=useState(()=>{
+    if(gate)return "signup";
+    try{if(window.sessionStorage.getItem("approva-account-mode")==="signup"){window.sessionStorage.removeItem("approva-account-mode");return "signup"}}catch{}
+    return "signin";
+  });
   const [name,setName]=useState("");
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
@@ -214,6 +219,9 @@ export function AccountCloud({s,setS,go,gate=false}){
       // O progresso desta conta sai da área ativa do dispositivo (fica arquivado
       // localmente e na conta) para não ficar visível ao próximo aluno.
       const owner=activeStateAccount()||(session.user?String(session.user.id):null);
+      // Depois de sair, a app volta ao primeiro ecrã (com "Já tens conta? Entrar"),
+      // e não ao onboarding: o próximo aluno tem de poder entrar na sua conta.
+      try{sessionStorage.removeItem("a25-onboarding-entry")}catch{}
       if(forgetDevice&&owner){
         purgeAccountFromDevice(owner);
         try{localStorage.removeItem(CLOUD_ACCOUNT_HINT_KEY)}catch{}
@@ -440,8 +448,8 @@ export function AccountCloud({s,setS,go,gate=false}){
   const lastRemoteDevice=sync.lastRemoteDeviceId?shortDeviceId(sync.lastRemoteDeviceId):"—";
 
   return <Shell>{gate?<Back go={go} to="welcome"/>:<Back go={go}/>}<p className="eyebrow">CONTA <BrandName/> · PROGRESSO ONLINE</p>
-    <h1>{gate?"Entra ou cria a tua conta para começar.":"O teu progresso, seguro em todos os teus dispositivos."}</h1>
-    {gate&&<p className="muted">A conta guarda o teu progresso para o encontrares no telemóvel e no computador. Só pedimos nome, email e palavra-passe.</p>}
+    <h1>{gate?"Cria a tua conta para guardar o teu plano.":"O teu progresso, seguro em todos os teus dispositivos."}</h1>
+    {gate&&<p className="muted">O teu diagnóstico e o teu plano ficam guardados na conta e continuas no telemóvel ou no computador. Só pedimos nome, email e palavra-passe.</p>}
     <p className="muted">Com sessão iniciada, o teu progresso é guardado automaticamente na conta e aparece nos teus outros dispositivos. Se houver versões diferentes, a APProva+ pede-te para escolher antes de substituir alguma coisa.</p>
 
     {!cfg.configured&&<div className="cloudUnavailable">

@@ -30,13 +30,17 @@ const BASE=process.env.APPROVA_BASE_URL||'http://localhost:3100/';
   // forçar navegação para fora de "welcome": usar o CTA principal
   const cta=p.locator('button').filter({hasText:/Descobrir o meu nível/}).first();
   await cta.click();await p.waitForTimeout(1500);
-  await p.getByText('Entra ou cria a tua conta para começar.').waitFor({timeout:5000});
-  console.log('✓ G1 sem sessão: estudo pede conta (página inicial continua pública)');
+  assert.equal(await p.getByText('Cria a tua conta para guardar o teu plano.').count(),0,'antes do primeiro estudo não há pedido de conta');
+  // Depois do diagnóstico (primeiro estudo), a conta passa a ser pedida.
+  await p.evaluate(()=>{const s=JSON.parse(localStorage.getItem('a25')||'{}');s.diagnosticDone=true;s.firstUseTourCompleted=true;s._savedAt=Date.now();localStorage.setItem('a25',JSON.stringify(s))});
+  await p.reload();await p.waitForTimeout(2500);
+  await p.getByText('Cria a tua conta para guardar o teu plano.').waitFor({timeout:5000});
+  console.log('✓ G1 sem sessão: onboarding livre; depois do diagnóstico pede conta');
   // 2) Registo exige 13+ e termos
   await p.getByRole('button',{name:'Criar conta'}).first().click();
   await p.getByPlaceholder('nome@email.pt').fill('a.aluno@exemplo.invalid');
   await p.getByPlaceholder('••••••••').fill('palavra-passe-teste-1');
-  const submit=p.locator('.realAuthForm > button');
+  const submit=p.locator('.realAuthForm > button:not(.linkButton)');
   assert.equal(await submit.isDisabled(),true,'sem confirmações o registo está bloqueado');
   await p.getByText('Tenho 13 anos ou mais.').click();
   assert.equal(await submit.isDisabled(),true,'só idade não chega');
@@ -44,10 +48,10 @@ const BASE=process.env.APPROVA_BASE_URL||'http://localhost:3100/';
   assert.equal(await submit.isDisabled(),false);
   console.log('✓ G2 registo exige 13+ anos e aceitação de termos/privacidade');
   await submit.click();await p.waitForTimeout(3000);
-  assert.equal(await p.getByText('Entra ou cria a tua conta para começar.').count(),0,'gate abre depois de entrar');
+  assert.equal(await p.getByText('Cria a tua conta para guardar o teu plano.').count(),0,'gate abre depois de entrar');
   console.log('✓ G3 depois de entrar, o estudo fica disponível');
   // 3) Simular progresso de A ligado à conta e gravado
-  await p.evaluate(()=>{const s=JSON.parse(localStorage.getItem('a25')||'{}');s.xp=321;s.selectedSubjectIds=['portuguese'];s.activeSubjectId='portuguese';s.firstUseTourCompleted=true;s.subjectSettings={portuguese:{profileConfigured:true,curriculumConfigured:true,goalConfigured:true,goal:14}};s.subjectProgress={portuguese:{version:4,diagnosticDone:true,diagnosticCompletedAt:1}};s.cloudSync={...(s.cloudSync||{}),accountId:'A',baseRevision:1};s._savedAt=Date.now();localStorage.setItem('a25',JSON.stringify(s));localStorage.setItem('a25-active-session-v1','{"kind":"mission","answers":[2]}')});
+  await p.evaluate(()=>{const s=JSON.parse(localStorage.getItem('a25')||'{}');delete s.diagnosticDone;s.xp=321;s.selectedSubjectIds=['portuguese'];s.activeSubjectId='portuguese';s.firstUseTourCompleted=true;s.subjectSettings={portuguese:{profileConfigured:true,curriculumConfigured:true,goalConfigured:true,goal:14}};s.subjectProgress={portuguese:{version:4,diagnosticDone:true,diagnosticCompletedAt:1}};s.cloudSync={...(s.cloudSync||{}),accountId:'A',baseRevision:1};s._savedAt=Date.now();localStorage.setItem('a25',JSON.stringify(s));localStorage.setItem('a25-active-session-v1','{"kind":"mission","answers":[2]}')});
   remote.A={revision:1,state_json:{schema:'aplus-student-state-v8',xp:321}};
   await p.reload();await p.waitForTimeout(3000);
   // 4) Terminar sessão via ecrã de conta
@@ -65,20 +69,21 @@ const BASE=process.env.APPROVA_BASE_URL||'http://localhost:3100/';
   console.log('✓ T1 terminar sessão: progresso e tentativa de A saem da área ativa (arquivados)');
   // 5) B entra no mesmo browser: não vê A
   await p.goto(BASE);await p.waitForTimeout(2000);
-  await cta.click().catch(()=>{});await p.waitForTimeout(1500);
+  // Quem já tem conta entra pelo "Já tens conta? Entrar" do primeiro ecrã.
+  await p.getByRole('button',{name:/Já tens conta\? Entrar/}).first().click();await p.waitForTimeout(1500);
   await p.getByPlaceholder('nome@email.pt').fill('b.aluno@exemplo.invalid');
   await p.getByPlaceholder('••••••••').fill('palavra-passe-teste-2');
-  await p.locator('.realAuthForm > button').click();await p.waitForTimeout(3500);
+  await p.locator('.realAuthForm > button:not(.linkButton)').click();await p.waitForTimeout(3500);
   const bState=await local();
   assert.ok(!bState||(bState.xp||0)!==321,'B não herda o XP de A');
   console.log('✓ T2 aluno B no mesmo browser não vê o progresso de A');
   // 6) B sai, A volta: progresso e tentativa repostos
   await p.evaluate(()=>{const s=JSON.parse(localStorage.getItem('a25')||'{}');s.cloudSync={...(s.cloudSync||{}),accountId:'B'};localStorage.setItem('a25',JSON.stringify(s))});
   user=null;await p.goto(BASE);await p.waitForTimeout(2000);
-  await cta.click().catch(()=>{});await p.waitForTimeout(1500);
+  await p.getByRole('button',{name:/Já tens conta\? Entrar/}).first().click();await p.waitForTimeout(1500);
   await p.getByPlaceholder('nome@email.pt').fill('a.aluno@exemplo.invalid');
   await p.getByPlaceholder('••••••••').fill('palavra-passe-teste-1');
-  await p.locator('.realAuthForm > button').click();await p.waitForTimeout(4500);
+  await p.locator('.realAuthForm > button:not(.linkButton)').click();await p.waitForTimeout(4500);
   const aBack=await local();
   assert.equal(aBack?.xp,321,'A recupera o seu progresso');
   assert.equal(await p.evaluate(()=>localStorage.getItem('a25-active-session-v1')),'{"kind":"mission","answers":[2]}','tentativa em curso de A reposta byte a byte');
