@@ -1,0 +1,20 @@
+// Mensagens de autenticação em português e sem revelar se um email tem conta.
+// Recebe o erro devolvido pelo serviço de autenticação (code/status/message).
+const GENERIC_SIGNUP="Não foi possível criar a conta. Se já tens conta com este email, usa «Entrar».";
+const GENERIC_SIGNIN="Email ou palavra-passe incorretos.";
+const TOO_MANY="Demasiadas tentativas. Espera alguns minutos e tenta novamente.";
+
+export function authErrorMessage(kind,error){
+  const code=String(error?.code||"").toUpperCase();
+  const status=Number(error?.status)||0;
+  const text=String(error?.message||"");
+  if(status===429||/TOO_MANY|RATE/.test(code))return TOO_MANY;
+  if(code==="SIGNUP_DISABLED")return "A criação de novas contas está temporariamente em pausa. Tenta novamente mais tarde.";
+  if(/PASSWORD_TOO_SHORT/.test(code)||/password.*(short|least)/i.test(text))return "A palavra-passe deve ter pelo menos 8 caracteres.";
+  if(/PASSWORD_TOO_LONG/.test(code))return "A palavra-passe é demasiado longa.";
+  if(code==="INVALID_EMAIL"||/invalid email(?! or)/i.test(text))return "Confirma se o endereço de email está correto.";
+  if(/EMAIL_NOT_VERIFIED/.test(code)||/not verified/i.test(text))return "Confirma o teu email antes de entrar. Procura a mensagem na tua caixa de correio.";
+  if(/ORIGIN/.test(code)||/invalid origin/i.test(text))return "Não foi possível ligar ao serviço de contas a partir deste endereço. Tenta mais tarde.";
+  // Conta existente, credenciais erradas ou qualquer outra falha: resposta genérica.
+  return kind==="signup"?GENERIC_SIGNUP:GENERIC_SIGNIN;
+}
