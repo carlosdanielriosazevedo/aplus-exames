@@ -431,7 +431,9 @@ export default function App(){
 
   // Funil anónimo: só quando um novo passo é atingido (e nunca na beta privada).
   stateRefForFunnel.current=s;
-  const funnelKey=hydrated&&!isFriendsBeta(s)?funnelStepsReached(s).join(","):"";
+  // Nunca durante uma avaliação: sem tráfego extra enquanto o aluno responde.
+  const funnelQuiet=["diag","diagRun","mission","trainingSetup","trainingRun","miniExamIntro","miniExamRun","miniExamReview","portugueseMiniExam","physicsChemistryMini1","physicsChemistryMini2","physicsChemistryExam"].includes(screen);
+  const funnelKey=hydrated&&!isFriendsBeta(s)&&!funnelQuiet?funnelStepsReached(s).join(","):"";
   useEffect(()=>{
     if(!funnelKey)return;
     const id=setTimeout(()=>{flushFunnel(stateRefForFunnel.current).catch(()=>{})},1500);

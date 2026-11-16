@@ -34,6 +34,17 @@ describe("funil anónimo",()=>{
     expect(funnelStepsReached({productAnalytics:{firstSeenDay:"2026-11-10",activeDays:["2026-11-10","2026-11-12"]}})).toEqual([]);
     expect(pendingFunnelSteps(s,["app_opened","subjects_selected"])).toHaveLength(4);
   });
+  it("sem rede não tenta enviar",async()=>{
+    const original=Object.getOwnPropertyDescriptor(globalThis,"navigator");
+    Object.defineProperty(globalThis,"navigator",{value:{onLine:false},configurable:true});
+    try{
+      const fetchImpl=vi.fn();
+      expect(await flushFunnel({productAnalytics:{appOpenCount:1}},{storage:memory(),fetchImpl})).toBe(0);
+      expect(fetchImpl).not.toHaveBeenCalled();
+    }finally{
+      if(original)Object.defineProperty(globalThis,"navigator",original);else delete globalThis.navigator;
+    }
+  });
   it("cada dispositivo envia cada passo uma única vez; falhas ficam para depois",async()=>{
     const s={productAnalytics:{appOpenCount:1},selectedSubjectIds:["math-a"]};
     const storage=memory();
