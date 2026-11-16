@@ -20,7 +20,8 @@ import {academicScopeThemes} from "../lib/curriculumScope";
 import {normalizeAfterCloud} from "../lib/cloudApply";
 import {flushCloudNow,rememberCloudSession,bindCloudAccount,profilesDiffer} from "../lib/cloudAutosync";
 import {CLOUD_ACCOUNT_HINT_KEY} from "../lib/cloudSessionHint";
-import {activeStateAccount,archiveActiveAccount,switchDeviceToAccount} from "../lib/accountDeviceStorage";
+import {queueSignupConsent,flushPendingConsent} from "../lib/consentClient";
+import {activeStateAccount,archiveActiveAccount,switchDeviceToAccount,purgeAccountFromDevice} from "../lib/accountDeviceStorage";
 
 // O ranking ainda usa participantes simulados: não pedimos ano, distrito nem
 // escola a alunos (muitos menores) para uma funcionalidade que ainda não existe.
@@ -52,6 +53,7 @@ export function AccountCloud({s,setS,go,gate=false}){
   const [password,setPassword]=useState("");
   const [signupAge,setSignupAge]=useState(false);
   const [signupTerms,setSignupTerms]=useState(false);
+  const [forgetDevice,setForgetDevice]=useState(false);
   const [rankingYear,setRankingYear]=useState(["10.º","11.º","12.º","Já terminei o secundário"].includes(s.profile?.schoolYear)?s.profile.schoolYear:"");
   const rankingProfile=s.competition?.profile||{};
   const initialRankingSchool=schoolsForRegion(rankingProfile.region||"").find(row=>row.id===rankingProfile.schoolId||row.name===rankingProfile.school);
@@ -89,6 +91,7 @@ export function AccountCloud({s,setS,go,gate=false}){
     setSession({loading:false,user:result.user||null,error:result.error||null});
     if(result.user){
       rememberCloudSession(true);
+      flushPendingConsent().catch(()=>{});
       setS(prev=>({...migrateCloudSync(prev),identity:{
         mode:"authenticated",
         authUserId:result.user.id,
@@ -125,6 +128,7 @@ export function AccountCloud({s,setS,go,gate=false}){
     setBusy(true);setMessage(null);
     try{
       if(mode==="signup"){
+        await queueSignupConsent(email);
         await cloudSignUp({name:name.trim()||"Aluno",email:email.trim(),password});
         setMessage({ok:true,text:"Conta criada. Se receberes um email de confirmação, confirma-o antes de entrares."});
       }else{
@@ -167,6 +171,11 @@ export function AccountCloud({s,setS,go,gate=false}){
       // Última gravação antes de sair. Se falhar, o aluno decide: o progresso
       // nunca é apagado deste dispositivo ao terminar sessão.
       const flushed=await flushCloudNow();
+      // Apagar deste dispositivo só é seguro com o progresso confirmado na conta.
+      if(forgetDevice&&flushed?.status!=="saved"){
+        setMessage({ok:false,text:"Não apagámos nada: o progresso mais recente ainda não está confirmado na conta. Verifica a ligação e tenta novamente."});
+        return;
+      }
       if(!["saved","inactive","signed_out"].includes(flushed?.status)
         &&typeof window!=="undefined"
         &&!window.confirm("Ainda não foi possível guardar online o progresso mais recente. Fica guardado neste dispositivo. Terminar sessão mesmo assim?")){
@@ -177,6 +186,12 @@ export function AccountCloud({s,setS,go,gate=false}){
       // O progresso desta conta sai da área ativa do dispositivo (fica arquivado
       // localmente e na conta) para não ficar visível ao próximo aluno.
       const owner=activeStateAccount()||(session.user?String(session.user.id):null);
+      if(forgetDevice&&owner){
+        purgeAccountFromDevice(owner);
+        try{localStorage.removeItem(CLOUD_ACCOUNT_HINT_KEY)}catch{}
+        window.location.reload();
+        return;
+      }
       if(owner&&activeStateAccount()===owner){
         const archived=archiveActiveAccount(owner);
         if(archived.ok){
@@ -494,6 +509,7 @@ export function AccountCloud({s,setS,go,gate=false}){
         </div>)}
 
 
+      <label className="forgetDevice"><input type="checkbox" checked={forgetDevice} onChange={e=>setForgetDevice(e.target.checked)}/><span><b>Computador partilhado?</b> Apagar o meu progresso deste dispositivo ao sair. Continua guardado na tua conta.</span></label>
       <button className="secondary" onClick={signout} disabled={busy}>Terminar sessão</button>
     </>}
 

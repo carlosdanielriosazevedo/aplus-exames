@@ -2050,3 +2050,4 @@ button,input,select,textarea{max-width:100%}
 .pendingCloudSave b{font-size:14px}.pendingCloudSave span{font-size:12.5px}.pendingCloudSave button{font-size:13.5px}
 .rankConsent,.privacyRankNote,.rankingIdentityCard>div:first-child small,.rankingIdentityCard>div:first-child span,.rankingIdentityCard>label:not(.rankConsent),.rankingProfile>label:not(.rankConsent){font-size:12.5px}
 .rankingIdentityCard input,.rankingIdentityCard select{font-size:16px}
+.forgetDevice{display:flex;gap:10px;align-items:flex-start;margin:14px 0 8px;font-size:13.5px;line-height:1.45;color:#4d566b;cursor:pointer}.forgetDevice input{width:20px;height:20px;margin-top:1px;flex:none;accent-color:#6b54db}.forgetDevice b{color:#111a32}

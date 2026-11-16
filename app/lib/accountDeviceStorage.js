@@ -144,3 +144,23 @@ export function switchDeviceToAccount(accountId){
   }
   return {ok:true,reload:changed};
 }
+
+// "Computador partilhado": apaga deste dispositivo o progresso ativo da conta e o
+// respetivo arquivo. Só deve ser chamado depois de o progresso estar guardado na
+// conta. Nunca apaga progresso que pertença a outra conta ou que seja anónimo.
+export function purgeAccountFromDevice(accountId){
+  if(!accountId)return {ok:false,code:"ACCOUNT_REQUIRED"};
+  const local=globalThis.localStorage;
+  if(!local)return {ok:false,code:"STORAGE_UNAVAILABLE"};
+  let removed=0;
+  if(activeStateAccount()===String(accountId)){
+    for(const [,store] of stores()){
+      for(const key of keysOf(store)){
+        if(!isAcademicKey(key))continue;
+        try{store.removeItem(key);removed++}catch{}
+      }
+    }
+  }
+  try{if(local.getItem(archiveKey(accountId))!==null){local.removeItem(archiveKey(accountId));removed++}}catch{}
+  return {ok:true,removed};
+}
