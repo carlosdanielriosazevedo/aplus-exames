@@ -1,5 +1,5 @@
 import {afterEach,beforeEach,describe,expect,it} from "vitest";
-import {archiveActiveAccount,restoreAccountArchive,switchDeviceToAccount,hasAcademicData,archiveKey,activeStateAccount} from "../../app/lib/accountDeviceStorage.js";
+import {archiveActiveAccount,restoreAccountArchive,switchDeviceToAccount,hasAcademicData,archiveKey,activeStateAccount,purgeAccountFromDevice} from "../../app/lib/accountDeviceStorage.js";
 
 function memoryStore({failWritesFor=null}={}){
   const m=new Map();
@@ -90,5 +90,27 @@ describe("separação por conta no mesmo dispositivo",()=>{
     localStorage.setItem("a25",JSON.stringify({xp:1}));
     expect(restoreAccountArchive("A")).toEqual({ok:false,code:"ACTIVE_AREA_NOT_EMPTY"});
     expect(JSON.parse(localStorage.getItem("a25")).xp).toBe(1);
+  });
+});
+
+describe("computador partilhado: apagar a conta deste dispositivo",()=>{
+  it("apaga o progresso ativo e o arquivo da conta, mantendo o resto",()=>{
+    seedA();
+    localStorage.setItem(archiveKey("A"),"{}");
+    localStorage.setItem(archiveKey("B"),'{"outra":"conta"}');
+    const r=purgeAccountFromDevice("A");
+    expect(r.ok).toBe(true);
+    expect(hasAcademicData()).toBe(false);
+    expect(localStorage.getItem(archiveKey("A"))).toBeNull();
+    expect(localStorage.getItem(archiveKey("B"))).toBe('{"outra":"conta"}');
+    expect(localStorage.getItem("a25-device-id-v1")).toBe("device-x");
+  });
+  it("nunca apaga progresso de outra conta nem progresso anónimo",()=>{
+    seedA();
+    expect(purgeAccountFromDevice("B").removed).toBe(0);
+    expect(localStorage.getItem("a25")).toBe(stateOf("A",120));
+    localStorage.setItem("a25",JSON.stringify({xp:30}));
+    purgeAccountFromDevice("A");
+    expect(JSON.parse(localStorage.getItem("a25")).xp).toBe(30);
   });
 });
