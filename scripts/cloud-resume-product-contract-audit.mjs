@@ -41,7 +41,7 @@ assert.doesNotMatch(cloud,/sessionDraft|active-session/u,"a cloud de progresso n
 
 // Nenhuma das ações de carga pode substituir a tentativa local ou o seu baseline.
 for(const handler of ["loadCloud","resolveKeepRemote","resolveMerge"]){
-  assert.ok(account.includes(`async function ${handler}(){\n    if(hasPendingAssessment(s))`),`${handler} deve bloquear a carga durante uma avaliação`);
+  assert.match(account,new RegExp(`async function ${handler}\\([^)]*\\)\\{\\n    if\\(hasPendingAssessment\\(s\\)\\)`,"u"),`${handler} deve bloquear a carga durante uma avaliação`);
 }
 assert.ok((account.match(/setS\(prev=>preservePendingAssessment\(prev,/gu)||[]).length>=3,"a aplicação tardia de uma resposta cloud também deve respeitar a tentativa atual");
 
@@ -55,7 +55,8 @@ assert.match(account,/Carregar progresso online/u,"a ação de carga deve usar l
 assert.match(account,/Detalhes e cópias de segurança/u,"a UI deve manter acesso aos detalhes de segurança sem os impor como linguagem principal");
 
 // Uma revisão remota mais recente bloqueia a escrita e exige decisão consciente.
-assert.match(account,/O progresso deste dispositivo e o da conta são diferentes\. Não substituímos nada automaticamente\./u,"conflitos devem bloquear sobrescritas automáticas");
+assert.match(account,/Nada foi substituído\./u,"conflitos devem bloquear sobrescritas automáticas");
+assert.match(account,/Qual é o teu perfil escolar\?/u,"perfis escolares diferentes exigem escolha explícita do aluno");
 assert.match(account,/O progresso deste dispositivo e o da tua conta são diferentes/u,"a UI deve explicar o conflito em linguagem não técnica");
 assert.match(account,/conflictCompare[\s\S]{0,300}versionSummary\(s\)[\s\S]{0,200}versionSummary\(conflictRemote\.state_json\)/u,"o aluno deve ver as duas versões antes de escolher");
 for(const label of ["Juntar os dois (recomendado)","Usar só o da conta","Usar só o deste dispositivo"]){

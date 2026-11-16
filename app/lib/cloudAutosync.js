@@ -5,12 +5,16 @@
 //   no mesmo dispositivo nunca recebe nem envia esse progresso;
 // - progresso anónimo só é associado a uma conta com confirmação explícita;
 // - o progresso online só substitui o local quando o local não tem alterações por
-//   guardar e não há avaliação em curso. Caso contrário: conflito explícito;
+//   guardar e não há avaliação em curso;
+// - quando os dois lados mudaram, o estudo é JUNTADO automaticamente (união por
+//   identificadores estáveis, nada é descartado). Só se pede uma decisão quando o
+//   perfil escolar (ano/matéria dada) é diferente, porque isso muda o que é medido;
 // - a escrita usa sempre a revisão conhecida (CAS no servidor);
 // - progresso anónimo que o aluno confirmou ser seu é JUNTADO ao que a conta já
 //   tinha online (união por identificadores estáveis), em vez de abrir um segundo
 //   pedido de decisão logo a seguir ao "Sim, é meu".
 import {cloudSyncMeta,stateFingerprint} from "./cloudReliability.js";
+import {academicScopeKey} from "./curriculumScope.js";
 
 export {CLOUD_ACCOUNT_HINT_KEY,AUTH_CHANGED_EVENT,rememberCloudSession,cloudSessionHinted} from "./cloudSessionHint.js";
 
@@ -59,20 +63,21 @@ export function decideSync({state,payload,accountId,remote,pendingAssessment=fal
     return {action:"push",operation:"insert",expectedRevision:0,bind:true};
   }
   const remoteRevision=Number(remote.revision)||0;
-  if(bound&&meta.adoptionPending&&remoteRevision!==meta.baseRevision){
-    if(pendingAssessment)return {action:"wait_assessment"};
-    return {action:"merge_remote",expectedRevision:remoteRevision};
-  }
   if(bound&&remoteRevision===meta.baseRevision){
     return dirty?{action:"push",operation:"update",expectedRevision:remoteRevision}:{action:"idle"};
   }
   // O online avançou (ou este dispositivo nunca sincronizou esta conta).
   const fresh=!bound&&!hasMeaningfulProgress(state);
-  if(fresh||(bound&&!dirty)){
-    if(pendingAssessment)return {action:"wait_assessment"};
-    return {action:"apply_remote",bind:!bound};
-  }
-  return {action:"conflict"};
+  if(pendingAssessment)return {action:"wait_assessment"};
+  if(fresh||(bound&&!dirty))return {action:"apply_remote",bind:!bound};
+  if(!bound)return {action:"conflict"}; // sem confirmação de adoção nunca se junta
+  if(profilesDiffer(state,remote.state_json))return {action:"conflict",reason:"profile"};
+  return {action:"merge_remote",expectedRevision:remoteRevision};
+}
+
+export function profilesDiffer(local,remote){
+  if(!remote?.profile||!local?.profile)return false;
+  return academicScopeKey(local.profile)!==academicScopeKey(remote.profile);
 }
 
 export function markAutosynced(state,{accountId,revision,payload,deviceId=null,at=Date.now()}){

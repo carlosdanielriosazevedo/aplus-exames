@@ -272,6 +272,8 @@
 .conflictCompare{display:grid;grid-template-columns:1fr 1fr;gap:8px}.conflictCompare div{background:#fff;border:1px solid #e2d5bd;border-radius:10px;padding:10px}.conflictCompare span{display:block;font-size:12px;color:#6b5a3e}.conflictCompare b{display:block;font-size:14px;color:#2b2416;margin-top:2px}
 .conflictPrimary{border:0;background:#6b54db;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;font-weight:900}.conflictPrimary:disabled{opacity:.6}
 .conflictHint{font-size:12.5px;color:#6b5a3e;text-align:center}
+.conflictProfileChoices{display:grid;grid-template-columns:1fr 1fr;gap:8px}.conflictProfileChoices button{text-align:left;border:2px solid #6b54db;background:#fff;border-radius:12px;padding:12px}.conflictProfileChoices span{display:block;font-size:12.5px;color:#5c6479}.conflictProfileChoices b{display:block;font-size:15px;color:#2b2140;margin-top:3px}.conflictProfileChoices button:disabled{opacity:.6}
+@media(max-width:520px){.conflictProfileChoices{grid-template-columns:1fr}}
 .conflictChoices{display:grid;grid-template-columns:1fr 1fr;gap:8px}.conflictChoices button{border:1px solid #d9cbb0;background:#fff;border-radius:10px;padding:10px;font-size:13.5px;font-weight:700;color:#4a3f2c}
 @media(max-width:650px){.cloudRevisionCard,.conflictChoices{grid-template-columns:1fr}.pendingCloudSave{align-items:flex-start}}
 
@@ -2035,3 +2037,16 @@ button,input,select,textarea{max-width:100%}
 }
 .learnHome .pathNode.current article .pausedActivityEyebrow .pausedActivitySeparator{color:#b9c9d3!important}
 .learnHome .pathNode.current article .pausedActivityEyebrow .pausedActivityStatus{color:#ffb3ad!important;font-weight:900}
+/* Ecrã de conta: tamanhos legíveis. Os valores anteriores (5,7–10 px) só eram
+   legíveis no Chrome Android por causa do "font boosting"; no computador e no
+   Safari ficavam ilegíveis. Inputs a 16 px evitam o zoom automático no iOS. */
+.cloudProgressCard span,.cloudProgressCard small,.signedAccount span,.signedAccount small{font-size:12px}
+.signedAccount strong{font-size:12.5px}
+.cloudRevisionCard small{font-size:11.5px;letter-spacing:.2px}.cloudRevisionCard b{font-size:14px}.cloudRevisionCard span{font-size:12px}
+.securityBox b{font-size:14px}.securityBox span{font-size:13px}.securityBox code{font-size:12px}
+.realAuthForm label{font-size:13px}.realAuthForm input{font-size:16px}.realAuthForm>button{font-size:15px}
+.authTabs button{font-size:14px}.syncActions button{font-size:14px}
+.cloudUnavailable b{font-size:15px}.cloudUnavailable span,.cloudLoading,.cloudPrivacy{font-size:13px}
+.pendingCloudSave b{font-size:14px}.pendingCloudSave span{font-size:12.5px}.pendingCloudSave button{font-size:13.5px}
+.rankConsent,.privacyRankNote,.rankingIdentityCard>div:first-child small,.rankingIdentityCard>div:first-child span,.rankingIdentityCard>label:not(.rankConsent),.rankingProfile>label:not(.rankConsent){font-size:12.5px}
+.rankingIdentityCard input,.rankingIdentityCard select{font-size:16px}

@@ -1,5 +1,5 @@
 import {describe,expect,it} from "vitest";
-import {decideSync,markAutosynced,bindCloudAccount,hasMeaningfulProgress,isDirty,retryDelayMs,syncMeta} from "../../app/lib/cloudAutosync.js";
+import {decideSync,markAutosynced,bindCloudAccount,hasMeaningfulProgress,isDirty,retryDelayMs,syncMeta,profilesDiffer} from "../../app/lib/cloudAutosync.js";
 import {markCloudSaved,markCloudLoaded} from "../../app/lib/cloudReliability.js";
 
 const payloadOf=state=>({schema:"aplus-student-state-v8",xp:state.xp||0,subjectProgress:state.subjectProgress||{}});
@@ -48,13 +48,19 @@ describe("sincronização automática: nunca substitui trabalho por guardar",()=
   it("online avançou e o local está limpo: aplica o online",()=>{
     expect(decide(synced(studied),{remote:{revision:7}})).toEqual({action:"apply_remote",bind:false});
   });
-  it("online avançou e o local tem alterações: conflito explícito, nada é substituído",()=>{
+  it("online avançou e o local tem alterações (mesmo perfil): junta, nada é substituído",()=>{
     const changed={...synced(studied),xp:55};
-    expect(decide(changed,{remote:{revision:7}}).action).toBe("conflict");
+    expect(decide(changed,{remote:{revision:7}})).toEqual({action:"merge_remote",expectedRevision:7});
+    const y11={schoolYear:"11.º"};
+    expect(decide({...changed,profile:y11},{remote:{revision:7,state_json:{profile:{...y11}}}}).action).toBe("merge_remote");
   });
-  it("conta com progresso online + progresso anónimo adotado: conflito, não substituição",()=>{
-    const adopted=bindCloudAccount(studied,"A");
-    expect(decide(adopted,{remote:{revision:2}}).action).toBe("conflict");
+  it("perfis escolares diferentes: conflito explícito, o aluno escolhe",()=>{
+    const changed={...synced(studied),xp:55,profile:{schoolYear:"11.º"}};
+    expect(decide(changed,{remote:{revision:7,state_json:{profile:{schoolYear:"10.º"}}}})).toEqual({action:"conflict",reason:"profile"});
+    expect(profilesDiffer({profile:{schoolYear:"11.º",taughtSubtopicIds:[]}},{profile:{schoolYear:"11.º"}})).toBe(false);
+  });
+  it("progresso anónimo nunca é juntado sem confirmação",()=>{
+    expect(decide(studied,{remote:{revision:2}}).action).toBe("needs_adoption");
   });
   it("progresso anónimo confirmado como do aluno é juntado ao da conta, sem segundo pedido",()=>{
     const adopted=bindCloudAccount(studied,"A",{adopted:true});
@@ -68,10 +74,8 @@ describe("sincronização automática: nunca substitui trabalho por guardar",()=
     const adopted=bindCloudAccount(studied,"A",{adopted:true});
     const done=markAutosynced(adopted,{accountId:"A",revision:5,payload:payloadOf(adopted)});
     expect(syncMeta(done).adoptionPending).toBe(false);
-    // Outro dispositivo avança mais tarde: aplica (local limpo), nunca junta às cegas.
+    // Outro dispositivo avança mais tarde: aplica se o local estiver limpo.
     expect(decide(done,{remote:{revision:6}}).action).toBe("apply_remote");
-    const changed={...done,xp:99};
-    expect(decide(changed,{remote:{revision:6}}).action).toBe("conflict");
   });
   it("resolver um conflito manualmente também conclui a adoção",()=>{
     const adopted=bindCloudAccount(studied,"A",{adopted:true});
