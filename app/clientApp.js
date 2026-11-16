@@ -3,6 +3,7 @@ import {pendingPhysicsChemistryExam} from "./lib/physicsChemistryExamDraft";
 import {hasPendingAssessment} from "./lib/pendingAssessment";
 import {useEffect,useMemo,useRef,useState} from "react";
 import {AUTH_CHANGED_EVENT,cloudSessionHinted} from "./lib/cloudSessionHint";
+import {SaveProgressPrompt} from "./components/SaveProgressPrompt";
 import ContentReportButton from "./components/ContentReportButton";
 import dynamic from "next/dynamic";
 import {insertMathText} from "./lib/mathInput";
@@ -501,7 +502,11 @@ export default function App(){
   };
 
   const view=(()=>{
-  if(REQUIRE_ACCOUNT&&hydrated&&screen!=="welcome"&&!isFriendsBeta(s)){
+  // Fase 2 (conta obrigatória): como no Duolingo, primeiro o aluno vê valor
+  // (onboarding + diagnóstico + resultado); a conta é pedida a seguir.
+  const studiedOnce=!!s.diagnosticDone||Object.values(s.subjectProgress||{}).some(row=>row?.diagnosticDone||(row?.sessions||[]).length>0)||(s.missionHistory||[]).length>0;
+  const gateExempt=["welcome","diagResult","account","diag","diagRun","resumeSubjectDiagnostic"].includes(screen);
+  if(REQUIRE_ACCOUNT&&hydrated&&studiedOnce&&!gateExempt&&!isFriendsBeta(s)){
     if(accountGate==="checking")return <Shell><Logo/><div className="cloudLoading">A verificar sessão…</div></Shell>;
     if(accountGate==="required")return <AccountCloud s={s} setS={setS} go={go} gate/>;
   }
@@ -1003,6 +1008,7 @@ function DiagResult({s,setS,go}){
 
   <FriendsBetaDisclaimer s={s}/>
   {isFriendsBeta(s)&&<BetaSessionFeedback s={s} setS={setS} kind="diagnostic"/>}
+  <SaveProgressPrompt s={s} setS={setS} go={go} place="diagResult"/>
   <button className="primary" onClick={()=>{
     setS(prev=>recordMilestone(dismissDailyMissionPrompt(prev),"first_plan_viewed",{
       measuredThemes:measured.length,
@@ -1257,6 +1263,7 @@ function Home({s,setS,go,reset}){
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{probableNext?.short||"A definir após esta sessão"}</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>}
+    <SaveProgressPrompt s={s} setS={setS} go={go} place="home"/>
     <StudentNav active="home" go={go}/>
   </section></main>
 }
