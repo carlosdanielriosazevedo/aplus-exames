@@ -22,6 +22,10 @@ import {flushCloudNow,rememberCloudSession,bindCloudAccount} from "../lib/cloudA
 import {CLOUD_ACCOUNT_HINT_KEY} from "../lib/cloudSessionHint";
 import {activeStateAccount,archiveActiveAccount,switchDeviceToAccount} from "../lib/accountDeviceStorage";
 
+// O ranking ainda usa participantes simulados: não pedimos ano, distrito nem
+// escola a alunos (muitos menores) para uma funcionalidade que ainda não existe.
+const RANKING_PROFILE_ENABLED=false;
+
 export function AccountCloud({s,setS,go,gate=false}){
   const cfg=cloudConfiguration();
   const [mode,setMode]=useState("signin");
@@ -373,7 +377,7 @@ export function AccountCloud({s,setS,go,gate=false}){
   return <Shell>{gate?<Back go={go} to="welcome"/>:<Back go={go}/>}<p className="eyebrow">CONTA <BrandName/> · PROGRESSO ONLINE</p>
     <h1>{gate?"Entra ou cria a tua conta para começar.":"O teu progresso, seguro em todos os teus dispositivos."}</h1>
     {gate&&<p className="muted">A conta guarda o teu progresso para o encontrares no telemóvel e no computador. Só pedimos nome, email e palavra-passe.</p>}
-    <p className="muted">A APProva+ guarda primeiro o estudo neste dispositivo. Quando guardas online, verifica se existe progresso mais recente noutro dispositivo e nunca o substitui sem te perguntar.</p>
+    <p className="muted">Com sessão iniciada, o teu progresso é guardado automaticamente na conta e aparece nos teus outros dispositivos. Se houver versões diferentes, a APProva+ pede-te para escolher antes de substituir alguma coisa.</p>
 
     {!cfg.configured&&<div className="cloudUnavailable">
       <b>○ Progresso online temporariamente indisponível</b>
@@ -402,7 +406,7 @@ export function AccountCloud({s,setS,go,gate=false}){
         <div><span>Conta autenticada</span><b>{user.name||"Aluno"}</b><small>{user.email}</small></div><strong>● online</strong>
       </div>
 
-      <div className="rankingIdentityCard">
+      {RANKING_PROFILE_ENABLED&&<div className="rankingIdentityCard">
         <div><small>DADOS PARA O RANKING</small><b>Indica o teu ano e escola</b><span>O login continua disponível sem estes dados. Para aderires ao ranking da escola, precisamos do ano, da escola e da tua autorização explícita.</span></div>
         <label>Ano<select value={rankingYear} onChange={e=>setRankingYear(e.target.value)}><option value="">Selecionar ano</option><option value="10.º">10.º ano</option><option value="11.º">11.º ano</option><option value="12.º">12.º ano</option><option value="Já terminei o secundário">Já terminei o secundário</option></select></label>
         <label>Distrito/Região<select value={rankingRegion} onChange={e=>{setRankingRegion(e.target.value);setRankingMunicipality("");setRankingSchoolId("")}}><option value="">Selecionar distrito/região</option>{PORTUGAL_REGIONS.map(region=><option key={region} value={region}>{region}</option>)}</select></label>
@@ -411,7 +415,7 @@ export function AccountCloud({s,setS,go,gate=false}){
         <label className="rankConsent"><input type="checkbox" checked={rankingSchoolOptIn} onChange={e=>setRankingSchoolOptIn(e.target.checked)}/><span>Quero participar no ranking da minha escola.</span></label>
         <button onClick={saveRankingIdentity}>Guardar dados do ranking</button>
         <small className="privacyRankNote">A escola é usada apenas para agrupar o ranking e não é mostrada no teu perfil público. Podes retirar a autorização a qualquer momento.</small>
-      </div>
+      </div>}
 
       <div className="cloudProgressCard">
         <div><span>Progresso local atual</span><b>{localIndex??"—"}<small>/100 índice parcial</small></b></div>
@@ -426,19 +430,21 @@ export function AccountCloud({s,setS,go,gate=false}){
           <div><small>ÚLTIMO PROGRESSO ONLINE</small><b>versão {sync.lastRemoteRevision??sync.baseRevision}</b><span>Dispositivo: {lastRemoteDevice}</span></div>
           <div><small>CÓPIAS DE SEGURANÇA</small><b>{snapshots.length}</b><span>{pending.length} tentativa{pending.length===1?"":"s"} pendente{pending.length===1?"":"s"}</span></div>
         </div>
+        <p className="muted">Normalmente não precisas destes botões: o progresso é guardado e atualizado automaticamente. Usa-os apenas se te pedirmos ajuda para recuperar progresso.</p>
+        {!otherAccountOwnsDevice&&<div className="syncActions">
+          <button onClick={saveCloud} disabled={busy}>↑ Guardar online</button>
+          <button onClick={loadCloud} disabled={busy}>↓ Carregar progresso online</button>
+        </div>}
+
+        {pending.length>0&&<div className="pendingCloudSave">
+          <div><b>⟳ Há uma gravação por repetir</b><span>Falhou anteriormente sem apagar o progresso local.</span></div>
+          <button onClick={retryPending} disabled={busy}>Tentar novamente</button>
+        </div>}
+
+        <div className="notice"><b>O que acontece entre dispositivos?</b><span>Se encontrares progresso diferente noutro dispositivo, a APProva+ bloqueia a substituição automática e pede-te para escolher. Assim, nenhuma versão desaparece sem aviso.</span></div>
       </details>
 
       {otherAccountOwnsDevice&&<div className="notice warning"><b>Este dispositivo tem progresso de outra conta</b><span>Para proteger os dados de cada aluno, o progresso deste dispositivo não é guardado nem substituído nesta conta. Termina sessão e entra com a conta a que o progresso pertence.</span></div>}
-
-      {!otherAccountOwnsDevice&&<div className="syncActions">
-        <button onClick={saveCloud} disabled={busy}>↑ Guardar online</button>
-        <button onClick={loadCloud} disabled={busy}>↓ Carregar progresso online</button>
-      </div>}
-
-      {pending.length>0&&<div className="pendingCloudSave">
-        <div><b>⟳ Há uma gravação por repetir</b><span>Falhou anteriormente sem apagar o progresso local.</span></div>
-        <button onClick={retryPending} disabled={busy}>Tentar novamente</button>
-      </div>}
 
       {conflictRemote&&<div className="cloudConflictCard">
         <div className="cloudConflictHead"><span>⚠</span><div><b>Encontrámos progresso mais recente noutro dispositivo</b>
@@ -451,7 +457,6 @@ export function AccountCloud({s,setS,go,gate=false}){
         </div>
       </div>}
 
-      <div className="notice"><b>O que acontece entre dispositivos?</b><span>Se encontrares progresso diferente noutro dispositivo, a APProva+ bloqueia a substituição automática e pede-te para escolher. Assim, nenhuma versão desaparece sem aviso.</span></div>
 
       <button className="secondary" onClick={signout} disabled={busy}>Terminar sessão</button>
     </>}

@@ -9,6 +9,10 @@ import {
 } from "../lib/competition";
 import {schoolsForRegion} from "../data/secondarySchools";
 
+// O ranking ainda usa participantes simulados: não pedimos nickname, distrito,
+// escola nem ano a alunos (muitos menores) enquanto não houver ranking real.
+const RANKING_PROFILE_ENABLED=false;
+
 const DEFAULT_SUBJECT_ID="math-a";
 const RANKING_SUBJECT_IDS=["math-a","portuguese","physics-chemistry-a"].filter(id=>AVAILABLE_SUBJECT_IDS.includes(id));
 function subjectById(id){return SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id===id)||SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id===DEFAULT_SUBJECT_ID);}
@@ -140,7 +144,7 @@ export default function Ranking({s,setS,go}){
       <p>Cada liga junta um pequeno grupo de até 20 alunos. No fim da semana, os primeiros sobem e os últimos podem descer. A divisão usa sempre o XP total, mesmo quando consultas um filtro por disciplina.</p>
     </section>
 
-    <section className="rankingProfile">
+    {RANKING_PROFILE_ENABLED&&<section className="rankingProfile">
       <div><small>PERFIL PÚBLICO DO RANKING</small><h3>Nickname, nunca nota.</h3>
         <p>O ano já faz parte do teu perfil académico. Para entrares no ranking da escola, indica o ano, a escola e ativa a participação. O nome da escola serve apenas para agrupar resultados e nunca aparece publicamente.</p></div>
       <label>Nickname<input maxLength="24" value={nickname} onChange={e=>setNickname(e.target.value)} placeholder="Ex.: Sigma17"/></label>
@@ -152,7 +156,7 @@ export default function Ranking({s,setS,go}){
       <label className="rankConsent"><input type="checkbox" checked={schoolOptIn} onChange={e=>setSchoolOptIn(e.target.checked)}/><span>Participar no ranking da minha escola.</span></label>
       <button className="primary" onClick={saveProfile}>Guardar perfil de ranking</button>
       <small className="privacyRankNote">Nunca entram no ranking: Domínio, Certeza, Índice de Preparação, nota objetivo, resultados de exame ou número de erros.</small>
-    </section>
+    </section>}
     <StudentNav active="ranking" go={go}/>
   </Shell>;
 }
