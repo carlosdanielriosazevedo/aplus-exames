@@ -2,6 +2,7 @@
 
 import {createInternalNeonAuth} from "@neondatabase/neon-js/auth";
 import {BetterAuthReactAdapter} from "@neondatabase/neon-js/auth/react/adapters";
+import {authErrorMessage} from "./authErrorCopy.js";
 
 let authInternalSingleton=null;
 
@@ -75,7 +76,7 @@ export async function cloudSignIn({email,password}){
   const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
   const result=await client.signIn.email({email,password});
-  if(result?.error)throw new Error(result.error.message||"Não foi possível iniciar sessão.");
+  if(result?.error)throw new Error(authErrorMessage("signin",result.error));
   await provisionServerIdentity();
   return result;
 }
@@ -84,7 +85,7 @@ export async function cloudSignUp({name,email,password}){
   const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
   const result=await client.signUp.email({name,email,password});
-  if(result?.error)throw new Error(result.error.message||"Não foi possível criar a conta.");
+  if(result?.error)throw new Error(authErrorMessage("signup",result.error));
   await provisionServerIdentity();
   return result;
 }
