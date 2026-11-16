@@ -22,7 +22,7 @@ const studyModeHub=readFileSync(new URL("../app/components/StudyModeHub.js",impo
 
 assert.match(agents,/A APProva\+ pensa muito e mostra pouco/);
 assert.match(agents,/Cada ecrã do aluno deve ter uma ação visualmente dominante/);
-assert.match(chrome,/STUDENT_NAV\s*=\s*\[\["home","Aprender"\],\["train","Treinar"\],\.\.\.\(RANKING_ENABLED\?\[\["ranking","Ranking"\]\]:\[\]\),\["progress","Progresso"\]\]/);
+assert.match(chrome,/STUDENT_NAV\s*=\s*\[\["home","Aprender"\],\["train","Treinar"\],\["ranking","Ranking"\],\["progress","Progresso"\]\]/);
 assert.equal((page.match(/<StudentNav active=/g)||[]).length,5,"home, ranking, training, progress and exams hub need navigation");
 assert.doesNotMatch(chrome,/STUDENT_NAV[\s\S]{0,300}(?:Exames|Pais|Conta)/);
 assert.match(page,/className="adaptivePath"/);

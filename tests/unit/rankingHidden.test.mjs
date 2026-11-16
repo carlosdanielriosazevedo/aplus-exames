@@ -1,17 +1,21 @@
 import {describe,expect,it} from "vitest";
 import {readFileSync} from "node:fs";
 
-// Em produção a liga (participantes simulados) fica escondida até existir uma
-// liga real. Os testes de browser ligam NEXT_PUBLIC_APPROVA_RANKING=1 para
-// continuar a verificar o ecrã, que fica no código para ser reativado.
-describe("navegação principal sem liga simulada",()=>{
-  it("o separador Ranking só existe com NEXT_PUBLIC_APPROVA_RANKING=1",()=>{
-    const chrome=readFileSync("app/components/chrome.js","utf8");
-    expect(chrome).toMatch(/RANKING_ENABLED=process\.env\.NEXT_PUBLIC_APPROVA_RANKING==="1"/);
-    expect(chrome).toMatch(/\.\.\.\(RANKING_ENABLED\?\[\["ranking","Ranking"\]\]:\[\]\)/);
+// Sem liga real, o Ranking mostra o XP do aluno e "Ligas semanais — em breve",
+// sem participantes simulados. A liga de demonstração só existe com
+// NEXT_PUBLIC_APPROVA_RANKING=1 (os testes de browser ligam-no).
+describe("Ranking sem participantes simulados por omissão",()=>{
+  const screen=readFileSync("app/components/RankingScreen.js","utf8");
+  it("o separador Ranking está sempre na navegação",()=>{
+    expect(readFileSync("app/components/chrome.js","utf8")).toMatch(/\["ranking","Ranking"\]/);
+  });
+  it("a liga de demonstração só aparece com o interruptor ligado",()=>{
+    expect(screen).toMatch(/LEAGUES_LIVE=process\.env\.NEXT_PUBLIC_APPROVA_RANKING==="1"/);
+    expect(screen).toMatch(/\{LEAGUES_LIVE&&<>\s*<details className="demoRankingDisclosure">/);
     expect(process.env.NEXT_PUBLIC_APPROVA_RANKING).not.toBe("1");
   });
-  it("o XP no topo leva ao Progresso quando a liga está escondida",()=>{
-    expect(readFileSync("app/components/chrome.js","utf8")).toMatch(/go\(RANKING_ENABLED\?"ranking":"progress"\)/);
+  it("sem liga real explica as ligas que vêm aí",()=>{
+    expect(screen).toMatch(/!LEAGUES_LIVE&&<section className="leaguesComingSoon"/);
+    expect(screen).toContain("sem participantes inventados");
   });
 });

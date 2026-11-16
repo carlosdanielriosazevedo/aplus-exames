@@ -12,6 +12,10 @@ import {schoolsForRegion} from "../data/secondarySchools";
 // O ranking ainda usa participantes simulados: não pedimos nickname, distrito,
 // escola nem ano a alunos (muitos menores) enquanto não houver ranking real.
 const RANKING_PROFILE_ENABLED=false;
+// Enquanto não houver uma liga real, o ecrã mostra o XP do aluno e explica as
+// ligas que vêm aí ("em breve"), sem participantes simulados. A liga de
+// demonstração só aparece com NEXT_PUBLIC_APPROVA_RANKING=1 (testes/futuro).
+export const LEAGUES_LIVE=process.env.NEXT_PUBLIC_APPROVA_RANKING==="1";
 
 const DEFAULT_SUBJECT_ID="math-a";
 const RANKING_SUBJECT_IDS=["math-a","portuguese","physics-chemistry-a"].filter(id=>AVAILABLE_SUBJECT_IDS.includes(id));
@@ -73,9 +77,23 @@ export default function Ranking({s,setS,go}){
     <div className="rankingHero">
       <div className="sectionIntro"><div className="rankingTitle"><p className="eyebrow">🏆 COMPETIÇÃO SEMANAL</p><h1>Treina. Ganha XP. Sobe.</h1><Apronso className="rankingHeadingApronso" pose="welcome" alt=""/></div>
         <p className="muted">O ranking compara <b>atividade de estudo</b>, nunca Domínio, Certeza, Índice de Preparação ou notas.</p></div>
-      <div className="divisionBadge" aria-label="Divisão e XP total desta semana"><span aria-hidden="true">{globalSummary.division.icon}</span><b>{globalSummary.division.label}</b><small>{globalSummary.weekXp} XP esta semana</small>{subjectId&&<small>{summary.weekXp} XP · {subjectLabel}</small>}</div>
+      {LEAGUES_LIVE
+        ?<div className="divisionBadge" aria-label="Divisão e XP total desta semana"><span aria-hidden="true">{globalSummary.division.icon}</span><b>{globalSummary.division.label}</b><small>{globalSummary.weekXp} XP esta semana</small>{subjectId&&<small>{summary.weekXp} XP · {subjectLabel}</small>}</div>
+        :<div className="divisionBadge" aria-label="XP desta semana"><span aria-hidden="true">⚡</span><b>{globalSummary.weekXp} XP</b><small>esta semana</small></div>}
     </div>
 
+    {!LEAGUES_LIVE&&<section className="leaguesComingSoon" aria-label="Ligas semanais em breve">
+      <small className="eyebrow">EM BREVE</small>
+      <h3>Ligas semanais</h3>
+      <p>Vais competir num grupo de até 20 alunos reais. No fim de cada semana, os primeiros sobem de divisão e os últimos podem descer.</p>
+      <ul>
+        <li>Conta só o <b>esforço</b> (XP de estudo), nunca notas, Domínio ou erros.</li>
+        <li>O XP que ganhas desde já fica a contar para a tua primeira liga.</li>
+        <li>Abrimos as ligas quando houver alunos suficientes para grupos reais — sem participantes inventados.</li>
+      </ul>
+    </section>}
+
+    {LEAGUES_LIVE&&<>
     <details className="demoRankingDisclosure"><summary>Modo de demonstração · participantes simulados ⓘ</summary><p>Os restantes participantes são simulados nesta fase e não representam outros alunos reais.</p></details>
 
     <section aria-label="Filtrar ranking por disciplina">
@@ -124,6 +142,8 @@ export default function Ranking({s,setS,go}){
       {scope!=="league"&&<small className="aroundYouNote">Em rankings grandes mostramos a tua posição e os participantes mais próximos.</small>}
     </section>}
 
+    </>}
+
     <section className="xpRules">
       <div><small>{subjectId?`XP COMPETITIVO · ${subjectLabel.toUpperCase()}`:"COMO GANHAS XP COMPETITIVO"}</small><h3>{subjectId?`O que conta em ${subjectLabel}.`:"Mais estudo útil, menos repetição."}</h3></div>
       <div className="xpRuleGrid">
@@ -131,7 +151,7 @@ export default function Ranking({s,setS,go}){
         <div><b>🧠 até +40</b><span>Treino Livre</span><small>Repetir sempre o mesmo foco reduz progressivamente o XP competitivo.</small></div>
         <div><b>📝 até +80</b><span>Mini-exame</span><small>XP pela atividade concluída, não pela nota.</small></div>
         <div><b>⏱️ até +120</b><span>Exame Completo</span><small>Depende da parte da prova respondida, nunca da nota. Uma recompensa por disciplina/dia.</small></div>
-        {!subjectId&&<div><b>🧭 +30</b><span>1.º Diagnóstico</span><small>Bónus inicial global: conta uma vez em “Todas” e não entra nos filtros por disciplina.</small></div>}
+        {!subjectId&&<div><b>🧭 +30</b><span>1.º Diagnóstico</span><small>{LEAGUES_LIVE?"Bónus inicial global: conta uma vez em “Todas” e não entra nos filtros por disciplina.":"Bónus inicial: conta uma única vez."}</small></div>}
       </div>
       {subjectId&&<p className="muted">O bónus único do 1.º Diagnóstico pertence apenas ao ranking “Todas”, por isso não aparece nesta lista.</p>}
       {latestGain&&<div className="lastRankXp"><b>Último ganho{subjectId?` em ${subjectLabel}`:""}: +{latestGain.rankedXp} XP</b><span>{latestGain.reason}</span></div>}
@@ -141,7 +161,7 @@ export default function Ranking({s,setS,go}){
     <section className="divisionLadder">
       <small>DIVISÕES</small>
       <div>{DIVISIONS.map(d=><div key={d.id} className={d.id===globalSummary.division.id?"current":""}><span>{d.icon}</span><b>{d.label}</b></div>)}</div>
-      <p>Cada liga junta um pequeno grupo de até 20 alunos. No fim da semana, os primeiros sobem e os últimos podem descer. A divisão usa sempre o XP total, mesmo quando consultas um filtro por disciplina.</p>
+      <p>Cada liga junta um pequeno grupo de até 20 alunos. No fim da semana, os primeiros sobem e os últimos podem descer. A divisão usa sempre o XP total{LEAGUES_LIVE?", mesmo quando consultas um filtro por disciplina":" de todas as disciplinas"}.</p>
     </section>
 
     {RANKING_PROFILE_ENABLED&&<section className="rankingProfile">

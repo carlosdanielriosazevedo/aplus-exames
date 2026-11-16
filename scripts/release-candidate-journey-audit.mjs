@@ -15,7 +15,7 @@ const cloudRoute=readFileSync(new URL("../app/api/cloud/state/route.js",import.m
 const cloudStore=readFileSync(new URL("../app/lib/server/cloud-state-store.js",import.meta.url),"utf8");
 
 // Shared release-candidate contract: the normal student journey must stay navigable.
-assert.match(chrome,/STUDENT_NAV\s*=\s*\[\["home","Aprender"\],\["train","Treinar"\],\.\.\.\(RANKING_ENABLED\?\[\["ranking","Ranking"\]\]:\[\]\),\["progress","Progresso"\]\]/u,"RC: the four primary student areas must remain available.");
+assert.match(chrome,/STUDENT_NAV\s*=\s*\[\["home","Aprender"\],\["train","Treinar"\],\["ranking","Ranking"\],\["progress","Progresso"\]\]/u,"RC: the four primary student areas must remain available.");
 assert.match(hub,/Praticar/u,"RC: Praticar must remain available from Treinar.");
 assert.match(hub,/Rever matéria/u,"RC: Rever matéria must remain available from Treinar.");
 assert.match(hub,/Exames/u,"RC: Exames must remain available from Treinar.");
