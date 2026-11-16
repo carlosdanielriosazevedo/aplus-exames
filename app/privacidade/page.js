@@ -47,8 +47,12 @@ export default function PrivacyPage(){
     </div>
 
     <div className={styles.section}>
-      <h2>Diagnóstico técnico de erros</h2>
+      <h2>Contagens anónimas de utilização</h2>
       <p className={styles.copy}>Para sabermos se a app está a ajudar, contamos de forma anónima quantas vezes, por dia, alguém dá certos passos (por exemplo, abrir a app, terminar um diagnóstico ou voltar no dia seguinte). Cada dispositivo conta cada passo no máximo uma vez e guardamos apenas o total diário: não guardamos conta, nome, email, endereço IP, identificador do dispositivo nem respostas.</p>
+    </div>
+
+    <div className={styles.section}>
+      <h2>Diagnóstico técnico de erros</h2>
       <p className={styles.copy}>Quando ocorre uma falha inesperada no browser, a app pode enviar um relatório técnico mínimo para conseguirmos perceber e corrigir o problema. Esse relatório contém o tipo de erro, o ecrã lógico onde aconteceu, o caminho da página, referências técnicas da falha, versão da aplicação e informação do browser. Não inclui o texto das respostas, palavra-passe ou email do aluno. Estes registos são usados apenas para fiabilidade, segurança e investigação de erros e são mantidos apenas durante o período necessário para esses fins, sujeito também às regras de retenção da infraestrutura de alojamento.</p>
     </div>
 
