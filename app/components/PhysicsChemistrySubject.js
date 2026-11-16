@@ -12,7 +12,7 @@ import {physicsChemistrySubtopicById,physicsChemistrySubtopicsForDomain} from ".
 import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";
 import {buildAdaptivePhysicsChemistryMission,buildPhysicsChemistryDiagnostic,gradePhysicsChemistryResponse,physicsChemistryCoverage,physicsChemistryScope} from "../lib/physicsChemistryEngine";
-import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor,quarantineUnrecoverableSubjectSession} from "../lib/subjectProgress";
+import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor,quarantineUnrecoverableSubjectSession,restoredSubjectAnswer} from "../lib/subjectProgress";
 import {activateSubjectState,finishSubjectOnboardingState,subjectGoal,subjectOnboardingStep} from "../lib/subjectWorkspace";
 import {missionCompletedToday} from "../lib/engagement";
 import {loadPhysicsChemistryExamDraft,physicsChemistryDraftAgeLabel} from "../lib/physicsChemistryExamDraft";
@@ -190,8 +190,9 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       window.alert("Não foi possível recuperar esta sessão porque faltam perguntas. O teu progresso continua guardado.");
       return;
     }
-    setSession({sessionId:saved.sessionId,kind:saved.kind,label:saved.label,domain:saved.domain,items,current:Math.min(saved.current,items.length-1)});
-    setResults(saved.results||[]);setAnswer(saved.currentAnswer??null);setFeedback(saved.currentResult||null);
+    const current=Math.min(saved.current,items.length-1);
+    setSession({sessionId:saved.sessionId,kind:saved.kind,label:saved.label,domain:saved.domain,items,current});
+    setResults(saved.results||[]);setAnswer(restoredSubjectAnswer(saved,items[current]));setFeedback(saved.currentResult||null);
   }
 
   useEffect(()=>{

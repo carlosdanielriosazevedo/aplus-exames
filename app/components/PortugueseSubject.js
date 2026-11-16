@@ -11,7 +11,7 @@ import {portugueseLiteraryWorkById,portugueseLiteraryWorksForYear} from "../data
 import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence,portugueseRevisionCompare,portugueseRevisionEvidenceCompare,rubricObservationEvidenceSnapshot} from "../lib/portugueseEngine";
 import {portugueseObservationGuidance} from "../lib/portugueseObservationGuidance";
 import {portugueseWordLimitFeedback} from "../lib/portugueseWordLimit";
-import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor,quarantineUnrecoverableSubjectSession} from "../lib/subjectProgress";
+import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor,quarantineUnrecoverableSubjectSession,restoredSubjectAnswer} from "../lib/subjectProgress";
 import {clearPortugueseMiniExamDraft} from "../lib/portugueseMiniExamDraft";
 import {engagementSummary,missionCompletedToday} from "../lib/engagement";
 import {STUDY_MODE_COPY,practiceModeCopy} from "../lib/studyModeCopy";
@@ -232,7 +232,7 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
     setSession({sessionId:saved.sessionId,kind:saved.kind,label:saved.label,domain:saved.domain,items,current});
     setResults(saved.results||[]);
     const restored=saved.currentResult?.final?saved.currentResult:restorePortugueseRubricEvidence(items[current],saved.currentResult);
-    setAnswer(saved.currentAnswer??restored?.responseText??null);setFeedback(restored);setEditingCriterionId(null);
+    setAnswer(restoredSubjectAnswer(saved,items[current])??restored?.responseText??null);setFeedback(restored);setEditingCriterionId(null);
   }
 
   useEffect(()=>{

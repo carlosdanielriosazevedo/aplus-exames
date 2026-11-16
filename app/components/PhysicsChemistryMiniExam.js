@@ -8,6 +8,7 @@ import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
 import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";
 import {hasPhysicsChemistryExamDraft,clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";
+import {markStoredDraftOrder,physicsChemistryDraftKey,storedDraftInCurrentOrder} from "../lib/optionOrderDrafts";
 
 const SUBJECT_ID="physics-chemistry-a";
 
@@ -33,7 +34,7 @@ function formatTime(seconds){
 export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go}){
   const exam=physicsChemistryMiniExamById(modelId);
   const itemIds=useMemo(()=>exam.items.map(row=>row.id),[exam.items]);
-  const [initialDraft]=useState(()=>loadPhysicsChemistryExamDraft(exam.id,exam.items.map(row=>row.id)));
+  const [initialDraft]=useState(()=>storedDraftInCurrentOrder(physicsChemistryDraftKey(exam.id),loadPhysicsChemistryExamDraft(exam.id,exam.items.map(row=>row.id)),exam.items));
   const [index,setIndex]=useState(()=>Math.max(0,Math.min(exam.items.length-1,initialDraft?.index||0)));
   const [answers,setAnswers]=useState(()=>initialDraft?.answers||{});
   const [review,setReview]=useState(()=>!!initialDraft?.review);
@@ -57,7 +58,8 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   useEffect(()=>{if(remaining===0&&!review)finish({force:true})},[remaining,review]);
   useEffect(()=>{
     if(recoveryBlocked)return;
-    savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review,rubricAssessments,markedForReview});
+    // As respostas em memória já estão na ordem atual das opções.
+    if(savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review,rubricAssessments,markedForReview})===true)markStoredDraftOrder(physicsChemistryDraftKey(exam.id));
   },[answers,exam.id,index,itemIds,markedForReview,review,rubricAssessments,startedAt]);
 
   const baseResults=useMemo(()=>exam.items.map(row=>gradePhysicsChemistryResponse(row,answers[row.id])),[exam.items,answers]);

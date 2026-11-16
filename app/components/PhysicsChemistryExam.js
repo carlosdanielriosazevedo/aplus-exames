@@ -8,6 +8,7 @@ import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryE
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
 import {hasPhysicsChemistryExamDraft,clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";
+import {markStoredDraftOrder,physicsChemistryDraftKey,storedDraftInCurrentOrder} from "../lib/optionOrderDrafts";
 
 const SUBJECT_ID="physics-chemistry-a";
 
@@ -41,7 +42,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
   const rows=useMemo(()=>[...blueprint.mandatoryItems,...blueprint.optionalItems],[]);
   const examId="fqa-full-715";
   const itemIds=useMemo(()=>rows.map(row=>row.id),[rows]);
-  const [initialDraft]=useState(()=>loadPhysicsChemistryExamDraft(examId,rows.map(row=>row.id)));
+  const [initialDraft]=useState(()=>storedDraftInCurrentOrder(physicsChemistryDraftKey(examId),loadPhysicsChemistryExamDraft(examId,rows.map(row=>row.id)),rows));
   const [current,setCurrent]=useState(()=>Math.max(0,Math.min(rows.length-1,initialDraft?.index||0)));
   const [answers,setAnswers]=useState(()=>initialDraft?.answers||{});
   const [review,setReview]=useState(()=>!!initialDraft?.review);
@@ -83,7 +84,8 @@ export default function PhysicsChemistryExam({s,setS,go}){
   useEffect(()=>{if(timeExpired&&!review)finish({force:true})},[timeExpired,review]);
   useEffect(()=>{
     if(recoveryBlocked)return;
-    savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review,rubricAssessments,markedForReview});
+    // As respostas em memória já estão na ordem atual das opções.
+    if(savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review,rubricAssessments,markedForReview})===true)markStoredDraftOrder(physicsChemistryDraftKey(examId));
   },[answers,current,examId,itemIds,markedForReview,review,rubricAssessments,startedAt]);
 
   function toggleMarked(id){setMarkedForReview(current=>current.includes(id)?current.filter(row=>row!==id):[...current,id]);}

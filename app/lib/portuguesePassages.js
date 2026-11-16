@@ -1,3 +1,4 @@
+import {balanceOptionOrder} from "./optionOrder.js";
 export function portuguesePassageId(item){
   const id=String(item?.passageId||"").trim();
   return id||null;
@@ -12,7 +13,7 @@ export function materializePortuguesePassageItems(document){
     if(!passageId)throw new Error("Passage prototype sem passageId.");
     if(!passageText)throw new Error(`${passageId}: texto partilhado vazio.`);
     return (passage.items||[]).map(item=>({
-      ...item,
+      ...(item?.responseType==="multiple-choice"?balanceOptionOrder(item,{optionsKey:"options",answerKey:"answerIndex"}):item),
       passageId,
       passageTitle,
       passageText,

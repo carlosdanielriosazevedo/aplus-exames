@@ -1,3 +1,4 @@
+import {balanceOptionOrder} from "../lib/optionOrder.js";
 import {PHYSICS_CHEMISTRY_A_AUTHENTICITY_WAVE3} from "./physicsChemistryAuthenticityWave3.js";
 import {PHYSICS_CHEMISTRY_A_AUTHENTICITY_ITEMS} from "./physicsChemistryAuthenticityItems.js";
 import {PHYSICS_CHEMISTRY_A_COVERAGE_WAVE2_Q11} from "./physicsChemistryCoverageWave2Q11.js";
@@ -118,6 +119,10 @@ const PHYSICS_CHEMISTRY_A_SELECTION_ITEMS=raw.map(([id,year,domain,competencyId,
   difficultyTarget:1+(index%3),maxPoints:10
 }));
 
+// Rotação antiga (soma dos códigos do ID): com IDs seguidos, a letra certa avançava
+// uma posição de pergunta para pergunta, um padrão aprendível. Mantém-se só porque
+// as sessões antigas guardaram índices nesta ordem; a posição final é decidida
+// depois por balanceOptionOrder (lib/optionOrder.js), que converte esses índices.
 function balancePhysicsChemistryChoicePosition(item){
   if(item.responseType!=="multiple-choice"||!Array.isArray(item.options)||item.options.length!==4)return item;
   const shift=[...String(item.id)].reduce((sum,char)=>sum+char.charCodeAt(0),0)%4;
@@ -151,7 +156,8 @@ export const PHYSICS_CHEMISTRY_A_ALL_ITEMS=[
   ...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS,
   ...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE2,
   ...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE3,...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE4,...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE5,...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE6
-].map(item=>({...item,subtopicId:item.subtopicId||physicsChemistrySubtopicIdForItem(item)})).map(balancePhysicsChemistryChoicePosition);
+].map(item=>({...item,subtopicId:item.subtopicId||physicsChemistrySubtopicIdForItem(item)})).map(balancePhysicsChemistryChoicePosition)
+  .map(item=>item.responseType==="multiple-choice"?balanceOptionOrder(item,{optionsKey:"options",answerKey:"answerIndex"}):item);
 
 // Banco usado pela app para selecionar perguntas (diagnóstico, missões, treino).
 export const PHYSICS_CHEMISTRY_A_ITEMS=PHYSICS_CHEMISTRY_A_ALL_ITEMS.filter(item=>!isRetiredPhysicsChemistryItem(item));
