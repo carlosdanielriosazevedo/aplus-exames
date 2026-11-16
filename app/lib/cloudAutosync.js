@@ -6,7 +6,10 @@
 // - progresso anónimo só é associado a uma conta com confirmação explícita;
 // - o progresso online só substitui o local quando o local não tem alterações por
 //   guardar e não há avaliação em curso. Caso contrário: conflito explícito;
-// - a escrita usa sempre a revisão conhecida (CAS no servidor).
+// - a escrita usa sempre a revisão conhecida (CAS no servidor);
+// - progresso anónimo que o aluno confirmou ser seu é JUNTADO ao que a conta já
+//   tinha online (união por identificadores estáveis), em vez de abrir um segundo
+//   pedido de decisão logo a seguir ao "Sim, é meu".
 import {cloudSyncMeta,stateFingerprint} from "./cloudReliability.js";
 
 export {CLOUD_ACCOUNT_HINT_KEY,AUTH_CHANGED_EVENT,rememberCloudSession,cloudSessionHinted} from "./cloudSessionHint.js";
@@ -28,7 +31,8 @@ export function syncMeta(state){
   return {
     ...cloudSyncMeta(state),
     accountId:typeof raw.accountId==="string"&&raw.accountId?raw.accountId:null,
-    payloadFingerprint:typeof raw.payloadFingerprint==="string"?raw.payloadFingerprint:null
+    payloadFingerprint:typeof raw.payloadFingerprint==="string"?raw.payloadFingerprint:null,
+    adoptionPending:raw.adoptionPending===true
   };
 }
 
@@ -55,6 +59,10 @@ export function decideSync({state,payload,accountId,remote,pendingAssessment=fal
     return {action:"push",operation:"insert",expectedRevision:0,bind:true};
   }
   const remoteRevision=Number(remote.revision)||0;
+  if(bound&&meta.adoptionPending&&remoteRevision!==meta.baseRevision){
+    if(pendingAssessment)return {action:"wait_assessment"};
+    return {action:"merge_remote",expectedRevision:remoteRevision};
+  }
   if(bound&&remoteRevision===meta.baseRevision){
     return dirty?{action:"push",operation:"update",expectedRevision:remoteRevision}:{action:"idle"};
   }
@@ -79,13 +87,15 @@ export function markAutosynced(state,{accountId,revision,payload,deviceId=null,a
       lastRemoteRevision:revision,
       payloadFingerprint:payloadFingerprint(payload),
       lastSyncedAt:at,
-      lastConflict:null
+      lastConflict:null,
+      adoptionPending:false
     }
   };
 }
 
-export function bindCloudAccount(state,accountId){
-  return {...state,cloudSync:{...(state?.cloudSync||{}),accountId}};
+// `adopted`: o aluno confirmou que o progresso anónimo deste dispositivo é seu.
+export function bindCloudAccount(state,accountId,{adopted=false}={}){
+  return {...state,cloudSync:{...(state?.cloudSync||{}),accountId,...(adopted?{adoptionPending:true}:{})}};
 }
 
 export function retryDelayMs(attempt){

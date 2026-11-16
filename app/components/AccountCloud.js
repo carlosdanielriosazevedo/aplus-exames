@@ -26,6 +26,17 @@ import {activeStateAccount,archiveActiveAccount,switchDeviceToAccount} from "../
 // escola a alunos (muitos menores) para uma funcionalidade que ainda não existe.
 const RANKING_PROFILE_ENABLED=false;
 
+// Resumo curto de uma versão do progresso, para o aluno comparar antes de escolher.
+function versionSummary(state){
+  if(!state)return "—";
+  let index=null;
+  try{index=prepIndex(state)}catch{}
+  const xp=Number(state.xp)||0;
+  const sessions=(state.missionHistory||[]).length+(state.examHistory||[]).length
+    +Object.values(state.subjectProgress||{}).reduce((n,row)=>n+((row?.sessions||[]).length),0);
+  return [`${xp} XP`,index===null?null:`índice ${index}`,`${sessions} ${sessions===1?"sessão":"sessões"}`].filter(Boolean).join(" · ");
+}
+
 export function AccountCloud({s,setS,go,gate=false}){
   const cfg=cloudConfiguration();
   const [mode,setMode]=useState("signin");
@@ -184,7 +195,7 @@ export function AccountCloud({s,setS,go,gate=false}){
       remoteUpdatedAt:remote?.updated_at,
       remoteState:remote?.state_json
     }));
-    setMessage({ok:false,text:"Existe progresso online mais recente. Não substituímos nada automaticamente."});
+    setMessage({ok:false,text:"O progresso deste dispositivo e o da conta são diferentes. Não substituímos nada automaticamente."});
   }
 
   async function saveCloud(){
@@ -447,13 +458,17 @@ export function AccountCloud({s,setS,go,gate=false}){
       {otherAccountOwnsDevice&&<div className="notice warning"><b>Este dispositivo tem progresso de outra conta</b><span>Para proteger os dados de cada aluno, o progresso deste dispositivo não é guardado nem substituído nesta conta. Termina sessão e entra com a conta a que o progresso pertence.</span></div>}
 
       {conflictRemote&&<div className="cloudConflictCard">
-        <div className="cloudConflictHead"><span>⚠</span><div><b>Encontrámos progresso mais recente noutro dispositivo</b>
-          <small>Nada foi substituído. Escolhe qual progresso queres manter ou combina os dois.</small></div></div>
-        <p>Antes de qualquer alteração, a APProva+ cria uma cópia de segurança neste dispositivo.</p>
+        <div className="cloudConflictHead"><span aria-hidden="true">⚠</span><div><b>O progresso deste dispositivo e o da tua conta são diferentes</b>
+          <small>Nada foi substituído. Antes de qualquer alteração, a APProva+ cria uma cópia de segurança neste dispositivo.</small></div></div>
+        <div className="conflictCompare">
+          <div><span>Neste dispositivo</span><b>{versionSummary(s)}</b></div>
+          <div><span>Na conta</span><b>{versionSummary(conflictRemote.state_json)}</b></div>
+        </div>
+        <button className="conflictPrimary" onClick={resolveMerge} disabled={busy}>Juntar os dois (recomendado)</button>
+        <small className="conflictHint">Junta o estudo feito nos dois lados. Nada se perde.</small>
         <div className="conflictChoices">
-          <button onClick={resolveKeepRemote} disabled={busy}><b>Usar progresso online</b><span>Usar a versão mais recente que já está guardada online.</span></button>
-          <button onClick={resolveMerge} disabled={busy}><b>Combinar progresso</b><span>Juntar atividade feita separadamente nos dois dispositivos.</span></button>
-          <button onClick={resolveKeepLocal} disabled={busy}><b>Manter este dispositivo</b><span>Guardar online o progresso que estás a ver aqui.</span></button>
+          <button onClick={resolveKeepRemote} disabled={busy}>Usar só o da conta</button>
+          <button onClick={resolveKeepLocal} disabled={busy}>Usar só o deste dispositivo</button>
         </div>
       </div>}
 

@@ -43,9 +43,9 @@ assert.ok(page.includes("dailyMissionPromptDecision"),"Lógica automática da Mi
 assert.ok(page.includes("missionPlanForToday(s,dailyMissionPlan(s))"),"Missão diária deixou de usar a atribuição congelada.");
 assert.ok(page.includes("O QUE A APP ESTÁ A ACOMPANHAR")&&page.includes("Pontos a confirmar"),"UI da memória pedagógica desapareceu.");
 assert.ok(page.includes("refreshLearningHypotheses"),"Refresh da memória pedagógica após evidência desapareceu.");
-assert.ok(page.includes("Encontrámos progresso mais recente noutro dispositivo"),"UI explícita de conflitos cloud desapareceu.");
+assert.ok(page.includes("O progresso deste dispositivo e o da tua conta são diferentes"),"UI explícita de conflitos cloud desapareceu.");
 assert.ok(page.includes("Guardar online"),"Save cloud deixou de estar explícito para o aluno.");
-assert.ok(page.includes("Combinar progresso"),"Resolução segura de conflito por combinação desapareceu.");
+assert.ok(page.includes("Juntar os dois (recomendado)"),"Resolução segura de conflito por combinação desapareceu.");
 assert.ok(page.includes("FUNIL + RETENÇÃO"),"Painel de funil/retenção desapareceu.");
 assert.ok(page.includes("recordAppOpen"),"Registo de abertura diária da app desapareceu.");
 assert.ok(page.includes("first_mission_completed"),"Milestone de ativação pela primeira Missão desapareceu.");

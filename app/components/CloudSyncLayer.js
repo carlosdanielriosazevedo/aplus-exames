@@ -4,7 +4,7 @@
 // anónimos não fazem pedidos adicionais.
 import {useCallback,useEffect,useRef,useState} from "react";
 import {saveStudentCloudState,loadStudentCloudState,studentStateForCloud,mergeStudentCloudState} from "../lib/cloud";
-import {getOrCreateDeviceId,saveLocalSnapshot,cloudConflict} from "../lib/cloudReliability";
+import {getOrCreateDeviceId,saveLocalSnapshot,cloudConflict,safeCloudMerge} from "../lib/cloudReliability";
 import {hasPendingAssessment,preservePendingAssessment} from "../lib/pendingAssessment";
 import {
   AUTH_CHANGED_EVENT,decideSync,markAutosynced,bindCloudAccount,payloadFingerprint,
@@ -83,6 +83,20 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
           setS(prev=>preservePendingAssessment(prev,next));
           setStatus("saved");attempts.current=0;return {status:"saved"};
         }
+        if(decision.action==="merge_remote"){
+          // O aluno confirmou que o progresso deste dispositivo é seu e a conta já
+          // tinha progresso: juntar os dois (nada é descartado) e gravar o resultado.
+          setStatus("saving");
+          saveLocalSnapshot(state,{label:"Antes de juntar ao progresso da conta"});
+          const deviceId=getOrCreateDeviceId();
+          const combined=normalizeAfterCloud(safeCloudMerge(state,remote.state_json));
+          const result=await saveStudentCloudState(combined,{expectedRevision:decision.expectedRevision,deviceId,knownRemote:true});
+          if(result.conflict){remote=result.remote;state=stateRef.current;continue}
+          const revision=Number(result.data?.revision)||decision.expectedRevision+1;
+          const next=markAutosynced(combined,{accountId:user.id,revision,payload:studentStateForCloud(combined),deviceId});
+          setS(prev=>preservePendingAssessment(prev,next));
+          setStatus("saved");attempts.current=0;return {status:"saved"};
+        }
         if(decision.action==="push"){
           setStatus("saving");
           const deviceId=getOrCreateDeviceId();
@@ -151,8 +165,8 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
   if(adoption&&account)return <div role="dialog" aria-modal="true" aria-labelledby="cloud-adopt-title" style={styles.overlay}>
     <div style={styles.dialog}>
       <b id="cloud-adopt-title" style={{fontSize:18}}>Guardar o progresso deste dispositivo na tua conta?</b>
-      <p style={styles.text}>Este dispositivo tem estudo feito antes de entrares{account.email?<> como <b>{account.email}</b></>:null}. Se for teu, guardamo-lo na conta para o encontrares noutros dispositivos. Se este computador for partilhado e o progresso não for teu, escolhe “Agora não”.</p>
-      <button type="button" style={styles.primary} onClick={()=>{adoptionRef.current=true;setS(prev=>bindCloudAccount(prev,account.id));setAdoption(false);setTimeout(()=>cycle({fetchRemote:true}),0)}}>Sim, é meu — guardar na conta</button>
+      <p style={styles.text}>Este dispositivo tem estudo feito antes de entrares{account.email?<> como <b>{account.email}</b></>:null}. Se for teu, juntamo-lo ao progresso da conta para o encontrares noutros dispositivos. Nada é apagado. Se este computador for partilhado e o progresso não for teu, escolhe “Agora não”.</p>
+      <button type="button" style={styles.primary} onClick={()=>{adoptionRef.current=true;setS(prev=>bindCloudAccount(prev,account.id,{adopted:true}));setAdoption(false);setTimeout(()=>cycle({fetchRemote:true}),0)}}>Sim, é meu — guardar na conta</button>
       <button type="button" style={styles.secondary} onClick={()=>{setAdoption(false);setStatus("not_synced")}}>Agora não</button>
     </div>
   </div>;
