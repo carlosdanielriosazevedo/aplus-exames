@@ -1,4 +1,5 @@
 "use client";
+import {SaveProgressPrompt} from "./SaveProgressPrompt";
 import {useEffect,useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import StudyModeHub from "./StudyModeHub";
@@ -225,6 +226,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       </div>
       {pending>0&&<div className="notice warning"><b>Resultado académico incompleto</b><span>A app avaliou automaticamente o que conseguiu nas respostas abertas e por etapas. Os resultados não determinísticos mantêm indicação provisória e de confiança.</span></div>}
       {unanswered>0&&<div className="notice"><b>{unanswered+" "+(unanswered===1?"resposta em branco":"respostas em branco")}</b><span>Ficam registadas como ausência de resposta, sem inventar evidência de domínio.</span></div>}
+      {session.kind==="diagnostic"&&<SaveProgressPrompt s={s} setS={setS} go={go} place="diagResult"/>}
       <button className="primary" onClick={()=>{setSession(null);setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});go(primaryTarget)}}>{primaryLabel}</button>
       {session.kind!=="diagnostic"&&<button className="secondary" onClick={()=>{const kind=session.kind;setSession(null);setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});go(kind==="mission"?"progress":"train")}}>{session.kind==="mission"?"Ver progresso detalhado":"Treinar outra coisa"}</button>}
     </Shell>;

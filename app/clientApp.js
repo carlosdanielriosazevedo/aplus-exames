@@ -4,6 +4,8 @@ import {hasPendingAssessment} from "./lib/pendingAssessment";
 import {useEffect,useMemo,useRef,useState} from "react";
 import {AUTH_CHANGED_EVENT,cloudSessionHinted} from "./lib/cloudSessionHint";
 import {SaveProgressPrompt} from "./components/SaveProgressPrompt";
+import {flushFunnel} from "./lib/funnelClient";
+import {funnelStepsReached} from "./lib/funnel";
 import ContentReportButton from "./components/ContentReportButton";
 import dynamic from "next/dynamic";
 import {insertMathText} from "./lib/mathInput";
@@ -268,6 +270,7 @@ const initial={
 export default function App(){
   const [s,setS]=useState(initial);
   const [screen,setScreen]=useState("welcome");
+  const stateRefForFunnel=useRef(null);
   const [trainingCfg,setTrainingCfg]=useState(null);
   const [examSession,setExamSession]=useState(null);
   const [recoveredSession,setRecoveredSession]=useState(null);
@@ -425,6 +428,16 @@ export default function App(){
   useEffect(()=>{
     if(hydrated)saveLocalState(s);
   },[s,hydrated]);
+
+  // Funil anónimo: só quando um novo passo é atingido (e nunca na beta privada).
+  stateRefForFunnel.current=s;
+  const funnelKey=hydrated&&!isFriendsBeta(s)?funnelStepsReached(s).join(","):"";
+  useEffect(()=>{
+    if(!funnelKey)return;
+    const id=setTimeout(()=>{flushFunnel(stateRefForFunnel.current).catch(()=>{})},1500);
+    return ()=>clearTimeout(id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[funnelKey]);
 
   useEffect(()=>{
     const mathActive=(s.activeSubjectId==="math-a"||(!s.activeSubjectId&&MATH_ENGINE_SCREENS.has(screen)));
