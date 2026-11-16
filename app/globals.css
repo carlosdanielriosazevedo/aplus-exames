@@ -2060,3 +2060,4 @@ button,input,select,textarea{max-width:100%}
 .studentNav{grid-template-columns:none!important;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}
 .pathNode.current article>p.missionBlockedNote{display:block!important;margin:10px 0 14px;color:#dbe4f0;font-size:14px;line-height:1.5}
 .leaguesComingSoon{margin:16px 0;padding:18px;border:2px dashed #d6a85a;border-radius:16px;background:#fffaf0;color:#3b2f17}.leaguesComingSoon .eyebrow{display:block;margin:0 0 4px}.leaguesComingSoon h3{margin:0 0 6px;font-size:20px;color:#2b2416}.leaguesComingSoon p{margin:0 0 8px;font-size:15px;line-height:1.5;color:#4d4433}.leaguesComingSoon ul{margin:0;padding-left:20px;font-size:14px;line-height:1.6;color:#4d4433}
+.leaguesComingSoon .leaguesComingSoonAction{display:block;width:100%;max-width:360px;margin:14px 0 0;min-height:48px}

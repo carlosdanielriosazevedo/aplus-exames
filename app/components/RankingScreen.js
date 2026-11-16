@@ -88,9 +88,10 @@ export default function Ranking({s,setS,go}){
       <p>Vais competir num grupo de até 20 alunos reais. No fim de cada semana, os primeiros sobem de divisão e os últimos podem descer.</p>
       <ul>
         <li>Conta só o <b>esforço</b> (XP de estudo), nunca notas, Domínio ou erros.</li>
-        <li>O XP que ganhas desde já fica a contar para a tua primeira liga.</li>
+        <li>Toda a gente começa em Bronze. Até lá, o XP que ganhas fica guardado no teu total.</li>
         <li>Abrimos as ligas quando houver alunos suficientes para grupos reais — sem participantes inventados.</li>
       </ul>
+      <button type="button" className="primary leaguesComingSoonAction" onClick={()=>go("home")}>Ganhar XP agora</button>
     </section>}
 
     {LEAGUES_LIVE&&<>
@@ -160,8 +161,10 @@ export default function Ranking({s,setS,go}){
 
     <section className="divisionLadder">
       <small>DIVISÕES</small>
-      <div>{DIVISIONS.map(d=><div key={d.id} className={d.id===globalSummary.division.id?"current":""}><span>{d.icon}</span><b>{d.label}</b></div>)}</div>
-      <p>Cada liga junta um pequeno grupo de até 20 alunos. No fim da semana, os primeiros sobem e os últimos podem descer. A divisão usa sempre o XP total{LEAGUES_LIVE?", mesmo quando consultas um filtro por disciplina":" de todas as disciplinas"}.</p>
+      <div>{DIVISIONS.map(d=><div key={d.id} className={LEAGUES_LIVE&&d.id===globalSummary.division.id?"current":""}><span>{d.icon}</span><b>{d.label}</b></div>)}</div>
+      <p>{LEAGUES_LIVE
+        ?"Cada liga junta um pequeno grupo de até 20 alunos. No fim da semana, os primeiros sobem e os últimos podem descer. A divisão usa sempre o XP total, mesmo quando consultas um filtro por disciplina."
+        :"Sobes uma divisão de cada vez, de Bronze até Diamante. Conta o XP de todas as disciplinas."}</p>
     </section>
 
     {RANKING_PROFILE_ENABLED&&<section className="rankingProfile">

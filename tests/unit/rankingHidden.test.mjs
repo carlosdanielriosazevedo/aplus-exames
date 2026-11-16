@@ -18,4 +18,11 @@ describe("Ranking sem participantes simulados por omissão",()=>{
     expect(screen).toMatch(/!LEAGUES_LIVE&&<section className="leaguesComingSoon"/);
     expect(screen).toContain("sem participantes inventados");
   });
+  it("não promete o que ainda não existe e tem uma ação dominante",()=>{
+    // Não há código que transporte XP de agora para uma "primeira liga".
+    expect(screen).not.toMatch(/primeira liga/);
+    // Sem liga real, nenhuma divisão aparece como "a tua".
+    expect(screen).toMatch(/className=\{LEAGUES_LIVE&&d\.id===globalSummary\.division\.id\?"current":""\}/);
+    expect(screen).toMatch(/className="primary leaguesComingSoonAction" onClick=\{\(\)=>go\("home"\)\}/);
+  });
 });
