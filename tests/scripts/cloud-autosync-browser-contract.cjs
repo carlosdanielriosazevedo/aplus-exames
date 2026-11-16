@@ -54,6 +54,21 @@ async function scenario(name,{seed,remote,postMode='ok',session='A'},check){
     assert.ok(posts.length>=2);assert.equal((await local()).cloudSync.baseRevision,2);
     assert.equal(await p.getByText(/Sem ligação/).count(),0);
   });
+  await scenario('S8 "Sim, é meu" com progresso já na conta: junta os dois num só passo, sem conflito',{seed:studied,remote:{revision:4,last_device_id:'d',state_json:{schema:'aplus-student-state-v8',xp:90,missionHistory:[{id:'r1',completionId:'r1',at:1}],subjectProgress:{}}}},async({p,posts,local})=>{
+    await p.getByText('Guardar o progresso deste dispositivo na tua conta?').waitFor({timeout:5000});
+    assert.equal(posts.length,0,'nada enviado antes da confirmação');
+    await p.getByRole('button',{name:/Sim, é meu/}).click();await p.waitForTimeout(2000);
+    assert.equal(posts.length,1,'uma única gravação');
+    assert.equal(posts[0].operation,'update');assert.equal(posts[0].expectedRevision,4);
+    assert.equal(posts[0].state.xp,90,'XP nunca é somado: máximo dos dois');
+    const ids=posts[0].state.missionHistory.map(m=>m.completionId||m.id).sort();
+    assert.deepEqual(ids,['m1','r1'],'estudo dos dois lados preservado');
+    const s=await local();assert.equal(s.cloudSync.accountId,'A');assert.equal(s.cloudSync.baseRevision,5);
+    assert.equal(s.cloudSync.adoptionPending,false);assert.equal(s.cloudSync.lastConflict,null);
+    assert.equal(await p.getByText(/progresso diferente/).count(),0,'sem aviso de conflito');
+    const snaps=await p.evaluate(()=>JSON.parse(localStorage.getItem('a25-cloud-snapshots-v1')||'[]'));
+    assert.ok(snaps.some(x=>/Antes de juntar/.test(x.label)),'cópia de segurança antes de juntar');
+  });
   await scenario('S7 sem sessão iniciada: não envia nada',{seed:studied,remote:null,session:null},async({posts})=>{
     assert.equal(posts.length,0);
   });

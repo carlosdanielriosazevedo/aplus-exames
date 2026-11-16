@@ -56,6 +56,28 @@ describe("sincronização automática: nunca substitui trabalho por guardar",()=
     const adopted=bindCloudAccount(studied,"A");
     expect(decide(adopted,{remote:{revision:2}}).action).toBe("conflict");
   });
+  it("progresso anónimo confirmado como do aluno é juntado ao da conta, sem segundo pedido",()=>{
+    const adopted=bindCloudAccount(studied,"A",{adopted:true});
+    expect(syncMeta(adopted).adoptionPending).toBe(true);
+    expect(decide(adopted,{remote:{revision:4}})).toEqual({action:"merge_remote",expectedRevision:4});
+    expect(decide(adopted,{remote:{revision:4},pendingAssessment:true}).action).toBe("wait_assessment");
+    // Conta ainda sem progresso online: grava diretamente.
+    expect(decide(adopted,{remote:null}).action).toBe("push");
+  });
+  it("depois de juntar, a adoção fica concluída e volta ao fluxo normal",()=>{
+    const adopted=bindCloudAccount(studied,"A",{adopted:true});
+    const done=markAutosynced(adopted,{accountId:"A",revision:5,payload:payloadOf(adopted)});
+    expect(syncMeta(done).adoptionPending).toBe(false);
+    // Outro dispositivo avança mais tarde: aplica (local limpo), nunca junta às cegas.
+    expect(decide(done,{remote:{revision:6}}).action).toBe("apply_remote");
+    const changed={...done,xp:99};
+    expect(decide(changed,{remote:{revision:6}}).action).toBe("conflict");
+  });
+  it("resolver um conflito manualmente também conclui a adoção",()=>{
+    const adopted=bindCloudAccount(studied,"A",{adopted:true});
+    expect(syncMeta(markCloudSaved(adopted,{revision:7,deviceId:"d"})).adoptionPending).toBe(false);
+    expect(syncMeta(markCloudLoaded(adopted,{revision:7})).adoptionPending).toBe(false);
+  });
   it("avaliação em curso: o online espera, não é aplicado",()=>{
     expect(decide(synced(studied),{remote:{revision:7},pendingAssessment:true}).action).toBe("wait_assessment");
   });

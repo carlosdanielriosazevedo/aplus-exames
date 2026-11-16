@@ -68,7 +68,7 @@ assert.doesNotMatch(account,/A password é tratada/u,"A explicação pública da
 assert.doesNotMatch(account,/Neon Auth\/Data API ainda não ativados/u,"A interface pública não deve expor nomes de infraestrutura.");
 assert.doesNotMatch(account,/migration v4\.9/u,"A interface pública não deve expor versões de migrations.");
 assert.doesNotMatch(account,/Carregar cloud com snapshot/u,"A ação principal de recuperação deve usar linguagem orientada ao aluno.");
-for(const copy of ["Guardar online","Carregar progresso online","Detalhes e cópias de segurança","Encontrámos progresso mais recente noutro dispositivo"]){
+for(const copy of ["Guardar online","Carregar progresso online","Detalhes e cópias de segurança","O progresso deste dispositivo e o da tua conta são diferentes"]){
   assert.match(account,new RegExp(copy,"u"),`Falta copy pública de progresso online: ${copy}.`);
 }
 assert.doesNotMatch(fqa,/Voltar à Home/u,"A interface deve usar a nomenclatura comum de menu inicial.");

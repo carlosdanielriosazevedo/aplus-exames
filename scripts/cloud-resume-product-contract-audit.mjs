@@ -55,9 +55,10 @@ assert.match(account,/Carregar progresso online/u,"a ação de carga deve usar l
 assert.match(account,/Detalhes e cópias de segurança/u,"a UI deve manter acesso aos detalhes de segurança sem os impor como linguagem principal");
 
 // Uma revisão remota mais recente bloqueia a escrita e exige decisão consciente.
-assert.match(account,/Existe progresso online mais recente\. Não substituímos nada automaticamente\./u,"conflitos devem bloquear sobrescritas automáticas");
-assert.match(account,/Encontrámos progresso mais recente noutro dispositivo/u,"a UI deve explicar o conflito em linguagem não técnica");
-for(const label of ["Usar progresso online","Combinar progresso","Manter este dispositivo"]){
+assert.match(account,/O progresso deste dispositivo e o da conta são diferentes\. Não substituímos nada automaticamente\./u,"conflitos devem bloquear sobrescritas automáticas");
+assert.match(account,/O progresso deste dispositivo e o da tua conta são diferentes/u,"a UI deve explicar o conflito em linguagem não técnica");
+assert.match(account,/conflictCompare[\s\S]{0,300}versionSummary\(s\)[\s\S]{0,200}versionSummary\(conflictRemote\.state_json\)/u,"o aluno deve ver as duas versões antes de escolher");
+for(const label of ["Juntar os dois (recomendado)","Usar só o da conta","Usar só o deste dispositivo"]){
   assert.ok(account.includes(label),`resolução de conflito em falta: ${label}`);
 }
 assert.match(account,/safeCloudMerge\(s,conflictRemote\.state_json\)/u,"a opção combinar deve usar o merge seguro");

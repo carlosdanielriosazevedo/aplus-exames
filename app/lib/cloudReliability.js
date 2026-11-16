@@ -68,7 +68,10 @@ export function cloudSyncMeta(state){
     // Ligação do progresso local a uma conta e impressão do último payload
     // sincronizado automaticamente. Têm de sobreviver às ações manuais.
     accountId:typeof raw.accountId==="string"&&raw.accountId?raw.accountId:null,
-    payloadFingerprint:typeof raw.payloadFingerprint==="string"?raw.payloadFingerprint:null
+    payloadFingerprint:typeof raw.payloadFingerprint==="string"?raw.payloadFingerprint:null,
+    // O aluno confirmou que o progresso anónimo deste dispositivo é seu e ainda
+    // não foi juntado ao progresso que a conta já tinha online.
+    adoptionPending:raw.adoptionPending===true
   };
 }
 
@@ -100,7 +103,8 @@ export function markCloudLoaded(state,{
       lastRemoteRevision:revision,
       lastRemoteDeviceId:remoteDeviceId||null,
       lastSyncedAt:at,
-      lastConflict:null
+      lastConflict:null,
+      adoptionPending:false
     }
   };
 }
@@ -123,7 +127,8 @@ export function markCloudSaved(state,{
       lastRemoteRevision:nextRevision,
       lastRemoteDeviceId:deviceId||current.deviceId||null,
       lastSyncedAt:at,
-      lastConflict:null
+      lastConflict:null,
+      adoptionPending:false
     }
   };
 }
