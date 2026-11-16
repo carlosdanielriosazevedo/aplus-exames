@@ -43,9 +43,17 @@ async function scenario(name,{seed,remote,postMode='ok',session='A'},check){
     const s=await local();assert.equal(s.xp,77);assert.equal(s.cloudSync.accountId,'A');assert.equal(s.cloudSync.baseRevision,5);
     assert.equal(posts.length,0);
   });
-  await scenario('S5 alterações locais + online mais recente: conflito, nada substituído',{seed:{...studied,cloudSync:{accountId:'A',baseRevision:1,payloadFingerprint:'stale'}},remote:{revision:4,state_json:{schema:'aplus-student-state-v8',xp:5}}},async({p,posts,local})=>{
-    await p.getByText(/progresso diferente noutro dispositivo/).waitFor({timeout:5000});
-    assert.equal(posts.length,0);assert.equal((await local()).xp,40);
+  await scenario('S5 alterações locais + online mais recente, mesmo perfil: junta automaticamente, nada se perde',{seed:{...studied,profile:{schoolYear:'11.º'},cloudSync:{accountId:'A',baseRevision:1,payloadFingerprint:'stale'}},remote:{revision:4,state_json:{schema:'aplus-student-state-v8',xp:5,profile:{schoolYear:'11.º'},missionHistory:[{id:'r1',completionId:'r1',at:1}]}}},async({p,posts,local})=>{
+    await p.waitForTimeout(1500);
+    assert.equal(posts.length,1);assert.equal(posts[0].operation,'update');assert.equal(posts[0].expectedRevision,4);
+    assert.deepEqual(posts[0].state.missionHistory.map(m=>m.completionId||m.id).sort(),['m1','r1']);
+    assert.equal(posts[0].state.xp,40);
+    assert.equal(await p.getByText(/diferente noutro dispositivo/).count(),0);
+    assert.equal((await local()).cloudSync.baseRevision,5);
+  });
+  await scenario('S9 perfis escolares diferentes: pede ao aluno o perfil, nada é enviado',{seed:{...studied,profile:{schoolYear:'11.º'},cloudSync:{accountId:'A',baseRevision:1,payloadFingerprint:'stale'}},remote:{revision:4,state_json:{schema:'aplus-student-state-v8',xp:5,profile:{schoolYear:'10.º'}}}},async({p,posts,local})=>{
+    await p.getByText(/perfil escolar é diferente/).waitFor({timeout:5000});
+    assert.equal(posts.length,0);const s=await local();assert.equal(s.xp,40);assert.equal(s.profile.schoolYear,'11.º');
   });
   await scenario('S6 sem rede: avisa, mantém local e volta a tentar com sucesso',{seed:{...studied,cloudSync:{accountId:'A',baseRevision:1,payloadFingerprint:'stale'}},remote:{revision:1,state_json:{schema:'aplus-student-state-v8',xp:5}},postMode:'abort'},async({p,posts,local,setMode})=>{
     await p.getByText(/Sem ligação/).waitFor({timeout:5000});

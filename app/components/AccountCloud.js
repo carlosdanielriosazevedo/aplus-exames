@@ -18,13 +18,20 @@ import {prepIndex,measuredThemes} from "../lib/engine";
 import {demoIdentity} from "../lib/identity";
 import {academicScopeThemes} from "../lib/curriculumScope";
 import {normalizeAfterCloud} from "../lib/cloudApply";
-import {flushCloudNow,rememberCloudSession,bindCloudAccount} from "../lib/cloudAutosync";
+import {flushCloudNow,rememberCloudSession,bindCloudAccount,profilesDiffer} from "../lib/cloudAutosync";
 import {CLOUD_ACCOUNT_HINT_KEY} from "../lib/cloudSessionHint";
 import {activeStateAccount,archiveActiveAccount,switchDeviceToAccount} from "../lib/accountDeviceStorage";
 
 // O ranking ainda usa participantes simulados: não pedimos ano, distrito nem
 // escola a alunos (muitos menores) para uma funcionalidade que ainda não existe.
 const RANKING_PROFILE_ENABLED=false;
+
+// Perfil escolar resumido: ano e número de áreas que contam para o índice.
+function profileSummary(state){
+  const year=state?.profile?.schoolYear||"ano por indicar";
+  const areas=academicScopeThemes(state?.profile).length;
+  return `${year} · ${areas} ${areas===1?"área":"áreas"} da matéria`;
+}
 
 // Resumo curto de uma versão do progresso, para o aluno comparar antes de escolher.
 function versionSummary(state){
@@ -195,7 +202,7 @@ export function AccountCloud({s,setS,go,gate=false}){
       remoteUpdatedAt:remote?.updated_at,
       remoteState:remote?.state_json
     }));
-    setMessage({ok:false,text:"O progresso deste dispositivo e o da conta são diferentes. Não substituímos nada automaticamente."});
+    // O cartão de conflito já explica a situação; sem mensagem repetida em baixo.
   }
 
   async function saveCloud(){
@@ -300,13 +307,17 @@ export function AccountCloud({s,setS,go,gate=false}){
     }finally{setBusy(false)}
   }
 
-  async function resolveMerge(){
+  // profileFrom: perfil escolar que fica depois de juntar ("local" ou "remote").
+  async function resolveMerge(profileFrom="local"){
     if(hasPendingAssessment(s)){setMessage({ok:false,text:"Há uma avaliação em curso. Continua e conclui a tentativa antes de carregar progresso online."});return}
     if(!conflictRemote?.state_json)return;
     setBusy(true);setMessage(null);
     try{
       saveLocalSnapshot(s,{label:"Conflito · antes de combinar"});
-      const combined=safeCloudMerge(s,conflictRemote.state_json);
+      let combined=safeCloudMerge(s,conflictRemote.state_json);
+      if(profileFrom==="remote"&&conflictRemote.state_json.profile){
+        combined={...combined,profile:conflictRemote.state_json.profile,goal:conflictRemote.state_json.goal??combined.goal};
+      }
       let next=normalizeAfterCloud(combined);
       next=markCloudLoaded(next,{
         revision:conflictRemote.revision,
@@ -457,20 +468,30 @@ export function AccountCloud({s,setS,go,gate=false}){
 
       {otherAccountOwnsDevice&&<div className="notice warning"><b>Este dispositivo tem progresso de outra conta</b><span>Para proteger os dados de cada aluno, o progresso deste dispositivo não é guardado nem substituído nesta conta. Termina sessão e entra com a conta a que o progresso pertence.</span></div>}
 
-      {conflictRemote&&<div className="cloudConflictCard">
-        <div className="cloudConflictHead"><span aria-hidden="true">⚠</span><div><b>O progresso deste dispositivo e o da tua conta são diferentes</b>
-          <small>Nada foi substituído. Antes de qualquer alteração, a APProva+ cria uma cópia de segurança neste dispositivo.</small></div></div>
-        <div className="conflictCompare">
-          <div><span>Neste dispositivo</span><b>{versionSummary(s)}</b></div>
-          <div><span>Na conta</span><b>{versionSummary(conflictRemote.state_json)}</b></div>
+      {conflictRemote&&(profilesDiffer(s,conflictRemote.state_json)
+        ?<div className="cloudConflictCard">
+          <div className="cloudConflictHead"><span aria-hidden="true">⚠</span><div><b>Qual é o teu perfil escolar?</b>
+            <small>Este dispositivo e a tua conta têm anos ou matéria dada diferentes. O estudo dos dois é juntado sempre; só tens de escolher o perfil certo, porque é ele que define o que a APProva+ mede.</small></div></div>
+          <div className="conflictProfileChoices">
+            <button onClick={()=>resolveMerge("local")} disabled={busy}><span>Neste dispositivo</span><b>{profileSummary(s)}</b></button>
+            <button onClick={()=>resolveMerge("remote")} disabled={busy}><span>Na conta</span><b>{profileSummary(conflictRemote.state_json)}</b></button>
+          </div>
+          <small className="conflictHint">Antes de qualquer alteração, a APProva+ cria uma cópia de segurança neste dispositivo.</small>
         </div>
-        <button className="conflictPrimary" onClick={resolveMerge} disabled={busy}>Juntar os dois (recomendado)</button>
-        <small className="conflictHint">Junta o estudo feito nos dois lados. Nada se perde.</small>
-        <div className="conflictChoices">
-          <button onClick={resolveKeepRemote} disabled={busy}>Usar só o da conta</button>
-          <button onClick={resolveKeepLocal} disabled={busy}>Usar só o deste dispositivo</button>
-        </div>
-      </div>}
+        :<div className="cloudConflictCard">
+          <div className="cloudConflictHead"><span aria-hidden="true">⚠</span><div><b>O progresso deste dispositivo e o da tua conta são diferentes</b>
+            <small>Nada foi substituído. Antes de qualquer alteração, a APProva+ cria uma cópia de segurança neste dispositivo.</small></div></div>
+          <div className="conflictCompare">
+            <div><span>Neste dispositivo</span><b>{versionSummary(s)}</b></div>
+            <div><span>Na conta</span><b>{versionSummary(conflictRemote.state_json)}</b></div>
+          </div>
+          <button className="conflictPrimary" onClick={()=>resolveMerge()} disabled={busy}>Juntar os dois (recomendado)</button>
+          <small className="conflictHint">Junta o estudo feito nos dois lados. Nada se perde.</small>
+          <div className="conflictChoices">
+            <button onClick={resolveKeepRemote} disabled={busy}>Usar só o da conta</button>
+            <button onClick={resolveKeepLocal} disabled={busy}>Usar só o deste dispositivo</button>
+          </div>
+        </div>)}
 
 
       <button className="secondary" onClick={signout} disabled={busy}>Terminar sessão</button>

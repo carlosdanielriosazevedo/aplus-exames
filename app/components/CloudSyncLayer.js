@@ -20,6 +20,7 @@ const COPY={
   paused:{icon:"⏸",text:"A gravação online está em pausa por manutenção. O progresso continua guardado neste dispositivo."},
   offline:{icon:"!",text:"Sem ligação. O progresso está guardado neste dispositivo e vamos tentar de novo."},
   conflict:{icon:"⚠",text:"Há progresso diferente noutro dispositivo. Nada foi substituído.",action:"Resolver"},
+  conflict_profile:{icon:"⚠",text:"O teu perfil escolar é diferente noutro dispositivo. Nada foi substituído.",action:"Escolher"},
   blocked_other_account:{icon:"⚠",text:"Este dispositivo tem progresso de outra conta. Não vamos misturar os dados.",action:"Ver conta"},
   wait_assessment:{icon:"⏸",text:"Há progresso mais recente online. Será aplicado quando terminares a avaliação em curso."},
   error:{icon:"!",text:"Não foi possível guardar online. O progresso continua neste dispositivo.",action:"Ver conta"}
@@ -74,7 +75,8 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
         if(decision.action==="idle"){setStatus("saved");attempts.current=0;return {status:"saved"}}
         if(decision.action==="conflict"){
           setS(prev=>cloudConflict(prev,{remoteRevision:remote?.revision,remoteDeviceId:remote?.last_device_id,remoteUpdatedAt:remote?.updated_at,remoteState:remote?.state_json}));
-          setStatus("conflict");return {status:"conflict"};
+          const kind=decision.reason==="profile"?"conflict_profile":"conflict";
+          setStatus(kind);return {status:kind};
         }
         if(decision.action==="apply_remote"){
           saveLocalSnapshot(state,{label:"Antes de aplicar progresso de outro dispositivo"});
@@ -84,10 +86,10 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
           setStatus("saved");attempts.current=0;return {status:"saved"};
         }
         if(decision.action==="merge_remote"){
-          // O aluno confirmou que o progresso deste dispositivo é seu e a conta já
-          // tinha progresso: juntar os dois (nada é descartado) e gravar o resultado.
+          // Os dois lados mudaram (ou o aluno adotou progresso anónimo numa conta que
+          // já tinha progresso): juntar os dois (nada é descartado) e gravar.
           setStatus("saving");
-          saveLocalSnapshot(state,{label:"Antes de juntar ao progresso da conta"});
+          saveLocalSnapshot(state,{label:"Antes de juntar com o progresso da conta"});
           const deviceId=getOrCreateDeviceId();
           const combined=normalizeAfterCloud(safeCloudMerge(state,remote.state_json));
           const result=await saveStudentCloudState(combined,{expectedRevision:decision.expectedRevision,deviceId,knownRemote:true});

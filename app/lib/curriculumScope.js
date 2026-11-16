@@ -41,6 +41,14 @@ export function isThemeInAcademicScope(theme,profile={}){
   return normalizeTaughtSubtopics(profile).some(id=>CURRICULUM_SUBTOPIC_BY_ID.get(id)?.themeId===theme.id);
 }
 
+// Chave do âmbito académico (ano, opcionais, matéria já dada). Dois perfis com a
+// mesma chave medem exatamente as mesmas áreas; com chaves diferentes, o mesmo
+// estudo dá índices diferentes e a escolha tem de ser do aluno.
+export function academicScopeKey(profile={}){
+  const optional=Array.isArray(profile?.optionalTopics)?[...new Set(profile.optionalTopics)].sort():[];
+  return JSON.stringify([schoolYearLevel(profile),optional,normalizeTaughtSubtopics(profile).sort()]);
+}
+
 export function taughtSubtopicIds(profile={}){
   return Array.isArray(profile?.taughtSubtopicIds)
     ?[...new Set(profile.taughtSubtopicIds.filter(id=>typeof id==="string"))]
