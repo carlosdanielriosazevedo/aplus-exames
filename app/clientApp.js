@@ -731,31 +731,46 @@ function SubjectSelection({s,setS,go}){
       <div><span>{selected.length}</span><p><b>{selected.length===0?"Nenhuma disciplina selecionada":selected.length===1?"Disciplina selecionada":"Disciplinas selecionadas"}</b><small>{selected.length?"Podes adicionar outras mais tarde.":"Seleciona pelo menos uma disciplina para continuar."}</small></p></div>
     </div>
     <p className="subjectAvailabilityNote">Atualmente disponíveis: Matemática A, Português e Física e Química A.</p>
-
-    <div className="subjectCatalog">{SUBJECT_GROUPS.map(group=>{
-      const subjects=SECONDARY_EXAM_SUBJECTS.filter(subject=>subject.group===group.id);
-      return <section key={group.id} className="subjectGroup" aria-labelledby={`subject-group-${group.id}`}>
-        <h2 id={`subject-group-${group.id}`}>{group.label}</h2>
-        <div>{subjects.map(subject=>{
-          const isSelected=selected.includes(subject.id);
-          return <button
-            type="button"
-            key={subject.id}
-            className={`subjectCard ${isSelected?"selected":""} ${subject.available?"available":subject.releaseStage==="foundation"?"preparing":"coming"}`}
-            disabled={!subject.available}
-            aria-pressed={subject.available?isSelected:undefined}
-            onClick={()=>toggleSubject(subject)}
-          >
-            <span className="subjectIcon" aria-hidden="true">{subject.icon}</span>
-            <span className="subjectInfo">
-              <b>{subject.shortName||subject.name}</b>
-              <small>{subject.examYear} ano · Prova {examCodesLabel(subject)}</small>
-            </span>
-            <span className="subjectStatus">{subjectStatusLabel(subject,isSelected)}</span>
-          </button>;
-        })}</div>
-      </section>;
-    })}</div>
+    {(()=>{
+      const card=subject=>{
+        const isSelected=selected.includes(subject.id);
+        return <button
+          type="button"
+          key={subject.id}
+          className={`subjectCard ${isSelected?"selected":""} ${subject.available?"available":subject.releaseStage==="foundation"?"preparing":"coming"}`}
+          disabled={!subject.available}
+          aria-pressed={subject.available?isSelected:undefined}
+          onClick={()=>toggleSubject(subject)}
+        >
+          <span className="subjectIcon" aria-hidden="true">{subject.icon}</span>
+          <span className="subjectInfo">
+            <b>{subject.shortName||subject.name}</b>
+            <small>{subject.examYear} ano · Prova {examCodesLabel(subject)}</small>
+          </span>
+          <span className="subjectStatus">{subjectStatusLabel(subject,isSelected)}</span>
+        </button>;
+      };
+      const available=SECONDARY_EXAM_SUBJECTS.filter(subject=>subject.available);
+      const coming=SECONDARY_EXAM_SUBJECTS.filter(subject=>!subject.available);
+      // Primeiro só o que se pode escolher; as disciplinas futuras ficam recolhidas.
+      return <div className="subjectCatalog">
+        <section className="subjectGroup subjectGroupAvailable" aria-labelledby="subject-group-available">
+          <h2 id="subject-group-available">Disponíveis agora</h2>
+          <div>{available.map(card)}</div>
+        </section>
+        {coming.length>0&&<details className="subjectComingSoon">
+          <summary>Ver as disciplinas que vêm a seguir ({coming.length})</summary>
+          {SUBJECT_GROUPS.map(group=>{
+            const subjects=coming.filter(subject=>subject.group===group.id);
+            if(!subjects.length)return null;
+            return <section key={group.id} className="subjectGroup" aria-labelledby={`subject-group-${group.id}`}>
+              <h2 id={`subject-group-${group.id}`}>{group.label}</h2>
+              <div>{subjects.map(card)}</div>
+            </section>;
+          })}
+        </details>}
+      </div>;
+    })()}
 
     <button className="primary" disabled={!selected.length} onClick={save}>Continuar</button>
   </Shell>;
@@ -1259,7 +1274,10 @@ function Home({s,setS,go,reset}){
     </section>:<section className="adaptivePath" aria-label="Caminho adaptativo">
       <div className="pathNode done"><span>✓</span><div><small>ÚLTIMO PASSO</small><b>{completedMission?.focus||theme(completedMission?.themeId)?.short||"Diagnóstico concluído"}</b></div></div>
       <div className="pathLine active"/>
-      <div className={"pathNode current "+(missionDone&&!pausedDraft?"complete":"")}><span>{missionDone&&!pausedDraft?"✓":"●"}</span><article>{pausedDraft?<PausedActivityEyebrow kind={pausedDraft.kind}/>:<small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small>}<h2>{pausedDraft?.kind==="mini_exam"?"Mini-exame de Matemática A":pausedDraft?.kind==="training"?"Treino Livre de Matemática A":pausedDraft?.kind==="diagnostic"?"Diagnóstico de Matemática A":missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.focus||t?.short||"Conteúdo protegido")}</h2><div className="missionCardMeta">{pausedDraft?<span className="sessionPausedMeta">{Number.isInteger(pausedDraft.i)?`Pergunta ${pausedDraft.i+1} de ${pausedDraft.questions?.length||0}`:"Progresso guardado"}</span>:<><span>~3–5 min</span>{!missionDone&&t?.year&&<span>{t.year}</span>}</>}</div>{pausedDraft?<button onClick={()=>{if(pausedDraft.kind==="mini_exam")go(pausedDraft.screen||"miniExamRun");else if(pausedDraft.kind==="training")go("trainingRun");else if(pausedDraft.kind==="diagnostic")go(pausedDraft.screen||"diag");else startDailyMission("home_card")}}>Continuar sessão</button>:missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:<button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Indisponível":"Começar Missão"}</button>}{!pausedDraft&&!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
+      <div className={"pathNode current "+(missionDone&&!pausedDraft?"complete":"")}><span>{missionDone&&!pausedDraft?"✓":"●"}</span><article>{pausedDraft?<PausedActivityEyebrow kind={pausedDraft.kind}/>:<small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small>}<h2>{pausedDraft?.kind==="mini_exam"?"Mini-exame de Matemática A":pausedDraft?.kind==="training"?"Treino Livre de Matemática A":pausedDraft?.kind==="diagnostic"?"Diagnóstico de Matemática A":missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.type==="blocked"?"Ainda não há Missão para hoje":(plan.focus||t?.short||"Missão de hoje"))}</h2><div className="missionCardMeta">{pausedDraft?<span className="sessionPausedMeta">{Number.isInteger(pausedDraft.i)?`Pergunta ${pausedDraft.i+1} de ${pausedDraft.questions?.length||0}`:"Progresso guardado"}</span>:plan.type==="blocked"&&!missionDone?null:<><span>~3–5 min</span>{!missionDone&&t?.year&&<span>{t.year}</span>}</>}</div>{pausedDraft?<button onClick={()=>{if(pausedDraft.kind==="mini_exam")go(pausedDraft.screen||"miniExamRun");else if(pausedDraft.kind==="training")go("trainingRun");else if(pausedDraft.kind==="diagnostic")go(pausedDraft.screen||"diag");else startDailyMission("home_card")}}>Continuar sessão</button>:missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:plan.type==="blocked"
+        // Sem perguntas elegíveis para a matéria indicada: nunca um beco sem saída.
+        ?<><p className="missionBlockedNote">Com a matéria que indicaste ainda não temos perguntas suficientes. Confirma a matéria dada ou treina livremente.</p><button onClick={()=>go("curriculumSettings")}>Confirmar matéria dada</button></>
+        :<button onClick={()=>startDailyMission("home_card")}>Começar Missão</button>}{!pausedDraft&&!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{probableNext?.short||"A definir após esta sessão"}</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>}
@@ -1799,7 +1817,7 @@ function Progress({s,go}){
   const index=prepIndex(s);
   return <Shell className="wideStudentShell progressPage"><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1></div>
     <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{index??"—"}<em>/100</em></b><div className="bar"><i style={{width:(index??0)+"%"}}/></div><span>Índice parcial</span></div><p><small>OBJETIVO</small><b>{s.goal} valores</b><span>O índice não prevê a tua nota de exame.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
-    <div className="progressOverview">{overview.map(t=>{const score=scopedThemeScore(s,t.id);return <div key={t.id}><span>{t.short}</span><div className="bar"><i style={{width:(score.domain??0)+"%"}}/></div><b>{score.domain??"—"}</b></div>})}</div>
+    {overview.length>0&&<div className="progressOverview">{overview.map(t=>{const score=scopedThemeScore(s,t.id);return <div key={t.id}><span>{t.short}</span><div className="bar"><i style={{width:(score.domain??0)+"%"}}/></div><b>{score.domain??"—"}</b></div>})}</div>}
     <div className="progressActions"><button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada</button><button className="secondary" onClick={()=>go("profileSettings")}>Ano e percurso escolar</button></div>
     <FriendsBetaDisclaimer s={s} compact/>
     <details className="progressDetails"><summary>Ver detalhe por matéria →</summary>

@@ -27,7 +27,7 @@
   display:block;
   margin-bottom:7px;
   color:var(--app-orange-dark);
-  font-size:11px;
+  font-size:12px;
   font-weight:950;
   letter-spacing:.1em;
 }
@@ -176,7 +176,7 @@
   border-radius:9px;
   background:#fff0d3;
   color:var(--app-orange-dark);
-  font-size:11px;
+  font-size:12px;
   font-weight:950;
 }
 
@@ -228,7 +228,7 @@
   display:block;
   margin:1px 0 5px;
   color:var(--app-orange-dark);
-  font-size:10px;
+  font-size:12px;
   font-weight:950;
   letter-spacing:.09em;
 }
@@ -290,7 +290,7 @@
   border-radius:9px;
   background:#eef3f5;
   color:var(--app-muted);
-  font-size:10px;
+  font-size:12px;
   font-weight:950;
 }
 
@@ -298,7 +298,7 @@
   display:block;
   margin-bottom:2px;
   color:var(--app-muted);
-  font-size:9px;
+  font-size:12px;
   font-weight:950;
   letter-spacing:.09em;
 }
@@ -383,7 +383,7 @@
 
 .examplePrompt>b{
   color:var(--app-orange-dark);
-  font-size:10px;
+  font-size:12px;
   letter-spacing:.08em;
 }
 
@@ -414,7 +414,7 @@
 
 .exampleAnswer small{
   color:#3f6a54;
-  font-size:9px;
+  font-size:12px;
   font-weight:950;
   letter-spacing:.08em;
 }
@@ -458,7 +458,7 @@
 .reviewPitfalls small{
   display:block;
   margin-bottom:5px;
-  font-size:9px;
+  font-size:12px;
   font-weight:950;
   letter-spacing:.08em;
 }
