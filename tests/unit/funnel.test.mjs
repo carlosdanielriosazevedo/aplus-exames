@@ -20,7 +20,8 @@ describe("funil anónimo",()=>{
     for(const extra of [{userId:"u"},{deviceId:"d"},{email:"a@b.c"}])
       expect((await POST(post({step:"app_opened",...extra}))).body.code).toBe("UNKNOWN_FUNNEL_FIELD");
     expect((await POST(post({step:"nota_do_exame"}))).status).toBe(400);
-    expect((await POST(post({step:"app_opened"},{origin:"https://evil.test"}))).status).toBe(403);
+    const foreign=await POST(post({step:"app_opened"},{origin:"https://evil.test"}));
+    expect(foreign.status).toBe(202);expect(foreign.body.recorded).toBe(false);
   });
   it("limita abuso por origem (60 por hora)",async()=>{
     for(let i=0;i<60;i++)expect((await POST(post({step:"app_opened"}))).status).toBe(201);
@@ -38,7 +39,9 @@ describe("funil anónimo",()=>{
     const storage=memory();
     const fail=vi.fn().mockRejectedValue(new Error("offline"));
     expect(await flushFunnel(s,{storage,fetchImpl:fail})).toBe(0);
-    const ok=vi.fn().mockResolvedValue({ok:true,status:201});
+    const notRecorded=vi.fn().mockResolvedValue({ok:true,status:202,json:async()=>({recorded:false})});
+    expect(await flushFunnel(s,{storage,fetchImpl:notRecorded})).toBe(0);
+    const ok=vi.fn().mockResolvedValue({ok:true,status:201,json:async()=>({ok:true,recorded:true})});
     expect(await flushFunnel(s,{storage,fetchImpl:ok})).toBe(2);
     expect(await flushFunnel(s,{storage,fetchImpl:ok})).toBe(0);
     expect(JSON.parse(storage.getItem(FUNNEL_SENT_KEY))).toEqual(["app_opened","subjects_selected"]);

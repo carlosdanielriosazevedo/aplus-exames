@@ -16,7 +16,8 @@ export async function flushFunnel(s,{storage=globalThis.localStorage,fetchImpl=g
       try{
         const response=await fetchImpl("/api/funnel",{method:"POST",cache:"no-store",keepalive:true,
           headers:{"Content-Type":"application/json"},body:JSON.stringify({step})});
-        ok=response.ok||response.status===400;
+        if(response.status===400)ok=true; // passo inválido: não insistir
+        else if(response.ok){const body=await response.json().catch(()=>null);ok=body?.recorded!==false}
       }catch{ok=false}
       if(!ok)break;
       sent.push(step);sentNow++;
