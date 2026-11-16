@@ -1,4 +1,5 @@
 "use client";
+import {SaveProgressPrompt} from "./SaveProgressPrompt";
 import {useEffect,useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import PortugueseLearnPanel from "./PortugueseLearnPanel";
@@ -409,6 +410,7 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
         <div className="notice"><b>Como ler este resultado</b><span>As respostas objetivas dão uma indicação inicial. As respostas abertas são avaliadas automaticamente por critérios; quando a app não tem evidência suficiente, mantém o resultado provisório em vez de fingir certeza.</span></div>
         <section className="portugueseProgressCard diagnosticDomainSummary"><h2>Primeira leitura por domínio</h2><div className="portugueseMissionGrid">{rows.map(row=><article className="portugueseSubjectAction" key={row.domain}><div><b>{row.label}</b><strong>{row.percent===null?"—":`${row.percent}%`}</strong></div><span>{row.percent===null?"Ainda sem respostas objetivas suficientes":`${row.correct} certas em ${row.total} respostas objetivas`}</span>{row.pending>0&&<small>{row.pending} resposta(s) aberta(s) com avaliação provisória ou por confirmar</small>}</article>)}</div></section>
         {priority&&<div className="notice"><b>Próximo foco: {priority.label}</b><span>Vamos começar por aqui e ajustar a missão àquilo que já respondeste, evitando repetir conteúdo sem necessidade.</span></div>}
+        <SaveProgressPrompt s={s} setS={setS} go={go} place="diagResult"/>
         <button className="primary" onClick={()=>{setSession(null);setResults([]);setAnswer(null);setFeedback(null);setTimeout(()=>startRecommendedMission(),0)}}>Começar a missão recomendada</button>
         <button className="secondary" onClick={()=>{setSession(null);setResults([]);setAnswer(null);setFeedback(null);go("home")}}>Ir para o menu inicial</button>
       </Shell>;
