@@ -7,6 +7,8 @@ function readSent(storage){try{const v=JSON.parse(storage?.getItem(FUNNEL_SENT_K
 // Envia os passos ainda não contados deste dispositivo. Falhas ficam para depois.
 export async function flushFunnel(s,{storage=globalThis.localStorage,fetchImpl=globalThis.fetch}={}){
   if(inFlight||!storage||!fetchImpl)return 0;
+  // Sem rede: nem tentar (evita erros de rede na consola); fica para depois.
+  if(globalThis.navigator&&globalThis.navigator.onLine===false)return 0;
   inFlight=true;
   let sentNow=0;
   try{
