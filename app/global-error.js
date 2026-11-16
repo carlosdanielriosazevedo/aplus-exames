@@ -2,9 +2,10 @@
 
 import {useEffect} from "react";
 import {reportClientError} from "./lib/clientRuntimeReport";
+import {reloadOnceForChunkError} from "./lib/chunkReload";
 
 export default function GlobalError({error}){
-  useEffect(()=>{reportClientError({kind:"global_boundary",error})},[error]);
+  useEffect(()=>{reportClientError({kind:"global_boundary",error});reloadOnceForChunkError(error)},[error]);
   return <html lang="pt-PT"><body>
     <main style={{minHeight:"100vh",display:"grid",placeItems:"center",padding:24,fontFamily:"system-ui,sans-serif",background:"#081827",color:"white"}}>
       <section style={{maxWidth:620,textAlign:"center"}}>

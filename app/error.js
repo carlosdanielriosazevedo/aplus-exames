@@ -2,9 +2,10 @@
 
 import {useEffect} from "react";
 import {reportClientError} from "./lib/clientRuntimeReport";
+import {reloadOnceForChunkError} from "./lib/chunkReload";
 
 export default function Error({error,reset}){
-  useEffect(()=>{reportClientError({kind:"react_boundary",error})},[error]);
+  useEffect(()=>{reportClientError({kind:"react_boundary",error});reloadOnceForChunkError(error)},[error]);
   return <main className="dark center">
     <section className="hero" style={{maxWidth:680}}>
       <p className="eyebrow">APProva+</p>
