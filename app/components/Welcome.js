@@ -56,10 +56,11 @@ export function Welcome({s, setS, go}){
     <h1>A tua melhor nota<br/><em>começa aqui.</em></h1>
     <p>A <BrandName/> descobre onde estás a perder pontos e decide o que vale mais a pena estudar hoje.</p>
     <button disabled={friends && !segment} onClick={start}>{friends ? (segment ? "Continuar →" : "Escolhe primeiro o teu perfil") : "Descobrir o meu nível →"}</button>
+    {!friends&&<button type="button" className="welcomeAccountLink" onClick={()=>go("account")}>Já tens conta? <u>Entrar</u></button>}
     <div className="features"><span>⚡ 10–20 min/dia</span><span>🎯 Adaptativo</span><span>{friends ? "🧪 Feedback importante" : "📈 Progresso real"}</span></div>
     <div aria-label="Informação legal" style={{display:"flex",gap:14,justifyContent:"center",flexWrap:"wrap",marginTop:18,fontSize:13}}>
-      <a href="/privacidade" style={{color:"#cbd5e1"}}>Privacidade</a>
-      <a href="/termos" style={{color:"#cbd5e1"}}>Termos de utilização</a>
+      <a href="/privacidade" style={{color:"#4d566b"}}>Privacidade</a>
+      <a href="/termos" style={{color:"#4d566b"}}>Termos de utilização</a>
     </div>
   </section></main>;
 }

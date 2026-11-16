@@ -6,6 +6,7 @@ import {useEffect,useState} from "react";
 const ClientApp=dynamic(()=>import("./clientApp"),{ssr:false,loading:({error})=>error?<Loading failed/>:<Loading/>});
 const STORAGE_KEYS=["a25","a25-friends-beta"];
 const ENTRY_KEY="a25-onboarding-entry";
+const OPEN_ACCOUNT_KEY="approva-open-account";
 
 function storedProgress(){
   for(const name of ["localStorage","sessionStorage"])try{
@@ -31,6 +32,7 @@ function Landing({onStart}){return <main className="dark center"><section classN
   <h1>A tua melhor nota<br/><em>começa aqui.</em></h1>
   <p>A <Brand/> descobre onde estás a perder pontos e decide o que vale mais a pena estudar hoje.</p>
   <form action="/" method="get" className="landingEntryForm"><button type="submit" name="entrada" value="1" onClick={onStart?event=>{event.preventDefault();onStart()}:undefined}>Descobrir o meu nível →</button></form>
+  <form action="/" method="get" className="landingAccountForm"><button type="submit" name="conta" value="1" onClick={onStart?event=>{event.preventDefault();onStart({account:true})}:undefined}>Já tens conta? <u>Entrar</u></button></form>
   <div className="features"><span>⚡ 10–20 min/dia</span><span>🎯 Adaptativo</span><span>📈 Progresso real</span></div>
   <div aria-label="Informação legal" className="publicLegalLinks"><a href="/privacidade">Privacidade</a><a href="/termos">Termos de utilização</a></div>
 </section></main>}
@@ -39,17 +41,23 @@ export default function Page(){
   const [ready,setReady]=useState(false),[boot,setBoot]=useState(false);
   useEffect(()=>{
     const url=new URL(window.location.href);
+    const fromAccountForm=url.searchParams.get("conta")==="1";
+    if(fromAccountForm){
+      try{window.sessionStorage.setItem(OPEN_ACCOUNT_KEY,"1")}catch{}
+      url.searchParams.delete("conta");
+      window.history.replaceState(window.history.state,"",url.pathname+url.search+url.hash);
+    }
     const fromEntryForm=url.searchParams.get("entrada")==="1";
     if(fromEntryForm){
       try{window.sessionStorage.setItem(ENTRY_KEY,"1")}catch{}
       url.searchParams.delete("entrada");
       window.history.replaceState(window.history.state,"",url.pathname+url.search+url.hash);
     }
-    setBoot(url.searchParams.get("recuperar")!=="inicio"&&(storedProgress()||privateEntry()||url.searchParams.has("preview")||fromEntryForm));
+    setBoot(url.searchParams.get("recuperar")!=="inicio"&&(storedProgress()||privateEntry()||url.searchParams.has("preview")||fromEntryForm||fromAccountForm));
     setReady(true);
   },[]);
-  function start(){
-    try{window.sessionStorage.setItem(ENTRY_KEY,"1")}catch{}
+  function start({account=false}={}){
+    try{window.sessionStorage.setItem(account?OPEN_ACCOUNT_KEY:ENTRY_KEY,"1")}catch{}
     setBoot(true);
   }
   // Se a hidratação falhar, manter HTML navegável em vez de um splash infinito.
