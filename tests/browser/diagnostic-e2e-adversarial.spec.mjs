@@ -1,4 +1,25 @@
 import {test,expect} from "@playwright/test";
+import {readdirSync,readFileSync} from "node:fs";
+import {RUNTIME_QUESTION_BANK} from "../../app/lib/engine.js";
+import {PORTUGUESE_LITERARY_ITEMS} from "../../app/data/portugueseLiteraryQuestions.js";
+import {PHYSICS_CHEMISTRY_A_ITEMS} from "../../app/data/physicsChemistryFoundation.js";
+
+// O Playwright não importa JSON sem atributo; o texto da resposta certa não depende
+// da ordem das opções, por isso basta ler os pacotes de Português do disco.
+const PORTUGUESE_FOUNDATION_DIR="content/vnext/portuguese/foundation";
+const PORTUGUESE_PACK_ITEMS=readdirSync(PORTUGUESE_FOUNDATION_DIR)
+  .filter(file=>/^portuguese-639-(pilot|wave\d+)\.json$/.test(file))
+  .flatMap(file=>JSON.parse(readFileSync(`${PORTUGUESE_FOUNDATION_DIR}/${file}`,"utf8")).items||[]);
+
+// A posição da resposta certa não segue padrão (lib/optionOrder.js), por isso o
+// teste não pode contar com «A, B, C, D…» para acertar e errar. Usa o texto das
+// respostas certas para escolher de propósito uma certa e uma errada.
+const normalizeOption=text=>String(text||"").replace(/\s+/g," ").trim();
+const CORRECT_OPTION_TEXTS=new Set([
+  ...RUNTIME_QUESTION_BANK.filter(q=>Array.isArray(q.o)&&Number.isInteger(q.a)).map(q=>normalizeOption(q.o[q.a])),
+  ...[...PORTUGUESE_PACK_ITEMS,...PORTUGUESE_LITERARY_ITEMS,...PHYSICS_CHEMISTRY_A_ITEMS].filter(q=>q.responseType==="multiple-choice").map(q=>normalizeOption(q.options[q.answerIndex]))
+].filter(Boolean));
+const isCorrectOptionText=text=>[...CORRECT_OPTION_TEXTS].some(correct=>normalizeOption(text).endsWith(correct));
 
 const SUBJECTS=[
   {id:"math-a",name:"Matemática A",subjectButton:/^Matemática A\b/u,done:/Podemos criar o teu primeiro plano\./u},
@@ -47,7 +68,11 @@ async function fillCurrentAnswer(page,step){
   const options=choiceButtons(page);
   if(await options.count()){
     const count=await options.count();
-    await options.nth(step%count).click();
+    const texts=await options.allInnerTexts();
+    // Passos pares procuram a certa; ímpares, uma errada.
+    const wanted=step%2===0;
+    const index=texts.findIndex(text=>isCorrectOptionText(text)===wanted);
+    await options.nth(index>=0?index:step%count).click();
     return "choice";
   }
   const textarea=page.locator("textarea:visible").first();

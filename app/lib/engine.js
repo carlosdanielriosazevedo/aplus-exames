@@ -11,6 +11,7 @@ import {VNEXT_PILOT_QUESTIONS} from "../data/vnextPilot.js";
 import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../data/vnextDiagnostic.js";
 import {VNEXT_MISSION_QUESTIONS} from "../data/vnextMission.js";
 import {VNEXT_EXAM_QUESTIONS} from "../data/vnextExam.js";
+import {balanceOptionOrderBank} from "./optionOrder.js";
 import {CONSTRUCTED_RESPONSE_BANK,COMPLETION_RESPONSE_BANK,gradeResponse,miniExamPointSummary} from "./constructedResponse.js";
 import {
   HYPOTHESIS_STATUS,applyHypothesisObservation,normalizeLearningHypothesis,
@@ -24,7 +25,10 @@ export const emptyScores=()=>TAXONOMY.reduce((acc,t)=>{
 
 // O runtime recebe os bancos vNext que alimentam os fluxos ativos da beta.
 // Os protótipos continuam bloqueados fora dos modos interno/amigos pela política editorial.
-export const RUNTIME_QUESTION_BANK=[...QUESTION_BANK,...VNEXT_PILOT_QUESTIONS,...VNEXT_DIAGNOSTIC_QUESTIONS,...VNEXT_MISSION_QUESTIONS,...VNEXT_EXAM_QUESTIONS,...CONSTRUCTED_RESPONSE_BANK,...COMPLETION_RESPONSE_BANK];
+// A posição da resposta certa nos bancos vNext segue uma regra estável e sem padrão
+// entre perguntas seguidas (ver lib/optionOrder.js). O QUESTION_BANK já tem a sua.
+const VNEXT_RUNTIME_QUESTIONS=balanceOptionOrderBank([...VNEXT_PILOT_QUESTIONS,...VNEXT_DIAGNOSTIC_QUESTIONS,...VNEXT_MISSION_QUESTIONS,...VNEXT_EXAM_QUESTIONS]);
+export const RUNTIME_QUESTION_BANK=[...QUESTION_BANK,...VNEXT_RUNTIME_QUESTIONS,...CONSTRUCTED_RESPONSE_BANK,...COMPLETION_RESPONSE_BANK];
 export const questionById=id=>RUNTIME_QUESTION_BANK.find(q=>q.id===id)||null;
 
 export const theme=id=>TAXONOMY.find(t=>t.id===id);

@@ -1,4 +1,5 @@
 import {canonicalSubjectId} from "./subjectWorkspace.js";
+import {OPTION_ORDER_VERSION,legacyOptionIndex} from "./optionOrder.js";
 import {missionCompletedToday,recordStudyActivity} from "./engagement.js";
 import {recordCompetitiveActivity} from "./competition.js";
 
@@ -182,18 +183,25 @@ export function createSubjectSessionId(subjectId,kind,at=Date.now()){
   return `ses-${subjectId}-${kind}-${at}-${Math.random().toString(16).slice(2)}`;
 }
 
+// Índice escolhido guardado por uma sessão anterior à regra atual de ordem das opções.
+export function restoredSubjectAnswer(saved,item){
+  const value=saved?.currentAnswer??null;
+  if(saved?.optionOrder===OPTION_ORDER_VERSION||item?.responseType!=="multiple-choice")return value;
+  return legacyOptionIndex(item,value);
+}
+
 export function beginSubjectSession(state,{subjectId,kind,label,domain=null,items,sessionId=null,startedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
   // Uma tentativa em curso não pode ser substituída, nem por chamadas diretas ao motor.
   if(progress.lastPosition||(subjectId==="portuguese"&&state.subjectSettings?.portuguese?.miniExamDraft))return state;
   const id=sessionId||createSubjectSessionId(subjectId,kind,startedAt);
-  return putProgress(state,subjectId,{...progress,lastPosition:{sessionId:id,kind,label,domain,itemIds:items.map(item=>item.id),current:0,results:[],startedAt,updatedAt:startedAt},lastActivityAt:startedAt});
+  return putProgress(state,subjectId,{...progress,lastPosition:{sessionId:id,kind,label,domain,itemIds:items.map(item=>item.id),current:0,results:[],optionOrder:OPTION_ORDER_VERSION,startedAt,updatedAt:startedAt},lastActivityAt:startedAt});
 }
 
 export function advanceSubjectSession(state,subjectId,{sessionId=null,current,results,currentResult=null,currentAnswer=null,updatedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
   if(!progress.lastPosition||(sessionId&&sessionId!==progress.lastPosition.sessionId))return state;
-  return putProgress(state,subjectId,{...progress,lastPosition:{...progress.lastPosition,current,results:results.map(compactResult),currentResult:compactResult(currentResult),currentAnswer,updatedAt},lastActivityAt:updatedAt});
+  return putProgress(state,subjectId,{...progress,lastPosition:{...progress.lastPosition,current,results:results.map(compactResult),currentResult:compactResult(currentResult),currentAnswer,optionOrder:OPTION_ORDER_VERSION,updatedAt},lastActivityAt:updatedAt});
 }
 
 function subjectSessionXp(kind,results=[]){

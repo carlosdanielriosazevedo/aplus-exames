@@ -4,6 +4,7 @@ import PortuguesePassageMiniExam from "./PortuguesePassageMiniExam";
 import {portugueseMiniExamMeta,portugueseMiniExamsForYear,portuguesePassagePrototypeExam} from "../data/portuguesePassagePrototype";
 import {recordSubjectSession} from "../lib/subjectProgress";
 import {clearPortugueseMiniExamDraft,normalizePortugueseMiniExamDraft,savePortugueseMiniExamDraft} from "../lib/portugueseMiniExamDraft";
+import {markPortugueseDraftOrder,portugueseDraftInCurrentOrder} from "../lib/optionOrderDrafts";
 
 export default function PortuguesePassageMiniExamRoute({s,setS,onExit}){
   const currentYear=["10.º","11.º","12.º"].includes(s?.profile?.schoolYear)?s.profile.schoolYear:"12.º";
@@ -15,8 +16,9 @@ export default function PortuguesePassageMiniExamRoute({s,setS,onExit}){
   const exam=portuguesePassagePrototypeExam(examId);
   const label=examId==="full-1"?"Simulado completo de Português":(portugueseMiniExamMeta(examId)?.title||"Mini-exame de Português");
   const itemIds=exam.items.map(item=>item.id);
-  const draft=normalizePortugueseMiniExamDraft(s?.subjectSettings?.portuguese?.miniExamDraft,{examId,itemIds});
-  const saveDraft=useCallback(nextDraft=>setS(prev=>savePortugueseMiniExamDraft(prev,nextDraft)),[setS]);
+  const draft=portugueseDraftInCurrentOrder(normalizePortugueseMiniExamDraft(s?.subjectSettings?.portuguese?.miniExamDraft,{examId,itemIds}),s?.subjectSettings?.portuguese,exam.items);
+  // As respostas em memória já estão na ordem atual das opções: marcar o rascunho.
+  const saveDraft=useCallback(nextDraft=>setS(prev=>{const next=savePortugueseMiniExamDraft(prev,nextDraft);return next===prev?prev:markPortugueseDraftOrder(next)}),[setS]);
   const complete=useCallback(({items,results,sessionId})=>setS(prev=>prev.subjectSettings?.portuguese?.miniExamDraft?.attemptId&&prev.subjectSettings.portuguese.miniExamDraft.attemptId!==sessionId?prev:recordSubjectSession(clearPortugueseMiniExamDraft(prev),{subjectId:"portuguese",kind:examId==="full-1"?"practice_exam":"mini_exam",label,items,results,sessionId})),[examId,label,setS]);
   if(pending&&!draft)return <div role="alert">Não foi possível recuperar esta prova. As respostas guardadas foram conservadas.</div>;
   return <PortuguesePassageMiniExam exam={exam} examId={examId} initialDraft={draft} onDraftChange={saveDraft} onExit={onExit} onComplete={complete}/>;

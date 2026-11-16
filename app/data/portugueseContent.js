@@ -1,3 +1,4 @@
+import {balanceOptionOrder} from "../lib/optionOrder.js";
 import pilot from "../../content/vnext/portuguese/foundation/portuguese-639-pilot.json";
 import wave1 from "../../content/vnext/portuguese/foundation/portuguese-639-wave1.json";
 import wave2 from "../../content/vnext/portuguese/foundation/portuguese-639-wave2.json";
@@ -30,7 +31,9 @@ import {PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE6} from "./portugueseLiteraryT
 
 export const PORTUGUESE_CONTENT_PACKS=[pilot,wave1,wave2,wave3,wave4,wave5,wave6,wave7,wave8,wave9,wave10,wave11,wave12,wave13,wave14,wave15,wave16,wave17];
 export const PORTUGUESE_DIFFICULTY_MATRIX=difficulty;
-export const PORTUGUESE_ALL_ITEMS=applyPortugueseRubricObservations(applyPortugueseDifficulty([...PORTUGUESE_CONTENT_PACKS.flatMap(pack=>pack.items),...PORTUGUESE_LITERARY_ITEMS,...PORTUGUESE_LITERARY_TRAINING_VARIANTS,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE3,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE4,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE5,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE6],difficulty));
+// Posição da resposta certa: regra única e sem padrão entre perguntas seguidas
+// (lib/optionOrder.js), aplicada por cima das rotações antigas por ID.
+export const PORTUGUESE_ALL_ITEMS=applyPortugueseRubricObservations(applyPortugueseDifficulty([...PORTUGUESE_CONTENT_PACKS.flatMap(pack=>pack.items),...PORTUGUESE_LITERARY_ITEMS,...PORTUGUESE_LITERARY_TRAINING_VARIANTS,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE3,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE4,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE5,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE6],difficulty)).map(item=>item.responseType==="multiple-choice"?balanceOptionOrder(item,{optionsKey:"options",answerKey:"answerIndex"}):item);
 
 // Banco usado pela app para selecionar perguntas.
 export const PORTUGUESE_ITEMS=PORTUGUESE_ALL_ITEMS.filter(item=>!isRetiredPortugueseItem(item));
