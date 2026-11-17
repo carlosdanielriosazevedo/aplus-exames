@@ -317,7 +317,7 @@
         "A ciclovia liga o centro à estação e, por isso, não precisa de manutenção."
       ],
       "answerIndex": 0,
-      "explanation": "A primeira opção elimina repetições por coordenação e omissão controlada do sujeito, preservando as três informações.",
+      "explanation": "A versão correta elimina repetições por coordenação e omissão controlada do sujeito, preservando as três informações.",
       "gradingMode": "deterministic",
       "maxPoints": 13
     },

@@ -9,7 +9,8 @@ function opts(correct,a,b,c,format=x=>String(x)){
   for(let index=0;index<candidates.length;index++){
     let value=format(candidates[index]);
     if(values.includes(value)){
-      const replacement=fallbacks.find(candidate=>!values.includes(format(candidate)));
+      // Arredondar também os valores de recurso (nunca mostrar 1,9994999999999998).
+      const replacement=fallbacks.map(candidate=>Number(candidate.toFixed(3))).find(candidate=>!values.includes(format(candidate)));
       if(replacement===undefined)throw new Error("Unable to build four distinct FQ training options.");
       value=format(replacement);
     }
@@ -21,11 +22,11 @@ const rows=[];
 
 [
   [18,9,.5],[44,22,.5],[58.5,29.25,.5],[40,10,.25],[98,49,.5],[32,8,.25]
-].forEach(([M,m,ans],i)=>{const p=opts(ans,ans*2,ans/2,M/m*10,x=>String(n(x,2)).replace(".",","));rows.push(mc({id:`FQA-V-MOL-V${i+1}`,year:"10.º",domain:"q10-elements",subtopicId:"q10-amount-molar",prompt:`Uma amostra tem massa ${String(m).replace(".",",")} g e massa molar ${String(M).replace(".",",")} g mol⁻¹. Qual é a quantidade de matéria?`,...p,explanation:`n=m/M=${m}/${M}=${String(ans).replace(".",",")} mol.`}))});
+].forEach(([M,m,ans],i)=>{const p=opts(ans,ans*2,ans/2,M/m*10,x=>`${String(n(x,2)).replace(".",",")} mol`);rows.push(mc({id:`FQA-V-MOL-V${i+1}`,year:"10.º",domain:"q10-elements",subtopicId:"q10-amount-molar",prompt:`Uma amostra tem massa ${String(m).replace(".",",")} g e massa molar ${String(M).replace(".",",")} g mol⁻¹. Qual é a quantidade de matéria?`,...p,explanation:`n=m/M=${m}/${M}=${String(ans).replace(".",",")} mol.`}))});
 
 [
   [0.20,0.50],[0.15,0.30],[0.40,0.80],[0.12,0.60],[0.25,1.00],[0.36,0.90]
-].forEach(([mol,vol],i)=>{const ans=n(mol/vol,3);const p=opts(ans,n(ans*2,3),n(ans/2,3),n(vol/mol,3),x=>String(x).replace(".",","));rows.push(mc({id:`FQA-V-SOL-V${i+1}`,year:"10.º",domain:"q10-matter",subtopicId:"q10-gases-solutions",prompt:`Uma solução contém ${String(mol).replace(".",",")} mol de soluto em ${String(vol).replace(".",",")} dm³. Qual é a concentração molar?`,...p,explanation:`c=n/V=${mol}/${vol}=${ans} mol dm⁻³.`}))});
+].forEach(([mol,vol],i)=>{const ans=n(mol/vol,3);const p=opts(ans,n(ans*2,3),n(ans/2,3),n(vol/mol,3),x=>`${String(x).replace(".",",")} mol dm⁻³`);rows.push(mc({id:`FQA-V-SOL-V${i+1}`,year:"10.º",domain:"q10-matter",subtopicId:"q10-gases-solutions",prompt:`Uma solução contém ${String(mol).replace(".",",")} mol de soluto em ${String(vol).replace(".",",")} dm³. Qual é a concentração molar?`,...p,explanation:`c=n/V=${mol}/${vol}=${ans} mol dm⁻³.`}))});
 
 [
   [120,170,-50],[210,160,50],[90,135,-45],[300,250,50],[145,205,-60],[260,310,-50]
@@ -64,8 +65,8 @@ const rows=[];
 ].forEach(([v,f],i)=>{const ans=n(v/f,3);const p=opts(ans,n(f/v,3),n(v*f,3),n(ans*2,3),x=>`${String(x).replace(".",",")} m`);rows.push(mc({id:`FQA-V-SOUND-V${i+1}`,year:"11.º",domain:"f11-waves",subtopicId:"f11-sound",prompt:`No meio considerado, o som propaga-se a ${v} m s⁻¹ e tem frequência ${f} Hz. Qual é o comprimento de onda?`,...p,explanation:`λ=v/f=${ans} m.`}))});
 
 [
-  [2,1,3],[1,3,2],[4,2,5],[3,1,4],[2,4,1],[5,2,4]
-].forEach(([a,b,pdt],i)=>{const ans=n((pdt/a)*b,3);const wrong1=n((pdt/b)*a,3),wrong2=n(pdt*a*b,3),wrong3=n(pdt/(a*b),3);const p=opts(ans,wrong1,wrong2,wrong3,x=>`${String(x).replace(".",",")} mol`);rows.push(mc({id:`FQA-V-STO-V${i+1}`,year:"11.º",domain:"q11-equilibrium",subtopicId:"q11-stoichiometry",prompt:`Na reação ${a} A → ${b} B, formaram-se ${String(pdt).replace(".",",")} mol de A consumido. Quantos mol de B se formam, segundo a proporção estequiométrica?`,...p,explanation:`n(B)=n(A)×${b}/${a}=${ans} mol.`}))});
+  [2,1,3],[1,3,2],[4,2,5],[3,1,6],[2,4,1],[5,2,4]
+].forEach(([a,b,pdt],i)=>{const ans=n((pdt/a)*b,3);const wrong1=n((pdt/b)*a,3),wrong2=n(pdt*a*b,3),wrong3=n(pdt/(a*b),3);const p=opts(ans,wrong1,wrong2,wrong3,x=>`${String(x).replace(".",",")} mol`);rows.push(mc({id:`FQA-V-STO-V${i+1}`,year:"11.º",domain:"q11-equilibrium",subtopicId:"q11-stoichiometry",prompt:`Na reação ${a===1?"":a+" "}A → ${b===1?"":b+" "}B, consumiram-se ${String(pdt).replace(".",",")} mol de A. Que quantidade de B se forma, segundo a proporção estequiométrica?`,...p,explanation:`n(B)=n(A)×${b}/${a}=${ans} mol.`}))});
 
 [
   [50,.8],[80,.75],[120,.6],[40,.9],[150,.7],[90,.85]
@@ -78,5 +79,21 @@ const rows=[];
 [
   [1e-2,2],[1e-3,3],[1e-4,4],[1e-5,5],[1e-6,6],[1e-1,1]
 ].forEach(([h,ans],i)=>{const p=opts(ans,14-ans,ans+1,Math.max(0,ans-1),x=>String(x));rows.push(mc({id:`FQA-V-PH-V${i+1}`,year:"11.º",domain:"q11-aqueous",subtopicId:"q11-ph",prompt:`Uma solução tem [H₃O⁺]=${h.toExponential(0).replace("e-","×10⁻")} mol dm⁻³. Qual é o pH?`,...p,explanation:`pH=−log[H₃O⁺]=${ans}.`}))});
+
+// Escrita portuguesa nos textos gerados: vírgula decimal, sinal de menos (−) e
+// expoentes em sobrescrito (revisão integral de FQ A, 2026-11-17).
+const SUPERSCRIPT={"0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+export function portugueseScientificText(text){
+  return String(text)
+    .replace(/10⁻(\d+)/g,(_,digits)=>"10⁻"+[...digits].map(d=>SUPERSCRIPT[d]).join(""))
+    .replace(/(\d)\.(\d)/g,"$1,$2")
+    .replace(/(^|[\s(=−+])-(?=\d)/g,"$1−")
+    .replace(/(^|[\s(=])-(?=\d)/g,"$1−");
+}
+for(const row of rows){
+  row.prompt=portugueseScientificText(row.prompt);
+  row.options=row.options.map(portugueseScientificText);
+  row.explanation=portugueseScientificText(row.explanation);
+}
 
 export const PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS=rows;

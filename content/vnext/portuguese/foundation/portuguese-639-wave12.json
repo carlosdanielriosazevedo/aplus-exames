@@ -305,7 +305,7 @@
         "Muitas pessoas fotografam árvores durante os passeios."
       ],
       "answerIndex": 0,
-      "explanation": "A primeira opção apresenta uma consequência diretamente relacionada com a qualidade dos espaços urbanos e com a tese defendida.",
+      "explanation": "A redução do calor e o conforto dos espaços são consequências diretamente ligadas à qualidade de vida e à tese defendida; as restantes opções não sustentam a tese.",
       "gradingMode": "deterministic",
       "maxPoints": 13
     },
@@ -472,7 +472,7 @@
         "Certeza absoluta.",
         "Probabilidade.",
         "Proibição.",
-        "Certeza."
+        "Obrigação."
       ],
       "answerIndex": 1,
       "explanation": "«É provável que» apresenta o conteúdo como possível ou provável, não como certo ou obrigatório.",

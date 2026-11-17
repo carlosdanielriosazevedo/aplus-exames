@@ -38,7 +38,7 @@ addSet("EMWAVES","11.º","f11-waves","f11-em-waves",[
   {prompt:"Numa onda eletromagnética, os campos elétrico e magnético são:",options:["perpendiculares entre si e à direção de propagação","paralelos entre si","sempre nulos","longitudinais à propagação"],explanation:"Ondas eletromagnéticas são transversais, com E e B perpendiculares."},
   {prompt:"No vazio, se a frequência de uma onda eletromagnética aumenta, o comprimento de onda:",options:["diminui","aumenta","fica constante","torna-se nulo em qualquer caso"],explanation:"Como c=λf, frequência e comprimento de onda são inversamente proporcionais."},
   {prompt:"Entre ondas de rádio e raios X, os raios X apresentam em geral:",options:["maior frequência e maior energia por fotão","menor frequência","igual energia por fotão","maior comprimento de onda"],explanation:"Raios X têm frequência maior e, por E=hf, fotões mais energéticos."},
-  {prompt:"A polarização é uma propriedade que evidencia o caráter:",options:["transversal das ondas eletromagnéticas","longitudinal obrigatório","corpuscular exclusivo","estacionário de toda a radiação"],explanation:"A polarização é característica de ondas transversais."},
+  {prompt:"A difração de uma onda ao atravessar uma abertura é mais acentuada quando a largura da abertura é:",options:["da ordem de grandeza do comprimento de onda","muito maior do que o comprimento de onda","independente do comprimento de onda","nula, porque só há difração sem abertura"],explanation:"A difração é significativa quando a abertura (ou obstáculo) tem dimensões comparáveis ao comprimento de onda."},
   {prompt:"Ao passar do vazio para um meio transparente onde a velocidade diminui, a frequência da luz:",options:["mantém-se","diminui sempre para metade","aumenta obrigatoriamente","torna-se zero"],explanation:"Na passagem de meio, a frequência é determinada pela fonte e mantém-se; muda o comprimento de onda."}
 ]);
 
@@ -47,7 +47,7 @@ addSet("OPTICS","11.º","f11-waves","f11-optics",[
   {prompt:"Na refração, a mudança de direção da luz resulta da alteração da sua:",options:["velocidade de propagação","frequência da fonte","carga elétrica","massa"],explanation:"A velocidade muda entre meios, provocando refração; a frequência mantém-se."},
   {prompt:"Ao passar para um meio com maior índice de refração, um raio oblíquo aproxima-se em geral:",options:["da normal","da superfície","do eixo horizontal independentemente da interface","de um ângulo de 90° sempre"],explanation:"Para n maior, a velocidade diminui e o raio refratado aproxima-se da normal."},
   {prompt:"A reflexão total interna só pode ocorrer quando a luz passa:",options:["de um meio de maior índice para outro de menor índice","do ar para vidro em qualquer ângulo","entre meios de igual índice","apenas no vazio"],explanation:"É necessária passagem do meio opticamente mais denso para o menos denso e incidência acima do ângulo crítico."},
-  {prompt:"Uma lente convergente pode formar imagem real quando o objeto está:",options:["além do foco","sempre entre a lente e o foco","exatamente no centro ótico apenas","em qualquer posição sem exceção"],explanation:"Com objeto além do foco, raios convergem do outro lado da lente e podem formar imagem real."},
+  {prompt:"Numa fibra ótica, a luz é guiada ao longo do núcleo sobretudo por:",options:["reflexão total nas paredes do núcleo","difração na entrada da fibra","absorção e reemissão pelo revestimento","refração com aproximação à normal"],explanation:"O núcleo tem índice de refração maior do que o revestimento; com incidência acima do ângulo crítico, a luz sofre reflexão total sucessiva."},
   {prompt:"O índice de refração absoluto de um meio pode ser expresso por:",options:["n=c/v","n=v/c","n=cv","n=c+v"],explanation:"Define-se n=c/v, com c a velocidade no vazio e v no meio."}
 ]);
 
@@ -79,10 +79,10 @@ addSet("GREEN","11.º","q11-equilibrium","q11-green-industry",[
 ],"fqa-experimental");
 
 addSet("ACIDBASE","11.º","q11-aqueous","q11-acid-base",[
-  {prompt:"Segundo Brønsted-Lowry, um ácido é uma espécie capaz de:",options:["ceder protões","ceder eletrões obrigatoriamente","receber neutrões","aumentar sempre o pH"],explanation:"Um ácido de Brønsted-Lowry doa H+."},
-  {prompt:"A base conjugada de um ácido forma-se quando esse ácido:",options:["cede um protão","ganha dois eletrões","recebe um protão","perde um neutrão"],explanation:"Ao doar H+, o ácido origina a sua base conjugada."},
+  {prompt:"Segundo Brönsted-Lowry, um ácido é uma espécie capaz de:",options:["ceder protões","ceder eletrões obrigatoriamente","receber neutrões","aumentar sempre o pH"],explanation:"Um ácido de Brönsted-Lowry doa H⁺ (protão)."},
+  {prompt:"A base conjugada de um ácido forma-se quando esse ácido:",options:["cede um protão","ganha dois eletrões","recebe um protão","perde um neutrão"],explanation:"Ao doar H⁺, o ácido origina a sua base conjugada."},
   {prompt:"Uma solução aquosa com pH inferior a 7, a 25 °C, é:",options:["ácida","básica","sempre neutra","necessariamente concentrada"],explanation:"A 25 °C, pH<7 caracteriza uma solução ácida."},
-  {prompt:"Se [H3O+] aumentar dez vezes, o pH:",options:["diminui aproximadamente uma unidade","aumenta dez unidades","não se altera","duplica"],explanation:"pH=-log[H3O+], logo um fator 10 corresponde a uma unidade de pH."},
+  {prompt:"Se [H₃O⁺] aumentar dez vezes, o pH:",options:["diminui aproximadamente uma unidade","aumenta dez unidades","não se altera","duplica"],explanation:"pH=−log[H₃O⁺], logo um fator 10 corresponde a uma unidade de pH."},
   {prompt:"Um ácido forte em água caracteriza-se por:",options:["ionização praticamente completa","pH obrigatoriamente zero","ausência de base conjugada","concentração sempre elevada"],explanation:"A força ácida refere-se à extensão da ionização, não à concentração inicial."},
   {prompt:"Uma solução tampão resiste a variações de pH porque contém tipicamente:",options:["um par ácido-base conjugado em quantidades apreciáveis","apenas água pura","só um sal insolúvel","um metal sem reação"],explanation:"O par conjugado consome pequenas quantidades de ácido ou base adicionadas."}
 ]);
@@ -101,7 +101,7 @@ addSet("REDOX","11.º","q11-aqueous","q11-redox",[
   {prompt:"A espécie que provoca a oxidação de outra e se reduz é o agente:",options:["oxidante","redutor","catalisador neutro","solvente"],explanation:"O agente oxidante aceita eletrões e sofre redução."},
   {prompt:"Redução corresponde a uma variação do número de oxidação no sentido de:",options:["diminuir","aumentar sempre","ficar necessariamente zero","duplicar"],explanation:"Na redução há ganho de eletrões e diminuição do número de oxidação."},
   {prompt:"Numa equação redox corretamente acertada devem conservar-se:",options:["átomos e carga elétrica","apenas os átomos de oxigénio","apenas os eletrões livres","somente o número de moléculas"],explanation:"O acerto redox respeita conservação da matéria e da carga."},
-  {prompt:"Se Zn(s) se transforma em Zn2+(aq), o zinco:",options:["é oxidado","é reduzido","não transfere eletrões","ganha dois eletrões"],explanation:"Zn perde dois eletrões para formar Zn2+, sofrendo oxidação."},
+  {prompt:"Se Zn(s) se transforma em Zn²⁺(aq), o zinco:",options:["é oxidado","é reduzido","não transfere eletrões","ganha dois eletrões"],explanation:"Zn perde dois eletrões para formar Zn²⁺, sofrendo oxidação."},
   {prompt:"Os eletrões numa reação redox são:",options:["transferidos entre espécies","criados do nada","destruídos no produto","sempre ligados a protões"],explanation:"A oxidação e a redução estão acopladas por transferência eletrónica."}
 ]);
 
@@ -117,7 +117,7 @@ addSet("ELECTRO","11.º","q11-aqueous","q11-electrochem",[
 addSet("SOLUB","11.º","q11-aqueous","q11-solubility",[
   {prompt:"A solubilidade de uma substância corresponde, em condições definidas, à:",options:["quantidade máxima que se dissolve até formar solução saturada","quantidade mínima de solvente","massa molar do soluto","velocidade instantânea de dissolução"],explanation:"Solubilidade é uma propriedade de equilíbrio que quantifica quanto soluto pode dissolver-se."},
   {prompt:"Uma solução saturada está em equilíbrio com:",options:["soluto não dissolvido quando este está presente","apenas vapor de água","qualquer gás externo","um catalisador"],explanation:"Numa solução saturada pode existir equilíbrio dinâmico entre dissolução e cristalização."},
-  {prompt:"Para muitos sólidos em água, a solubilidade tende a:",options:["variar com a temperatura","ser sempre independente da temperatura","ser igual à massa molar","ser sempre 1 mol/L"],explanation:"A temperatura influencia o equilíbrio de dissolução e, por isso, a solubilidade."},
+  {prompt:"Para muitos sólidos em água, a solubilidade tende a:",options:["variar com a temperatura","ser sempre independente da temperatura","ser igual à massa molar","ser sempre 1 mol dm⁻³"],explanation:"A temperatura influencia o equilíbrio de dissolução e, por isso, a solubilidade."},
   {prompt:"Adicionar um solvente a uma solução insaturada, mantendo o soluto, provoca inicialmente:",options:["diluição","precipitação obrigatória","aumento instantâneo de Kps","eliminação do soluto"],explanation:"A quantidade de soluto mantém-se, mas o volume aumenta e a concentração diminui."},
   {prompt:"Quando se diz que duas soluções têm a mesma concentração molar, significa que têm:",options:["igual quantidade de soluto por unidade de volume de solução","igual massa total","igual número de moléculas de solvente","o mesmo volume necessariamente"],explanation:"Concentração molar é n/V e não exige massas ou volumes totais iguais."},
   {prompt:"A presença de um ião comum num equilíbrio de dissolução pode:",options:["diminuir a solubilidade do sal","aumentar sempre a solubilidade","eliminar o equilíbrio","tornar Kps dependente da quantidade adicionada"],explanation:"O ião comum desloca o equilíbrio no sentido do sólido, reduzindo a solubilidade em muitos casos."}
@@ -125,7 +125,7 @@ addSet("SOLUB","11.º","q11-aqueous","q11-solubility",[
 
 addSet("KSP","11.º","q11-aqueous","q11-ksp",[
   {prompt:"O produto de solubilidade Kps descreve o equilíbrio de:",options:["dissolução de um sólido pouco solúvel","combustão completa","neutralização forte obrigatória","fusão de um metal"],explanation:"Kps é a constante associada ao equilíbrio entre um sólido pouco solúvel e os seus iões em solução."},
-  {prompt:"Para um sal AB(s) ⇌ A+(aq)+B−(aq), a expressão de Kps é:",options:["[A+][B−]","[AB]","[A+]+[B−]","[A+]/[B−]"],explanation:"A atividade do sólido puro não entra na expressão e os iões aparecem multiplicados."},
+  {prompt:"Para um sal AB(s) ⇌ A⁺(aq) + B⁻(aq), a expressão de Kps é:",options:["[A⁺][B⁻]","[AB]","[A⁺]+[B⁻]","[A⁺]/[B⁻]"],explanation:"A atividade do sólido puro não entra na expressão e os iões aparecem multiplicados."},
   {prompt:"Se o produto iónico Qps for inferior a Kps, a solução está:",options:["insaturada relativamente ao sólido","necessariamente com precipitado","em equilíbrio exato","sem solvente"],explanation:"Qps<Kps indica possibilidade de dissolver mais soluto antes da saturação."},
   {prompt:"Se Qps for superior a Kps, prevê-se:",options:["precipitação até se restabelecer o equilíbrio","dissolução adicional ilimitada","ausência total de iões","Kps igual a zero"],explanation:"Qps>Kps corresponde a supersaturação e favorece formação de precipitado."},
   {prompt:"O valor de Kps de um sal, a temperatura constante, não depende diretamente da:",options:["quantidade inicial de sólido presente, desde que exista fase sólida","temperatura","natureza do sal","estequiometria de dissolução"],explanation:"A constante de equilíbrio depende da temperatura, não da massa de sólido puro presente."},

@@ -22,11 +22,11 @@
           "reviewStatus": "prototype",
           "responseType": "multiple-choice",
           "cognitive": "interpretar",
-          "prompt": "No quarto período, a expressão “Esse hábito” retoma sobretudo",
+          "prompt": "No terceiro período, a expressão “Esse hábito” retoma sobretudo",
           "options": [
             "a transformação da caixa de entrada num espaço presente ao longo de todo o dia.",
             "a disponibilidade permanente criada pelas notificações.",
-            "a expectativa de responder a todas as mensagens assim que chegam.",
+            "a experiência das equipas que definem períodos sem notificações.",
             "a associação entre rapidez de resposta e eficiência."
           ],
           "answerIndex": 3,
@@ -48,7 +48,7 @@
           "options": [
             "mostrar que o modelo descrito depende de profissões em que a resposta pode ser adiada.",
             "reconhecer um limite e evitar generalizar a mesma solução a todos os contextos.",
-            "distinguir situações em que a rapidez é necessária daquelas em que apenas parece eficiente.",
+            "defender que a rapidez de resposta deve continuar a ser a regra na maioria das profissões.",
             "reforçar que a organização da comunicação deve variar consoante o custo de esperar."
           ],
           "answerIndex": 1,
@@ -171,7 +171,7 @@
             "criar uma imagem de instabilidade que contrasta com a permanência material do caderno.",
             "sugerir que a chuva apaga simbolicamente as certezas presentes nas páginas antigas.",
             "criar uma imagem de inscrição e passagem que dialoga com o gesto de escrever no caderno.",
-            "aproximar a paisagem exterior da hesitação de Leonor antes de retomar a escrita."
+            "indicar que Leonor desiste de voltar a escrever no caderno."
           ],
           "answerIndex": 2,
           "explanation": "As linhas da chuva aproximam visualmente o vidro de uma superfície escrita e reforçam a relação entre memória, inscrição e novo começo.",

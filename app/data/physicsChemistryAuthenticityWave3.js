@@ -49,7 +49,7 @@ export const PHYSICS_CHEMISTRY_A_AUTHENTICITY_WAVE3=[
     prompt:"Num sistema fechado A ⇌ B, registaram-se as concentrações seguintes. A partir de que instante os dados são compatíveis com um estado de equilíbrio dinâmico?",
     stimulus:{type:"table",columns:["t / min","0","2","4","6","8"],rows:[["[A] / mol dm⁻³","0,80","0,62","0,51","0,50","0,50"],["[B] / mol dm⁻³","0,10","0,28","0,39","0,40","0,40"]]},
     options:["0 min","2 min","4 min","6 min"],answerIndex:3,
-    explanation:"A partir de 6 min as concentrações se mantêm constantes dentro dos dados apresentados, embora as reações direta e inversa continuem."
+    explanation:"A partir de 6 min as concentrações mantêm-se constantes dentro dos dados apresentados, embora as reações direta e inversa continuem."
   }),
   base({
     id:"FQA-W3-DATA-AQ-01",year:"11.º",domain:"q11-aqueous",subtopicId:"q11-titration",competencyId:"fqa-data",
@@ -108,7 +108,7 @@ export const PHYSICS_CHEMISTRY_A_AUTHENTICITY_WAVE3=[
   base({
     id:"FQA-W3-C-EQ-01",year:"11.º",domain:"q11-equilibrium",subtopicId:"q11-limiting-yield",competencyId:"fqa-problems",
     responseType:"stepwise",gradingMode:"structured-provisional",difficultyTarget:4,maxPoints:15,
-    prompt:"Numa síntese, o rendimento teórico é 12,0 g e foram obtidos 9,30 g de produto. Determina o rendimento percentual e a massa que seria obtida se o rendimento aumentasse para 85,0%.",
+    prompt:"Numa síntese, a massa teórica de produto é 12,0 g e foram obtidos 9,30 g. Determina o rendimento percentual e a massa que seria obtida se o rendimento aumentasse para 85,0%.",
     steps:[
       {id:"yield",label:"Rendimento percentual",type:"numeric",value:77.5,tolerance:0.4,unit:"%",points:7,expected:"77,5%"},
       {id:"mass",label:"Massa para 85,0%",type:"numeric",value:10.2,tolerance:0.1,unit:"g",points:8,expected:"10,2 g"}

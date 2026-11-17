@@ -6,7 +6,7 @@ export const PHYSICS_CHEMISTRY_A_AUTHENTICITY_ITEMS=[
   mc({
     id:"FQA-AUTH-ELEM-G1",year:"10.º",domain:"q10-elements",subtopicId:"q10-periodicity",
     prompt:"O gráfico mostra a variação de uma propriedade periódica ao longo de quatro elementos consecutivos. Qual interpretação é mais consistente com uma diminuição global do raio atómico ao longo de um período?",
-    options:["A carga nuclear efetiva aumenta e a nuvem eletrónica tende a contrair.","O número de níveis eletrónicos ocupados aumenta sempre de um elemento para o seguinte.","A carga nuclear diminui ao longo do período.","O número de protões se mantém constante."],answerIndex:0,
+    options:["A carga nuclear efetiva aumenta e a nuvem eletrónica tende a contrair.","O número de níveis eletrónicos ocupados aumenta sempre de um elemento para o seguinte.","A carga nuclear diminui ao longo do período.","O número de protões mantém-se constante."],answerIndex:0,
     explanation:"Ao longo de um período aumenta, em geral, a carga nuclear efetiva sentida pelos eletrões de valência, favorecendo uma contração do raio.",
     stimulus:{type:"line-chart",caption:"Raio atómico relativo ao longo de uma sequência de elementos do mesmo período.",xLabel:"Elemento na sequência",yLabel:"Raio relativo",points:[{x:1,y:1.00},{x:2,y:0.92},{x:3,y:0.86},{x:4,y:0.80}],xTicks:[1,2,3,4],yTicks:[0.8,0.9,1.0]}
   }),

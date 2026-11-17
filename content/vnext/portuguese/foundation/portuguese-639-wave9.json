@@ -480,13 +480,13 @@
       "stimulus": "Frase a pontuar: «Quando terminou a aula os alunos saíram para o intervalo».",
       "prompt": "Qual versão está corretamente pontuada?",
       "options": [
+        "Quando terminou, a aula os alunos saíram para o intervalo.",
+        "Quando terminou a aula os alunos, saíram para o intervalo.",
         "Quando terminou a aula, os alunos saíram para o intervalo.",
-        "Quando terminou a aula, os alunos ficaram na sala.",
-        "Quando terminou a aula, a professora iniciou outra atividade.",
-        "Quando terminou a aula, os alunos foram para casa."
+        "Quando, terminou a aula os alunos saíram para o intervalo."
       ],
       "answerIndex": 2,
-      "explanation": "A oração subordinada adverbial anteposta é separada da oração principal por vírgula.",
+      "explanation": "A oração subordinada adverbial temporal anteposta («Quando terminou a aula») separa-se da oração principal por vírgula; nas outras versões a vírgula separa constituintes que devem ficar juntos.",
       "gradingMode": "deterministic",
       "maxPoints": 13
     },
