@@ -37,9 +37,17 @@ Reescrita editorial das 448 perguntas de escolha múltipla de literatura (25 obr
 | A certa é a opção mais longa | 85% | 31% |
 | A certa é claramente a mais longa (≥1,2×) | 67% | 2% |
 
-Guarda: `tests/unit/optionLengthCue.test.mjs` (literatura ≤35% / ≤5%; perguntas de base sem piorar).
+**Perguntas de base (199, as do diagnóstico e das missões de gramática, leitura e escrita):** 70 reescritas.
+- Terminologia: as erradas passam a termos técnicos igualmente longos, que são as confusões clássicas («modificador restritivo do nome», «complemento agente da passiva»).
+- Escrita e leitura: as erradas passam a frases tão desenvolvidas como a certa, mas com o defeito a detetar (registo, coesão, irrelevância, inferência não sustentada).
+
+| Base | Antes | Depois |
+|---|---|---|
+| A certa é a opção mais longa | 52% | 30% |
+| A certa é claramente a mais longa | 35% | 0% |
+
+Guarda: `tests/unit/optionLengthCue.test.mjs` (≤35% / ≤5% nos dois conjuntos).
 
 ### Pendente
-- Perguntas de base de Português (199): a certa é a mais longa em 52% e claramente a mais longa em 35%. É a próxima reescrita.
 - Na literatura, a certa raramente é a opção mais curta (2%). A errada curta que ficou continua fácil de eliminar. É uma pista fraca, mas existe.
 - Reescrita feita sem professor. Fica sujeita à revisão pedagógica já prevista.

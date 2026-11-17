@@ -20,9 +20,10 @@ describe("comprimento das opções em Português",()=>{
     expect(longest).toBeLessThanOrEqual(0.35);
     expect(clearlyLongest).toBeLessThanOrEqual(0.05);
   });
-  it("perguntas de base: não piorar enquanto a reescrita não chega",()=>{
+  it("perguntas de base: escolher a opção mais longa não compensa",()=>{
+    // Antes: 52% / 35%.
     const {longest,clearlyLongest}=lengthCue(choice.filter(item=>item.id.startsWith("PT639-FND-")));
-    expect(longest).toBeLessThanOrEqual(0.53);
-    expect(clearlyLongest).toBeLessThanOrEqual(0.36);
+    expect(longest).toBeLessThanOrEqual(0.35);
+    expect(clearlyLongest).toBeLessThanOrEqual(0.05);
   });
 });

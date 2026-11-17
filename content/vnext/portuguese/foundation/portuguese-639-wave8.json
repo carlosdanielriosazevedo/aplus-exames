@@ -44,7 +44,7 @@
       "options": [
         "As aulas passaram a ser mais curtas.",
         "Os cacifos facilitaram o transporte do material escolar.",
-        "A escola reduziu o número de disciplinas.",
+        "Os horários das aulas foram alterados para reduzir o peso das mochilas.",
         "Os alunos deixaram de usar mochilas."
       ],
       "answerIndex": 1,
@@ -65,7 +65,7 @@
       "prompt": "A expressão «mil olhos acesos» constrói sobretudo",
       "options": [
         "uma enumeração científica.",
-        "uma definição literal de cidade.",
+        "uma descrição literal das pessoas acordadas na cidade.",
         "uma imagem metafórica das janelas iluminadas.",
         "uma indicação cronológica."
       ],
@@ -150,7 +150,7 @@
       "prompt": "Qual é o argumento mais diretamente relevante?",
       "options": [
         "A leitura autónoma regular cria oportunidades para consolidar hábitos de leitura e contactar com textos variados.",
-        "A escola tem paredes brancas.",
+        "A escola tem paredes brancas e uma biblioteca com muitas estantes, mesas e cadeiras confortáveis.",
         "Alguns livros têm capas duras.",
         "O recreio começa depois da aula."
       ],
@@ -174,7 +174,7 @@
         "Os transportes públicos são úteis. Carros. Emissões. Cidades.",
         "Os transportes públicos são úteis porque podem reduzir o número de automóveis nas cidades e, consequentemente, contribuir para diminuir emissões.",
         "Transportes públicos, públicos transportes, são úteis e úteis.",
-        "Os transportes públicos são úteis, mas uma biblioteca tem livros."
+        "Os transportes públicos são úteis nas cidades, mas uma biblioteca escolar tem muitos livros e também computadores para os alunos."
       ],
       "answerIndex": 1,
       "explanation": "A reformulação evita repetições e explicita relações lógicas entre as ideias.",
@@ -217,8 +217,8 @@
       "options": [
         "Complemento direto.",
         "Predicativo do complemento direto.",
-        "Complemento indireto.",
-        "Modificador do nome."
+        "Complemento agente da passiva.",
+        "Modificador restritivo do nome."
       ],
       "answerIndex": 1,
       "explanation": "«Representante da turma» atribui uma propriedade ou estatuto ao complemento direto «a Sofia», funcionando como predicativo do complemento direto.",
@@ -341,8 +341,8 @@
       "stimulus": "Tese: Os municípios devem criar mais zonas pedonais nos centros urbanos. Argumento: «As zonas pedonais podem tornar as deslocações a pé mais seguras e reduzir conflitos entre peões e automóveis.»",
       "prompt": "Porque é este argumento pertinente?",
       "options": [
-        "Porque muda o tema para a história dos automóveis.",
-        "Porque repete a tese sem a relacionar com consequências.",
+        "Porque muda o tema para a história dos automóveis e das estradas portuguesas.",
+        "Porque repete a tese por outras palavras, sem a relacionar com consequências.",
         "Porque descreve a cor e o aspeto das ruas.",
         "Porque apresenta consequências diretamente relacionadas com a medida defendida."
       ],

@@ -230,7 +230,7 @@
         "epistémica de possibilidade.",
         "deôntica de obrigação.",
         "apreciativa negativa.",
-        "epistémica de certeza."
+        "epistémica de certeza absoluta."
       ],
       "answerIndex": 0,
       "explanation": "«Talvez» apresenta a conclusão do projeto como possível, não como certa ou obrigatória.",
@@ -268,10 +268,10 @@
       "stimulus": "Os voluntários consideraram a iniciativa muito útil.",
       "prompt": "A expressão «muito útil» desempenha a função sintática de",
       "options": [
-        "complemento direto.",
+        "complemento agente da passiva.",
         "modificador do grupo verbal.",
         "predicativo do complemento direto.",
-        "complemento oblíquo."
+        "modificador restritivo do nome."
       ],
       "answerIndex": 2,
       "explanation": "A expressão atribui uma propriedade ao complemento direto «a iniciativa», funcionando como seu predicativo.",

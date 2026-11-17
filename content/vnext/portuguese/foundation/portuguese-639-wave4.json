@@ -129,7 +129,7 @@
       "prompt": "A expressão «A manhã abriu as janelas do céu» recorre sobretudo a",
       "options": [
         "personificação.",
-        "metáfora.",
+        "dupla adjetivação.",
         "comparação.",
         "hipérbole."
       ],
@@ -303,7 +303,7 @@
       "options": [
         "deôntica de obrigação.",
         "epistémica de possibilidade.",
-        "apreciativa negativa.",
+        "apreciativa de avaliação negativa.",
         "deôntica de permissão."
       ],
       "answerIndex": 1,
@@ -325,8 +325,8 @@
       "options": [
         "predicativo do complemento direto.",
         "complemento indireto.",
-        "modificador do nome.",
-        "sujeito."
+        "modificador apositivo do nome.",
+        "predicativo do sujeito."
       ],
       "answerIndex": 0,
       "explanation": "«Inviável» atribui uma propriedade ao complemento direto «a proposta», funcionando como predicativo do complemento direto.",
@@ -436,9 +436,9 @@
       "stimulus": "Objetivo: tornar mais precisa a frase «As redes sociais têm coisas boas e coisas más.»",
       "prompt": "Qual das versões apresenta maior precisão lexical?",
       "options": [
-        "As redes sociais têm coisas boas e coisas más para muitas pessoas.",
+        "As redes sociais têm muitas coisas boas e também muitas coisas más, que afetam muitas pessoas de muitas maneiras.",
         "As redes sociais oferecem oportunidades de comunicação, mas também podem ampliar a exposição a desinformação e pressão social.",
-        "As redes sociais são redes que têm aspetos positivos e negativos.",
+        "As redes sociais são redes que têm vários aspetos positivos e negativos para as pessoas que as usam muito.",
         "As redes sociais existem e são usadas todos os dias."
       ],
       "answerIndex": 1,

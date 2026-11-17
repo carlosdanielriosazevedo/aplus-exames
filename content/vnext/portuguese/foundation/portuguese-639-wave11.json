@@ -128,9 +128,9 @@
       "prompt": "A última parte do texto serve principalmente para",
       "options": [
         "introduzir uma personagem central.",
-        "descrever o espaço onde ocorre a ação.",
+        "apresentar uma terceira explicação que resolve definitivamente o problema.",
         "retomar e qualificar as explicações anteriormente apresentadas.",
-        "abandonar o tema inicial sem conclusão."
+        "abandonar o tema inicial e introduzir um problema sem relação."
       ],
       "answerIndex": 2,
       "explanation": "A parte final retoma as explicações e estabelece uma posição mais matizada sobre elas.",
@@ -169,7 +169,7 @@
       "prompt": "A formulação «não conseguia imaginar outra saída» mostra sobretudo que",
       "options": [
         "a interpretação dos acontecimentos está condicionada pela perspetiva do narrador naquele momento.",
-        "o narrador conhece todas as alternativas possíveis e rejeita-as objetivamente.",
+        "o narrador conhece todas as alternativas possíveis e rejeita-as de forma objetiva e ponderada.",
         "a decisão é apresentada como inevitável por uma voz exterior à personagem.",
         "o relato elimina qualquer acesso à experiência interior do narrador."
       ],
@@ -215,7 +215,7 @@
         "de uma escolha que articula mudança e ligação ao passado.",
         "de uma rejeição das relações familiares.",
         "de uma viagem sem dimensão emocional.",
-        "de uma dificuldade em tomar uma decisão."
+        "de uma incapacidade de decidir que paralisa a personagem."
       ],
       "answerIndex": 0,
       "explanation": "A partida implica mudança, enquanto a fotografia simboliza a manutenção de um vínculo com o passado.",
@@ -258,7 +258,7 @@
       "options": [
         "comparação.",
         "personificação.",
-        "eufemismo.",
+        "dupla adjetivação.",
         "antítese."
       ],
       "answerIndex": 1,
@@ -323,7 +323,7 @@
       "prompt": "Qual argumento apoia mais diretamente esta tese?",
       "options": [
         "Alguns alunos gostam de livros de aventura.",
-        "As bibliotecas escolares têm estantes de várias dimensões.",
+        "As bibliotecas escolares têm estantes de várias dimensões e livros organizados por temas.",
         "Muitas salas de aula possuem janelas grandes.",
         "A leitura pode desenvolver hábitos de atenção e contacto regular com diferentes textos."
       ],
@@ -347,7 +347,7 @@
         "tornar a argumentação mais desenvolvida ao considerar uma perspetiva alternativa.",
         "eliminar a posição defendida pelo autor.",
         "substituir todos os argumentos por uma descrição.",
-        "mostrar que o autor não possui qualquer posição."
+        "mostrar que o autor hesita entre as duas posições e não chega a assumir nenhuma."
       ],
       "answerIndex": 0,
       "explanation": "Considerar e responder a uma objeção permite antecipar uma perspetiva alternativa e reforçar a fundamentação da posição defendida.",
@@ -388,7 +388,7 @@
       "stimulus": "Contexto: pedido formal dirigido à direção de uma escola.",
       "prompt": "Qual formulação é mais adequada ao registo exigido?",
       "options": [
-        "Queria saber isso do horário, digam lá.",
+        "Queria saber isso do horário da reunião, por isso digam lá qualquer coisa.",
         "Venho solicitar esclarecimento relativamente ao horário da reunião.",
         "Mandem-me aí o horário da reunião.",
         "Então, afinal, a que horas é isso?"
@@ -494,7 +494,7 @@
       "prompt": "O advérbio «Talvez» contribui para exprimir",
       "options": [
         "certeza absoluta.",
-        "ordem.",
+        "obrigação ou necessidade.",
         "proibição.",
         "dúvida ou possibilidade."
       ],

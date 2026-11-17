@@ -23,7 +23,7 @@
         "Na sala de reuniões.",
         "Na biblioteca.",
         "No auditório.",
-        "Na sala de aula."
+        "Na sala de estudo da biblioteca."
       ],
       "answerIndex": 0,
       "explanation": "O local indicado no aviso é a sala de reuniões.",
@@ -65,7 +65,7 @@
         "às quatro propostas apresentadas.",
         "às duas propostas que não foram excluídas.",
         "às duas propostas excluídas.",
-        "a novas propostas não mencionadas."
+        "a novas propostas, ainda não mencionadas no texto."
       ],
       "answerIndex": 1,
       "explanation": "«As outras» retoma as duas propostas diferentes das que foram excluídas.",
@@ -106,7 +106,7 @@
       "stimulus": "O autor reconhece que a proposta exige investimento inicial, mas defende que os benefícios a médio prazo podem compensar esse custo.",
       "prompt": "Como se caracteriza a posição do autor?",
       "options": [
-        "Rejeita a proposta devido ao investimento inicial.",
+        "Rejeita a proposta porque o investimento inicial lhe parece demasiado elevado.",
         "Afirma que a proposta não tem qualquer custo.",
         "Considera impossível avaliar os benefícios.",
         "Reconhece um custo inicial, mas defende a proposta pelos benefícios esperados."
@@ -151,7 +151,7 @@
         "Personificação.",
         "Antítese.",
         "Enumeração.",
-        "Eufemismo."
+        "Dupla adjetivação."
       ],
       "answerIndex": 0,
       "explanation": "Atribui-se às paredes uma capacidade humana, a de escutar.",
@@ -215,7 +215,7 @@
         "Impõe uma interpretação única das decisões.",
         "Elimina a personagem da narrativa.",
         "Favorece uma avaliação menos explicitamente orientada pelo narrador.",
-        "Transforma automaticamente a narração em diálogo."
+        "Leva o narrador a condenar implicitamente as escolhas da personagem."
       ],
       "answerIndex": 2,
       "explanation": "A ausência de comentário avaliativo explícito deixa maior espaço para a interpretação do leitor.",
@@ -297,7 +297,7 @@
       "prompt": "Seleciona o argumento mais pertinente.",
       "options": [
         "Atividades orientadas podem criar oportunidades regulares de contacto com diferentes textos.",
-        "Algumas escolas têm edifícios de estilos arquitetónicos diferentes.",
+        "Algumas escolas têm edifícios de estilos arquitetónicos muito diferentes entre si.",
         "Os livros podem ter capas de vários formatos.",
         "Há alunos que preferem estudar em silêncio."
       ],
@@ -321,7 +321,7 @@
         "Eliminar a necessidade de fundamentação.",
         "Ilustrar ou tornar mais concreta a ideia geral apresentada.",
         "Introduzir uma personagem obrigatória.",
-        "Alterar automaticamente a posição defendida."
+        "Substituir a ideia geral por um caso que a contradiz."
       ],
       "answerIndex": 1,
       "explanation": "Um exemplo pode concretizar uma afirmação geral e facilitar a compreensão da argumentação.",
@@ -382,7 +382,7 @@
       "stimulus": "Versão inicial: «Os resultados foram positivos. Os resultados mostraram melhorias. Os resultados foram importantes para a equipa.»",
       "prompt": "Que alteração melhora mais diretamente a coesão?",
       "options": [
-        "Repetir «os resultados» em todas as frases.",
+        "Repetir «os resultados» em todas as frases para garantir a total clareza do texto.",
         "Eliminar todos os pronomes.",
         "Acrescentar uma nova frase sem relação.",
         "Evitar a repetição do mesmo grupo nominal através de referenciação adequada."
@@ -471,7 +471,7 @@
         "Obrigação.",
         "Certeza.",
         "Possibilidade.",
-        "Proibição."
+        "Certeza absoluta."
       ],
       "answerIndex": 2,
       "explanation": "A expressão apresenta a situação como possível, sem a afirmar como certa.",
@@ -509,9 +509,9 @@
       "stimulus": "A comissão nomeou a estudante representante do grupo.",
       "prompt": "Que função sintática desempenha «representante do grupo»?",
       "options": [
-        "Complemento indireto.",
+        "Complemento agente da passiva.",
         "Modificador do nome.",
-        "Sujeito.",
+        "Predicativo do sujeito.",
         "Predicativo do complemento direto."
       ],
       "answerIndex": 3,

@@ -149,7 +149,7 @@
       "prompt": "Que recurso expressivo está presente na expressão destacada?",
       "options": [
         "Personificação.",
-        "Enumeração.",
+        "Interrogação retórica.",
         "Ironia.",
         "Perífrase."
       ],
@@ -194,7 +194,7 @@
         "repetir exatamente a mesma ideia sem alteração.",
         "desenvolver gradualmente a transformação do sentido da imagem.",
         "eliminar a relação entre as estrofes.",
-        "apresentar uma sequência exclusivamente narrativa."
+        "apresentar três imagens diferentes, sem relação entre si."
       ],
       "answerIndex": 1,
       "explanation": "A repetição da imagem com valores diferentes produz uma evolução de sentido ao longo do poema.",
@@ -301,7 +301,7 @@
       "options": [
         "A arborização pode contribuir para reduzir o calor e tornar os espaços urbanos mais agradáveis.",
         "Algumas árvores têm folhas de formas muito diferentes.",
-        "Existem jardins com espécies provenientes de vários países.",
+        "Existem jardins urbanos com espécies de árvores provenientes de vários países do mundo.",
         "Muitas pessoas fotografam árvores durante os passeios."
       ],
       "answerIndex": 0,
@@ -323,7 +323,7 @@
       "options": [
         "Introduz obrigatoriamente uma nova personagem.",
         "Contribui para fechar a linha argumentativa e reforçar a posição defendida.",
-        "Elimina a necessidade dos argumentos anteriores.",
+        "Introduz uma nova questão que fica em aberto para um texto seguinte.",
         "Transforma o texto num relato cronológico."
       ],
       "answerIndex": 1,
@@ -385,7 +385,7 @@
       "stimulus": "Versão inicial: «O projeto é importante porque é muito importante para a escola e tem uma importância grande para os alunos.»",
       "prompt": "Qual alteração melhora mais diretamente a formulação?",
       "options": [
-        "Acrescentar mais duas ocorrências de «importante».",
+        "Acrescentar mais duas ocorrências de «importante» para reforçar a ideia central.",
         "Repetir a primeira frase no final do parágrafo.",
         "Retirar todos os verbos da frase.",
         "Eliminar repetições e substituir algumas ocorrências por formulações mais precisas."
@@ -469,7 +469,7 @@
       "stimulus": "É provável que os alunos terminem o trabalho antes do final da aula. A expressão «É provável que» introduz uma avaliação do grau de certeza do enunciado.",
       "prompt": "Que valor de modalidade é predominante na expressão destacada?",
       "options": [
-        "Obrigação.",
+        "Certeza absoluta.",
         "Probabilidade.",
         "Proibição.",
         "Certeza."

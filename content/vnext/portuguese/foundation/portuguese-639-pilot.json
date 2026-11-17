@@ -77,7 +77,7 @@
       "cognitive": "interpretar",
       "stimulus": "Na gaveta dorme o mapa; / quando a janela se abre, / a estrada acorda devagar.",
       "prompt": "O recurso expressivo dominante em «a estrada acorda» é",
-      "options": ["a comparação.","a personificação.","a hipérbole.","a enumeração."],
+      "options": ["a comparação.","a personificação.","a hipérbole.","a interrogação retórica."],
       "answerIndex": 1,
       "explanation": "Atribui-se à estrada uma ação própria de um ser animado: acordar.",
       "gradingMode": "deterministic",

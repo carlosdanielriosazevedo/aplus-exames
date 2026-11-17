@@ -108,7 +108,7 @@
       "prompt": "A transformação do valor simbólico da janela contribui para",
       "options": [
         "descrever apenas as dimensões físicas da janela.",
-        "introduzir uma informação sem relação com a personagem.",
+        "introduzir uma informação sobre a casa sem relação com a personagem.",
         "repetir o mesmo significado sem alteração.",
         "acompanhar uma mudança na situação ou na perspetiva da personagem."
       ],
@@ -237,7 +237,7 @@
       "prompt": "Que posição do autor é mais adequadamente caracterizada?",
       "options": [
         "É contrário à medida.",
-        "Considera que os resultados são geralmente negativos.",
+        "Considera que os resultados serão positivos em quaisquer circunstâncias.",
         "Recusa avaliar as consequências da medida.",
         "É favorável, mas condiciona os benefícios à implementação da medida."
       ],
@@ -299,8 +299,8 @@
       "prompt": "Seleciona o argumento mais adequado.",
       "options": [
         "A leitura frequente pode ampliar o contacto com diferentes ideias, vocabulários e formas de expressão.",
-        "Alguns livros têm capas com ilustrações muito coloridas.",
-        "Há bibliotecas localizadas em diferentes zonas das cidades.",
+        "Alguns livros têm capas com ilustrações muito coloridas, que chamam a atenção dos leitores.",
+        "Há bibliotecas municipais localizadas em diferentes zonas das cidades e das vilas.",
         "Certos livros apresentam títulos com poucas palavras."
       ],
       "answerIndex": 0,
@@ -320,7 +320,7 @@
       "stimulus": "Num texto de opinião, o autor apresenta uma posição, reconhece uma objeção e responde-lhe antes de reforçar a conclusão.",
       "prompt": "Que efeito tem a inclusão da objeção seguida de resposta?",
       "options": [
-        "Impede o autor de apresentar uma posição própria.",
+        "Mostra que o autor mudou de opinião ao longo do texto e abandonou a tese.",
         "Torna a argumentação mais desenvolvida ao considerar uma posição alternativa.",
         "Substitui os argumentos por uma descrição.",
         "Elimina a necessidade de conclusão."
@@ -343,7 +343,7 @@
       "prompt": "Que estratégia de revisão melhora mais diretamente a frase?",
       "options": [
         "Repetir «atividade» em todas as orações.",
-        "Acrescentar uma segunda conclusão sem relação.",
+        "Acrescentar uma segunda conclusão sem relação com a atividade descrita.",
         "Eliminar repetições e reformular a referência à atividade.",
         "Retirar o verbo «participaram» de toda a frase."
       ],
@@ -385,9 +385,9 @@
       "stimulus": "A professora considerou os resultados bastante satisfatórios.",
       "prompt": "Que função sintática desempenha «bastante satisfatórios»?",
       "options": [
-        "Complemento indireto.",
+        "Complemento agente da passiva.",
         "Modificador do nome.",
-        "Sujeito.",
+        "Predicativo do sujeito.",
         "Predicativo do complemento direto."
       ],
       "answerIndex": 3,
@@ -428,8 +428,8 @@
       "prompt": "Que relação estabelece «por isso» entre as duas partes do enunciado?",
       "options": [
         "Consecutiva ou de consequência.",
-        "Concessiva.",
-        "Temporal.",
+        "Concessiva ou de contraste.",
+        "Causal ou explicativa.",
         "Final."
       ],
       "answerIndex": 0,
@@ -532,9 +532,9 @@
       "stimulus": "Talvez a equipa termine o projeto ainda hoje.",
       "prompt": "Que valor de modalidade é expresso por «Talvez»?",
       "options": [
-        "Obrigação.",
+        "Obrigação ou necessidade.",
         "Certeza absoluta.",
-        "Proibição.",
+        "Permissão ou autorização.",
         "Possibilidade ou incerteza."
       ],
       "answerIndex": 3,
