@@ -24,7 +24,7 @@
           "cognitive": "interpretar",
           "prompt": "Os dois exemplos iniciais têm como função principal",
           "options": [
-            "mostrar que medir resultados pode alterar o comportamento das pessoas avaliadas.",
+            "mostrar que os indicadores devem ser abandonados quando alteram o comportamento das pessoas avaliadas.",
             "ilustrar como um indicador pode incentivar comportamentos que não correspondem totalmente ao objetivo.",
             "mostrar que a comparação entre resultados depende da escolha de indicadores equivalentes.",
             "sugerir que um indicador perde utilidade quando não mede diretamente a qualidade."
@@ -148,8 +148,8 @@
           "options": [
             "substituir uma construção imaginada por uma relação mais concreta com o passado.",
             "confirmar que as histórias ouvidas sobre a casa correspondiam ao que imaginara.",
-            "perceber que a importância da sala dependia mais do segredo do que dos objetos encontrados.",
-            "reconhecer que a curiosidade criada ao longo dos anos era mais significativa do que a descoberta."
+            "confirmar que a sala guardava um segredo familiar que a avó quisera esconder.",
+            "lamentar que a realidade da sala tenha apagado as memórias de infância."
           ],
           "answerIndex": 0,
           "explanation": "A sala imaginada durante anos revela-se comum, e Miguel passa a relacionar-se com o passado através de objetos concretos e não do mistério da porta.",
@@ -169,7 +169,7 @@
           "prompt": "A frase final — «A sala parecia menor aberta, mas a casa, estranhamente, parecia maior» — sugere que",
           "options": [
             "a abertura da sala altera a perceção física do espaço e reduz o peso das histórias familiares.",
-            "a perda de expectativa torna a sala menos importante, ao mesmo tempo que valoriza o resto da casa.",
+            "a sala aberta passa a dominar a casa, que perde o seu sentido familiar.",
             "o desaparecimento do mistério reduz uma divisão, mas amplia a compreensão que Miguel tem da casa e do passado.",
             "a descoberta confirma que a dimensão simbólica da casa depende daquilo que permanece inacessível."
           ],

@@ -76,7 +76,11 @@ for(const item of items){
     if(Array.isArray(item.options)){
       const normalized=item.options.map(normalize);
       assert(normalized.every(Boolean),`${item.id}: opção vazia.`);
-      assert(new Set(normalized).size===normalized.length,`${item.id}: opções duplicadas após normalização.`);
+      // Perguntas de pontuação: as opções são a mesma frase com a vírgula em sítios diferentes.
+      // A normalização apaga a pontuação, por isso exigem-se aí opções distintas no texto original.
+      const punctuationContrast=new Set(normalized).size===1;
+      if(punctuationContrast)assert(new Set(item.options.map(option=>String(option).trim())).size===item.options.length,`${item.id}: opções de pontuação repetidas.`);
+      else assert(new Set(normalized).size===normalized.length,`${item.id}: opções duplicadas após normalização.`);
       assert(!normalized.some(option=>option===promptKey),`${item.id}: uma opção repete integralmente o enunciado.`);
     }
     if(Number.isInteger(item.answerIndex)&&item.answerIndex>=0&&item.answerIndex<4){

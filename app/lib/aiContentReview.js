@@ -5,7 +5,7 @@
 // alterado perde automaticamente a aprovação anterior).
 import {validationHash} from "./validationFingerprint.js";
 
-const REVIEWED_FIELDS=["prompt","stimulus","options","answerIndex","explanation","steps","criteria","acceptedAnswers","referenceAnswer","rubric","wordLimit"];
+const REVIEWED_FIELDS=["prompt","stimulus","passageText","options","answerIndex","explanation","steps","criteria","acceptedAnswers","referenceAnswer","rubric","wordLimit"];
 
 export function aiReviewFingerprint(item){
   const payload={id:item?.id||null};

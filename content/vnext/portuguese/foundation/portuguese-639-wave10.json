@@ -42,7 +42,7 @@
       "stimulus": "A escola deveria disponibilizar bebedouros em mais zonas do recinto, porque isso facilitaria o acesso à água durante os intervalos.",
       "prompt": "A expressão introduzida por «porque» funciona como",
       "options": [
-        "exemplo sem relação.",
+        "condição necessária para a proposta.",
         "justificação da proposta.",
         "conclusão contrária.",
         "exemplo sem relação com a proposta."
@@ -326,7 +326,7 @@
       "responseType": "multiple-choice",
       "cognitive": "analisar",
       "stimulus": "É possível que a reunião termine mais cedo.",
-      "prompt": "A expressão «É possível que» introduz uma modalidade de",
+      "prompt": "A expressão «É possível que» introduz uma modalidade",
       "options": [
         "deôntica, com valor de obrigação.",
         "epistémica, com valor de possibilidade.",
@@ -438,13 +438,13 @@
       "stimulus": "Frase: «Joana que chegou primeiro abriu a sala.»",
       "prompt": "Se a informação «que chegou primeiro» for explicativa, qual é a pontuação adequada?",
       "options": [
+        "Joana que chegou primeiro, abriu a sala.",
+        "Joana, que chegou primeiro abriu a sala.",
         "Joana, que chegou primeiro, abriu a sala.",
-        "Joana, que chegou atrasada, fechou a sala.",
-        "Joana, que chegou primeiro, esperou no corredor.",
-        "Joana, que chegou depois, encontrou a sala fechada."
+        "Joana que, chegou primeiro, abriu a sala."
       ],
       "answerIndex": 2,
-      "explanation": "Uma oração relativa explicativa é delimitada por vírgulas.",
+      "explanation": "Uma oração relativa explicativa é delimitada por vírgulas antes e depois; com uma só vírgula, ou com a vírgula depois de «que», a frase fica mal pontuada.",
       "gradingMode": "deterministic",
       "maxPoints": 13
     },
