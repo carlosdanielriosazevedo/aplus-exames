@@ -25,7 +25,7 @@
         "(f+g)(x)=f(x)/g(x)."
       ],
       "a": 0,
-      "sol": "Somam-se os valores das duas funções no mesmo x.",
+      "sol": "Para cada x no domínio comum, calculam-se f(x) e g(x) e somam-se os dois valores. Assim, (f+g)(x)=f(x)+g(x).",
       "hyp": "Pode confundir soma com composição.",
       "contexts": [
         "mission",
@@ -52,7 +52,7 @@
         "(fg)(x)=f(x)/g(x)."
       ],
       "a": 1,
-      "sol": "Multiplicam-se os valores de f e g.",
+      "sol": "Para cada x no domínio comum, calculam-se f(x) e g(x) e multiplicam-se os dois valores. Assim, (fg)(x)=f(x)g(x).",
       "hyp": "Pode confundir com composição.",
       "contexts": [
         "mission",
@@ -238,10 +238,10 @@
         "mantém as exclusões da expressão original.",
         "passa a ser sempre R.",
         "depende apenas do numerador.",
-        "deixa de importar."
+        "passa a excluir só os zeros do denominador simplificado."
       ],
       "a": 0,
-      "sol": "Pontos onde o denominador original era zero continuam excluídos.",
+      "sol": "O quociente f/g é definido nos pontos do domínio comum para os quais g(x)≠0. Cancelar um fator só dá uma igualdade nos pontos onde a expressão original está definida.",
       "hyp": "Pode recuperar indevidamente pontos cancelados.",
       "contexts": [
         "mission",
@@ -557,7 +557,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Se f(x)=2x−1 e g(x)=x², então (f∘g)(x)=",
+      "q": "Considera f(x)=2x−1. Que expressão se obtém ao substituir x por x² em f(x)?",
       "o": [
         "2x²−1.",
         "(2x−1)².",
@@ -565,7 +565,7 @@
         "2x−x²."
       ],
       "a": 0,
-      "sol": "f(x²)=2x²−1.",
+      "sol": "O termo 2x torna-se 2x² e o termo independente mantém-se. Obtém-se f(x²)=2x²−1.",
       "hyp": "Pode substituir f dentro de g.",
       "contexts": [
         "mission",
@@ -611,7 +611,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se f(x)=√x e g(x)=x−4, o domínio de f∘g é...",
+      "q": "Qual é o domínio real da função h(x)=√(x−4)?",
       "o": [
         "[0,+∞[.",
         "R.",
@@ -619,7 +619,7 @@
         "]−∞,4]."
       ],
       "a": 2,
-      "sol": "É preciso g(x)=x−4≥0.",
+      "sol": "A raiz quadrada em ℝ exige x−4≥0, ou seja, x≥4. O domínio de h é [4,+∞[.",
       "hyp": "Pode usar apenas o domínio de f sem o traduzir para x.",
       "contexts": [
         "mission",
@@ -719,7 +719,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Compreensão",
-      "q": "Para x pertencer ao domínio de f∘g, é necessário que...",
+      "q": "Sejam D_f e D_g os domínios de f e g. Primeiro calcula-se g(x), depois usa-se o resultado como argumento de f. Que condições garantem que as duas avaliações estão definidas?",
       "o": [
         "x∈D_f apenas.",
         "x∈D_f∪D_g.",
@@ -727,7 +727,7 @@
         "f(x)∈D_g."
       ],
       "a": 2,
-      "sol": "Primeiro g tem de estar definida e a sua imagem deve poder entrar em f.",
+      "sol": "Para calcular g(x), é preciso que x pertença a D_g. Para aplicar f ao resultado, é preciso que g(x) pertença a D_f.",
       "hyp": "Pode inverter a condição.",
       "contexts": [
         "mission",
@@ -989,7 +989,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Restringindo f(x)=x² a [0,+∞[, a inversa é...",
+      "q": "Para cada número real x≥0, considera a equação t²=x. Que expressão dá a sua solução não negativa em função de x?",
       "o": [
         "√x.",
         "−√x.",
@@ -997,7 +997,7 @@
         "1/x²."
       ],
       "a": 0,
-      "sol": "No ramo não negativo, x² é injetiva e a operação inversa é a raiz quadrada principal.",
+      "sol": "A raiz quadrada √x é, por definição, não negativa e o seu quadrado é x. A solução no intervalo pedido é t=√x.",
       "hyp": "Pode incluir o ramo negativo.",
       "contexts": [
         "mission",
@@ -1051,7 +1051,7 @@
         "x²."
       ],
       "a": 2,
-      "sol": "A raiz quadrada principal é não negativa.",
+      "sol": "A raiz quadrada principal devolve o número não negativo cujo quadrado é x². Se x≥0, esse número é x. Se x<0, é −x. Em ambos os casos, é |x|.",
       "hyp": "Pode cancelar quadrado e raiz sem considerar o sinal.",
       "contexts": [
         "mission",

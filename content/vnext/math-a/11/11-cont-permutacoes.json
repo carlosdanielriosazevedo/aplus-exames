@@ -476,15 +476,15 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Se trocarmos duas posições numa permutação de objetos distintos...",
+      "q": "Se trocarmos os objetos de duas posições diferentes numa permutação de objetos distintos, o que acontece?",
       "o": [
         "a permutação mantém-se sempre igual.",
-        "obtemos em geral uma permutação diferente.",
+        "obtém-se sempre uma permutação diferente.",
         "a ordem deixa de importar.",
         "o número de objetos muda."
       ],
       "a": 1,
-      "sol": "A identidade dos objetos por posição muda.",
+      "sol": "Os objetos nas duas posições são distintos. Após a troca, cada uma dessas posições contém um objeto diferente do inicial, logo a permutação muda.",
       "hyp": "Pode confundir ordenação com conjunto sem ordem.",
       "contexts": [
         "mission",

@@ -20,9 +20,9 @@
       "q": "Um diagrama de árvore é útil para...",
       "o": [
         "organizar escolhas sucessivas e visualizar ramos.",
-        "calcular derivadas.",
-        "resolver apenas equações.",
-        "representar funções contínuas."
+        "representar apenas escolhas independentes.",
+        "agrupar automaticamente ordens diferentes num só caminho.",
+        "eliminar automaticamente resultados repetidos."
       ],
       "a": 0,
       "sol": "Cada nível da árvore pode representar uma etapa do processo de escolha.",
@@ -183,11 +183,11 @@
       "o": [
         "multiplicando sempre os graus máximos.",
         "contando apenas os nós internos.",
-        "somando o número de folhas de todos os ramos.",
+        "somando o número de folhas dos ramos que saem diretamente da raiz.",
         "fazendo a média dos ramos."
       ],
       "a": 2,
-      "sol": "Cada folha representa um resultado final distinto.",
+      "sol": "Cada folha representa um resultado final e pertence a exatamente um ramo que sai da raiz. Somar as folhas desses ramos conta cada resultado uma vez.",
       "hyp": "Pode aplicar multiplicação uniforme quando não existe.",
       "contexts": [
         "mission",
@@ -233,15 +233,15 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Num problema de contagem, listar casos de forma sistemática ajuda a evitar...",
+      "q": "Ao listar os casos de um problema de contagem, que condição deve cumprir a lista completa?",
       "o": [
-        "omissões e duplicações.",
-        "apenas cálculos com decimais.",
-        "uso de símbolos.",
-        "qualquer necessidade de raciocínio."
+        "inclui todos os casos admissíveis exatamente uma vez.",
+        "inclui todos os casos admissíveis, podendo repetir alguns.",
+        "evita repetições, mesmo que deixe casos admissíveis de fora.",
+        "mostra um caso admissível de cada tipo sem contar os restantes."
       ],
       "a": 0,
-      "sol": "Uma organização consistente permite verificar cobertura e exclusividade.",
+      "sol": "Uma lista que omite casos conta de menos. Uma lista que repete casos conta de mais. Por isso, cada caso admissível deve aparecer uma vez.",
       "hyp": "Pode achar que listar casos é sempre menos rigoroso.",
       "contexts": [
         "mission",
@@ -449,7 +449,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Um aluno escolhe Ciências ou Humanidades. Em Ciências há 3 opções de clube; em Humanidades há 2. Quantas folhas finais?",
+      "q": "Um aluno escolhe um curso (Ciências ou Humanidades) e, depois, um clube desse curso. Há 3 clubes disponíveis em Ciências e 2 em Humanidades. Quantos caminhos completos tem o diagrama de árvore destas escolhas?",
       "o": [
         "5.",
         "6.",
@@ -457,7 +457,7 @@
         "2."
       ],
       "a": 0,
-      "sol": "3+2=5.",
+      "sol": "Cada caminho completo escolhe um curso e um dos seus clubes. O ramo de Ciências tem 3 folhas e o de Humanidades tem 2, pelo que há 3+2=5 caminhos.",
       "hyp": "Pode multiplicar os ramos principais.",
       "contexts": [
         "mission",
@@ -557,7 +557,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Quantas palavras de 2 letras sobre {A,B,C} há? Uma tabela 3×3 mostraria...",
+      "q": "Numa tabela de dupla entrada, contam-se sequências de duas letras escolhidas de {A, B, C}, com repetição permitida. Quantas sequências há?",
       "o": [
         "9.",
         "6.",
@@ -584,7 +584,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Quantas palavras de 2 letras sobre {A,B,C} existem se não são permitidas letras iguais?",
+      "q": "Quantas sequências de duas letras distintas podem ser formadas com o conjunto {A, B, C}?",
       "o": [
         "9.",
         "6.",
@@ -592,7 +592,7 @@
         "2."
       ],
       "a": 1,
-      "sol": "Das 9, retiram-se AA,BB,CC: restam 6.",
+      "sol": "Com repetição, haveria 3×3=9 sequências. Ao retirar AA, BB e CC, restam 6.",
       "hyp": "Pode esquecer a diagonal inválida.",
       "contexts": [
         "mission",
@@ -611,7 +611,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Numa tabela de dupla entrada para pares (i,j), a diagonal principal costuma corresponder a...",
+      "q": "Numa tabela de dupla entrada para pares (i,j), as linhas e as colunas são indexadas pelos mesmos valores na mesma ordem. A que casos corresponde a diagonal principal?",
       "o": [
         "casos em que i≠j.",
         "casos impossíveis sempre.",
@@ -619,7 +619,7 @@
         "resultados não ordenados."
       ],
       "a": 2,
-      "sol": "Na diagonal, índice da linha e coluna coincide.",
+      "sol": "Na diagonal, a linha e a coluna ocupam a mesma posição na ordem de índices. Os dois índices coincidem, logo i=j.",
       "hyp": "Pode interpretar diagonal como exclusão obrigatória.",
       "contexts": [
         "mission",

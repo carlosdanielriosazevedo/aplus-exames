@@ -314,7 +314,7 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Se a>0, o vértice da parábola corresponde a...",
+      "q": "Considera a função quadrática f(x)=ax²+bx+c, com a>0. O vértice da parábola corresponde a...",
       "o": [
         "um máximo.",
         "um zero obrigatório.",
@@ -1097,7 +1097,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "A altura de um objeto é h(t)=−5t²+20t+1. Em que instante ocorre a altura máxima?",
+      "q": "A altura de um objeto é dada por h(t)=−5t²+20t+1, onde t é o tempo, em segundos, desde o lançamento. Em que instante o objeto atinge a altura máxima?",
       "o": [
         "2 s",
         "1 s",

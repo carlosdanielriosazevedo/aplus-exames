@@ -19,10 +19,10 @@
       "cognitive": "Compreensão",
       "q": "Num estudo estatístico, o que é a população?",
       "o": [
-        "O conjunto total de indivíduos/elementos sobre os quais se pretende estudar uma característica.",
-        "Apenas os elementos efetivamente observados.",
-        "A média dos dados.",
-        "Uma representação gráfica."
+        "O conjunto de unidades que se pretende estudar.",
+        "O conjunto de unidades efetivamente observadas.",
+        "O conjunto de unidades que aceitaram participar.",
+        "O conjunto de unidades com dados completos."
       ],
       "a": 0,
       "sol": "A população é o conjunto de referência do estudo.",
@@ -560,9 +560,9 @@
       "q": "Pretende-se estudar o consumo semanal de água das famílias de uma cidade. Qual formulação identifica corretamente população e variável?",
       "o": [
         "População: famílias da cidade; variável: consumo semanal de água por família.",
-        "População: litros de água; variável: cidade.",
-        "População: apenas famílias escolhidas; variável: número de ruas.",
-        "População: consumo médio; variável: famílias."
+        "População: famílias da cidade; variável: número de pessoas por família.",
+        "População: famílias inquiridas; variável: consumo semanal de água por família.",
+        "População: moradores da cidade; variável: consumo semanal de água por morador."
       ],
       "a": 0,
       "sol": "A população é o conjunto de famílias; a variável é a quantidade observada em cada família.",

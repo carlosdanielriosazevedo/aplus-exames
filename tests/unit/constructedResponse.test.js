@@ -12,6 +12,26 @@ const byId=id=>{
   return question;
 };
 
+describe("Matemática A · quantidade dos resultados em passos numéricos",()=>{
+  it.each(["CRV2-12RAE-STEPS-1","CRV2-12INT-BARROW-STEPS-1","CRV2-12CPLX-MOD-STEPS-1"])("aceita as respostas-modelo de %s",id=>{
+    const question=byId(id);
+    const steps=Object.fromEntries(question.response.steps.map(step=>[step.id,step.expected]));
+    expect(gradeResponse(question,{steps}).points).toBe(question.points);
+  });
+
+  it("não atribui pontos ao quadrado do outro extremo",()=>{
+    const question=byId("CRV2-12RAE-STEPS-1");
+    const result=gradeResponse(question,{steps:{lower:"1,42²=1,9881"}});
+    expect(result.stepResults[0]).toMatchObject({reason:"wrong_quantity",points:0});
+  });
+
+  it("não descarta outra quantidade numa igualdade encadeada",()=>{
+    const question=byId("CRV2-12RAE-STEPS-1");
+    const result=gradeResponse(question,{steps:{lower:"1,41²=r=1,9881"}});
+    expect(result.stepResults[0]).toMatchObject({reason:"invalid_numeric_format",points:0});
+  });
+});
+
 describe("Matemática A · conclusão por palavras no zero da função",()=>{
   const zero=byId("CRV2-10FUN-STEPS-1");
   it("atribui crédito à conclusão explícita no terceiro campo",()=>{

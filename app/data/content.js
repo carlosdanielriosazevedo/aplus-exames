@@ -229,8 +229,8 @@ const DIAG_BANK = [
    q:"A função f(x)=x²−4 tem que zeros?",o:["−4 e 4","−2 e 2","0 e 4","apenas 2"],a:1,
    sol:"f(x)=0 ⇔ x²=4 ⇔ x=−2 ou x=2.",hyp:"Pode existir uma dificuldade na leitura de zeros ou na resolução de uma equação quadrática simples.",probe:"D10F-P"},
   {id:"D10F-P",themeId:"10-fun",role:"probe",difficulty:1,cognitive:"Compreensão",
-   q:"Se f(3)=0, o que significa geometricamente?",o:["O gráfico passa por (0,3)","3 é um zero da função","A função é constante","O domínio termina em 3"],a:1,
-   sol:"f(3)=0 significa que x=3 é um zero da função.",hyp:"A dificuldade pode estar no próprio significado de zero de uma função."},
+   q:"Qual ponto do gráfico de f corresponde à igualdade f(3)=0?",o:["(0; 3)","(3; 0)","(3; 3)","(0; 0)"],a:1,
+   sol:"O gráfico de f contém os pontos (x; f(x)). Como f(3)=0, o ponto correspondente tem abcissa 3 e ordenada 0: (3; 0).",hyp:"A dificuldade pode estar no próprio significado de zero de uma função."},
 
   // 10.º — Geometria analítica
   {id:"D10G-A",themeId:"10-ga",role:"anchor",difficulty:2,cognitive:"Aplicação",
@@ -242,11 +242,11 @@ const DIAG_BANK = [
 
   // 11.º — Trigonometria
   {id:"D11T-A",themeId:"11-trig",role:"anchor",difficulty:2,cognitive:"Aplicação",
-   q:"Num ângulo agudo, sin(x)=3/5. Se cos(x)>0, quanto vale cos(x)?",o:["2/5","4/5","3/4","5/3"],a:1,
-   sol:"sin²x+cos²x=1, logo cos²x=1−9/25=16/25 e cos(x)=4/5.",hyp:"Pode faltar a identidade fundamental ou a interpretação do sinal do cosseno.",probe:"D11T-P"},
+   q:"Sabe-se que x é um ângulo agudo e que sen x=3/5. Quanto vale cos x?",o:["2/5","4/5","3/4","−4/5"],a:1,
+   sol:"Da fórmula sen² x+cos² x=1, vem cos² x=1−9/25=16/25. Como x é agudo, cos x>0, logo cos x=4/5.",hyp:"Pode faltar a identidade fundamental ou a interpretação do sinal do cosseno.",probe:"D11T-P"},
   {id:"D11T-P",themeId:"11-trig",role:"probe",difficulty:1,cognitive:"Compreensão",
-   q:"Qual identidade é verdadeira para qualquer x onde seno e cosseno estejam definidos?",o:["sin x+cos x=1","sin²x+cos²x=1","sin x=cos x","sin²x−cos²x=1"],a:1,
-   sol:"A identidade fundamental é sin²x+cos²x=1.",hyp:"A dificuldade pode estar numa identidade trigonométrica fundamental."},
+   q:"Um ponto do círculo trigonométrico tem abcissa cos x e ordenada sen x. Que igualdade resulta de esse ponto estar à distância 1 da origem?",o:["sen x+cos x=1","sen² x+cos² x=1","sen x=cos x","sen² x−cos² x=1"],a:1,
+   sol:"Pela fórmula da distância à origem, o quadrado da distância é cos² x+sen² x. Como a distância é 1, sen² x+cos² x=1.",hyp:"A dificuldade pode estar numa identidade trigonométrica fundamental."},
 
   // 11.º — Contagem
   {id:"D11C-A",themeId:"11-cont",role:"anchor",difficulty:2,cognitive:"Aplicação",
@@ -277,7 +277,7 @@ const DIAG_BANK = [
    q:"P(A∩B)=0,18 e P(B)=0,60. Quanto vale P(A|B)?",o:["0,30","0,108","0,42","0,78"],a:0,
    sol:"P(A|B)=0,18/0,60=0,30.",hyp:"Pode estar a falhar o condicionamento ou a operação necessária.",probe:"D12P-P"},
   {id:"D12P-P",themeId:"12-prob",role:"probe",difficulty:1,cognitive:"Compreensão",
-   q:"Em P(A|B), qual é o universo relevante depois de sabermos que B ocorreu?",o:["O universo original inteiro","Apenas B","Apenas A","A∪B"],a:1,
+   q:"Na probabilidade P(A|B), com P(B)>0, que conjunto de resultados serve de referência depois de sabermos que B ocorreu?",o:["O universo original inteiro","Apenas B","Apenas A","A∪B"],a:1,
    sol:"A condição B restringe o universo relevante ao acontecimento B.",hyp:"A dificuldade pode estar no significado da condição, e não no cálculo."},
 
   // 12.º — Exponenciais e logaritmos
@@ -301,22 +301,22 @@ const MISSION_BANK = [
   // Funções
   {id:"M10F-1",themeId:"10-fun",difficulty:2,cognitive:"Aplicação",q:"Para f(x)=2x−6, qual é o zero?",o:["−3","0","3","6"],a:2,sol:"2x−6=0 ⇔ x=3.",hyp:"Pode haver dificuldade em ligar o zero à equação f(x)=0."},
   {id:"M10F-2",themeId:"10-fun",difficulty:2,cognitive:"Interpretação",q:"Se o gráfico de f corta o eixo Ox em x=−1, então...",o:["f(−1)=0","f(0)=−1","f(−1)=1","−1 não pertence ao domínio"],a:0,sol:"Intersetar o eixo Ox significa ter ordenada 0.",hyp:"Pode haver dificuldade na leitura gráfica de zeros."},
-  {id:"M10F-3",themeId:"10-fun",difficulty:3,cognitive:"Raciocínio",q:"Uma função tem zeros −2 e 5. Qual expressão tem necessariamente esses zeros?",o:["(x+2)(x−5)","(x−2)(x+5)","x²−7","(x+2)(x+5)"],a:0,sol:"Os fatores anulam-se em x=−2 e x=5.",hyp:"Pode faltar a ligação entre zeros e fatores."},
+  {id:"M10F-3",themeId:"10-fun",difficulty:3,cognitive:"Raciocínio",q:"Qual das seguintes expressões se anula exatamente em x=−2 e x=5?",o:["(x+2)(x−5)","(x−2)(x+5)","x²−7","(x+2)(x+5)"],a:0,sol:"Os fatores anulam-se em x=−2 e x=5.",hyp:"Pode faltar a ligação entre zeros e fatores."},
 
   // Geometria analítica
   {id:"M10G-1",themeId:"10-ga",difficulty:2,cognitive:"Aplicação",q:"O vetor de A(−1,2) para B(3,5) é...",o:["(2,7)","(4,3)","(−4,−3)","(3,5)"],a:1,sol:"AB=(3−(−1),5−2)=(4,3).",hyp:"Pode haver dificuldade na subtração de coordenadas."},
-  {id:"M10G-2",themeId:"10-ga",difficulty:2,cognitive:"Aplicação",q:"A distância entre (0,0) e (3,4) é...",o:["5","7","12","25"],a:0,sol:"d=√(3²+4²)=5.",hyp:"Pode haver dificuldade na fórmula da distância ou no Teorema de Pitágoras."},
-  {id:"M10G-3",themeId:"10-ga",difficulty:3,cognitive:"Raciocínio",q:"Se o ponto M(2,1) é o ponto médio de A(0,0) e B(x,y), então B é...",o:["(1,0,5)","(4,2)","(2,1)","(−4,−2)"],a:1,sol:"(x/2,y/2)=(2,1), logo x=4 e y=2.",hyp:"Pode haver dificuldade em inverter a relação do ponto médio."},
+  {id:"M10G-2",themeId:"10-ga",difficulty:2,cognitive:"Aplicação",q:"O ponto P=(x, 12) está no primeiro quadrante e a sua distância à origem é 13. Qual é a abcissa de P?",o:["5","−5","12","13"],a:0,sol:"A fórmula da distância dá x²+12²=13², logo x²=169−144=25. No primeiro quadrante x>0, pelo que x=5.",hyp:"Pode haver dificuldade na fórmula da distância ou no Teorema de Pitágoras."},
+  {id:"M10G-3",themeId:"10-ga",difficulty:3,cognitive:"Raciocínio",q:"Se M=(2; 1) é o ponto médio de A=(0; 0) e B=(x; y), quais são as coordenadas de B?",o:["(1; 0,5)","(4; 2)","(2; 1)","(−4; −2)"],a:1,sol:"Como M é o ponto médio, x/2=2 e y/2=1. Logo, x=4 e y=2, pelo que B=(4; 2).",hyp:"Pode haver dificuldade em inverter a relação do ponto médio."},
 
   // Trigonometria
-  {id:"M11T-1",themeId:"11-trig",difficulty:2,cognitive:"Aplicação",q:"Se cos(x)=1/2 e x é agudo, então sin(x) é...",o:["1/2","√3/2","√2/2","3/2"],a:1,sol:"sin²x=1−1/4=3/4, logo sin(x)=√3/2.",hyp:"Pode faltar a identidade fundamental."},
-  {id:"M11T-2",themeId:"11-trig",difficulty:2,cognitive:"Compreensão",q:"Num ângulo do 2.º quadrante, o seno é...",o:["positivo","negativo","sempre zero","não definido"],a:0,sol:"No 2.º quadrante, o seno é positivo.",hyp:"Pode haver dificuldade nos sinais das funções trigonométricas."},
-  {id:"M11T-3",themeId:"11-trig",difficulty:3,cognitive:"Raciocínio",q:"Se sin(x)=0 e x∈[0,2π], então x pode ser...",o:["π/2 apenas","0, π ou 2π","π/4 ou 3π/4","π/2 ou 3π/2"],a:1,sol:"O seno anula-se nos múltiplos de π.",hyp:"Pode haver dificuldade em localizar zeros da função seno."},
+  {id:"M11T-1",themeId:"11-trig",difficulty:2,cognitive:"Aplicação",q:"Se cos(x)=1/2 e x é agudo, então sen(x) é...",o:["1/2","√3/2","√2/2","−√3/2"],a:1,sol:"Pela fórmula fundamental, sen² x=1−1/4=3/4. Como x é agudo, sen x>0 e, portanto, sen x=√3/2.",hyp:"Pode faltar a identidade fundamental."},
+  {id:"M11T-2",themeId:"11-trig",difficulty:2,cognitive:"Compreensão",q:"Num ângulo do 2.º quadrante, o seno é...",o:["positivo","negativo","sempre zero","não definido"],a:0,sol:"O seno é a ordenada do ponto associado ao ângulo no círculo trigonométrico. No 2.º quadrante, essa ordenada é positiva.",hyp:"Pode haver dificuldade nos sinais das funções trigonométricas."},
+  {id:"M11T-3",themeId:"11-trig",difficulty:3,cognitive:"Raciocínio",q:"No círculo trigonométrico, os pontos associados a x e a −x são simétricos em relação ao eixo Ox. Para que valores de x∈[0,2π] coincidem esses pontos?",o:["π/2 apenas","0, π ou 2π","π/4 ou 3π/4","π/2 ou 3π/2"],a:1,sol:"Os pontos coincidem quando têm ordenada nula, isto é, quando sen x=0. Em [0,2π], os múltiplos de π são 0, π e 2π.",hyp:"Pode haver dificuldade em localizar zeros da função seno."},
 
   // Contagem
   {id:"M11C-1",themeId:"11-cont",difficulty:2,cognitive:"Aplicação",q:"Quantas comissões de 3 pessoas podem ser escolhidas entre 7?",o:["21","35","210","343"],a:1,sol:"Sem cargos, a ordem não interessa: C(7,3)=35.",hyp:"Pode estar a usar uma contagem ordenada."},
-  {id:"M11C-2",themeId:"11-cont",difficulty:2,cognitive:"Aplicação",q:"Um código tem 2 algarismos, com repetição permitida. Quantos códigos existem?",o:["20","90","100","10"],a:2,sol:"Há 10 opções em cada posição: 10×10=100.",hyp:"Pode estar a somar possibilidades de etapas sucessivas."},
-  {id:"M11C-3",themeId:"11-cont",difficulty:3,cognitive:"Raciocínio",q:"Entre 6 pessoas escolhem-se presidente e vice. Quantos resultados diferentes existem?",o:["15","30","36","12"],a:1,sol:"As funções são distintas: 6×5=30.",hyp:"Pode não reconhecer que a ordem/função interessa."},
+  {id:"M11C-2",themeId:"11-cont",difficulty:2,cognitive:"Aplicação",q:"Um código é formado por dois algarismos, pode começar por zero e admite repetição. Quantos códigos diferentes existem?",o:["20","90","100","10"],a:2,sol:"Há 10 opções em cada posição: 10×10=100.",hyp:"Pode estar a somar possibilidades de etapas sucessivas."},
+  {id:"M11C-3",themeId:"11-cont",difficulty:3,cognitive:"Raciocínio",q:"Entre seis pessoas escolhem-se duas pessoas distintas para os cargos de presidente e vice-presidente. De quantas formas se podem atribuir os dois cargos?",o:["15","30","36","12"],a:1,sol:"Há 6 possibilidades para presidente. Para cada uma, restam 5 possibilidades para vice-presidente. Pelo princípio da multiplicação, há 6×5=30 atribuições.",hyp:"Pode não reconhecer que a ordem/função interessa."},
 
   // Cálculo diferencial
   {id:"M11D-1",themeId:"11-cd",difficulty:2,cognitive:"Procedimento",q:"Qual é a derivada de 3x²−2x?",o:["6x−2","3x−2","6x","x²−2"],a:0,sol:"(3x²−2x)'=6x−2.",hyp:"Pode haver dificuldade nas regras básicas de derivação."},
@@ -324,13 +324,13 @@ const MISSION_BANK = [
   {id:"M11D-3",themeId:"11-cd",difficulty:3,cognitive:"Raciocínio",q:"Se f'(2)=0 e f' muda de positivo para negativo em x=2, então x=2 corresponde a...",o:["um mínimo local","um máximo local","um ponto sem extremo","uma assíntota"],a:1,sol:"A passagem de crescente para decrescente indica um máximo local.",hyp:"Pode haver dificuldade na análise de sinal e extremos."},
 
   // Complexos
-  {id:"M12C-1",themeId:"12-cplx",difficulty:2,cognitive:"Aplicação",q:"(2+i)+(1−3i) é...",o:["3−2i","1−2i","3+4i","2−3i"],a:0,sol:"Somam-se partes reais e imaginárias: 3−2i.",hyp:"Pode haver dificuldade em operar partes real e imaginária."},
+  {id:"M12C-1",themeId:"12-cplx",difficulty:2,cognitive:"Aplicação",q:"Calcula (2+i)+conj(1+3i), onde conj designa o conjugado.",o:["3−2i","1−2i","3+4i","2−3i"],a:0,sol:"O conjugado de 1+3i é 1−3i. Somando as partes reais e os coeficientes de i, obtém-se (2+1)+(1−3)i=3−2i.",hyp:"Pode haver dificuldade em operar partes real e imaginária."},
   {id:"M12C-2",themeId:"12-cplx",difficulty:2,cognitive:"Compreensão",q:"Se z=−4+3i, então Re(z) é...",o:["3","−4","4","−3"],a:1,sol:"A parte real é −4.",hyp:"Pode haver dificuldade em identificar as componentes do número complexo."},
   {id:"M12C-3",themeId:"12-cplx",difficulty:3,cognitive:"Aplicação",q:"Quanto vale i²?",o:["1","−1","i","−i"],a:1,sol:"Por definição, i²=−1.",hyp:"Pode faltar uma propriedade fundamental da unidade imaginária."},
 
   // Probabilidades
-  {id:"M12P-1",themeId:"12-prob",difficulty:2,cognitive:"Aplicação",q:"40% compram café e 10% compram café e bolo. Sabendo que compra café, P(comprar bolo) é...",o:["10%","25%","40%","50%"],a:1,sol:"10%/40%=25%.",hyp:"Pode estar a usar diretamente a interseção sem condicionar."},
-  {id:"M12P-2",themeId:"12-prob",difficulty:2,cognitive:"Compreensão",q:"Se A e B são independentes, saber que B ocorreu...",o:["torna A impossível","não altera P(A)","obriga A a ocorrer","faz P(A)=P(B)"],a:1,sol:"Independência significa ausência de alteração na probabilidade de A.",hyp:"Pode estar a confundir independência com incompatibilidade."},
+  {id:"M12P-1",themeId:"12-prob",difficulty:2,cognitive:"Aplicação",q:"De entre os clientes de um café, 40% compram café e 10% compram café e bolo. Escolhe-se um cliente ao acaso. Sabendo que comprou café, qual é a probabilidade de também ter comprado bolo?",o:["10%","25%","40%","50%"],a:1,sol:"Entre os 40% que compraram café, há 10% do total que também compraram bolo. A probabilidade pedida é 0,10/0,40=0,25, ou 25%.",hyp:"Pode estar a usar diretamente a interseção sem condicionar."},
+  {id:"M12P-2",themeId:"12-prob",difficulty:2,cognitive:"Compreensão",q:"Se A e B são independentes e P(B)>0, saber que B ocorreu...",o:["torna A impossível","não altera P(A)","obriga A a ocorrer","faz P(A)=P(B)"],a:1,sol:"P(A|B)=P(A∩B)/P(B)=P(A)P(B)/P(B)=P(A).",hyp:"Pode estar a confundir independência com incompatibilidade."},
   {id:"M12P-3",themeId:"12-prob",difficulty:3,cognitive:"Raciocínio",q:"P(A)=0,4, P(B)=0,3 e P(A∩B)=0,12. A e B são...",o:["independentes","incompatíveis","complementares","iguais"],a:0,sol:"0,4×0,3=0,12, logo satisfazem o critério de independência.",hyp:"Pode haver dificuldade em aplicar o critério formal de independência."},
 
   // Exponenciais e logaritmos
@@ -347,12 +347,12 @@ const MISSION_BANK = [
 
 const EXTRA_BANK = [
   {id:"M10F-4",themeId:"10-fun",difficulty:3,cognitive:"Interpretação",q:"A função f(x)=−(x−2)²+5 atinge o seu valor máximo quando...",o:["x=−2","x=0","x=2","x=5"],a:2,sol:"A parábola está na forma de vértice e tem máximo no vértice, x=2.",hyp:"Pode haver dificuldade em interpretar a forma de vértice de uma função quadrática."},
-  {id:"M10F-5",themeId:"10-fun",difficulty:3,cognitive:"Raciocínio",q:"Se f(x)=(x−1)(x+3), quais são os zeros de f?",o:["1 e −3","−1 e 3","1 e 3","−1 e −3"],a:0,sol:"Cada fator deve ser zero: x=1 ou x=−3.",hyp:"Pode faltar a ligação entre fatores e zeros de uma função."},
+  {id:"M10F-5",themeId:"10-fun",difficulty:3,cognitive:"Raciocínio",q:"Se f(x)=(x−1)(x+3), quais são os zeros de f?",o:["1 e −3","−1 e 3","1 e 3","−1 e −3"],a:0,sol:"Pela lei do anulamento do produto, (x−1)(x+3)=0 se x−1=0 ou x+3=0. Assim, os zeros são 1 e −3.",hyp:"Pode faltar a ligação entre fatores e zeros de uma função."},
 
   {id:"M10G-4",themeId:"10-ga",difficulty:3,cognitive:"Aplicação",q:"Qual é o declive da reta que passa por (1,2) e (3,6)?",o:["1","2","3","4"],a:1,sol:"m=(6−2)/(3−1)=4/2=2.",hyp:"Pode haver dificuldade no cálculo do declive a partir de dois pontos."},
   {id:"M10G-5",themeId:"10-ga",difficulty:2,cognitive:"Compreensão",q:"Qual das equações representa uma reta de declive 2 que passa na origem?",o:["y=x+2","y=2x","y=2","x=2y"],a:1,sol:"Uma reta pela origem tem ordenada na origem 0: y=2x.",hyp:"Pode haver dificuldade em relacionar declive e equação reduzida da reta."},
 
-  {id:"M11T-4",themeId:"11-trig",difficulty:2,cognitive:"Conhecimento",q:"Quanto vale sin(π/6)?",o:["0","1/2","√2/2","1"],a:1,sol:"sin(π/6)=1/2.",hyp:"Pode faltar um valor trigonométrico notável."},
+  {id:"M11T-4",themeId:"11-trig",difficulty:2,cognitive:"Conhecimento",q:"Quanto vale sen(π/6)?",o:["0","1/2","√2/2","1"],a:1,sol:"A altura de um triângulo equilátero de lado 2 divide-o em dois triângulos retângulos. Em cada um, o cateto oposto ao ângulo π/6 mede 1 e a hipotenusa mede 2, logo sen(π/6)=1/2.",hyp:"Pode faltar um valor trigonométrico notável."},
   {id:"M11T-5",themeId:"11-trig",difficulty:3,cognitive:"Aplicação",q:"Em [0,2π], as soluções de cos(x)=0 são...",o:["0 e π","π/2 e 3π/2","π/4 e 5π/4","apenas π/2"],a:1,sol:"O cosseno anula-se em π/2 e 3π/2 nesse intervalo.",hyp:"Pode haver dificuldade em localizar zeros da função cosseno."},
 
   {id:"M11C-4",themeId:"11-cont",difficulty:2,cognitive:"Aplicação",q:"De quantas maneiras podem ser ordenados 4 livros diferentes numa prateleira?",o:["4","8","16","24"],a:3,sol:"São 4! = 24 ordenações.",hyp:"Pode haver dificuldade em reconhecer uma permutação."},
@@ -364,11 +364,11 @@ const EXTRA_BANK = [
   {id:"M12C-4",themeId:"12-cplx",difficulty:2,cognitive:"Aplicação",q:"Quanto vale (1+i)(1−i)?",o:["0","1","2","2i"],a:2,sol:"(1+i)(1−i)=1−i²=2.",hyp:"Pode haver dificuldade na multiplicação de complexos ou na utilização de i²=−1."},
   {id:"M12C-5",themeId:"12-cplx",difficulty:2,cognitive:"Conhecimento",q:"Quanto vale i³?",o:["1","−1","i","−i"],a:3,sol:"i³=i²·i=−i.",hyp:"Pode faltar o ciclo das potências da unidade imaginária."},
 
-  {id:"M12P-4",themeId:"12-prob",difficulty:3,cognitive:"Aplicação",q:"P(A)=0,4, P(B)=0,5 e P(A∩B)=0,2. Quanto vale P(A∪B)?",o:["0,2","0,7","0,9","1,1"],a:1,sol:"P(A∪B)=0,4+0,5−0,2=0,7.",hyp:"Pode haver dificuldade na fórmula da união ou em descontar a interseção."},
-  {id:"M12P-5",themeId:"12-prob",difficulty:3,cognitive:"Aplicação",q:"A e B são independentes, P(A)=0,3 e P(B)=0,4. Quanto vale P(A∩B)?",o:["0,12","0,7","0,1","1,2"],a:0,sol:"Para acontecimentos independentes, P(A∩B)=P(A)P(B)=0,12.",hyp:"Pode haver dificuldade em aplicar o critério de independência."},
+  {id:"M12P-4",themeId:"12-prob",difficulty:3,cognitive:"Aplicação",q:"P(A)=0,4, P(B)=0,5 e P(A∩B)=0,2. Quanto vale P(A∪B)?",o:["0,2","0,7","0,9","0,5"],a:1,sol:"P(A∪B)=0,4+0,5−0,2=0,7.",hyp:"Pode haver dificuldade na fórmula da união ou em descontar a interseção."},
+  {id:"M12P-5",themeId:"12-prob",difficulty:3,cognitive:"Aplicação",q:"A e B são independentes, P(A)=0,3 e P(B)=0,4. Quanto vale P(A∩B)?",o:["0,12","0,7","0,1","0,012"],a:0,sol:"Para acontecimentos independentes, P(A∩B)=P(A)P(B)=0,12.",hyp:"Pode haver dificuldade em aplicar o critério de independência."},
 
-  {id:"M12E-4",themeId:"12-expl",difficulty:2,cognitive:"Conhecimento",q:"Quanto vale ln(e³)?",o:["e","3","ln(3)","9"],a:1,sol:"ln e³=3.",hyp:"Pode faltar a relação inversa entre exponencial e logaritmo natural."},
-  {id:"M12E-5",themeId:"12-expl",difficulty:3,cognitive:"Raciocínio",q:"Quanto vale 10^(log₁₀7)?",o:["1","7","10","70"],a:1,sol:"A exponencial de base 10 e o logaritmo de base 10 são funções inversas.",hyp:"Pode haver dificuldade na relação entre funções exponenciais e logarítmicas."},
+  {id:"M12E-4",themeId:"12-expl",difficulty:2,cognitive:"Conhecimento",q:"Quanto vale ln(e³)?",o:["e","3","ln(3)","9"],a:1,sol:"Como a exponencial de base e e o logaritmo natural são funções inversas, ln(e³)=3.",hyp:"Pode faltar a relação inversa entre exponencial e logaritmo natural."},
+  {id:"M12E-5",themeId:"12-expl",difficulty:3,cognitive:"Raciocínio",q:"Quanto vale 10^(log₁₀(7))?",o:["1","7","10","70"],a:1,sol:"A exponencial de base 10 e o logaritmo de base 10 são funções inversas. Assim, 10^(log₁₀(7))=7.",hyp:"Pode haver dificuldade na relação entre funções exponenciais e logarítmicas."},
 
   {id:"M12L-4",themeId:"12-fcont",difficulty:2,cognitive:"Interpretação",q:"A função f(x)=1/x tem uma assíntota vertical em...",o:["x=−1","x=0","x=1","y=0"],a:1,sol:"Quando x se aproxima de 0, 1/x cresce em módulo sem limite; x=0 é assíntota vertical.",hyp:"Pode haver dificuldade em relacionar comportamento limite e assíntotas."},
   {id:"M12L-5",themeId:"12-fcont",difficulty:2,cognitive:"Aplicação",q:"Quanto vale lim(x→2)(x²+1)?",o:["3","4","5","não existe"],a:2,sol:"Sendo um polinómio contínuo, basta substituir: 2²+1=5.",hyp:"Pode haver dificuldade em calcular limites de funções contínuas."}
@@ -399,7 +399,7 @@ const PROFILE_DIAG_VARIANTS = [
   {id:"D11D-E",themeId:"11-cd",role:"anchor",difficulty:1,cognitive:"Procedimento",focus:"Derivadas",
    q:"Qual é a derivada de f(x)=x²?",o:["x","2x","x²","2"],a:1,sol:"(x²)'=2x.",hyp:"Pode existir uma dificuldade numa regra elementar de derivação.",contexts:["diagnostic"],signature:"11-cd:derivadas:easy"},
   {id:"D11D-H",themeId:"11-cd",role:"anchor",difficulty:3,cognitive:"Raciocínio",focus:"Monotonia e extremos",
-   q:"Se f' é positiva antes de x=3 e negativa depois de x=3, então f tem em x=3...",o:["um mínimo local","um máximo local","uma assíntota","um zero obrigatório"],a:1,sol:"A função passa de crescente para decrescente: existe um máximo local.",hyp:"Pode existir dificuldade em ligar o sinal da derivada à monotonia e aos extremos.",contexts:["diagnostic"],signature:"11-cd:extremos:hard"},
+   q:"Se f é contínua em x=3, f′ é positiva imediatamente antes de x=3 e negativa imediatamente depois, o que tem f em x=3?",o:["um mínimo local","um máximo local","uma assíntota","um zero obrigatório"],a:1,sol:"A função cresce até x=3 e decresce a partir daí. A continuidade em 3 liga os dois intervalos de monotonia, pelo que f(3) é um máximo local.",hyp:"Pode existir dificuldade em ligar o sinal da derivada à monotonia e aos extremos.",contexts:["diagnostic"],signature:"11-cd:extremos:hard"},
 
   {id:"D12P-E",themeId:"12-prob",role:"anchor",difficulty:1,cognitive:"Compreensão",focus:"Acontecimentos",
    q:"Se P(A)=0,35, qual é P(Aᶜ)?",o:["0,35","0,65","1,35","0"],a:1,sol:"P(Aᶜ)=1−0,35=0,65.",hyp:"Pode existir uma dificuldade numa propriedade elementar da probabilidade.",contexts:["diagnostic"],signature:"12-prob:complementar:easy"},
@@ -414,17 +414,17 @@ const PROFILE_DIAG_VARIANTS = [
 
 const CALIBRATION_BANK = [
   {id:"C10EST-1",themeId:"10-est",difficulty:2,cognitive:"Interpretação",focus:"Interpretação de dados",
-   q:"Num conjunto de valores, aumentar apenas o maior valor tende a afetar diretamente...",o:["a média","apenas a moda","nunca a mediana","o número de observações"],a:0,
-   sol:"A média usa todos os valores e aumenta quando um valor aumenta.",hyp:"Pode haver dificuldade em compreender a sensibilidade da média.",contexts:["mission"],signature:"10-est:media:cal1"},
+   q:"Mantendo o número de observações, aumenta-se uma das observações com valor máximo. Qual destas quantidades aumenta necessariamente?",o:["A média","A moda","A mediana","A frequência absoluta da moda"],a:0,
+   sol:"O numerador usado para calcular a média é a soma das observações. Essa soma aumenta e o número de observações mantém-se. Assim, a média aumenta sempre.",hyp:"Pode haver dificuldade em compreender a sensibilidade da média.",contexts:["mission"],signature:"10-est:media:cal1"},
   {id:"C10GS-1",themeId:"10-gs",difficulty:2,cognitive:"Raciocínio",focus:"Raciocínio geométrico",
-   q:"Num triângulo, dois ângulos medem 50° e 60°. O terceiro mede...",o:["60°","70°","80°","110°"],a:1,
-   sol:"A soma dos ângulos internos de um triângulo é 180°: 180−110=70.",hyp:"Pode haver dificuldade numa propriedade geométrica elementar.",contexts:["mission"],signature:"10-gs:triangulo:cal1"},
+   q:"Num triângulo, dois ângulos externos, em vértices diferentes, medem 130° e 120°. Quanto mede o ângulo interno no terceiro vértice?",o:["60°","70°","80°","110°"],a:1,
+   sol:"Cada ângulo interno é suplementar do externo junto ao mesmo vértice. Assim, os dois primeiros ângulos internos medem 180°−130°=50° e 180°−120°=60°. O terceiro mede 180°−50°−60°=70°.",hyp:"Pode haver dificuldade numa propriedade geométrica elementar.",contexts:["mission"],signature:"10-gs:triangulo:cal1"},
   {id:"C11SUC-1",themeId:"11-suc",difficulty:2,cognitive:"Aplicação",focus:"Termo geral",
    q:"Na sucessão uₙ=2n+1, quanto vale u₅?",o:["6","10","11","12"],a:2,
    sol:"u₅=2×5+1=11.",hyp:"Pode haver dificuldade em substituir o índice no termo geral.",contexts:["mission"],signature:"11-suc:termo:cal1"},
   {id:"C11PE-1",themeId:"11-pe",difficulty:2,cognitive:"Compreensão",focus:"Perpendicularidade",
-   q:"Se dois vetores não nulos têm produto escalar igual a zero, então são...",o:["paralelos","perpendiculares","iguais","opostos"],a:1,
-   sol:"Produto escalar nulo entre vetores não nulos caracteriza perpendicularidade.",hyp:"Pode haver dificuldade na interpretação geométrica do produto escalar.",contexts:["mission"],signature:"11-pe:perp:cal1"},
+   q:"Dois vetores diretores de duas retas do mesmo plano têm produto escalar zero. Como são as retas?",o:["paralelas","perpendiculares","coincidentes","secantes oblíquas"],a:1,
+   sol:"Como os vetores diretores são não nulos e têm produto escalar zero, são perpendiculares. Logo, as duas retas do plano também são perpendiculares.",hyp:"Pode haver dificuldade na interpretação geométrica do produto escalar.",contexts:["mission"],signature:"11-pe:perp:cal1"},
   {id:"C12INT-1",themeId:"12-int",difficulty:2,cognitive:"Aplicação",focus:"Primitivas",
    q:"Uma primitiva de f(x)=2x é...",o:["x²","2x²","x","2"],a:0,
    sol:"A derivada de x² é 2x.",hyp:"Pode haver dificuldade na relação entre derivação e primitivação.",contexts:["mission"],signature:"12-int:primitiva:cal1"},
@@ -446,16 +446,16 @@ const CAUSAL_PROBE_BANK = [
    sol:"Pela regra da potência, (4x³)'=12x².",hyp:"Pode existir uma dificuldade numa regra elementar de derivação.",
    contexts:["mission"],signature:"11-cd:derivadas:causal1",reviewStatus:"prototype",causalProbe:true},
   {id:"CP11D-MON-1",themeId:"11-cd",difficulty:1,cognitive:"Interpretação",focus:"Monotonia e extremos",
-   q:"Se f'(x)>0 em ]1,4[, então nesse intervalo f é...",o:["decrescente","crescente","constante","negativa"],a:1,
-   sol:"Derivada positiva implica que f é crescente.",hyp:"Pode existir dificuldade em interpretar o sinal da derivada.",
+   q:"A altura h de um elevador é derivável em função do tempo. Durante certo intervalo, h′(t)>0. Como varia h nesse intervalo?",o:["decrescente","crescente","constante","negativa"],a:1,
+   sol:"A derivada h′(t) é a velocidade vertical do elevador. Como é positiva em todo o intervalo, a altura h é crescente.",hyp:"Pode existir dificuldade em interpretar o sinal da derivada.",
    contexts:["mission"],signature:"11-cd:monotonia:causal1",reviewStatus:"prototype",causalProbe:true},
   {id:"CP10F-MON-1",themeId:"10-fun",difficulty:1,cognitive:"Interpretação",focus:"Monotonia e extremos",
-   q:"Se, quando x aumenta num intervalo, os valores de f(x) também aumentam, então f é nesse intervalo...",o:["decrescente","crescente","constante","sem domínio"],a:1,
+   q:"Se, quando x aumenta num intervalo, os valores de f(x) também aumentam, então f é nesse intervalo...",o:["decrescente","crescente","constante","crescente apenas para x>0"],a:1,
    sol:"Os valores da função aumentam com x, logo a função é crescente.",hyp:"Pode existir dificuldade na própria noção de monotonia.",
    contexts:["mission"],signature:"10-fun:monotonia:causal1",reviewStatus:"prototype",causalProbe:true},
   {id:"CP12L-LIM-1",themeId:"12-fcont",difficulty:1,cognitive:"Compreensão",focus:"Limites",
-   q:"Se lim(x→2) f(x)=5, então, quando x está muito próximo de 2, f(x) está tipicamente...",o:["próximo de 2","próximo de 5","sempre igual a 5","sempre igual a 2"],a:1,
-   sol:"O limite descreve o valor de que f(x) se aproxima quando x se aproxima de 2.",hyp:"Pode existir dificuldade no significado de limite.",
+   q:"Se lim(x→2) f(x)=5, a que valor fica f(x) arbitrariamente próxima quando x está suficientemente perto de 2, com x≠2?",o:["próximo de 2","próximo de 5","sempre igual a 5","sempre igual a 2"],a:1,
+   sol:"O limite indica que se consegue tornar f(x) tão próxima de 5 quanto se pretenda, tomando x suficientemente próximo de 2 e diferente de 2.",hyp:"Pode existir dificuldade no significado de limite.",
    contexts:["mission"],signature:"12-fcont:limites:causal1",reviewStatus:"prototype",causalProbe:true},
   {id:"CP12P-ACO-1",themeId:"12-prob",difficulty:1,cognitive:"Compreensão",focus:"Acontecimentos",
    q:"Se A e B ocorrem simultaneamente, esse acontecimento representa-se por...",o:["A∪B","A∩B","Aᶜ","Bᶜ"],a:1,
@@ -540,9 +540,9 @@ const BETA_GAP_BANK = [
   },
   {
     id:"BG12E-MOD-1",themeId:"12-expl",difficulty:2,cognitive:"Modelação",focus:"Modelação",
-    q:"Uma cultura começa com 500 bactérias e duplica de 3 em 3 horas. Qual expressão modela o número N de bactérias ao fim de t horas?",
+    q:"Uma cultura tem inicialmente 500 bactérias e cresce segundo um modelo exponencial. O número de bactérias duplica a cada 3 horas. Qual é a expressão para o número estimado N(t) de bactérias ao fim de t horas?",
     o:["N(t)=500·2^(t/3)","N(t)=500·3^(t/2)","N(t)=500+2t/3","N(t)=1000·2^t"],a:0,
-    sol:"Há um fator 2 por cada intervalo de 3 horas, logo o número de duplicações ao fim de t horas é t/3: N(t)=500·2^(t/3).",
+    sol:"O valor inicial é 500 e o fator de crescimento em 3 horas é 2. Como t horas correspondem a t/3 períodos de 3 horas, o modelo é N(t)=500·2^(t/3).",
     hyp:"Pode existir dificuldade em transformar uma taxa de crescimento por intervalos num expoente temporal.",
     contexts:["mission","training","exam"],signature:"12-expl:Modelação:beta-gap-1",reviewStatus:"prototype"
   }
@@ -556,7 +556,7 @@ const COVERAGE_V5_1_BANK = [
   // 11.º — Cálculo diferencial · Taxa de variação
   {
     id:"CV51-11CD-TV-1",themeId:"11-cd",difficulty:2,cognitive:"Aplicação",focus:"Taxa de variação",
-    q:"A posição de uma partícula é s(t)=t²+2t, em metros. Qual é a taxa média de variação de s entre t=1 e t=3?",
+    q:"A posição de uma partícula é s(t)=t²+2t, com s em metros e t em segundos. Qual é a taxa média de variação de s entre t=1 e t=3?",
     o:["4 m/s","5 m/s","6 m/s","12 m/s"],a:2,
     sol:"s(3)=15 e s(1)=3. A taxa média é (15−3)/(3−1)=12/2=6 m/s.",
     hyp:"Pode existir dificuldade em calcular uma taxa média de variação a partir de valores da função.",
@@ -576,7 +576,7 @@ const COVERAGE_V5_1_BANK = [
     id:"CV51-11CD-OPT-1",themeId:"11-cd",difficulty:3,cognitive:"Modelação",focus:"Otimização",
     q:"Um retângulo tem perímetro 20. Se um dos lados mede x, a área pode escrever-se A(x)=x(10−x). Qual é a área máxima possível?",
     o:["20","24","25","50"],a:2,
-    sol:"A(x)=−x²+10x é uma parábola com máximo no vértice x=5. Logo A(5)=25.",
+    sol:"Como o perímetro é 20, os lados medem x e 10−x, com 0<x<10. A(x)=25−(x−5)² é máxima para x=5, valor admissível. Portanto, a área máxima é 25.",
     hyp:"Pode existir dificuldade em transformar uma restrição geométrica numa função a otimizar.",
     contexts:["mission","training","exam"],signature:"11-cd:Otimização:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
   },
@@ -584,7 +584,7 @@ const COVERAGE_V5_1_BANK = [
     id:"CV51-11CD-OPT-2",themeId:"11-cd",difficulty:2,cognitive:"Aplicação",focus:"Otimização",
     q:"Considere f(x)=−x²+6x+1. Para que valor de x a função atinge o seu máximo?",
     o:["1","2","3","6"],a:2,
-    sol:"f'(x)=−2x+6. O ponto crítico verifica −2x+6=0, logo x=3; como a parábola é côncava, é máximo.",
+    sol:"A derivada f′(x)=−2x+6 anula-se em x=3. É positiva para x<3 e negativa para x>3, pelo que f atinge o máximo quando x=3.",
     hyp:"Pode existir dificuldade em localizar um extremo usando a derivada.",
     contexts:["mission","training","exam"],signature:"11-cd:Otimização:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
   },
@@ -674,7 +674,7 @@ const COVERAGE_V5_1_BANK = [
     id:"CV51-12FCD-RC-2",themeId:"12-fcd",difficulty:3,cognitive:"Procedimento",focus:"Regra da cadeia",
     q:"Para h(x)=√(2x+5), qual é h'(x)?",
     o:["1/(2√(2x+5))","1/√(2x+5)","2/√(2x+5)","√(2x+5)"],a:1,
-    sol:"h'(x)=(1/(2√(2x+5)))·2=1/√(2x+5).",
+    sol:"Para 2x+5>0, a regra da cadeia dá h'(x)=[1/(2√(2x+5))]·2=1/√(2x+5). Assim, a fórmula vale para x>−5/2.",
     hyp:"Pode existir dificuldade em aplicar a regra da cadeia a uma raiz quadrada.",
     contexts:["mission","training","exam"],signature:"12-fcd:Regra da cadeia:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
   },
@@ -744,9 +744,9 @@ const COVERAGE_V5_1_BANK = [
   },
   {
     id:"CV51-12CPLX-MA-2",themeId:"12-cplx",difficulty:3,cognitive:"Raciocínio",focus:"Módulo e argumento",
-    q:"Considere z=−1+√3 i. Um argumento de z no intervalo [0,2π[ é...",
+    q:"Considera z=2+2√3 i. Qual é o argumento de −conj(z) no intervalo [0, 2π[, onde conj designa o conjugado?",
     o:["π/3","2π/3","4π/3","5π/3"],a:1,
-    sol:"z está no 2.º quadrante e tan do ângulo de referência é √3. O argumento é 2π/3.",
+    sol:"Tem-se −conj(z)=−2+2√3 i. O afixo fica no 2.º quadrante e a tangente do ângulo de referência é (2√3)/2=√3. O argumento pedido é π−π/3=2π/3.",
     hyp:"Pode existir dificuldade em combinar quadrante e ângulo de referência na determinação do argumento.",
     contexts:["mission","training","exam"],signature:"12-cplx:Módulo e argumento:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
   },
@@ -824,9 +824,9 @@ const COVERAGE_V5_1_BANK = [
   },
   {
     id:"CV51-11TRIG-EQ-2",themeId:"11-trig",difficulty:2,cognitive:"Procedimento",focus:"Equações trigonométricas",
-    q:"No intervalo [0,2π], quais são as soluções da equação sin x=0?",
+    q:"No intervalo [0,2π], quais são as soluções da equação sen x=0?",
     o:["0 e π","π/2 e 3π/2","0, π e 2π","π apenas"],a:2,
-    sol:"sin x=0 para múltiplos inteiros de π. Em [0,2π], as soluções são 0, π e 2π.",
+    sol:"sen x=0 para múltiplos inteiros de π. Em [0,2π], as soluções são 0, π e 2π.",
     hyp:"Pode existir dificuldade em identificar todas as soluções trigonométricas dentro de um intervalo fechado.",
     contexts:["mission","training","exam"],signature:"11-trig:Equações trigonométricas:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
   },
@@ -892,7 +892,7 @@ const COVERAGE_V5_1_BANK = [
   {
     id:"CV51-10EST-REP-1",themeId:"10-est",difficulty:2,cognitive:"Interpretação",focus:"Representações de dados",
     q:"Qual representação é particularmente adequada para comparar frequências de categorias como 'A', 'B' e 'C'?",
-    o:["Diagrama de barras","Gráfico de uma função contínua","Circunferência trigonométrica","Reta numérica apenas"],a:0,
+    o:["Diagrama de barras","Histograma de classes numéricas","Diagrama de dispersão","Diagrama de extremos e quartis"],a:0,
     sol:"Um diagrama de barras permite comparar diretamente as frequências associadas a categorias.",
     hyp:"Pode existir dificuldade em selecionar uma representação apropriada ao tipo de dados.",
     contexts:["mission","training","exam"],signature:"10-est:Representações de dados:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
@@ -916,7 +916,7 @@ const COVERAGE_V5_1_BANK = [
   },
   {
     id:"CV51-10GS-RP-1",themeId:"10-gs",difficulty:2,cognitive:"Resolução de problemas",focus:"Resolução de problemas",
-    q:"Uma escada de 5 m está encostada a uma parede e a base fica a 3 m da parede. A que altura chega a escada?",
+    q:"Uma escada de 5 m encosta-se a uma parede vertical sobre chão horizontal. A base da escada fica a 3 m da parede. A que altura chega a escada?",
     o:["2 m","3 m","4 m","8 m"],a:2,
     sol:"Forma-se um triângulo retângulo: h²+3²=5², logo h²=16 e h=4 m.",
     hyp:"Pode existir dificuldade em reconhecer um modelo geométrico dentro de um contexto.",
@@ -933,9 +933,9 @@ const COVERAGE_V5_1_BANK = [
   },
   {
     id:"CV51-11PE-AG-1",themeId:"11-pe",difficulty:3,cognitive:"Aplicação",focus:"Aplicações geométricas",
-    q:"Se u e v são vetores não nulos e u·v=|u||v|, qual é o ângulo entre eles?",
+    q:"Se u e v são vetores não nulos e u·v=‖u‖‖v‖, qual é o ângulo entre eles?",
     o:["0","π/4","π/2","π"],a:0,
-    sol:"u·v=|u||v|cosθ. Logo cosθ=1 e θ=0.",
+    sol:"Como u·v=‖u‖‖v‖cos θ, segue-se que cos θ=1. Para θ∈[0,π], isso só ocorre quando θ=0.",
     hyp:"Pode existir dificuldade em ligar produto escalar ao ângulo entre vetores.",
     contexts:["mission","training","exam"],signature:"11-pe:Aplicações geométricas:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
   },
@@ -959,7 +959,7 @@ const COVERAGE_V5_1_BANK = [
 
   {
     id:"CV51-12RAE-APR-1",themeId:"12-rae",difficulty:2,cognitive:"Aplicação",focus:"Aproximações",
-    q:"Sabe-se que f(1)<0 e f(2)>0 e que f é contínua em [1,2]. Qual intervalo é garantido conter pelo menos um zero de f?",
+    q:"Sabe-se que f é contínua em [1,2], f(1)<0 e f(2)>0. Em qual dos intervalos seguintes está garantida a existência de pelo menos um zero de f?",
     o:["[−2,−1]","[0,1]","[1,2]","[2,3]"],a:2,
     sol:"Pela continuidade e mudança de sinal entre 1 e 2, existe pelo menos um zero em [1,2].",
     hyp:"Pode existir dificuldade em usar uma mudança de sinal para localizar aproximadamente uma solução.",
@@ -977,7 +977,7 @@ const COVERAGE_V5_1_BANK = [
   {
     id:"CV51-12IE-EST-1",themeId:"12-ie",difficulty:2,cognitive:"Interpretação",focus:"Estimativas",
     q:"Numa amostra aleatória de 200 alunos, 120 preferem a opção A. Qual é a estimativa pontual da proporção populacional que prefere A?",
-    o:["0,4","0,5","0,6","1,2"],a:2,
+    o:["0,4","0,5","0,6","2/3"],a:2,
     sol:"A proporção amostral é 120/200=0,6 e serve como estimativa pontual da proporção populacional.",
     hyp:"Pode existir dificuldade em obter uma estimativa de proporção a partir de uma amostra.",
     contexts:["mission","training","exam"],signature:"12-ie:Estimativas:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
@@ -1001,7 +1001,7 @@ const COVERAGE_V5_1_BANK = [
   },
   {
     id:"CV51-12MAT-APL-1",themeId:"12-mat",difficulty:2,cognitive:"Modelação",focus:"Aplicações",
-    q:"Uma loja regista as quantidades vendidas de dois produtos em v=(3,5) e os preços em p=(2,4), em euros. Qual é a receita total, usando o produto linha-coluna correspondente?",
+    q:"Uma loja vende 3 unidades do primeiro produto e 5 do segundo. O vetor-linha das quantidades é v=(3,5) e o vetor-coluna dos preços em euros é p=(2,4)ᵀ. Qual é a receita total, dada pelo produto vp?",
     o:["18 €","20 €","26 €","32 €"],a:2,
     sol:"A receita é 3×2+5×4=6+20=26 €.",
     hyp:"Pode existir dificuldade em interpretar uma operação matricial/vetorial num contexto.",

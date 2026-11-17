@@ -71,7 +71,7 @@
       "year": "12.º opcional",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "A média aproximada da distribuição de X̄ é...",
+      "q": "Uma amostra tem dois grupos de igual dimensão. As médias dos grupos têm esperanças μ−1 e μ+1. Qual é a esperança da média de toda a amostra?",
       "o": [
         "μ/n.",
         "nμ.",
@@ -79,7 +79,7 @@
         "σ."
       ],
       "a": 2,
-      "sol": "E(X̄)=μ.",
+      "sol": "Como os grupos têm a mesma dimensão, a média global é a média das duas médias de grupo. Pela linearidade da esperança, o resultado exato é [(μ−1)+(μ+1)]/2=μ.",
       "hyp": "Pode dividir a média por n.",
       "contexts": [
         "mission",
@@ -287,7 +287,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Assim, X̄ é aproximadamente N(100,2²), se a notação usar variância no segundo parâmetro. Isto significa desvio padrão...",
+      "q": "A média amostral X̄ segue aproximadamente uma distribuição normal N(100;2²), em que 2² é a variância. Qual é o seu desvio padrão?",
       "o": [
         "4.",
         "100.",
@@ -368,7 +368,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Se n passa de 25 para 100, o erro padrão...",
+      "q": "Para amostras de observações independentes da mesma população de desvio padrão σ>0, como muda o erro padrão da média quando n passa de 25 para 100?",
       "o": [
         "fica um quarto.",
         "fica metade.",
@@ -557,7 +557,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Suponha X̄≈N(100,2²). O valor z associado a X̄=104 é...",
+      "q": "A média amostral X̄ segue aproximadamente uma normal de média 100 e variância 2². Qual é o valor padronizado z para X̄=104?",
       "o": [
         "2.",
         "1.",
@@ -719,7 +719,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Aproximadamente 95% está entre...",
+      "q": "Numa distribuição normal de média μ e desvio padrão σ, entre que limites se encontra aproximadamente 95% da probabilidade?",
       "o": [
         "μ−σ e μ+σ.",
         "μ−3σ e μ+3σ.",
@@ -746,7 +746,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Modelação",
-      "q": "Se médias de lotes de 64 peças têm μ=10g, σ individual=0,8g, o erro padrão é...",
+      "q": "As massas de 64 peças são observações independentes da mesma população, com média 10 g e desvio padrão 0,8 g. Qual é o erro padrão da média das massas?",
       "o": [
         "0,8g.",
         "0,0125g.",
@@ -1070,7 +1070,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Exemplo",
-      "q": "Aproximar P(X≤20) para X Binomial por Normal pode usar fronteira...",
+      "q": "Para aproximar uma variável binomial X por uma normal, representa-se cada inteiro k pelo intervalo de amplitude 1 centrado em k. Que limite superior se usa na aproximação de P(X≤20)?",
       "o": [
         "20.",
         "19,5 sempre.",
@@ -1078,7 +1078,7 @@
         "20,5."
       ],
       "a": 3,
-      "sol": "A correção típica inclui toda a barra de X=20 até 20,5.",
+      "sol": "O intervalo centrado em 20 vai de 19,5 a 20,5. Como X=20 pertence ao acontecimento X≤20, a aproximação inclui esse intervalo até 20,5.",
       "hyp": "Pode deslocar no sentido errado.",
       "contexts": [
         "mission",

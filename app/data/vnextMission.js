@@ -70,13 +70,13 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Método de Borda",
     "q": "No perfil 6 eleitores A > B > C e 5 eleitores B > C > A, A tem 6 dos 11 primeiros lugares. Mesmo assim, B vence por Borda 3-2-1. O que mostra este exemplo?",
     "o": [
-      "Borda considera apenas os primeiros lugares.",
+      "A maioria de primeiros lugares garante vitória quando há apenas 11 eleitores.",
       "Ter maioria de primeiros lugares não garante necessariamente vitória por Borda.",
-      "Borda ignora os segundos lugares.",
-      "O perfil é inválido."
+      "A maioria de primeiros lugares só deixa de contar quando há empate.",
+      "O maior número de segundos lugares é condição suficiente para vencer."
     ],
     "a": 1,
-    "sol": "O método de Borda valoriza toda a ordenação. B acumula muitos pontos por aparecer sempre em posições altas.",
+    "sol": "A obtém 6×3+5×1=23 pontos. B obtém 6×2+5×3=27 pontos. Assim, apesar de A liderar nos primeiros lugares, B vence porque a pontuação tem em conta todas as posições.",
     "hyp": "Pode supor que a maioria de primeiras preferências domina qualquer método.",
     "contexts": [
       "mission"
@@ -271,11 +271,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Método de D'Hondt",
-    "q": "Se todos os votos de todas as listas forem multiplicados por 10, mantendo o número de mandatos, o que acontece à distribuição de D'Hondt?",
+    "q": "Se todos os votos forem multiplicados por 10, mantendo o número de mandatos e usando o mesmo critério de desempate baseado nos votos relativos das listas, o que acontece à distribuição de D'Hondt?",
     "o": [
-      "Muda sempre a favor da lista maior.",
-      "Todas as listas recebem mais mandatos.",
-      "Passa a existir empate.",
+      "Pode mudar, porque os maiores quocientes aumentam mais em valor absoluto.",
+      "Mantém-se apenas se as listas tiverem o mesmo número de votos.",
+      "Mantém-se apenas se cada lista já tiver obtido um mandato.",
       "Mantém-se, porque todos os quocientes são multiplicados por 10."
     ],
     "a": 3,
@@ -390,12 +390,12 @@ export const VNEXT_MISSION_QUESTIONS=[
     "q": "Adicionar exatamente 100 votos a todas as listas garante que a distribuição de D'Hondt fica igual?",
     "o": [
       "Não; somar a mesma constante não multiplica todos os quocientes pelo mesmo fator e pode alterar a ordem.",
-      "Sim, porque todas aumentam o mesmo.",
-      "Sim, desde que haja três listas.",
-      "Não, porque D'Hondt não usa votos."
+      "Sim, porque a ordem das listas pelos votos se mantém.",
+      "Sim, porque é somado o mesmo valor a cada quociente.",
+      "Não, porque a soma altera a sequência de divisores das listas."
     ],
     "a": 0,
-    "sol": "A invariância é garantida para multiplicação comum, não para adição comum. A soma pode alterar razões e quocientes de forma diferente.",
+    "sol": "Com 210 votos para A, 100 para B e dois mandatos, ambos vão para A: 210>105>100. Somando 100 votos a cada lista, o segundo mandato passa para B, porque 200>310÷2=155. Somar o mesmo número de votos pode alterar a ordem dos quocientes.",
     "hyp": "Pode generalizar incorretamente a invariância por escala para uma translação.",
     "contexts": [
       "mission"
@@ -627,7 +627,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "A:3, B:2, C:0"
     ],
     "a": 2,
-    "sol": "Os cinco maiores quocientes são 1300(A), 950(B), 520(C), 433,33...(A) e 316,67...(B). Resultado 2-2-1.",
+    "sol": "Os cinco maiores quocientes são 1300, 950, 520, 1300÷3≈433,33 e 950÷3≈316,67, das listas A, B, C, A e B, respetivamente. Assim, A e B recebem dois mandatos cada e C recebe um.",
     "hyp": "Pode aplicar divisores 1,2,3 ou excluir C antes de comparar o seu primeiro quociente.",
     "contexts": [
       "mission"
@@ -735,7 +735,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Método de St. Laguë, comparação e limitações",
-    "q": "Uma cooperativa vai distribuir 4 lugares entre grupos com 500, 400 e 200 votos e decidiu usar St. Laguë. Qual resultado deve comunicar?",
+    "q": "Uma cooperativa vai distribuir quatro lugares entre os grupos A, B e C, que tiveram 500, 400 e 200 votos, respetivamente. Quantos lugares recebe cada grupo, pela mesma ordem, pelo método de St. Laguë?",
     "o": [
       "2-2-0",
       "2-1-1",
@@ -743,7 +743,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "3-1-0"
     ],
     "a": 1,
-    "sol": "Os quatro maiores quocientes são 500(A),400(B),200(C),166,67(A), dando 2-1-1.",
+    "sol": "Os quatro maiores quocientes são 500 de A, 400 de B, 200 de C e 500÷3≈166,67 de A. Logo, A recebe dois lugares, B recebe um e C recebe um.",
     "hyp": "Pode usar D'Hondt por hábito apesar de o método estar explicitado.",
     "contexts": [
       "mission"
@@ -853,10 +853,10 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Amostragem, representatividade e enviesamento",
     "q": "O que é enviesamento de seleção?",
     "o": [
-      "Uma média diferente de zero.",
-      "Um erro sistemático introduzido pelo modo como os elementos são escolhidos.",
-      "Uma amostra grande.",
-      "Uma tabela mal desenhada."
+      "Um erro de resposta induzido pela redação das perguntas.",
+      "Um erro sistemático no modo de escolher a amostra.",
+      "Uma diferença casual entre resultados de duas amostras.",
+      "Um erro na transcrição das respostas recolhidas."
     ],
     "a": 1,
     "sol": "O enviesamento de seleção surge quando o processo de escolha favorece certos elementos e prejudica outros.",
@@ -909,15 +909,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Amostragem, representatividade e enviesamento",
-    "q": "O que caracteriza uma amostra aleatória simples, num modelo introdutório?",
+    "q": "Qual propriedade define a amostragem aleatória simples sem reposição, para uma dimensão de amostra fixada?",
     "o": [
       "Escolhem-se os mais fáceis de contactar.",
       "Escolhem-se apenas voluntários.",
-      "Cada elemento tem a mesma oportunidade de ser selecionado.",
-      "Escolhe-se exatamente metade da população."
+      "Cada amostra possível da dimensão fixada tem a mesma probabilidade de ser selecionada.",
+      "Cada indivíduo tem a mesma probabilidade de inclusão, mesmo que alguns pares nunca possam ser selecionados."
     ],
     "a": 2,
-    "sol": "A ideia central é igualdade de oportunidade de seleção, segundo o mecanismo definido.",
+    "sol": "Numa amostra aleatória simples de dimensão fixa, todas as amostras possíveis têm a mesma probabilidade. Por exemplo, escolher com igual probabilidade o par {A, B} ou o par {C, D} dá igual probabilidade a cada pessoa, mas exclui os outros quatro pares.",
     "hyp": "Pode confundir aleatoriedade com escolha informal.",
     "contexts": [
       "mission"
@@ -1199,7 +1199,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Compreensão",
     "focus": "Dados bivariados, diagrama de dispersão, correlação, regressão, outliers e correlação vs causalidade",
-    "q": "Um resíduo, num modelo de regressão, é...",
+    "q": "Num diagrama de dispersão, o resíduo de uma observação é o desvio vertical em relação à reta de regressão. É positivo quando o ponto fica acima da reta. Como se calcula?",
     "o": [
       "valor observado de y menos valor previsto de y.",
       "a média de x.",
@@ -1207,7 +1207,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "o número de observações."
     ],
     "a": 0,
-    "sol": "Resíduo mede o erro vertical da previsão para um ponto.",
+    "sol": "Para o mesmo valor de x, compara-se a ordenada y observada com a ordenada y prevista pela reta. Subtrair o valor previsto ao observado dá um resíduo positivo quando o ponto está acima da reta.",
     "hyp": "Pode confundir resíduo com valor previsto.",
     "contexts": [
       "mission"
@@ -1294,7 +1294,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "de Q1 a Q3."
     ],
     "a": 3,
-    "sol": "A caixa representa os 50% centrais entre Q1 e Q3.",
+    "sol": "O primeiro quartil Q₁ e o terceiro quartil Q₃ são os extremos da caixa. O seu comprimento é a amplitude interquartil Q₃−Q₁.",
     "hyp": "Pode confundir caixa com amplitude total.",
     "contexts": [
       "mission"
@@ -1462,13 +1462,13 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Medidas de localização",
     "q": "A mediana é...",
     "o": [
-      "sempre o maior valor.",
-      "o valor central dos dados ordenados, ou a média dos dois centrais se o número for par.",
-      "a soma das frequências.",
-      "o valor mais frequente."
+      "a média dos valores mínimo e máximo da lista ordenada.",
+      "o centro da lista ordenada, usando a média dos dois valores centrais se forem dois.",
+      "a soma dos valores dividida pelo número de observações.",
+      "o valor que mais se repete, ou os valores empatados na maior frequência."
     ],
     "a": 1,
-    "sol": "A mediana depende da posição central após ordenar os dados.",
+    "sol": "Ordenam-se as observações. Com um número ímpar, há um único valor central, que é a mediana. Com um número par, calcula-se a média dos dois valores centrais.",
     "hyp": "Pode confundir mediana com média ou moda.",
     "contexts": [
       "mission"
@@ -1547,15 +1547,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Medidas de localização",
-    "q": "Os salários mensais de cinco pessoas são 1 000,1 050,1 100,1 150 e 8 000 €. Qual medida descreve melhor o salário típico do grupo, se 8 000 € for um extremo?",
+    "q": "Cinco salários mensais são 1 000 €, 1 050 €, 1 100 €, 1 150 € e 8 000 €. Dado o valor extremo de 8 000 €, qual destas medidas descreve melhor um salário típico do grupo?",
     "o": [
       "Mediana=1 100 €.",
-      "Média=1 100 €.",
+      "Média=2 460 €.",
       "Máximo=8 000 €.",
       "Amplitude=7 000 €."
     ],
     "a": 0,
-    "sol": "A mediana 1 100 € é robusta ao valor extremo.",
+    "sol": "A mediana é o salário central, 1 100 €. A média é 12 300 €/5=2 460 € e fica acima dos primeiros quatro salários, pois é bastante influenciada pelo valor extremo de 8 000 €.",
     "hyp": "Pode usar a média sem considerar o extremo.",
     "contexts": [
       "mission"
@@ -1695,9 +1695,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "q": "Pretende-se estudar o consumo semanal de água das famílias de uma cidade. Qual formulação identifica corretamente população e variável?",
     "o": [
       "População: famílias da cidade; variável: consumo semanal de água por família.",
-      "População: litros de água; variável: cidade.",
-      "População: apenas famílias escolhidas; variável: número de ruas.",
-      "População: consumo médio; variável: famílias."
+      "População: famílias da cidade; variável: número de pessoas por família.",
+      "População: famílias inquiridas; variável: consumo semanal de água por família.",
+      "População: moradores da cidade; variável: consumo semanal de água por morador."
     ],
     "a": 0,
     "sol": "A população é o conjunto de famílias; a variável é a quantidade observada em cada família.",
@@ -1926,13 +1926,13 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Dados univariados e representações",
     "q": "Qual diferença visual típica existe entre gráfico de barras e histograma?",
     "o": [
-      "São sempre idênticos.",
-      "No gráfico de barras não há eixo.",
-      "Histogramas só usam percentagens.",
-      "No histograma, classes contíguas são representadas por retângulos adjacentes; em barras, categorias podem estar separadas."
+      "Num diagrama de barras, as categorias têm sempre de ser intervalos numéricos.",
+      "No histograma, a ordem dos retângulos pode ser escolhida livremente.",
+      "Num diagrama de barras, a largura da barra indica a frequência.",
+      "No histograma, os retângulos representam intervalos contíguos."
     ],
     "a": 3,
-    "sol": "O histograma representa intervalos contíguos de uma variável quantitativa.",
+    "sol": "O histograma agrupa dados quantitativos em intervalos contíguos no eixo horizontal. Num diagrama de barras para dados categóricos, cada barra corresponde a uma categoria e pode ser separada das restantes.",
     "hyp": "Pode tratar qualquer conjunto de retângulos como o mesmo gráfico.",
     "contexts": [
       "mission"
@@ -2040,7 +2040,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Salário bruto/líquido, Segurança Social e retenção",
-    "q": "Um trabalhador tem salário bruto de 1 400 €. Neste exercício, desconta 11% para Segurança Social e 6% de retenção. Qual é a percentagem total de descontos?",
+    "q": "Um trabalhador tem salário bruto de 1 400 €. Neste exercício, desconta 11% do bruto para a Segurança Social e 6% do bruto para retenção. Qual é a percentagem total de descontos sobre o bruto?",
     "o": [
       "15%",
       "16%",
@@ -2333,12 +2333,12 @@ export const VNEXT_MISSION_QUESTIONS=[
     "q": "Um rendimento atinge um escalão marginal de 30%, mas a taxa efetiva é 18%. Isto é coerente?",
     "o": [
       "Não, as duas taxas têm de ser iguais.",
-      "Só se não houver imposto.",
-      "Só se o rendimento for inferior ao primeiro escalão.",
+      "Sim, porque a maior taxa marginal é a taxa efetiva de cada parcela.",
+      "Não, porque a taxa efetiva seria a média simples das taxas marginais.",
       "Sim, porque as parcelas inferiores são tributadas a taxas menores."
     ],
     "a": 3,
-    "sol": "A taxa efetiva é uma média ponderada das taxas aplicadas às parcelas.",
+    "sol": "A taxa efetiva é o imposto total dividido pelo rendimento. Como cada parcela é tributada à sua taxa marginal, o resultado é uma média das taxas ponderada pelo peso de cada parcela. As parcelas tributadas abaixo de 30% podem fazer a taxa efetiva descer para 18%.",
     "hyp": "Pode esperar igualdade entre taxa marginal e média.",
     "contexts": [
       "mission"
@@ -2367,7 +2367,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "425 €"
     ],
     "a": 0,
-    "sol": "50 + 225 + 125 = 400 €.",
+    "sol": "Nos primeiros 1 000 €, 5% dá 50 €. Nos 1 500 € seguintes, 15% dá 225 €. Sobram 500 €, dos quais 25% são 125 €. Assim, o imposto é 50+225+125=400 €.",
     "hyp": "Pode aplicar as taxas aos limites acumulados em vez das larguras.",
     "contexts": [
       "mission"
@@ -2533,15 +2533,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Juro composto, poupança, crédito e modelação financeira",
-    "q": "Com capital e taxa positivos, qual comparação entre juro simples e composto é correta para mais de um período?",
+    "q": "Para o mesmo capital inicial positivo e a mesma taxa positiva por período, como se comparam os montantes de juro simples e composto após mais de um período?",
     "o": [
-      "O simples é sempre superior.",
-      "São sempre iguais.",
-      "O composto tende a dar montante superior, porque os juros também rendem.",
-      "O composto elimina os juros anteriores."
+      "O simples dá um montante maior, porque mantém fixa a base de cálculo.",
+      "Os montantes são iguais, porque o capital inicial e a taxa coincidem.",
+      "O composto dá um montante maior, porque os juros acumulados também rendem.",
+      "Os montantes só diferem se as duas taxas forem diferentes."
     ],
     "a": 2,
-    "sol": "Depois do primeiro período, a capitalização dos juros cria crescimento adicional no regime composto.",
+    "sol": "Ao fim do primeiro período, os montantes coincidem. Em cada período seguinte o juro simples incide sobre o capital inicial, enquanto o juro composto incide também sobre os juros acumulados. Como a taxa é positiva, o montante composto é maior a partir do segundo período.",
     "hyp": "Pode ignorar o efeito dos juros sobre juros.",
     "contexts": [
       "mission"
@@ -2562,7 +2562,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Juro composto, poupança, crédito e modelação financeira",
-    "q": "Uma poupança de 5 000 € cresce 3% ao ano durante 5 anos. Sem depósitos adicionais, qual é o montante aproximado?",
+    "q": "Uma poupança inicial de 5 000 € rende 3% ao ano em regime de juro composto, com capitalização anual. Sem depósitos ou levantamentos, qual é o montante ao fim de cinco anos, arredondado aos cêntimos?",
     "o": [
       "5 750,00 €",
       "5 850,00 €",
@@ -2736,15 +2736,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Juro simples",
-    "q": "No juro simples com capital e taxa fixos, como evolui o montante ao longo do tempo?",
+    "q": "No juro simples com capital inicial e taxa positivos e fixos, como evolui o montante de um período para o seguinte?",
     "o": [
-      "Exponencialmente.",
-      "De forma aleatória.",
-      "Mantém-se constante.",
-      "Linearmente."
+      "É multiplicado sempre pelo mesmo fator superior a 1.",
+      "Aumenta um valor monetário que diminui a cada período.",
+      "Mantém o valor, porque a taxa de juro é constante.",
+      "Aumenta sempre o mesmo valor monetário por período."
     ],
     "a": 3,
-    "sol": "O juro cresce proporcionalmente ao número de períodos, logo o montante é uma função afim do tempo.",
+    "sol": "Em cada período, o juro é a taxa fixa multiplicada pelo capital inicial. Assim, acrescenta-se sempre o mesmo montante. O total é uma função afim do número de períodos.",
     "hyp": "Pode confundir crescimento linear com composto exponencial.",
     "contexts": [
       "mission"
@@ -3171,7 +3171,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Função afim e modelação",
-    "q": "Um depósito tem 120 L e enche a 8 L/min. Qual função V(t) é adequada?",
+    "q": "No instante inicial, um depósito contém 120 L. A água entra a 8 L por minuto. Qual expressão dá o volume V(t), em litros, t minutos depois de se iniciar o enchimento?",
     "o": [
       "V(t)=120−8t",
       "V(t)=120+8t",
@@ -3260,10 +3260,10 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Conceito de função e representações",
     "q": "Uma função pode ser representada por...",
     "o": [
-      "apenas uma fórmula.",
+      "uma fórmula ou uma tabela, mas nunca um gráfico.",
       "uma fórmula, tabela, gráfico ou descrição verbal adequada.",
-      "apenas um gráfico.",
-      "apenas uma tabela."
+      "um gráfico ou uma tabela, mas nunca uma descrição verbal.",
+      "uma tabela ou uma descrição verbal, mas nunca uma fórmula."
     ],
     "a": 1,
     "sol": "Uma função pode ter diferentes representações equivalentes.",
@@ -3316,15 +3316,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Conceito de função e representações",
-    "q": "Se f(2)=3 e f(3)=2, pode concluir-se que f não é função?",
+    "q": "Uma tabela contém apenas os pares (2; 3) e (3; 2). Estes pares impedem que a tabela represente uma função?",
     "o": [
-      "Sim.",
-      "Não.",
-      "Só se f(2)=f(3).",
-      "Só se o domínio for inteiro."
+      "Sim, pois a saída 3 também aparece como entrada.",
+      "Não, pois as entradas 2 e 3 têm uma saída cada.",
+      "Sim, pois as duas entradas têm saídas diferentes.",
+      "Não, pois a saída de um par deve ser a entrada no outro."
     ],
     "a": 1,
-    "sol": "É perfeitamente possível duas entradas trocarem imagens; cada entrada continua a ter uma única saída.",
+    "sol": "As duas entradas são distintas. A entrada 2 tem apenas a saída 3, e a entrada 3 tem apenas a saída 2. Assim, a tabela pode representar uma função.",
     "hyp": "Pode confundir função com monotonia ou injetividade.",
     "contexts": [
       "mission"
@@ -3345,12 +3345,12 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Conceito de função e representações",
-    "q": "Numa tabela de uma função, a mesma entrada aparece associada a 4 e a 6. A tabela representa uma função?",
+    "q": "Numa tabela de correspondência, a mesma entrada aparece associada ao valor 4 e ao valor 6. Pode a tabela representar uma função?",
     "o": [
-      "Sim.",
-      "Só se 4=6.",
-      "Não.",
-      "Só se houver mais entradas."
+      "Sim, porque os valores de saída são diferentes.",
+      "Não, porque as entradas devem ser 4 e 6.",
+      "Não, porque uma entrada tem duas saídas diferentes.",
+      "Sim, porque cada linha da tabela tem uma única saída."
     ],
     "a": 2,
     "sol": "Uma mesma entrada não pode ter duas imagens diferentes numa função.",
@@ -3461,15 +3461,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Domínio, contradomínio/imagem, zeros e sinal",
-    "q": "No gráfico de y=f(x), os zeros correspondem aos pontos onde o gráfico...",
+    "q": "No gráfico de y=f(x), os zeros são as abcissas dos pontos em que o gráfico...",
     "o": [
       "interseta o eixo Oy.",
       "interseta ou toca o eixo Ox.",
-      "atinge a média.",
+      "muda de monotonia.",
       "tem sempre máximo."
     ],
     "a": 1,
-    "sol": "Nesses pontos y=0.",
+    "sol": "Um zero é a abcissa de um ponto do gráfico cuja ordenada é nula, porque f(x)=0. Assim, localiza os pontos onde o gráfico encontra o eixo Ox e lê as suas abcissas.",
     "hyp": "Pode confundir eixo Ox com Oy.",
     "contexts": [
       "mission"
@@ -3519,7 +3519,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Domínio, contradomínio/imagem, zeros e sinal",
-    "q": "Se f(x)=x²−4, quais são os zeros?",
+    "q": "Considera a parábola y=x²−2x e a reta y=4−2x. Quais são as abcissas dos pontos de interseção dos dois gráficos?",
     "o": [
       "−2 e 2.",
       "−4 e 4.",
@@ -3527,8 +3527,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "apenas 2."
     ],
     "a": 0,
-    "sol": "x²−4=0 => x²=4 => x=±2.",
-    "hyp": "Pode esquecer uma das raízes.",
+    "sol": "Iguala x²−2x e 4−2x, porque as ordenadas coincidem nos pontos de interseção. Soma 2x aos dois membros para obter x²=4. Assim, os gráficos encontram-se nas abcissas −2 e 2.",
+    "hyp": "Pode procurar os zeros de cada expressão em vez de igualar as duas ordenadas.",
     "contexts": [
       "mission"
     ],
@@ -3548,7 +3548,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Domínio, contradomínio/imagem, zeros e sinal",
-    "q": "Se o gráfico cruza o eixo Ox em x=−1 e x=4, os zeros são...",
+    "q": "Se o gráfico de f interseta o eixo Ox apenas em x=−1 e x=4, quais são os zeros de f?",
     "o": [
       "0 e 3.",
       "−4 e 1.",
@@ -3556,7 +3556,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "apenas 4."
     ],
     "a": 2,
-    "sol": "As abcissas das interseções com Ox são os zeros.",
+    "sol": "Nos pontos de interseção com o eixo Ox, a ordenada é zero porque todos os pontos desse eixo têm a forma (x; 0). Assim, os zeros de f são −1 e 4.",
     "hyp": "Pode usar ordenadas em vez de abcissas.",
     "contexts": [
       "mission"
@@ -3577,7 +3577,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Domínio, contradomínio/imagem, zeros e sinal",
-    "q": "Uma altura h(t)=20−5t é fisicamente válida até atingir o solo. Qual é o domínio temporal natural e o zero do modelo?",
+    "q": "A altura de um objeto é dada por h(t)=20−5t, com t, em segundos, contado desde o início da observação até o objeto atingir o solo. Qual é o domínio temporal do modelo e qual é o seu zero?",
     "o": [
       "Domínio R e zero t=5.",
       "Domínio [0,4] e zero t=4.",
@@ -3585,7 +3585,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "Domínio [−4,0] e zero t=−4."
     ],
     "a": 1,
-    "sol": "20−5t=0 dá t=4; fisicamente considera-se desde t=0 até esse instante.",
+    "sol": "Iguala a altura a zero: 20−5t=0, logo t=4. O modelo começa em t=0 e termina em t=4, porque este é o instante em que o objeto atinge o solo. Assim, o domínio é [0,4].",
     "hyp": "Pode ignorar o contexto ao definir o domínio.",
     "contexts": [
       "mission"
@@ -3611,10 +3611,10 @@ export const VNEXT_MISSION_QUESTIONS=[
       "o conjunto de todas as entradas.",
       "o conjunto dos valores efetivamente obtidos pela função.",
       "um único valor obrigatório.",
-      "o contradomínio sempre por definição."
+      "o conjunto das entradas para as quais a função toma o valor zero."
     ],
     "a": 1,
-    "sol": "A imagem contém as saídas que a função realmente assume.",
+    "sol": "Para formar a imagem, calcula f(x) para os valores x do domínio e reúne as saídas obtidas. Um valor pertence à imagem porque é atingido pela função para pelo menos uma entrada.",
     "hyp": "Pode confundir imagem com domínio ou contradomínio.",
     "contexts": [
       "mission"
@@ -3751,7 +3751,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Função quadrática, zeros, extremos e problemas",
-    "q": "Se a>0, o vértice da parábola corresponde a...",
+    "q": "Considera a função quadrática f(x)=ax²+bx+c, com a>0. O vértice da parábola corresponde a...",
     "o": [
       "um máximo.",
       "um zero obrigatório.",
@@ -3780,7 +3780,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Função quadrática, zeros, extremos e problemas",
-    "q": "A altura de um objeto é h(t)=−5t²+20t+1. Em que instante ocorre a altura máxima?",
+    "q": "A altura de um objeto é dada por h(t)=−5t²+20t+1, onde t é o tempo, em segundos, desde o lançamento. Em que instante o objeto atinge a altura máxima?",
     "o": [
       "2 s",
       "1 s",
@@ -4244,15 +4244,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Compreensão",
     "focus": "Colinearidade e equações de retas",
-    "q": "Duas retas não verticais de declives m1 e m2 são perpendiculares quando...",
+    "q": "Para duas retas não verticais, o critério de perpendicularidade diz que os declives m₁ e m₂ são recíprocos e de sinais opostos. Qual igualdade traduz esse critério?",
     "o": [
-      "m1m2=−1.",
-      "m1=m2.",
-      "m1+m2=0 sempre.",
-      "m1m2=1."
+      "m₁m₂=−1.",
+      "m₁=m₂.",
+      "m₁+m₂=0.",
+      "m₁m₂=1."
     ],
     "a": 0,
-    "sol": "Declives de retas perpendiculares são recíprocos e de sinais opostos.",
+    "sol": "Se m₁ e m₂ são recíprocos e têm sinais opostos, então m₂=−1/m₁. Ao multiplicar por m₁ obtém-se m₁m₂=−1.",
     "hyp": "Pode confundir declives opostos com perpendiculares.",
     "contexts": [
       "mission"
@@ -4455,7 +4455,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "(x,−y)."
     ],
     "a": 0,
-    "sol": "A regra padrão é (x,y)→(−y,x).",
+    "sol": "A rotação de 90° no sentido positivo leva os vetores dos eixos (1,0) e (0,1) a (0,1) e (−1,0). Assim, a componente x contribui com x para a nova ordenada e a componente y contribui com −y para a nova abcissa. O resultado é (−y,x).",
     "hyp": "Pode usar a rotação horária.",
     "contexts": [
       "mission"
@@ -5056,7 +5056,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Mediatriz, plano mediador, circunferência, círculo, esfera e superfície esférica",
-    "q": "Qual é o centro e raio de x²−6x+y²+4y−12=0?",
+    "q": "Qual é o centro e o raio da circunferência de equação (x−3)²+(y+2)²=25?",
     "o": [
       "Centro (−3,2), raio 5.",
       "Centro (3,−2), raio 12.",
@@ -5064,7 +5064,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "Centro (6,−4), raio 5."
     ],
     "a": 2,
-    "sol": "Completando quadrados: (x−3)²+(y+2)²=25.",
+    "sol": "Compara com (x−a)²+(y−b)²=r². Tem-se a=3 e b=−2, porque y+2=y−(−2). Como o raio é positivo e r²=25, o raio é 5.",
     "hyp": "Pode completar quadrados incorretamente.",
     "contexts": [
       "mission"
@@ -5172,15 +5172,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Vetores, coordenadas, norma e operações",
-    "q": "Se v=2u, então v e u são...",
+    "q": "Se u é um vetor não nulo e v=2u, qual é a relação entre v e u?",
     "o": [
-      "colineares e com o mesmo sentido se u≠0.",
-      "perpendiculares.",
-      "sempre de mesma norma.",
-      "não relacionados."
+      "São colineares e têm o mesmo sentido.",
+      "São perpendiculares.",
+      "Têm a mesma norma.",
+      "São colineares e de sentidos opostos."
     ],
     "a": 0,
-    "sol": "Um múltiplo escalar positivo preserva direção e sentido.",
+    "sol": "Como v é um múltiplo de u, os vetores têm a mesma direção. O fator 2 é positivo, por isso os dois vetores têm o mesmo sentido. A norma de v é o dobro da norma de u.",
     "hyp": "Pode confundir colinearidade com igualdade.",
     "contexts": [
       "mission"
@@ -5201,7 +5201,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Vetores, coordenadas, norma e operações",
-    "q": "Um deslocamento de 5 m para leste e 12 m para norte é representado por v=(5,12). Qual é o deslocamento direto?",
+    "q": "Uma pessoa desloca-se 5 m para leste e depois 12 m para norte. Qual é a distância em linha reta entre o ponto de partida e o ponto de chegada?",
     "o": [
       "17 m.",
       "7 m.",
@@ -5209,7 +5209,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "60 m."
     ],
     "a": 2,
-    "sol": "A norma de (5,12) é 13.",
+    "sol": "Os dois percursos são perpendiculares e formam os catetos de um triângulo retângulo. A distância em linha reta é a hipotenusa, que mede √(5²+12²)=√169=13 m.",
     "hyp": "Pode somar as componentes.",
     "contexts": [
       "mission"
@@ -5346,7 +5346,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Baricentro e propriedades das medianas",
-    "q": "Se AM=18 e G é baricentro, quanto valem AG e GM?",
+    "q": "No triângulo ABC, a mediana AM mede 18 e G é o baricentro. Quanto medem AG e GM, respetivamente?",
     "o": [
       "9 e 9",
       "6 e 12",
@@ -5557,7 +5557,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "Porque a hipotenusa é uma bissetriz."
     ],
     "a": 0,
-    "sol": "Num triângulo retângulo, a circunferência com diâmetro igual à hipotenusa passa pelos três vértices.",
+    "sol": "Pelo recíproco do teorema do ângulo inscrito numa semicircunferência, a hipotenusa AB é o diâmetro da circunferência circunscrita ao triângulo retângulo ABC. O circuncentro é o ponto médio de AB.",
     "hyp": "Pode justificar com propriedade errada.",
     "contexts": [
       "mission"
@@ -5607,7 +5607,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Circuncentro e incentro",
-    "q": "Quer-se desenhar a maior circunferência interior tangente aos três lados de um triângulo. O seu centro é...",
+    "q": "Quer-se desenhar uma circunferência no interior de um triângulo, tangente aos três lados. Qual é o centro dessa circunferência?",
     "o": [
       "o circuncentro.",
       "o baricentro.",
@@ -5694,12 +5694,12 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Localização dos centros, reta de Euler e circunferência dos nove pontos",
-    "q": "Três dos nove pontos são...",
+    "q": "Que pontos pertencem, em qualquer triângulo, à circunferência dos nove pontos?",
     "o": [
       "os três vértices.",
       "os pontos médios dos três lados.",
       "os três excentros.",
-      "os três centros de massa."
+      "os três pontos de tangência da circunferência inscrita."
     ],
     "a": 1,
     "sol": "A circunferência dos nove pontos passa pelos três pontos médios dos lados.",
@@ -5723,7 +5723,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Localização dos centros, reta de Euler e circunferência dos nove pontos",
-    "q": "Na reta de Euler, o baricentro G divide o segmento OH segundo...",
+    "q": "Num triângulo não equilátero, O é o circuncentro, G o baricentro e H o ortocentro. Em que razão o baricentro divide o segmento OH?",
     "o": [
       "OG:GH=2:1.",
       "OG:GH=1:2.",
@@ -5752,7 +5752,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Localização dos centros, reta de Euler e circunferência dos nove pontos",
-    "q": "Se OG=6 e GH=12, qual é OH?",
+    "q": "Num triângulo, O, G e H são o circuncentro, o baricentro e o ortocentro, respetivamente. Se OG=6 e GH=12, qual é o comprimento de OH?",
     "o": [
       "12",
       "18",
@@ -5760,7 +5760,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "24"
     ],
     "a": 1,
-    "sol": "OH=6+12=18.",
+    "sol": "Na reta de Euler, o baricentro G está entre O e H. Por isso, OH=OG+GH=6+12=18.",
     "hyp": "Pode usar apenas o maior segmento.",
     "contexts": [
       "mission"
@@ -5839,12 +5839,12 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Localização dos centros, reta de Euler e circunferência dos nove pontos",
-    "q": "O centro da circunferência dos nove pontos é...",
+    "q": "Num triângulo não equilátero, sejam O o circuncentro, G o baricentro e H o ortocentro. Onde fica o centro da circunferência dos nove pontos?",
     "o": [
-      "o incentro.",
-      "o baricentro sempre.",
-      "o ponto médio de OH, onde O é circuncentro e H ortocentro.",
-      "um vértice."
+      "No ponto médio de OG.",
+      "No baricentro G.",
+      "No ponto médio de OH.",
+      "No ponto médio de GH."
     ],
     "a": 2,
     "sol": "O centro N da circunferência dos nove pontos é o ponto médio do segmento OH.",
@@ -5876,7 +5876,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "16"
     ],
     "a": 2,
-    "sol": "ON=12.",
+    "sol": "Como N é o ponto médio de OH, os comprimentos ON e NH são iguais. Logo, ON=OH/2=24/2=12.",
     "hyp": "Pode confundir com OG=OH/3=8.",
     "contexts": [
       "mission"
@@ -5897,12 +5897,12 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Ortocentro e alturas",
-    "q": "Para determinar o ortocentro, basta traçar...",
+    "q": "Que duas construções bastam para localizar o ortocentro de qualquer triângulo?",
     "o": [
-      "duas medianas.",
-      "duas alturas; a terceira passa pelo mesmo ponto.",
-      "duas mediatrizes.",
-      "uma bissetriz."
+      "Duas medianas.",
+      "Duas alturas.",
+      "Duas mediatrizes.",
+      "Duas bissetrizes."
     ],
     "a": 1,
     "sol": "Duas alturas não paralelas determinam o ponto comum das três.",
@@ -6013,7 +6013,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Ortocentro e alturas",
-    "q": "Quer-se encontrar o ponto comum às três perpendiculares traçadas dos vértices aos lados opostos de uma região triangular. Que ponto é esse?",
+    "q": "A partir de cada vértice de um triângulo, traça-se uma reta perpendicular à reta que contém o lado oposto. Como se chama o ponto comum às três retas?",
     "o": [
       "Baricentro.",
       "Incentro.",
@@ -6021,7 +6021,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "Circuncentro."
     ],
     "a": 2,
-    "sol": "Essas perpendiculares são as alturas.",
+    "sol": "Cada reta assim traçada é a reta suporte de uma altura. As três retas passam pelo mesmo ponto, que é o ortocentro, mesmo quando uma altura encontra o prolongamento de um lado.",
     "hyp": "Pode confundir famílias de retas.",
     "contexts": [
       "mission"
@@ -6158,15 +6158,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Propriedades geométricas e construções de base",
-    "q": "Se dois triângulos semelhantes têm áreas na razão 16:25, qual é a razão dos comprimentos correspondentes?",
+    "q": "As áreas de dois triângulos semelhantes estão na razão 16:25. Qual é a razão simplificada dos comprimentos de lados correspondentes, pela mesma ordem?",
     "o": [
-      "8:10",
+      "5:4",
       "4:5",
       "16:25",
       "2:5"
     ],
     "a": 1,
-    "sol": "A razão linear é a raiz quadrada da razão das áreas: 4:5.",
+    "sol": "A razão das áreas é o quadrado da razão dos comprimentos. Na mesma ordem, a razão dos comprimentos é √(16/25)=4/5, ou 4:5.",
     "hyp": "Pode usar diretamente a razão das áreas.",
     "contexts": [
       "mission"
@@ -6187,7 +6187,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Propriedades geométricas e construções de base",
-    "q": "Num triângulo equilátero, mediana, altura, mediatriz e bissetriz relativas ao mesmo vértice...",
+    "q": "Num triângulo equilátero, como se relacionam as retas da mediana, da altura e da bissetriz por um mesmo vértice com a mediatriz do lado oposto?",
     "o": [
       "são sempre distintas.",
       "coincidem.",
@@ -6195,7 +6195,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "não existem."
     ],
     "a": 1,
-    "sol": "A simetria do triângulo equilátero faz coincidir essas retas notáveis.",
+    "sol": "O eixo de simetria por esse vértice passa pelo ponto médio do lado oposto, é perpendicular ao lado e divide o ângulo do vértice ao meio. Por isso, as quatro retas coincidem.",
     "hyp": "Pode transportar propriedades de triângulo escaleno.",
     "contexts": [
       "mission"
@@ -6311,7 +6311,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2"
     ],
     "a": 3,
-    "sol": "Derivando a expressão e substituindo x=1, obtém-se 2.",
+    "sol": "Pela regra da potência, f′(x)=2x. Logo f′(1)=2×1=2.",
     "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
@@ -6332,15 +6332,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Taxa instantânea e derivada num ponto",
-    "q": "Geometricamente, f'(a) representa",
+    "q": "O que representa geometricamente f′(a)?",
     "o": [
       "o declive de qualquer secante",
       "o declive da reta tangente ao gráfico em x=a",
       "a ordenada do ponto",
-      "a distancia a origem"
+      "a distância à origem"
     ],
     "a": 1,
-    "sol": "A derivada e o declive da tangente.",
+    "sol": "No limite em que o segundo ponto da secante se aproxima do ponto de abcissa a, o declive da secante tende para o declive da reta tangente. Esse limite é f′(a).",
     "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
@@ -6361,7 +6361,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Taxa instantânea e derivada num ponto",
-    "q": "Para f(x)=x^2, o limite lim_{h->0} [f(0+h)-f(0)]/h vale",
+    "q": "Para f(x)=x², quanto vale o limite do quociente [f(0+h)−f(0)]/h quando h→0?",
     "o": [
       "2",
       "0",
@@ -6369,7 +6369,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "1"
     ],
     "a": 1,
-    "sol": "Expandindo e simplificando, o quociente tende para 2a=0.",
+    "sol": "Para h≠0, o quociente é h²/h=h. Logo, quando h tende para 0, o limite vale 0.",
     "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
@@ -6398,7 +6398,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "12"
     ],
     "a": 0,
-    "sol": "Derivando a expressão e substituindo x=3, obtém-se 6.",
+    "sol": "Pela regra da potência, f′(x)=2x. Logo f′(3)=2×3=6.",
     "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
@@ -6419,7 +6419,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelacao",
     "focus": "Taxa instantânea e derivada num ponto",
-    "q": "A posição e dada por s(t)=t^2. Qual é a velocidade instantânea em t=3?",
+    "q": "A posição de uma partícula é dada por s(t)=t², com s em metros e t em segundos. Qual é, em m/s, a velocidade instantânea no instante t=3?",
     "o": [
       "6",
       "8",
@@ -6427,7 +6427,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "3"
     ],
     "a": 0,
-    "sol": "A velocidade e s'(t); avaliando em t=3, obtém-se 6.",
+    "sol": "A velocidade instantânea é a derivada da posição. Como s′(t)=2t, no instante t=3 resulta s′(3)=6 m/s.",
     "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
@@ -6448,15 +6448,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Taxa instantânea e derivada num ponto",
-    "q": "A definicao por limite de f'(a) e",
+    "q": "Qual é a definição de f′(a) por meio de um limite?",
     "o": [
-      "lim_{h->0} [f(a+h)+f(a)]/h",
-      "f(a+h)-f(a)",
-      "lim_{h->0} [f(a+h)-f(a)]/h",
-      "lim_{h->0} h/[f(a+h)-f(a)]"
+      "lim [f(a+h)+f(a)]/h, com h→0",
+      "f(a+h)−f(a)",
+      "lim [f(a+h)−f(a)]/h, com h→0",
+      "lim h/[f(a+h)−f(a)], com h→0"
     ],
     "a": 2,
-    "sol": "E o limite do quociente incremental.",
+    "sol": "O numerador f(a+h)−f(a) é a variação dos valores de f quando a abcissa aumenta h. Divide-se essa variação pelo incremento h e toma-se o limite quando h tende para zero.",
     "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
@@ -6485,7 +6485,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "3"
     ],
     "a": 3,
-    "sol": "Por definicao, o declive da tangente e f'(2)=3.",
+    "sol": "O declive da tangente no ponto de abcissa 2 é o valor da derivada em 2, isto é, f′(2)=3. O valor f(2)=5 dá a ordenada desse ponto.",
     "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
@@ -6508,13 +6508,13 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "função derivada",
     "q": "Se f(x)=5x^3, então f'(x)=",
     "o": [
-      "5x^3",
-      "15x^2+1",
-      "0",
+      "5x²",
+      "5x³",
+      "15x³",
       "15x^2"
     ],
     "a": 3,
-    "sol": "Derivando termo a termo obtém-se 15x^2.",
+    "sol": "A regra da potência multiplica o coeficiente pelo expoente 3 e reduz o expoente em uma unidade. Logo, a derivada de 5x³ é 15x².",
     "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
@@ -6535,7 +6535,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "função derivada",
-    "q": "Se f'(x)>0 num intervalo, f e",
+    "q": "Como varia f num intervalo onde f′(x)>0 para todo o x?",
     "o": [
       "decrescente",
       "crescente nesse intervalo",
@@ -6564,7 +6564,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "função derivada",
-    "q": "Se f'(x)=2x, em x>0, então",
+    "q": "Se f′(x)=2x, o que se pode concluir sobre f no intervalo ]0,+∞[?",
     "o": [
       "f é decrescente",
       "f é constante",
@@ -6572,7 +6572,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "f é crescente"
     ],
     "a": 3,
-    "sol": "Para x>0, 2x>0.",
+    "sol": "Para todo o x>0, f′(x)=2x>0. Portanto, f é crescente em ]0,+∞[.",
     "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
@@ -6596,12 +6596,12 @@ export const VNEXT_MISSION_QUESTIONS=[
     "q": "Se f(x)=2x^5, então f'(x)=",
     "o": [
       "10x^4",
-      "2x^5",
-      "10x^4+1",
-      "0"
+      "2x⁴",
+      "2x⁵",
+      "10x⁵"
     ],
     "a": 0,
-    "sol": "Derivando termo a termo obtém-se 10x^4.",
+    "sol": "A regra da potência multiplica o coeficiente pelo expoente 5 e reduz o expoente em uma unidade. Logo, a derivada de 2x⁵ é 10x⁴.",
     "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
@@ -6622,7 +6622,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "função derivada",
-    "q": "f'(x)=4x^3; uma possibilidade para f(x) e",
+    "q": "Em cada expressão, C representa uma constante real. Qual das expressões tem derivada 4x³?",
     "o": [
       "4x^4+C",
       "x^4+C",
@@ -6630,7 +6630,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "x^4/4+C"
     ],
     "a": 1,
-    "sol": "A derivada de x^4+C e 4x^3.",
+    "sol": "A derivada de x⁴ é 4x³ e a derivada de C é zero. Portanto, a derivada de x⁴+C é 4x³.",
     "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
@@ -6651,7 +6651,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "função derivada",
-    "q": "Se f'(x)<0 num intervalo, f e",
+    "q": "Como varia f num intervalo onde f′(x)<0 para todo o x?",
     "o": [
       "crescente",
       "constante",
@@ -6680,7 +6680,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "função derivada",
-    "q": "Se f'(x)=2x, em x<0, então",
+    "q": "Se f′(x)=2x, o que se pode concluir sobre f no intervalo ]−∞,0[?",
     "o": [
       "f é decrescente",
       "f é crescente",
@@ -6688,7 +6688,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "f é positiva"
     ],
     "a": 0,
-    "sol": "Para x<0, 2x<0.",
+    "sol": "Para todo o x<0, f′(x)=2x<0. Portanto, f é decrescente em ]−∞,0[.",
     "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
@@ -6709,15 +6709,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Monotonia, extremos e otimização",
-    "q": "Se f'(x)=-2x, então junto de x=0 a situação correta é",
+    "q": "Uma função f derivável em ℝ satisfaz f′(x)=−2x. Que opção indica a monotonia de f de cada lado de x=0 e o tipo de extremo em x=0?",
     "o": [
-      "crescente em ]-inf,0[ e decrescente em ]0,+inf[",
-      "máximo em x=0",
-      "não se pode concluir nada",
-      "crescente em ]-inf,0[ e decrescente em ]0,+inf[; máximo em x=0."
+      "decrescente antes de 0, crescente depois de 0 e mínimo em x=0.",
+      "crescente antes de 0, decrescente depois de 0 e mínimo em x=0.",
+      "crescente antes de 0, crescente depois de 0 e sem extremo em x=0.",
+      "crescente antes de 0, decrescente depois de 0 e máximo em x=0."
     ],
     "a": 3,
-    "sol": "Analisa-se o sinal de f' antes e depois de 0.",
+    "sol": "Temos f′(0)=0. Antes de 0, f′ é positiva e depois é negativa. Portanto, f é crescente antes de 0 e decrescente depois de 0, pelo que tem um máximo em x=0.",
     "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
     "contexts": [
       "mission"
@@ -6767,15 +6767,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Monotonia, extremos e otimização",
-    "q": "No intervalo [-2,3], para f(x)=x^2, os extremos absolutos sao",
+    "q": "No intervalo [−2,3], quais são o máximo e o mínimo absolutos de f(x)=x² e onde se atingem?",
     "o": [
-      "máximo 9 em x=3",
-      "mínimo 0 em x=0",
-      "máximo 9 em x=3; mínimo 0 em x=0.",
-      "apenas o ponto onde f'=0"
+      "Máximo 9 em x=3 e mínimo 4 em x=−2.",
+      "Máximo 4 em x=−2 e mínimo 0 em x=0.",
+      "Máximo 9 em x=3 e mínimo 0 em x=0.",
+      "Máximo 9 em x=3 e mínimo 0 em x=−2."
     ],
     "a": 2,
-    "sol": "Comparam-se valores nos pontos criticos e nas extremidades do intervalo.",
+    "sol": "A derivada f′(x)=2x anula-se em x=0. Comparam-se o valor nesse ponto e os nas extremidades: f(−2)=4, f(0)=0 e f(3)=9. Máximo 9 em x=3 e mínimo 0 em x=0.",
     "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
     "contexts": [
       "mission"
@@ -6796,15 +6796,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Monotonia, extremos e otimização",
-    "q": "Para f(x)=x^2-4x+5, o extremo relevante ocorre em",
+    "q": "Para f(x)=x²−4x+5, qual é o tipo de extremo, em que abcissa ocorre e que valor tem?",
     "o": [
       "x=2, sendo mínimo e f(2)=1.",
-      "x=2, sendo mínimo mas com outro valor",
-      "x=0",
-      "não existe extremo"
+      "x=2, sendo mínimo e f(2)=5.",
+      "x=0, sendo mínimo e f(0)=5.",
+      "x=2, sendo máximo e f(2)=1."
     ],
     "a": 0,
-    "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parábola.",
+    "sol": "Como f(x)=(x−2)²+1, temos f(x)≥1 para todo o x, com igualdade apenas em x=2. Logo, 1 é o mínimo, atingido em x=2.",
     "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
     "contexts": [
       "mission"
@@ -6825,7 +6825,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Monotonia, extremos e otimização",
-    "q": "Se f'(x)>0 em ]-inf,1[, f'(1)=0 e f'(x)<0 em ]1,+inf[, então",
+    "q": "Se f′(x)>0 em ]−∞,1[, f′(1)=0 e f′(x)<0 em ]1,+∞[, o que se pode concluir?",
     "o": [
       "f tem mínimo local em x=1",
       "f tem máximo local em x=1",
@@ -6833,7 +6833,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "f(1)=0"
     ],
     "a": 1,
-    "sol": "O sinal muda de + para -.",
+    "sol": "A função é crescente antes de 1 e decrescente depois de 1. Como f é derivável em 1, também é contínua nesse ponto. Assim, f tem um máximo local em x=1.",
     "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
     "contexts": [
       "mission"
@@ -6854,15 +6854,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Monotonia, extremos e otimização",
-    "q": "Um ponto onde f'(a)=0 chama-se frequentemente",
+    "q": "Como se chama o ponto do gráfico de f de abcissa a quando f′(a)=0?",
     "o": [
       "assíntota",
-      "zero obrigatorio de f",
-      "ponto estacionario",
+      "zero obrigatório de f",
+      "ponto estacionário",
       "ponto de descontinuidade"
     ],
     "a": 2,
-    "sol": "A tangente e horizontal quando f'(a)=0.",
+    "sol": "Como f′(a)=0, o declive da tangente em a é zero. O ponto (a,f(a)) chama-se ponto estacionário.",
     "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
     "contexts": [
       "mission"
@@ -6883,15 +6883,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Modelacao",
     "focus": "Monotonia, extremos e otimização",
-    "q": "Um retangulo tem perimetro 20. Se um lado mede x, a área e A(x)=x(10-x). A área maxima ocorre para",
+    "q": "Pretende-se vedar três lados de um terreno retangular junto a um muro. Há 20 m de vedação. Se cada lado perpendicular ao muro mede x metros, a área é A(x)=x(20−2x). Para que valor de x é máxima?",
     "o": [
-      "x=10",
+      "x=4",
       "x=2",
-      "x=0",
+      "x=8",
       "x=5"
     ],
     "a": 3,
-    "sol": "A'(x)=10-2x=0 => x=5.",
+    "sol": "Os lados medem x e 20−2x, pelo que 0<x<10. A(x)=50−2(x−5)² atinge o máximo quando x=5.",
     "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
     "contexts": [
       "mission"
@@ -6914,13 +6914,13 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Regras de derivação",
     "q": "Deriva f(x)=x^7.",
     "o": [
-      "x^7",
-      "7x^6+1",
-      "0",
+      "x⁶",
+      "x⁷",
+      "7x⁷",
       "7x^6"
     ],
     "a": 3,
-    "sol": "Aplicando regra da potência e linearidade obtém-se 7x^6.",
+    "sol": "Ao derivar x⁷, multiplica-se o coeficiente pelo expoente 7 e baixa-se o expoente uma unidade. Logo, f′(x)=7x⁶.",
     "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
@@ -6941,15 +6941,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Regras de derivação",
-    "q": "A derivada de cf, com c constante, e",
+    "q": "Para uma função derivável f e uma constante real c, qual é a derivada de c·f?",
     "o": [
       "c'f",
       "cf'",
-      "f'/c",
+      "c+f'",
       "cf"
     ],
     "a": 1,
-    "sol": "A constante multiplica a derivada.",
+    "sol": "A constante c multiplica todo o quociente incremental de f e pode sair do limite. Assim, (c·f)′=c·f′.",
     "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
@@ -6974,11 +6974,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "o": [
       "2x+1",
       "2x-1",
-      "x(x+1)",
-      "0"
+      "x+1",
+      "1"
     ],
     "a": 0,
-    "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtém-se 2x+1.",
+    "sol": "Pela regra do produto, a derivada de x(x+1) é (x+1)+x=2x+1.",
     "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
@@ -7002,12 +7002,12 @@ export const VNEXT_MISSION_QUESTIONS=[
     "q": "Deriva f(x)=3x^4.",
     "o": [
       "12x^3",
-      "3x^4",
-      "12x^3+1",
-      "0"
+      "3x³",
+      "3x⁴",
+      "12x⁴"
     ],
     "a": 0,
-    "sol": "Aplicando regra da potência e linearidade obtém-se 12x^3.",
+    "sol": "Ao derivar 3x⁴, multiplica-se o coeficiente pelo expoente 4 e baixa-se o expoente uma unidade. Logo, f′(x)=12x³.",
     "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
@@ -7057,7 +7057,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Regras de derivação",
-    "q": "A derivada de x^n, para n inteiro positivo, e",
+    "q": "Qual é a derivada de xⁿ, sendo n um inteiro positivo?",
     "o": [
       "x^(n-1)",
       "n x^n",
@@ -7065,7 +7065,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "(n-1)x^n"
     ],
     "a": 2,
-    "sol": "E a regra da potência.",
+    "sol": "Deriva-se multiplicando pelo expoente n e reduzindo o expoente uma unidade. Por exemplo, quando n=3, (x³)′=3x². Em geral, (xⁿ)′=n xⁿ⁻¹.",
     "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
@@ -7090,11 +7090,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "o": [
       "3x^2-2x",
       "3x^2+2x",
-      "x^2(x+1)",
-      "0"
+      "2x(x+1)",
+      "2x"
     ],
     "a": 1,
-    "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtém-se 3x^2+2x.",
+    "sol": "Pela regra do produto, a derivada de x²(x+1) é 2x(x+1)+x²=3x²+2x.",
     "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
@@ -7123,7 +7123,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "y=4x-4"
     ],
     "a": 3,
-    "sol": "Usa-se y-4=4(x-2), que simplifica para y=4x-4.",
+    "sol": "Para f(x)=x², f(2)=4 e f′(x)=2x. Logo f′(2)=4, e a reta passa por (2,4) com esse declive. Assim, y−4=4(x−2), ou seja, y=4x−4.",
     "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
     "contexts": [
       "mission"
@@ -7144,7 +7144,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Reta tangente e interpretação geométrica",
-    "q": "O declive da tangente em x=a e",
+    "q": "Qual é o declive da reta tangente ao gráfico de f no ponto de abcissa a?",
     "o": [
       "f(a)",
       "f'(a)",
@@ -7152,7 +7152,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "f(a)/a"
     ],
     "a": 1,
-    "sol": "A derivada no ponto e o declive tangente.",
+    "sol": "A derivada f′(a) é o limite dos declives das secantes quando o outro ponto de interseção se aproxima de (a,f(a)). Esse limite é o declive da tangente.",
     "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
     "contexts": [
       "mission"
@@ -7181,7 +7181,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "x=2"
     ],
     "a": 1,
-    "sol": "y-5=3(x-2)",
+    "sol": "A tangente passa por (2,5), pois f(2)=5, e tem declive 3, pois f′(2)=3. Assim, y−5=3(x−2), que se reduz a y=3x−1.",
     "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
     "contexts": [
       "mission"
@@ -7210,7 +7210,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "x=-1"
     ],
     "a": 0,
-    "sol": "Usa-se y-1=-2(x+1), que simplifica para y=-2x-1.",
+    "sol": "Para f(x)=x², f(−1)=1 e f′(x)=2x. Logo f′(−1)=−2, e a reta passa por (−1,1) com esse declive. Assim, y−1=−2(x+1), ou seja, y=−2x−1.",
     "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
     "contexts": [
       "mission"
@@ -7231,15 +7231,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelacao",
     "focus": "Reta tangente e interpretação geométrica",
-    "q": "Sabendo que f(2)=5 e f'(2)=3, pela aproximação linear f(2,1) e",
+    "q": "Sabe-se que f(2)=5 e f′(2)=3. Para estimar f(2,1), usa a ordenada da reta tangente em x=2 na abcissa 2,1. Que valor resulta?",
     "o": [
       "5,03",
-      "aproximadamente 5,3",
-      "8",
+      "5,3",
+      "8,0",
       "2,1"
     ],
     "a": 1,
-    "sol": "Usa-se f(2+h)≈f(2)+f'(2)h com h=0,1.",
+    "sol": "A tangente tem equação y=5+3(x−2). Para x=2,1, obtém-se 5+3×0,1=5,3.",
     "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
     "contexts": [
       "mission"
@@ -7260,7 +7260,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Reta tangente e interpretação geométrica",
-    "q": "Uma equação da tangente em x=a e",
+    "q": "Qual é uma equação da reta tangente ao gráfico de f no ponto de abcissa a, supondo que f é derivável em a?",
     "o": [
       "y-a=f(a)(x-f'(a))",
       "y=f(a)x+a",
@@ -7268,7 +7268,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "y=f'(a) apenas"
     ],
     "a": 2,
-    "sol": "E a forma ponto-declive.",
+    "sol": "A tangente passa por (a,f(a)) e tem declive f′(a). Substituindo estes dados na forma ponto-declive y−y₀=m(x−x₀), obtém-se y−f(a)=f′(a)(x−a).",
     "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
     "contexts": [
       "mission"
@@ -7289,7 +7289,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Reta tangente e interpretação geométrica",
-    "q": "A tangente ao gráfico em x=2 e y=4x-3. Então f'(2)=",
+    "q": "A reta tangente ao gráfico de f no ponto de abcissa 2 é y=4x−3. Qual é o valor de f′(2)?",
     "o": [
       "5",
       "2",
@@ -7297,7 +7297,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "4"
     ],
     "a": 3,
-    "sol": "O declive da reta y=4x-3 e 4.",
+    "sol": "A derivada no ponto de tangência é o declive dessa reta, dado pelo coeficiente de x. Logo, f′(2)=4.",
     "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
     "contexts": [
       "mission"
@@ -7347,7 +7347,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "taxa média de variação",
-    "q": "Geometricamente, a taxa média de variação entre dois pontos do gráfico e",
+    "q": "Qual é o significado geométrico da taxa média de variação de f entre dois pontos distintos do seu gráfico?",
     "o": [
       "o declive da tangente no primeiro ponto",
       "o declive da reta secante",
@@ -7355,7 +7355,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "a ordenada média"
     ],
     "a": 1,
-    "sol": "A secante passa pelos dois pontos considerados.",
+    "sol": "Na reta secante que passa pelos dois pontos, o declive é a diferença das ordenadas dividida pela diferença das abcissas. É exatamente essa razão que define a taxa média de variação.",
     "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
@@ -7376,15 +7376,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Modelacao",
     "focus": "taxa média de variação",
-    "q": "Uma grandeza de temperatura passa de 12 para 20 em 4 unidades de tempo. Qual é a taxa média?",
+    "q": "A temperatura passa de 12 °C para 20 °C em 4 horas. Qual é a taxa média de variação, em °C/h?",
     "o": [
       "8",
       "4",
       "2",
-      "0.5"
+      "0,5"
     ],
     "a": 2,
-    "sol": "(20-12)/4=2 graus por hora.",
+    "sol": "Divide-se a variação total pelo tempo decorrido. Assim, (20−12)/4=2 °C/h.",
     "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
@@ -7463,7 +7463,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "taxa média de variação",
-    "q": "Se f mede distancia em km e t mede tempo em horas, a taxa média tem unidades",
+    "q": "Uma função f(t) dá a distância percorrida, em quilómetros, ao fim de t horas. Qual é a unidade da taxa média de variação de f?",
     "o": [
       "km.h",
       "h/km",
@@ -7471,7 +7471,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "km"
     ],
     "a": 2,
-    "sol": "As unidades da taxa sao unidades de saida por unidades de entrada.",
+    "sol": "A taxa média é a variação da distância dividida pelo tempo decorrido. A sua unidade é o quilómetro por hora, km/h.",
     "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
@@ -7492,7 +7492,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Modelacao",
     "focus": "taxa média de variação",
-    "q": "Uma grandeza de volume passa de 100 para 160 em 3 unidades de tempo. Qual é a taxa média?",
+    "q": "O volume passa de 100 L para 160 L em 3 minutos. Qual é a taxa média de variação, em L/min?",
     "o": [
       "60",
       "3",
@@ -7500,7 +7500,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "20"
     ],
     "a": 3,
-    "sol": "(160-100)/3=20 litros por minuto.",
+    "sol": "Divide-se a variação total pelo tempo decorrido. Assim, (160−100)/3=20 L/min.",
     "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
@@ -7550,15 +7550,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Princípios da adição e multiplicação",
-    "q": "O princípio da multiplicação aplica-se quando um processo é feito em...",
+    "q": "Que condição garante que o total se pode obter multiplicando diretamente os números de escolhas das etapas?",
     "o": [
-      "alternativas incompatíveis.",
-      "etapas sucessivas.",
-      "um único caso.",
-      "eventos impossíveis."
+      "Cada percurso fica completo quando se escolhe uma de várias alternativas mutuamente exclusivas.",
+      "Cada etapa tem o mesmo número de escolhas para todas as opções das etapas anteriores.",
+      "O número de opções é sempre maior na etapa seguinte do que na etapa anterior.",
+      "O número de opções da segunda etapa varia consoante a escolha da primeira."
     ],
     "a": 1,
-    "sol": "Se uma escolha é seguida de outra, multiplicam-se as possibilidades por etapa.",
+    "sol": "Se a primeira etapa tem a escolhas e, para cada uma, a segunda tem b escolhas, há a×b resultados com as duas etapas completas.",
     "hyp": "Pode somar escolhas sucessivas.",
     "contexts": [
       "mission"
@@ -7811,7 +7811,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Arranjos",
-    "q": "Comparando A(n,k) e C(n,k), para k≥1...",
+    "q": "Qual é a relação entre A(n,k) e C(n,k) válida para todos os naturais n e k com 1≤k≤n?",
     "o": [
       "A(n,k)=C(n,k)/k!.",
       "A(n,k)=k!·C(n,k).",
@@ -7819,7 +7819,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "A(n,k)=n^k."
     ],
     "a": 1,
-    "sol": "Cada escolha sem ordem de k elementos pode ser ordenada de k! maneiras.",
+    "sol": "Cada subconjunto de k elementos admite k! ordenações, logo A(n,k)=k!·C(n,k) para todos os índices permitidos. Quando k=1, k!=1 e os dois números coincidem.",
     "hyp": "Pode inverter a relação.",
     "contexts": [
       "mission"
@@ -8014,15 +8014,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Combinações e escolha sem ordem",
-    "q": "Se escolher presidente e vice entre 8 pessoas, devemos usar diretamente C(8,2)?",
+    "q": "Entre oito pessoas, vão ser escolhidos um presidente e um vice-presidente distintos. Pode usar-se C(8,2) diretamente para contar as atribuições de cargos?",
     "o": [
-      "Sim, sempre.",
-      "Só se houver 8 cargos.",
-      "Só se as pessoas forem iguais.",
-      "Não, porque os cargos distinguem a ordem/função."
+      "Sim, porque são escolhidas duas pessoas distintas.",
+      "Sim, porque cada dupla admite uma só atribuição.",
+      "Não, porque ficam oito pessoas disponíveis para ambos os cargos.",
+      "Não, porque uma dupla admite duas atribuições."
     ],
     "a": 3,
-    "sol": "O par escolhido pode ocupar os dois cargos de 2 formas.",
+    "sol": "C(8,2) conta os pares sem distinguir cargos. Cada par admite duas atribuições, conforme qual das duas pessoas fica como presidente. O total é 2×C(8,2)=56.",
     "hyp": "Pode ignorar a distinção entre cargos.",
     "contexts": [
       "mission"
@@ -8043,7 +8043,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Combinações e escolha sem ordem",
-    "q": "Uma app escolhe 3 tópicos distintos entre 12 para uma revisão, sem ordem. Quantas seleções?",
+    "q": "Uma aplicação tem 12 tópicos de revisão e vai manter 9 deles. Quantos conjuntos diferentes de tópicos pode manter, sem atender à ordem?",
     "o": [
       "220.",
       "1320.",
@@ -8051,7 +8051,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "36."
     ],
     "a": 0,
-    "sol": "C(12,3)=220.",
+    "sol": "Cada conjunto de 9 tópicos fica determinado pelos 3 que são excluídos. Assim, há C(12,9)=C(12,3)=12×11×10/(3×2×1)=220 escolhas.",
     "hyp": "Pode usar arranjos por imaginar uma ordem de apresentação não pedida.",
     "contexts": [
       "mission"
@@ -8188,7 +8188,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Diagramas, tabelas e organização de casos",
-    "q": "Quantas palavras de 2 letras sobre {A,B,C} há? Uma tabela 3×3 mostraria...",
+    "q": "Numa tabela de dupla entrada, contam-se sequências de duas letras escolhidas de {A, B, C}, com repetição permitida. Quantas sequências há?",
     "o": [
       "9.",
       "6.",
@@ -8217,15 +8217,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Diagramas, tabelas e organização de casos",
-    "q": "Num problema de contagem, listar casos de forma sistemática ajuda a evitar...",
+    "q": "Ao listar os casos de um problema de contagem, que condição deve cumprir a lista completa?",
     "o": [
-      "omissões e duplicações.",
-      "apenas cálculos com decimais.",
-      "uso de símbolos.",
-      "qualquer necessidade de raciocínio."
+      "inclui todos os casos admissíveis exatamente uma vez.",
+      "inclui todos os casos admissíveis, podendo repetir alguns.",
+      "evita repetições, mesmo que deixe casos admissíveis de fora.",
+      "mostra um caso admissível de cada tipo sem contar os restantes."
     ],
     "a": 0,
-    "sol": "Uma organização consistente permite verificar cobertura e exclusividade.",
+    "sol": "Uma lista que omite casos conta de menos. Uma lista que repete casos conta de mais. Por isso, cada caso admissível deve aparecer uma vez.",
     "hyp": "Pode achar que listar casos é sempre menos rigoroso.",
     "contexts": [
       "mission"
@@ -8304,7 +8304,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Diagramas, tabelas e organização de casos",
-    "q": "Quantas palavras de 2 letras sobre {A,B,C} existem se não são permitidas letras iguais?",
+    "q": "Quantas sequências de duas letras distintas podem ser formadas com o conjunto {A, B, C}?",
     "o": [
       "9.",
       "6.",
@@ -8312,7 +8312,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2."
     ],
     "a": 1,
-    "sol": "Das 9, retiram-se AA,BB,CC: restam 6.",
+    "sol": "Com repetição, haveria 3×3=9 sequências. Ao retirar AA, BB e CC, restam 6.",
     "hyp": "Pode esquecer a diagonal inválida.",
     "contexts": [
       "mission"
@@ -8333,15 +8333,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Fatorial e contagens elementares",
-    "q": "A expressão n! cresce, para n natural positivo, de forma...",
+    "q": "Para n natural positivo, como evolui o fator que transforma n! em (n+1)! à medida que n aumenta?",
     "o": [
-      "muito rápida.",
-      "linear.",
-      "constante.",
-      "decrescente."
+      "aumenta com n.",
+      "alterna entre dois valores.",
+      "mantém-se constante.",
+      "diminui com n."
     ],
     "a": 0,
-    "sol": "Cada novo termo multiplica o anterior por n+1.",
+    "sol": "O fator é (n+1)!/n!=n+1. Quando n aumenta, esse fator também aumenta.",
     "hyp": "Pode confundir crescimento fatorial com crescimento linear.",
     "contexts": [
       "mission"
@@ -8457,7 +8457,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2⁶."
     ],
     "a": 2,
-    "sol": "Depois de cada pessoa colocada resta uma opção a menos.",
+    "sol": "Para o primeiro lugar há 6 escolhas, para o segundo há 5 e assim sucessivamente até ao último, com 1 escolha. Pelo princípio multiplicativo, o total é 6·5·4·3·2·1=6!.",
     "hyp": "Pode usar repetição em cada lugar.",
     "contexts": [
       "mission"
@@ -8623,15 +8623,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Permutações",
-    "q": "Se trocarmos duas posições numa permutação de objetos distintos...",
+    "q": "Se trocarmos os objetos de duas posições diferentes numa permutação de objetos distintos, o que acontece?",
     "o": [
       "a permutação mantém-se sempre igual.",
-      "obtemos em geral uma permutação diferente.",
+      "obtém-se sempre uma permutação diferente.",
       "a ordem deixa de importar.",
       "o número de objetos muda."
     ],
     "a": 1,
-    "sol": "A identidade dos objetos por posição muda.",
+    "sol": "Os objetos nas duas posições são distintos. Após a troca, cada uma dessas posições contém um objeto diferente do inicial, logo a permutação muda.",
     "hyp": "Pode confundir ordenação com conjunto sem ordem.",
     "contexts": [
       "mission"
@@ -8776,7 +8776,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "y=1."
     ],
     "a": 1,
-    "sol": "O denominador anula-se em x=0.",
+    "sol": "Quando x se aproxima de 0 pela direita, 1/x cresce sem limite. Pela esquerda, 1/x diminui sem limite. Por isso, a reta x=0 é uma assíntota vertical.",
     "hyp": "Pode trocar vertical e horizontal.",
     "contexts": [
       "mission"
@@ -8805,7 +8805,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "a função é crescente."
     ],
     "a": 0,
-    "sol": "Um fator cancelado pode criar apenas uma descontinuidade removível.",
+    "sol": "Depois de cancelar os fatores comuns, verifica-se se x−a permanece no denominador. Se permanecer, há uma assíntota vertical. Se o fator desaparecer por completo, a exclusão de a do domínio original dá apenas um ponto removível.",
     "hyp": "Pode usar apenas o denominador antes de simplificar.",
     "contexts": [
       "mission"
@@ -8826,7 +8826,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Assíntotas, interpretação e modelação",
-    "q": "Para f(x)=(x²+2x+3)/(x+1), a divisão dá...",
+    "q": "Para x≠−1, qual das expressões é igual a (x²+2x+3)/(x+1)?",
     "o": [
       "x+2+1/(x+1).",
       "x+1+2/(x+1).",
@@ -8834,7 +8834,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "x+3."
     ],
     "a": 1,
-    "sol": "(x+1)(x+1)=x²+2x+1, sobra 2.",
+    "sol": "A divisão euclidiana dá quociente x+1 e resto 2, pois x²+2x+3=(x+1)²+2. Para x≠−1, a expressão racional é, portanto, x+1+2/(x+1).",
     "hyp": "Pode errar o resto.",
     "contexts": [
       "mission"
@@ -9037,7 +9037,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "±2 e ±3."
     ],
     "a": 3,
-    "sol": "y²−13y+36=(y−4)(y−9), logo x²=4 ou 9.",
+    "sol": "Com y=x², resulta (y−4)(y−9)=0. Logo, x²=4 ou x²=9. Como ambas as soluções de y são positivas, as quatro soluções reais são x=−2, x=2, x=−3 e x=3.",
     "hyp": "Pode esquecer sinais.",
     "contexts": [
       "mission"
@@ -9124,7 +9124,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "em nenhum ponto."
     ],
     "a": 0,
-    "sol": "Cada zero real distinto corresponde a uma interseção com Ox.",
+    "sol": "Um polinómio de grau 3 com três zeros reais distintos tem três fatores lineares diferentes. Perto de cada zero só muda o sinal do fator correspondente, pelo que o gráfico cruza Ox em cada um desses três pontos.",
     "hyp": "Pode confundir grau com número exato de zeros reais.",
     "contexts": [
       "mission"
@@ -9174,7 +9174,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Divisão de polinómios, Ruffini/Horner",
-    "q": "O grau do resto R na divisão por um divisor de grau 2 deve ser...",
+    "q": "Na divisão euclidiana por um polinómio de grau 2, o que se pode afirmar sobre o grau do resto quando este é não nulo?",
     "o": [
       "igual a 2.",
       "inferior a 2.",
@@ -9182,7 +9182,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "sempre 0."
     ],
     "a": 1,
-    "sol": "O resto tem grau estritamente inferior ao do divisor.",
+    "sol": "A divisão euclidiana termina quando o resto é nulo ou tem grau menor do que o divisor. Logo, um resto não nulo tem grau inferior a 2.",
     "hyp": "Pode usar grau igual ao divisor.",
     "contexts": [
       "mission"
@@ -9298,7 +9298,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "de grau 2."
     ],
     "a": 2,
-    "sol": "O divisor tem grau 1, logo o resto tem grau inferior a 1.",
+    "sol": "O divisor tem grau 1, por isso o resto é nulo ou tem grau 0. Em ambos os casos, representa-se por uma constante.",
     "hyp": "Pode pensar que o resto deve ter o mesmo grau do divisor.",
     "contexts": [
       "mission"
@@ -9319,7 +9319,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Divisão de polinómios, Ruffini/Horner",
-    "q": "Divide x³−6x²+11x−6 por x−2. O quociente é...",
+    "q": "Divide x³−6x²+11x−2 por x−2. Qual é o quociente da divisão euclidiana?",
     "o": [
       "x²−5x+3.",
       "x²−4x+3.",
@@ -9327,7 +9327,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "x²+4x+3."
     ],
     "a": 1,
-    "sol": "Ruffini com 2 dá 1,−4,3 e resto 0.",
+    "sol": "Ruffini com 2 dá os coeficientes 1,−4,3 e o resto 4. De facto, x³−6x²+11x−2=(x−2)(x²−4x+3)+4. Logo o quociente é x²−4x+3.",
     "hyp": "Pode usar o resultado da divisão por x−1.",
     "contexts": [
       "mission"
@@ -9385,7 +9385,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "(fg)(x)=f(x)/g(x)."
     ],
     "a": 1,
-    "sol": "Multiplicam-se os valores de f e g.",
+    "sol": "Para cada x no domínio comum, calculam-se f(x) e g(x) e multiplicam-se os dois valores. Assim, (fg)(x)=f(x)g(x).",
     "hyp": "Pode confundir com composição.",
     "contexts": [
       "mission"
@@ -9406,7 +9406,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Operações entre funções",
-    "q": "Se f(x)=√x e g(x)=x−4, o domínio de f∘g é...",
+    "q": "Qual é o domínio real da função h(x)=√(x−4)?",
     "o": [
       "[0,+∞[.",
       "R.",
@@ -9414,7 +9414,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "]−∞,4]."
     ],
     "a": 2,
-    "sol": "É preciso g(x)=x−4≥0.",
+    "sol": "A raiz quadrada em ℝ exige x−4≥0, ou seja, x≥4. O domínio de h é [4,+∞[.",
     "hyp": "Pode usar apenas o domínio de f sem o traduzir para x.",
     "contexts": [
       "mission"
@@ -9440,10 +9440,10 @@ export const VNEXT_MISSION_QUESTIONS=[
       "mantém as exclusões da expressão original.",
       "passa a ser sempre R.",
       "depende apenas do numerador.",
-      "deixa de importar."
+      "passa a excluir só os zeros do denominador simplificado."
     ],
     "a": 0,
-    "sol": "Pontos onde o denominador original era zero continuam excluídos.",
+    "sol": "O quociente f/g é definido nos pontos do domínio comum para os quais g(x)≠0. Cancelar um fator só dá uma igualdade nos pontos onde a expressão original está definida.",
     "hyp": "Pode recuperar indevidamente pontos cancelados.",
     "contexts": [
       "mission"
@@ -9464,7 +9464,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Operações entre funções",
-    "q": "Restringindo f(x)=x² a [0,+∞[, a inversa é...",
+    "q": "Para cada número real x≥0, considera a equação t²=x. Que expressão dá a sua solução não negativa em função de x?",
     "o": [
       "√x.",
       "−√x.",
@@ -9472,7 +9472,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "1/x²."
     ],
     "a": 0,
-    "sol": "No ramo não negativo, x² é injetiva e a operação inversa é a raiz quadrada principal.",
+    "sol": "A raiz quadrada √x é, por definição, não negativa e o seu quadrado é x. A solução no intervalo pedido é t=√x.",
     "hyp": "Pode incluir o ramo negativo.",
     "contexts": [
       "mission"
@@ -9522,7 +9522,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Aplicação",
     "focus": "Operações entre funções",
-    "q": "Se f(x)=2x−1 e g(x)=x², então (f∘g)(x)=",
+    "q": "Considera f(x)=2x−1. Que expressão se obtém ao substituir x por x² em f(x)?",
     "o": [
       "2x²−1.",
       "(2x−1)².",
@@ -9530,7 +9530,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2x−x²."
     ],
     "a": 0,
-    "sol": "f(x²)=2x²−1.",
+    "sol": "O termo 2x torna-se 2x² e o termo independente mantém-se. Obtém-se f(x²)=2x²−1.",
     "hyp": "Pode substituir f dentro de g.",
     "contexts": [
       "mission"
@@ -9638,15 +9638,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Funções racionais",
-    "q": "A função f(x)=(x²−1)/(x−1) coincide com y=x+1 exceto...",
+    "q": "Ao simplificar f(x)=(x²−1)/(x−1), para que valores de x se pode escrever f(x)=x+1?",
     "o": [
-      "em x=−1.",
-      "em x=0.",
-      "no ponto x=1, que está excluído.",
-      "em todo o domínio."
+      "Para todos os reais exceto x=−1.",
+      "Para todos os reais exceto x=0.",
+      "Para todos os reais exceto x=1.",
+      "Para todos os reais, incluindo x=1."
     ],
     "a": 2,
-    "sol": "A expressão original não está definida em x=1.",
+    "sol": "Fatora-se x²−1=(x−1)(x+1). O fator x−1 só se pode cancelar quando x≠1. Assim, a igualdade vale para todos os reais exceto 1, que continua fora do domínio.",
     "hyp": "Pode esquecer o buraco removível.",
     "contexts": [
       "mission"
@@ -9841,15 +9841,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Teorema do resto, raízes, multiplicidade e fatorização",
-    "q": "Se x=a é raiz de multiplicidade 2, então P tem fator...",
+    "q": "Qual é o fator quadrático que P tem sempre, para qualquer raiz a de multiplicidade 2?",
     "o": [
       "(x−a)².",
       "x−2a.",
-      "(x+a)².",
+      "(x−a)²+1.",
       "x²−a."
     ],
     "a": 0,
-    "sol": "Multiplicidade 2 significa o fator linear repetido duas vezes.",
+    "sol": "A multiplicidade 2 significa que o fator x−a ocorre duas vezes na fatorização. Portanto, (x−a)² divide P.",
     "hyp": "Pode confundir multiplicidade com coeficiente.",
     "contexts": [
       "mission"
@@ -9870,7 +9870,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Teorema do resto, raízes, multiplicidade e fatorização",
-    "q": "Num modelo polinomial, P(t)=0 representa frequentemente...",
+    "q": "Num modelo polinomial, P(t) é o valor de uma grandeza no instante t. Se P(t₀)=0, o que representa t₀ no modelo?",
     "o": [
       "o valor máximo obrigatório.",
       "uma assíntota.",
@@ -9957,7 +9957,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Produto escalar, norma e ângulo",
-    "q": "Se ||u||=3, ||v||=4 e θ=60°, então u·v=",
+    "q": "Para dois vetores u e v de normas 3 e 4, o ângulo entre eles é 60°. Quanto vale u·v?",
     "o": [
       "12.",
       "6.",
@@ -10044,7 +10044,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Produto escalar, norma e ângulo",
-    "q": "Se u·v>0, então θ é...",
+    "q": "Se u e v são vetores não nulos e não colineares com u·v>0, como se classifica o ângulo θ entre eles?",
     "o": [
       "reto.",
       "obtuso.",
@@ -10052,7 +10052,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "sempre 0."
     ],
     "a": 2,
-    "sol": "cosθ>0 em ]0,π/2[.",
+    "sol": "De u·v=‖u‖‖v‖cos θ segue-se que cos θ>0. Os vetores não são colineares, pelo que θ≠0. Portanto, 0<θ<π/2 e o ângulo é agudo.",
     "hyp": "Pode achar que positivo implica vetores iguais.",
     "contexts": [
       "mission"
@@ -10073,7 +10073,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Produto escalar, norma e ângulo",
-    "q": "Uma força de 10 N atua num deslocamento de 5 m formando 60°. O produto escalar F·d é...",
+    "q": "Uma força F de intensidade 10 N atua durante um deslocamento d de comprimento 5 m. O ângulo entre F e d é 60°. Quanto vale F·d, em joules?",
     "o": [
       "50.",
       "25.",
@@ -10081,7 +10081,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "100."
     ],
     "a": 1,
-    "sol": "10×5×cos60°=25.",
+    "sol": "F·d=‖F‖‖d‖cos 60°=10×5×(1/2)=25 J.",
     "hyp": "Pode multiplicar só as magnitudes.",
     "contexts": [
       "mission"
@@ -10226,7 +10226,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "60° obrigatoriamente."
     ],
     "a": 0,
-    "sol": "m=(8−2)/(4−1)=2, logo α=arctan2.",
+    "sol": "O declive é m=(8−2)/(4−1)=2. A inclinação α está em [0,π[ e satisfaz tan α=2. Como o declive é positivo, α é o ângulo agudo arctan(2).",
     "hyp": "Pode inverter a razão.",
     "contexts": [
       "mission"
@@ -10276,15 +10276,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Declive e inclinação",
-    "q": "Uma estrada sobe 1 m por cada 10 m na horizontal. A sua inclinação é aproximadamente...",
+    "q": "Uma estrada sobe 1 m por cada 10 m na horizontal. Qual é a expressão exata da sua inclinação relativamente à horizontal?",
     "o": [
       "arctan(0,1).",
       "arctan(10).",
-      "sin⁻¹(0,1) obrigatoriamente.",
-      "0,1 rad exatamente."
+      "arcsin(0,1).",
+      "arccos(0,1)."
     ],
     "a": 0,
-    "sol": "Declive e inclinação relacionam-se por m=tan α.",
+    "sol": "O declive é a razão entre a subida e o percurso horizontal, 1/10=0,1. Sendo α o ângulo agudo com a horizontal, tan α=0,1, pelo que α=arctan(0,1).",
     "hyp": "Pode confundir tangente com seno.",
     "contexts": [
       "mission"
@@ -10392,15 +10392,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Distâncias em problemas geométricos",
-    "q": "A distância de um ponto P a um plano α é...",
+    "q": "Se P é um ponto exterior ao plano α, qual é a distância de P a α?",
     "o": [
-      "qualquer segmento até um ponto do plano.",
+      "o comprimento do segmento que liga P a qualquer ponto do plano.",
       "o comprimento do segmento perpendicular de P ao plano.",
-      "a norma de P.",
-      "a distância à origem."
+      "o comprimento da projeção de [OP] sobre um plano paralelo a α.",
+      "o comprimento do segmento que liga P à origem."
     ],
     "a": 1,
-    "sol": "A distância mínima é medida na direção normal ao plano.",
+    "sol": "A projeção ortogonal H de P no plano α é o ponto do plano mais próximo de P. Logo, a distância é o comprimento de [PH].",
     "hyp": "Pode confundir distância a plano com distância a um ponto arbitrário.",
     "contexts": [
       "mission"
@@ -10429,7 +10429,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2√3."
     ],
     "a": 2,
-    "sol": "A segunda simplifica para x+y+z−3=0; distância=3/√3=√3.",
+    "sol": "Dividindo a segunda equação por 2, obtém-se x+y+z=3. A origem pertence ao primeiro plano. A sua distância ao segundo é |0−3|/√(1²+1²+1²)=√3, que é também a distância entre os planos paralelos.",
     "hyp": "Pode comparar termos sem primeiro tornar as normais iguais.",
     "contexts": [
       "mission"
@@ -10479,15 +10479,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Distâncias em problemas geométricos",
-    "q": "A fórmula de distância ponto-plano pode ser vista como...",
+    "q": "Seja Q um ponto do plano α, P um ponto exterior e n um vetor normal unitário a α. Como se obtém a distância de P a α a partir de w=QP?",
     "o": [
-      "a norma do vetor posição do ponto.",
-      "o produto vetorial com a origem.",
-      "o valor absoluto da projeção do vetor entre o ponto e um ponto do plano sobre uma normal unitária.",
-      "a soma das coordenadas."
+      "Pela norma de w, qualquer que seja Q.",
+      "Pelo módulo da componente de w paralela ao plano.",
+      "Pelo módulo da componente de w na direção de n.",
+      "Pela norma de w mais a norma de n."
     ],
     "a": 2,
-    "sol": "A distância é a componente normal do deslocamento.",
+    "sol": "A projeção escalar de w sobre n é w·n, que pode ser positiva ou negativa conforme o sentido de n. A distância ao plano é, portanto, |w·n|.",
     "hyp": "Pode confundir projeção normal com comprimento total.",
     "contexts": [
       "mission"
@@ -10545,7 +10545,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "√(d1²+d2²)."
     ],
     "a": 0,
-    "sol": "É o análogo tridimensional da distância entre retas paralelas.",
+    "sol": "Se Q pertence ao primeiro plano, a expressão ax+by+cz vale −d₁ em Q e −d₂ no segundo plano. A distância é o módulo dessa diferença dividido pela norma √(a²+b²+c²) do vetor normal.",
     "hyp": "Pode esquecer normalizar pela norma da normal.",
     "contexts": [
       "mission"
@@ -10711,15 +10711,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Perpendicularidade",
-    "q": "Um vetor perpendicular a (a,b) pode ser...",
+    "q": "Qual das expressões dá um vetor perpendicular a (a,b) para qualquer par real (a,b)≠(0,0)?",
     "o": [
       "(a,b).",
       "(−a,−b).",
-      "(b,a) sempre.",
+      "(a−b,a+b).",
       "(−b,a)."
     ],
     "a": 3,
-    "sol": "a(−b)+ba=0.",
+    "sol": "O produto escalar de (a,b) com (−b,a) é a(−b)+ba=0. Como (a,b) é não nulo, (−b,a) também é não nulo.",
     "hyp": "Pode escolher o vetor oposto.",
     "contexts": [
       "mission"
@@ -10885,7 +10885,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Produto escalar por coordenadas",
-    "q": "Uma força F=(10,0) atua num deslocamento d=(3,4). O produto F·d é...",
+    "q": "Uma força F=(10,0), em newtons, atua durante um deslocamento d=(3,4), em metros. Quanto vale o produto escalar F·d, em joules?",
     "o": [
       "40.",
       "30.",
@@ -10893,7 +10893,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "70."
     ],
     "a": 1,
-    "sol": "10×3+0×4=30.",
+    "sol": "Multiplicam-se as componentes correspondentes e somam-se os produtos. Assim, F·d=10×3+0×4=30 J.",
     "hyp": "Pode usar apenas normas.",
     "contexts": [
       "mission"
@@ -10972,7 +10972,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Ângulos e posições relativas de retas e planos",
-    "q": "As retas de diretores (1,2) e (2,4) são...",
+    "q": "Duas retas distintas do plano têm vetores diretores (1,2) e (2,4). Qual é a sua posição relativa?",
     "o": [
       "perpendiculares.",
       "paralelas.",
@@ -10980,7 +10980,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "sem relação."
     ],
     "a": 1,
-    "sol": "(2,4)=2(1,2).",
+    "sol": "Os vetores diretores são proporcionais, pois (2,4)=2(1,2). As retas têm a mesma direção e, por serem distintas, são paralelas.",
     "hyp": "Pode olhar apenas para componentes diferentes.",
     "contexts": [
       "mission"
@@ -11088,7 +11088,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Ângulos e posições relativas de retas e planos",
-    "q": "Uma rampa tem direção v=(3,0,1) e o chão horizontal tem normal n=(0,0,1). O seno do ângulo da rampa com o chão é...",
+    "q": "Uma rampa liga O=(0,0,0) a P=(3,0,1). O ponto H=(3,0,0) é a projeção de P no chão horizontal. Qual é o seno do ângulo que os segmentos [OP] e [OH] formam em O?",
     "o": [
       "3/√10.",
       "1/√10.",
@@ -11096,7 +11096,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "√10."
     ],
     "a": 1,
-    "sol": "sinβ=|v·n|/(||v||||n||)=1/√10.",
+    "sol": "O triângulo OPH é retângulo em H. O cateto oposto ao ângulo é PH=1 e a hipotenusa é OP=√(3²+1²)=√10. Logo, o seno é 1/√10.",
     "hyp": "Pode usar a componente horizontal.",
     "contexts": [
       "mission"
@@ -11146,7 +11146,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Ângulos e posições relativas de retas e planos",
-    "q": "Qual é o ângulo entre os planos x=0 e x+y=0?",
+    "q": "O ângulo entre dois planos é o menor ângulo que se pode formar com as respetivas normais. Qual é o ângulo entre os planos x=0 e x+y=0?",
     "o": [
       "90°.",
       "45°.",
@@ -11154,7 +11154,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "60°."
     ],
     "a": 1,
-    "sol": "Normais n1=(1,0,0), n2=(1,1,0); cosθ=1/√2.",
+    "sol": "As normais podem ser (1,0,0) e (1,1,0). O seu produto escalar é 1 e as normas são 1 e √2. Logo, o cosseno do menor ângulo é 1/√2, correspondente a 45°.",
     "hyp": "Pode usar diretamente coeficientes sem normalizar.",
     "contexts": [
       "mission"
@@ -11233,7 +11233,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Comportamento e modelação com sucessões",
-    "q": "Qual modelo descreve melhor 100,110,121,133,1,...?",
+    "q": "Qual modelo é compatível com os primeiros termos 100; 110; 121; 133,1; …?",
     "o": [
       "PG de razão 1,1.",
       "PA de razão 10.",
@@ -11241,7 +11241,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "PG de razão 10."
     ],
     "a": 0,
-    "sol": "Cada termo é 1,1 vezes o anterior.",
+    "sol": "Cada um destes termos a partir do segundo é 1,1 vezes o anterior: 110/100=121/110=133,1/121=1,1. O modelo compatível é uma PG de razão 1,1.",
     "hyp": "Pode olhar apenas para a primeira diferença.",
     "contexts": [
       "mission"
@@ -11697,7 +11697,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Progressões geométricas",
-    "q": "Uma população de 500 aumenta 10% por período. Qual é o 4.º valor se o primeiro é 500?",
+    "q": "O volume de água num depósito é inicialmente de 500 L e aumenta 10% por período. Se o volume inicial é o primeiro valor da sucessão, qual é o quarto valor, em litros?",
     "o": [
       "650.",
       "550.",
@@ -11705,7 +11705,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "665,5."
     ],
     "a": 3,
-    "sol": "500×1,1³=665,5.",
+    "sol": "Do primeiro até ao quarto valor há três aumentos. Cada um multiplica o volume por 1,1, logo o quarto valor é 500×1,1³=665,5 L.",
     "hyp": "Pode somar sempre 50 em vez de aplicar percentagem ao novo valor.",
     "contexts": [
       "mission"
@@ -11879,7 +11879,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "S_n=nq."
     ],
     "a": 2,
-    "sol": "É a fórmula da soma geométrica finita.",
+    "sol": "Escreve S_n=u_1+u_1q+…+u_1q^{n−1}. Ao subtrair qS_n a S_n, os termos intermédios cancelam, dando (1−q)S_n=u_1−u_1q^n. Como q≠1, segue-se S_n=u_1(1−q^n)/(1−q).",
     "hyp": "Pode usar a fórmula de PA.",
     "contexts": [
       "mission"
@@ -11900,7 +11900,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Somas de termos de PA e PG",
-    "q": "Numa PA, a soma de um número ímpar de termos consecutivos é igual a...",
+    "q": "Considera n termos consecutivos de uma progressão aritmética, com n ímpar. Que expressão dá a soma desses termos?",
     "o": [
       "n vezes o primeiro termo.",
       "n vezes a razão.",
@@ -11908,7 +11908,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "metade do último termo."
     ],
     "a": 2,
-    "sol": "A média dos termos é o termo central.",
+    "sol": "Cada par de termos à mesma distância do centro tem média igual ao termo central. Com o próprio termo central, a média dos n termos mantém-se igual a esse termo. A soma é n vezes o termo central.",
     "hyp": "Pode achar que só vale para PA simétrica em torno de zero.",
     "contexts": [
       "mission"
@@ -12132,7 +12132,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Regularidades, termo geral e recorrência",
-    "q": "Na sucessão (u_n), u_5 representa...",
+    "q": "Na sucessão (u_n) indexada a partir de n=1, o que representa u_5?",
     "o": [
       "a soma dos 5 primeiros termos.",
       "o 5.º termo.",
@@ -12248,7 +12248,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Aplicação",
     "focus": "Ângulos orientados, arcos e radianos",
-    "q": "Um ângulo coterminal em [0,360[ com 765° é...",
+    "q": "Mantendo o lado inicial, qual é a amplitude em [0°, 360°[ que tem o mesmo lado final de um ângulo de 765°?",
     "o": [
       "45°",
       "135°",
@@ -12256,7 +12256,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "315°"
     ],
     "a": 0,
-    "sol": "765−720=45°.",
+    "sol": "Duas voltas completas não alteram o lado final. Subtraindo 2×360° a 765°, obtém-se 45°.",
     "hyp": "Pode retirar apenas uma volta.",
     "contexts": [
       "mission"
@@ -12364,7 +12364,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Aplicação",
     "focus": "Ângulos orientados, arcos e radianos",
-    "q": "Um ângulo coterminal em [0,2π[ com 17π/6 é...",
+    "q": "Mantendo o lado inicial, qual é a amplitude em radianos em [0,2π[ que tem o mesmo lado final de um ângulo de 17π/6 rad?",
     "o": [
       "11π/6",
       "5π/6",
@@ -12372,7 +12372,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "7π/6"
     ],
     "a": 1,
-    "sol": "17π/6−12π/6=5π/6.",
+    "sol": "Uma volta completa não altera o lado final. Subtraindo 2π a 17π/6, obtém-se 5π/6, que pertence ao intervalo indicado.",
     "hyp": "Pode subtrair π em vez de 2π.",
     "contexts": [
       "mission"
@@ -12430,7 +12430,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "ao arco."
     ],
     "a": 1,
-    "sol": "O ponto associado tem coordenadas (cos θ,sin θ).",
+    "sol": "O ponto associado tem coordenadas (cos θ,sen θ).",
     "hyp": "Pode trocar seno e cosseno.",
     "contexts": [
       "mission"
@@ -12517,7 +12517,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "−√3/2"
     ],
     "a": 3,
-    "sol": "A coordenada vertical é sin(5π/3)=−√3/2.",
+    "sol": "A coordenada vertical é sen(5π/3)=−√3/2.",
     "hyp": "Pode usar o cosseno.",
     "contexts": [
       "mission"
@@ -12538,7 +12538,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Círculo trigonométrico e redução",
-    "q": "No círculo trigonométrico, sin θ corresponde...",
+    "q": "No círculo trigonométrico, sen θ corresponde...",
     "o": [
       "à abcissa.",
       "ao raio.",
@@ -12546,7 +12546,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "ao comprimento do arco."
     ],
     "a": 2,
-    "sol": "O ponto associado tem coordenadas (cos θ,sin θ).",
+    "sol": "O ponto associado tem coordenadas (cos θ,sen θ).",
     "hyp": "Pode trocar seno e cosseno.",
     "contexts": [
       "mission"
@@ -12567,7 +12567,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Aplicação",
     "focus": "Círculo trigonométrico e redução",
-    "q": "Quanto vale sin(π/6)?",
+    "q": "Quanto vale sen(5π/6)?",
     "o": [
       "1/2",
       "√2/2",
@@ -12575,7 +12575,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "1"
     ],
     "a": 0,
-    "sol": "É um valor notável.",
+    "sol": "Os pontos de 5π/6 e π/6 são simétricos em relação ao eixo Oy. Têm, por isso, a mesma ordenada: sen(5π/6)=sen(π/6)=1/2.",
     "hyp": "Pode confundir com seno de π/3.",
     "contexts": [
       "mission"
@@ -12596,7 +12596,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Equações trigonométricas",
-    "q": "Em [0,2π[, sin x=1/2 tem soluções...",
+    "q": "Em [0,2π[, sen x=1/2 tem soluções...",
     "o": [
       "π/6 e 11π/6.",
       "π/6 e 5π/6.",
@@ -12625,10 +12625,10 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Equações trigonométricas",
-    "q": "A equação cos x=0 tem soluções...",
+    "q": "Quais são as soluções em ℝ da equação cos x=0? Nas expressões, k∈ℤ.",
     "o": [
       "x=kπ.",
-      "x=π/2+kπ, k∈Z.",
+      "x=π/2+kπ.",
       "x=2kπ.",
       "x=π/4+2kπ."
     ],
@@ -12662,7 +12662,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "infinitas soluções."
     ],
     "a": 0,
-    "sol": "O cosseno também tem imagem [−1,1].",
+    "sol": "Para todo x real, −1≤cos x≤1. Como −3/2<−1, a equação não tem soluções reais.",
     "hyp": "Pode tentar resolver numericamente um valor impossível.",
     "contexts": [
       "mission"
@@ -12712,7 +12712,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Equações trigonométricas",
-    "q": "A altura de uma maré simplificada é h(t)=2+sin t. Em [0,2π[, quando h(t)=2?",
+    "q": "A altura de uma maré simplificada é h(t)=2+sen t. Em [0,2π[, quando h(t)=2?",
     "o": [
       "t=π/2 e 3π/2.",
       "t=π apenas.",
@@ -12720,7 +12720,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "t=0 e t=π."
     ],
     "a": 3,
-    "sol": "h=2 implica sin t=0.",
+    "sol": "A igualdade h(t)=2 equivale a sen t=0. O seno anula-se nos múltiplos inteiros de π, dos quais só 0 e π pertencem a [0,2π[.",
     "hyp": "Pode procurar extremos em vez do nível médio.",
     "contexts": [
       "mission"
@@ -12741,15 +12741,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Equações trigonométricas",
-    "q": "A equação tan x=0 tem soluções...",
+    "q": "Quais são as soluções em ℝ da equação tg x=0? Nas expressões, k∈ℤ.",
     "o": [
       "x=π/2+kπ.",
       "x=π/4+kπ.",
-      "x=kπ, k∈Z.",
+      "x=kπ.",
       "x=2kπ apenas."
     ],
     "a": 2,
-    "sol": "tan x=0 quando sin x=0 e cos x≠0, isto é, x=kπ.",
+    "sol": "tg x=0 quando sen x=0 e cos x≠0, isto é, x=kπ.",
     "hyp": "Pode confundir com pontos onde a tangente não existe.",
     "contexts": [
       "mission"
@@ -12770,7 +12770,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Equações trigonométricas",
-    "q": "Resolve sin²x=1 em [0,2π[.",
+    "q": "Resolve sen² x=1 em [0,2π[.",
     "o": [
       "0 e π.",
       "π/2 e 3π/2.",
@@ -12778,7 +12778,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "π/2 apenas."
     ],
     "a": 1,
-    "sol": "sin²x=1 implica sin x=±1.",
+    "sol": "De sen² x=1 resulta sen x=1 ou sen x=−1. Em [0,2π[, estes valores são atingidos em π/2 e 3π/2, respetivamente.",
     "hyp": "Pode considerar apenas sin x=1.",
     "contexts": [
       "mission"
@@ -12803,11 +12803,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "o": [
       "0.",
       "−1.",
-      "−π.",
+      "−1/2.",
       "1."
     ],
     "a": 1,
-    "sol": "O cosseno atinge −1.",
+    "sol": "No círculo trigonométrico, o cosseno é a abcissa, que varia entre −1 e 1. A menor abcissa é −1 e é atingida, por exemplo, em x=π.",
     "hyp": "Pode confundir mínimo com zero.",
     "contexts": [
       "mission"
@@ -12886,12 +12886,12 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Funções seno e cosseno",
-    "q": "O gráfico de y=sin x deslocado 2 unidades para cima torna-se...",
+    "q": "O gráfico de y=sen x deslocado 2 unidades para cima torna-se...",
     "o": [
-      "y=sin(x+2).",
+      "y=sen(x+2).",
       "y=2sin x.",
-      "y=sin x+2.",
-      "y=sin x−2."
+      "y=sen x+2.",
+      "y=sen x−2."
     ],
     "a": 2,
     "sol": "Uma translação vertical soma 2 à saída.",
@@ -12946,7 +12946,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Funções seno e cosseno",
     "q": "A imagem da função seno é...",
     "o": [
-      "R.",
+      "ℝ.",
       "[0,1].",
       "[−1,1].",
       "]−∞,1]."
@@ -12973,15 +12973,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Compreensão",
     "focus": "Funções seno e cosseno",
-    "q": "No modelo y=A sin(Bx+C)+D, D representa...",
+    "q": "No modelo periódico y=A sen(Bx+C)+D, com A≠0 e B≠0, o que representa D?",
     "o": [
-      "o deslocamento vertical/eixo médio.",
+      "a ordenada da linha média.",
       "a amplitude.",
       "o período.",
       "a frequência angular."
     ],
     "a": 0,
-    "sol": "D desloca todo o gráfico verticalmente.",
+    "sol": "Os valores extremos são D−|A| e D+|A|. A média destes valores é D, logo a linha média é a reta y=D.",
     "hyp": "Pode confundir com amplitude.",
     "contexts": [
       "mission"
@@ -13002,7 +13002,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Resolução de triângulos e modelação periódica",
-    "q": "Num triângulo retângulo, tan α=3/4 e o cateto adjacente mede 8. O cateto oposto mede...",
+    "q": "Num triângulo retângulo, tg α=3/4 e o cateto adjacente mede 8. O cateto oposto mede...",
     "o": [
       "8",
       "6",
@@ -13031,7 +13031,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Resolução de triângulos e modelação periódica",
-    "q": "Num triângulo retângulo, cos α é...",
+    "q": "Num triângulo retângulo, α é um ângulo agudo. A que razão corresponde cos α?",
     "o": [
       "cateto oposto/hipotenusa.",
       "cateto adjacente/hipotenusa.",
@@ -13089,7 +13089,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Resolução de triângulos e modelação periódica",
-    "q": "Se A=90°, a Lei dos Cossenos reduz-se a...",
+    "q": "Num triângulo, a é o lado oposto ao ângulo A e os outros lados medem b e c. A lei dos cossenos dá a²=b²+c²−2bc cos A. Que igualdade se obtém quando A=90°?",
     "o": [
       "a²=b²+c².",
       "a=b+c.",
@@ -13097,7 +13097,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "a²=2bc."
     ],
     "a": 0,
-    "sol": "cos90°=0.",
+    "sol": "Como cos 90°=0, o termo −2bc cos A é nulo. Fica a²=b²+c², a igualdade do teorema de Pitágoras.",
     "hyp": "Pode não reconhecer a ligação a Pitágoras.",
     "contexts": [
       "mission"
@@ -13118,7 +13118,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Resolução de triângulos e modelação periódica",
-    "q": "Dois observadores A e B estão a 100 m um do outro e veem um ponto C com ângulos internos A=45° e B=60°. Quanto mede C?",
+    "q": "Dois observadores A e B estão a 100 m um do outro e veem um ponto C. No triângulo ABC, os ângulos internos em A e B medem 45° e 60°, respetivamente. Qual é a amplitude do ângulo interno em C?",
     "o": [
       "105°",
       "15°",
@@ -13147,7 +13147,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Aplicação",
     "focus": "Resolução de triângulos e modelação periódica",
-    "q": "Num triângulo retângulo, relativamente a α, o cateto oposto mede 3 e a hipotenusa 5. Então sin α=",
+    "q": "Num triângulo retângulo, relativamente a α, o cateto oposto mede 3 e a hipotenusa 5. Então sen α=",
     "o": [
       "4/5",
       "3/4",
@@ -13155,7 +13155,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "3/5"
     ],
     "a": 3,
-    "sol": "sin α=oposto/hipotenusa=3/5.",
+    "sol": "sen α=oposto/hipotenusa=3/5.",
     "hyp": "Pode usar o cateto adjacente.",
     "contexts": [
       "mission"
@@ -13176,7 +13176,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Resolução de triângulos e modelação periódica",
-    "q": "Num triângulo, a=7, A=30° e B=45°. Pela Lei dos Senos, b é aproximadamente...",
+    "q": "Num triângulo, a e b são os lados opostos aos ângulos A e B e verifica-se a/sen A=b/sen B. Se a=7, A=30° e B=45°, qual é o valor de b arredondado às centésimas?",
     "o": [
       "7,00",
       "9,90",
@@ -13184,7 +13184,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "14,00"
     ],
     "a": 1,
-    "sol": "b=7 sin45°/sin30°=7(√2/2)/(1/2)=7√2≈9,90.",
+    "sol": "Da relação dada, b=7 sen 45°/sen 30°=7(√2/2)/(1/2)=7√2. Arredondando às centésimas, b≈9,90.",
     "hyp": "Pode inverter a razão.",
     "contexts": [
       "mission"
@@ -13205,7 +13205,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Relações e identidades trigonométricas fundamentais",
-    "q": "Se sin x=5/13 e x está no 1.º quadrante, então cos x=",
+    "q": "Se sen x=5/13 e x está no 1.º quadrante, então cos x=",
     "o": [
       "−12/13",
       "12/13",
@@ -13213,7 +13213,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "8/13"
     ],
     "a": 1,
-    "sol": "cos²x=1−25/169=144/169 e no 1.º quadrante cos>0.",
+    "sol": "cos² x=1−25/169=144/169 e no 1.º quadrante cos>0.",
     "hyp": "Pode escolher a raiz negativa.",
     "contexts": [
       "mission"
@@ -13234,11 +13234,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Relações e identidades trigonométricas fundamentais",
-    "q": "Quando cos x≠0, tan x é igual a...",
+    "q": "Quando cos x≠0, tg x é igual a...",
     "o": [
-      "cos x/sin x.",
-      "sin x/cos x.",
-      "sin x·cos x.",
+      "cos x/sen x.",
+      "sen x/cos x.",
+      "sen x·cos x.",
       "1/cos x."
     ],
     "a": 1,
@@ -13263,7 +13263,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Relações e identidades trigonométricas fundamentais",
-    "q": "Se sin x=4/5 e x∈]π/2,π[, então tan x=",
+    "q": "Se sen x=4/5 e x∈]π/2,π[, então tg x=",
     "o": [
       "4/3",
       "−3/4",
@@ -13271,7 +13271,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "3/4"
     ],
     "a": 2,
-    "sol": "cos x=−3/5 e tan=(4/5)/(−3/5)=−4/3.",
+    "sol": "cos x=−3/5 e tg=(4/5)/(−3/5)=−4/3.",
     "hyp": "Pode errar o sinal ou inverter a razão.",
     "contexts": [
       "mission"
@@ -13292,7 +13292,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Relações e identidades trigonométricas fundamentais",
-    "q": "No 2.º quadrante, tan x é...",
+    "q": "No 2.º quadrante, tg x é...",
     "o": [
       "positiva.",
       "negativa.",
@@ -13329,7 +13329,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "12/5"
     ],
     "a": 3,
-    "sol": "cos=5/13; tan=(12/13)/(5/13)=12/5.",
+    "sol": "cos=5/13; tg=(12/13)/(5/13)=12/5.",
     "hyp": "Pode usar o inverso ou sinal errado.",
     "contexts": [
       "mission"
@@ -13350,7 +13350,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Relações e identidades trigonométricas fundamentais",
-    "q": "Se sin x=0 e cos x≠0, então tan x=",
+    "q": "Se sen x=0 e cos x≠0, então tg x=",
     "o": [
       "1.",
       "não existe.",
@@ -13358,7 +13358,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "cos x."
     ],
     "a": 2,
-    "sol": "tan x=sin x/cos x=0.",
+    "sol": "tg x=sen x/cos x=0.",
     "hyp": "Pode achar que tangente não existe sempre que seno é zero.",
     "contexts": [
       "mission"
@@ -13379,7 +13379,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Relações e identidades trigonométricas fundamentais",
-    "q": "Se tan x=1 e x∈]π,3π/2[, então sin x=",
+    "q": "Se tg x=1 e x∈]π,3π/2[, então sen x=",
     "o": [
       "−√2/2",
       "√2/2",
@@ -13387,7 +13387,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "1/2"
     ],
     "a": 0,
-    "sol": "No 3.º quadrante seno e cosseno são negativos com igual módulo.",
+    "sol": "Como tg x=1, tem-se sen x=cos x. A fórmula fundamental dá 2 sen² x=1. No 3.º quadrante o seno é negativo, pelo que sen x=−√2/2.",
     "hyp": "Pode escolher os sinais do 1.º quadrante.",
     "contexts": [
       "mission"
@@ -13524,7 +13524,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Plano de Argand-Gauss e interpretação geométrica",
-    "q": "Um deslocamento no plano é representado por z=4+3i. A distância total à origem é...",
+    "q": "Um objeto desloca-se do ponto que representa 2+i para o ponto que representa 6+4i. Qual é a distância entre esses dois pontos?",
     "o": [
       "7.",
       "5.",
@@ -13532,7 +13532,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "25."
     ],
     "a": 1,
-    "sol": "É o módulo de z.",
+    "sol": "O deslocamento entre os pontos é (6+4i)−(2+i)=4+3i. A distância é o seu módulo, √(4²+3²)=5.",
     "hyp": "Pode somar as componentes.",
     "contexts": [
       "mission"
@@ -13582,7 +13582,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Plano de Argand-Gauss e interpretação geométrica",
-    "q": "A condição |z−z1|=|z−z2| descreve...",
+    "q": "Se z1 e z2 são complexos distintos, o que descreve a condição |z−z1|=|z−z2|?",
     "o": [
       "a mediatriz do segmento que une z1 e z2.",
       "a reta z1z2.",
@@ -13590,7 +13590,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "apenas o ponto médio."
     ],
     "a": 0,
-    "sol": "São os pontos equidistantes de z1 e z2.",
+    "sol": "A igualdade significa que o afixo de z está à mesma distância dos afixos distintos de z1 e z2, pelo que pertence à mediatriz do segmento que os une.",
     "hyp": "Pode reduzir o lugar ao ponto médio.",
     "contexts": [
       "mission"
@@ -13727,15 +13727,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Conjugado e módulo",
-    "q": "Um ponto complexo z=6−8i está a que distância da origem?",
+    "q": "Se z=(6−8i)²/10, qual é o módulo de z?",
     "o": [
-      "14.",
+      "1.",
       "100.",
-      "2.",
+      "20.",
       "10."
     ],
     "a": 3,
-    "sol": "|z|=√(36+64)=10.",
+    "sol": "Como |6−8i|=√(6²+8²)=10, obtém-se |z|=10²/10=10.",
     "hyp": "Pode usar distância Manhattan.",
     "contexts": [
       "mission"
@@ -13814,9 +13814,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Forma algébrica, parte real/imaginária e igualdade",
-    "q": "Um número real r, visto em C, escreve-se...",
+    "q": "Um número real r, considerado como elemento de ℂ, escreve-se em forma algébrica como...",
     "o": [
-      "0+ri.",
+      "−r+0i.",
       "ri.",
       "r+i.",
       "r+0i."
@@ -14046,7 +14046,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Forma trigonométrica, módulo e argumento",
-    "q": "Na forma r(cosθ+i sinθ), r representa...",
+    "q": "Na forma trigonométrica z=r(cos θ+i sin θ), com r>0, o que representa r?",
     "o": [
       "a parte real.",
       "o módulo de z.",
@@ -14162,7 +14162,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Forma trigonométrica, módulo e argumento",
-    "q": "Na forma z=r(cosθ+i sinθ), θ representa...",
+    "q": "Na forma trigonométrica z=r(cos θ+i sin θ), com r>0, o que representa θ?",
     "o": [
       "o módulo.",
       "a parte real.",
@@ -14170,7 +14170,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "a parte imaginária."
     ],
     "a": 2,
-    "sol": "θ determina a direção do vetor complexo.",
+    "sol": "O módulo r é positivo, pelo que θ mede um ângulo orientado do semieixo real positivo para o vetor que representa z.",
     "hyp": "Pode confundir com o raio.",
     "contexts": [
       "mission"
@@ -14191,7 +14191,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Forma trigonométrica, módulo e argumento",
-    "q": "Se arg(z)=0 mod 2π, então z é...",
+    "q": "Se 0 é um argumento do número complexo z, então z é...",
     "o": [
       "real positivo.",
       "real negativo.",
@@ -14452,7 +14452,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
-    "q": "Se z1=r1(cosα+i sinα) e z2=r2(cosβ+i sinβ), então um argumento de z1z2 é...",
+    "q": "Se z1=r1(cos α+i sin α) e z2=r2(cos β+i sin β), com r1>0 e r2>0, então um argumento de z1z2 é...",
     "o": [
       "α−β.",
       "α+β.",
@@ -14460,7 +14460,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "α/β."
     ],
     "a": 1,
-    "sol": "Na multiplicação, somam-se argumentos.",
+    "sol": "Como os módulos são positivos, α e β são argumentos dos fatores. Um argumento do produto é α+β.",
     "hyp": "Pode subtrair argumentos como na divisão.",
     "contexts": [
       "mission"
@@ -14539,7 +14539,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
-    "q": "Multiplicar por um complexo de módulo 2 e argumento π/3 corresponde geometricamente a...",
+    "q": "No plano complexo, considera dilatações e rotações com centro na origem. A que transformação corresponde multiplicar por um complexo de módulo 2 e argumento π/3?",
     "o": [
       "uma dilatação de fator 2 e rotação de π/3.",
       "apenas uma rotação.",
@@ -14547,7 +14547,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "uma reflexão."
     ],
     "a": 0,
-    "sol": "Módulo controla escala e argumento controla rotação.",
+    "sol": "A multiplicação duplica a distância à origem e acrescenta π/3 a um argumento de cada ponto diferente da origem. A origem permanece fixa.",
     "hyp": "Pode ignorar um dos efeitos.",
     "contexts": [
       "mission"
@@ -14568,7 +14568,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
-    "q": "No quociente z1/z2, com z2≠0, o módulo é...",
+    "q": "Sejam r1=|z1| e r2=|z2|, com z2≠0. Qual é o módulo do quociente z1/z2?",
     "o": [
       "r1r2.",
       "r1−r2.",
@@ -14626,7 +14626,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Unidade imaginária, conjunto C e equações de 2.º grau",
-    "q": "√(−9), no conjunto dos complexos, pode escrever-se como...",
+    "q": "Qual é a solução da equação z²=−9 em ℂ cuja parte imaginária é positiva?",
     "o": [
       "3i.",
       "−3.",
@@ -14634,7 +14634,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "i/3."
     ],
     "a": 0,
-    "sol": "√(−9)=√9·i=3i, tomando a raiz principal.",
+    "sol": "Como (3i)²=9i²=−9, as soluções são 3i e −3i. Só 3i tem parte imaginária positiva.",
     "hyp": "Pode tratar a raiz como real.",
     "contexts": [
       "mission"
@@ -14715,13 +14715,13 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Unidade imaginária, conjunto C e equações de 2.º grau",
     "q": "Todo número real é também...",
     "o": [
-      "um imaginário puro.",
-      "um número sem módulo.",
+      "um número complexo de argumento 0.",
+      "um número complexo de módulo igual à sua parte real.",
       "um número complexo com parte imaginária zero.",
       "um complexo com parte real zero."
     ],
     "a": 2,
-    "sol": "R⊂C e a+0i representa qualquer real.",
+    "sol": "Todo r∈ℝ é representado em ℂ por r+0i, com parte imaginária igual a zero.",
     "hyp": "Pode pensar que reais e complexos são conjuntos disjuntos.",
     "contexts": [
       "mission"
@@ -14771,7 +14771,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Aplicação",
     "focus": "Unidade imaginária, conjunto C e equações de 2.º grau",
-    "q": "i³ é igual a...",
+    "q": "Qual é o conjugado de i⁵?",
     "o": [
       "i.",
       "−i.",
@@ -14779,7 +14779,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "−1."
     ],
     "a": 1,
-    "sol": "i³=i²·i=−i.",
+    "sol": "O ciclo de quatro potências dá i⁵=i⁴·i=i. O conjugado de i é −i.",
     "hyp": "Pode esquecer i²=−1.",
     "contexts": [
       "mission"
@@ -14829,7 +14829,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Equações exponenciais/logarítmicas e problemas",
-    "q": "Resolve log_2(x−1)=log_2 7.",
+    "q": "Resolve em ℝ a equação log₂(x−1)=log₂(7).",
     "o": [
       "x=7.",
       "x=8.",
@@ -14837,7 +14837,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "x=14."
     ],
     "a": 1,
-    "sol": "x−1=7 =>x=8.",
+    "sol": "O primeiro logaritmo exige x>1. A função logarítmica de base 2 é injetiva, por isso x−1=7 e x=8, que pertence ao domínio.",
     "hyp": "Pode responder o argumento 7.",
     "contexts": [
       "mission"
@@ -14866,7 +14866,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "x=1/3."
     ],
     "a": 1,
-    "sol": "1/9=3^−2.",
+    "sol": "Como 1/9=1/3²=3⁻² e a exponencial de base 3 é injetiva, a solução de 3^x=3⁻² é x=−2.",
     "hyp": "Pode ignorar o expoente negativo.",
     "contexts": [
       "mission"
@@ -14889,13 +14889,13 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Equações exponenciais/logarítmicas e problemas",
     "q": "Resolve 2^x=5 usando logaritmos.",
     "o": [
-      "x=ln5/ln2.",
-      "x=ln2/ln5.",
+      "x=ln(5)/ln(2).",
+      "x=ln(2)/ln(5).",
       "x=5/2.",
-      "x=ln10."
+      "x=ln(10)."
     ],
     "a": 0,
-    "sol": "x ln2=ln5, logo x=ln5/ln2.",
+    "sol": "Aplicar ln aos dois membros dá x·ln(2)=ln(5). Como ln(2)≠0, divide-se por ln(2) e obtém-se x=ln(5)/ln(2).",
     "hyp": "Pode inverter a mudança de base.",
     "contexts": [
       "mission"
@@ -14916,7 +14916,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Equações exponenciais/logarítmicas e problemas",
-    "q": "Resolve log_2 x+log_2 4=5.",
+    "q": "Resolve em ℝ a equação log₂(x)+log₂(4)=5.",
     "o": [
       "x=4.",
       "x=16.",
@@ -14924,7 +14924,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "x=32."
     ],
     "a": 2,
-    "sol": "log_2 x+2=5 =>log_2 x=3 =>x=8.",
+    "sol": "Como x>0 e log₂(4)=2, a equação reduz-se a log₂(x)=3. Assim, x=2³=8, que pertence ao domínio.",
     "hyp": "Pode converter a soma em log_2(x+4).",
     "contexts": [
       "mission"
@@ -14945,15 +14945,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Equações exponenciais/logarítmicas e problemas",
-    "q": "Uma população P(t)=1000·1,05^t atinge 2000 quando t satisfaz...",
+    "q": "Uma população é dada por P(t)=1000·(1,05)^t. Que valor de t satisfaz P(t)=2000?",
     "o": [
       "t=2/1,05.",
-      "t=ln2·ln1,05.",
-      "t=ln2/ln1,05.",
-      "t=ln1,05/ln2."
+      "t=ln(2)·ln(1,05).",
+      "t=ln(2)/ln(1,05).",
+      "t=ln(1,05)/ln(2)."
     ],
     "a": 2,
-    "sol": "1,05^t=2 =>t ln1,05=ln2.",
+    "sol": "Dividindo por 1000, obtém-se (1,05)^t=2. Aplicando ln, t·ln(1,05)=ln(2), logo t=ln(2)/ln(1,05).",
     "hyp": "Pode dividir os valores lineares em vez de aplicar logaritmos.",
     "contexts": [
       "mission"
@@ -14974,15 +14974,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Aplicação",
     "focus": "Equações exponenciais/logarítmicas e problemas",
-    "q": "Resolve log_2 x=4.",
+    "q": "Resolve log₂(2x)=5.",
     "o": [
       "x=8.",
-      "x=6.",
+      "x=32.",
       "x=16.",
-      "x=2."
+      "x=10."
     ],
     "a": 2,
-    "sol": "x=2^4=16.",
+    "sol": "O argumento 2x tem de ser positivo. Pela definição de logaritmo, 2x=2⁵=32, logo x=16, que respeita a condição x>0.",
     "hyp": "Pode multiplicar 2×4.",
     "contexts": [
       "mission"
@@ -15005,13 +15005,13 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Equações exponenciais/logarítmicas e problemas",
     "q": "Resolve 3^(2x)=7. Uma expressão para x é...",
     "o": [
-      "ln7/ln3.",
-      "ln7/(2ln3).",
-      "2ln7/ln3.",
-      "ln3/(2ln7)."
+      "ln(7)/ln(3).",
+      "ln(7)/(2·ln(3)).",
+      "2·ln(7)/ln(3).",
+      "ln(3)/(2·ln(7))."
     ],
     "a": 1,
-    "sol": "2x ln3=ln7.",
+    "sol": "Aplicando ln, obtém-se 2x·ln(3)=ln(7). Como ln(3)≠0, segue-se x=ln(7)/(2·ln(3)).",
     "hyp": "Pode esquecer o fator 2 do expoente.",
     "contexts": [
       "mission"
@@ -15032,15 +15032,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Função exponencial",
-    "q": "Se a>1, a função f(x)=a^x é...",
+    "q": "Para a>1, qual das afirmações é verdadeira para f(x)=a^x?",
     "o": [
       "decrescente.",
       "estritamente crescente.",
       "constante.",
-      "alternada."
+      "crescente com incrementos iguais em intervalos de comprimento 1."
     ],
     "a": 1,
-    "sol": "Bases superiores a 1 geram crescimento exponencial.",
+    "sol": "Como a>1, multiplicar f(x) por a faz aumentar o seu valor. Para x₂>x₁, o fator é a^(x₂−x₁)>1, logo f é estritamente crescente. Os incrementos em intervalos de comprimento 1 variam com x.",
     "hyp": "Pode associar expoente crescente a valores sempre decrescentes.",
     "contexts": [
       "mission"
@@ -15206,7 +15206,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Função exponencial",
-    "q": "A imagem de y=−2^x+1 é...",
+    "q": "Qual é o conjunto de valores da função y=1−2^x, com x∈ℝ?",
     "o": [
       "]1,+∞[.",
       "]−∞,1[.",
@@ -15214,7 +15214,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "R."
     ],
     "a": 1,
-    "sol": "−2^x<0, logo −2^x+1<1; aproxima-se de 1 sem atingir.",
+    "sol": "Quando x percorre ℝ, 2^x toma todos os valores positivos. Portanto, 1−2^x toma todos os valores inferiores a 1, o que dá ]−∞, 1[.",
     "hyp": "Pode não considerar a reflexão antes da translação.",
     "contexts": [
       "mission"
@@ -15351,15 +15351,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Função inversa e raízes",
-    "q": "A notação f^−1 deve ser distinguida de...",
+    "q": "Qual das expressões designa a função que a cada x associa o inverso multiplicativo de f(x), quando f(x)≠0?",
     "o": [
-      "1/f, o recíproco dos valores da função.",
-      "f∘g.",
-      "f(x+1).",
-      "f²(x) como domínio."
+      "1/f.",
+      "f⁻¹.",
+      "−f.",
+      "f²."
     ],
     "a": 0,
-    "sol": "f^−1 significa função inversa, enquanto 1/f é a função recíproca quando definida.",
+    "sol": "A função 1/f associa a x o número 1/f(x). Por sua vez, f⁻¹ designa a inversa da função f, quando existe.",
     "hyp": "Pode tratar o expoente −1 como recíproco em qualquer contexto funcional.",
     "contexts": [
       "mission"
@@ -15380,7 +15380,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Função inversa e raízes",
-    "q": "Se f(a)=b e f é invertível, então...",
+    "q": "Se f(a)=b e f é invertível, qual das igualdades é necessariamente verdadeira?",
     "o": [
       "f^−1(a)=b.",
       "f(b)=a.",
@@ -15438,7 +15438,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Função logarítmica e propriedades",
-    "q": "O domínio de f(x)=log_2 x é...",
+    "q": "Qual é o domínio de f(x)=log₂(x)?",
     "o": [
       "]0,+∞[.",
       "R.",
@@ -15467,7 +15467,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Aplicação",
     "focus": "Função logarítmica e propriedades",
-    "q": "log_2 8 é...",
+    "q": "Quanto vale log₂(32)−log₂(4)?",
     "o": [
       "2.",
       "4.",
@@ -15475,7 +15475,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "8."
     ],
     "a": 2,
-    "sol": "2³=8.",
+    "sol": "A diferença de logaritmos da mesma base é o logaritmo do quociente: log₂(32/4)=log₂(8). Como 2³=8, a diferença vale 3.",
     "hyp": "Pode dividir 8 por 2.",
     "contexts": [
       "mission"
@@ -15496,12 +15496,12 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Função logarítmica e propriedades",
-    "q": "log_2 x+log_2 y simplifica para...",
+    "q": "Para x>0 e y>0, qual é a expressão equivalente a log₂(x)+log₂(y)?",
     "o": [
-      "log_2(x+y).",
-      "log_2(xy).",
-      "log_2(x/y).",
-      "log_2 x·y."
+      "log₂(x+y).",
+      "log₂(xy).",
+      "log₂(x/y).",
+      "(log₂(x))·y."
     ],
     "a": 1,
     "sol": "A soma de logaritmos da mesma base corresponde ao produto dos argumentos.",
@@ -15525,7 +15525,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Função logarítmica e propriedades",
-    "q": "O gráfico de y=log_a x passa sempre por...",
+    "q": "Para a>0 e a≠1, por que ponto passa sempre o gráfico de y=logₐ(x)?",
     "o": [
       "(0,1).",
       "(0,0).",
@@ -15533,7 +15533,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "(1,1)."
     ],
     "a": 2,
-    "sol": "log_a1=0.",
+    "sol": "Como a⁰=1, tem-se logₐ(1)=0. Assim, o ponto (1, 0) pertence ao gráfico para qualquer base admissível.",
     "hyp": "Pode usar o ponto(0,1) da exponencial.",
     "contexts": [
       "mission"
@@ -15554,7 +15554,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Função logarítmica e propriedades",
-    "q": "O gráfico de y=log_a x é a reflexão do gráfico de y=a^x relativamente a...",
+    "q": "Para a>0 e a≠1, relativamente a que reta o gráfico de y=logₐ(x) é o reflexo do gráfico de y=a^x?",
     "o": [
       "y=x.",
       "Ox.",
@@ -15583,7 +15583,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Função logarítmica e propriedades",
-    "q": "Para log_a x real, exige-se...",
+    "q": "Em que condições está definido o logaritmo real logₐ(x)?",
     "o": [
       "a<0 e x>0.",
       "a>0, a≠1 e x>0.",
@@ -15612,15 +15612,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Compreensão",
     "focus": "Função logarítmica e propriedades",
-    "q": "A fórmula de mudança de base é...",
+    "q": "Se a e n são bases de logaritmos admissíveis e x>0, qual é a fórmula correta para a mudança de base de a para n?",
     "o": [
-      "log_a x=log_b x/log_b a.",
-      "log_a x=log_b a/log_b x.",
-      "log_a x=log_b(ax).",
-      "log_a x=a log_b x."
+      "logₐ(x)=logₙ(x)/logₙ(a).",
+      "logₐ(x)=logₙ(a)/logₙ(x).",
+      "logₐ(x)=logₙ(ax).",
+      "logₐ(x)=a·logₙ(x)."
     ],
     "a": 0,
-    "sol": "Para uma base b válida, divide-se o logaritmo do argumento pelo da base original.",
+    "sol": "Se y=logₐ(x), então a^y=x. Aplicando logₙ, obtém-se y·logₙ(a)=logₙ(x). Dividir por logₙ(a), que é diferente de zero, dá a fórmula pretendida.",
     "hyp": "Pode inverter numerador e denominador.",
     "contexts": [
       "mission"
@@ -15670,7 +15670,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Crescimento/decrescimento exponencial e modelação",
-    "q": "Se 0<a<1 em Q(t)=Q0·a^t, o modelo representa...",
+    "q": "Num modelo Q(t)=Q₀·a^t, com Q₀>0 e 0<a<1, que tipo de evolução tem Q?",
     "o": [
       "crescimento linear.",
       "decrescimento exponencial.",
@@ -15678,7 +15678,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "oscilação."
     ],
     "a": 1,
-    "sol": "A quantidade é multiplicada repetidamente por um fator inferior a 1.",
+    "sol": "Como Q₀>0 e 0<a<1, multiplicar Q(t) pelo fator a a cada unidade de tempo diminui a quantidade. Trata-se de decrescimento exponencial.",
     "hyp": "Pode pensar que qualquer base positiva gera crescimento.",
     "contexts": [
       "mission"
@@ -15844,7 +15844,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Estudo de funções, modelação e otimização",
-    "q": "Se f'(x)=2x−4, o ponto crítico é...",
+    "q": "Uma função f é derivável em ℝ e f′(x)=2x−4. Qual é a abcissa do seu único ponto crítico?",
     "o": [
       "x=4.",
       "x=2.",
@@ -15852,7 +15852,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "x=0."
     ],
     "a": 1,
-    "sol": "2x−4=0 => x=2.",
+    "sol": "Como f é derivável em ℝ, os pontos críticos são zeros da derivada. Resolvendo 2x−4=0, obtém-se x=2.",
     "hyp": "Pode igualar apenas x a 4.",
     "contexts": [
       "mission"
@@ -15902,7 +15902,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Modelação",
     "focus": "Estudo de funções, modelação e otimização",
-    "q": "Uma receita é R(q)=20q−q². Para maximizar R, devemos resolver...",
+    "q": "Uma receita é R(q)=20q−q². Qual é a condição necessária para q ser um ponto interior de máximo de R?",
     "o": [
       "R'(q)=0.",
       "R(q)=0 apenas.",
@@ -15910,7 +15910,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "q=20 obrigatoriamente."
     ],
     "a": 0,
-    "sol": "Candidatos interiores a máximo surgem de R'(q)=0.",
+    "sol": "Num ponto interior de máximo de uma função derivável, R′(q)=0. Aqui R′(q)=20−2q dá q=10, e R″(10)=−2 confirma o máximo local.",
     "hyp": "Pode procurar zeros da receita em vez do máximo.",
     "contexts": [
       "mission"
@@ -15931,7 +15931,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Estudo de funções, modelação e otimização",
-    "q": "Para f'(x)=2x−4, f é decrescente em...",
+    "q": "Se f é derivável em ℝ e f′(x)=2x−4, qual é o intervalo em que f′ é estritamente negativa?",
     "o": [
       "]2,+∞[.",
       "R.",
@@ -15939,7 +15939,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "nenhum intervalo."
     ],
     "a": 2,
-    "sol": "2x−4<0 quando x<2.",
+    "sol": "A condição 2x−4<0 equivale a x<2. Portanto, f decresce em ]−∞, 2[, onde a derivada é negativa.",
     "hyp": "Pode trocar os sinais.",
     "contexts": [
       "mission"
@@ -15960,15 +15960,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Estudo de funções, modelação e otimização",
-    "q": "Se f'(x)=(x−1)(x+2), então f é crescente em...",
+    "q": "Se f é derivável em ℝ e f′(x)=(x−1)(x+2), em que intervalos abertos máximos é f′(x)>0, garantindo que f é estritamente crescente em cada um deles?",
     "o": [
-      "]−∞,−2[∪]1,+∞[.",
+      "]−∞, −2[ e ]1, +∞[.",
       "]−2,1[.",
       "R.",
       "]−∞,1[."
     ],
     "a": 0,
-    "sol": "O produto é positivo fora das raízes −2 e 1.",
+    "sol": "Para x<−2 os dois fatores são negativos. Para x>1 os dois fatores são positivos. Em cada um dos intervalos ]−∞, −2[ e ]1, +∞[, f′(x)>0 garante que f é estritamente crescente.",
     "hyp": "Pode construir mal a tabela de sinais.",
     "contexts": [
       "mission"
@@ -16026,7 +16026,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "x=6."
     ],
     "a": 3,
-    "sol": "C'=2x−12=0.",
+    "sol": "Resolvendo C′(x)=2x−12=0, obtém-se x=6. Como C(x)=(x−6)²+14, qualquer outro nível de produção dá um custo maior.",
     "hyp": "Pode usar o coeficiente linear sem dividir por 2.",
     "contexts": [
       "mission"
@@ -16079,8 +16079,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "q": "Se f(x)=x+1 e g(x)=2x, então f∘g e g∘f...",
     "o": [
       "são sempre iguais.",
-      "só diferem por uma constante.",
-      "têm sempre o mesmo domínio.",
+      "coincidem apenas em x=0.",
+      "coincidem apenas em x=1.",
       "não são iguais."
     ],
     "a": 3,
@@ -16366,7 +16366,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Número e e derivada da exponencial",
-    "q": "No modelo P'(t)=kP(t), se k>0...",
+    "q": "Num modelo com população P(t)>0 e P′(t)=kP(t), com k>0, o que se pode afirmar?",
     "o": [
       "a taxa de crescimento é proporcional à população e positiva.",
       "a população é constante.",
@@ -16374,7 +16374,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "P(t) pode ser negativa."
     ],
     "a": 0,
-    "sol": "k>0 e P>0 implicam crescimento positivo.",
+    "sol": "A taxa instantânea de crescimento é P′(t). Pela equação P′(t)=kP(t), é proporcional a P(t) e é positiva, pois ambos os fatores são positivos.",
     "hyp": "Pode confundir crescimento relativo e absoluto.",
     "contexts": [
       "mission"
@@ -16482,15 +16482,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Derivadas de logaritmos, trigonométricas e potências",
-    "q": "A derivada de sin x é...",
+    "q": "A derivada de sen(x) é...",
     "o": [
-      "−sin x.",
-      "cos x.",
-      "−cos x.",
-      "tan x."
+      "−sen(x).",
+      "cos(x).",
+      "−cos(x).",
+      "tg(x)."
     ],
     "a": 1,
-    "sol": "(sin x)'=cos x.",
+    "sol": "(sen(x))'=cos(x).",
     "hyp": "Pode trocar seno e cosseno.",
     "contexts": [
       "mission"
@@ -16511,15 +16511,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Derivadas de logaritmos, trigonométricas e potências",
-    "q": "A derivada de ln(sin x), onde sin x>0, é...",
+    "q": "A derivada de ln(sen(x)), onde sen(x)>0, é...",
     "o": [
-      "cos x/sin x.",
-      "sin x/cos x.",
-      "1/sin x.",
-      "−sin x."
+      "cos(x)/sen(x).",
+      "sen(x)/cos(x).",
+      "1/sen(x).",
+      "−sen(x)."
     ],
     "a": 0,
-    "sol": "g'/g=cosx/sinx.",
+    "sol": "Pela regra da cadeia, a derivada de ln(u) é u′/u. Aqui u=sen(x) e u′=cos(x), pelo que a derivada é cos(x)/sen(x).",
     "hyp": "Pode esquecer a cadeia.",
     "contexts": [
       "mission"
@@ -16598,15 +16598,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Derivadas de logaritmos, trigonométricas e potências",
-    "q": "A derivada de cos x é...",
+    "q": "A derivada de cos(x) é...",
     "o": [
-      "sin x.",
-      "cos x.",
-      "−sin x.",
-      "−cos x."
+      "sen(x).",
+      "cos(x).",
+      "−sen(x).",
+      "−cos(x)."
     ],
     "a": 2,
-    "sol": "(cos x)'=−sin x.",
+    "sol": "(cos(x))'=−sen(x).",
     "hyp": "Pode esquecer o sinal negativo.",
     "contexts": [
       "mission"
@@ -16627,15 +16627,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Derivadas de logaritmos, trigonométricas e potências",
-    "q": "A derivada de ln(cos x), onde cos x>0, é...",
+    "q": "A derivada de ln(cos(x)), onde cos(x)>0, é...",
     "o": [
-      "cos x/sin x.",
-      "−sin x/cos x.",
-      "sin x/cos x.",
-      "−cos x."
+      "cos(x)/sen(x).",
+      "−sen(x)/cos(x).",
+      "sen(x)/cos(x).",
+      "−cos(x)."
     ],
     "a": 1,
-    "sol": "g'/g=(−sinx)/cosx.",
+    "sol": "Pela regra da cadeia, a derivada de ln(u) é u′/u. Aqui u=cos(x) e u′=−sen(x), pelo que a derivada é −sen(x)/cos(x).",
     "hyp": "Pode esquecer o sinal.",
     "contexts": [
       "mission"
@@ -16664,7 +16664,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "ln x."
     ],
     "a": 2,
-    "sol": "Produto: 1·lnx+x·1/x=lnx+1.",
+    "sol": "Pela regra do produto, deriva-se x num termo e ln(x) no outro. O resultado é 1·ln(x)+x·(1/x)=ln(x)+1.",
     "hyp": "Pode esquecer um dos termos.",
     "contexts": [
       "mission"
@@ -16722,7 +16722,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2ln x."
     ],
     "a": 2,
-    "sol": "Cadeia: 2lnx·1/x.",
+    "sol": "Pela regra da cadeia, a derivada de [ln(x)]² é 2·ln(x) vezes a derivada de ln(x). Como esta vale 1/x, o resultado é 2·ln(x)/x.",
     "hyp": "Pode derivar o quadrado sem a função interna.",
     "contexts": [
       "mission"
@@ -16743,15 +16743,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Operações entre derivadas e regra da cadeia",
-    "q": "A derivada de x sin x é...",
+    "q": "A derivada de x sen(x) é...",
     "o": [
-      "cos x.",
-      "x cos x.",
-      "sin x−x cos x.",
-      "sin x+x cos x."
+      "cos(x).",
+      "x cos(x).",
+      "sen(x)−x cos(x).",
+      "sen(x)+x cos(x)."
     ],
     "a": 3,
-    "sol": "Produto: sinx+xcosx.",
+    "sol": "Pela regra do produto, a derivada de x·sen(x) é 1·sen(x)+x·cos(x)=sen(x)+x·cos(x).",
     "hyp": "Pode derivar apenas o seno.",
     "contexts": [
       "mission"
@@ -16801,7 +16801,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Operações entre derivadas e regra da cadeia",
-    "q": "A regra do quociente é...",
+    "q": "Se f e g são deriváveis em x e g(x)≠0, qual é a regra para a derivada de f/g em x?",
     "o": [
       "(f/g)'=f'/g'.",
       "(f/g)'=(f'g+fg')/g².",
@@ -16809,7 +16809,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "(f/g)'=(f'g−fg')/g²."
     ],
     "a": 3,
-    "sol": "Numerador: derivada do de cima vezes o de baixo menos o de cima vezes derivada do de baixo.",
+    "sol": "O numerador é f′g−fg′, a diferença entre os produtos com a derivada de cada função. Divide-se por g², que é diferente de zero no ponto.",
     "hyp": "Pode trocar a ordem dos termos ou usar f'/g'.",
     "contexts": [
       "mission"
@@ -16830,7 +16830,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Aplicação",
     "focus": "Operações entre derivadas e regra da cadeia",
-    "q": "A derivada de √(3x+1) é...",
+    "q": "Para x>−1/3, qual é a derivada de f(x)=√(3x+1)?",
     "o": [
       "3/[2√(3x+1)].",
       "1/[2√(3x+1)].",
@@ -16838,7 +16838,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "1/√(3x+1)."
     ],
     "a": 0,
-    "sol": "(1/2)(3x+1)^{-1/2}·3.",
+    "sol": "Neste intervalo o radicando é positivo. A regra da cadeia dá f′(x)=3·(1/2)(3x+1)^(−1/2)=3/[2√(3x+1)].",
     "hyp": "Pode esquecer o fator 3.",
     "contexts": [
       "mission"
@@ -16925,7 +16925,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "a=2."
     ],
     "a": 0,
-    "sol": "O valor do ramo esquerdo em 1 é 1.",
+    "sol": "O valor f(1) é 1 e o limite pela direita é a·1+b=a+b. O ramo esquerdo é contínuo até 1. Assim, a continuidade em 1 exige a+b=1.",
     "hyp": "Pode usar a condição de derivabilidade prematuramente.",
     "contexts": [
       "mission"
@@ -16946,15 +16946,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Derivabilidade e relação com continuidade",
-    "q": "√x é contínua em 0 mas...",
+    "q": "O que se pode afirmar sobre a derivabilidade de f(x)=√x em x=0?",
     "o": [
-      "é descontínua em 0.",
+      "tem quociente incremental igual a √h para h>0.",
       "tem derivada 0.",
       "tem derivada 1.",
       "não é derivável em 0 com derivada real finita."
     ],
     "a": 3,
-    "sol": "O quociente incremental é 1/√h→+∞ pela direita.",
+    "sol": "Para h>0, o quociente incremental é (√h−0)/h=1/√h. Este tende para +∞ quando h tende para 0 pela direita. Assim, nem pela direita se obtém uma derivada real finita em 0.",
     "hyp": "Pode concluir derivabilidade a partir da continuidade.",
     "contexts": [
       "mission"
@@ -16975,7 +16975,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Derivabilidade e relação com continuidade",
-    "q": "Para f(x)=√x, a linearização em x=4 é L(x)=2+(x−4)/4. Usando-a, √4,1 é aproximadamente...",
+    "q": "A reta tangente ao gráfico de f(x)=√x no ponto de abcissa 4 tem equação y=2+(x−4)/4. Usando a reta tangente para aproximar √(4,1), que valor se obtém?",
     "o": [
       "2,05.",
       "2,025.",
@@ -17041,7 +17041,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "a+b=2."
     ],
     "a": 1,
-    "sol": "Derivada esquerda de x² em 1 é 2; derivada direita da reta éa.",
+    "sol": "Assumindo a continuidade em 1, o ramo direito estende-se ao ponto com declive a. O ramo esquerdo tem derivada 2x, que em 1 vale 2. A derivabilidade exige a igualdade das derivadas laterais, logo a=2.",
     "hyp": "Pode igualar valores em vez de declives.",
     "contexts": [
       "mission"
@@ -17062,7 +17062,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Monotonia, extremos e estudo global de funções",
-    "q": "Se f'(x)<0 antes de 2 e f'(x)>0 depois de 2, então x=2 é...",
+    "q": "Seja f contínua em x=2. Se f′ é negativa imediatamente à esquerda de 2 e positiva imediatamente à direita de 2, o que tem f em x=2?",
     "o": [
       "máximo local.",
       "assíntota.",
@@ -17070,7 +17070,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "ponto de inflexão obrigatório."
     ],
     "a": 2,
-    "sol": "Passa de decrescente a crescente.",
+    "sol": "A derivada negativa à esquerda e positiva à direita significa que f decresce até f(2) e cresce a partir desse valor, usando a continuidade em 2. Portanto, há um mínimo local em x=2.",
     "hyp": "Pode inverter os sinais.",
     "contexts": [
       "mission"
@@ -17128,7 +17128,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "nenhum extremo."
     ],
     "a": 2,
-    "sol": "f''=6x<0 em −1.",
+    "sol": "Tem-se f′(x)=3x²−3 e f′(−1)=0. A segunda derivada é f″(x)=6x e f″(−1)=−6<0. Pelo teste da segunda derivada, há um máximo local em x=−1.",
     "hyp": "Pode trocar os extremos.",
     "contexts": [
       "mission"
@@ -17153,11 +17153,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "o": [
       "é sempre máximo.",
       "é sempre mínimo.",
-      "é sempre descontinuidade.",
+      "é sempre ponto de inflexão.",
       "pode não ser extremo."
     ],
     "a": 3,
-    "sol": "Por exemplo x³ em 0.",
+    "sol": "Para f(x)=x³, temos f′(0)=0 e f′(x)=3x²>0 para x≠0. Como f é crescente dos dois lados de 0, não tem extremo local em 0.",
     "hyp": "Pode assumir que todo ponto crítico é extremo.",
     "contexts": [
       "mission"
@@ -17178,7 +17178,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Monotonia, extremos e estudo global de funções",
-    "q": "Num modelo de concentração C(t), um máximo local representa...",
+    "q": "Num modelo de concentração C(t), a função é contínua em t₀ e estritamente monótona em cada um dos intervalos imediatamente antes e depois de t₀. O que representa um máximo local em t₀?",
     "o": [
       "um instante em que C=0.",
       "necessariamente o fim do processo.",
@@ -17186,7 +17186,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "um instante em que a concentração deixa de aumentar e começa a diminuir."
     ],
     "a": 3,
-    "sol": "Traduz a mudança de sinal de C'.",
+    "sol": "A concentração aumenta no intervalo anterior e diminui no intervalo seguinte. Com a continuidade, C(t₀) é superior às concentrações suficientemente próximas de ambos os lados.",
     "hyp": "Pode interpretar extremo sem contexto dinâmico.",
     "contexts": [
       "mission"
@@ -17207,15 +17207,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Monotonia, extremos e estudo global de funções",
-    "q": "Um máximo absoluto de f num domínio é um ponto onde...",
+    "q": "Que propriedade caracteriza um ponto de máximo absoluto de f?",
     "o": [
       "f'=0 obrigatoriamente.",
       "f=0.",
-      "f atinge o maior valor do domínio considerado.",
+      "f atinge o maior dos seus valores.",
       "f''=0."
     ],
     "a": 2,
-    "sol": "É uma definição global, podendo ocorrer numa fronteira.",
+    "sol": "No máximo absoluto, o valor da função é pelo menos tão grande como todos os outros valores que toma no domínio considerado. Esse máximo pode ocorrer numa extremidade.",
     "hyp": "Pode reduzir máximos absolutos a pontos críticos interiores.",
     "contexts": [
       "mission"
@@ -17265,15 +17265,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Limite intuitivo e continuidade",
-    "q": "Se os limites laterais em a existem mas são diferentes, então...",
+    "q": "Se o limite à esquerda de a é finito e o limite à direita de a é +∞, o que se conclui sobre f?",
     "o": [
-      "o limite é a média dos laterais.",
+      "o limite bilateral em a é +∞.",
       "o limite bilateral em a não existe.",
       "f é contínua.",
-      "o limite é zero."
+      "o limite bilateral em a é igual ao limite à esquerda."
     ],
     "a": 1,
-    "sol": "Para existir limite bilateral, os dois laterais devem coincidir.",
+    "sol": "Os limites laterais são diferentes, pois um é finito e o outro é +∞. Logo, o limite bilateral em a não existe.",
     "hyp": "Pode fazer média de valores laterais.",
     "contexts": [
       "mission"
@@ -17294,7 +17294,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Aplicação",
     "focus": "Limite intuitivo e continuidade",
-    "q": "A função f(x)=x² é contínua em...",
+    "q": "Qual é o maior conjunto em que a função f(x)=x² é contínua?",
     "o": [
       "apenas x=0.",
       "apenas x>0.",
@@ -17468,7 +17468,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Operações com funções contínuas",
-    "q": "A função e^x cos x é contínua em...",
+    "q": "Qual é o maior conjunto em que f(x)=e^x cos(x) é contínua?",
     "o": [
       "x>0 apenas.",
       "todo R.",
@@ -17526,7 +17526,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Operações com funções contínuas",
-    "q": "A função f(x)=ln(x²+1) é contínua em...",
+    "q": "Qual é o maior conjunto em que a função f(x)=ln(x²+1) é contínua?",
     "o": [
       "todo R.",
       "x>0 apenas.",
@@ -17534,7 +17534,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "|x|>1."
     ],
     "a": 0,
-    "sol": "x²+1>0 para todo x.",
+    "sol": "O polinómio x²+1 é contínuo em ℝ e é sempre positivo. Como ln é contínua nos reais positivos, a função composta é contínua em todo ℝ.",
     "hyp": "Pode impor domínio x>0 ao x em vez do argumento.",
     "contexts": [
       "mission"
@@ -17642,7 +17642,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Compreensão",
     "focus": "Operações com funções contínuas",
-    "q": "Se lim f=L, então lim e^{f(x)}=",
+    "q": "Se lim(x→a) f(x)=L, com L∈ℝ, como se exprime lim(x→a) e^(f(x)) em função de L?",
     "o": [
       "e^L.",
       "L e.",
@@ -17787,7 +17787,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Distribuições de amostragem / comportamento amostral",
-    "q": "Uma média de tempos de espera baseada em n=400 terá, face a n=100 e mesmo σ, erro padrão...",
+    "q": "Os tempos de espera são observações independentes de uma população com desvio padrão σ>0. Comparando n=400 com n=100, como muda o erro padrão da média?",
     "o": [
       "um quarto.",
       "metade.",
@@ -17795,7 +17795,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "igual."
     ],
     "a": 1,
-    "sol": "√400=20 e√100=10.",
+    "sol": "O erro padrão é σ/√n. Para n=100 é σ/10 e para n=400 é σ/20, pelo que fica reduzido a metade.",
     "hyp": "Pode usar a razão de tamanhos em vez das raízes.",
     "contexts": [
       "mission"
@@ -17845,7 +17845,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Distribuições de amostragem / comportamento amostral",
-    "q": "Se X tem média 50 e desvio padrão 10, qual é o desvio padrão de X̄ para amostras de dimensão 25?",
+    "q": "Uma população tem média 50 e desvio padrão 10. Qual é o desvio padrão da média de 25 observações independentes retiradas dessa população?",
     "o": [
       "10.",
       "2.",
@@ -17932,15 +17932,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Estimação de parâmetros",
-    "q": "Um pequeno viés pode ser aceitável se permitir...",
+    "q": "Para comparar dois estimadores usa-se o erro total, dado pela soma da variância com o quadrado do viés. Quando pode ser vantajoso aceitar que aumente ligeiramente o viés em módulo?",
     "o": [
-      "variância infinita.",
-      "grande redução de variância e menor erro global.",
-      "ignorar o parâmetro.",
-      "eliminar os dados."
+      "Quando a variância aumenta na mesma proporção.",
+      "Quando a variância diminui mais do que aumenta o quadrado do viés.",
+      "Quando a variância permanece igual.",
+      "Quando o aumento do quadrado do viés é igual à redução da variância."
     ],
     "a": 1,
-    "sol": "Há trade-offs entre viés e variância em alguns estimadores.",
+    "sol": "A soma diminui se a redução da variância for maior do que o aumento do quadrado do viés. Nesse caso, o erro total é menor.",
     "hyp": "Pode tratar não enviesamento como único critério.",
     "contexts": [
       "mission"
@@ -18048,7 +18048,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Compreensão",
     "focus": "Estimação de parâmetros",
-    "q": "O erro quadrático médio (EQM/MSE) combina...",
+    "q": "O erro quadrático médio de um estimador T de θ é E[(T−θ)²]. Define-se o viés b=E(T)−θ, de modo que T−θ=(T−E(T))+b. Ao desenvolver o quadrado e calcular a esperança, que duas parcelas restam?",
     "o": [
       "variância e viés ao quadrado.",
       "apenas média e mediana.",
@@ -18056,7 +18056,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "apenas viés."
     ],
     "a": 0,
-    "sol": "MSE=Var(θ̂)+Bias(θ̂)².",
+    "sol": "Ao desenvolver o quadrado, a esperança do termo cruzado é 2b E[T−E(T)]=0. A esperança de [T−E(T)]² é a variância de T. Restam a variância e o quadrado do viés b².",
     "hyp": "Pode pensar que avalia só dispersão.",
     "contexts": [
       "mission"
@@ -18169,10 +18169,10 @@ export const VNEXT_MISSION_QUESTIONS=[
       "vantagem aos indivíduos mais acessíveis.",
       "garantia de média exata.",
       "mais peso aos extremos.",
-      "a cada amostra possível de mesmo tamanho uma chance apropriada de seleção."
+      "a mesma probabilidade a todas as amostras possíveis de tamanho fixado."
     ],
     "a": 3,
-    "sol": "A seleção aleatória reduz mecanismos sistemáticos de preferência.",
+    "sol": "Na amostragem aleatória simples, todas as amostras possíveis de tamanho n são equiprováveis. A definição refere-se à seleção da amostra inteira.",
     "hyp": "Pode confundir aleatoriedade com precisão perfeita.",
     "contexts": [
       "mission"
@@ -18396,12 +18396,12 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Intervalos de confiança, margem de erro e interpretação",
-    "q": "Uma sondagem dá p̂=0,52 com IC95% [0,49;0,55]. Uma leitura cuidadosa é...",
+    "q": "Uma sondagem dá p̂=0,52 e um intervalo de confiança de 95% [0,49;0,55]. O que se pode concluir sobre a hipótese de a proporção populacional ser 0,50?",
     "o": [
-      "os dados são compatíveis com valores próximos de metade e não sustentam uma separação clara de 0,50 ao nível considerado.",
-      "p=0,52 exatamente.",
-      "há 95% dos eleitores entre 0,49 e 0,55.",
-      "p>0,5 está provado."
+      "0,50 é compatível com os dados ao nível de confiança usado.",
+      "0,50 é excluído porque é menor do que a estimativa.",
+      "0,50 é confirmado como o valor exato pelo intervalo.",
+      "0,50 é excluído porque não é o centro do intervalo."
     ],
     "a": 0,
     "sol": "0,50 está dentro do intervalo.",
@@ -18541,7 +18541,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Aplicação",
     "focus": "Teorema Limite Central em contexto introdutório",
-    "q": "Suponha X̄≈N(100,2²). O valor z associado a X̄=104 é...",
+    "q": "A média amostral X̄ segue aproximadamente uma normal de média 100 e variância 2². Qual é o valor padronizado z para X̄=104?",
     "o": [
       "2.",
       "1.",
@@ -18570,7 +18570,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Teorema Limite Central em contexto introdutório",
-    "q": "Se n passa de 25 para 100, o erro padrão...",
+    "q": "Para amostras de observações independentes da mesma população de desvio padrão σ>0, como muda o erro padrão da média quando n passa de 25 para 100?",
     "o": [
       "fica um quarto.",
       "fica metade.",
@@ -18599,7 +18599,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Exemplo",
     "focus": "Teorema Limite Central em contexto introdutório",
-    "q": "Aproximar P(X≤20) para X Binomial por Normal pode usar fronteira...",
+    "q": "Para aproximar uma variável binomial X por uma normal, representa-se cada inteiro k pelo intervalo de amplitude 1 centrado em k. Que limite superior se usa na aproximação de P(X≤20)?",
     "o": [
       "20.",
       "19,5 sempre.",
@@ -18607,7 +18607,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "20,5."
     ],
     "a": 3,
-    "sol": "A correção típica inclui toda a barra de X=20 até 20,5.",
+    "sol": "O intervalo centrado em 20 vai de 19,5 a 20,5. Como X=20 pertence ao acontecimento X≤20, a aproximação inclui esse intervalo até 20,5.",
     "hyp": "Pode deslocar no sentido errado.",
     "contexts": [
       "mission"
@@ -18628,7 +18628,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Teorema Limite Central em contexto introdutório",
-    "q": "A média aproximada da distribuição de X̄ é...",
+    "q": "Uma amostra tem dois grupos de igual dimensão. As médias dos grupos têm esperanças μ−1 e μ+1. Qual é a esperança da média de toda a amostra?",
     "o": [
       "μ/n.",
       "nμ.",
@@ -18636,7 +18636,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "σ."
     ],
     "a": 2,
-    "sol": "E(X̄)=μ.",
+    "sol": "Como os grupos têm a mesma dimensão, a média global é a média das duas médias de grupo. Pela linearidade da esperança, o resultado exato é [(μ−1)+(μ+1)]/2=μ.",
     "hyp": "Pode dividir a média por n.",
     "contexts": [
       "mission"
@@ -18657,7 +18657,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Modelação",
     "focus": "Teorema Limite Central em contexto introdutório",
-    "q": "Se médias de lotes de 64 peças têm μ=10g, σ individual=0,8g, o erro padrão é...",
+    "q": "As massas de 64 peças são observações independentes da mesma população, com média 10 g e desvio padrão 0,8 g. Qual é o erro padrão da média das massas?",
     "o": [
       "0,8g.",
       "0,0125g.",
@@ -18715,7 +18715,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Áreas e aplicações",
-    "q": "Se f(x)≤0 em [a,b], a área geométrica entre o gráfico e Ox é...",
+    "q": "Se f é contínua, não positiva e não identicamente nula em [a,b], com a<b, como se escreve a área da região entre o gráfico de f e o eixo Ox nesse intervalo?",
     "o": [
       "∫_a^b f(x)dx.",
       "−∫_a^b f(x)dx.",
@@ -18723,7 +18723,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "f(b)−f(a)."
     ],
     "a": 1,
-    "sol": "A integral é negativa, por isso a área geométrica é o seu oposto.",
+    "sol": "Como f(x)≤0, a altura da região é |f(x)|=−f(x). Assim, a área é ∫_a^b |f(x)| dx=−∫_a^b f(x) dx.",
     "hyp": "Pode usar diretamente a integral negativa como área.",
     "contexts": [
       "mission"
@@ -18752,7 +18752,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "x=1 e x=2."
     ],
     "a": 0,
-    "sol": "x²=2x =>x(x−2)=0.",
+    "sol": "Os pontos de interseção verificam x²=2x, ou seja, x(x−2)=0. Logo, as abcissas dos extremos da região são 0 e 2.",
     "hyp": "Pode dividir por x e perder 0.",
     "contexts": [
       "mission"
@@ -18860,7 +18860,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Áreas e aplicações",
-    "q": "No intervalo [0,2], entre y=2x e y=x², a função superior é...",
+    "q": "Entre os dois pontos de interseção, com 0<x<2, qual das funções y=2x e y=x² tem o gráfico acima do outro?",
     "o": [
       "x².",
       "2x.",
@@ -18868,7 +18868,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "depende apenas do sinal de x."
     ],
     "a": 1,
-    "sol": "2x−x²=x(2−x)≥0.",
+    "sol": "Para 0<x<2 os dois fatores de 2x−x²=x(2−x) são estritamente positivos. Logo, 2x>x² entre os pontos de interseção.",
     "hyp": "Pode escolher a quadrática por crescer mais depressa fora do intervalo.",
     "contexts": [
       "mission"
@@ -18976,7 +18976,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Integral definido",
-    "q": "Se f(x)≥0 em [a,b], então ∫_a^b f...",
+    "q": "Se f é contínua e f(x)≥0 para todo o x em [a,b], com a<b, o que se pode afirmar sobre ∫_a^b f(x) dx?",
     "o": [
       "é sempre zero.",
       "é negativa.",
@@ -18984,7 +18984,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "é não negativa."
     ],
     "a": 3,
-    "sol": "A área algébrica coincide com área geométrica positiva.",
+    "sol": "O integral coincide com a área entre o gráfico e o eixo Ox, pelo que é não negativo. Se f for identicamente nula, o integral é zero.",
     "hyp": "Pode ignorar o sinal da função.",
     "contexts": [
       "mission"
@@ -19005,7 +19005,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Integral definido",
-    "q": "Se v(t) muda de sinal, ∫v(t)dt representa...",
+    "q": "Se v(t) é a velocidade de um móvel e muda de sinal em [a,b], o que representa o integral definido ∫_a^b v(t) dt?",
     "o": [
       "deslocamento líquido.",
       "distância total sempre.",
@@ -19100,7 +19100,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "3x²."
     ],
     "a": 1,
-    "sol": "A derivada de x³/3 éx².",
+    "sol": "Deriva-se x³/3 pela regra da potência: (x³/3)′=(3x²)/3=x². Logo, x³/3 é uma primitiva de x².",
     "hyp": "Pode manter o expoente.",
     "contexts": [
       "mission"
@@ -19216,7 +19216,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2t³."
     ],
     "a": 0,
-    "sol": "Uma primitiva de 6t² é 2t³.",
+    "sol": "Integrar q′(t)=6t² dá q(t)=2t³+C. Ao substituir t=0 obtém-se C=q(0)=10, logo q(t)=2t³+10.",
     "hyp": "Pode esquecer o coeficiente 1/3.",
     "contexts": [
       "mission"
@@ -19324,7 +19324,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Primitivas imediatas e propriedades",
-    "q": "Para constante k, ∫k f(x)dx=",
+    "q": "Para uma constante não nula k, como se escreve a expressão geral ∫k f(x) dx em termos de ∫f(x) dx?",
     "o": [
       "∫f(x)dx/k.",
       "k∫f(x)dx.",
@@ -19469,7 +19469,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Primitivas imediatas e propriedades",
-    "q": "∫(x+1)e^{x²+2x}dx é proporcional a...",
+    "q": "Ao calcular uma primitiva de (x+1)e^{x²+2x} com constante de integração nula, obtém-se um múltiplo constante de que função?",
     "o": [
       "e^{x²+2x}.",
       "ln(x²+2x).",
@@ -19593,7 +19593,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2."
     ],
     "a": 3,
-    "sol": "Primitiva 2√x;4−2=2.",
+    "sol": "Uma primitiva de 1/√x em x>0 é 2√x. Pela fórmula de Barrow, o integral é 2√4−2√1=4−2=2.",
     "hyp": "Pode esquecer o fator 2.",
     "contexts": [
       "mission"
@@ -19962,7 +19962,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Compreensão",
     "focus": "Modelação e aplicações",
-    "q": "Em uma matriz de adjacência A, a entrada (A²)_ij conta, em rede simples apropriada...",
+    "q": "Numa rede simples e não dirigida, A é a matriz de adjacência: aᵢⱼ=1 quando i e j estão ligados e aᵢⱼ=0 nos restantes casos. O que conta a entrada (A²)ᵢⱼ?",
     "o": [
       "percursos de comprimento 2 de i para j.",
       "ligações diretas apenas.",
@@ -19970,7 +19970,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "grau de i apenas."
     ],
     "a": 0,
-    "sol": "Cada termo soma escolhas de um vértice intermédio.",
+    "sol": "O produto aᵢₖaₖⱼ vale 1 precisamente quando se pode ir de i para k e de k para j. Ao somar sobre k, contam-se os percursos de dois passos, incluindo o regresso ao vértice de partida quando i=j.",
     "hyp": "Pode confundir potência matricial com elevar entradas.",
     "contexts": [
       "mission"
@@ -19991,7 +19991,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Modelação e aplicações",
-    "q": "Se c é um vetor de custos unitários de recursos e A descreve consumo de recursos por produto, então c^T A pode representar...",
+    "q": "Se c é o vetor-coluna dos custos unitários dos recursos e A tem um recurso por linha e um produto por coluna, com aᵢⱼ igual ao consumo do recurso i por unidade do produto j, o que representa cᵀA?",
     "o": [
       "custo de recursos por produto.",
       "quantidade produzida por recurso.",
@@ -20049,7 +20049,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Aplicação",
     "focus": "Modelação e aplicações",
-    "q": "Se Q=[[10,20],[15,5]] representa quantidades de 2 produtos em 2 lojas, o total de unidades na 1.ª loja é...",
+    "q": "A matriz Q=[[10,20],[15,5]] regista quantidades vendidas. As linhas representam lojas e as colunas representam produtos. Quantas unidades vendeu a 1.ª loja, somando os dois produtos?",
     "o": [
       "25.",
       "35.",
@@ -20086,7 +20086,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2A."
     ],
     "a": 1,
-    "sol": "Dois passos levam cada vértice de volta a si próprio.",
+    "sol": "Pelo produto linha-coluna, A²=[[1,0],[0,1]]=I₂. Cada elemento da diagonal resulta de 1·1 e cada elemento fora da diagonal é 0.",
     "hyp": "Pode elevar entradas individualmente.",
     "contexts": [
       "mission"
@@ -20658,7 +20658,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Transformações geométricas com matrizes",
-    "q": "A matriz [[k,0],[0,k]] representa...",
+    "q": "Para k>0, que transformação do plano representa a matriz [[k,0],[0,k]]?",
     "o": [
       "uma rotação de 90°.",
       "uma reflexão no eixo Ox.",
@@ -20716,15 +20716,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Probabilidade condicionada",
-    "q": "Ao saber que B ocorreu, o novo universo de referência passa a ser...",
+    "q": "Numa turma, A é «estudar música» e B é «praticar desporto». Há alunos que praticam desporto. Para calcular a probabilidade de estudar música sabendo que o aluno escolhido pratica desporto, qual é o conjunto de referência?",
     "o": [
       "A.",
       "B.",
       "A∪B.",
-      "Ω^c."
+      "A∩B."
     ],
     "a": 1,
-    "sol": "Condicionar em B restringe a atenção aos resultados em B.",
+    "sol": "Já se sabe que o aluno pratica desporto. O conjunto de referência é B, o grupo dos alunos que praticam desporto.",
     "hyp": "Pode tomar A como novo espaço por ser o primeiro símbolo.",
     "contexts": [
       "mission"
@@ -20803,15 +20803,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Probabilidade condicionada",
-    "q": "P(A∩B)=0,18 e P(A)=0,6. Então P(B|A)=...",
+    "q": "Se P(A∩Bᶜ)=0,42 e P(A)=0,6, qual é o valor de P(B|A)?",
     "o": [
       "0,18.",
       "0,3.",
-      "0,78.",
+      "0,7.",
       "0,6."
     ],
     "a": 1,
-    "sol": "0,18/0,6=0,3.",
+    "sol": "A parte de A que também pertence a B tem probabilidade 0,6−0,42=0,18. Assim, P(B|A)=0,18/0,6=0,3.",
     "hyp": "Pode dividir pelo acontecimento condicionado errado.",
     "contexts": [
       "mission"
@@ -20861,15 +20861,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Aplicação",
     "focus": "Probabilidade condicionada",
-    "q": "Se P(A∩B)=0,2 e P(B)=0,5, então P(A|B)=...",
+    "q": "Uma turma tem 25 alunos que estudam música. Destes, 10 também praticam desporto. Escolhe-se ao acaso um dos alunos que estudam música. Qual é a probabilidade de que também pratique desporto?",
     "o": [
       "0,2.",
       "0,5.",
       "0,4.",
-      "0,7."
+      "0,6."
     ],
     "a": 2,
-    "sol": "0,2/0,5=0,4.",
+    "sol": "A seleção faz-se entre os 25 alunos que estudam música. Desses, 10 praticam desporto, pelo que a probabilidade é 10/25=0,4.",
     "hyp": "Pode somar em vez de dividir.",
     "contexts": [
       "mission"
@@ -21035,7 +21035,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Tabelas de contingência e independência",
-    "q": "Numa empresa, 40% trabalham remotamente, 30% têm horário flexível e 12% têm ambos. Os dois fatores são...",
+    "q": "Numa empresa com 250 trabalhadores, 100 trabalham remotamente, 75 têm horário flexível e 30 reúnem as duas condições. Escolhe-se um trabalhador ao acaso. Os acontecimentos «trabalhar remotamente» e «ter horário flexível» são...",
     "o": [
       "independentes.",
       "dependentes.",
@@ -21043,7 +21043,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "complementares."
     ],
     "a": 0,
-    "sol": "0,4×0,3=0,12.",
+    "sol": "As probabilidades marginais são 100/250=0,4 e 75/250=0,3, e a conjunta é 30/250=0,12. Como 0,4×0,3=0,12, os acontecimentos são independentes.",
     "hyp": "Pode confundir sobreposição com dependência.",
     "contexts": [
       "mission"
@@ -21267,12 +21267,12 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Aplicação",
     "focus": "Fenómeno aleatório, espaço de resultados e acontecimentos",
-    "q": "No lançamento de uma moeda, um espaço de resultados possível é...",
+    "q": "Lança-se uma moeda comum uma vez e regista-se a face que fica para cima. Qual é o espaço de resultados?",
     "o": [
       "{cara}.",
-      "{0,1,2}.",
+      "{coroa}.",
       "{cara,coroa}.",
-      "{cara,cara}."
+      "{cara,coroa,duas caras}."
     ],
     "a": 2,
     "sol": "Há dois resultados elementares possíveis: cara e coroa.",
@@ -21441,7 +21441,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Valor médio/dispersão de modelos e Modelo Normal",
-    "q": "Alturas têm modelo N(170,6). Uma altura 182 cm está a...",
+    "q": "As alturas seguem uma distribuição normal com média 170 cm e desvio-padrão 6 cm. Onde se situa uma altura de 182 cm em relação à média, em unidades de desvio-padrão?",
     "o": [
       "2 desvios-padrão acima da média.",
       "12 desvios-padrão acima.",
@@ -21449,7 +21449,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2 abaixo."
     ],
     "a": 0,
-    "sol": "(182−170)/6=2.",
+    "sol": "A diferença 182−170=12 cm corresponde a 12/6=2 desvios-padrão acima da média.",
     "hyp": "Pode usar a diferença 12 como número de desvios.",
     "contexts": [
       "mission"
@@ -21499,7 +21499,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Aplicação",
     "focus": "Valor médio/dispersão de modelos e Modelo Normal",
-    "q": "X~N(70,10). O intervalo μ±σ é...",
+    "q": "Uma variável normal X tem média μ=70 e desvio-padrão σ=10. Qual é o intervalo [μ−σ, μ+σ]?",
     "o": [
       "[50,90].",
       "[70,80].",
@@ -21507,7 +21507,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "[60,90]."
     ],
     "a": 2,
-    "sol": "70−10=60 e 70+10=80.",
+    "sol": "O limite inferior é 70−10=60 e o superior é 70+10=80. O intervalo é [60, 80].",
     "hyp": "Pode somar/descontar2σ.",
     "contexts": [
       "mission"
@@ -21528,7 +21528,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Regra do produto e árvores de probabilidade",
-    "q": "Uma moeda equilibrada é lançada duas vezes. P(cara e depois cara)=...",
+    "q": "Lança-se uma moeda equilibrada duas vezes, de forma independente. Qual é a probabilidade de obter cara nos dois lançamentos?",
     "o": [
       "1/2.",
       "1/4.",
@@ -21586,15 +21586,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Regra do produto e árvores de probabilidade",
-    "q": "Se P(A)=0,7, P(B|A)=0,4 e P(B^c|A)=...",
+    "q": "Se P(A)=0,7 e P(B|A)=0,4, qual é a probabilidade P(Bᶜ|A)?",
     "o": [
       "0,6.",
       "0,4.",
       "0,3.",
-      "1,1."
+      "0,42."
     ],
     "a": 0,
-    "sol": "Os ramos B e B^c a partir de A somam 1:1−0,4=0,6.",
+    "sol": "Sabendo que ocorreu A, as probabilidades de B e de Bᶜ somam 1. Logo, P(Bᶜ|A)=1−0,4=0,6.",
     "hyp": "Pode usar P(A^c).",
     "contexts": [
       "mission"
@@ -21913,7 +21913,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "Só se P(A∪B)=1."
     ],
     "a": 1,
-    "sol": "Interseção nula significa incompatibilidade probabilística; independência exigiria P(A∩B)=P(A)P(B), o que só acontece se pelo menos um tiver probabilidade 0.",
+    "sol": "Se P(A∩B)=0, A e B só são independentes quando P(A)P(B)=0. Por exemplo, cara e coroa num único lançamento de moeda equilibrada têm interseção de probabilidade 0 e probabilidades individuais 1/2.",
     "hyp": "Pode confundir incompatibilidade e independência.",
     "contexts": [
       "mission"
@@ -22079,7 +22079,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Probabilidade total e problemas em cadeia",
-    "q": "Numa partição {A1,...,An}, P(B) é...",
+    "q": "Se {A1, …, An} é uma partição do espaço de resultados e P(Ai)>0 para cada i, como se calcula P(B) pela regra da probabilidade total?",
     "o": [
       "ΣP(Ai).",
       "ΣP(B|Ai).",
@@ -22087,7 +22087,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "ΠP(B|Ai)."
     ],
     "a": 2,
-    "sol": "Soma-se a probabilidade de B através de cada ramo da partição.",
+    "sol": "Para cada i de 1 a n, calcula-se P(B|Ai)P(Ai), a probabilidade da interseção B∩Ai. A soma dessas parcelas dá P(B).",
     "hyp": "Pode esquecer ponderar pelas probabilidades dos ramos.",
     "contexts": [
       "mission"
@@ -22195,7 +22195,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Variáveis aleatórias discretas e função massa",
-    "q": "X assume −1,0,2 com probabilidades 0,2;0,5;0,3. E(X)=...",
+    "q": "X assume os valores −1, 0 e 2 com probabilidades respetivas 0,2, 0,5 e 0,3. Qual é E(X)?",
     "o": [
       "0,4.",
       "0,6.",
@@ -22290,7 +22290,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "o número de valores possíveis."
     ],
     "a": 2,
-    "sol": "Os valores possíveis de X formam uma partição do espaço amostral.",
+    "sol": "Os acontecimentos {X=x}, para cada valor possível x, são disjuntos e a sua união é o espaço de resultados. Por isso, as respetivas probabilidades somam 1.",
     "hyp": "Pode somar os valores de X em vez das probabilidades.",
     "contexts": [
       "mission"
@@ -22311,7 +22311,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Variáveis aleatórias discretas e função massa",
-    "q": "Se Y=2X+3, então E(Y)=...",
+    "q": "X é uma variável aleatória com um conjunto finito de valores possíveis. Se Y=2X+3, qual é E(Y)?",
     "o": [
       "E(X)^2+3.",
       "2E(X)+3.",
@@ -22340,7 +22340,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Método da bisseção, aproximação e erro",
-    "q": "Se f(1)<0, f(3)>0 e f(2)<0, o novo intervalo é...",
+    "q": "Na bisseção de uma função contínua no intervalo [1,3], verifica-se f(1)<0, f(3)>0 e f(2)<0. Que intervalo resulta da primeira iteração?",
     "o": [
       "[1,2].",
       "[2,3].",
@@ -22400,10 +22400,10 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Método da bisseção, aproximação e erro",
     "q": "Para f(x)=x²−2 em [1,2], o primeiro ponto médio é 1,5 e f(1,5)>0. O novo intervalo é...",
     "o": [
-      "[1,1,5].",
-      "[1,5,2].",
-      "[1,25,1,5].",
-      "[0,1,5]."
+      "[1;1,5].",
+      "[1,5;2].",
+      "[1,25;1,5].",
+      "[0;1,5]."
     ],
     "a": 0,
     "sol": "f(1)<0 e f(1,5)>0.",
@@ -22427,7 +22427,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Método da bisseção, aproximação e erro",
-    "q": "Se f(m)=0 numa iteração, então...",
+    "q": "Numa iteração do método da bisseção, o ponto médio do intervalo é m. Se f(m)=0, o que se conclui?",
     "o": [
       "é obrigatório continuar.",
       "o método falhou.",
@@ -22485,7 +22485,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Método da bisseção, aproximação e erro",
-    "q": "Depois de calcular o ponto médio m, escolhe-se...",
+    "q": "No método da bisseção, o ponto médio m verifica f(m)≠0. Qual das duas metades do intervalo se conserva para a iteração seguinte?",
     "o": [
       "sempre a metade esquerda.",
       "sempre a metade direita.",
@@ -22545,7 +22545,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "Teorema do Valor Intermédio/Bolzano-Cauchy e localização de raízes",
     "q": "Para f(x)=x²−2, temos f(1)=−1 e f(2)=2. Logo existe uma raiz em...",
     "o": [
-      "]−1,2[.",
+      "]−1,1[.",
       "]1,2[.",
       "]0,1[.",
       "]2,3[."
@@ -22717,7 +22717,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Teorema do Valor Intermédio/Bolzano-Cauchy e localização de raízes",
-    "q": "Se f é contínua, f(2,1)<0 e f(2,2)>0, então a raiz fica confinada num intervalo de amplitude...",
+    "q": "Uma função f é contínua em [2,1;2,2] e verifica f(2,1)<0<f(2,2). Qual é a amplitude do intervalo ]2,1;2,2[, onde o Teorema de Bolzano garante pelo menos uma raiz?",
     "o": [
       "0,01.",
       "0,1.",
@@ -22725,7 +22725,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2,2."
     ],
     "a": 1,
-    "sol": "2,2−2,1=0,1.",
+    "sol": "A continuidade e os sinais opostos nos extremos garantem pelo menos uma raiz em ]2,1;2,2[. A amplitude é 2,2−2,1=0,1.",
     "hyp": "Pode confundir amplitude com casas decimais exatas.",
     "contexts": [
       "mission"
@@ -22746,7 +22746,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Método de Newton-Raphson, aproximação e análise de adequação",
-    "q": "Para f(x)=x²−2, a iteração de Newton pode escrever-se...",
+    "q": "Aplica o método de Newton a f(x)=x²−2 numa iteração em que xₙ≠0. Como se escreve xₙ₊₁?",
     "o": [
       "x_{n+1}=x_n/2.",
       "x_{n+1}=(x_n+2/x_n)/2.",
@@ -22775,7 +22775,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Método de Newton-Raphson, aproximação e análise de adequação",
-    "q": "A fórmula iterativa de Newton é...",
+    "q": "Se f é derivável em xₙ e f′(xₙ)≠0, qual é a fórmula de Newton para calcular xₙ₊₁?",
     "o": [
       "x_{n+1}=(a+b)/2.",
       "x_{n+1}=x_n−f(x_n)/f'(x_n).",
@@ -22804,7 +22804,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Método de Newton-Raphson, aproximação e análise de adequação",
-    "q": "Outro critério útil é...",
+    "q": "Ao aproximar uma raiz de f(x)=0 pelo método de Newton, qual das seguintes condições pode servir de critério de paragem baseado no resíduo?",
     "o": [
       "|f(x_n)| pequeno, com interpretação adequada.",
       "f'(x_n)>0 sempre.",
@@ -22812,7 +22812,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "x_n próximo de 1."
     ],
     "a": 0,
-    "sol": "Um resíduo pequeno indica que a aproximação quase satisfaz a equação.",
+    "sol": "O resíduo |f(xₙ)| mede quanto falta para satisfazer f(x)=0. Um resíduo pequeno pode justificar a paragem se a tolerância estiver definida para o valor de f. O erro na abcissa é uma grandeza diferente.",
     "hyp": "Pode confundir sinal com precisão.",
     "contexts": [
       "mission"
@@ -22833,7 +22833,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Método de Newton-Raphson, aproximação e análise de adequação",
-    "q": "A tangente a f em x_n tem equação y=f(x_n)+f'(x_n)(x−x_n). Ao impor y=0 para obter a abcissa de interseção com o eixo Ox, obtemos...",
+    "q": "A tangente a f em xₙ tem equação y=f(xₙ)+f′(xₙ)(x−xₙ), com f′(xₙ)≠0. Que fórmula se obtém ao impor y=0 e isolar x?",
     "o": [
       "a fórmula de Newton.",
       "a fórmula da bisseção.",
@@ -22920,7 +22920,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Exemplo",
     "focus": "Método de Newton-Raphson, aproximação e análise de adequação",
-    "q": "Para f(x)=x²−1, um x0 positivo razoável tende a convergir para...",
+    "q": "Aplica o método de Newton a f(x)=x²−1, a partir de x₀>0. Para que raiz converge a sucessão de aproximações?",
     "o": [
       "−1.",
       "1.",
@@ -22928,7 +22928,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "as duas raízes simultaneamente."
     ],
     "a": 1,
-    "sol": "Em geral, o lado positivo pertence à bacia da raiz positiva neste caso simples.",
+    "sol": "A iteração é xₙ₊₁=(xₙ+1/xₙ)/2. Para xₙ>0, xₙ₊₁−1=(xₙ−1)²/(2xₙ)≥0. Quando xₙ≥1, tem-se também xₙ₊₁≤xₙ. A partir do primeiro passo, a sucessão converge para um limite L≥1 que verifica L=(L+1/L)/2. Logo, L=1.",
     "hyp": "Pode ignorar a influência do sinal inicial.",
     "contexts": [
       "mission"

@@ -17,12 +17,12 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Uma tabela de contingência organiza dados segundo...",
+      "q": "Uma tabela de contingência de dupla entrada classifica as observações segundo...",
       "o": [
         "duas variáveis categóricas.",
         "uma única variável contínua.",
-        "apenas médias.",
-        "apenas probabilidades condicionadas."
+        "duas medidas numéricas sem agrupamento.",
+        "as frequências marginais de uma única variável."
       ],
       "a": 0,
       "sol": "As linhas e colunas correspondem a categorias de duas variáveis.",
@@ -262,7 +262,7 @@
       "cognitive": "Raciocínio",
       "q": "Se A e B são independentes, P(A)=0,6 e P(B)=0,5, então P(A∪B)=...",
       "o": [
-        "1,1.",
+        "0,2.",
         "0,8.",
         "0,3.",
         "0,5."
@@ -295,7 +295,7 @@
         "necessariamente iguais."
       ],
       "a": 2,
-      "sol": "A independência preserva-se ao complementar um dos acontecimentos.",
+      "sol": "P(A∩Bᶜ)=P(A)−P(A∩B)=P(A)−P(A)P(B)=P(A)(1−P(B))=P(A)P(Bᶜ). Logo, A e Bᶜ são independentes.",
       "hyp": "Pode achar que complementar destrói independência.",
       "contexts": [
         "mission",
@@ -1205,7 +1205,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Numa empresa, 40% trabalham remotamente, 30% têm horário flexível e 12% têm ambos. Os dois fatores são...",
+      "q": "Numa empresa com 250 trabalhadores, 100 trabalham remotamente, 75 têm horário flexível e 30 reúnem as duas condições. Escolhe-se um trabalhador ao acaso. Os acontecimentos «trabalhar remotamente» e «ter horário flexível» são...",
       "o": [
         "independentes.",
         "dependentes.",
@@ -1213,7 +1213,7 @@
         "complementares."
       ],
       "a": 0,
-      "sol": "0,4×0,3=0,12.",
+      "sol": "As probabilidades marginais são 100/250=0,4 e 75/250=0,3, e a conjunta é 30/250=0,12. Como 0,4×0,3=0,12, os acontecimentos são independentes.",
       "hyp": "Pode confundir sobreposição com dependência.",
       "contexts": [
         "mission",

@@ -422,7 +422,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Para dividir por c+di≠0, é útil multiplicar por...",
+      "q": "Para tornar real o denominador c+di≠0 de um quociente, por que número convém multiplicar o numerador e o denominador?",
       "o": [
         "o oposto −c−di.",
         "i.",
@@ -430,7 +430,7 @@
         "o conjugado c−di."
       ],
       "a": 3,
-      "sol": "O produto com o conjugado torna o denominador real.",
+      "sol": "Multiplica-se pelo conjugado c−di, que é não nulo. O denominador passa a (c+di)(c−di)=c²+d².",
       "hyp": "Pode usar o oposto, que não elimina i.",
       "contexts": [
         "mission",

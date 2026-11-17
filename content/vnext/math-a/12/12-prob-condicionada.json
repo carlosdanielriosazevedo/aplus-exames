@@ -71,15 +71,15 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "Se P(A∩B)=0,2 e P(B)=0,5, então P(A|B)=...",
+      "q": "Uma turma tem 25 alunos que estudam música. Destes, 10 também praticam desporto. Escolhe-se ao acaso um dos alunos que estudam música. Qual é a probabilidade de que também pratique desporto?",
       "o": [
         "0,2.",
         "0,5.",
         "0,4.",
-        "0,7."
+        "0,6."
       ],
       "a": 2,
-      "sol": "0,2/0,5=0,4.",
+      "sol": "A seleção faz-se entre os 25 alunos que estudam música. Desses, 10 praticam desporto, pelo que a probabilidade é 10/25=0,4.",
       "hyp": "Pode somar em vez de dividir.",
       "contexts": [
         "mission",
@@ -152,15 +152,15 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Ao saber que B ocorreu, o novo universo de referência passa a ser...",
+      "q": "Numa turma, A é «estudar música» e B é «praticar desporto». Há alunos que praticam desporto. Para calcular a probabilidade de estudar música sabendo que o aluno escolhido pratica desporto, qual é o conjunto de referência?",
       "o": [
         "A.",
         "B.",
         "A∪B.",
-        "Ω^c."
+        "A∩B."
       ],
       "a": 1,
-      "sol": "Condicionar em B restringe a atenção aos resultados em B.",
+      "sol": "Já se sabe que o aluno pratica desporto. O conjunto de referência é B, o grupo dos alunos que praticam desporto.",
       "hyp": "Pode tomar A como novo espaço por ser o primeiro símbolo.",
       "contexts": [
         "mission",
@@ -260,15 +260,15 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "P(A∩B)=0,18 e P(A)=0,6. Então P(B|A)=...",
+      "q": "Se P(A∩Bᶜ)=0,42 e P(A)=0,6, qual é o valor de P(B|A)?",
       "o": [
         "0,18.",
         "0,3.",
-        "0,78.",
+        "0,7.",
         "0,6."
       ],
       "a": 1,
-      "sol": "0,18/0,6=0,3.",
+      "sol": "A parte de A que também pertence a B tem probabilidade 0,6−0,42=0,18. Assim, P(B|A)=0,18/0,6=0,3.",
       "hyp": "Pode dividir pelo acontecimento condicionado errado.",
       "contexts": [
         "mission",

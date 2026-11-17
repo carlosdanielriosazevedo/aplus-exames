@@ -5,7 +5,26 @@
   "themeId": "11-cd",
   "subtopicId": "11-cd-derivada-ponto",
   "sourcePath": "content/vnext/math-a/11/11-cd-derivada-ponto.json",
-  "sourceBlobSha": "d870cd2168781bce7f7c14ece68aa96762a9a51b",
+  "sourceBlobSha": "171b91829160b1675ecdda70ff1f186eca7038b5",
+  "aiRereview": {
+    "reviewedAt": "2026-11-17",
+    "reviewer": "Codex",
+    "previousSourceBlobSha": "d870cd2168781bce7f7c14ece68aa96762a9a51b",
+    "items": [
+      "VN11CD-DP-001",
+      "VN11CD-DP-002",
+      "VN11CD-DP-003",
+      "VN11CD-DP-011",
+      "VN11CD-DP-012",
+      "VN11CD-DP-013",
+      "VN11CD-DP-014",
+      "VN11CD-DP-026",
+      "VN11CD-DP-027",
+      "VN11CD-DP-036",
+      "VN11CD-DP-041",
+      "VN11CD-DP-042"
+    ]
+  },
   "reviewedAt": "2026-09-13",
   "reviewType": "editorial_math_pass",
   "status": "complete",

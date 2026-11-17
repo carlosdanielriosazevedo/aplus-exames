@@ -25,7 +25,7 @@
         "o maior ângulo entre vetores diretores."
       ],
       "a": 0,
-      "sol": "Usa-se o menor ângulo entre as direções das retas.",
+      "sol": "Um vetor diretor pode ser substituído pelo seu oposto sem mudar a reta. A escolha dos sentidos pode produzir ângulos suplementares. Toma-se o menor, entre 0 e π/2.",
       "hyp": "Pode confundir com diferença orientada de inclinações sem redução.",
       "contexts": [
         "mission",
@@ -152,7 +152,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "As retas de diretores (1,2) e (2,4) são...",
+      "q": "Duas retas distintas do plano têm vetores diretores (1,2) e (2,4). Qual é a sua posição relativa?",
       "o": [
         "perpendiculares.",
         "paralelas.",
@@ -160,7 +160,7 @@
         "sem relação."
       ],
       "a": 1,
-      "sol": "(2,4)=2(1,2).",
+      "sol": "Os vetores diretores são proporcionais, pois (2,4)=2(1,2). As retas têm a mesma direção e, por serem distintas, são paralelas.",
       "hyp": "Pode olhar apenas para componentes diferentes.",
       "contexts": [
         "mission",
@@ -584,7 +584,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Qual é o ângulo entre os planos x=0 e x+y=0?",
+      "q": "O ângulo entre dois planos é o menor ângulo que se pode formar com as respetivas normais. Qual é o ângulo entre os planos x=0 e x+y=0?",
       "o": [
         "90°.",
         "45°.",
@@ -592,7 +592,7 @@
         "60°."
       ],
       "a": 1,
-      "sol": "Normais n1=(1,0,0), n2=(1,1,0); cosθ=1/√2.",
+      "sol": "As normais podem ser (1,0,0) e (1,1,0). O seu produto escalar é 1 e as normas são 1 e √2. Logo, o cosseno do menor ângulo é 1/√2, correspondente a 45°.",
       "hyp": "Pode usar diretamente coeficientes sem normalizar.",
       "contexts": [
         "mission",
@@ -773,15 +773,15 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Compreensão",
-      "q": "Para vetor diretor v e normal n, o seno do ângulo β entre reta e plano satisfaz...",
+      "q": "Sejam v um vetor diretor de uma reta e n um vetor normal a um plano. O ângulo β entre a reta e o plano é complementar do ângulo entre as direções de v e n tomado em [0,π/2]. Qual das seguintes igualdades é válida?",
       "o": [
         "sinβ=|v·n|/(||v||||n||).",
-        "cosβ=|v·n|/(||v||||n||) sempre.",
-        "tanβ=||v||||n||.",
-        "sinβ=v·n sem normalização."
+        "cosβ=|v·n|/(||v||||n||).",
+        "sinβ=|v·n|/(||v||+||n||).",
+        "sinβ=1−|v·n|/(||v||||n||)."
       ],
       "a": 0,
-      "sol": "É o complemento da fórmula do ângulo entre v e n.",
+      "sol": "O seno de β é o cosseno do ângulo entre a direção da reta e a direção normal ao plano tomado em [0,π/2]. Pelo produto escalar, esse cosseno é |v·n|/(‖v‖‖n‖).",
       "hyp": "Pode confundir com a fórmula entre dois vetores.",
       "contexts": [
         "mission",
@@ -1016,15 +1016,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Uma reta r tem diretor (1,2,−1). Um plano α tem normal (2,−1,0). A relação direcional é...",
+      "q": "A reta r tem vetor diretor (1,2,−1) e o plano α tem vetor normal (2,−1,0). Sem conhecer um ponto de r, o que se pode concluir?",
       "o": [
-        "r perpendicular a α.",
-        "r paralela a α.",
-        "r normal ao plano.",
-        "impossível determinar qualquer coisa."
+        "A direção de r é paralela a α e r tem de estar contida em α.",
+        "A direção de r é paralela a α e r pode estar contida em α.",
+        "A direção de r é paralela a α e r tem de ser exterior a α.",
+        "A direção de r é perpendicular a α e r interseta α."
       ],
       "a": 1,
-      "sol": "Produto=2−2+0=0, logo a direção é paralela ao plano.",
+      "sol": "O produto escalar entre o vetor diretor e o normal é 1×2+2×(−1)+(−1)×0=0. Assim, a direção de r é paralela ao plano. Dependendo de um ponto de r, ela pode estar contida no plano ou ser-lhe exterior.",
       "hyp": "Pode confundir produto zero com perpendicularidade reta-plano.",
       "contexts": [
         "mission",
@@ -1232,7 +1232,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Uma rampa tem direção v=(3,0,1) e o chão horizontal tem normal n=(0,0,1). O seno do ângulo da rampa com o chão é...",
+      "q": "Uma rampa liga O=(0,0,0) a P=(3,0,1). O ponto H=(3,0,0) é a projeção de P no chão horizontal. Qual é o seno do ângulo que os segmentos [OP] e [OH] formam em O?",
       "o": [
         "3/√10.",
         "1/√10.",
@@ -1240,7 +1240,7 @@
         "√10."
       ],
       "a": 1,
-      "sol": "sinβ=|v·n|/(||v||||n||)=1/√10.",
+      "sol": "O triângulo OPH é retângulo em H. O cateto oposto ao ângulo é PH=1 e a hipotenusa é OP=√(3²+1²)=√10. Logo, o seno é 1/√10.",
       "hyp": "Pode usar a componente horizontal.",
       "contexts": [
         "mission",

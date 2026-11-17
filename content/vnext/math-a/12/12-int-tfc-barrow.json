@@ -17,7 +17,7 @@
       "year": "12.º opcional",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "A Fórmula de Barrow afirma que, se F'=f, então...",
+      "q": "Se f é contínua em [a,b] e F é uma primitiva de f, que igualdade dá a fórmula de Barrow?",
       "o": [
         "∫_a^b f(x)dx=F(b)−F(a).",
         "∫_a^b f=F(a)−F(b).",
@@ -25,7 +25,7 @@
         "∫f=f(b)−f(a)."
       ],
       "a": 0,
-      "sol": "Avalia-se uma primitiva nos limites superior e inferior.",
+      "sol": "A fórmula de Barrow dá ∫_a^b f(x) dx=F(b)−F(a). Subtrai-se o valor da primitiva no limite inferior ao seu valor no limite superior.",
       "hyp": "Pode inverter os limites ou usar f em vez de F.",
       "contexts": [
         "mission",
@@ -322,7 +322,7 @@
         "2."
       ],
       "a": 3,
-      "sol": "Primitiva 2√x;4−2=2.",
+      "sol": "Uma primitiva de 1/√x em x>0 é 2√x. Pela fórmula de Barrow, o integral é 2√4−2√1=4−2=2.",
       "hyp": "Pode esquecer o fator 2.",
       "contexts": [
         "mission",
@@ -619,7 +619,7 @@
         "2."
       ],
       "a": 2,
-      "sol": "Primitiva (t−2)²/2? Melhor: t²/2−2t; em 3 dá 4,5−6=−1,5; em 1 dá 0,5−2=−1,5; diferença 0.",
+      "sol": "Como uma primitiva de t−2 é (t−2)²/2, pela fórmula de Barrow A(3)=(3−2)²/2−(1−2)²/2=1/2−1/2=0.",
       "hyp": "Pode confundir derivada e valor acumulado.",
       "contexts": [
         "mission",

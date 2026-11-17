@@ -46,13 +46,13 @@
       "cognitive": "Compreensão",
       "q": "A mediana é...",
       "o": [
-        "sempre o maior valor.",
-        "o valor central dos dados ordenados, ou a média dos dois centrais se o número for par.",
-        "a soma das frequências.",
-        "o valor mais frequente."
+        "a média dos valores mínimo e máximo da lista ordenada.",
+        "o centro da lista ordenada, usando a média dos dois valores centrais se forem dois.",
+        "a soma dos valores dividida pelo número de observações.",
+        "o valor que mais se repete, ou os valores empatados na maior frequência."
       ],
       "a": 1,
-      "sol": "A mediana depende da posição central após ordenar os dados.",
+      "sol": "Ordenam-se as observações. Com um número ímpar, há um único valor central, que é a mediana. Com um número par, calcula-se a média dos dois valores centrais.",
       "hyp": "Pode confundir mediana com média ou moda.",
       "contexts": [
         "mission",
@@ -1313,15 +1313,15 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Os salários mensais de cinco pessoas são 1 000,1 050,1 100,1 150 e 8 000 €. Qual medida descreve melhor o salário típico do grupo, se 8 000 € for um extremo?",
+      "q": "Cinco salários mensais são 1 000 €, 1 050 €, 1 100 €, 1 150 € e 8 000 €. Dado o valor extremo de 8 000 €, qual destas medidas descreve melhor um salário típico do grupo?",
       "o": [
         "Mediana=1 100 €.",
-        "Média=1 100 €.",
+        "Média=2 460 €.",
         "Máximo=8 000 €.",
         "Amplitude=7 000 €."
       ],
       "a": 0,
-      "sol": "A mediana 1 100 € é robusta ao valor extremo.",
+      "sol": "A mediana é o salário central, 1 100 €. A média é 12 300 €/5=2 460 € e fica acima dos primeiros quatro salários, pois é bastante influenciada pelo valor extremo de 8 000 €.",
       "hyp": "Pode usar a média sem considerar o extremo.",
       "contexts": [
         "mission",

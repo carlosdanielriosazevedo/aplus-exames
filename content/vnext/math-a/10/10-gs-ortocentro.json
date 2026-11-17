@@ -152,12 +152,12 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Para determinar o ortocentro, basta traçar...",
+      "q": "Que duas construções bastam para localizar o ortocentro de qualquer triângulo?",
       "o": [
-        "duas medianas.",
-        "duas alturas; a terceira passa pelo mesmo ponto.",
-        "duas mediatrizes.",
-        "uma bissetriz."
+        "Duas medianas.",
+        "Duas alturas.",
+        "Duas mediatrizes.",
+        "Duas bissetrizes."
       ],
       "a": 1,
       "sol": "Duas alturas não paralelas determinam o ponto comum das três.",
@@ -341,7 +341,7 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Se a altura AD é perpendicular a BC e ∠ADB mede...",
+      "q": "No triângulo ABC, a altura que parte de A intersecta a reta BC em D. Qual é a amplitude do ângulo entre as retas AD e BC?",
       "o": [
         "90°",
         "45°",
@@ -349,7 +349,7 @@
         "180°"
       ],
       "a": 0,
-      "sol": "Perpendicularidade implica ângulo reto.",
+      "sol": "Uma altura é perpendicular à reta que contém o lado oposto. Neste caso, AD é perpendicular a BC, pelo que o ângulo entre as duas retas mede 90°.",
       "hyp": "Pode não traduzir perpendicularidade em 90°.",
       "contexts": [
         "mission",
@@ -673,7 +673,7 @@
         "necessariamente escaleno."
       ],
       "a": 0,
-      "sol": "No triângulo retângulo, o ortocentro é o vértice reto.",
+      "sol": "Se o ortocentro coincide com A, a altura por B passa também por A. A reta AB é então perpendicular a AC. Logo, o triângulo tem um ângulo reto em A.",
       "hyp": "Pode confundir com circuncentro.",
       "contexts": [
         "mission",
@@ -1259,7 +1259,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Quer-se encontrar o ponto comum às três perpendiculares traçadas dos vértices aos lados opostos de uma região triangular. Que ponto é esse?",
+      "q": "A partir de cada vértice de um triângulo, traça-se uma reta perpendicular à reta que contém o lado oposto. Como se chama o ponto comum às três retas?",
       "o": [
         "Baricentro.",
         "Incentro.",
@@ -1267,7 +1267,7 @@
         "Circuncentro."
       ],
       "a": 2,
-      "sol": "Essas perpendiculares são as alturas.",
+      "sol": "Cada reta assim traçada é a reta suporte de uma altura. As três retas passam pelo mesmo ponto, que é o ortocentro, mesmo quando uma altura encontra o prolongamento de um lado.",
       "hyp": "Pode confundir famílias de retas.",
       "contexts": [
         "mission",

@@ -71,7 +71,7 @@
       "year": "12.º opcional",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "Se Q=[[10,20],[15,5]] representa quantidades de 2 produtos em 2 lojas, o total de unidades na 1.ª loja é...",
+      "q": "A matriz Q=[[10,20],[15,5]] regista quantidades vendidas. As linhas representam lojas e as colunas representam produtos. Quantas unidades vendeu a 1.ª loja, somando os dois produtos?",
       "o": [
         "25.",
         "35.",
@@ -233,7 +233,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Se c é um vetor de custos unitários de recursos e A descreve consumo de recursos por produto, então c^T A pode representar...",
+      "q": "Se c é o vetor-coluna dos custos unitários dos recursos e A tem um recurso por linha e um produto por coluna, com aᵢⱼ igual ao consumo do recurso i por unidade do produto j, o que representa cᵀA?",
       "o": [
         "custo de recursos por produto.",
         "quantidade produzida por recurso.",
@@ -314,7 +314,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Se A=[[2,1],[3,4]] dá unidades de recursos por produto e q=(5,2)^T, então Aq=(12,23)^T. A primeira componente representa...",
+      "q": "A matriz A=[[2,1],[3,4]] indica as unidades de cada recurso (linhas) necessárias por unidade de cada produto (colunas). Para o vetor de produção q=(5,2)ᵀ, obtém-se Aq=(12,23)ᵀ. O que representa a primeira componente?",
       "o": [
         "produção total do produto 1.",
         "custo do recurso 1.",
@@ -557,7 +557,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Compreensão",
-      "q": "Em uma matriz de adjacência A, a entrada (A²)_ij conta, em rede simples apropriada...",
+      "q": "Numa rede simples e não dirigida, A é a matriz de adjacência: aᵢⱼ=1 quando i e j estão ligados e aᵢⱼ=0 nos restantes casos. O que conta a entrada (A²)ᵢⱼ?",
       "o": [
         "percursos de comprimento 2 de i para j.",
         "ligações diretas apenas.",
@@ -565,7 +565,7 @@
         "grau de i apenas."
       ],
       "a": 0,
-      "sol": "Cada termo soma escolhas de um vértice intermédio.",
+      "sol": "O produto aᵢₖaₖⱼ vale 1 precisamente quando se pode ir de i para k e de k para j. Ao somar sobre k, contam-se os percursos de dois passos, incluindo o regresso ao vértice de partida quando i=j.",
       "hyp": "Pode confundir potência matricial com elevar entradas.",
       "contexts": [
         "mission",
@@ -592,7 +592,7 @@
         "2A."
       ],
       "a": 1,
-      "sol": "Dois passos levam cada vértice de volta a si próprio.",
+      "sol": "Pelo produto linha-coluna, A²=[[1,0],[0,1]]=I₂. Cada elemento da diagonal resulta de 1·1 e cada elemento fora da diagonal é 0.",
       "hyp": "Pode elevar entradas individualmente.",
       "contexts": [
         "mission",
@@ -692,7 +692,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Se P tem 1.ª linha (0,8; 0,3), 2.ª linha (0,2; 0,7) e x_0=(100,0)^T, então x_1=",
+      "q": "Uma população ocupa dois estados. Em cada passo, a distribuição evolui segundo xₙ₊₁=Pxₙ. A matriz P tem linhas (0,8; 0,3) e (0,2; 0,7). Se x₀=(100,0)ᵀ, qual é o vetor x₁?",
       "o": [
         "(30,70)^T.",
         "(80,20)^T.",

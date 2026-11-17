@@ -1,0 +1,4942 @@
+{
+ "schemaVersion": 1,
+ "subject": "Matemática A",
+ "reviewedAt": "2026-11-17",
+ "reviewer": "Codex (revisão integral, pergunta a pergunta)",
+ "method": "Leitura de cada pergunta ativa e da respetiva fonte. Conferência do enunciado, opções, chave, resolução, passos, adequação curricular e repetição. Correções e regeneração antes de calcular as impressões digitais.",
+ "notes": [
+  "As perguntas mantêm o estado prototype e o bloqueio de elegibilidade para produção.",
+  "O registo cobre a versão final do banco ativo. Os IDs e as correções constam de docs/content-quality/revisao-matematica-a.md."
+ ],
+ "items": {
+  "BG10F-REP-1": {
+   "fingerprint": "ai1-c3c84d49"
+  },
+  "BG12E-EXP-1": {
+   "fingerprint": "ai1-0c63253f"
+  },
+  "BG12E-MOD-1": {
+   "fingerprint": "ai1-6fa5de44"
+  },
+  "BG12FC-ASS-1": {
+   "fingerprint": "ai1-f05820c4"
+  },
+  "BG12FC-CON-1": {
+   "fingerprint": "ai1-955a61d0"
+  },
+  "BG12FC-DER-1": {
+   "fingerprint": "ai1-ec31af6d"
+  },
+  "C10EST-1": {
+   "fingerprint": "ai1-a3ac0809"
+  },
+  "C10GS-1": {
+   "fingerprint": "ai1-5017fe24"
+  },
+  "C11PE-1": {
+   "fingerprint": "ai1-01df96a7"
+  },
+  "C11SUC-1": {
+   "fingerprint": "ai1-0f8ecfd5"
+  },
+  "C12IE-1": {
+   "fingerprint": "ai1-123ef743"
+  },
+  "C12INT-1": {
+   "fingerprint": "ai1-8213e0d1"
+  },
+  "C12MAT-1": {
+   "fingerprint": "ai1-29ab00f6"
+  },
+  "C12RAE-1": {
+   "fingerprint": "ai1-e2c8d693"
+  },
+  "CP10F-MON-1": {
+   "fingerprint": "ai1-bfc625ee"
+  },
+  "CP11D-DER-1": {
+   "fingerprint": "ai1-a8be0329"
+  },
+  "CP11D-MON-1": {
+   "fingerprint": "ai1-910727d3"
+  },
+  "CP12E-EXP-1": {
+   "fingerprint": "ai1-1914d710"
+  },
+  "CP12E-LOG-1": {
+   "fingerprint": "ai1-e01eeffa"
+  },
+  "CP12L-LIM-1": {
+   "fingerprint": "ai1-bb530e1a"
+  },
+  "CP12P-ACO-1": {
+   "fingerprint": "ai1-aff5bef8"
+  },
+  "CP12P-COND-1": {
+   "fingerprint": "ai1-78087d0e"
+  },
+  "CRV2-10ELE-DHONDT-STEPS-1": {
+   "fingerprint": "ai1-af49f498"
+  },
+  "CRV2-10EST-STEPS-1": {
+   "fingerprint": "ai1-8b6d2661"
+  },
+  "CRV2-10FIN-STEPS-1": {
+   "fingerprint": "ai1-ab1c0e61"
+  },
+  "CRV2-10FUN-AFIM-STEPS-1": {
+   "fingerprint": "ai1-afc6a972"
+  },
+  "CRV2-10FUN-EXT-STEPS-1": {
+   "fingerprint": "ai1-77290930"
+  },
+  "CRV2-10FUN-MOD-STEPS-1": {
+   "fingerprint": "ai1-561735aa"
+  },
+  "CRV2-10FUN-STEPS-1": {
+   "fingerprint": "ai1-d91a4651"
+  },
+  "CRV2-10GA-DIST-STEPS-1": {
+   "fingerprint": "ai1-600a2e82"
+  },
+  "CRV2-10GA-LG-STEPS-1": {
+   "fingerprint": "ai1-ba32c92a"
+  },
+  "CRV2-10GA-STEPS-1": {
+   "fingerprint": "ai1-07d3dd84"
+  },
+  "CRV2-10GA-VET-STEPS-1": {
+   "fingerprint": "ai1-5563c2d9"
+  },
+  "CRV2-10GS-BAR-STEPS-1": {
+   "fingerprint": "ai1-92c172b8"
+  },
+  "CRV2-11CD-MON-STEPS-1": {
+   "fingerprint": "ai1-246b4a5e"
+  },
+  "CRV2-11CD-STEPS-1": {
+   "fingerprint": "ai1-29c39d96"
+  },
+  "CRV2-11CD-TAN-STEPS-1": {
+   "fingerprint": "ai1-eadba08c"
+  },
+  "CRV2-11CD-TV-STEPS-1": {
+   "fingerprint": "ai1-cb77070c"
+  },
+  "CRV2-11CONT-PERM-STEPS-1": {
+   "fingerprint": "ai1-6705bb3d"
+  },
+  "CRV2-11CONT-STEPS-1": {
+   "fingerprint": "ai1-a304dfac"
+  },
+  "CRV2-11FUN-RUFFINI-STEPS-1": {
+   "fingerprint": "ai1-09f3eec7"
+  },
+  "CRV2-11PE-STEPS-1": {
+   "fingerprint": "ai1-7793e23c"
+  },
+  "CRV2-11SUC-STEPS-1": {
+   "fingerprint": "ai1-b9fdf0f1"
+  },
+  "CRV2-11TRIG-MOD-STEPS-1": {
+   "fingerprint": "ai1-b73a5886"
+  },
+  "CRV2-11TRIG-STEPS-1": {
+   "fingerprint": "ai1-5e11ce5d"
+  },
+  "CRV2-12CPLX-MOD-STEPS-1": {
+   "fingerprint": "ai1-4027e17e"
+  },
+  "CRV2-12CPLX-POW-STEPS-1": {
+   "fingerprint": "ai1-d28cb3da"
+  },
+  "CRV2-12CPLX-STEPS-1": {
+   "fingerprint": "ai1-ec8281c9"
+  },
+  "CRV2-12CPLX-TRIG-STEPS-1": {
+   "fingerprint": "ai1-408d92a7"
+  },
+  "CRV2-12EXPL-LOG-STEPS-1": {
+   "fingerprint": "ai1-756c7bc9"
+  },
+  "CRV2-12EXPL-MOD-STEPS-1": {
+   "fingerprint": "ai1-551b25f0"
+  },
+  "CRV2-12EXPL-STEPS-1": {
+   "fingerprint": "ai1-4c0da791"
+  },
+  "CRV2-12FCD-CHAIN-STEPS-1": {
+   "fingerprint": "ai1-4f372143"
+  },
+  "CRV2-12FCONT-ASS-STEPS-1": {
+   "fingerprint": "ai1-ed578789"
+  },
+  "CRV2-12FCONT-STEPS-1": {
+   "fingerprint": "ai1-daec013f"
+  },
+  "CRV2-12IE-IC-STEPS-1": {
+   "fingerprint": "ai1-761e41b8"
+  },
+  "CRV2-12INT-AREA-STEPS-1": {
+   "fingerprint": "ai1-ac495239"
+  },
+  "CRV2-12INT-BARROW-STEPS-1": {
+   "fingerprint": "ai1-2b7dba5d"
+  },
+  "CRV2-12INT-STEPS-1": {
+   "fingerprint": "ai1-b9f290e9"
+  },
+  "CRV2-12MAT-PROD-STEPS-1": {
+   "fingerprint": "ai1-d8de68c0"
+  },
+  "CRV2-12PROB-COND-STEPS-1": {
+   "fingerprint": "ai1-4685fe66"
+  },
+  "CRV2-12PROB-STEPS-1": {
+   "fingerprint": "ai1-addd083e"
+  },
+  "CRV2-12RAE-STEPS-1": {
+   "fingerprint": "ai1-bd266a2f"
+  },
+  "CV51-10ELE-INT-1": {
+   "fingerprint": "ai1-b5b0f1e8"
+  },
+  "CV51-10ELE-PART-1": {
+   "fingerprint": "ai1-772f0c14"
+  },
+  "CV51-10ELE-VOT-1": {
+   "fingerprint": "ai1-539c3944"
+  },
+  "CV51-10EST-MED-1": {
+   "fingerprint": "ai1-6cc01d60"
+  },
+  "CV51-10EST-REP-1": {
+   "fingerprint": "ai1-15cafec5"
+  },
+  "CV51-10FIN-CAP-1": {
+   "fingerprint": "ai1-30b2b481"
+  },
+  "CV51-10FIN-JUR-1": {
+   "fingerprint": "ai1-c5d7c1ea"
+  },
+  "CV51-10FIN-MOD-1": {
+   "fingerprint": "ai1-1e4e0650"
+  },
+  "CV51-10GA-VET-2": {
+   "fingerprint": "ai1-160c1355"
+  },
+  "CV51-10GS-PROP-1": {
+   "fingerprint": "ai1-1cf4afd3"
+  },
+  "CV51-10GS-RP-1": {
+   "fingerprint": "ai1-9f5a5df1"
+  },
+  "CV51-11CD-OPT-1": {
+   "fingerprint": "ai1-ddcb43ac"
+  },
+  "CV51-11CD-OPT-2": {
+   "fingerprint": "ai1-1ea00441"
+  },
+  "CV51-11CD-TV-1": {
+   "fingerprint": "ai1-8b39d385"
+  },
+  "CV51-11CD-TV-2": {
+   "fingerprint": "ai1-8382f729"
+  },
+  "CV51-11CONT-PM-2": {
+   "fingerprint": "ai1-7fd6b60f"
+  },
+  "CV51-11FUN-IG-1": {
+   "fingerprint": "ai1-4dc39fe3"
+  },
+  "CV51-11FUN-IG-2": {
+   "fingerprint": "ai1-ad75a83d"
+  },
+  "CV51-11FUN-MOD-1": {
+   "fingerprint": "ai1-77ccbbd5"
+  },
+  "CV51-11FUN-MOD-2": {
+   "fingerprint": "ai1-44826102"
+  },
+  "CV51-11FUN-TR-1": {
+   "fingerprint": "ai1-56f510bd"
+  },
+  "CV51-11FUN-TR-2": {
+   "fingerprint": "ai1-2d0c5137"
+  },
+  "CV51-11PE-AG-1": {
+   "fingerprint": "ai1-9c654541"
+  },
+  "CV51-11PE-PE-1": {
+   "fingerprint": "ai1-160eb7e8"
+  },
+  "CV51-11SUC-COMP-1": {
+   "fingerprint": "ai1-9d8d11c2"
+  },
+  "CV51-11SUC-PROG-1": {
+   "fingerprint": "ai1-080fc14a"
+  },
+  "CV51-11TRIG-EQ-2": {
+   "fingerprint": "ai1-368e9404"
+  },
+  "CV51-12CPLX-FT-1": {
+   "fingerprint": "ai1-dba94c56"
+  },
+  "CV51-12CPLX-FT-2": {
+   "fingerprint": "ai1-6ae00559"
+  },
+  "CV51-12CPLX-MA-1": {
+   "fingerprint": "ai1-5c85e3d1"
+  },
+  "CV51-12CPLX-MA-2": {
+   "fingerprint": "ai1-9cf85427"
+  },
+  "CV51-12FCD-APL-1": {
+   "fingerprint": "ai1-82e3fb26"
+  },
+  "CV51-12FCD-APL-2": {
+   "fingerprint": "ai1-17a875f2"
+  },
+  "CV51-12FCD-COMP-1": {
+   "fingerprint": "ai1-fc33e561"
+  },
+  "CV51-12FCD-COMP-2": {
+   "fingerprint": "ai1-5855aee1"
+  },
+  "CV51-12FCD-RC-1": {
+   "fingerprint": "ai1-ce87f902"
+  },
+  "CV51-12FCD-RC-2": {
+   "fingerprint": "ai1-4415598d"
+  },
+  "CV51-12IE-EST-1": {
+   "fingerprint": "ai1-2cf89165"
+  },
+  "CV51-12IE-INF-1": {
+   "fingerprint": "ai1-a74966b9"
+  },
+  "CV51-12INT-AREA-1": {
+   "fingerprint": "ai1-6daef71d"
+  },
+  "CV51-12INT-AREA-2": {
+   "fingerprint": "ai1-677bf420"
+  },
+  "CV51-12INT-ID-1": {
+   "fingerprint": "ai1-ca586adf"
+  },
+  "CV51-12INT-ID-2": {
+   "fingerprint": "ai1-a081d905"
+  },
+  "CV51-12INT-PRIM-2": {
+   "fingerprint": "ai1-5ad3c7af"
+  },
+  "CV51-12MAT-APL-1": {
+   "fingerprint": "ai1-4ce919cd"
+  },
+  "CV51-12MAT-REP-1": {
+   "fingerprint": "ai1-ef9af0f0"
+  },
+  "CV51-12PROB-LAP-1": {
+   "fingerprint": "ai1-569f7e0e"
+  },
+  "CV51-12PROB-LAP-2": {
+   "fingerprint": "ai1-acfa2deb"
+  },
+  "CV51-12PROB-MIX-1": {
+   "fingerprint": "ai1-aee7d69c"
+  },
+  "CV51-12PROB-MIX-2": {
+   "fingerprint": "ai1-3a389151"
+  },
+  "CV51-12RAE-APR-1": {
+   "fingerprint": "ai1-af4171f5"
+  },
+  "CV51-12RAE-VAL-1": {
+   "fingerprint": "ai1-2c927762"
+  },
+  "D10F-A": {
+   "fingerprint": "ai1-4f50d88a"
+  },
+  "D10F-E": {
+   "fingerprint": "ai1-6379e6b5"
+  },
+  "D10F-H": {
+   "fingerprint": "ai1-35ef298a"
+  },
+  "D10F-P": {
+   "fingerprint": "ai1-a2c24cdb"
+  },
+  "D10G-A": {
+   "fingerprint": "ai1-be2bde1e"
+  },
+  "D10G-P": {
+   "fingerprint": "ai1-a940b2f9"
+  },
+  "D11C-A": {
+   "fingerprint": "ai1-f15b647f"
+  },
+  "D11C-P": {
+   "fingerprint": "ai1-2f694de4"
+  },
+  "D11D-A": {
+   "fingerprint": "ai1-85473823"
+  },
+  "D11D-E": {
+   "fingerprint": "ai1-95c020e6"
+  },
+  "D11D-H": {
+   "fingerprint": "ai1-42d82e80"
+  },
+  "D11D-P": {
+   "fingerprint": "ai1-279f8a12"
+  },
+  "D11T-A": {
+   "fingerprint": "ai1-d3d79867"
+  },
+  "D11T-P": {
+   "fingerprint": "ai1-ea292012"
+  },
+  "D12C-A": {
+   "fingerprint": "ai1-0f2fd49c"
+  },
+  "D12C-P": {
+   "fingerprint": "ai1-fd5ccb99"
+  },
+  "D12E-A": {
+   "fingerprint": "ai1-e12c34fe"
+  },
+  "D12E-E": {
+   "fingerprint": "ai1-d502e371"
+  },
+  "D12E-H": {
+   "fingerprint": "ai1-30b33771"
+  },
+  "D12E-P": {
+   "fingerprint": "ai1-ec14abff"
+  },
+  "D12L-A": {
+   "fingerprint": "ai1-a5078a29"
+  },
+  "D12L-P": {
+   "fingerprint": "ai1-bb4cc296"
+  },
+  "D12P-A": {
+   "fingerprint": "ai1-40c6d2df"
+  },
+  "D12P-E": {
+   "fingerprint": "ai1-78e51eb4"
+  },
+  "D12P-H": {
+   "fingerprint": "ai1-279da030"
+  },
+  "D12P-P": {
+   "fingerprint": "ai1-823548f4"
+  },
+  "DG-VN10ELE-BOR-001": {
+   "fingerprint": "ai1-730ebc48"
+  },
+  "DG-VN10ELE-BOR-016": {
+   "fingerprint": "ai1-5d2127bd"
+  },
+  "DG-VN10ELE-DHO-001": {
+   "fingerprint": "ai1-8d030e82"
+  },
+  "DG-VN10ELE-DHO-010": {
+   "fingerprint": "ai1-884ffec9"
+  },
+  "DG-VN10ELE-MAJ-001": {
+   "fingerprint": "ai1-03926a05"
+  },
+  "DG-VN10ELE-MAJ-006": {
+   "fingerprint": "ai1-2f8eeabb"
+  },
+  "DG-VN10ELE-STL-001": {
+   "fingerprint": "ai1-80787844"
+  },
+  "DG-VN10ELE-STL-006": {
+   "fingerprint": "ai1-b2613d91"
+  },
+  "DG-VN10EST-AMO-001": {
+   "fingerprint": "ai1-925cd7bf"
+  },
+  "DG-VN10EST-AMO-008": {
+   "fingerprint": "ai1-70546885"
+  },
+  "DG-VN10EST-BIV-001": {
+   "fingerprint": "ai1-7f622d0b"
+  },
+  "DG-VN10EST-BIV-011": {
+   "fingerprint": "ai1-f0d32df1"
+  },
+  "DG-VN10EST-DIS-001": {
+   "fingerprint": "ai1-33a7179d"
+  },
+  "DG-VN10EST-DIS-009": {
+   "fingerprint": "ai1-b80b7528"
+  },
+  "DG-VN10EST-LOC-001": {
+   "fingerprint": "ai1-b5ea110e"
+  },
+  "DG-VN10EST-LOC-015": {
+   "fingerprint": "ai1-c8817cca"
+  },
+  "DG-VN10EST-PPA-001": {
+   "fingerprint": "ai1-11bf7d2b"
+  },
+  "DG-VN10EST-PPA-010": {
+   "fingerprint": "ai1-cbbed142"
+  },
+  "DG-VN10EST-UNI-001": {
+   "fingerprint": "ai1-5c524173"
+  },
+  "DG-VN10EST-UNI-006": {
+   "fingerprint": "ai1-6e243080"
+  },
+  "DG-VN10FIN-BRL-001": {
+   "fingerprint": "ai1-afdbe22a"
+  },
+  "DG-VN10FIN-BRL-018": {
+   "fingerprint": "ai1-abd6e8dc"
+  },
+  "DG-VN10FIN-IRS-001": {
+   "fingerprint": "ai1-ea7f3d10"
+  },
+  "DG-VN10FIN-IRS-013": {
+   "fingerprint": "ai1-48e12dd4"
+  },
+  "DG-VN10FIN-JC-001": {
+   "fingerprint": "ai1-87a646ac"
+  },
+  "DG-VN10FIN-JC-011": {
+   "fingerprint": "ai1-908147c7"
+  },
+  "DG-VN10FIN-JS-001": {
+   "fingerprint": "ai1-a09029f6"
+  },
+  "DG-VN10FIN-JS-013": {
+   "fingerprint": "ai1-a27a2348"
+  },
+  "DG-VN10FIN-SAL-001": {
+   "fingerprint": "ai1-05f7bc39"
+  },
+  "DG-VN10FIN-SAL-013": {
+   "fingerprint": "ai1-368b4307"
+  },
+  "DG-VN10FUN-AF-001": {
+   "fingerprint": "ai1-4773ed9b"
+  },
+  "DG-VN10FUN-AF-013": {
+   "fingerprint": "ai1-07dbd670"
+  },
+  "DG-VN10FUN-CR-001": {
+   "fingerprint": "ai1-74829788"
+  },
+  "DG-VN10FUN-CR-013": {
+   "fingerprint": "ai1-9c0f5648"
+  },
+  "DG-VN10FUN-DIZ-001": {
+   "fingerprint": "ai1-a5105347"
+  },
+  "DG-VN10FUN-DIZ-010": {
+   "fingerprint": "ai1-3a9ded34"
+  },
+  "DG-VN10FUN-QUA-001": {
+   "fingerprint": "ai1-78b0006b"
+  },
+  "DG-VN10FUN-QUA-019": {
+   "fingerprint": "ai1-e6a9acff"
+  },
+  "DG-VN10FUN-TRM-001": {
+   "fingerprint": "ai1-40b85207"
+  },
+  "DG-VN10FUN-TRM-007": {
+   "fingerprint": "ai1-f76bf710"
+  },
+  "DG-VN10GA-CT-001": {
+   "fingerprint": "ai1-ceab2916"
+  },
+  "DG-VN10GA-CT-014": {
+   "fingerprint": "ai1-cd2f49d5"
+  },
+  "DG-VN10GA-DPM-001": {
+   "fingerprint": "ai1-67b972e0"
+  },
+  "DG-VN10GA-DPM-011": {
+   "fingerprint": "ai1-3783e5f0"
+  },
+  "DG-VN10GA-ESP-001": {
+   "fingerprint": "ai1-77a376bf"
+  },
+  "DG-VN10GA-ESP-006": {
+   "fingerprint": "ai1-02b19cc0"
+  },
+  "DG-VN10GA-LG-001": {
+   "fingerprint": "ai1-cad9f9e6"
+  },
+  "DG-VN10GA-LG-018": {
+   "fingerprint": "ai1-5ef5ae2b"
+  },
+  "DG-VN10GA-RET-001": {
+   "fingerprint": "ai1-57927658"
+  },
+  "DG-VN10GA-RET-014": {
+   "fingerprint": "ai1-54afeb68"
+  },
+  "DG-VN10GA-VET-001": {
+   "fingerprint": "ai1-76fa213b"
+  },
+  "DG-VN10GA-VET-006": {
+   "fingerprint": "ai1-c4860840"
+  },
+  "DG-VN10GS-BAR-001": {
+   "fingerprint": "ai1-dc2e6ef4"
+  },
+  "DG-VN10GS-BAR-009": {
+   "fingerprint": "ai1-d702a451"
+  },
+  "DG-VN10GS-CI-001": {
+   "fingerprint": "ai1-5656548a"
+  },
+  "DG-VN10GS-CI-013": {
+   "fingerprint": "ai1-4e0d27b7"
+  },
+  "DG-VN10GS-E9-001": {
+   "fingerprint": "ai1-119a22dc"
+  },
+  "DG-VN10GS-E9-015": {
+   "fingerprint": "ai1-1ed3c03c"
+  },
+  "DG-VN10GS-ORT-001": {
+   "fingerprint": "ai1-b23edab0"
+  },
+  "DG-VN10GS-ORT-015": {
+   "fingerprint": "ai1-6ff4bae3"
+  },
+  "DG-VN10GS-PC-001": {
+   "fingerprint": "ai1-feb08d57"
+  },
+  "DG-VN10GS-PC-007": {
+   "fingerprint": "ai1-50e471b7"
+  },
+  "DG-VN11CD-DP-001": {
+   "fingerprint": "ai1-5a9960d4"
+  },
+  "DG-VN11CD-DP-011": {
+   "fingerprint": "ai1-648e1bbe"
+  },
+  "DG-VN11CD-FD-001": {
+   "fingerprint": "ai1-cb7e7ef4"
+  },
+  "DG-VN11CD-FD-011": {
+   "fingerprint": "ai1-0de9b0e1"
+  },
+  "DG-VN11CD-MO-001": {
+   "fingerprint": "ai1-29fe32a3"
+  },
+  "DG-VN11CD-MO-011": {
+   "fingerprint": "ai1-2d8347c2"
+  },
+  "DG-VN11CD-REG-001": {
+   "fingerprint": "ai1-6c4dee31"
+  },
+  "DG-VN11CD-REG-011": {
+   "fingerprint": "ai1-b1009633"
+  },
+  "DG-VN11CD-TAN-001": {
+   "fingerprint": "ai1-c5ed6bc6"
+  },
+  "DG-VN11CD-TAN-011": {
+   "fingerprint": "ai1-6b4ad2ea"
+  },
+  "DG-VN11CD-TM-001": {
+   "fingerprint": "ai1-0670106a"
+  },
+  "DG-VN11CD-TM-011": {
+   "fingerprint": "ai1-b7438b5e"
+  },
+  "DG-VN11CONT-AM-001": {
+   "fingerprint": "ai1-3c236d87"
+  },
+  "DG-VN11CONT-AM-013": {
+   "fingerprint": "ai1-b674e79d"
+  },
+  "DG-VN11CONT-ARR-001": {
+   "fingerprint": "ai1-dd9bdc7e"
+  },
+  "DG-VN11CONT-ARR-016": {
+   "fingerprint": "ai1-70af7771"
+  },
+  "DG-VN11CONT-COMB-001": {
+   "fingerprint": "ai1-4bc06fdd"
+  },
+  "DG-VN11CONT-COMB-006": {
+   "fingerprint": "ai1-b0a1ef96"
+  },
+  "DG-VN11CONT-DG-001": {
+   "fingerprint": "ai1-97530b15"
+  },
+  "DG-VN11CONT-DG-017": {
+   "fingerprint": "ai1-b8bf1610"
+  },
+  "DG-VN11CONT-FAT-001": {
+   "fingerprint": "ai1-250838fa"
+  },
+  "DG-VN11CONT-FAT-011": {
+   "fingerprint": "ai1-2fc9d038"
+  },
+  "DG-VN11CONT-PERM-001": {
+   "fingerprint": "ai1-7fb9d37a"
+  },
+  "DG-VN11CONT-PERM-007": {
+   "fingerprint": "ai1-762919be"
+  },
+  "DG-VN11FUN-AM-001": {
+   "fingerprint": "ai1-c8b9e4d6"
+  },
+  "DG-VN11FUN-AM-016": {
+   "fingerprint": "ai1-86cd0343"
+  },
+  "DG-VN11FUN-CQ-001": {
+   "fingerprint": "ai1-8552e37a"
+  },
+  "DG-VN11FUN-CQ-015": {
+   "fingerprint": "ai1-b0d98a44"
+  },
+  "DG-VN11FUN-DP-001": {
+   "fingerprint": "ai1-73db3107"
+  },
+  "DG-VN11FUN-DP-016": {
+   "fingerprint": "ai1-26183cd7"
+  },
+  "DG-VN11FUN-OP-001": {
+   "fingerprint": "ai1-e97d9f2b"
+  },
+  "DG-VN11FUN-OP-006": {
+   "fingerprint": "ai1-24705c5e"
+  },
+  "DG-VN11FUN-RAT-001": {
+   "fingerprint": "ai1-ea034339"
+  },
+  "DG-VN11FUN-RAT-014": {
+   "fingerprint": "ai1-1032212c"
+  },
+  "DG-VN11FUN-RR-001": {
+   "fingerprint": "ai1-ca041fd7"
+  },
+  "DG-VN11FUN-RR-008": {
+   "fingerprint": "ai1-1407a016"
+  },
+  "DG-VN11PE-AN-001": {
+   "fingerprint": "ai1-85818071"
+  },
+  "DG-VN11PE-AN-010": {
+   "fingerprint": "ai1-5dc04251"
+  },
+  "DG-VN11PE-DI-001": {
+   "fingerprint": "ai1-de5b906a"
+  },
+  "DG-VN11PE-DI-019": {
+   "fingerprint": "ai1-0ef16929"
+  },
+  "DG-VN11PE-DIST-001": {
+   "fingerprint": "ai1-c040b6b5"
+  },
+  "DG-VN11PE-DIST-006": {
+   "fingerprint": "ai1-8736612a"
+  },
+  "DG-VN11PE-PC-001": {
+   "fingerprint": "ai1-405a7374"
+  },
+  "DG-VN11PE-PC-018": {
+   "fingerprint": "ai1-0b105d98"
+  },
+  "DG-VN11PE-PERP-001": {
+   "fingerprint": "ai1-bfb3deca"
+  },
+  "DG-VN11PE-PERP-006": {
+   "fingerprint": "ai1-92ff97bf"
+  },
+  "DG-VN11PE-RP-001": {
+   "fingerprint": "ai1-c4a9635f"
+  },
+  "DG-VN11PE-RP-009": {
+   "fingerprint": "ai1-32ea5f2f"
+  },
+  "DG-VN11SUC-MC-001": {
+   "fingerprint": "ai1-6c0a4f36"
+  },
+  "DG-VN11SUC-MC-015": {
+   "fingerprint": "ai1-52a94be6"
+  },
+  "DG-VN11SUC-PA-001": {
+   "fingerprint": "ai1-15a5ddb2"
+  },
+  "DG-VN11SUC-PA-008": {
+   "fingerprint": "ai1-214fb18d"
+  },
+  "DG-VN11SUC-PG-001": {
+   "fingerprint": "ai1-b55c83e4"
+  },
+  "DG-VN11SUC-PG-008": {
+   "fingerprint": "ai1-adcb7baf"
+  },
+  "DG-VN11SUC-SOM-001": {
+   "fingerprint": "ai1-b3a341e8"
+  },
+  "DG-VN11SUC-SOM-008": {
+   "fingerprint": "ai1-b215ac27"
+  },
+  "DG-VN11SUC-TR-001": {
+   "fingerprint": "ai1-160bd7ca"
+  },
+  "DG-VN11SUC-TR-019": {
+   "fingerprint": "ai1-43b0295a"
+  },
+  "DG-VN11TRIG-AR-001": {
+   "fingerprint": "ai1-9fa1d1f9"
+  },
+  "DG-VN11TRIG-AR-008": {
+   "fingerprint": "ai1-16742d84"
+  },
+  "DG-VN11TRIG-CIR-001": {
+   "fingerprint": "ai1-9dcc5d07"
+  },
+  "DG-VN11TRIG-CIR-012": {
+   "fingerprint": "ai1-9df671a6"
+  },
+  "DG-VN11TRIG-EQ-001": {
+   "fingerprint": "ai1-55c609bc"
+  },
+  "DG-VN11TRIG-EQ-017": {
+   "fingerprint": "ai1-b262e216"
+  },
+  "DG-VN11TRIG-FUN-001": {
+   "fingerprint": "ai1-c1ed8ccd"
+  },
+  "DG-VN11TRIG-FUN-007": {
+   "fingerprint": "ai1-3c15dd3e"
+  },
+  "DG-VN11TRIG-MOD-001": {
+   "fingerprint": "ai1-e4ed4c59"
+  },
+  "DG-VN11TRIG-MOD-009": {
+   "fingerprint": "ai1-ab4880fb"
+  },
+  "DG-VN11TRIG-REL-001": {
+   "fingerprint": "ai1-07f251d4"
+  },
+  "DG-VN11TRIG-REL-017": {
+   "fingerprint": "ai1-9c3b4c29"
+  },
+  "DG-VN12CPLX-AG-001": {
+   "fingerprint": "ai1-9c67191e"
+  },
+  "DG-VN12CPLX-AG-007": {
+   "fingerprint": "ai1-86513b97"
+  },
+  "DG-VN12CPLX-CM-001": {
+   "fingerprint": "ai1-6b8df923"
+  },
+  "DG-VN12CPLX-CM-019": {
+   "fingerprint": "ai1-3d0284a9"
+  },
+  "DG-VN12CPLX-FA-001": {
+   "fingerprint": "ai1-d8461762"
+  },
+  "DG-VN12CPLX-FA-013": {
+   "fingerprint": "ai1-72206d95"
+  },
+  "DG-VN12CPLX-FT-001": {
+   "fingerprint": "ai1-7874546d"
+  },
+  "DG-VN12CPLX-FT-006": {
+   "fingerprint": "ai1-a1590bde"
+  },
+  "DG-VN12CPLX-OA-001": {
+   "fingerprint": "ai1-4798c8f5"
+  },
+  "DG-VN12CPLX-OA-015": {
+   "fingerprint": "ai1-f2cc3a5b"
+  },
+  "DG-VN12CPLX-OT-001": {
+   "fingerprint": "ai1-cfbb06f0"
+  },
+  "DG-VN12CPLX-OT-015": {
+   "fingerprint": "ai1-6ca2fbc9"
+  },
+  "DG-VN12CPLX-UE-001": {
+   "fingerprint": "ai1-5fd2153e"
+  },
+  "DG-VN12CPLX-UE-011": {
+   "fingerprint": "ai1-27dfab9a"
+  },
+  "DG-VN12EXPL-EQ-001": {
+   "fingerprint": "ai1-b44d6030"
+  },
+  "DG-VN12EXPL-EQ-007": {
+   "fingerprint": "ai1-0c80f2e2"
+  },
+  "DG-VN12EXPL-EXP-001": {
+   "fingerprint": "ai1-6921be70"
+  },
+  "DG-VN12EXPL-EXP-015": {
+   "fingerprint": "ai1-e1cf9724"
+  },
+  "DG-VN12EXPL-IR-001": {
+   "fingerprint": "ai1-269d4c33"
+  },
+  "DG-VN12EXPL-IR-007": {
+   "fingerprint": "ai1-b72d3059"
+  },
+  "DG-VN12EXPL-LOG-001": {
+   "fingerprint": "ai1-b5a1f2cd"
+  },
+  "DG-VN12EXPL-LOG-006": {
+   "fingerprint": "ai1-871703bc"
+  },
+  "DG-VN12EXPL-MOD-001": {
+   "fingerprint": "ai1-7de95078"
+  },
+  "DG-VN12EXPL-MOD-014": {
+   "fingerprint": "ai1-4a93e5f0"
+  },
+  "DG-VN12FCD-AP-001": {
+   "fingerprint": "ai1-08566e47"
+  },
+  "DG-VN12FCD-AP-009": {
+   "fingerprint": "ai1-817ac66e"
+  },
+  "DG-VN12FCD-COMP-001": {
+   "fingerprint": "ai1-6bbdef2e"
+  },
+  "DG-VN12FCD-COMP-008": {
+   "fingerprint": "ai1-b2d9ce75"
+  },
+  "DG-VN12FCD-EE-001": {
+   "fingerprint": "ai1-0e0077cc"
+  },
+  "DG-VN12FCD-EE-017": {
+   "fingerprint": "ai1-4a9ebf1a"
+  },
+  "DG-VN12FCD-LTP-001": {
+   "fingerprint": "ai1-cf8bf247"
+  },
+  "DG-VN12FCD-LTP-020": {
+   "fingerprint": "ai1-114967e8"
+  },
+  "DG-VN12FCD-RC-001": {
+   "fingerprint": "ai1-3d16f9ca"
+  },
+  "DG-VN12FCD-RC-006": {
+   "fingerprint": "ai1-9215d93b"
+  },
+  "DG-VN12FCONT-DER-001": {
+   "fingerprint": "ai1-b57cc065"
+  },
+  "DG-VN12FCONT-DER-009": {
+   "fingerprint": "ai1-804c4450"
+  },
+  "DG-VN12FCONT-EG-001": {
+   "fingerprint": "ai1-deb6148e"
+  },
+  "DG-VN12FCONT-EG-006": {
+   "fingerprint": "ai1-10c0320f"
+  },
+  "DG-VN12FCONT-LC-001": {
+   "fingerprint": "ai1-483372dd"
+  },
+  "DG-VN12FCONT-LC-009": {
+   "fingerprint": "ai1-52f47049"
+  },
+  "DG-VN12FCONT-OP-001": {
+   "fingerprint": "ai1-9c3ebb03"
+  },
+  "DG-VN12FCONT-OP-013": {
+   "fingerprint": "ai1-73ba28cd"
+  },
+  "DG-VN12IE-DA-001": {
+   "fingerprint": "ai1-54b14e7c"
+  },
+  "DG-VN12IE-DA-008": {
+   "fingerprint": "ai1-318b37d5"
+  },
+  "DG-VN12IE-EST-001": {
+   "fingerprint": "ai1-ee7994f3"
+  },
+  "DG-VN12IE-EST-016": {
+   "fingerprint": "ai1-dbdecc22"
+  },
+  "DG-VN12IE-IA-001": {
+   "fingerprint": "ai1-c28e3901"
+  },
+  "DG-VN12IE-IA-006": {
+   "fingerprint": "ai1-42e1b390"
+  },
+  "DG-VN12IE-IC-001": {
+   "fingerprint": "ai1-3aad5e93"
+  },
+  "DG-VN12IE-IC-015": {
+   "fingerprint": "ai1-08633e06"
+  },
+  "DG-VN12IE-TLC-001": {
+   "fingerprint": "ai1-bae370a6"
+  },
+  "DG-VN12IE-TLC-011": {
+   "fingerprint": "ai1-f4e5e9fb"
+  },
+  "DG-VN12INT-AR-001": {
+   "fingerprint": "ai1-748a7b78"
+  },
+  "DG-VN12INT-AR-010": {
+   "fingerprint": "ai1-235ebc37"
+  },
+  "DG-VN12INT-ID-001": {
+   "fingerprint": "ai1-8d9fbee0"
+  },
+  "DG-VN12INT-ID-009": {
+   "fingerprint": "ai1-b8e5377a"
+  },
+  "DG-VN12INT-PR-001": {
+   "fingerprint": "ai1-117379da"
+  },
+  "DG-VN12INT-PR-019": {
+   "fingerprint": "ai1-48d04dd5"
+  },
+  "DG-VN12INT-TFC-001": {
+   "fingerprint": "ai1-d223c664"
+  },
+  "DG-VN12INT-TFC-011": {
+   "fingerprint": "ai1-2cb893a7"
+  },
+  "DG-VN12INT-TP-001": {
+   "fingerprint": "ai1-f1ae34db"
+  },
+  "DG-VN12INT-TP-014": {
+   "fingerprint": "ai1-5fd76882"
+  },
+  "DG-VN12MAT-AE-001": {
+   "fingerprint": "ai1-71039705"
+  },
+  "DG-VN12MAT-AE-007": {
+   "fingerprint": "ai1-3f736896"
+  },
+  "DG-VN12MAT-MOD-001": {
+   "fingerprint": "ai1-8277d620"
+  },
+  "DG-VN12MAT-MOD-018": {
+   "fingerprint": "ai1-83f7b6d5"
+  },
+  "DG-VN12MAT-PRD-001": {
+   "fingerprint": "ai1-8449d75e"
+  },
+  "DG-VN12MAT-PRD-006": {
+   "fingerprint": "ai1-0591b7c7"
+  },
+  "DG-VN12MAT-RT-001": {
+   "fingerprint": "ai1-31bc55be"
+  },
+  "DG-VN12MAT-RT-009": {
+   "fingerprint": "ai1-a77cc6ad"
+  },
+  "DG-VN12MAT-TR-001": {
+   "fingerprint": "ai1-41d8ea0a"
+  },
+  "DG-VN12MAT-TR-006": {
+   "fingerprint": "ai1-cfcf038f"
+  },
+  "DG-VN12PROB-CI-001": {
+   "fingerprint": "ai1-2906f016"
+  },
+  "DG-VN12PROB-CI-010": {
+   "fingerprint": "ai1-ea85050d"
+  },
+  "DG-VN12PROB-FA-001": {
+   "fingerprint": "ai1-6f0f41f8"
+  },
+  "DG-VN12PROB-FA-020": {
+   "fingerprint": "ai1-9c785a0b"
+  },
+  "DG-VN12PROB-NO-001": {
+   "fingerprint": "ai1-940ccb42"
+  },
+  "DG-VN12PROB-NO-019": {
+   "fingerprint": "ai1-07780cae"
+  },
+  "DG-VN12PROB-PA-001": {
+   "fingerprint": "ai1-bc593e31"
+  },
+  "DG-VN12PROB-PA-015": {
+   "fingerprint": "ai1-0180e0c7"
+  },
+  "DG-VN12PROB-PC-001": {
+   "fingerprint": "ai1-17672ed9"
+  },
+  "DG-VN12PROB-PC-007": {
+   "fingerprint": "ai1-819b1595"
+  },
+  "DG-VN12PROB-PR-001": {
+   "fingerprint": "ai1-377bb921"
+  },
+  "DG-VN12PROB-PR-011": {
+   "fingerprint": "ai1-ec3d04ca"
+  },
+  "DG-VN12PROB-PT-001": {
+   "fingerprint": "ai1-68bb46b5"
+  },
+  "DG-VN12PROB-PT-011": {
+   "fingerprint": "ai1-8da467ac"
+  },
+  "DG-VN12PROB-VD-001": {
+   "fingerprint": "ai1-873d7891"
+  },
+  "DG-VN12PROB-VD-008": {
+   "fingerprint": "ai1-cda5a7bd"
+  },
+  "DG-VN12RAE-BIS-001": {
+   "fingerprint": "ai1-3d9be777"
+  },
+  "DG-VN12RAE-BIS-012": {
+   "fingerprint": "ai1-56322fd0"
+  },
+  "DG-VN12RAE-BL-001": {
+   "fingerprint": "ai1-9a850c38"
+  },
+  "DG-VN12RAE-BL-017": {
+   "fingerprint": "ai1-5e50f8ae"
+  },
+  "DG-VN12RAE-NEW-001": {
+   "fingerprint": "ai1-3edb1365"
+  },
+  "DG-VN12RAE-NEW-012": {
+   "fingerprint": "ai1-9d45645b"
+  },
+  "EX-VN10ELE-BOR-020": {
+   "fingerprint": "ai1-e70c7874"
+  },
+  "EX-VN10ELE-BOR-024": {
+   "fingerprint": "ai1-4834d3c6"
+  },
+  "EX-VN10ELE-BOR-041": {
+   "fingerprint": "ai1-4ff437b6"
+  },
+  "EX-VN10ELE-DHO-007": {
+   "fingerprint": "ai1-67b3d9ea"
+  },
+  "EX-VN10ELE-DHO-025": {
+   "fingerprint": "ai1-f5391d53"
+  },
+  "EX-VN10ELE-DHO-050": {
+   "fingerprint": "ai1-59b6c45a"
+  },
+  "EX-VN10ELE-MAJ-008": {
+   "fingerprint": "ai1-942c16c2"
+  },
+  "EX-VN10ELE-MAJ-022": {
+   "fingerprint": "ai1-03fa7b86"
+  },
+  "EX-VN10ELE-MAJ-046": {
+   "fingerprint": "ai1-11ece579"
+  },
+  "EX-VN10ELE-STL-013": {
+   "fingerprint": "ai1-6b6783d5"
+  },
+  "EX-VN10ELE-STL-018": {
+   "fingerprint": "ai1-7b51d7d4"
+  },
+  "EX-VN10ELE-STL-035": {
+   "fingerprint": "ai1-edd4fe5f"
+  },
+  "EX-VN10EST-AMO-010": {
+   "fingerprint": "ai1-a7fc7967"
+  },
+  "EX-VN10EST-AMO-022": {
+   "fingerprint": "ai1-9f3e7102"
+  },
+  "EX-VN10EST-AMO-046": {
+   "fingerprint": "ai1-8848fb70"
+  },
+  "EX-VN10EST-BIV-012": {
+   "fingerprint": "ai1-e7c69f24"
+  },
+  "EX-VN10EST-BIV-026": {
+   "fingerprint": "ai1-d23be366"
+  },
+  "EX-VN10EST-BIV-038": {
+   "fingerprint": "ai1-b8fa02c7"
+  },
+  "EX-VN10EST-DIS-015": {
+   "fingerprint": "ai1-37106c65"
+  },
+  "EX-VN10EST-DIS-022": {
+   "fingerprint": "ai1-3b069a11"
+  },
+  "EX-VN10EST-DIS-041": {
+   "fingerprint": "ai1-7da8f197"
+  },
+  "EX-VN10EST-LOC-010": {
+   "fingerprint": "ai1-2581b9e1"
+  },
+  "EX-VN10EST-LOC-027": {
+   "fingerprint": "ai1-06be94c6"
+  },
+  "EX-VN10EST-LOC-040": {
+   "fingerprint": "ai1-c78a78cb"
+  },
+  "EX-VN10EST-PPA-009": {
+   "fingerprint": "ai1-b93b86e4"
+  },
+  "EX-VN10EST-PPA-023": {
+   "fingerprint": "ai1-18176172"
+  },
+  "EX-VN10EST-PPA-042": {
+   "fingerprint": "ai1-c36036e7"
+  },
+  "EX-VN10EST-UNI-015": {
+   "fingerprint": "ai1-7930df68"
+  },
+  "EX-VN10EST-UNI-022": {
+   "fingerprint": "ai1-6d938a9a"
+  },
+  "EX-VN10EST-UNI-040": {
+   "fingerprint": "ai1-0148004f"
+  },
+  "EX-VN10FIN-BRL-009": {
+   "fingerprint": "ai1-a8372fc6"
+  },
+  "EX-VN10FIN-BRL-027": {
+   "fingerprint": "ai1-951571d7"
+  },
+  "EX-VN10FIN-BRL-041": {
+   "fingerprint": "ai1-1f661cb0"
+  },
+  "EX-VN10FIN-IRS-007": {
+   "fingerprint": "ai1-690f490a"
+  },
+  "EX-VN10FIN-IRS-024": {
+   "fingerprint": "ai1-f8b4a104"
+  },
+  "EX-VN10FIN-IRS-050": {
+   "fingerprint": "ai1-e4004ab0"
+  },
+  "EX-VN10FIN-JC-008": {
+   "fingerprint": "ai1-ecf54613"
+  },
+  "EX-VN10FIN-JC-027": {
+   "fingerprint": "ai1-84c1fb81"
+  },
+  "EX-VN10FIN-JC-042": {
+   "fingerprint": "ai1-dd318e4b"
+  },
+  "EX-VN10FIN-JS-011": {
+   "fingerprint": "ai1-b0a44049"
+  },
+  "EX-VN10FIN-JS-023": {
+   "fingerprint": "ai1-42f1daa5"
+  },
+  "EX-VN10FIN-JS-042": {
+   "fingerprint": "ai1-49c00dc3"
+  },
+  "EX-VN10FIN-SAL-009": {
+   "fingerprint": "ai1-b1847ffd"
+  },
+  "EX-VN10FIN-SAL-032": {
+   "fingerprint": "ai1-b21c5ba7"
+  },
+  "EX-VN10FIN-SAL-048": {
+   "fingerprint": "ai1-84db7e49"
+  },
+  "EX-VN10FUN-AF-007": {
+   "fingerprint": "ai1-d854f451"
+  },
+  "EX-VN10FUN-AF-022": {
+   "fingerprint": "ai1-334df10c"
+  },
+  "EX-VN10FUN-AF-039": {
+   "fingerprint": "ai1-06d16fc5"
+  },
+  "EX-VN10FUN-CR-019": {
+   "fingerprint": "ai1-8726ffc4"
+  },
+  "EX-VN10FUN-CR-027": {
+   "fingerprint": "ai1-00815160"
+  },
+  "EX-VN10FUN-CR-037": {
+   "fingerprint": "ai1-92591cb7"
+  },
+  "EX-VN10FUN-DIZ-008": {
+   "fingerprint": "ai1-86bc71f4"
+  },
+  "EX-VN10FUN-DIZ-022": {
+   "fingerprint": "ai1-f5cef734"
+  },
+  "EX-VN10FUN-DIZ-037": {
+   "fingerprint": "ai1-933b4c0f"
+  },
+  "EX-VN10FUN-QUA-018": {
+   "fingerprint": "ai1-d7f09fdf"
+  },
+  "EX-VN10FUN-QUA-024": {
+   "fingerprint": "ai1-4e6fabc9"
+  },
+  "EX-VN10FUN-QUA-047": {
+   "fingerprint": "ai1-d670fb1e"
+  },
+  "EX-VN10FUN-TRM-011": {
+   "fingerprint": "ai1-c15a49a0"
+  },
+  "EX-VN10FUN-TRM-027": {
+   "fingerprint": "ai1-006d45fb"
+  },
+  "EX-VN10FUN-TRM-038": {
+   "fingerprint": "ai1-c9b42b4b"
+  },
+  "EX-VN10GA-CT-008": {
+   "fingerprint": "ai1-d018619e"
+  },
+  "EX-VN10GA-CT-025": {
+   "fingerprint": "ai1-4e59555e"
+  },
+  "EX-VN10GA-CT-042": {
+   "fingerprint": "ai1-181e5fe6"
+  },
+  "EX-VN10GA-DPM-010": {
+   "fingerprint": "ai1-757ca75e"
+  },
+  "EX-VN10GA-DPM-027": {
+   "fingerprint": "ai1-13c4cdf3"
+  },
+  "EX-VN10GA-DPM-037": {
+   "fingerprint": "ai1-91487fc5"
+  },
+  "EX-VN10GA-ESP-010": {
+   "fingerprint": "ai1-9fbff4cf"
+  },
+  "EX-VN10GA-ESP-023": {
+   "fingerprint": "ai1-65186662"
+  },
+  "EX-VN10GA-ESP-043": {
+   "fingerprint": "ai1-5f6ee124"
+  },
+  "EX-VN10GA-LG-008": {
+   "fingerprint": "ai1-b6dd5467"
+  },
+  "EX-VN10GA-LG-022": {
+   "fingerprint": "ai1-5a6e308e"
+  },
+  "EX-VN10GA-LG-047": {
+   "fingerprint": "ai1-7307510c"
+  },
+  "EX-VN10GA-RET-018": {
+   "fingerprint": "ai1-b19c030a"
+  },
+  "EX-VN10GA-RET-031": {
+   "fingerprint": "ai1-be0fc9ef"
+  },
+  "EX-VN10GA-RET-043": {
+   "fingerprint": "ai1-4274febc"
+  },
+  "EX-VN10GA-VET-009": {
+   "fingerprint": "ai1-4ae735b7"
+  },
+  "EX-VN10GA-VET-027": {
+   "fingerprint": "ai1-8d5d6c2d"
+  },
+  "EX-VN10GA-VET-045": {
+   "fingerprint": "ai1-dcc4c7f5"
+  },
+  "EX-VN10GS-BAR-007": {
+   "fingerprint": "ai1-15dbadf5"
+  },
+  "EX-VN10GS-BAR-027": {
+   "fingerprint": "ai1-969c3679"
+  },
+  "EX-VN10GS-BAR-038": {
+   "fingerprint": "ai1-6c3ad34a"
+  },
+  "EX-VN10GS-CI-010": {
+   "fingerprint": "ai1-9cf25915"
+  },
+  "EX-VN10GS-CI-024": {
+   "fingerprint": "ai1-ea5e2d38"
+  },
+  "EX-VN10GS-CI-037": {
+   "fingerprint": "ai1-fa1d78c0"
+  },
+  "EX-VN10GS-E9-007": {
+   "fingerprint": "ai1-b84c1006"
+  },
+  "EX-VN10GS-E9-026": {
+   "fingerprint": "ai1-605adb08"
+  },
+  "EX-VN10GS-E9-043": {
+   "fingerprint": "ai1-1534f82e"
+  },
+  "EX-VN10GS-ORT-013": {
+   "fingerprint": "ai1-152eea4f"
+  },
+  "EX-VN10GS-ORT-025": {
+   "fingerprint": "ai1-26474cb2"
+  },
+  "EX-VN10GS-ORT-039": {
+   "fingerprint": "ai1-b8794170"
+  },
+  "EX-VN10GS-PC-016": {
+   "fingerprint": "ai1-cab5e4a7"
+  },
+  "EX-VN10GS-PC-022": {
+   "fingerprint": "ai1-3cfb4da9"
+  },
+  "EX-VN10GS-PC-042": {
+   "fingerprint": "ai1-e5a26818"
+  },
+  "EX-VN11CD-DP-014": {
+   "fingerprint": "ai1-34c098f4"
+  },
+  "EX-VN11CD-DP-027": {
+   "fingerprint": "ai1-8e7fe061"
+  },
+  "EX-VN11CD-DP-042": {
+   "fingerprint": "ai1-c13d3be5"
+  },
+  "EX-VN11CD-FD-016": {
+   "fingerprint": "ai1-5c1ea337"
+  },
+  "EX-VN11CD-FD-044": {
+   "fingerprint": "ai1-ca7a7270"
+  },
+  "EX-VN11CD-FD-049": {
+   "fingerprint": "ai1-adc387be"
+  },
+  "EX-VN11CD-MO-013": {
+   "fingerprint": "ai1-9923c21d"
+  },
+  "EX-VN11CD-MO-032": {
+   "fingerprint": "ai1-d8061368"
+  },
+  "EX-VN11CD-MO-050": {
+   "fingerprint": "ai1-dfc0ec4c"
+  },
+  "EX-VN11CD-REG-017": {
+   "fingerprint": "ai1-d7efbe52"
+  },
+  "EX-VN11CD-REG-023": {
+   "fingerprint": "ai1-cc6c0aa6"
+  },
+  "EX-VN11CD-REG-046": {
+   "fingerprint": "ai1-e8068407"
+  },
+  "EX-VN11CD-TAN-016": {
+   "fingerprint": "ai1-226b41c7"
+  },
+  "EX-VN11CD-TAN-037": {
+   "fingerprint": "ai1-308cbfab"
+  },
+  "EX-VN11CD-TAN-043": {
+   "fingerprint": "ai1-3bdf4039"
+  },
+  "EX-VN11CD-TM-021": {
+   "fingerprint": "ai1-d27929e0"
+  },
+  "EX-VN11CD-TM-033": {
+   "fingerprint": "ai1-c7646287"
+  },
+  "EX-VN11CD-TM-045": {
+   "fingerprint": "ai1-f96a2657"
+  },
+  "EX-VN11CONT-AM-007": {
+   "fingerprint": "ai1-8e963823"
+  },
+  "EX-VN11CONT-AM-023": {
+   "fingerprint": "ai1-5e419b19"
+  },
+  "EX-VN11CONT-AM-046": {
+   "fingerprint": "ai1-caf021bd"
+  },
+  "EX-VN11CONT-ARR-010": {
+   "fingerprint": "ai1-5819d70f"
+  },
+  "EX-VN11CONT-ARR-025": {
+   "fingerprint": "ai1-0975119a"
+  },
+  "EX-VN11CONT-ARR-049": {
+   "fingerprint": "ai1-0528035d"
+  },
+  "EX-VN11CONT-COMB-011": {
+   "fingerprint": "ai1-36d9f689"
+  },
+  "EX-VN11CONT-COMB-024": {
+   "fingerprint": "ai1-b0eca1a3"
+  },
+  "EX-VN11CONT-COMB-041": {
+   "fingerprint": "ai1-e0e65b32"
+  },
+  "EX-VN11CONT-DG-007": {
+   "fingerprint": "ai1-0ffe3106"
+  },
+  "EX-VN11CONT-DG-023": {
+   "fingerprint": "ai1-990d08c3"
+  },
+  "EX-VN11CONT-DG-040": {
+   "fingerprint": "ai1-99ef3abf"
+  },
+  "EX-VN11CONT-FAT-007": {
+   "fingerprint": "ai1-b2aa6827"
+  },
+  "EX-VN11CONT-FAT-027": {
+   "fingerprint": "ai1-a0f0d09d"
+  },
+  "EX-VN11CONT-FAT-050": {
+   "fingerprint": "ai1-417c72ea"
+  },
+  "EX-VN11CONT-PERM-017": {
+   "fingerprint": "ai1-cdc4e6cd"
+  },
+  "EX-VN11CONT-PERM-023": {
+   "fingerprint": "ai1-605c5d1d"
+  },
+  "EX-VN11CONT-PERM-046": {
+   "fingerprint": "ai1-4c79c8be"
+  },
+  "EX-VN11FUN-AM-009": {
+   "fingerprint": "ai1-20a8674c"
+  },
+  "EX-VN11FUN-AM-023": {
+   "fingerprint": "ai1-06f16ff8"
+  },
+  "EX-VN11FUN-AM-039": {
+   "fingerprint": "ai1-56ff4167"
+  },
+  "EX-VN11FUN-CQ-010": {
+   "fingerprint": "ai1-3be36cb1"
+  },
+  "EX-VN11FUN-CQ-022": {
+   "fingerprint": "ai1-c23e36ff"
+  },
+  "EX-VN11FUN-CQ-038": {
+   "fingerprint": "ai1-b16f9237"
+  },
+  "EX-VN11FUN-DP-018": {
+   "fingerprint": "ai1-75584484"
+  },
+  "EX-VN11FUN-DP-028": {
+   "fingerprint": "ai1-818a83d6"
+  },
+  "EX-VN11FUN-DP-037": {
+   "fingerprint": "ai1-58d95e8d"
+  },
+  "EX-VN11FUN-OP-008": {
+   "fingerprint": "ai1-400a3a87"
+  },
+  "EX-VN11FUN-OP-027": {
+   "fingerprint": "ai1-b3baa0a7"
+  },
+  "EX-VN11FUN-OP-039": {
+   "fingerprint": "ai1-988aa961"
+  },
+  "EX-VN11FUN-RAT-012": {
+   "fingerprint": "ai1-4405a19a"
+  },
+  "EX-VN11FUN-RAT-031": {
+   "fingerprint": "ai1-2d43faa2"
+  },
+  "EX-VN11FUN-RAT-040": {
+   "fingerprint": "ai1-da26004f"
+  },
+  "EX-VN11FUN-RR-010": {
+   "fingerprint": "ai1-ed8d3d89"
+  },
+  "EX-VN11FUN-RR-028": {
+   "fingerprint": "ai1-80efbc3b"
+  },
+  "EX-VN11FUN-RR-041": {
+   "fingerprint": "ai1-14351f4e"
+  },
+  "EX-VN11PE-AN-020": {
+   "fingerprint": "ai1-8eae5a66"
+  },
+  "EX-VN11PE-AN-023": {
+   "fingerprint": "ai1-7c7e8e47"
+  },
+  "EX-VN11PE-AN-042": {
+   "fingerprint": "ai1-6cadd3ce"
+  },
+  "EX-VN11PE-DI-007": {
+   "fingerprint": "ai1-d42bbc72"
+  },
+  "EX-VN11PE-DI-024": {
+   "fingerprint": "ai1-1c2f6826"
+  },
+  "EX-VN11PE-DI-040": {
+   "fingerprint": "ai1-4ac76ea5"
+  },
+  "EX-VN11PE-DIST-010": {
+   "fingerprint": "ai1-4bf0289f"
+  },
+  "EX-VN11PE-DIST-027": {
+   "fingerprint": "ai1-7da0651d"
+  },
+  "EX-VN11PE-DIST-048": {
+   "fingerprint": "ai1-26d2a14d"
+  },
+  "EX-VN11PE-PC-009": {
+   "fingerprint": "ai1-30a32118"
+  },
+  "EX-VN11PE-PC-028": {
+   "fingerprint": "ai1-0f0d78ba"
+  },
+  "EX-VN11PE-PC-044": {
+   "fingerprint": "ai1-688fadc1"
+  },
+  "EX-VN11PE-PERP-013": {
+   "fingerprint": "ai1-52481422"
+  },
+  "EX-VN11PE-PERP-022": {
+   "fingerprint": "ai1-8cde9362"
+  },
+  "EX-VN11PE-PERP-047": {
+   "fingerprint": "ai1-2b4436c6"
+  },
+  "EX-VN11PE-RP-015": {
+   "fingerprint": "ai1-399ed763"
+  },
+  "EX-VN11PE-RP-029": {
+   "fingerprint": "ai1-03602ffe"
+  },
+  "EX-VN11PE-RP-038": {
+   "fingerprint": "ai1-73399a54"
+  },
+  "EX-VN11SUC-MC-019": {
+   "fingerprint": "ai1-1d23162f"
+  },
+  "EX-VN11SUC-MC-023": {
+   "fingerprint": "ai1-340cbe74"
+  },
+  "EX-VN11SUC-MC-038": {
+   "fingerprint": "ai1-12892ad6"
+  },
+  "EX-VN11SUC-PA-016": {
+   "fingerprint": "ai1-9609ff3d"
+  },
+  "EX-VN11SUC-PA-026": {
+   "fingerprint": "ai1-62f6503c"
+  },
+  "EX-VN11SUC-PA-050": {
+   "fingerprint": "ai1-21adcab1"
+  },
+  "EX-VN11SUC-PG-012": {
+   "fingerprint": "ai1-74e11378"
+  },
+  "EX-VN11SUC-PG-025": {
+   "fingerprint": "ai1-386551f3"
+  },
+  "EX-VN11SUC-PG-050": {
+   "fingerprint": "ai1-398c7260"
+  },
+  "EX-VN11SUC-SOM-007": {
+   "fingerprint": "ai1-a9c1a315"
+  },
+  "EX-VN11SUC-SOM-023": {
+   "fingerprint": "ai1-736e5d15"
+  },
+  "EX-VN11SUC-SOM-044": {
+   "fingerprint": "ai1-98649d9b"
+  },
+  "EX-VN11SUC-TR-015": {
+   "fingerprint": "ai1-6a685433"
+  },
+  "EX-VN11SUC-TR-023": {
+   "fingerprint": "ai1-a7529ccd"
+  },
+  "EX-VN11SUC-TR-048": {
+   "fingerprint": "ai1-589c40d0"
+  },
+  "EX-VN11TRIG-AR-016": {
+   "fingerprint": "ai1-9d7b0c84"
+  },
+  "EX-VN11TRIG-AR-025": {
+   "fingerprint": "ai1-607e0bac"
+  },
+  "EX-VN11TRIG-AR-040": {
+   "fingerprint": "ai1-29c826c6"
+  },
+  "EX-VN11TRIG-CIR-017": {
+   "fingerprint": "ai1-6cd9767e"
+  },
+  "EX-VN11TRIG-CIR-029": {
+   "fingerprint": "ai1-63c6879e"
+  },
+  "EX-VN11TRIG-CIR-045": {
+   "fingerprint": "ai1-2044f713"
+  },
+  "EX-VN11TRIG-EQ-007": {
+   "fingerprint": "ai1-a6f10db8"
+  },
+  "EX-VN11TRIG-EQ-029": {
+   "fingerprint": "ai1-290e93cf"
+  },
+  "EX-VN11TRIG-EQ-046": {
+   "fingerprint": "ai1-18d64a93"
+  },
+  "EX-VN11TRIG-FUN-014": {
+   "fingerprint": "ai1-ec2ae532"
+  },
+  "EX-VN11TRIG-FUN-022": {
+   "fingerprint": "ai1-e3d7bce8"
+  },
+  "EX-VN11TRIG-FUN-042": {
+   "fingerprint": "ai1-eac95a62"
+  },
+  "EX-VN11TRIG-MOD-011": {
+   "fingerprint": "ai1-790d934e"
+  },
+  "EX-VN11TRIG-MOD-026": {
+   "fingerprint": "ai1-79427c99"
+  },
+  "EX-VN11TRIG-MOD-049": {
+   "fingerprint": "ai1-d044760a"
+  },
+  "EX-VN11TRIG-REL-007": {
+   "fingerprint": "ai1-31ba70ef"
+  },
+  "EX-VN11TRIG-REL-030": {
+   "fingerprint": "ai1-3f6b2d72"
+  },
+  "EX-VN11TRIG-REL-045": {
+   "fingerprint": "ai1-955f6ab0"
+  },
+  "EX-VN12CPLX-AG-012": {
+   "fingerprint": "ai1-00a29150"
+  },
+  "EX-VN12CPLX-AG-027": {
+   "fingerprint": "ai1-7e639297"
+  },
+  "EX-VN12CPLX-AG-037": {
+   "fingerprint": "ai1-07e3a022"
+  },
+  "EX-VN12CPLX-CM-010": {
+   "fingerprint": "ai1-e13413fc"
+  },
+  "EX-VN12CPLX-CM-023": {
+   "fingerprint": "ai1-304b1ee9"
+  },
+  "EX-VN12CPLX-CM-050": {
+   "fingerprint": "ai1-ce71868f"
+  },
+  "EX-VN12CPLX-FA-012": {
+   "fingerprint": "ai1-58646e21"
+  },
+  "EX-VN12CPLX-FA-025": {
+   "fingerprint": "ai1-bda60046"
+  },
+  "EX-VN12CPLX-FA-038": {
+   "fingerprint": "ai1-f51c3121"
+  },
+  "EX-VN12CPLX-FT-008": {
+   "fingerprint": "ai1-98a71518"
+  },
+  "EX-VN12CPLX-FT-029": {
+   "fingerprint": "ai1-52daa5d4"
+  },
+  "EX-VN12CPLX-FT-042": {
+   "fingerprint": "ai1-21bf4a26"
+  },
+  "EX-VN12CPLX-OA-016": {
+   "fingerprint": "ai1-e534cf41"
+  },
+  "EX-VN12CPLX-OA-027": {
+   "fingerprint": "ai1-ed620dbf"
+  },
+  "EX-VN12CPLX-OA-049": {
+   "fingerprint": "ai1-4e12e341"
+  },
+  "EX-VN12CPLX-OT-019": {
+   "fingerprint": "ai1-a63543ab"
+  },
+  "EX-VN12CPLX-OT-024": {
+   "fingerprint": "ai1-b5832610"
+  },
+  "EX-VN12CPLX-OT-046": {
+   "fingerprint": "ai1-e26b563c"
+  },
+  "EX-VN12CPLX-UE-018": {
+   "fingerprint": "ai1-d10b695c"
+  },
+  "EX-VN12CPLX-UE-030": {
+   "fingerprint": "ai1-82eabf03"
+  },
+  "EX-VN12CPLX-UE-039": {
+   "fingerprint": "ai1-b4e80bd9"
+  },
+  "EX-VN12EXPL-EQ-012": {
+   "fingerprint": "ai1-029c3c99"
+  },
+  "EX-VN12EXPL-EQ-026": {
+   "fingerprint": "ai1-67c66115"
+  },
+  "EX-VN12EXPL-EQ-045": {
+   "fingerprint": "ai1-f7da0584"
+  },
+  "EX-VN12EXPL-EXP-012": {
+   "fingerprint": "ai1-f96d3be6"
+  },
+  "EX-VN12EXPL-EXP-024": {
+   "fingerprint": "ai1-95dfe04c"
+  },
+  "EX-VN12EXPL-EXP-037": {
+   "fingerprint": "ai1-421debc5"
+  },
+  "EX-VN12EXPL-IR-010": {
+   "fingerprint": "ai1-8c7e4c85"
+  },
+  "EX-VN12EXPL-IR-025": {
+   "fingerprint": "ai1-6817e440"
+  },
+  "EX-VN12EXPL-IR-044": {
+   "fingerprint": "ai1-333a4efc"
+  },
+  "EX-VN12EXPL-LOG-017": {
+   "fingerprint": "ai1-1a418557"
+  },
+  "EX-VN12EXPL-LOG-027": {
+   "fingerprint": "ai1-d522e632"
+  },
+  "EX-VN12EXPL-LOG-049": {
+   "fingerprint": "ai1-3d5f9c61"
+  },
+  "EX-VN12EXPL-MOD-007": {
+   "fingerprint": "ai1-e184d87f"
+  },
+  "EX-VN12EXPL-MOD-024": {
+   "fingerprint": "ai1-eb175eef"
+  },
+  "EX-VN12EXPL-MOD-037": {
+   "fingerprint": "ai1-0d504f79"
+  },
+  "EX-VN12FCD-AP-013": {
+   "fingerprint": "ai1-961781b0"
+  },
+  "EX-VN12FCD-AP-032": {
+   "fingerprint": "ai1-54964fa0"
+  },
+  "EX-VN12FCD-AP-049": {
+   "fingerprint": "ai1-86e126de"
+  },
+  "EX-VN12FCD-COMP-007": {
+   "fingerprint": "ai1-9a5f8512"
+  },
+  "EX-VN12FCD-COMP-027": {
+   "fingerprint": "ai1-b7183b08"
+  },
+  "EX-VN12FCD-COMP-049": {
+   "fingerprint": "ai1-f3501b8e"
+  },
+  "EX-VN12FCD-EE-011": {
+   "fingerprint": "ai1-7c3d6f34"
+  },
+  "EX-VN12FCD-EE-022": {
+   "fingerprint": "ai1-55249590"
+  },
+  "EX-VN12FCD-EE-049": {
+   "fingerprint": "ai1-791be678"
+  },
+  "EX-VN12FCD-LTP-009": {
+   "fingerprint": "ai1-9681805c"
+  },
+  "EX-VN12FCD-LTP-024": {
+   "fingerprint": "ai1-645c0b71"
+  },
+  "EX-VN12FCD-LTP-049": {
+   "fingerprint": "ai1-36fbf107"
+  },
+  "EX-VN12FCD-RC-009": {
+   "fingerprint": "ai1-fd942771"
+  },
+  "EX-VN12FCD-RC-030": {
+   "fingerprint": "ai1-399290a6"
+  },
+  "EX-VN12FCD-RC-049": {
+   "fingerprint": "ai1-7d56c511"
+  },
+  "EX-VN12FCONT-DER-007": {
+   "fingerprint": "ai1-ad679a92"
+  },
+  "EX-VN12FCONT-DER-026": {
+   "fingerprint": "ai1-9f833b74"
+  },
+  "EX-VN12FCONT-DER-040": {
+   "fingerprint": "ai1-fd37d56f"
+  },
+  "EX-VN12FCONT-EG-011": {
+   "fingerprint": "ai1-98791c94"
+  },
+  "EX-VN12FCONT-EG-032": {
+   "fingerprint": "ai1-ad3fe9be"
+  },
+  "EX-VN12FCONT-EG-039": {
+   "fingerprint": "ai1-92d14ce4"
+  },
+  "EX-VN12FCONT-LC-017": {
+   "fingerprint": "ai1-9da9752c"
+  },
+  "EX-VN12FCONT-LC-023": {
+   "fingerprint": "ai1-74c0278e"
+  },
+  "EX-VN12FCONT-LC-047": {
+   "fingerprint": "ai1-6a970640"
+  },
+  "EX-VN12FCONT-OP-008": {
+   "fingerprint": "ai1-0e5f16d9"
+  },
+  "EX-VN12FCONT-OP-028": {
+   "fingerprint": "ai1-e932e302"
+  },
+  "EX-VN12FCONT-OP-050": {
+   "fingerprint": "ai1-54b5599a"
+  },
+  "EX-VN12IE-DA-012": {
+   "fingerprint": "ai1-e5edbbd8"
+  },
+  "EX-VN12IE-DA-024": {
+   "fingerprint": "ai1-d9fe7afa"
+  },
+  "EX-VN12IE-DA-038": {
+   "fingerprint": "ai1-ef14f5ba"
+  },
+  "EX-VN12IE-EST-018": {
+   "fingerprint": "ai1-fbadd40c"
+  },
+  "EX-VN12IE-EST-027": {
+   "fingerprint": "ai1-8ec6f856"
+  },
+  "EX-VN12IE-EST-040": {
+   "fingerprint": "ai1-089127d4"
+  },
+  "EX-VN12IE-IA-011": {
+   "fingerprint": "ai1-44d1d8cc"
+  },
+  "EX-VN12IE-IA-022": {
+   "fingerprint": "ai1-70d22eeb"
+  },
+  "EX-VN12IE-IA-041": {
+   "fingerprint": "ai1-db719083"
+  },
+  "EX-VN12IE-IC-007": {
+   "fingerprint": "ai1-18e3787f"
+  },
+  "EX-VN12IE-IC-024": {
+   "fingerprint": "ai1-c272bfe9"
+  },
+  "EX-VN12IE-IC-038": {
+   "fingerprint": "ai1-21e73f33"
+  },
+  "EX-VN12IE-TLC-008": {
+   "fingerprint": "ai1-2bb0e1e5"
+  },
+  "EX-VN12IE-TLC-027": {
+   "fingerprint": "ai1-e55de09a"
+  },
+  "EX-VN12IE-TLC-038": {
+   "fingerprint": "ai1-00868f10"
+  },
+  "EX-VN12INT-AR-011": {
+   "fingerprint": "ai1-de108d0a"
+  },
+  "EX-VN12INT-AR-032": {
+   "fingerprint": "ai1-25f8e7b3"
+  },
+  "EX-VN12INT-AR-038": {
+   "fingerprint": "ai1-4f0029f3"
+  },
+  "EX-VN12INT-ID-013": {
+   "fingerprint": "ai1-954808e7"
+  },
+  "EX-VN12INT-ID-022": {
+   "fingerprint": "ai1-f919a824"
+  },
+  "EX-VN12INT-ID-038": {
+   "fingerprint": "ai1-0fc2cd6e"
+  },
+  "EX-VN12INT-PR-007": {
+   "fingerprint": "ai1-b6f0c3bc"
+  },
+  "EX-VN12INT-PR-030": {
+   "fingerprint": "ai1-670fd8fb"
+  },
+  "EX-VN12INT-PR-042": {
+   "fingerprint": "ai1-ae29cbde"
+  },
+  "EX-VN12INT-TFC-018": {
+   "fingerprint": "ai1-e7c0517c"
+  },
+  "EX-VN12INT-TFC-023": {
+   "fingerprint": "ai1-c526ba19"
+  },
+  "EX-VN12INT-TFC-040": {
+   "fingerprint": "ai1-79fe3042"
+  },
+  "EX-VN12INT-TP-008": {
+   "fingerprint": "ai1-b310bd81"
+  },
+  "EX-VN12INT-TP-034": {
+   "fingerprint": "ai1-4ebbe189"
+  },
+  "EX-VN12INT-TP-037": {
+   "fingerprint": "ai1-3ba15787"
+  },
+  "EX-VN12MAT-AE-009": {
+   "fingerprint": "ai1-a2c8a2f7"
+  },
+  "EX-VN12MAT-AE-027": {
+   "fingerprint": "ai1-a2dbc76b"
+  },
+  "EX-VN12MAT-AE-040": {
+   "fingerprint": "ai1-5cf086db"
+  },
+  "EX-VN12MAT-MOD-012": {
+   "fingerprint": "ai1-1eef90d7"
+  },
+  "EX-VN12MAT-MOD-026": {
+   "fingerprint": "ai1-0ccc20f9"
+  },
+  "EX-VN12MAT-MOD-039": {
+   "fingerprint": "ai1-9fd37941"
+  },
+  "EX-VN12MAT-PRD-010": {
+   "fingerprint": "ai1-176ef436"
+  },
+  "EX-VN12MAT-PRD-031": {
+   "fingerprint": "ai1-2ac9e3af"
+  },
+  "EX-VN12MAT-PRD-037": {
+   "fingerprint": "ai1-acdf66f5"
+  },
+  "EX-VN12MAT-RT-012": {
+   "fingerprint": "ai1-8e5c0669"
+  },
+  "EX-VN12MAT-RT-021": {
+   "fingerprint": "ai1-e05f45ea"
+  },
+  "EX-VN12MAT-RT-037": {
+   "fingerprint": "ai1-c26e82ac"
+  },
+  "EX-VN12MAT-TR-017": {
+   "fingerprint": "ai1-7056cc2a"
+  },
+  "EX-VN12MAT-TR-024": {
+   "fingerprint": "ai1-443223f9"
+  },
+  "EX-VN12MAT-TR-041": {
+   "fingerprint": "ai1-ff680aa3"
+  },
+  "EX-VN12PROB-CI-011": {
+   "fingerprint": "ai1-137f7472"
+  },
+  "EX-VN12PROB-CI-024": {
+   "fingerprint": "ai1-77590ece"
+  },
+  "EX-VN12PROB-CI-038": {
+   "fingerprint": "ai1-98823d75"
+  },
+  "EX-VN12PROB-FA-007": {
+   "fingerprint": "ai1-0b0e7baf"
+  },
+  "EX-VN12PROB-FA-027": {
+   "fingerprint": "ai1-378dd573"
+  },
+  "EX-VN12PROB-FA-038": {
+   "fingerprint": "ai1-a97e9e66"
+  },
+  "EX-VN12PROB-NO-014": {
+   "fingerprint": "ai1-84d1bd21"
+  },
+  "EX-VN12PROB-NO-021": {
+   "fingerprint": "ai1-6aeb5ca8"
+  },
+  "EX-VN12PROB-NO-040": {
+   "fingerprint": "ai1-9350fbf8"
+  },
+  "EX-VN12PROB-PA-011": {
+   "fingerprint": "ai1-3f325813"
+  },
+  "EX-VN12PROB-PA-025": {
+   "fingerprint": "ai1-6e131e1a"
+  },
+  "EX-VN12PROB-PA-047": {
+   "fingerprint": "ai1-194e9812"
+  },
+  "EX-VN12PROB-PC-013": {
+   "fingerprint": "ai1-3970c297"
+  },
+  "EX-VN12PROB-PC-023": {
+   "fingerprint": "ai1-bd7667b4"
+  },
+  "EX-VN12PROB-PC-047": {
+   "fingerprint": "ai1-76ee2663"
+  },
+  "EX-VN12PROB-PR-007": {
+   "fingerprint": "ai1-24bcf639"
+  },
+  "EX-VN12PROB-PR-023": {
+   "fingerprint": "ai1-cba065eb"
+  },
+  "EX-VN12PROB-PR-050": {
+   "fingerprint": "ai1-c84279e8"
+  },
+  "EX-VN12PROB-PT-007": {
+   "fingerprint": "ai1-1e39bcc4"
+  },
+  "EX-VN12PROB-PT-025": {
+   "fingerprint": "ai1-970c23a2"
+  },
+  "EX-VN12PROB-PT-037": {
+   "fingerprint": "ai1-0508b13f"
+  },
+  "EX-VN12PROB-VD-011": {
+   "fingerprint": "ai1-61cd1ea7"
+  },
+  "EX-VN12PROB-VD-030": {
+   "fingerprint": "ai1-0e52bb37"
+  },
+  "EX-VN12PROB-VD-041": {
+   "fingerprint": "ai1-b68bd98a"
+  },
+  "EX-VN12RAE-BIS-011": {
+   "fingerprint": "ai1-12503d94"
+  },
+  "EX-VN12RAE-BIS-027": {
+   "fingerprint": "ai1-bb8d967f"
+  },
+  "EX-VN12RAE-BIS-042": {
+   "fingerprint": "ai1-69d34f34"
+  },
+  "EX-VN12RAE-BL-008": {
+   "fingerprint": "ai1-0e26b7d1"
+  },
+  "EX-VN12RAE-BL-023": {
+   "fingerprint": "ai1-eb7eb1a4"
+  },
+  "EX-VN12RAE-BL-048": {
+   "fingerprint": "ai1-19df7c6e"
+  },
+  "EX-VN12RAE-NEW-011": {
+   "fingerprint": "ai1-73646995"
+  },
+  "EX-VN12RAE-NEW-024": {
+   "fingerprint": "ai1-7de2f6d8"
+  },
+  "EX-VN12RAE-NEW-043": {
+   "fingerprint": "ai1-a6a8e203"
+  },
+  "M10F-1": {
+   "fingerprint": "ai1-deb50e99"
+  },
+  "M10F-2": {
+   "fingerprint": "ai1-a04434c8"
+  },
+  "M10F-3": {
+   "fingerprint": "ai1-f1d67b3c"
+  },
+  "M10F-4": {
+   "fingerprint": "ai1-67d5cedb"
+  },
+  "M10F-5": {
+   "fingerprint": "ai1-9f762d5e"
+  },
+  "M10G-1": {
+   "fingerprint": "ai1-870fb586"
+  },
+  "M10G-2": {
+   "fingerprint": "ai1-7a6edcd0"
+  },
+  "M10G-3": {
+   "fingerprint": "ai1-9476e610"
+  },
+  "M10G-4": {
+   "fingerprint": "ai1-300ffeb2"
+  },
+  "M10G-5": {
+   "fingerprint": "ai1-0968ea6f"
+  },
+  "M11C-1": {
+   "fingerprint": "ai1-4545ab2f"
+  },
+  "M11C-2": {
+   "fingerprint": "ai1-d8388228"
+  },
+  "M11C-3": {
+   "fingerprint": "ai1-35c03f29"
+  },
+  "M11C-4": {
+   "fingerprint": "ai1-3b193c88"
+  },
+  "M11C-5": {
+   "fingerprint": "ai1-d4465aab"
+  },
+  "M11D-1": {
+   "fingerprint": "ai1-98a92353"
+  },
+  "M11D-2": {
+   "fingerprint": "ai1-59533292"
+  },
+  "M11D-3": {
+   "fingerprint": "ai1-18114c37"
+  },
+  "M11D-4": {
+   "fingerprint": "ai1-11b34c8f"
+  },
+  "M11D-5": {
+   "fingerprint": "ai1-32ab5d2e"
+  },
+  "M11T-1": {
+   "fingerprint": "ai1-9879d295"
+  },
+  "M11T-2": {
+   "fingerprint": "ai1-c5036ed3"
+  },
+  "M11T-3": {
+   "fingerprint": "ai1-05677a38"
+  },
+  "M11T-4": {
+   "fingerprint": "ai1-689624a7"
+  },
+  "M11T-5": {
+   "fingerprint": "ai1-1b74ad5f"
+  },
+  "M12C-1": {
+   "fingerprint": "ai1-317e7fda"
+  },
+  "M12C-2": {
+   "fingerprint": "ai1-b9b68196"
+  },
+  "M12C-3": {
+   "fingerprint": "ai1-c011fdb4"
+  },
+  "M12C-4": {
+   "fingerprint": "ai1-b1f51bdb"
+  },
+  "M12C-5": {
+   "fingerprint": "ai1-87771661"
+  },
+  "M12E-1": {
+   "fingerprint": "ai1-cdff47d4"
+  },
+  "M12E-2": {
+   "fingerprint": "ai1-e19ac3a8"
+  },
+  "M12E-3": {
+   "fingerprint": "ai1-be712831"
+  },
+  "M12E-4": {
+   "fingerprint": "ai1-4afc06e8"
+  },
+  "M12E-5": {
+   "fingerprint": "ai1-57268022"
+  },
+  "M12L-1": {
+   "fingerprint": "ai1-6156bce5"
+  },
+  "M12L-2": {
+   "fingerprint": "ai1-6e0eb928"
+  },
+  "M12L-3": {
+   "fingerprint": "ai1-34e003dd"
+  },
+  "M12L-4": {
+   "fingerprint": "ai1-d6824ce4"
+  },
+  "M12L-5": {
+   "fingerprint": "ai1-42987072"
+  },
+  "M12P-1": {
+   "fingerprint": "ai1-1e31d8c2"
+  },
+  "M12P-2": {
+   "fingerprint": "ai1-6e7f316b"
+  },
+  "M12P-3": {
+   "fingerprint": "ai1-4eb08088"
+  },
+  "M12P-4": {
+   "fingerprint": "ai1-a51c9c88"
+  },
+  "M12P-5": {
+   "fingerprint": "ai1-d57c214b"
+  },
+  "MS-VN10ELE-BOR-002": {
+   "fingerprint": "ai1-106c6f5d"
+  },
+  "MS-VN10ELE-BOR-003": {
+   "fingerprint": "ai1-7f831413"
+  },
+  "MS-VN10ELE-BOR-006": {
+   "fingerprint": "ai1-f6b79e26"
+  },
+  "MS-VN10ELE-BOR-010": {
+   "fingerprint": "ai1-2165bfb4"
+  },
+  "MS-VN10ELE-BOR-017": {
+   "fingerprint": "ai1-d30f175d"
+  },
+  "MS-VN10ELE-BOR-018": {
+   "fingerprint": "ai1-7bd98ffb"
+  },
+  "MS-VN10ELE-BOR-045": {
+   "fingerprint": "ai1-f21ed85b"
+  },
+  "MS-VN10ELE-DHO-002": {
+   "fingerprint": "ai1-ff1da360"
+  },
+  "MS-VN10ELE-DHO-005": {
+   "fingerprint": "ai1-ac14bda9"
+  },
+  "MS-VN10ELE-DHO-006": {
+   "fingerprint": "ai1-9eb9a175"
+  },
+  "MS-VN10ELE-DHO-008": {
+   "fingerprint": "ai1-66645e42"
+  },
+  "MS-VN10ELE-DHO-012": {
+   "fingerprint": "ai1-6b8b5f9d"
+  },
+  "MS-VN10ELE-DHO-013": {
+   "fingerprint": "ai1-2ff9a3b4"
+  },
+  "MS-VN10ELE-DHO-043": {
+   "fingerprint": "ai1-5ecfb557"
+  },
+  "MS-VN10ELE-MAJ-002": {
+   "fingerprint": "ai1-3ae8878f"
+  },
+  "MS-VN10ELE-MAJ-003": {
+   "fingerprint": "ai1-cd7950aa"
+  },
+  "MS-VN10ELE-MAJ-007": {
+   "fingerprint": "ai1-27497e81"
+  },
+  "MS-VN10ELE-MAJ-011": {
+   "fingerprint": "ai1-a0fefb0e"
+  },
+  "MS-VN10ELE-MAJ-021": {
+   "fingerprint": "ai1-be2cdccc"
+  },
+  "MS-VN10ELE-MAJ-024": {
+   "fingerprint": "ai1-a6d0fc2f"
+  },
+  "MS-VN10ELE-MAJ-045": {
+   "fingerprint": "ai1-b992a141"
+  },
+  "MS-VN10ELE-STL-002": {
+   "fingerprint": "ai1-ff84a5ff"
+  },
+  "MS-VN10ELE-STL-005": {
+   "fingerprint": "ai1-1fb05f89"
+  },
+  "MS-VN10ELE-STL-007": {
+   "fingerprint": "ai1-1a120312"
+  },
+  "MS-VN10ELE-STL-009": {
+   "fingerprint": "ai1-f32b44b9"
+  },
+  "MS-VN10ELE-STL-011": {
+   "fingerprint": "ai1-9e5ce0db"
+  },
+  "MS-VN10ELE-STL-020": {
+   "fingerprint": "ai1-3dc0c17e"
+  },
+  "MS-VN10ELE-STL-042": {
+   "fingerprint": "ai1-4f9e7367"
+  },
+  "MS-VN10EST-AMO-002": {
+   "fingerprint": "ai1-236192de"
+  },
+  "MS-VN10EST-AMO-003": {
+   "fingerprint": "ai1-1f9c434e"
+  },
+  "MS-VN10EST-AMO-006": {
+   "fingerprint": "ai1-847ff4d8"
+  },
+  "MS-VN10EST-AMO-007": {
+   "fingerprint": "ai1-b2558a5d"
+  },
+  "MS-VN10EST-AMO-021": {
+   "fingerprint": "ai1-3515013b"
+  },
+  "MS-VN10EST-AMO-025": {
+   "fingerprint": "ai1-a47458f7"
+  },
+  "MS-VN10EST-AMO-039": {
+   "fingerprint": "ai1-a1cebcbe"
+  },
+  "MS-VN10EST-BIV-002": {
+   "fingerprint": "ai1-63ad0760"
+  },
+  "MS-VN10EST-BIV-003": {
+   "fingerprint": "ai1-595997f4"
+  },
+  "MS-VN10EST-BIV-006": {
+   "fingerprint": "ai1-648b8336"
+  },
+  "MS-VN10EST-BIV-007": {
+   "fingerprint": "ai1-a6cea6b2"
+  },
+  "MS-VN10EST-BIV-021": {
+   "fingerprint": "ai1-0e7d814e"
+  },
+  "MS-VN10EST-BIV-022": {
+   "fingerprint": "ai1-3ae29a31"
+  },
+  "MS-VN10EST-BIV-037": {
+   "fingerprint": "ai1-95fafac1"
+  },
+  "MS-VN10EST-DIS-002": {
+   "fingerprint": "ai1-33d1517a"
+  },
+  "MS-VN10EST-DIS-003": {
+   "fingerprint": "ai1-48e01a3c"
+  },
+  "MS-VN10EST-DIS-006": {
+   "fingerprint": "ai1-c8d6fd83"
+  },
+  "MS-VN10EST-DIS-008": {
+   "fingerprint": "ai1-c721fb1c"
+  },
+  "MS-VN10EST-DIS-021": {
+   "fingerprint": "ai1-fdf2a10c"
+  },
+  "MS-VN10EST-DIS-024": {
+   "fingerprint": "ai1-35ebac75"
+  },
+  "MS-VN10EST-DIS-037": {
+   "fingerprint": "ai1-94de8016"
+  },
+  "MS-VN10EST-LOC-002": {
+   "fingerprint": "ai1-4622512a"
+  },
+  "MS-VN10EST-LOC-005": {
+   "fingerprint": "ai1-0f33306f"
+  },
+  "MS-VN10EST-LOC-008": {
+   "fingerprint": "ai1-7d65d602"
+  },
+  "MS-VN10EST-LOC-016": {
+   "fingerprint": "ai1-69ed8ff6"
+  },
+  "MS-VN10EST-LOC-021": {
+   "fingerprint": "ai1-010a4d26"
+  },
+  "MS-VN10EST-LOC-022": {
+   "fingerprint": "ai1-d02c3023"
+  },
+  "MS-VN10EST-LOC-049": {
+   "fingerprint": "ai1-e733cd18"
+  },
+  "MS-VN10EST-PPA-003": {
+   "fingerprint": "ai1-d826230b"
+  },
+  "MS-VN10EST-PPA-004": {
+   "fingerprint": "ai1-6b5af6c6"
+  },
+  "MS-VN10EST-PPA-007": {
+   "fingerprint": "ai1-1639ab48"
+  },
+  "MS-VN10EST-PPA-008": {
+   "fingerprint": "ai1-8ccaa909"
+  },
+  "MS-VN10EST-PPA-021": {
+   "fingerprint": "ai1-fd6d7c55"
+  },
+  "MS-VN10EST-PPA-022": {
+   "fingerprint": "ai1-91f981d5"
+  },
+  "MS-VN10EST-PPA-041": {
+   "fingerprint": "ai1-9f6a690a"
+  },
+  "MS-VN10EST-UNI-004": {
+   "fingerprint": "ai1-8f880df5"
+  },
+  "MS-VN10EST-UNI-005": {
+   "fingerprint": "ai1-dbfdef8d"
+  },
+  "MS-VN10EST-UNI-007": {
+   "fingerprint": "ai1-02444ea3"
+  },
+  "MS-VN10EST-UNI-012": {
+   "fingerprint": "ai1-61ef02f4"
+  },
+  "MS-VN10EST-UNI-021": {
+   "fingerprint": "ai1-12b6de59"
+  },
+  "MS-VN10EST-UNI-025": {
+   "fingerprint": "ai1-59f7eb97"
+  },
+  "MS-VN10EST-UNI-049": {
+   "fingerprint": "ai1-d00f32bd"
+  },
+  "MS-VN10FIN-BRL-002": {
+   "fingerprint": "ai1-8d91878d"
+  },
+  "MS-VN10FIN-BRL-003": {
+   "fingerprint": "ai1-a884e7e4"
+  },
+  "MS-VN10FIN-BRL-007": {
+   "fingerprint": "ai1-c126b935"
+  },
+  "MS-VN10FIN-BRL-013": {
+   "fingerprint": "ai1-1b33aa15"
+  },
+  "MS-VN10FIN-BRL-021": {
+   "fingerprint": "ai1-b12b3e5e"
+  },
+  "MS-VN10FIN-BRL-024": {
+   "fingerprint": "ai1-d1a553e3"
+  },
+  "MS-VN10FIN-BRL-047": {
+   "fingerprint": "ai1-58312e4d"
+  },
+  "MS-VN10FIN-IRS-002": {
+   "fingerprint": "ai1-db254b90"
+  },
+  "MS-VN10FIN-IRS-003": {
+   "fingerprint": "ai1-ec01de6f"
+  },
+  "MS-VN10FIN-IRS-006": {
+   "fingerprint": "ai1-45f94e7d"
+  },
+  "MS-VN10FIN-IRS-012": {
+   "fingerprint": "ai1-be9c9d82"
+  },
+  "MS-VN10FIN-IRS-021": {
+   "fingerprint": "ai1-0487f963"
+  },
+  "MS-VN10FIN-IRS-023": {
+   "fingerprint": "ai1-85670a92"
+  },
+  "MS-VN10FIN-IRS-041": {
+   "fingerprint": "ai1-a911503e"
+  },
+  "MS-VN10FIN-JC-002": {
+   "fingerprint": "ai1-971c51dc"
+  },
+  "MS-VN10FIN-JC-003": {
+   "fingerprint": "ai1-b7bed994"
+  },
+  "MS-VN10FIN-JC-006": {
+   "fingerprint": "ai1-757902d4"
+  },
+  "MS-VN10FIN-JC-015": {
+   "fingerprint": "ai1-78def2ec"
+  },
+  "MS-VN10FIN-JC-023": {
+   "fingerprint": "ai1-9ffbb4a7"
+  },
+  "MS-VN10FIN-JC-030": {
+   "fingerprint": "ai1-046a3b26"
+  },
+  "MS-VN10FIN-JC-040": {
+   "fingerprint": "ai1-6502b577"
+  },
+  "MS-VN10FIN-JS-002": {
+   "fingerprint": "ai1-6fd2cc59"
+  },
+  "MS-VN10FIN-JS-005": {
+   "fingerprint": "ai1-dbfbede4"
+  },
+  "MS-VN10FIN-JS-006": {
+   "fingerprint": "ai1-9e824081"
+  },
+  "MS-VN10FIN-JS-016": {
+   "fingerprint": "ai1-7eefa30b"
+  },
+  "MS-VN10FIN-JS-022": {
+   "fingerprint": "ai1-f62af1c4"
+  },
+  "MS-VN10FIN-JS-030": {
+   "fingerprint": "ai1-394aefa3"
+  },
+  "MS-VN10FIN-JS-037": {
+   "fingerprint": "ai1-0aa2739a"
+  },
+  "MS-VN10FIN-SAL-002": {
+   "fingerprint": "ai1-c9679dfe"
+  },
+  "MS-VN10FIN-SAL-003": {
+   "fingerprint": "ai1-f0021258"
+  },
+  "MS-VN10FIN-SAL-007": {
+   "fingerprint": "ai1-edcae105"
+  },
+  "MS-VN10FIN-SAL-008": {
+   "fingerprint": "ai1-a09420a4"
+  },
+  "MS-VN10FIN-SAL-022": {
+   "fingerprint": "ai1-f7ff4d71"
+  },
+  "MS-VN10FIN-SAL-024": {
+   "fingerprint": "ai1-9da73b5f"
+  },
+  "MS-VN10FIN-SAL-047": {
+   "fingerprint": "ai1-ea23059f"
+  },
+  "MS-VN10FUN-AF-002": {
+   "fingerprint": "ai1-853de2e4"
+  },
+  "MS-VN10FUN-AF-004": {
+   "fingerprint": "ai1-c74a963a"
+  },
+  "MS-VN10FUN-AF-006": {
+   "fingerprint": "ai1-06a5ab01"
+  },
+  "MS-VN10FUN-AF-011": {
+   "fingerprint": "ai1-75ec8c71"
+  },
+  "MS-VN10FUN-AF-021": {
+   "fingerprint": "ai1-568f9a49"
+  },
+  "MS-VN10FUN-AF-023": {
+   "fingerprint": "ai1-da827037"
+  },
+  "MS-VN10FUN-AF-042": {
+   "fingerprint": "ai1-89b3365f"
+  },
+  "MS-VN10FUN-CR-002": {
+   "fingerprint": "ai1-d64b906f"
+  },
+  "MS-VN10FUN-CR-004": {
+   "fingerprint": "ai1-3919c019"
+  },
+  "MS-VN10FUN-CR-006": {
+   "fingerprint": "ai1-27b9f38d"
+  },
+  "MS-VN10FUN-CR-007": {
+   "fingerprint": "ai1-b730e79c"
+  },
+  "MS-VN10FUN-CR-021": {
+   "fingerprint": "ai1-afd895c9"
+  },
+  "MS-VN10FUN-CR-022": {
+   "fingerprint": "ai1-309075e4"
+  },
+  "MS-VN10FUN-CR-040": {
+   "fingerprint": "ai1-fb80b2ee"
+  },
+  "MS-VN10FUN-DIZ-002": {
+   "fingerprint": "ai1-e3eaf5cd"
+  },
+  "MS-VN10FUN-DIZ-004": {
+   "fingerprint": "ai1-af5f6d9f"
+  },
+  "MS-VN10FUN-DIZ-006": {
+   "fingerprint": "ai1-db4d15be"
+  },
+  "MS-VN10FUN-DIZ-007": {
+   "fingerprint": "ai1-e7e78ca2"
+  },
+  "MS-VN10FUN-DIZ-021": {
+   "fingerprint": "ai1-d4468b30"
+  },
+  "MS-VN10FUN-DIZ-025": {
+   "fingerprint": "ai1-8c2eba67"
+  },
+  "MS-VN10FUN-DIZ-050": {
+   "fingerprint": "ai1-10441a90"
+  },
+  "MS-VN10FUN-QUA-002": {
+   "fingerprint": "ai1-eecd7ff9"
+  },
+  "MS-VN10FUN-QUA-003": {
+   "fingerprint": "ai1-8453eb6c"
+  },
+  "MS-VN10FUN-QUA-006": {
+   "fingerprint": "ai1-89ebc5dc"
+  },
+  "MS-VN10FUN-QUA-012": {
+   "fingerprint": "ai1-433ecf91"
+  },
+  "MS-VN10FUN-QUA-021": {
+   "fingerprint": "ai1-8a7f1aa6"
+  },
+  "MS-VN10FUN-QUA-023": {
+   "fingerprint": "ai1-234cee81"
+  },
+  "MS-VN10FUN-QUA-041": {
+   "fingerprint": "ai1-342ee2cd"
+  },
+  "MS-VN10FUN-TRM-002": {
+   "fingerprint": "ai1-43a65ae8"
+  },
+  "MS-VN10FUN-TRM-003": {
+   "fingerprint": "ai1-47ca91a4"
+  },
+  "MS-VN10FUN-TRM-006": {
+   "fingerprint": "ai1-8109ae68"
+  },
+  "MS-VN10FUN-TRM-008": {
+   "fingerprint": "ai1-b2c19f3b"
+  },
+  "MS-VN10FUN-TRM-021": {
+   "fingerprint": "ai1-9b5d2ff5"
+  },
+  "MS-VN10FUN-TRM-025": {
+   "fingerprint": "ai1-3d04e59b"
+  },
+  "MS-VN10FUN-TRM-037": {
+   "fingerprint": "ai1-3624c226"
+  },
+  "MS-VN10GA-CT-002": {
+   "fingerprint": "ai1-309b81d6"
+  },
+  "MS-VN10GA-CT-004": {
+   "fingerprint": "ai1-a26add53"
+  },
+  "MS-VN10GA-CT-006": {
+   "fingerprint": "ai1-5c785e9a"
+  },
+  "MS-VN10GA-CT-007": {
+   "fingerprint": "ai1-3d19ba60"
+  },
+  "MS-VN10GA-CT-021": {
+   "fingerprint": "ai1-49d78b05"
+  },
+  "MS-VN10GA-CT-027": {
+   "fingerprint": "ai1-746a087d"
+  },
+  "MS-VN10GA-CT-037": {
+   "fingerprint": "ai1-64aaacfb"
+  },
+  "MS-VN10GA-DPM-002": {
+   "fingerprint": "ai1-389b9693"
+  },
+  "MS-VN10GA-DPM-005": {
+   "fingerprint": "ai1-2ee6d73b"
+  },
+  "MS-VN10GA-DPM-006": {
+   "fingerprint": "ai1-55bca2c9"
+  },
+  "MS-VN10GA-DPM-017": {
+   "fingerprint": "ai1-b1de78a0"
+  },
+  "MS-VN10GA-DPM-021": {
+   "fingerprint": "ai1-de35c27c"
+  },
+  "MS-VN10GA-DPM-024": {
+   "fingerprint": "ai1-56ab83a9"
+  },
+  "MS-VN10GA-DPM-048": {
+   "fingerprint": "ai1-2ac465a7"
+  },
+  "MS-VN10GA-ESP-002": {
+   "fingerprint": "ai1-226e6501"
+  },
+  "MS-VN10GA-ESP-003": {
+   "fingerprint": "ai1-59a92a9d"
+  },
+  "MS-VN10GA-ESP-007": {
+   "fingerprint": "ai1-efbea402"
+  },
+  "MS-VN10GA-ESP-008": {
+   "fingerprint": "ai1-a18583a3"
+  },
+  "MS-VN10GA-ESP-021": {
+   "fingerprint": "ai1-ab61d4a9"
+  },
+  "MS-VN10GA-ESP-022": {
+   "fingerprint": "ai1-66b1f8e9"
+  },
+  "MS-VN10GA-ESP-037": {
+   "fingerprint": "ai1-81f56b66"
+  },
+  "MS-VN10GA-LG-002": {
+   "fingerprint": "ai1-05df2c66"
+  },
+  "MS-VN10GA-LG-003": {
+   "fingerprint": "ai1-528c9df4"
+  },
+  "MS-VN10GA-LG-006": {
+   "fingerprint": "ai1-5184b4f7"
+  },
+  "MS-VN10GA-LG-007": {
+   "fingerprint": "ai1-b5faea3f"
+  },
+  "MS-VN10GA-LG-021": {
+   "fingerprint": "ai1-9c181d15"
+  },
+  "MS-VN10GA-LG-023": {
+   "fingerprint": "ai1-c1d3e915"
+  },
+  "MS-VN10GA-LG-041": {
+   "fingerprint": "ai1-2c9b1e5f"
+  },
+  "MS-VN10GA-RET-002": {
+   "fingerprint": "ai1-9abec962"
+  },
+  "MS-VN10GA-RET-003": {
+   "fingerprint": "ai1-0d55f220"
+  },
+  "MS-VN10GA-RET-006": {
+   "fingerprint": "ai1-f75f0f25"
+  },
+  "MS-VN10GA-RET-015": {
+   "fingerprint": "ai1-0f608e2b"
+  },
+  "MS-VN10GA-RET-021": {
+   "fingerprint": "ai1-8d3ce33c"
+  },
+  "MS-VN10GA-RET-024": {
+   "fingerprint": "ai1-32c8a3d4"
+  },
+  "MS-VN10GA-RET-048": {
+   "fingerprint": "ai1-2ee8af15"
+  },
+  "MS-VN10GA-VET-002": {
+   "fingerprint": "ai1-1c82da9d"
+  },
+  "MS-VN10GA-VET-007": {
+   "fingerprint": "ai1-9045da0c"
+  },
+  "MS-VN10GA-VET-008": {
+   "fingerprint": "ai1-a1d7ad09"
+  },
+  "MS-VN10GA-VET-017": {
+   "fingerprint": "ai1-8dd3d423"
+  },
+  "MS-VN10GA-VET-021": {
+   "fingerprint": "ai1-e7630ece"
+  },
+  "MS-VN10GA-VET-023": {
+   "fingerprint": "ai1-4f82f471"
+  },
+  "MS-VN10GA-VET-047": {
+   "fingerprint": "ai1-3d6d7bd7"
+  },
+  "MS-VN10GS-BAR-002": {
+   "fingerprint": "ai1-0be6fcf2"
+  },
+  "MS-VN10GS-BAR-004": {
+   "fingerprint": "ai1-a069ad13"
+  },
+  "MS-VN10GS-BAR-006": {
+   "fingerprint": "ai1-7cbc7f24"
+  },
+  "MS-VN10GS-BAR-012": {
+   "fingerprint": "ai1-226f9bc3"
+  },
+  "MS-VN10GS-BAR-023": {
+   "fingerprint": "ai1-bd85596b"
+  },
+  "MS-VN10GS-BAR-024": {
+   "fingerprint": "ai1-da5149f7"
+  },
+  "MS-VN10GS-BAR-043": {
+   "fingerprint": "ai1-669dd7a3"
+  },
+  "MS-VN10GS-CI-002": {
+   "fingerprint": "ai1-e9424977"
+  },
+  "MS-VN10GS-CI-003": {
+   "fingerprint": "ai1-4fdde970"
+  },
+  "MS-VN10GS-CI-007": {
+   "fingerprint": "ai1-1af104e0"
+  },
+  "MS-VN10GS-CI-009": {
+   "fingerprint": "ai1-1f1f6897"
+  },
+  "MS-VN10GS-CI-021": {
+   "fingerprint": "ai1-680329e5"
+  },
+  "MS-VN10GS-CI-022": {
+   "fingerprint": "ai1-b2bcb516"
+  },
+  "MS-VN10GS-CI-043": {
+   "fingerprint": "ai1-0efd234d"
+  },
+  "MS-VN10GS-E9-002": {
+   "fingerprint": "ai1-89e6797a"
+  },
+  "MS-VN10GS-E9-003": {
+   "fingerprint": "ai1-cf12aef7"
+  },
+  "MS-VN10GS-E9-006": {
+   "fingerprint": "ai1-96b78c0d"
+  },
+  "MS-VN10GS-E9-009": {
+   "fingerprint": "ai1-c950b3aa"
+  },
+  "MS-VN10GS-E9-022": {
+   "fingerprint": "ai1-e0423282"
+  },
+  "MS-VN10GS-E9-023": {
+   "fingerprint": "ai1-d140237a"
+  },
+  "MS-VN10GS-E9-042": {
+   "fingerprint": "ai1-eb6c3c90"
+  },
+  "MS-VN10GS-ORT-002": {
+   "fingerprint": "ai1-bec998d1"
+  },
+  "MS-VN10GS-ORT-003": {
+   "fingerprint": "ai1-2a2e97c2"
+  },
+  "MS-VN10GS-ORT-006": {
+   "fingerprint": "ai1-154b200f"
+  },
+  "MS-VN10GS-ORT-009": {
+   "fingerprint": "ai1-92bdd575"
+  },
+  "MS-VN10GS-ORT-021": {
+   "fingerprint": "ai1-a231cb7a"
+  },
+  "MS-VN10GS-ORT-022": {
+   "fingerprint": "ai1-5828b9f4"
+  },
+  "MS-VN10GS-ORT-047": {
+   "fingerprint": "ai1-894e3220"
+  },
+  "MS-VN10GS-PC-002": {
+   "fingerprint": "ai1-d2331b9e"
+  },
+  "MS-VN10GS-PC-003": {
+   "fingerprint": "ai1-9cc7713b"
+  },
+  "MS-VN10GS-PC-006": {
+   "fingerprint": "ai1-3a1d0a1d"
+  },
+  "MS-VN10GS-PC-014": {
+   "fingerprint": "ai1-12e14876"
+  },
+  "MS-VN10GS-PC-021": {
+   "fingerprint": "ai1-97a16897"
+  },
+  "MS-VN10GS-PC-026": {
+   "fingerprint": "ai1-c102875e"
+  },
+  "MS-VN10GS-PC-048": {
+   "fingerprint": "ai1-c7280dd9"
+  },
+  "MS-VN11CD-DP-002": {
+   "fingerprint": "ai1-ba9fd891"
+  },
+  "MS-VN11CD-DP-003": {
+   "fingerprint": "ai1-4e2b0251"
+  },
+  "MS-VN11CD-DP-012": {
+   "fingerprint": "ai1-45538bb0"
+  },
+  "MS-VN11CD-DP-013": {
+   "fingerprint": "ai1-d3c5895f"
+  },
+  "MS-VN11CD-DP-026": {
+   "fingerprint": "ai1-6d890036"
+  },
+  "MS-VN11CD-DP-036": {
+   "fingerprint": "ai1-ab1b83e2"
+  },
+  "MS-VN11CD-DP-041": {
+   "fingerprint": "ai1-d784c194"
+  },
+  "MS-VN11CD-FD-002": {
+   "fingerprint": "ai1-415af3f4"
+  },
+  "MS-VN11CD-FD-003": {
+   "fingerprint": "ai1-e488e674"
+  },
+  "MS-VN11CD-FD-012": {
+   "fingerprint": "ai1-8104fea9"
+  },
+  "MS-VN11CD-FD-013": {
+   "fingerprint": "ai1-670ecf20"
+  },
+  "MS-VN11CD-FD-036": {
+   "fingerprint": "ai1-def1023f"
+  },
+  "MS-VN11CD-FD-037": {
+   "fingerprint": "ai1-c9df728a"
+  },
+  "MS-VN11CD-FD-046": {
+   "fingerprint": "ai1-dbca0c7a"
+  },
+  "MS-VN11CD-MO-002": {
+   "fingerprint": "ai1-09cf7496"
+  },
+  "MS-VN11CD-MO-003": {
+   "fingerprint": "ai1-934a56c0"
+  },
+  "MS-VN11CD-MO-012": {
+   "fingerprint": "ai1-e62a1206"
+  },
+  "MS-VN11CD-MO-021": {
+   "fingerprint": "ai1-d89a8f7b"
+  },
+  "MS-VN11CD-MO-031": {
+   "fingerprint": "ai1-742d66f9"
+  },
+  "MS-VN11CD-MO-036": {
+   "fingerprint": "ai1-7dff03ea"
+  },
+  "MS-VN11CD-MO-046": {
+   "fingerprint": "ai1-ca02a08a"
+  },
+  "MS-VN11CD-REG-002": {
+   "fingerprint": "ai1-efe4372b"
+  },
+  "MS-VN11CD-REG-003": {
+   "fingerprint": "ai1-1e999401"
+  },
+  "MS-VN11CD-REG-012": {
+   "fingerprint": "ai1-d428ec7b"
+  },
+  "MS-VN11CD-REG-013": {
+   "fingerprint": "ai1-d7d3bbb1"
+  },
+  "MS-VN11CD-REG-021": {
+   "fingerprint": "ai1-5e37d8db"
+  },
+  "MS-VN11CD-REG-022": {
+   "fingerprint": "ai1-33a0c4eb"
+  },
+  "MS-VN11CD-REG-041": {
+   "fingerprint": "ai1-f1cf2ab0"
+  },
+  "MS-VN11CD-TAN-002": {
+   "fingerprint": "ai1-5aa7d9d0"
+  },
+  "MS-VN11CD-TAN-003": {
+   "fingerprint": "ai1-c04346cc"
+  },
+  "MS-VN11CD-TAN-012": {
+   "fingerprint": "ai1-c01188a4"
+  },
+  "MS-VN11CD-TAN-013": {
+   "fingerprint": "ai1-5f8161a3"
+  },
+  "MS-VN11CD-TAN-026": {
+   "fingerprint": "ai1-65e48b51"
+  },
+  "MS-VN11CD-TAN-036": {
+   "fingerprint": "ai1-2b160417"
+  },
+  "MS-VN11CD-TAN-046": {
+   "fingerprint": "ai1-04d2ebf7"
+  },
+  "MS-VN11CD-TM-002": {
+   "fingerprint": "ai1-42036a3f"
+  },
+  "MS-VN11CD-TM-003": {
+   "fingerprint": "ai1-443ca926"
+  },
+  "MS-VN11CD-TM-012": {
+   "fingerprint": "ai1-20dcd163"
+  },
+  "MS-VN11CD-TM-013": {
+   "fingerprint": "ai1-10f0a5d8"
+  },
+  "MS-VN11CD-TM-031": {
+   "fingerprint": "ai1-278536e8"
+  },
+  "MS-VN11CD-TM-032": {
+   "fingerprint": "ai1-d0e21250"
+  },
+  "MS-VN11CD-TM-041": {
+   "fingerprint": "ai1-65fcced0"
+  },
+  "MS-VN11CONT-AM-002": {
+   "fingerprint": "ai1-0ea4ac01"
+  },
+  "MS-VN11CONT-AM-003": {
+   "fingerprint": "ai1-bd9718bc"
+  },
+  "MS-VN11CONT-AM-006": {
+   "fingerprint": "ai1-b51e1491"
+  },
+  "MS-VN11CONT-AM-011": {
+   "fingerprint": "ai1-cb525448"
+  },
+  "MS-VN11CONT-AM-021": {
+   "fingerprint": "ai1-6aeb07bf"
+  },
+  "MS-VN11CONT-AM-022": {
+   "fingerprint": "ai1-23aad61a"
+  },
+  "MS-VN11CONT-AM-050": {
+   "fingerprint": "ai1-611f0c8d"
+  },
+  "MS-VN11CONT-ARR-002": {
+   "fingerprint": "ai1-87d85fb7"
+  },
+  "MS-VN11CONT-ARR-003": {
+   "fingerprint": "ai1-146d332c"
+  },
+  "MS-VN11CONT-ARR-006": {
+   "fingerprint": "ai1-23528658"
+  },
+  "MS-VN11CONT-ARR-018": {
+   "fingerprint": "ai1-4d468c19"
+  },
+  "MS-VN11CONT-ARR-021": {
+   "fingerprint": "ai1-ec28a082"
+  },
+  "MS-VN11CONT-ARR-022": {
+   "fingerprint": "ai1-37ed594d"
+  },
+  "MS-VN11CONT-ARR-047": {
+   "fingerprint": "ai1-34977eae"
+  },
+  "MS-VN11CONT-COMB-002": {
+   "fingerprint": "ai1-de50e4ac"
+  },
+  "MS-VN11CONT-COMB-005": {
+   "fingerprint": "ai1-c1e80634"
+  },
+  "MS-VN11CONT-COMB-007": {
+   "fingerprint": "ai1-a1030b41"
+  },
+  "MS-VN11CONT-COMB-016": {
+   "fingerprint": "ai1-f3a6d517"
+  },
+  "MS-VN11CONT-COMB-021": {
+   "fingerprint": "ai1-ad475fcf"
+  },
+  "MS-VN11CONT-COMB-022": {
+   "fingerprint": "ai1-d0d6b8a7"
+  },
+  "MS-VN11CONT-COMB-049": {
+   "fingerprint": "ai1-3f0c8311"
+  },
+  "MS-VN11CONT-DG-002": {
+   "fingerprint": "ai1-da8c3eaa"
+  },
+  "MS-VN11CONT-DG-003": {
+   "fingerprint": "ai1-24897bd2"
+  },
+  "MS-VN11CONT-DG-006": {
+   "fingerprint": "ai1-44df26d4"
+  },
+  "MS-VN11CONT-DG-009": {
+   "fingerprint": "ai1-0eab8420"
+  },
+  "MS-VN11CONT-DG-021": {
+   "fingerprint": "ai1-2e1c2d3e"
+  },
+  "MS-VN11CONT-DG-022": {
+   "fingerprint": "ai1-08548876"
+  },
+  "MS-VN11CONT-DG-046": {
+   "fingerprint": "ai1-03eca17a"
+  },
+  "MS-VN11CONT-FAT-002": {
+   "fingerprint": "ai1-9a631f69"
+  },
+  "MS-VN11CONT-FAT-005": {
+   "fingerprint": "ai1-b8469566"
+  },
+  "MS-VN11CONT-FAT-006": {
+   "fingerprint": "ai1-78312430"
+  },
+  "MS-VN11CONT-FAT-017": {
+   "fingerprint": "ai1-9da8d5cb"
+  },
+  "MS-VN11CONT-FAT-021": {
+   "fingerprint": "ai1-e21d3a3c"
+  },
+  "MS-VN11CONT-FAT-023": {
+   "fingerprint": "ai1-1137a976"
+  },
+  "MS-VN11CONT-FAT-047": {
+   "fingerprint": "ai1-dbca7993"
+  },
+  "MS-VN11CONT-PERM-002": {
+   "fingerprint": "ai1-dd59763e"
+  },
+  "MS-VN11CONT-PERM-003": {
+   "fingerprint": "ai1-f0d7b731"
+  },
+  "MS-VN11CONT-PERM-006": {
+   "fingerprint": "ai1-8d4f17b1"
+  },
+  "MS-VN11CONT-PERM-018": {
+   "fingerprint": "ai1-9973bab9"
+  },
+  "MS-VN11CONT-PERM-021": {
+   "fingerprint": "ai1-e16ee509"
+  },
+  "MS-VN11CONT-PERM-022": {
+   "fingerprint": "ai1-b4a9ba10"
+  },
+  "MS-VN11CONT-PERM-047": {
+   "fingerprint": "ai1-a6996cf4"
+  },
+  "MS-VN11FUN-AM-002": {
+   "fingerprint": "ai1-25754a0a"
+  },
+  "MS-VN11FUN-AM-003": {
+   "fingerprint": "ai1-8dcc76a8"
+  },
+  "MS-VN11FUN-AM-006": {
+   "fingerprint": "ai1-690bc82c"
+  },
+  "MS-VN11FUN-AM-018": {
+   "fingerprint": "ai1-0f2c7200"
+  },
+  "MS-VN11FUN-AM-021": {
+   "fingerprint": "ai1-ae114aac"
+  },
+  "MS-VN11FUN-AM-022": {
+   "fingerprint": "ai1-3c25ba18"
+  },
+  "MS-VN11FUN-AM-044": {
+   "fingerprint": "ai1-65ea9765"
+  },
+  "MS-VN11FUN-CQ-002": {
+   "fingerprint": "ai1-07a15872"
+  },
+  "MS-VN11FUN-CQ-003": {
+   "fingerprint": "ai1-27970a71"
+  },
+  "MS-VN11FUN-CQ-006": {
+   "fingerprint": "ai1-71a36156"
+  },
+  "MS-VN11FUN-CQ-016": {
+   "fingerprint": "ai1-bb2c9dda"
+  },
+  "MS-VN11FUN-CQ-021": {
+   "fingerprint": "ai1-c823daf8"
+  },
+  "MS-VN11FUN-CQ-024": {
+   "fingerprint": "ai1-379ad531"
+  },
+  "MS-VN11FUN-CQ-045": {
+   "fingerprint": "ai1-26f693cc"
+  },
+  "MS-VN11FUN-DP-002": {
+   "fingerprint": "ai1-b5872986"
+  },
+  "MS-VN11FUN-DP-003": {
+   "fingerprint": "ai1-e7e005b7"
+  },
+  "MS-VN11FUN-DP-006": {
+   "fingerprint": "ai1-4c092d37"
+  },
+  "MS-VN11FUN-DP-014": {
+   "fingerprint": "ai1-d2a81227"
+  },
+  "MS-VN11FUN-DP-021": {
+   "fingerprint": "ai1-56455571"
+  },
+  "MS-VN11FUN-DP-022": {
+   "fingerprint": "ai1-de48ffbe"
+  },
+  "MS-VN11FUN-DP-047": {
+   "fingerprint": "ai1-8c42c8d3"
+  },
+  "MS-VN11FUN-OP-002": {
+   "fingerprint": "ai1-e7eb2a7c"
+  },
+  "MS-VN11FUN-OP-003": {
+   "fingerprint": "ai1-a3e73866"
+  },
+  "MS-VN11FUN-OP-007": {
+   "fingerprint": "ai1-c57b1d25"
+  },
+  "MS-VN11FUN-OP-009": {
+   "fingerprint": "ai1-cc0802cc"
+  },
+  "MS-VN11FUN-OP-021": {
+   "fingerprint": "ai1-d34162ae"
+  },
+  "MS-VN11FUN-OP-023": {
+   "fingerprint": "ai1-bbd0c97e"
+  },
+  "MS-VN11FUN-OP-037": {
+   "fingerprint": "ai1-993d3d59"
+  },
+  "MS-VN11FUN-RAT-002": {
+   "fingerprint": "ai1-8f2fc271"
+  },
+  "MS-VN11FUN-RAT-003": {
+   "fingerprint": "ai1-88102c9b"
+  },
+  "MS-VN11FUN-RAT-008": {
+   "fingerprint": "ai1-fe74be74"
+  },
+  "MS-VN11FUN-RAT-011": {
+   "fingerprint": "ai1-f0e5c597"
+  },
+  "MS-VN11FUN-RAT-021": {
+   "fingerprint": "ai1-5943b7aa"
+  },
+  "MS-VN11FUN-RAT-027": {
+   "fingerprint": "ai1-96f1a52c"
+  },
+  "MS-VN11FUN-RAT-048": {
+   "fingerprint": "ai1-534d7bf6"
+  },
+  "MS-VN11FUN-RR-002": {
+   "fingerprint": "ai1-bb958621"
+  },
+  "MS-VN11FUN-RR-003": {
+   "fingerprint": "ai1-54fcd030"
+  },
+  "MS-VN11FUN-RR-006": {
+   "fingerprint": "ai1-e009ff24"
+  },
+  "MS-VN11FUN-RR-013": {
+   "fingerprint": "ai1-55f9a1ce"
+  },
+  "MS-VN11FUN-RR-021": {
+   "fingerprint": "ai1-88f673b7"
+  },
+  "MS-VN11FUN-RR-023": {
+   "fingerprint": "ai1-12362736"
+  },
+  "MS-VN11FUN-RR-048": {
+   "fingerprint": "ai1-6cf516cb"
+  },
+  "MS-VN11PE-AN-002": {
+   "fingerprint": "ai1-fc62e2e3"
+  },
+  "MS-VN11PE-AN-003": {
+   "fingerprint": "ai1-f673d4de"
+  },
+  "MS-VN11PE-AN-006": {
+   "fingerprint": "ai1-e367a701"
+  },
+  "MS-VN11PE-AN-015": {
+   "fingerprint": "ai1-d388d6cf"
+  },
+  "MS-VN11PE-AN-021": {
+   "fingerprint": "ai1-1576982c"
+  },
+  "MS-VN11PE-AN-022": {
+   "fingerprint": "ai1-4aa1a7c8"
+  },
+  "MS-VN11PE-AN-046": {
+   "fingerprint": "ai1-a5617865"
+  },
+  "MS-VN11PE-DI-002": {
+   "fingerprint": "ai1-a8709e09"
+  },
+  "MS-VN11PE-DI-004": {
+   "fingerprint": "ai1-ae4787c4"
+  },
+  "MS-VN11PE-DI-006": {
+   "fingerprint": "ai1-b7a73e82"
+  },
+  "MS-VN11PE-DI-014": {
+   "fingerprint": "ai1-c1956619"
+  },
+  "MS-VN11PE-DI-021": {
+   "fingerprint": "ai1-f0923c48"
+  },
+  "MS-VN11PE-DI-022": {
+   "fingerprint": "ai1-219d45a6"
+  },
+  "MS-VN11PE-DI-037": {
+   "fingerprint": "ai1-b5040e19"
+  },
+  "MS-VN11PE-DIST-002": {
+   "fingerprint": "ai1-3e5e1ffa"
+  },
+  "MS-VN11PE-DIST-003": {
+   "fingerprint": "ai1-e442a337"
+  },
+  "MS-VN11PE-DIST-007": {
+   "fingerprint": "ai1-4fde9289"
+  },
+  "MS-VN11PE-DIST-008": {
+   "fingerprint": "ai1-6911f4c6"
+  },
+  "MS-VN11PE-DIST-021": {
+   "fingerprint": "ai1-32feaa08"
+  },
+  "MS-VN11PE-DIST-023": {
+   "fingerprint": "ai1-71f0b555"
+  },
+  "MS-VN11PE-DIST-043": {
+   "fingerprint": "ai1-96d7b8de"
+  },
+  "MS-VN11PE-PC-002": {
+   "fingerprint": "ai1-e6a197fb"
+  },
+  "MS-VN11PE-PC-004": {
+   "fingerprint": "ai1-e1a5eacb"
+  },
+  "MS-VN11PE-PC-006": {
+   "fingerprint": "ai1-8a2131bc"
+  },
+  "MS-VN11PE-PC-015": {
+   "fingerprint": "ai1-f6ddd918"
+  },
+  "MS-VN11PE-PC-021": {
+   "fingerprint": "ai1-f8639e1b"
+  },
+  "MS-VN11PE-PC-025": {
+   "fingerprint": "ai1-324e7246"
+  },
+  "MS-VN11PE-PC-046": {
+   "fingerprint": "ai1-412e3521"
+  },
+  "MS-VN11PE-PERP-002": {
+   "fingerprint": "ai1-1a5fad8e"
+  },
+  "MS-VN11PE-PERP-004": {
+   "fingerprint": "ai1-756c9054"
+  },
+  "MS-VN11PE-PERP-007": {
+   "fingerprint": "ai1-ba37dc0b"
+  },
+  "MS-VN11PE-PERP-008": {
+   "fingerprint": "ai1-a2988106"
+  },
+  "MS-VN11PE-PERP-021": {
+   "fingerprint": "ai1-d6cc670a"
+  },
+  "MS-VN11PE-PERP-023": {
+   "fingerprint": "ai1-d0736627"
+  },
+  "MS-VN11PE-PERP-046": {
+   "fingerprint": "ai1-8703c361"
+  },
+  "MS-VN11PE-RP-002": {
+   "fingerprint": "ai1-7f2cd26e"
+  },
+  "MS-VN11PE-RP-003": {
+   "fingerprint": "ai1-855e611d"
+  },
+  "MS-VN11PE-RP-006": {
+   "fingerprint": "ai1-156a3435"
+  },
+  "MS-VN11PE-RP-012": {
+   "fingerprint": "ai1-6057edcf"
+  },
+  "MS-VN11PE-RP-021": {
+   "fingerprint": "ai1-8fd5bac6"
+  },
+  "MS-VN11PE-RP-022": {
+   "fingerprint": "ai1-e54d96f6"
+  },
+  "MS-VN11PE-RP-046": {
+   "fingerprint": "ai1-2a514d27"
+  },
+  "MS-VN11SUC-MC-002": {
+   "fingerprint": "ai1-d3d325c7"
+  },
+  "MS-VN11SUC-MC-003": {
+   "fingerprint": "ai1-440b7039"
+  },
+  "MS-VN11SUC-MC-006": {
+   "fingerprint": "ai1-a4959b39"
+  },
+  "MS-VN11SUC-MC-017": {
+   "fingerprint": "ai1-e18036e3"
+  },
+  "MS-VN11SUC-MC-021": {
+   "fingerprint": "ai1-358cb07c"
+  },
+  "MS-VN11SUC-MC-022": {
+   "fingerprint": "ai1-33ef75be"
+  },
+  "MS-VN11SUC-MC-037": {
+   "fingerprint": "ai1-ca9b7bfc"
+  },
+  "MS-VN11SUC-PA-002": {
+   "fingerprint": "ai1-e8fc39f3"
+  },
+  "MS-VN11SUC-PA-003": {
+   "fingerprint": "ai1-a9445198"
+  },
+  "MS-VN11SUC-PA-006": {
+   "fingerprint": "ai1-969ad46a"
+  },
+  "MS-VN11SUC-PA-013": {
+   "fingerprint": "ai1-36b5c396"
+  },
+  "MS-VN11SUC-PA-021": {
+   "fingerprint": "ai1-8fad53d2"
+  },
+  "MS-VN11SUC-PA-022": {
+   "fingerprint": "ai1-130f7a93"
+  },
+  "MS-VN11SUC-PA-044": {
+   "fingerprint": "ai1-98c672b6"
+  },
+  "MS-VN11SUC-PG-002": {
+   "fingerprint": "ai1-fd5d736a"
+  },
+  "MS-VN11SUC-PG-003": {
+   "fingerprint": "ai1-4d3c86fd"
+  },
+  "MS-VN11SUC-PG-006": {
+   "fingerprint": "ai1-78d5494d"
+  },
+  "MS-VN11SUC-PG-013": {
+   "fingerprint": "ai1-9bc579d4"
+  },
+  "MS-VN11SUC-PG-021": {
+   "fingerprint": "ai1-5c242eec"
+  },
+  "MS-VN11SUC-PG-022": {
+   "fingerprint": "ai1-bc32d5c8"
+  },
+  "MS-VN11SUC-PG-044": {
+   "fingerprint": "ai1-2ed9a8b9"
+  },
+  "MS-VN11SUC-SOM-004": {
+   "fingerprint": "ai1-cf68a4eb"
+  },
+  "MS-VN11SUC-SOM-005": {
+   "fingerprint": "ai1-02f8d1f4"
+  },
+  "MS-VN11SUC-SOM-006": {
+   "fingerprint": "ai1-e958db04"
+  },
+  "MS-VN11SUC-SOM-011": {
+   "fingerprint": "ai1-7e46eee1"
+  },
+  "MS-VN11SUC-SOM-021": {
+   "fingerprint": "ai1-8101a464"
+  },
+  "MS-VN11SUC-SOM-022": {
+   "fingerprint": "ai1-6aca5974"
+  },
+  "MS-VN11SUC-SOM-043": {
+   "fingerprint": "ai1-bdf16a9d"
+  },
+  "MS-VN11SUC-TR-002": {
+   "fingerprint": "ai1-27d07fbe"
+  },
+  "MS-VN11SUC-TR-003": {
+   "fingerprint": "ai1-1bab5300"
+  },
+  "MS-VN11SUC-TR-006": {
+   "fingerprint": "ai1-5d2c8a1c"
+  },
+  "MS-VN11SUC-TR-013": {
+   "fingerprint": "ai1-48bef6eb"
+  },
+  "MS-VN11SUC-TR-021": {
+   "fingerprint": "ai1-36281ae9"
+  },
+  "MS-VN11SUC-TR-022": {
+   "fingerprint": "ai1-01583cf3"
+  },
+  "MS-VN11SUC-TR-047": {
+   "fingerprint": "ai1-9a907884"
+  },
+  "MS-VN11TRIG-AR-003": {
+   "fingerprint": "ai1-5336e691"
+  },
+  "MS-VN11TRIG-AR-004": {
+   "fingerprint": "ai1-beac36f7"
+  },
+  "MS-VN11TRIG-AR-006": {
+   "fingerprint": "ai1-1b3398aa"
+  },
+  "MS-VN11TRIG-AR-018": {
+   "fingerprint": "ai1-6572c795"
+  },
+  "MS-VN11TRIG-AR-021": {
+   "fingerprint": "ai1-9f31665e"
+  },
+  "MS-VN11TRIG-AR-022": {
+   "fingerprint": "ai1-38df4866"
+  },
+  "MS-VN11TRIG-AR-037": {
+   "fingerprint": "ai1-ab68f77e"
+  },
+  "MS-VN11TRIG-CIR-002": {
+   "fingerprint": "ai1-223d0f93"
+  },
+  "MS-VN11TRIG-CIR-003": {
+   "fingerprint": "ai1-af27dcdf"
+  },
+  "MS-VN11TRIG-CIR-006": {
+   "fingerprint": "ai1-13f8c359"
+  },
+  "MS-VN11TRIG-CIR-008": {
+   "fingerprint": "ai1-a68fdd04"
+  },
+  "MS-VN11TRIG-CIR-021": {
+   "fingerprint": "ai1-75d61aac"
+  },
+  "MS-VN11TRIG-CIR-028": {
+   "fingerprint": "ai1-bc5c4f21"
+  },
+  "MS-VN11TRIG-CIR-048": {
+   "fingerprint": "ai1-6b4fea55"
+  },
+  "MS-VN11TRIG-EQ-002": {
+   "fingerprint": "ai1-f2518871"
+  },
+  "MS-VN11TRIG-EQ-003": {
+   "fingerprint": "ai1-56a34566"
+  },
+  "MS-VN11TRIG-EQ-006": {
+   "fingerprint": "ai1-56cf9d9b"
+  },
+  "MS-VN11TRIG-EQ-018": {
+   "fingerprint": "ai1-e09b9005"
+  },
+  "MS-VN11TRIG-EQ-021": {
+   "fingerprint": "ai1-a5e61ed3"
+  },
+  "MS-VN11TRIG-EQ-022": {
+   "fingerprint": "ai1-466618c9"
+  },
+  "MS-VN11TRIG-EQ-048": {
+   "fingerprint": "ai1-270432f8"
+  },
+  "MS-VN11TRIG-FUN-002": {
+   "fingerprint": "ai1-fa9a3a40"
+  },
+  "MS-VN11TRIG-FUN-003": {
+   "fingerprint": "ai1-8475c20e"
+  },
+  "MS-VN11TRIG-FUN-006": {
+   "fingerprint": "ai1-0938c471"
+  },
+  "MS-VN11TRIG-FUN-019": {
+   "fingerprint": "ai1-9445d932"
+  },
+  "MS-VN11TRIG-FUN-021": {
+   "fingerprint": "ai1-61e3615b"
+  },
+  "MS-VN11TRIG-FUN-024": {
+   "fingerprint": "ai1-259894ff"
+  },
+  "MS-VN11TRIG-FUN-037": {
+   "fingerprint": "ai1-d4ff96fe"
+  },
+  "MS-VN11TRIG-MOD-002": {
+   "fingerprint": "ai1-35e6ac19"
+  },
+  "MS-VN11TRIG-MOD-004": {
+   "fingerprint": "ai1-5fff0779"
+  },
+  "MS-VN11TRIG-MOD-006": {
+   "fingerprint": "ai1-d74aacbc"
+  },
+  "MS-VN11TRIG-MOD-013": {
+   "fingerprint": "ai1-e6804295"
+  },
+  "MS-VN11TRIG-MOD-021": {
+   "fingerprint": "ai1-39598ee9"
+  },
+  "MS-VN11TRIG-MOD-022": {
+   "fingerprint": "ai1-39d287f7"
+  },
+  "MS-VN11TRIG-MOD-048": {
+   "fingerprint": "ai1-8c268eb2"
+  },
+  "MS-VN11TRIG-REL-002": {
+   "fingerprint": "ai1-e2eae5a2"
+  },
+  "MS-VN11TRIG-REL-003": {
+   "fingerprint": "ai1-38151951"
+  },
+  "MS-VN11TRIG-REL-006": {
+   "fingerprint": "ai1-b891c20f"
+  },
+  "MS-VN11TRIG-REL-014": {
+   "fingerprint": "ai1-ff224e1b"
+  },
+  "MS-VN11TRIG-REL-027": {
+   "fingerprint": "ai1-ba305ecb"
+  },
+  "MS-VN11TRIG-REL-029": {
+   "fingerprint": "ai1-b565635a"
+  },
+  "MS-VN11TRIG-REL-048": {
+   "fingerprint": "ai1-f57f6ce0"
+  },
+  "MS-VN12CPLX-AG-002": {
+   "fingerprint": "ai1-13a72f0a"
+  },
+  "MS-VN12CPLX-AG-003": {
+   "fingerprint": "ai1-394de7bb"
+  },
+  "MS-VN12CPLX-AG-006": {
+   "fingerprint": "ai1-4dd3e5d0"
+  },
+  "MS-VN12CPLX-AG-008": {
+   "fingerprint": "ai1-80d179f3"
+  },
+  "MS-VN12CPLX-AG-021": {
+   "fingerprint": "ai1-e05b11e7"
+  },
+  "MS-VN12CPLX-AG-022": {
+   "fingerprint": "ai1-659edd31"
+  },
+  "MS-VN12CPLX-AG-046": {
+   "fingerprint": "ai1-f14f6612"
+  },
+  "MS-VN12CPLX-CM-002": {
+   "fingerprint": "ai1-0ccd0a7a"
+  },
+  "MS-VN12CPLX-CM-004": {
+   "fingerprint": "ai1-2fd5edf0"
+  },
+  "MS-VN12CPLX-CM-008": {
+   "fingerprint": "ai1-6a4e7687"
+  },
+  "MS-VN12CPLX-CM-017": {
+   "fingerprint": "ai1-d510c011"
+  },
+  "MS-VN12CPLX-CM-021": {
+   "fingerprint": "ai1-b30ae2f4"
+  },
+  "MS-VN12CPLX-CM-022": {
+   "fingerprint": "ai1-775e42b5"
+  },
+  "MS-VN12CPLX-CM-048": {
+   "fingerprint": "ai1-a6338dad"
+  },
+  "MS-VN12CPLX-FA-002": {
+   "fingerprint": "ai1-904e75fe"
+  },
+  "MS-VN12CPLX-FA-004": {
+   "fingerprint": "ai1-3cea302d"
+  },
+  "MS-VN12CPLX-FA-008": {
+   "fingerprint": "ai1-94308989"
+  },
+  "MS-VN12CPLX-FA-018": {
+   "fingerprint": "ai1-68fccab9"
+  },
+  "MS-VN12CPLX-FA-021": {
+   "fingerprint": "ai1-dddfb539"
+  },
+  "MS-VN12CPLX-FA-023": {
+   "fingerprint": "ai1-9e532849"
+  },
+  "MS-VN12CPLX-FA-048": {
+   "fingerprint": "ai1-039964ba"
+  },
+  "MS-VN12CPLX-FT-002": {
+   "fingerprint": "ai1-49f5135c"
+  },
+  "MS-VN12CPLX-FT-003": {
+   "fingerprint": "ai1-06f1f288"
+  },
+  "MS-VN12CPLX-FT-007": {
+   "fingerprint": "ai1-e92efb55"
+  },
+  "MS-VN12CPLX-FT-013": {
+   "fingerprint": "ai1-22f7788a"
+  },
+  "MS-VN12CPLX-FT-021": {
+   "fingerprint": "ai1-fb3125ca"
+  },
+  "MS-VN12CPLX-FT-025": {
+   "fingerprint": "ai1-7fa4f1f5"
+  },
+  "MS-VN12CPLX-FT-041": {
+   "fingerprint": "ai1-e6c2d434"
+  },
+  "MS-VN12CPLX-OA-002": {
+   "fingerprint": "ai1-594052a9"
+  },
+  "MS-VN12CPLX-OA-004": {
+   "fingerprint": "ai1-10292763"
+  },
+  "MS-VN12CPLX-OA-007": {
+   "fingerprint": "ai1-18c6bc03"
+  },
+  "MS-VN12CPLX-OA-013": {
+   "fingerprint": "ai1-4e930bb9"
+  },
+  "MS-VN12CPLX-OA-024": {
+   "fingerprint": "ai1-f4775a69"
+  },
+  "MS-VN12CPLX-OA-025": {
+   "fingerprint": "ai1-b2a5046e"
+  },
+  "MS-VN12CPLX-OA-048": {
+   "fingerprint": "ai1-830f5f9c"
+  },
+  "MS-VN12CPLX-OT-002": {
+   "fingerprint": "ai1-00d3b043"
+  },
+  "MS-VN12CPLX-OT-003": {
+   "fingerprint": "ai1-43fea499"
+  },
+  "MS-VN12CPLX-OT-006": {
+   "fingerprint": "ai1-ad2557b2"
+  },
+  "MS-VN12CPLX-OT-007": {
+   "fingerprint": "ai1-1d7a1552"
+  },
+  "MS-VN12CPLX-OT-021": {
+   "fingerprint": "ai1-0cb8a63b"
+  },
+  "MS-VN12CPLX-OT-023": {
+   "fingerprint": "ai1-a1f0c8bd"
+  },
+  "MS-VN12CPLX-OT-045": {
+   "fingerprint": "ai1-352cd12b"
+  },
+  "MS-VN12CPLX-UE-002": {
+   "fingerprint": "ai1-d60bda26"
+  },
+  "MS-VN12CPLX-UE-005": {
+   "fingerprint": "ai1-8e61e545"
+  },
+  "MS-VN12CPLX-UE-013": {
+   "fingerprint": "ai1-90d4b0ce"
+  },
+  "MS-VN12CPLX-UE-019": {
+   "fingerprint": "ai1-4dfdf3a9"
+  },
+  "MS-VN12CPLX-UE-026": {
+   "fingerprint": "ai1-c01640a6"
+  },
+  "MS-VN12CPLX-UE-032": {
+   "fingerprint": "ai1-f1c73612"
+  },
+  "MS-VN12CPLX-UE-049": {
+   "fingerprint": "ai1-d9038a9b"
+  },
+  "MS-VN12EXPL-EQ-002": {
+   "fingerprint": "ai1-00d7e3de"
+  },
+  "MS-VN12EXPL-EQ-003": {
+   "fingerprint": "ai1-77c552a1"
+  },
+  "MS-VN12EXPL-EQ-014": {
+   "fingerprint": "ai1-3d16d6f0"
+  },
+  "MS-VN12EXPL-EQ-015": {
+   "fingerprint": "ai1-a1d9b9fb"
+  },
+  "MS-VN12EXPL-EQ-021": {
+   "fingerprint": "ai1-448f8d59"
+  },
+  "MS-VN12EXPL-EQ-022": {
+   "fingerprint": "ai1-eb4fc640"
+  },
+  "MS-VN12EXPL-EQ-043": {
+   "fingerprint": "ai1-a49876d6"
+  },
+  "MS-VN12EXPL-EXP-002": {
+   "fingerprint": "ai1-5fdd1e8b"
+  },
+  "MS-VN12EXPL-EXP-004": {
+   "fingerprint": "ai1-d1ea7fa4"
+  },
+  "MS-VN12EXPL-EXP-006": {
+   "fingerprint": "ai1-f2dc691a"
+  },
+  "MS-VN12EXPL-EXP-008": {
+   "fingerprint": "ai1-9c9dcff0"
+  },
+  "MS-VN12EXPL-EXP-021": {
+   "fingerprint": "ai1-a6805e46"
+  },
+  "MS-VN12EXPL-EXP-022": {
+   "fingerprint": "ai1-9fc62ddc"
+  },
+  "MS-VN12EXPL-EXP-047": {
+   "fingerprint": "ai1-f695d6d2"
+  },
+  "MS-VN12EXPL-IR-002": {
+   "fingerprint": "ai1-b1033eeb"
+  },
+  "MS-VN12EXPL-IR-003": {
+   "fingerprint": "ai1-07b7db47"
+  },
+  "MS-VN12EXPL-IR-006": {
+   "fingerprint": "ai1-14099ddc"
+  },
+  "MS-VN12EXPL-IR-008": {
+   "fingerprint": "ai1-6a1e55e4"
+  },
+  "MS-VN12EXPL-IR-023": {
+   "fingerprint": "ai1-a08da2fa"
+  },
+  "MS-VN12EXPL-IR-024": {
+   "fingerprint": "ai1-f52b6670"
+  },
+  "MS-VN12EXPL-IR-049": {
+   "fingerprint": "ai1-564a52f4"
+  },
+  "MS-VN12EXPL-LOG-002": {
+   "fingerprint": "ai1-adac068f"
+  },
+  "MS-VN12EXPL-LOG-003": {
+   "fingerprint": "ai1-f720cb07"
+  },
+  "MS-VN12EXPL-LOG-009": {
+   "fingerprint": "ai1-569d83d6"
+  },
+  "MS-VN12EXPL-LOG-011": {
+   "fingerprint": "ai1-dd649c3b"
+  },
+  "MS-VN12EXPL-LOG-021": {
+   "fingerprint": "ai1-5560ae75"
+  },
+  "MS-VN12EXPL-LOG-026": {
+   "fingerprint": "ai1-d18b998b"
+  },
+  "MS-VN12EXPL-LOG-037": {
+   "fingerprint": "ai1-8a1339ec"
+  },
+  "MS-VN12EXPL-MOD-002": {
+   "fingerprint": "ai1-2e432d16"
+  },
+  "MS-VN12EXPL-MOD-003": {
+   "fingerprint": "ai1-a8143252"
+  },
+  "MS-VN12EXPL-MOD-006": {
+   "fingerprint": "ai1-b27241a4"
+  },
+  "MS-VN12EXPL-MOD-016": {
+   "fingerprint": "ai1-8faeaf6c"
+  },
+  "MS-VN12EXPL-MOD-021": {
+   "fingerprint": "ai1-0574e1aa"
+  },
+  "MS-VN12EXPL-MOD-022": {
+   "fingerprint": "ai1-20fb4fd4"
+  },
+  "MS-VN12EXPL-MOD-043": {
+   "fingerprint": "ai1-e4518483"
+  },
+  "MS-VN12FCD-AP-002": {
+   "fingerprint": "ai1-07451a31"
+  },
+  "MS-VN12FCD-AP-003": {
+   "fingerprint": "ai1-143c2711"
+  },
+  "MS-VN12FCD-AP-006": {
+   "fingerprint": "ai1-3270d48b"
+  },
+  "MS-VN12FCD-AP-007": {
+   "fingerprint": "ai1-6630bc81"
+  },
+  "MS-VN12FCD-AP-021": {
+   "fingerprint": "ai1-57c86e6c"
+  },
+  "MS-VN12FCD-AP-024": {
+   "fingerprint": "ai1-17fbeca9"
+  },
+  "MS-VN12FCD-AP-037": {
+   "fingerprint": "ai1-fd20705c"
+  },
+  "MS-VN12FCD-COMP-002": {
+   "fingerprint": "ai1-a6373ff0"
+  },
+  "MS-VN12FCD-COMP-004": {
+   "fingerprint": "ai1-57f1210f"
+  },
+  "MS-VN12FCD-COMP-006": {
+   "fingerprint": "ai1-4aba60cc"
+  },
+  "MS-VN12FCD-COMP-014": {
+   "fingerprint": "ai1-28f56941"
+  },
+  "MS-VN12FCD-COMP-021": {
+   "fingerprint": "ai1-fd493a83"
+  },
+  "MS-VN12FCD-COMP-022": {
+   "fingerprint": "ai1-508dfaeb"
+  },
+  "MS-VN12FCD-COMP-037": {
+   "fingerprint": "ai1-a19fec81"
+  },
+  "MS-VN12FCD-EE-002": {
+   "fingerprint": "ai1-92295221"
+  },
+  "MS-VN12FCD-EE-004": {
+   "fingerprint": "ai1-97e601f9"
+  },
+  "MS-VN12FCD-EE-006": {
+   "fingerprint": "ai1-b7d0a2f5"
+  },
+  "MS-VN12FCD-EE-008": {
+   "fingerprint": "ai1-46446e13"
+  },
+  "MS-VN12FCD-EE-021": {
+   "fingerprint": "ai1-68f58339"
+  },
+  "MS-VN12FCD-EE-036": {
+   "fingerprint": "ai1-90e24018"
+  },
+  "MS-VN12FCD-EE-037": {
+   "fingerprint": "ai1-242a8cdc"
+  },
+  "MS-VN12FCD-LTP-002": {
+   "fingerprint": "ai1-ef7506ce"
+  },
+  "MS-VN12FCD-LTP-003": {
+   "fingerprint": "ai1-c34af5c1"
+  },
+  "MS-VN12FCD-LTP-006": {
+   "fingerprint": "ai1-eb5fbea4"
+  },
+  "MS-VN12FCD-LTP-007": {
+   "fingerprint": "ai1-422121ef"
+  },
+  "MS-VN12FCD-LTP-021": {
+   "fingerprint": "ai1-a2434040"
+  },
+  "MS-VN12FCD-LTP-022": {
+   "fingerprint": "ai1-fe5effaf"
+  },
+  "MS-VN12FCD-LTP-047": {
+   "fingerprint": "ai1-434d4940"
+  },
+  "MS-VN12FCD-RC-002": {
+   "fingerprint": "ai1-a73dfaf4"
+  },
+  "MS-VN12FCD-RC-004": {
+   "fingerprint": "ai1-6f76e7b6"
+  },
+  "MS-VN12FCD-RC-007": {
+   "fingerprint": "ai1-2652ba75"
+  },
+  "MS-VN12FCD-RC-008": {
+   "fingerprint": "ai1-c71e6fe8"
+  },
+  "MS-VN12FCD-RC-021": {
+   "fingerprint": "ai1-c7045adc"
+  },
+  "MS-VN12FCD-RC-027": {
+   "fingerprint": "ai1-63cccbfe"
+  },
+  "MS-VN12FCD-RC-046": {
+   "fingerprint": "ai1-7fdfddcd"
+  },
+  "MS-VN12FCONT-DER-002": {
+   "fingerprint": "ai1-7286f791"
+  },
+  "MS-VN12FCONT-DER-003": {
+   "fingerprint": "ai1-4c0934cb"
+  },
+  "MS-VN12FCONT-DER-006": {
+   "fingerprint": "ai1-e7460924"
+  },
+  "MS-VN12FCONT-DER-008": {
+   "fingerprint": "ai1-047612f0"
+  },
+  "MS-VN12FCONT-DER-021": {
+   "fingerprint": "ai1-a36dd3fc"
+  },
+  "MS-VN12FCONT-DER-022": {
+   "fingerprint": "ai1-42613ab4"
+  },
+  "MS-VN12FCONT-DER-042": {
+   "fingerprint": "ai1-0e1c023f"
+  },
+  "MS-VN12FCONT-EG-002": {
+   "fingerprint": "ai1-3fc1d65e"
+  },
+  "MS-VN12FCONT-EG-003": {
+   "fingerprint": "ai1-95fed176"
+  },
+  "MS-VN12FCONT-EG-007": {
+   "fingerprint": "ai1-4f99e2d4"
+  },
+  "MS-VN12FCONT-EG-008": {
+   "fingerprint": "ai1-5126f47b"
+  },
+  "MS-VN12FCONT-EG-022": {
+   "fingerprint": "ai1-9abbc2c6"
+  },
+  "MS-VN12FCONT-EG-023": {
+   "fingerprint": "ai1-bffbfdc4"
+  },
+  "MS-VN12FCONT-EG-048": {
+   "fingerprint": "ai1-98507f50"
+  },
+  "MS-VN12FCONT-LC-002": {
+   "fingerprint": "ai1-f5c3d85b"
+  },
+  "MS-VN12FCONT-LC-004": {
+   "fingerprint": "ai1-f28a59ec"
+  },
+  "MS-VN12FCONT-LC-006": {
+   "fingerprint": "ai1-0836b60b"
+  },
+  "MS-VN12FCONT-LC-010": {
+   "fingerprint": "ai1-c8865d17"
+  },
+  "MS-VN12FCONT-LC-021": {
+   "fingerprint": "ai1-0b80cb4e"
+  },
+  "MS-VN12FCONT-LC-022": {
+   "fingerprint": "ai1-eeb3827e"
+  },
+  "MS-VN12FCONT-LC-048": {
+   "fingerprint": "ai1-a08d0e6d"
+  },
+  "MS-VN12FCONT-OP-002": {
+   "fingerprint": "ai1-cb258a68"
+  },
+  "MS-VN12FCONT-OP-003": {
+   "fingerprint": "ai1-0834e68d"
+  },
+  "MS-VN12FCONT-OP-006": {
+   "fingerprint": "ai1-f9acbdbd"
+  },
+  "MS-VN12FCONT-OP-018": {
+   "fingerprint": "ai1-4f73f8a3"
+  },
+  "MS-VN12FCONT-OP-021": {
+   "fingerprint": "ai1-9c11cc7e"
+  },
+  "MS-VN12FCONT-OP-025": {
+   "fingerprint": "ai1-bd611352"
+  },
+  "MS-VN12FCONT-OP-049": {
+   "fingerprint": "ai1-d508da38"
+  },
+  "MS-VN12IE-DA-002": {
+   "fingerprint": "ai1-533743c9"
+  },
+  "MS-VN12IE-DA-003": {
+   "fingerprint": "ai1-59214c88"
+  },
+  "MS-VN12IE-DA-006": {
+   "fingerprint": "ai1-ca899ea1"
+  },
+  "MS-VN12IE-DA-015": {
+   "fingerprint": "ai1-33ccde4e"
+  },
+  "MS-VN12IE-DA-021": {
+   "fingerprint": "ai1-7dcb2a24"
+  },
+  "MS-VN12IE-DA-022": {
+   "fingerprint": "ai1-01d06661"
+  },
+  "MS-VN12IE-DA-046": {
+   "fingerprint": "ai1-8ffc4c02"
+  },
+  "MS-VN12IE-EST-002": {
+   "fingerprint": "ai1-a3a4645a"
+  },
+  "MS-VN12IE-EST-004": {
+   "fingerprint": "ai1-5297c268"
+  },
+  "MS-VN12IE-EST-006": {
+   "fingerprint": "ai1-f8807381"
+  },
+  "MS-VN12IE-EST-019": {
+   "fingerprint": "ai1-05a96738"
+  },
+  "MS-VN12IE-EST-021": {
+   "fingerprint": "ai1-daea6bc5"
+  },
+  "MS-VN12IE-EST-022": {
+   "fingerprint": "ai1-e745e6b3"
+  },
+  "MS-VN12IE-EST-046": {
+   "fingerprint": "ai1-4e481d50"
+  },
+  "MS-VN12IE-IA-002": {
+   "fingerprint": "ai1-7afcd816"
+  },
+  "MS-VN12IE-IA-005": {
+   "fingerprint": "ai1-57687b42"
+  },
+  "MS-VN12IE-IA-007": {
+   "fingerprint": "ai1-c4b085e5"
+  },
+  "MS-VN12IE-IA-008": {
+   "fingerprint": "ai1-aba4a0a5"
+  },
+  "MS-VN12IE-IA-021": {
+   "fingerprint": "ai1-902ddd8c"
+  },
+  "MS-VN12IE-IA-023": {
+   "fingerprint": "ai1-ac89904b"
+  },
+  "MS-VN12IE-IA-048": {
+   "fingerprint": "ai1-4977c014"
+  },
+  "MS-VN12IE-IC-002": {
+   "fingerprint": "ai1-3ac693ec"
+  },
+  "MS-VN12IE-IC-003": {
+   "fingerprint": "ai1-ec226f90"
+  },
+  "MS-VN12IE-IC-006": {
+   "fingerprint": "ai1-55d5c837"
+  },
+  "MS-VN12IE-IC-008": {
+   "fingerprint": "ai1-b948007d"
+  },
+  "MS-VN12IE-IC-021": {
+   "fingerprint": "ai1-924be6a5"
+  },
+  "MS-VN12IE-IC-023": {
+   "fingerprint": "ai1-8aab07be"
+  },
+  "MS-VN12IE-IC-045": {
+   "fingerprint": "ai1-bc3f6e1e"
+  },
+  "MS-VN12IE-TLC-002": {
+   "fingerprint": "ai1-857ed541"
+  },
+  "MS-VN12IE-TLC-003": {
+   "fingerprint": "ai1-4dbfd7b6"
+  },
+  "MS-VN12IE-TLC-006": {
+   "fingerprint": "ai1-c64e6c40"
+  },
+  "MS-VN12IE-TLC-014": {
+   "fingerprint": "ai1-06fe18b7"
+  },
+  "MS-VN12IE-TLC-021": {
+   "fingerprint": "ai1-2c60b5cd"
+  },
+  "MS-VN12IE-TLC-028": {
+   "fingerprint": "ai1-7a597b46"
+  },
+  "MS-VN12IE-TLC-040": {
+   "fingerprint": "ai1-7c2a8a8e"
+  },
+  "MS-VN12INT-AR-002": {
+   "fingerprint": "ai1-ca2f8f8b"
+  },
+  "MS-VN12INT-AR-003": {
+   "fingerprint": "ai1-c56f11de"
+  },
+  "MS-VN12INT-AR-006": {
+   "fingerprint": "ai1-df7f825b"
+  },
+  "MS-VN12INT-AR-009": {
+   "fingerprint": "ai1-c306750f"
+  },
+  "MS-VN12INT-AR-021": {
+   "fingerprint": "ai1-8c85c38f"
+  },
+  "MS-VN12INT-AR-022": {
+   "fingerprint": "ai1-ca86115a"
+  },
+  "MS-VN12INT-AR-043": {
+   "fingerprint": "ai1-ed79b3b9"
+  },
+  "MS-VN12INT-ID-002": {
+   "fingerprint": "ai1-61c3e6f4"
+  },
+  "MS-VN12INT-ID-004": {
+   "fingerprint": "ai1-259baa23"
+  },
+  "MS-VN12INT-ID-010": {
+   "fingerprint": "ai1-467d2822"
+  },
+  "MS-VN12INT-ID-016": {
+   "fingerprint": "ai1-d4c561c5"
+  },
+  "MS-VN12INT-ID-021": {
+   "fingerprint": "ai1-0912d831"
+  },
+  "MS-VN12INT-ID-024": {
+   "fingerprint": "ai1-c24669ed"
+  },
+  "MS-VN12INT-ID-037": {
+   "fingerprint": "ai1-2fd812cb"
+  },
+  "MS-VN12INT-PR-002": {
+   "fingerprint": "ai1-abfccd11"
+  },
+  "MS-VN12INT-PR-003": {
+   "fingerprint": "ai1-a354ecb6"
+  },
+  "MS-VN12INT-PR-006": {
+   "fingerprint": "ai1-28e13d35"
+  },
+  "MS-VN12INT-PR-015": {
+   "fingerprint": "ai1-efc93c94"
+  },
+  "MS-VN12INT-PR-025": {
+   "fingerprint": "ai1-a2b6c8af"
+  },
+  "MS-VN12INT-PR-027": {
+   "fingerprint": "ai1-6ce3aee3"
+  },
+  "MS-VN12INT-PR-049": {
+   "fingerprint": "ai1-149e77fd"
+  },
+  "MS-VN12INT-TFC-002": {
+   "fingerprint": "ai1-ffe72e2e"
+  },
+  "MS-VN12INT-TFC-003": {
+   "fingerprint": "ai1-e9f71d7c"
+  },
+  "MS-VN12INT-TFC-012": {
+   "fingerprint": "ai1-f29dc136"
+  },
+  "MS-VN12INT-TFC-016": {
+   "fingerprint": "ai1-df924480"
+  },
+  "MS-VN12INT-TFC-021": {
+   "fingerprint": "ai1-a4d267af"
+  },
+  "MS-VN12INT-TFC-022": {
+   "fingerprint": "ai1-100d9605"
+  },
+  "MS-VN12INT-TFC-041": {
+   "fingerprint": "ai1-6565533b"
+  },
+  "MS-VN12INT-TP-002": {
+   "fingerprint": "ai1-74849e75"
+  },
+  "MS-VN12INT-TP-003": {
+   "fingerprint": "ai1-fb4dac44"
+  },
+  "MS-VN12INT-TP-010": {
+   "fingerprint": "ai1-370677e1"
+  },
+  "MS-VN12INT-TP-015": {
+   "fingerprint": "ai1-03e545ed"
+  },
+  "MS-VN12INT-TP-032": {
+   "fingerprint": "ai1-4f02dcaa"
+  },
+  "MS-VN12INT-TP-033": {
+   "fingerprint": "ai1-cb9e212e"
+  },
+  "MS-VN12INT-TP-048": {
+   "fingerprint": "ai1-33c30ef9"
+  },
+  "MS-VN12MAT-AE-002": {
+   "fingerprint": "ai1-de9e1ab5"
+  },
+  "MS-VN12MAT-AE-003": {
+   "fingerprint": "ai1-c5657e89"
+  },
+  "MS-VN12MAT-AE-006": {
+   "fingerprint": "ai1-730b5707"
+  },
+  "MS-VN12MAT-AE-020": {
+   "fingerprint": "ai1-4d9cc378"
+  },
+  "MS-VN12MAT-AE-024": {
+   "fingerprint": "ai1-316faf6d"
+  },
+  "MS-VN12MAT-AE-028": {
+   "fingerprint": "ai1-1d489fb8"
+  },
+  "MS-VN12MAT-AE-045": {
+   "fingerprint": "ai1-0c2e2f56"
+  },
+  "MS-VN12MAT-MOD-002": {
+   "fingerprint": "ai1-a7dfed72"
+  },
+  "MS-VN12MAT-MOD-003": {
+   "fingerprint": "ai1-8c89eae7"
+  },
+  "MS-VN12MAT-MOD-006": {
+   "fingerprint": "ai1-106df897"
+  },
+  "MS-VN12MAT-MOD-009": {
+   "fingerprint": "ai1-3f7e36a1"
+  },
+  "MS-VN12MAT-MOD-021": {
+   "fingerprint": "ai1-131ecb5c"
+  },
+  "MS-VN12MAT-MOD-022": {
+   "fingerprint": "ai1-3a13b5df"
+  },
+  "MS-VN12MAT-MOD-050": {
+   "fingerprint": "ai1-68362c8f"
+  },
+  "MS-VN12MAT-PRD-002": {
+   "fingerprint": "ai1-125c6f0a"
+  },
+  "MS-VN12MAT-PRD-003": {
+   "fingerprint": "ai1-fde01854"
+  },
+  "MS-VN12MAT-PRD-007": {
+   "fingerprint": "ai1-5c85d293"
+  },
+  "MS-VN12MAT-PRD-017": {
+   "fingerprint": "ai1-29efb909"
+  },
+  "MS-VN12MAT-PRD-021": {
+   "fingerprint": "ai1-8a754e63"
+  },
+  "MS-VN12MAT-PRD-022": {
+   "fingerprint": "ai1-9b3061b9"
+  },
+  "MS-VN12MAT-PRD-045": {
+   "fingerprint": "ai1-04b57232"
+  },
+  "MS-VN12MAT-RT-002": {
+   "fingerprint": "ai1-e733c560"
+  },
+  "MS-VN12MAT-RT-003": {
+   "fingerprint": "ai1-9b2b6a0f"
+  },
+  "MS-VN12MAT-RT-006": {
+   "fingerprint": "ai1-2822fd0b"
+  },
+  "MS-VN12MAT-RT-008": {
+   "fingerprint": "ai1-0d68006f"
+  },
+  "MS-VN12MAT-RT-027": {
+   "fingerprint": "ai1-96c31874"
+  },
+  "MS-VN12MAT-RT-032": {
+   "fingerprint": "ai1-fb8f0178"
+  },
+  "MS-VN12MAT-RT-039": {
+   "fingerprint": "ai1-86cc4120"
+  },
+  "MS-VN12MAT-TR-002": {
+   "fingerprint": "ai1-22c31711"
+  },
+  "MS-VN12MAT-TR-003": {
+   "fingerprint": "ai1-23456895"
+  },
+  "MS-VN12MAT-TR-007": {
+   "fingerprint": "ai1-3e31ad84"
+  },
+  "MS-VN12MAT-TR-008": {
+   "fingerprint": "ai1-a65aa3dd"
+  },
+  "MS-VN12MAT-TR-021": {
+   "fingerprint": "ai1-c5c3aed9"
+  },
+  "MS-VN12MAT-TR-023": {
+   "fingerprint": "ai1-58fae0ca"
+  },
+  "MS-VN12MAT-TR-037": {
+   "fingerprint": "ai1-e0ea49ae"
+  },
+  "MS-VN12PROB-CI-002": {
+   "fingerprint": "ai1-a1a96722"
+  },
+  "MS-VN12PROB-CI-003": {
+   "fingerprint": "ai1-307ade48"
+  },
+  "MS-VN12PROB-CI-006": {
+   "fingerprint": "ai1-997f9695"
+  },
+  "MS-VN12PROB-CI-009": {
+   "fingerprint": "ai1-758b814e"
+  },
+  "MS-VN12PROB-CI-021": {
+   "fingerprint": "ai1-6561f739"
+  },
+  "MS-VN12PROB-CI-022": {
+   "fingerprint": "ai1-2fc62577"
+  },
+  "MS-VN12PROB-CI-045": {
+   "fingerprint": "ai1-8a814d70"
+  },
+  "MS-VN12PROB-FA-002": {
+   "fingerprint": "ai1-28592edf"
+  },
+  "MS-VN12PROB-FA-003": {
+   "fingerprint": "ai1-08441e1a"
+  },
+  "MS-VN12PROB-FA-006": {
+   "fingerprint": "ai1-d0d61906"
+  },
+  "MS-VN12PROB-FA-019": {
+   "fingerprint": "ai1-15295699"
+  },
+  "MS-VN12PROB-FA-025": {
+   "fingerprint": "ai1-ceffa093"
+  },
+  "MS-VN12PROB-FA-026": {
+   "fingerprint": "ai1-f525093d"
+  },
+  "MS-VN12PROB-FA-047": {
+   "fingerprint": "ai1-a2a8f998"
+  },
+  "MS-VN12PROB-NO-004": {
+   "fingerprint": "ai1-fa3fc4d8"
+  },
+  "MS-VN12PROB-NO-005": {
+   "fingerprint": "ai1-0a7c4be5"
+  },
+  "MS-VN12PROB-NO-006": {
+   "fingerprint": "ai1-38bedd07"
+  },
+  "MS-VN12PROB-NO-009": {
+   "fingerprint": "ai1-0c94331c"
+  },
+  "MS-VN12PROB-NO-024": {
+   "fingerprint": "ai1-a509e168"
+  },
+  "MS-VN12PROB-NO-027": {
+   "fingerprint": "ai1-25d98466"
+  },
+  "MS-VN12PROB-NO-045": {
+   "fingerprint": "ai1-9d259725"
+  },
+  "MS-VN12PROB-PA-002": {
+   "fingerprint": "ai1-1040ddb2"
+  },
+  "MS-VN12PROB-PA-003": {
+   "fingerprint": "ai1-4e5be4af"
+  },
+  "MS-VN12PROB-PA-006": {
+   "fingerprint": "ai1-b7fca416"
+  },
+  "MS-VN12PROB-PA-017": {
+   "fingerprint": "ai1-4e72918f"
+  },
+  "MS-VN12PROB-PA-021": {
+   "fingerprint": "ai1-9639e2db"
+  },
+  "MS-VN12PROB-PA-022": {
+   "fingerprint": "ai1-d0d627e7"
+  },
+  "MS-VN12PROB-PA-045": {
+   "fingerprint": "ai1-94e102fa"
+  },
+  "MS-VN12PROB-PC-002": {
+   "fingerprint": "ai1-d35dcc56"
+  },
+  "MS-VN12PROB-PC-003": {
+   "fingerprint": "ai1-0ae36f6b"
+  },
+  "MS-VN12PROB-PC-006": {
+   "fingerprint": "ai1-35237ab5"
+  },
+  "MS-VN12PROB-PC-010": {
+   "fingerprint": "ai1-c1ed6307"
+  },
+  "MS-VN12PROB-PC-021": {
+   "fingerprint": "ai1-50a0bc8f"
+  },
+  "MS-VN12PROB-PC-022": {
+   "fingerprint": "ai1-96fbb4b8"
+  },
+  "MS-VN12PROB-PC-046": {
+   "fingerprint": "ai1-3ffb5de0"
+  },
+  "MS-VN12PROB-PR-002": {
+   "fingerprint": "ai1-c3b1a932"
+  },
+  "MS-VN12PROB-PR-003": {
+   "fingerprint": "ai1-c36b2ce4"
+  },
+  "MS-VN12PROB-PR-006": {
+   "fingerprint": "ai1-fe8fa3e4"
+  },
+  "MS-VN12PROB-PR-012": {
+   "fingerprint": "ai1-d00c78ef"
+  },
+  "MS-VN12PROB-PR-021": {
+   "fingerprint": "ai1-16757b3c"
+  },
+  "MS-VN12PROB-PR-022": {
+   "fingerprint": "ai1-82dd43ac"
+  },
+  "MS-VN12PROB-PR-045": {
+   "fingerprint": "ai1-888136e9"
+  },
+  "MS-VN12PROB-PT-002": {
+   "fingerprint": "ai1-d3062b46"
+  },
+  "MS-VN12PROB-PT-003": {
+   "fingerprint": "ai1-79fc6750"
+  },
+  "MS-VN12PROB-PT-006": {
+   "fingerprint": "ai1-6c0d2442"
+  },
+  "MS-VN12PROB-PT-012": {
+   "fingerprint": "ai1-ac259623"
+  },
+  "MS-VN12PROB-PT-021": {
+   "fingerprint": "ai1-a9283b5d"
+  },
+  "MS-VN12PROB-PT-022": {
+   "fingerprint": "ai1-d882adff"
+  },
+  "MS-VN12PROB-PT-046": {
+   "fingerprint": "ai1-414a8f87"
+  },
+  "MS-VN12PROB-VD-002": {
+   "fingerprint": "ai1-d4314bb6"
+  },
+  "MS-VN12PROB-VD-003": {
+   "fingerprint": "ai1-c1294ff8"
+  },
+  "MS-VN12PROB-VD-006": {
+   "fingerprint": "ai1-f4272e10"
+  },
+  "MS-VN12PROB-VD-014": {
+   "fingerprint": "ai1-44c069d4"
+  },
+  "MS-VN12PROB-VD-021": {
+   "fingerprint": "ai1-2ded79ce"
+  },
+  "MS-VN12PROB-VD-022": {
+   "fingerprint": "ai1-8b418c75"
+  },
+  "MS-VN12PROB-VD-043": {
+   "fingerprint": "ai1-0d760e3d"
+  },
+  "MS-VN12RAE-BIS-002": {
+   "fingerprint": "ai1-8be69505"
+  },
+  "MS-VN12RAE-BIS-003": {
+   "fingerprint": "ai1-9d913869"
+  },
+  "MS-VN12RAE-BIS-006": {
+   "fingerprint": "ai1-6b104261"
+  },
+  "MS-VN12RAE-BIS-008": {
+   "fingerprint": "ai1-8c93d231"
+  },
+  "MS-VN12RAE-BIS-021": {
+   "fingerprint": "ai1-3170deed"
+  },
+  "MS-VN12RAE-BIS-022": {
+   "fingerprint": "ai1-63269028"
+  },
+  "MS-VN12RAE-BIS-044": {
+   "fingerprint": "ai1-29e9cc59"
+  },
+  "MS-VN12RAE-BL-002": {
+   "fingerprint": "ai1-76c6587b"
+  },
+  "MS-VN12RAE-BL-004": {
+   "fingerprint": "ai1-6457a21d"
+  },
+  "MS-VN12RAE-BL-006": {
+   "fingerprint": "ai1-c6e47332"
+  },
+  "MS-VN12RAE-BL-007": {
+   "fingerprint": "ai1-c9b166ca"
+  },
+  "MS-VN12RAE-BL-021": {
+   "fingerprint": "ai1-b9759bbf"
+  },
+  "MS-VN12RAE-BL-022": {
+   "fingerprint": "ai1-8c233b2f"
+  },
+  "MS-VN12RAE-BL-044": {
+   "fingerprint": "ai1-00e1be7b"
+  },
+  "MS-VN12RAE-NEW-002": {
+   "fingerprint": "ai1-f71e612b"
+  },
+  "MS-VN12RAE-NEW-003": {
+   "fingerprint": "ai1-e9f2d1bd"
+  },
+  "MS-VN12RAE-NEW-006": {
+   "fingerprint": "ai1-a228aafd"
+  },
+  "MS-VN12RAE-NEW-013": {
+   "fingerprint": "ai1-a5fc8329"
+  },
+  "MS-VN12RAE-NEW-021": {
+   "fingerprint": "ai1-2b803a32"
+  },
+  "MS-VN12RAE-NEW-026": {
+   "fingerprint": "ai1-34d8ff81"
+  },
+  "MS-VN12RAE-NEW-046": {
+   "fingerprint": "ai1-1a4a2a0a"
+  },
+  "SEL-COMP-10FUN-1": {
+   "fingerprint": "ai1-0350aea6"
+  },
+  "VN10FUN-DIZ-001": {
+   "fingerprint": "ai1-7a86541d"
+  },
+  "VN10FUN-DIZ-002": {
+   "fingerprint": "ai1-c0ee78d1"
+  },
+  "VN10FUN-DIZ-003": {
+   "fingerprint": "ai1-befa91f0"
+  },
+  "VN10FUN-DIZ-004": {
+   "fingerprint": "ai1-85fdef83"
+  },
+  "VN10FUN-DIZ-005": {
+   "fingerprint": "ai1-eaf421d2"
+  },
+  "VN10FUN-DIZ-006": {
+   "fingerprint": "ai1-dee35d27"
+  },
+  "VN10FUN-DIZ-007": {
+   "fingerprint": "ai1-7eb3ce2f"
+  },
+  "VN10FUN-DIZ-008": {
+   "fingerprint": "ai1-d4ee5ca7"
+  },
+  "VN10FUN-DIZ-009": {
+   "fingerprint": "ai1-0f9aeeee"
+  },
+  "VN10FUN-DIZ-010": {
+   "fingerprint": "ai1-5b8ed04b"
+  },
+  "VN10FUN-DIZ-011": {
+   "fingerprint": "ai1-7c65baf8"
+  },
+  "VN10FUN-DIZ-012": {
+   "fingerprint": "ai1-8678b6f2"
+  },
+  "VN10FUN-DIZ-013": {
+   "fingerprint": "ai1-fabdd9b4"
+  },
+  "VN10FUN-DIZ-014": {
+   "fingerprint": "ai1-f3b388e2"
+  },
+  "VN10FUN-DIZ-015": {
+   "fingerprint": "ai1-622a31fe"
+  },
+  "VN10FUN-DIZ-016": {
+   "fingerprint": "ai1-e726b931"
+  },
+  "VN10FUN-DIZ-017": {
+   "fingerprint": "ai1-a089ac42"
+  },
+  "VN10FUN-DIZ-018": {
+   "fingerprint": "ai1-1e89994a"
+  },
+  "VN10FUN-DIZ-019": {
+   "fingerprint": "ai1-2ffecc8f"
+  },
+  "VN10FUN-DIZ-020": {
+   "fingerprint": "ai1-c2910b7d"
+  },
+  "VN10FUN-DIZ-021": {
+   "fingerprint": "ai1-9ec6a79d"
+  },
+  "VN10FUN-DIZ-022": {
+   "fingerprint": "ai1-9721f782"
+  },
+  "VN10FUN-DIZ-023": {
+   "fingerprint": "ai1-7a9d3a25"
+  },
+  "VN10FUN-DIZ-024": {
+   "fingerprint": "ai1-4f5db015"
+  },
+  "VN10FUN-DIZ-025": {
+   "fingerprint": "ai1-d1be9563"
+  },
+  "VN10FUN-DIZ-026": {
+   "fingerprint": "ai1-40b5878b"
+  },
+  "VN10FUN-DIZ-027": {
+   "fingerprint": "ai1-4a524236"
+  },
+  "VN10FUN-DIZ-028": {
+   "fingerprint": "ai1-31e35ac4"
+  },
+  "VN10FUN-DIZ-029": {
+   "fingerprint": "ai1-43e8a06b"
+  },
+  "VN10FUN-DIZ-030": {
+   "fingerprint": "ai1-7b95125b"
+  },
+  "VN10FUN-DIZ-031": {
+   "fingerprint": "ai1-f9b07bbe"
+  },
+  "VN10FUN-DIZ-032": {
+   "fingerprint": "ai1-86ce0f1b"
+  },
+  "VN10FUN-DIZ-033": {
+   "fingerprint": "ai1-21e2226f"
+  },
+  "VN10FUN-DIZ-034": {
+   "fingerprint": "ai1-2cba1360"
+  },
+  "VN10FUN-DIZ-035": {
+   "fingerprint": "ai1-37d04462"
+  },
+  "VN10FUN-DIZ-036": {
+   "fingerprint": "ai1-2f14bc69"
+  },
+  "VN10FUN-DIZ-037": {
+   "fingerprint": "ai1-caac5774"
+  },
+  "VN10FUN-DIZ-038": {
+   "fingerprint": "ai1-0fdca8f2"
+  },
+  "VN10FUN-DIZ-039": {
+   "fingerprint": "ai1-659b9bb3"
+  },
+  "VN10FUN-DIZ-040": {
+   "fingerprint": "ai1-e56c6793"
+  },
+  "VN10FUN-DIZ-041": {
+   "fingerprint": "ai1-95d7a452"
+  },
+  "VN10FUN-DIZ-042": {
+   "fingerprint": "ai1-ffe8d103"
+  },
+  "VN10FUN-DIZ-043": {
+   "fingerprint": "ai1-0a5c7d81"
+  },
+  "VN10FUN-DIZ-044": {
+   "fingerprint": "ai1-a29f0eed"
+  },
+  "VN10FUN-DIZ-045": {
+   "fingerprint": "ai1-2b061ec3"
+  },
+  "VN10FUN-DIZ-046": {
+   "fingerprint": "ai1-4ff9775e"
+  },
+  "VN10FUN-DIZ-047": {
+   "fingerprint": "ai1-90737fdb"
+  },
+  "VN10FUN-DIZ-048": {
+   "fingerprint": "ai1-25ba5f4b"
+  },
+  "VN10FUN-DIZ-049": {
+   "fingerprint": "ai1-d4342329"
+  },
+  "VN10FUN-DIZ-050": {
+   "fingerprint": "ai1-a86f4b95"
+  },
+  "VN10GA-VET-001": {
+   "fingerprint": "ai1-5345ef87"
+  },
+  "VN10GA-VET-002": {
+   "fingerprint": "ai1-b6a045b6"
+  },
+  "VN10GA-VET-003": {
+   "fingerprint": "ai1-eb477efb"
+  },
+  "VN10GA-VET-004": {
+   "fingerprint": "ai1-eea3bfe9"
+  },
+  "VN10GA-VET-005": {
+   "fingerprint": "ai1-4d1c1ee5"
+  },
+  "VN10GA-VET-006": {
+   "fingerprint": "ai1-b47eb8ad"
+  },
+  "VN10GA-VET-007": {
+   "fingerprint": "ai1-029b68c6"
+  },
+  "VN10GA-VET-008": {
+   "fingerprint": "ai1-6d9e9bf3"
+  },
+  "VN10GA-VET-009": {
+   "fingerprint": "ai1-da4e7f53"
+  },
+  "VN10GA-VET-010": {
+   "fingerprint": "ai1-eecdb3e9"
+  },
+  "VN10GA-VET-011": {
+   "fingerprint": "ai1-ea9f8d94"
+  },
+  "VN10GA-VET-012": {
+   "fingerprint": "ai1-c3abdea8"
+  },
+  "VN10GA-VET-013": {
+   "fingerprint": "ai1-10131b8f"
+  },
+  "VN10GA-VET-014": {
+   "fingerprint": "ai1-f6bda377"
+  },
+  "VN10GA-VET-015": {
+   "fingerprint": "ai1-ca177742"
+  },
+  "VN10GA-VET-016": {
+   "fingerprint": "ai1-870e3b66"
+  },
+  "VN10GA-VET-017": {
+   "fingerprint": "ai1-84f9650d"
+  },
+  "VN10GA-VET-018": {
+   "fingerprint": "ai1-c3774b95"
+  },
+  "VN10GA-VET-019": {
+   "fingerprint": "ai1-0c2840d0"
+  },
+  "VN10GA-VET-020": {
+   "fingerprint": "ai1-10d6776e"
+  },
+  "VN10GA-VET-021": {
+   "fingerprint": "ai1-8dc5e5ed"
+  },
+  "VN10GA-VET-022": {
+   "fingerprint": "ai1-ef32e8ab"
+  },
+  "VN10GA-VET-023": {
+   "fingerprint": "ai1-a5ee0e8d"
+  },
+  "VN10GA-VET-024": {
+   "fingerprint": "ai1-437789d1"
+  },
+  "VN10GA-VET-025": {
+   "fingerprint": "ai1-7a62a6b9"
+  },
+  "VN10GA-VET-026": {
+   "fingerprint": "ai1-72b0de27"
+  },
+  "VN10GA-VET-027": {
+   "fingerprint": "ai1-21bc5b63"
+  },
+  "VN10GA-VET-028": {
+   "fingerprint": "ai1-6a1d9a5b"
+  },
+  "VN10GA-VET-029": {
+   "fingerprint": "ai1-645d9019"
+  },
+  "VN10GA-VET-030": {
+   "fingerprint": "ai1-3a8fa1d9"
+  },
+  "VN10GA-VET-031": {
+   "fingerprint": "ai1-2345a61a"
+  },
+  "VN10GA-VET-032": {
+   "fingerprint": "ai1-8d6d65d7"
+  },
+  "VN10GA-VET-033": {
+   "fingerprint": "ai1-0675bebc"
+  },
+  "VN10GA-VET-034": {
+   "fingerprint": "ai1-e7f6248a"
+  },
+  "VN10GA-VET-035": {
+   "fingerprint": "ai1-60399bd9"
+  },
+  "VN10GA-VET-036": {
+   "fingerprint": "ai1-1fc1d6c6"
+  },
+  "VN10GA-VET-037": {
+   "fingerprint": "ai1-6f70b719"
+  },
+  "VN10GA-VET-038": {
+   "fingerprint": "ai1-5df0176b"
+  },
+  "VN10GA-VET-039": {
+   "fingerprint": "ai1-962ef248"
+  },
+  "VN10GA-VET-040": {
+   "fingerprint": "ai1-c3143d6f"
+  },
+  "VN10GA-VET-041": {
+   "fingerprint": "ai1-5ee315c1"
+  },
+  "VN10GA-VET-042": {
+   "fingerprint": "ai1-d0fd54b0"
+  },
+  "VN10GA-VET-043": {
+   "fingerprint": "ai1-2ea5f11c"
+  },
+  "VN10GA-VET-044": {
+   "fingerprint": "ai1-7a84d4b9"
+  },
+  "VN10GA-VET-045": {
+   "fingerprint": "ai1-0c4ad71d"
+  },
+  "VN10GA-VET-046": {
+   "fingerprint": "ai1-008fe27d"
+  },
+  "VN10GA-VET-047": {
+   "fingerprint": "ai1-25022abe"
+  },
+  "VN10GA-VET-048": {
+   "fingerprint": "ai1-c8e6a7f9"
+  },
+  "VN10GA-VET-049": {
+   "fingerprint": "ai1-0af09e04"
+  },
+  "VN10GA-VET-050": {
+   "fingerprint": "ai1-f8510e9a"
+  }
+ }
+}

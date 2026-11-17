@@ -21,8 +21,8 @@
       "o": [
         "não pode ser previsto com certeza antes da realização.",
         "é sempre o mesmo.",
-        "é necessariamente numérico.",
-        "é impossível de observar."
+        "tem a mesma probabilidade que todos os restantes.",
+        "pertence a um conjunto de resultados que só se conhece após a realização."
       ],
       "a": 0,
       "sol": "Num fenómeno aleatório conhecem-se os resultados possíveis, mas não o que ocorrerá numa realização concreta.",
@@ -71,12 +71,12 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "No lançamento de uma moeda, um espaço de resultados possível é...",
+      "q": "Lança-se uma moeda comum uma vez e regista-se a face que fica para cima. Qual é o espaço de resultados?",
       "o": [
         "{cara}.",
-        "{0,1,2}.",
+        "{coroa}.",
         "{cara,coroa}.",
-        "{cara,cara}."
+        "{cara,coroa,duas caras}."
       ],
       "a": 2,
       "sol": "Há dois resultados elementares possíveis: cara e coroa.",
@@ -719,7 +719,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Ao lançar duas moedas, um espaço de resultados ordenado pode ser...",
+      "q": "Lançam-se duas moedas. Registam-se pela ordem da primeira e da segunda moeda as faces observadas, usando C para cara e K para coroa. Qual é o espaço de resultados deste registo?",
       "o": [
         "{C,K}.",
         "{CC,KK}.",

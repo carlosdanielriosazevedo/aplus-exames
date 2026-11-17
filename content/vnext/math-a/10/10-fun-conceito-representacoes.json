@@ -154,10 +154,10 @@
       "cognitive": "Compreensão",
       "q": "Uma função pode ser representada por...",
       "o": [
-        "apenas uma fórmula.",
+        "uma fórmula ou uma tabela, mas nunca um gráfico.",
         "uma fórmula, tabela, gráfico ou descrição verbal adequada.",
-        "apenas um gráfico.",
-        "apenas uma tabela."
+        "um gráfico ou uma tabela, mas nunca uma descrição verbal.",
+        "uma tabela ou uma descrição verbal, mas nunca uma fórmula."
       ],
       "a": 1,
       "sol": "Uma função pode ter diferentes representações equivalentes.",
@@ -179,12 +179,12 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Numa tabela de uma função, a mesma entrada aparece associada a 4 e a 6. A tabela representa uma função?",
+      "q": "Numa tabela de correspondência, a mesma entrada aparece associada ao valor 4 e ao valor 6. Pode a tabela representar uma função?",
       "o": [
-        "Sim.",
-        "Só se 4=6.",
-        "Não.",
-        "Só se houver mais entradas."
+        "Sim, porque os valores de saída são diferentes.",
+        "Não, porque as entradas devem ser 4 e 6.",
+        "Não, porque uma entrada tem duas saídas diferentes.",
+        "Sim, porque cada linha da tabela tem uma única saída."
       ],
       "a": 2,
       "sol": "Uma mesma entrada não pode ter duas imagens diferentes numa função.",
@@ -584,15 +584,15 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se f(2)=3 e f(3)=2, pode concluir-se que f não é função?",
+      "q": "Uma tabela contém apenas os pares (2; 3) e (3; 2). Estes pares impedem que a tabela represente uma função?",
       "o": [
-        "Sim.",
-        "Não.",
-        "Só se f(2)=f(3).",
-        "Só se o domínio for inteiro."
+        "Sim, pois a saída 3 também aparece como entrada.",
+        "Não, pois as entradas 2 e 3 têm uma saída cada.",
+        "Sim, pois as duas entradas têm saídas diferentes.",
+        "Não, pois a saída de um par deve ser a entrada no outro."
       ],
       "a": 1,
-      "sol": "É perfeitamente possível duas entradas trocarem imagens; cada entrada continua a ter uma única saída.",
+      "sol": "As duas entradas são distintas. A entrada 2 tem apenas a saída 3, e a entrada 3 tem apenas a saída 2. Assim, a tabela pode representar uma função.",
       "hyp": "Pode confundir função com monotonia ou injetividade.",
       "contexts": [
         "mission",
@@ -989,15 +989,15 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "No domínio R, f(x)=(x²−1)/(x−1) e g(x)=x+1 definem a mesma função?",
+      "q": "Considera as expressões f(x)=(x²−1)/(x−1) e g(x)=x+1, cada uma com o seu domínio real natural. Definem a mesma função?",
       "o": [
         "Não, porque f não está definida em x=1 e g está.",
         "Sim, porque simplificam para a mesma expressão.",
-        "Sim, sempre que x≠0.",
-        "Não, porque os gráficos nunca coincidem."
+        "Sim, porque os dois domínios excluem x=1.",
+        "Não, porque os gráficos só coincidem em x=1."
       ],
       "a": 0,
-      "sol": "Apesar de f(x)=x+1 para x≠1, os domínios diferem em x=1.",
+      "sol": "Se x≠1, podemos cancelar o fator x−1 no numerador e no denominador de f. Então f(x)=x+1 para esses valores. Porém, f não está definida em x=1, ao passo que g(1)=2. Os domínios são diferentes.",
       "hyp": "Pode simplificar uma expressão e esquecer restrições do domínio.",
       "contexts": [
         "mission",

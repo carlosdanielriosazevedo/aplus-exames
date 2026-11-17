@@ -71,7 +71,7 @@
       "year": "12.º opcional",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "A matriz [[k,0],[0,k]] representa...",
+      "q": "Para k>0, que transformação do plano representa a matriz [[k,0],[0,k]]?",
       "o": [
         "uma rotação de 90°.",
         "uma reflexão no eixo Ox.",
@@ -638,12 +638,12 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Uma reflexão axial preserva...",
+      "q": "Qual das afirmações descreve corretamente o efeito de uma reflexão axial nas distâncias e na orientação do plano?",
       "o": [
-        "apenas distâncias à origem e não entre pontos.",
-        "sempre as coordenadas.",
-        "a orientação.",
-        "distâncias, mas inverte a orientação."
+        "Preserva as distâncias à origem, mas altera as distâncias entre pontos.",
+        "Preserva as distâncias e a posição de todos os pontos.",
+        "Preserva as distâncias e mantém a orientação.",
+        "Preserva as distâncias e inverte a orientação."
       ],
       "a": 3,
       "sol": "Reflexões são isometrias, mas trocam orientação.",

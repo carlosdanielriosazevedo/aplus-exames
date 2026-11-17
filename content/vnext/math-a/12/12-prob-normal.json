@@ -20,12 +20,12 @@
       "q": "A variância de uma variável aleatória mede sobretudo...",
       "o": [
         "a dispersão em torno do valor médio.",
-        "a probabilidade total.",
-        "o valor máximo.",
-        "a mediana sempre."
+        "a diferença entre a média e a mediana.",
+        "a amplitude entre os valores extremos.",
+        "a dispersão em torno do valor mais frequente."
       ],
       "a": 0,
-      "sol": "A variância quantifica a variabilidade relativamente à média.",
+      "sol": "Quando existe, a variância é o valor esperado do quadrado da diferença entre X e a sua média.",
       "hyp": "Pode confundir dispersão com localização.",
       "contexts": [
         "mission",
@@ -719,7 +719,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "X~N(70,10). O intervalo μ±σ é...",
+      "q": "Uma variável normal X tem média μ=70 e desvio-padrão σ=10. Qual é o intervalo [μ−σ, μ+σ]?",
       "o": [
         "[50,90].",
         "[70,80].",
@@ -727,7 +727,7 @@
         "[60,90]."
       ],
       "a": 2,
-      "sol": "70−10=60 e 70+10=80.",
+      "sol": "O limite inferior é 70−10=60 e o superior é 70+10=80. O intervalo é [60, 80].",
       "hyp": "Pode somar/descontar2σ.",
       "contexts": [
         "mission",
@@ -1205,7 +1205,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Alturas têm modelo N(170,6). Uma altura 182 cm está a...",
+      "q": "As alturas seguem uma distribuição normal com média 170 cm e desvio-padrão 6 cm. Onde se situa uma altura de 182 cm em relação à média, em unidades de desvio-padrão?",
       "o": [
         "2 desvios-padrão acima da média.",
         "12 desvios-padrão acima.",
@@ -1213,7 +1213,7 @@
         "2 abaixo."
       ],
       "a": 0,
-      "sol": "(182−170)/6=2.",
+      "sol": "A diferença 182−170=12 cm corresponde a 12/6=2 desvios-padrão acima da média.",
       "hyp": "Pode usar a diferença 12 como número de desvios.",
       "contexts": [
         "mission",

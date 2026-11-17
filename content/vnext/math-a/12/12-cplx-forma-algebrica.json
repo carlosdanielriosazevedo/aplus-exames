@@ -20,9 +20,9 @@
       "q": "A forma algébrica de um número complexo é...",
       "o": [
         "a+bi, com a,b reais.",
-        "a/b.",
-        "a+bx.",
-        "r(cosθ+i sinθ) apenas."
+        "a+bi, com a real e b sempre positivo.",
+        "a+bi, com a real e b sempre diferente de zero.",
+        "a+bi, com a inteiro e b real."
       ],
       "a": 0,
       "sol": "Todo complexo pode escrever-se como a+bi.",
@@ -206,9 +206,9 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Um número real r, visto em C, escreve-se...",
+      "q": "Um número real r, considerado como elemento de ℂ, escreve-se em forma algébrica como...",
       "o": [
-        "0+ri.",
+        "−r+0i.",
         "ri.",
         "r+i.",
         "r+0i."
@@ -1016,7 +1016,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Se z=(m+2)+(m²−4)i é imaginário puro (admitindo zero), então...",
+      "q": "Seja m real. Para que valor de m tem z=(m+2)+(m²−4)i parte real nula?",
       "o": [
         "m=2.",
         "m=−2.",
@@ -1024,7 +1024,7 @@
         "m=0."
       ],
       "a": 1,
-      "sol": "Parte real zero implica m=−2; nesse caso z=0, que satisfaz a condição admitindo zero.",
+      "sol": "A parte real é m+2, pelo que m+2=0 equivale a m=−2. Para esse valor também se obtém m²−4=0, logo z=0.",
       "hyp": "Pode não verificar ambas as condições.",
       "contexts": [
         "mission",

@@ -5,7 +5,11 @@
 // alterado perde automaticamente a aprovação anterior).
 import {validationHash} from "./validationFingerprint.js";
 
-const REVIEWED_FIELDS=["prompt","stimulus","passageText","options","answerIndex","explanation","steps","criteria","acceptedAnswers","referenceAnswer","rubric","wordLimit"];
+const REVIEWED_FIELDS=[
+  "prompt","stimulus","passageText","options","answerIndex","explanation","steps","criteria","acceptedAnswers","referenceAnswer","rubric","wordLimit",
+  // O motor de Matemática usa campos próprios, incluindo os passos e critérios em response.
+  "q","o","a","sol","response"
+];
 
 export function aiReviewFingerprint(item){
   const payload={id:item?.id||null};

@@ -71,15 +71,15 @@
       "year": "10.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "Se A=(1,2) e B=(4,6), então AB=",
+      "q": "O vetor de posição de A é (−2, −1). O ponto B é a imagem da origem pela translação de vetor (1, 3). Quais são as componentes do vetor AB?",
       "o": [
-        "(5,8).",
+        "(−1,2).",
         "(−3,−4).",
         "(3,4).",
-        "(2,3)."
+        "(1,3)."
       ],
       "a": 2,
-      "sol": "(4−1,6−2)=(3,4).",
+      "sol": "O vetor de posição dá A=(−2, −1) e a translação da origem dá B=(1, 3). Para calcular o vetor de A para B, subtrai-se cada coordenada de A à de B. Resulta (1−(−2), 3−(−1))=(3, 4).",
       "hyp": "Pode somar coordenadas ou inverter o sentido.",
       "contexts": [
         "mission",
@@ -125,7 +125,7 @@
       "year": "10.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "A norma de v=(a,b) é...",
+      "q": "Num referencial ortonormado do plano, qual é a norma do vetor v=(a, b)?",
       "o": [
         "√(a²+b²).",
         "a+b.",
@@ -133,7 +133,7 @@
         "ab."
       ],
       "a": 0,
-      "sol": "A norma é o comprimento do vetor.",
+      "sol": "Num referencial ortonormado, as projeções do vetor sobre os eixos formam os catetos de um triângulo retângulo, com comprimentos |a| e |b|. Pelo teorema de Pitágoras, a norma de v é √(a²+b²), fórmula que vale também quando uma componente é nula.",
       "hyp": "Pode confundir norma com soma das componentes.",
       "contexts": [
         "mission",
@@ -241,7 +241,7 @@
         "(a,−b)."
       ],
       "a": 0,
-      "sol": "O vetor oposto tem mesma norma e direção, mas sentido contrário.",
+      "sol": "O vetor oposto é −v=(−a, −b), porque v+(−v) é o vetor nulo. Quando v é diferente de zero, a multiplicação por −1 conserva a direção e a norma e inverte o sentido. O vetor nulo é o seu próprio oposto.",
       "hyp": "Pode mudar só uma componente.",
       "contexts": [
         "mission",
@@ -449,15 +449,15 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Se v=2u, então v e u são...",
+      "q": "Se u é um vetor não nulo e v=2u, qual é a relação entre v e u?",
       "o": [
-        "colineares e com o mesmo sentido se u≠0.",
-        "perpendiculares.",
-        "sempre de mesma norma.",
-        "não relacionados."
+        "São colineares e têm o mesmo sentido.",
+        "São perpendiculares.",
+        "Têm a mesma norma.",
+        "São colineares e de sentidos opostos."
       ],
       "a": 0,
-      "sol": "Um múltiplo escalar positivo preserva direção e sentido.",
+      "sol": "Como v é um múltiplo de u, os vetores têm a mesma direção. O fator 2 é positivo, por isso os dois vetores têm o mesmo sentido. A norma de v é o dobro da norma de u.",
       "hyp": "Pode confundir colinearidade com igualdade.",
       "contexts": [
         "mission",
@@ -719,15 +719,15 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Dois vetores não nulos são colineares se...",
+      "q": "Qual é a condição necessária e suficiente para que dois vetores não nulos sejam colineares?",
       "o": [
         "têm a mesma norma.",
-        "a soma é zero sempre.",
+        "a sua soma é o vetor nulo.",
         "um é múltiplo escalar do outro.",
         "as primeiras componentes são iguais."
       ],
       "a": 2,
-      "sol": "Proporcionalidade das componentes caracteriza direção comum.",
+      "sol": "Dois vetores não nulos são colineares exatamente quando um é um múltiplo do outro. Os vetores opostos são um caso particular, em que o fator é −1 e a soma é o vetor nulo.",
       "hyp": "Pode confundir mesma norma com mesma direção.",
       "contexts": [
         "mission",
@@ -800,15 +800,15 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Os vetores (2,3) e (4,5) são colineares?",
+      "q": "Os vetores (2, 3) e (4, 5) são colineares? Seleciona a conclusão acompanhada de uma justificação.",
       "o": [
-        "Sim.",
-        "Não.",
-        "Só se tiverem mesma norma.",
-        "Só se forem pontos."
+        "Sim, porque as primeiras componentes são proporcionais.",
+        "Não, porque as razões 4/2 e 5/3 são diferentes.",
+        "Não, porque têm normas diferentes.",
+        "Sim, porque somar 2 a cada componente do primeiro dá o segundo."
       ],
       "a": 1,
-      "sol": "4/2=2, mas 5/3≠2.",
+      "sol": "O fator que transforma 2 em 4 é 2. Aplicado à segunda componente, daria 2×3=6, mas a segunda componente de (4, 5) é 5. Como não há um único fator para as duas componentes, os vetores não são colineares.",
       "hyp": "Pode verificar apenas uma componente.",
       "contexts": [
         "mission",
@@ -1259,7 +1259,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Um deslocamento de 5 m para leste e 12 m para norte é representado por v=(5,12). Qual é o deslocamento direto?",
+      "q": "Uma pessoa desloca-se 5 m para leste e depois 12 m para norte. Qual é a distância em linha reta entre o ponto de partida e o ponto de chegada?",
       "o": [
         "17 m.",
         "7 m.",
@@ -1267,7 +1267,7 @@
         "60 m."
       ],
       "a": 2,
-      "sol": "A norma de (5,12) é 13.",
+      "sol": "Os dois percursos são perpendiculares e formam os catetos de um triângulo retângulo. A distância em linha reta é a hipotenusa, que mede √(5²+12²)=√169=13 m.",
       "hyp": "Pode somar as componentes.",
       "contexts": [
         "mission",

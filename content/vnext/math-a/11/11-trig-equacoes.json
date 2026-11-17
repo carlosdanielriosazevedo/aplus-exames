@@ -17,9 +17,9 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "A equação sin x=0 tem, em R, soluções...",
+      "q": "Quais são as soluções em ℝ da equação sen x=0? Nas expressões, k∈ℤ.",
       "o": [
-        "x=kπ, k∈Z.",
+        "x=kπ.",
         "x=π/2+kπ.",
         "x=2kπ apenas.",
         "x=π/4+kπ."
@@ -44,10 +44,10 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "A equação cos x=0 tem soluções...",
+      "q": "Quais são as soluções em ℝ da equação cos x=0? Nas expressões, k∈ℤ.",
       "o": [
         "x=kπ.",
-        "x=π/2+kπ, k∈Z.",
+        "x=π/2+kπ.",
         "x=2kπ.",
         "x=π/4+2kπ."
       ],
@@ -71,15 +71,15 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "A equação tan x=0 tem soluções...",
+      "q": "Quais são as soluções em ℝ da equação tg x=0? Nas expressões, k∈ℤ.",
       "o": [
         "x=π/2+kπ.",
         "x=π/4+kπ.",
-        "x=kπ, k∈Z.",
+        "x=kπ.",
         "x=2kπ apenas."
       ],
       "a": 2,
-      "sol": "tan x=0 quando sin x=0 e cos x≠0, isto é, x=kπ.",
+      "sol": "tg x=0 quando sen x=0 e cos x≠0, isto é, x=kπ.",
       "hyp": "Pode confundir com pontos onde a tangente não existe.",
       "contexts": [
         "mission",
@@ -152,7 +152,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Em [0,2π[, sin x=1/2 tem soluções...",
+      "q": "Em [0,2π[, sen x=1/2 tem soluções...",
       "o": [
         "π/6 e 11π/6.",
         "π/6 e 5π/6.",
@@ -449,15 +449,15 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Resolve 2sin x=1 em [0,2π[.",
+      "q": "Resolve cos(2x)=1/2 no intervalo [0,π[.",
       "o": [
         "π/6 e 5π/6.",
-        "π/3 e 2π/3.",
-        "7π/6 e 11π/6.",
+        "π/3 e 5π/6.",
+        "π/6 e π/3.",
         "π/6 apenas."
       ],
       "a": 0,
-      "sol": "A equação reduz-se a sin x=1/2.",
+      "sol": "Como x∈[0,π[, tem-se 2x∈[0,2π[. Nesse intervalo, o cosseno vale 1/2 nos ângulos π/3 e 5π/3. Dividindo por 2, obtém-se x=π/6 ou x=5π/6.",
       "hyp": "Pode esquecer dividir por 2.",
       "contexts": [
         "mission",
@@ -565,7 +565,7 @@
         "infinitas soluções."
       ],
       "a": 0,
-      "sol": "O cosseno também tem imagem [−1,1].",
+      "sol": "Para todo x real, −1≤cos x≤1. Como −3/2<−1, a equação não tem soluções reais.",
       "hyp": "Pode tentar resolver numericamente um valor impossível.",
       "contexts": [
         "mission",
@@ -584,7 +584,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Resolve sin²x=1 em [0,2π[.",
+      "q": "Resolve sen² x=1 em [0,2π[.",
       "o": [
         "0 e π.",
         "π/2 e 3π/2.",
@@ -592,7 +592,7 @@
         "π/2 apenas."
       ],
       "a": 1,
-      "sol": "sin²x=1 implica sin x=±1.",
+      "sol": "De sen² x=1 resulta sen x=1 ou sen x=−1. Em [0,2π[, estes valores são atingidos em π/2 e 3π/2, respetivamente.",
       "hyp": "Pode considerar apenas sin x=1.",
       "contexts": [
         "mission",
@@ -773,7 +773,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Resolve sin x=cos x em [0,2π[.",
+      "q": "Resolve sen x=cos x em [0,2π[.",
       "o": [
         "π/4 e 5π/4.",
         "π/4 e 3π/4.",
@@ -781,7 +781,7 @@
         "0 e π."
       ],
       "a": 0,
-      "sol": "Quando cos x≠0, tan x=1; os pontos onde cos x=0 não satisfazem a igualdade.",
+      "sol": "Se cos x=0, então sen x=±1, logo os dois valores não são iguais. Nos restantes pontos, dividir por cos x dá tg x=1. Em [0,2π[, as soluções são π/4 e 5π/4.",
       "hyp": "Pode dividir por cos sem verificar, embora aqui os excluídos não sejam soluções.",
       "contexts": [
         "mission",
@@ -1232,10 +1232,10 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Ao dividir uma equação por sin x, que cuidado é necessário?",
+      "q": "Ao dividir uma equação por sen x, que cuidado é necessário?",
       "o": [
-        "Pode criar sempre soluções com sin x=0.",
-        "Pode perder soluções com sin x=0.",
+        "Pode criar sempre soluções com sen x=0.",
+        "Pode perder soluções com sen x=0.",
         "Não há qualquer cuidado.",
         "A tangente deixa de existir sempre."
       ],
@@ -1286,7 +1286,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "A altura de uma maré simplificada é h(t)=2+sin t. Em [0,2π[, quando h(t)=2?",
+      "q": "A altura de uma maré simplificada é h(t)=2+sen t. Em [0,2π[, quando h(t)=2?",
       "o": [
         "t=π/2 e 3π/2.",
         "t=π apenas.",
@@ -1294,7 +1294,7 @@
         "t=0 e t=π."
       ],
       "a": 3,
-      "sol": "h=2 implica sin t=0.",
+      "sol": "A igualdade h(t)=2 equivale a sen t=0. O seno anula-se nos múltiplos inteiros de π, dos quais só 0 e π pertencem a [0,2π[.",
       "hyp": "Pode procurar extremos em vez do nível médio.",
       "contexts": [
         "mission",

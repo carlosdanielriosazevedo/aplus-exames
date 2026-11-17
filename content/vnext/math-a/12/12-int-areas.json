@@ -44,7 +44,7 @@
       "year": "12.º opcional",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Se f(x)≤0 em [a,b], a área geométrica entre o gráfico e Ox é...",
+      "q": "Se f é contínua, não positiva e não identicamente nula em [a,b], com a<b, como se escreve a área da região entre o gráfico de f e o eixo Ox nesse intervalo?",
       "o": [
         "∫_a^b f(x)dx.",
         "−∫_a^b f(x)dx.",
@@ -52,7 +52,7 @@
         "f(b)−f(a)."
       ],
       "a": 1,
-      "sol": "A integral é negativa, por isso a área geométrica é o seu oposto.",
+      "sol": "Como f(x)≤0, a altura da região é |f(x)|=−f(x). Assim, a área é ∫_a^b |f(x)| dx=−∫_a^b f(x) dx.",
       "hyp": "Pode usar diretamente a integral negativa como área.",
       "contexts": [
         "mission",
@@ -565,7 +565,7 @@
         "x=1 e x=2."
       ],
       "a": 0,
-      "sol": "x²=2x =>x(x−2)=0.",
+      "sol": "Os pontos de interseção verificam x²=2x, ou seja, x(x−2)=0. Logo, as abcissas dos extremos da região são 0 e 2.",
       "hyp": "Pode dividir por x e perder 0.",
       "contexts": [
         "mission",
@@ -584,7 +584,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "No intervalo [0,2], entre y=2x e y=x², a função superior é...",
+      "q": "Entre os dois pontos de interseção, com 0<x<2, qual das funções y=2x e y=x² tem o gráfico acima do outro?",
       "o": [
         "x².",
         "2x.",
@@ -592,7 +592,7 @@
         "depende apenas do sinal de x."
       ],
       "a": 1,
-      "sol": "2x−x²=x(2−x)≥0.",
+      "sol": "Para 0<x<2 os dois fatores de 2x−x²=x(2−x) são estritamente positivos. Logo, 2x>x² entre os pontos de interseção.",
       "hyp": "Pode escolher a quadrática por crescer mais depressa fora do intervalo.",
       "contexts": [
         "mission",
@@ -862,7 +862,7 @@
         "2."
       ],
       "a": 3,
-      "sol": "cos muda de sinal emπ/2; área=∫_0^{π/2}cosx dx−∫_{π/2}^π cosx dx=1+1=2.",
+      "sol": "O cosseno muda de sinal em π/2. A área é ∫_0^{π/2} cos x dx−∫_{π/2}^π cos x dx=(1−0)−(0−1)=2.",
       "hyp": "Pode usar a integral algébrica 0.",
       "contexts": [
         "mission",

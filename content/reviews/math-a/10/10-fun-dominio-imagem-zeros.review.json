@@ -5,7 +5,41 @@
   "themeId": "10-fun",
   "subtopicId": "10-fun-dominio-imagem-zeros",
   "sourcePath": "content/vnext/math-a/10/10-fun-dominio-imagem-zeros.json",
-  "sourceBlobSha": "96b4ab19594dff63ea3c427a870ce6f0df44e486",
+  "sourceBlobSha": "6d3e78a9d71915756785117db102ed047d888fec",
+  "aiRereview": {
+    "reviewedAt": "2026-11-17",
+    "reviewer": "Codex",
+    "previousSourceBlobSha": "96b4ab19594dff63ea3c427a870ce6f0df44e486",
+    "items": [
+      "VN10FUN-DIZ-002",
+      "VN10FUN-DIZ-003",
+      "VN10FUN-DIZ-006",
+      "VN10FUN-DIZ-007",
+      "VN10FUN-DIZ-008",
+      "VN10FUN-DIZ-009",
+      "VN10FUN-DIZ-022",
+      "VN10FUN-DIZ-023",
+      "VN10FUN-DIZ-025",
+      "VN10FUN-DIZ-026",
+      "VN10FUN-DIZ-027",
+      "VN10FUN-DIZ-029",
+      "VN10FUN-DIZ-030",
+      "VN10FUN-DIZ-034",
+      "VN10FUN-DIZ-035",
+      "VN10FUN-DIZ-036",
+      "VN10FUN-DIZ-037",
+      "VN10FUN-DIZ-041",
+      "VN10FUN-DIZ-042",
+      "VN10FUN-DIZ-046",
+      "VN10FUN-DIZ-047",
+      "VN10FUN-DIZ-048",
+      "VN10FUN-DIZ-050"
+    ],
+    "supersededEditorialOverrides": [
+      "VN10FUN-DIZ-029",
+      "VN10FUN-DIZ-030"
+    ]
+  },
   "reviewedAt": "2026-09-12",
   "reviewType": "editorial_math_pass",
   "status": "complete",
@@ -55,28 +89,28 @@
     {"id":"VN10FUN-DIZ-027","status":"approved"},
     {"id":"VN10FUN-DIZ-028","status":"approved"},
     {
-      "id":"VN10FUN-DIZ-029",
-      "status":"approved_with_override",
-      "rationale":"A opção correta anterior dizia «cruza ou toca» apesar de os dados apenas garantirem o ponto (2,0) e a mudança de sinal; a nova formulação evita sugerir uma propriedade geométrica não demonstrada sem hipótese de continuidade.",
+      "id": "VN10FUN-DIZ-029",
+      "status": "approved_with_override",
+      "rationale": "A revisão por IA incorporou a correção no enunciado, nas opções ou na resolução da fonte. Esta entrada regista os campos agora em vigor.",
       "override": {
         "o": [
-          "passa pelo ponto (2,0) e há mudança de sinal em x=2.",
-          "nunca encontra o eixo Ox.",
+          "contém (2; 0) e passa de ordenadas positivas para negativas.",
+          "nunca toca Ox.",
           "tem zero em x=0.",
-          "é necessariamente crescente."
+          "é sempre crescente."
         ],
         "a": 0,
-        "sol": "Como f(2)=0, o ponto (2,0) pertence ao gráfico. Além disso, f é positiva à esquerda de 2 e negativa à direita de 2, logo há mudança de sinal em x=2.",
-        "hyp": "Pode confundir mudança de sinal com monotonia ou concluir propriedades de continuidade que não foram dadas."
+        "sol": "Para x<2, a ordenada é positiva; para x>2, a ordenada é negativa. Em x=2, f(2)=0, logo o gráfico contém o ponto (2; 0) e o sinal de f muda de positivo para negativo.",
+        "hyp": "Pode confundir mudança de sinal com monotonia."
       }
     },
     {
-      "id":"VN10FUN-DIZ-030",
-      "status":"approved_with_override",
-      "rationale":"A resolução anterior introduzia multiplicidade par sem necessidade. O exemplo explícito torna a justificação autocontida e adequada ao nível.",
+      "id": "VN10FUN-DIZ-030",
+      "status": "approved_with_override",
+      "rationale": "A revisão por IA incorporou a correção no enunciado, nas opções ou na resolução da fonte. Esta entrada regista os campos agora em vigor.",
       "override": {
-        "sol": "É possível tocar no eixo Ox sem mudar de sinal. Por exemplo, f(x)=(x−1)² é positiva para x≠1 e vale 0 em x=1.",
-        "hyp": "Pode pensar que todo zero obriga o gráfico a atravessar o eixo Ox ou a mudar de sinal."
+        "sol": "Como f(1)=0, o gráfico encontra Ox em (1; 0). Fica acima de Ox à esquerda e à direita desse ponto porque f é positiva em ambos os lados. Assim, toca o eixo sem o atravessar.",
+        "hyp": "Pode achar que todo zero implica mudança de sinal."
       }
     },
     {"id":"VN10FUN-DIZ-031","status":"approved"},

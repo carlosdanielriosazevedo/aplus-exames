@@ -17,12 +17,12 @@
       "year": "10.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Uma amostra é representativa quando...",
+      "q": "Que propriedade caracteriza uma amostra representativa?",
       "o": [
-        "reflete de forma razoável características relevantes da população.",
-        "é sempre muito pequena.",
-        "contém apenas voluntários.",
-        "tem exatamente 100 elementos."
+        "Reflete as características relevantes da população.",
+        "Tem dimensão semelhante à de estudos anteriores.",
+        "Resulta exclusivamente de participação voluntária.",
+        "Tem o mesmo número de pessoas em cada grupo."
       ],
       "a": 0,
       "sol": "Uma amostra representativa procura refletir a diversidade relevante da população.",
@@ -46,10 +46,10 @@
       "cognitive": "Compreensão",
       "q": "O que é enviesamento de seleção?",
       "o": [
-        "Uma média diferente de zero.",
-        "Um erro sistemático introduzido pelo modo como os elementos são escolhidos.",
-        "Uma amostra grande.",
-        "Uma tabela mal desenhada."
+        "Um erro de resposta induzido pela redação das perguntas.",
+        "Um erro sistemático no modo de escolher a amostra.",
+        "Uma diferença casual entre resultados de duas amostras.",
+        "Um erro na transcrição das respostas recolhidas."
       ],
       "a": 1,
       "sol": "O enviesamento de seleção surge quando o processo de escolha favorece certos elementos e prejudica outros.",
@@ -179,15 +179,15 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "O que caracteriza uma amostra aleatória simples, num modelo introdutório?",
+      "q": "Qual propriedade define a amostragem aleatória simples sem reposição, para uma dimensão de amostra fixada?",
       "o": [
         "Escolhem-se os mais fáceis de contactar.",
         "Escolhem-se apenas voluntários.",
-        "Cada elemento tem a mesma oportunidade de ser selecionado.",
-        "Escolhe-se exatamente metade da população."
+        "Cada amostra possível da dimensão fixada tem a mesma probabilidade de ser selecionada.",
+        "Cada indivíduo tem a mesma probabilidade de inclusão, mesmo que alguns pares nunca possam ser selecionados."
       ],
       "a": 2,
-      "sol": "A ideia central é igualdade de oportunidade de seleção, segundo o mecanismo definido.",
+      "sol": "Numa amostra aleatória simples de dimensão fixa, todas as amostras possíveis têm a mesma probabilidade. Por exemplo, escolher com igual probabilidade o par {A, B} ou o par {C, D} dá igual probabilidade a cada pessoa, mas exclui os outros quatro pares.",
       "hyp": "Pode confundir aleatoriedade com escolha informal.",
       "contexts": [
         "mission",
@@ -206,15 +206,15 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Uma população tem alunos do 10.º, 11.º e 12.º. Para garantir presença dos três anos, uma estratégia útil é...",
+      "q": "Uma escola tem alunos do 10.º, 11.º e 12.º anos. Qual estratégia permite garantir que cada ano fica representado na amostra?",
       "o": [
-        "escolher apenas o 12.º ano.",
-        "escolher só a primeira turma disponível.",
-        "inquirir apenas alunos voluntários.",
+        "seleção aleatória simples da lista de todos os alunos.",
+        "seleção aleatória de uma turma inteira.",
+        "seleção por ordem de resposta a um convite geral.",
         "amostragem estratificada por ano."
       ],
       "a": 3,
-      "sol": "Estratificar permite assegurar representação de subgrupos relevantes.",
+      "sol": "Cria-se um estrato por ano e seleciona-se pelo menos um aluno de cada estrato. Numa seleção aleatória única, ou a partir de turmas ou voluntários específicos, não há garantia de que todos os anos ficam representados.",
       "hyp": "Pode ignorar grupos importantes da população.",
       "contexts": [
         "mission",
@@ -584,11 +584,11 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Uma escola envia questionário a todos os alunos, mas só 15% responde. Qual risco permanece?",
+      "q": "Uma escola envia um questionário a todos os alunos, mas só 15% responde. A possibilidade de os alunos que responderam diferirem sistematicamente dos restantes ilustra que risco?",
       "o": [
         "Nenhum, porque todos receberam o questionário.",
         "Enviesamento de não resposta.",
-        "A população desaparece.",
+        "Enviesamento de medição causado pelo questionário.",
         "A amostra passa a ser censo."
       ],
       "a": 1,

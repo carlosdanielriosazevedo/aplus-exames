@@ -17,7 +17,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "A derivada de uma soma f+g e",
+      "q": "Para funções deriváveis f e g, qual é a derivada de f+g?",
       "o": [
         "f'+g'",
         "f'g'",
@@ -25,7 +25,7 @@
         "fg'"
       ],
       "a": 0,
-      "sol": "A derivação e linear relativamente a soma.",
+      "sol": "A variação da soma é a soma das variações. Tomando o limite dos quocientes incrementais, obtém-se (f+g)′=f′+g′.",
       "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
       "contexts": [
         "mission",
@@ -44,15 +44,15 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "A derivada de cf, com c constante, e",
+      "q": "Para uma função derivável f e uma constante real c, qual é a derivada de c·f?",
       "o": [
         "c'f",
         "cf'",
-        "f'/c",
+        "c+f'",
         "cf"
       ],
       "a": 1,
-      "sol": "A constante multiplica a derivada.",
+      "sol": "A constante c multiplica todo o quociente incremental de f e pode sair do limite. Assim, (c·f)′=c·f′.",
       "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
       "contexts": [
         "mission",
@@ -71,7 +71,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "A derivada de x^n, para n inteiro positivo, e",
+      "q": "Qual é a derivada de xⁿ, sendo n um inteiro positivo?",
       "o": [
         "x^(n-1)",
         "n x^n",
@@ -79,7 +79,7 @@
         "(n-1)x^n"
       ],
       "a": 2,
-      "sol": "E a regra da potência.",
+      "sol": "Deriva-se multiplicando pelo expoente n e reduzindo o expoente uma unidade. Por exemplo, quando n=3, (x³)′=3x². Em geral, (xⁿ)′=n xⁿ⁻¹.",
       "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
       "contexts": [
         "mission",
@@ -289,13 +289,13 @@
       "cognitive": "Aplicacao",
       "q": "Deriva f(x)=x^5.",
       "o": [
-        "x^5",
-        "5x^4+1",
+        "x⁴",
+        "x⁵",
         "5x^4",
-        "0"
+        "5x⁵"
       ],
       "a": 2,
-      "sol": "Aplicando regra da potência e linearidade obtém-se 5x^4.",
+      "sol": "Ao derivar x⁵, multiplica-se o coeficiente pelo expoente 5 e baixa-se o expoente uma unidade. Logo, f′(x)=5x⁴.",
       "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
       "contexts": [
         "mission",
@@ -316,13 +316,13 @@
       "cognitive": "Aplicacao",
       "q": "Deriva f(x)=x^7.",
       "o": [
-        "x^7",
-        "7x^6+1",
-        "0",
+        "x⁶",
+        "x⁷",
+        "7x⁷",
         "7x^6"
       ],
       "a": 3,
-      "sol": "Aplicando regra da potência e linearidade obtém-se 7x^6.",
+      "sol": "Ao derivar x⁷, multiplica-se o coeficiente pelo expoente 7 e baixa-se o expoente uma unidade. Logo, f′(x)=7x⁶.",
       "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
       "contexts": [
         "mission",
@@ -344,12 +344,12 @@
       "q": "Deriva f(x)=3x^4.",
       "o": [
         "12x^3",
-        "3x^4",
-        "12x^3+1",
-        "0"
+        "3x³",
+        "3x⁴",
+        "12x⁴"
       ],
       "a": 0,
-      "sol": "Aplicando regra da potência e linearidade obtém-se 12x^3.",
+      "sol": "Ao derivar 3x⁴, multiplica-se o coeficiente pelo expoente 4 e baixa-se o expoente uma unidade. Logo, f′(x)=12x³.",
       "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
       "contexts": [
         "mission",
@@ -452,12 +452,12 @@
       "q": "Deriva f(x)=2x^5-3x^2.",
       "o": [
         "10x^4-6x",
-        "2x^5-3x^2",
-        "10x^4-6x+1",
-        "0"
+        "5x⁴−2x",
+        "10x⁴−3x",
+        "10x⁵−6x²"
       ],
       "a": 0,
-      "sol": "Aplicando regra da potência e linearidade obtém-se 10x^4-6x.",
+      "sol": "Pela regra da potência, (2x⁵)′=10x⁴ e (−3x²)′=−6x. Portanto, f′(x)=10x⁴−6x.",
       "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
       "contexts": [
         "mission",
@@ -561,11 +561,11 @@
       "o": [
         "2x+1",
         "2x-1",
-        "x(x+1)",
-        "0"
+        "x+1",
+        "1"
       ],
       "a": 0,
-      "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtém-se 2x+1.",
+      "sol": "Pela regra do produto, a derivada de x(x+1) é (x+1)+x=2x+1.",
       "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
       "contexts": [
         "mission",
@@ -588,11 +588,11 @@
       "o": [
         "3x^2-2x",
         "3x^2+2x",
-        "x^2(x+1)",
-        "0"
+        "2x(x+1)",
+        "2x"
       ],
       "a": 1,
-      "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtém-se 3x^2+2x.",
+      "sol": "Pela regra do produto, a derivada de x²(x+1) é 2x(x+1)+x²=3x²+2x.",
       "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
       "contexts": [
         "mission",
@@ -614,12 +614,12 @@
       "q": "Usando a regra do produto, deriva f(x)=x(x^2+3).",
       "o": [
         "3x^2-3",
-        "x(x^2+3)",
+        "x²+3",
         "3x^2+3",
-        "0"
+        "2x"
       ],
       "a": 2,
-      "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtém-se 3x^2+3.",
+      "sol": "Pela regra do produto, a derivada de x(x²+3) é (x²+3)+2x²=3x²+3.",
       "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
       "contexts": [
         "mission",
@@ -1232,15 +1232,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Derivar f(x)=x^2(x+1) por expansao ou regra do produto deve dar",
+      "q": "Que relação se obtém entre os resultados ao derivar f(x)=x²(x+1) por expansão ou pela regra do produto?",
       "o": [
         "resultados diferentes",
         "o mesmo resultado",
-        "apenas a expansao e valida",
-        "apenas o produto e valido"
+        "apenas a expansão é válida",
+        "apenas a regra do produto é válida"
       ],
       "a": 1,
-      "sol": "As regras sao coerentes e descrevem a mesma derivada.",
+      "sol": "Expandindo, f(x)=x³+x² e f′(x)=3x²+2x. Pela regra do produto, f′(x)=2x(x+1)+x²=3x²+2x. Os dois métodos dão o mesmo resultado.",
       "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
       "contexts": [
         "mission",

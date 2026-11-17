@@ -4,13 +4,13 @@ export const VNEXT_PILOT_META=[
   {
     "subtopicId": "10-fun-dominio-imagem-zeros",
     "sourceFile": "content/vnext/math-a/10/10-fun-dominio-imagem-zeros.json",
-    "sourceSha256": "eaf5a77b31465749efac4c57901c3ee5da5e98a4fb588a42c6248d977e571cf1",
+    "sourceSha256": "640584f57f5d78355b463a3267423686082845b4e29a439be53bf60132878d14",
     "questionCount": 50
   },
   {
     "subtopicId": "10-ga-vetores",
     "sourceFile": "content/vnext/math-a/10/10-ga-vetores.json",
-    "sourceSha256": "a4013d60141a71efcbfb71a34a5b3eab8809bcbb81f39be76a1aa36daf4e35b8",
+    "sourceSha256": "1964960fe46d536a148db8933fe7f657a2470767adeebc6c0b04359c2dcf153d",
     "questionCount": 50
   }
 ];
@@ -58,10 +58,10 @@ export const VNEXT_PILOT_QUESTIONS=[
       "o conjunto de todas as entradas.",
       "o conjunto dos valores efetivamente obtidos pela função.",
       "um único valor obrigatório.",
-      "o contradomínio sempre por definição."
+      "o conjunto das entradas para as quais a função toma o valor zero."
     ],
     "a": 1,
-    "sol": "A imagem contém as saídas que a função realmente assume. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Para formar a imagem, calcula f(x) para os valores x do domínio e reúne as saídas obtidas. Um valor pertence à imagem porque é atingido pela função para pelo menos uma entrada.",
     "hyp": "Pode confundir imagem com domínio ou contradomínio.",
     "contexts": [
       "mission",
@@ -91,7 +91,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "f(x)=1."
     ],
     "a": 2,
-    "sol": "Os zeros são as preimagens de 0. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “f(x)=0.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Para determinar os zeros, procura as entradas do domínio para as quais a ordenada vale zero. Assim, um valor x é zero da função porque verifica f(x)=0.",
     "hyp": "Pode achar que zero da função significa apenas x=0.",
     "contexts": [
       "mission",
@@ -173,15 +173,15 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 2,
     "cognitive": "Compreensão",
-    "q": "No gráfico de y=f(x), os zeros correspondem aos pontos onde o gráfico...",
+    "q": "No gráfico de y=f(x), os zeros são as abcissas dos pontos em que o gráfico...",
     "o": [
       "interseta o eixo Oy.",
       "interseta ou toca o eixo Ox.",
-      "atinge a média.",
+      "muda de monotonia.",
       "tem sempre máximo."
     ],
     "a": 1,
-    "sol": "Nesses pontos y=0. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “interseta ou toca o eixo Ox.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Um zero é a abcissa de um ponto do gráfico cuja ordenada é nula, porque f(x)=0. Assim, localiza os pontos onde o gráfico encontra o eixo Ox e lê as suas abcissas.",
     "hyp": "Pode confundir eixo Ox com Oy.",
     "contexts": [
       "mission",
@@ -203,7 +203,7 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
-    "q": "Se o gráfico cruza o eixo Ox em x=−1 e x=4, os zeros são...",
+    "q": "Se o gráfico de f interseta o eixo Ox apenas em x=−1 e x=4, quais são os zeros de f?",
     "o": [
       "0 e 3.",
       "−4 e 1.",
@@ -211,7 +211,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "apenas 4."
     ],
     "a": 2,
-    "sol": "As abcissas das interseções com Ox são os zeros. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Nos pontos de interseção com o eixo Ox, a ordenada é zero porque todos os pontos desse eixo têm a forma (x; 0). Assim, os zeros de f são −1 e 4.",
     "hyp": "Pode usar ordenadas em vez de abcissas.",
     "contexts": [
       "mission",
@@ -233,15 +233,15 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 2,
     "cognitive": "Compreensão",
-    "q": "Dizer que f(x)>0 significa que o gráfico está...",
+    "q": "Em relação ao eixo Ox, onde está o ponto de abcissa x do gráfico de f, sabendo que f(x)>0?",
     "o": [
       "abaixo do eixo Ox.",
-      "sobre o eixo Oy.",
+      "sobre o eixo Ox.",
       "sempre no primeiro quadrante.",
       "acima do eixo Ox."
     ],
     "a": 3,
-    "sol": "f(x)>0 significa ordenada positiva. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “acima do eixo Ox.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Para cada entrada x, o ponto do gráfico tem coordenadas (x; f(x)). Se f(x)>0, a ordenada é positiva, por isso o ponto fica acima do eixo Ox.",
     "hyp": "Pode associar positividade a x>0.",
     "contexts": [
       "mission",
@@ -263,7 +263,7 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 2,
     "cognitive": "Compreensão",
-    "q": "Dizer que f(x)<0 significa que o gráfico está...",
+    "q": "Se f(x)<0, onde está o ponto do gráfico de f que tem abcissa x?",
     "o": [
       "abaixo do eixo Ox.",
       "acima do eixo Ox.",
@@ -271,7 +271,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "sempre no terceiro quadrante."
     ],
     "a": 0,
-    "sol": "f(x)<0 corresponde a ordenada negativa. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “abaixo do eixo Ox.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Para cada entrada x, o ponto do gráfico tem coordenadas (x; f(x)). Se f(x)<0, a ordenada é negativa, por isso o ponto fica abaixo do eixo Ox.",
     "hyp": "Pode confundir sinal de x com sinal de f(x).",
     "contexts": [
       "mission",
@@ -661,7 +661,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "[−2,+∞[."
     ],
     "a": 1,
-    "sol": "Como x²≥0, x²+2≥2, e 2 é atingido em x=0. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “[2,+∞[.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Como x²≥0, temos x²+2≥2. Qualquer y≥2 é atingido, porque basta tomar x=√(y−2) para obter f(x)=y. Assim, a imagem é [2,+∞[.",
     "hyp": "Pode deslocar a imagem para o lado errado.",
     "contexts": [
       "mission",
@@ -691,7 +691,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "[0,5]."
     ],
     "a": 2,
-    "sol": "−x²≤0, logo f(x)≤5, e 5 é atingido em x=0. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Como x²≥0, temos −x²+5≤5. Qualquer y≤5 é atingido, porque basta tomar x=√(5−y) para obter f(x)=y. Assim, a imagem é ]−∞,5].",
     "hyp": "Pode confundir máximo com mínimo.",
     "contexts": [
       "mission",
@@ -743,7 +743,7 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
-    "q": "Se f(x)=x²−4, quais são os zeros?",
+    "q": "Considera a parábola y=x²−2x e a reta y=4−2x. Quais são as abcissas dos pontos de interseção dos dois gráficos?",
     "o": [
       "−2 e 2.",
       "−4 e 4.",
@@ -751,8 +751,8 @@ export const VNEXT_PILOT_QUESTIONS=[
       "apenas 2."
     ],
     "a": 0,
-    "sol": "x²−4=0 ⇒ x²=4 ⇒ x=±2. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “−2 e 2.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
-    "hyp": "Pode esquecer uma das raízes.",
+    "sol": "Iguala x²−2x e 4−2x, porque as ordenadas coincidem nos pontos de interseção. Soma 2x aos dois membros para obter x²=4. Assim, os gráficos encontram-se nas abcissas −2 e 2.",
+    "hyp": "Pode procurar os zeros de cada expressão em vez de igualar as duas ordenadas.",
     "contexts": [
       "mission",
       "training",
@@ -773,7 +773,7 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
-    "q": "Se f(x)=(x−1)(x+3), quais são os zeros?",
+    "q": "Se f(x)=(x+1)(x−3) e g(x)=f(−x), quais são os zeros de g?",
     "o": [
       "−1 e 3.",
       "1 e −3.",
@@ -781,8 +781,8 @@ export const VNEXT_PILOT_QUESTIONS=[
       "−1 e −3."
     ],
     "a": 1,
-    "sol": "Cada fator pode ser zero: x=1 ou x=−3. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “1 e −3.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
-    "hyp": "Pode trocar sinais dos fatores.",
+    "sol": "Os fatores de f anulam-se em −1 e 3. Para resolver g(x)=0, iguala −x a cada um desses valores, porque g(x)=f(−x). Assim, −x=−1 ou −x=3, logo os zeros de g são 1 e −3.",
+    "hyp": "Pode usar diretamente os zeros de f sem trocar o sinal das abcissas na reflexão do gráfico.",
     "contexts": [
       "mission",
       "training",
@@ -811,7 +811,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "0 apenas."
     ],
     "a": 2,
-    "sol": "Produto zero quando x=0 ou x−5=0. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “0 e 5.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Pela lei do anulamento do produto, x(x−5)=0 exatamente quando x=0 ou x−5=0. A segunda condição dá x=5, logo tanto 0 como 5 são zeros. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode esquecer o fator x.",
     "contexts": [
       "mission",
@@ -865,13 +865,13 @@ export const VNEXT_PILOT_QUESTIONS=[
     "cognitive": "Interpretação",
     "q": "Se f(x)>0 em ]−∞,2[ e f(x)<0 em ]2,+∞[, com f(2)=0, então o gráfico...",
     "o": [
-      "cruza ou toca Ox em x=2 e muda de sinal aí.",
+      "contém (2; 0) e passa de ordenadas positivas para negativas.",
       "nunca toca Ox.",
       "tem zero em x=0.",
       "é sempre crescente."
     ],
     "a": 0,
-    "sol": "x=2 é zero e o sinal muda de positivo para negativo. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Para x<2, a ordenada é positiva; para x>2, a ordenada é negativa. Em x=2, f(2)=0, logo o gráfico contém o ponto (2; 0) e o sinal de f muda de positivo para negativo. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode confundir mudança de sinal com monotonia.",
     "contexts": [
       "mission",
@@ -893,15 +893,15 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Interpretação",
-    "q": "Se f(x)>0 dos dois lados de x=1 e f(1)=0, então em x=1 o gráfico pode...",
+    "q": "Uma função quadrática f verifica f(1)=0 e toma valores positivos de ambos os lados de x=1. O que acontece ao gráfico em x=1?",
     "o": [
-      "atravessar obrigatoriamente o eixo.",
-      "tocar o eixo Ox sem o atravessar.",
-      "ter assíntota vertical.",
-      "deixar de ser função."
+      "atravessa o eixo Ox.",
+      "toca o eixo Ox sem o atravessar.",
+      "tem uma assíntota vertical.",
+      "interseta o eixo Oy."
     ],
     "a": 1,
-    "sol": "Um zero de multiplicidade par, por exemplo, pode tocar sem mudar de sinal. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Como f(1)=0, o gráfico encontra Ox em (1; 0). Fica acima de Ox à esquerda e à direita desse ponto porque f é positiva em ambos os lados. Assim, toca o eixo sem o atravessar.",
     "hyp": "Pode achar que todo zero implica mudança de sinal.",
     "contexts": [
       "mission",
@@ -1013,15 +1013,15 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
-    "q": "Se o domínio de f é [−3,4] e f tem zeros em −1 e 2, quantos zeros são conhecidos?",
+    "q": "As únicas interseções do gráfico de f com os eixos são (−1; 0), (0; 3) e (2; 0). Quantos zeros tem f?",
     "o": [
       "1.",
       "2.",
-      "7.",
-      "Não se pode dizer que −1 e 2 pertençam ao domínio."
+      "3.",
+      "0."
     ],
     "a": 1,
-    "sol": "Ambos pertencem ao domínio e foram explicitamente dados como zeros. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Para determinar os zeros a partir de um gráfico, lê as abcissas dos pontos em que ele encontra o eixo Ox, porque nesses pontos f(x)=0. As abcissas indicadas são −1 e 2, logo há dois zeros.",
     "hyp": "Pode confundir quantidade de zeros com extensão do domínio.",
     "contexts": [
       "mission",
@@ -1045,10 +1045,10 @@ export const VNEXT_PILOT_QUESTIONS=[
     "cognitive": "Interpretação",
     "q": "Pode um zero de uma função ficar fora do domínio?",
     "o": [
-      "Sim, sempre.",
-      "Só em funções quadráticas.",
+      "Sim, se a expressão se anular após simplificação.",
+      "Sim, se esse valor pertencer à imagem.",
       "Não.",
-      "Só se for negativo."
+      "Sim, se a função se anular ao aproximar-se desse valor."
     ],
     "a": 2,
     "sol": "Um zero é, por definição, um elemento do domínio onde f(x)=0. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
@@ -1073,7 +1073,7 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
-    "q": "Considere f(x)=(x²−1)/(x−1), com domínio R\\{1}. A equação f(x)=0 tem solução...",
+    "q": "Considera f(x)=(x²−1)/(x−1), com domínio ℝ sem o número 1. Qual é a solução da equação f(x)=0?",
     "o": [
       "x=−1 e x=1.",
       "x=1 apenas.",
@@ -1081,7 +1081,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "x=−1 apenas."
     ],
     "a": 3,
-    "sol": "O numerador zera em ±1, mas x=1 não pertence ao domínio; resta x=−1. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Fatora o numerador como (x−1)(x+1). Para x≠1, podemos cancelar x−1 e resolver x+1=0, obtendo x=−1. O valor 1 não é um zero porque está fora do domínio.",
     "hyp": "Pode aceitar raiz anulada pelo denominador.",
     "contexts": [
       "mission",
@@ -1111,7 +1111,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "]−2,+∞[."
     ],
     "a": 0,
-    "sol": "É necessário x+2≥0 e x≠3. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “[−2,+∞[\\{3}.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "A raiz exige x+2≥0, isto é, x≥−2. O denominador exige x−3≠0, logo exclui-se 3, porque é o único valor que o anula. Assim, o domínio é [−2,+∞[ sem o 3.",
     "hyp": "Pode esquecer uma das duas restrições.",
     "contexts": [
       "mission",
@@ -1223,7 +1223,7 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 4,
     "cognitive": "Raciocínio",
-    "q": "Qual é a imagem de f(x)=√x+2, x≥0?",
+    "q": "Qual é a imagem de f(x)=√(x)+2, com x≥0?",
     "o": [
       "[2,+∞[.",
       "[0,+∞[.",
@@ -1231,7 +1231,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "]2,+∞[."
     ],
     "a": 0,
-    "sol": "√x≥0 e vale 0 em x=0, logo f≥2 e 2 é atingido. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "A raiz √x toma todos os valores a partir de zero. Quando lhe somas 2, cada saída aumenta duas unidades, por isso a imagem fica [2,+∞[.",
     "hyp": "Pode esquecer a translação vertical.",
     "contexts": [
       "mission",
@@ -1261,7 +1261,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "[0,3]."
     ],
     "a": 1,
-    "sol": "|x|≥0, então 3−|x|≤3 e pode descer sem limite. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Como |x|≥0, temos 3−|x|≤3. Qualquer y≤3 é atingido, porque basta escolher x=3−y para obter f(x)=y. Assim, a imagem é ]−∞,3].",
     "hyp": "Pode assumir imagem não negativa por causa do módulo.",
     "contexts": [
       "mission",
@@ -1381,7 +1381,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "R\\{0}."
     ],
     "a": 1,
-    "sol": "x²>4 ⇒ |x|>2. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “]−∞,−2[∪]2,+∞[.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Resolve x²−4>0 para obter x²>4, ou seja, |x|>2. Assim, x<−2 ou x>2. Os extremos não entram porque neles f(x)=0.",
     "hyp": "Pode escolher o intervalo entre as raízes.",
     "contexts": [
       "mission",
@@ -1411,7 +1411,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "R."
     ],
     "a": 2,
-    "sol": "−x²+9≥0 ⇒ x²≤9. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “[−3,3].”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Resolve −x²+9≥0, ou seja, x²≤9. Isto equivale a −3≤x≤3, logo o conjunto é [−3,3]. Os extremos pertencem à solução porque neles f(x)=0.",
     "hyp": "Pode esquecer que a parábola abre para baixo.",
     "contexts": [
       "mission",
@@ -1433,15 +1433,15 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 4,
     "cognitive": "Interpretação",
-    "q": "Uma função tem domínio [0,10] e imagem [−2,7]. Pode concluir-se que f(10)=7?",
+    "q": "Uma função tem domínio [0, 10] e imagem [−2, 7]. Estes dados garantem que f(10)=7?",
     "o": [
-      "Sim.",
-      "Só se f for crescente.",
-      "Sim, porque 10 e 7 são extremos.",
-      "Não."
+      "Sim, porque o valor 10 pertence ao domínio.",
+      "Sim, porque 7 é a última saída por ordem das entradas.",
+      "Sim, porque os extremos direitos dos dois intervalos correspondem sempre.",
+      "Não, porque o máximo pode ser atingido noutra entrada."
     ],
     "a": 3,
-    "sol": "Conhecer domínio e imagem não diz em que entrada o máximo 7 ocorre. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "A imagem contém 7 como valor máximo, mas não diz em que entrada é atingido. Por exemplo, f(x)=7−0,9x tem a imagem dada e f(10)=−2. Assim, f(10)=7 não é garantido. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode emparelhar extremos sem justificação.",
     "contexts": [
       "mission",
@@ -1493,7 +1493,7 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 4,
     "cognitive": "Modelação",
-    "q": "Uma altura h(t)=20−5t é fisicamente válida até atingir o solo. Qual é o domínio temporal natural e o zero do modelo?",
+    "q": "A altura de um objeto é dada por h(t)=20−5t, com t, em segundos, contado desde o início da observação até o objeto atingir o solo. Qual é o domínio temporal do modelo e qual é o seu zero?",
     "o": [
       "Domínio R e zero t=5.",
       "Domínio [0,4] e zero t=4.",
@@ -1501,7 +1501,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "Domínio [−4,0] e zero t=−4."
     ],
     "a": 1,
-    "sol": "20−5t=0 dá t=4; fisicamente considera-se desde t=0 até esse instante. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
+    "sol": "Iguala a altura a zero: 20−5t=0, logo t=4. O modelo começa em t=0 e termina em t=4, porque este é o instante em que o objeto atinge o solo. Assim, o domínio é [0,4].",
     "hyp": "Pode ignorar o contexto ao definir o domínio.",
     "contexts": [
       "mission",
@@ -1583,15 +1583,15 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 1,
     "cognitive": "Aplicação",
-    "q": "Se A=(1,2) e B=(4,6), então AB=",
+    "q": "O vetor de posição de A é (−2, −1). O ponto B é a imagem da origem pela translação de vetor (1, 3). Quais são as componentes do vetor AB?",
     "o": [
-      "(5,8).",
+      "(−1,2).",
       "(−3,−4).",
       "(3,4).",
-      "(2,3)."
+      "(1,3)."
     ],
     "a": 2,
-    "sol": "(4−1,6−2)=(3,4). Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(3,4).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
+    "sol": "O vetor de posição dá A=(−2, −1) e a translação da origem dá B=(1, 3). Para calcular o vetor de A para B, subtrai-se cada coordenada de A à de B. Resulta (1−(−2), 3−(−1))=(3, 4). Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode somar coordenadas ou inverter o sentido.",
     "contexts": [
       "mission",
@@ -1643,7 +1643,7 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
-    "q": "A norma de v=(a,b) é...",
+    "q": "Num referencial ortonormado do plano, qual é a norma do vetor v=(a, b)?",
     "o": [
       "√(a²+b²).",
       "a+b.",
@@ -1651,7 +1651,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "ab."
     ],
     "a": 0,
-    "sol": "A norma é o comprimento do vetor. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “√(a²+b²).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
+    "sol": "Num referencial ortonormado, as projeções do vetor sobre os eixos formam os catetos de um triângulo retângulo, com comprimentos |a| e |b|. Pelo teorema de Pitágoras, a norma de v é √(a²+b²), fórmula que vale também quando uma componente é nula. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode confundir norma com soma das componentes.",
     "contexts": [
       "mission",
@@ -1771,7 +1771,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(a,−b)."
     ],
     "a": 0,
-    "sol": "O vetor oposto tem mesma norma e direção, mas sentido contrário. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
+    "sol": "O vetor oposto é −v=(−a, −b), porque v+(−v) é o vetor nulo. Quando v é diferente de zero, a multiplicação por −1 conserva a direção e a norma e inverte o sentido. O vetor nulo é o seu próprio oposto.",
     "hyp": "Pode mudar só uma componente.",
     "contexts": [
       "mission",
@@ -2003,15 +2003,15 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
-    "q": "Se v=2u, então v e u são...",
+    "q": "Se u é um vetor não nulo e v=2u, qual é a relação entre v e u?",
     "o": [
-      "colineares e com o mesmo sentido se u≠0.",
-      "perpendiculares.",
-      "sempre de mesma norma.",
-      "não relacionados."
+      "São colineares e têm o mesmo sentido.",
+      "São perpendiculares.",
+      "Têm a mesma norma.",
+      "São colineares e de sentidos opostos."
     ],
     "a": 0,
-    "sol": "Um múltiplo escalar positivo preserva direção e sentido. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
+    "sol": "Como v é um múltiplo de u, os vetores têm a mesma direção. O fator 2 é positivo, por isso os dois vetores têm o mesmo sentido. A norma de v é o dobro da norma de u. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode confundir colinearidade com igualdade.",
     "contexts": [
       "mission",
@@ -2303,15 +2303,15 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Interpretação",
-    "q": "Dois vetores não nulos são colineares se...",
+    "q": "Qual é a condição necessária e suficiente para que dois vetores não nulos sejam colineares?",
     "o": [
       "têm a mesma norma.",
-      "a soma é zero sempre.",
+      "a sua soma é o vetor nulo.",
       "um é múltiplo escalar do outro.",
       "as primeiras componentes são iguais."
     ],
     "a": 2,
-    "sol": "Proporcionalidade das componentes caracteriza direção comum. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
+    "sol": "Dois vetores não nulos são colineares exatamente quando um é um múltiplo do outro. Os vetores opostos são um caso particular, em que o fator é −1 e a soma é o vetor nulo. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode confundir mesma norma com mesma direção.",
     "contexts": [
       "mission",
@@ -2393,15 +2393,15 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
-    "q": "Os vetores (2,3) e (4,5) são colineares?",
+    "q": "Os vetores (2, 3) e (4, 5) são colineares? Seleciona a conclusão acompanhada de uma justificação.",
     "o": [
-      "Sim.",
-      "Não.",
-      "Só se tiverem mesma norma.",
-      "Só se forem pontos."
+      "Sim, porque as primeiras componentes são proporcionais.",
+      "Não, porque as razões 4/2 e 5/3 são diferentes.",
+      "Não, porque têm normas diferentes.",
+      "Sim, porque somar 2 a cada componente do primeiro dá o segundo."
     ],
     "a": 1,
-    "sol": "4/2=2, mas 5/3≠2. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “Não.”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
+    "sol": "O fator que transforma 2 em 4 é 2. Aplicado à segunda componente, daria 2×3=6, mas a segunda componente de (4, 5) é 5. Como não há um único fator para as duas componentes, os vetores não são colineares. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode verificar apenas uma componente.",
     "contexts": [
       "mission",
@@ -2903,7 +2903,7 @@ export const VNEXT_PILOT_QUESTIONS=[
     "year": "10.º",
     "difficulty": 4,
     "cognitive": "Modelação",
-    "q": "Um deslocamento de 5 m para leste e 12 m para norte é representado por v=(5,12). Qual é o deslocamento direto?",
+    "q": "Uma pessoa desloca-se 5 m para leste e depois 12 m para norte. Qual é a distância em linha reta entre o ponto de partida e o ponto de chegada?",
     "o": [
       "17 m.",
       "7 m.",
@@ -2911,7 +2911,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "60 m."
     ],
     "a": 2,
-    "sol": "A norma de (5,12) é 13. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “13 m.”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
+    "sol": "Os dois percursos são perpendiculares e formam os catetos de um triângulo retângulo. A distância em linha reta é a hipotenusa, que mede √(5²+12²)=√169=13 m. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode somar as componentes.",
     "contexts": [
       "mission",

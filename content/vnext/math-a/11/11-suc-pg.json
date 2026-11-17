@@ -17,7 +17,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Uma progressão geométrica (PG) é uma sucessão em que...",
+      "q": "Numa progressão geométrica (PG) de termos não nulos, qual é a propriedade que se verifica sempre?",
       "o": [
         "a razão entre termos consecutivos é constante.",
         "a diferença entre termos consecutivos é constante.",
@@ -25,7 +25,7 @@
         "o termo geral é sempre linear."
       ],
       "a": 0,
-      "sol": "Numa PG, para termos não nulos, u_{n+1}/u_n=q é constante.",
+      "sol": "Existe uma constante q tal que u_{n+1}=q·u_n para todo n. Para termos não nulos, o quociente u_{n+1}/u_n é, portanto, constante e igual a q.",
       "hyp": "Pode confundir PG com PA.",
       "contexts": [
         "mission",
@@ -1178,7 +1178,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Uma população de 500 aumenta 10% por período. Qual é o 4.º valor se o primeiro é 500?",
+      "q": "O volume de água num depósito é inicialmente de 500 L e aumenta 10% por período. Se o volume inicial é o primeiro valor da sucessão, qual é o quarto valor, em litros?",
       "o": [
         "650.",
         "550.",
@@ -1186,7 +1186,7 @@
         "665,5."
       ],
       "a": 3,
-      "sol": "500×1,1³=665,5.",
+      "sol": "Do primeiro até ao quarto valor há três aumentos. Cada um multiplica o volume por 1,1, logo o quarto valor é 500×1,1³=665,5 L.",
       "hyp": "Pode somar sempre 50 em vez de aplicar percentagem ao novo valor.",
       "contexts": [
         "mission",
@@ -1340,7 +1340,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Um ficheiro perde metade do tamanho a cada compressão sucessiva, começando em 80 MB. Um modelo adequado é...",
+      "q": "Num modelo de compressões sucessivas, o tamanho de um ficheiro é reduzido a metade a cada compressão. Antes da primeira compressão, u_1=80 MB. Qual é o termo geral u_n?",
       "o": [
         "u_n=80−(n−1)/2.",
         "u_n=80·(1/2)^{n−1}.",
@@ -1348,7 +1348,7 @@
         "u_n=80·2^{n−1}."
       ],
       "a": 1,
-      "sol": "Reduzir a metade é uma alteração multiplicativa constante.",
+      "sol": "De u_1 até u_n são feitas n−1 compressões, cada uma multiplicando o tamanho por 1/2. Assim, u_n=80·(1/2)^{n−1}.",
       "hyp": "Pode modelar uma perda absoluta em vez de proporcional.",
       "contexts": [
         "mission",

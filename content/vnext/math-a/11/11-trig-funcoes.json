@@ -17,7 +17,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "A função y=sin x tem período fundamental...",
+      "q": "A função y=sen x tem período fundamental...",
       "o": [
         "2π.",
         "π.",
@@ -73,7 +73,7 @@
       "cognitive": "Compreensão",
       "q": "A imagem da função seno é...",
       "o": [
-        "R.",
+        "ℝ.",
         "[0,1].",
         "[−1,1].",
         "]−∞,1]."
@@ -156,11 +156,11 @@
       "o": [
         "0.",
         "−1.",
-        "−π.",
+        "−1/2.",
         "1."
       ],
       "a": 1,
-      "sol": "O cosseno atinge −1.",
+      "sol": "No círculo trigonométrico, o cosseno é a abcissa, que varia entre −1 e 1. A menor abcissa é −1 e é atingida, por exemplo, em x=π.",
       "hyp": "Pode confundir mínimo com zero.",
       "contexts": [
         "mission",
@@ -179,11 +179,11 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "sin(x+2π) é igual a...",
+      "q": "sen(x+2π) é igual a...",
       "o": [
-        "−sin x.",
+        "−sen x.",
         "cos x.",
-        "sin x.",
+        "sen x.",
         "−cos x."
       ],
       "a": 2,
@@ -373,7 +373,7 @@
         "[−1,1].",
         "[−2,2].",
         "[0,2].",
-        "R."
+        "ℝ."
       ],
       "a": 1,
       "sol": "Multiplicar por 2 duplica os valores extremos.",
@@ -503,12 +503,12 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "O gráfico de y=sin x deslocado 2 unidades para cima torna-se...",
+      "q": "O gráfico de y=sen x deslocado 2 unidades para cima torna-se...",
       "o": [
-        "y=sin(x+2).",
+        "y=sen(x+2).",
         "y=2sin x.",
-        "y=sin x+2.",
-        "y=sin x−2."
+        "y=sen x+2.",
+        "y=sen x−2."
       ],
       "a": 2,
       "sol": "Uma translação vertical soma 2 à saída.",
@@ -557,15 +557,15 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Compreensão",
-      "q": "No modelo y=A sin(Bx+C)+D, D representa...",
+      "q": "No modelo periódico y=A sen(Bx+C)+D, com A≠0 e B≠0, o que representa D?",
       "o": [
-        "o deslocamento vertical/eixo médio.",
+        "a ordenada da linha média.",
         "a amplitude.",
         "o período.",
         "a frequência angular."
       ],
       "a": 0,
-      "sol": "D desloca todo o gráfico verticalmente.",
+      "sol": "Os valores extremos são D−|A| e D+|A|. A média destes valores é D, logo a linha média é a reta y=D.",
       "hyp": "Pode confundir com amplitude.",
       "contexts": [
         "mission",
@@ -584,7 +584,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Compreensão",
-      "q": "No modelo y=A sin(Bx+C)+D, |A| representa...",
+      "q": "No modelo periódico y=A sen(Bx+C)+D, com A≠0 e B≠0, o que representa |A|?",
       "o": [
         "o período.",
         "a amplitude.",
@@ -592,7 +592,7 @@
         "o valor médio."
       ],
       "a": 1,
-      "sol": "O módulo de A determina a escala vertical.",
+      "sol": "Como o seno percorre [−1,1], o máximo é D+|A| e o mínimo é D−|A|. A amplitude é metade da diferença entre esses extremos, ou seja, |A|.",
       "hyp": "Pode usar A sem módulo quando A<0.",
       "contexts": [
         "mission",
@@ -1124,15 +1124,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Se y=2sin(3x−π)+1, qual é o deslocamento horizontal equivalente?",
+      "q": "Qual é a menor translação horizontal para a direita que transforma o gráfico de y=2 sen(3x)+1 no gráfico de y=2 sen(3x−π)+1?",
       "o": [
         "π para a direita.",
         "π/3 para a direita.",
-        "π/3 para a esquerda.",
-        "1 para cima apenas."
+        "π/6 para a direita.",
+        "2π/3 para a direita."
       ],
       "a": 1,
-      "sol": "3x−π=3(x−π/3), logo deslocamento π/3 para a direita.",
+      "sol": "Como 3x−π=3(x−π/3), transladar π/3 para a direita dá o gráfico. O período fundamental do modelo é 2π/3. Os deslocamentos equivalentes diferem por múltiplos de 2π/3, pelo que π/3 é o menor positivo.",
       "hyp": "Pode usar C diretamente sem dividir por B.",
       "contexts": [
         "mission",

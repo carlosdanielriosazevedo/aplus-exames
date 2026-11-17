@@ -106,7 +106,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "1, 2, 3, 4, ...",
       "2, 4, 6, 8, ...",
       "1, 3, 5, 7, ...",
-      "10, 100, 1000, ..."
+      "2, 3, 4, 5, ..."
     ],
     "a": 0,
     "sol": "Os quocientes de D'Hondt obtêm-se dividindo os votos de cada lista por 1, 2, 3, 4, ...",
@@ -165,7 +165,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "o": [
       "Vence quem tiver mais votos do que qualquer outro candidato.",
       "Vence apenas quem ultrapassar metade dos votos válidos.",
-      "Vence o candidato com menos votos nulos.",
+      "Vence quem tiver mais votos do que os outros candidatos somados.",
       "Vence sempre quem ficar acima de 40%."
     ],
     "a": 0,
@@ -251,15 +251,15 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Amostragem, representatividade e enviesamento",
-    "q": "Uma população tem alunos do 10.º, 11.º e 12.º. Para garantir presença dos três anos, uma estratégia útil é...",
+    "q": "Uma escola tem alunos do 10.º, 11.º e 12.º anos. Qual estratégia permite garantir que cada ano fica representado na amostra?",
     "o": [
-      "escolher apenas o 12.º ano.",
-      "escolher só a primeira turma disponível.",
-      "inquirir apenas alunos voluntários.",
+      "seleção aleatória simples da lista de todos os alunos.",
+      "seleção aleatória de uma turma inteira.",
+      "seleção por ordem de resposta a um convite geral.",
       "amostragem estratificada por ano."
     ],
     "a": 3,
-    "sol": "Estratificar permite assegurar representação de subgrupos relevantes.",
+    "sol": "Cria-se um estrato por ano e seleciona-se pelo menos um aluno de cada estrato. Numa seleção aleatória única, ou a partir de turmas ou voluntários específicos, não há garantia de que todos os anos ficam representados.",
     "hyp": "Pode ignorar grupos importantes da população.",
     "contexts": [
       "diagnostic"
@@ -281,12 +281,12 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Amostragem, representatividade e enviesamento",
-    "q": "Uma amostra é representativa quando...",
+    "q": "Que propriedade caracteriza uma amostra representativa?",
     "o": [
-      "reflete de forma razoável características relevantes da população.",
-      "é sempre muito pequena.",
-      "contém apenas voluntários.",
-      "tem exatamente 100 elementos."
+      "Reflete as características relevantes da população.",
+      "Tem dimensão semelhante à de estudos anteriores.",
+      "Resulta exclusivamente de participação voluntária.",
+      "Tem o mesmo número de pessoas em cada grupo."
     ],
     "a": 0,
     "sol": "Uma amostra representativa procura refletir a diversidade relevante da população.",
@@ -371,15 +371,15 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Medidas de dispersão e interpretação conjunta",
-    "q": "Os dados 2,4,6 têm média 4. Quais são os desvios à média?",
+    "q": "Os valores 2, 4 e 6 têm média 4. Quais são, pela mesma ordem, os desvios em relação à média?",
     "o": [
-      "−2,0,2",
-      "2,4,6",
-      "−4,0,4",
-      "2,0,−2"
+      "−2, 0 e 2",
+      "2, 4 e 6",
+      "−4, 0 e 4",
+      "2, 0 e −2"
     ],
     "a": 0,
-    "sol": "Subtrai-se 4 a cada valor: −2,0,2.",
+    "sol": "Subtrai-se 4 a cada valor. Os desvios são 2−4=−2, 4−4=0 e 6−4=2, pela ordem dada.",
     "hyp": "Pode usar valores absolutos ou inverter sinais.",
     "contexts": [
       "diagnostic"
@@ -523,10 +523,10 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "focus": "Problema estatístico, variabilidade, população, amostra e variável",
     "q": "Num estudo estatístico, o que é a população?",
     "o": [
-      "O conjunto total de indivíduos/elementos sobre os quais se pretende estudar uma característica.",
-      "Apenas os elementos efetivamente observados.",
-      "A média dos dados.",
-      "Uma representação gráfica."
+      "O conjunto de unidades que se pretende estudar.",
+      "O conjunto de unidades efetivamente observadas.",
+      "O conjunto de unidades que aceitaram participar.",
+      "O conjunto de unidades com dados completos."
     ],
     "a": 0,
     "sol": "A população é o conjunto de referência do estudo.",
@@ -644,9 +644,9 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "q": "Qual é a diferença entre salário bruto e salário líquido?",
     "o": [
       "O bruto é o valor antes dos descontos; o líquido é o valor após os descontos.",
-      "O líquido é sempre maior do que o bruto.",
-      "O bruto é apenas o valor por hora.",
-      "Não existe diferença."
+      "O bruto exclui os descontos; o líquido inclui os descontos.",
+      "O bruto é mensal; o líquido é o valor anual antes dos descontos.",
+      "O bruto inclui subsídios; o líquido exclui subsídios e ignora descontos."
     ],
     "a": 0,
     "sol": "O salário bruto corresponde ao valor antes das deduções; o líquido é o valor que resta depois das deduções consideradas.",
@@ -766,7 +766,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "o capital acumulado, incluindo juros anteriores.",
       "apenas o capital inicial.",
       "apenas os juros anteriores.",
-      "uma média dos montantes."
+      "a média entre o capital inicial e o montante acumulado."
     ],
     "a": 0,
     "sol": "No juro composto, os juros são incorporados no capital e passam também a render.",
@@ -826,7 +826,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "o capital inicial.",
       "o montante acumulado até esse momento.",
       "apenas os juros anteriores.",
-      "uma média aleatória."
+      "a média entre o capital inicial e o montante acumulado."
     ],
     "a": 0,
     "sol": "No juro simples, a base de cálculo mantém-se no capital inicial.",
@@ -1481,7 +1481,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Mediatriz, plano mediador, circunferência, círculo, esfera e superfície esférica",
-    "q": "O lugar geométrico dos pontos do plano à mesma distância de A e B é...",
+    "q": "Se A e B são pontos distintos, qual é o lugar geométrico dos pontos do plano que estão à mesma distância de A e de B?",
     "o": [
       "a mediatriz de AB.",
       "a reta AB.",
@@ -1691,7 +1691,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Localização dos centros, reta de Euler e circunferência dos nove pontos",
-    "q": "Se OG=4 cm, quanto mede OH?",
+    "q": "Num triângulo não equilátero, O, G e H são o circuncentro, o baricentro e o ortocentro, respetivamente. Se OG=4 cm, qual é o comprimento de OH?",
     "o": [
       "8 cm",
       "10 cm",
@@ -1699,7 +1699,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "16 cm"
     ],
     "a": 2,
-    "sol": "GH=8 e OH=OG+GH=12; equivalentemente OH=3OG.",
+    "sol": "Pela relação de Euler, G está entre O e H e GH é o dobro de OG. Como OG=4 cm, temos GH=8 cm e OH=4+8=12 cm.",
     "hyp": "Pode esquecer uma das partes.",
     "contexts": [
       "diagnostic"
@@ -1879,7 +1879,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "2"
     ],
     "a": 2,
-    "sol": "Derivando a expressão e substituindo x=0, obtém-se 0.",
+    "sol": "Pela regra da potência, f′(x)=2x. Logo f′(0)=2×0=0.",
     "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "diagnostic"
@@ -1901,15 +1901,15 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Taxa instantânea e derivada num ponto",
-    "q": "A derivada de f no ponto a representa",
+    "q": "O que representa a derivada de f no ponto de abcissa a?",
     "o": [
       "a taxa instantânea de variação de f em a",
       "uma taxa média em qualquer intervalo",
       "o valor f(a)",
-      "a área acumulada"
+      "a variação de f entre 0 e a"
     ],
     "a": 0,
-    "sol": "A derivada mede a variação local instantânea.",
+    "sol": "A derivada é o limite da taxa média de variação entre a e a+h quando h tende para zero. Por isso, mede a taxa instantânea em a.",
     "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "diagnostic"
@@ -1933,13 +1933,13 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "focus": "função derivada",
     "q": "Se f(x)=x^4, então f'(x)=",
     "o": [
-      "x^4",
-      "4x^3+1",
+      "x³",
+      "x⁴",
       "4x^3",
-      "0"
+      "4x⁴"
     ],
     "a": 2,
-    "sol": "Derivando termo a termo obtém-se 4x^3.",
+    "sol": "A regra da potência multiplica o coeficiente pelo expoente 4 e reduz o expoente em uma unidade. Logo, a derivada de x⁴ é 4x³.",
     "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "diagnostic"
@@ -1991,15 +1991,15 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Monotonia, extremos e otimização",
-    "q": "Se f'(x)=2x, então junto de x=0 a situação correta é",
+    "q": "Uma função f derivável em ℝ satisfaz f′(x)=2x. Que opção indica a monotonia de f de cada lado de x=0 e o tipo de extremo em x=0?",
     "o": [
-      "decrescente em ]-inf,0[ e crescente em ]0,+inf[",
-      "mínimo em x=0",
-      "decrescente em ]-inf,0[ e crescente em ]0,+inf[; mínimo em x=0.",
-      "não se pode concluir nada"
+      "crescente antes de 0, decrescente depois de 0 e máximo em x=0.",
+      "decrescente antes de 0, crescente depois de 0 e máximo em x=0.",
+      "decrescente antes de 0, crescente depois de 0 e mínimo em x=0.",
+      "decrescente antes de 0, decrescente depois de 0 e sem extremo em x=0."
     ],
     "a": 2,
-    "sol": "Analisa-se o sinal de f' antes e depois de 0.",
+    "sol": "Temos f′(0)=0. Antes de 0, f′ é negativa e depois é positiva. Portanto, f é decrescente antes de 0 e crescente depois de 0, pelo que tem um mínimo em x=0.",
     "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
     "contexts": [
       "diagnostic"
@@ -2053,13 +2053,13 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "focus": "Regras de derivação",
     "q": "Deriva f(x)=x^5.",
     "o": [
-      "x^5",
-      "5x^4+1",
+      "x⁴",
+      "x⁵",
       "5x^4",
-      "0"
+      "5x⁵"
     ],
     "a": 2,
-    "sol": "Aplicando regra da potência e linearidade obtém-se 5x^4.",
+    "sol": "Ao derivar x⁵, multiplica-se o coeficiente pelo expoente 5 e baixa-se o expoente uma unidade. Logo, f′(x)=5x⁴.",
     "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "diagnostic"
@@ -2081,7 +2081,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Regras de derivação",
-    "q": "A derivada de uma soma f+g e",
+    "q": "Para funções deriváveis f e g, qual é a derivada de f+g?",
     "o": [
       "f'+g'",
       "f'g'",
@@ -2089,7 +2089,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "fg'"
     ],
     "a": 0,
-    "sol": "A derivação é linear relativamente à soma.",
+    "sol": "A variação da soma é a soma das variações. Tomando o limite dos quocientes incrementais, obtém-se (f+g)′=f′+g′.",
     "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "diagnostic"
@@ -2119,7 +2119,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "x=1"
     ],
     "a": 2,
-    "sol": "Usa-se y-1=2(x-1), que simplifica para y=2x-1.",
+    "sol": "Para f(x)=x², f(1)=1 e f′(x)=2x. Logo f′(1)=2, e a reta passa por (1,1) com esse declive. Assim, y−1=2(x−1), ou seja, y=2x−1.",
     "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
     "contexts": [
       "diagnostic"
@@ -2201,7 +2201,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "taxa média de variação",
-    "q": "A taxa média de variação de f entre a e b e",
+    "q": "Se a e b são valores distintos do domínio de f, qual é a taxa média de variação de f entre a e b?",
     "o": [
       "(f(b)-f(a))/(b-a)",
       "(f(a)+f(b))/2",
@@ -2209,7 +2209,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "(b-a)/(f(b)-f(a))"
     ],
     "a": 0,
-    "sol": "É a variação da função por unidade de variação da variável.",
+    "sol": "Entre a e b, o valor de f varia f(b)−f(a) e a abcissa varia b−a. A taxa média é a razão entre estas duas variações, igual ao declive da secante que liga (a,f(a)) a (b,f(b)).",
     "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "diagnostic"
@@ -2291,7 +2291,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Arranjos",
-    "q": "A(n,2) simplifica para...",
+    "q": "Para n natural com n≥2, qual é a expressão simplificada de A(n,2)?",
     "o": [
       "n².",
       "n(n+1).",
@@ -2411,7 +2411,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Diagramas, tabelas e organização de casos",
-    "q": "Um aluno escolhe Ciências ou Humanidades. Em Ciências há 3 opções de clube; em Humanidades há 2. Quantas folhas finais?",
+    "q": "Um aluno escolhe um curso (Ciências ou Humanidades) e, depois, um clube desse curso. Há 3 clubes disponíveis em Ciências e 2 em Humanidades. Quantos caminhos completos tem o diagrama de árvore destas escolhas?",
     "o": [
       "5.",
       "6.",
@@ -2419,7 +2419,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "2."
     ],
     "a": 0,
-    "sol": "3+2=5.",
+    "sol": "Cada caminho completo escolhe um curso e um dos seus clubes. O ramo de Ciências tem 3 folhas e o de Humanidades tem 2, pelo que há 3+2=5 caminhos.",
     "hyp": "Pode multiplicar os ramos principais.",
     "contexts": [
       "diagnostic"
@@ -2444,9 +2444,9 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "q": "Um diagrama de árvore é útil para...",
     "o": [
       "organizar escolhas sucessivas e visualizar ramos.",
-      "calcular derivadas.",
-      "resolver apenas equações.",
-      "representar funções contínuas."
+      "representar apenas escolhas independentes.",
+      "agrupar automaticamente ordens diferentes num só caminho.",
+      "eliminar automaticamente resultados repetidos."
     ],
     "a": 0,
     "sol": "Cada nível da árvore pode representar uma etapa do processo de escolha.",
@@ -2471,7 +2471,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Fatorial e contagens elementares",
-    "q": "n!/(n−1)! simplifica para...",
+    "q": "Para n natural positivo, que expressão é igual a n!/(n−1)!?",
     "o": [
       "n−1.",
       "n!−1.",
@@ -2591,7 +2591,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Assíntotas, interpretação e modelação",
-    "q": "Divide x²+1 por x. Obtém-se...",
+    "q": "Para x≠0, qual é a expressão equivalente a (x²+1)/x?",
     "o": [
       "x+1.",
       "x².",
@@ -2599,7 +2599,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "x+1/x."
     ],
     "a": 3,
-    "sol": "x²/x=x e sobra 1/x.",
+    "sol": "Dividindo as parcelas do numerador por x, obtém-se x²/x+1/x=x+1/x. A igualdade vale para x≠0.",
     "hyp": "Pode cancelar x num termo onde não existe.",
     "contexts": [
       "diagnostic"
@@ -2621,7 +2621,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Assíntotas, interpretação e modelação",
-    "q": "Uma assíntota vertical de uma função racional ocorre tipicamente num valor x=a onde...",
+    "q": "Para uma função racional, que condição sobre os fatores do numerador e do denominador identifica uma assíntota vertical em x=a?",
     "o": [
       "o denominador se anula sem cancelamento completo.",
       "o numerador se anula.",
@@ -2629,7 +2629,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "a função é constante."
     ],
     "a": 0,
-    "sol": "Se o denominador tende a zero e o fator não se cancela, o gráfico pode divergir junto de x=a.",
+    "sol": "Simplificam-se os fatores comuns. Se o fator x−a permanece no denominador, este aproxima-se de zero quando x se aproxima de a e o numerador simplificado aproxima-se de um valor não nulo. Logo, o quociente cresce em módulo e x=a é uma assíntota vertical.",
     "hyp": "Pode confundir zero da função com exclusão do domínio.",
     "contexts": [
       "diagnostic"
@@ -2651,7 +2651,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Famílias cúbicas/quárticas e comportamento gráfico",
-    "q": "Resolver x⁴−13x²+36=0 equivale a resolver, com y=x²...",
+    "q": "Ao resolver x⁴−13x²+36=0 em ℝ pela substituição y=x², com y≥0, que equação em y se obtém?",
     "o": [
       "y⁴−13y²+36=0.",
       "y²−13x+36=0.",
@@ -2659,7 +2659,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "y−13+36=0."
     ],
     "a": 2,
-    "sol": "Substituindo y=x², x⁴=y².",
+    "sol": "Como y=x², temos x⁴=(x²)²=y². Portanto, a equação fica y²−13y+36=0. Cada solução y≥0 deve depois ser substituída em x²=y.",
     "hyp": "Pode substituir apenas um termo.",
     "contexts": [
       "diagnostic"
@@ -2809,7 +2809,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "(f+g)(x)=f(x)/g(x)."
     ],
     "a": 0,
-    "sol": "Somam-se os valores das duas funções no mesmo x.",
+    "sol": "Para cada x no domínio comum, calculam-se f(x) e g(x) e somam-se os dois valores. Assim, (f+g)(x)=f(x)+g(x).",
     "hyp": "Pode confundir soma com composição.",
     "contexts": [
       "diagnostic"
@@ -2861,7 +2861,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Funções racionais",
-    "q": "Uma função racional é, em geral, um quociente...",
+    "q": "Uma função racional é definida pelo quociente de que tipo de expressões?",
     "o": [
       "de dois polinómios, com denominador não identicamente nulo.",
       "de duas funções trigonométricas.",
@@ -2869,7 +2869,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "de duas sucessões."
     ],
     "a": 0,
-    "sol": "Funções racionais têm a forma P(x)/Q(x), com Q não nulo.",
+    "sol": "Uma função racional tem a forma P(x)/Q(x), em que P e Q são polinómios e Q não é o polinómio nulo. O domínio exclui os valores em que Q(x)=0.",
     "hyp": "Pode confundir racional com qualquer fração numérica.",
     "contexts": [
       "diagnostic"
@@ -2951,7 +2951,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Produto escalar, norma e ângulo",
-    "q": "Se u·v=12, ||u||=3 e ||v||=4, então θ=",
+    "q": "Se u·v=12, ‖u‖=3 e ‖v‖=4, qual é o ângulo θ entre u e v?",
     "o": [
       "π/3.",
       "0.",
@@ -2959,7 +2959,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "π."
     ],
     "a": 1,
-    "sol": "cosθ=12/(12)=1, logo θ=0.",
+    "sol": "Temos cos θ=(u·v)/(‖u‖‖v‖)=12/(3×4)=1. No intervalo [0,π], isso dá θ=0.",
     "hyp": "Pode pensar que produto igual ao produto das normas implica 60°.",
     "contexts": [
       "diagnostic"
@@ -2981,7 +2981,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Produto escalar, norma e ângulo",
-    "q": "Para vetores não nulos u e v, u·v é igual a...",
+    "q": "Sejam u e v vetores não nulos e θ o ângulo entre eles. Qual é a expressão do produto escalar u·v em função de θ e das normas?",
     "o": [
       "||u||||v||cosθ.",
       "||u||+||v||.",
@@ -2989,7 +2989,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "cos(||u||+||v||)."
     ],
     "a": 0,
-    "sol": "Esta é a forma geométrica do produto escalar.",
+    "sol": "O produto escalar é dado pelo produto das normas dos vetores multiplicado pelo cosseno do ângulo entre eles.",
     "hyp": "Pode trocar cosseno por seno.",
     "contexts": [
       "diagnostic"
@@ -3101,15 +3101,15 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Distâncias em problemas geométricos",
-    "q": "A distância de um ponto P a uma reta r é...",
+    "q": "Se P é um ponto exterior à reta r, qual é a distância de P a r?",
     "o": [
       "o comprimento do segmento perpendicular de P a r.",
-      "qualquer segmento que una P a r.",
-      "a distância à origem.",
-      "o declive da reta."
+      "o comprimento da projeção de [OP] sobre uma reta paralela a r.",
+      "o comprimento do segmento que liga P à origem.",
+      "o comprimento do segmento que liga P à interseção de r com Ox."
     ],
     "a": 0,
-    "sol": "A menor distância é medida segundo a perpendicular à reta.",
+    "sol": "O pé H da perpendicular traçada de P a r é o ponto de r mais próximo de P. Por isso, a distância pedida é o comprimento de [PH].",
     "hyp": "Pode usar um segmento oblíquo.",
     "contexts": [
       "diagnostic"
@@ -3289,7 +3289,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "o maior ângulo entre vetores diretores."
     ],
     "a": 0,
-    "sol": "Usa-se o menor ângulo entre as direções das retas.",
+    "sol": "Um vetor diretor pode ser substituído pelo seu oposto sem mudar a reta. A escolha dos sentidos pode produzir ângulos suplementares. Toma-se o menor, entre 0 e π/2.",
     "hyp": "Pode confundir com diferença orientada de inclinações sem redução.",
     "contexts": [
       "diagnostic"
@@ -3461,7 +3461,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Progressões geométricas",
-    "q": "Uma progressão geométrica (PG) é uma sucessão em que...",
+    "q": "Numa progressão geométrica (PG) de termos não nulos, qual é a propriedade que se verifica sempre?",
     "o": [
       "a razão entre termos consecutivos é constante.",
       "a diferença entre termos consecutivos é constante.",
@@ -3469,7 +3469,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "o termo geral é sempre linear."
     ],
     "a": 0,
-    "sol": "Numa PG, para termos não nulos, u_{n+1}/u_n=q é constante.",
+    "sol": "Existe uma constante q tal que u_{n+1}=q·u_n para todo n. Para termos não nulos, o quociente u_{n+1}/u_n é, portanto, constante e igual a q.",
     "hyp": "Pode confundir PG com PA.",
     "contexts": [
       "diagnostic"
@@ -3581,15 +3581,15 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Regularidades, termo geral e recorrência",
-    "q": "Uma sucessão é...",
+    "q": "Qual é a definição de uma sucessão real infinita (u_n) indexada a partir de n=1?",
     "o": [
-      "uma função cujo domínio é um subconjunto dos números naturais.",
-      "qualquer conjunto sem ordem.",
-      "uma equação do 2.º grau.",
-      "uma função apenas definida em R."
+      "uma função dos naturais positivos em ℝ.",
+      "um conjunto de valores reais sem índices.",
+      "uma função de ℝ nos naturais positivos.",
+      "uma função dos naturais positivos nos naturais positivos, obrigatoriamente."
     ],
     "a": 0,
-    "sol": "Uma sucessão associa a cada índice natural um termo.",
+    "sol": "A cada n natural positivo associa-se um único termo real u_n. Os índices constituem o domínio e os termos são os valores da função.",
     "hyp": "Pode confundir sucessão com conjunto não ordenado.",
     "contexts": [
       "diagnostic"
@@ -3611,7 +3611,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Ângulos orientados, arcos e radianos",
-    "q": "60° correspondem a...",
+    "q": "Qual é a amplitude de um ângulo de 60° em radianos?",
     "o": [
       "π/6",
       "2π/3",
@@ -3619,7 +3619,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "π/3"
     ],
     "a": 3,
-    "sol": "60×π/180=π/3.",
+    "sol": "Como 180° correspondem a π rad, a amplitude em radianos é 60×π/180=π/3.",
     "hyp": "Pode simplificar a fração incorretamente.",
     "contexts": [
       "diagnostic"
@@ -3679,7 +3679,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "1"
     ],
     "a": 3,
-    "sol": "A abcissa de (1,0) é 1.",
+    "sol": "O ângulo nulo tem o lado final no semieixo positivo Ox. O ponto associado no círculo trigonométrico é (1, 0), cuja abcissa é 1. Portanto, cos 0=1.",
     "hyp": "Pode usar a ordenada.",
     "contexts": [
       "diagnostic"
@@ -3731,15 +3731,15 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Equações trigonométricas",
-    "q": "Resolve 2sin x=1 em [0,2π[.",
+    "q": "Resolve cos(2x)=1/2 no intervalo [0,π[.",
     "o": [
       "π/6 e 5π/6.",
-      "π/3 e 2π/3.",
-      "7π/6 e 11π/6.",
+      "π/3 e 5π/6.",
+      "π/6 e π/3.",
       "π/6 apenas."
     ],
     "a": 0,
-    "sol": "A equação reduz-se a sin x=1/2.",
+    "sol": "Como x∈[0,π[, tem-se 2x∈[0,2π[. Nesse intervalo, o cosseno vale 1/2 nos ângulos π/3 e 5π/3. Dividindo por 2, obtém-se x=π/6 ou x=5π/6.",
     "hyp": "Pode esquecer dividir por 2.",
     "contexts": [
       "diagnostic"
@@ -3761,9 +3761,9 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Equações trigonométricas",
-    "q": "A equação sin x=0 tem, em R, soluções...",
+    "q": "Quais são as soluções em ℝ da equação sen x=0? Nas expressões, k∈ℤ.",
     "o": [
-      "x=kπ, k∈Z.",
+      "x=kπ.",
       "x=π/2+kπ.",
       "x=2kπ apenas.",
       "x=π/4+kπ."
@@ -3791,11 +3791,11 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Funções seno e cosseno",
-    "q": "sin(x+2π) é igual a...",
+    "q": "sen(x+2π) é igual a...",
     "o": [
-      "−sin x.",
+      "−sen x.",
       "cos x.",
-      "sin x.",
+      "sen x.",
       "−cos x."
     ],
     "a": 2,
@@ -3821,7 +3821,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Funções seno e cosseno",
-    "q": "A função y=sin x tem período fundamental...",
+    "q": "A função y=sen x tem período fundamental...",
     "o": [
       "2π.",
       "π.",
@@ -3859,7 +3859,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "5/√3 m"
     ],
     "a": 0,
-    "sol": "Altura=5 sin60°=5√3/2.",
+    "sol": "Altura=5 sen 60°=5√3/2.",
     "hyp": "Pode usar cosseno em vez de seno.",
     "contexts": [
       "diagnostic"
@@ -3881,7 +3881,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Resolução de triângulos e modelação periódica",
-    "q": "Num triângulo retângulo, sin α é...",
+    "q": "Num triângulo retângulo, α é um ângulo agudo. A que razão corresponde sen α?",
     "o": [
       "cateto oposto/hipotenusa.",
       "cateto adjacente/hipotenusa.",
@@ -3889,7 +3889,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "hipotenusa/cateto oposto."
     ],
     "a": 0,
-    "sol": "Por definição, sin α=oposto/hipotenusa.",
+    "sol": "Por definição, sen α=oposto/hipotenusa.",
     "hyp": "Pode trocar seno e cosseno.",
     "contexts": [
       "diagnostic"
@@ -3911,7 +3911,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Relações e identidades trigonométricas fundamentais",
-    "q": "Se tan x=3/4 e x está no 1.º quadrante, uma escolha compatível para (sin x,cos x) é...",
+    "q": "Se tg x=3/4 e x está no 1.º quadrante, uma escolha compatível para (sen x,cos x) é...",
     "o": [
       "(3/5,4/5).",
       "(4/5,3/5).",
@@ -3919,7 +3919,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "(3/4,1)."
     ],
     "a": 0,
-    "sol": "Um triângulo 3-4-5 dá sin/cos=3/4.",
+    "sol": "No 1.º quadrante, seno e cosseno são positivos. Num triângulo retângulo com catetos 3 e 4, a hipotenusa mede 5. Portanto, sen x=3/5 e cos x=4/5.",
     "hyp": "Pode inverter seno e cosseno.",
     "contexts": [
       "diagnostic"
@@ -3943,10 +3943,10 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "focus": "Relações e identidades trigonométricas fundamentais",
     "q": "A identidade trigonométrica fundamental é...",
     "o": [
-      "sin²x+cos²x=1.",
-      "sin x+cos x=1.",
-      "tan²x=1.",
-      "sin x cos x=1."
+      "sen² x+cos² x=1.",
+      "sen x+cos x=1.",
+      "tg² x=1.",
+      "sen x cos x=1."
     ],
     "a": 0,
     "sol": "Resulta da equação do círculo unitário.",
@@ -4124,9 +4124,9 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "q": "A forma algébrica de um número complexo é...",
     "o": [
       "a+bi, com a,b reais.",
-      "a/b.",
-      "a+bx.",
-      "r(cosθ+i sinθ) apenas."
+      "a+bi, com a real e b sempre positivo.",
+      "a+bi, com a real e b sempre diferente de zero.",
+      "a+bi, com a inteiro e b real."
     ],
     "a": 0,
     "sol": "Todo complexo pode escrever-se como a+bi.",
@@ -4301,7 +4301,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
-    "q": "Se z1=r1(cosα+i sinα) e z2=r2(cosβ+i sinβ), então z1z2 tem módulo...",
+    "q": "Se z1=r1(cos α+i sin α) e z2=r2(cos β+i sin β), com r1>0 e r2>0, então z1z2 tem módulo...",
     "o": [
       "r1r2.",
       "r1+r2.",
@@ -4421,15 +4421,15 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Aplicação",
     "focus": "Equações exponenciais/logarítmicas e problemas",
-    "q": "Resolve 2^x=8.",
+    "q": "Resolve em ℝ a equação 2^(2x−1)=32.",
     "o": [
       "x=3.",
       "x=4.",
       "x=2.",
-      "x=8."
+      "x=5."
     ],
     "a": 0,
-    "sol": "8=2³, logo x=3.",
+    "sol": "Como 32=2⁵ e a exponencial de base 2 é injetiva, 2x−1=5. Assim, 2x=6 e a solução é x=3.",
     "hyp": "Pode dividir 8 por 2.",
     "contexts": [
       "diagnostic"
@@ -4481,7 +4481,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Função exponencial",
-    "q": "Uma função exponencial elementar tem forma f(x)=a^x, com...",
+    "q": "Para que f(x)=a^x seja uma função exponencial real não constante definida em ℝ, que condição deve satisfazer a base a?",
     "o": [
       "a>0 e a≠1.",
       "a<0.",
@@ -4489,7 +4489,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "a=0."
     ],
     "a": 0,
-    "sol": "Para uma exponencial real definida em todo R exige-se base positiva e diferente de 1.",
+    "sol": "A base tem de ser positiva para a expressão definir uma exponencial em ℝ. Se a=1, então f(x)=1 para todo x. Por isso, a>0 e a≠1.",
     "hyp": "Pode admitir bases não positivas ou a base 1 como caso exponencial não trivial.",
     "contexts": [
       "diagnostic"
@@ -4541,7 +4541,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Função inversa e raízes",
-    "q": "Uma função admite inversa como função no seu domínio se for...",
+    "q": "Para existir uma função inversa definida na imagem de f, que propriedade deve ter f?",
     "o": [
       "injetiva.",
       "constante.",
@@ -4549,7 +4549,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "sempre par."
     ],
     "a": 0,
-    "sol": "Para cada valor da imagem existir um único antecedente, a função tem de ser injetiva.",
+    "sol": "Cada valor da imagem tem pelo menos um antecedente. Para a inversa atribuir um único antecedente a cada valor, f tem de ser injetiva.",
     "hyp": "Pode confundir inversa com recíproco algébrico.",
     "contexts": [
       "diagnostic"
@@ -4571,7 +4571,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Função logarítmica e propriedades",
-    "q": "log_a a, com a válido, é...",
+    "q": "Para a>0 e a≠1, qual é o valor de logₐ(a)?",
     "o": [
       "0.",
       "1.",
@@ -4579,7 +4579,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "−1."
     ],
     "a": 1,
-    "sol": "a^1=a.",
+    "sol": "Pela definição de logaritmo, como a¹=a, temos logₐ(a)=1.",
     "hyp": "Pode confundir com log_a1.",
     "contexts": [
       "diagnostic"
@@ -4601,7 +4601,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Função logarítmica e propriedades",
-    "q": "log_a b=c significa que...",
+    "q": "A igualdade logₐ(b)=c é equivalente a que igualdade?",
     "o": [
       "a^c=b.",
       "b^c=a.",
@@ -4631,15 +4631,15 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Crescimento/decrescimento exponencial e modelação",
-    "q": "Um modelo para meia-vida H pode escrever-se como...",
+    "q": "Uma quantidade começa em Q₀>0 e decresce exponencialmente. Reduz-se a metade em cada período de duração H. Qual é a expressão da quantidade ao fim de t unidades de tempo?",
     "o": [
-      "Q0·2^(t/H).",
-      "Q0·(1/2)^(t/H).",
-      "Q0·(1/2)^(Ht).",
-      "Q0−t/H."
+      "Q₀·2^(t/H).",
+      "Q₀·(1/2)^(t/H).",
+      "Q₀·(1/2)^(Ht).",
+      "Q₀−t/H."
     ],
     "a": 1,
-    "sol": "Quando t=H, o expoente é 1 e a quantidade fica Q0/2.",
+    "sol": "A cada intervalo H aplica-se o fator 1/2. Como t corresponde a t/H intervalos de duração H, a quantidade é Q₀·(1/2)^(t/H).",
     "hyp": "Pode usar fator 2 ou multiplicar H pelo tempo.",
     "contexts": [
       "diagnostic"
@@ -4661,7 +4661,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Crescimento/decrescimento exponencial e modelação",
-    "q": "Um modelo Q(t)=Q0·a^t com a>1 representa, em geral...",
+    "q": "Num modelo Q(t)=Q₀·a^t, com Q₀>0 e a>1, que tipo de evolução tem Q?",
     "o": [
       "crescimento exponencial.",
       "decrescimento exponencial.",
@@ -4691,7 +4691,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Estudo de funções, modelação e otimização",
-    "q": "Se f'(x)=x(x−3), os pontos críticos são...",
+    "q": "Uma função f é derivável em ℝ e f′(x)=x(x−3). Quais são as abcissas dos seus pontos críticos?",
     "o": [
       "0 e 3.",
       "0 apenas.",
@@ -4699,7 +4699,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "−3 e 0."
     ],
     "a": 0,
-    "sol": "Produto nulo quando x=0 ou x=3.",
+    "sol": "Como f é derivável em ℝ, os pontos críticos são zeros de f′. O produto x(x−3) anula-se em x=0 e x=3.",
     "hyp": "Pode resolver apenas um fator.",
     "contexts": [
       "diagnostic"
@@ -5021,7 +5021,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Derivabilidade e relação com continuidade",
-    "q": "Se f é derivável em a, então f é...",
+    "q": "Supondo que lim(h→0) [f(a+h)−f(a)]/h=−2, que propriedade é garantida para f em a?",
     "o": [
       "contínua em a.",
       "descontínua em a.",
@@ -5029,7 +5029,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "necessariamente crescente."
     ],
     "a": 0,
-    "sol": "Derivabilidade implica continuidade.",
+    "sol": "O limite do quociente incremental é finito, logo f é derivável em a. Toda a função derivável num ponto é também contínua nesse ponto.",
     "hyp": "Pode inverter a implicação.",
     "contexts": [
       "diagnostic"
@@ -5051,7 +5051,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Monotonia, extremos e estudo global de funções",
-    "q": "Se f'(x)>0 em ]−∞,1[ e f'(x)<0 em ]1,+∞[, então x=1 é...",
+    "q": "Seja f contínua em x=1, com f′(x)>0 para x<1 e f′(x)<0 para x>1. Que tipo de extremo tem f em x=1?",
     "o": [
       "mínimo local.",
       "máximo local.",
@@ -5059,7 +5059,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "nenhum extremo."
     ],
     "a": 1,
-    "sol": "A função passa de crescente a decrescente.",
+    "sol": "A derivada é positiva à esquerda e negativa à direita. Pela continuidade em 1, os valores nos dois lados são menores do que f(1), pelo que f tem um máximo local em x=1.",
     "hyp": "Pode inverter a mudança de sinais.",
     "contexts": [
       "diagnostic"
@@ -5231,7 +5231,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Distribuições de amostragem / comportamento amostral",
-    "q": "Quadruplicar n faz o erro padrão da média...",
+    "q": "Para observações independentes da mesma população de desvio padrão σ>0, como muda o erro padrão da média amostral quando se quadruplica n?",
     "o": [
       "ficar um quarto.",
       "duplicar.",
@@ -5291,15 +5291,15 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Estimação de parâmetros",
-    "q": "Se X̄ estima μ com erro padrão 2, uma amostra maior tende a produzir erro padrão...",
+    "q": "Com observações independentes da mesma população, a média amostral tem erro padrão 2 para uma amostra de dimensão n. Como se altera o erro padrão ao aumentar n?",
     "o": [
       "maior sempre.",
       "igual sempre.",
       "negativo.",
-      "menor que 2, mantendo σ comparável."
+      "fica abaixo de 2."
     ],
     "a": 3,
-    "sol": "EP≈σ/√n.",
+    "sol": "O erro padrão teórico é σ/√n. Como o desvio padrão σ da população se mantém e é positivo, aumentar n reduz o erro padrão para menos de 2.",
     "hyp": "Pode pensar que mais dados aumentam erro.",
     "contexts": [
       "diagnostic"
@@ -5351,7 +5351,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Raciocínio inferencial e amostragem",
-    "q": "A média de 80 alunos selecionados de uma escola é...",
+    "q": "Uma escola tem 500 alunos. Calcula-se a média das idades de 80 dos alunos da escola que foram selecionados para um estudo. Que tipo de medida é essa média?",
     "o": [
       "um parâmetro populacional necessariamente.",
       "uma estatística amostral.",
@@ -5471,7 +5471,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Teorema Limite Central em contexto introdutório",
-    "q": "Assim, X̄ é aproximadamente N(100,2²), se a notação usar variância no segundo parâmetro. Isto significa desvio padrão...",
+    "q": "A média amostral X̄ segue aproximadamente uma distribuição normal N(100;2²), em que 2² é a variância. Qual é o seu desvio padrão?",
     "o": [
       "4.",
       "100.",
@@ -5621,7 +5621,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Integral definido",
-    "q": "A integral definida ∫_a^b f(x)dx representa, em termos geométricos...",
+    "q": "Se f é contínua em [a,b], com a<b, que interpretação geométrica tem o integral definido ∫_a^b f(x) dx?",
     "o": [
       "área algébrica entre o gráfico e Ox.",
       "sempre área positiva.",
@@ -5719,7 +5719,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "3e^x−2cosx+C."
     ],
     "a": 1,
-    "sol": "Integra-se cada termo.",
+    "sol": "Uma primitiva de e^x é e^x e uma primitiva de cos x é sen x. Pela linearidade, a expressão geral é 3e^x−2 sen x+C.",
     "hyp": "Pode trocar a primitiva do cosseno.",
     "contexts": [
       "diagnostic"
@@ -5801,7 +5801,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Teorema Fundamental do Cálculo / Fórmula de Barrow",
-    "q": "A Fórmula de Barrow afirma que, se F'=f, então...",
+    "q": "Se f é contínua em [a,b] e F é uma primitiva de f, que igualdade dá a fórmula de Barrow?",
     "o": [
       "∫_a^b f(x)dx=F(b)−F(a).",
       "∫_a^b f=F(a)−F(b).",
@@ -5809,7 +5809,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "∫f=f(b)−f(a)."
     ],
     "a": 0,
-    "sol": "Avalia-se uma primitiva nos limites superior e inferior.",
+    "sol": "A fórmula de Barrow dá ∫_a^b f(x) dx=F(b)−F(a). Subtrai-se o valor da primitiva no limite inferior ao seu valor no limite superior.",
     "hyp": "Pode inverter os limites ou usar f em vez de F.",
     "contexts": [
       "diagnostic"
@@ -6193,7 +6193,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "focus": "Tabelas de contingência e independência",
     "q": "Se A e B são independentes, P(A)=0,6 e P(B)=0,5, então P(A∪B)=...",
     "o": [
-      "1,1.",
+      "0,2.",
       "0,8.",
       "0,3.",
       "0,5."
@@ -6221,12 +6221,12 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Tabelas de contingência e independência",
-    "q": "Uma tabela de contingência organiza dados segundo...",
+    "q": "Uma tabela de contingência de dupla entrada classifica as observações segundo...",
     "o": [
       "duas variáveis categóricas.",
       "uma única variável contínua.",
-      "apenas médias.",
-      "apenas probabilidades condicionadas."
+      "duas medidas numéricas sem agrupamento.",
+      "as frequências marginais de uma única variável."
     ],
     "a": 0,
     "sol": "As linhas e colunas correspondem a categorias de duas variáveis.",
@@ -6285,8 +6285,8 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "o": [
       "não pode ser previsto com certeza antes da realização.",
       "é sempre o mesmo.",
-      "é necessariamente numérico.",
-      "é impossível de observar."
+      "tem a mesma probabilidade que todos os restantes.",
+      "pertence a um conjunto de resultados que só se conhece após a realização."
     ],
     "a": 0,
     "sol": "Num fenómeno aleatório conhecem-se os resultados possíveis, mas não o que ocorrerá numa realização concreta.",
@@ -6344,12 +6344,12 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "q": "A variância de uma variável aleatória mede sobretudo...",
     "o": [
       "a dispersão em torno do valor médio.",
-      "a probabilidade total.",
-      "o valor máximo.",
-      "a mediana sempre."
+      "a diferença entre a média e a mediana.",
+      "a amplitude entre os valores extremos.",
+      "a dispersão em torno do valor mais frequente."
     ],
     "a": 0,
-    "sol": "A variância quantifica a variabilidade relativamente à média.",
+    "sol": "Quando existe, a variância é o valor esperado do quadrado da diferença entre X e a sua média.",
     "hyp": "Pode confundir dispersão com localização.",
     "contexts": [
       "diagnostic"
@@ -6371,7 +6371,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Regra do produto e árvores de probabilidade",
-    "q": "Na urna 3 V e 2 A sem reposição, P(duas cores diferentes)=...",
+    "q": "Uma urna tem 3 bolas verdes e 2 azuis. Retiram-se ao acaso duas bolas sucessivamente, sem reposição. Qual é a probabilidade de saírem duas cores diferentes?",
     "o": [
       "3/10.",
       "1/2.",
@@ -6379,7 +6379,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "6/25."
     ],
     "a": 2,
-    "sol": "P(VA)+P(AV)=3/10+3/10=3/5.",
+    "sol": "As duas ordens possíveis são verde–azul e azul–verde. Somando as suas probabilidades, obtém-se (3/5)×(2/4)+(2/5)×(3/4)=3/5.",
     "hyp": "Pode contar apenas uma das ordens.",
     "contexts": [
       "diagnostic"
@@ -6401,7 +6401,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Regra do produto e árvores de probabilidade",
-    "q": "A regra do produto pode escrever-se como...",
+    "q": "Se P(A)>0, como se escreve a regra do produto para a probabilidade da interseção de A e B?",
     "o": [
       "P(A∩B)=P(A)P(B|A).",
       "P(A∩B)=P(A)+P(B).",
@@ -6409,7 +6409,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "P(A|B)=P(A)P(B)."
     ],
     "a": 0,
-    "sol": "A probabilidade de ocorrer A e depois B é P(A) vezes a probabilidade de B condicionada a A.",
+    "sol": "Como P(B|A)=P(A∩B)/P(A), a interseção tem probabilidade P(A∩B)=P(A)P(B|A).",
     "hyp": "Pode somar probabilidades de etapas sucessivas.",
     "contexts": [
       "diagnostic"
@@ -6461,7 +6461,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Probabilidade e propriedades elementares",
-    "q": "Para qualquer acontecimento A, P(A) pertence a...",
+    "q": "Qual dos seguintes é o conjunto exato dos valores que uma probabilidade pode assumir?",
     "o": [
       "[0,1].",
       "R.",
@@ -6469,7 +6469,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "{0,1} apenas."
     ],
     "a": 0,
-    "sol": "Uma probabilidade está sempre entre 0 e 1.",
+    "sol": "Uma probabilidade pode tomar qualquer valor entre 0 e 1, incluindo P(∅)=0 e P(Ω)=1.",
     "hyp": "Pode confundir probabilidade com frequência absoluta.",
     "contexts": [
       "diagnostic"
@@ -6521,7 +6521,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Probabilidade total e problemas em cadeia",
-    "q": "Se A e A^c formam uma partição, então P(B) pode escrever-se como...",
+    "q": "Se 0<P(A)<1, como se pode exprimir P(B) pela regra da probabilidade total, usando A e o seu complementar?",
     "o": [
       "P(B|A)P(A)+P(B|A^c)P(A^c).",
       "P(B|A)+P(B|A^c).",
@@ -6551,7 +6551,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Variáveis aleatórias discretas e função massa",
-    "q": "Se X assume 1,2,3 com probabilidades 0,2;0,3;k, então k=...",
+    "q": "Se X assume os valores 1, 2 e 3 com probabilidades respetivas 0,2, 0,3 e k, qual é o valor de k?",
     "o": [
       "0,2.",
       "0,3.",
@@ -6559,7 +6559,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "0,5."
     ],
     "a": 3,
-    "sol": "0,2+0,3+k=1 =>k=0,5.",
+    "sol": "A soma das três probabilidades é 1. Assim, 0,2+0,3+k=1 e k=0,5.",
     "hyp": "Pode fazer a soma das massas igual ao maior valor de X.",
     "contexts": [
       "diagnostic"
@@ -6584,9 +6584,9 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "q": "Uma variável aleatória discreta associa a cada resultado elementar...",
     "o": [
       "um valor numérico de um conjunto finito ou enumerável.",
-      "uma probabilidade necessariamente igual.",
-      "um intervalo contínuo obrigatório.",
-      "um acontecimento impossível."
+      "a probabilidade desse resultado.",
+      "qualquer valor de um intervalo contínuo.",
+      "um conjunto de resultados elementares."
     ],
     "a": 0,
     "sol": "Uma variável aleatória é uma função numérica sobre o espaço de resultados; discreta quando os valores possíveis são finitos ou enumeráveis.",
@@ -6611,7 +6611,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Método da bisseção, aproximação e erro",
-    "q": "Se L0=1, após 10 bisseções a amplitude é...",
+    "q": "O intervalo inicial da bisseção tem amplitude L₀=1. Qual é a amplitude após 10 iterações que reduzem o intervalo a metade?",
     "o": [
       "1/10.",
       "1/100.",
@@ -6731,7 +6731,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Método de Newton-Raphson, aproximação e análise de adequação",
-    "q": "A reta tangente a f em x_n tem equação...",
+    "q": "Se f é derivável em xₙ, qual é a equação da tangente ao gráfico de f no ponto de abcissa xₙ?",
     "o": [
       "y=f'(x_n)x.",
       "y=f(x_n)x+x_n.",

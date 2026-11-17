@@ -503,7 +503,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Modelação",
-      "q": "Uma bateria retém 90% da carga anterior a cada ciclo. Se começa em 100, o modelo é...",
+      "q": "Uma bateria retém 90% da carga anterior em cada ciclo. A carga antes do primeiro ciclo é u_1=100. Qual é a expressão do termo geral u_n?",
       "o": [
         "u_n=100−10(n−1).",
         "u_n=90n.",
@@ -511,7 +511,7 @@
         "u_n=100·1,1^{n−1}."
       ],
       "a": 2,
-      "sol": "Reter 90% significa multiplicar por 0,9.",
+      "sol": "Reter 90% significa multiplicar por 0,9 a cada ciclo. Para passar de u_1 a u_n há n−1 ciclos, logo u_n=100·0,9^{n−1}.",
       "hyp": "Pode subtrair sempre 10 pontos percentuais.",
       "contexts": [
         "mission",
@@ -557,7 +557,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Qual modelo descreve melhor 100,110,121,133,1,...?",
+      "q": "Qual modelo é compatível com os primeiros termos 100; 110; 121; 133,1; …?",
       "o": [
         "PG de razão 1,1.",
         "PA de razão 10.",
@@ -565,7 +565,7 @@
         "PG de razão 10."
       ],
       "a": 0,
-      "sol": "Cada termo é 1,1 vezes o anterior.",
+      "sol": "Cada um destes termos a partir do segundo é 1,1 vezes o anterior: 110/100=121/110=133,1/121=1,1. O modelo compatível é uma PG de razão 1,1.",
       "hyp": "Pode olhar apenas para a primeira diferença.",
       "contexts": [
         "mission",

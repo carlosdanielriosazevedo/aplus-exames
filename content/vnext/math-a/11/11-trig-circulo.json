@@ -52,7 +52,7 @@
         "ao arco."
       ],
       "a": 1,
-      "sol": "O ponto associado tem coordenadas (cos θ,sin θ).",
+      "sol": "O ponto associado tem coordenadas (cos θ,sen θ).",
       "hyp": "Pode trocar seno e cosseno.",
       "contexts": [
         "mission",
@@ -71,7 +71,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "No círculo trigonométrico, sin θ corresponde...",
+      "q": "No círculo trigonométrico, sen θ corresponde...",
       "o": [
         "à abcissa.",
         "ao raio.",
@@ -79,7 +79,7 @@
         "ao comprimento do arco."
       ],
       "a": 2,
-      "sol": "O ponto associado tem coordenadas (cos θ,sin θ).",
+      "sol": "O ponto associado tem coordenadas (cos θ,sen θ).",
       "hyp": "Pode trocar seno e cosseno.",
       "contexts": [
         "mission",
@@ -322,7 +322,7 @@
         "1"
       ],
       "a": 3,
-      "sol": "A abcissa de (1,0) é 1.",
+      "sol": "O ângulo nulo tem o lado final no semieixo positivo Ox. O ponto associado no círculo trigonométrico é (1, 0), cuja abcissa é 1. Portanto, cos 0=1.",
       "hyp": "Pode usar a ordenada.",
       "contexts": [
         "mission",
@@ -557,7 +557,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Quanto vale sin(π/6)?",
+      "q": "Quanto vale sen(5π/6)?",
       "o": [
         "1/2",
         "√2/2",
@@ -565,7 +565,7 @@
         "1"
       ],
       "a": 0,
-      "sol": "É um valor notável.",
+      "sol": "Os pontos de 5π/6 e π/6 são simétricos em relação ao eixo Oy. Têm, por isso, a mesma ordenada: sen(5π/6)=sen(π/6)=1/2.",
       "hyp": "Pode confundir com seno de π/3.",
       "contexts": [
         "mission",
@@ -773,7 +773,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se sin θ=√2/2 e θ∈[0,2π[, então θ pode ser...",
+      "q": "Se sen θ=√2/2 e θ∈[0,2π[, então θ pode ser...",
       "o": [
         "π/4 ou 3π/4.",
         "π/4 ou 7π/4.",
@@ -1294,7 +1294,7 @@
         "−√3/2"
       ],
       "a": 3,
-      "sol": "A coordenada vertical é sin(5π/3)=−√3/2.",
+      "sol": "A coordenada vertical é sen(5π/3)=−√3/2.",
       "hyp": "Pode usar o cosseno.",
       "contexts": [
         "mission",

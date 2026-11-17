@@ -1205,12 +1205,12 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Uma sondagem dá p̂=0,52 com IC95% [0,49;0,55]. Uma leitura cuidadosa é...",
+      "q": "Uma sondagem dá p̂=0,52 e um intervalo de confiança de 95% [0,49;0,55]. O que se pode concluir sobre a hipótese de a proporção populacional ser 0,50?",
       "o": [
-        "os dados são compatíveis com valores próximos de metade e não sustentam uma separação clara de 0,50 ao nível considerado.",
-        "p=0,52 exatamente.",
-        "há 95% dos eleitores entre 0,49 e 0,55.",
-        "p>0,5 está provado."
+        "0,50 é compatível com os dados ao nível de confiança usado.",
+        "0,50 é excluído porque é menor do que a estimativa.",
+        "0,50 é confirmado como o valor exato pelo intervalo.",
+        "0,50 é excluído porque não é o centro do intervalo."
       ],
       "a": 0,
       "sol": "0,50 está dentro do intervalo.",

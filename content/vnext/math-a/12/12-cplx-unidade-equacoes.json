@@ -44,7 +44,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "i³ é igual a...",
+      "q": "Qual é o conjugado de i⁵?",
       "o": [
         "i.",
         "−i.",
@@ -52,7 +52,7 @@
         "−1."
       ],
       "a": 1,
-      "sol": "i³=i²·i=−i.",
+      "sol": "O ciclo de quatro potências dá i⁵=i⁴·i=i. O conjugado de i é −i.",
       "hyp": "Pode esquecer i²=−1.",
       "contexts": [
         "mission",
@@ -341,7 +341,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "√(−9), no conjunto dos complexos, pode escrever-se como...",
+      "q": "Qual é a solução da equação z²=−9 em ℂ cuja parte imaginária é positiva?",
       "o": [
         "3i.",
         "−3.",
@@ -349,7 +349,7 @@
         "i/3."
       ],
       "a": 0,
-      "sol": "√(−9)=√9·i=3i, tomando a raiz principal.",
+      "sol": "Como (3i)²=9i²=−9, as soluções são 3i e −3i. Só 3i tem parte imaginária positiva.",
       "hyp": "Pode tratar a raiz como real.",
       "contexts": [
         "mission",
@@ -505,13 +505,13 @@
       "cognitive": "Interpretação",
       "q": "Todo número real é também...",
       "o": [
-        "um imaginário puro.",
-        "um número sem módulo.",
+        "um número complexo de argumento 0.",
+        "um número complexo de módulo igual à sua parte real.",
         "um número complexo com parte imaginária zero.",
         "um complexo com parte real zero."
       ],
       "a": 2,
-      "sol": "R⊂C e a+0i representa qualquer real.",
+      "sol": "Todo r∈ℝ é representado em ℂ por r+0i, com parte imaginária igual a zero.",
       "hyp": "Pode pensar que reais e complexos são conjuntos disjuntos.",
       "contexts": [
         "mission",
@@ -1043,7 +1043,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Se uma equação real de 2.º grau tem uma raiz 2+3i, a outra é...",
+      "q": "Uma equação do 2.º grau com coeficientes reais tem, em ℂ, a raiz 2+3i. Qual é a outra raiz?",
       "o": [
         "−2+3i.",
         "−2−3i.",

@@ -22,7 +22,7 @@
         "o capital inicial.",
         "o montante acumulado até esse momento.",
         "apenas os juros anteriores.",
-        "uma média aleatória."
+        "a média entre o capital inicial e o montante acumulado."
       ],
       "a": 0,
       "sol": "No juro simples, a base de cálculo mantém-se no capital inicial.",
@@ -422,15 +422,15 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "No juro simples com capital e taxa fixos, como evolui o montante ao longo do tempo?",
+      "q": "No juro simples com capital inicial e taxa positivos e fixos, como evolui o montante de um período para o seguinte?",
       "o": [
-        "Exponencialmente.",
-        "De forma aleatória.",
-        "Mantém-se constante.",
-        "Linearmente."
+        "É multiplicado sempre pelo mesmo fator superior a 1.",
+        "Aumenta um valor monetário que diminui a cada período.",
+        "Mantém o valor, porque a taxa de juro é constante.",
+        "Aumenta sempre o mesmo valor monetário por período."
       ],
       "a": 3,
-      "sol": "O juro cresce proporcionalmente ao número de períodos, logo o montante é uma função afim do tempo.",
+      "sol": "Em cada período, o juro é a taxa fixa multiplicada pelo capital inicial. Assim, acrescenta-se sempre o mesmo montante. O total é uma função afim do número de períodos.",
       "hyp": "Pode confundir crescimento linear com composto exponencial.",
       "contexts": [
         "mission",
@@ -611,7 +611,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Um capital terminou em 1 260 € depois de 2 anos a 5% ao ano em juro simples. Qual era o capital inicial?",
+      "q": "Um capital atingiu 1 260 € depois de dois anos a 5% ao ano, em regime de juro simples. Qual era o capital inicial, arredondado aos cêntimos?",
       "o": [
         "1 100 €",
         "1 200 €",
@@ -1124,7 +1124,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Na função M(t)=2 000+80t, o que representa 80?",
+      "q": "Numa aplicação em regime de juro simples, o montante em euros após t anos é M(t)=2 000+80t. O que representa 80?",
       "o": [
         "O capital inicial.",
         "O juro ganho por ano.",

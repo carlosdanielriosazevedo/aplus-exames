@@ -208,19 +208,26 @@ function gradeStep(spec,value){
   }
   const typedPrefix=String(value??"").includes("=")?String(value).split("=")[0]:null;
   const expectedPrefix=String(spec.expected).includes("=")?String(spec.expected).split("=")[0]:null;
-  if(["numeric","fraction"].includes(spec.type)&&typedPrefix&&expectedPrefix&&normalizedExpression(typedPrefix)!==normalizedExpression(expectedPrefix))return {stepId:spec.id,label:spec.label,status:"incorrect",correct:false,points:0,maxPoints:spec.points,expected:spec.expected,answer:value,reason:"wrong_quantity"};
+  let numericInput=value;
+  if(["numeric","fraction"].includes(spec.type)&&typedPrefix&&expectedPrefix){
+    const prefixes=[expectedPrefix,...(spec.prefixes||[])];
+    if(!prefixes.some(prefix=>normalizedExpression(prefix)===normalizedExpression(typedPrefix)))return {stepId:spec.id,label:spec.label,status:"incorrect",correct:false,points:0,maxPoints:spec.points,expected:spec.expected,answer:value,reason:"wrong_quantity"};
+    // O próprio passo pode identificar o valor com uma potência, um integral ou um módulo.
+    const quantityValue=String(value).slice(typedPrefix.length+1);
+    if(!quantityValue.includes("="))numericInput=quantityValue;
+  }
   if(spec.type==="numeric"){
-    const parsed=parseNumeric(value),tolerance=Math.max(0,Number(spec.tolerance)||0);
+    const parsed=parseNumeric(numericInput),tolerance=Math.max(0,Number(spec.tolerance)||0);
     correct=parsed!==null&&Math.abs(parsed-Number(spec.value))<=tolerance+Number.EPSILON;
     if(parsed===null)reason="invalid_numeric_format";
     else if(!correct)reason="calculation_error";
   }
   if(spec.type==="fraction"){
-    const parsed=parseFraction(value);
+    const parsed=parseFraction(numericInput);
     const target=spec.numerator/spec.denominator;
     correct=!!parsed&&parsed.numerator*spec.denominator===spec.numerator*parsed.denominator;
     if(!parsed){
-      const decimal=decimalExactness(value,target);
+      const decimal=decimalExactness(numericInput,target);
       if(decimal?.exact){
         reason="wrong_final_form";
         return {stepId:spec.id,label:spec.label,status:"partial",correct:false,points:scoreIaveStep({maxPoints:spec.points,basePoints:spec.points,reason}),maxPoints:spec.points,expected:spec.expected,answer:value??"",reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high"};

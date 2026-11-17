@@ -1186,7 +1186,7 @@
         "4."
       ],
       "a": 3,
-      "sol": "O produto seleciona a componente horizontal.",
+      "sol": "Como e=(1,0), temos u·e=4×1+(−3)×0=4. O produto escalar com e dá a componente horizontal de u.",
       "hyp": "Pode usar a norma.",
       "contexts": [
         "mission",
@@ -1232,7 +1232,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Uma força F=(10,0) atua num deslocamento d=(3,4). O produto F·d é...",
+      "q": "Uma força F=(10,0), em newtons, atua durante um deslocamento d=(3,4), em metros. Quanto vale o produto escalar F·d, em joules?",
       "o": [
         "40.",
         "30.",
@@ -1240,7 +1240,7 @@
         "70."
       ],
       "a": 1,
-      "sol": "10×3+0×4=30.",
+      "sol": "Multiplicam-se as componentes correspondentes e somam-se os produtos. Assim, F·d=10×3+0×4=30 J.",
       "hyp": "Pode usar apenas normas.",
       "contexts": [
         "mission",

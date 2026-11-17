@@ -17,7 +17,7 @@
       "year": "10.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "O lugar geométrico dos pontos do plano à mesma distância de A e B é...",
+      "q": "Se A e B são pontos distintos, qual é o lugar geométrico dos pontos do plano que estão à mesma distância de A e de B?",
       "o": [
         "a mediatriz de AB.",
         "a reta AB.",
@@ -611,7 +611,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Qual é o centro e raio de x²−6x+y²+4y−12=0?",
+      "q": "Qual é o centro e o raio da circunferência de equação (x−3)²+(y+2)²=25?",
       "o": [
         "Centro (−3,2), raio 5.",
         "Centro (3,−2), raio 12.",
@@ -619,7 +619,7 @@
         "Centro (6,−4), raio 5."
       ],
       "a": 2,
-      "sol": "Completando quadrados: (x−3)²+(y+2)²=25.",
+      "sol": "Compara com (x−a)²+(y−b)²=r². Tem-se a=3 e b=−2, porque y+2=y−(−2). Como o raio é positivo e r²=25, o raio é 5.",
       "hyp": "Pode completar quadrados incorretamente.",
       "contexts": [
         "mission",

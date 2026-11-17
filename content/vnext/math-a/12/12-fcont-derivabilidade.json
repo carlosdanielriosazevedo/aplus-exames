@@ -17,7 +17,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Se f é derivável em a, então f é...",
+      "q": "Supondo que lim(h→0) [f(a+h)−f(a)]/h=−2, que propriedade é garantida para f em a?",
       "o": [
         "contínua em a.",
         "descontínua em a.",
@@ -25,7 +25,7 @@
         "necessariamente crescente."
       ],
       "a": 0,
-      "sol": "Derivabilidade implica continuidade.",
+      "sol": "O limite do quociente incremental é finito, logo f é derivável em a. Toda a função derivável num ponto é também contínua nesse ponto.",
       "hyp": "Pode inverter a implicação.",
       "contexts": [
         "mission",
@@ -206,15 +206,15 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "√x é contínua em 0 mas...",
+      "q": "O que se pode afirmar sobre a derivabilidade de f(x)=√x em x=0?",
       "o": [
-        "é descontínua em 0.",
+        "tem quociente incremental igual a √h para h>0.",
         "tem derivada 0.",
         "tem derivada 1.",
         "não é derivável em 0 com derivada real finita."
       ],
       "a": 3,
-      "sol": "O quociente incremental é 1/√h→+∞ pela direita.",
+      "sol": "Para h>0, o quociente incremental é (√h−0)/h=1/√h. Este tende para +∞ quando h tende para 0 pela direita. Assim, nem pela direita se obtém uma derivada real finita em 0.",
       "hyp": "Pode concluir derivabilidade a partir da continuidade.",
       "contexts": [
         "mission",
@@ -565,7 +565,7 @@
         "a=2."
       ],
       "a": 0,
-      "sol": "O valor do ramo esquerdo em 1 é 1.",
+      "sol": "O valor f(1) é 1 e o limite pela direita é a·1+b=a+b. O ramo esquerdo é contínuo até 1. Assim, a continuidade em 1 exige a+b=1.",
       "hyp": "Pode usar a condição de derivabilidade prematuramente.",
       "contexts": [
         "mission",
@@ -592,7 +592,7 @@
         "a+b=2."
       ],
       "a": 1,
-      "sol": "Derivada esquerda de x² em 1 é 2; derivada direita da reta éa.",
+      "sol": "Assumindo a continuidade em 1, o ramo direito estende-se ao ponto com declive a. O ramo esquerdo tem derivada 2x, que em 1 vale 2. A derivabilidade exige a igualdade das derivadas laterais, logo a=2.",
       "hyp": "Pode igualar valores em vez de declives.",
       "contexts": [
         "mission",
@@ -1070,7 +1070,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Se f é derivável em a, então f(a+h)=f(a)+f'(a)h+o(h) exprime...",
+      "q": "Se f é derivável em a, então lim(h→0) [f(a+h)−f(a)−f′(a)h]/h=0. Que propriedade de f exprime este limite?",
       "o": [
         "uma identidade global exata.",
         "a definição de continuidade apenas.",
@@ -1078,7 +1078,7 @@
         "a aproximação linear local."
       ],
       "a": 3,
-      "sol": "A derivabilidade equivale a admitir uma aproximação linear de primeira ordem.",
+      "sol": "Pela definição de derivada, [f(a+h)−f(a)]/h tende para f′(a). Assim, o erro da aproximação de f(a+h) por f(a)+f′(a)h, dividido por h, tende para 0. A expressão f(a)+f′(a)h é a ordenada da reta tangente na abcissa a+h.",
       "hyp": "Pode tratar a aproximação como igualdade exata para qualquer h.",
       "contexts": [
         "mission",
@@ -1124,7 +1124,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Para f(x)=√x, a linearização em x=4 é L(x)=2+(x−4)/4. Usando-a, √4,1 é aproximadamente...",
+      "q": "A reta tangente ao gráfico de f(x)=√x no ponto de abcissa 4 tem equação y=2+(x−4)/4. Usando a reta tangente para aproximar √(4,1), que valor se obtém?",
       "o": [
         "2,05.",
         "2,025.",

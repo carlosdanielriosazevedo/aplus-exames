@@ -71,15 +71,15 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "Um ponto onde f'(a)=0 chama-se frequentemente",
+      "q": "Como se chama o ponto do gráfico de f de abcissa a quando f′(a)=0?",
       "o": [
         "assíntota",
-        "zero obrigatorio de f",
-        "ponto estacionario",
+        "zero obrigatório de f",
+        "ponto estacionário",
         "ponto de descontinuidade"
       ],
       "a": 2,
-      "sol": "A tangente e horizontal quando f'(a)=0.",
+      "sol": "Como f′(a)=0, o declive da tangente em a é zero. O ponto (a,f(a)) chama-se ponto estacionário.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -287,15 +287,15 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=2x, então junto de x=0 a situação correta é",
+      "q": "Uma função f derivável em ℝ satisfaz f′(x)=2x. Que opção indica a monotonia de f de cada lado de x=0 e o tipo de extremo em x=0?",
       "o": [
-        "decrescente em ]-inf,0[ e crescente em ]0,+inf[",
-        "mínimo em x=0",
-        "decrescente em ]-inf,0[ e crescente em ]0,+inf[; mínimo em x=0.",
-        "não se pode concluir nada"
+        "crescente antes de 0, decrescente depois de 0 e máximo em x=0.",
+        "decrescente antes de 0, crescente depois de 0 e máximo em x=0.",
+        "decrescente antes de 0, crescente depois de 0 e mínimo em x=0.",
+        "decrescente antes de 0, decrescente depois de 0 e sem extremo em x=0."
       ],
       "a": 2,
-      "sol": "Analisa-se o sinal de f' antes e depois de 0.",
+      "sol": "Temos f′(0)=0. Antes de 0, f′ é negativa e depois é positiva. Portanto, f é decrescente antes de 0 e crescente depois de 0, pelo que tem um mínimo em x=0.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -314,15 +314,15 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=-2x, então junto de x=0 a situação correta é",
+      "q": "Uma função f derivável em ℝ satisfaz f′(x)=−2x. Que opção indica a monotonia de f de cada lado de x=0 e o tipo de extremo em x=0?",
       "o": [
-        "crescente em ]-inf,0[ e decrescente em ]0,+inf[",
-        "máximo em x=0",
-        "não se pode concluir nada",
-        "crescente em ]-inf,0[ e decrescente em ]0,+inf[; máximo em x=0."
+        "decrescente antes de 0, crescente depois de 0 e mínimo em x=0.",
+        "crescente antes de 0, decrescente depois de 0 e mínimo em x=0.",
+        "crescente antes de 0, crescente depois de 0 e sem extremo em x=0.",
+        "crescente antes de 0, decrescente depois de 0 e máximo em x=0."
       ],
       "a": 3,
-      "sol": "Analisa-se o sinal de f' antes e depois de 0.",
+      "sol": "Temos f′(0)=0. Antes de 0, f′ é positiva e depois é negativa. Portanto, f é crescente antes de 0 e decrescente depois de 0, pelo que tem um máximo em x=0.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -341,15 +341,15 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=x-3, então junto de x=3 a situação correta é",
+      "q": "Uma função f derivável em ℝ satisfaz f′(x)=x−3. Que opção indica a monotonia de f de cada lado de x=3 e o tipo de extremo em x=3?",
       "o": [
-        "decrescente para x<3 e crescente para x>3; mínimo em x=3.",
-        "decrescente para x<3 e crescente para x>3",
-        "mínimo em x=3",
-        "não se pode concluir nada"
+        "decrescente antes de 3, crescente depois de 3 e mínimo em x=3.",
+        "crescente antes de 3, decrescente depois de 3 e máximo em x=3.",
+        "decrescente antes de 3, crescente depois de 3 e máximo em x=3.",
+        "decrescente antes de 3, decrescente depois de 3 e sem extremo em x=3."
       ],
       "a": 0,
-      "sol": "Analisa-se o sinal de f' antes e depois de 3.",
+      "sol": "Temos f′(3)=0. Antes de 3, f′ é negativa e depois é positiva. Portanto, f é decrescente antes de 3 e crescente depois de 3, pelo que tem um mínimo em x=3.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -557,15 +557,15 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Para f(x)=x^2-4x+5, o extremo relevante ocorre em",
+      "q": "Para f(x)=x²−4x+5, qual é o tipo de extremo, em que abcissa ocorre e que valor tem?",
       "o": [
         "x=2, sendo mínimo e f(2)=1.",
-        "x=2, sendo mínimo mas com outro valor",
-        "x=0",
-        "não existe extremo"
+        "x=2, sendo mínimo e f(2)=5.",
+        "x=0, sendo mínimo e f(0)=5.",
+        "x=2, sendo máximo e f(2)=1."
       ],
       "a": 0,
-      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parábola.",
+      "sol": "Como f(x)=(x−2)²+1, temos f(x)≥1 para todo o x, com igualdade apenas em x=2. Logo, 1 é o mínimo, atingido em x=2.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -827,15 +827,15 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocinio",
-      "q": "No intervalo [-2,3], para f(x)=x^2, os extremos absolutos sao",
+      "q": "No intervalo [−2,3], quais são o máximo e o mínimo absolutos de f(x)=x² e onde se atingem?",
       "o": [
-        "máximo 9 em x=3",
-        "mínimo 0 em x=0",
-        "máximo 9 em x=3; mínimo 0 em x=0.",
-        "apenas o ponto onde f'=0"
+        "Máximo 9 em x=3 e mínimo 4 em x=−2.",
+        "Máximo 4 em x=−2 e mínimo 0 em x=0.",
+        "Máximo 9 em x=3 e mínimo 0 em x=0.",
+        "Máximo 9 em x=3 e mínimo 0 em x=−2."
       ],
       "a": 2,
-      "sol": "Comparam-se valores nos pontos criticos e nas extremidades do intervalo.",
+      "sol": "A derivada f′(x)=2x anula-se em x=0. Comparam-se o valor nesse ponto e os nas extremidades: f(−2)=4, f(0)=0 e f(3)=9. Máximo 9 em x=3 e mínimo 0 em x=0.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -854,15 +854,15 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocinio",
-      "q": "No intervalo [0,5], para f(x)=x^2-4x, os extremos absolutos sao",
+      "q": "No intervalo [0,5], quais são o máximo e o mínimo absolutos de f(x)=x²−4x e onde se atingem?",
       "o": [
-        "máximo 5 em x=5",
-        "mínimo -4 em x=2",
-        "apenas o ponto onde f'=0",
-        "máximo 5 em x=5; mínimo -4 em x=2."
+        "Máximo 5 em x=5 e mínimo 0 em x=0.",
+        "Máximo 0 em x=0 e mínimo −4 em x=2.",
+        "Máximo 5 em x=5 e mínimo −4 em x=0.",
+        "Máximo 5 em x=5 e mínimo −4 em x=2."
       ],
       "a": 3,
-      "sol": "Comparam-se valores nos pontos criticos e nas extremidades do intervalo.",
+      "sol": "A derivada f′(x)=2x−4 anula-se em x=2. Comparam-se o valor nesse ponto e os nas extremidades: f(0)=0, f(2)=−4 e f(5)=5. Máximo 5 em x=5 e mínimo −4 em x=2.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -962,15 +962,15 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Modelacao",
-      "q": "Um retangulo tem perimetro 20. Se um lado mede x, a área e A(x)=x(10-x). A área maxima ocorre para",
+      "q": "Pretende-se vedar três lados de um terreno retangular junto a um muro. Há 20 m de vedação. Se cada lado perpendicular ao muro mede x metros, a área é A(x)=x(20−2x). Para que valor de x é máxima?",
       "o": [
-        "x=10",
+        "x=4",
         "x=2",
-        "x=0",
+        "x=8",
         "x=5"
       ],
       "a": 3,
-      "sol": "A'(x)=10-2x=0 => x=5.",
+      "sol": "Os lados medem x e 20−2x, pelo que 0<x<10. A(x)=50−2(x−5)² atinge o máximo quando x=5.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -1232,7 +1232,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se f'(x)>0 em ]-inf,1[, f'(1)=0 e f'(x)<0 em ]1,+inf[, então",
+      "q": "Se f′(x)>0 em ]−∞,1[, f′(1)=0 e f′(x)<0 em ]1,+∞[, o que se pode concluir?",
       "o": [
         "f tem mínimo local em x=1",
         "f tem máximo local em x=1",
@@ -1240,7 +1240,7 @@
         "f(1)=0"
       ],
       "a": 1,
-      "sol": "O sinal muda de + para -.",
+      "sol": "A função é crescente antes de 1 e decrescente depois de 1. Como f é derivável em 1, também é contínua nesse ponto. Assim, f tem um máximo local em x=1.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",
@@ -1340,15 +1340,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Uma solução de f'(x)=0 fora do domínio fisico de um problema",
+      "q": "O que se deve fazer com uma solução de f′(x)=0 que está fora do domínio físico de um problema?",
       "o": [
         "deve ser sempre aceite",
         "deve ser rejeitada como candidata nesse contexto",
-        "e automaticamente máximo",
-        "e automaticamente mínimo"
+        "é automaticamente um máximo",
+        "é automaticamente um mínimo"
       ],
       "a": 1,
-      "sol": "O domínio do modelo faz parte do problema.",
+      "sol": "Apenas os valores admissíveis da variável representam soluções possíveis do problema. Se uma solução de f′(x)=0 está fora do domínio físico, deve ser excluída dos candidatos a extremo.",
       "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
       "contexts": [
         "mission",

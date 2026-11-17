@@ -206,7 +206,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "60° correspondem a...",
+      "q": "Qual é a amplitude de um ângulo de 60° em radianos?",
       "o": [
         "π/6",
         "2π/3",
@@ -214,7 +214,7 @@
         "π/3"
       ],
       "a": 3,
-      "sol": "60×π/180=π/3.",
+      "sol": "Como 180° correspondem a π rad, a amplitude em radianos é 60×π/180=π/3.",
       "hyp": "Pode simplificar a fração incorretamente.",
       "contexts": [
         "mission",
@@ -424,10 +424,10 @@
       "cognitive": "Compreensão",
       "q": "Um ângulo orientado positivo mede-se, por convenção, no sentido...",
       "o": [
-        "horário.",
-        "vertical.",
-        "indiferente.",
-        "anti-horário."
+        "horário a partir do lado inicial.",
+        "anti-horário só no 1.º quadrante.",
+        "horário para amplitudes até 180°.",
+        "anti-horário a partir do lado inicial."
       ],
       "a": 3,
       "sol": "A convenção usual toma o sentido anti-horário como positivo.",
@@ -557,7 +557,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Um ângulo coterminal em [0,360[ com 765° é...",
+      "q": "Mantendo o lado inicial, qual é a amplitude em [0°, 360°[ que tem o mesmo lado final de um ângulo de 765°?",
       "o": [
         "45°",
         "135°",
@@ -565,7 +565,7 @@
         "315°"
       ],
       "a": 0,
-      "sol": "765−720=45°.",
+      "sol": "Duas voltas completas não alteram o lado final. Subtraindo 2×360° a 765°, obtém-se 45°.",
       "hyp": "Pode retirar apenas uma volta.",
       "contexts": [
         "mission",
@@ -584,7 +584,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Um ângulo coterminal em [0,2π[ com 17π/6 é...",
+      "q": "Mantendo o lado inicial, qual é a amplitude em radianos em [0,2π[ que tem o mesmo lado final de um ângulo de 17π/6 rad?",
       "o": [
         "11π/6",
         "5π/6",
@@ -592,7 +592,7 @@
         "7π/6"
       ],
       "a": 1,
-      "sol": "17π/6−12π/6=5π/6.",
+      "sol": "Uma volta completa não altera o lado final. Subtraindo 2π a 17π/6, obtém-se 5π/6, que pertence ao intervalo indicado.",
       "hyp": "Pode subtrair π em vez de 2π.",
       "contexts": [
         "mission",

@@ -557,7 +557,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "A condição |z−z1|=|z−z2| descreve...",
+      "q": "Se z1 e z2 são complexos distintos, o que descreve a condição |z−z1|=|z−z2|?",
       "o": [
         "a mediatriz do segmento que une z1 e z2.",
         "a reta z1z2.",
@@ -565,7 +565,7 @@
         "apenas o ponto médio."
       ],
       "a": 0,
-      "sol": "São os pontos equidistantes de z1 e z2.",
+      "sol": "A igualdade significa que o afixo de z está à mesma distância dos afixos distintos de z1 e z2, pelo que pertence à mediatriz do segmento que os une.",
       "hyp": "Pode reduzir o lugar ao ponto médio.",
       "contexts": [
         "mission",
@@ -989,7 +989,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "A condição |z−1|=|z+1| é equivalente a...",
+      "q": "Se conj designa o conjugado, a condição |z−(1+i)|=|conj(z)+(1+i)| é equivalente a...",
       "o": [
         "Re(z)=0.",
         "Im(z)=0.",
@@ -997,7 +997,7 @@
         "Re(z)=1."
       ],
       "a": 0,
-      "sol": "É a mediatriz dos pontos 1 e −1: o eixo imaginário.",
+      "sol": "O módulo do conjugado é igual ao módulo original, pelo que |conj(z)+(1+i)|=|z+(1−i)|. Os afixos 1+i e −1+i têm a mesma ordenada e são simétricos em relação ao eixo imaginário. A sua mediatriz é Re(z)=0.",
       "hyp": "Pode escolher o eixo que contém ±1.",
       "contexts": [
         "mission",
@@ -1232,7 +1232,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Um deslocamento no plano é representado por z=4+3i. A distância total à origem é...",
+      "q": "Um objeto desloca-se do ponto que representa 2+i para o ponto que representa 6+4i. Qual é a distância entre esses dois pontos?",
       "o": [
         "7.",
         "5.",
@@ -1240,7 +1240,7 @@
         "25."
       ],
       "a": 1,
-      "sol": "É o módulo de z.",
+      "sol": "O deslocamento entre os pontos é (6+4i)−(2+i)=4+3i. A distância é o seu módulo, √(4²+3²)=5.",
       "hyp": "Pode somar as componentes.",
       "contexts": [
         "mission",

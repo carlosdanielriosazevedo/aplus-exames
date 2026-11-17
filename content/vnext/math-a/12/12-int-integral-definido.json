@@ -17,7 +17,7 @@
       "year": "12.º opcional",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "A integral definida ∫_a^b f(x)dx representa, em termos geométricos...",
+      "q": "Se f é contínua em [a,b], com a<b, que interpretação geométrica tem o integral definido ∫_a^b f(x) dx?",
       "o": [
         "área algébrica entre o gráfico e Ox.",
         "sempre área positiva.",
@@ -422,7 +422,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Se f(x)≥0 em [a,b], então ∫_a^b f...",
+      "q": "Se f é contínua e f(x)≥0 para todo o x em [a,b], com a<b, o que se pode afirmar sobre ∫_a^b f(x) dx?",
       "o": [
         "é sempre zero.",
         "é negativa.",
@@ -430,7 +430,7 @@
         "é não negativa."
       ],
       "a": 3,
-      "sol": "A área algébrica coincide com área geométrica positiva.",
+      "sol": "O integral coincide com a área entre o gráfico e o eixo Ox, pelo que é não negativo. Se f for identicamente nula, o integral é zero.",
       "hyp": "Pode ignorar o sinal da função.",
       "contexts": [
         "mission",
@@ -989,7 +989,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Se v(t) muda de sinal, ∫v(t)dt representa...",
+      "q": "Se v(t) é a velocidade de um móvel e muda de sinal em [a,b], o que representa o integral definido ∫_a^b v(t) dt?",
       "o": [
         "deslocamento líquido.",
         "distância total sempre.",
@@ -1016,12 +1016,12 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "A distância total percorrida quando v muda de sinal é...",
+      "q": "A velocidade v(t) de um móvel muda de sinal entre os instantes a e b, com a<b. Que expressão dá a distância total percorrida nesse intervalo?",
       "o": [
-        "|∫v(t)dt| sempre.",
-        "∫|v(t)|dt.",
-        "∫v'(t)dt.",
-        "∫t v(t)dt."
+        "|∫_a^b v(t) dt|.",
+        "∫_a^b |v(t)| dt.",
+        "∫_a^b v′(t) dt.",
+        "∫_a^b t v(t) dt."
       ],
       "a": 1,
       "sol": "O módulo elimina cancelamentos de direção.",

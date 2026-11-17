@@ -206,7 +206,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Quadruplicar n faz o erro padrão da média...",
+      "q": "Para observações independentes da mesma população de desvio padrão σ>0, como muda o erro padrão da média amostral quando se quadruplica n?",
       "o": [
         "ficar um quarto.",
         "duplicar.",
@@ -314,7 +314,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "O erro padrão teórico de p̂ é...",
+      "q": "Numa amostra de n observações independentes, cada uma com probabilidade p de sucesso, qual é o erro padrão teórico da proporção amostral p̂?",
       "o": [
         "p(1−p)/n.",
         "√p/n.",
@@ -584,7 +584,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se X tem média 50 e desvio padrão 10, qual é o desvio padrão de X̄ para amostras de dimensão 25?",
+      "q": "Uma população tem média 50 e desvio padrão 10. Qual é o desvio padrão da média de 25 observações independentes retiradas dessa população?",
       "o": [
         "10.",
         "2.",
@@ -1016,7 +1016,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "A correção finita √[(N−n)/(N−1)] é...",
+      "q": "Numa população de tamanho N>1 e para 1≤n≤N, considera o fator √[(N−n)/(N−1)] que corrige o erro padrão ao amostrar sem reposição. Que afirmação é sempre verdadeira sobre esse fator?",
       "o": [
         "sempre maior que 1.",
         "menor ou igual a 1.",
@@ -1232,7 +1232,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Uma média de tempos de espera baseada em n=400 terá, face a n=100 e mesmo σ, erro padrão...",
+      "q": "Os tempos de espera são observações independentes de uma população com desvio padrão σ>0. Comparando n=400 com n=100, como muda o erro padrão da média?",
       "o": [
         "um quarto.",
         "metade.",
@@ -1240,7 +1240,7 @@
         "igual."
       ],
       "a": 1,
-      "sol": "√400=20 e√100=10.",
+      "sol": "O erro padrão é σ/√n. Para n=100 é σ/10 e para n=400 é σ/20, pelo que fica reduzido a metade.",
       "hyp": "Pode usar a razão de tamanhos em vez das raízes.",
       "contexts": [
         "mission",

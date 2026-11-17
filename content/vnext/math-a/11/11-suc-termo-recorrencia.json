@@ -17,15 +17,15 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Uma sucessão é...",
+      "q": "Qual é a definição de uma sucessão real infinita (u_n) indexada a partir de n=1?",
       "o": [
-        "uma função cujo domínio é um subconjunto dos números naturais.",
-        "qualquer conjunto sem ordem.",
-        "uma equação do 2.º grau.",
-        "uma função apenas definida em R."
+        "uma função dos naturais positivos em ℝ.",
+        "um conjunto de valores reais sem índices.",
+        "uma função de ℝ nos naturais positivos.",
+        "uma função dos naturais positivos nos naturais positivos, obrigatoriamente."
       ],
       "a": 0,
-      "sol": "Uma sucessão associa a cada índice natural um termo.",
+      "sol": "A cada n natural positivo associa-se um único termo real u_n. Os índices constituem o domínio e os termos são os valores da função.",
       "hyp": "Pode confundir sucessão com conjunto não ordenado.",
       "contexts": [
         "mission",
@@ -44,7 +44,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Na sucessão (u_n), u_5 representa...",
+      "q": "Na sucessão (u_n) indexada a partir de n=1, o que representa u_5?",
       "o": [
         "a soma dos 5 primeiros termos.",
         "o 5.º termo.",

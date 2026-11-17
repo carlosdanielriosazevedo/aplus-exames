@@ -71,15 +71,15 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Um máximo absoluto de f num domínio é um ponto onde...",
+      "q": "Que propriedade caracteriza um ponto de máximo absoluto de f?",
       "o": [
         "f'=0 obrigatoriamente.",
         "f=0.",
-        "f atinge o maior valor do domínio considerado.",
+        "f atinge o maior dos seus valores.",
         "f''=0."
       ],
       "a": 2,
-      "sol": "É uma definição global, podendo ocorrer numa fronteira.",
+      "sol": "No máximo absoluto, o valor da função é pelo menos tão grande como todos os outros valores que toma no domínio considerado. Esse máximo pode ocorrer numa extremidade.",
       "hyp": "Pode reduzir máximos absolutos a pontos críticos interiores.",
       "contexts": [
         "mission",
@@ -152,7 +152,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Se f'(x)>0 em ]−∞,1[ e f'(x)<0 em ]1,+∞[, então x=1 é...",
+      "q": "Seja f contínua em x=1, com f′(x)>0 para x<1 e f′(x)<0 para x>1. Que tipo de extremo tem f em x=1?",
       "o": [
         "mínimo local.",
         "máximo local.",
@@ -160,7 +160,7 @@
         "nenhum extremo."
       ],
       "a": 1,
-      "sol": "A função passa de crescente a decrescente.",
+      "sol": "A derivada é positiva à esquerda e negativa à direita. Pela continuidade em 1, os valores nos dois lados são menores do que f(1), pelo que f tem um máximo local em x=1.",
       "hyp": "Pode inverter a mudança de sinais.",
       "contexts": [
         "mission",
@@ -179,7 +179,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Se f'(x)<0 antes de 2 e f'(x)>0 depois de 2, então x=2 é...",
+      "q": "Seja f contínua em x=2. Se f′ é negativa imediatamente à esquerda de 2 e positiva imediatamente à direita de 2, o que tem f em x=2?",
       "o": [
         "máximo local.",
         "assíntota.",
@@ -187,7 +187,7 @@
         "ponto de inflexão obrigatório."
       ],
       "a": 2,
-      "sol": "Passa de decrescente a crescente.",
+      "sol": "A derivada negativa à esquerda e positiva à direita significa que f decresce até f(2) e cresce a partir desse valor, usando a continuidade em 2. Portanto, há um mínimo local em x=2.",
       "hyp": "Pode inverter os sinais.",
       "contexts": [
         "mission",
@@ -210,11 +210,11 @@
       "o": [
         "é sempre máximo.",
         "é sempre mínimo.",
-        "é sempre descontinuidade.",
+        "é sempre ponto de inflexão.",
         "pode não ser extremo."
       ],
       "a": 3,
-      "sol": "Por exemplo x³ em 0.",
+      "sol": "Para f(x)=x³, temos f′(0)=0 e f′(x)=3x²>0 para x≠0. Como f é crescente dos dois lados de 0, não tem extremo local em 0.",
       "hyp": "Pode assumir que todo ponto crítico é extremo.",
       "contexts": [
         "mission",
@@ -619,7 +619,7 @@
         "nenhum extremo."
       ],
       "a": 2,
-      "sol": "f''=6x<0 em −1.",
+      "sol": "Tem-se f′(x)=3x²−3 e f′(−1)=0. A segunda derivada é f″(x)=6x e f″(−1)=−6<0. Pelo teste da segunda derivada, há um máximo local em x=−1.",
       "hyp": "Pode trocar os extremos.",
       "contexts": [
         "mission",
@@ -854,12 +854,12 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Para f(x)=x²−4x em [0,5], os candidatos a extremos absolutos são...",
+      "q": "Para f(x)=x²−4x no intervalo [0, 5], que valores de x são candidatos a pontos de extremo absoluto?",
       "o": [
         "x=2 apenas.",
         "x=0 e 5 apenas.",
-        "x=0,4,5.",
-        "x=0,2,5."
+        "x=0, x=4 e x=5.",
+        "x=0, x=2 e x=5."
       ],
       "a": 3,
       "sol": "f'=2x−4=0 dá 2, além das extremidades 0 e 5.",
@@ -1286,7 +1286,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Num modelo de concentração C(t), um máximo local representa...",
+      "q": "Num modelo de concentração C(t), a função é contínua em t₀ e estritamente monótona em cada um dos intervalos imediatamente antes e depois de t₀. O que representa um máximo local em t₀?",
       "o": [
         "um instante em que C=0.",
         "necessariamente o fim do processo.",
@@ -1294,7 +1294,7 @@
         "um instante em que a concentração deixa de aumentar e começa a diminuir."
       ],
       "a": 3,
-      "sol": "Traduz a mudança de sinal de C'.",
+      "sol": "A concentração aumenta no intervalo anterior e diminui no intervalo seguinte. Com a continuidade, C(t₀) é superior às concentrações suficientemente próximas de ambos os lados.",
       "hyp": "Pode interpretar extremo sem contexto dinâmico.",
       "contexts": [
         "mission",

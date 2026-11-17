@@ -295,7 +295,7 @@
         "S_n=nq."
       ],
       "a": 2,
-      "sol": "É a fórmula da soma geométrica finita.",
+      "sol": "Escreve S_n=u_1+u_1q+…+u_1q^{n−1}. Ao subtrair qS_n a S_n, os termos intermédios cancelam, dando (1−q)S_n=u_1−u_1q^n. Como q≠1, segue-se S_n=u_1(1−q^n)/(1−q).",
       "hyp": "Pode usar a fórmula de PA.",
       "contexts": [
         "mission",
@@ -619,7 +619,7 @@
         "110."
       ],
       "a": 2,
-      "sol": "Em uma PA, a média dos termos simétricos é o termo central; média=20, logo soma=11×20=220.",
+      "sol": "Numa progressão aritmética, os termos à mesma distância do centro têm desvios opostos em relação a esse termo. A média dos 11 termos é, portanto, 20, e a soma é 11×20=220.",
       "hyp": "Pode somar apenas 10 termos.",
       "contexts": [
         "mission",
@@ -1151,7 +1151,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Numa PA, a soma de um número ímpar de termos consecutivos é igual a...",
+      "q": "Considera n termos consecutivos de uma progressão aritmética, com n ímpar. Que expressão dá a soma desses termos?",
       "o": [
         "n vezes o primeiro termo.",
         "n vezes a razão.",
@@ -1159,7 +1159,7 @@
         "metade do último termo."
       ],
       "a": 2,
-      "sol": "A média dos termos é o termo central.",
+      "sol": "Cada par de termos à mesma distância do centro tem média igual ao termo central. Com o próprio termo central, a média dos n termos mantém-se igual a esse termo. A soma é n vezes o termo central.",
       "hyp": "Pode achar que só vale para PA simétrica em torno de zero.",
       "contexts": [
         "mission",

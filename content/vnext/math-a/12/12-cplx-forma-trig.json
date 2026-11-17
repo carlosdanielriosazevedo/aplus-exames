@@ -44,7 +44,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Na forma r(cosθ+i sinθ), r representa...",
+      "q": "Na forma trigonométrica z=r(cos θ+i sin θ), com r>0, o que representa r?",
       "o": [
         "a parte real.",
         "o módulo de z.",
@@ -71,7 +71,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Na forma z=r(cosθ+i sinθ), θ representa...",
+      "q": "Na forma trigonométrica z=r(cos θ+i sin θ), com r>0, o que representa θ?",
       "o": [
         "o módulo.",
         "a parte real.",
@@ -79,7 +79,7 @@
         "a parte imaginária."
       ],
       "a": 2,
-      "sol": "θ determina a direção do vetor complexo.",
+      "sol": "O módulo r é positivo, pelo que θ mede um ângulo orientado do semieixo real positivo para o vetor que representa z.",
       "hyp": "Pode confundir com o raio.",
       "contexts": [
         "mission",
@@ -665,7 +665,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Se arg(z)=0 mod 2π, então z é...",
+      "q": "Se 0 é um argumento do número complexo z, então z é...",
       "o": [
         "real positivo.",
         "real negativo.",
@@ -1124,15 +1124,15 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "A condição arg(z)=π/2, z≠0, descreve...",
+      "q": "Em que semieixo está o afixo de um complexo não nulo com argumento π/2?",
       "o": [
-        "todo o eixo imaginário.",
+        "o semieixo imaginário negativo.",
         "o semieixo imaginário positivo.",
         "o semieixo real positivo.",
-        "uma circunferência."
+        "o semieixo real negativo."
       ],
       "a": 1,
-      "sol": "Argumento π/2 fixa a direção positiva de Oy.",
+      "sol": "O ponto tem abcissa r cos(π/2)=0 e ordenada r sin(π/2)=r>0, onde r é o módulo.",
       "hyp": "Pode incluir a direção oposta.",
       "contexts": [
         "mission",

@@ -98,7 +98,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "A função f(x)=x² é contínua em...",
+      "q": "Qual é o maior conjunto em que a função f(x)=x² é contínua?",
       "o": [
         "apenas x=0.",
         "apenas x>0.",
@@ -152,15 +152,15 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Se os limites laterais em a existem mas são diferentes, então...",
+      "q": "Se o limite à esquerda de a é finito e o limite à direita de a é +∞, o que se conclui sobre f?",
       "o": [
-        "o limite é a média dos laterais.",
+        "o limite bilateral em a é +∞.",
         "o limite bilateral em a não existe.",
         "f é contínua.",
-        "o limite é zero."
+        "o limite bilateral em a é igual ao limite à esquerda."
       ],
       "a": 1,
-      "sol": "Para existir limite bilateral, os dois laterais devem coincidir.",
+      "sol": "Os limites laterais são diferentes, pois um é finito e o outro é +∞. Logo, o limite bilateral em a não existe.",
       "hyp": "Pode fazer média de valores laterais.",
       "contexts": [
         "mission",

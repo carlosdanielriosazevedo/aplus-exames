@@ -368,7 +368,7 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Num triângulo equilátero, mediana, altura, mediatriz e bissetriz relativas ao mesmo vértice...",
+      "q": "Num triângulo equilátero, como se relacionam as retas da mediana, da altura e da bissetriz por um mesmo vértice com a mediatriz do lado oposto?",
       "o": [
         "são sempre distintas.",
         "coincidem.",
@@ -376,7 +376,7 @@
         "não existem."
       ],
       "a": 1,
-      "sol": "A simetria do triângulo equilátero faz coincidir essas retas notáveis.",
+      "sol": "O eixo de simetria por esse vértice passa pelo ponto médio do lado oposto, é perpendicular ao lado e divide o ângulo do vértice ao meio. Por isso, as quatro retas coincidem.",
       "hyp": "Pode transportar propriedades de triângulo escaleno.",
       "contexts": [
         "mission",
@@ -692,15 +692,15 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se dois triângulos semelhantes têm áreas na razão 16:25, qual é a razão dos comprimentos correspondentes?",
+      "q": "As áreas de dois triângulos semelhantes estão na razão 16:25. Qual é a razão simplificada dos comprimentos de lados correspondentes, pela mesma ordem?",
       "o": [
-        "8:10",
+        "5:4",
         "4:5",
         "16:25",
         "2:5"
       ],
       "a": 1,
-      "sol": "A razão linear é a raiz quadrada da razão das áreas: 4:5.",
+      "sol": "A razão das áreas é o quadrado da razão dos comprimentos. Na mesma ordem, a razão dos comprimentos é √(16/25)=4/5, ou 4:5.",
       "hyp": "Pode usar diretamente a razão das áreas.",
       "contexts": [
         "mission",
@@ -1124,12 +1124,12 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Num triângulo, uma construção com régua e compasso da mediatriz de dois lados permite localizar...",
+      "q": "Num triângulo, que ponto se pode localizar construindo com régua e compasso a mediatriz de cada um de dois lados?",
       "o": [
         "um ponto equidistante dos três lados.",
         "um ponto equidistante dos três vértices.",
         "o ponto médio de qualquer altura.",
-        "a moda das medidas."
+        "o ponto de interseção das medianas."
       ],
       "a": 1,
       "sol": "A interseção das mediatrizes é equidistante dos três vértices; isso antecipa o circuncentro.",

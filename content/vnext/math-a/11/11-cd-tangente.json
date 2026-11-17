@@ -44,7 +44,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "O declive da tangente em x=a e",
+      "q": "Qual é o declive da reta tangente ao gráfico de f no ponto de abcissa a?",
       "o": [
         "f(a)",
         "f'(a)",
@@ -52,7 +52,7 @@
         "f(a)/a"
       ],
       "a": 1,
-      "sol": "A derivada no ponto e o declive tangente.",
+      "sol": "A derivada f′(a) é o limite dos declives das secantes quando o outro ponto de interseção se aproxima de (a,f(a)). Esse limite é o declive da tangente.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -71,7 +71,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "Uma equação da tangente em x=a e",
+      "q": "Qual é uma equação da reta tangente ao gráfico de f no ponto de abcissa a, supondo que f é derivável em a?",
       "o": [
         "y-a=f(a)(x-f'(a))",
         "y=f(a)x+a",
@@ -79,7 +79,7 @@
         "y=f'(a) apenas"
       ],
       "a": 2,
-      "sol": "E a forma ponto-declive.",
+      "sol": "A tangente passa por (a,f(a)) e tem declive f′(a). Substituindo estes dados na forma ponto-declive y−y₀=m(x−x₀), obtém-se y−f(a)=f′(a)(x−a).",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -295,7 +295,7 @@
         "x=1"
       ],
       "a": 2,
-      "sol": "Usa-se y-1=2(x-1), que simplifica para y=2x-1.",
+      "sol": "Para f(x)=x², f(1)=1 e f′(x)=2x. Logo f′(1)=2, e a reta passa por (1,1) com esse declive. Assim, y−1=2(x−1), ou seja, y=2x−1.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -322,7 +322,7 @@
         "y=4x-4"
       ],
       "a": 3,
-      "sol": "Usa-se y-4=4(x-2), que simplifica para y=4x-4.",
+      "sol": "Para f(x)=x², f(2)=4 e f′(x)=2x. Logo f′(2)=4, e a reta passa por (2,4) com esse declive. Assim, y−4=4(x−2), ou seja, y=4x−4.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -349,7 +349,7 @@
         "x=-1"
       ],
       "a": 0,
-      "sol": "Usa-se y-1=-2(x+1), que simplifica para y=-2x-1.",
+      "sol": "Para f(x)=x², f(−1)=1 e f′(x)=2x. Logo f′(−1)=−2, e a reta passa por (−1,1) com esse declive. Assim, y−1=−2(x+1), ou seja, y=−2x−1.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -430,7 +430,7 @@
         "y=3x-2"
       ],
       "a": 3,
-      "sol": "Usa-se y-1=3(x-1), que simplifica para y=3x-2.",
+      "sol": "Para f(x)=x³, f(1)=1 e f′(x)=3x². Logo f′(1)=3, e a reta passa por (1,1) com esse declive. Assim, y−1=3(x−1), ou seja, y=3x−2.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -700,7 +700,7 @@
         "x=2"
       ],
       "a": 1,
-      "sol": "y-5=3(x-2)",
+      "sol": "A tangente passa por (2,5), pois f(2)=5, e tem declive 3, pois f′(2)=3. Assim, y−5=3(x−2), que se reduz a y=3x−1.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -962,7 +962,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "A tangente ao gráfico em x=2 e y=4x-3. Então f'(2)=",
+      "q": "A reta tangente ao gráfico de f no ponto de abcissa 2 é y=4x−3. Qual é o valor de f′(2)?",
       "o": [
         "5",
         "2",
@@ -970,7 +970,7 @@
         "4"
       ],
       "a": 3,
-      "sol": "O declive da reta y=4x-3 e 4.",
+      "sol": "A derivada no ponto de tangência é o declive dessa reta, dado pelo coeficiente de x. Logo, f′(2)=4.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -989,7 +989,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "A tangente ao gráfico em x=1 e y=-2x+7. Então f'(1)=",
+      "q": "A reta tangente ao gráfico de f no ponto de abcissa 1 é y=−2x+7. Qual é o valor de f′(1)?",
       "o": [
         "-2",
         "5",
@@ -997,7 +997,7 @@
         "-1"
       ],
       "a": 0,
-      "sol": "O declive da reta y=-2x+7 e -2.",
+      "sol": "A derivada no ponto de tangência é o declive dessa reta, dado pelo coeficiente de x. Logo, f′(1)=−2.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -1151,7 +1151,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "Se a tangente em (0,-3) tem declive 4, uma reta normal ao gráfico nesse ponto é",
+      "q": "A reta tangente ao gráfico de f no ponto (0,−3) tem declive 4. Qual é a equação da reta perpendicular à tangente que passa por (0,−3)?",
       "o": [
         "y=4x-3",
         "y=-4x-3",
@@ -1159,7 +1159,7 @@
         "x=0"
       ],
       "a": 2,
-      "sol": "O declive da normal é -1/4; usando o ponto obtém-se y=-(1/4)x-3.",
+      "sol": "As duas retas não são verticais, por isso os declives têm produto −1. Como o declive da tangente é 4, o da perpendicular é −1/4. A reta passa por (0,−3), logo tem equação y=−(1/4)x−3.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -1232,15 +1232,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelacao",
-      "q": "Sabendo que f(2)=5 e f'(2)=3, pela aproximação linear f(2,1) e",
+      "q": "Sabe-se que f(2)=5 e f′(2)=3. Para estimar f(2,1), usa a ordenada da reta tangente em x=2 na abcissa 2,1. Que valor resulta?",
       "o": [
         "5,03",
-        "aproximadamente 5,3",
-        "8",
+        "5,3",
+        "8,0",
         "2,1"
       ],
       "a": 1,
-      "sol": "Usa-se f(2+h)≈f(2)+f'(2)h com h=0,1.",
+      "sol": "A tangente tem equação y=5+3(x−2). Para x=2,1, obtém-se 5+3×0,1=5,3.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",

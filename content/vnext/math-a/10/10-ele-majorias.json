@@ -21,7 +21,7 @@
       "o": [
         "Vence quem tiver mais votos do que qualquer outro candidato.",
         "Vence apenas quem ultrapassar metade dos votos válidos.",
-        "Vence o candidato com menos votos nulos.",
+        "Vence quem tiver mais votos do que os outros candidatos somados.",
         "Vence sempre quem ficar acima de 40%."
       ],
       "a": 0,
@@ -1232,7 +1232,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Com a mesma regra de eleição à primeira volta apenas com mais de 50% dos votos válidos, os resultados são A=50%, B=27%, C=23%. Qual é a decisão correta?",
+      "q": "Um regulamento determina que, se ninguém obtiver mais de 50% dos votos válidos, os dois candidatos mais votados passam à segunda volta. Os resultados são A=50%, B=27% e C=23%. Qual é a decisão correta?",
       "o": [
         "A é eleita porque atingiu 50%.",
         "A e B passam à segunda volta.",

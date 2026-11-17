@@ -557,7 +557,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Compreensão",
-      "q": "Um resíduo, num modelo de regressão, é...",
+      "q": "Num diagrama de dispersão, o resíduo de uma observação é o desvio vertical em relação à reta de regressão. É positivo quando o ponto fica acima da reta. Como se calcula?",
       "o": [
         "valor observado de y menos valor previsto de y.",
         "a média de x.",
@@ -565,7 +565,7 @@
         "o número de observações."
       ],
       "a": 0,
-      "sol": "Resíduo mede o erro vertical da previsão para um ponto.",
+      "sol": "Para o mesmo valor de x, compara-se a ordenada y observada com a ordenada y prevista pela reta. Subtrair o valor previsto ao observado dá um resíduo positivo quando o ponto está acima da reta.",
       "hyp": "Pode confundir resíduo com valor previsto.",
       "contexts": [
         "mission",
@@ -692,15 +692,15 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Se os resíduos formam um padrão curvo claro, isso sugere que...",
+      "q": "Ajustou-se uma reta a um conjunto de pontos. Para cada ponto, calculou-se o resíduo, que é a diferença entre o valor observado de y e o valor previsto pela reta. Se o gráfico dos resíduos em função de x mostra um padrão claramente curvo, o que se pode concluir?",
       "o": [
         "a correlação é necessariamente 1.",
         "uma reta pode não ser o modelo mais adequado.",
-        "todos os dados estão errados.",
+        "uma reta descreve bem a relação desde que os resíduos tenham média zero.",
         "não há relação entre as variáveis."
       ],
       "a": 1,
-      "sol": "Estrutura sistemática nos resíduos indica que o modelo linear deixa padrão por explicar.",
+      "sol": "Um padrão sistemático nos resíduos mostra que a diferença entre o observado e o previsto depende de x de forma regular. Isso sugere que a reta deixou por explicar parte da relação entre as variáveis.",
       "hyp": "Pode ignorar evidência de não linearidade.",
       "contexts": [
         "mission",

@@ -565,7 +565,7 @@
         "60° obrigatoriamente."
       ],
       "a": 0,
-      "sol": "m=(8−2)/(4−1)=2, logo α=arctan2.",
+      "sol": "O declive é m=(8−2)/(4−1)=2. A inclinação α está em [0,π[ e satisfaz tan α=2. Como o declive é positivo, α é o ângulo agudo arctan(2).",
       "hyp": "Pode inverter a razão.",
       "contexts": [
         "mission",
@@ -989,15 +989,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Uma estrada sobe 1 m por cada 10 m na horizontal. A sua inclinação é aproximadamente...",
+      "q": "Uma estrada sobe 1 m por cada 10 m na horizontal. Qual é a expressão exata da sua inclinação relativamente à horizontal?",
       "o": [
         "arctan(0,1).",
         "arctan(10).",
-        "sin⁻¹(0,1) obrigatoriamente.",
-        "0,1 rad exatamente."
+        "arcsin(0,1).",
+        "arccos(0,1)."
       ],
       "a": 0,
-      "sol": "Declive e inclinação relacionam-se por m=tan α.",
+      "sol": "O declive é a razão entre a subida e o percurso horizontal, 1/10=0,1. Sendo α o ângulo agudo com a horizontal, tan α=0,1, pelo que α=arctan(0,1).",
       "hyp": "Pode confundir tangente com seno.",
       "contexts": [
         "mission",
