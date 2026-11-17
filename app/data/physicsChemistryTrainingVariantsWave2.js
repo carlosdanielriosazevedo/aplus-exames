@@ -38,7 +38,7 @@ addSet("PERIOD","10.º","q10-elements","q10-periodicity",[
   {prompt:"Ao descer num grupo da Tabela Periódica, o raio atómico tende a:",options:["aumentar","diminuir","ficar nulo","não depender do número de níveis"],explanation:"Aparecem novos níveis eletrónicos ocupados, aumentando o tamanho do átomo."},
   {prompt:"A energia de ionização mede a energia necessária para:",options:["remover um eletrão de uma espécie gasosa","adicionar um neutrão ao núcleo","fundir um sólido","quebrar qualquer ligação química"],explanation:"A energia de ionização está associada à remoção de eletrões de espécies no estado gasoso."},
   {prompt:"Os elementos de um mesmo grupo apresentam tipicamente:",options:["propriedades químicas semelhantes","o mesmo número de protões","a mesma massa atómica","o mesmo raio atómico"],explanation:"A semelhança deriva da configuração eletrónica de valência."},
-  {prompt:"Um halogéneo tende, em reações simples, a:",options:["ganhar um eletrão","perder sete eletrões obrigatoriamente","ganhar dois protões","permanecer sempre neutro"],explanation:"Os halogéneos tendem a completar a camada de valência ganhando um eletrão."},
+  {prompt:"Na formação de um ião monoatómico, um átomo de halogéneo tende a:",options:["ganhar um eletrão","perder sete eletrões obrigatoriamente","ganhar dois protões","permanecer sempre neutro"],explanation:"Os halogéneos tendem a completar a camada de valência ganhando um eletrão."},
   {prompt:"Os gases nobres apresentam baixa reatividade porque possuem, em geral:",options:["camada de valência completa","apenas um eletrão","núcleos sem protões","energia de ionização nula"],explanation:"Uma configuração de valência completa é particularmente estável."}
 ]);
 

@@ -45,7 +45,7 @@ export const PHYSICS_CHEMISTRY_A_AUTHENTICITY_ITEMS=[
     prompt:"No esquema de medição, qual disposição é adequada para determinar simultaneamente a corrente no resistor e a diferença de potencial aos seus terminais?",
     options:["Amperímetro em série e voltímetro em paralelo.","Amperímetro em paralelo e voltímetro em série.","Ambos em série.","Ambos em paralelo com a fonte, ignorando o resistor."],answerIndex:0,
     explanation:"A corrente mede-se com amperímetro em série; a diferença de potencial mede-se com voltímetro em paralelo.",
-    stimulus:{type:"diagram",caption:"Esquema funcional de um circuito de medição.",nodes:[{id:"source",label:"Fonte"},{id:"amp",label:"A",note:"em série"},{id:"res",label:"Resistor"},{id:"volt",label:"V",note:"aos terminais do resistor"}]}
+    stimulus:{type:"diagram",caption:"Elementos do circuito de medição (a ligação de cada aparelho não está indicada).",nodes:[{id:"source",label:"Fonte"},{id:"amp",label:"Amperímetro (A)"},{id:"res",label:"Resistor"},{id:"volt",label:"Voltímetro (V)"}]}
   }),
 
   mc({
@@ -90,7 +90,7 @@ export const PHYSICS_CHEMISTRY_A_AUTHENTICITY_ITEMS=[
     prompt:"Num sistema exotérmico em equilíbrio, o esquema mostra um aumento de temperatura imposto ao sistema. Segundo Le Châtelier, espera-se favorecer:",
     options:["o sentido endotérmico.","o sentido exotérmico.","nenhum sentido em qualquer caso.","apenas a reação mais rápida."],answerIndex:0,
     explanation:"O sistema tende a contrariar o aumento de temperatura favorecendo o sentido que absorve energia.",
-    stimulus:{type:"diagram",caption:"Perturbação térmica de um equilíbrio.",nodes:[{id:"eq",label:"Equilíbrio exotérmico"},{id:"heat",label:"↑ Temperatura"},{id:"response",label:"Resposta",note:"favorecer sentido endotérmico"}]}
+    stimulus:{type:"diagram",caption:"Perturbação térmica de um equilíbrio.",nodes:[{id:"eq",label:"Equilíbrio exotérmico"},{id:"heat",label:"↑ Temperatura"},{id:"response",label:"Resposta do sistema?"}]}
   }),
 
   mc({

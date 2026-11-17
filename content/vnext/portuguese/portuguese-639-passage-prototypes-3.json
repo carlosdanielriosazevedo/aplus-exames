@@ -46,10 +46,10 @@
           "cognitive": "interpretar",
           "prompt": "A referência a profissões em que esperar tem custos reais serve para",
           "options": [
-            "mostrar que o modelo descrito depende de profissões em que a resposta pode ser adiada.",
+            "mostrar que o modelo descrito só funciona em equipas com poucas mensagens.",
             "reconhecer um limite e evitar generalizar a mesma solução a todos os contextos.",
             "defender que a rapidez de resposta deve continuar a ser a regra na maioria das profissões.",
-            "reforçar que a organização da comunicação deve variar consoante o custo de esperar."
+            "provar que as notificações permanentes são indispensáveis em todas as profissões."
           ],
           "answerIndex": 1,
           "explanation": "O texto introduz uma concessão: a proposta pode ser útil sem ser universalmente aplicável.",
@@ -168,8 +168,8 @@
           "cognitive": "interpretar",
           "prompt": "A imagem da chuva que “riscava o vidro em linhas oblíquas” contribui sobretudo para",
           "options": [
-            "criar uma imagem de instabilidade que contrasta com a permanência material do caderno.",
-            "sugerir que a chuva apaga simbolicamente as certezas presentes nas páginas antigas.",
+            "descrever o mau tempo para justificar que Leonor fique em casa.",
+            "anunciar que Leonor vai rasgar as páginas antigas do caderno.",
             "criar uma imagem de inscrição e passagem que dialoga com o gesto de escrever no caderno.",
             "indicar que Leonor desiste de voltar a escrever no caderno."
           ],

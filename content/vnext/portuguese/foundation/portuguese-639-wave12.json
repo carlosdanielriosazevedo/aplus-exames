@@ -488,13 +488,13 @@
       "reviewStatus": "prototype",
       "responseType": "short-answer",
       "cognitive": "analisar",
-      "stimulus": "A investigadora afirmou: «Concluirei o relatório na próxima semana.» No discurso indireto, o enunciado é integrado na perspetiva temporal do relato.",
+      "stimulus": "Há um mês, a investigadora afirmou: «Concluirei o relatório na próxima semana.» Hoje relatas essa afirmação.",
       "prompt": "Reformula a frase em discurso indireto, começando por «A investigadora afirmou que».",
       "acceptedAnswers": [
         "A investigadora afirmou que concluiria o relatório na semana seguinte.",
-        "A investigadora afirmou que concluiria o relatório na próxima semana."
+        "A investigadora afirmou que iria concluir o relatório na semana seguinte."
       ],
-      "explanation": "Na passagem para o discurso indireto, o futuro simples pode ser recuado para o condicional e a referência temporal pode ajustar-se ao novo contexto.",
+      "explanation": "Como o relato é feito um mês depois, o futuro simples passa ao condicional e «na próxima semana» passa a «na semana seguinte».",
       "gradingMode": "deterministic-with-equivalents",
       "maxPoints": 13
     },

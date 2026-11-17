@@ -487,13 +487,14 @@
       "reviewStatus": "prototype",
       "responseType": "short-answer",
       "cognitive": "analisar",
-      "stimulus": "A coordenadora disse: «Entregaremos os documentos amanhã.» No discurso indireto, a referência temporal deve ser ajustada ao novo contexto de enunciação.",
+      "stimulus": "Na segunda-feira, a coordenadora disse: «Entregaremos os documentos amanhã.» Na sexta-feira, relatas essa frase a um colega.",
       "prompt": "Reformula a frase em discurso indireto, começando por «A coordenadora disse que».",
       "acceptedAnswers": [
         "A coordenadora disse que entregariam os documentos no dia seguinte.",
-        "A coordenadora disse que entregariam os documentos amanhã."
+        "A coordenadora disse que entregariam os documentos na terça-feira.",
+        "A coordenadora disse que iriam entregar os documentos no dia seguinte."
       ],
-      "explanation": "O futuro simples pode ser recuado para o condicional e a referência temporal pode ajustar-se no discurso indireto.",
+      "explanation": "Como o relato é feito dias depois, o futuro passa ao condicional e «amanhã» passa a «no dia seguinte» (ou «na terça-feira»).",
       "gradingMode": "deterministic-with-equivalents",
       "maxPoints": 13
     },
