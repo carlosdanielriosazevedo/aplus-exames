@@ -191,19 +191,19 @@
       "competencyId": "pt-escrita-argumentacao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "aplicar",
       "stimulus": "Tese: A leitura de notícias deve fazer parte das rotinas escolares.",
-      "prompt": "Escreve um argumento breve que sustente a tese.",
-      "acceptedAnswers": [
-        "ajuda os alunos a acompanhar a atualidade",
-        "permite acompanhar a atualidade",
-        "desenvolve o pensamento crítico",
-        "ajuda a desenvolver pensamento crítico",
-        "permite contactar com diferentes perspetivas"
+      "prompt": "Qual é o argumento que sustenta melhor a tese?",
+      "options": [
+        "Os jornais têm muitas páginas, secções e suplementos ao fim de semana.",
+        "Alguns alunos preferem ler revistas de desporto em vez de jornais.",
+        "As notícias são publicadas todos os dias, a qualquer hora.",
+        "Ler notícias ajuda os alunos a acompanhar a atualidade com espírito crítico."
       ],
+      "answerIndex": 3,
       "explanation": "Um argumento pertinente deve apresentar uma vantagem diretamente relacionada com a leitura regular de notícias.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {

@@ -37,17 +37,19 @@
       "competencyId": "pt-leitura-coesao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "reconhecer",
       "stimulus": "A escola instalou bebedouros novos. Essa medida reduziu o consumo de garrafas descartáveis.",
       "prompt": "Indica o referente da expressão «Essa medida».",
-      "acceptedAnswers": [
-        "a instalação de bebedouros novos",
-        "instalar bebedouros novos",
-        "a escola ter instalado bebedouros novos"
+      "options": [
+        "o consumo de garrafas descartáveis.",
+        "a escola que fez a mudança.",
+        "a redução do lixo no recreio.",
+        "a instalação de bebedouros novos."
       ],
+      "answerIndex": 3,
       "explanation": "A expressão retoma a instalação de bebedouros novos referida na frase anterior.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -387,19 +389,19 @@
       "competencyId": "pt-gramatica-coesao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "interpretar",
       "stimulus": "A Rita encontrou a Marta quando ela saía da biblioteca.",
-      "prompt": "Indica a principal dificuldade de coesão referencial provocada pelo pronome «ela».",
-      "acceptedAnswers": [
-        "ambiguidade referencial",
-        "referente ambíguo",
-        "ambiguidade do referente",
-        "não é claro se se refere à Rita ou à Marta",
-        "não se sabe se ela é a Rita ou a Marta"
+      "prompt": "Que dificuldade de coesão referencial provoca o pronome «ela»?",
+      "options": [
+        "O pronome não concorda em género nem em número com o referente.",
+        "Não é claro se «ela» se refere à Rita ou à Marta.",
+        "O pronome devia estar antes do verbo «encontrou».",
+        "O pronome refere-se à biblioteca, e não a uma pessoa."
       ],
+      "answerIndex": 1,
       "explanation": "O pronome pode retomar «Rita» ou «Marta», pelo que o referente não fica inequivocamente identificado.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {

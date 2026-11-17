@@ -59,17 +59,19 @@
       "competencyId": "pt-leitura-coesao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "reconhecer",
       "stimulus": "A comissão propôs adiar a votação. Essa decisão permitiria recolher mais informação antes da escolha final.",
       "prompt": "Indica o referente da expressão «Essa decisão».",
-      "acceptedAnswers": [
-        "adiar a votação",
-        "o adiamento da votação",
-        "a proposta de adiar a votação"
+      "options": [
+        "a comissão que fez a proposta.",
+        "o adiamento da votação.",
+        "a informação a recolher.",
+        "a escolha final da comissão."
       ],
+      "answerIndex": 1,
       "explanation": "A expressão retoma a decisão de adiar a votação.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {

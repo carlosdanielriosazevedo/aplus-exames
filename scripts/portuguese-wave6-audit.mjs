@@ -47,7 +47,9 @@ const byType={
   multipleChoice:items.filter(item=>item.responseType==="multiple-choice").length,
   shortAnswer:items.filter(item=>item.responseType==="short-answer").length
 };
-assert.deepEqual(byType,{multipleChoice:12,shortAnswer:8});
+// Decisão do product owner (2026-11-17): as respostas curtas interpretativas passaram a escolha múltipla,
+// porque o corretor determinístico rejeitava formulações corretas. Ficam como resposta curta só as de resposta fechada.
+assert.deepEqual(byType,{multipleChoice:14,shortAnswer:6});
 const byYear=Object.fromEntries(["10.º","11.º","12.º"].map(year=>[year,items.filter(item=>item.year===year).length]));
 assert.ok(Math.max(...Object.values(byYear))-Math.min(...Object.values(byYear))<=1,`anos desequilibrados: ${JSON.stringify(byYear)}`);
 

@@ -43,8 +43,10 @@ const deterministic=(responseTypes["multiple-choice"]||0)+(responseTypes["short-
 const open=(responseTypes["restricted-response"]||0)+(responseTypes["extended-writing"]||0);
 assert(ratio(deterministic)>=0.70,`Formatos determinísticos insuficientes (${deterministic}/${items.length}; ${pct(deterministic)}%).`);
 assert(ratio(open)>=0.08,`Respostas abertas demasiado diluídas (${open}/${items.length}; ${pct(open)}%).`);
-assert(ratio(responseTypes["short-answer"]||0)>=0.15,`Resposta curta sub-representada (${responseTypes["short-answer"]||0}/${items.length}; ${pct(responseTypes["short-answer"]||0)}%).`);
-assert(ratio(responseTypes["multiple-choice"]||0)<=0.67,`Escolha múltipla excessiva (${responseTypes["multiple-choice"]||0}/${items.length}; ${pct(responseTypes["multiple-choice"]||0)}%).`);
+// Decisão do product owner (2026-11-17): as respostas curtas interpretativas passaram a escolha múltipla,
+// porque o corretor determinístico rejeitava formulações corretas. Ficam como resposta curta só as de resposta fechada.
+assert(ratio(responseTypes["short-answer"]||0)>=0.10,`Resposta curta sub-representada (${responseTypes["short-answer"]||0}/${items.length}; ${pct(responseTypes["short-answer"]||0)}%).`);
+assert(ratio(responseTypes["multiple-choice"]||0)<=0.75,`Escolha múltipla excessiva (${responseTypes["multiple-choice"]||0}/${items.length}; ${pct(responseTypes["multiple-choice"]||0)}%).`);
 
 for(const label of ["reconhecer","interpretar","raciocinar","criar"]){
   const n=cognitive[label]||0;

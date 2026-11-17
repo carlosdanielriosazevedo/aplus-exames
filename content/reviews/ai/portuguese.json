@@ -13,7 +13,8 @@
  "notes": [
   "FND-174 e FND-196 (pontuação) estavam partidas: as opções eram frases diferentes todas bem pontuadas. Refeitas.",
   "Quatro perguntas de texto dos mini-exames tinham um distrator também defensável. Substituídos.",
-  "As perguntas literárias genéricas (estímulo descreve a obra, não cita o texto) estão corretas mas são pouco exigentes; candidatas a reescrita com excertos originais."
+  "As perguntas literárias genéricas (estímulo descreve a obra, não cita o texto) estão corretas mas são pouco exigentes; candidatas a reescrita com excertos originais.",
+  "2026-11-17: 40 respostas curtas interpretativas convertidas em escolha múltipla (decisão do product owner); o corretor só aceitava texto exato."
  ],
  "items": {
   "PT639-FND-001": {
@@ -23,7 +24,8 @@
    "fingerprint": "ai1-f1bd20a5"
   },
   "PT639-FND-003": {
-   "fingerprint": "ai1-f9e022fc"
+   "fingerprint": "ai1-d533359b",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-004": {
    "fingerprint": "ai1-2d4657a5"
@@ -59,7 +61,8 @@
    "fingerprint": "ai1-c07c07ee"
   },
   "PT639-FND-015": {
-   "fingerprint": "ai1-9ed785ba"
+   "fingerprint": "ai1-aeef8dce",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-016": {
    "fingerprint": "ai1-ab2e00a2"
@@ -113,7 +116,8 @@
    "fingerprint": "ai1-1e231ab1"
   },
   "PT639-FND-033": {
-   "fingerprint": "ai1-50522561"
+   "fingerprint": "ai1-318fbdb3",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-034": {
    "fingerprint": "ai1-6da764f4"
@@ -122,7 +126,8 @@
    "fingerprint": "ai1-09bd312b"
   },
   "PT639-FND-036": {
-   "fingerprint": "ai1-4f57046f"
+   "fingerprint": "ai1-517f4b4d",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-037": {
    "fingerprint": "ai1-8124613f"
@@ -158,7 +163,8 @@
    "fingerprint": "ai1-a15a7d6b"
   },
   "PT639-FND-048": {
-   "fingerprint": "ai1-912aab46"
+   "fingerprint": "ai1-ecbb064b",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-049": {
    "fingerprint": "ai1-26dbcd95"
@@ -203,7 +209,8 @@
    "fingerprint": "ai1-b6e2e3bd"
   },
   "PT639-FND-063": {
-   "fingerprint": "ai1-99e2101f"
+   "fingerprint": "ai1-0d2dc6e5",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-064": {
    "fingerprint": "ai1-7dc109d4"
@@ -260,7 +267,8 @@
    "fingerprint": "ai1-5374ab93"
   },
   "PT639-FND-082": {
-   "fingerprint": "ai1-bfb48159"
+   "fingerprint": "ai1-bba274c5",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-083": {
    "fingerprint": "ai1-4019e887"
@@ -308,7 +316,8 @@
    "fingerprint": "ai1-7c1570b7"
   },
   "PT639-FND-098": {
-   "fingerprint": "ai1-41645389"
+   "fingerprint": "ai1-73a66dc5",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-099": {
    "fingerprint": "ai1-6eac7ac9"
@@ -329,7 +338,8 @@
    "fingerprint": "ai1-27ee8315"
   },
   "PT639-FND-105": {
-   "fingerprint": "ai1-5e2d8694"
+   "fingerprint": "ai1-9fa03c54",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-106": {
    "fingerprint": "ai1-cb90b64e"
@@ -347,7 +357,8 @@
    "fingerprint": "ai1-3d735468"
   },
   "PT639-FND-111": {
-   "fingerprint": "ai1-a3e21541"
+   "fingerprint": "ai1-7da12e0f",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-112": {
    "fingerprint": "ai1-4e9c84aa"
@@ -386,13 +397,15 @@
    "fingerprint": "ai1-0439eb92"
   },
   "PT639-FND-124": {
-   "fingerprint": "ai1-e4baa5f1"
+   "fingerprint": "ai1-f67ece03",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-125": {
    "fingerprint": "ai1-0b2baee0"
   },
   "PT639-FND-126": {
-   "fingerprint": "ai1-adbce927"
+   "fingerprint": "ai1-4d7e6727",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-127": {
    "fingerprint": "ai1-5ca32722"
@@ -497,7 +510,8 @@
    "fingerprint": "ai1-975982e1"
   },
   "PT639-FND-161": {
-   "fingerprint": "ai1-42fbcc65"
+   "fingerprint": "ai1-e44ea155",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-162": {
    "fingerprint": "ai1-0c8e5038"
@@ -560,7 +574,8 @@
    "fingerprint": "ai1-da2a28b6"
   },
   "PT639-FND-182": {
-   "fingerprint": "ai1-e32cf6a7"
+   "fingerprint": "ai1-eaa68e49",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-183": {
    "fingerprint": "ai1-d1951460"
@@ -617,19 +632,22 @@
    "fingerprint": "ai1-fb9820a4"
   },
   "PT639-FND-201": {
-   "fingerprint": "ai1-f5f99989"
+   "fingerprint": "ai1-e2b7125e",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-202": {
    "fingerprint": "ai1-0dd41f60"
   },
   "PT639-FND-203": {
-   "fingerprint": "ai1-1dcdca2e"
+   "fingerprint": "ai1-9ce0e03d",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-204": {
    "fingerprint": "ai1-ace59dca"
   },
   "PT639-FND-205": {
-   "fingerprint": "ai1-ae18acef"
+   "fingerprint": "ai1-e0dfbffe",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-206": {
    "fingerprint": "ai1-5ba8db4a"
@@ -641,7 +659,8 @@
    "fingerprint": "ai1-7627ed50"
   },
   "PT639-FND-209": {
-   "fingerprint": "ai1-26ff7783"
+   "fingerprint": "ai1-9e24b43b",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-210": {
    "fingerprint": "ai1-064c23b6"
@@ -656,7 +675,8 @@
    "fingerprint": "ai1-5c071806"
   },
   "PT639-FND-214": {
-   "fingerprint": "ai1-dc761952"
+   "fingerprint": "ai1-766c1983",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-215": {
    "fingerprint": "ai1-1cdd5b61"
@@ -671,7 +691,8 @@
    "fingerprint": "ai1-0a4e0061"
   },
   "PT639-FND-219": {
-   "fingerprint": "ai1-2919475d"
+   "fingerprint": "ai1-c515cc37",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-220": {
    "fingerprint": "ai1-169ce11a"
@@ -696,13 +717,15 @@
    "fingerprint": "ai1-afe7295b"
   },
   "PT639-FND-227": {
-   "fingerprint": "ai1-f834927c"
+   "fingerprint": "ai1-a9dcce5a",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-228": {
    "fingerprint": "ai1-a9aff1a0"
   },
   "PT639-FND-229": {
-   "fingerprint": "ai1-e505de4e"
+   "fingerprint": "ai1-28609d87",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-230": {
    "fingerprint": "ai1-be729ac0"
@@ -714,7 +737,8 @@
    "fingerprint": "ai1-62f1b8c7"
   },
   "PT639-FND-233": {
-   "fingerprint": "ai1-8fb3ed39"
+   "fingerprint": "ai1-1452fd95",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-234": {
    "fingerprint": "ai1-bb338c05"
@@ -723,13 +747,15 @@
    "fingerprint": "ai1-b5318def"
   },
   "PT639-FND-236": {
-   "fingerprint": "ai1-cd3be84f"
+   "fingerprint": "ai1-0b0cd1e8",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-237": {
    "fingerprint": "ai1-c362dc0a"
   },
   "PT639-FND-238": {
-   "fingerprint": "ai1-43ec494c"
+   "fingerprint": "ai1-fc13d03a",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-239": {
    "fingerprint": "ai1-d250dcbd"
@@ -738,7 +764,8 @@
    "fingerprint": "ai1-508f30ef"
   },
   "PT639-FND-241": {
-   "fingerprint": "ai1-cb3a4919"
+   "fingerprint": "ai1-5f387266",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-242": {
    "fingerprint": "ai1-9efb9f14"
@@ -772,7 +799,8 @@
    "fingerprint": "ai1-b9b691a3"
   },
   "PT639-FND-252": {
-   "fingerprint": "ai1-019e0228"
+   "fingerprint": "ai1-f8fdc226",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-253": {
    "fingerprint": "ai1-e021d7e1"
@@ -784,13 +812,15 @@
    "fingerprint": "ai1-d70d42a8"
   },
   "PT639-FND-256": {
-   "fingerprint": "ai1-d5d18577"
+   "fingerprint": "ai1-42d8d6ed",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-257": {
    "fingerprint": "ai1-cf4a66af"
   },
   "PT639-FND-258": {
-   "fingerprint": "ai1-9ef77dcb"
+   "fingerprint": "ai1-a51e4e95",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-259": {
    "fingerprint": "ai1-50991d13"
@@ -802,11 +832,12 @@
    "fingerprint": "ai1-5b86a0a8"
   },
   "PT639-FND-262": {
-   "fingerprint": "ai1-b7c68f14"
+   "fingerprint": "ai1-6f09a26d",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-263": {
-   "fingerprint": "ai1-221599f8",
-   "revisedAfterSecondReview": "2026-11-17"
+   "fingerprint": "ai1-84eda021",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-264": {
    "fingerprint": "ai1-6642dc5d"
@@ -818,7 +849,8 @@
    "fingerprint": "ai1-c4a795ce"
   },
   "PT639-FND-267": {
-   "fingerprint": "ai1-f2ba45f1"
+   "fingerprint": "ai1-1c346c97",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-268": {
    "fingerprint": "ai1-cd77d114"
@@ -839,7 +871,8 @@
    "fingerprint": "ai1-3db3e147"
   },
   "PT639-FND-274": {
-   "fingerprint": "ai1-fe24a059"
+   "fingerprint": "ai1-692e027f",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-275": {
    "fingerprint": "ai1-6f84cf56"
@@ -848,7 +881,8 @@
    "fingerprint": "ai1-c20dd182"
   },
   "PT639-FND-277": {
-   "fingerprint": "ai1-7f17fbe7"
+   "fingerprint": "ai1-ff4a42ef",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-278": {
    "fingerprint": "ai1-3778930e"
@@ -860,13 +894,15 @@
    "fingerprint": "ai1-419b01e4"
   },
   "PT639-FND-281": {
-   "fingerprint": "ai1-e19437b7"
+   "fingerprint": "ai1-dce8500d",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-282": {
    "fingerprint": "ai1-eda6a268"
   },
   "PT639-FND-283": {
-   "fingerprint": "ai1-42174938"
+   "fingerprint": "ai1-0fbe7194",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-284": {
    "fingerprint": "ai1-a2609d79"
@@ -878,10 +914,12 @@
    "fingerprint": "ai1-ae7e6cf3"
   },
   "PT639-FND-287": {
-   "fingerprint": "ai1-0501d26c"
+   "fingerprint": "ai1-b2269c25",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-288": {
-   "fingerprint": "ai1-4954bb8c"
+   "fingerprint": "ai1-3c2559b0",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-289": {
    "fingerprint": "ai1-27d93ade"
@@ -893,7 +931,8 @@
    "fingerprint": "ai1-f1eb4749"
   },
   "PT639-FND-292": {
-   "fingerprint": "ai1-3ca9e866"
+   "fingerprint": "ai1-275bc86f",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-293": {
    "fingerprint": "ai1-abf0c1dc"
@@ -966,7 +1005,8 @@
    "fingerprint": "ai1-0eb3aff3"
   },
   "PT639-FND-316": {
-   "fingerprint": "ai1-30d6dcc0"
+   "fingerprint": "ai1-1891a5a8",
+   "convertedToMultipleChoice": "2026-11-17"
   },
   "PT639-FND-317": {
    "fingerprint": "ai1-8bd24cca"

@@ -210,17 +210,19 @@
       "competencyId": "pt-leitura-coesao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "analisar",
       "stimulus": "«A equipa apresentou duas propostas. A segunda foi escolhida por exigir menos recursos.»",
       "prompt": "A expressão «A segunda» retoma que elemento?",
-      "acceptedAnswers": [
-        "a segunda proposta",
-        "segunda proposta",
-        "a proposta apresentada em segundo lugar"
+      "options": [
+        "a equipa que apresentou as propostas.",
+        "a segunda proposta apresentada.",
+        "os recursos exigidos pela proposta.",
+        "a primeira proposta apresentada."
       ],
-      "explanation": "A expressão funciona anaforicamente e retoma a segunda das duas propostas mencionadas na frase anterior.",
-      "gradingMode": "deterministic-with-equivalents",
+      "answerIndex": 1,
+      "explanation": "A expressão retoma anaforicamente a segunda das duas propostas mencionadas na frase anterior.",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {

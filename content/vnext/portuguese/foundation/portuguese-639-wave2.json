@@ -97,17 +97,19 @@
       "competencyId": "pt-leitura-organizacao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "interpretar",
       "stimulus": "O artigo começa por definir desperdício alimentar, apresenta depois números relativos às famílias portuguesas e termina com cinco sugestões práticas para reduzir o problema em casa.",
-      "prompt": "Indica as três etapas da organização do artigo.",
-      "acceptedAnswers": [
-        "definição, apresentação de dados e sugestões práticas",
-        "definir o problema, apresentar números e propor soluções",
-        "definição do desperdício, dados sobre as famílias e sugestões para o reduzir"
+      "prompt": "Quais são as três etapas da organização do artigo?",
+      "options": [
+        "Dados sobre as famílias, definição e sugestões práticas.",
+        "Definição, dados quantitativos e sugestões práticas.",
+        "Definição, sugestões práticas e dados quantitativos.",
+        "Sugestões práticas, dados quantitativos e conclusão."
       ],
+      "answerIndex": 1,
       "explanation": "A descrição explicita uma sequência em três momentos: definição, dados quantitativos e propostas práticas.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -178,18 +180,19 @@
       "competencyId": "pt-literatura-voz",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "interpretar",
       "stimulus": "Não me perguntes por que voltei. A rua reconheceu os meus passos antes de eu reconhecer as suas janelas.",
-      "prompt": "Indica uma marca textual da presença do destinatário.",
-      "acceptedAnswers": [
-        "Não me perguntes",
-        "a forma verbal perguntes",
-        "o uso da segunda pessoa em perguntes",
-        "perguntes"
+      "prompt": "Qual é a marca textual da presença do destinatário?",
+      "options": [
+        "A forma verbal «voltei».",
+        "O determinante possessivo «meus».",
+        "A forma verbal «perguntes».",
+        "O nome «janelas»."
       ],
-      "explanation": "A forma verbal «perguntes», na segunda pessoa, evidencia que o sujeito se dirige diretamente a um destinatário.",
-      "gradingMode": "deterministic-with-equivalents",
+      "answerIndex": 2,
+      "explanation": "A forma verbal «perguntes», na segunda pessoa, mostra que o sujeito se dirige diretamente a um destinatário; «voltei» e «meus» marcam o próprio sujeito.",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {

@@ -101,17 +101,19 @@
       "competencyId": "pt-leitura-coesao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "interpretar",
       "stimulus": "O município reforçou a rede de bicicletas partilhadas. Esta decisão foi acompanhada pela criação de novos pontos de estacionamento.",
       "prompt": "Indica o referente de «Esta decisão».",
-      "acceptedAnswers": [
-        "o reforço da rede de bicicletas partilhadas",
-        "reforçar a rede de bicicletas partilhadas",
-        "a decisão de reforçar a rede de bicicletas partilhadas"
+      "options": [
+        "a criação de novos pontos de estacionamento.",
+        "o município que tomou a decisão.",
+        "o reforço da rede de bicicletas partilhadas.",
+        "a utilização das bicicletas pelos moradores."
       ],
+      "answerIndex": 2,
       "explanation": "A expressão demonstrativa retoma a decisão anteriormente referida: reforçar a rede de bicicletas partilhadas.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -228,18 +230,19 @@
       "competencyId": "pt-literatura-voz",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "interpretar",
       "stimulus": "Na altura achei que todos me tinham abandonado. Hoje sei que alguns apenas não sabiam como ajudar.",
-      "prompt": "Indica a relação entre a perspetiva do passado e a perspetiva atual do narrador.",
-      "acceptedAnswers": [
-        "o narrador revê no presente a interpretação que fez no passado",
-        "há uma revisão crítica da perspetiva passada",
-        "a perspetiva atual corrige a interpretação do passado",
-        "o narrador reconsidera hoje o que pensava na altura"
+      "prompt": "Que relação se estabelece entre a perspetiva do passado e a perspetiva atual do narrador?",
+      "options": [
+        "A perspetiva atual confirma que todos o abandonaram.",
+        "O narrador já não se lembra do que pensou na altura.",
+        "As duas perspetivas coincidem por completo.",
+        "O narrador revê hoje a interpretação que fez na altura."
       ],
+      "answerIndex": 3,
       "explanation": "A voz narrativa distancia-se da interpretação inicial e reformula-a a partir do conhecimento adquirido no presente.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {

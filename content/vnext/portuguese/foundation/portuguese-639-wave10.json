@@ -125,19 +125,19 @@
       "competencyId": "pt-literatura-forma",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "analisar",
       "stimulus": "Voltou.\nParou.\nOlhou.\nPartiu.",
-      "prompt": "Explica brevemente um efeito da sucessão de frases muito curtas.",
-      "acceptedAnswers": [
-        "acelera o ritmo",
-        "cria um ritmo rápido",
-        "destaca cada ação",
-        "dá destaque às ações",
-        "torna a sequência mais intensa"
+      "prompt": "A sucessão de frases muito curtas produz sobretudo",
+      "options": [
+        "uma descrição pormenorizada do espaço onde a personagem está.",
+        "um ritmo marcado que destaca cada ação.",
+        "uma explicação das razões que levam a personagem a partir.",
+        "um tom humorístico que alivia a tensão da cena."
       ],
+      "answerIndex": 1,
       "explanation": "As unidades muito breves segmentam e destacam as ações, produzindo um ritmo marcado.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {

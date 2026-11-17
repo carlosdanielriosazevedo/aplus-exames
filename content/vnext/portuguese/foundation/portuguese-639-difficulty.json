@@ -59,12 +59,12 @@
     {
       "id": "PT639-FND-003",
       "level": 1,
-      "score": 1.15,
+      "score": 1,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 1,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
@@ -74,7 +74,7 @@
       },
       "rationale": [
         "operação cognitiva: reconhecer",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 18 palavras",
         "instrução: 7 palavras"
       ]
@@ -335,12 +335,12 @@
     {
       "id": "PT639-FND-015",
       "level": 1,
-      "score": 1.15,
+      "score": 1,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 1,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
@@ -350,7 +350,7 @@
       },
       "rationale": [
         "operação cognitiva: reconhecer",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 24 palavras",
         "instrução: 9 palavras"
       ]
@@ -749,24 +749,24 @@
     {
       "id": "PT639-FND-033",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 26,
-        "promptWords": 8
+        "promptWords": 9
       },
       "rationale": [
         "operação cognitiva: interpretar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 26 palavras",
-        "instrução: 8 palavras"
+        "instrução: 9 palavras"
       ]
     },
     {
@@ -818,24 +818,24 @@
     {
       "id": "PT639-FND-036",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 19,
-        "promptWords": 8
+        "promptWords": 9
       },
       "rationale": [
         "operação cognitiva: interpretar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 19 palavras",
-        "instrução: 8 palavras"
+        "instrução: 9 palavras"
       ]
     },
     {
@@ -1094,12 +1094,12 @@
     {
       "id": "PT639-FND-048",
       "level": 1,
-      "score": 1.15,
+      "score": 1,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 1,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
@@ -1109,7 +1109,7 @@
       },
       "rationale": [
         "operação cognitiva: reconhecer",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 17 palavras",
         "instrução: 7 palavras"
       ]
@@ -1439,12 +1439,12 @@
     {
       "id": "PT639-FND-063",
       "level": 1,
-      "score": 1.15,
+      "score": 1,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 1,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
@@ -1454,7 +1454,7 @@
       },
       "rationale": [
         "operação cognitiva: reconhecer",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 16 palavras",
         "instrução: 7 palavras"
       ]
@@ -1876,12 +1876,12 @@
     {
       "id": "PT639-FND-082",
       "level": 1,
-      "score": 1.15,
+      "score": 1,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 1,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
@@ -1891,7 +1891,7 @@
       },
       "rationale": [
         "operação cognitiva: reconhecer",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 13 palavras",
         "instrução: 7 palavras"
       ]
@@ -2244,24 +2244,24 @@
     {
       "id": "PT639-FND-098",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 10,
-        "promptWords": 11
+        "promptWords": 9
       },
       "rationale": [
         "operação cognitiva: interpretar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 10 palavras",
-        "instrução: 11 palavras"
+        "instrução: 9 palavras"
       ]
     },
     {
@@ -2405,12 +2405,12 @@
     {
       "id": "PT639-FND-105",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
@@ -2420,7 +2420,7 @@
       },
       "rationale": [
         "operação cognitiva: interpretar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 19 palavras",
         "instrução: 6 palavras"
       ]
@@ -2543,24 +2543,24 @@
     {
       "id": "PT639-FND-111",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 17,
-        "promptWords": 14
+        "promptWords": 15
       },
       "rationale": [
         "operação cognitiva: interpretar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 17 palavras",
-        "instrução: 14 palavras"
+        "instrução: 15 palavras"
       ]
     },
     {
@@ -2842,24 +2842,24 @@
     {
       "id": "PT639-FND-124",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 10,
-        "promptWords": 9
+        "promptWords": 6
       },
       "rationale": [
         "operação cognitiva: interpretar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 10 palavras",
-        "instrução: 9 palavras"
+        "instrução: 6 palavras"
       ]
     },
     {
@@ -2888,24 +2888,24 @@
     {
       "id": "PT639-FND-126",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 10,
-        "promptWords": 14
+        "promptWords": 15
       },
       "rationale": [
         "operação cognitiva: aplicar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 10 palavras",
-        "instrução: 14 palavras"
+        "instrução: 15 palavras"
       ]
     },
     {
@@ -3693,24 +3693,24 @@
     {
       "id": "PT639-FND-161",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 11,
-        "promptWords": 8
+        "promptWords": 9
       },
       "rationale": [
         "operação cognitiva: aplicar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 11 palavras",
-        "instrução: 8 palavras"
+        "instrução: 9 palavras"
       ]
     },
     {
@@ -4176,24 +4176,24 @@
     {
       "id": "PT639-FND-182",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 4,
-        "promptWords": 10
+        "promptWords": 8
       },
       "rationale": [
         "operação cognitiva: analisar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 4 palavras",
-        "instrução: 10 palavras"
+        "instrução: 8 palavras"
       ]
     },
     {
@@ -4613,24 +4613,24 @@
     {
       "id": "PT639-FND-201",
       "level": 1,
-      "score": 1.23,
+      "score": 1,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 1,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
-        "prompt": 0.08,
+        "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 28,
-        "promptWords": 16
+        "promptWords": 14
       },
       "rationale": [
         "operação cognitiva: reconhecer",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 28 palavras",
-        "instrução: 16 palavras"
+        "instrução: 14 palavras"
       ]
     },
     {
@@ -4659,12 +4659,12 @@
     {
       "id": "PT639-FND-203",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
@@ -4674,7 +4674,7 @@
       },
       "rationale": [
         "operação cognitiva: analisar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 20 palavras",
         "instrução: 5 palavras"
       ]
@@ -4705,24 +4705,24 @@
     {
       "id": "PT639-FND-205",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 24,
-        "promptWords": 12
+        "promptWords": 11
       },
       "rationale": [
         "operação cognitiva: avaliar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 24 palavras",
-        "instrução: 12 palavras"
+        "instrução: 11 palavras"
       ]
     },
     {
@@ -4797,24 +4797,24 @@
     {
       "id": "PT639-FND-209",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 23,
-        "promptWords": 13
+        "promptWords": 12
       },
       "rationale": [
         "operação cognitiva: analisar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 23 palavras",
-        "instrução: 13 palavras"
+        "instrução: 12 palavras"
       ]
     },
     {
@@ -4912,24 +4912,24 @@
     {
       "id": "PT639-FND-214",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 22,
-        "promptWords": 13
+        "promptWords": 11
       },
       "rationale": [
         "operação cognitiva: aplicar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 22 palavras",
-        "instrução: 13 palavras"
+        "instrução: 11 palavras"
       ]
     },
     {
@@ -5027,24 +5027,24 @@
     {
       "id": "PT639-FND-219",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 11,
-        "promptWords": 8
+        "promptWords": 9
       },
       "rationale": [
         "operação cognitiva: revisar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 11 palavras",
-        "instrução: 8 palavras"
+        "instrução: 9 palavras"
       ]
     },
     {
@@ -5211,24 +5211,24 @@
     {
       "id": "PT639-FND-227",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 28,
-        "promptWords": 14
+        "promptWords": 13
       },
       "rationale": [
         "operação cognitiva: inferir",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 28 palavras",
-        "instrução: 14 palavras"
+        "instrução: 13 palavras"
       ]
     },
     {
@@ -5257,24 +5257,24 @@
     {
       "id": "PT639-FND-229",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 29,
-        "promptWords": 11
+        "promptWords": 12
       },
       "rationale": [
         "operação cognitiva: analisar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 29 palavras",
-        "instrução: 11 palavras"
+        "instrução: 12 palavras"
       ]
     },
     {
@@ -5349,24 +5349,24 @@
     {
       "id": "PT639-FND-233",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 22,
-        "promptWords": 10
+        "promptWords": 9
       },
       "rationale": [
         "operação cognitiva: interpretar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 22 palavras",
-        "instrução: 10 palavras"
+        "instrução: 9 palavras"
       ]
     },
     {
@@ -5418,24 +5418,24 @@
     {
       "id": "PT639-FND-236",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 22,
-        "promptWords": 8
+        "promptWords": 9
       },
       "rationale": [
         "operação cognitiva: analisar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 22 palavras",
-        "instrução: 8 palavras"
+        "instrução: 9 palavras"
       ]
     },
     {
@@ -5464,12 +5464,12 @@
     {
       "id": "PT639-FND-238",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
@@ -5479,7 +5479,7 @@
       },
       "rationale": [
         "operação cognitiva: aplicar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 23 palavras",
         "instrução: 11 palavras"
       ]
@@ -5533,24 +5533,24 @@
     {
       "id": "PT639-FND-241",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 19,
-        "promptWords": 9
+        "promptWords": 7
       },
       "rationale": [
         "operação cognitiva: revisar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 19 palavras",
-        "instrução: 9 palavras"
+        "instrução: 7 palavras"
       ]
     },
     {
@@ -5786,24 +5786,24 @@
     {
       "id": "PT639-FND-252",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 17,
-        "promptWords": 15
+        "promptWords": 12
       },
       "rationale": [
         "operação cognitiva: analisar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 17 palavras",
-        "instrução: 15 palavras"
+        "instrução: 12 palavras"
       ]
     },
     {
@@ -5878,24 +5878,24 @@
     {
       "id": "PT639-FND-256",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 21,
-        "promptWords": 11
+        "promptWords": 8
       },
       "rationale": [
         "operação cognitiva: analisar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 21 palavras",
-        "instrução: 11 palavras"
+        "instrução: 8 palavras"
       ]
     },
     {
@@ -5924,24 +5924,24 @@
     {
       "id": "PT639-FND-258",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 27,
-        "promptWords": 10
+        "promptWords": 9
       },
       "rationale": [
         "operação cognitiva: inferir",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 27 palavras",
-        "instrução: 10 palavras"
+        "instrução: 9 palavras"
       ]
     },
     {
@@ -6016,47 +6016,47 @@
     {
       "id": "PT639-FND-262",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 26,
-        "promptWords": 12
+        "promptWords": 13
       },
       "rationale": [
         "operação cognitiva: analisar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 26 palavras",
-        "instrução: 12 palavras"
+        "instrução: 13 palavras"
       ]
     },
     {
       "id": "PT639-FND-263",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 25,
-        "promptWords": 11
+        "promptWords": 13
       },
       "rationale": [
         "operação cognitiva: aplicar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 25 palavras",
-        "instrução: 11 palavras"
+        "instrução: 13 palavras"
       ]
     },
     {
@@ -6131,24 +6131,24 @@
     {
       "id": "PT639-FND-267",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 29,
-        "promptWords": 11
+        "promptWords": 10
       },
       "rationale": [
         "operação cognitiva: aplicar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 29 palavras",
-        "instrução: 11 palavras"
+        "instrução: 10 palavras"
       ]
     },
     {
@@ -6292,12 +6292,12 @@
     {
       "id": "PT639-FND-274",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
@@ -6307,7 +6307,7 @@
       },
       "rationale": [
         "operação cognitiva: analisar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 15 palavras",
         "instrução: 7 palavras"
       ]
@@ -6361,24 +6361,24 @@
     {
       "id": "PT639-FND-277",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 27,
-        "promptWords": 9
+        "promptWords": 10
       },
       "rationale": [
         "operação cognitiva: inferir",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 27 palavras",
-        "instrução: 9 palavras"
+        "instrução: 10 palavras"
       ]
     },
     {
@@ -6453,24 +6453,24 @@
     {
       "id": "PT639-FND-281",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 24,
-        "promptWords": 9
+        "promptWords": 10
       },
       "rationale": [
         "operação cognitiva: analisar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 24 palavras",
-        "instrução: 9 palavras"
+        "instrução: 10 palavras"
       ]
     },
     {
@@ -6499,24 +6499,24 @@
     {
       "id": "PT639-FND-283",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 19,
-        "promptWords": 8
+        "promptWords": 13
       },
       "rationale": [
         "operação cognitiva: analisar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 19 palavras",
-        "instrução: 8 palavras"
+        "instrução: 13 palavras"
       ]
     },
     {
@@ -6591,47 +6591,47 @@
     {
       "id": "PT639-FND-287",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 18,
-        "promptWords": 11
+        "promptWords": 7
       },
       "rationale": [
         "operação cognitiva: interpretar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 18 palavras",
-        "instrução: 11 palavras"
+        "instrução: 7 palavras"
       ]
     },
     {
       "id": "PT639-FND-288",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 18,
-        "promptWords": 15
+        "promptWords": 10
       },
       "rationale": [
         "operação cognitiva: aplicar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 18 palavras",
-        "instrução: 15 palavras"
+        "instrução: 10 palavras"
       ]
     },
     {
@@ -6706,24 +6706,24 @@
     {
       "id": "PT639-FND-292",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 29,
-        "promptWords": 13
+        "promptWords": 11
       },
       "rationale": [
         "operação cognitiva: aplicar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 29 palavras",
-        "instrução: 13 palavras"
+        "instrução: 11 palavras"
       ]
     },
     {
@@ -7258,12 +7258,12 @@
     {
       "id": "PT639-FND-316",
       "level": 2,
-      "score": 2.15,
+      "score": 2,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 2,
-        "response": 0.15,
+        "response": 0,
         "stimulus": 0,
         "prompt": 0,
         "rubric": 0,
@@ -7273,7 +7273,7 @@
       },
       "rationale": [
         "operação cognitiva: analisar",
-        "formato: short-answer",
+        "formato: multiple-choice",
         "estímulo: 13 palavras",
         "instrução: 7 palavras"
       ]

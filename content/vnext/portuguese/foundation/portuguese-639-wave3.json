@@ -76,17 +76,19 @@
       "competencyId": "pt-leitura-coesao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "reconhecer",
       "stimulus": "A equipa propôs reduzir o número de reuniões. Essa solução libertaria tempo para concluir as tarefas pendentes.",
       "prompt": "Indica o referente da expressão «Essa solução».",
-      "acceptedAnswers": [
-        "reduzir o número de reuniões",
-        "a redução do número de reuniões",
-        "a proposta de reduzir o número de reuniões"
+      "options": [
+        "a equipa que fez a proposta.",
+        "a conclusão das tarefas pendentes.",
+        "a redução do número de reuniões.",
+        "o tempo que ficaria livre."
       ],
+      "answerIndex": 2,
       "explanation": "A expressão demonstrativa retoma a proposta apresentada na frase anterior: reduzir o número de reuniões.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
