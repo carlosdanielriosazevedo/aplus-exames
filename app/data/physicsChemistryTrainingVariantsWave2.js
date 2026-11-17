@@ -25,10 +25,10 @@ addSet("SPECTRA","10.º","q10-elements","q10-spectra",[
 ],"fqa-problems");
 
 addSet("ECONF","10.º","q10-elements","q10-electron-config",[
-  {prompt:"Os eletrões de valência são os que ocupam:",options:["os níveis mais externos ocupados","apenas o primeiro nível","o núcleo","qualquer nível interior completo"],explanation:"Os eletrões de valência pertencem à camada eletrónica mais externa ocupada."},
+  {prompt:"Os eletrões de valência são os que ocupam:",options:["o nível mais externo ocupado","apenas o primeiro nível","o núcleo","qualquer nível interior completo"],explanation:"Os eletrões de valência pertencem à camada eletrónica mais externa ocupada."},
   {prompt:"A configuração 1s² 2s² 2p⁶ representa um átomo com:",options:["10 eletrões","6 eletrões","8 eletrões","12 eletrões"],explanation:"A soma dos expoentes é 2+2+6=10 eletrões."},
-  {prompt:"Num orbital podem existir, no máximo:",options:["2 eletrões","1 eletrão","4 eletrões","8 eletrões"],explanation:"Cada orbital comporta no máximo dois eletrões com spins opostos."},
-  {prompt:"O subnível p pode conter, no máximo:",options:["6 eletrões","2 eletrões","4 eletrões","10 eletrões"],explanation:"Um subnível p tem três orbitais, cada um com capacidade para dois eletrões."},
+  {prompt:"Numa orbital podem existir, no máximo:",options:["2 eletrões","1 eletrão","4 eletrões","8 eletrões"],explanation:"Cada orbital comporta no máximo dois eletrões com spins opostos."},
+  {prompt:"O subnível p pode conter, no máximo:",options:["6 eletrões","2 eletrões","4 eletrões","10 eletrões"],explanation:"Um subnível p tem três orbitais, cada uma com capacidade para dois eletrões."},
   {prompt:"Ao formar Na⁺ a partir de Na, o átomo:",options:["perde um eletrão de valência","ganha um protão","ganha um eletrão","perde um neutrão"],explanation:"O catião Na⁺ resulta da perda do eletrão mais externo do sódio."},
   {prompt:"Elementos do mesmo grupo principal apresentam semelhanças químicas sobretudo porque têm:",options:["configurações de valência semelhantes","o mesmo número de neutrões","a mesma massa atómica","o mesmo número total de eletrões"],explanation:"A reatividade química depende fortemente da configuração eletrónica de valência."}
 ]);
@@ -90,7 +90,7 @@ addSet("PHOTO","10.º","q10-matter","q10-photochemistry",[
 addSet("MECHENE","10.º","f10-energy","f10-mechanical-energy",[
   {prompt:"Na ausência de forças dissipativas, a energia mecânica de um sistema:",options:["conserva-se","aumenta sempre","diminui sempre","é sempre zero"],explanation:"Com apenas forças conservativas, a soma das energias cinética e potencial mantém-se."},
   {prompt:"Ao cair em queda livre, desprezando o ar, a energia potencial gravítica:",options:["diminui enquanto a cinética aumenta","aumenta juntamente com a cinética","não se altera","transforma-se em massa"],explanation:"A diminuição de energia potencial é convertida em energia cinética."},
-  {prompt:"A energia potencial gravítica próxima da superfície terrestre depende de:",options:["massa, g e altura de referência","apenas da velocidade","apenas do tempo","carga elétrica"],explanation:"Usa-se Epg=mgh relativamente a um nível de referência."},
+  {prompt:"A energia potencial gravítica próxima da superfície terrestre depende de:",options:["massa, g e altura em relação a um nível de referência","apenas da velocidade","apenas do tempo","carga elétrica"],explanation:"Usa-se Epg=mgh relativamente a um nível de referência."},
   {prompt:"Se a rapidez de um corpo duplica, a sua energia cinética:",options:["quadruplica","duplica","fica metade","não se altera"],explanation:"Ec=½mv², logo depende do quadrado da rapidez."},
   {prompt:"O trabalho de uma força dissipativa, como o atrito, pode provocar:",options:["diminuição da energia mecânica","aumento obrigatório da energia mecânica","conservação perfeita da energia mecânica","eliminação da energia total"],explanation:"Parte da energia mecânica é transferida para energia interna, embora a energia total se conserve."},
   {prompt:"Num lançamento vertical sem resistência do ar, no ponto mais alto:",options:["a energia cinética é mínima e a potencial máxima","a energia cinética é máxima","a energia potencial é mínima","a energia mecânica é zero"],explanation:"No topo a velocidade instantânea é zero e a energia potencial é máxima relativamente ao ponto de lançamento."}

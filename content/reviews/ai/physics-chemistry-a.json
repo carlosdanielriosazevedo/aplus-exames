@@ -1,0 +1,1810 @@
+{
+ "schemaVersion": 1,
+ "subject": "Física e Química A",
+ "reviewedAt": "2026-11-17",
+ "reviewer": "Claude (revisão integral, pergunta a pergunta)",
+ "method": "Leitura de cada pergunta ativa: chave, distratores, enunciado, explicação, contas refeitas, dados de tabelas/gráficos, notação e português europeu. Correções aplicadas antes do registo.",
+ "secondReview": {
+  "status": "pending",
+  "note": "Segunda IA independente, por amostragem."
+ },
+ "items": {
+  "FQA-AQ-01": {
+   "fingerprint": "ai1-e080d2ce"
+  },
+  "FQA-AQ-02": {
+   "fingerprint": "ai1-3cc2946a"
+  },
+  "FQA-AQ-03": {
+   "fingerprint": "ai1-0898b3cc"
+  },
+  "FQA-AQ-04": {
+   "fingerprint": "ai1-fc94e0f4"
+  },
+  "FQA-AQ-05": {
+   "fingerprint": "ai1-ba9df7de"
+  },
+  "FQA-AQ-06": {
+   "fingerprint": "ai1-6be802a2"
+  },
+  "FQA-AQ-07": {
+   "fingerprint": "ai1-bb03d028"
+  },
+  "FQA-AQ-08": {
+   "fingerprint": "ai1-689c17e7"
+  },
+  "FQA-AUTH-AQ-D1": {
+   "fingerprint": "ai1-6721d4db"
+  },
+  "FQA-AUTH-AQ-G1": {
+   "fingerprint": "ai1-7f2eb58d"
+  },
+  "FQA-AUTH-ELEM-D1": {
+   "fingerprint": "ai1-047c7888"
+  },
+  "FQA-AUTH-ELEM-G1": {
+   "fingerprint": "ai1-9c85d305"
+  },
+  "FQA-AUTH-ENE-D1": {
+   "fingerprint": "ai1-46fbefa5"
+  },
+  "FQA-AUTH-ENE-G1": {
+   "fingerprint": "ai1-6352132e"
+  },
+  "FQA-AUTH-EQ-D1": {
+   "fingerprint": "ai1-6b88a3d8"
+  },
+  "FQA-AUTH-EQ-G1": {
+   "fingerprint": "ai1-704a0589"
+  },
+  "FQA-AUTH-MAT-D1": {
+   "fingerprint": "ai1-77026de9"
+  },
+  "FQA-AUTH-MAT-G1": {
+   "fingerprint": "ai1-f44bd620"
+  },
+  "FQA-AUTH-MEC-D1": {
+   "fingerprint": "ai1-d78639a0"
+  },
+  "FQA-AUTH-MEC-G1": {
+   "fingerprint": "ai1-4301f5bb"
+  },
+  "FQA-AUTH-WAV-D1": {
+   "fingerprint": "ai1-dba44c08"
+  },
+  "FQA-AUTH-WAV-G1": {
+   "fingerprint": "ai1-88b4f536"
+  },
+  "FQA-C-AQ-01": {
+   "fingerprint": "ai1-97954dc0"
+  },
+  "FQA-C-ELEM-01": {
+   "fingerprint": "ai1-07bee53f"
+  },
+  "FQA-C-ENE-01": {
+   "fingerprint": "ai1-308ed1ab"
+  },
+  "FQA-C-EQ-01": {
+   "fingerprint": "ai1-a7f94820"
+  },
+  "FQA-C-MAT-01": {
+   "fingerprint": "ai1-f03756d2"
+  },
+  "FQA-C-MEC-01": {
+   "fingerprint": "ai1-b5959008"
+  },
+  "FQA-C-WAV-01": {
+   "fingerprint": "ai1-0eb6b628"
+  },
+  "FQA-DATA-AQ-01": {
+   "fingerprint": "ai1-3dcd0724"
+  },
+  "FQA-DATA-ELEM-01": {
+   "fingerprint": "ai1-20f492cc"
+  },
+  "FQA-DATA-ENE-01": {
+   "fingerprint": "ai1-9bed8fba"
+  },
+  "FQA-DATA-EQ-01": {
+   "fingerprint": "ai1-e150c5e5"
+  },
+  "FQA-DATA-MAT-01": {
+   "fingerprint": "ai1-981c79cf"
+  },
+  "FQA-DATA-MEC-01": {
+   "fingerprint": "ai1-359df5f5"
+  },
+  "FQA-DATA-WAV-01": {
+   "fingerprint": "ai1-7ea0aa6e"
+  },
+  "FQA-DATA-WAV-02": {
+   "fingerprint": "ai1-fdaa383c"
+  },
+  "FQA-ELEM-01": {
+   "fingerprint": "ai1-deb751fc"
+  },
+  "FQA-ELEM-02": {
+   "fingerprint": "ai1-3cf4686a"
+  },
+  "FQA-ELEM-03": {
+   "fingerprint": "ai1-54ecc320"
+  },
+  "FQA-ELEM-04": {
+   "fingerprint": "ai1-3700ebf3"
+  },
+  "FQA-ELEM-05": {
+   "fingerprint": "ai1-b858d218"
+  },
+  "FQA-ELEM-06": {
+   "fingerprint": "ai1-00b460d3"
+  },
+  "FQA-ELEM-07": {
+   "fingerprint": "ai1-c912d5ac"
+  },
+  "FQA-ELEM-08": {
+   "fingerprint": "ai1-ac1f1aa2"
+  },
+  "FQA-ENE-01": {
+   "fingerprint": "ai1-bc91557a"
+  },
+  "FQA-ENE-02": {
+   "fingerprint": "ai1-efa2d23e"
+  },
+  "FQA-ENE-03": {
+   "fingerprint": "ai1-d6d74e32"
+  },
+  "FQA-ENE-04": {
+   "fingerprint": "ai1-b8df093c"
+  },
+  "FQA-ENE-05": {
+   "fingerprint": "ai1-edf1d5d8"
+  },
+  "FQA-ENE-06": {
+   "fingerprint": "ai1-03cfa089"
+  },
+  "FQA-ENE-07": {
+   "fingerprint": "ai1-f5000890"
+  },
+  "FQA-ENE-08": {
+   "fingerprint": "ai1-60d8ecd7"
+  },
+  "FQA-EQ-01": {
+   "fingerprint": "ai1-eee0fa5d"
+  },
+  "FQA-EQ-02": {
+   "fingerprint": "ai1-cdc1397a"
+  },
+  "FQA-EQ-03": {
+   "fingerprint": "ai1-9676c7e4"
+  },
+  "FQA-EQ-04": {
+   "fingerprint": "ai1-660553fa"
+  },
+  "FQA-EQ-05": {
+   "fingerprint": "ai1-dc1a38c0"
+  },
+  "FQA-EQ-06": {
+   "fingerprint": "ai1-7eb06f07"
+  },
+  "FQA-EQ-07": {
+   "fingerprint": "ai1-967a9cc8"
+  },
+  "FQA-EQ-08": {
+   "fingerprint": "ai1-e7fd35b6"
+  },
+  "FQA-MAT-01": {
+   "fingerprint": "ai1-3fd2132c"
+  },
+  "FQA-MAT-02": {
+   "fingerprint": "ai1-d6193d90"
+  },
+  "FQA-MAT-03": {
+   "fingerprint": "ai1-7f1b47f4"
+  },
+  "FQA-MAT-04": {
+   "fingerprint": "ai1-081ffee6"
+  },
+  "FQA-MAT-05": {
+   "fingerprint": "ai1-7399b87a"
+  },
+  "FQA-MAT-06": {
+   "fingerprint": "ai1-a2731d34"
+  },
+  "FQA-MAT-07": {
+   "fingerprint": "ai1-59acca97"
+  },
+  "FQA-MAT-08": {
+   "fingerprint": "ai1-1176abf4"
+  },
+  "FQA-MEC-01": {
+   "fingerprint": "ai1-c5f50455"
+  },
+  "FQA-MEC-02": {
+   "fingerprint": "ai1-5654c2b3"
+  },
+  "FQA-MEC-03": {
+   "fingerprint": "ai1-18cc42f9"
+  },
+  "FQA-MEC-04": {
+   "fingerprint": "ai1-d5018706"
+  },
+  "FQA-MEC-05": {
+   "fingerprint": "ai1-6a83e8f8"
+  },
+  "FQA-MEC-06": {
+   "fingerprint": "ai1-56a356d5"
+  },
+  "FQA-MEC-07": {
+   "fingerprint": "ai1-67e2fd58"
+  },
+  "FQA-MEC-08": {
+   "fingerprint": "ai1-2b95b159"
+  },
+  "FQA-R-AQ-01": {
+   "fingerprint": "ai1-ff78c5fe"
+  },
+  "FQA-R-ELEM-01": {
+   "fingerprint": "ai1-10bc79d7"
+  },
+  "FQA-R-ENE-01": {
+   "fingerprint": "ai1-e57313f6"
+  },
+  "FQA-R-EQ-01": {
+   "fingerprint": "ai1-71e3263d"
+  },
+  "FQA-R-MAT-01": {
+   "fingerprint": "ai1-7fe6a6cd"
+  },
+  "FQA-R-MEC-01": {
+   "fingerprint": "ai1-e3cb4769"
+  },
+  "FQA-R-WAV-01": {
+   "fingerprint": "ai1-d5016cd7"
+  },
+  "FQA-V-CIRC-V1": {
+   "fingerprint": "ai1-84ec4952"
+  },
+  "FQA-V-CIRC-V2": {
+   "fingerprint": "ai1-4bf58317"
+  },
+  "FQA-V-CIRC-V3": {
+   "fingerprint": "ai1-f9a19177"
+  },
+  "FQA-V-CIRC-V4": {
+   "fingerprint": "ai1-1084fbd9"
+  },
+  "FQA-V-CIRC-V5": {
+   "fingerprint": "ai1-d1cb7744"
+  },
+  "FQA-V-CIRC-V6": {
+   "fingerprint": "ai1-3c723fd1"
+  },
+  "FQA-V-ELEC-V1": {
+   "fingerprint": "ai1-153a322d"
+  },
+  "FQA-V-ELEC-V2": {
+   "fingerprint": "ai1-5f0df52e"
+  },
+  "FQA-V-ELEC-V3": {
+   "fingerprint": "ai1-96889b47"
+  },
+  "FQA-V-ELEC-V4": {
+   "fingerprint": "ai1-b71e6adc"
+  },
+  "FQA-V-ELEC-V5": {
+   "fingerprint": "ai1-092fa3a3"
+  },
+  "FQA-V-ELEC-V6": {
+   "fingerprint": "ai1-9859f954"
+  },
+  "FQA-V-ENTH-V1": {
+   "fingerprint": "ai1-4d4751ff"
+  },
+  "FQA-V-ENTH-V2": {
+   "fingerprint": "ai1-55667130"
+  },
+  "FQA-V-ENTH-V3": {
+   "fingerprint": "ai1-fb45c2c6"
+  },
+  "FQA-V-ENTH-V4": {
+   "fingerprint": "ai1-cce3f75f"
+  },
+  "FQA-V-ENTH-V5": {
+   "fingerprint": "ai1-a9bdf29b"
+  },
+  "FQA-V-ENTH-V6": {
+   "fingerprint": "ai1-8cf2f5bd"
+  },
+  "FQA-V-KIN-V1": {
+   "fingerprint": "ai1-7fdce8b3"
+  },
+  "FQA-V-KIN-V2": {
+   "fingerprint": "ai1-8becc6e8"
+  },
+  "FQA-V-KIN-V3": {
+   "fingerprint": "ai1-47760276"
+  },
+  "FQA-V-KIN-V4": {
+   "fingerprint": "ai1-7eab0226"
+  },
+  "FQA-V-KIN-V5": {
+   "fingerprint": "ai1-4d8fb664"
+  },
+  "FQA-V-KIN-V6": {
+   "fingerprint": "ai1-10f3f1cf"
+  },
+  "FQA-V-KINEN-V1": {
+   "fingerprint": "ai1-b5f3f3ad"
+  },
+  "FQA-V-KINEN-V2": {
+   "fingerprint": "ai1-0adc9c8d"
+  },
+  "FQA-V-KINEN-V3": {
+   "fingerprint": "ai1-43b05894"
+  },
+  "FQA-V-KINEN-V4": {
+   "fingerprint": "ai1-5214b6e0"
+  },
+  "FQA-V-KINEN-V5": {
+   "fingerprint": "ai1-4b7df265"
+  },
+  "FQA-V-KINEN-V6": {
+   "fingerprint": "ai1-80fb48b1"
+  },
+  "FQA-V-KQ-V1": {
+   "fingerprint": "ai1-d3333138"
+  },
+  "FQA-V-KQ-V2": {
+   "fingerprint": "ai1-e1362f98"
+  },
+  "FQA-V-KQ-V3": {
+   "fingerprint": "ai1-aac0dd56"
+  },
+  "FQA-V-KQ-V4": {
+   "fingerprint": "ai1-206073bb"
+  },
+  "FQA-V-KQ-V5": {
+   "fingerprint": "ai1-0d012527"
+  },
+  "FQA-V-KQ-V6": {
+   "fingerprint": "ai1-65fb2c5f"
+  },
+  "FQA-V-MOL-V1": {
+   "fingerprint": "ai1-6fb230a1"
+  },
+  "FQA-V-MOL-V2": {
+   "fingerprint": "ai1-e02bec88"
+  },
+  "FQA-V-MOL-V3": {
+   "fingerprint": "ai1-b466fb75"
+  },
+  "FQA-V-MOL-V4": {
+   "fingerprint": "ai1-3c7c1938"
+  },
+  "FQA-V-MOL-V5": {
+   "fingerprint": "ai1-026689c1"
+  },
+  "FQA-V-MOL-V6": {
+   "fingerprint": "ai1-05d46ba8"
+  },
+  "FQA-V-NEWTON-V1": {
+   "fingerprint": "ai1-6856e26d"
+  },
+  "FQA-V-NEWTON-V2": {
+   "fingerprint": "ai1-7c71190b"
+  },
+  "FQA-V-NEWTON-V3": {
+   "fingerprint": "ai1-91caec63"
+  },
+  "FQA-V-NEWTON-V4": {
+   "fingerprint": "ai1-cd910bae"
+  },
+  "FQA-V-NEWTON-V5": {
+   "fingerprint": "ai1-ab1ef03f"
+  },
+  "FQA-V-NEWTON-V6": {
+   "fingerprint": "ai1-cfe9c9bc"
+  },
+  "FQA-V-PH-V1": {
+   "fingerprint": "ai1-925dc73f"
+  },
+  "FQA-V-PH-V2": {
+   "fingerprint": "ai1-e87d21b6"
+  },
+  "FQA-V-PH-V3": {
+   "fingerprint": "ai1-dff73dde"
+  },
+  "FQA-V-PH-V4": {
+   "fingerprint": "ai1-34d99c12"
+  },
+  "FQA-V-PH-V5": {
+   "fingerprint": "ai1-e1f281d1"
+  },
+  "FQA-V-PH-V6": {
+   "fingerprint": "ai1-bc19248a"
+  },
+  "FQA-V-SOL-V1": {
+   "fingerprint": "ai1-9e06e123"
+  },
+  "FQA-V-SOL-V2": {
+   "fingerprint": "ai1-32440c7e"
+  },
+  "FQA-V-SOL-V3": {
+   "fingerprint": "ai1-646205fe"
+  },
+  "FQA-V-SOL-V4": {
+   "fingerprint": "ai1-464b9cc7"
+  },
+  "FQA-V-SOL-V5": {
+   "fingerprint": "ai1-1905698b"
+  },
+  "FQA-V-SOL-V6": {
+   "fingerprint": "ai1-1a3872aa"
+  },
+  "FQA-V-SOUND-V1": {
+   "fingerprint": "ai1-1aab0365"
+  },
+  "FQA-V-SOUND-V2": {
+   "fingerprint": "ai1-35d2dd2c"
+  },
+  "FQA-V-SOUND-V3": {
+   "fingerprint": "ai1-ddd5e83c"
+  },
+  "FQA-V-SOUND-V4": {
+   "fingerprint": "ai1-568e0c06"
+  },
+  "FQA-V-SOUND-V5": {
+   "fingerprint": "ai1-eb5f16a8"
+  },
+  "FQA-V-SOUND-V6": {
+   "fingerprint": "ai1-8af5fe78"
+  },
+  "FQA-V-STO-V1": {
+   "fingerprint": "ai1-ff352e53"
+  },
+  "FQA-V-STO-V2": {
+   "fingerprint": "ai1-afe05813"
+  },
+  "FQA-V-STO-V3": {
+   "fingerprint": "ai1-2dfa6f2f"
+  },
+  "FQA-V-STO-V4": {
+   "fingerprint": "ai1-35c1cf08"
+  },
+  "FQA-V-STO-V5": {
+   "fingerprint": "ai1-b56da0a0"
+  },
+  "FQA-V-STO-V6": {
+   "fingerprint": "ai1-a282ee42"
+  },
+  "FQA-V-WAVE-V1": {
+   "fingerprint": "ai1-06bbe8a3"
+  },
+  "FQA-V-WAVE-V2": {
+   "fingerprint": "ai1-93f996a8"
+  },
+  "FQA-V-WAVE-V3": {
+   "fingerprint": "ai1-0e31677c"
+  },
+  "FQA-V-WAVE-V4": {
+   "fingerprint": "ai1-cc5f741e"
+  },
+  "FQA-V-WAVE-V5": {
+   "fingerprint": "ai1-c0e18ca0"
+  },
+  "FQA-V-WAVE-V6": {
+   "fingerprint": "ai1-e261bd99"
+  },
+  "FQA-V-WORK-V1": {
+   "fingerprint": "ai1-52de14e4"
+  },
+  "FQA-V-WORK-V2": {
+   "fingerprint": "ai1-f392f178"
+  },
+  "FQA-V-WORK-V3": {
+   "fingerprint": "ai1-043655b1"
+  },
+  "FQA-V-WORK-V4": {
+   "fingerprint": "ai1-13cb8867"
+  },
+  "FQA-V-WORK-V5": {
+   "fingerprint": "ai1-2c02a642"
+  },
+  "FQA-V-WORK-V6": {
+   "fingerprint": "ai1-b4cca5d2"
+  },
+  "FQA-V-YIELD-V1": {
+   "fingerprint": "ai1-31756068"
+  },
+  "FQA-V-YIELD-V2": {
+   "fingerprint": "ai1-a0f6f075"
+  },
+  "FQA-V-YIELD-V3": {
+   "fingerprint": "ai1-7950d069"
+  },
+  "FQA-V-YIELD-V4": {
+   "fingerprint": "ai1-a8e049ab"
+  },
+  "FQA-V-YIELD-V5": {
+   "fingerprint": "ai1-536d8fcc"
+  },
+  "FQA-V-YIELD-V6": {
+   "fingerprint": "ai1-32713922"
+  },
+  "FQA-V2-ATOM-V1": {
+   "fingerprint": "ai1-4c2b34e5"
+  },
+  "FQA-V2-ATOM-V2": {
+   "fingerprint": "ai1-aac9bd1d"
+  },
+  "FQA-V2-ATOM-V3": {
+   "fingerprint": "ai1-a4f80bed"
+  },
+  "FQA-V2-ATOM-V4": {
+   "fingerprint": "ai1-c9ba4b33"
+  },
+  "FQA-V2-ATOM-V5": {
+   "fingerprint": "ai1-1d7b0444"
+  },
+  "FQA-V2-ATOM-V6": {
+   "fingerprint": "ai1-655a55bd"
+  },
+  "FQA-V2-BOND-V1": {
+   "fingerprint": "ai1-9a48af88"
+  },
+  "FQA-V2-BOND-V2": {
+   "fingerprint": "ai1-d5440346"
+  },
+  "FQA-V2-BOND-V3": {
+   "fingerprint": "ai1-2e48f369"
+  },
+  "FQA-V2-BOND-V4": {
+   "fingerprint": "ai1-be6ae5b8"
+  },
+  "FQA-V2-BOND-V5": {
+   "fingerprint": "ai1-9bd83bd0"
+  },
+  "FQA-V2-BOND-V6": {
+   "fingerprint": "ai1-0c4b8f51"
+  },
+  "FQA-V2-CARBON-V1": {
+   "fingerprint": "ai1-69b363ea"
+  },
+  "FQA-V2-CARBON-V2": {
+   "fingerprint": "ai1-4561b607"
+  },
+  "FQA-V2-CARBON-V3": {
+   "fingerprint": "ai1-d91e3ae3"
+  },
+  "FQA-V2-CARBON-V4": {
+   "fingerprint": "ai1-ae69be35"
+  },
+  "FQA-V2-CARBON-V5": {
+   "fingerprint": "ai1-546c2d1d"
+  },
+  "FQA-V2-CARBON-V6": {
+   "fingerprint": "ai1-b9b11c2f"
+  },
+  "FQA-V2-ECONF-V1": {
+   "fingerprint": "ai1-b24f8022"
+  },
+  "FQA-V2-ECONF-V2": {
+   "fingerprint": "ai1-2e797896"
+  },
+  "FQA-V2-ECONF-V3": {
+   "fingerprint": "ai1-e472efaf"
+  },
+  "FQA-V2-ECONF-V4": {
+   "fingerprint": "ai1-dc219727"
+  },
+  "FQA-V2-ECONF-V5": {
+   "fingerprint": "ai1-98509bae"
+  },
+  "FQA-V2-ECONF-V6": {
+   "fingerprint": "ai1-d778efae"
+  },
+  "FQA-V2-FORCEMOT-V1": {
+   "fingerprint": "ai1-e05d0124"
+  },
+  "FQA-V2-FORCEMOT-V2": {
+   "fingerprint": "ai1-e454e601"
+  },
+  "FQA-V2-FORCEMOT-V3": {
+   "fingerprint": "ai1-fea63692"
+  },
+  "FQA-V2-FORCEMOT-V4": {
+   "fingerprint": "ai1-5b32722d"
+  },
+  "FQA-V2-FORCEMOT-V5": {
+   "fingerprint": "ai1-d64d247a"
+  },
+  "FQA-V2-FORCEMOT-V6": {
+   "fingerprint": "ai1-ddb90209"
+  },
+  "FQA-V2-GEOM-V1": {
+   "fingerprint": "ai1-4e5d7e41"
+  },
+  "FQA-V2-GEOM-V2": {
+   "fingerprint": "ai1-cc199871"
+  },
+  "FQA-V2-GEOM-V3": {
+   "fingerprint": "ai1-6a4a9983"
+  },
+  "FQA-V2-GEOM-V4": {
+   "fingerprint": "ai1-11e52b40"
+  },
+  "FQA-V2-GEOM-V5": {
+   "fingerprint": "ai1-aa28187f"
+  },
+  "FQA-V2-GEOM-V6": {
+   "fingerprint": "ai1-499d1984"
+  },
+  "FQA-V2-INTER-V1": {
+   "fingerprint": "ai1-53bd150a"
+  },
+  "FQA-V2-INTER-V2": {
+   "fingerprint": "ai1-9caebebf"
+  },
+  "FQA-V2-INTER-V3": {
+   "fingerprint": "ai1-b9d0e0ec"
+  },
+  "FQA-V2-INTER-V4": {
+   "fingerprint": "ai1-9dda54a3"
+  },
+  "FQA-V2-INTER-V5": {
+   "fingerprint": "ai1-b58434a7"
+  },
+  "FQA-V2-INTER-V6": {
+   "fingerprint": "ai1-24a73bfa"
+  },
+  "FQA-V2-INTERACT-V1": {
+   "fingerprint": "ai1-3b506684"
+  },
+  "FQA-V2-INTERACT-V2": {
+   "fingerprint": "ai1-da4c07af"
+  },
+  "FQA-V2-INTERACT-V3": {
+   "fingerprint": "ai1-eb9e22ea"
+  },
+  "FQA-V2-INTERACT-V4": {
+   "fingerprint": "ai1-7b73ae07"
+  },
+  "FQA-V2-INTERACT-V5": {
+   "fingerprint": "ai1-94113d6d"
+  },
+  "FQA-V2-INTERACT-V6": {
+   "fingerprint": "ai1-a2060e93"
+  },
+  "FQA-V2-MECHENE-V1": {
+   "fingerprint": "ai1-fadb7c83"
+  },
+  "FQA-V2-MECHENE-V2": {
+   "fingerprint": "ai1-14b98d82"
+  },
+  "FQA-V2-MECHENE-V3": {
+   "fingerprint": "ai1-a6f78a8e"
+  },
+  "FQA-V2-MECHENE-V4": {
+   "fingerprint": "ai1-0a91ec91"
+  },
+  "FQA-V2-MECHENE-V5": {
+   "fingerprint": "ai1-06874e29"
+  },
+  "FQA-V2-MECHENE-V6": {
+   "fingerprint": "ai1-c06f4cf1"
+  },
+  "FQA-V2-PERIOD-V1": {
+   "fingerprint": "ai1-e3892e5c"
+  },
+  "FQA-V2-PERIOD-V2": {
+   "fingerprint": "ai1-388a4a52"
+  },
+  "FQA-V2-PERIOD-V3": {
+   "fingerprint": "ai1-32939c1d"
+  },
+  "FQA-V2-PERIOD-V4": {
+   "fingerprint": "ai1-583e69ff"
+  },
+  "FQA-V2-PERIOD-V5": {
+   "fingerprint": "ai1-cc93f4e8"
+  },
+  "FQA-V2-PERIOD-V6": {
+   "fingerprint": "ai1-4ebd0639"
+  },
+  "FQA-V2-PHOTO-V1": {
+   "fingerprint": "ai1-7a25fcca"
+  },
+  "FQA-V2-PHOTO-V2": {
+   "fingerprint": "ai1-110c0b4a"
+  },
+  "FQA-V2-PHOTO-V3": {
+   "fingerprint": "ai1-5196339e"
+  },
+  "FQA-V2-PHOTO-V4": {
+   "fingerprint": "ai1-c5001dbe"
+  },
+  "FQA-V2-PHOTO-V5": {
+   "fingerprint": "ai1-9a1a0ae0"
+  },
+  "FQA-V2-PHOTO-V6": {
+   "fingerprint": "ai1-b58d2d98"
+  },
+  "FQA-V2-SPECTRA-V1": {
+   "fingerprint": "ai1-f62f33db"
+  },
+  "FQA-V2-SPECTRA-V2": {
+   "fingerprint": "ai1-3005fe87"
+  },
+  "FQA-V2-SPECTRA-V3": {
+   "fingerprint": "ai1-c2c02641"
+  },
+  "FQA-V2-SPECTRA-V4": {
+   "fingerprint": "ai1-5b94d0b5"
+  },
+  "FQA-V2-SPECTRA-V5": {
+   "fingerprint": "ai1-93b694eb"
+  },
+  "FQA-V2-SPECTRA-V6": {
+   "fingerprint": "ai1-c2f006e9"
+  },
+  "FQA-V2-THERMO-V1": {
+   "fingerprint": "ai1-b24d611f"
+  },
+  "FQA-V2-THERMO-V2": {
+   "fingerprint": "ai1-032d976e"
+  },
+  "FQA-V2-THERMO-V3": {
+   "fingerprint": "ai1-0b23b3c8"
+  },
+  "FQA-V2-THERMO-V4": {
+   "fingerprint": "ai1-e256d962"
+  },
+  "FQA-V2-THERMO-V5": {
+   "fingerprint": "ai1-a8ab064c"
+  },
+  "FQA-V2-THERMO-V6": {
+   "fingerprint": "ai1-ffe4c52e"
+  },
+  "FQA-V2-THERMRAD-V1": {
+   "fingerprint": "ai1-a77c54e2"
+  },
+  "FQA-V2-THERMRAD-V2": {
+   "fingerprint": "ai1-a0510bd1"
+  },
+  "FQA-V2-THERMRAD-V3": {
+   "fingerprint": "ai1-f2651438"
+  },
+  "FQA-V2-THERMRAD-V4": {
+   "fingerprint": "ai1-b891d628"
+  },
+  "FQA-V2-THERMRAD-V5": {
+   "fingerprint": "ai1-25cb4f25"
+  },
+  "FQA-V2-THERMRAD-V6": {
+   "fingerprint": "ai1-d5b42891"
+  },
+  "FQA-V3-ACIDBASE-V1": {
+   "fingerprint": "ai1-58895d03"
+  },
+  "FQA-V3-ACIDBASE-V2": {
+   "fingerprint": "ai1-9a66659e"
+  },
+  "FQA-V3-ACIDBASE-V3": {
+   "fingerprint": "ai1-1e646565"
+  },
+  "FQA-V3-ACIDBASE-V4": {
+   "fingerprint": "ai1-72caec32"
+  },
+  "FQA-V3-ACIDBASE-V5": {
+   "fingerprint": "ai1-44c2ea24"
+  },
+  "FQA-V3-ACIDBASE-V6": {
+   "fingerprint": "ai1-096a6580"
+  },
+  "FQA-V3-ELECTRO-V1": {
+   "fingerprint": "ai1-b0d60649",
+   "note": "Correta, mas possivelmente fora do programa atual de FQ A (pilhas galvânicas, ponte salina, eletrólise): confirmar na segunda revisão."
+  },
+  "FQA-V3-ELECTRO-V2": {
+   "fingerprint": "ai1-cc647687",
+   "note": "Correta, mas possivelmente fora do programa atual de FQ A (pilhas galvânicas, ponte salina, eletrólise): confirmar na segunda revisão."
+  },
+  "FQA-V3-ELECTRO-V3": {
+   "fingerprint": "ai1-d557c565",
+   "note": "Correta, mas possivelmente fora do programa atual de FQ A (pilhas galvânicas, ponte salina, eletrólise): confirmar na segunda revisão."
+  },
+  "FQA-V3-ELECTRO-V4": {
+   "fingerprint": "ai1-57b0d48a",
+   "note": "Correta, mas possivelmente fora do programa atual de FQ A (pilhas galvânicas, ponte salina, eletrólise): confirmar na segunda revisão."
+  },
+  "FQA-V3-ELECTRO-V5": {
+   "fingerprint": "ai1-da1ecdfb",
+   "note": "Correta, mas possivelmente fora do programa atual de FQ A (pilhas galvânicas, ponte salina, eletrólise): confirmar na segunda revisão."
+  },
+  "FQA-V3-ELECTRO-V6": {
+   "fingerprint": "ai1-4d653765",
+   "note": "Correta, mas possivelmente fora do programa atual de FQ A (pilhas galvânicas, ponte salina, eletrólise): confirmar na segunda revisão."
+  },
+  "FQA-V3-EMWAVES-V1": {
+   "fingerprint": "ai1-506108f0"
+  },
+  "FQA-V3-EMWAVES-V2": {
+   "fingerprint": "ai1-7502ccc1"
+  },
+  "FQA-V3-EMWAVES-V3": {
+   "fingerprint": "ai1-13e42e06"
+  },
+  "FQA-V3-EMWAVES-V4": {
+   "fingerprint": "ai1-522b6bb8"
+  },
+  "FQA-V3-EMWAVES-V5": {
+   "fingerprint": "ai1-69762041"
+  },
+  "FQA-V3-EMWAVES-V6": {
+   "fingerprint": "ai1-9a52aa71"
+  },
+  "FQA-V3-EQSTATE-V1": {
+   "fingerprint": "ai1-e7556578"
+  },
+  "FQA-V3-EQSTATE-V2": {
+   "fingerprint": "ai1-9ec369ac"
+  },
+  "FQA-V3-EQSTATE-V3": {
+   "fingerprint": "ai1-9cc8d829"
+  },
+  "FQA-V3-EQSTATE-V4": {
+   "fingerprint": "ai1-2fa33fc6"
+  },
+  "FQA-V3-EQSTATE-V5": {
+   "fingerprint": "ai1-70192bc8"
+  },
+  "FQA-V3-EQSTATE-V6": {
+   "fingerprint": "ai1-af727239"
+  },
+  "FQA-V3-EXPMOT-V1": {
+   "fingerprint": "ai1-c4e05e95"
+  },
+  "FQA-V3-EXPMOT-V2": {
+   "fingerprint": "ai1-f81c810d"
+  },
+  "FQA-V3-EXPMOT-V3": {
+   "fingerprint": "ai1-2eac3c27"
+  },
+  "FQA-V3-EXPMOT-V4": {
+   "fingerprint": "ai1-29873005"
+  },
+  "FQA-V3-EXPMOT-V5": {
+   "fingerprint": "ai1-8873c2d0"
+  },
+  "FQA-V3-EXPMOT-V6": {
+   "fingerprint": "ai1-082eedaa"
+  },
+  "FQA-V3-FIELDS-V1": {
+   "fingerprint": "ai1-320a8b1d"
+  },
+  "FQA-V3-FIELDS-V2": {
+   "fingerprint": "ai1-68fddb07"
+  },
+  "FQA-V3-FIELDS-V3": {
+   "fingerprint": "ai1-627a7eb6"
+  },
+  "FQA-V3-FIELDS-V4": {
+   "fingerprint": "ai1-0e03995d"
+  },
+  "FQA-V3-FIELDS-V5": {
+   "fingerprint": "ai1-431ef605"
+  },
+  "FQA-V3-FIELDS-V6": {
+   "fingerprint": "ai1-0eaf811f"
+  },
+  "FQA-V3-GREEN-V1": {
+   "fingerprint": "ai1-35c715cf"
+  },
+  "FQA-V3-GREEN-V2": {
+   "fingerprint": "ai1-bb5ce6dd"
+  },
+  "FQA-V3-GREEN-V3": {
+   "fingerprint": "ai1-6be79484"
+  },
+  "FQA-V3-GREEN-V4": {
+   "fingerprint": "ai1-d41a779b"
+  },
+  "FQA-V3-GREEN-V5": {
+   "fingerprint": "ai1-0a461db8"
+  },
+  "FQA-V3-GREEN-V6": {
+   "fingerprint": "ai1-1ce5cbb7"
+  },
+  "FQA-V3-INDUCT-V1": {
+   "fingerprint": "ai1-2c623c76"
+  },
+  "FQA-V3-INDUCT-V2": {
+   "fingerprint": "ai1-545e8255"
+  },
+  "FQA-V3-INDUCT-V3": {
+   "fingerprint": "ai1-eb905878"
+  },
+  "FQA-V3-INDUCT-V4": {
+   "fingerprint": "ai1-8f5ea004"
+  },
+  "FQA-V3-INDUCT-V5": {
+   "fingerprint": "ai1-aa7a71af"
+  },
+  "FQA-V3-INDUCT-V6": {
+   "fingerprint": "ai1-6ff97c56"
+  },
+  "FQA-V3-KSP-V1": {
+   "fingerprint": "ai1-bbbee12f"
+  },
+  "FQA-V3-KSP-V2": {
+   "fingerprint": "ai1-c85b55fe"
+  },
+  "FQA-V3-KSP-V3": {
+   "fingerprint": "ai1-954d1978"
+  },
+  "FQA-V3-KSP-V4": {
+   "fingerprint": "ai1-18ce4f7f"
+  },
+  "FQA-V3-KSP-V5": {
+   "fingerprint": "ai1-fde248d5"
+  },
+  "FQA-V3-KSP-V6": {
+   "fingerprint": "ai1-ae570743"
+  },
+  "FQA-V3-LECHAT-V1": {
+   "fingerprint": "ai1-0ddb5904"
+  },
+  "FQA-V3-LECHAT-V2": {
+   "fingerprint": "ai1-e1386568"
+  },
+  "FQA-V3-LECHAT-V3": {
+   "fingerprint": "ai1-24e7ec70"
+  },
+  "FQA-V3-LECHAT-V4": {
+   "fingerprint": "ai1-3382de63"
+  },
+  "FQA-V3-LECHAT-V5": {
+   "fingerprint": "ai1-dac32a9e"
+  },
+  "FQA-V3-LECHAT-V6": {
+   "fingerprint": "ai1-75e6e57f"
+  },
+  "FQA-V3-OPTICS-V1": {
+   "fingerprint": "ai1-a0100c67"
+  },
+  "FQA-V3-OPTICS-V2": {
+   "fingerprint": "ai1-de22bb1d"
+  },
+  "FQA-V3-OPTICS-V3": {
+   "fingerprint": "ai1-10368867"
+  },
+  "FQA-V3-OPTICS-V4": {
+   "fingerprint": "ai1-56d295f4"
+  },
+  "FQA-V3-OPTICS-V5": {
+   "fingerprint": "ai1-026c83de"
+  },
+  "FQA-V3-OPTICS-V6": {
+   "fingerprint": "ai1-739386f4"
+  },
+  "FQA-V3-REDOX-V1": {
+   "fingerprint": "ai1-6dba0057"
+  },
+  "FQA-V3-REDOX-V2": {
+   "fingerprint": "ai1-efe91d84"
+  },
+  "FQA-V3-REDOX-V3": {
+   "fingerprint": "ai1-ac4f33ce"
+  },
+  "FQA-V3-REDOX-V4": {
+   "fingerprint": "ai1-35bb115b"
+  },
+  "FQA-V3-REDOX-V5": {
+   "fingerprint": "ai1-bb8cc803"
+  },
+  "FQA-V3-REDOX-V6": {
+   "fingerprint": "ai1-b61a6950"
+  },
+  "FQA-V3-SOLUB-V1": {
+   "fingerprint": "ai1-4db4ec92"
+  },
+  "FQA-V3-SOLUB-V2": {
+   "fingerprint": "ai1-3bb65582"
+  },
+  "FQA-V3-SOLUB-V3": {
+   "fingerprint": "ai1-3d062d6f"
+  },
+  "FQA-V3-SOLUB-V4": {
+   "fingerprint": "ai1-266a4fe4"
+  },
+  "FQA-V3-SOLUB-V5": {
+   "fingerprint": "ai1-74ca728f"
+  },
+  "FQA-V3-SOLUB-V6": {
+   "fingerprint": "ai1-61d64ebf"
+  },
+  "FQA-V3-TITR-V1": {
+   "fingerprint": "ai1-12efccc8"
+  },
+  "FQA-V3-TITR-V2": {
+   "fingerprint": "ai1-a696b27c"
+  },
+  "FQA-V3-TITR-V3": {
+   "fingerprint": "ai1-c3d6fc8a"
+  },
+  "FQA-V3-TITR-V4": {
+   "fingerprint": "ai1-326a8946"
+  },
+  "FQA-V3-TITR-V5": {
+   "fingerprint": "ai1-5ac23392"
+  },
+  "FQA-V3-TITR-V6": {
+   "fingerprint": "ai1-8be14f76"
+  },
+  "FQA-W1-AB-01": {
+   "fingerprint": "ai1-91e7796b"
+  },
+  "FQA-W1-AB-02": {
+   "fingerprint": "ai1-a217c1fd"
+  },
+  "FQA-W1-ATOM-01": {
+   "fingerprint": "ai1-f5845bcd"
+  },
+  "FQA-W1-BOND-01": {
+   "fingerprint": "ai1-ef2bc9df"
+  },
+  "FQA-W1-BOND-02": {
+   "fingerprint": "ai1-93a365a5"
+  },
+  "FQA-W1-CARBON-01": {
+   "fingerprint": "ai1-c9d4a7bd"
+  },
+  "FQA-W1-CARBON-02": {
+   "fingerprint": "ai1-0d997dea"
+  },
+  "FQA-W1-CIRC-01": {
+   "fingerprint": "ai1-dcb17aa4"
+  },
+  "FQA-W1-CIRC-02": {
+   "fingerprint": "ai1-ae85179d"
+  },
+  "FQA-W1-CONF-01": {
+   "fingerprint": "ai1-c446f138"
+  },
+  "FQA-W1-CONF-02": {
+   "fingerprint": "ai1-821326b7"
+  },
+  "FQA-W1-ELEC-01": {
+   "fingerprint": "ai1-75edfd5b"
+  },
+  "FQA-W1-ELEC-02": {
+   "fingerprint": "ai1-bdc45712"
+  },
+  "FQA-W1-ELECTRO-01": {
+   "fingerprint": "ai1-c9342be0"
+  },
+  "FQA-W1-ELECTRO-02": {
+   "fingerprint": "ai1-ce54aaa3"
+  },
+  "FQA-W1-EMW-01": {
+   "fingerprint": "ai1-6126fa5e"
+  },
+  "FQA-W1-EMW-02": {
+   "fingerprint": "ai1-40f0a4e1"
+  },
+  "FQA-W1-ENTH-01": {
+   "fingerprint": "ai1-7e7d3c13"
+  },
+  "FQA-W1-EXPMEC-01": {
+   "fingerprint": "ai1-38d91d1f"
+  },
+  "FQA-W1-FIELD-01": {
+   "fingerprint": "ai1-8b949b5b"
+  },
+  "FQA-W1-FIELD-02": {
+   "fingerprint": "ai1-252a25c5"
+  },
+  "FQA-W1-FORCE-01": {
+   "fingerprint": "ai1-92d7fa18"
+  },
+  "FQA-W1-GEO-01": {
+   "fingerprint": "ai1-9c9b9605"
+  },
+  "FQA-W1-GEO-02": {
+   "fingerprint": "ai1-ab415bc5"
+  },
+  "FQA-W1-GREEN-01": {
+   "fingerprint": "ai1-94f58683"
+  },
+  "FQA-W1-IND-01": {
+   "fingerprint": "ai1-e79a9ed0"
+  },
+  "FQA-W1-IND-02": {
+   "fingerprint": "ai1-8e9a7259"
+  },
+  "FQA-W1-INT-01": {
+   "fingerprint": "ai1-f99d9e4e"
+  },
+  "FQA-W1-INT-02": {
+   "fingerprint": "ai1-89a647e1"
+  },
+  "FQA-W1-INTER-01": {
+   "fingerprint": "ai1-a589afd5"
+  },
+  "FQA-W1-INTER-02": {
+   "fingerprint": "ai1-51ff5cd3"
+  },
+  "FQA-W1-KQ-01": {
+   "fingerprint": "ai1-6117e622"
+  },
+  "FQA-W1-KSP-01": {
+   "fingerprint": "ai1-064c7982"
+  },
+  "FQA-W1-LEC-01": {
+   "fingerprint": "ai1-abefa758"
+  },
+  "FQA-W1-LIM-01": {
+   "fingerprint": "ai1-a9250aa1"
+  },
+  "FQA-W1-LIM-02": {
+   "fingerprint": "ai1-479875f1"
+  },
+  "FQA-W1-MECHEN-01": {
+   "fingerprint": "ai1-271e739a"
+  },
+  "FQA-W1-NEWTON-01": {
+   "fingerprint": "ai1-471e250c"
+  },
+  "FQA-W1-OPT-01": {
+   "fingerprint": "ai1-26c1b4f6"
+  },
+  "FQA-W1-OPT-02": {
+   "fingerprint": "ai1-290fc053"
+  },
+  "FQA-W1-PER-01": {
+   "fingerprint": "ai1-2989021b"
+  },
+  "FQA-W1-PH-01": {
+   "fingerprint": "ai1-08cf2fc0"
+  },
+  "FQA-W1-PHOTO-01": {
+   "fingerprint": "ai1-0aca91f2"
+  },
+  "FQA-W1-PHOTO-02": {
+   "fingerprint": "ai1-f8db680d"
+  },
+  "FQA-W1-REDOX-01": {
+   "fingerprint": "ai1-7a4342a9"
+  },
+  "FQA-W1-REDOX-02": {
+   "fingerprint": "ai1-600ff177"
+  },
+  "FQA-W1-SOL-01": {
+   "fingerprint": "ai1-3c798a79"
+  },
+  "FQA-W1-SOL-02": {
+   "fingerprint": "ai1-f707f45b"
+  },
+  "FQA-W1-STOICH-01": {
+   "fingerprint": "ai1-0cffda5f"
+  },
+  "FQA-W1-STOICH-02": {
+   "fingerprint": "ai1-c7b5e3d9"
+  },
+  "FQA-W1-THERM-01": {
+   "fingerprint": "ai1-75077434"
+  },
+  "FQA-W1-THERMO-01": {
+   "fingerprint": "ai1-fc5af66f"
+  },
+  "FQA-W1-THERMO-02": {
+   "fingerprint": "ai1-89d768ed"
+  },
+  "FQA-W1-WORK-01": {
+   "fingerprint": "ai1-054dfcf1"
+  },
+  "FQA-W2F11-CIRC-01": {
+   "fingerprint": "ai1-958dce03"
+  },
+  "FQA-W2F11-CIRC-02": {
+   "fingerprint": "ai1-5be44dea"
+  },
+  "FQA-W2F11-CIRC-03": {
+   "fingerprint": "ai1-555843f2"
+  },
+  "FQA-W2F11-CIRC-04": {
+   "fingerprint": "ai1-a685fb89"
+  },
+  "FQA-W2F11-EMW-01": {
+   "fingerprint": "ai1-900273c8"
+  },
+  "FQA-W2F11-EMW-02": {
+   "fingerprint": "ai1-9f1cbe01"
+  },
+  "FQA-W2F11-EMW-03": {
+   "fingerprint": "ai1-fa14ec0c"
+  },
+  "FQA-W2F11-EMW-04": {
+   "fingerprint": "ai1-f2a5f0f2"
+  },
+  "FQA-W2F11-EXP-01": {
+   "fingerprint": "ai1-ca64ccc3"
+  },
+  "FQA-W2F11-EXP-02": {
+   "fingerprint": "ai1-77f382ca"
+  },
+  "FQA-W2F11-EXP-03": {
+   "fingerprint": "ai1-b2a98d48"
+  },
+  "FQA-W2F11-EXP-04": {
+   "fingerprint": "ai1-3a135088"
+  },
+  "FQA-W2F11-FIELD-01": {
+   "fingerprint": "ai1-266d6f45"
+  },
+  "FQA-W2F11-FIELD-02": {
+   "fingerprint": "ai1-6d6fc907"
+  },
+  "FQA-W2F11-FIELD-03": {
+   "fingerprint": "ai1-62816d45"
+  },
+  "FQA-W2F11-FIELD-04": {
+   "fingerprint": "ai1-42bc0e7d"
+  },
+  "FQA-W2F11-FORCE-01": {
+   "fingerprint": "ai1-72dc0817"
+  },
+  "FQA-W2F11-FORCE-02": {
+   "fingerprint": "ai1-8b58d6bf"
+  },
+  "FQA-W2F11-FORCE-03": {
+   "fingerprint": "ai1-c43dc706"
+  },
+  "FQA-W2F11-FORCE-04": {
+   "fingerprint": "ai1-b2d7a852"
+  },
+  "FQA-W2F11-IND-01": {
+   "fingerprint": "ai1-9f2cd65f"
+  },
+  "FQA-W2F11-IND-02": {
+   "fingerprint": "ai1-059098a4"
+  },
+  "FQA-W2F11-IND-03": {
+   "fingerprint": "ai1-631c2a22"
+  },
+  "FQA-W2F11-IND-04": {
+   "fingerprint": "ai1-666789e1"
+  },
+  "FQA-W2F11-INT-01": {
+   "fingerprint": "ai1-5bf81886"
+  },
+  "FQA-W2F11-INT-02": {
+   "fingerprint": "ai1-c8e55d8e"
+  },
+  "FQA-W2F11-INT-03": {
+   "fingerprint": "ai1-e9641fd3"
+  },
+  "FQA-W2F11-INT-04": {
+   "fingerprint": "ai1-fabfef9a"
+  },
+  "FQA-W2F11-KIN-01": {
+   "fingerprint": "ai1-471e5544"
+  },
+  "FQA-W2F11-KIN-02": {
+   "fingerprint": "ai1-758a2db1"
+  },
+  "FQA-W2F11-KIN-03": {
+   "fingerprint": "ai1-682b929e"
+  },
+  "FQA-W2F11-KIN-04": {
+   "fingerprint": "ai1-8054393d"
+  },
+  "FQA-W2F11-NEWTON-01": {
+   "fingerprint": "ai1-95e07eda"
+  },
+  "FQA-W2F11-NEWTON-02": {
+   "fingerprint": "ai1-71f9b50f"
+  },
+  "FQA-W2F11-NEWTON-03": {
+   "fingerprint": "ai1-7af050f3"
+  },
+  "FQA-W2F11-NEWTON-04": {
+   "fingerprint": "ai1-006a5e41"
+  },
+  "FQA-W2F11-OPT-01": {
+   "fingerprint": "ai1-cf109f86"
+  },
+  "FQA-W2F11-OPT-02": {
+   "fingerprint": "ai1-707e4551"
+  },
+  "FQA-W2F11-OPT-03": {
+   "fingerprint": "ai1-250b72b4"
+  },
+  "FQA-W2F11-OPT-04": {
+   "fingerprint": "ai1-04ca46a3"
+  },
+  "FQA-W2F11-SIG-01": {
+   "fingerprint": "ai1-e31223fa"
+  },
+  "FQA-W2F11-SIG-02": {
+   "fingerprint": "ai1-83b3b3fb"
+  },
+  "FQA-W2F11-SIG-03": {
+   "fingerprint": "ai1-63b08c48"
+  },
+  "FQA-W2F11-SIG-04": {
+   "fingerprint": "ai1-019b4c08"
+  },
+  "FQA-W2F11-SOUND-01": {
+   "fingerprint": "ai1-05e2c48b"
+  },
+  "FQA-W2F11-SOUND-02": {
+   "fingerprint": "ai1-4ca97ef6"
+  },
+  "FQA-W2F11-SOUND-03": {
+   "fingerprint": "ai1-3e7ecd31"
+  },
+  "FQA-W2F11-SOUND-04": {
+   "fingerprint": "ai1-f9c20eea"
+  },
+  "FQA-W2Q10-ATOM-01": {
+   "fingerprint": "ai1-175d8c76"
+  },
+  "FQA-W2Q10-ATOM-02": {
+   "fingerprint": "ai1-0d85f044"
+  },
+  "FQA-W2Q10-ATOM-03": {
+   "fingerprint": "ai1-cf7e270f"
+  },
+  "FQA-W2Q10-ATOM-04": {
+   "fingerprint": "ai1-506bafb4"
+  },
+  "FQA-W2Q10-BOND-01": {
+   "fingerprint": "ai1-ed2e27f0"
+  },
+  "FQA-W2Q10-BOND-02": {
+   "fingerprint": "ai1-fcaba3b8"
+  },
+  "FQA-W2Q10-BOND-03": {
+   "fingerprint": "ai1-a5dea028"
+  },
+  "FQA-W2Q10-BOND-04": {
+   "fingerprint": "ai1-c2eeff8c"
+  },
+  "FQA-W2Q10-CARB-01": {
+   "fingerprint": "ai1-c56d346e"
+  },
+  "FQA-W2Q10-CARB-02": {
+   "fingerprint": "ai1-0389fbd4"
+  },
+  "FQA-W2Q10-CARB-03": {
+   "fingerprint": "ai1-96c52f50"
+  },
+  "FQA-W2Q10-CARB-04": {
+   "fingerprint": "ai1-9285d5c4"
+  },
+  "FQA-W2Q10-CONF-01": {
+   "fingerprint": "ai1-5cff6216"
+  },
+  "FQA-W2Q10-CONF-02": {
+   "fingerprint": "ai1-3b8904ff"
+  },
+  "FQA-W2Q10-CONF-03": {
+   "fingerprint": "ai1-a849c8e9"
+  },
+  "FQA-W2Q10-CONF-04": {
+   "fingerprint": "ai1-14542e9c"
+  },
+  "FQA-W2Q10-ELEC-01": {
+   "fingerprint": "ai1-f89a9512"
+  },
+  "FQA-W2Q10-ELEC-02": {
+   "fingerprint": "ai1-ba7db31a"
+  },
+  "FQA-W2Q10-ELEC-03": {
+   "fingerprint": "ai1-58a4f5b1"
+  },
+  "FQA-W2Q10-ELEC-04": {
+   "fingerprint": "ai1-4a722169"
+  },
+  "FQA-W2Q10-EMOT-01": {
+   "fingerprint": "ai1-996c06c7"
+  },
+  "FQA-W2Q10-EMOT-02": {
+   "fingerprint": "ai1-60baec51"
+  },
+  "FQA-W2Q10-EMOT-03": {
+   "fingerprint": "ai1-f920d50e"
+  },
+  "FQA-W2Q10-EMOT-04": {
+   "fingerprint": "ai1-c2137029"
+  },
+  "FQA-W2Q10-ENTH-01": {
+   "fingerprint": "ai1-7da31d7d"
+  },
+  "FQA-W2Q10-ENTH-02": {
+   "fingerprint": "ai1-29ff7e95"
+  },
+  "FQA-W2Q10-ENTH-03": {
+   "fingerprint": "ai1-790a7612"
+  },
+  "FQA-W2Q10-ENTH-04": {
+   "fingerprint": "ai1-29026c91"
+  },
+  "FQA-W2Q10-GAS-01": {
+   "fingerprint": "ai1-c0486d46"
+  },
+  "FQA-W2Q10-GAS-02": {
+   "fingerprint": "ai1-caa50f7c"
+  },
+  "FQA-W2Q10-GAS-03": {
+   "fingerprint": "ai1-fd6ee4d4"
+  },
+  "FQA-W2Q10-GAS-04": {
+   "fingerprint": "ai1-aa668674"
+  },
+  "FQA-W2Q10-GEO-01": {
+   "fingerprint": "ai1-2a75986c"
+  },
+  "FQA-W2Q10-GEO-02": {
+   "fingerprint": "ai1-874e91a7"
+  },
+  "FQA-W2Q10-GEO-03": {
+   "fingerprint": "ai1-3ac5f9d0"
+  },
+  "FQA-W2Q10-GEO-04": {
+   "fingerprint": "ai1-6661d6af"
+  },
+  "FQA-W2Q10-INTER-01": {
+   "fingerprint": "ai1-d7215926"
+  },
+  "FQA-W2Q10-INTER-02": {
+   "fingerprint": "ai1-bf4b855c"
+  },
+  "FQA-W2Q10-INTER-03": {
+   "fingerprint": "ai1-5ccbfbf0"
+  },
+  "FQA-W2Q10-INTER-04": {
+   "fingerprint": "ai1-7e08b961"
+  },
+  "FQA-W2Q10-MECH-01": {
+   "fingerprint": "ai1-7b97c494"
+  },
+  "FQA-W2Q10-MECH-02": {
+   "fingerprint": "ai1-bf2a5cfd"
+  },
+  "FQA-W2Q10-MECH-03": {
+   "fingerprint": "ai1-819c8f0b"
+  },
+  "FQA-W2Q10-MECH-04": {
+   "fingerprint": "ai1-5287ed9c"
+  },
+  "FQA-W2Q10-MOL-01": {
+   "fingerprint": "ai1-d0c5f979"
+  },
+  "FQA-W2Q10-MOL-02": {
+   "fingerprint": "ai1-6b1b4f13"
+  },
+  "FQA-W2Q10-MOL-03": {
+   "fingerprint": "ai1-d01f9dac"
+  },
+  "FQA-W2Q10-MOL-04": {
+   "fingerprint": "ai1-5e05d097"
+  },
+  "FQA-W2Q10-PER-01": {
+   "fingerprint": "ai1-d10501a8"
+  },
+  "FQA-W2Q10-PER-02": {
+   "fingerprint": "ai1-cf6435c0"
+  },
+  "FQA-W2Q10-PER-03": {
+   "fingerprint": "ai1-00e9d6e4"
+  },
+  "FQA-W2Q10-PER-04": {
+   "fingerprint": "ai1-316d6012"
+  },
+  "FQA-W2Q10-PHOTO-01": {
+   "fingerprint": "ai1-fd89413a"
+  },
+  "FQA-W2Q10-PHOTO-02": {
+   "fingerprint": "ai1-3140025e"
+  },
+  "FQA-W2Q10-PHOTO-03": {
+   "fingerprint": "ai1-6caa75a3"
+  },
+  "FQA-W2Q10-PHOTO-04": {
+   "fingerprint": "ai1-94e82c11"
+  },
+  "FQA-W2Q10-SPEC-01": {
+   "fingerprint": "ai1-0d7a32ff"
+  },
+  "FQA-W2Q10-SPEC-02": {
+   "fingerprint": "ai1-3175e8c3"
+  },
+  "FQA-W2Q10-SPEC-03": {
+   "fingerprint": "ai1-9bdfce24"
+  },
+  "FQA-W2Q10-SPEC-04": {
+   "fingerprint": "ai1-d8bfac5d"
+  },
+  "FQA-W2Q10-THERM-01": {
+   "fingerprint": "ai1-86d29781"
+  },
+  "FQA-W2Q10-THERM-02": {
+   "fingerprint": "ai1-e714f64d"
+  },
+  "FQA-W2Q10-THERM-03": {
+   "fingerprint": "ai1-fc15cf79"
+  },
+  "FQA-W2Q10-THERM-04": {
+   "fingerprint": "ai1-7ec69c75"
+  },
+  "FQA-W2Q10-THERMO-01": {
+   "fingerprint": "ai1-2e8a567c"
+  },
+  "FQA-W2Q10-THERMO-02": {
+   "fingerprint": "ai1-90e3c64d"
+  },
+  "FQA-W2Q10-THERMO-03": {
+   "fingerprint": "ai1-7f710693"
+  },
+  "FQA-W2Q10-THERMO-04": {
+   "fingerprint": "ai1-553abe98"
+  },
+  "FQA-W2Q10-WORK-01": {
+   "fingerprint": "ai1-95d9144f"
+  },
+  "FQA-W2Q10-WORK-02": {
+   "fingerprint": "ai1-7576cf92"
+  },
+  "FQA-W2Q10-WORK-03": {
+   "fingerprint": "ai1-32de7b59"
+  },
+  "FQA-W2Q10-WORK-04": {
+   "fingerprint": "ai1-e51342db"
+  },
+  "FQA-W2Q11-AB-01": {
+   "fingerprint": "ai1-fa9a9618"
+  },
+  "FQA-W2Q11-AB-02": {
+   "fingerprint": "ai1-3097bddf"
+  },
+  "FQA-W2Q11-AB-03": {
+   "fingerprint": "ai1-0d9db346"
+  },
+  "FQA-W2Q11-AB-04": {
+   "fingerprint": "ai1-e0ba34f3"
+  },
+  "FQA-W2Q11-ELEC-01": {
+   "fingerprint": "ai1-7a646532"
+  },
+  "FQA-W2Q11-ELEC-02": {
+   "fingerprint": "ai1-5343cb3f"
+  },
+  "FQA-W2Q11-ELEC-03": {
+   "fingerprint": "ai1-f499d882"
+  },
+  "FQA-W2Q11-ELEC-04": {
+   "fingerprint": "ai1-d5e61727"
+  },
+  "FQA-W2Q11-EQS-01": {
+   "fingerprint": "ai1-4c2d8393"
+  },
+  "FQA-W2Q11-EQS-02": {
+   "fingerprint": "ai1-7750a13c"
+  },
+  "FQA-W2Q11-EQS-03": {
+   "fingerprint": "ai1-a5c2604a"
+  },
+  "FQA-W2Q11-EQS-04": {
+   "fingerprint": "ai1-7c172252"
+  },
+  "FQA-W2Q11-GREEN-01": {
+   "fingerprint": "ai1-5ac4ca62"
+  },
+  "FQA-W2Q11-GREEN-02": {
+   "fingerprint": "ai1-616344fc"
+  },
+  "FQA-W2Q11-GREEN-03": {
+   "fingerprint": "ai1-ecee05fd"
+  },
+  "FQA-W2Q11-GREEN-04": {
+   "fingerprint": "ai1-1389ef37"
+  },
+  "FQA-W2Q11-KQ-01": {
+   "fingerprint": "ai1-39807082"
+  },
+  "FQA-W2Q11-KQ-02": {
+   "fingerprint": "ai1-b816f218"
+  },
+  "FQA-W2Q11-KQ-03": {
+   "fingerprint": "ai1-d5de602c"
+  },
+  "FQA-W2Q11-KQ-04": {
+   "fingerprint": "ai1-55fdcc30"
+  },
+  "FQA-W2Q11-KSP-01": {
+   "fingerprint": "ai1-9ec0e823"
+  },
+  "FQA-W2Q11-KSP-02": {
+   "fingerprint": "ai1-bc7a3fc9"
+  },
+  "FQA-W2Q11-KSP-03": {
+   "fingerprint": "ai1-ddd44e17"
+  },
+  "FQA-W2Q11-KSP-04": {
+   "fingerprint": "ai1-2ce0cffb"
+  },
+  "FQA-W2Q11-LEC-01": {
+   "fingerprint": "ai1-6fbcafc5"
+  },
+  "FQA-W2Q11-LEC-02": {
+   "fingerprint": "ai1-df386669"
+  },
+  "FQA-W2Q11-LEC-03": {
+   "fingerprint": "ai1-014401f3"
+  },
+  "FQA-W2Q11-LEC-04": {
+   "fingerprint": "ai1-e7db6b65"
+  },
+  "FQA-W2Q11-LIM-01": {
+   "fingerprint": "ai1-216f5b15"
+  },
+  "FQA-W2Q11-LIM-02": {
+   "fingerprint": "ai1-dacb4ffb"
+  },
+  "FQA-W2Q11-LIM-03": {
+   "fingerprint": "ai1-6f256331"
+  },
+  "FQA-W2Q11-LIM-04": {
+   "fingerprint": "ai1-855bdd02"
+  },
+  "FQA-W2Q11-PH-01": {
+   "fingerprint": "ai1-ffc3b956"
+  },
+  "FQA-W2Q11-PH-02": {
+   "fingerprint": "ai1-a751fead"
+  },
+  "FQA-W2Q11-PH-03": {
+   "fingerprint": "ai1-4177e984"
+  },
+  "FQA-W2Q11-PH-04": {
+   "fingerprint": "ai1-68f29312"
+  },
+  "FQA-W2Q11-RED-01": {
+   "fingerprint": "ai1-349fdcdf"
+  },
+  "FQA-W2Q11-RED-02": {
+   "fingerprint": "ai1-5bdfd518"
+  },
+  "FQA-W2Q11-RED-03": {
+   "fingerprint": "ai1-14a233c0"
+  },
+  "FQA-W2Q11-RED-04": {
+   "fingerprint": "ai1-216ed9a3"
+  },
+  "FQA-W2Q11-SOL-01": {
+   "fingerprint": "ai1-e9f82119"
+  },
+  "FQA-W2Q11-SOL-02": {
+   "fingerprint": "ai1-f1234557"
+  },
+  "FQA-W2Q11-SOL-03": {
+   "fingerprint": "ai1-4eafde86"
+  },
+  "FQA-W2Q11-SOL-04": {
+   "fingerprint": "ai1-85c63836"
+  },
+  "FQA-W2Q11-STO-01": {
+   "fingerprint": "ai1-5ba2853a"
+  },
+  "FQA-W2Q11-STO-02": {
+   "fingerprint": "ai1-cad75747"
+  },
+  "FQA-W2Q11-STO-03": {
+   "fingerprint": "ai1-ced89109"
+  },
+  "FQA-W2Q11-STO-04": {
+   "fingerprint": "ai1-d5abe900"
+  },
+  "FQA-W2Q11-TIT-01": {
+   "fingerprint": "ai1-40d3b64e"
+  },
+  "FQA-W2Q11-TIT-02": {
+   "fingerprint": "ai1-c00eb495"
+  },
+  "FQA-W2Q11-TIT-03": {
+   "fingerprint": "ai1-dbe1cec5"
+  },
+  "FQA-W2Q11-TIT-04": {
+   "fingerprint": "ai1-2ee671d5"
+  },
+  "FQA-W3-C-AQ-01": {
+   "fingerprint": "ai1-fc4b1130"
+  },
+  "FQA-W3-C-ELEM-01": {
+   "fingerprint": "ai1-c3765d96"
+  },
+  "FQA-W3-C-ENE-01": {
+   "fingerprint": "ai1-46d9c7cc"
+  },
+  "FQA-W3-C-EQ-01": {
+   "fingerprint": "ai1-d5e38b35"
+  },
+  "FQA-W3-C-MAT-01": {
+   "fingerprint": "ai1-462b3972"
+  },
+  "FQA-W3-C-MEC-01": {
+   "fingerprint": "ai1-e881386e"
+  },
+  "FQA-W3-C-WAV-01": {
+   "fingerprint": "ai1-58597123"
+  },
+  "FQA-W3-DATA-AQ-01": {
+   "fingerprint": "ai1-3e77bdb3"
+  },
+  "FQA-W3-DATA-ELEM-01": {
+   "fingerprint": "ai1-5e868e96"
+  },
+  "FQA-W3-DATA-ENE-01": {
+   "fingerprint": "ai1-a921983f"
+  },
+  "FQA-W3-DATA-EQ-01": {
+   "fingerprint": "ai1-7345b4c3"
+  },
+  "FQA-W3-DATA-MAT-01": {
+   "fingerprint": "ai1-16138b1c"
+  },
+  "FQA-W3-DATA-MEC-01": {
+   "fingerprint": "ai1-21548dcb"
+  },
+  "FQA-W3-DATA-WAV-01": {
+   "fingerprint": "ai1-f7cf6c40"
+  },
+  "FQA-W3-R-AQ-01": {
+   "fingerprint": "ai1-6f5f7c27"
+  },
+  "FQA-W3-R-ELEM-01": {
+   "fingerprint": "ai1-1563763c"
+  },
+  "FQA-W3-R-ENE-01": {
+   "fingerprint": "ai1-07864c26"
+  },
+  "FQA-W3-R-EQ-01": {
+   "fingerprint": "ai1-cc5b2d61"
+  },
+  "FQA-W3-R-MAT-01": {
+   "fingerprint": "ai1-3cf76be1"
+  },
+  "FQA-W3-R-MEC-01": {
+   "fingerprint": "ai1-129014ea"
+  },
+  "FQA-W3-R-WAV-01": {
+   "fingerprint": "ai1-c93fe90a"
+  },
+  "FQA-WAV-01": {
+   "fingerprint": "ai1-b0696688"
+  },
+  "FQA-WAV-02": {
+   "fingerprint": "ai1-24f48171"
+  },
+  "FQA-WAV-03": {
+   "fingerprint": "ai1-f8ff515c"
+  },
+  "FQA-WAV-04": {
+   "fingerprint": "ai1-853a0538"
+  },
+  "FQA-WAV-05": {
+   "fingerprint": "ai1-efc8abd0"
+  },
+  "FQA-WAV-06": {
+   "fingerprint": "ai1-edaf851b"
+  },
+  "FQA-WAV-07": {
+   "fingerprint": "ai1-f834ed15"
+  },
+  "FQA-WAV-08": {
+   "fingerprint": "ai1-50cf0261"
+  }
+ }
+}
