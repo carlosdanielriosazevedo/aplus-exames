@@ -512,11 +512,12 @@
       "reviewStatus": "prototype",
       "responseType": "short-answer",
       "cognitive": "analisar",
-      "stimulus": "O diretor afirmou: «A reunião será amanhã.»",
-      "prompt": "Se o discurso passar para discurso indireto, indica uma possibilidade de reformulação adequada.",
+      "stimulus": "Na quinta-feira, o diretor afirmou: «A reunião será amanhã.» Uma semana depois, relatas o que ele disse.",
+      "prompt": "Reescreve a frase em discurso indireto, começando por «O diretor afirmou que».",
       "acceptedAnswers": [
         "O diretor afirmou que a reunião seria no dia seguinte.",
-        "O diretor declarou que a reunião seria no dia seguinte."
+        "O diretor afirmou que a reunião seria na sexta-feira.",
+        "O diretor afirmou que a reunião iria ser no dia seguinte."
       ],
       "explanation": "Na passagem para discurso indireto, é possível ajustar os tempos e referências deícticas ao novo contexto; «seria no dia seguinte» é uma reformulação adequada.",
       "gradingMode": "deterministic-with-equivalents",

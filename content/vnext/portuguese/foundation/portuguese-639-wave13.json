@@ -275,7 +275,7 @@
       "reviewStatus": "prototype",
       "responseType": "short-answer",
       "cognitive": "aplicar",
-      "stimulus": "Vais explicar num texto como se organiza uma atividade escolar. Tens informação sobre objetivos, preparação, realização e avaliação.",
+      "stimulus": "Vais explicar num texto como se organiza uma atividade escolar. Tens informação, por esta ordem, sobre a avaliação, a realização, os objetivos e a preparação.",
       "prompt": "Indica uma ordem adequada para organizar essa informação num texto expositivo.",
       "acceptedAnswers": [
         "objetivos, preparação, realização e avaliação",

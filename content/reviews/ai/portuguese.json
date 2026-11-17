@@ -5,8 +5,10 @@
  "reviewer": "Claude (revisão integral, pergunta a pergunta)",
  "method": "Leitura de cada pergunta ativa (782 do banco + perguntas de texto dos mini-exames e do exame completo): chave, ambiguidade entre opções, distratores repetidos, explicações, respostas-modelo, grelhas, rigor literário e português europeu. Correções aplicadas antes do registo.",
  "secondReview": {
-  "status": "pending",
-  "note": "Segunda IA independente, por amostragem."
+  "status": "done",
+  "reviewedAt": "2026-11-17",
+  "reviewer": "ChatGPT (amostra de 154 perguntas, docs/content-quality/segunda-revisao-ia-amostra.md)",
+  "result": "Aprovação condicionada: nenhuma chave errada; 3 problemas graves e 5 médios, todos confirmados e corrigidos. Detalhe em docs/content-quality/segunda-revisao-ia-resultado.md."
  },
  "notes": [
   "FND-174 e FND-196 (pontuação) estavam partidas: as opções eram frases diferentes todas bem pontuadas. Refeitas.",
@@ -684,7 +686,8 @@
    "fingerprint": "ai1-a6e465b0"
   },
   "PT639-FND-224": {
-   "fingerprint": "ai1-48785822"
+   "fingerprint": "ai1-53d21769",
+   "revisedAfterSecondReview": "2026-11-17"
   },
   "PT639-FND-225": {
    "fingerprint": "ai1-bea1add9"
@@ -756,7 +759,8 @@
    "fingerprint": "ai1-ed29e889"
   },
   "PT639-FND-248": {
-   "fingerprint": "ai1-53b03173"
+   "fingerprint": "ai1-3a713ad3",
+   "revisedAfterSecondReview": "2026-11-17"
   },
   "PT639-FND-249": {
    "fingerprint": "ai1-2b933e03"
@@ -801,7 +805,8 @@
    "fingerprint": "ai1-b7c68f14"
   },
   "PT639-FND-263": {
-   "fingerprint": "ai1-a81a457a"
+   "fingerprint": "ai1-221599f8",
+   "revisedAfterSecondReview": "2026-11-17"
   },
   "PT639-FND-264": {
    "fingerprint": "ai1-6642dc5d"
@@ -906,7 +911,8 @@
    "fingerprint": "ai1-90df1016"
   },
   "PT639-FND-298": {
-   "fingerprint": "ai1-dc91c886"
+   "fingerprint": "ai1-6a48c692",
+   "revisedAfterSecondReview": "2026-11-17"
   },
   "PT639-FND-299": {
    "fingerprint": "ai1-edc18e14"
@@ -2397,7 +2403,8 @@
    "fingerprint": "ai1-4b9876ea"
   },
   "PT639-PASSAGE-11-LEITURA-001-Q1": {
-   "fingerprint": "ai1-f191fcd7"
+   "fingerprint": "ai1-62a753ed",
+   "revisedAfterSecondReview": "2026-11-17"
   },
   "PT639-PASSAGE-11-LEITURA-001-Q2": {
    "fingerprint": "ai1-3aa508dd"
@@ -2472,7 +2479,8 @@
    "fingerprint": "ai1-47fd220d"
   },
   "PT639-PASSAGE-LEITURA-003-Q2": {
-   "fingerprint": "ai1-1831ff42"
+   "fingerprint": "ai1-b3a719d8",
+   "revisedAfterSecondReview": "2026-11-17"
   },
   "PT639-PASSAGE-LEITURA-003-Q3": {
    "fingerprint": "ai1-004846b6"
@@ -2481,7 +2489,8 @@
    "fingerprint": "ai1-d87f428a"
   },
   "PT639-PASSAGE-LIT-003-Q2": {
-   "fingerprint": "ai1-c55da6b9"
+   "fingerprint": "ai1-40f00b4f",
+   "revisedAfterSecondReview": "2026-11-17"
   },
   "PT639-PASSAGE-LIT-003-Q3": {
    "fingerprint": "ai1-b7791640"

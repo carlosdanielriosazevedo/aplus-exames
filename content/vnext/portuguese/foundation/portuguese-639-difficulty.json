@@ -5152,14 +5152,14 @@
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
-        "stimulusWords": 7,
-        "promptWords": 13
+        "stimulusWords": 17,
+        "promptWords": 12
       },
       "rationale": [
         "operação cognitiva: analisar",
         "formato: short-answer",
-        "estímulo: 7 palavras",
-        "instrução: 13 palavras"
+        "estímulo: 17 palavras",
+        "instrução: 12 palavras"
       ]
     },
     {
@@ -5704,13 +5704,13 @@
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
-        "stimulusWords": 21,
+        "stimulusWords": 16,
         "promptWords": 12
       },
       "rationale": [
         "operação cognitiva: analisar",
         "formato: short-answer",
-        "estímulo: 21 palavras",
+        "estímulo: 16 palavras",
         "instrução: 12 palavras"
       ]
     },
@@ -6049,13 +6049,13 @@
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
-        "stimulusWords": 18,
+        "stimulusWords": 25,
         "promptWords": 11
       },
       "rationale": [
         "operação cognitiva: aplicar",
         "formato: short-answer",
-        "estímulo: 18 palavras",
+        "estímulo: 25 palavras",
         "instrução: 11 palavras"
       ]
     },
@@ -6854,13 +6854,13 @@
         "prompt": 0,
         "rubric": 0,
         "wordLimit": 0,
-        "stimulusWords": 21,
+        "stimulusWords": 17,
         "promptWords": 12
       },
       "rationale": [
         "operação cognitiva: analisar",
         "formato: short-answer",
-        "estímulo: 21 palavras",
+        "estímulo: 17 palavras",
         "instrução: 12 palavras"
       ]
     },

@@ -203,6 +203,22 @@ export function normalizePortugueseAnswer(value){
     .trim();
 }
 
+// Resposta curta: retira de ambos os lados enquadramentos que não mudam o conteúdo
+// («é», «o/a», «desempenha a função de»…). Como se aplica também às respostas aceites,
+// não passa a aceitar nada que antes fosse errado; só deixa de rejeitar formulações completas.
+const SHORT_ANSWER_LEADS=["desempenha a funcao sintatica de","desempenha a funcao de","a funcao sintatica e","a funcao sintatica de","funcao sintatica de","a funcao e","a funcao de","funcao de","trata-se de","trata se de","e um","e uma","e o","e a","e","o","a","os","as","um","uma"];
+export function shortAnswerCore(value){
+  let text=normalizePortugueseAnswer(value);
+  let changed=true;
+  while(changed){
+    changed=false;
+    for(const lead of SHORT_ANSWER_LEADS){
+      if(text.startsWith(`${lead} `)&&text.length>lead.length+1){text=text.slice(lead.length+1).trim();changed=true;break;}
+    }
+  }
+  return text;
+}
+
 export function portugueseWordCount(value){
   const normalized=String(value??"").trim();
   return normalized?normalized.split(/\s+/u).filter(Boolean).length:0;
@@ -217,8 +233,8 @@ export function gradePortugueseResponse(item,response){
     return {status:answered?"final":"unanswered",final:true,correct:answered?correct:null,points:answered?(correct?item.maxPoints:0):null,maxPoints:item.maxPoints,gradingMode:item.gradingMode};
   }
   if(item.responseType==="short-answer"){
-    const answer=normalizePortugueseAnswer(response);
-    const accepted=(item.acceptedAnswers||[]).map(normalizePortugueseAnswer);
+    const answer=shortAnswerCore(response);
+    const accepted=(item.acceptedAnswers||[]).map(shortAnswerCore);
     const answered=answer.length>0;
     const correct=answered&&accepted.includes(answer);
     return {status:answered?"final":"unanswered",final:true,correct:answered?correct:null,points:answered?(correct?item.maxPoints:0):null,maxPoints:item.maxPoints,gradingMode:item.gradingMode};

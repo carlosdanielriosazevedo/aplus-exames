@@ -24,13 +24,13 @@
           "cognitive": "interpretar",
           "prompt": "A organização do texto desenvolve-se sobretudo através de",
           "options": [
-            "uma definição inicial seguida de condições para que a discordância seja útil.",
+            "a correção de uma ideia comum, seguida das condições para que a discordância seja útil.",
             "uma comparação entre diferentes formas de discordar, organizada por grau de eficácia.",
             "uma sequência de exemplos que conduz à rejeição da discordância como método de decisão.",
             "uma oposição entre rapidez de decisão e participação de várias pessoas numa reunião."
           ],
           "answerIndex": 0,
-          "explanation": "O texto parte de uma ideia comum sobre discordância e depois define condições que transformam o desacordo num instrumento de qualidade.",
+          "explanation": "O texto parte de uma ideia comum sobre discordância («impedir uma decisão»), corrige-a e depois define condições que transformam o desacordo num instrumento de qualidade.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
           "difficultyTarget": 2

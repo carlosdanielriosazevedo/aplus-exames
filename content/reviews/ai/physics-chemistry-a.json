@@ -5,8 +5,10 @@
  "reviewer": "Claude (revisão integral, pergunta a pergunta)",
  "method": "Leitura de cada pergunta ativa: chave, distratores, enunciado, explicação, contas refeitas, dados de tabelas/gráficos, notação e português europeu. Correções aplicadas antes do registo.",
  "secondReview": {
-  "status": "pending",
-  "note": "Segunda IA independente, por amostragem."
+  "status": "done",
+  "reviewedAt": "2026-11-17",
+  "reviewer": "ChatGPT (amostra de 154 perguntas, docs/content-quality/segunda-revisao-ia-amostra.md)",
+  "result": "Aprovação condicionada: nenhuma chave errada; 3 problemas graves e 5 médios, todos confirmados e corrigidos. Detalhe em docs/content-quality/segunda-revisao-ia-resultado.md."
  },
  "items": {
   "FQA-AQ-01": {
@@ -46,13 +48,15 @@
    "fingerprint": "ai1-9c85d305"
   },
   "FQA-AUTH-ENE-D1": {
-   "fingerprint": "ai1-46fbefa5"
+   "fingerprint": "ai1-0ddcb4d4",
+   "revisedAfterSecondReview": "2026-11-17"
   },
   "FQA-AUTH-ENE-G1": {
    "fingerprint": "ai1-6352132e"
   },
   "FQA-AUTH-EQ-D1": {
-   "fingerprint": "ai1-6b88a3d8"
+   "fingerprint": "ai1-fcb4eb66",
+   "revisedAfterSecondReview": "2026-11-17"
   },
   "FQA-AUTH-EQ-G1": {
    "fingerprint": "ai1-704a0589"
@@ -706,7 +710,8 @@
    "fingerprint": "ai1-583e69ff"
   },
   "FQA-V2-PERIOD-V5": {
-   "fingerprint": "ai1-cc93f4e8"
+   "fingerprint": "ai1-eeb75be8",
+   "revisedAfterSecondReview": "2026-11-17"
   },
   "FQA-V2-PERIOD-V6": {
    "fingerprint": "ai1-4ebd0639"
