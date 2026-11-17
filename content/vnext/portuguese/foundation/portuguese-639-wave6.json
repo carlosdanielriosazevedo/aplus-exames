@@ -64,8 +64,8 @@
       "options": [
         "O aumento das marcações resultou sobretudo da maior facilidade de acesso à reserva.",
         "A escola aumentou a dimensão da sala de estudo.",
-        "O horário foi prolongado depois da criação da aplicação.",
-        "Os alunos deixaram de preferir espaços silenciosos."
+        "O horário da sala de estudo foi prolongado depois da criação da aplicação.",
+        "Os alunos deixaram de preferir espaços silenciosos para estudar em grupo."
       ],
       "answerIndex": 0,
       "explanation": "Como espaço e horário não mudaram, a alteração associada ao aumento foi a possibilidade de reservar de forma mais simples.",
@@ -150,7 +150,7 @@
       "options": [
         "a personificação.",
         "a hipérbole.",
-        "a comparação.",
+        "a dupla adjetivação.",
         "a aliteração."
       ],
       "answerIndex": 0,
@@ -191,7 +191,7 @@
       "options": [
         "de uma viagem que ainda não aconteceu.",
         "da memória de uma decisão que marcou a identidade da personagem.",
-        "de uma obrigação de regressar imediatamente.",
+        "de uma obrigação de regressar imediatamente à cidade de onde partiu.",
         "da inutilidade de conservar objetos antigos."
       ],
       "answerIndex": 1,
@@ -255,9 +255,9 @@
       "prompt": "A alternância entre «abro» e «fecho» reforça sobretudo",
       "options": [
         "uma progressão entre aproximação e recuo perante uma experiência difícil.",
-        "a descrição técnica de movimentos sem valor expressivo.",
+        "a descrição técnica de gestos quotidianos repetidos, sem valor expressivo.",
         "a ausência de qualquer tensão no sujeito.",
-        "uma sequência cronológica de várias semanas."
+        "uma sequência cronológica de ações ao longo de várias semanas."
       ],
       "answerIndex": 0,
       "explanation": "A estrutura alternada materializa um movimento de aproximação e retraimento, associado à hesitação do sujeito.",
@@ -298,10 +298,10 @@
       "stimulus": "Tese: «As escolas devem criar mais zonas verdes nos recreios.»",
       "prompt": "Qual opção apresenta uma relação argumentativa mais completa?",
       "options": [
-        "As zonas verdes podem tornar o recreio visualmente mais agradável.",
+        "As zonas verdes podem tornar o recreio visualmente mais agradável e mais bonito para quem o frequenta.",
         "Várias escolas já têm árvores e canteiros junto aos recreios.",
         "Mais sombra e vegetação podem reduzir o calor e criar espaços de descanso mais confortáveis para os alunos.",
-        "Os recreios são usados por muitos alunos durante os intervalos."
+        "Os recreios são usados todos os dias por muitos alunos, sobretudo durante os intervalos mais longos."
       ],
       "answerIndex": 2,
       "explanation": "A opção correta estabelece uma cadeia explícita entre a medida proposta, os seus efeitos e uma consequência relevante para os alunos; as restantes são observações relacionadas, mas fundamentam a tese de forma incompleta.",
@@ -422,7 +422,7 @@
       "prompt": "Neste contexto, «deve» exprime sobretudo",
       "options": [
         "obrigação imposta ao sujeito.",
-        "certeza baseada em observação direta.",
+        "uma certeza baseada em observação direta e comprovada.",
         "uma ordem dada ao interlocutor.",
         "uma inferência com elevado grau de probabilidade."
       ],

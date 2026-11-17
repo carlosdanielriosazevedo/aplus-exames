@@ -26,3 +26,28 @@ Resultado: repetição de ~25% e letras equilibradas em todos os bancos. Guarda:
 
 ## Pendente
 A posição deixou de ser pista; o **comprimento** ainda é: em Português, a certa é claramente a opção mais longa (≥1,2×) em 67% das perguntas de literatura. Corrigido por reescrita editorial das opções erradas, obra a obra.
+
+## Comprimento das opções em Português (2026-11-17)
+Reescrita editorial das 448 perguntas de escolha múltipla de literatura (25 obras), sem mudar a resposta certa:
+- **1.ª passagem (300 perguntas):** as opções erradas curtas e absurdas («Elimina a unidade da obra.») passam a leituras plausíveis mas erradas da obra, com tamanho e tom próximos da certa. Fica uma errada curta por pergunta. Nos casos de respostas certas muito longas, a certa foi encurtada sem perder precisão. Nos heterónimos, várias erradas passam a ser traços de outro heterónimo, ao estilo dos exames.
+- **2.ª passagem (136 perguntas):** uma das erradas foi alongada para que «escolher a opção mais longa» deixe de compensar.
+
+| Literatura | Antes | Depois |
+|---|---|---|
+| A certa é a opção mais longa | 85% | 31% |
+| A certa é claramente a mais longa (≥1,2×) | 67% | 2% |
+
+**Perguntas de base (199, as do diagnóstico e das missões de gramática, leitura e escrita):** 70 reescritas.
+- Terminologia: as erradas passam a termos técnicos igualmente longos, que são as confusões clássicas («modificador restritivo do nome», «complemento agente da passiva»).
+- Escrita e leitura: as erradas passam a frases tão desenvolvidas como a certa, mas com o defeito a detetar (registo, coesão, irrelevância, inferência não sustentada).
+
+| Base | Antes | Depois |
+|---|---|---|
+| A certa é a opção mais longa | 52% | 30% |
+| A certa é claramente a mais longa | 35% | 0% |
+
+Guarda: `tests/unit/optionLengthCue.test.mjs` (≤35% / ≤5% nos dois conjuntos).
+
+### Pendente
+- Na literatura, a certa raramente é a opção mais curta (2%). A errada curta que ficou continua fácil de eliminar. É uma pista fraca, mas existe.
+- Reescrita feita sem professor. Fica sujeita à revisão pedagógica já prevista.

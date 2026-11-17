@@ -45,7 +45,7 @@
         "exemplo sem relação.",
         "justificação da proposta.",
         "conclusão contrária.",
-        "definição de escola."
+        "exemplo sem relação com a proposta."
       ],
       "answerIndex": 1,
       "explanation": "Apresenta uma razão que sustenta a proposta formulada.",
@@ -154,7 +154,7 @@
       "options": [
         "A rivalidade política.",
         "A preservação dos laços apesar da distância.",
-        "A investigação científica.",
+        "A vontade de esquecer a infância e a terra natal.",
         "O medo de viajar."
       ],
       "answerIndex": 1,
@@ -174,7 +174,7 @@
       "stimulus": "Pretendes escrever um texto de opinião sobre a utilização de inteligência artificial no estudo.",
       "prompt": "Antes da redação, é mais útil",
       "options": [
-        "escrever frases aleatórias até ocupar espaço.",
+        "escrever frases soltas sobre o tema até ocupar o espaço disponível.",
         "escolher apenas palavras difíceis.",
         "definir a tese e selecionar argumentos e exemplos relevantes.",
         "redigir a conclusão sem decidir uma posição."
@@ -196,7 +196,7 @@
       "stimulus": "Contexto: mensagem formal para solicitar esclarecimentos a uma instituição.",
       "prompt": "Qual despedida é mais adequada?",
       "options": [
-        "Falamos depois!",
+        "Fico à espera, um abraço grande!",
         "Vá, abraço!",
         "Até já, malta!",
         "Com os melhores cumprimentos,"
@@ -416,7 +416,7 @@
       "stimulus": "Contexto: email a um professor para pedir confirmação de uma data.",
       "prompt": "Qual formulação é adequada?",
       "options": [
-        "Ó prof, diz lá quando é para entregar isso.",
+        "Ó professora, diga-me lá quando é que é para entregar isso do trabalho.",
         "Poderia, por favor, confirmar a data de entrega do trabalho?",
         "Manda aí a data.",
         "Então, quando é isso, pá?"

@@ -23,7 +23,7 @@
         "Uma atividade de grupo ou apresentação.",
         "Uma prova de atletismo.",
         "O encerramento da escola.",
-        "Uma refeição no refeitório."
+        "Uma refeição de convívio no refeitório da escola."
       ],
       "answerIndex": 0,
       "explanation": "A disposição em círculo, o projetor e os cartões com nomes apontam para uma atividade coletiva organizada.",
@@ -67,7 +67,7 @@
         "Contraria a proposta apresentada.",
         "Muda para um assunto sem relação.",
         "Apresenta uma razão que sustenta a proposta.",
-        "Apresenta uma definição da medida."
+        "Apresenta uma definição técnica da medida proposta."
       ],
       "answerIndex": 2,
       "explanation": "A segunda parte funciona como argumento a favor da ampliação da rede de ciclovias.",
@@ -152,10 +152,10 @@
       "stimulus": "Tema: vantagens e limites do trabalho de grupo.",
       "prompt": "Qual plano é mais adequado?",
       "options": [
-        "Escrever ideias aleatórias sem relação entre si.",
+        "Escrever todas as ideias que surgirem, pela ordem em que surgirem, sem as relacionar entre si.",
         "Apresentar o tema; desenvolver vantagens e limites com exemplos; concluir sintetizando a posição.",
         "Repetir o título em todos os parágrafos.",
-        "Começar pela conclusão e omitir o desenvolvimento."
+        "Começar pela conclusão, apresentar a opinião pessoal e omitir o desenvolvimento dos argumentos."
       ],
       "answerIndex": 1,
       "explanation": "O plano organiza introdução, desenvolvimento equilibrado e conclusão.",
@@ -349,7 +349,7 @@
       "prompt": "A atribuição da ação de «sussurrar» ao vento constitui",
       "options": [
         "personificação.",
-        "comparação.",
+        "interrogação retórica.",
         "pleonasmo.",
         "antítese."
       ],
@@ -370,7 +370,7 @@
       "stimulus": "Contexto: pedido formal enviado à direção da escola.",
       "prompt": "Qual formulação é mais adequada?",
       "options": [
-        "Então, malta, quando é que isso acontece?",
+        "Então, malta, alguém me consegue dizer quando é que isso da atividade acontece?",
         "Venho solicitar informação sobre o calendário previsto para a atividade.",
         "Diz aí quando vai ser.",
         "Quero saber isso já, ok?"

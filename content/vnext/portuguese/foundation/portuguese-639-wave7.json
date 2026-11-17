@@ -22,7 +22,7 @@
       "options": [
         "a época de exames.",
         "o prolongamento do horário da biblioteca.",
-        "o estudo depois das aulas.",
+        "o estudo dos alunos depois das aulas terminarem.",
         "o número de alunos."
       ],
       "answerIndex": 1,
@@ -66,7 +66,7 @@
       "options": [
         "Elimina qualquer perspetiva subjetiva.",
         "Aproxima o leitor da experiência e da reflexão do narrador.",
-        "Transforma o narrador numa personagem ausente.",
+        "Garante uma visão objetiva e distante dos acontecimentos narrados.",
         "Impede a referência a acontecimentos passados."
       ],
       "answerIndex": 1,
@@ -109,8 +109,8 @@
       "prompt": "Qual é o início mais adequado a um texto expositivo?",
       "options": [
         "Ler regularmente pode contribuir para ampliar o vocabulário e desenvolver a compreensão textual.",
-        "Toda a gente sabe que quem não lê está completamente errado.",
-        "Era uma vez um aluno que entrou numa biblioteca misteriosa.",
+        "Toda a gente sabe que quem não lê está completamente errado e nunca vai ter sucesso na vida.",
+        "Era uma vez um aluno que entrou numa biblioteca misteriosa e descobriu o prazer de ler livros.",
         "Leiam mais, porque eu mando e não há nada a discutir."
       ],
       "answerIndex": 0,
@@ -175,7 +175,7 @@
       "options": [
         "certeza.",
         "possibilidade.",
-        "obrigação.",
+        "certeza absoluta.",
         "ordem."
       ],
       "answerIndex": 1,
@@ -261,7 +261,7 @@
       "prompt": "A repetição da frase contribui sobretudo para",
       "options": [
         "criar uma estrutura circular e reforçar a ideia de impasse.",
-        "introduzir uma nova personagem.",
+        "mostrar que a situação da personagem mudou por completo no final.",
         "eliminar a relação entre início e fim.",
         "transformar o texto numa descrição científica."
       ],
@@ -283,7 +283,7 @@
       "prompt": "Qual dos argumentos sustenta diretamente a tese?",
       "options": [
         "Esses espaços permitem estudar ou colaborar nos intervalos sem ocupar salas de aula.",
-        "A escola foi construída há vinte anos.",
+        "A escola foi construída há vinte anos e tem hoje muitos mais alunos do que quando abriu.",
         "Alguns alunos preferem canetas azuis.",
         "O edifício tem três entradas."
       ],
@@ -305,7 +305,7 @@
       "prompt": "Qual revisão melhora a coesão sem alterar o sentido?",
       "options": [
         "A reciclagem é importante, pois permite reduzir resíduos e também favorece a reutilização de materiais.",
-        "A reciclagem é importante. Ontem choveu bastante. Os materiais existem.",
+        "A reciclagem é importante e, ontem, choveu bastante, pelo que os materiais existem em todas as escolas.",
         "A reciclagem, reciclagem, reciclagem é muito importante e pronto.",
         "Talvez a reciclagem seja uma personagem que reduz resíduos."
       ],
@@ -351,7 +351,7 @@
         "um elevado grau de certeza do enunciador.",
         "uma ordem dirigida aos alunos.",
         "uma condição necessária.",
-        "uma dúvida forte."
+        "uma dúvida forte do enunciador sobre o facto."
       ],
       "answerIndex": 0,
       "explanation": "O advérbio modal «certamente» marca um elevado grau de certeza relativamente ao enunciado.",
