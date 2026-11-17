@@ -37,6 +37,11 @@ export default function PrivacyPage(){
     </div>
 
     <div className={styles.section}>
+      <h2>Eliminar a conta</h2>
+      <p className={styles.copy}>Podes eliminar a tua conta a qualquer momento na própria app (Conta → Eliminar conta). A eliminação apaga a conta, o progresso guardado online e o registo de aceitação dos termos, de forma imediata. <Link href="/eliminar-conta">Saber como eliminar a conta</Link>.</p>
+    </div>
+
+    <div className={styles.section}>
       <h2>Ranking</h2>
       <p className={styles.copy}>A participação em rankings escolares depende de uma escolha explícita. Quando aderires, podem ser usados o ano escolar, a escola indicada e os dados competitivos necessários para calcular a posição. Não precisas de indicar escola para usar as restantes áreas da aplicação.</p>
     </div>

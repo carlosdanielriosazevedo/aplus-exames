@@ -137,6 +137,15 @@ function eventSubjectId(event={}){
   return null;
 }
 
+// XP total por esforço (regra do produto: o XP mede atividade, nunca conhecimento).
+// Mesmos valores-base do XP competitivo, sem depender de acertos.
+export function effortXp(kind,{total=0,answered=0}={}){
+  const done=Math.max(0,Number(answered)||0);
+  if(kind==="training")return Math.min(40,done*8);
+  if(kind==="mini_exam")return done>0?Math.min(80,Math.max(40,(Number(total)||done)*8)):0;
+  return 0;
+}
+
 export function competitiveAward(state,event={}){
   const kind=event.kind||"study";
   const competition=normalizeCompetition(state);

@@ -131,7 +131,8 @@ describe("subject completion idempotency",()=>{
       const first=recordSubjectSession(started,{subjectId,kind:"training",label:"Treino",items,results:result,sessionId:"once",completedAt:200});
       const repeated=recordSubjectSession(first,{subjectId,kind:"training",label:"Treino",items,results:result,sessionId:"once",completedAt:300});
       expect(repeated).toBe(first);
-      expect(first.xp).toBe(10);
+      // XP por esforço: 8 por pergunta respondida no treino (não por acerto).
+      expect(first.xp).toBe(8);
       expect(first.subjectProgress[subjectId].sessions).toHaveLength(1);
     });
   }

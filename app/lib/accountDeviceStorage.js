@@ -164,3 +164,21 @@ export function purgeAccountFromDevice(accountId){
   try{if(local.getItem(archiveKey(accountId))!==null){local.removeItem(archiveKey(accountId));removed++}}catch{}
   return {ok:true,removed};
 }
+
+// Eliminação da conta: apaga deste dispositivo os dados de estudo ativos (estejam
+// ou não associados a esta conta) e o arquivo local da conta.
+export function eraseAcademicDataFromDevice(accountId){
+  const local=globalThis.localStorage;
+  if(!local)return {ok:false,code:"STORAGE_UNAVAILABLE"};
+  let removed=0;
+  for(const [,store] of stores()){
+    for(const key of keysOf(store)){
+      if(!isAcademicKey(key))continue;
+      try{store.removeItem(key);removed++}catch{}
+    }
+  }
+  if(accountId){
+    try{if(local.getItem(archiveKey(accountId))!==null){local.removeItem(archiveKey(accountId));removed++}}catch{}
+  }
+  return {ok:true,removed};
+}

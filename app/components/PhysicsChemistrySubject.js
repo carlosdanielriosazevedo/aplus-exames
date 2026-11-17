@@ -1,4 +1,5 @@
 "use client";
+import {localDayKey} from "../lib/engagement";
 import {SaveProgressPrompt} from "./SaveProgressPrompt";
 import {useEffect,useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
@@ -12,7 +13,7 @@ import {physicsChemistrySubtopicById,physicsChemistrySubtopicsForDomain} from ".
 import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";
 import {buildAdaptivePhysicsChemistryMission,buildPhysicsChemistryDiagnostic,gradePhysicsChemistryResponse,physicsChemistryCoverage,physicsChemistryScope} from "../lib/physicsChemistryEngine";
-import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor,quarantineUnrecoverableSubjectSession,restoredSubjectAnswer} from "../lib/subjectProgress";
+import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor,quarantineUnrecoverableSubjectSession,restoredSubjectAnswer,todaysMissionAssignment,assignDailyMission} from "../lib/subjectProgress";
 import {activateSubjectState,finishSubjectOnboardingState,subjectGoal,subjectOnboardingStep} from "../lib/subjectWorkspace";
 import {missionCompletedToday} from "../lib/engagement";
 import {loadPhysicsChemistryExamDraft,physicsChemistryDraftAgeLabel} from "../lib/physicsChemistryExamDraft";
@@ -130,8 +131,17 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
 
   function startDiagnostic(){start("diagnostic",buildPhysicsChemistryDiagnostic(scopedItems),"Diagnóstico")}
   function startMission(domain=null){
+    // A Missão recomendada do dia fica congelada: reabrir no mesmo dia repete as mesmas perguntas.
+    const day=localDayKey(Date.now());
+    if(!domain){
+      const frozen=todaysMissionAssignment(s,SUBJECT_ID,day);
+      const frozenItems=frozen?frozen.itemIds.map(physicsChemistryItemById).filter(Boolean):[];
+      if(frozen&&frozenItems.length===frozen.itemIds.length){start("mission",frozenItems,frozen.label||"Missão recomendada",null);return}
+    }
     const built=buildAdaptivePhysicsChemistryMission(scopedItems,{progress,domain,size:7});
-    start("mission",built.items,domain?"Missão · "+(physicsChemistryDomainById(domain)?.shortTitle||domain):"Missão recomendada",domain);
+    const label=domain?"Missão · "+(physicsChemistryDomainById(domain)?.shortTitle||domain):"Missão recomendada";
+    if(!domain&&!progress.lastPosition)setS(prev=>assignDailyMission(prev,SUBJECT_ID,{day,itemIds:built.items.map(item=>item.id),label}));
+    start("mission",built.items,label,domain);
   }
   function startPractice(){
     const available=practiceSubtopic?(coverage.bySubtopic[practiceSubtopic]||0):(coverage.byDomain[practiceDomain]||0);

@@ -4,6 +4,7 @@ import {
   QUESTION_BANK,microcompetencyFor,microcompetencyId,microcompetencyLabel
 } from "../data/content.js";
 import {generateVariants,hasGenerator} from "./generators.js";
+import {effortXp} from "./competition.js";
 import {isEligibleForContext,effectiveEditorialItem} from "./quality.js";
 import {academicScopeThemes,isThemeInAcademicScope,isQuestionInAcademicScope,isEvidenceInAcademicScope,isSubtopicInAcademicScope,normalizeTaughtSubtopics} from "./curriculumScope.js";
 import {CURRICULUM_SUBTOPIC_BY_ID,curriculumSubtopicForItem} from "../data/curriculumVnext.js";
@@ -1006,6 +1007,7 @@ export function applyMiniExam(s,questions,answers,elapsedSeconds=0){
   });
 
   const {correctCount,score20,earnedPoints,maxPoints,results:itemResults}=pointSummary;
+  const answeredCount=questions.filter((q,i)=>gradeResponse(q,answers[i]).status!=="unanswered").length;
   const changes=Object.keys(before).map(themeId=>({
     themeId,
     before:before[themeId],
@@ -1025,6 +1027,7 @@ export function applyMiniExam(s,questions,answers,elapsedSeconds=0){
     answers,
     itemResults,
     correctCount,
+    answeredCount,
     total:questions.length,
     earnedPoints,
     maxPoints,
@@ -1038,7 +1041,7 @@ export function applyMiniExam(s,questions,answers,elapsedSeconds=0){
   return {
     ...s,
     scores,
-    xp:s.xp+correctCount*18,
+    xp:s.xp+effortXp("mini_exam",{total:questions.length,answered:answeredCount}),
     lastExam:result,
     examHistory:[...(s.examHistory||[]),result]
   };

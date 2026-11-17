@@ -1,3 +1,12 @@
+// União estável: primeiro as do dispositivo, depois as da conta.
+export function mergeSelectedSubjects(local,remote){
+  const ids=[...(Array.isArray(local?.selectedSubjectIds)?local.selectedSubjectIds:[]),...(Array.isArray(remote?.selectedSubjectIds)?remote.selectedSubjectIds:[])]
+    .filter(id=>typeof id==="string"&&id);
+  const selectedSubjectIds=[...new Set(ids)].slice(0,12);
+  const candidates=[local?.activeSubjectId,remote?.activeSubjectId].filter(id=>typeof id==="string"&&selectedSubjectIds.includes(id));
+  return {selectedSubjectIds,activeSubjectId:candidates[0]||selectedSubjectIds[0]||null};
+}
+
 function mergeByStableId(local=[],remote=[],idFn=x=>x?.id){
   const map=new Map();
   for(const item of [...(remote||[]),...(local||[])]){
@@ -58,6 +67,7 @@ export function safeCloudMerge(local,remote){
     goal:local?.goal??remote?.goal,
     profile:local?.profile??remote?.profile,
     dailyMission:local?.dailyMission??remote?.dailyMission,
+    ...mergeSelectedSubjects(local,remote),
     identity:local?.identity,
     cloudMeta:local?.cloudMeta,
     cloudSync:local?.cloudSync

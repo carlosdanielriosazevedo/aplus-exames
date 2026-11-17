@@ -33,7 +33,7 @@ export async function GET(){
     // Um snapshot malformado nunca é entregue aos consumidores automáticos nem
     // apagado; fica intacto na base de dados para revisão.
     if(!readable(data))return quarantined(data);
-    return json({ok:true,authority:"client-reported",data});
+    return json({ok:true,authority:"client-reported",owner:auth.value.authUserId,data});
   }catch{
     return json({ok:false,code:"CLOUD_READ_FAILED"},503);
   }
@@ -58,6 +58,8 @@ export async function POST(request){
   catch{return json({ok:false,code:"INVALID_JSON"},400);}
   const valid=validateCloudWrite(parsed);
   if(!valid.ok)return json({ok:false,code:valid.code},400);
+  // Outra conta entrou entretanto (por exemplo noutro separador): não gravar.
+  if(valid.expectedOwner&&valid.expectedOwner!==auth.value.authUserId)return json({ok:false,code:"ACCOUNT_MISMATCH"},409);
 
   try{
     const sql=getSql();
@@ -65,7 +67,7 @@ export async function POST(request){
     if(!readable(current))return quarantined(current);
     const result=await writeCloudRow(sql,auth.value.authUserId,valid);
     if(result.conflict&&!readable(result.remote))return quarantined(result.remote);
-    return json({...result,authority:"client-reported"},result.conflict?409:200);
+    return json({...result,authority:"client-reported",owner:auth.value.authUserId},result.conflict?409:200);
   }catch{
     // Sem mensagens SQL, credenciais ou dados pessoais na resposta.
     return json({ok:false,code:"CLOUD_WRITE_FAILED"},503);
