@@ -26,3 +26,20 @@ Resultado: repetição de ~25% e letras equilibradas em todos os bancos. Guarda:
 
 ## Pendente
 A posição deixou de ser pista; o **comprimento** ainda é: em Português, a certa é claramente a opção mais longa (≥1,2×) em 67% das perguntas de literatura. Corrigido por reescrita editorial das opções erradas, obra a obra.
+
+## Comprimento das opções em Português (2026-11-17)
+Reescrita editorial das 448 perguntas de escolha múltipla de literatura (25 obras), sem mudar a resposta certa:
+- **1.ª passagem (300 perguntas):** as opções erradas curtas e absurdas («Elimina a unidade da obra.») passam a leituras plausíveis mas erradas da obra, com tamanho e tom próximos da certa. Fica uma errada curta por pergunta. Nos casos de respostas certas muito longas, a certa foi encurtada sem perder precisão. Nos heterónimos, várias erradas passam a ser traços de outro heterónimo, ao estilo dos exames.
+- **2.ª passagem (136 perguntas):** uma das erradas foi alongada para que «escolher a opção mais longa» deixe de compensar.
+
+| Literatura | Antes | Depois |
+|---|---|---|
+| A certa é a opção mais longa | 85% | 31% |
+| A certa é claramente a mais longa (≥1,2×) | 67% | 2% |
+
+Guarda: `tests/unit/optionLengthCue.test.mjs` (literatura ≤35% / ≤5%; perguntas de base sem piorar).
+
+### Pendente
+- Perguntas de base de Português (199): a certa é a mais longa em 52% e claramente a mais longa em 35%. É a próxima reescrita.
+- Na literatura, a certa raramente é a opção mais curta (2%). A errada curta que ficou continua fácil de eliminar. É uma pista fraca, mas existe.
+- Reescrita feita sem professor. Fica sujeita à revisão pedagógica já prevista.
