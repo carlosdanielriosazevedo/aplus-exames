@@ -58,17 +58,19 @@
       "competencyId": "pt-leitura-informacao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "reconhecer",
       "stimulus": "O município instalou sensores para medir o ruído em seis ruas. Os dados serão publicados mensalmente e servirão para avaliar futuras alterações ao trânsito.",
-      "prompt": "Indica a finalidade atribuída no texto aos dados recolhidos.",
-      "acceptedAnswers": [
-        "avaliar futuras alterações ao trânsito",
-        "avaliar alterações futuras ao trânsito",
-        "servir para avaliar futuras alterações ao trânsito"
+      "prompt": "Segundo o texto, para que servirão os dados recolhidos?",
+      "options": [
+        "Para avaliar futuras alterações ao trânsito.",
+        "Para multar os condutores mais ruidosos.",
+        "Para escolher as seis ruas a monitorizar.",
+        "Para decidir onde instalar novos sensores."
       ],
+      "answerIndex": 0,
       "explanation": "O segundo período declara explicitamente que os dados servirão para avaliar futuras alterações ao trânsito.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {

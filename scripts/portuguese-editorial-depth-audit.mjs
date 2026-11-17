@@ -82,8 +82,10 @@ for(const item of items){
   }
 }
 
-assert.equal(checkedMultipleChoice,199);
-assert.equal(checkedShortAnswers,79);
+// Decisão do product owner (2026-11-17): as respostas curtas interpretativas passaram a escolha múltipla,
+// porque o corretor determinístico rejeitava formulações corretas. Ficam como resposta curta só as de resposta fechada.
+assert.equal(checkedMultipleChoice,239);
+assert.equal(checkedShortAnswers,39);
 assert.ok(lengthSkew.length<=8,`demasiadas respostas corretas denunciam-se pelo comprimento: ${lengthSkew.join(" | ")}`);
 assert.equal(weakSignals.length,0,`distratores linguisticamente denunciadores: ${weakSignals.join(" | ")}`);
 

@@ -57,13 +57,14 @@
       "competencyId": "pt-leitura-coesao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "reconhecer",
       "stimulus": "A associação publicou ontem um relatório sobre os transportes locais. Este documento reúne dados recolhidos durante seis meses.",
       "prompt": "Indica o referente da expressão «Este documento».",
-      "acceptedAnswers": ["o relatório","relatório","um relatório sobre os transportes locais","o relatório sobre os transportes locais"],
-      "explanation": "A expressão demonstrativa retoma «um relatório sobre os transportes locais».",
-      "gradingMode": "deterministic-with-equivalents",
+      "options": ["o relatório sobre os transportes locais.","a associação que o publicou.","os dados recolhidos durante seis meses.","os transportes locais."],
+      "answerIndex": 0,
+      "explanation": "«Este documento» retoma o grupo nominal «um relatório sobre os transportes locais».",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {

@@ -37,17 +37,19 @@
       "competencyId": "pt-leitura-inferencia",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "inferir",
       "stimulus": "Depois de vários meses de chuva, a associação decidiu adiar a feira ao ar livre. Os organizadores mantiveram, contudo, as atividades que podiam decorrer no salão da comunidade.",
-      "prompt": "Explica por que razão a decisão não implicou o cancelamento de todas as atividades.",
-      "acceptedAnswers": [
-        "porque algumas atividades podiam realizar-se no salão",
-        "porque parte das atividades podia decorrer num espaço interior",
-        "porque as atividades transferíveis para o salão foram mantidas"
+      "prompt": "Por que razão a decisão não implicou o cancelamento de todas as atividades?",
+      "options": [
+        "Porque a chuva parou antes da data prevista para a feira.",
+        "Porque os organizadores desistiram de adiar a feira.",
+        "Porque algumas atividades podiam decorrer no salão.",
+        "Porque a feira passou a realizar-se noutra localidade."
       ],
+      "answerIndex": 2,
       "explanation": "A informação permite inferir que apenas as atividades dependentes do espaço exterior foram afetadas pelo adiamento.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -79,17 +81,19 @@
       "competencyId": "pt-leitura-organizacao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "analisar",
       "stimulus": "O autor começa por descrever a transformação de uma rua. Depois apresenta testemunhos de moradores e, no último parágrafo, relaciona essas mudanças com a criação de novas zonas pedonais.",
-      "prompt": "Indica uma função dos testemunhos dos moradores na organização do texto.",
-      "acceptedAnswers": [
-        "apresentam perspetivas dos moradores sobre a transformação",
-        "dão exemplos ou testemunhos que concretizam a mudança",
-        "acrescentam pontos de vista sobre a transformação descrita"
+      "prompt": "Qual é a função dos testemunhos dos moradores na organização do texto?",
+      "options": [
+        "Contrariar a descrição inicial e provar que a rua não mudou.",
+        "Concretizar a transformação com a perspetiva de quem lá vive.",
+        "Introduzir um tema novo, sem relação com a transformação.",
+        "Substituir a conclusão sobre as novas zonas pedonais."
       ],
+      "answerIndex": 1,
       "explanation": "Os testemunhos introduzem perspetivas concretas dos moradores depois da apresentação geral da transformação.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -165,18 +169,19 @@
       "competencyId": "pt-literatura-temas",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "interpretar",
       "stimulus": "A personagem regressa à aldeia depois de muitos anos. Reconhece as casas, mas sente que já não pertence ao lugar onde cresceu.",
-      "prompt": "Explica o que o regresso pode representar para a personagem.",
-      "acceptedAnswers": [
-        "um confronto entre o passado e o presente",
-        "uma reflexão sobre a mudança e a pertença",
-        "o reconhecimento de que o lugar mudou e a personagem também",
-        "um confronto com as suas origens"
+      "prompt": "O regresso à aldeia representa sobretudo, para a personagem,",
+      "options": [
+        "a recuperação intacta da vida que tinha na infância.",
+        "a decisão de ficar definitivamente a viver na aldeia.",
+        "a descoberta de que as casas da aldeia foram demolidas.",
+        "um confronto entre o passado e a mudança que viveu."
       ],
+      "answerIndex": 3,
       "explanation": "O regresso coloca em relação a memória do passado com a experiência presente de mudança e de pertença.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -230,18 +235,19 @@
       "competencyId": "pt-literatura-recursos",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "analisar",
       "stimulus": "A frase «correu, correu, correu até ao portão» prolonga a repetição de um mesmo verbo numa passagem marcada pela urgência da ação.",
-      "prompt": "Indica um efeito expressivo da repetição de «correu».",
-      "acceptedAnswers": [
-        "reforça a ideia de rapidez ou insistência",
-        "intensifica a sensação de urgência",
-        "acentua a continuidade da ação",
-        "transmite maior intensidade ao movimento"
+      "prompt": "A repetição de «correu» tem sobretudo o efeito de",
+      "options": [
+        "intensificar a urgência e a continuidade da ação.",
+        "indicar que a personagem correu exatamente três vezes.",
+        "abrandar o ritmo da passagem e criar uma pausa.",
+        "introduzir uma dúvida sobre o que realmente aconteceu."
       ],
+      "answerIndex": 0,
       "explanation": "A repetição pode intensificar a ação e transmitir ao leitor a sua urgência ou continuidade.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -273,18 +279,19 @@
       "competencyId": "pt-escrita-exposicao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "aplicar",
       "stimulus": "Vais escrever um texto expositivo sobre os efeitos do ruído no ambiente escolar. Dispões de informação sobre concentração, descanso e comunicação entre alunos.",
-      "prompt": "Indica uma decisão de organização adequada antes de começares a redigir.",
-      "acceptedAnswers": [
-        "agrupar a informação por tópicos",
-        "definir uma sequência lógica para os aspetos a explicar",
-        "organizar os dados de acordo com os subtemas",
-        "decidir a ordem de apresentação das informações"
+      "prompt": "Que decisão de organização é adequada antes de começares a redigir?",
+      "options": [
+        "Apresentar a informação pela ordem em que a encontraste.",
+        "Escolher apenas um dos três aspetos e ignorar os restantes.",
+        "Agrupar a informação por subtemas e definir a sua ordem.",
+        "Começar pela tua opinião pessoal sobre o ruído na escola."
       ],
+      "answerIndex": 2,
       "explanation": "Um texto expositivo beneficia de uma organização prévia dos dados e dos subtemas que serão explicados.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -338,17 +345,19 @@
       "competencyId": "pt-escrita-revisao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "revisar",
       "stimulus": "Versão inicial: «A escola criou um novo clube. O novo clube reúne alunos. O novo clube funciona à sexta-feira.»",
-      "prompt": "Indica uma alteração que melhore a coesão da sequência.",
-      "acceptedAnswers": [
-        "substituir algumas repetições de «o novo clube» por um pronome ou expressão adequada",
-        "evitar a repetição de «o novo clube»",
-        "usar uma forma de referenciação para ligar as frases"
+      "prompt": "Que alteração melhora a coesão da sequência?",
+      "options": [
+        "Repetir «o novo clube» também numa quarta frase.",
+        "Separar as três frases em parágrafos diferentes.",
+        "Trocar a ordem das frases sem mais alterações.",
+        "Substituir repetições de «o novo clube» por pronomes."
       ],
+      "answerIndex": 3,
       "explanation": "A repetição excessiva do mesmo grupo nominal pode ser reduzida através de mecanismos de referenciação e coesão.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {

@@ -40,5 +40,7 @@ const byDomain=Object.fromEntries(["leitura","educacao-literaria","escrita","gra
 const nonMc=pack.items.filter(item=>item.responseType!=="multiple-choice").length;
 assert.ok(Object.values(byYear).every(count=>count>=7));
 assert.ok(Object.values(byDomain).every(count=>count>=5));
-assert.ok(nonMc>=8,"A wave 11 deve aumentar a diversidade para além de escolha múltipla.");
+// Decisão do product owner (2026-11-17): as respostas curtas interpretativas passaram a escolha múltipla,
+// porque o corretor determinístico rejeitava formulações corretas. Ficam como resposta curta só as de resposta fechada.
+assert.ok(nonMc>=6,"A wave 11 deve manter diversidade para além de escolha múltipla.");
 console.log("✓ Portuguese wave 11: 25 itens · "+JSON.stringify(byYear)+" · "+JSON.stringify(byDomain)+" · "+nonMc+" respostas não-MC");

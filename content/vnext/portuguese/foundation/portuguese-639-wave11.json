@@ -15,18 +15,19 @@
       "competencyId": "pt-leitura-informacao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "reconhecer",
       "stimulus": "A biblioteca abre às oito e meia. Durante a manhã, a sala de leitura é reservada às turmas; depois das catorze horas, fica disponível para todos os alunos.",
-      "prompt": "Indica a partir de que período a sala de leitura fica disponível para todos os alunos.",
-      "acceptedAnswers": [
-        "depois das catorze horas",
-        "a partir das catorze horas",
-        "após as 14 horas",
-        "depois das 14 horas"
+      "prompt": "A partir de quando fica a sala de leitura disponível para todos os alunos?",
+      "options": [
+        "Às oito e meia, quando a biblioteca abre.",
+        "Durante a manhã, ao mesmo tempo que as turmas.",
+        "Depois das catorze horas.",
+        "Só depois de as turmas terminarem as aulas do dia."
       ],
-      "explanation": "O texto indica explicitamente que a sala fica disponível para todos depois das catorze horas.",
-      "gradingMode": "deterministic-with-equivalents",
+      "answerIndex": 2,
+      "explanation": "O texto indica que, depois das catorze horas, a sala fica disponível para todos os alunos; de manhã está reservada às turmas.",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -58,17 +59,19 @@
       "competencyId": "pt-leitura-coesao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "analisar",
       "stimulus": "A associação publicou um relatório sobre os hábitos de leitura dos jovens. Este foi apresentado numa sessão aberta ao público.",
       "prompt": "Indica o referente de «Este».",
-      "acceptedAnswers": [
-        "o relatório sobre os hábitos de leitura dos jovens",
-        "o relatório",
-        "relatório sobre os hábitos de leitura dos jovens"
+      "options": [
+        "a associação que fez o estudo.",
+        "o relatório sobre os hábitos de leitura.",
+        "a sessão aberta ao público.",
+        "os hábitos de leitura dos jovens."
       ],
+      "answerIndex": 1,
       "explanation": "O demonstrativo retoma o grupo nominal «um relatório sobre os hábitos de leitura dos jovens».",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -100,19 +103,19 @@
       "competencyId": "pt-leitura-inferencia",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "avaliar",
       "stimulus": "A proposta de criar mais espaços de estudo é acompanhada da afirmação de que muitos alunos não dispõem de condições de silêncio em casa.",
-      "prompt": "Explica a função da informação sobre as condições de estudo em casa.",
-      "acceptedAnswers": [
-        "fundamenta a proposta",
-        "justifica a proposta",
-        "apresenta uma razão para a proposta",
-        "funciona como argumento",
-        "sustenta a proposta"
+      "prompt": "A informação sobre as condições de estudo em casa funciona como",
+      "options": [
+        "um exemplo que contraria a proposta.",
+        "uma conclusão que encerra a discussão.",
+        "uma razão que fundamenta a proposta.",
+        "uma definição do conceito de estudo."
       ],
+      "answerIndex": 2,
       "explanation": "A informação fornece uma razão que procura justificar a necessidade de criar espaços de estudo.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -185,19 +188,19 @@
       "competencyId": "pt-literatura-forma",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "analisar",
       "stimulus": "A mesma frase surge no início e no final do poema, mas, no final, aparece depois de uma sequência de imagens de perda.",
-      "prompt": "Explica um efeito possível da repetição da frase no início e no final.",
-      "acceptedAnswers": [
-        "cria uma estrutura circular",
-        "reforça a ideia central",
-        "dá unidade ao poema",
-        "faz a frase adquirir novo sentido no final",
-        "relaciona o início e o fim"
+      "prompt": "A repetição da frase no início e no final do poema pode",
+      "options": [
+        "indicar que o poema repete a mesma ideia do princípio ao fim.",
+        "separar o poema em dois temas independentes um do outro.",
+        "corrigir uma informação errada dada no início.",
+        "criar circularidade e renovar o sentido da frase."
       ],
+      "answerIndex": 3,
       "explanation": "A repetição estabelece uma ligação estrutural entre as duas posições e pode fazer a frase ganhar ou reforçar sentido à luz do desenvolvimento do poema.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -295,19 +298,19 @@
       "competencyId": "pt-escrita-exposicao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "aplicar",
       "stimulus": "Pretendes escrever uma exposição sobre a importância dos espaços verdes nas cidades. Tens três dados sobre temperatura, ruído e utilização dos parques.",
-      "prompt": "Indica uma operação de planificação que deves realizar antes de redigir o texto.",
-      "acceptedAnswers": [
-        "selecionar e organizar os dados relevantes",
-        "definir a organização do texto",
-        "estabelecer uma sequência para as ideias",
-        "selecionar informação adequada ao tema",
-        "planear os parágrafos"
+      "prompt": "Que operação de planificação deves realizar antes de redigir o texto?",
+      "options": [
+        "Selecionar e organizar os dados relevantes para o tema.",
+        "Escrever logo a conclusão e só depois pensar nos dados.",
+        "Reunir também dados sem relação com os espaços verdes.",
+        "Rever a ortografia antes de saber o que vais escrever."
       ],
+      "answerIndex": 0,
       "explanation": "A planificação exige selecionar e organizar a informação de acordo com o objetivo e o tema do texto.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -405,18 +408,19 @@
       "competencyId": "pt-escrita-revisao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "revisar",
       "stimulus": "Versão inicial: «Apesar de estar cansado, no entanto, continuou a estudar.»",
-      "prompt": "Indica o problema de coesão presente na frase.",
-      "acceptedAnswers": [
-        "redundância de conectores",
-        "uso simultâneo de «apesar de» e «no entanto»",
-        "acumulação desnecessária de conectores concessivos",
-        "duplicação da relação concessiva"
+      "prompt": "Qual é o problema de coesão presente na frase?",
+      "options": [
+        "A falta de um sujeito expresso na oração principal da frase.",
+        "A acumulação de dois conectores com valor concessivo.",
+        "O uso de um tempo verbal incompatível com a forma «continuou».",
+        "A ausência de vírgula depois da expressão «Apesar de»."
       ],
+      "answerIndex": 1,
       "explanation": "«Apesar de» já introduz uma relação concessiva, tornando desnecessária a acumulação com «no entanto» nesta construção.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {

@@ -37,17 +37,19 @@
       "competencyId": "pt-leitura-inferencia",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "inferir",
       "stimulus": "A empresa anunciou a abertura de uma nova linha de transporte, mas esclareceu que a frequência dos veículos dependerá do número de utilizadores registados nas primeiras semanas.",
-      "prompt": "Explica o que pode determinar a frequência dos veículos.",
-      "acceptedAnswers": [
-        "o número de utilizadores registados",
-        "a quantidade de utilizadores registados nas primeiras semanas",
-        "a adesão inicial ao serviço"
+      "prompt": "Segundo o texto, de que depende a frequência dos veículos?",
+      "options": [
+        "Do número de veículos que a empresa já possui.",
+        "Da distância entre as paragens da nova linha.",
+        "Do número de utilizadores registados nas primeiras semanas.",
+        "Do preço dos bilhetes fixado para a nova linha."
       ],
+      "answerIndex": 2,
       "explanation": "O texto estabelece uma relação entre a frequência e o número de utilizadores registados inicialmente.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -123,17 +125,19 @@
       "competencyId": "pt-leitura-organizacao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "analisar",
       "stimulus": "Depois de apresentar duas explicações possíveis para um fenómeno, o texto compara as duas e termina indicando qual reúne maior apoio nos dados disponíveis.",
-      "prompt": "Indica a função da comparação entre as duas explicações.",
-      "acceptedAnswers": [
-        "permitir avaliar as duas hipóteses à luz dos dados",
-        "confrontar as explicações antes de escolher a mais sustentada",
-        "ajudar a justificar a conclusão final"
+      "prompt": "Qual é a função da comparação entre as duas explicações?",
+      "options": [
+        "Mostrar que nenhuma das explicações pode ser avaliada.",
+        "Avaliar as hipóteses à luz dos dados antes de concluir.",
+        "Substituir a conclusão por uma terceira hipótese nova.",
+        "Apresentar o fenómeno ao leitor pela primeira vez."
       ],
+      "answerIndex": 1,
       "explanation": "A comparação prepara a avaliação das hipóteses e fundamenta a conclusão apresentada.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -165,17 +169,19 @@
       "competencyId": "pt-literatura-forma",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "analisar",
       "stimulus": "Num poema, o mesmo verso surge no início de três estrofes, mas cada repetição aparece depois de imagens diferentes.",
-      "prompt": "Indica uma função possível da repetição do verso.",
-      "acceptedAnswers": [
-        "criar unidade entre as estrofes",
-        "reforçar uma ideia ou motivo central",
-        "estabelecer um elemento recorrente que articula partes do poema"
+      "prompt": "Que função pode ter a repetição do verso no início das três estrofes?",
+      "options": [
+        "Indicar que as três estrofes dizem exatamente o mesmo.",
+        "Separar o poema em três poemas independentes entre si.",
+        "Dar unidade às estrofes e reforçar um motivo central.",
+        "Marcar uma mudança de sujeito poético em cada estrofe."
       ],
+      "answerIndex": 2,
       "explanation": "A repetição pode ligar estruturalmente as estrofes e reforçar um motivo ou ideia central.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -251,17 +257,19 @@
       "competencyId": "pt-literatura-temas",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "interpretar",
       "stimulus": "Durante a narrativa, a personagem deixa de esconder uma carta que guardava há anos e decide finalmente entregá-la.",
-      "prompt": "Explica uma possível função simbólica da carta na evolução da personagem.",
-      "acceptedAnswers": [
-        "representar algo do passado que precisava de ser revelado",
-        "simbolizar uma decisão de enfrentar ou encerrar uma situação passada",
-        "marcar a passagem do silêncio para a revelação"
+      "prompt": "A entrega da carta pode simbolizar sobretudo",
+      "options": [
+        "o desejo de esquecer a pessoa que a escreveu.",
+        "uma mudança de casa sem importância para a ação.",
+        "a vontade de continuar a esconder o mesmo segredo.",
+        "a decisão de enfrentar uma situação do passado."
       ],
+      "answerIndex": 3,
       "explanation": "A entrega da carta pode simbolizar a resolução de um segredo, conflito ou ligação ao passado.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -271,17 +279,19 @@
       "competencyId": "pt-escrita-exposicao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "aplicar",
       "stimulus": "Vais escrever um texto expositivo sobre uma atividade de voluntariado. Tens dados sobre objetivos, participantes, tarefas e resultados.",
-      "prompt": "Indica uma estratégia para evitar que a apresentação das informações seja apenas uma lista desconexa.",
-      "acceptedAnswers": [
-        "agrupar os dados por aspetos e estabelecer uma ordem lógica",
-        "organizar a informação em tópicos relacionados",
-        "definir uma sequência que relacione objetivos, tarefas e resultados"
+      "prompt": "Que estratégia evita que a informação fique uma lista desconexa?",
+      "options": [
+        "Apresentar cada dado num parágrafo isolado e independente.",
+        "Agrupar os dados por aspetos e ligá-los numa ordem lógica.",
+        "Reunir todos os dados numa única frase muito longa.",
+        "Retirar os resultados para que o texto fique mais curto."
       ],
+      "answerIndex": 1,
       "explanation": "A organização por aspetos relacionados e numa sequência lógica favorece a coerência do texto expositivo.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -357,17 +367,19 @@
       "competencyId": "pt-escrita-argumentacao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "aplicar",
       "stimulus": "Pretendes defender que os alunos devem aprender a verificar informação antes de a partilhar. Tens como dados a rapidez da circulação de conteúdos e a existência de informação incorreta.",
-      "prompt": "Indica uma relação entre esses dois dados que possa sustentar a tua posição.",
-      "acceptedAnswers": [
-        "a rapidez da circulação aumenta a importância de verificar a informação antes de a partilhar",
-        "a existência de informação incorreta torna necessária uma verificação antes da divulgação",
-        "quanto mais rapidamente circula a informação, maior é a necessidade de confirmar a sua fiabilidade"
+      "prompt": "Que relação entre os dois dados pode sustentar a tua posição?",
+      "options": [
+        "Se a informação incorreta circula depressa, é preciso verificá-la antes de a partilhar.",
+        "A informação incorreta circula sempre mais devagar do que a informação verificada.",
+        "A rapidez da circulação de conteúdos garante, por si só, que a informação é fiável.",
+        "Os dois dados não se relacionam, pelo que devem ser usados em textos diferentes."
       ],
+      "answerIndex": 0,
       "explanation": "A relação entre circulação rápida e possibilidade de informação incorreta fundamenta a necessidade de verificação.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {

@@ -37,18 +37,19 @@
       "competencyId": "pt-literatura-voz",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "analisar",
       "stimulus": "O narrador descreve a personagem como «prudente», mas relata imediatamente uma decisão impulsiva que contradiz essa caracterização.",
-      "prompt": "Explica o efeito da relação entre a avaliação do narrador e a ação da personagem.",
-      "acceptedAnswers": [
-        "cria contraste entre a caracterização e o comportamento",
-        "introduz uma possível contradição na caracterização",
-        "leva o leitor a questionar a avaliação do narrador",
-        "mostra que a personagem não corresponde inteiramente à imagem apresentada"
+      "prompt": "O contraste entre a avaliação do narrador e a ação da personagem",
+      "options": [
+        "confirma que a personagem é, de facto, prudente.",
+        "leva o leitor a questionar a avaliação do narrador.",
+        "torna irrelevante a decisão tomada pela personagem.",
+        "elimina qualquer distância entre narrador e leitor."
       ],
+      "answerIndex": 1,
       "explanation": "A discrepância entre a avaliação e o comportamento produz contraste e pode levar o leitor a problematizar a caracterização.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -124,18 +125,19 @@
       "competencyId": "pt-literatura-voz",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "analisar",
       "stimulus": "A narrativa alterna entre momentos em que são apresentados pensamentos da personagem e momentos em que apenas são descritos acontecimentos observáveis.",
-      "prompt": "Indica uma consequência dessa alternância para a construção da perspetiva narrativa.",
-      "acceptedAnswers": [
-        "aproxima e afasta o leitor da interioridade da personagem",
-        "combina acesso à interioridade com observação externa",
-        "faz variar o grau de informação sobre a personagem",
-        "alterna entre perspetiva interna e apresentação externa"
+      "prompt": "Que consequência tem essa alternância na perspetiva narrativa?",
+      "options": [
+        "Faz variar o acesso do leitor à interioridade da personagem.",
+        "Elimina por completo os pensamentos da personagem.",
+        "Transforma a narrativa num relato na primeira pessoa.",
+        "Impede o leitor de conhecer os acontecimentos observáveis."
       ],
+      "answerIndex": 0,
       "explanation": "A alternância modifica o acesso do leitor à interioridade e aos acontecimentos observáveis.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -167,17 +169,19 @@
       "competencyId": "pt-leitura-inferencia",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "inferir",
       "stimulus": "A biblioteca passou a disponibilizar computadores portáteis. Nas primeiras semanas, a procura foi superior ao número de equipamentos disponíveis, pelo que foi criado um sistema de reserva.",
-      "prompt": "Explica por que razão o sistema de reserva foi criado.",
-      "acceptedAnswers": [
-        "porque havia mais procura do que computadores disponíveis",
-        "porque o número de utilizadores interessados excedia os equipamentos",
-        "para organizar o acesso aos equipamentos quando a procura era superior à oferta"
+      "prompt": "Por que razão foi criado o sistema de reserva?",
+      "options": [
+        "Porque vários computadores portáteis estavam avariados.",
+        "Porque havia mais procura do que computadores.",
+        "Porque a biblioteca quis reduzir o número de utilizadores.",
+        "Porque os alunos deixaram de procurar os portáteis."
       ],
+      "answerIndex": 1,
       "explanation": "A necessidade de reserva resulta da diferença entre a procura e o número de computadores disponíveis.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -253,17 +257,19 @@
       "competencyId": "pt-leitura-organizacao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "analisar",
       "stimulus": "O artigo começa com um caso concreto, amplia depois a discussão para o problema geral e termina retomando o caso inicial à luz dos argumentos apresentados.",
-      "prompt": "Explica a função da retoma do caso inicial na estrutura do artigo.",
-      "acceptedAnswers": [
-        "fecha a estrutura retomando o ponto de partida depois da discussão geral",
-        "relaciona a conclusão com o exemplo inicial",
-        "mostra como os argumentos desenvolvidos permitem reinterpretar o caso"
+      "prompt": "Qual é a função da retoma do caso inicial na estrutura do artigo?",
+      "options": [
+        "Introduzir um segundo caso concreto, sem relação com o primeiro.",
+        "Repetir o caso inicial apenas para preencher o espaço do texto.",
+        "Mostrar que os argumentos não se aplicam a casos concretos.",
+        "Fechar a estrutura e reler o caso à luz dos argumentos."
       ],
+      "answerIndex": 3,
       "explanation": "A retoma cria uma estrutura circular e liga a conclusão ao ponto de partida do artigo.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -273,17 +279,19 @@
       "competencyId": "pt-escrita-exposicao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "aplicar",
       "stimulus": "Vais explicar num texto como se organiza uma atividade escolar. Tens informação, por esta ordem, sobre a avaliação, a realização, os objetivos e a preparação.",
-      "prompt": "Indica uma ordem adequada para organizar essa informação num texto expositivo.",
-      "acceptedAnswers": [
-        "objetivos, preparação, realização e avaliação",
-        "apresentar primeiro os objetivos, depois a preparação, a realização e finalmente a avaliação",
-        "seguir uma sequência lógica do planeamento à avaliação"
+      "prompt": "Qual é a ordem mais adequada para organizar essa informação num texto expositivo?",
+      "options": [
+        "Avaliação, realização, objetivos e preparação.",
+        "Objetivos, preparação, realização e avaliação.",
+        "Realização, avaliação, preparação e objetivos.",
+        "Preparação, objetivos, avaliação e realização."
       ],
-      "explanation": "A sequência proposta acompanha o desenvolvimento temporal e funcional da atividade.",
-      "gradingMode": "deterministic-with-equivalents",
+      "answerIndex": 1,
+      "explanation": "A sequência objetivos → preparação → realização → avaliação acompanha o desenvolvimento temporal e funcional da atividade.",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -359,18 +367,19 @@
       "competencyId": "pt-escrita-argumentacao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "aplicar",
       "stimulus": "Pretendes defender que uma escola deve reservar um espaço para estudo silencioso. Tens como dados o ruído existente, o número de alunos interessados e a disponibilidade de uma sala.",
-      "prompt": "Indica dois elementos que poderiam funcionar como fundamentos da tua posição.",
-      "acceptedAnswers": [
-        "o ruído existente e o número de alunos interessados",
-        "o número de alunos interessados e a disponibilidade de uma sala",
-        "dados sobre a necessidade do espaço e condições concretas para o criar",
-        "a existência de ruído e a disponibilidade de uma sala"
+      "prompt": "Que dois elementos podem funcionar como fundamentos da tua posição?",
+      "options": [
+        "O número de salas de aula e o horário dos intervalos.",
+        "A tua preferência pessoal e o tamanho do recreio.",
+        "O ruído existente e o número de alunos interessados.",
+        "O número de professores e a localização da cantina."
       ],
+      "answerIndex": 2,
       "explanation": "Os dados devem apoiar a necessidade da medida e/ou demonstrar condições concretas para a sua implementação.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -507,17 +516,19 @@
       "competencyId": "pt-gramatica-coesao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "analisar",
       "stimulus": "A escola renovou a biblioteca. Essa mudança permitiu criar uma zona destinada ao estudo individual.",
       "prompt": "A que expressão anterior retoma «Essa mudança»?",
-      "acceptedAnswers": [
-        "a renovação da biblioteca",
-        "a escola ter renovado a biblioteca",
-        "a renovação da biblioteca pela escola"
+      "options": [
+        "a renovação da biblioteca.",
+        "a zona de estudo individual.",
+        "a escola que fez as obras.",
+        "o estudo individual dos alunos."
       ],
+      "answerIndex": 0,
       "explanation": "«Essa mudança» retoma a ação anteriormente apresentada: a renovação da biblioteca.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {

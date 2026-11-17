@@ -20,5 +20,7 @@ for(const item of pack.items){
 const years=Object.fromEntries(["10.º","11.º","12.º"].map(y=>[y,pack.items.filter(i=>i.year===y).length]));
 const domains=Object.fromEntries(["leitura","educacao-literaria","escrita","gramatica"].map(d=>[d,pack.items.filter(i=>i.domain===d).length]));
 assert.ok(Object.values(years).every(n=>n>=7)); assert.ok(Object.values(domains).every(n=>n>=5));
-assert.ok(pack.items.filter(i=>i.responseType!=="multiple-choice").length>=8);
+// Decisão do product owner (2026-11-17): as respostas curtas interpretativas passaram a escolha múltipla,
+// porque o corretor determinístico rejeitava formulações corretas. Ficam como resposta curta só as de resposta fechada.
+assert.ok(pack.items.filter(i=>i.responseType!=="multiple-choice").length>=2);
 console.log("✓ Portuguese wave 13: 25 itens · "+JSON.stringify(years)+" · "+JSON.stringify(domains));

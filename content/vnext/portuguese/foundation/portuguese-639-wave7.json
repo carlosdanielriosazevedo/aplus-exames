@@ -81,19 +81,19 @@
       "competencyId": "pt-literatura-forma",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "interpretar",
       "stimulus": "Chove.\nA rua cala-se.\nUma janela acende-se.\nE alguém espera.",
-      "prompt": "Explica, numa frase, um efeito produzido pelos versos curtos.",
-      "acceptedAnswers": [
-        "criam um ritmo pausado",
-        "criam ritmo pausado",
-        "reforçam a sensação de pausa",
-        "destacam cada imagem",
-        "dão destaque a cada imagem"
+      "prompt": "Os versos muito curtos produzem sobretudo",
+      "options": [
+        "uma narração rápida de muitas ações seguidas.",
+        "um ritmo pausado que destaca cada imagem.",
+        "uma argumentação sobre a passagem do tempo.",
+        "um tom cómico e ligeiro que contrasta com a chuva."
       ],
+      "answerIndex": 1,
       "explanation": "A fragmentação em versos muito curtos abranda o ritmo e isola as imagens sucessivas.",
-      "gradingMode": "deterministic-with-equivalents",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
@@ -125,18 +125,19 @@
       "competencyId": "pt-escrita-opiniao",
       "sourceOrigin": "original",
       "reviewStatus": "prototype",
-      "responseType": "short-answer",
+      "responseType": "multiple-choice",
       "cognitive": "aplicar",
       "stimulus": "Tema: As escolas devem reservar diariamente um período sem telemóveis?",
-      "prompt": "Formula uma tese clara que possa orientar um texto de opinião sobre o tema.",
-      "acceptedAnswers": [
-        "as escolas devem reservar diariamente um período sem telemóveis",
-        "defendo que as escolas devem reservar diariamente um período sem telemóveis",
-        "as escolas não devem reservar diariamente um período sem telemóveis",
-        "defendo que as escolas não devem reservar diariamente um período sem telemóveis"
+      "prompt": "Qual é a tese mais clara para orientar um texto de opinião sobre o tema?",
+      "options": [
+        "Os telemóveis existem há muitos anos nas escolas portuguesas.",
+        "Há opiniões diferentes sobre o uso de telemóveis nas escolas.",
+        "As escolas devem reservar diariamente um período sem telemóveis.",
+        "Será que os telemóveis fazem mesmo falta nas escolas?"
       ],
-      "explanation": "Uma tese deve assumir uma posição explícita e discutível perante o tema proposto.",
-      "gradingMode": "deterministic-with-equivalents",
+      "answerIndex": 2,
+      "explanation": "Uma tese assume uma posição explícita e discutível; as outras opções descrevem, constatam ou perguntam, sem tomar posição.",
+      "gradingMode": "deterministic",
       "maxPoints": 13
     },
     {
