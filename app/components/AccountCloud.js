@@ -3,7 +3,7 @@ import {useEffect,useState} from "react";
 import {hasPendingAssessment,preservePendingAssessment} from "../lib/pendingAssessment";
 import {Back,BrandName,Shell} from "./chrome";
 import {
-  cloudConfiguration,getCloudSession,cloudSignIn,cloudSignUp,cloudSignOut,cloudRequestPasswordReset,cloudResetPassword,
+  cloudConfiguration,getCloudSession,cloudSignIn,cloudSignUp,cloudSignOut,cloudDeleteAccount,cloudRequestPasswordReset,cloudResetPassword,
   loadStudentCloudState,saveStudentCloudState,overwriteStudentCloudState,mergeStudentCloudState
 } from "../lib/cloud";
 import {
@@ -21,7 +21,7 @@ import {normalizeAfterCloud} from "../lib/cloudApply";
 import {flushCloudNow,rememberCloudSession,bindCloudAccount,profilesDiffer} from "../lib/cloudAutosync";
 import {CLOUD_ACCOUNT_HINT_KEY} from "../lib/cloudSessionHint";
 import {queueSignupConsent,flushPendingConsent} from "../lib/consentClient";
-import {activeStateAccount,archiveActiveAccount,switchDeviceToAccount,purgeAccountFromDevice,hasAcademicData} from "../lib/accountDeviceStorage";
+import {activeStateAccount,archiveActiveAccount,switchDeviceToAccount,purgeAccountFromDevice,hasAcademicData,eraseAcademicDataFromDevice} from "../lib/accountDeviceStorage";
 
 // O ranking ainda usa participantes simulados: não pedimos ano, distrito nem
 // escola a alunos (muitos menores) para uma funcionalidade que ainda não existe.
@@ -59,6 +59,8 @@ export function AccountCloud({s,setS,go,gate=false}){
   const [signupAge,setSignupAge]=useState(false);
   const [signupTerms,setSignupTerms]=useState(false);
   const [forgetDevice,setForgetDevice]=useState(false);
+  const [deletePassword,setDeletePassword]=useState("");
+  const [deleteConfirmation,setDeleteConfirmation]=useState("");
   const [resetStep,setResetStep]=useState("request");
   const [resetCode,setResetCode]=useState("");
   const [rankingYear,setRankingYear]=useState(["10.º","11.º","12.º","Já terminei o secundário"].includes(s.profile?.schoolYear)?s.profile.schoolYear:"");
@@ -158,7 +160,7 @@ export function AccountCloud({s,setS,go,gate=false}){
       if(mode==="signup"){
         await queueSignupConsent(email);
         await cloudSignUp({name:name.trim()||"Aluno",email:email.trim(),password});
-        setMessage({ok:true,text:"Conta criada. Se receberes um email de confirmação, confirma-o antes de entrares."});
+        setMessage({ok:true,text:"Conta criada. A partir de agora o teu progresso fica guardado na conta."});
       }else{
         await cloudSignIn({email:email.trim(),password});
         setMessage({ok:true,text:"Sessão iniciada."});
@@ -196,6 +198,32 @@ export function AccountCloud({s,setS,go,gate=false}){
       schoolOptIn:Boolean(rankingSelectedSchool&&rankingSchoolOptIn)
     }));
     setMessage({ok:true,text:"Dados do ranking guardados neste dispositivo. A escola só será usada se a participação estiver ativa."});
+  }
+
+  // Eliminação definitiva: conta, progresso online e dados de estudo deste dispositivo.
+  async function deleteAccount(){
+    if(busy)return;
+    setBusy(true);setMessage(null);
+    try{
+      const result=await cloudDeleteAccount({password:deletePassword,confirmation:deleteConfirmation});
+      if(!result.ok){
+        const text={
+          INVALID_PASSWORD:"A palavra-passe não está certa. Nada foi apagado.",
+          CONFIRMATION_REQUIRED:"Escreve ELIMINAR para confirmar. Nada foi apagado.",
+          PASSWORD_REQUIRED:"Indica a tua palavra-passe. Nada foi apagado.",
+          TOO_MANY_ATTEMPTS:"Demasiadas tentativas. Espera alguns minutos e tenta novamente. Nada foi apagado.",
+          NETWORK_ERROR:"Sem ligação. Nada foi apagado. Tenta novamente quando tiveres internet."
+        }[result.code]||"Não foi possível eliminar a conta agora. Nada foi apagado. Tenta novamente mais tarde.";
+        setMessage({ok:false,text});
+        return;
+      }
+      const owner=activeStateAccount()||(session.user?String(session.user.id):null);
+      eraseAcademicDataFromDevice(owner);
+      try{localStorage.removeItem(CLOUD_ACCOUNT_HINT_KEY)}catch{}
+      try{sessionStorage.removeItem("a25-onboarding-entry")}catch{}
+      rememberCloudSession(false);
+      window.location.replace("/eliminar-conta?concluido=1");
+    }finally{setBusy(false);setDeletePassword("")}
   }
 
   async function signout(){
@@ -261,6 +289,7 @@ export function AccountCloud({s,setS,go,gate=false}){
     const currentSync=cloudSyncMeta(s);
     try{
       const result=await saveStudentCloudState(s,{
+        expectedOwner:session.user?.id||null,
         expectedRevision:currentSync.baseRevision,
         deviceId,
         knownRemote:!!currentSync.baseFingerprint
@@ -291,7 +320,7 @@ export function AccountCloud({s,setS,go,gate=false}){
     if(hasPendingAssessment(s)){setMessage({ok:false,text:"Há uma avaliação em curso. Continua e conclui a tentativa antes de carregar progresso online."});return}
     setBusy(true);setMessage(null);setConflictRemote(null);
     try{
-      const row=await loadStudentCloudState();
+      const row=await loadStudentCloudState({expectedOwner:session.user?.id||null});
       if(!row?.state_json){
         setMessage({ok:true,text:"Esta conta ainda não tem progresso guardado online. Usa “Guardar online” quando quiseres criar a primeira cópia."});
       }else{
@@ -340,6 +369,7 @@ export function AccountCloud({s,setS,go,gate=false}){
     try{
       saveLocalSnapshot(s,{label:"Conflito · antes de substituir a cloud"});
       const result=await overwriteStudentCloudState(s,{
+        expectedOwner:session.user?.id||null,
         remoteRevision:conflictRemote.revision,
         deviceId
       });
@@ -377,6 +407,7 @@ export function AccountCloud({s,setS,go,gate=false}){
       });
 
       const result=await overwriteStudentCloudState(next,{
+        expectedOwner:session.user?.id||null,
         remoteRevision:conflictRemote.revision,
         deviceId
       });
@@ -403,6 +434,7 @@ export function AccountCloud({s,setS,go,gate=false}){
     setBusy(true);setMessage(null);
     try{
       const result=await saveStudentCloudState(item.state,{
+        expectedOwner:session.user?.id||null,
         expectedRevision:item.expectedRevision,
         deviceId:item.deviceId||deviceId,
         knownRemote:!!item.knownRemote
@@ -428,7 +460,7 @@ export function AccountCloud({s,setS,go,gate=false}){
     if(!sessionUserId||!autosyncConflict||conflictRemote)return;
     if(sync.accountId&&sync.accountId!==sessionUserId)return;
     let live=true;
-    loadStudentCloudState().then(row=>{if(live&&row)registerConflict(row)}).catch(()=>{});
+    loadStudentCloudState({expectedOwner:sessionUserId}).then(row=>{if(live&&row)registerConflict(row)}).catch(()=>{});
     return ()=>{live=false};
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[sessionUserId,autosyncConflict]);
@@ -561,6 +593,17 @@ export function AccountCloud({s,setS,go,gate=false}){
 
       <label className="forgetDevice"><input type="checkbox" checked={forgetDevice} onChange={e=>setForgetDevice(e.target.checked)}/><span><b>Computador partilhado?</b> Apagar o meu progresso deste dispositivo ao sair. Continua guardado na tua conta.</span></label>
       <button className="secondary" onClick={signout} disabled={busy}>Terminar sessão</button>
+
+      <details className="deleteAccount">
+        <summary>Eliminar conta</summary>
+        <p>Apaga a conta, o progresso guardado online e os dados de estudo deste dispositivo. É imediato e <b>não pode ser desfeito</b>.</p>
+        <form className="deleteAccountForm" onSubmit={event=>{event.preventDefault();deleteAccount()}}>
+          <label>Palavra-passe<input type="password" autoComplete="current-password" value={deletePassword} onChange={e=>setDeletePassword(e.target.value)}/></label>
+          <label>Escreve ELIMINAR para confirmar<input autoComplete="off" autoCapitalize="characters" value={deleteConfirmation} onChange={e=>setDeleteConfirmation(e.target.value)}/></label>
+          <button type="submit" className="dangerButton" disabled={busy||!deletePassword||deleteConfirmation.trim().toUpperCase()!=="ELIMINAR"}>Eliminar conta definitivamente</button>
+        </form>
+        <small><a href="/eliminar-conta">O que é apagado e o que fica</a></small>
+      </details>
     </>}
 
     {message&&<div className={"cloudMessage "+(message.ok?"ok":"bad")}><b>{message.ok?"✓":"!"}</b><span>{message.text}</span></div>}

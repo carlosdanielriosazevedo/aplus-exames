@@ -36,7 +36,7 @@
     {"sourcePath":"content/vnext/math-a/10/10-fin-salarios.json","sourceBlobSha":"6a2851c4ff1185cd2805f74be3cc71cc7bdbef20"},
     {"sourcePath":"content/vnext/math-a/10/10-fun-afim.json","sourceBlobSha":"c1e675d9d4d218f52418aa1650f345ad1536f77a"},
     {"sourcePath":"content/vnext/math-a/10/10-fun-conceito-representacoes.json","sourceBlobSha":"18b904e0ddd519a0efd5bd18849c979bb0220fb2"},
-    {"sourcePath":"content/vnext/math-a/10/10-fun-quadratica.json","sourceBlobSha":"285bea11abac54e55e077f3fc07bfc2f7d935ac2"},
+    {"sourcePath":"content/vnext/math-a/10/10-fun-quadratica.json","sourceBlobSha":"01305f8d5f5b83a410bd83002e8c817e67a3d42c","rereview":{"reviewedAt":"2026-11-17","items":["VN10FUN-QUA-001"],"note":"Auditoria independente: a condição a≠0 só aparecia na opção certa e denunciava-a. As quatro opções passam a ter a condição; chave, enunciado e resolução inalterados e corretos."}},
     {"sourcePath":"content/vnext/math-a/10/10-fun-transformacoes-ramos-modulo.json","sourceBlobSha":"256c3f8952895c476af5c05fb2c4f0c51b6c12b3"},
     {"sourcePath":"content/vnext/math-a/10/10-ga-colinearidade-retas.json","sourceBlobSha":"5a229dbea42c020d7147dac94bf5979b5db79525"},
     {"sourcePath":"content/vnext/math-a/10/10-ga-coordenadas-transformacoes.json","sourceBlobSha":"87ada16ba3240eb9295c90e3a8a6dd450ed5f3af"},

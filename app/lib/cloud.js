@@ -1,4 +1,5 @@
 "use client";
+import {mergeSelectedSubjects} from "./cloudStateMerge.js";
 
 import {createInternalNeonAuth} from "@neondatabase/neon-js/auth";
 import {BetterAuthReactAdapter} from "@neondatabase/neon-js/auth/react/adapters";
@@ -120,6 +121,22 @@ export async function cloudSignUp({name,email,password}){
   return result;
 }
 
+// Eliminação definitiva da conta (servidor). Nunca lança: devolve {ok,code}.
+export async function cloudDeleteAccount({password,confirmation}){
+  try{
+    const response=await fetch("/api/account/delete",{
+      method:"POST",credentials:"include",cache:"no-store",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({password,confirmation})
+    });
+    const body=await response.json().catch(()=>null);
+    if(response.ok&&body?.ok)return {ok:true};
+    return {ok:false,code:body?.code||body?.error||`HTTP_${response.status}`};
+  }catch{
+    return {ok:false,code:"NETWORK_ERROR"};
+  }
+}
+
 export async function cloudSignOut(){
   const client=getCloudAuthClient();
   if(!client)return;
@@ -165,9 +182,14 @@ export function studentStateForCloud(s){
     subjectProgressModelVersion:s.subjectProgressModelVersion||4,
     evidenceModelVersion:2,
     pedagogicalIdVersion:s.pedagogicalIdVersion||1,
-    pedagogicalMemoryVersion:s.pedagogicalMemoryVersion||2
+    pedagogicalMemoryVersion:s.pedagogicalMemoryVersion||2,
+    // Disciplinas escolhidas viajam com a conta: noutro dispositivo o aluno não
+    // tem de as voltar a escolher.
+    selectedSubjectIds:Array.isArray(s.selectedSubjectIds)?s.selectedSubjectIds.filter(id=>typeof id==="string").slice(0,12):[],
+    activeSubjectId:typeof s.activeSubjectId==="string"?s.activeSubjectId:null
   });
 }
+
 
 export function mergeStudentCloudState(local,remote){
   if(!remote || !["aplus-student-state-v1","aplus-student-state-v2","aplus-student-state-v3","aplus-student-state-v4","aplus-student-state-v5","aplus-student-state-v6","aplus-student-state-v7","aplus-student-state-v8"].includes(remote.schema))return local;
@@ -196,7 +218,8 @@ export function mergeStudentCloudState(local,remote){
     subjectProgress:remote.subjectProgress??local.subjectProgress,
     subjectProgressModelVersion:remote.subjectProgressModelVersion??local.subjectProgressModelVersion??4,
     pedagogicalIdVersion:remote.pedagogicalIdVersion??local.pedagogicalIdVersion??1,
-    pedagogicalMemoryVersion:remote.pedagogicalMemoryVersion??local.pedagogicalMemoryVersion??2
+    pedagogicalMemoryVersion:remote.pedagogicalMemoryVersion??local.pedagogicalMemoryVersion??2,
+    ...mergeSelectedSubjects(local,remote)
   };
 }
 
@@ -231,13 +254,19 @@ function normalizeRow(row){
   return {...row,revision:Number(row.revision)||0,last_device_id:row.last_device_id||null};
 }
 
-export async function loadStudentCloudState(){
+export async function loadStudentCloudState({expectedOwner=null}={}){
   if(!cloudConfiguration().configured)throw new Error("Cloud ainda não configurada.");
   const result=await callCloudStateApi("GET");
+  // A resposta pertence a outra conta (sessão trocada durante o pedido): descartar.
+  if(expectedOwner&&result.owner&&String(result.owner)!==String(expectedOwner))throw accountChanged();
   return normalizeRow(result.data);
 }
 
-export async function saveStudentCloudState(s,{expectedRevision=0,deviceId=null,knownRemote=false}={}){
+function accountChanged(){
+  return Object.assign(new Error("A conta mudou durante a sincronização. Nada foi aplicado."),{code:"ACCOUNT_MISMATCH",status:409});
+}
+
+export async function saveStudentCloudState(s,{expectedRevision=0,deviceId=null,knownRemote=false,expectedOwner=null}={}){
   if(!cloudConfiguration().configured)throw new Error("Cloud ainda não configurada.");
   const revision=Math.max(0,Number(expectedRevision)||0);
   // Só o servidor decide o dono e incrementa a revisão de forma atómica.
@@ -245,16 +274,19 @@ export async function saveStudentCloudState(s,{expectedRevision=0,deviceId=null,
     operation:revision===0&&!knownRemote?"insert":"update",
     expectedRevision:revision,
     state:studentStateForCloud(s),
-    deviceId:deviceId||null
+    deviceId:deviceId||null,
+    ...(expectedOwner?{expectedOwner:String(expectedOwner)}:{})
   });
+  if(expectedOwner&&result.owner&&String(result.owner)!==String(expectedOwner))throw accountChanged();
   if(result.conflict)return {ok:false,conflict:true,remote:normalizeRow(result.remote)};
   return {ok:true,conflict:false,data:result.data};
 }
 
-export async function overwriteStudentCloudState(s,{remoteRevision,deviceId=null}={}){
+export async function overwriteStudentCloudState(s,{remoteRevision,deviceId=null,expectedOwner=null}={}){
   return saveStudentCloudState(s,{
     expectedRevision:Number(remoteRevision)||0,
     deviceId,
-    knownRemote:true
+    knownRemote:true,
+    expectedOwner
   });
 }

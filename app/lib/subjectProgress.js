@@ -1,7 +1,7 @@
 import {canonicalSubjectId} from "./subjectWorkspace.js";
 import {OPTION_ORDER_VERSION,legacyOptionIndex} from "./optionOrder.js";
 import {missionCompletedToday,recordStudyActivity} from "./engagement.js";
-import {recordCompetitiveActivity} from "./competition.js";
+import {recordCompetitiveActivity,effortXp} from "./competition.js";
 
 const MODEL_VERSION=4;
 const MAX_SESSIONS=100;
@@ -130,6 +130,7 @@ function mergeProgress(left,right,subjectId){
     missionHistory:mergeUniqueRows(a.missionHistory,b.missionHistory),
     interruptedTechnicalSessions:mergeUniqueRows(a.interruptedTechnicalSessions,b.interruptedTechnicalSessions),
     competence:mergeCompetenceRows(a.competence,b.competence),
+    evidenceExposures:Object.fromEntries([...new Set([...Object.keys(a.evidenceExposures||{}),...Object.keys(b.evidenceExposures||{})])].map(key=>[key,Math.max(a.evidenceExposures?.[key]||0,b.evidenceExposures?.[key]||0)])),
     errorPatterns:mergeErrorPatterns(a.errorPatterns,b.errorPatterns),
     errorMemoryVersion:1,
     lastPosition:(()=>{const archivedIds=new Set([...a.interruptedTechnicalSessions||[],...b.interruptedTechnicalSessions||[]].map(row=>row.sessionId));return [newest.lastPosition,a.lastPosition,b.lastPosition].find(row=>row&&!archivedIds.has(row.sessionId))||null})(),
@@ -204,12 +205,38 @@ export function advanceSubjectSession(state,subjectId,{sessionId=null,current,re
   return putProgress(state,subjectId,{...progress,lastPosition:{...progress.lastPosition,current,results:results.map(compactResult),currentResult:compactResult(currentResult),currentAnswer,optionOrder:OPTION_ORDER_VERSION,updatedAt},lastActivityAt:updatedAt});
 }
 
-function subjectSessionXp(kind,results=[]){
-  const deterministicCorrect=results.filter(result=>result?.final&&result?.correct===true).length;
-  if(kind==="mission")return results.length*25;
-  if(kind==="training")return deterministicCorrect*10;
-  if(kind==="mini_exam")return deterministicCorrect*18;
-  return 0;
+// XP por esforço: perguntas respondidas e sessões concluídas, nunca acertos.
+function subjectSessionXp(kind,results=[],total=results.length){
+  const answered=results.filter(result=>result&&result.status!=="unanswered").length;
+  if(kind==="mission")return answered*25;
+  return effortXp(kind,{total,answered});
+}
+
+// Missão diária congelada: a primeira missão recomendada do dia fica guardada e é
+// repetida tal e qual se o aluno a voltar a abrir nesse dia.
+export function todaysMissionAssignment(state,subjectId,day){
+  const assignment=subjectProgressFor(state,subjectId).dailyMissionAssignment;
+  return assignment&&assignment.day===day&&Array.isArray(assignment.itemIds)&&assignment.itemIds.length?assignment:null;
+}
+
+export function assignDailyMission(state,subjectId,{day,itemIds,label,domain=null}){
+  const progress=subjectProgressFor(state,subjectId);
+  if(progress.dailyMissionAssignment?.day===day)return state;
+  return putProgress(state,subjectId,{...progress,dailyMissionAssignment:{day,itemIds:[...itemIds],label,domain}});
+}
+
+export function evidenceExposureKey(item){
+  return String(item?.signature||item?.id||"").replace(/-V\d+$/,"");
+}
+
+export function evidenceWeight(previousExposures=0){
+  const n=Math.max(0,Number(previousExposures)||0);
+  return 1/(2**n);
+}
+
+function pruneExposures(exposures,max=800){
+  const entries=Object.entries(exposures).filter(([key,value])=>key&&Number.isFinite(value)&&value>0);
+  return Object.fromEntries(entries.slice(-max));
 }
 
 export function recordSubjectSession(state,{subjectId,kind,label,domain=null,items,results,sessionId=null,completedAt=Date.now()}){
@@ -222,7 +249,13 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
   if(completionId&&((progress.completedSessionIds||[]).includes(completionId)||progress.sessions.some(row=>row.sessionId===completionId)))return state;
   const competence={...progress.competence};
   let errorPatterns=normalizeErrorPatterns(progress.errorPatterns);
-  const recordsAcademicEvidence=kind!=="training";
+  // Só uma Missão principal por dia: uma segunda conclusão conta como treino,
+  // também para a evidência académica (não só para o XP).
+  const repeatedMissionToday=kind==="mission"&&missionCompletedToday(state,completedAt);
+  const recordsAcademicEvidence=kind!=="training"&&!repeatedMissionToday;
+  // Regra do produto: a mesma pergunta (ou uma variante quase idêntica) não conta
+  // como evidência independente. Cada repetição vale metade da anterior.
+  const exposures={...(progress.evidenceExposures||{})};
   items.forEach((item,index)=>{
     const result=results[index];
     if(!result||result.status==="unanswered")return;
@@ -231,7 +264,10 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
     const id=item.competencyId||`${item.domain}:general`;
     const previous=normalizeCompetenceRow(competence[id]);
     if(result.final){
-      competence[id]={...previous,domainId:item.domain||previous.domainId,label:item.competencyLabel||previous.label,attempts:previous.attempts+1,correct:previous.correct+(result.correct?1:0),deterministicAttempts:previous.deterministicAttempts+1,points:previous.points+(Number.isFinite(result.points)?result.points:0),maxPoints:previous.maxPoints+(Number.isFinite(result.maxPoints)?result.maxPoints:0),lastAnsweredAt:completedAt};
+      const key=evidenceExposureKey(item);
+      const weight=evidenceWeight(exposures[key]);
+      exposures[key]=(exposures[key]||0)+1;
+      competence[id]={...previous,domainId:item.domain||previous.domainId,label:item.competencyLabel||previous.label,attempts:previous.attempts+weight,correct:previous.correct+(result.correct?weight:0),deterministicAttempts:previous.deterministicAttempts+weight,points:previous.points+(Number.isFinite(result.points)?result.points:0),maxPoints:previous.maxPoints+(Number.isFinite(result.maxPoints)?result.maxPoints:0),lastAnsweredAt:completedAt};
       return;
     }
     if(result.gradingMode==="structured-provisional"){
@@ -266,10 +302,10 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
     };
   });
   const session={sessionId:completionId,kind,label,domain,itemIds:items.map(item=>item.id),results:results.map(compactResult),completedAt};
-  let completed=putProgress(state,subjectId,{...progress,completedSessionIds:[...new Set([...(progress.completedSessionIds||[]),...progress.sessions.map(row=>row.sessionId).filter(Boolean),...(completionId?[completionId]:[])])],diagnosticDone:progress.diagnosticDone||kind==="diagnostic",diagnosticCompletedAt:kind==="diagnostic"?completedAt:progress.diagnosticCompletedAt,sessions:[...progress.sessions,session].slice(-MAX_SESSIONS),missionHistory:kind==="mission"?[...progress.missionHistory,session].slice(-MAX_SESSIONS):progress.missionHistory,competence,errorPatterns,errorMemoryVersion:1,lastPosition:null,lastActivityAt:completedAt});
+  let completed=putProgress(state,subjectId,{...progress,evidenceExposures:pruneExposures(exposures),completedSessionIds:[...new Set([...(progress.completedSessionIds||[]),...progress.sessions.map(row=>row.sessionId).filter(Boolean),...(completionId?[completionId]:[])])],diagnosticDone:progress.diagnosticDone||kind==="diagnostic",diagnosticCompletedAt:kind==="diagnostic"?completedAt:progress.diagnosticCompletedAt,sessions:[...progress.sessions,session].slice(-MAX_SESSIONS),missionHistory:kind==="mission"?[...progress.missionHistory,session].slice(-MAX_SESSIONS):progress.missionHistory,competence,errorPatterns,errorMemoryVersion:1,lastPosition:null,lastActivityAt:completedAt});
   const alreadyCompletedMission=kind==="mission"&&missionCompletedToday(state,completedAt);
   const activityKind=alreadyCompletedMission?"training":kind;
-  const xpEarned=subjectSessionXp(activityKind,results);
+  const xpEarned=subjectSessionXp(activityKind,results,items.length);
   const answered=results.filter(result=>result&&result.status!=="unanswered").length;
   completed={...completed,xp:(Number(completed.xp)||0)+xpEarned};
   completed=recordStudyActivity(completed,{kind:activityKind,xpEarned,sessionId:completionId,activityId:completionId||undefined,at:completedAt});

@@ -1124,9 +1124,9 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "q": "Uma função quadrática tem a forma...",
     "o": [
       "f(x)=ax²+bx+c, com a≠0.",
-      "f(x)=ax+b.",
-      "f(x)=a/x.",
-      "f(x)=|x|+b."
+      "f(x)=ax+b, com a≠0.",
+      "f(x)=a/x, com a≠0.",
+      "f(x)=a·|x|+b, com a≠0."
     ],
     "a": 0,
     "sol": "O termo de grau 2 com coeficiente não nulo caracteriza a função quadrática.",

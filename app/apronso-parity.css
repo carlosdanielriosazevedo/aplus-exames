@@ -229,7 +229,9 @@
     background:url('/mascot/apronso-welcome.webp') center bottom/contain no-repeat;
     pointer-events:none;
   }
-  .studentTop .studentTopActions>button[aria-label$=" XP"]{
+  /* Especificidade reforçada (html body): não pode depender da ordem dos ficheiros
+     CSS, que o Next.js altera quando surgem novas rotas. */
+  html body .studentTop .studentTopActions>button[aria-label$=" XP"]{
     flex:0 0 auto;width:auto;min-width:72px;max-width:none;padding:0 6px!important;
   }
 }

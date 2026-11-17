@@ -4,7 +4,8 @@ export const CLOUD_FIELDS=new Set([
   "competition","competitionModelVersion","dailyMission","dailyMissionModelVersion",
   "diagnosticDone","diagnosticAnswers","missionHistory","freeTrainingSignals","examHistory",
   "lastMission","lastExam","betaParticipant","learningHypotheses","subjectProgress",
-  "subjectProgressModelVersion","evidenceModelVersion","pedagogicalIdVersion","pedagogicalMemoryVersion"
+  "subjectProgressModelVersion","evidenceModelVersion","pedagogicalIdVersion","pedagogicalMemoryVersion",
+  "selectedSubjectIds","activeSubjectId"
 ]);
 export const SNAPSHOT_LIMITS=Object.freeze({nodes:25000,depth:40,array:10000,keys:2000,string:65536,bytes:2_000_000});
 const PRIVATE_FIELDS=new Set(["answers","answer","currentAnswer","responseText","previousResponseText","studentEvidence"]);
@@ -67,7 +68,7 @@ const competence=fields({domainId:nullable(text),label:nullable(text),attempts:c
 const errors=fields({...common,count:count,recoveryEvidence:count,itemIds:strings});
 const progress=fields({subjectId:text,version:version(4),diagnosticDone:boolean,diagnosticCompletedAt:stamp,
   sessions:rows,missionHistory:rows,interruptedTechnicalSessions:rows,completedSessionIds:strings,
-  competence:dictionary(competence),errorPatterns:dictionary(errors),errorMemoryVersion:version(1),
+  competence:dictionary(competence),evidenceExposures:numericMap,dailyMissionAssignment:nullable(fields({day:text,itemIds:strings,label:nullable(text),domain:nullable(text)})),errorPatterns:dictionary(errors),errorMemoryVersion:version(1),
   lastPosition:nullable(row),lastActivityAt:stamp});
 const profile=fields({schoolYear:nullable(text),year:x=>text(x)||integer(x),school:nullable(text),
   examTiming:nullable(text),syllabus:nullable(text),selectedThemeIds:strings,taughtThemeIds:strings,
@@ -92,7 +93,8 @@ const root={cloudRecoveryArchive:archive,goal:x=>count(x)&&x<=20,profile:nullabl
   lastMission:nullable(row),lastExam:nullable(row),betaParticipant:nullable(fields({code:nullable(text),cohort:nullable(text),joinedAt:stamp})),
   subjectProgress:dictionary(progress),engagement:nullable(engagement),competition:nullable(competition),dailyMission:nullable(daily),
   engagementModelVersion:version(1),competitionModelVersion:version(1),dailyMissionModelVersion:version(1),
-  subjectProgressModelVersion:version(4),evidenceModelVersion:version(2),pedagogicalIdVersion:version(1),pedagogicalMemoryVersion:version(2)};
+  subjectProgressModelVersion:version(4),evidenceModelVersion:version(2),pedagogicalIdVersion:version(1),pedagogicalMemoryVersion:version(2),
+  selectedSubjectIds:x=>Array.isArray(x)&&x.length<=12&&x.every(id=>text(id)&&id.length<=60),activeSubjectId:nullable(x=>text(x)&&x.length<=60)};
 
 export function validateCloudSnapshot(input,{legacy=false,local=false,privateFields=!local}={}){
   const fail=code=>({ok:false,code});

@@ -70,6 +70,11 @@ Machine-lane eligibility requires the exact current fingerprint and deterministi
 
 Machine-only validation is allowed only for the current closed-beta policy. Keep productionEligible=false unless the product owner explicitly approves a future policy change.
 
+## Decisões do product owner — 2026-11-17 (auditoria antes da Google Play)
+1. **Sem revisão de professores.** A beta pública e a publicação na Google Play avançam sem revisão docente. O product owner confia na IA para a qualidade e a correção do conteúdo das três disciplinas e aceita esse risco. Isto substitui, para a beta pública, a exigência de revisão humana do diagnóstico. Controlos compensatórios obrigatórios: em Matemática, validação determinística das respostas; em Português e FQ A, revisão integral pergunta a pergunta pela IA e uma segunda revisão por outra IA (amostragem); guardas automáticas no CI contra padrões de resposta e pistas de comprimento; botão de reporte com triagem. Os itens mantêm `reviewStatus:"prototype"` e `productionEligible:false` até nova decisão.
+2. **Conta obrigatória (fase 2) ligada antes da Google Play.** Primeiro diagnóstico sem conta; antes de continuar, criar conta (13+).
+3. **Eliminação de conta.** O aluno elimina a conta na app (Conta → Eliminar conta) ou segue `/eliminar-conta`. Apaga-se tudo o que o identifica: conta Neon Auth, sessões, progresso online e histórico, registo de consentimento, ranking e identidade da app, mais os dados de estudo do dispositivo. Ficam apenas contagens diárias anónimas e reportes sem identificador. Sem revisão jurídica externa (decisão do product owner).
+
 ## Teacher/editorial workflow
 Editorial states include prototype, pending, reviewed and blocked.
 A reviewed question changed later must lose the old approval automatically via version/fingerprint integrity.

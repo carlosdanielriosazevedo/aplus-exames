@@ -1,4 +1,5 @@
 "use client";
+import {localDayKey} from "../lib/engagement";
 import {SaveProgressPrompt} from "./SaveProgressPrompt";
 import {useEffect,useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
@@ -11,7 +12,7 @@ import {portugueseLiteraryWorkById,portugueseLiteraryWorksForYear} from "../data
 import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence,portugueseRevisionCompare,portugueseRevisionEvidenceCompare,rubricObservationEvidenceSnapshot} from "../lib/portugueseEngine";
 import {portugueseObservationGuidance} from "../lib/portugueseObservationGuidance";
 import {portugueseWordLimitFeedback} from "../lib/portugueseWordLimit";
-import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor,quarantineUnrecoverableSubjectSession,restoredSubjectAnswer} from "../lib/subjectProgress";
+import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor,quarantineUnrecoverableSubjectSession,restoredSubjectAnswer,todaysMissionAssignment,assignDailyMission} from "../lib/subjectProgress";
 import {clearPortugueseMiniExamDraft} from "../lib/portugueseMiniExamDraft";
 import {engagementSummary,missionCompletedToday} from "../lib/engagement";
 import {STUDY_MODE_COPY,practiceModeCopy} from "../lib/studyModeCopy";
@@ -180,8 +181,18 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
   }
 
   function startRecommendedMission(){
+    // A Missão do dia fica congelada: reabrir no mesmo dia repete as mesmas perguntas.
+    const day=localDayKey(Date.now());
+    const frozen=todaysMissionAssignment(s,"portuguese",day);
+    const frozenItems=frozen?frozen.itemIds.map(portugueseItemById).filter(Boolean):[];
+    if(frozen&&frozenItems.length===frozen.itemIds.length){
+      setMissionFocus({targetEvidenceCompetencyIds:[],targetEvidenceObservations:[],label:"Missão recomendada"});
+      start("mission",frozenItems,frozen.label||"Missão recomendada",frozen.domain||null);
+      return;
+    }
     const mission=buildAdaptivePortugueseMission(scopedItems,{progress});
     setMissionFocus({targetEvidenceCompetencyIds:mission.targetEvidenceCompetencyIds||[],targetEvidenceObservations:mission.targetEvidenceObservations||[],label:"Missão recomendada"});
+    if(!progress.lastPosition)setS(prev=>assignDailyMission(prev,"portuguese",{day,itemIds:mission.items.map(item=>item.id),label:"Missão recomendada"}));
     start("mission",mission.items,"Missão recomendada");
   }
 

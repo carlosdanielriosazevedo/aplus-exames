@@ -83,7 +83,7 @@ import {
   dailyMissionPromptDecision,migrateDailyMission
 } from "./lib/dailyMission";
 import {
-  emptyCompetition,recordCompetitiveActivity,competitionSummary,latestCompetitiveActivity,demoLeaderboard,
+  emptyCompetition,recordCompetitiveActivity,effortXp,competitionSummary,latestCompetitiveActivity,demoLeaderboard,
   leaderboardAroundUser,leagueProjection,updateCompetitionProfile,scopeAvailability,
   PORTUGAL_REGIONS,DIVISIONS,PROMOTION_COUNT,DEMOTION_COUNT,
   SCHOOL_MIN_PARTICIPANTS,DISTRICT_MIN_PARTICIPANTS,migrateCompetition
@@ -1751,7 +1751,7 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
         if(openIdx>=0)sessions[openIdx]=sessionFinish(sessions[openIdx],{themeId:cfg.themeId,focus:cfg.focus,correct:newCorrect,total:questions.length,earnedPoints:newEarnedPoints,maxPoints,reviewRequired:newHasIncomplete});
         const base={
           ...prev,
-          xp:prev.xp+newCorrect*10,
+          xp:prev.xp+effortXp("training",{answered:questions.length}),
           betaSessions:sessions,
           betaEvents:[...(prev.betaEvents||[]),betaEvent("training_finished",{sessionId:sessionId||null,themeId:cfg.themeId,focus:cfg.focus,correct:newCorrect,total:questions.length,earnedPoints:newEarnedPoints,maxPoints,reviewRequired:newHasIncomplete})],
           freeTrainingSignals:potential?[
@@ -1766,7 +1766,7 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
         const activityAt=Date.now();
         let completed=recordStudyActivity(base,{
           kind:"training",
-          xpEarned:newCorrect*10,
+          xpEarned:effortXp("training",{answered:questions.length}),
           sessionId:sessionId||null,
           at:activityAt
         });
@@ -2075,7 +2075,7 @@ function MiniExamReview({session,setSession,s,setS,go}){
     const activityAt=Date.now();
     updated=recordStudyActivity(updated,{
       kind:"mini_exam",
-      xpEarned:(updated.lastExam?.correctCount||0)*18,
+      xpEarned:effortXp("mini_exam",{total:updated.lastExam?.total||0,answered:updated.lastExam?.answeredCount??updated.lastExam?.total??0}),
       sessionId:session.sessionId||updated.lastExam?.completionId||null,
       at:activityAt
     });

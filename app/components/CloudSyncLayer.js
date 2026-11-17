@@ -68,7 +68,7 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
         const decision=decideSync({state,payload,accountId:user.id,remote,
           pendingAssessment:hasPendingAssessment(state),adoptionConfirmed:adoptionRef.current});
         if(decision.action==="fetch_remote"||(fetchRemote&&remote===undefined&&decision.action!=="needs_adoption"&&decision.action!=="blocked_other_account")){
-          remote=await loadStudentCloudState();fetchRemote=false;continue;
+          remote=await loadStudentCloudState({expectedOwner:user.id});fetchRemote=false;if(accountRef.current?.id!==user.id)return {status:"account_changed"};continue;
         }
         if(decision.action==="needs_adoption"){setAdoption(true);setStatus(null);return {status:"needs_adoption"}}
         if(["blocked_other_account","wait_assessment"].includes(decision.action)){setStatus(decision.action);return {status:decision.action}}
@@ -92,7 +92,8 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
           saveLocalSnapshot(state,{label:"Antes de juntar com o progresso da conta"});
           const deviceId=getOrCreateDeviceId();
           const combined=normalizeAfterCloud(safeCloudMerge(state,remote.state_json));
-          const result=await saveStudentCloudState(combined,{expectedRevision:decision.expectedRevision,deviceId,knownRemote:true});
+          const result=await saveStudentCloudState(combined,{expectedRevision:decision.expectedRevision,deviceId,knownRemote:true,expectedOwner:user.id});
+          if(accountRef.current?.id!==user.id)return {status:"account_changed"};
           if(result.conflict){remote=result.remote;state=stateRef.current;continue}
           const revision=Number(result.data?.revision)||decision.expectedRevision+1;
           const next=markAutosynced(combined,{accountId:user.id,revision,payload:studentStateForCloud(combined),deviceId});
@@ -102,7 +103,8 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
         if(decision.action==="push"){
           setStatus("saving");
           const deviceId=getOrCreateDeviceId();
-          const result=await saveStudentCloudState(state,{expectedRevision:decision.expectedRevision,deviceId,knownRemote:decision.operation==="update"});
+          const result=await saveStudentCloudState(state,{expectedRevision:decision.expectedRevision,deviceId,knownRemote:decision.operation==="update",expectedOwner:user.id});
+          if(accountRef.current?.id!==user.id)return {status:"account_changed"};
           if(result.conflict){remote=result.remote;state=stateRef.current;continue}
           const revision=Number(result.data?.revision)||decision.expectedRevision+1;
           // Marca a impressão do payload efetivamente enviado; alterações feitas
@@ -115,6 +117,8 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
       setStatus("conflict");return {status:"conflict"};
     }catch(error){
       if(error?.status===401){setAccount(null);setStatus(null);rememberCloudSession(false);return {status:"signed_out"}}
+      // A sessão mudou de conta durante o pedido (outro separador): nada foi aplicado.
+      if(error?.code==="ACCOUNT_MISMATCH"){setStatus(null);refreshAccount();return {status:"account_changed"}}
       if(error?.code==="CLOUD_WRITES_DISABLED"){
         setStatus("paused");
         clearTimeout(timer.current);
@@ -132,7 +136,7 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
       busy.current=false;
       if(again.current){again.current=false;clearTimeout(timer.current);timer.current=setTimeout(()=>cycle(),DEBOUNCE_MS)}
     }
-  },[setS]);
+  },[setS,refreshAccount]);
 
   useEffect(()=>{if(hydrated)refreshAccount()},[hydrated,refreshAccount]);
   useEffect(()=>{

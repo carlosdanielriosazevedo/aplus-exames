@@ -1,6 +1,6 @@
 import {createNeonAuth} from "@neondatabase/neon-js/auth/next/server";
 
-function authBaseUrl(){
+export function authBaseUrl(){
   return process.env.NEON_AUTH_BASE_URL
     || process.env.NEXT_PUBLIC_NEON_AUTH_URL
     || process.env.NEON_AUTH_URL
