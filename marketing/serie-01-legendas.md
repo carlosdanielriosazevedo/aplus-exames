@@ -45,7 +45,7 @@ Resume tu em 4 palavras nos comentários. A melhor ganha o meu respeito eterno (
 `#osmaias #eçadequeiros #portugues11 #literatura`
 
 ### 6 · `06-matematica-minimo.png`
-O mínimo para passar existe. Mas há de ser um mínimo a sério: f′ passa de negativa a positiva.
+Só peço o mínimo. Até isso tem condições: f′(a) = 0 não chega, f′ tem de passar de negativa a positiva em a.
 `#matematicaA #derivadas #examenacional #mat12`
 
 ### 7 · `07-le-chatelier.png`
@@ -55,7 +55,7 @@ No exame, perturbação = temperatura, pressão ou concentração. Não vale a p
 `#quimica #equilibrioquimico #fq11 #fisicaequimica`
 
 ### 8 · `08-como-funciona.png`
-Não precisas de saber por onde começar. Essa parte é comigo.
+Não sabes por onde começar? Eu sei. Essa parte é comigo.
 
 1. Diagnóstico curto
 2. Plano para ti
