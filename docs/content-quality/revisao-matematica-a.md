@@ -746,7 +746,8 @@ A regeneração substituiu dois IDs do Mini-exame na submatéria de domínio, im
 
 ## Integridade editorial e validação
 
-- Atualizados 109 valores de `sourceBlobSha` com `git hash-object`. Os planos guardam os hashes anteriores, a autoria da nova passagem por IA e os IDs afetados. Duas propostas de override editorial antigas foram revistas após a correção das fontes.
+- Atualizados 109 valores de `sourceBlobSha` com `git hash-object`. As 500 perguntas-fonte alteradas com aprovação anterior têm uma nova decisão em `aiRereview.decisions`, assinada por **Codex (IA)** em 2026-11-17, com o motivo específico e a impressão digital da pergunta. `previousReview` guarda a decisão anterior, incluindo os dois `rationale` e `override` explícitos. A data original é `null` nos 384 registos cujo plano não a indica.
+- Os manifestos conservam as entradas e os resumos originais. A auditoria usa a nova decisão para cada pergunta re-revista e compara a sua impressão digital. Nas 109 fontes alteradas, verifica também o conjunto que conserva a aprovação anterior. Uma edição posterior exige voltar a rever a pergunta alterada.
 - Renovadas 5 atestações locais depois de confirmar o oráculo correspondente e a pré-revisão automática nos itens `M11C-2`, `CV51-11CD-TV-1`, `CV51-11CD-OPT-2`, `CV51-12FCD-RC-2`, `CV51-11TRIG-EQ-2`.
 - Todos os itens mantêm o estado `prototype` e produção bloqueada. O registo identifica Codex como autor da revisão.
 - Conferidas com o corretor as 41 respostas-modelo por etapas e a chave de completamento. Os casos de resposta equivalente, forma pedida e quantidade errada foram verificados com os testes do corretor.

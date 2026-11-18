@@ -19,35 +19,325 @@
   ],
   "defaultDecision": "approved",
   "sources": [
-    {"sourcePath":"content/vnext/math-a/10/10-ele-borda.json","sourceBlobSha":"3b293f74d7456c7c7619f5b7a210fe0ebffd8b8a","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"c7f174f6671d8cb166fa21f5686beeabb5c60ae6","items":["VN10ELE-BOR-010"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-ele-dhondt.json","sourceBlobSha":"4e24e37337cc39932e9394812ec04918c538ac2c","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"32fff79c48971e80333dd949d70ac267266c9dac","items":["VN10ELE-DHO-001","VN10ELE-DHO-012","VN10ELE-DHO-013"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-ele-majorias.json","sourceBlobSha":"abe8b55201c3b6ae64431c593384cc9513544c51","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"4deb48a07c8017a6057d52b187d21f9a231d6505","items":["VN10ELE-MAJ-001","VN10ELE-MAJ-046"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-ele-stlague-comparacao.json","sourceBlobSha":"deb2d1b16babb8b6f4661832526170328b9051ad","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"219bc363256aeb490f12f17c83f507cec15c0ce0","items":["VN10ELE-STL-007","VN10ELE-STL-018","VN10ELE-STL-035","VN10ELE-STL-042"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-est-amostragem.json","sourceBlobSha":"60ab1948e7930359c8b8e38869a8af1bd817d54e","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"7928f999899764b785491240b8bd3158ac44f862","items":["VN10EST-AMO-001","VN10EST-AMO-002","VN10EST-AMO-007","VN10EST-AMO-008","VN10EST-AMO-022"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-est-bivariados-regressao.json","sourceBlobSha":"38ebad8f60a1da8b7ec1cfe011e3499d69ee94d9","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"750861a2ca808bed9b62135844e1090654e731c4","items":["VN10EST-BIV-021","VN10EST-BIV-026"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-est-dispersao.json","sourceBlobSha":"abf7643c532fcdecb81bc97421d2c559cb00c25e","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"133eec4e4f6c23c291b4e289267729e61e9d1a0a","items":["VN10EST-DIS-009","VN10EST-DIS-022","VN10EST-DIS-024"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-est-localizacao.json","sourceBlobSha":"c4476162046b241d1f50fca614fa788d0715fa95","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"d53a448dab1865f7f848a54c059b8c1b0cd67cd4","items":["VN10EST-LOC-002","VN10EST-LOC-049"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-est-problema-pop-amostra.json","sourceBlobSha":"b2cb8e4ded25bd717ffc6221b5067b31a6d477ee","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"17a74cbec6cba01f9ef8cbc9ba9bb5a9c0db5124","items":["VN10EST-PPA-001","VN10EST-PPA-021"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-est-univariados-representacoes.json","sourceBlobSha":"fcbbd1444952986de20632836c7986edd05b2fd9","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"59aed7296681abfd1dbf2f8da163102e6d2f6892","items":["VN10EST-UNI-012"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-fin-bruto-liquido.json","sourceBlobSha":"16b05c566523cbf1ab69916a8661dc7ba022d2aa","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"9e78d2c89a2ee79af453bde4451d4567a6a0ff1c","items":["VN10FIN-BRL-001","VN10FIN-BRL-007"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-fin-irs.json","sourceBlobSha":"995d015d606a9681793eee31063a261fe1ad3021","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"7072db91a57083ab24331d78133fb30f6df8d9b8","items":["VN10FIN-IRS-007","VN10FIN-IRS-012","VN10FIN-IRS-024","VN10FIN-IRS-041"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-fin-juro-composto-credito.json","sourceBlobSha":"d3bbe23c82e02a6da1a32ca49a7657e5ecbc6bc2","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"686883ebe459821ff3b891943f1048fa90c5376d","items":["VN10FIN-JC-001","VN10FIN-JC-015","VN10FIN-JC-027","VN10FIN-JC-040","VN10FIN-JC-042"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-fin-juro-simples.json","sourceBlobSha":"e00fb03dffdf9d3990a2a460348b3b4c4d2e48a5","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"4e11f6f05dc0bfaeec93071f720345b2e3f01143","items":["VN10FIN-JS-001","VN10FIN-JS-016","VN10FIN-JS-023","VN10FIN-JS-042"]}},
+    {"sourcePath":"content/vnext/math-a/10/10-ele-borda.json","sourceBlobSha":"3b293f74d7456c7c7619f5b7a210fe0ebffd8b8a","previousSourceBlobSha": "c7f174f6671d8cb166fa21f5686beeabb5c60ae6", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "3b293f74d7456c7c7619f5b7a210fe0ebffd8b8a",
+      "retainedQuestionFingerprint": "1e8375e82f2e94b86b4ad76a2595f629f117fd8ba05404d0f1028a34716678d6",
+      "items": ["VN10ELE-BOR-010"],
+      "decisions": {
+        "VN10ELE-BOR-010": {"status":"approved","rationale":"Três alternativas muito curtas contradiziam diretamente as regras dadas. A explicação não mostrava que B superava A na contagem. Apresenta conclusões sobre posições e compara os pontos de A e B.","fingerprint":"d19034010734181d0664af4865d428f37b94101863545ede397ee3bbcb07f7c9","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10ELE-BOR-010","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-ele-dhondt.json","sourceBlobSha":"4e24e37337cc39932e9394812ec04918c538ac2c","previousSourceBlobSha": "32fff79c48971e80333dd949d70ac267266c9dac", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "4e24e37337cc39932e9394812ec04918c538ac2c",
+      "retainedQuestionFingerprint": "eb293a601c994133506784f47fdc9275f9a2d3a23258d4ac17aadcf7d4caba21",
+      "items": ["VN10ELE-DHO-001","VN10ELE-DHO-012","VN10ELE-DHO-013"],
+      "decisions": {
+        "VN10ELE-DHO-001": {"status":"approved","rationale":"Dividir só por potências de dez era um erro sem relação com os métodos ensinados. A alternativa passa a testar a confusão entre sequências de divisores iniciadas em 1 e em 2.","fingerprint":"5863e56501a64845e80aa87bc5d52552f7306be1ee6a771793dca446fe3266ac","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10ELE-DHO-001","status":"approved"}}},
+        "VN10ELE-DHO-012": {"status":"approved","rationale":"Com o número de mandatos fixo, «todas as listas recebem mais» era impossível; os distratores não refletiam erros de comparação de quocientes. Contrapõe alterações plausíveis da ordem dos quocientes e explicita que a regra de desempate permanece.","fingerprint":"e58ff3683d0e6b32969d563b5a8a18ab0f6911326b5acf930d0a2c8c1be40fb9","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10ELE-DHO-012","status":"approved"}}},
+        "VN10ELE-DHO-013": {"status":"approved","rationale":"Um distrator afirmava que D'Hondt nem sequer usa votos e a explicação não dava um caso em que o efeito ocorre. Testa a variação desigual entre divisores e demonstra a mudança com um exemplo sem empate.","fingerprint":"c7c92d2b154622cd558cc8713ab544cf7b19fa51af29b2e4723f63809157578e","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10ELE-DHO-013","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-ele-majorias.json","sourceBlobSha":"abe8b55201c3b6ae64431c593384cc9513544c51","previousSourceBlobSha": "4deb48a07c8017a6057d52b187d21f9a231d6505", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "abe8b55201c3b6ae64431c593384cc9513544c51",
+      "retainedQuestionFingerprint": "c5ef8ccae1f3c265db851d2a08f79c47e72da6dcf1a6cda0d494971e558887da",
+      "items": ["VN10ELE-MAJ-001","VN10ELE-MAJ-046"],
+      "decisions": {
+        "VN10ELE-MAJ-001": {"status":"approved","rationale":"Votos nulos não são votos de um candidato, pelo que a alternativa não constituía um critério comparável. Testa a confusão entre obter pluralidade e obter mais votos do que os adversários somados.","fingerprint":"f1bafb4b9cddbc39326a6bee70c5910a72c7a3aa7e572312a132e2ed6407a097","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10ELE-MAJ-001","status":"approved"}}},
+        "VN10ELE-MAJ-046": {"status":"approved","rationale":"«Com a mesma regra» referia-se a outro item e omitia a regra que leva A e B à segunda volta. Formula o regulamento completo no próprio item.","fingerprint":"a778022ef5df6e5b2db86abf3d137503a2b7ca4ac46a4b6c7f61d75da574d7e3","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10ELE-MAJ-046","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-ele-stlague-comparacao.json","sourceBlobSha":"deb2d1b16babb8b6f4661832526170328b9051ad","previousSourceBlobSha": "219bc363256aeb490f12f17c83f507cec15c0ce0", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "deb2d1b16babb8b6f4661832526170328b9051ad",
+      "retainedQuestionFingerprint": "76cdba49970cceb11f70ef4d2e9bff9c73bad82e466dfd5ff01ffb7ef3666381",
+      "items": ["VN10ELE-STL-007","VN10ELE-STL-018","VN10ELE-STL-035","VN10ELE-STL-042"],
+      "decisions": {
+        "VN10ELE-STL-007": {"status":"approved","rationale":"«316,67...» sugere um desenvolvimento decimal que não é o de 950÷3. Usa a fração exata e os valores com sinal de aproximação.","fingerprint":"12b26dfa9d89f69f09e7f511edc5948d36772595e3555602716789058ab8adf9","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10ELE-STL-007","status":"approved"}}},
+        "VN10ELE-STL-018": {"status":"approved","rationale":"Afirmar que arredondar altera votos ou muda os divisores ímpares permitia descartar sem perceber como os quocientes são ordenados. Apresenta erros de interpretação sobre empates e a seleção dos quocientes.","fingerprint":"d4394debcb2c3ea9e369ad17d0a1a4d73ee1d02731fda84648a981d0be714f07","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10ELE-STL-018","status":"approved"}}},
+        "VN10ELE-STL-035": {"status":"approved","rationale":"As opções com quocientes usavam aproximações sem indicar essa precisão. Pede o valor arredondado às centésimas e apresenta o quociente exato na resolução.","fingerprint":"c55d3fd29bfc823c6364a5df82f6f7f51b8903577d1fec0193401d927d170126","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10ELE-STL-035","status":"approved"}}},
+        "VN10ELE-STL-042": {"status":"approved","rationale":"A pergunta e as opções identificavam os grupos apenas pela ordem implícita dos votos. A resolução escrevia 166,67 como se fosse um quociente exato. Indica explicitamente os grupos A, B e C e a ordem pedida. Assinala a aproximação do quociente 500÷3.","fingerprint":"0bce1367e261c954d26185c1c3607112883893e7d4d24e0a676c1891c2445aff","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10ELE-STL-042","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-est-amostragem.json","sourceBlobSha":"60ab1948e7930359c8b8e38869a8af1bd817d54e","previousSourceBlobSha": "7928f999899764b785491240b8bd3158ac44f862", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "60ab1948e7930359c8b8e38869a8af1bd817d54e",
+      "retainedQuestionFingerprint": "f6b9b12ed9c2467e3e7789e7e60f00d6d6f36fdf7bb233ee83afd661fff753a1",
+      "items": ["VN10EST-AMO-001","VN10EST-AMO-002","VN10EST-AMO-007","VN10EST-AMO-008","VN10EST-AMO-022"],
+      "decisions": {
+        "VN10EST-AMO-001": {"status":"approved","rationale":"Só a chave incluía um critério preciso de representatividade. Os distratores eram absolutos ou arbitrários, incluindo a dimensão exata 100. Compara o perfil da população com a dimensão, distribuição pelos grupos e participação voluntária.","fingerprint":"ba41e6b8afdc76b17392bdb37c5ec700d06a9d5dd1b66901ada5bf50f049e348","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10EST-AMO-001","status":"approved"}}},
+        "VN10EST-AMO-002": {"status":"approved","rationale":"O item podia ser acertado pela extensão da única opção que descrevia um erro real de amostragem. Compara o erro de seleção com erros de resposta, registo e variabilidade casual.","fingerprint":"46724d42c39c3988b34643561e0b03de52b4c10e0ed4b53ee67fe6834c65eacd","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10EST-AMO-002","status":"approved"}}},
+        "VN10EST-AMO-007": {"status":"approved","rationale":"A equiprobabilidade marginal dos elementos não basta para definir amostragem aleatória simples. Precisa a equiprobabilidade de todas as amostras da dimensão fixada e dá um contraexemplo para o critério marginal.","fingerprint":"2a275c2fa8e98ed2a1c9d731f88bbb7cec32d612c1b2773904cba45ac073acc8","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10EST-AMO-007","status":"approved"}}},
+        "VN10EST-AMO-008": {"status":"approved","rationale":"A estratificação só garante presença se forem efetivamente selecionados alunos de todos os estratos, e duas opções excluíam subgrupos à partida. Explica a regra de seleção por estrato e usa outros métodos realistas como distratores.","fingerprint":"216485607438d39a9b3f960c3c02c30d0a7c269f5f407eb0b6aac4fa675b3226","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10EST-AMO-008","status":"approved"}}},
+        "VN10EST-AMO-022": {"status":"approved","rationale":"«A população desaparece» era uma opção absurda num item sobre não resposta. Usa enviesamento de medição como confusão legítima com outras categorias de erro.","fingerprint":"c1f367cb28563bdceb1d31ccc0b7ee1911a6002b1f9cfb08570a382028a95dbf","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10EST-AMO-022","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-est-bivariados-regressao.json","sourceBlobSha":"38ebad8f60a1da8b7ec1cfe011e3499d69ee94d9","previousSourceBlobSha": "750861a2ca808bed9b62135844e1090654e731c4", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "38ebad8f60a1da8b7ec1cfe011e3499d69ee94d9",
+      "retainedQuestionFingerprint": "c49594db336526aa5c6b753be4ed7aac2f5b7382afb74da107050ec9cb353472",
+      "items": ["VN10EST-BIV-021","VN10EST-BIV-026"],
+      "decisions": {
+        "VN10EST-BIV-021": {"status":"approved","rationale":"A definição de resíduo não figura como objetivo autónomo nas AE de Estatística do 10.º. Torna o termo autocontido e pede a expressão que representa a comparação vertical com a reta.","fingerprint":"e509d20be8bb5321cca7d2da35b3fd65ae84e984608fd4fb2a02547cf25d074c","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10EST-BIV-021","status":"approved"}}},
+        "VN10EST-BIV-026": {"status":"approved","rationale":"O item pressupunha o conceito de resíduo sem o definir e «todos os dados estão errados» estava fora de um diagnóstico estatístico realista. Define a diferença observada, liga o padrão à qualidade do modelo e usa uma interpretação plausível como distrator.","fingerprint":"d82ba809147ce16d470dd2fe448d856b721f0f5c81ef3fb6be7e8724baa1d2ee","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10EST-BIV-026","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-est-dispersao.json","sourceBlobSha":"abf7643c532fcdecb81bc97421d2c559cb00c25e","previousSourceBlobSha": "133eec4e4f6c23c291b4e289267729e61e9d1a0a", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "abf7643c532fcdecb81bc97421d2c559cb00c25e",
+      "retainedQuestionFingerprint": "4c985c9aec288f13207e2233f81cca6d10258cebc7be4cd6d6f29e9004200462",
+      "items": ["VN10EST-DIS-009","VN10EST-DIS-022","VN10EST-DIS-024"],
+      "decisions": {
+        "VN10EST-DIS-009": {"status":"approved","rationale":"Vírgulas sem espaços tornavam as listas numéricas visualmente ambíguas com a vírgula decimal. Separa os valores de cada lista e indica que os desvios seguem a ordem dada.","fingerprint":"39f21b5df93b62b8b0e7fadb2873319c77da309cca880572f04951ee9d761009","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10EST-DIS-009","status":"approved"}}},
+        "VN10EST-DIS-022": {"status":"approved","rationale":"«Nos mesmos dados» não referia uma lista anterior no fluxo de exame e omitia a convenção de cálculo do quartil. Dá a lista completa e a regra da mediana das metades, coerente com o item de Q₁ da mesma família.","fingerprint":"17df2b1ade7bee9987a6c38033815b69e39898e0e017efe31bdbe36493515aae","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10EST-DIS-022","status":"approved"}}},
+        "VN10EST-DIS-024": {"status":"approved","rationale":"A explicação dizia que a caixa representa exatamente 50% dos dados, leitura problemática com empates e diferentes convenções de quartis. Explica os extremos da caixa por meio de Q₁ e Q₃.","fingerprint":"2b5692e6dcaf13faee3eb50d0c4cf86d4b12befb482d8576f1e98b3e0c69317d","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10EST-DIS-024","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-est-localizacao.json","sourceBlobSha":"c4476162046b241d1f50fca614fa788d0715fa95","previousSourceBlobSha": "d53a448dab1865f7f848a54c059b8c1b0cd67cd4", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "c4476162046b241d1f50fca614fa788d0715fa95",
+      "retainedQuestionFingerprint": "45e7ae5248dcfd4dbf1c0ddea03c8846ae42432d85b5637680a522cf1b817540",
+      "items": ["VN10EST-LOC-002","VN10EST-LOC-049"],
+      "decisions": {
+        "VN10EST-LOC-002": {"status":"approved","rationale":"A única opção detalhada dava as duas regras da mediana, enquanto as restantes eram respostas curtas de natureza distinta. Formula as alternativas como critérios calculáveis e explicita na solução a regra para cada paridade.","fingerprint":"9e0b81b3b03583b43c48a4755dc4e36c739d996a97d4e415456d97edc35f27fe","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10EST-LOC-002","status":"approved"}}},
+        "VN10EST-LOC-049": {"status":"approved","rationale":"O distrator «Média=1 100 €» trazia um cálculo errado da média, que podia ser eliminado sem decidir a adequação da medida. Os salários eram difíceis de separar visualmente. Apresenta a média real (2 460 €), separa os salários e fundamenta a escolha da mediana.","fingerprint":"b04e0872ee8f049a86a3838cb4d02eefa7f06da7a21081e7dc77c81241be4993","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10EST-LOC-049","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-est-problema-pop-amostra.json","sourceBlobSha":"b2cb8e4ded25bd717ffc6221b5067b31a6d477ee","previousSourceBlobSha": "17a74cbec6cba01f9ef8cbc9ba9bb5a9c0db5124", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "b2cb8e4ded25bd717ffc6221b5067b31a6d477ee",
+      "retainedQuestionFingerprint": "a26c59a1bf4f6297993498d1b65d60675fc7dc5b0e2068cecfca4fa1137a0c35",
+      "items": ["VN10EST-PPA-001","VN10EST-PPA-021"],
+      "decisions": {
+        "VN10EST-PPA-001": {"status":"approved","rationale":"Uma representação gráfica e a média dos dados nem eram conjuntos de unidades. A opção correta tinha muito mais texto. Compara conjuntos diferentes de unidades para testar a distinção entre população e amostra.","fingerprint":"e21bb5d510964bcb126601688ce64d1d6c0622951d2a307056fa6ecfba1bd4c5","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10EST-PPA-001","status":"approved"}}},
+        "VN10EST-PPA-021": {"status":"approved","rationale":"As permutações «população: litros de água» e «variável: famílias» forneciam pistas gramaticais sem avaliar a distinção entre família, amostra e medida. Reescreve os distratores como confusões entre amostra e população, medida diferente e unidade estatística diferente.","fingerprint":"931db3dd9b2e4f2cb237c32db10a4d0d20f4665904b73e06d88dd350c86ba26f","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10EST-PPA-021","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-est-univariados-representacoes.json","sourceBlobSha":"fcbbd1444952986de20632836c7986edd05b2fd9","previousSourceBlobSha": "59aed7296681abfd1dbf2f8da163102e6d2f6892", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "fcbbd1444952986de20632836c7986edd05b2fd9",
+      "retainedQuestionFingerprint": "df25bfc4f25e243098451b2e160970737319051a9ea8e3c8f54e41b75bc80396",
+      "items": ["VN10EST-UNI-012"],
+      "decisions": {
+        "VN10EST-UNI-012": {"status":"approved","rationale":"A opção correta tinha mais de quatro vezes o comprimento das restantes e incluía toda a informação sobre classes adjacentes. Compara afirmações de comprimento semelhante sobre a disposição dos retângulos e o significado dos intervalos.","fingerprint":"193e637be32065d3b4b5a38c2cd331d7280c187a794eb4e707aec9614a64f654","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10EST-UNI-012","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-fin-bruto-liquido.json","sourceBlobSha":"16b05c566523cbf1ab69916a8661dc7ba022d2aa","previousSourceBlobSha": "9e78d2c89a2ee79af453bde4451d4567a6a0ff1c", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "16b05c566523cbf1ab69916a8661dc7ba022d2aa",
+      "retainedQuestionFingerprint": "e5cc2a859364fd7ae996b7a00c2c28da1f7f84a892e6996714add94ffff4e531",
+      "items": ["VN10FIN-BRL-001","VN10FIN-BRL-007"],
+      "decisions": {
+        "VN10FIN-BRL-001": {"status":"approved","rationale":"«O bruto é apenas o valor por hora» e «não existe diferença» eram alternativas muito curtas e desligadas dos descontos. Apresenta definições de dimensão comparável que confundem descontos, subsídios ou bases de remuneração.","fingerprint":"02be96bbec172ccae44cdd992168501451f4f634dfafac669b3982a49e46123f","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FIN-BRL-001","status":"approved"}}},
+        "VN10FIN-BRL-007": {"status":"approved","rationale":"A soma direta de 11% e 6% pressupõe que ambos os descontos incidem no salário bruto. Especifica a base comum no enunciado.","fingerprint":"77cc9c53710af6eb5a36a8a9dab12edb9505842b827207322c5ac50e13eb358e","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FIN-BRL-007","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-fin-irs.json","sourceBlobSha":"995d015d606a9681793eee31063a261fe1ad3021","previousSourceBlobSha": "7072db91a57083ab24331d78133fb30f6df8d9b8", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "995d015d606a9681793eee31063a261fe1ad3021",
+      "retainedQuestionFingerprint": "dd4f3296ca86f2f3c6013094c0fdb20657f8eb66127a9277b17dfcf2da756833",
+      "items": ["VN10FIN-IRS-007","VN10FIN-IRS-012","VN10FIN-IRS-024","VN10FIN-IRS-041"],
+      "decisions": {
+        "VN10FIN-IRS-007": {"status":"approved","rationale":"«Na mesma tabela» remetia para um item anterior que pode não aparecer junto. Apresenta como regra autónoma as taxas progressivas de cada parcela.","fingerprint":"66a926fe0a227931191cdaae084a4b4462d3f9dc02a4cbd7b15e82b8a7420932","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FIN-IRS-007","status":"approved"}}},
+        "VN10FIN-IRS-012": {"status":"approved","rationale":"Duas alternativas eram incompatíveis com um rendimento no escalão de 30% com taxa efetiva de 18%. A explicação não identificava os pesos da média. Testa a confusão entre parcelas, taxas marginais e efetiva. Explica a razão imposto/rendimento.","fingerprint":"fef731748d5f95e2dac4a2794f74ae44c18131564c072e692235639b9a5b461b","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FIN-IRS-012","status":"approved"}}},
+        "VN10FIN-IRS-024": {"status":"approved","rationale":"A abreviatura «tabela 10%-20%-30%» omitia que cada taxa só se aplica à parcela do escalão. Explicita as três taxas marginais e respetivos limites.","fingerprint":"27fe19c7d40ae5947aa54c927bf32ad23d4a1178c3c15e5001456d138c47b626","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FIN-IRS-024","status":"approved"}}},
+        "VN10FIN-IRS-041": {"status":"approved","rationale":"A resolução dava apenas a soma de três valores, sem ligar nenhum à respetiva parcela tributável. Mostra as três bases e os impostos parciais.","fingerprint":"15cde5d33cbc47eb0e759d4fb1f64b04299fd8f286a53bac0b7145fe502a363f","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FIN-IRS-041","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-fin-juro-composto-credito.json","sourceBlobSha":"d3bbe23c82e02a6da1a32ca49a7657e5ecbc6bc2","previousSourceBlobSha": "686883ebe459821ff3b891943f1048fa90c5376d", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "d3bbe23c82e02a6da1a32ca49a7657e5ecbc6bc2",
+      "retainedQuestionFingerprint": "c6ed2c0a04d06f9b9f149c32b84bc938303d1520e44780b516cf90ab150cda3a",
+      "items": ["VN10FIN-JC-001","VN10FIN-JC-015","VN10FIN-JC-027","VN10FIN-JC-040","VN10FIN-JC-042"],
+      "decisions": {
+        "VN10FIN-JC-001": {"status":"approved","rationale":"«Uma média dos montantes» não especificava que montantes seriam usados. Distingue a base de cálculo correta da média entre dois valores conhecidos.","fingerprint":"d1fcf2f14963a78b4e3f6e8dbd5c300e373119dc425ff7cb76a0e84c491912a7","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FIN-JC-001","status":"approved"}}},
+        "VN10FIN-JC-015": {"status":"approved","rationale":"«Tende a dar» tratava como tendência uma desigualdade estrita garantida por capital e taxa positivos após o primeiro período. Um distrator afirmava que a capitalização elimina juros. Explicita que a taxa tem de ser a mesma nos dois regimes e que o composto dá um montante estritamente maior, completando a comparação.","fingerprint":"2654e16c7b0d11903c55e11efe445623195c6ae209ee989b882c31c2c825eba6","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FIN-JC-015","status":"approved"}}},
+        "VN10FIN-JC-027": {"status":"approved","rationale":"«Uma aplicação mensal de 1 000 €» também podia significar depósitos mensais de 1 000 €. Estabelece que 1 000 € é o capital inicial único.","fingerprint":"c83354fc9f0880e8ac4b6483190598654e8ba118bea8d5c4472945543c2f76a4","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FIN-JC-027","status":"approved"}}},
+        "VN10FIN-JC-040": {"status":"approved","rationale":"O enunciado não explicita o regime de capitalização nem o arredondamento esperado. Indica capitalização anual e pede o resultado em cêntimos.","fingerprint":"cbab3ec6dd902f402b0e0021b77428713ba68c01a6bb31d6bea50adf6a24472d","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FIN-JC-040","status":"approved"}}},
+        "VN10FIN-JC-042": {"status":"approved","rationale":"A taxa constante aparecia apenas na explicação e dois distratores contradiziam condições básicas do crédito. Acrescenta taxa positiva e constante e distingue crescimento do saldo e do juro do período.","fingerprint":"e49bccf2eae632b54a31a07da32a7d4a84ae3bfd058aa25c1314a753ac593935","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FIN-JC-042","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-fin-juro-simples.json","sourceBlobSha":"e00fb03dffdf9d3990a2a460348b3b4c4d2e48a5","previousSourceBlobSha": "4e11f6f05dc0bfaeec93071f720345b2e3f01143", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "e00fb03dffdf9d3990a2a460348b3b4c4d2e48a5",
+      "retainedQuestionFingerprint": "1a33674a1d03b7558a6fe12261b38c31d5f30e520f29e858e6a49bc8f0bd3570",
+      "items": ["VN10FIN-JS-001","VN10FIN-JS-016","VN10FIN-JS-023","VN10FIN-JS-042"],
+      "decisions": {
+        "VN10FIN-JS-001": {"status":"approved","rationale":"«Uma média aleatória» não é uma base de cálculo de juros plausível. Testa a ideia errada de calcular sobre um capital médio.","fingerprint":"75e425dd12ea08e41d9b5a985cbaf7f290d0be3ada5f7a6b75190c90afb63f61","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FIN-JS-001","status":"approved"}}},
+        "VN10FIN-JS-016": {"status":"approved","rationale":"«Linearmente» podia confundir o montante com uma função linear na aceção escolar portuguesa: o montante inicial é o termo independente. Um distrator aleatório testava pouca compreensão. Distingue acréscimo constante de multiplicação por fator fixo, sem chamar linear à função afim.","fingerprint":"6009c46144497a44420f248299eae5a5e71c80cca605c2b4261747e6b0d6492d","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FIN-JS-016","status":"approved"}}},
+        "VN10FIN-JS-023": {"status":"approved","rationale":"O capital calculado é 1 145,4545… €, mas a pergunta pedia um capital sem indicar aproximação. Pede o capital inicial arredondado aos cêntimos.","fingerprint":"b0ac588db65567f1aa34da006226001685d8e61936e52f53797560d751ddfbb3","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FIN-JS-023","status":"approved"}}},
+        "VN10FIN-JS-042": {"status":"approved","rationale":"O valor 80 só é um juro por ano se t medir anos e M(t) representar o montante monetário. Dá unidades e interpreta o coeficiente no modelo.","fingerprint":"2f7c23028adbe1963702c9c194314f475b1b9c804fb9232ca07d14b9730ab05d","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FIN-JS-042","status":"approved"}}}
+      }
+    }},
     {"sourcePath":"content/vnext/math-a/10/10-fin-salarios.json","sourceBlobSha":"6a2851c4ff1185cd2805f74be3cc71cc7bdbef20"},
-    {"sourcePath":"content/vnext/math-a/10/10-fun-afim.json","sourceBlobSha":"6442121a791445479215b68919b7702e7f12acae","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"c1e675d9d4d218f52418aa1650f345ad1536f77a","items":["VN10FUN-AF-007","VN10FUN-AF-039","VN10FUN-AF-042"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-fun-conceito-representacoes.json","sourceBlobSha":"d20630799857b3b88e5e0e3717289ac84cbf5615","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"18b904e0ddd519a0efd5bd18849c979bb0220fb2","items":["VN10FUN-CR-006","VN10FUN-CR-007","VN10FUN-CR-022","VN10FUN-CR-037"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-fun-quadratica.json","sourceBlobSha":"c79f04c3c44c64fbdfd2c8007facb7bdf4365bbe","rereview":{"reviewedAt":"2026-11-17","items":["VN10FUN-QUA-001"],"note":"Auditoria independente: a condição a≠0 só aparecia na opção certa e denunciava-a. As quatro opções passam a ter a condição; chave, enunciado e resolução inalterados e corretos."},"aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"01305f8d5f5b83a410bd83002e8c817e67a3d42c","items":["VN10FUN-QUA-012","VN10FUN-QUA-041"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-fun-transformacoes-ramos-modulo.json","sourceBlobSha":"bea28b0112f01563ebeb8fc497bbd177f5e056bc","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"256c3f8952895c476af5c05fb2c4f0c51b6c12b3","items":["VN10FUN-TRM-038"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-ga-colinearidade-retas.json","sourceBlobSha":"b110d98401985655c517fb86c6e6d81ef4675aad","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"5a229dbea42c020d7147dac94bf5979b5db79525","items":["VN10GA-RET-018","VN10GA-RET-021"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-ga-coordenadas-transformacoes.json","sourceBlobSha":"3c7e1c374c25771430b6dc52e81a2825c5e48232","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"87ada16ba3240eb9295c90e3a8a6dd450ed5f3af","items":["VN10GA-CT-021"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-ga-distancias-ponto-medio.json","sourceBlobSha":"adc95cd11fb003f3bde198b6bce3761312510343","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"66ebe96461a650a5764caee26fbb9655eba227e3","items":["VN10GA-DPM-027"]}},
+    {"sourcePath":"content/vnext/math-a/10/10-fun-afim.json","sourceBlobSha":"6442121a791445479215b68919b7702e7f12acae","previousSourceBlobSha": "c1e675d9d4d218f52418aa1650f345ad1536f77a", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "6442121a791445479215b68919b7702e7f12acae",
+      "retainedQuestionFingerprint": "64cfba9cfbc93cab0abfbdf421dfe0f957b64d5943df5112b8690cf066e5f62d",
+      "items": ["VN10FUN-AF-007","VN10FUN-AF-039","VN10FUN-AF-042"],
+      "decisions": {
+        "VN10FUN-AF-007": {"status":"approved","rationale":"O enunciado não define o coeficiente a que compara com 0. Identifica a expressão da função afim.","fingerprint":"cc101e13b21348e165e59c08354205b5a20883cbfd7b700c0b44a67a274d661b","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FUN-AF-007","status":"approved"}}},
+        "VN10FUN-AF-039": {"status":"approved","rationale":"«Paralela» e «perpendicular» não descrevem monotonia, permitindo eliminação sem interpretar os declives. Substitui por interpretações plausíveis do sinal do declive.","fingerprint":"104e13b20ffdd220c123932097484a756baabb228ea51162576efb81c151c563","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FUN-AF-039","status":"approved"}}},
+        "VN10FUN-AF-042": {"status":"approved","rationale":"O enunciado não dizia o que media t, nem quando existiam 120 L. Define o volume inicial e t em minutos.","fingerprint":"110a965b63ef45c058c102e108b4025cce83cb0fdf8d08ae69042f3266c8a1e3","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FUN-AF-042","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-fun-conceito-representacoes.json","sourceBlobSha":"d20630799857b3b88e5e0e3717289ac84cbf5615","previousSourceBlobSha": "18b904e0ddd519a0efd5bd18849c979bb0220fb2", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "d20630799857b3b88e5e0e3717289ac84cbf5615",
+      "retainedQuestionFingerprint": "e87f0e82dd3829094e83842aac58de7d2723317b4ce7e88a595236ad600fb1fd",
+      "items": ["VN10FUN-CR-006","VN10FUN-CR-007","VN10FUN-CR-022","VN10FUN-CR-037"],
+      "decisions": {
+        "VN10FUN-CR-006": {"status":"approved","rationale":"As três alternativas erradas usavam «apenas» e apresentavam uma única forma, deixando a única alternativa longa facilmente identificável. Contrapõe conjuntos de representações de extensão semelhante.","fingerprint":"c585f66c8c1d5fedd2edd8b96c4c166e4b5820e4ca99b3ff339a51f4516be51b","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FUN-CR-006","status":"approved"}}},
+        "VN10FUN-CR-007": {"status":"approved","rationale":"«Numa tabela de uma função» pressupunha a conclusão que se pretendia testar. Dois distratores eram impossíveis pelos dados. Apresenta uma tabela de correspondência e contrasta os motivos de validade.","fingerprint":"6bcc945ae5edd48d5b17e40ec9c84cb4a1983f99e8a0ad934d3ed00f730a1dfd","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FUN-CR-007","status":"approved"}}},
+        "VN10FUN-CR-022": {"status":"approved","rationale":"A pergunta «pode concluir-se que f não é função» tinha distratores sem relação com a aparente troca de entradas e saídas. Testa hipóteses concretas sobre pares ordenados e unicidade.","fingerprint":"246337e294a0618a63ab87fa908e4e88b5d2c59dba4590e68019fa6e33d9c914","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FUN-CR-022","status":"approved"}}},
+        "VN10FUN-CR-037": {"status":"approved","rationale":"A frase «No domínio ℝ» atribuía a f um domínio que inclui x=1, onde a expressão não está definida. A segunda resposta afirmativa ocorria com uma condição irrelevante. Pede a comparação dos domínios naturais e opõe duas comparações erradas de domínios ou gráficos.","fingerprint":"7b46a202a1cac51978c6c0603493290f4b3a222af34ca46b599fbffecd8f2070","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FUN-CR-037","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-fun-quadratica.json","sourceBlobSha":"c79f04c3c44c64fbdfd2c8007facb7bdf4365bbe","rereview":{"reviewedAt":"2026-11-17","items":["VN10FUN-QUA-001"],"note":"Auditoria independente: a condição a≠0 só aparecia na opção certa e denunciava-a. As quatro opções passam a ter a condição; chave, enunciado e resolução inalterados e corretos."},"previousSourceBlobSha": "01305f8d5f5b83a410bd83002e8c817e67a3d42c", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "c79f04c3c44c64fbdfd2c8007facb7bdf4365bbe",
+      "retainedQuestionFingerprint": "a5a7466c16ac6ae04fd59876d178c0cbd18601bb6cce318d5f24227271394c29",
+      "items": ["VN10FUN-QUA-012","VN10FUN-QUA-041"],
+      "decisions": {
+        "VN10FUN-QUA-012": {"status":"approved","rationale":"O coeficiente a não foi definido na pergunta autónoma. Declara a forma geral da função e o significado de a.","fingerprint":"a191c911cd16f68e843e792d035935f7bbe935185ba895bacc52ca1b344751c9","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FUN-QUA-012","status":"approved"}}},
+        "VN10FUN-QUA-041": {"status":"approved","rationale":"A unidade de t aparecia apenas nas opções. Define o tempo em segundos no enunciado.","fingerprint":"4bc745b1eeca26b40a559ecb3f6a89fef0f913d7656c893fece361a85fd5dcfe","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FUN-QUA-041","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-fun-transformacoes-ramos-modulo.json","sourceBlobSha":"bea28b0112f01563ebeb8fc497bbd177f5e056bc","previousSourceBlobSha": "256c3f8952895c476af5c05fb2c4f0c51b6c12b3", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "bea28b0112f01563ebeb8fc497bbd177f5e056bc",
+      "retainedQuestionFingerprint": "23cd0d7e168dcca10b42bb33b196f25a748c5926b1b70d5a17eab739078e6a58",
+      "items": ["VN10FUN-TRM-038"],
+      "decisions": {
+        "VN10FUN-TRM-038": {"status":"approved","rationale":"A resolução identificava o ponto de mudança, mas não explicava qual o sinal de cada ramo. Aplica a definição de módulo de acordo com o sinal do argumento.","fingerprint":"0217e05faa60b9d87b13de7cdc690603b64af49c99eb7c6ee49ff31d356c1e34","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10FUN-TRM-038","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-ga-colinearidade-retas.json","sourceBlobSha":"b110d98401985655c517fb86c6e6d81ef4675aad","previousSourceBlobSha": "5a229dbea42c020d7147dac94bf5979b5db79525", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "b110d98401985655c517fb86c6e6d81ef4675aad",
+      "retainedQuestionFingerprint": "0337fa4163d8f093ee7eac5cbdca17cc891f03a35d8017bb64b5829e42c73f0d",
+      "items": ["VN10GA-RET-018","VN10GA-RET-021"],
+      "decisions": {
+        "VN10GA-RET-018": {"status":"approved","rationale":"A condição do declive sem distinguir retas iguais resultava suficiente também para retas coincidentes. A explicação não ligava a direção ao declive. Restringe a retas distintas e explica o vetor diretor comum.","fingerprint":"45ddceb507ddbf887cb5348e66131f138fcd4c815c709c354a1370f714eadcf8","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GA-RET-018","status":"approved"}}},
+        "VN10GA-RET-021": {"status":"approved","rationale":"O critério de perpendicularidade entre declives é matéria de Produto Escalar do 11.º ano. Dá o critério no enunciado para avaliar só a tradução de uma relação para linguagem algébrica.","fingerprint":"ecc6982d67eb5fa9cce5d51a1d33163b0155c974dcb267ab38f8be456184b8a4","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GA-RET-021","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-ga-coordenadas-transformacoes.json","sourceBlobSha":"3c7e1c374c25771430b6dc52e81a2825c5e48232","previousSourceBlobSha": "87ada16ba3240eb9295c90e3a8a6dd450ed5f3af", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "3c7e1c374c25771430b6dc52e81a2825c5e48232",
+      "retainedQuestionFingerprint": "67d37cf978898b3039ebce5dcb6e069150942d5703ec9d3447039919af9c1889",
+      "items": ["VN10GA-CT-021"],
+      "decisions": {
+        "VN10GA-CT-021": {"status":"approved","rationale":"A resolução repetia a regra de rotação sem justificar a troca de coordenadas e os sinais. Justifica a rotação anti-horária pela imagem dos dois vetores unitários.","fingerprint":"9f6ee2e1cd3fdf66f14e6153c099b87023ebbfa41acc1eea46432080da247c7a","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GA-CT-021","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-ga-distancias-ponto-medio.json","sourceBlobSha":"adc95cd11fb003f3bde198b6bce3761312510343","previousSourceBlobSha": "66ebe96461a650a5764caee26fbb9655eba227e3", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "adc95cd11fb003f3bde198b6bce3761312510343",
+      "retainedQuestionFingerprint": "2bf23940c074acca48c41c622541808fd6c75d2990e12494dd3612583833ff1d",
+      "items": ["VN10GA-DPM-027"],
+      "decisions": {
+        "VN10GA-DPM-027": {"status":"approved","rationale":"Repetia a definição da mediatriz de DG-VN10GA-LG-001 e não exigia A≠B. Dá um critério algébrico com extremos distintos e pede a sua interpretação geométrica.","fingerprint":"8e87e60086fc55e8f43a972cfaed5f468d84a8d11a8dd085a9abe3e1193bb5b6","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GA-DPM-027","status":"approved"}}}
+      }
+    }},
     {"sourcePath":"content/vnext/math-a/10/10-ga-espaco.json","sourceBlobSha":"9691c1e596fdd91a37b95e6ef8d1c006dc62b884"},
-    {"sourcePath":"content/vnext/math-a/10/10-ga-lugares-geometricos.json","sourceBlobSha":"c9bd4da429b99030bd88a6bc417a7d35db0742d2","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"ab964504323f234de4cc1b7c08319b1a93dba460","items":["VN10GA-LG-001","VN10GA-LG-023"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-gs-baricentro-medianas.json","sourceBlobSha":"91f3a1c4dbf2e03579b60d1bcccd93ab5dd68444","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"84e6b4b44c78748e02ab61a889fb8823b6d712cc","items":["VN10GS-BAR-024"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-gs-circuncentro-incentro.json","sourceBlobSha":"d48fe71fe626ebbf4dcad3f592ea5799d3d0ffda","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"94972ac030cc0b701bc59a585d57df38f701f316","items":["VN10GS-CI-021","VN10GS-CI-043"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-gs-euler-nove-pontos.json","sourceBlobSha":"dd10b5224801e12f69479bf7e84c6b8f41e7162b","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"87f4f9e67a0af847dfabbaba7f66f2865eb068e7","items":["VN10GS-E9-002","VN10GS-E9-003","VN10GS-E9-006","VN10GS-E9-007","VN10GS-E9-015","VN10GS-E9-022","VN10GS-E9-023","VN10GS-E9-026"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-gs-ortocentro.json","sourceBlobSha":"9119fa8589059eb95c9276b2b654399a5b4964b9","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"c9a5d5217fccc0683c7e83217d5eae2da6a10a35","items":["VN10GS-ORT-006","VN10GS-ORT-013","VN10GS-ORT-025","VN10GS-ORT-047"]}},
-    {"sourcePath":"content/vnext/math-a/10/10-gs-propriedades-construcoes.json","sourceBlobSha":"4d0900b0859c80a32b95c5c9793d1499f2c44c11","aiRereview":{"reviewedAt":"2026-11-17","reviewer":"Codex","previousSourceBlobSha":"640d4d1690e2a2a2fda79fa2a3b5e33c771bddd4","items":["VN10GS-PC-014","VN10GS-PC-026","VN10GS-PC-042"]}}
+    {"sourcePath":"content/vnext/math-a/10/10-ga-lugares-geometricos.json","sourceBlobSha":"c9bd4da429b99030bd88a6bc417a7d35db0742d2","previousSourceBlobSha": "ab964504323f234de4cc1b7c08319b1a93dba460", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "c9bd4da429b99030bd88a6bc417a7d35db0742d2",
+      "retainedQuestionFingerprint": "8519fe4a6fc4af75173ab675160107a2fae2af06f69a46f17534f86143d3cc4f",
+      "items": ["VN10GA-LG-001","VN10GA-LG-023"],
+      "decisions": {
+        "VN10GA-LG-001": {"status":"approved","rationale":"A mediatriz só está definida se os pontos forem distintos. Explicita A≠B no enunciado.","fingerprint":"2abf49bc4e872fe280db6c2b74e368410af888ed061dfc2e66bc68019a5dd7cf","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GA-LG-001","status":"approved"}}},
+        "VN10GA-LG-023": {"status":"approved","rationale":"O cálculo exigia completar quadrados numa equação de circunferência fora da forma reduzida, embora as AE só considerem equações reduzidas. Apresenta uma equação reduzida equivalente e pede a interpretação dos parâmetros.","fingerprint":"213954a04316517360d49ceee98b2a4b81d821fdf7fe781ccac41a23f561f280","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GA-LG-023","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-gs-baricentro-medianas.json","sourceBlobSha":"91f3a1c4dbf2e03579b60d1bcccd93ab5dd68444","previousSourceBlobSha": "84e6b4b44c78748e02ab61a889fb8823b6d712cc", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "91f3a1c4dbf2e03579b60d1bcccd93ab5dd68444",
+      "retainedQuestionFingerprint": "28ed1263ad1a4fbf2f5d85931ca499b9ca58b031a0a0f2a1c70d3cb6aaaf20e7",
+      "items": ["VN10GS-BAR-024"],
+      "decisions": {
+        "VN10GS-BAR-024": {"status":"approved","rationale":"O enunciado não dizia que AM era uma mediana. Identifica ABC e a mediana AM, o que justifica que G pertence a AM e a razão 2:1 se aplica.","fingerprint":"0b758ce21fe84de0003c2f85a7bfa49952b572ae0990512bed7c49df8b9074cb","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-BAR-024","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-gs-circuncentro-incentro.json","sourceBlobSha":"d48fe71fe626ebbf4dcad3f592ea5799d3d0ffda","previousSourceBlobSha": "94972ac030cc0b701bc59a585d57df38f701f316", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "d48fe71fe626ebbf4dcad3f592ea5799d3d0ffda",
+      "retainedQuestionFingerprint": "ef2b683f5aadcc2e3241d2b62f1569ac60e68e94c2fe143f5df2feedd6b23d23",
+      "items": ["VN10GS-CI-021","VN10GS-CI-043"],
+      "decisions": {
+        "VN10GS-CI-021": {"status":"approved","rationale":"A resolução citava a circunferência de diâmetro igual à hipotenusa sem ligar explicitamente o seu centro à propriedade do circuncentro. Identifica o teorema do ângulo inscrito e as três distâncias iguais.","fingerprint":"2825f71d2c694abd88beabd501f3b3dee69b6bab15c10823fc80287321ba6e8e","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-CI-021","status":"approved"}}},
+        "VN10GS-CI-043": {"status":"approved","rationale":"«Maior circunferência interior tangente aos três lados» sugere que há várias circunferências inscritas a comparar. Pede o centro da circunferência inscrita a partir da condição de tangência.","fingerprint":"8e07d9db204fe9ced200b4bacf3e523d0c42bc9e84a9252839999cb8803be56a","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-CI-043","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-gs-euler-nove-pontos.json","sourceBlobSha":"dd10b5224801e12f69479bf7e84c6b8f41e7162b","previousSourceBlobSha": "87f4f9e67a0af847dfabbaba7f66f2865eb068e7", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "dd10b5224801e12f69479bf7e84c6b8f41e7162b",
+      "retainedQuestionFingerprint": "c6208c436e5bfe10e4dcd41c2d113a577fbe5f33d6f48e334a3497e885a8afce",
+      "items": ["VN10GS-E9-002","VN10GS-E9-003","VN10GS-E9-006","VN10GS-E9-007","VN10GS-E9-015","VN10GS-E9-022","VN10GS-E9-023","VN10GS-E9-026"],
+      "decisions": {
+        "VN10GS-E9-002": {"status":"approved","rationale":"O e H não eram definidos, e a razão era indeterminada no caso equilátero. Identifica os centros e explicita a condição não equilátera.","fingerprint":"b773d0067e6d6ee38868077d46984ed336d09649059bd7a17ab5aca1b25afa5e","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-E9-002","status":"approved"}}},
+        "VN10GS-E9-003": {"status":"approved","rationale":"A opção correta era a única que definia os centros e tinha muito mais texto do que as restantes. Define os pontos no enunciado e compara posições próximas na reta de Euler.","fingerprint":"cd4a02b7f3c8f54437706365995554239ee931af3c442bb31fd0cb6dbf15a3c4","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-E9-003","status":"approved"}}},
+        "VN10GS-E9-006": {"status":"approved","rationale":"«Três dos nove pontos» não dizia de que circunferência se tratava fora da lista temática. «Os três centros de massa» de um triângulo é um distrator impossível. Identifica a circunferência e usa um distrator ligado a um centro notável.","fingerprint":"b7d87ba530c92c3586fc0da3a68cb506365d7ba98d3652c28e4cb8b1a85c5aa6","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-E9-006","status":"approved"}}},
+        "VN10GS-E9-007": {"status":"approved","rationale":"«Outros três» não tinha antecedente, pelo que também eram defensáveis as interseções das medianas com os lados, pois são os pontos médios. Indica os pontos médios já contados e pede a terceira família de pontos.","fingerprint":"46c0a181fce5d27de45ccc7998b00b2014bec305f5cda3206df2b9b6169132af","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-E9-007","status":"approved"}}},
+        "VN10GS-E9-015": {"status":"approved","rationale":"Usava O, G e H sem os identificar. Define os três centros num triângulo não equilátero e explica a relação de Euler.","fingerprint":"8670a312fccff4c6c1d3b0a086a53316142574707ad475c27af17fb6abc207cd","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-E9-015","status":"approved"}}},
+        "VN10GS-E9-022": {"status":"approved","rationale":"Sem saber que pontos eram O, G e H ou se G estava entre O e H, tanto 18 como 6 seriam possíveis em linha reta. Define os centros e usa a posição dada pela reta de Euler na resolução.","fingerprint":"1b9f584619e65762e758bb4367a656e477657ce53b3c8ee1e7395b430e4a577b","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-E9-022","status":"approved"}}},
+        "VN10GS-E9-023": {"status":"approved","rationale":"Limitava-se à resposta ON=12 sem aplicar explicitamente a propriedade de ponto médio. Explica que ON é metade de OH.","fingerprint":"0dd1a76fdba4f678ae8422586328e59de4058b9943161c08b4ad4172eb6688c1","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-E9-023","status":"approved"}}},
+        "VN10GS-E9-026": {"status":"approved","rationale":"O, H, G e N não eram apresentados em nenhum lugar do enunciado. Define a origem, os centros e a coordenada de H num enunciado autónomo.","fingerprint":"6314bf7b0544c552ff963548b4cb04eb0c5e084c1d95f4eabde8c76d51ec2791","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-E9-026","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-gs-ortocentro.json","sourceBlobSha":"9119fa8589059eb95c9276b2b654399a5b4964b9","previousSourceBlobSha": "c9a5d5217fccc0683c7e83217d5eae2da6a10a35", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "9119fa8589059eb95c9276b2b654399a5b4964b9",
+      "retainedQuestionFingerprint": "5b29d26c96406f192224426af1b175183dd966f9588613f1d1fb547cc8d5f469",
+      "items": ["VN10GS-ORT-006","VN10GS-ORT-013","VN10GS-ORT-025","VN10GS-ORT-047"],
+      "decisions": {
+        "VN10GS-ORT-006": {"status":"approved","rationale":"A chave revelava a propriedade pedida na única opção com explicação e, num triângulo equilátero, duas medianas também seriam suficientes. Pede a construção válida para qualquer triângulo e equilibra as alternativas.","fingerprint":"8434098aa75d589b2e01d1d59a8d3d34b3cd28a86624230f608d41b20ba43e5c","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-ORT-006","status":"approved"}}},
+        "VN10GS-ORT-013": {"status":"approved","rationale":"O enunciado estava truncado e o ângulo ADB nem sequer está definido se D=B. Pede o ângulo entre as duas retas, o que inclui o caso em que a altura passa por um vértice.","fingerprint":"08a0cecd3d34cc16403db7468427dc4fbc48c5eb211e245add973405555674ce","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-ORT-013","status":"approved"}}},
+        "VN10GS-ORT-025": {"status":"approved","rationale":"A resolução enunciava apenas a implicação de triângulo retângulo para ortocentro no vértice, quando a pergunta exige o sentido inverso. Deduz o ângulo reto a partir de uma altura que passa pelo vértice em causa.","fingerprint":"e066fea43d24a8b6052565cea1f166a898b8e2702ba377e5a891dad475800d88","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-ORT-025","status":"approved"}}},
+        "VN10GS-ORT-047": {"status":"approved","rationale":"As alturas não intersectam necessariamente o segmento do lado oposto, por exemplo num triângulo obtusângulo. Usa as retas que contêm os lados e inclui o caso de prolongamento.","fingerprint":"b899fa01715053e6fadea1c890dcb253606bc1f6e61c2fd0d2f5a1056422d4bc","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-ORT-047","status":"approved"}}}
+      }
+    }},
+    {"sourcePath":"content/vnext/math-a/10/10-gs-propriedades-construcoes.json","sourceBlobSha":"4d0900b0859c80a32b95c5c9793d1499f2c44c11","previousSourceBlobSha": "640d4d1690e2a2a2fda79fa2a3b5e33c771bddd4", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "4d0900b0859c80a32b95c5c9793d1499f2c44c11",
+      "retainedQuestionFingerprint": "dfb3a1a17a11151204fd1e13fb3f3f025dcda44bbede5dab35c89309ae0fe14c",
+      "items": ["VN10GS-PC-014","VN10GS-PC-026","VN10GS-PC-042"],
+      "decisions": {
+        "VN10GS-PC-014": {"status":"approved","rationale":"Uma mediatriz é relativa a um lado, não ao vértice. Faz corresponder explicitamente a mediatriz ao lado oposto e explica a propriedade.","fingerprint":"229144ee55f16a3c3e61ff6665f05eb47b878ab557446b58e03ed767f13bb3d6","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-PC-014","status":"approved"}}},
+        "VN10GS-PC-026": {"status":"approved","rationale":"8:10 e 4:5 eram a mesma razão e, por isso, duas respostas corretas. Substitui 8:10 pela razão inversa e explicita a ordem e a raiz quadrada.","fingerprint":"4f3d9d9e601b7b74a889f9b1c27f5e742fe3db8caced6b823e7ce6e58e8d6a59","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-PC-026","status":"approved"}}},
+        "VN10GS-PC-042": {"status":"approved","rationale":"«Moda das medidas» era alheia à construção e a mediatriz no singular tornava a instrução imprecisa. Explicita as duas mediatrizes e troca o distrator por outro centro notável do triângulo.","fingerprint":"3eb14a597723d45f55b30a2ccbe8836d4d811bbd668352dd2f871f49e3f3e59d","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GS-PC-042","status":"approved"}}}
+      }
+    }}
   ],
   "overrides": [
     {
