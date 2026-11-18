@@ -1,12 +1,15 @@
 import {createHash} from "node:crypto";
-import {FUNNEL_SERVER_STEPS} from "../funnel.js";
+import {FUNNEL_SERVER_STEPS,FUNNEL_SOURCES} from "../funnel.js";
 
 const STEPS=new Set(FUNNEL_SERVER_STEPS);
 export function validateFunnelStep(payload){
   if(!payload||typeof payload!=="object"||Array.isArray(payload))return {ok:false,code:"INVALID_FUNNEL"};
-  if(Object.keys(payload).some(key=>key!=="step"))return {ok:false,code:"UNKNOWN_FUNNEL_FIELD"};
+  if(Object.keys(payload).some(key=>key!=="step"&&key!=="source"))return {ok:false,code:"UNKNOWN_FUNNEL_FIELD"};
   if(!STEPS.has(payload.step))return {ok:false,code:"INVALID_FUNNEL_STEP"};
-  return {ok:true,step:payload.step};
+  // Clientes antigos não enviam origem → "direto". Valores fora da lista fechada são recusados.
+  const source=payload.source===undefined?"direto":payload.source;
+  if(!FUNNEL_SOURCES.includes(source))return {ok:false,code:"INVALID_FUNNEL_SOURCE"};
+  return {ok:true,step:payload.step,source};
 }
 
 // Limite anti-abuso em memória da instância; o IP é usado só como chave efémera
@@ -21,10 +24,10 @@ export function funnelRateAllowed(ip,now=Date.now()){
 }
 export function resetFunnelRateLimit(){buckets.clear()}
 
-export async function incrementFunnel(sql,step){
+export async function incrementFunnel(sql,step,source="direto"){
   await sql`
-    insert into public.funnel_daily(day,step,count)
-    values ((now() at time zone 'Europe/Lisbon')::date,${step},1)
-    on conflict (day,step) do update set count=public.funnel_daily.count+1
+    insert into public.funnel_daily(day,step,source,count)
+    values ((now() at time zone 'Europe/Lisbon')::date,${step},${source},1)
+    on conflict (day,step,source) do update set count=public.funnel_daily.count+1
   `;
 }

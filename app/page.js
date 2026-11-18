@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import {useEffect,useState} from "react";
+import {captureFunnelSource} from "./lib/funnelClient";
 
 const ClientApp=dynamic(()=>import("./clientApp"),{ssr:false,loading:({error})=>error?<Loading failed/>:<Loading/>});
 const STORAGE_KEYS=["a25","a25-friends-beta"];
@@ -40,6 +41,7 @@ function Landing({onStart}){return <main className="dark center"><section classN
 export default function Page(){
   const [ready,setReady]=useState(false),[boot,setBoot]=useState(false);
   useEffect(()=>{
+    captureFunnelSource();
     const url=new URL(window.location.href);
     const fromAccountForm=url.searchParams.get("conta")==="1";
     if(fromAccountForm){
