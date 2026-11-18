@@ -32,6 +32,32 @@ const VNEXT_RUNTIME_QUESTIONS=balanceOptionOrderBank([...VNEXT_PILOT_QUESTIONS,.
 export const RUNTIME_QUESTION_BANK=[...QUESTION_BANK,...VNEXT_RUNTIME_QUESTIONS,...CONSTRUCTED_RESPONSE_BANK,...COMPLETION_RESPONSE_BANK];
 export const questionById=id=>RUNTIME_QUESTION_BANK.find(q=>q.id===id)||null;
 
+const VNEXT_SOURCE_IDS=new Map();
+const VNEXT_SOURCE_SIGNATURES=new Map();
+for(const question of VNEXT_RUNTIME_QUESTIONS){
+  const sourceId=question.sourceQuestionId||question.id;
+  if(question.sourceQuestionId)VNEXT_SOURCE_IDS.set(question.id,sourceId);
+  // O item piloto vem antes das cópias e conserva a assinatura da família.
+  if(!VNEXT_SOURCE_SIGNATURES.has(sourceId))VNEXT_SOURCE_SIGNATURES.set(sourceId,question.signature||sourceId);
+}
+
+function sourceIdForQuestionId(id){
+  // Uma versão antiga pode conter um ID de contexto que já saiu do banco.
+  if(typeof id!=="string")return id;
+  return VNEXT_SOURCE_IDS.get(id)||id.replace(/^(?:DG|MS|EX)-(VN\d{2}[A-Z0-9]+-[A-Z0-9]+-\d{3})$/u,"$1");
+}
+
+function questionSourceId(item){
+  const id=item.id??item.itemId;
+  return VNEXT_SOURCE_IDS.get(id)||item.sourceQuestionId||sourceIdForQuestionId(id);
+}
+
+function evidenceIdentity(item){
+  const sourceId=questionSourceId(item);
+  const vnextSource=sourceId&&/^VN\d{2}[A-Z0-9]+-[A-Z0-9]+-\d{3}$/u.test(sourceId);
+  return vnextSource?(VNEXT_SOURCE_SIGNATURES.get(sourceId)||sourceId):(item.signature||sourceId);
+}
+
 export const theme=id=>TAXONOMY.find(t=>t.id===id);
 export const byYear=year=>TAXONOMY.filter(t=>t.year===year);
 
@@ -142,7 +168,7 @@ function difficultyWeight(difficulty){
 function signatureDiminishingFactors(evidence){
   const seen=new Map();
   return evidence.map(e=>{
-    const key=e.signature||e.itemId||"sem-assinatura";
+    const key=evidenceIdentity(e)||"sem-assinatura";
     const n=seen.get(key)||0;
     seen.set(key,n+1);
     // Repetir a mesma estrutura pode ser útil para aprender, mas não deve
@@ -157,7 +183,7 @@ function evidenceAgreement(evidence){
   const independent=[];
   const seen=new Set();
   [...evidence].sort((a,b)=>(b.at||0)-(a.at||0)).forEach(e=>{
-    const key=e.signature||e.itemId;
+    const key=evidenceIdentity(e);
     if(!seen.has(key) && (e.strength??1)>=.5){seen.add(key);independent.push(e)}
   });
   if(independent.length<2)return {factor:1,dispersion:0,contradictory:false};
@@ -193,7 +219,7 @@ export function summarizeEvidence(evidence=[],now=Date.now()){
   const domain=Math.round(weighted.reduce((a,e)=>a+(e.signal??50)*e.w,0)/denom);
 
   const strong=evidence.filter(e=>(e.strength??1)>=.5);
-  const independentSignatures=new Set(strong.map(e=>e.signature||e.itemId)).size;
+  const independentSignatures=new Set(strong.map(evidenceIdentity)).size;
   const cognitiveVariety=new Set(strong.map(e=>e.cognitive).filter(Boolean)).size;
   const sourceVariety=new Set(strong.map(e=>e.source).filter(Boolean)).size;
   const difficultyVariety=new Set(strong.map(e=>e.difficulty).filter(x=>x!==undefined)).size;
@@ -241,7 +267,8 @@ export function evidenceHealth(score,now=Date.now()){
 
 export function applyEvidence(score,item,correct,source="diagnostic",strength=1,meta={}){
   const previous=score?.evidence || [];
-  const duplicateSignature=previous.some(e=>(e.signature||e.itemId)===(item.signature||item.id));
+  const identity=evidenceIdentity(item);
+  const duplicateSignature=previous.some(e=>evidenceIdentity(e)===identity);
   const effectiveStrength=strength*(duplicateSignature?.55:1);
 
   const newEvidence={
@@ -317,7 +344,9 @@ export function estimateMissionSeconds(item){
 }
 
 export function isUsefulMissionInteraction(item,usedIds=[],usedSignatures=[]){
-  if(!item||usedIds.includes(item.id))return false;
+  if(!item)return false;
+  const sourceId=questionSourceId(item);
+  if(usedIds.some(id=>sourceIdForQuestionId(id)===sourceId))return false;
   const signature=item.signature||item.id;
   return !usedSignatures.includes(signature);
 }
@@ -383,7 +412,7 @@ export function missionStopDecision({
   const confGain=relevantNow-relevantBefore;
 
   const independent=new Set(
-    sessionTargetItems.map(x=>x.signature||x.id).filter(Boolean)
+    sessionTargetItems.map(evidenceIdentity).filter(Boolean)
   ).size;
   const cognitiveVariety=new Set(
     sessionTargetItems.map(x=>x.cognitive).filter(Boolean)
@@ -544,6 +573,7 @@ export function trainingQuestions(s,{themeId,focus,level},limit=DEFAULT_TRAINING
   const selected=[];
   const usedCog=new Set();
   const usedSignatures=new Set();
+  const usedSources=new Set();
   const pool=[...candidates];
 
   while(pool.length && selected.length<boundedLimit){
@@ -556,9 +586,12 @@ export function trainingQuestions(s,{themeId,focus,level},limit=DEFAULT_TRAINING
       return score(a)-score(b);
     });
     const q=pool.shift();
+    const sourceId=questionSourceId(q);
+    if(usedSources.has(sourceId))continue;
     selected.push(q);
     usedCog.add(q.cognitive);
     usedSignatures.add(q.signature);
+    usedSources.add(sourceId);
   }
   const constructed=constructedPracticeQuestion(s,{themeId,focus,level});
   if(constructed&&selected.length>=2)selected[selected.length-1]=constructed;
@@ -883,16 +916,17 @@ export function seenQuestionIds(s){
   return new Set(ids);
 }
 
-function bestExamQuestionForTheme(s,themeId,seenIds,usedCognitive,usedSessionIds=new Set()){
-  const all=eligibleQuestions(s,themeId,"exam").filter(q=>!q.response||q.response.type==="choice").filter(q=>!usedSessionIds.has(q.id));
+function bestExamQuestionForTheme(s,themeId,seenSources,usedCognitive,usedSessionSources){
+  const all=eligibleQuestions(s,themeId,"exam")
+    .filter(q=>(!q.response||q.response.type==="choice")&&!usedSessionSources.has(questionSourceId(q)));
   if(!all.length)return null;
-  const unseen=all.filter(q=>!seenIds.has(q.id));
+  const unseen=all.filter(q=>!seenSources.has(questionSourceId(q)));
   const pool=unseen.length?unseen:all;
   const target=desiredDifficulty(s.scores[themeId],s.goal);
   return [...pool].sort((a,b)=>{
     const score=q=>Math.abs(q.difficulty-target)*3
       +(usedCognitive.has(q.cognitive)?1.3:0)
-      +(seenIds.has(q.id)?5:0);
+      +(seenSources.has(questionSourceId(q))?5:0);
     return score(a)-score(b);
   })[0];
 }
@@ -901,9 +935,9 @@ export function buildMiniExam(s,count=MATH_MINI_EXAM_QUESTIONS){
   const examCount=Math.max(10,Math.min(14,Number.isInteger(count)?count:MATH_MINI_EXAM_QUESTIONS));
   const constructedTarget=examCount>=4?Math.min(2,examCount-2):0;
   const choiceTarget=examCount-constructedTarget;
-  const seen=seenQuestionIds(s);
+  const seen=new Set([...seenQuestionIds(s)].map(sourceIdForQuestionId));
   const usedCognitive=new Set();
-  const usedSessionIds=new Set();
+  const usedSessionSources=new Set();
   const selected=[];
   const usedThemes=new Set();
   const scopedThemes=academicScopeThemes(s?.profile)
@@ -928,9 +962,9 @@ export function buildMiniExam(s,count=MATH_MINI_EXAM_QUESTIONS){
       const inYear=selected.filter(q=>theme(q.themeId)?.year===group.year).length;
       if(inYear>=group.n)break;
       if(usedThemes.has(t.id))continue;
-      const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive,usedSessionIds);
+      const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive,usedSessionSources);
       if(q){
-        selected.push(q);usedThemes.add(t.id);usedSessionIds.add(q.id);usedCognitive.add(q.cognitive);
+        selected.push(q);usedThemes.add(t.id);usedSessionSources.add(questionSourceId(q));usedCognitive.add(q.cognitive);
       }
     }
   }
@@ -941,8 +975,8 @@ export function buildMiniExam(s,count=MATH_MINI_EXAM_QUESTIONS){
       .sort((a,b)=>b.relevance-a.relevance);
     for(const t of themes){
       if(selected.length>=choiceTarget)break;
-      const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive,usedSessionIds);
-      if(q){selected.push(q);usedThemes.add(t.id);usedSessionIds.add(q.id);usedCognitive.add(q.cognitive)}
+      const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive,usedSessionSources);
+      if(q){selected.push(q);usedThemes.add(t.id);usedSessionSources.add(questionSourceId(q));usedCognitive.add(q.cognitive)}
     }
   }
 
@@ -953,9 +987,9 @@ export function buildMiniExam(s,count=MATH_MINI_EXAM_QUESTIONS){
     progress=false;
     for(const t of [...scopedThemes].sort((a,b)=>b.relevance-a.relevance)){
       if(selected.length>=choiceTarget)break;
-      const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive,usedSessionIds);
+      const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive,usedSessionSources);
       if(!q)continue;
-      selected.push(q);usedSessionIds.add(q.id);usedCognitive.add(q.cognitive);progress=true;
+      selected.push(q);usedSessionSources.add(questionSourceId(q));usedCognitive.add(q.cognitive);progress=true;
     }
   }
 

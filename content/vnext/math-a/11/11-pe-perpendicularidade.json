@@ -98,15 +98,15 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Um vetor perpendicular a (a,b) pode ser...",
+      "q": "Qual das expressões dá um vetor perpendicular a (a,b) para qualquer par real (a,b)≠(0,0)?",
       "o": [
         "(a,b).",
         "(−a,−b).",
-        "(b,a) sempre.",
+        "(a−b,a+b).",
         "(−b,a)."
       ],
       "a": 3,
-      "sol": "a(−b)+ba=0.",
+      "sol": "O produto escalar de (a,b) com (−b,a) é a(−b)+ba=0. Como (a,b) é não nulo, (−b,a) também é não nulo.",
       "hyp": "Pode escolher o vetor oposto.",
       "contexts": [
         "mission",
@@ -1259,7 +1259,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Uma viga deve ficar contida no plano x+2y+2z=0. Qual vetor diretor é possível?",
+      "q": "Uma viga deve ficar contida no plano x+2y+2z=0. Qual dos vetores pode dar a direção da viga?",
       "o": [
         "(1,2,2).",
         "(2,4,4).",
@@ -1267,7 +1267,7 @@
         "(0,1,1)."
       ],
       "a": 2,
-      "sol": "A normal é (1,2,2); (2,−1,0) tem produto 2−2=0.",
+      "sol": "A direção da viga é perpendicular à normal (1,2,2) do plano. Para (2,−1,0), o produto escalar com a normal é 2−2+0=0, portanto essa direção é possível.",
       "hyp": "Pode usar a normal como direção da viga.",
       "contexts": [
         "mission",

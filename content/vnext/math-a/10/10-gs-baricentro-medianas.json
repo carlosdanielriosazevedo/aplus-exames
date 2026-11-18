@@ -638,7 +638,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se AM=18 e G é baricentro, quanto valem AG e GM?",
+      "q": "No triângulo ABC, a mediana AM mede 18 e G é o baricentro. Quanto medem AG e GM, respetivamente?",
       "o": [
         "9 e 9",
         "6 e 12",

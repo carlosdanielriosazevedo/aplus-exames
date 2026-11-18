@@ -17,7 +17,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "A regra do produto pode escrever-se como...",
+      "q": "Se P(A)>0, como se escreve a regra do produto para a probabilidade da interseção de A e B?",
       "o": [
         "P(A∩B)=P(A)P(B|A).",
         "P(A∩B)=P(A)+P(B).",
@@ -25,7 +25,7 @@
         "P(A|B)=P(A)P(B)."
       ],
       "a": 0,
-      "sol": "A probabilidade de ocorrer A e depois B é P(A) vezes a probabilidade de B condicionada a A.",
+      "sol": "Como P(B|A)=P(A∩B)/P(A), a interseção tem probabilidade P(A∩B)=P(A)P(B|A).",
       "hyp": "Pode somar probabilidades de etapas sucessivas.",
       "contexts": [
         "mission",
@@ -152,7 +152,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Uma moeda equilibrada é lançada duas vezes. P(cara e depois cara)=...",
+      "q": "Lança-se uma moeda equilibrada duas vezes, de forma independente. Qual é a probabilidade de obter cara nos dois lançamentos?",
       "o": [
         "1/2.",
         "1/4.",
@@ -287,7 +287,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Uma urna tem 3 vermelhas e 2 azuis. Retira-se uma bola, repõe-se e retira-se outra. P(VV)=...",
+      "q": "Uma urna tem 3 bolas vermelhas e 2 azuis. Retira-se ao acaso uma bola, repõe-se a bola e retira-se outra ao acaso. Qual é a probabilidade de ambas serem vermelhas?",
       "o": [
         "3/5.",
         "6/25.",
@@ -295,7 +295,7 @@
         "3/10."
       ],
       "a": 2,
-      "sol": "Com reposição, P(V)=3/5 em ambas; (3/5)^2=9/25.",
+      "sol": "Com reposição, a probabilidade de sair uma bola vermelha é 3/5 em cada extração e as duas extrações são independentes. Assim, a probabilidade pedida é (3/5)²=9/25.",
       "hyp": "Pode usar 3/5×2/5.",
       "contexts": [
         "mission",
@@ -395,7 +395,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Na urna 3 V e 2 A sem reposição, P(duas cores diferentes)=...",
+      "q": "Uma urna tem 3 bolas verdes e 2 azuis. Retiram-se ao acaso duas bolas sucessivamente, sem reposição. Qual é a probabilidade de saírem duas cores diferentes?",
       "o": [
         "3/10.",
         "1/2.",
@@ -403,7 +403,7 @@
         "6/25."
       ],
       "a": 2,
-      "sol": "P(VA)+P(AV)=3/10+3/10=3/5.",
+      "sol": "As duas ordens possíveis são verde–azul e azul–verde. Somando as suas probabilidades, obtém-se (3/5)×(2/4)+(2/5)×(3/4)=3/5.",
       "hyp": "Pode contar apenas uma das ordens.",
       "contexts": [
         "mission",
@@ -557,15 +557,15 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se P(A)=0,7, P(B|A)=0,4 e P(B^c|A)=...",
+      "q": "Se P(A)=0,7 e P(B|A)=0,4, qual é a probabilidade P(Bᶜ|A)?",
       "o": [
         "0,6.",
         "0,4.",
         "0,3.",
-        "1,1."
+        "0,42."
       ],
       "a": 0,
-      "sol": "Os ramos B e B^c a partir de A somam 1:1−0,4=0,6.",
+      "sol": "Sabendo que ocorreu A, as probabilidades de B e de Bᶜ somam 1. Logo, P(Bᶜ|A)=1−0,4=0,6.",
       "hyp": "Pode usar P(A^c).",
       "contexts": [
         "mission",

@@ -17,7 +17,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "A taxa média de variação de f entre a e b e",
+      "q": "Se a e b são valores distintos do domínio de f, qual é a taxa média de variação de f entre a e b?",
       "o": [
         "(f(b)-f(a))/(b-a)",
         "(f(a)+f(b))/2",
@@ -25,7 +25,7 @@
         "(b-a)/(f(b)-f(a))"
       ],
       "a": 0,
-      "sol": "E a variação da função por unidade de variação da variavel.",
+      "sol": "Entre a e b, o valor de f varia f(b)−f(a) e a abcissa varia b−a. A taxa média é a razão entre estas duas variações, igual ao declive da secante que liga (a,f(a)) a (b,f(b)).",
       "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
       "contexts": [
         "mission",
@@ -44,7 +44,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "Geometricamente, a taxa média de variação entre dois pontos do gráfico e",
+      "q": "Qual é o significado geométrico da taxa média de variação de f entre dois pontos distintos do seu gráfico?",
       "o": [
         "o declive da tangente no primeiro ponto",
         "o declive da reta secante",
@@ -52,7 +52,7 @@
         "a ordenada média"
       ],
       "a": 1,
-      "sol": "A secante passa pelos dois pontos considerados.",
+      "sol": "Na reta secante que passa pelos dois pontos, o declive é a diferença das ordenadas dividida pela diferença das abcissas. É exatamente essa razão que define a taxa média de variação.",
       "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
       "contexts": [
         "mission",
@@ -71,7 +71,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "Se f mede distancia em km e t mede tempo em horas, a taxa média tem unidades",
+      "q": "Uma função f(t) dá a distância percorrida, em quilómetros, ao fim de t horas. Qual é a unidade da taxa média de variação de f?",
       "o": [
         "km.h",
         "h/km",
@@ -79,7 +79,7 @@
         "km"
       ],
       "a": 2,
-      "sol": "As unidades da taxa sao unidades de saida por unidades de entrada.",
+      "sol": "A taxa média é a variação da distância dividida pelo tempo decorrido. A sua unidade é o quilómetro por hora, km/h.",
       "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
       "contexts": [
         "mission",
@@ -557,7 +557,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicacao",
-      "q": "Para f(x)=2x+(3), qual é a taxa média de variação entre x=1 e x=5?",
+      "q": "Para f(x)=2x+3, qual é a taxa média de variação entre x=1 e x=5?",
       "o": [
         "2",
         "3",
@@ -565,7 +565,7 @@
         "4"
       ],
       "a": 0,
-      "sol": "Por ser afim, a taxa média e constante e igual ao declive 2.",
+      "sol": "Temos f(1)=5 e f(5)=13. A taxa média é (13−5)/(5−1)=2, igual ao declive da função afim.",
       "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
       "contexts": [
         "mission",
@@ -827,15 +827,15 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Modelacao",
-      "q": "Uma grandeza de temperatura passa de 12 para 20 em 4 unidades de tempo. Qual é a taxa média?",
+      "q": "A temperatura passa de 12 °C para 20 °C em 4 horas. Qual é a taxa média de variação, em °C/h?",
       "o": [
         "8",
         "4",
         "2",
-        "0.5"
+        "0,5"
       ],
       "a": 2,
-      "sol": "(20-12)/4=2 graus por hora.",
+      "sol": "Divide-se a variação total pelo tempo decorrido. Assim, (20−12)/4=2 °C/h.",
       "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
       "contexts": [
         "mission",
@@ -854,7 +854,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Modelacao",
-      "q": "Uma grandeza de volume passa de 100 para 160 em 3 unidades de tempo. Qual é a taxa média?",
+      "q": "O volume passa de 100 L para 160 L em 3 minutos. Qual é a taxa média de variação, em L/min?",
       "o": [
         "60",
         "3",
@@ -862,7 +862,7 @@
         "20"
       ],
       "a": 3,
-      "sol": "(160-100)/3=20 litros por minuto.",
+      "sol": "Divide-se a variação total pelo tempo decorrido. Assim, (160−100)/3=20 L/min.",
       "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
       "contexts": [
         "mission",
@@ -881,7 +881,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Modelacao",
-      "q": "Uma grandeza de população passa de 500 para 620 em 6 unidades de tempo. Qual é a taxa média?",
+      "q": "A população passa de 500 indivíduos para 620 indivíduos em 6 anos. Qual é a taxa média de variação, em indivíduos/ano?",
       "o": [
         "20",
         "120",
@@ -889,7 +889,7 @@
         "620"
       ],
       "a": 0,
-      "sol": "(620-500)/6=20 individuos por ano.",
+      "sol": "Divide-se a variação total pelo tempo decorrido. Assim, (620−500)/6=20 indivíduos/ano.",
       "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
       "contexts": [
         "mission",

@@ -17,15 +17,15 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "A distância de um ponto P a uma reta r é...",
+      "q": "Se P é um ponto exterior à reta r, qual é a distância de P a r?",
       "o": [
         "o comprimento do segmento perpendicular de P a r.",
-        "qualquer segmento que una P a r.",
-        "a distância à origem.",
-        "o declive da reta."
+        "o comprimento da projeção de [OP] sobre uma reta paralela a r.",
+        "o comprimento do segmento que liga P à origem.",
+        "o comprimento do segmento que liga P à interseção de r com Ox."
       ],
       "a": 0,
-      "sol": "A menor distância é medida segundo a perpendicular à reta.",
+      "sol": "O pé H da perpendicular traçada de P a r é o ponto de r mais próximo de P. Por isso, a distância pedida é o comprimento de [PH].",
       "hyp": "Pode usar um segmento oblíquo.",
       "contexts": [
         "mission",
@@ -44,15 +44,15 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "A distância de um ponto P a um plano α é...",
+      "q": "Se P é um ponto exterior ao plano α, qual é a distância de P a α?",
       "o": [
-        "qualquer segmento até um ponto do plano.",
+        "o comprimento do segmento que liga P a qualquer ponto do plano.",
         "o comprimento do segmento perpendicular de P ao plano.",
-        "a norma de P.",
-        "a distância à origem."
+        "o comprimento da projeção de [OP] sobre um plano paralelo a α.",
+        "o comprimento do segmento que liga P à origem."
       ],
       "a": 1,
-      "sol": "A distância mínima é medida na direção normal ao plano.",
+      "sol": "A projeção ortogonal H de P no plano α é o ponto do plano mais próximo de P. Logo, a distância é o comprimento de [PH].",
       "hyp": "Pode confundir distância a plano com distância a um ponto arbitrário.",
       "contexts": [
         "mission",
@@ -565,7 +565,7 @@
         "√(d1²+d2²)."
       ],
       "a": 0,
-      "sol": "É o análogo tridimensional da distância entre retas paralelas.",
+      "sol": "Se Q pertence ao primeiro plano, a expressão ax+by+cz vale −d₁ em Q e −d₂ no segundo plano. A distância é o módulo dessa diferença dividido pela norma √(a²+b²+c²) do vetor normal.",
       "hyp": "Pode esquecer normalizar pela norma da normal.",
       "contexts": [
         "mission",
@@ -619,7 +619,7 @@
         "2√3."
       ],
       "a": 2,
-      "sol": "A segunda simplifica para x+y+z−3=0; distância=3/√3=√3.",
+      "sol": "Dividindo a segunda equação por 2, obtém-se x+y+z=3. A origem pertence ao primeiro plano. A sua distância ao segundo é |0−3|/√(1²+1²+1²)=√3, que é também a distância entre os planos paralelos.",
       "hyp": "Pode comparar termos sem primeiro tornar as normais iguais.",
       "contexts": [
         "mission",
@@ -724,10 +724,10 @@
         "7.",
         "7/3.",
         "1.",
-        "7/√49."
+        "1/7."
       ],
       "a": 2,
-      "sol": "Norma da normal=√(36+9+4)=7; distância=7/7=1.",
+      "sol": "A norma do vetor normal (6,3,−2) é √(36+9+4)=7. O valor absoluto do termo independente é 7, pelo que a distância da origem ao plano é 7/7=1.",
       "hyp": "Pode não reconhecer a norma 7.",
       "contexts": [
         "mission",
@@ -1151,15 +1151,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "A fórmula de distância ponto-plano pode ser vista como...",
+      "q": "Seja Q um ponto do plano α, P um ponto exterior e n um vetor normal unitário a α. Como se obtém a distância de P a α a partir de w=QP?",
       "o": [
-        "a norma do vetor posição do ponto.",
-        "o produto vetorial com a origem.",
-        "o valor absoluto da projeção do vetor entre o ponto e um ponto do plano sobre uma normal unitária.",
-        "a soma das coordenadas."
+        "Pela norma de w, qualquer que seja Q.",
+        "Pelo módulo da componente de w paralela ao plano.",
+        "Pelo módulo da componente de w na direção de n.",
+        "Pela norma de w mais a norma de n."
       ],
       "a": 2,
-      "sol": "A distância é a componente normal do deslocamento.",
+      "sol": "A projeção escalar de w sobre n é w·n, que pode ser positiva ou negativa conforme o sentido de n. A distância ao plano é, portanto, |w·n|.",
       "hyp": "Pode confundir projeção normal com comprimento total.",
       "contexts": [
         "mission",

@@ -341,15 +341,15 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Se x=a é raiz de multiplicidade 2, então P tem fator...",
+      "q": "Qual é o fator quadrático que P tem sempre, para qualquer raiz a de multiplicidade 2?",
       "o": [
         "(x−a)².",
         "x−2a.",
-        "(x+a)².",
+        "(x−a)²+1.",
         "x²−a."
       ],
       "a": 0,
-      "sol": "Multiplicidade 2 significa o fator linear repetido duas vezes.",
+      "sol": "A multiplicidade 2 significa que o fator x−a ocorre duas vezes na fatorização. Portanto, (x−a)² divide P.",
       "hyp": "Pode confundir multiplicidade com coeficiente.",
       "contexts": [
         "mission",
@@ -746,7 +746,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Se P tem raízes 1,2,3 e coeficiente líder 2, então...",
+      "q": "Um polinómio P de grau 3 tem raízes 1, 2 e 3 e o coeficiente de x³ é 2. Qual é a expressão de P(x)?",
       "o": [
         "P(x)=(x−1)(x−2)(x−3).",
         "P(x)=2(x+1)(x+2)(x+3).",
@@ -754,7 +754,7 @@
         "P(x)=2(x−1)(x−2)(x−3)."
       ],
       "a": 3,
-      "sol": "Os fatores vêm das raízes e o coeficiente líder ajusta a escala.",
+      "sol": "As três raízes distintas dão os fatores (x−1), (x−2) e (x−3). Como o grau é 3, o produto destes fatores só precisa de ser multiplicado por 2 para ter o coeficiente de x³ indicado.",
       "hyp": "Pode esquecer o coeficiente líder.",
       "contexts": [
         "mission",
@@ -1286,7 +1286,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Num modelo polinomial, P(t)=0 representa frequentemente...",
+      "q": "Num modelo polinomial, P(t) é o valor de uma grandeza no instante t. Se P(t₀)=0, o que representa t₀ no modelo?",
       "o": [
         "o valor máximo obrigatório.",
         "uma assíntota.",

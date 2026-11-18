@@ -17,7 +17,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Para vetores não nulos u e v, u·v é igual a...",
+      "q": "Sejam u e v vetores não nulos e θ o ângulo entre eles. Qual é a expressão do produto escalar u·v em função de θ e das normas?",
       "o": [
         "||u||||v||cosθ.",
         "||u||+||v||.",
@@ -25,7 +25,7 @@
         "cos(||u||+||v||)."
       ],
       "a": 0,
-      "sol": "Esta é a forma geométrica do produto escalar.",
+      "sol": "O produto escalar é dado pelo produto das normas dos vetores multiplicado pelo cosseno do ângulo entre eles.",
       "hyp": "Pode trocar cosseno por seno.",
       "contexts": [
         "mission",
@@ -152,7 +152,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Se ||u||=3, ||v||=4 e θ=60°, então u·v=",
+      "q": "Para dois vetores u e v de normas 3 e 4, o ângulo entre eles é 60°. Quanto vale u·v?",
       "o": [
         "12.",
         "6.",
@@ -260,7 +260,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Se u·v=12, ||u||=3 e ||v||=4, então θ=",
+      "q": "Se u·v=12, ‖u‖=3 e ‖v‖=4, qual é o ângulo θ entre u e v?",
       "o": [
         "π/3.",
         "0.",
@@ -268,7 +268,7 @@
         "π."
       ],
       "a": 1,
-      "sol": "cosθ=12/(12)=1, logo θ=0.",
+      "sol": "Temos cos θ=(u·v)/(‖u‖‖v‖)=12/(3×4)=1. No intervalo [0,π], isso dá θ=0.",
       "hyp": "Pode pensar que produto igual ao produto das normas implica 60°.",
       "contexts": [
         "mission",
@@ -395,7 +395,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Se u·v>0, então θ é...",
+      "q": "Se u e v são vetores não nulos e não colineares com u·v>0, como se classifica o ângulo θ entre eles?",
       "o": [
         "reto.",
         "obtuso.",
@@ -403,7 +403,7 @@
         "sempre 0."
       ],
       "a": 2,
-      "sol": "cosθ>0 em ]0,π/2[.",
+      "sol": "De u·v=‖u‖‖v‖cos θ segue-se que cos θ>0. Os vetores não são colineares, pelo que θ≠0. Portanto, 0<θ<π/2 e o ângulo é agudo.",
       "hyp": "Pode achar que positivo implica vetores iguais.",
       "contexts": [
         "mission",
@@ -611,7 +611,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Compreensão",
-      "q": "Normalizar um vetor significa...",
+      "q": "Em que consiste normalizar um vetor não nulo?",
       "o": [
         "multiplicá-lo pela norma.",
         "somar as componentes.",
@@ -619,7 +619,7 @@
         "torná-lo perpendicular."
       ],
       "a": 2,
-      "sol": "O resultado é um vetor unitário com mesma direção e sentido.",
+      "sol": "Divide-se o vetor pela sua norma, que é positiva. O vetor obtido tem norma 1 e mantém a direção e o sentido do vetor inicial.",
       "hyp": "Pode confundir com projeção.",
       "contexts": [
         "mission",
@@ -1232,7 +1232,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Uma força de 10 N atua num deslocamento de 5 m formando 60°. O produto escalar F·d é...",
+      "q": "Uma força F de intensidade 10 N atua durante um deslocamento d de comprimento 5 m. O ângulo entre F e d é 60°. Quanto vale F·d, em joules?",
       "o": [
         "50.",
         "25.",
@@ -1240,7 +1240,7 @@
         "100."
       ],
       "a": 1,
-      "sol": "10×5×cos60°=25.",
+      "sol": "F·d=‖F‖‖d‖cos 60°=10×5×(1/2)=25 J.",
       "hyp": "Pode multiplicar só as magnitudes.",
       "contexts": [
         "mission",

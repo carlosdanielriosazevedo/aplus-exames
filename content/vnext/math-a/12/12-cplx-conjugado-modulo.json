@@ -1286,15 +1286,15 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Um ponto complexo z=6−8i está a que distância da origem?",
+      "q": "Se z=(6−8i)²/10, qual é o módulo de z?",
       "o": [
-        "14.",
+        "1.",
         "100.",
-        "2.",
+        "20.",
         "10."
       ],
       "a": 3,
-      "sol": "|z|=√(36+64)=10.",
+      "sol": "Como |6−8i|=√(6²+8²)=10, obtém-se |z|=10²/10=10.",
       "hyp": "Pode usar distância Manhattan.",
       "contexts": [
         "mission",

@@ -44,7 +44,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "Se f'(x)>0 num intervalo, f e",
+      "q": "Como varia f num intervalo onde f′(x)>0 para todo o x?",
       "o": [
         "decrescente",
         "crescente nesse intervalo",
@@ -71,7 +71,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "Se f'(x)<0 num intervalo, f e",
+      "q": "Como varia f num intervalo onde f′(x)<0 para todo o x?",
       "o": [
         "crescente",
         "constante",
@@ -289,13 +289,13 @@
       "cognitive": "Aplicacao",
       "q": "Se f(x)=x^4, então f'(x)=",
       "o": [
-        "x^4",
-        "4x^3+1",
+        "x³",
+        "x⁴",
         "4x^3",
-        "0"
+        "4x⁴"
       ],
       "a": 2,
-      "sol": "Derivando termo a termo obtém-se 4x^3.",
+      "sol": "A regra da potência multiplica o coeficiente pelo expoente 4 e reduz o expoente em uma unidade. Logo, a derivada de x⁴ é 4x³.",
       "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
@@ -316,13 +316,13 @@
       "cognitive": "Aplicacao",
       "q": "Se f(x)=5x^3, então f'(x)=",
       "o": [
-        "5x^3",
-        "15x^2+1",
-        "0",
+        "5x²",
+        "5x³",
+        "15x³",
         "15x^2"
       ],
       "a": 3,
-      "sol": "Derivando termo a termo obtém-se 15x^2.",
+      "sol": "A regra da potência multiplica o coeficiente pelo expoente 3 e reduz o expoente em uma unidade. Logo, a derivada de 5x³ é 15x².",
       "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
@@ -344,12 +344,12 @@
       "q": "Se f(x)=2x^5, então f'(x)=",
       "o": [
         "10x^4",
-        "2x^5",
-        "10x^4+1",
-        "0"
+        "2x⁴",
+        "2x⁵",
+        "10x⁵"
       ],
       "a": 0,
-      "sol": "Derivando termo a termo obtém-se 10x^4.",
+      "sol": "A regra da potência multiplica o coeficiente pelo expoente 5 e reduz o expoente em uma unidade. Logo, a derivada de 2x⁵ é 10x⁴.",
       "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
@@ -424,13 +424,13 @@
       "cognitive": "Aplicacao",
       "q": "Se f(x)=x^3+x, então f'(x)=",
       "o": [
-        "x^3+x",
-        "3x^2+1+1",
-        "0",
+        "x²+1",
+        "3x²+x",
+        "3x²",
         "3x^2+1"
       ],
       "a": 3,
-      "sol": "Derivando termo a termo obtém-se 3x^2+1.",
+      "sol": "A derivada de x³ é 3x² e a de x é 1. Somando, obtém-se f′(x)=3x²+1.",
       "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
@@ -962,7 +962,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=2x, em x>0, então",
+      "q": "Se f′(x)=2x, o que se pode concluir sobre f no intervalo ]0,+∞[?",
       "o": [
         "f e decrescente",
         "f e constante",
@@ -970,7 +970,7 @@
         "f e crescente"
       ],
       "a": 3,
-      "sol": "Para x>0, 2x>0.",
+      "sol": "Para todo o x>0, f′(x)=2x>0. Portanto, f é crescente em ]0,+∞[.",
       "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
@@ -989,7 +989,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=2x, em x<0, então",
+      "q": "Se f′(x)=2x, o que se pode concluir sobre f no intervalo ]−∞,0[?",
       "o": [
         "f e decrescente",
         "f e crescente",
@@ -997,7 +997,7 @@
         "f e positiva"
       ],
       "a": 0,
-      "sol": "Para x<0, 2x<0.",
+      "sol": "Para todo o x<0, f′(x)=2x<0. Portanto, f é decrescente em ]−∞,0[.",
       "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
@@ -1178,7 +1178,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretacao",
-      "q": "Se f'(x)=(x-1)(x+2), em x<-2, então",
+      "q": "Se f′(x)=(x−1)(x+2), o que se pode concluir sobre f em ]−∞,−2[?",
       "o": [
         "f e decrescente",
         "f e constante",
@@ -1186,7 +1186,7 @@
         "f e crescente"
       ],
       "a": 3,
-      "sol": "Ambos os fatores sao negativos, produto positivo.",
+      "sol": "Nesse intervalo, x−1<0 e x+2<0. Logo f′(x)>0, e f é crescente em ]−∞,−2[.",
       "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
@@ -1232,7 +1232,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "f'(x)=4x^3; uma possibilidade para f(x) e",
+      "q": "Em cada expressão, C representa uma constante real. Qual das expressões tem derivada 4x³?",
       "o": [
         "4x^4+C",
         "x^4+C",
@@ -1240,7 +1240,7 @@
         "x^4/4+C"
       ],
       "a": 1,
-      "sol": "A derivada de x^4+C e 4x^3.",
+      "sol": "A derivada de x⁴ é 4x³ e a derivada de C é zero. Portanto, a derivada de x⁴+C é 4x³.",
       "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
@@ -1313,7 +1313,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocinio",
-      "q": "f'(x)=3x^2+2; uma possibilidade para f(x) e",
+      "q": "Em cada expressão, C representa uma constante real. Qual das expressões tem derivada 3x²+2?",
       "o": [
         "x^3+2x+C",
         "3x^3+2x+C",
@@ -1321,7 +1321,7 @@
         "x^2+2x+C"
       ],
       "a": 0,
-      "sol": "Derivando x^3+2x+C obtém-se 3x^2+2.",
+      "sol": "Ao derivar os termos x³, 2x e C, obtém-se respetivamente 3x², 2 e 0. Portanto, a derivada de x³+2x+C é 3x²+2.",
       "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",

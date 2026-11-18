@@ -154,7 +154,7 @@
       "cognitive": "Aplicação",
       "q": "Para f(x)=x²−2, temos f(1)=−1 e f(2)=2. Logo existe uma raiz em...",
       "o": [
-        "]−1,2[.",
+        "]−1,1[.",
         "]1,2[.",
         "]0,1[.",
         "]2,3[."
@@ -584,7 +584,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se f é contínua, f(2,1)<0 e f(2,2)>0, então a raiz fica confinada num intervalo de amplitude...",
+      "q": "Uma função f é contínua em [2,1;2,2] e verifica f(2,1)<0<f(2,2). Qual é a amplitude do intervalo ]2,1;2,2[, onde o Teorema de Bolzano garante pelo menos uma raiz?",
       "o": [
         "0,01.",
         "0,1.",
@@ -592,7 +592,7 @@
         "2,2."
       ],
       "a": 1,
-      "sol": "2,2−2,1=0,1.",
+      "sol": "A continuidade e os sinais opostos nos extremos garantem pelo menos uma raiz em ]2,1;2,2[. A amplitude é 2,2−2,1=0,1.",
       "hyp": "Pode confundir amplitude com casas decimais exatas.",
       "contexts": [
         "mission",

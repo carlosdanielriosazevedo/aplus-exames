@@ -49,10 +49,10 @@
         "o conjunto de todas as entradas.",
         "o conjunto dos valores efetivamente obtidos pela função.",
         "um único valor obrigatório.",
-        "o contradomínio sempre por definição."
+        "o conjunto das entradas para as quais a função toma o valor zero."
       ],
       "a": 1,
-      "sol": "A imagem contém as saídas que a função realmente assume.",
+      "sol": "Para formar a imagem, calcula f(x) para os valores x do domínio e reúne as saídas obtidas. Um valor pertence à imagem porque é atingido pela função para pelo menos uma entrada.",
       "hyp": "Pode confundir imagem com domínio ou contradomínio.",
       "contexts": [
         "mission",
@@ -79,7 +79,7 @@
         "f(x)=1."
       ],
       "a": 2,
-      "sol": "Os zeros são as preimagens de 0.",
+      "sol": "Para determinar os zeros, procura as entradas do domínio para as quais a ordenada vale zero. Assim, um valor x é zero da função porque verifica f(x)=0.",
       "hyp": "Pode achar que zero da função significa apenas x=0.",
       "contexts": [
         "mission",
@@ -152,15 +152,15 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "No gráfico de y=f(x), os zeros correspondem aos pontos onde o gráfico...",
+      "q": "No gráfico de y=f(x), os zeros são as abcissas dos pontos em que o gráfico...",
       "o": [
         "interseta o eixo Oy.",
         "interseta ou toca o eixo Ox.",
-        "atinge a média.",
+        "muda de monotonia.",
         "tem sempre máximo."
       ],
       "a": 1,
-      "sol": "Nesses pontos y=0.",
+      "sol": "Um zero é a abcissa de um ponto do gráfico cuja ordenada é nula, porque f(x)=0. Assim, localiza os pontos onde o gráfico encontra o eixo Ox e lê as suas abcissas.",
       "hyp": "Pode confundir eixo Ox com Oy.",
       "contexts": [
         "mission",
@@ -179,7 +179,7 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Se o gráfico cruza o eixo Ox em x=−1 e x=4, os zeros são...",
+      "q": "Se o gráfico de f interseta o eixo Ox apenas em x=−1 e x=4, quais são os zeros de f?",
       "o": [
         "0 e 3.",
         "−4 e 1.",
@@ -187,7 +187,7 @@
         "apenas 4."
       ],
       "a": 2,
-      "sol": "As abcissas das interseções com Ox são os zeros.",
+      "sol": "Nos pontos de interseção com o eixo Ox, a ordenada é zero porque todos os pontos desse eixo têm a forma (x; 0). Assim, os zeros de f são −1 e 4.",
       "hyp": "Pode usar ordenadas em vez de abcissas.",
       "contexts": [
         "mission",
@@ -206,15 +206,15 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Dizer que f(x)>0 significa que o gráfico está...",
+      "q": "Em relação ao eixo Ox, onde está o ponto de abcissa x do gráfico de f, sabendo que f(x)>0?",
       "o": [
         "abaixo do eixo Ox.",
-        "sobre o eixo Oy.",
+        "sobre o eixo Ox.",
         "sempre no primeiro quadrante.",
         "acima do eixo Ox."
       ],
       "a": 3,
-      "sol": "f(x)>0 significa ordenada positiva.",
+      "sol": "Para cada entrada x, o ponto do gráfico tem coordenadas (x; f(x)). Se f(x)>0, a ordenada é positiva, por isso o ponto fica acima do eixo Ox.",
       "hyp": "Pode associar positividade a x>0.",
       "contexts": [
         "mission",
@@ -233,7 +233,7 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Dizer que f(x)<0 significa que o gráfico está...",
+      "q": "Se f(x)<0, onde está o ponto do gráfico de f que tem abcissa x?",
       "o": [
         "abaixo do eixo Ox.",
         "acima do eixo Ox.",
@@ -241,7 +241,7 @@
         "sempre no terceiro quadrante."
       ],
       "a": 0,
-      "sol": "f(x)<0 corresponde a ordenada negativa.",
+      "sol": "Para cada entrada x, o ponto do gráfico tem coordenadas (x; f(x)). Se f(x)<0, a ordenada é negativa, por isso o ponto fica abaixo do eixo Ox.",
       "hyp": "Pode confundir sinal de x com sinal de f(x).",
       "contexts": [
         "mission",
@@ -592,7 +592,7 @@
         "[−2,+∞[."
       ],
       "a": 1,
-      "sol": "Como x²≥0, x²+2≥2, e 2 é atingido em x=0.",
+      "sol": "Como x²≥0, temos x²+2≥2. Qualquer y≥2 é atingido, porque basta tomar x=√(y−2) para obter f(x)=y. Assim, a imagem é [2,+∞[.",
       "hyp": "Pode deslocar a imagem para o lado errado.",
       "contexts": [
         "mission",
@@ -619,7 +619,7 @@
         "[0,5]."
       ],
       "a": 2,
-      "sol": "−x²≤0, logo f(x)≤5, e 5 é atingido em x=0.",
+      "sol": "Como x²≥0, temos −x²+5≤5. Qualquer y≤5 é atingido, porque basta tomar x=√(5−y) para obter f(x)=y. Assim, a imagem é ]−∞,5].",
       "hyp": "Pode confundir máximo com mínimo.",
       "contexts": [
         "mission",
@@ -665,7 +665,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se f(x)=x²−4, quais são os zeros?",
+      "q": "Considera a parábola y=x²−2x e a reta y=4−2x. Quais são as abcissas dos pontos de interseção dos dois gráficos?",
       "o": [
         "−2 e 2.",
         "−4 e 4.",
@@ -673,8 +673,8 @@
         "apenas 2."
       ],
       "a": 0,
-      "sol": "x²−4=0 => x²=4 => x=±2.",
-      "hyp": "Pode esquecer uma das raízes.",
+      "sol": "Iguala x²−2x e 4−2x, porque as ordenadas coincidem nos pontos de interseção. Soma 2x aos dois membros para obter x²=4. Assim, os gráficos encontram-se nas abcissas −2 e 2.",
+      "hyp": "Pode procurar os zeros de cada expressão em vez de igualar as duas ordenadas.",
       "contexts": [
         "mission",
         "training",
@@ -692,7 +692,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se f(x)=(x−1)(x+3), quais são os zeros?",
+      "q": "Se f(x)=(x+1)(x−3) e g(x)=f(−x), quais são os zeros de g?",
       "o": [
         "−1 e 3.",
         "1 e −3.",
@@ -700,8 +700,8 @@
         "−1 e −3."
       ],
       "a": 1,
-      "sol": "Cada fator pode ser zero: x=1 ou x=−3.",
-      "hyp": "Pode trocar sinais dos fatores.",
+      "sol": "Os fatores de f anulam-se em −1 e 3. Para resolver g(x)=0, iguala −x a cada um desses valores, porque g(x)=f(−x). Assim, −x=−1 ou −x=3, logo os zeros de g são 1 e −3.",
+      "hyp": "Pode usar diretamente os zeros de f sem trocar o sinal das abcissas na reflexão do gráfico.",
       "contexts": [
         "mission",
         "training",
@@ -727,7 +727,7 @@
         "0 apenas."
       ],
       "a": 2,
-      "sol": "Produto zero quando x=0 ou x−5=0.",
+      "sol": "Pela lei do anulamento do produto, x(x−5)=0 exatamente quando x=0 ou x−5=0. A segunda condição dá x=5, logo tanto 0 como 5 são zeros.",
       "hyp": "Pode esquecer o fator x.",
       "contexts": [
         "mission",
@@ -775,13 +775,13 @@
       "cognitive": "Interpretação",
       "q": "Se f(x)>0 em ]−∞,2[ e f(x)<0 em ]2,+∞[, com f(2)=0, então o gráfico...",
       "o": [
-        "cruza ou toca Ox em x=2 e muda de sinal aí.",
+        "contém (2; 0) e passa de ordenadas positivas para negativas.",
         "nunca toca Ox.",
         "tem zero em x=0.",
         "é sempre crescente."
       ],
       "a": 0,
-      "sol": "x=2 é zero e o sinal muda de positivo para negativo.",
+      "sol": "Para x<2, a ordenada é positiva; para x>2, a ordenada é negativa. Em x=2, f(2)=0, logo o gráfico contém o ponto (2; 0) e o sinal de f muda de positivo para negativo.",
       "hyp": "Pode confundir mudança de sinal com monotonia.",
       "contexts": [
         "mission",
@@ -800,15 +800,15 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Se f(x)>0 dos dois lados de x=1 e f(1)=0, então em x=1 o gráfico pode...",
+      "q": "Uma função quadrática f verifica f(1)=0 e toma valores positivos de ambos os lados de x=1. O que acontece ao gráfico em x=1?",
       "o": [
-        "atravessar obrigatoriamente o eixo.",
-        "tocar o eixo Ox sem o atravessar.",
-        "ter assíntota vertical.",
-        "deixar de ser função."
+        "atravessa o eixo Ox.",
+        "toca o eixo Ox sem o atravessar.",
+        "tem uma assíntota vertical.",
+        "interseta o eixo Oy."
       ],
       "a": 1,
-      "sol": "Um zero de multiplicidade par, por exemplo, pode tocar sem mudar de sinal.",
+      "sol": "Como f(1)=0, o gráfico encontra Ox em (1; 0). Fica acima de Ox à esquerda e à direita desse ponto porque f é positiva em ambos os lados. Assim, toca o eixo sem o atravessar.",
       "hyp": "Pode achar que todo zero implica mudança de sinal.",
       "contexts": [
         "mission",
@@ -908,15 +908,15 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se o domínio de f é [−3,4] e f tem zeros em −1 e 2, quantos zeros são conhecidos?",
+      "q": "As únicas interseções do gráfico de f com os eixos são (−1; 0), (0; 3) e (2; 0). Quantos zeros tem f?",
       "o": [
         "1.",
         "2.",
-        "7.",
-        "Não se pode dizer que −1 e 2 pertençam ao domínio."
+        "3.",
+        "0."
       ],
       "a": 1,
-      "sol": "Ambos pertencem ao domínio e foram explicitamente dados como zeros.",
+      "sol": "Para determinar os zeros a partir de um gráfico, lê as abcissas dos pontos em que ele encontra o eixo Ox, porque nesses pontos f(x)=0. As abcissas indicadas são −1 e 2, logo há dois zeros.",
       "hyp": "Pode confundir quantidade de zeros com extensão do domínio.",
       "contexts": [
         "mission",
@@ -937,10 +937,10 @@
       "cognitive": "Interpretação",
       "q": "Pode um zero de uma função ficar fora do domínio?",
       "o": [
-        "Sim, sempre.",
-        "Só em funções quadráticas.",
+        "Sim, se a expressão se anular após simplificação.",
+        "Sim, se esse valor pertencer à imagem.",
         "Não.",
-        "Só se for negativo."
+        "Sim, se a função se anular ao aproximar-se desse valor."
       ],
       "a": 2,
       "sol": "Um zero é, por definição, um elemento do domínio onde f(x)=0.",
@@ -962,7 +962,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Considere f(x)=(x²−1)/(x−1), com domínio R\\{1}. A equação f(x)=0 tem solução...",
+      "q": "Considera f(x)=(x²−1)/(x−1), com domínio ℝ sem o número 1. Qual é a solução da equação f(x)=0?",
       "o": [
         "x=−1 e x=1.",
         "x=1 apenas.",
@@ -970,7 +970,7 @@
         "x=−1 apenas."
       ],
       "a": 3,
-      "sol": "O numerador zera em ±1, mas x=1 não pertence ao domínio; resta x=−1.",
+      "sol": "Fatora o numerador como (x−1)(x+1). Para x≠1, podemos cancelar x−1 e resolver x+1=0, obtendo x=−1. O valor 1 não é um zero porque está fora do domínio.",
       "hyp": "Pode aceitar raiz anulada pelo denominador.",
       "contexts": [
         "mission",
@@ -997,7 +997,7 @@
         "]−2,+∞[."
       ],
       "a": 0,
-      "sol": "É necessário x+2≥0 e x≠3.",
+      "sol": "A raiz exige x+2≥0, isto é, x≥−2. O denominador exige x−3≠0, logo exclui-se 3, porque é o único valor que o anula. Assim, o domínio é [−2,+∞[ sem o 3.",
       "hyp": "Pode esquecer uma das duas restrições.",
       "contexts": [
         "mission",
@@ -1097,7 +1097,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Qual é a imagem de f(x)=√x+2, x≥0?",
+      "q": "Qual é a imagem de f(x)=√(x)+2, com x≥0?",
       "o": [
         "[2,+∞[.",
         "[0,+∞[.",
@@ -1105,7 +1105,7 @@
         "]2,+∞[."
       ],
       "a": 0,
-      "sol": "√x≥0 e vale 0 em x=0, logo f≥2 e 2 é atingido.",
+      "sol": "A raiz √x toma todos os valores a partir de zero. Quando lhe somas 2, cada saída aumenta duas unidades, por isso a imagem fica [2,+∞[.",
       "hyp": "Pode esquecer a translação vertical.",
       "contexts": [
         "mission",
@@ -1132,7 +1132,7 @@
         "[0,3]."
       ],
       "a": 1,
-      "sol": "|x|≥0, então 3−|x|≤3 e pode descer sem limite.",
+      "sol": "Como |x|≥0, temos 3−|x|≤3. Qualquer y≤3 é atingido, porque basta escolher x=3−y para obter f(x)=y. Assim, a imagem é ]−∞,3].",
       "hyp": "Pode assumir imagem não negativa por causa do módulo.",
       "contexts": [
         "mission",
@@ -1240,7 +1240,7 @@
         "R\\{0}."
       ],
       "a": 1,
-      "sol": "x²>4 => |x|>2.",
+      "sol": "Resolve x²−4>0 para obter x²>4, ou seja, |x|>2. Assim, x<−2 ou x>2. Os extremos não entram porque neles f(x)=0.",
       "hyp": "Pode escolher o intervalo entre as raízes.",
       "contexts": [
         "mission",
@@ -1267,7 +1267,7 @@
         "R."
       ],
       "a": 2,
-      "sol": "−x²+9≥0 => x²≤9.",
+      "sol": "Resolve −x²+9≥0, ou seja, x²≤9. Isto equivale a −3≤x≤3, logo o conjunto é [−3,3]. Os extremos pertencem à solução porque neles f(x)=0.",
       "hyp": "Pode esquecer que a parábola abre para baixo.",
       "contexts": [
         "mission",
@@ -1286,15 +1286,15 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Uma função tem domínio [0,10] e imagem [−2,7]. Pode concluir-se que f(10)=7?",
+      "q": "Uma função tem domínio [0, 10] e imagem [−2, 7]. Estes dados garantem que f(10)=7?",
       "o": [
-        "Sim.",
-        "Só se f for crescente.",
-        "Sim, porque 10 e 7 são extremos.",
-        "Não."
+        "Sim, porque o valor 10 pertence ao domínio.",
+        "Sim, porque 7 é a última saída por ordem das entradas.",
+        "Sim, porque os extremos direitos dos dois intervalos correspondem sempre.",
+        "Não, porque o máximo pode ser atingido noutra entrada."
       ],
       "a": 3,
-      "sol": "Conhecer domínio e imagem não diz em que entrada o máximo 7 ocorre.",
+      "sol": "A imagem contém 7 como valor máximo, mas não diz em que entrada é atingido. Por exemplo, f(x)=7−0,9x tem a imagem dada e f(10)=−2. Assim, f(10)=7 não é garantido.",
       "hyp": "Pode emparelhar extremos sem justificação.",
       "contexts": [
         "mission",
@@ -1340,7 +1340,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Uma altura h(t)=20−5t é fisicamente válida até atingir o solo. Qual é o domínio temporal natural e o zero do modelo?",
+      "q": "A altura de um objeto é dada por h(t)=20−5t, com t, em segundos, contado desde o início da observação até o objeto atingir o solo. Qual é o domínio temporal do modelo e qual é o seu zero?",
       "o": [
         "Domínio R e zero t=5.",
         "Domínio [0,4] e zero t=4.",
@@ -1348,7 +1348,7 @@
         "Domínio [−4,0] e zero t=−4."
       ],
       "a": 1,
-      "sol": "20−5t=0 dá t=4; fisicamente considera-se desde t=0 até esse instante.",
+      "sol": "Iguala a altura a zero: 20−5t=0, logo t=4. O modelo começa em t=0 e termina em t=4, porque este é o instante em que o objeto atinge o solo. Assim, o domínio é [0,4].",
       "hyp": "Pode ignorar o contexto ao definir o domínio.",
       "contexts": [
         "mission",

@@ -17,7 +17,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Uma função racional é, em geral, um quociente...",
+      "q": "Uma função racional é definida pelo quociente de que tipo de expressões?",
       "o": [
         "de dois polinómios, com denominador não identicamente nulo.",
         "de duas funções trigonométricas.",
@@ -25,7 +25,7 @@
         "de duas sucessões."
       ],
       "a": 0,
-      "sol": "Funções racionais têm a forma P(x)/Q(x), com Q não nulo.",
+      "sol": "Uma função racional tem a forma P(x)/Q(x), em que P e Q são polinómios e Q não é o polinómio nulo. O domínio exclui os valores em que Q(x)=0.",
       "hyp": "Pode confundir racional com qualquer fração numérica.",
       "contexts": [
         "mission",
@@ -287,15 +287,15 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "A função f(x)=(x²−1)/(x−1) coincide com y=x+1 exceto...",
+      "q": "Ao simplificar f(x)=(x²−1)/(x−1), para que valores de x se pode escrever f(x)=x+1?",
       "o": [
-        "em x=−1.",
-        "em x=0.",
-        "no ponto x=1, que está excluído.",
-        "em todo o domínio."
+        "Para todos os reais exceto x=−1.",
+        "Para todos os reais exceto x=0.",
+        "Para todos os reais exceto x=1.",
+        "Para todos os reais, incluindo x=1."
       ],
       "a": 2,
-      "sol": "A expressão original não está definida em x=1.",
+      "sol": "Fatora-se x²−1=(x−1)(x+1). O fator x−1 só se pode cancelar quando x≠1. Assim, a igualdade vale para todos os reais exceto 1, que continua fora do domínio.",
       "hyp": "Pode esquecer o buraco removível.",
       "contexts": [
         "mission",
@@ -827,7 +827,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Para f(x)=1/(x−a), o gráfico de 1/x sofre uma translação...",
+      "q": "Para a>0, como se obtém o gráfico de f(x)=1/(x−a) a partir do gráfico de g(x)=1/x?",
       "o": [
         "a unidades na vertical.",
         "a vezes na escala vertical.",
@@ -835,7 +835,7 @@
         "nenhuma."
       ],
       "a": 2,
-      "sol": "Substituir x por x−a desloca para a direita se a>0.",
+      "sol": "Como f(x+a)=g(x) para x≠0, cada ponto (x,g(x)) passa a (x+a,g(x)). É uma translação horizontal de a unidades para a direita.",
       "hyp": "Pode confundir deslocamento horizontal e vertical.",
       "contexts": [
         "mission",

@@ -233,15 +233,15 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Os dados 2,4,6 têm média 4. Quais são os desvios à média?",
+      "q": "Os valores 2, 4 e 6 têm média 4. Quais são, pela mesma ordem, os desvios em relação à média?",
       "o": [
-        "−2,0,2",
-        "2,4,6",
-        "−4,0,4",
-        "2,0,−2"
+        "−2, 0 e 2",
+        "2, 4 e 6",
+        "−4, 0 e 4",
+        "2, 0 e −2"
       ],
       "a": 0,
-      "sol": "Subtrai-se 4 a cada valor: −2,0,2.",
+      "sol": "Subtrai-se 4 a cada valor. Os desvios são 2−4=−2, 4−4=0 e 6−4=2, pela ordem dada.",
       "hyp": "Pode usar valores absolutos ou inverter sinais.",
       "contexts": [
         "mission",
@@ -584,7 +584,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Nos mesmos dados 1 a 8, Q3 é...",
+      "q": "Considera os dados ordenados 1, 2, 3, 4, 5, 6, 7 e 8. Usando a mediana das metades, qual é o terceiro quartil Q₃?",
       "o": [
         "5,5",
         "6,5",
@@ -592,7 +592,7 @@
         "7"
       ],
       "a": 1,
-      "sol": "Metade superior 5,6,7,8; mediana=(6+7)/2=6,5.",
+      "sol": "A metade superior é 5, 6, 7 e 8. A mediana dessa metade é a média dos dois valores centrais: (6+7)/2=6,5.",
       "hyp": "Pode usar 6 ou 7 diretamente.",
       "contexts": [
         "mission",
@@ -646,7 +646,7 @@
         "de Q1 a Q3."
       ],
       "a": 3,
-      "sol": "A caixa representa os 50% centrais entre Q1 e Q3.",
+      "sol": "O primeiro quartil Q₁ e o terceiro quartil Q₃ são os extremos da caixa. O seu comprimento é a amplitude interquartil Q₃−Q₁.",
       "hyp": "Pode confundir caixa com amplitude total.",
       "contexts": [
         "mission",

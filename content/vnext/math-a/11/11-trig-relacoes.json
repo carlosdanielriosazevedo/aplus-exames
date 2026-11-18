@@ -19,10 +19,10 @@
       "cognitive": "Compreensão",
       "q": "A identidade trigonométrica fundamental é...",
       "o": [
-        "sin²x+cos²x=1.",
-        "sin x+cos x=1.",
-        "tan²x=1.",
-        "sin x cos x=1."
+        "sen² x+cos² x=1.",
+        "sen x+cos x=1.",
+        "tg² x=1.",
+        "sen x cos x=1."
       ],
       "a": 0,
       "sol": "Resulta da equação do círculo unitário.",
@@ -44,11 +44,11 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Quando cos x≠0, tan x é igual a...",
+      "q": "Quando cos x≠0, tg x é igual a...",
       "o": [
-        "cos x/sin x.",
-        "sin x/cos x.",
-        "sin x·cos x.",
+        "cos x/sen x.",
+        "sen x/cos x.",
+        "sen x·cos x.",
         "1/cos x."
       ],
       "a": 1,
@@ -71,7 +71,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Se sin x=0 e cos x≠0, então tan x=",
+      "q": "Se sen x=0 e cos x≠0, então tg x=",
       "o": [
         "1.",
         "não existe.",
@@ -79,7 +79,7 @@
         "cos x."
       ],
       "a": 2,
-      "sol": "tan x=sin x/cos x=0.",
+      "sol": "tg x=sen x/cos x=0.",
       "hyp": "Pode achar que tangente não existe sempre que seno é zero.",
       "contexts": [
         "mission",
@@ -152,7 +152,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Se sin x=5/13 e x está no 1.º quadrante, então cos x=",
+      "q": "Se sen x=5/13 e x está no 1.º quadrante, então cos x=",
       "o": [
         "−12/13",
         "12/13",
@@ -160,7 +160,7 @@
         "8/13"
       ],
       "a": 1,
-      "sol": "cos²x=1−25/169=144/169 e no 1.º quadrante cos>0.",
+      "sol": "cos² x=1−25/169=144/169 e no 1.º quadrante cos>0.",
       "hyp": "Pode escolher a raiz negativa.",
       "contexts": [
         "mission",
@@ -179,7 +179,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Se cos x=−3/5 e x está no 2.º quadrante, então sin x=",
+      "q": "Se cos x=−3/5 e x está no 2.º quadrante, então sen x=",
       "o": [
         "−4/5",
         "3/4",
@@ -187,7 +187,7 @@
         "−3/4"
       ],
       "a": 2,
-      "sol": "sin²x=1−9/25=16/25 e no 2.º quadrante sin>0.",
+      "sol": "sen² x=1−9/25=16/25 e no 2.º quadrante sen>0.",
       "hyp": "Pode errar o sinal.",
       "contexts": [
         "mission",
@@ -368,7 +368,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "No 2.º quadrante, tan x é...",
+      "q": "No 2.º quadrante, tg x é...",
       "o": [
         "positiva.",
         "negativa.",
@@ -449,7 +449,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Se tan x=3/4 e x está no 1.º quadrante, uma escolha compatível para (sin x,cos x) é...",
+      "q": "Se tg x=3/4 e x está no 1.º quadrante, uma escolha compatível para (sen x,cos x) é...",
       "o": [
         "(3/5,4/5).",
         "(4/5,3/5).",
@@ -457,7 +457,7 @@
         "(3/4,1)."
       ],
       "a": 0,
-      "sol": "Um triângulo 3-4-5 dá sin/cos=3/4.",
+      "sol": "No 1.º quadrante, seno e cosseno são positivos. Num triângulo retângulo com catetos 3 e 4, a hipotenusa mede 5. Portanto, sen x=3/5 e cos x=4/5.",
       "hyp": "Pode inverter seno e cosseno.",
       "contexts": [
         "mission",
@@ -719,7 +719,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se sin x=4/5 e x∈]π/2,π[, então tan x=",
+      "q": "Se sen x=4/5 e x∈]π/2,π[, então tg x=",
       "o": [
         "4/3",
         "−3/4",
@@ -727,7 +727,7 @@
         "3/4"
       ],
       "a": 2,
-      "sol": "cos x=−3/5 e tan=(4/5)/(−3/5)=−4/3.",
+      "sol": "cos x=−3/5 e tg=(4/5)/(−3/5)=−4/3.",
       "hyp": "Pode errar o sinal ou inverter a razão.",
       "contexts": [
         "mission",
@@ -773,7 +773,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se tan x=1 e x∈]π,3π/2[, então sin x=",
+      "q": "Se tg x=1 e x∈]π,3π/2[, então sen x=",
       "o": [
         "−√2/2",
         "√2/2",
@@ -781,7 +781,7 @@
         "1/2"
       ],
       "a": 0,
-      "sol": "No 3.º quadrante seno e cosseno são negativos com igual módulo.",
+      "sol": "Como tg x=1, tem-se sen x=cos x. A fórmula fundamental dá 2 sen² x=1. No 3.º quadrante o seno é negativo, pelo que sen x=−√2/2.",
       "hyp": "Pode escolher os sinais do 1.º quadrante.",
       "contexts": [
         "mission",
@@ -800,7 +800,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se tan x=−√3 e x está no 2.º quadrante, então cos x=",
+      "q": "Se tg x=−√3 e x está no 2.º quadrante, então cos x=",
       "o": [
         "1/2",
         "−1/2",
@@ -1205,7 +1205,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "A identidade sin²x+cos²x=1 implica que o ponto (cos x,sin x)...",
+      "q": "A identidade sen² x+cos² x=1 implica que o ponto (cos x,sen x)...",
       "o": [
         "pertence ao círculo unitário.",
         "pertence sempre à reta y=x.",
@@ -1294,7 +1294,7 @@
         "12/5"
       ],
       "a": 3,
-      "sol": "cos=5/13; tan=(12/13)/(5/13)=12/5.",
+      "sol": "cos=5/13; tg=(12/13)/(5/13)=12/5.",
       "hyp": "Pode usar o inverso ou sinal errado.",
       "contexts": [
         "mission",

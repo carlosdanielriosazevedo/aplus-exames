@@ -179,7 +179,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "A relação correta é...",
+      "q": "Para n∈ℕ e n≥1, vale…",
       "o": [
         "n!=(n−1)!+n.",
         "n!=n+(n−1).",
@@ -187,7 +187,7 @@
         "n!=(n−1)!/n."
       ],
       "a": 2,
-      "sol": "É a relação recursiva fundamental do fatorial.",
+      "sol": "No produto n!, o primeiro fator é n e o produto dos fatores restantes é (n−1)!. Logo, n!=n(n−1)!.",
       "hyp": "Pode trocar produto por soma.",
       "contexts": [
         "mission",
@@ -287,7 +287,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "n!/(n−1)! simplifica para...",
+      "q": "Para n natural positivo, que expressão é igual a n!/(n−1)!?",
       "o": [
         "n−1.",
         "n!−1.",
@@ -449,15 +449,15 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "A expressão n! cresce, para n natural positivo, de forma...",
+      "q": "Para n natural positivo, como evolui o fator que transforma n! em (n+1)! à medida que n aumenta?",
       "o": [
-        "muito rápida.",
-        "linear.",
-        "constante.",
-        "decrescente."
+        "aumenta com n.",
+        "alterna entre dois valores.",
+        "mantém-se constante.",
+        "diminui com n."
       ],
       "a": 0,
-      "sol": "Cada novo termo multiplica o anterior por n+1.",
+      "sol": "O fator é (n+1)!/n!=n+1. Quando n aumenta, esse fator também aumenta.",
       "hyp": "Pode confundir crescimento fatorial com crescimento linear.",
       "contexts": [
         "mission",
@@ -719,7 +719,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Simplifica (n+3)!/(n+1)!.",
+      "q": "Para um inteiro n≥0, simplifica (n+3)!/(n+1)!.",
       "o": [
         "(n+3)(n+2)(n+1).",
         "n+3.",
@@ -727,7 +727,7 @@
         "n+2."
       ],
       "a": 2,
-      "sol": "Cancelam-se todos os fatores até (n+1)!.",
+      "sol": "Como (n+3)!=(n+3)(n+2)(n+1)!, ao dividir por (n+1)! fica (n+3)(n+2).",
       "hyp": "Pode deixar um fator a mais.",
       "contexts": [
         "mission",
@@ -1267,7 +1267,7 @@
         "2⁶."
       ],
       "a": 2,
-      "sol": "Depois de cada pessoa colocada resta uma opção a menos.",
+      "sol": "Para o primeiro lugar há 6 escolhas, para o segundo há 5 e assim sucessivamente até ao último, com 1 escolha. Pelo princípio multiplicativo, o total é 6·5·4·3·2·1=6!.",
       "hyp": "Pode usar repetição em cada lugar.",
       "contexts": [
         "mission",
@@ -1340,15 +1340,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Um algoritmo testa todas as ordens possíveis de 7 itens distintos. O número de ordens a testar é...",
+      "q": "Um algoritmo testa as ordenações de oito itens distintos em que um item específico fica sempre em último lugar. Qual é o número de ordenações a testar?",
       "o": [
-        "7².",
+        "8!.",
         "7!.",
-        "2⁷.",
-        "7."
+        "8!−7!.",
+        "8!/7!."
       ],
       "a": 1,
-      "sol": "Cada ordem é uma permutação dos 7 itens, totalizando 7!.",
+      "sol": "O último lugar já está ocupado pelo item fixo. Os outros sete itens podem ocupar as sete primeiras posições em qualquer ordem, pelo que há 7! ordenações.",
       "hyp": "Pode usar potência por confundir posição com repetição.",
       "contexts": [
         "mission",

@@ -152,7 +152,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "A função e^x cos x é contínua em...",
+      "q": "Qual é o maior conjunto em que f(x)=e^x cos(x) é contínua?",
       "o": [
         "x>0 apenas.",
         "todo R.",
@@ -206,7 +206,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "A função (x²+1)/(x−3) é contínua em...",
+      "q": "Qual é o maior conjunto em que f(x)=(x²+1)/(x−3) é contínua?",
       "o": [
         "R.",
         "R\\{−3}.",
@@ -557,7 +557,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Compreensão",
-      "q": "Se lim f=L, então lim e^{f(x)}=",
+      "q": "Se lim(x→a) f(x)=L, com L∈ℝ, como se exprime lim(x→a) e^(f(x)) em função de L?",
       "o": [
         "e^L.",
         "L e.",
@@ -665,7 +665,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "A função f(x)=ln(x²+1) é contínua em...",
+      "q": "Qual é o maior conjunto em que a função f(x)=ln(x²+1) é contínua?",
       "o": [
         "todo R.",
         "x>0 apenas.",
@@ -673,7 +673,7 @@
         "|x|>1."
       ],
       "a": 0,
-      "sol": "x²+1>0 para todo x.",
+      "sol": "O polinómio x²+1 é contínuo em ℝ e é sempre positivo. Como ln é contínua nos reais positivos, a função composta é contínua em todo ℝ.",
       "hyp": "Pode impor domínio x>0 ao x em vez do argumento.",
       "contexts": [
         "mission",
@@ -746,15 +746,15 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "A função tan x=sinx/cosx é contínua onde...",
+      "q": "Qual é o conjunto de continuidade de tg(x)=sen(x)/cos(x)?",
       "o": [
-        "sinx≠0.",
+        "sen(x)≠0.",
         "x≠0.",
         "todo R.",
-        "cosx≠0."
+        "cos(x)≠0."
       ],
       "a": 3,
-      "sol": "É quociente de contínuas com denominador não nulo.",
+      "sol": "As funções seno e cosseno são contínuas em ℝ. O seu quociente está definido e é contínuo nos pontos em que cos(x)≠0.",
       "hyp": "Pode excluir zeros do numerador.",
       "contexts": [
         "mission",

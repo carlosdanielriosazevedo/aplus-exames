@@ -260,7 +260,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Uma função polinomial de grau ímpar com coeficiente líder positivo tem, nos extremos...",
+      "q": "Quando x tende para −∞ e +∞, como se comporta uma função polinomial de grau ímpar cujo coeficiente do termo de maior grau é positivo?",
       "o": [
         "ambos para +∞.",
         "esquerda para −∞ e direita para +∞.",
@@ -268,7 +268,7 @@
         "esquerda +∞ e direita −∞."
       ],
       "a": 1,
-      "sol": "É o padrão típico de grau ímpar positivo.",
+      "sol": "O termo de maior grau domina quando |x| é grande. Como o expoente é ímpar e o coeficiente é positivo, a função tende para −∞ à esquerda e para +∞ à direita.",
       "hyp": "Pode aplicar o padrão de grau par.",
       "contexts": [
         "mission",
@@ -395,7 +395,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Resolver x⁴−13x²+36=0 equivale a resolver, com y=x²...",
+      "q": "Ao resolver x⁴−13x²+36=0 em ℝ pela substituição y=x², com y≥0, que equação em y se obtém?",
       "o": [
         "y⁴−13y²+36=0.",
         "y²−13x+36=0.",
@@ -403,7 +403,7 @@
         "y−13+36=0."
       ],
       "a": 2,
-      "sol": "Substituindo y=x², x⁴=y².",
+      "sol": "Como y=x², temos x⁴=(x²)²=y². Portanto, a equação fica y²−13y+36=0. Cada solução y≥0 deve depois ser substituída em x²=y.",
       "hyp": "Pode substituir apenas um termo.",
       "contexts": [
         "mission",
@@ -430,7 +430,7 @@
         "±2 e ±3."
       ],
       "a": 3,
-      "sol": "y²−13y+36=(y−4)(y−9), logo x²=4 ou 9.",
+      "sol": "Com y=x², resulta (y−4)(y−9)=0. Logo, x²=4 ou x²=9. Como ambas as soluções de y são positivas, as quatro soluções reais são x=−2, x=2, x=−3 e x=3.",
       "hyp": "Pode esquecer sinais.",
       "contexts": [
         "mission",
@@ -565,7 +565,7 @@
         "em nenhum ponto."
       ],
       "a": 0,
-      "sol": "Cada zero real distinto corresponde a uma interseção com Ox.",
+      "sol": "Um polinómio de grau 3 com três zeros reais distintos tem três fatores lineares diferentes. Perto de cada zero só muda o sinal do fator correspondente, pelo que o gráfico cruza Ox em cada um desses três pontos.",
       "hyp": "Pode confundir grau com número exato de zeros reais.",
       "contexts": [
         "mission",
@@ -592,7 +592,7 @@
         "apenas 1."
       ],
       "a": 1,
-      "sol": "Pode ter um zero simples e um duplo (2 distintos) ou três simples, ou apenas um real.",
+      "sol": "Por ser de grau 3, a função muda de sinal entre os dois extremos do gráfico e é contínua. Tem, assim, pelo menos um zero real e, pelo grau, no máximo três. Por exemplo, x³, x²(x−1) e x(x−1)(x+1) têm respetivamente um, dois e três zeros reais distintos.",
       "hyp": "Pode achar que o grau fixa o número de zeros reais distintos.",
       "contexts": [
         "mission",
@@ -1016,7 +1016,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Se uma quártica monica tem zeros −2 e 3, ambos duplos, então...",
+      "q": "Se g é um polinómio mónico de grau 4 com zeros −2 e 3, ambos duplos, qual é a expressão de g(x)?",
       "o": [
         "g(x)=(x−2)²(x+3)².",
         "g(x)=(x+2)²(x−3)².",
@@ -1024,7 +1024,7 @@
         "g(x)=x⁴−6."
       ],
       "a": 1,
-      "sol": "Multiplicidade dupla corresponde ao quadrado de cada fator.",
+      "sol": "Os fatores (x+2)² e (x−3)² já somam grau 4. Como o coeficiente de x⁴ é 1, conclui-se que g(x)=(x+2)²(x−3)².",
       "hyp": "Pode esquecer as multiplicidades.",
       "contexts": [
         "mission",

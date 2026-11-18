@@ -29,6 +29,9 @@ function sourcePayload(sourcePath,expectedSha,label){
 function normalizedText(value){
   return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 }
+function questionFingerprint(value){
+  return createHash("sha256").update(JSON.stringify(value)).digest("hex");
+}
 function validateEffectiveDecision(decision,sourceItem,label){
   assert.ok(VALID_STATUSES.has(decision.status),`${label}/${decision.id}: estado editorial inválido`);
   if(decision.status==="approved_with_override"){
@@ -43,6 +46,36 @@ function validateEffectiveDecision(decision,sourceItem,label){
   }else if(decision.status==="needs_rewrite"||decision.status==="rejected"){
     assert.ok(decision.rationale?.trim(),`${label}/${decision.id}: item não aprovado sem justificação`);
   }
+}
+
+function currentRereviews(entry,source,previousDecision,previousDate,label){
+  const revision=entry.aiRereview;
+  if(!revision){
+    assert.equal(entry.previousSourceBlobSha,undefined,`${label}: fonte atualizada sem nova revisão`);
+    return new Map();
+  }
+  assert.ok(revision.reviewer?.trim(),`${label}: nova revisão sem autor`);
+  assert.match(revision.reviewedAt||"",/^\d{4}-\d{2}-\d{2}$/u,`${label}: nova revisão sem data`);
+  assert.match(entry.previousSourceBlobSha||"",/^[a-f0-9]{40}$/u,`${label}: hash anterior inválido`);
+  assert.notEqual(entry.previousSourceBlobSha,revision.sourceBlobSha,`${label}: os hashes da nova revisão e da anterior coincidem`);
+  assert.equal(revision.sourceBlobSha,entry.sourceBlobSha,`${label}: hash da fonte mudou sem nova revisão por pergunta`);
+  assert.ok(Array.isArray(revision.items)&&revision.items.length>0,`${label}: nova revisão sem IDs`);
+  assert.deepEqual(Object.keys(revision.decisions||{}).sort(),[...revision.items].sort(),`${label}: nova revisão sem decisão para cada ID`);
+  const revisedIds=new Set(revision.items);
+  const retainedQuestions=source.questions.filter(item=>!revisedIds.has(item.id));
+  assert.equal(revision.retainedQuestionFingerprint,questionFingerprint(retainedQuestions),`${label}: perguntas com aprovação anterior mudaram sem nova revisão`);
+  const itemsById=new Map(source.questions.map(item=>[item.id,item]));
+  return new Map(revision.items.map(id=>{
+    const decision=revision.decisions[id];
+    const item=itemsById.get(id);
+    const previous=previousDecision(id);
+    const itemLabel=`${label}/${id}`;
+    assert.ok(item,`${itemLabel}: pergunta ausente na fonte revista`);
+    assert.ok(decision.rationale?.trim(),`${itemLabel}: nova decisão sem justificação`);
+    assert.deepEqual(decision.previousReview,{reviewedAt:previous.reviewedAt??previousDate??null,decision:previous},`${itemLabel}: histórico editorial divergente`);
+    assert.equal(decision.fingerprint,questionFingerprint(item),`${itemLabel}: pergunta mudou depois da nova revisão`);
+    return [id,{...decision,id}];
+  }));
 }
 
 const reviewFiles=files(ROOT,".review.json");
@@ -88,7 +121,10 @@ for(const reviewFile of reviewFiles){
   assert.ok(!coveredSources.has(review.sourcePath),`${reviewFile}: fonte já coberta por outra revisão`);
   coveredSources.add(review.sourcePath);
 
-  for(const decision of decisions){
+  const previousById=new Map(decisions.map(decision=>[decision.id,decision]));
+  const rereviews=currentRereviews(review,source,id=>previousById.get(id),review.reviewedAt,reviewFile);
+  const effectiveDecisions=decisions.map(decision=>rereviews.get(decision.id)||decision);
+  for(const decision of effectiveDecisions){
     const original=source.questions.find(q=>q.id===decision.id);
     validateEffectiveDecision(decision,original,reviewFile);
     registerCoverage(review.sourcePath,decision.id,reviewFile);
@@ -102,7 +138,10 @@ for(const reviewFile of reviewFiles){
   assert.equal(review.summary.approved,localApproved,`${reviewFile}: summary.approved incorreto`);
   assert.equal(review.summary.approvedWithOverride,localOverride,`${reviewFile}: summary.approvedWithOverride incorreto`);
   assert.equal(review.summary.unresolved,localUnresolved,`${reviewFile}: summary.unresolved incorreto`);
-  if(review.status==="complete")assert.equal(localUnresolved,0,`${reviewFile}: revisão completa não pode ter itens por resolver`);
+  if(review.status==="complete"){
+    assert.equal(localUnresolved,0,`${reviewFile}: revisão original completa não pode ter itens por resolver`);
+    assert.ok(effectiveDecisions.every(d=>d.status==="approved"||d.status==="approved_with_override"),`${reviewFile}: nova revisão deixou itens por resolver`);
+  }
 }
 
 for(const planFile of planFiles){
@@ -131,11 +170,14 @@ for(const planFile of planFiles){
     assert.equal(source.questions.length,50,`${planFile}: cada submatéria deve ter 50 perguntas`);
     coveredSources.add(entry.sourcePath);
 
+    const previousDecision=id=>overrideById.get(id)||{id,status:plan.defaultDecision};
+    const rereviews=currentRereviews(entry,source,previousDecision,entry.reviewedAt??plan.reviewedAt,`${planFile}/${entry.sourcePath}`);
     for(const item of source.questions){
       const explicit=overrideById.get(item.id);
       if(explicit)assert.equal(explicit.sourcePath,entry.sourcePath,`${planFile}/${item.id}: override aponta para outra fonte`);
-      const decision=explicit||{id:item.id,status:plan.defaultDecision};
+      const decision=rereviews.get(item.id)||previousDecision(item.id);
       validateEffectiveDecision(decision,item,planFile);
+      if(plan.status==="complete")assert.ok(decision.status==="approved"||decision.status==="approved_with_override",`${planFile}/${item.id}: plano completo com decisão em vigor por resolver`);
       registerCoverage(entry.sourcePath,item.id,planFile);
       countDecision(decision);
     }

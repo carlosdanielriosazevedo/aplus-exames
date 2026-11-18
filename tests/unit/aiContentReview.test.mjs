@@ -28,11 +28,24 @@ describe("revisão integral por IA",()=>{
     expect(status.stale,"alteradas depois da revisão — rever e atualizar o registo").toEqual([]);
     expect(status.missing,"sem revisão").toEqual([]);
   });
+  it("Matemática A: todas as perguntas ativas revistas na versão atual",()=>{
+    const mathRegistry=registry("matematica-a.json");
+    const status=aiReviewStatus(RUNTIME_QUESTION_BANK,mathRegistry);
+    expect(status.stale,"alteradas depois da revisão — rever e atualizar o registo").toEqual([]);
+    expect(status.missing,"sem revisão").toEqual([]);
+    expect(Object.keys(mathRegistry.items).sort()).toEqual(RUNTIME_QUESTION_BANK.map(item=>item.id).sort());
+  });
   it("a impressão digital muda quando o conteúdo muda",()=>{
     const item={id:"X",prompt:"P",options:["a","b"],answerIndex:0};
     expect(aiReviewFingerprint(item)).not.toBe(aiReviewFingerprint({...item,answerIndex:1}));
     expect(aiReviewFingerprint(item)).toBe(aiReviewFingerprint({...item,year:"10.º"}));
     expect(aiReviewFingerprint({...item,passageText:"A"})).not.toBe(aiReviewFingerprint({...item,passageText:"B"}));
+  });
+  it("a impressão digital de Matemática inclui enunciado, opções, chave, resolução e passos",()=>{
+    const item={id:"MAT",q:"P",o:["1","2"],a:0,sol:"S",response:{type:"stepwise",steps:[{expected:"1"}]}};
+    for(const change of [{q:"Q"},{o:["1","3"]},{a:1},{sol:"T"},{response:{type:"stepwise",steps:[{expected:"2"}]}}]){
+      expect(aiReviewFingerprint({...item,...change})).not.toBe(aiReviewFingerprint(item));
+    }
   });
 });
 
@@ -47,7 +60,9 @@ describe("explicações sem referência à posição da opção",()=>{
     "Português":portugueseActiveItems()
   };
   for(const [subject,items] of Object.entries(banks))it(subject,()=>{
-    const offenders=items.filter(item=>Array.isArray(item.options)&&POSITIONAL.test(String(item.explanation||""))).map(item=>`${item.id}: ${item.explanation}`);
+    const offenders=items
+      .filter(item=>Array.isArray(item.options??item.o)&&POSITIONAL.test(item.explanation??item.sol??""))
+      .map(item=>`${item.id}: ${item.explanation??item.sol}`);
     expect(offenders).toEqual([]);
   });
 });

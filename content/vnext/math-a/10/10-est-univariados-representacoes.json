@@ -316,13 +316,13 @@
       "cognitive": "Interpretação",
       "q": "Qual diferença visual típica existe entre gráfico de barras e histograma?",
       "o": [
-        "São sempre idênticos.",
-        "No gráfico de barras não há eixo.",
-        "Histogramas só usam percentagens.",
-        "No histograma, classes contíguas são representadas por retângulos adjacentes; em barras, categorias podem estar separadas."
+        "Num diagrama de barras, as categorias têm sempre de ser intervalos numéricos.",
+        "No histograma, a ordem dos retângulos pode ser escolhida livremente.",
+        "Num diagrama de barras, a largura da barra indica a frequência.",
+        "No histograma, os retângulos representam intervalos contíguos."
       ],
       "a": 3,
-      "sol": "O histograma representa intervalos contíguos de uma variável quantitativa.",
+      "sol": "O histograma agrupa dados quantitativos em intervalos contíguos no eixo horizontal. Num diagrama de barras para dados categóricos, cada barra corresponde a uma categoria e pode ser separada das restantes.",
       "hyp": "Pode tratar qualquer conjunto de retângulos como o mesmo gráfico.",
       "contexts": [
         "mission",

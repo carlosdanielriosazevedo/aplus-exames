@@ -44,7 +44,7 @@
       "year": "10.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Na reta de Euler, o baricentro G divide o segmento OH segundo...",
+      "q": "Num triângulo não equilátero, O é o circuncentro, G o baricentro e H o ortocentro. Em que razão o baricentro divide o segmento OH?",
       "o": [
         "OG:GH=2:1.",
         "OG:GH=1:2.",
@@ -71,12 +71,12 @@
       "year": "10.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "O centro da circunferência dos nove pontos é...",
+      "q": "Num triângulo não equilátero, sejam O o circuncentro, G o baricentro e H o ortocentro. Onde fica o centro da circunferência dos nove pontos?",
       "o": [
-        "o incentro.",
-        "o baricentro sempre.",
-        "o ponto médio de OH, onde O é circuncentro e H ortocentro.",
-        "um vértice."
+        "No ponto médio de OG.",
+        "No baricentro G.",
+        "No ponto médio de OH.",
+        "No ponto médio de GH."
       ],
       "a": 2,
       "sol": "O centro N da circunferência dos nove pontos é o ponto médio do segmento OH.",
@@ -152,12 +152,12 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Três dos nove pontos são...",
+      "q": "Que pontos pertencem, em qualquer triângulo, à circunferência dos nove pontos?",
       "o": [
         "os três vértices.",
         "os pontos médios dos três lados.",
         "os três excentros.",
-        "os três centros de massa."
+        "os três pontos de tangência da circunferência inscrita."
       ],
       "a": 1,
       "sol": "A circunferência dos nove pontos passa pelos três pontos médios dos lados.",
@@ -179,7 +179,7 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Outros três pontos da circunferência dos nove pontos são...",
+      "q": "Considera um triângulo escaleno não retângulo. Além dos pontos médios dos lados e dos pontos médios dos segmentos do ortocentro aos vértices, que outros pontos pertencem à circunferência dos nove pontos?",
       "o": [
         "os três vértices.",
         "as interseções das medianas com os lados.",
@@ -187,7 +187,7 @@
         "os três pontos de tangência da inscrita sempre."
       ],
       "a": 2,
-      "sol": "Os pés das alturas pertencem à circunferência dos nove pontos.",
+      "sol": "A terceira família é constituída pelos pés das alturas, isto é, as interseções das alturas com as retas que contêm os respetivos lados opostos.",
       "hyp": "Pode confundir com pontos de tangência da incircunferência.",
       "contexts": [
         "mission",
@@ -395,7 +395,7 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Se OG=4 cm, quanto mede OH?",
+      "q": "Num triângulo não equilátero, O, G e H são o circuncentro, o baricentro e o ortocentro, respetivamente. Se OG=4 cm, qual é o comprimento de OH?",
       "o": [
         "8 cm",
         "10 cm",
@@ -403,7 +403,7 @@
         "16 cm"
       ],
       "a": 2,
-      "sol": "GH=8 e OH=OG+GH=12; equivalentemente OH=3OG.",
+      "sol": "Pela relação de Euler, G está entre O e H e GH é o dobro de OG. Como OG=4 cm, temos GH=8 cm e OH=4+8=12 cm.",
       "hyp": "Pode esquecer uma das partes.",
       "contexts": [
         "mission",
@@ -584,7 +584,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se OG=6 e GH=12, qual é OH?",
+      "q": "Num triângulo, O, G e H são o circuncentro, o baricentro e o ortocentro, respetivamente. Se OG=6 e GH=12, qual é o comprimento de OH?",
       "o": [
         "12",
         "18",
@@ -592,7 +592,7 @@
         "24"
       ],
       "a": 1,
-      "sol": "OH=6+12=18.",
+      "sol": "Na reta de Euler, o baricentro G está entre O e H. Por isso, OH=OG+GH=6+12=18.",
       "hyp": "Pode usar apenas o maior segmento.",
       "contexts": [
         "mission",
@@ -619,7 +619,7 @@
         "16"
       ],
       "a": 2,
-      "sol": "ON=12.",
+      "sol": "Como N é o ponto médio de OH, os comprimentos ON e NH são iguais. Logo, ON=OH/2=24/2=12.",
       "hyp": "Pode confundir com OG=OH/3=8.",
       "contexts": [
         "mission",
@@ -692,7 +692,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Na reta orientada de O para H, tome O=0 e H=30. Quais são as coordenadas de G e N?",
+      "q": "Num triângulo não equilátero, orienta-se a reta de Euler do circuncentro O para o ortocentro H. As coordenadas de O e H são 0 e 30. Quais são as coordenadas do baricentro G e do centro N da circunferência dos nove pontos?",
       "o": [
         "G=15, N=10",
         "G=10, N=15",
@@ -700,7 +700,7 @@
         "G=10, N=20"
       ],
       "a": 1,
-      "sol": "G fica a 1/3 de OH a partir de O:10; N é ponto médio: 15.",
+      "sol": "G pertence ao segmento OH e fica a um terço de OH a partir de O, pelo que a sua coordenada é 30/3=10. N é o ponto médio de OH, pelo que a sua coordenada é (0+30)/2=15.",
       "hyp": "Pode inverter a razão de G ou confundir N com G.",
       "contexts": [
         "mission",

@@ -5,7 +5,23 @@
   "themeId": "10-ga",
   "subtopicId": "10-ga-vetores",
   "sourcePath": "content/vnext/math-a/10/10-ga-vetores.json",
-  "sourceBlobSha": "808f01e557b2e42a64d58627f61b7c9e3c6871f9",
+  "sourceBlobSha": "f4f94b64cf3d232c144b69826da872050688c445",
+  "previousSourceBlobSha": "808f01e557b2e42a64d58627f61b7c9e3c6871f9", "aiRereview": {
+    "reviewer": "Codex (IA)",
+    "reviewedAt": "2026-11-17",
+    "sourceBlobSha": "f4f94b64cf3d232c144b69826da872050688c445",
+    "retainedQuestionFingerprint": "caf5e8cb1ca5beb4cac6b21c3e3c643a660a7d205953e605517d3bc4a770f58f",
+    "items": ["VN10GA-VET-003","VN10GA-VET-005","VN10GA-VET-009","VN10GA-VET-017","VN10GA-VET-027","VN10GA-VET-030","VN10GA-VET-047"],
+    "decisions": {
+      "VN10GA-VET-003": {"status":"approved","rationale":"Repetia o cálculo de AB com as mesmas coordenadas de D10G-P e CRV2-10GA-VET-STEPS-1. Pede a mesma subtração de coordenadas depois de identificar A e B noutra representação, a partir da origem.","fingerprint":"6ae600cd9a243d6ae8a3d3e82de41ada6df1f5aa72c46352fea907da2639269e","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GA-VET-003","status":"approved"}}},
+      "VN10GA-VET-005": {"status":"approved","rationale":"A resolução definia norma como comprimento, mas não explicava por que surge a raiz da soma dos quadrados. Deriva a expressão a partir das projeções e do teorema de Pitágoras.","fingerprint":"c6a3394c0f3477d108599e583c67ccbe36e07380e8db16017ce4b0942cf47aff","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GA-VET-005","status":"approved"}}},
+      "VN10GA-VET-009": {"status":"approved","rationale":"A explicação atribuía direção e sentido ao vetor nulo ao descrever o vetor oposto em geral. Explica a mudança das componentes por multiplicação por −1 e trata explicitamente o caso nulo.","fingerprint":"6a600409841449b52407bc68959e4848947befb3d191bf28587c1b2a9cdde7f4","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GA-VET-009","status":"approved"}}},
+      "VN10GA-VET-017": {"status":"approved","rationale":"A hipótese deixava v=u=0 dentro do enunciado e a condição de não nulidade aparecia só na opção mais longa. «Não relacionados» era um distrator vazio. Põe a hipótese no enunciado e faz as opções compararem direção, sentido e norma.","fingerprint":"66773dee48c9831e84fdea3b1b27b88e991c461d8167cdffc0a98c4e257712e1","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GA-VET-017","status":"approved"}}},
+      "VN10GA-VET-027": {"status":"approved","rationale":"«A soma é zero sempre» mistura uma condição verdadeira suficiente com a palavra «sempre», o que permite outra leitura do enunciado. Pede uma condição necessária e suficiente e usa a soma nula como distrator válido de suficiência sem necessidade.","fingerprint":"8b3ed7a36a8c191a61d9210800c879171ed9acdf6eea402828b7ba147ab2f019","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GA-VET-027","status":"approved"}}},
+      "VN10GA-VET-030": {"status":"approved","rationale":"«Só se forem pontos» e «Só se tiverem mesma norma» não respondem ao caso fixo e facilitavam eliminar duas opções. Pede a conclusão com justificação e dá erros concretos sobre proporcionalidade e norma.","fingerprint":"b21cad1de9eb320c47d91d9c4494d849b3e0f9839136a89d364c9eb845c9cb92","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GA-VET-030","status":"approved"}}},
+      "VN10GA-VET-047": {"status":"approved","rationale":"Pedia «o deslocamento direto» apesar de as opções designarem apenas o seu comprimento. Pede explicitamente a distância entre o ponto inicial e o final e mostra o cálculo.","fingerprint":"b11522b837094b0ac48fa64a7a8e62e4ae4586ebe507f9f9d1fabdaa46cf0538","previousReview":{"reviewedAt":"2026-09-12","decision":{"id":"VN10GA-VET-047","status":"approved"}}}
+    }
+  },
   "reviewedAt": "2026-09-12",
   "reviewType": "editorial_math_pass",
   "status": "complete",

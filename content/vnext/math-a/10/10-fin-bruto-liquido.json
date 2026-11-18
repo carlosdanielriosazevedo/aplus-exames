@@ -20,9 +20,9 @@
       "q": "Qual é a diferença entre salário bruto e salário líquido?",
       "o": [
         "O bruto é o valor antes dos descontos; o líquido é o valor após os descontos.",
-        "O líquido é sempre maior do que o bruto.",
-        "O bruto é apenas o valor por hora.",
-        "Não existe diferença."
+        "O bruto exclui os descontos; o líquido inclui os descontos.",
+        "O bruto é mensal; o líquido é o valor anual antes dos descontos.",
+        "O bruto inclui subsídios; o líquido exclui subsídios e ignora descontos."
       ],
       "a": 0,
       "sol": "O salário bruto corresponde ao valor antes das deduções; o líquido é o valor que resta depois das deduções consideradas.",
@@ -179,7 +179,7 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Um trabalhador tem salário bruto de 1 400 €. Neste exercício, desconta 11% para Segurança Social e 6% de retenção. Qual é a percentagem total de descontos?",
+      "q": "Um trabalhador tem salário bruto de 1 400 €. Neste exercício, desconta 11% do bruto para a Segurança Social e 6% do bruto para retenção. Qual é a percentagem total de descontos sobre o bruto?",
       "o": [
         "15%",
         "16%",

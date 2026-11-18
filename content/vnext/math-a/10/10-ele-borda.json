@@ -262,13 +262,13 @@
       "cognitive": "Interpretação",
       "q": "No perfil 6 eleitores A > B > C e 5 eleitores B > C > A, A tem 6 dos 11 primeiros lugares. Mesmo assim, B vence por Borda 3-2-1. O que mostra este exemplo?",
       "o": [
-        "Borda considera apenas os primeiros lugares.",
+        "A maioria de primeiros lugares garante vitória quando há apenas 11 eleitores.",
         "Ter maioria de primeiros lugares não garante necessariamente vitória por Borda.",
-        "Borda ignora os segundos lugares.",
-        "O perfil é inválido."
+        "A maioria de primeiros lugares só deixa de contar quando há empate.",
+        "O maior número de segundos lugares é condição suficiente para vencer."
       ],
       "a": 1,
-      "sol": "O método de Borda valoriza toda a ordenação. B acumula muitos pontos por aparecer sempre em posições altas.",
+      "sol": "A obtém 6×3+5×1=23 pontos. B obtém 6×2+5×3=27 pontos. Assim, apesar de A liderar nos primeiros lugares, B vence porque a pontuação tem em conta todas as posições.",
       "hyp": "Pode supor que a maioria de primeiras preferências domina qualquer método.",
       "contexts": [
         "mission",

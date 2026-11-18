@@ -44,15 +44,15 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "O princípio da multiplicação aplica-se quando um processo é feito em...",
+      "q": "Que condição garante que o total se pode obter multiplicando diretamente os números de escolhas das etapas?",
       "o": [
-        "alternativas incompatíveis.",
-        "etapas sucessivas.",
-        "um único caso.",
-        "eventos impossíveis."
+        "Cada percurso fica completo quando se escolhe uma de várias alternativas mutuamente exclusivas.",
+        "Cada etapa tem o mesmo número de escolhas para todas as opções das etapas anteriores.",
+        "O número de opções é sempre maior na etapa seguinte do que na etapa anterior.",
+        "O número de opções da segunda etapa varia consoante a escolha da primeira."
       ],
       "a": 1,
-      "sol": "Se uma escolha é seguida de outra, multiplicam-se as possibilidades por etapa.",
+      "sol": "Se a primeira etapa tem a escolhas e, para cada uma, a segunda tem b escolhas, há a×b resultados com as duas etapas completas.",
       "hyp": "Pode somar escolhas sucessivas.",
       "contexts": [
         "mission",
@@ -611,7 +611,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Quantos números de 3 algarismos pares existem?",
+      "q": "Quantos números pares de três algarismos existem?",
       "o": [
         "500.",
         "900.",
@@ -619,7 +619,7 @@
         "400."
       ],
       "a": 2,
-      "sol": "Centenas: 9, dezenas: 10, unidades pares: 5. 9×10×5=450.",
+      "sol": "Há 9 escolhas para o algarismo das centenas, 10 para o das dezenas e 5 escolhas pares (incluindo zero) para o das unidades. O total é 9×10×5=450.",
       "hyp": "Pode contar zero inicial ou esquecer paridade.",
       "contexts": [
         "mission",
@@ -1232,15 +1232,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Quando os números de opções da segunda etapa dependem da primeira...",
+      "q": "Um percurso é construído em duas etapas. O número de opções na segunda depende da escolha efetuada na primeira. Qual é o procedimento correto para contar todos os percursos?",
       "o": [
-        "multiplica-se sempre o total de opções médias.",
-        "podemos somar os produtos de cada ramo.",
-        "usa-se apenas adição.",
-        "não é possível contar."
+        "multiplica-se o número de escolhas iniciais pelo maior número de escolhas seguintes.",
+        "somam-se as contagens das escolhas seguintes para cada escolha inicial.",
+        "somam-se as escolhas da primeira etapa e as do primeiro ramo.",
+        "multiplica-se o número de escolhas da primeira etapa pelo menor número de escolhas seguintes."
       ],
       "a": 1,
-      "sol": "Conta-se cada ramo pelo princípio da multiplicação e somam-se os ramos exclusivos.",
+      "sol": "Fixada uma escolha inicial, cada escolha seguinte completa um percurso. Os percursos de escolhas iniciais diferentes são disjuntos, pelo que se somam os números de percursos de cada ramo.",
       "hyp": "Pode aplicar uma multiplicação uniforme que não existe.",
       "contexts": [
         "mission",

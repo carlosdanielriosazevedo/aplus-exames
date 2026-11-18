@@ -187,7 +187,7 @@
         "A:3, B:2, C:0"
       ],
       "a": 2,
-      "sol": "Os cinco maiores quocientes são 1300(A), 950(B), 520(C), 433,33...(A) e 316,67...(B). Resultado 2-2-1.",
+      "sol": "Os cinco maiores quocientes são 1300, 950, 520, 1300÷3≈433,33 e 950÷3≈316,67, das listas A, B, C, A e B, respetivamente. Assim, A e B recebem dois mandatos cada e C recebe um.",
       "hyp": "Pode aplicar divisores 1,2,3 ou excluir C antes de comparar o seu primeiro quociente.",
       "contexts": [
         "mission",
@@ -478,10 +478,10 @@
       "cognitive": "Interpretação",
       "q": "Por que deve evitar-se arredondar demasiado cedo quocientes próximos em St. Laguë?",
       "o": [
-        "Porque só são permitidos inteiros.",
+        "Porque quocientes muito próximos têm obrigatoriamente de ser considerados um empate.",
         "Porque pode alterar artificialmente a ordem dos quocientes.",
-        "Porque arredondar aumenta todos os votos.",
-        "Porque os divisores deixam de ser ímpares."
+        "Porque o número de mandatos depende da soma dos quocientes.",
+        "Porque os maiores quocientes devem ser arredondados com menos casas decimais."
       ],
       "a": 1,
       "sol": "A distribuição depende da comparação ordenada dos quocientes; arredondamentos grosseiros podem trocar posições ou criar falsos empates.",
@@ -935,7 +935,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Com A=980, B=760, C=460, D=300 e 6 mandatos, qual é o menor quociente entre os seis selecionados em St. Laguë?",
+      "q": "Com A=980, B=760, C=460, D=300 e 6 mandatos, qual é o menor quociente entre os seis selecionados em St. Laguë, arredondado às centésimas quando necessário?",
       "o": [
         "300 de D",
         "326,67 de A",
@@ -943,7 +943,7 @@
         "460 de C"
       ],
       "a": 2,
-      "sol": "Os selecionados são 980(A),760(B),460(C),326,67(A),300(D),253,33(B). O menor é 253,33.",
+      "sol": "Os seis maiores quocientes são 980 de A, 760 de B, 460 de C, 980÷3 de A, 300 de D e 760÷3 de B. O menor é 760÷3≈253,33.",
       "hyp": "Pode identificar o menor voto inicial em vez do último quociente vencedor.",
       "contexts": [
         "mission",
@@ -1124,7 +1124,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Uma cooperativa vai distribuir 4 lugares entre grupos com 500, 400 e 200 votos e decidiu usar St. Laguë. Qual resultado deve comunicar?",
+      "q": "Uma cooperativa vai distribuir quatro lugares entre os grupos A, B e C, que tiveram 500, 400 e 200 votos, respetivamente. Quantos lugares recebe cada grupo, pela mesma ordem, pelo método de St. Laguë?",
       "o": [
         "2-2-0",
         "2-1-1",
@@ -1132,7 +1132,7 @@
         "3-1-0"
       ],
       "a": 1,
-      "sol": "Os quatro maiores quocientes são 500(A),400(B),200(C),166,67(A), dando 2-1-1.",
+      "sol": "Os quatro maiores quocientes são 500 de A, 400 de B, 200 de C e 500÷3≈166,67 de A. Logo, A recebe dois lugares, B recebe um e C recebe um.",
       "hyp": "Pode usar D'Hondt por hábito apesar de o método estar explicitado.",
       "contexts": [
         "mission",

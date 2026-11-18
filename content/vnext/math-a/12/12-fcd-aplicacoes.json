@@ -152,7 +152,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Se f'(x)=2x−4, o ponto crítico é...",
+      "q": "Uma função f é derivável em ℝ e f′(x)=2x−4. Qual é a abcissa do seu único ponto crítico?",
       "o": [
         "x=4.",
         "x=2.",
@@ -160,7 +160,7 @@
         "x=0."
       ],
       "a": 1,
-      "sol": "2x−4=0 => x=2.",
+      "sol": "Como f é derivável em ℝ, os pontos críticos são zeros da derivada. Resolvendo 2x−4=0, obtém-se x=2.",
       "hyp": "Pode igualar apenas x a 4.",
       "contexts": [
         "mission",
@@ -179,7 +179,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Para f'(x)=2x−4, f é decrescente em...",
+      "q": "Se f é derivável em ℝ e f′(x)=2x−4, qual é o intervalo em que f′ é estritamente negativa?",
       "o": [
         "]2,+∞[.",
         "R.",
@@ -187,7 +187,7 @@
         "nenhum intervalo."
       ],
       "a": 2,
-      "sol": "2x−4<0 quando x<2.",
+      "sol": "A condição 2x−4<0 equivale a x<2. Portanto, f decresce em ]−∞, 2[, onde a derivada é negativa.",
       "hyp": "Pode trocar os sinais.",
       "contexts": [
         "mission",
@@ -233,7 +233,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Se f'(x)=x(x−3), os pontos críticos são...",
+      "q": "Uma função f é derivável em ℝ e f′(x)=x(x−3). Quais são as abcissas dos seus pontos críticos?",
       "o": [
         "0 e 3.",
         "0 apenas.",
@@ -241,7 +241,7 @@
         "−3 e 0."
       ],
       "a": 0,
-      "sol": "Produto nulo quando x=0 ou x=3.",
+      "sol": "Como f é derivável em ℝ, os pontos críticos são zeros de f′. O produto x(x−3) anula-se em x=0 e x=3.",
       "hyp": "Pode resolver apenas um fator.",
       "contexts": [
         "mission",
@@ -341,7 +341,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Se f''(a)>0 e f'(a)=0, então a é, sob condições usuais...",
+      "q": "Supondo que f″ é contínua numa vizinhança de a, que tipo de ponto é a se f′(a)=0 e f″(a)>0?",
       "o": [
         "ponto de mínimo local.",
         "ponto de máximo local.",
@@ -349,7 +349,7 @@
         "assíntota vertical."
       ],
       "a": 0,
-      "sol": "Segunda derivada positiva indica convexidade local.",
+      "sol": "Como f″ é contínua e positiva em a, é positiva perto de a, onde f′ é crescente. Como f′(a)=0, f′ é negativa à esquerda e positiva à direita de a. Portanto, f tem um mínimo local em a.",
       "hyp": "Pode inverter o teste da segunda derivada.",
       "contexts": [
         "mission",
@@ -557,7 +557,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Modelação",
-      "q": "Uma receita é R(q)=20q−q². Para maximizar R, devemos resolver...",
+      "q": "Uma receita é R(q)=20q−q². Qual é a condição necessária para q ser um ponto interior de máximo de R?",
       "o": [
         "R'(q)=0.",
         "R(q)=0 apenas.",
@@ -565,7 +565,7 @@
         "q=20 obrigatoriamente."
       ],
       "a": 0,
-      "sol": "Candidatos interiores a máximo surgem de R'(q)=0.",
+      "sol": "Num ponto interior de máximo de uma função derivável, R′(q)=0. Aqui R′(q)=20−2q dá q=10, e R″(10)=−2 confirma o máximo local.",
       "hyp": "Pode procurar zeros da receita em vez do máximo.",
       "contexts": [
         "mission",
@@ -646,7 +646,7 @@
         "x=6."
       ],
       "a": 3,
-      "sol": "C'=2x−12=0.",
+      "sol": "Resolvendo C′(x)=2x−12=0, obtém-se x=6. Como C(x)=(x−6)²+14, qualquer outro nível de produção dá um custo maior.",
       "hyp": "Pode usar o coeficiente linear sem dividir por 2.",
       "contexts": [
         "mission",
@@ -989,15 +989,15 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Se f'(x)=(x−1)(x+2), então f é crescente em...",
+      "q": "Se f é derivável em ℝ e f′(x)=(x−1)(x+2), em que intervalos abertos máximos é f′(x)>0, garantindo que f é estritamente crescente em cada um deles?",
       "o": [
-        "]−∞,−2[∪]1,+∞[.",
+        "]−∞, −2[ e ]1, +∞[.",
         "]−2,1[.",
         "R.",
         "]−∞,1[."
       ],
       "a": 0,
-      "sol": "O produto é positivo fora das raízes −2 e 1.",
+      "sol": "Para x<−2 os dois fatores são negativos. Para x>1 os dois fatores são positivos. Em cada um dos intervalos ]−∞, −2[ e ]1, +∞[, f′(x)>0 garante que f é estritamente crescente.",
       "hyp": "Pode construir mal a tabela de sinais.",
       "contexts": [
         "mission",

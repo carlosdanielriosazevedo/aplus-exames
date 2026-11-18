@@ -17,7 +17,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Se z1=r1(cosα+i sinα) e z2=r2(cosβ+i sinβ), então z1z2 tem módulo...",
+      "q": "Se z1=r1(cos α+i sin α) e z2=r2(cos β+i sin β), com r1>0 e r2>0, então z1z2 tem módulo...",
       "o": [
         "r1r2.",
         "r1+r2.",
@@ -44,7 +44,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Se z1=r1(cosα+i sinα) e z2=r2(cosβ+i sinβ), então um argumento de z1z2 é...",
+      "q": "Se z1=r1(cos α+i sin α) e z2=r2(cos β+i sin β), com r1>0 e r2>0, então um argumento de z1z2 é...",
       "o": [
         "α−β.",
         "α+β.",
@@ -52,7 +52,7 @@
         "α/β."
       ],
       "a": 1,
-      "sol": "Na multiplicação, somam-se argumentos.",
+      "sol": "Como os módulos são positivos, α e β são argumentos dos fatores. Um argumento do produto é α+β.",
       "hyp": "Pode subtrair argumentos como na divisão.",
       "contexts": [
         "mission",
@@ -71,7 +71,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "No quociente z1/z2, com z2≠0, o módulo é...",
+      "q": "Sejam r1=|z1| e r2=|z2|, com z2≠0. Qual é o módulo do quociente z1/z2?",
       "o": [
         "r1r2.",
         "r1−r2.",
@@ -503,7 +503,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Se z^n=w, com w de módulo R>0, então cada raiz z tem módulo...",
+      "q": "Se z^n=w, com n inteiro positivo e |w|=R>0, então cada raiz z tem módulo...",
       "o": [
         "R^n.",
         "R/n.",
@@ -511,7 +511,7 @@
         "nR."
       ],
       "a": 2,
-      "sol": "Ao elevar a n, o módulo fica r^n=R.",
+      "sol": "Tomando módulos na equação obtém-se |z|^n=R. Logo |z|=R^(1/n).",
       "hyp": "Pode dividir o módulo por n.",
       "contexts": [
         "mission",
@@ -1205,7 +1205,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Multiplicar por um complexo de módulo 2 e argumento π/3 corresponde geometricamente a...",
+      "q": "No plano complexo, considera dilatações e rotações com centro na origem. A que transformação corresponde multiplicar por um complexo de módulo 2 e argumento π/3?",
       "o": [
         "uma dilatação de fator 2 e rotação de π/3.",
         "apenas uma rotação.",
@@ -1213,7 +1213,7 @@
         "uma reflexão."
       ],
       "a": 0,
-      "sol": "Módulo controla escala e argumento controla rotação.",
+      "sol": "A multiplicação duplica a distância à origem e acrescenta π/3 a um argumento de cada ponto diferente da origem. A origem permanece fixa.",
       "hyp": "Pode ignorar um dos efeitos.",
       "contexts": [
         "mission",
@@ -1232,7 +1232,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Dividir por um complexo de módulo 2 e argumento π/4 corresponde a...",
+      "q": "No plano complexo, com centro das transformações na origem, a que corresponde dividir por um complexo de módulo 2 e argumento π/4?",
       "o": [
         "dilatar por 2 e rodar π/4.",
         "dilatar por 1/2 e rodar −π/4.",
@@ -1240,7 +1240,7 @@
         "refletir no eixo real."
       ],
       "a": 1,
-      "sol": "No quociente, divide-se o módulo e subtrai-se o argumento.",
+      "sol": "Dividir por esse número reduz todas as distâncias à origem a metade e subtrai π/4 aos argumentos dos pontos diferentes da origem.",
       "hyp": "Pode aplicar as regras da multiplicação.",
       "contexts": [
         "mission",

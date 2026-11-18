@@ -22,7 +22,7 @@
         "o capital acumulado, incluindo juros anteriores.",
         "apenas o capital inicial.",
         "apenas os juros anteriores.",
-        "uma média dos montantes."
+        "a média entre o capital inicial e o montante acumulado."
       ],
       "a": 0,
       "sol": "No juro composto, os juros são incorporados no capital e passam também a render.",
@@ -395,15 +395,15 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Com capital e taxa positivos, qual comparação entre juro simples e composto é correta para mais de um período?",
+      "q": "Para o mesmo capital inicial positivo e a mesma taxa positiva por período, como se comparam os montantes de juro simples e composto após mais de um período?",
       "o": [
-        "O simples é sempre superior.",
-        "São sempre iguais.",
-        "O composto tende a dar montante superior, porque os juros também rendem.",
-        "O composto elimina os juros anteriores."
+        "O simples dá um montante maior, porque mantém fixa a base de cálculo.",
+        "Os montantes são iguais, porque o capital inicial e a taxa coincidem.",
+        "O composto dá um montante maior, porque os juros acumulados também rendem.",
+        "Os montantes só diferem se as duas taxas forem diferentes."
       ],
       "a": 2,
-      "sol": "Depois do primeiro período, a capitalização dos juros cria crescimento adicional no regime composto.",
+      "sol": "Ao fim do primeiro período, os montantes coincidem. Em cada período seguinte o juro simples incide sobre o capital inicial, enquanto o juro composto incide também sobre os juros acumulados. Como a taxa é positiva, o montante composto é maior a partir do segundo período.",
       "hyp": "Pode ignorar o efeito dos juros sobre juros.",
       "contexts": [
         "mission",
@@ -719,7 +719,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Uma aplicação mensal de 1 000 € cresce para 1 020,10 € em 2 meses. Qual é a taxa mensal composta?",
+      "q": "Numa aplicação com capitalização mensal, um capital inicial de 1 000 € cresce para 1 020,10 € em dois meses, sem depósitos ou levantamentos. Qual é a taxa de juro mensal?",
       "o": [
         "0,5%",
         "2%",
@@ -1070,7 +1070,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Uma poupança de 5 000 € cresce 3% ao ano durante 5 anos. Sem depósitos adicionais, qual é o montante aproximado?",
+      "q": "Uma poupança inicial de 5 000 € rende 3% ao ano em regime de juro composto, com capitalização anual. Sem depósitos ou levantamentos, qual é o montante ao fim de cinco anos, arredondado aos cêntimos?",
       "o": [
         "5 750,00 €",
         "5 850,00 €",
@@ -1124,12 +1124,12 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Num crédito com capitalização composta e sem pagamentos intermédios, por que o saldo pode crescer cada vez mais em euros por período?",
+      "q": "Num crédito com capitalização composta, taxa de juro positiva constante e sem pagamentos intermédios, por que razão o saldo aumenta mais, em euros, de um período para o seguinte?",
       "o": [
         "Porque a taxa aumenta obrigatoriamente.",
         "Porque a mesma taxa incide sobre uma base crescente.",
-        "Porque os juros deixam de existir.",
-        "Porque o capital inicial é reduzido automaticamente."
+        "Porque se aplica a taxa apenas aos juros do período anterior.",
+        "Porque se repete em cada período o mesmo valor de juro em euros."
       ],
       "a": 1,
       "sol": "Com taxa constante, a percentagem aplica-se a um montante crescente.",

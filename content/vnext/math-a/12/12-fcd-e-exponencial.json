@@ -287,7 +287,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Se f(x)=e^{g(x)}, então f'(x)=",
+      "q": "Se g é derivável em x e f(x)=e^(g(x)), qual é a expressão de f′(x)?",
       "o": [
         "e^{g'(x)}.",
         "g(x)e^{g(x)−1}.",
@@ -989,7 +989,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "No modelo P'(t)=kP(t), se k>0...",
+      "q": "Num modelo com população P(t)>0 e P′(t)=kP(t), com k>0, o que se pode afirmar?",
       "o": [
         "a taxa de crescimento é proporcional à população e positiva.",
         "a população é constante.",
@@ -997,7 +997,7 @@
         "P(t) pode ser negativa."
       ],
       "a": 0,
-      "sol": "k>0 e P>0 implicam crescimento positivo.",
+      "sol": "A taxa instantânea de crescimento é P′(t). Pela equação P′(t)=kP(t), é proporcional a P(t) e é positiva, pois ambos os fatores são positivos.",
       "hyp": "Pode confundir crescimento relativo e absoluto.",
       "contexts": [
         "mission",

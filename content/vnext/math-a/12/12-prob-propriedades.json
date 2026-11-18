@@ -17,7 +17,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Para qualquer acontecimento A, P(A) pertence a...",
+      "q": "Qual dos seguintes é o conjunto exato dos valores que uma probabilidade pode assumir?",
       "o": [
         "[0,1].",
         "R.",
@@ -25,7 +25,7 @@
         "{0,1} apenas."
       ],
       "a": 0,
-      "sol": "Uma probabilidade está sempre entre 0 e 1.",
+      "sol": "Uma probabilidade pode tomar qualquer valor entre 0 e 1, incluindo P(∅)=0 e P(Ω)=1.",
       "hyp": "Pode confundir probabilidade com frequência absoluta.",
       "contexts": [
         "mission",
@@ -592,7 +592,7 @@
         "Só se P(A∪B)=1."
       ],
       "a": 1,
-      "sol": "Interseção nula significa incompatibilidade probabilística; independência exigiria P(A∩B)=P(A)P(B), o que só acontece se pelo menos um tiver probabilidade 0.",
+      "sol": "Se P(A∩B)=0, A e B só são independentes quando P(A)P(B)=0. Por exemplo, cara e coroa num único lançamento de moeda equilibrada têm interseção de probabilidade 0 e probabilidades individuais 1/2.",
       "hyp": "Pode confundir incompatibilidade e independência.",
       "contexts": [
         "mission",
@@ -611,7 +611,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se P(A)=0,7 e P(B)=0,6, então P(A∩B) é pelo menos...",
+      "q": "Se P(A)=0,7 e P(B)=0,6, qual é o menor valor possível de P(A∩B)?",
       "o": [
         "0.",
         "0,1.",
@@ -619,7 +619,7 @@
         "0,6."
       ],
       "a": 2,
-      "sol": "P(A∪B)≤1 =>0,7+0,6−P(A∩B)≤1, logo P(A∩B)≥0,3.",
+      "sol": "Como P(A∪B)=1,3−P(A∩B)≤1, vale P(A∩B)≥0,3. O valor 0,3 é possível, por exemplo, com probabilidades 0,4 para apenas A, 0,3 para apenas B e 0,3 para ambos.",
       "hyp": "Pode assumir interseção zero apesar de a soma ultrapassar 1.",
       "contexts": [
         "mission",

@@ -17,7 +17,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
   {
     id:"CRV2-10GA-STEPS-1",themeId:"10-ga",subtopicId:"10-ga-colinearidade-retas",
     microcompetencyId:"mc-10-ga-retas-e-planos",focus:"Retas e planos",difficulty:2,cognitive:"Raciocínio",
-    q:"Determina o declive da reta que passa pelos pontos A(1,2) e B(5,4). Apresenta e justifica os cálculos.",
+    q:"Determina o declive da reta que passa por A(1, 2) e B(5, 4). Indica as diferenças Δy=yB−yA e Δx=xB−xA. Escreve o declive como fração e justifica por palavras a operação que usaste.",
     response:{type:"stepwise",steps:[
       step("deltaY","1. Variação das ordenadas, Δy","numeric",8,{value:2,tolerance:0,expected:"Δy=2",placeholder:"Ex.: 2"}),
       step("deltaX","2. Variação das abcissas, Δx","numeric",8,{value:4,tolerance:0,expected:"Δx=4",placeholder:"Ex.: 4"}),
@@ -63,7 +63,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     microcompetencyId:"mc-12-fcont-limites",focus:"Limites",difficulty:3,cognitive:"Raciocínio",
     q:"Calcula lim(x→3) (x²−9)/(x−3), apresentando a resolução e justificando a conclusão.",
     response:{type:"stepwise",steps:[
-      step("factorization","1. Fatorização de x²−9","expression",10,{accepted:["(x-3)(x+3)","(x+3)(x-3)"],expected:"(x−3)(x+3)",placeholder:"Ex.: (x−3)(x+3)"}),
+      step("factorization","1. Fatorização de x²−9","expression",10,{accepted:["(x-3)(x+3)","(x+3)(x-3)","x²−9=(x−3)(x+3)","x²−9=(x+3)(x−3)"],expected:"(x−3)(x+3)",placeholder:"Ex.: (x−3)(x+3)"}),
       step("simplification","2. Expressão simplificada para x≠3","expression",10,{accepted:["x+3"],expected:"x+3",placeholder:"Ex.: x+3"}),
       step("conclusion","3. Conclusão justificada","text",15,{conceptGroups:[["continua","continuidade","substituir","substituicao"],["3"],["6"]],expected:"Como x+3 é contínua, substitui-se x=3 e o limite é 6.",placeholder:"Explica por palavras por que o limite é 6."})
     ]},
@@ -74,9 +74,9 @@ export const CONSTRUCTED_RESPONSE_BANK=[
   {
     id:"CRV2-12INT-STEPS-1",themeId:"12-int",subtopicId:"12-int-integral-definido",
     microcompetencyId:"mc-12-int-integral-definido",focus:"Integral definido",difficulty:3,cognitive:"Raciocínio",
-    q:"Calcula ∫₀¹ x dx, apresentando a primitiva e a aplicação da regra de Barrow.",
+    q:"Calcula ∫₀¹ x dx. Usa a primitiva de x que se anula em 0 e aplica a fórmula de Barrow.",
     response:{type:"stepwise",steps:[
-      step("primitive","1. Uma primitiva de x","expression",15,{accepted:["x^2/2","(x^2)/2","1/2x^2","x²/2"],conceptualErrorAccepted:["x^2","x²"],expected:"x²/2",placeholder:"Ex.: x^2/2"}),
+      step("primitive","1. Primitiva de x que se anula em 0","expression",15,{accepted:["x^2/2","(x^2)/2","1/2x^2","x²/2"],conceptualErrorAccepted:["x^2","x²"],expected:"x²/2",placeholder:"Ex.: x^2/2"}),
       step("barrow","2. Aplicação nos extremos","expression",10,{accepted:["1^2/2-0^2/2","(1^2)/2-(0^2)/2","1/2-0"],errorEffects:[
         {from:"primitive",reasons:["conceptual_error"],accepted:["1^2-0^2","1²−0²"],difficultyReduced:false}
       ],expected:"1²/2−0²/2",placeholder:"Ex.: 1^2/2−0^2/2"}),
@@ -84,18 +84,18 @@ export const CONSTRUCTED_RESPONSE_BANK=[
         {from:"primitive",reasons:["conceptual_error"],accepted:["1"],difficultyReduced:false}
       ],expected:"1/2",placeholder:"Ex.: 1/2"})
     ]},
-    points:35,sol:"Uma primitiva de x é x²/2. Pela regra de Barrow, [x²/2]₀¹=1²/2−0²/2=1/2.",
+    points:35,sol:"A primitiva de x que se anula em 0 é F(x)=x²/2. Pela fórmula de Barrow, ∫₀¹ x dx=F(1)−F(0)=1/2.",
     hyp:"Pode existir dificuldade em determinar a primitiva, aplicar os extremos ou manter o valor exato.",
     contexts:["exam"],signature:"12-int:Integral definido:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
   },
   {
     id:"CRV2-10FIN-STEPS-1",themeId:"10-fin",subtopicId:"10-fin-juro-simples",
     microcompetencyId:"mc-10-fin-juros",focus:"Juros",difficulty:2,cognitive:"Modelação",
-    q:"Uma aplicação de 1000 € rende juros simples à taxa anual de 5%. Determina o capital ao fim de um ano e apresenta os cálculos.",
+    q:"Uma aplicação de 1000 € rende juros simples à taxa anual de 5%. Calcula o juro e o montante ao fim de um ano. Apresenta os cálculos e escreve o montante com a unidade monetária na conclusão.",
     response:{type:"stepwise",steps:[
       step("interest","1. Valor dos juros","numeric",12,{value:50,tolerance:0,expected:"J=50",placeholder:"Ex.: J=50"}),
       step("capital","2. Capital ao fim de um ano","numeric",15,{value:1050,tolerance:0,expected:"C=1050",placeholder:"Ex.: C=1050"}),
-      step("conclusion","3. Conclusão com unidade","text",8,{accepted:["O capital ao fim de um ano é 1050 €.","Ao fim de um ano, o capital é 1050 €."],expected:"O capital ao fim de um ano é 1050 €.",placeholder:"Conclui com a unidade monetária."})
+      step("conclusion","3. Conclusão com unidade","text",8,{accepted:["O capital ao fim de um ano é 1050 €.","Ao fim de um ano, o capital é 1050 €.","Ao fim de um ano, o capital acumulado é de 1050 euros.","O montante ao fim de um ano é 1050 €."],expected:"O capital ao fim de um ano é 1050 €.",placeholder:"Conclui com a unidade monetária."})
     ]},
     points:35,sol:"Os juros são 1000×0,05=50 €. Logo, o capital ao fim de um ano é 1000+50=1050 €.",
     hyp:"Pode existir dificuldade em distinguir o juro obtido do capital acumulado.",
@@ -104,7 +104,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
   {
     id:"CRV2-10EST-STEPS-1",themeId:"10-est",subtopicId:"10-est-localizacao",
     microcompetencyId:"mc-10-est-medidas-estatisticas",focus:"Medidas estatísticas",difficulty:2,cognitive:"Procedimento",
-    q:"Considera os valores 2, 4, 4 e 6. Calcula a média e apresenta os cálculos.",
+    q:"Considera os valores 2, 4, 4 e 6. Calcula a média. Indica numa linha a soma dos valores, noutra o número de observações e, por fim, apresenta a média. Identifica as três quantidades.",
     response:{type:"stepwise",steps:[
       step("sum","1. Soma dos valores","numeric",10,{value:16,tolerance:0,expected:"S=16",placeholder:"Ex.: S=16"}),
       step("count","2. Número de observações","numeric",8,{value:4,tolerance:0,expected:"n=4",placeholder:"Ex.: n=4"}),
@@ -117,13 +117,13 @@ export const CONSTRUCTED_RESPONSE_BANK=[
   {
     id:"CRV2-11TRIG-STEPS-1",themeId:"11-trig",subtopicId:"11-trig-equacoes",
     microcompetencyId:"mc-11-trig-equacoes-trigonometricas",focus:"Equações trigonométricas",difficulty:3,cognitive:"Raciocínio",
-    q:"Resolve sin(x)=1/2 no intervalo [0,2π], apresentando as soluções nesse intervalo.",
+    q:"Resolve sen(x)=1/2 no intervalo [0,2π], apresentando as soluções nesse intervalo.",
     response:{type:"stepwise",steps:[
       step("reference","1. Ângulo de referência","expression",10,{accepted:["pi/6","π/6","x=pi/6","x=π/6"],expected:"π/6",placeholder:"Ex.: π/6"}),
       step("second","2. Segunda solução no intervalo","expression",12,{accepted:["5pi/6","5π/6","x=5pi/6","x=5π/6"],expected:"5π/6",placeholder:"Ex.: 5π/6"}),
-      step("set","3. Conjunto-solução","expression",13,{accepted:["{pi/6,5pi/6}","{π/6,5π/6}","s={pi/6,5pi/6}","s={π/6,5π/6}"],expected:"S={π/6,5π/6}",placeholder:"Ex.: S={π/6,5π/6}"})
+      step("set","3. Conjunto-solução","expression",13,{accepted:["{pi/6,5pi/6}","{π/6,5π/6}","s={pi/6,5pi/6}","s={π/6,5π/6}","{π/6;5π/6}","{5π/6;π/6}","S={π/6;5π/6}","S={5π/6;π/6}","{5π/6,π/6}","S={5π/6,π/6}","{pi/6;5pi/6}","{5pi/6;pi/6}","S={pi/6;5pi/6}","S={5pi/6;pi/6}","{5pi/6,pi/6}","S={5pi/6,pi/6}"],expected:"S={π/6; 5π/6}",placeholder:"Ex.: S={π/6,5π/6}"})
     ]},
-    points:35,sol:"No círculo trigonométrico, o seno vale 1/2 no primeiro e no segundo quadrantes. Assim, x=π/6 ou x=5π/6.",
+    points:35,sol:"No círculo trigonométrico, sen(π/6)=1/2. A outra solução em [0,2π] é o ângulo suplementar π−π/6=5π/6, com a mesma ordenada. O conjunto-solução é S={π/6; 5π/6}.",
     hyp:"Pode existir dificuldade em encontrar a solução do segundo quadrante ou em respeitar o intervalo.",
     contexts:["exam"],signature:"11-trig:Equações trigonométricas:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
   },
@@ -134,7 +134,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     response:{type:"stepwise",steps:[
       step("expression","1. Expressão do produto escalar","expression",12,{accepted:["2*3+(-1)*4","2x3+(-1)x4","2×3+(−1)×4","2*3-1*4"],expected:"2×3+(−1)×4",placeholder:"Ex.: 2×3+(−1)×4"}),
       step("value","2. Valor do produto escalar","numeric",13,{value:2,tolerance:0,expected:"u·v=2",placeholder:"Ex.: u·v=2"}),
-      step("conclusion","3. Conclusão geométrica","text",10,{accepted:["Os vetores não são perpendiculares porque o produto escalar não é zero.","Como u·v não é zero, os vetores não são perpendiculares."],expected:"Os vetores não são perpendiculares porque o produto escalar não é zero.",placeholder:"Relaciona o resultado com a perpendicularidade."})
+      step("conclusion","3. Conclusão geométrica","text",10,{accepted:["Os vetores não são perpendiculares porque o produto escalar não é zero.","Como u·v não é zero, os vetores não são perpendiculares.","Não, porque u·v=2≠0.","Não são perpendiculares, pois 2≠0."],expected:"Os vetores não são perpendiculares porque o produto escalar não é zero.",placeholder:"Relaciona o resultado com a perpendicularidade."})
     ]},
     points:35,sol:"u·v=2×3+(−1)×4=6−4=2. Como o produto escalar não é zero, os vetores não são perpendiculares.",
     hyp:"Pode existir dificuldade no sinal da segunda componente ou no critério de perpendicularidade.",
@@ -164,7 +164,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     response:{type:"stepwise",steps:[
       step("real","1. Soma das partes reais","numeric",10,{value:3,tolerance:0,expected:"a=3",placeholder:"Ex.: a=3"}),
       step("imaginary","2. Soma dos coeficientes de i","numeric",10,{value:-2,tolerance:0,expected:"b=−2",placeholder:"Ex.: b=−2"}),
-      step("result","3. Resultado na forma algébrica","expression",15,{accepted:["3-2i","z=3-2i","3+(-2)i","3+(−2)i"],expected:"3−2i",placeholder:"Ex.: 3−2i"})
+      step("result","3. Resultado na forma algébrica","expression",15,{accepted:["3-2i","z=3-2i","3+(-2)i","3+(−2)i","3-2*i","z=3-2*i","3+(-2)*i","z=3+(-2)*i"],expected:"3−2i",placeholder:"Ex.: 3−2i"})
     ]},
     points:35,sol:"Somam-se separadamente as partes reais e imaginárias: (2+1)+(1−3)i=3−2i.",
     hyp:"Pode existir dificuldade em combinar corretamente os coeficientes da parte imaginária.",
@@ -178,7 +178,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
       step("favourable","1. Casos favoráveis","numeric",8,{value:3,tolerance:0,expected:"favoráveis=3",placeholder:"Ex.: favoráveis=3"}),
       step("possible","2. Casos possíveis","numeric",8,{value:5,tolerance:0,expected:"possíveis=5",placeholder:"Ex.: possíveis=5"}),
       step("probability","3. Probabilidade","fraction",12,{numerator:3,denominator:5,expected:"P(V)=3/5",placeholder:"Ex.: P(V)=3/5"}),
-      step("conclusion","4. Justificação","text",7,{accepted:["Pela regra de Laplace, divide-se o número de casos favoráveis pelo número de casos possíveis.","A probabilidade é o quociente entre os casos favoráveis e os casos possíveis."],expected:"Pela regra de Laplace, divide-se o número de casos favoráveis pelo número de casos possíveis.",placeholder:"Explica o quociente usado."})
+      step("conclusion","4. Justificação","text",7,{accepted:["Pela regra de Laplace, divide-se o número de casos favoráveis pelo número de casos possíveis.","A probabilidade é o quociente entre os casos favoráveis e os casos possíveis.","Como as cinco bolas são equiprováveis e três são vermelhas, P(V)=3/5.","Como as cinco bolas são equiprováveis, divide-se o número de casos favoráveis, três, pelo número de casos possíveis, cinco."],expected:"Pela regra de Laplace, divide-se o número de casos favoráveis pelo número de casos possíveis.",placeholder:"Explica o quociente usado."})
     ]},
     points:35,sol:"Existem 3 casos favoráveis e 5 casos possíveis, todos equiprováveis. Pela regra de Laplace, P(V)=3/5.",
     hyp:"Pode existir dificuldade em identificar o total de casos ou em inverter o quociente.",
@@ -190,19 +190,19 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     q:"Resolve a equação 2ˣ=8, apresentando o raciocínio que permite determinar x.",
     response:{type:"stepwise",steps:[
       step("rewrite","1. Escrita de 8 como potência de base 2","expression",12,{accepted:["8=2^3","2^3=8"],expected:"8=2³",placeholder:"Ex.: 8=2^3"}),
-      step("equation","2. Igualdade entre potências","expression",10,{accepted:["2^x=2^3","2ˣ=2³"],expected:"2ˣ=2³",placeholder:"Ex.: 2^x=2^3"}),
+      step("equation","2. Igualdade entre potências","expression",10,{accepted:["2^x=2^3","2ˣ=2³","2^3=2^x","2³=2ˣ"],expected:"2ˣ=2³",placeholder:"Ex.: 2^x=2^3"}),
       step("value","3. Solução da equação","numeric",13,{value:3,tolerance:0,expected:"x=3",placeholder:"Ex.: x=3"})
     ]},
-    points:35,sol:"Como 8=2³, a equação fica 2ˣ=2³. Sendo as bases iguais, os expoentes são iguais, logo x=3.",
+    points:35,sol:"Como 8=2³, a equação fica 2ˣ=2³. Pela injetividade da função exponencial de base 2, os expoentes são iguais, logo x=3.",
     hyp:"Pode existir dificuldade em escrever 8 como potência ou em usar a injetividade da exponencial.",
     contexts:["exam"],signature:"12-expl:Equações:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
   },
   {
     id:"CRV2-10FUN-EXT-STEPS-1",themeId:"10-fun",subtopicId:"10-fun-quadratica",
     microcompetencyId:"mc-10-fun-monotonia-e-extremos",focus:"Monotonia e extremos",difficulty:3,cognitive:"Raciocínio",
-    q:"Considera f(x)=x²−4x+1. Determina o mínimo de f e o valor de x onde é atingido, apresentando os cálculos.",
+    q:"Considera f(x)=x²−4x+1. Reescreve f na forma f(x)=(x−p)²+q. Começa a igualdade por f(x)=. Usa a forma de vértice para indicar o mínimo de f e a abcissa onde é atingido.",
     response:{type:"stepwise",steps:[
-      step("form","1. Escrita na forma de vértice","expression",12,{accepted:["(x-2)^2-3","f(x)=(x-2)^2-3","(x−2)²−3"],expected:"f(x)=(x−2)²−3",placeholder:"Ex.: f(x)=(x−2)^2−3"}),
+      step("form","1. Forma de vértice, começando por f(x)=","expression",12,{accepted:["f(x)=(x-2)^2-3","f(x)=(x−2)²−3"],expected:"f(x)=(x−2)²−3",placeholder:"Ex.: f(x)=(x+4)²+7"}),
       step("abscissa","2. Abscissa do vértice","numeric",8,{value:2,tolerance:0,expected:"x=2",placeholder:"Ex.: x=2"}),
       step("minimum","3. Valor mínimo","numeric",8,{value:-3,tolerance:0,expected:"mínimo=−3",placeholder:"Ex.: mínimo=−3"}),
       step("conclusion","4. Conclusão","text",7,{accepted:["O mínimo de f é −3 e é atingido em x=2.","A função atinge o mínimo −3 quando x=2."],expected:"O mínimo de f é −3 e é atingido em x=2.",placeholder:"Indica o mínimo e onde ocorre."})
@@ -214,7 +214,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
   {
     id:"CRV2-10GA-VET-STEPS-1",themeId:"10-ga",subtopicId:"10-ga-vetores",
     microcompetencyId:"mc-10-ga-vetores",focus:"Vetores",difficulty:2,cognitive:"Procedimento",
-    q:"Dados A(1,2) e B(4,6), determina o vetor AB e o seu comprimento.",
+    q:"Dados A(1, 2) e B(4, 6), determina o vetor AB e o seu comprimento. Indica separadamente a variação da abcissa e a variação da ordenada de A para B.",
     response:{type:"stepwise",steps:[
       step("dx","1. Variação da primeira coordenada","numeric",7,{value:3,tolerance:0,expected:"Δx=3",placeholder:"Ex.: Δx=3"}),
       step("dy","2. Variação da segunda coordenada","numeric",7,{value:4,tolerance:0,expected:"Δy=4",placeholder:"Ex.: Δy=4"}),
@@ -232,7 +232,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     response:{type:"stepwise",steps:[
       step("derivative","1. Derivada de f","expression",10,{accepted:["f'(x)=2x-4","2x-4","f′(x)=2x−4"],expected:"f′(x)=2x−4",placeholder:"Ex.: f'(x)=2x−4"}),
       step("critical","2. Ponto onde f′(x)=0","numeric",8,{value:2,tolerance:0,expected:"x=2",placeholder:"Ex.: x=2"}),
-      step("variation","3. Intervalos de monotonia","expression",10,{accepted:["decrescente em ]-infinito,2[ e crescente em ]2,+infinito[","decrescente em ]−∞,2[ e crescente em ]2,+∞[","f decresce se x<2 e cresce se x>2"],expected:"f decresce se x<2 e cresce se x>2",placeholder:"Indica onde decresce e onde cresce."}),
+      step("variation","3. Intervalos de monotonia","expression",10,{accepted:["decrescente em ]-infinito,2[ e crescente em ]2,+infinito[","decrescente em ]−∞,2[ e crescente em ]2,+∞[","f decresce se x<2 e cresce se x>2","decrescente em ]−∞,2] e crescente em [2,+∞[","f é decrescente em ]−∞,2] e crescente em [2,+∞["],expected:"f decresce se x<2 e cresce se x>2",placeholder:"Indica onde decresce e onde cresce."}),
       step("extreme","4. Extremo","text",7,{accepted:["f tem mínimo −4 em x=2.","A função atinge o mínimo −4 quando x=2."],expected:"f tem mínimo −4 em x=2.",placeholder:"Indica o tipo, valor e localização do extremo."})
     ]},
     points:35,sol:"f′(x)=2x−4, que se anula em x=2. A derivada é negativa antes de 2 e positiva depois de 2; f decresce e depois cresce, tendo mínimo f(2)=−4.",
@@ -245,7 +245,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     q:"Seja f(x)=(x²+1)³. Determina f′(x), explicitando a aplicação da regra da cadeia.",
     response:{type:"stepwise",steps:[
       step("inner","1. Função interior","expression",7,{accepted:["u=x^2+1","x^2+1","u=x²+1"],expected:"u=x²+1",placeholder:"Ex.: u=x^2+1"}),
-      step("outer","2. Derivada da função exterior","expression",8,{accepted:["3u^2","3u²"],expected:"3u²",placeholder:"Ex.: 3u^2"}),
+      step("outer","2. Derivada da função exterior g(u)=u³","expression",8,{accepted:["3u^2","3u²","g′(u)=3u²"],expected:"3u²",placeholder:"Ex.: 3u^2"}),
       step("innerDerivative","3. Derivada da função interior","expression",8,{accepted:["u'=2x","2x","u′=2x"],expected:"u′=2x",placeholder:"Ex.: u'=2x"}),
       step("result","4. Derivada final","expression",12,{accepted:["f'(x)=6x(x^2+1)^2","6x(x^2+1)^2","f′(x)=6x(x²+1)²"],expected:"f′(x)=6x(x²+1)²",placeholder:"Ex.: f'(x)=6x(x^2+1)^2"})
     ]},
@@ -260,7 +260,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     response:{type:"stepwise",steps:[
       step("excluded","1. Zero do denominador","numeric",7,{value:3,tolerance:0,expected:"x=3",placeholder:"Ex.: x=3"}),
       step("vertical","2. Assíntota vertical","expression",9,{accepted:["x=3"],expected:"x=3",placeholder:"Ex.: x=3"}),
-      step("ratio","3. Quociente dos coeficientes dominantes","numeric",8,{value:2,tolerance:0,expected:"2/1=2",placeholder:"Ex.: 2"}),
+      step("ratio","3. Valor numérico do quociente dos coeficientes dominantes","numeric",8,{value:2,tolerance:0,expected:"2",placeholder:"Ex.: 2"}),
       step("horizontal","4. Assíntota horizontal","expression",11,{accepted:["y=2"],expected:"y=2",placeholder:"Ex.: y=2"})
     ]},
     points:35,sol:"O denominador anula-se em x=3 e o numerador não, logo x=3 é assíntota vertical. Como numerador e denominador têm o mesmo grau, o limite no infinito é 2/1=2; portanto, y=2 é assíntota horizontal.",
@@ -278,7 +278,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
         {value:"1,9881<2<1,42²",missingOnlyFinalPassage:true},
         {value:"1,9881<2",missingOnlyFinalPassage:false}
       ],expected:"1,9881<2<2,0164",placeholder:"Ex.: 1,9881<2<2,0164"}),
-      step("conclusion","4. Conclusão","text",7,{accepted:["Logo, 1,41<√2<1,42.","Conclui-se que √2 pertence a ]1,41;1,42[."],expected:"Logo, 1,41<√2<1,42.",placeholder:"Conclui a localização de √2."})
+      step("conclusion","4. Conclusão","text",7,{accepted:["Logo, 1,41<√2<1,42.","Conclui-se que √2 pertence a ]1,41;1,42[.","1,41<√2<1,42","√2 pertence a ]1,41;1,42["],expected:"Logo, 1,41<√2<1,42.",placeholder:"Conclui a localização de √2."})
     ]},
     points:35,sol:"1,41²=1,9881<2 e 1,42²=2,0164>2. Como os números são positivos, conclui-se que 1,41<√2<1,42.",
     hyp:"Pode existir dificuldade em usar os quadrados para justificar a localização da raiz.",
@@ -287,10 +287,10 @@ export const CONSTRUCTED_RESPONSE_BANK=[
   {
     id:"CRV2-12INT-AREA-STEPS-1",themeId:"12-int",subtopicId:"12-int-areas",
     microcompetencyId:"mc-12-int-areas",focus:"Áreas",difficulty:2,cognitive:"Aplicação",
-    q:"Calcula a área limitada pelo gráfico de y=x, pelo eixo Ox e pelas retas x=0 e x=2.",
+    q:"Calcula a área limitada pelo gráfico de y=x, pelo eixo Ox e pelas retas x=0 e x=2. Usa a primitiva do integrando que se anula em 0.",
     response:{type:"stepwise",steps:[
       step("integral","1. Integral que representa a área","expression",10,{accepted:["integral_0^2 x dx","∫₀²x dx","∫₀² x dx"],expected:"∫₀² x dx",placeholder:"Ex.: ∫₀² x dx"}),
-      step("primitive","2. Primitiva usada","expression",8,{accepted:["x^2/2","x²/2"],expected:"x²/2",placeholder:"Ex.: x^2/2"}),
+      step("primitive","2. Primitiva do integrando que se anula em 0","expression",8,{accepted:["x^2/2","x²/2"],expected:"x²/2",placeholder:"Ex.: x^2/2"}),
       step("barrow","3. Aplicação nos extremos","expression",9,{accepted:["2^2/2-0^2/2","4/2-0"],expected:"2²/2−0²/2",placeholder:"Ex.: 2^2/2−0^2/2"}),
       step("area","4. Valor da área","numeric",8,{value:2,tolerance:0,expected:"A=2",placeholder:"Ex.: A=2"})
     ]},
@@ -305,7 +305,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     response:{type:"stepwise",steps:[
       step("squares","1. Soma dos quadrados das componentes","expression",10,{accepted:["3^2+(-4)^2","3²+(−4)²","9+16"],expected:"3²+(−4)²",placeholder:"Ex.: 3^2+(−4)^2"}),
       step("sum","2. Valor dentro da raiz","numeric",8,{value:25,tolerance:0,expected:"25",placeholder:"Ex.: 25"}),
-      step("root","3. Cálculo da raiz","expression",8,{accepted:["sqrt(25)=5","√25=5","raiz(25)=5"],expected:"√25=5",placeholder:"Ex.: √25=5"}),
+      step("root","3. Cálculo da raiz","expression",8,{accepted:["sqrt(25)=5","√25=5","raiz(25)=5","√(25)=5"],expected:"√25=5",placeholder:"Ex.: √25=5"}),
       step("modulus","4. Módulo de z","numeric",9,{value:5,tolerance:0,expected:"|z|=5",placeholder:"Ex.: |z|=5"})
     ]},
     points:35,sol:"|z|=√(3²+(−4)²)=√(9+16)=√25=5.",
@@ -315,23 +315,23 @@ export const CONSTRUCTED_RESPONSE_BANK=[
   {
     id:"CRV2-10ELE-DHONDT-STEPS-1",themeId:"10-ele",subtopicId:"10-ele-dhondt",
     microcompetencyId:"mc-10-ele-metodos-de-votacao",focus:"Método de D'Hondt",difficulty:3,cognitive:"Aplicação",
-    q:"As listas A, B e C obtiveram, respetivamente, 4800, 2800 e 1200 votos. Distribui quatro mandatos pelo método de D'Hondt, apresentando os quocientes decisivos.",
+    q:"As listas A, B e C obtiveram 4800, 2800 e 1200 votos, respetivamente. Apresenta os quatro primeiros quocientes de A. Depois, identifica os quatro maiores quocientes das três listas e distribui os quatro mandatos pelo método de D'Hondt.",
     response:{type:"stepwise",steps:[
-      step("quotientsA","1. Quocientes relevantes da lista A","expression",10,{accepted:["A={4800;2400;1600;1200}"],expected:"A={4800;2400;1600;1200}",placeholder:"Ex.: A={4800;2400;1600;1200}"}),
+      step("quotientsA","1. Quatro primeiros quocientes da lista A","expression",10,{accepted:["A={4800;2400;1600;1200}","{4800;2400;1600;1200}","4800;2400;1600;1200"],expected:"A={4800;2400;1600;1200}",placeholder:"Ex.: A={4800;2400;1600;1200}"}),
       step("ranking","2. Quatro maiores quocientes por ordem","expression",12,{accepted:["4800(A)>2800(B)>2400(A)>1600(A)"],incompleteAccepted:[
         {value:"4800(A)>2800(B)>2400(A)",missingOnlyFinalPassage:true},
         {value:"4800(A)>2800(B)",missingOnlyFinalPassage:false}
       ],expected:"4800(A)>2800(B)>2400(A)>1600(A)",placeholder:"Ordena os quatro quocientes decisivos."}),
       step("allocation","3. Distribuição dos mandatos","expression",13,{accepted:["A=3;B=1;C=0","A:3;B:1;C:0"],expected:"A=3; B=1; C=0",placeholder:"Ex.: A=3; B=1; C=0"})
     ]},
-    points:35,sol:"Os quatro maiores quocientes são 4800 (A), 2800 (B), 2400 (A) e 1600 (A). Assim, A recebe 3 mandatos, B recebe 1 e C não recebe mandatos.",
+    points:35,sol:"Os quatro primeiros quocientes de A são 4800÷1=4800, 4800÷2=2400, 4800÷3=1600 e 4800÷4=1200. Os quatro maiores quocientes entre todas as listas são 4800 (A), 2800 (B), 2400 (A) e 1600 (A). Assim, A recebe três mandatos, B recebe um e C não recebe mandatos.",
     hyp:"Pode existir dificuldade em ordenar quocientes de listas diferentes ou em contar os mandatos atribuídos.",
     contexts:["exam"],signature:"10-ele:D'Hondt:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
   },
   {
     id:"CRV2-10GS-BAR-STEPS-1",themeId:"10-gs",subtopicId:"10-gs-baricentro-medianas",
     microcompetencyId:"mc-10-gs-raciocinio-geometrico",focus:"Baricentro",difficulty:2,cognitive:"Raciocínio",
-    q:"Num referencial, considera A(0,0), B(6,0) e C(0,3). Determina as coordenadas do baricentro G do triângulo ABC.",
+    q:"Num referencial, considera A(0, 0), B(6, 0) e C(0, 3). Escreve a expressão para o baricentro G como um par de médias das coordenadas dos vértices. Calcula separadamente a abcissa e a ordenada e apresenta G como um par ordenado.",
     response:{type:"stepwise",steps:[
       step("formula","1. Aplicação da fórmula do baricentro","expression",8,{accepted:["G=((0+6+0)/3,(0+0+3)/3)"],expected:"G=((0+6+0)/3,(0+0+3)/3)",placeholder:"Escreve a média de cada coordenada."}),
       step("xg","2. Abcissa do baricentro","numeric",9,{value:2,tolerance:0,expected:"xG=2",prefixes:["x_G","xg"],placeholder:"Ex.: xG=2"}),
@@ -345,14 +345,14 @@ export const CONSTRUCTED_RESPONSE_BANK=[
   {
     id:"CRV2-11FUN-RUFFINI-STEPS-1",themeId:"11-fun",subtopicId:"11-fun-divisao-polinomios",
     microcompetencyId:"mc-11-fun-transformacoes",focus:"Divisão de polinómios",difficulty:3,cognitive:"Raciocínio",
-    q:"Considera P(x)=x³−4x²+x+6. Verifica que 2 é uma raiz e fatoriza completamente P.",
+    q:"Considera P(x)=x³−4x²+x+6. Verifica que 2 é uma raiz e determina os três fatores de primeiro grau. Escreve os fatores com coeficiente de x igual a 1, separados por «;», como no exemplo x+2; x−4; x−6.",
     response:{type:"stepwise",steps:[
       step("verification","1. Verificação de P(2)","expression",10,{accepted:["P(2)=8-16+2+6=0","8-16+2+6=0"],expected:"P(2)=8−16+2+6=0",placeholder:"Substitui x por 2."}),
       step("quotient","2. Quociente da divisão por x−2","expression",12,{accepted:["x^2-2x-3","x²−2x−3"],expected:"x²−2x−3",placeholder:"Aplica Ruffini ou a divisão de polinómios."}),
-      step("factorization","3. Fatorização completa","expression",13,{accepted:["(x-2)(x-3)(x+1)","P(x)=(x-2)(x-3)(x+1)"],incompleteAccepted:[
+      step("factorization","3. Fatores de primeiro grau separados por «;»","expression",13,{accepted:["x+1; x−2; x−3","x+1; x−3; x−2","x−2; x+1; x−3","x−2; x−3; x+1","x−3; x+1; x−2","x−3; x−2; x+1","P(x)=(x+1)(x−2)(x−3)","P(x)=(x+1)×(x−2)×(x−3)","P(x)=(x+1)(x−3)(x−2)","P(x)=(x+1)×(x−3)×(x−2)","P(x)=(x−2)(x+1)(x−3)","P(x)=(x−2)×(x+1)×(x−3)","P(x)=(x−2)(x−3)(x+1)","P(x)=(x−2)×(x−3)×(x+1)","P(x)=(x−3)(x+1)(x−2)","P(x)=(x−3)×(x+1)×(x−2)","P(x)=(x−3)(x−2)(x+1)","P(x)=(x−3)×(x−2)×(x+1)"],incompleteAccepted:[
         {value:"P(x)=(x−2)(x²−2x−3)",missingOnlyFinalPassage:true},
         {value:"P(x)=(x−2)Q(x)",missingOnlyFinalPassage:false}
-      ],expected:"P(x)=(x−2)(x−3)(x+1)",placeholder:"Ex.: P(x)=(x−2)…"})
+      ],expected:"x+1; x−2; x−3",placeholder:"Ex.: x+2; x−4; x−6"})
     ]},
     points:35,sol:"P(2)=8−16+2+6=0, logo x−2 é fator. A divisão dá x²−2x−3=(x−3)(x+1). Portanto, P(x)=(x−2)(x−3)(x+1).",
     hyp:"Pode existir dificuldade em ligar o resto nulo ao fator x−2 ou em fatorizar o quociente.",
@@ -365,10 +365,10 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     response:{type:"stepwise",steps:[
       step("lower","1. Limite inferior","numeric",8,{value:47,tolerance:0,expected:"LI=47",prefixes:["li"],placeholder:"Ex.: LI=47"}),
       step("upper","2. Limite superior","numeric",8,{value:53,tolerance:0,expected:"LS=53",prefixes:["ls"],placeholder:"Ex.: LS=53"}),
-      step("interval","3. Intervalo de confiança","expression",9,{accepted:["IC95%=[47,53]","[47,53]"],expected:"IC95%=[47,53]",placeholder:"Ex.: IC95%=[47,53]"}),
-      step("interpretation","4. Interpretação","text",10,{accepted:["Com 95% de confiança, a média populacional encontra-se entre 47 e 53.","O intervalo [47,53] estima a média populacional com 95% de confiança."],expected:"Com 95% de confiança, a média populacional encontra-se entre 47 e 53.",placeholder:"Interpreta o intervalo no contexto da média populacional."})
+      step("interval","3. Intervalo de confiança","expression",9,{accepted:["IC95%=[47,53]","[47,53]","IC95%=[47;53]","[47;53]"],expected:"IC a 95%=[47;53]",placeholder:"Ex.: IC95%=[47,53]"}),
+      step("interpretation","4. Interpretação","text",10,{accepted:["Com 95% de confiança, a média populacional encontra-se entre 47 e 53.","O intervalo [47,53] estima a média populacional com 95% de confiança.","O intervalo [47;53] estima a média populacional com 95% de confiança.","Se repetirmos o procedimento muitas vezes, cerca de 95% dos intervalos conterão a média populacional."],expected:"Com 95% de confiança, a média populacional encontra-se entre 47 e 53.",placeholder:"Interpreta o intervalo no contexto da média populacional."})
     ]},
-    points:35,sol:"O intervalo é 50±3, isto é, [47,53]. Interpreta-se que, com 95% de confiança, a média populacional se encontra entre 47 e 53.",
+    points:35,sol:"O intervalo é [50−3;50+3]=[47;53]. O nível de confiança indica que, se repetirmos o procedimento nas mesmas condições, cerca de 95% dos intervalos obtidos conterão a média populacional.",
     hyp:"Pode existir dificuldade em aplicar a margem de erro aos dois limites ou em interpretar o nível de confiança.",
     contexts:["exam"],signature:"12-ie:Intervalos de confiança:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
   },
@@ -380,9 +380,9 @@ export const CONSTRUCTED_RESPONSE_BANK=[
       step("row1","1. Primeira linha do produto","expression",10,{accepted:["(4,4)","[4,4]"],expected:"(4,4)",placeholder:"Calcula os produtos linha-coluna."}),
       step("row2","2. Segunda linha do produto","expression",10,{accepted:["(10,8)","[10,8]"],expected:"(10,8)",placeholder:"Calcula os produtos linha-coluna."}),
       step("product","3. Matriz AB","expression",10,{accepted:["AB=[[4,4],[10,8]]","[[4,4],[10,8]]"],expected:"AB=[[4,4],[10,8]]",placeholder:"Ex.: AB=[[…],[…]]"}),
-      step("order","4. Justificação sobre a ordem","text",5,{accepted:["Em geral, o produto de matrizes não é comutativo, pelo que AB pode ser diferente de BA.","O produto de matrizes não é comutativo: em geral, AB≠BA."],expected:"Em geral, o produto de matrizes não é comutativo, pelo que AB pode ser diferente de BA.",placeholder:"Refere a não comutatividade do produto."})
+      step("order","4. Justificação sobre a ordem","text",5,{accepted:["Em geral, o produto de matrizes não é comutativo, pelo que AB pode ser diferente de BA.","O produto de matrizes não é comutativo: em geral, AB≠BA.","O produto de matrizes não é comutativo.","AB≠BA, pois o produto de matrizes não é comutativo.","Como BA=[[2,4],[7,10]], AB≠BA."],expected:"Em geral, o produto de matrizes não é comutativo, pelo que AB pode ser diferente de BA.",placeholder:"Refere a não comutatividade do produto."})
     ]},
-    points:35,sol:"AB=[[1×2+2×1,1×0+2×2],[3×2+4×1,3×0+4×2]]=[[4,4],[10,8]]. Em geral, o produto de matrizes não é comutativo, por isso AB pode diferir de BA.",
+    points:35,sol:"Pelo produto linha-coluna, AB=[[4,4],[10,8]]. Na ordem inversa, BA=[[2,4],[7,10]]. Como as duas matrizes diferem, a troca da ordem não é válida neste caso.",
     hyp:"Pode existir dificuldade em combinar linhas com colunas ou assumir incorretamente que AB=BA.",
     contexts:["exam"],signature:"12-mat:Produto de matrizes:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
   },
@@ -392,7 +392,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     q:"Um serviço de entregas cobra 4 € de taxa fixa e 1,50 € por quilómetro. Escreve a função custo C(x) e determina o preço de uma entrega de 10 km.",
     response:{type:"stepwise",steps:[
       step("model","1. Modelo do custo em função da distância","expression",12,{accepted:["C(x)=4+1.5x","4+1.5x","C(x)=1.5x+4"],conceptualErrorAccepted:["C(x)=4x+1.5","4x+1.5"],expected:"C(x)=4+1,5x",placeholder:"Ex.: C(x)=4+1,5x"}),
-      step("substitution","2. Substituição de x=10","expression",10,{accepted:["C(10)=4+1.5*10","4+1.5*10","4+1,5×10"],errorEffects:[
+      step("substitution","2. Substituição de x=10","expression",10,{accepted:["C(10)=4+1.5*10","4+1.5*10","4+1,5×10","C(10)=4+10×1,5","4+10×1,5"],errorEffects:[
         {from:"model",reasons:["conceptual_error"],accepted:["C(10)=4*10+1.5","4*10+1.5","4×10+1,5"],difficultyReduced:false}
       ],expected:"C(10)=4+1,5×10",placeholder:"Ex.: C(10)=4+1,5×10"}),
       step("value","3. Preço da entrega","numeric",13,{value:19,tolerance:0,errorEffects:[
@@ -406,7 +406,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
   {
     id:"CRV2-10GA-DIST-STEPS-1",themeId:"10-ga",subtopicId:"10-ga-distancias-ponto-medio",
     microcompetencyId:"mc-10-ga-coordenadas",focus:"Distâncias e ponto médio",difficulty:2,cognitive:"Aplicação",
-    q:"Considera os pontos A(−1,2) e B(3,5). Determina a distância AB, apresentando os cálculos.",
+    q:"Considera A(−1, 2) e B(3, 5). Calcula as diferenças de abcissas e de ordenadas, subtraindo as coordenadas de A às de B. Escreve a expressão da distância AB a partir dessas diferenças e calcula o seu valor.",
     response:{type:"stepwise",steps:[
       step("dx","1. Diferença das abcissas","numeric",7,{value:4,tolerance:0,expected:"Δx=4",placeholder:"Ex.: Δx=4"}),
       step("dy","2. Diferença das ordenadas","numeric",7,{value:3,tolerance:0,expected:"Δy=3",placeholder:"Ex.: Δy=3"}),
@@ -420,17 +420,17 @@ export const CONSTRUCTED_RESPONSE_BANK=[
   {
     id:"CRV2-11CD-TV-STEPS-1",themeId:"11-cd",subtopicId:"11-cd-funcao-derivada",
     microcompetencyId:"mc-11-cd-taxa-de-variacao",focus:"Taxa de variação",difficulty:3,cognitive:"Raciocínio",
-    q:"A posição de uma partícula é s(t)=t²+3t. Determina a velocidade instantânea no instante t=2.",
+    q:"A posição de uma partícula é dada por s(t)=t²+3t, com s em metros e t em segundos. Qual é, em m/s, a velocidade instantânea no instante t=2?",
     response:{type:"stepwise",steps:[
       step("derivative","1. Derivada da função posição","expression",12,{accepted:["s'(t)=2t+3","2t+3","s′(t)=2t+3"],conceptualErrorAccepted:["s'(t)=2t","2t","s′(t)=2t"],expected:"s′(t)=2t+3",placeholder:"Ex.: s'(t)=2t+3"}),
       step("substitution","2. Substituição de t=2","expression",10,{accepted:["s'(2)=2*2+3","2*2+3","2×2+3"],errorEffects:[
         {from:"derivative",reasons:["conceptual_error"],accepted:["s'(2)=2*2","2*2","2×2"],difficultyReduced:true}
       ],expected:"s′(2)=2×2+3",placeholder:"Ex.: s'(2)=2×2+3"}),
-      step("velocity","3. Velocidade instantânea","numeric",13,{value:7,tolerance:0,errorEffects:[
+      step("velocity","3. Valor numérico de s′(2), em m/s","numeric",13,{value:7,tolerance:0,errorEffects:[
         {from:"derivative",reasons:["conceptual_error"],accepted:["4","s'(2)=4","s′(2)=4"],difficultyReduced:true}
       ],expected:"s′(2)=7",placeholder:"Ex.: 7"})
     ]},
-    points:35,sol:"A velocidade instantânea é a derivada da posição. Como s′(t)=2t+3, resulta s′(2)=2×2+3=7.",
+    points:35,sol:"A velocidade instantânea é a derivada da posição. Como s′(t)=2t+3, no instante t=2 resulta s′(2)=7 m/s.",
     hyp:"Pode omitir a derivada do termo 3t; esse erro simplifica as etapas seguintes e deve ser propagado conservadoramente.",
     contexts:["exam"],signature:"11-cd:Taxa de variação:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
   },
@@ -440,10 +440,10 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     q:"Uma população é modelada por P(t)=1000×1,07ᵗ, com t em anos. Estima P(5), arredondando o resultado final às unidades.",
     response:{type:"stepwise",steps:[
       step("substitution","1. Substituição de t=5","expression",10,{accepted:["P(5)=1000*1.07^5","1000*1.07^5","1000×1,07^5"],expected:"P(5)=1000×1,07⁵",placeholder:"Ex.: P(5)=1000×1,07^5"}),
-      step("raw","2. Valor antes do arredondamento","numeric",12,{value:1402.5517307,tolerance:0.0001,expected:"Valor não arredondado=1402,5517307",placeholder:"Ex.: 1402,5517307"}),
-      step("rounded","3. Resultado arredondado às unidades","numeric",13,{value:1403,tolerance:0,rounding:{sourceValue:1402.5517307,decimals:0},expected:"Resultado=1403",placeholder:"Ex.: 1403"})
+      step("raw","2. Valor antes do arredondamento","numeric",12,{value:1402.5517307,tolerance:0.0001,expected:"Valor não arredondado=1402,5517307",placeholder:"Ex.: 1402,5517307",prefixes:["P(5)"]}),
+      step("rounded","3. Resultado arredondado às unidades (valor estimado de P(5))","numeric",13,{value:1403,tolerance:0,rounding:{sourceValue:1402.5517307,decimals:0},expected:"Resultado=1403",placeholder:"Ex.: 1403"})
     ]},
-    points:35,sol:"P(5)=1000×1,07⁵=1402,5517307… Como a primeira casa decimal é 5, arredonda-se às unidades: P(5)≈1403.",
+    points:35,sol:"Substituindo t por 5, obtém-se P(5)=1000×1,07⁵=1402,5517307. Como a parte decimal é maior do que 0,5, arredonda-se para 1403.",
     hyp:"Pode arredondar prematuramente ou aplicar incorretamente a regra de arredondamento final.",
     contexts:["exam"],signature:"12-expl:Modelação:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
   },
@@ -452,12 +452,12 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     microcompetencyId:"mc-10-fun-transformacoes-modulo",focus:"Transformações e módulo",difficulty:3,cognitive:"Raciocínio",
     q:"Considera f(x)=|x−2|−1. Indica o vértice do gráfico e determina os zeros de f, apresentando a resolução.",
     response:{type:"stepwise",steps:[
-      step("vertex","1. Vértice do gráfico","expression",9,{accepted:["V=(2,-1)","(2,-1)","V(2,-1)"],expected:"V=(2,−1)",placeholder:"Ex.: V=(2,−1)"}),
+      step("vertex","1. Vértice do gráfico","expression",9,{accepted:["V=(2,-1)","(2,-1)","V(2,-1)","V=(2; −1)","(2; −1)","V(2; −1)"],expected:"V=(2; −1)",placeholder:"Escreve as coordenadas do vértice."}),
       step("equation","2. Equação para determinar os zeros","expression",9,{accepted:["|x-2|=1","abs(x-2)=1"],expected:"|x−2|=1",placeholder:"Ex.: |x−2|=1"}),
-      step("branches","3. Separação nos dois casos","expression",9,{accepted:["x-2=1 ou x-2=-1","x−2=1 ou x−2=−1","x-2=+-1"],expected:"x−2=1 ou x−2=−1",placeholder:"Apresenta os dois casos."}),
-      step("zeros","4. Zeros da função","expression",8,{accepted:["x=1 ou x=3","{1,3}","Z={1,3}"],expected:"Z={1,3}",placeholder:"Ex.: Z={1,3}"})
+      step("branches","3. Separação nos dois casos","expression",9,{accepted:["x-2=1 ou x-2=-1","x−2=1 ou x−2=−1","x-2=+-1","x−2=−1 ou x−2=1","x−2=±1"],expected:"x−2=1 ou x−2=−1",placeholder:"Apresenta os dois casos."}),
+      step("zeros","4. Zeros da função","expression",8,{accepted:["x=1 ou x=3","x=3 ou x=1","{1,3}","Z={1,3}","{1; 3}","Z={1; 3}","{3; 1}","Z={3; 1}"],expected:"Z={1; 3}",placeholder:"Indica o conjunto dos zeros."})
     ]},
-    points:35,sol:"O gráfico de |x| foi transladado 2 unidades para a direita e 1 para baixo, logo o vértice é (2,−1). Para os zeros, |x−2|−1=0, isto é, |x−2|=1. Assim, x−2=1 ou x−2=−1, donde x=3 ou x=1.",
+    points:35,sol:"O gráfico de |x| foi transladado duas unidades para a direita e uma para baixo, logo o vértice é (2; −1). Para os zeros, |x−2|−1=0, isto é, |x−2|=1. Assim, x−2=1 ou x−2=−1, donde x=3 ou x=1.",
     hyp:"Pode trocar o sentido das translações ou considerar apenas um dos ramos da equação modular.",
     contexts:["exam"],signature:"10-fun:Transformações e módulo:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
   },
@@ -468,7 +468,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     response:{type:"stepwise",steps:[
       step("point","1. Ponto de tangência","expression",7,{accepted:["P=(1,1)","(1,1)","P(1,1)"],expected:"P=(1,1)",placeholder:"Calcula f(1)."}),
       step("derivative","2. Função derivada","expression",9,{accepted:["f'(x)=2x","2x","f′(x)=2x"],expected:"f′(x)=2x",placeholder:"Ex.: f'(x)=2x"}),
-      step("slope","3. Declive da tangente","numeric",8,{value:2,tolerance:0,expected:"m=f′(1)=2",placeholder:"Ex.: m=2"}),
+      step("slope","3. Declive da tangente","numeric",8,{value:2,tolerance:0,expected:"m=2",placeholder:"Ex.: m=2",prefixes:["f′(1)"]}),
       step("line","4. Equação da reta tangente","expression",11,{accepted:["y=2x-1","y-1=2(x-1)","2x-y-1=0"],expected:"y=2x−1",placeholder:"Ex.: y=2x−1"})
     ]},
     points:35,sol:"O ponto de tangência é (1,f(1))=(1,1). Como f′(x)=2x, o declive é f′(1)=2. Pela forma ponto-declive, y−1=2(x−1), ou seja, y=2x−1.",
@@ -480,10 +480,10 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     microcompetencyId:"mc-12-cplx-forma-trigonometrica",focus:"Forma trigonométrica",difficulty:3,cognitive:"Aplicação",
     q:"Escreve o número complexo z=−1+√3i na forma trigonométrica, usando um argumento pertencente a [0,2π[.",
     response:{type:"stepwise",steps:[
-      step("modulus","1. Módulo de z","expression",9,{accepted:["|z|=2","sqrt((-1)^2+(sqrt(3))^2)=2","√((-1)²+(√3)²)=2"],expected:"|z|=2",placeholder:"Calcula o módulo."}),
-      step("quadrant","2. Quadrante do afixo","text",7,{accepted:["O afixo pertence ao segundo quadrante.","Segundo quadrante.","2.º quadrante."],expected:"O afixo pertence ao segundo quadrante.",placeholder:"Identifica o quadrante."}),
-      step("argument","3. Argumento em [0,2π[","expression",9,{accepted:["arg(z)=2pi/3","2pi/3","arg(z)=2π/3"],expected:"arg(z)=2π/3",placeholder:"Ex.: arg(z)=2π/3"}),
-      step("trig","4. Forma trigonométrica","expression",10,{accepted:["z=2(cos(2pi/3)+i sin(2pi/3))","2(cos(2pi/3)+i sin(2pi/3))","z=2(cos(2π/3)+i sin(2π/3))"],expected:"z=2(cos(2π/3)+i sin(2π/3))",placeholder:"Escreve z=r(cos θ+i sin θ)."})
+      step("modulus","1. Módulo de z","expression",9,{accepted:["|z|=2","sqrt((-1)^2+(sqrt(3))^2)=2","√((-1)²+(√3)²)=2","2"],expected:"|z|=2",placeholder:"Calcula o módulo."}),
+      step("quadrant","2. Quadrante do afixo","text",7,{accepted:["O afixo pertence ao segundo quadrante.","Segundo quadrante.","2.º quadrante.","2º quadrante."],expected:"O afixo pertence ao segundo quadrante.",placeholder:"Identifica o quadrante."}),
+      step("argument","3. Argumento em [0,2π[","expression",9,{accepted:["arg(z)=2pi/3","2pi/3","arg(z)=2π/3","2π/3","θ=2π/3","θ=2pi/3"],expected:"arg(z)=2π/3",placeholder:"Ex.: arg(z)=2π/3"}),
+      step("trig","4. Forma trigonométrica","expression",10,{accepted:["z=2(cos(2pi/3)+i sin(2pi/3))","2(cos(2pi/3)+i sin(2pi/3))","z=2(cos(2π/3)+i sin(2π/3))","2(cos(2π/3)+i sin(2π/3))"],expected:"z=2(cos(2π/3)+i sin(2π/3))",placeholder:"Escreve z=r(cos θ+i sin θ)."})
     ]},
     points:35,sol:"Tem-se |z|=√((-1)²+(√3)²)=2. O afixo está no segundo quadrante e o ângulo de referência é π/3, logo um argumento em [0,2π[ é 2π/3. Portanto, z=2(cos(2π/3)+i sin(2π/3)).",
     hyp:"Pode escolher o argumento do primeiro quadrante ou omitir o módulo na forma trigonométrica.",
@@ -494,10 +494,10 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     microcompetencyId:"mc-12-expl-logaritmos",focus:"Função logarítmica",difficulty:3,cognitive:"Raciocínio",
     q:"Resolve, em ℝ, a equação log₂(x−1)=3, indicando a condição de existência.",
     response:{type:"stepwise",steps:[
-      step("domain","1. Condição de existência","expression",8,{accepted:["x-1>0","x>1","CE:x>1"],expected:"x−1>0 ⇔ x>1",placeholder:"Indica a condição de existência."}),
-      step("exponential","2. Passagem para a forma exponencial","expression",10,{accepted:["x-1=2^3","x−1=2³"],expected:"x−1=2³",placeholder:"Usa a definição de logaritmo."}),
+      step("domain","1. Condição de existência","expression",8,{accepted:["x-1>0","x>1","CE:x>1","x∈]1,+∞[","x∈]1,∞["],expected:"x−1>0 ⇔ x>1",placeholder:"Indica a condição de existência."}),
+      step("exponential","2. Passagem para a forma exponencial","expression",10,{accepted:["x-1=2^3","x−1=2³","x−1=8","8=x−1","2³=x−1"],expected:"x−1=2³",placeholder:"Usa a definição de logaritmo."}),
       step("solution","3. Resolução da equação","expression",9,{accepted:["x-1=8 => x=9","x−1=8 ⇔ x=9","x=9"],expected:"x−1=8 ⇔ x=9",placeholder:"Resolve em ordem a x."}),
-      step("check","4. Verificação da condição e conjunto-solução","text",8,{accepted:["Como 9>1, a solução é S={9}.","9 satisfaz a condição x>1, logo S={9}.","S={9}, pois 9>1."],expected:"Como 9>1, a solução é S={9}.",placeholder:"Confirma a condição e conclui."})
+      step("check","4. Verificação da condição e conjunto-solução","text",8,{accepted:["Como 9>1, a solução é S={9}.","9 satisfaz a condição x>1, logo S={9}.","S={9}, pois 9>1.","S={9}, porque 9>1.","9>1, logo S={9}.","S={9}, visto que 9>1."],expected:"Como 9>1, a solução é S={9}.",placeholder:"Confirma a condição e conclui."})
     ]},
     points:35,sol:"A condição de existência é x−1>0, ou seja, x>1. Pela definição de logaritmo, x−1=2³=8, pelo que x=9. Como 9>1, a solução é S={9}.",
     hyp:"Pode ignorar a condição de existência ou trocar a base pelo expoente na passagem à forma exponencial.",
@@ -506,11 +506,11 @@ export const CONSTRUCTED_RESPONSE_BANK=[
   {
     id:"CRV2-10GA-LG-STEPS-1",themeId:"10-ga",subtopicId:"10-ga-lugares-geometricos",
     microcompetencyId:"mc-10-ga-lugares-geometricos",focus:"Circunferência",difficulty:3,cognitive:"Aplicação",
-    q:"Determina uma equação da circunferência de centro C(2,−1) que passa pelo ponto P(5,3).",
+    q:"Determina a equação reduzida da circunferência de centro C(2, −1) que passa por P(5, 3). Indica separadamente as diferenças de abcissas e de ordenadas, subtraindo as coordenadas de C às de P, e usa-as para calcular o raio.",
     response:{type:"stepwise",steps:[
       step("dx","1. Diferença das abcissas entre P e C","numeric",7,{value:3,tolerance:0,expected:"Δx=3",placeholder:"Ex.: Δx=5−2"}),
       step("dy","2. Diferença das ordenadas entre P e C","numeric",7,{value:4,tolerance:0,expected:"Δy=4",placeholder:"Ex.: Δy=3−(−1)"}),
-      step("radius","3. Raio da circunferência","numeric",9,{value:5,tolerance:0,expected:"r=√(3²+4²)=5",placeholder:"Calcula a distância CP."}),
+      step("radius","3. Raio da circunferência","numeric",9,{value:5,tolerance:0,expected:"r=5",placeholder:"Calcula a distância CP."}),
       step("equation","4. Equação da circunferência","expression",12,{accepted:["(x-2)^2+(y+1)^2=25","(x−2)²+(y+1)²=25"],expected:"(x−2)²+(y+1)²=25",placeholder:"Usa o centro e o raio."})
     ]},
     points:35,sol:"Entre C e P, as diferenças são 3 e 4. Logo, r=CP=√(3²+4²)=5. A circunferência tem equação (x−2)²+(y+1)²=25.",
@@ -535,14 +535,14 @@ export const CONSTRUCTED_RESPONSE_BANK=[
   {
     id:"CRV2-11TRIG-MOD-STEPS-1",themeId:"11-trig",subtopicId:"11-trig-modelacao",
     microcompetencyId:"mc-11-trig-modelacao",focus:"Modelação trigonométrica",difficulty:3,cognitive:"Modelação",
-    q:"A partir de um ponto situado a 20 m da base de uma torre, observa-se o topo sob um ângulo de elevação de 45°. Admitindo terreno horizontal, determina a altura da torre.",
+    q:"De um ponto no solo horizontal, a 20 m da base de uma torre vertical, vê-se o topo sob um ângulo de elevação de 45°. Determina a altura da torre, apresentando os cálculos.",
     response:{type:"stepwise",steps:[
-      step("ratio","1. Razão trigonométrica adequada","text",8,{accepted:["Usa-se a tangente porque relaciona o cateto oposto com o adjacente.","A razão adequada é a tangente."],expected:"Usa-se a tangente porque relaciona o cateto oposto com o adjacente.",placeholder:"Identifica a razão trigonométrica."}),
-      step("model","2. Equação do problema","expression",10,{accepted:["tan(45)=h/20","tan(45°)=h/20","h=20tan(45)"],expected:"tan(45°)=h/20",placeholder:"Representa a altura por h."}),
+      step("ratio","1. Razão trigonométrica adequada","text",8,{accepted:["Usa-se a tangente porque relaciona o cateto oposto com o adjacente.","A razão adequada é a tangente.","Tangente","A razão é a tangente."],expected:"Usa-se a tangente porque relaciona o cateto oposto com o adjacente.",placeholder:"Identifica a razão trigonométrica."}),
+      step("model","2. Equação do problema","expression",10,{accepted:["tan(45)=h/20","tan(45°)=h/20","h=20tan(45)","tg(45)=h/20","h=20tg(45)","h=20*tg(45)","tg(45°)=h/20","h=20tg(45°)","h=20*tg(45°)","h=20*tan(45)","h=20tan(45°)","h=20*tan(45°)"],expected:"tg(45°)=h/20",placeholder:"Representa a altura por h."}),
       step("value","3. Valor trigonométrico","numeric",7,{value:1,tolerance:0,expected:"valor da tangente=1",placeholder:"Indica o valor exato."}),
       step("height","4. Altura da torre","numeric",10,{value:20,tolerance:0,expected:"h=20",placeholder:"Conclui: h=20 m."})
     ]},
-    points:35,sol:"No triângulo retângulo, tan(45°)=h/20. Como tan(45°)=1, resulta h/20=1 e, portanto, h=20 m.",
+    points:35,sol:"A altura h é o cateto oposto e os 20 m correspondem ao cateto adjacente. Assim, tg(45°)=h/20. Como tg(45°)=1, tem-se h=20 m.",
     hyp:"Pode usar seno ou cosseno sem identificar a hipotenusa, ou inverter os catetos na razão tangente.",
     contexts:["exam"],signature:"11-trig:Modelação de altura:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
   },
@@ -551,9 +551,9 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     microcompetencyId:"mc-12-cplx-operacoes-trig",focus:"Potenciação na forma trigonométrica",difficulty:3,cognitive:"Aplicação",
     q:"Considera z=2(cos(π/6)+i sin(π/6)). Determina z³ na forma algébrica.",
     response:{type:"stepwise",steps:[
-      step("modulus","1. Módulo de z³","numeric",7,{value:8,tolerance:0,expected:"|z³|=2³=8",placeholder:"Eleva o módulo ao cubo."}),
-      step("argument","2. Argumento de z³","expression",8,{accepted:["3*pi/6=pi/2","3π/6=π/2","pi/2"],expected:"3×π/6=π/2",placeholder:"Multiplica o argumento por 3."}),
-      step("trig","3. Forma trigonométrica de z³","expression",10,{accepted:["z^3=8(cos(pi/2)+i sin(pi/2))","8(cos(pi/2)+i sin(pi/2))","z³=8(cos(π/2)+i sin(π/2))"],expected:"z³=8(cos(π/2)+i sin(π/2))",placeholder:"Aplica a fórmula de Moivre."}),
+      step("modulus","1. Módulo de z³","numeric",7,{value:8,tolerance:0,expected:"|z³|=8",placeholder:"Eleva o módulo ao cubo."}),
+      step("argument","2. Argumento de z³ em [0, 2π[","expression",8,{accepted:["3*pi/6=pi/2","3π/6=π/2","pi/2","π/2","arg(z³)=π/2","arg(z^3)=pi/2"],expected:"3×π/6=π/2",placeholder:"Multiplica o argumento por 3."}),
+      step("trig","3. Forma trigonométrica de z³ com o argumento anterior","expression",10,{accepted:["z^3=8(cos(pi/2)+i sin(pi/2))","8(cos(pi/2)+i sin(pi/2))","z³=8(cos(π/2)+i sin(π/2))","8(cos(π/2)+i sin(π/2))"],expected:"z³=8(cos(π/2)+i sin(π/2))",placeholder:"Aplica a fórmula de Moivre."}),
       step("algebraic","4. Forma algébrica","expression",10,{accepted:["z^3=8i","8i","z³=8i"],expected:"z³=8i",placeholder:"Usa cos(π/2) e sin(π/2)."})
     ]},
     points:35,sol:"Pela fórmula de Moivre, z³=2³(cos(3π/6)+i sin(3π/6))=8(cos(π/2)+i sin(π/2))=8i.",
@@ -565,10 +565,10 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     microcompetencyId:"mc-12-prob-condicionada",focus:"Probabilidade condicionada",difficulty:3,cognitive:"Raciocínio",
     q:"Numa turma de 30 alunos, 18 praticam desporto, 12 estudam música e 6 fazem ambas as atividades. Escolhe-se ao acaso um aluno que pratica desporto. Determina a probabilidade de esse aluno também estudar música.",
     response:{type:"stepwise",steps:[
-      step("events","1. Identificação dos valores relevantes","text",7,{accepted:["Há 18 alunos no acontecimento condicionado e 6 na interseção.","Dos 18 que praticam desporto, 6 também estudam música."],expected:"Dos 18 que praticam desporto, 6 também estudam música.",placeholder:"Identifica o universo condicionado e a interseção."}),
-      step("formula","2. Fórmula da probabilidade condicionada","expression",9,{accepted:["P(M|D)=P(M∩D)/P(D)","P(M|D)=6/18"],expected:"P(M|D)=P(M∩D)/P(D)",placeholder:"Escreve a fórmula."}),
+      step("events","1. Identificação dos valores relevantes","text",7,{accepted:["Há 18 alunos no acontecimento condicionado e 6 na interseção.","Dos 18 que praticam desporto, 6 também estudam música.","Há 18 alunos no acontecimento condicionante e 6 na interseção.","Dos 18 alunos que praticam desporto, 6 estudam música."],expected:"Dos 18 que praticam desporto, 6 também estudam música.",placeholder:"Identifica o universo condicionado e a interseção."}),
+      step("formula","2. Fórmula da probabilidade condicionada","expression",9,{accepted:["P(M|D)=P(M∩D)/P(D)","P(M|D)=6/18","P(M|D)=P(D∩M)/P(D)"],expected:"P(M|D)=P(M∩D)/P(D)",placeholder:"Escreve a fórmula."}),
       step("fraction","3. Fração obtida","fraction",9,{numerator:6,denominator:18,expected:"P(M|D)=6/18",placeholder:"Usa os alunos que praticam desporto como denominador."}),
-      step("result","4. Probabilidade simplificada","fraction",10,{numerator:1,denominator:3,expected:"P(M|D)=1/3",placeholder:"Simplifica a fração."})
+      step("result","4. Probabilidade final em forma de fração","fraction",10,{numerator:1,denominator:3,expected:"P(M|D)=1/3",placeholder:"Simplifica a fração."})
     ]},
     points:35,sol:"Sabendo que o aluno pratica desporto, o universo fica reduzido aos 18 praticantes. Destes, 6 também estudam música. Assim, P(M|D)=6/18=1/3.",
     hyp:"Pode usar os 30 alunos como denominador e ignorar que o universo foi condicionado.",
@@ -577,9 +577,9 @@ export const CONSTRUCTED_RESPONSE_BANK=[
   {
     id:"CRV2-12INT-BARROW-STEPS-1",themeId:"12-int",subtopicId:"12-int-tfc-barrow",
     microcompetencyId:"mc-12-int-tfc-barrow",focus:"Fórmula de Barrow",difficulty:3,cognitive:"Aplicação",
-    q:"Calcula o integral definido ∫₀²(3x²+1)dx, apresentando a primitiva usada e a aplicação da fórmula de Barrow.",
+    q:"Calcula o integral definido ∫₀²(3x²+1) dx. Usa a primitiva do integrando que se anula em 0 e aplica a fórmula de Barrow.",
     response:{type:"stepwise",steps:[
-      step("primitive","1. Primitiva do integrando","expression",10,{accepted:["F(x)=x^3+x","x^3+x","F(x)=x³+x"],expected:"F(x)=x³+x",placeholder:"Determina uma primitiva."}),
+      step("primitive","1. Primitiva do integrando que se anula em 0","expression",10,{accepted:["F(x)=x^3+x","x^3+x","F(x)=x³+x"],expected:"F(x)=x³+x",placeholder:"Determina uma primitiva."}),
       step("barrow","2. Aplicação da fórmula de Barrow","expression",9,{accepted:["[x^3+x]_0^2","F(2)-F(0)","(2^3+2)-(0^3+0)"],expected:"[x³+x]₀²=F(2)−F(0)",placeholder:"Substitui os limites."}),
       step("values","3. Cálculo nos extremos","expression",8,{accepted:["(8+2)-0","10-0","F(2)=10 e F(0)=0"],expected:"F(2)−F(0)=10−0",placeholder:"Calcula F(2) e F(0)."}),
       step("result","4. Valor do integral","numeric",8,{value:10,tolerance:0,expected:"∫₀²(3x²+1)dx=10",placeholder:"Indica o resultado final."})

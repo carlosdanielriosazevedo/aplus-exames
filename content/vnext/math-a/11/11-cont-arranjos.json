@@ -422,7 +422,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "A(n,2) simplifica para...",
+      "q": "Para n natural com n≥2, qual é a expressão simplificada de A(n,2)?",
       "o": [
         "n².",
         "n(n+1).",
@@ -476,7 +476,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Comparando A(n,k) e C(n,k), para k≥1...",
+      "q": "Qual é a relação entre A(n,k) e C(n,k) válida para todos os naturais n e k com 1≤k≤n?",
       "o": [
         "A(n,k)=C(n,k)/k!.",
         "A(n,k)=k!·C(n,k).",
@@ -484,7 +484,7 @@
         "A(n,k)=n^k."
       ],
       "a": 1,
-      "sol": "Cada escolha sem ordem de k elementos pode ser ordenada de k! maneiras.",
+      "sol": "Cada subconjunto de k elementos admite k! ordenações, logo A(n,k)=k!·C(n,k) para todos os índices permitidos. Quando k=1, k!=1 e os dois números coincidem.",
       "hyp": "Pode inverter a relação.",
       "contexts": [
         "mission",

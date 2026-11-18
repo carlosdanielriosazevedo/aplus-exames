@@ -20,9 +20,9 @@
       "q": "Uma variável aleatória discreta associa a cada resultado elementar...",
       "o": [
         "um valor numérico de um conjunto finito ou enumerável.",
-        "uma probabilidade necessariamente igual.",
-        "um intervalo contínuo obrigatório.",
-        "um acontecimento impossível."
+        "a probabilidade desse resultado.",
+        "qualquer valor de um intervalo contínuo.",
+        "um conjunto de resultados elementares."
       ],
       "a": 0,
       "sol": "Uma variável aleatória é uma função numérica sobre o espaço de resultados; discreta quando os valores possíveis são finitos ou enumeráveis.",
@@ -79,7 +79,7 @@
         "o número de valores possíveis."
       ],
       "a": 2,
-      "sol": "Os valores possíveis de X formam uma partição do espaço amostral.",
+      "sol": "Os acontecimentos {X=x}, para cada valor possível x, são disjuntos e a sua união é o espaço de resultados. Por isso, as respetivas probabilidades somam 1.",
       "hyp": "Pode somar os valores de X em vez das probabilidades.",
       "contexts": [
         "mission",
@@ -206,7 +206,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Se X assume 1,2,3 com probabilidades 0,2;0,3;k, então k=...",
+      "q": "Se X assume os valores 1, 2 e 3 com probabilidades respetivas 0,2, 0,3 e k, qual é o valor de k?",
       "o": [
         "0,2.",
         "0,3.",
@@ -214,7 +214,7 @@
         "0,5."
       ],
       "a": 3,
-      "sol": "0,2+0,3+k=1 =>k=0,5.",
+      "sol": "A soma das três probabilidades é 1. Assim, 0,2+0,3+k=1 e k=0,5.",
       "hyp": "Pode fazer a soma das massas igual ao maior valor de X.",
       "contexts": [
         "mission",
@@ -287,7 +287,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "O valor esperado E(X) de uma variável discreta é...",
+      "q": "Como se calcula E(X) para uma variável aleatória X com um conjunto finito de valores possíveis?",
       "o": [
         "ΣP(X=x).",
         "Σx.",
@@ -557,7 +557,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "X assume −1,0,2 com probabilidades 0,2;0,5;0,3. E(X)=...",
+      "q": "X assume os valores −1, 0 e 2 com probabilidades respetivas 0,2, 0,5 e 0,3. Qual é E(X)?",
       "o": [
         "0,4.",
         "0,6.",
@@ -584,7 +584,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se Y=2X+3, então E(Y)=...",
+      "q": "X é uma variável aleatória com um conjunto finito de valores possíveis. Se Y=2X+3, qual é E(Y)?",
       "o": [
         "E(X)^2+3.",
         "2E(X)+3.",
@@ -800,7 +800,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Para X=número de caras em 2 lançamentos equilibrados, P(X=1)=...",
+      "q": "Lança-se uma moeda equilibrada duas vezes, de forma independente, e X conta o número de caras. Quanto vale P(X=1)?",
       "o": [
         "1/4.",
         "1/2.",
@@ -808,7 +808,7 @@
         "1."
       ],
       "a": 1,
-      "sol": "CK ou KC:2 de 4 resultados equiprováveis.",
+      "sol": "Há quatro pares ordenados equiprováveis. Ocorre exatamente uma cara nos pares cara–coroa e coroa–cara, pelo que P(X=1)=2/4=1/2.",
       "hyp": "Pode contar apenas uma ordem.",
       "contexts": [
         "mission",

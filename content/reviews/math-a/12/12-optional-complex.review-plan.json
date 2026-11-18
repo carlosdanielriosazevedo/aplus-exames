@@ -1,1 +1,151 @@
-{"schemaVersion":1,"subject":"Matemática A","year":"12.º opcional","reviewType":"editorial_math_annual_pass","status":"complete","defaultDecision":"approved","criteria":["correção matemática e resposta única","clareza do enunciado e português","adequação ao 12.º opcional e à submatéria","distratores plausíveis sem ambiguidade","resolução coerente com a resposta","notação matemática consistente","metadados e contexto de utilização válidos"],"sources":[{"sourcePath":"content/vnext/math-a/12/12-ie-distribuicoes-amostragem.json","sourceBlobSha":"79e775acf02e9e6b14c92fabbf3020d8f299b123"},{"sourcePath":"content/vnext/math-a/12/12-ie-estimacao.json","sourceBlobSha":"04d59512ca2f7615c537d10bff6d054d7ec3bcf3"},{"sourcePath":"content/vnext/math-a/12/12-ie-inferencia-amostragem.json","sourceBlobSha":"0ac76decc97768be8361e2b811e7a18ca4acfca9"},{"sourcePath":"content/vnext/math-a/12/12-ie-intervalos-confianca.json","sourceBlobSha":"929db2f1f6fef3479ae338c3de3c45bc8126bc03"},{"sourcePath":"content/vnext/math-a/12/12-ie-tlc.json","sourceBlobSha":"7822860e63389ee3755d909d8e4803ae63c9e0bb"},{"sourcePath":"content/vnext/math-a/12/12-int-areas.json","sourceBlobSha":"115fc761deb6a3a281d9cd5f88bc1ed91a4c39ae"},{"sourcePath":"content/vnext/math-a/12/12-int-integral-definido.json","sourceBlobSha":"348cbce31aeb1a1ecf62d5e70bb13345c5794a12"},{"sourcePath":"content/vnext/math-a/12/12-int-primitiva.json","sourceBlobSha":"760a728f379192993f221d27e25df08e0cfe9bf5"},{"sourcePath":"content/vnext/math-a/12/12-int-tabela-propriedades.json","sourceBlobSha":"75b0c132992f662a44f4baf8b8d0318259bd01e9"},{"sourcePath":"content/vnext/math-a/12/12-int-tfc-barrow.json","sourceBlobSha":"7e4ab15caf1d570728e0f5a8d2700dd08d99da6e"},{"sourcePath":"content/vnext/math-a/12/12-mat-adicao-escalar.json","sourceBlobSha":"b5b2c2ca01e472b4e3afd321260f633d4994da9d"},{"sourcePath":"content/vnext/math-a/12/12-mat-modelacao.json","sourceBlobSha":"1270f7d411effc4af73a342f1c95fad7800e4c57"},{"sourcePath":"content/vnext/math-a/12/12-mat-produto.json","sourceBlobSha":"1ba8544e18390980c13915d327ae8abea615c17f"},{"sourcePath":"content/vnext/math-a/12/12-mat-representacao-tipos.json","sourceBlobSha":"6e2fe092b2d604bc371645b0a450de31b76f15b5"},{"sourcePath":"content/vnext/math-a/12/12-mat-transformacoes.json","sourceBlobSha":"bf20f7384535f0a5b470d0310b4b352095034518"}],"overrides":[],"summary":{"subtopicsReviewed":15,"questionsReviewed":750,"approvedByDefault":750,"approvedWithOverride":0,"unresolved":0},"reviewScopeNote":"Passagem editorial interna APProva+ dos temas marcados como opcionais no banco do 12.º ano (Inferência Estatística, Integrais e Matrizes), com fontes fixadas por Git blob SHA. Em 2026-10-02, 12-int-tfc-barrow foi novamente verificado após uma correção exclusivamente tipográfica de espaçamento, sem alteração matemática, de resposta, distratores ou critério. Não equivale a certificação externa por professor nem validação oficial do IAVE.","updatedAt":"2026-10-02"}
+{"schemaVersion":1,"subject":"Matemática A","year":"12.º opcional","reviewType":"editorial_math_annual_pass","status":"complete","defaultDecision":"approved","criteria":["correção matemática e resposta única","clareza do enunciado e português","adequação ao 12.º opcional e à submatéria","distratores plausíveis sem ambiguidade","resolução coerente com a resposta","notação matemática consistente","metadados e contexto de utilização válidos"],"sources":[{"sourcePath":"content/vnext/math-a/12/12-ie-distribuicoes-amostragem.json","sourceBlobSha":"609c1c211d68f868c9ed02fa42d422076ebc1c4b","previousSourceBlobSha": "79e775acf02e9e6b14c92fabbf3020d8f299b123", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "609c1c211d68f868c9ed02fa42d422076ebc1c4b",
+      "retainedQuestionFingerprint": "37325a132aa7f1b60ce2823cdafa37e37c6458295b1e3669b52c9c44c7220ae7",
+      "items": ["VN12IE-DA-008","VN12IE-DA-012","VN12IE-DA-022","VN12IE-DA-038","VN12IE-DA-046"],
+      "decisions": {
+        "VN12IE-DA-008": {"status":"approved","rationale":"A conclusão só vale sob um modelo de amostragem com erro padrão σ/√n. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"7c5b257ff2acf9c9aed0b8a1d03e5dd4c65cf00fc542158505d501325c40159b","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-DA-008","status":"approved"}}},
+        "VN12IE-DA-012": {"status":"approved","rationale":"Sem o modelo de n observações independentes, a fórmula do erro padrão não é geral. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"b4e763d363bdfcc89c7649d158fa7c6553171238efb57c1f672aa194cf81a75e","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-DA-012","status":"approved"}}},
+        "VN12IE-DA-022": {"status":"approved","rationale":"A fórmula 10/√25 pressupunha observações independentes. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"e2749042496b1dbb25b3476bb799e0249944813d9df9ef05dcd463820e1e139f","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-DA-022","status":"approved"}}},
+        "VN12IE-DA-038": {"status":"approved","rationale":"O fator apresentado só existe para N>1 e o argumento requer 1≤n≤N. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"3bc9196f4d4ce08a7936e47dc4e0e377f35fb29ffc7c9afdd32cab948a895406","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-DA-038","status":"approved"}}},
+        "VN12IE-DA-046": {"status":"approved","rationale":"Faltava a condição de independência e a resolução só apresentava as duas raízes quadradas. Fixa-se uma população com σ>0 e divide-se o mesmo desvio padrão por cada raiz.","fingerprint":"15bf5ae7806ed0ecdc15ced9bbe036f729606b838b17b3467adc3d90e9b5ee32","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-DA-046","status":"approved"}}}
+      }
+    }},{"sourcePath":"content/vnext/math-a/12/12-ie-estimacao.json","sourceBlobSha":"e179b8c32a92bcc42af8f1f3921e75e2184fa3c0","previousSourceBlobSha": "04d59512ca2f7615c537d10bff6d054d7ec3bcf3", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "e179b8c32a92bcc42af8f1f3921e75e2184fa3c0",
+      "retainedQuestionFingerprint": "72408e7be2478757ce496c44724d5d7d301dfab9c9ec5c1b821fc96285f9cea0",
+      "items": ["VN12IE-EST-016","VN12IE-EST-021","VN12IE-EST-022","VN12IE-EST-027"],
+      "decisions": {
+        "VN12IE-EST-016": {"status":"approved","rationale":"«σ comparável» era insuficiente e a resolução apresentava uma igualdade exata como aproximação. Fixa-se a população e usa-se a expressão exata do erro padrão.","fingerprint":"2b27b8f8ece11052f0755bfef87736c59598d0aa88235ce685bde3199db17d10","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-EST-016","status":"approved"}}},
+        "VN12IE-EST-021": {"status":"approved","rationale":"A pergunta exigia decorar a decomposição do erro quadrático médio, que ultrapassa a introdução curricular à estimação. Define-se o viés e dá-se a decomposição inicial. A resolução usa a esperança para eliminar a parcela cruzada.","fingerprint":"cf10afab6190ddbcc8349a702759e1be5546850156193afc339bebfc4918be32","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-EST-021","status":"approved"}}},
+        "VN12IE-EST-022": {"status":"approved","rationale":"O compromisso viés–variância era pressuposto e as alternativas eliminavam-se sem o considerar. Define-se no enunciado a medida do erro usada e apresentam-se alternativas sobre o mesmo compromisso.","fingerprint":"0d418578690bbb48095c80bfa455275d1cb76c77b1bd14a202f185a80fb0b227","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-EST-022","status":"approved"}}},
+        "VN12IE-EST-027": {"status":"approved","rationale":"Um estimador pode depender unicamente de n ou ser constante, ao contrário do que o enunciado aberto sugeria. Pede-se de que pode depender a estimativa calculada a partir dos valores observados, com opções que distinguem dado observável de parâmetro.","fingerprint":"0e8d1fd053c3d5c94445744b39a9db743ca6b2aa04fffe275b20df5ce751b532","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-EST-027","status":"approved"}}}
+      }
+    }},{"sourcePath":"content/vnext/math-a/12/12-ie-inferencia-amostragem.json","sourceBlobSha":"bf8bf105af76f6ae9b47c8e2a495d86bbfa298ae","previousSourceBlobSha": "0ac76decc97768be8361e2b811e7a18ca4acfca9", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "bf8bf105af76f6ae9b47c8e2a495d86bbfa298ae",
+      "retainedQuestionFingerprint": "f5ce649523e7e97fee3077a60fc298de1e942aaaf50924f2152ea2f6aa2f965a",
+      "items": ["VN12IE-IA-006","VN12IE-IA-008","VN12IE-IA-041"],
+      "decisions": {
+        "VN12IE-IA-006": {"status":"approved","rationale":"Os 80 alunos podiam corresponder à população inteira e não se dizia de que se calculava a média. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"8b58016b5749f5cc870baa307101c2cba371cba0da2455265f719e1be158010e","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-IA-006","status":"approved"}}},
+        "VN12IE-IA-008": {"status":"approved","rationale":"«Uma chance apropriada» não caracterizava a amostragem aleatória simples. A chave explicita a equiprobabilidade das amostras do mesmo tamanho.","fingerprint":"88f2094881de05db9bfb04c90d04292389d999b0e51bd9338623f8dd93b82033","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-IA-008","status":"approved"}}},
+        "VN12IE-IA-041": {"status":"approved","rationale":"São os estimadores gerados pelas estratégias que podem ser não enviesados e ter variância, não as estratégias em si. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"55a5192ef3a430dc7b811c213a74d6f5d27a130e68a2a0fc3d1bfaaea94a9116","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-IA-041","status":"approved"}}}
+      }
+    }},{"sourcePath":"content/vnext/math-a/12/12-ie-intervalos-confianca.json","sourceBlobSha":"68f86079caa0bce916229823531bb6cb9a7e0452","previousSourceBlobSha": "929db2f1f6fef3479ae338c3de3c45bc8126bc03", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "68f86079caa0bce916229823531bb6cb9a7e0452",
+      "retainedQuestionFingerprint": "e32abb9e8ca5a12bd0144a0751ea9d82e989ec53673b18fec321cffd1fc43c9a",
+      "items": ["VN12IE-IC-045"],
+      "decisions": {
+        "VN12IE-IC-045": {"status":"approved","rationale":"Só a opção correta mencionava 0,50 e a compatibilidade com o intervalo, e era muito mais longa. Pede-se a interpretação sobre a mesma hipótese e as quatro opções usam a mesma escala.","fingerprint":"cba404d90b4dc3617ad04eb9f36a2896a5ff2987ae046ea914386ff72dce7bad","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-IC-045","status":"approved"}}}
+      }
+    }},{"sourcePath":"content/vnext/math-a/12/12-ie-tlc.json","sourceBlobSha":"78018a812f522058af11197c781ca3a89e4fc014","previousSourceBlobSha": "7822860e63389ee3755d909d8e4803ae63c9e0bb", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "78018a812f522058af11197c781ca3a89e4fc014",
+      "retainedQuestionFingerprint": "fe91d2a2a447e9d1e6f2135dbfe09f626a9abdaafdb3d092b91459b685f8fcdb",
+      "items": ["VN12IE-TLC-003","VN12IE-TLC-011","VN12IE-TLC-014","VN12IE-TLC-021","VN12IE-TLC-027","VN12IE-TLC-028","VN12IE-TLC-040"],
+      "decisions": {
+        "VN12IE-TLC-003": {"status":"approved","rationale":"Apresentava E(X̄)=μ como aproximada e repetia MS-VN12IE-DA-002. Compara as médias de dois grupos de igual tamanho com esperanças diferentes e demonstra o valor exato.","fingerprint":"5f7e020ba2c44fa3916694678483edeb498b4f4073a8e34e8864dbdca3bd8333","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-TLC-003","status":"approved"}}},
+        "VN12IE-TLC-011": {"status":"approved","rationale":"«Assim» remetia para dados anteriores ausentes. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"cda36bd0205ce66d3e1a0ecfbae3de213c71dca7e3b5c9b984fd2a5b27ed3515","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-TLC-011","status":"approved"}}},
+        "VN12IE-TLC-014": {"status":"approved","rationale":"A conclusão pressupunha comparar amostras independentes da mesma população. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"a88a95925b5bdddb36aa4be8faf8f6fa1981e58ec165af369f6fec58a3a11f36","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-TLC-014","status":"approved"}}},
+        "VN12IE-TLC-021": {"status":"approved","rationale":"O significado do segundo parâmetro da normal não estava definido. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"72c92ce2a6dff8647085af6bae3ddeeafe1368696abebdad5a79307b73b0c853","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-TLC-021","status":"approved"}}},
+        "VN12IE-TLC-027": {"status":"approved","rationale":"A frase não dizia que se tratava de uma distribuição normal nem o que representava 95%. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"71806ebc06512d94814247a874445750884d7ec74fc39e0c1bb8dd3fe9dabaa8","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-TLC-027","status":"approved"}}},
+        "VN12IE-TLC-028": {"status":"approved","rationale":"A média de lote podia envolver dependência entre peças e a unidade estava colada aos números. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"7c70150c5d86bc0e45bdd255f51884540757f0b061fe7954b01bc6c6600b1c29","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-TLC-028","status":"approved"}}},
+        "VN12IE-TLC-040": {"status":"approved","rationale":"O uso de correção de continuidade era pressuposto e o enunciado não definia o procedimento. O enunciado explica como associar um intervalo a um inteiro e a resolução aplica a fronteira.","fingerprint":"fe198822de1191a9761a2ec28d2ed8e6ead8b86ecba3cf20b7c8c8aca5a5e68f","previousReview":{"reviewedAt":null,"decision":{"id":"VN12IE-TLC-040","status":"approved"}}}
+      }
+    }},{"sourcePath":"content/vnext/math-a/12/12-int-areas.json","sourceBlobSha":"3955d1c5f6473dc395839bc9a643bfb0b16588eb","previousSourceBlobSha": "115fc761deb6a3a281d9cd5f88bc1ed91a4c39ae", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "3955d1c5f6473dc395839bc9a643bfb0b16588eb",
+      "retainedQuestionFingerprint": "cea3a4bd0b0dfaff10bbb16a5ade93b15c438a104833bf9832da44f63ac9ab6f",
+      "items": ["VN12INT-AR-002","VN12INT-AR-021","VN12INT-AR-022","VN12INT-AR-032"],
+      "decisions": {
+        "VN12INT-AR-002": {"status":"approved","rationale":"A resolução chamava ao integral «negativo» mesmo se f fosse identicamente nula, caso em que vários distratores coincidiam. Exclui-se a função identicamente nula e esclarece-se como se obtém a área.","fingerprint":"b8d52d9151d14e127dd2ba7676f90fad1ba272a85dc80e2a37d3f84107b0c6d9","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-AR-002","status":"approved"}}},
+        "VN12INT-AR-021": {"status":"approved","rationale":"O cálculo terminava em x(x−2)=0 sem explicitar os extremos. A resolução passa a justificar o resultado de forma completa.","fingerprint":"4690e523750dcdd64b82b7798d7aa7b9f1d7fe5fb91afb19dd65ea85e88e9690","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-AR-021","status":"approved"}}},
+        "VN12INT-AR-022": {"status":"approved","rationale":"A pergunta incluía os extremos onde os dois gráficos coincidem. Restringe-se a comparação ao interior e demonstra-se a desigualdade estrita.","fingerprint":"d52251aa6f3e4834d5911c2758503acb843a72291236f8929457d29b713fe51f","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-AR-022","status":"approved"}}},
+        "VN12INT-AR-032": {"status":"approved","rationale":"A notação «emπ/2» ocultava o ponto de separação e os contributos não estavam explicitados. A resolução passa a justificar o resultado de forma completa.","fingerprint":"b98887b093353b43434d5fef57e454b9ccc195e6c9bdc809d494bb4d345710cd","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-AR-032","status":"approved"}}}
+      }
+    }},{"sourcePath":"content/vnext/math-a/12/12-int-integral-definido.json","sourceBlobSha":"51b0b5d188d13c9dab271dd7db52de983bddc1c3","previousSourceBlobSha": "348cbce31aeb1a1ecf62d5e70bb13345c5794a12", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "51b0b5d188d13c9dab271dd7db52de983bddc1c3",
+      "retainedQuestionFingerprint": "d54f4276fec633b9a7fcf467cdb670f7a40d096c7750fe946644d2a250926550",
+      "items": ["VN12INT-ID-001","VN12INT-ID-016","VN12INT-ID-037","VN12INT-ID-038"],
+      "decisions": {
+        "VN12INT-ID-001": {"status":"approved","rationale":"A interpretação como área algébrica pressupunha limites na ordem a<b e uma função integrável. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"eb826730320090e65f40882742a2e8972fec4645fc90aa1291944447bac209f9","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-ID-001","status":"approved"}}},
+        "VN12INT-ID-016": {"status":"approved","rationale":"O texto não fixava a existência do integral e a resolução confundia «positiva» com «não negativa». Explicita-se a continuidade e inclui-se o caso de integral nulo.","fingerprint":"1cc0e59fc6bb1f5a718a399722764fdd2994ba9b50a47eb31efb590cde80df9e","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-ID-016","status":"approved"}}},
+        "VN12INT-ID-037": {"status":"approved","rationale":"O integral sem limites descrevia uma primitiva, mas a resposta era relativa ao deslocamento entre dois instantes. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"62ec6054abee154f0b18baa38b64c52a8d1e8a4c9d4e2d494ff338ee41c6a621","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-ID-037","status":"approved"}}},
+        "VN12INT-ID-038": {"status":"approved","rationale":"Todos os integrais eram indefinidos apesar de se pedir a distância total num período. Fixa-se o intervalo temporal e usam-se integrais definidos em todas as opções.","fingerprint":"90819538689e7f2d8600d59088665d29e884ecd765c6e6724c33eb2108c939ce","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-ID-038","status":"approved"}}}
+      }
+    }},{"sourcePath":"content/vnext/math-a/12/12-int-primitiva.json","sourceBlobSha":"7a6fde102bd632296d39b537bcba8122638dee5d","previousSourceBlobSha": "760a728f379192993f221d27e25df08e0cfe9bf5", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "7a6fde102bd632296d39b537bcba8122638dee5d",
+      "retainedQuestionFingerprint": "ddef5e8e7bbf0edc9f6865834ee26c7241734cd20662e23c3313ee92742a6fa6",
+      "items": ["VN12INT-PR-006","VN12INT-PR-049"],
+      "decisions": {
+        "VN12INT-PR-006": {"status":"approved","rationale":"Faltava o espaço em «éx²» e o cálculo intermédio. A resolução passa a justificar o resultado de forma completa.","fingerprint":"134fb23c2270f2ae05bc83163ec916329f8ccee595dfc861187ccde7953006ae","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-PR-006","status":"approved"}}},
+        "VN12INT-PR-049": {"status":"approved","rationale":"A resolução esquecia a condição inicial que determina a constante. A resolução passa a justificar o resultado de forma completa.","fingerprint":"d96bd2ee62c1ad44ad5c60fc45befa5bd37bc09368fa421a541d451816730302","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-PR-049","status":"approved"}}}
+      }
+    }},{"sourcePath":"content/vnext/math-a/12/12-int-tabela-propriedades.json","sourceBlobSha":"53486ee49a2de12e17abb56995eae14b5e16cc96","previousSourceBlobSha": "75b0c132992f662a44f4baf8b8d0318259bd01e9", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "53486ee49a2de12e17abb56995eae14b5e16cc96",
+      "retainedQuestionFingerprint": "d4aba885e0d15b4a095b4321ac06d5ee9dd86b62abf3ba76325bd86814fed06b",
+      "items": ["VN12INT-TP-002","VN12INT-TP-014","VN12INT-TP-033","VN12INT-TP-034"],
+      "decisions": {
+        "VN12INT-TP-002": {"status":"approved","rationale":"Para k=0, a expressão família de primitivas não permite absorver à direita uma constante arbitrária. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"dfd46cd3e843bd0967ed74ab0d8a0a28b8be3d8ecdc1e7a894e62f8ea8447d9d","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-TP-002","status":"approved"}}},
+        "VN12INT-TP-014": {"status":"approved","rationale":"«Integra-se cada termo» não explicava de onde vem o seno nem o sinal. A resolução passa a justificar o resultado de forma completa.","fingerprint":"86d750d12a86ea3091b78afd631e4b1566928ba6fba5b495aa37491a410b061e","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-TP-014","status":"approved"}}},
+        "VN12INT-TP-033": {"status":"approved","rationale":"Uma família A·e^{g(x)}+C não é em geral proporcional a e^{g(x)}. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"216cd9410a056984cc7c94635efd858b2ac658f352ed3b2f11ba4c44f0844501","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-TP-033","status":"approved"}}},
+        "VN12INT-TP-034": {"status":"approved","rationale":"A resolução «Falta metade da derivada interna» era ambígua e não justificava a expressão. A resolução passa a justificar o resultado de forma completa.","fingerprint":"546cc0108745ed61d6bb21cf6e392aa942cdec2890512e08e2a35d9b3c22d2bf","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-TP-034","status":"approved"}}}
+      }
+    }},{"sourcePath":"content/vnext/math-a/12/12-int-tfc-barrow.json","sourceBlobSha":"58f208a5d1da2d59cb870667959990e2da601c81","previousSourceBlobSha": "7e4ab15caf1d570728e0f5a8d2700dd08d99da6e", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "58f208a5d1da2d59cb870667959990e2da601c81",
+      "retainedQuestionFingerprint": "844eeb9848899490dea06e9a76bb0bdbe712bc9970e417dd64dfbe2b4ef85cee",
+      "items": ["VN12INT-TFC-001","VN12INT-TFC-012","VN12INT-TFC-023"],
+      "decisions": {
+        "VN12INT-TFC-001": {"status":"approved","rationale":"Não se indicavam as hipóteses usuais da fórmula de Barrow nem a ordem da subtração. Explicita-se a continuidade de f, identifica-se F como primitiva e justifica-se a ordem.","fingerprint":"d7e63ac85ec419ed4d6c61e67da13973ad403d1764d3b1a53cedf3d06bf254f4","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-TFC-001","status":"approved"}}},
+        "VN12INT-TFC-012": {"status":"approved","rationale":"A conta omitia a substituição de cada extremo na primitiva. A resolução passa a justificar o resultado de forma completa.","fingerprint":"6e53722f9727d37c79d1a3fdf01369856c6160642f696402e249b1fdd820fce6","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-TFC-012","status":"approved"}}},
+        "VN12INT-TFC-023": {"status":"approved","rationale":"Incluía a nota de rascunho «Primitiva ...? Melhor:» apesar de a primeira primitiva ser válida. A resolução passa a justificar o resultado de forma completa.","fingerprint":"93a793c7043c5ea7cda270feced02a1f49c083c7d27124c21a747d14f0184266","previousReview":{"reviewedAt":null,"decision":{"id":"VN12INT-TFC-023","status":"approved"}}}
+      }
+    }},{"sourcePath":"content/vnext/math-a/12/12-mat-adicao-escalar.json","sourceBlobSha":"b5b2c2ca01e472b4e3afd321260f633d4994da9d"},{"sourcePath":"content/vnext/math-a/12/12-mat-modelacao.json","sourceBlobSha":"0840d0c8e6b1df8f9b09c97e7ae578cd81918c1c","previousSourceBlobSha": "1270f7d411effc4af73a342f1c95fad7800e4c57", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "0840d0c8e6b1df8f9b09c97e7ae578cd81918c1c",
+      "retainedQuestionFingerprint": "93ce94f09013685c2fc3a94f9634858a2a4f1cb6dc58b3919150179ee5958733",
+      "items": ["VN12MAT-MOD-003","VN12MAT-MOD-009","VN12MAT-MOD-012","VN12MAT-MOD-021","VN12MAT-MOD-022","VN12MAT-MOD-026"],
+      "decisions": {
+        "VN12MAT-MOD-003": {"status":"approved","rationale":"A leitura da 1.ª loja depende de saber se são as linhas ou as colunas que representam lojas. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"8646a938d38b0eb57e54613c1d499a138c02e57d23f6c69d7781ff118eae767a","previousReview":{"reviewedAt":null,"decision":{"id":"VN12MAT-MOD-003","status":"approved"}}},
+        "VN12MAT-MOD-009": {"status":"approved","rationale":"Sem convenção para linhas e colunas de A, cᵀA podia não estar definido. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"939370d1a321b7e2e92423b7a085c047fc3e41891426840f4b8c9c0ba24c67d6","previousReview":{"reviewedAt":null,"decision":{"id":"VN12MAT-MOD-009","status":"approved"}}},
+        "VN12MAT-MOD-012": {"status":"approved","rationale":"O enunciado interpretava a primeira componente assumindo uma organização da matriz que não tinha sido declarada. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"a0519f4e59c18700d75baba5e33bc8caa3071c7febdd30a6435d00c96b22eeaf","previousReview":{"reviewedAt":null,"decision":{"id":"VN12MAT-MOD-012","status":"approved"}}},
+        "VN12MAT-MOD-021": {"status":"approved","rationale":"«Rede simples apropriada» não definia a configuração, e «percursos» podia excluir o regresso ao ponto inicial. Define-se a matriz de adjacência e esclarece-se que se contam sequências de dois passos, incluindo o regresso.","fingerprint":"fd2173f7e9520d47d504fc656535655e4826d008418e352db607b7c9d84b92f5","previousReview":{"reviewedAt":null,"decision":{"id":"VN12MAT-MOD-021","status":"approved"}}},
+        "VN12MAT-MOD-022": {"status":"approved","rationale":"Invocava uma rede e vértices que não apareciam no enunciado. A resolução passa a justificar o resultado de forma completa.","fingerprint":"7315ff23ab06970b2a503e6fa6f1000028c24a42de8f6c679657da75237ed249","previousReview":{"reviewedAt":null,"decision":{"id":"VN12MAT-MOD-022","status":"approved"}}},
+        "VN12MAT-MOD-026": {"status":"approved","rationale":"x₁ não tinha relação definida com a matriz P nem com x₀. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"6d63bc8bd91b96abedfe929bd36067812c4d57890400d95fb3cd3398cba8823c","previousReview":{"reviewedAt":null,"decision":{"id":"VN12MAT-MOD-026","status":"approved"}}}
+      }
+    }},{"sourcePath":"content/vnext/math-a/12/12-mat-produto.json","sourceBlobSha":"a5a9ab68606f59dbbce604299623ada26e71ee1a","previousSourceBlobSha": "1ba8544e18390980c13915d327ae8abea615c17f", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "a5a9ab68606f59dbbce604299623ada26e71ee1a",
+      "retainedQuestionFingerprint": "ca1e0885d0d01d468f8d58d701a05ce4b08614fcb7066e68ba469b7e081db88f",
+      "items": ["VN12MAT-PRD-037"],
+      "decisions": {
+        "VN12MAT-PRD-037": {"status":"approved","rationale":"«O produto das diagonais correspondentes fica 1» não explicava como verificar a inversa pela identidade. A resolução passa a justificar o resultado de forma completa.","fingerprint":"3388ad1669648eda29d48ade472389462994ccdd0ee47eda5eca021a1d882d41","previousReview":{"reviewedAt":null,"decision":{"id":"VN12MAT-PRD-037","status":"approved"}}}
+      }
+    }},{"sourcePath":"content/vnext/math-a/12/12-mat-representacao-tipos.json","sourceBlobSha":"6e2fe092b2d604bc371645b0a450de31b76f15b5"},{"sourcePath":"content/vnext/math-a/12/12-mat-transformacoes.json","sourceBlobSha":"28c7182ffd06e87bbdc29be93bfcc486b1d7ae4a","previousSourceBlobSha": "bf20f7384535f0a5b470d0310b4b352095034518", "aiRereview":{
+      "reviewer": "Codex (IA)",
+      "reviewedAt": "2026-11-17",
+      "sourceBlobSha": "28c7182ffd06e87bbdc29be93bfcc486b1d7ae4a",
+      "retainedQuestionFingerprint": "8cc2f5da9c32dd7ef6a7cd952e7fc50efba8a9386f957638461a080424f386cf",
+      "items": ["VN12MAT-TR-003","VN12MAT-TR-024"],
+      "decisions": {
+        "VN12MAT-TR-003": {"status":"approved","rationale":"Fator negativo ou nulo não descreve simplesmente uma dilatação ou redução de fator k. O enunciado explicita as condições ou os dados usados na resolução.","fingerprint":"0610626f5f69faf558f7626b348cbec81e91bdad428e54bb91f497fe8ab00641","previousReview":{"reviewedAt":null,"decision":{"id":"VN12MAT-TR-003","status":"approved"}}},
+        "VN12MAT-TR-024": {"status":"approved","rationale":"Perguntava o que a reflexão preserva, mas a chave incluía também uma propriedade que a reflexão não preserva. O enunciado pede a descrição do efeito e as opções passam a comparar as mesmas grandezas.","fingerprint":"92648fc05fa2d84e2ecb7c3b0dd3d3b108d5ed7f5329248b53f86280a99be742","previousReview":{"reviewedAt":null,"decision":{"id":"VN12MAT-TR-024","status":"approved"}}}
+      }
+    }}],"overrides":[],"summary":{"subtopicsReviewed":15,"questionsReviewed":750,"approvedByDefault":750,"approvedWithOverride":0,"unresolved":0},"reviewScopeNote":"Passagem editorial interna APProva+ dos temas marcados como opcionais no banco do 12.º ano (Inferência Estatística, Integrais e Matrizes), com fontes fixadas por Git blob SHA. Em 2026-10-02, 12-int-tfc-barrow foi novamente verificado após uma correção exclusivamente tipográfica de espaçamento, sem alteração matemática, de resposta, distratores ou critério. Não equivale a certificação externa por professor nem validação oficial do IAVE.","updatedAt":"2026-10-02"}

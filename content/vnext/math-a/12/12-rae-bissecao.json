@@ -71,7 +71,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Depois de calcular o ponto médio m, escolhe-se...",
+      "q": "No método da bisseção, o ponto médio m verifica f(m)≠0. Qual das duas metades do intervalo se conserva para a iteração seguinte?",
       "o": [
         "sempre a metade esquerda.",
         "sempre a metade direita.",
@@ -152,7 +152,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Se f(1)<0, f(3)>0 e f(2)<0, o novo intervalo é...",
+      "q": "Na bisseção de uma função contínua no intervalo [1,3], verifica-se f(1)<0, f(3)>0 e f(2)<0. Que intervalo resulta da primeira iteração?",
       "o": [
         "[1,2].",
         "[2,3].",
@@ -206,7 +206,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Se f(m)=0 numa iteração, então...",
+      "q": "Numa iteração do método da bisseção, o ponto médio do intervalo é m. Se f(m)=0, o que se conclui?",
       "o": [
         "é obrigatório continuar.",
         "o método falhou.",
@@ -287,7 +287,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Após n bisseções, a amplitude é...",
+      "q": "O intervalo inicial tem amplitude L₀. Depois de n iterações do método da bisseção que reduzem o intervalo a metade, qual é a sua amplitude?",
       "o": [
         "L0/n.",
         "2^nL0.",
@@ -314,7 +314,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Se L0=1, após 10 bisseções a amplitude é...",
+      "q": "O intervalo inicial da bisseção tem amplitude L₀=1. Qual é a amplitude após 10 iterações que reduzem o intervalo a metade?",
       "o": [
         "1/10.",
         "1/100.",
@@ -559,10 +559,10 @@
       "cognitive": "Raciocínio",
       "q": "Para f(x)=x²−2 em [1,2], o primeiro ponto médio é 1,5 e f(1,5)>0. O novo intervalo é...",
       "o": [
-        "[1,1,5].",
-        "[1,5,2].",
-        "[1,25,1,5].",
-        "[0,1,5]."
+        "[1;1,5].",
+        "[1,5;2].",
+        "[1,25;1,5].",
+        "[0;1,5]."
       ],
       "a": 0,
       "sol": "f(1)<0 e f(1,5)>0.",
@@ -719,7 +719,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se f(a)<0<f(b) e f(m)=−0,1, então...",
+      "q": "Numa iteração da bisseção, o intervalo é [a,b] e o seu ponto médio é m. Se f(a)<0<f(b) e f(m)=−0,1, qual é a atualização correta?",
       "o": [
         "substituímos b por m.",
         "terminamos.",
@@ -727,7 +727,7 @@
         "trocamos a e b."
       ],
       "a": 2,
-      "sol": "m tem o mesmo sinal de a, logo o novo extremo esquerdo é m.",
+      "sol": "Os valores f(m) e f(a) são negativos e f(b) é positivo. Mantém-se o subintervalo [m,b], onde f continua a ter sinais opostos nos extremos.",
       "hyp": "Pode escolher o extremo oposto.",
       "contexts": [
         "mission",

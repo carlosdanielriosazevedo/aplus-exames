@@ -160,7 +160,7 @@
         "3x²."
       ],
       "a": 1,
-      "sol": "A derivada de x³/3 éx².",
+      "sol": "Deriva-se x³/3 pela regra da potência: (x³/3)′=(3x²)/3=x². Logo, x³/3 é uma primitiva de x².",
       "hyp": "Pode manter o expoente.",
       "contexts": [
         "mission",
@@ -1321,7 +1321,7 @@
         "2t³."
       ],
       "a": 0,
-      "sol": "Uma primitiva de 6t² é 2t³.",
+      "sol": "Integrar q′(t)=6t² dá q(t)=2t³+C. Ao substituir t=0 obtém-se C=q(0)=10, logo q(t)=2t³+10.",
       "hyp": "Pode esquecer o coeficiente 1/3.",
       "contexts": [
         "mission",

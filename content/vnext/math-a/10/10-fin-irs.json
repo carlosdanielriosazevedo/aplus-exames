@@ -179,7 +179,7 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Na mesma tabela (10% até 1 000 €; 20% entre 1 000 € e 2 000 €), quanto imposto paga um rendimento de 2 000 €?",
+      "q": "Numa tabela progressiva, os primeiros 1 000 € são tributados a 10% e a parte acima de 1 000 € até 2 000 € é tributada a 20%. Qual é o imposto sobre um rendimento de 2 000 €?",
       "o": [
         "200 €",
         "250 €",
@@ -317,12 +317,12 @@
       "q": "Um rendimento atinge um escalão marginal de 30%, mas a taxa efetiva é 18%. Isto é coerente?",
       "o": [
         "Não, as duas taxas têm de ser iguais.",
-        "Só se não houver imposto.",
-        "Só se o rendimento for inferior ao primeiro escalão.",
+        "Sim, porque a maior taxa marginal é a taxa efetiva de cada parcela.",
+        "Não, porque a taxa efetiva seria a média simples das taxas marginais.",
         "Sim, porque as parcelas inferiores são tributadas a taxas menores."
       ],
       "a": 3,
-      "sol": "A taxa efetiva é uma média ponderada das taxas aplicadas às parcelas.",
+      "sol": "A taxa efetiva é o imposto total dividido pelo rendimento. Como cada parcela é tributada à sua taxa marginal, o resultado é uma média das taxas ponderada pelo peso de cada parcela. As parcelas tributadas abaixo de 30% podem fazer a taxa efetiva descer para 18%.",
       "hyp": "Pode esperar igualdade entre taxa marginal e média.",
       "contexts": [
         "mission",
@@ -638,7 +638,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Tabela 10%-20%-30% com limites em 1 000 € e 2 000 €. Que rendimento produz imposto total de 600 €?",
+      "q": "Numa tabela progressiva, os primeiros 1 000 € são tributados a 10%, os 1 000 € seguintes a 20% e a parcela que excede 2 000 € a 30%. Qual é o rendimento que produz um imposto total de 600 €?",
       "o": [
         "2 500 €",
         "2 800 €",
@@ -1105,7 +1105,7 @@
         "425 €"
       ],
       "a": 0,
-      "sol": "50 + 225 + 125 = 400 €.",
+      "sol": "Nos primeiros 1 000 €, 5% dá 50 €. Nos 1 500 € seguintes, 15% dá 225 €. Sobram 500 €, dos quais 25% são 125 €. Assim, o imposto é 50+225+125=400 €.",
       "hyp": "Pode aplicar as taxas aos limites acumulados em vez das larguras.",
       "contexts": [
         "mission",

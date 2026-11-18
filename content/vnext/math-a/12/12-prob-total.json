@@ -17,7 +17,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Se A e A^c formam uma partição, então P(B) pode escrever-se como...",
+      "q": "Se 0<P(A)<1, como se pode exprimir P(B) pela regra da probabilidade total, usando A e o seu complementar?",
       "o": [
         "P(B|A)P(A)+P(B|A^c)P(A^c).",
         "P(B|A)+P(B|A^c).",
@@ -71,7 +71,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Numa partição {A1,...,An}, P(B) é...",
+      "q": "Se {A1, …, An} é uma partição do espaço de resultados e P(Ai)>0 para cada i, como se calcula P(B) pela regra da probabilidade total?",
       "o": [
         "ΣP(Ai).",
         "ΣP(B|Ai).",
@@ -79,7 +79,7 @@
         "ΠP(B|Ai)."
       ],
       "a": 2,
-      "sol": "Soma-se a probabilidade de B através de cada ramo da partição.",
+      "sol": "Para cada i de 1 a n, calcula-se P(B|Ai)P(Ai), a probabilidade da interseção B∩Ai. A soma dessas parcelas dá P(B).",
       "hyp": "Pode esquecer ponderar pelas probabilidades dos ramos.",
       "contexts": [
         "mission",
@@ -665,7 +665,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Num exemplo com prevalência de 1%, sensibilidade de 99% e 5% de falsos positivos, P(doença|positivo) é cerca de 16,7%. Isto mostra que uma elevada sensibilidade do teste...",
+      "q": "Uma doença afeta 1% da população. Um teste dá positivo em 99% das pessoas com a doença e em 5% das pessoas sem a doença. A probabilidade de ter a doença sabendo que o teste deu positivo é cerca de 16,7%. O que mostra este resultado sobre uma elevada sensibilidade do teste?",
       "o": [
         "não implica, por si só, elevada P(doença|positivo).",
         "garante posterior superior a 90%.",
@@ -673,7 +673,7 @@
         "elimina falsos positivos."
       ],
       "a": 0,
-      "sol": "A prevalência e a taxa de falsos positivos também influenciam fortemente o posterior.",
+      "sol": "A probabilidade de doença e teste positivo é 0,01×0,99=0,0099. A de teste positivo é 0,0099+0,99×0,05=0,0594. O quociente 0,0099/0,0594≈0,167 depende também da prevalência da doença e da taxa de positivos entre as pessoas sem a doença.",
       "hyp": "Pode ignorar a taxa-base.",
       "contexts": [
         "mission",

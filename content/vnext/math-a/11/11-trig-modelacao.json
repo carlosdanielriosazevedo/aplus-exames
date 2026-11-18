@@ -17,7 +17,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Num triângulo retângulo, sin α é...",
+      "q": "Num triângulo retângulo, α é um ângulo agudo. A que razão corresponde sen α?",
       "o": [
         "cateto oposto/hipotenusa.",
         "cateto adjacente/hipotenusa.",
@@ -25,7 +25,7 @@
         "hipotenusa/cateto oposto."
       ],
       "a": 0,
-      "sol": "Por definição, sin α=oposto/hipotenusa.",
+      "sol": "Por definição, sen α=oposto/hipotenusa.",
       "hyp": "Pode trocar seno e cosseno.",
       "contexts": [
         "mission",
@@ -44,7 +44,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Num triângulo retângulo, cos α é...",
+      "q": "Num triângulo retângulo, α é um ângulo agudo. A que razão corresponde cos α?",
       "o": [
         "cateto oposto/hipotenusa.",
         "cateto adjacente/hipotenusa.",
@@ -98,7 +98,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "Num triângulo retângulo, relativamente a α, o cateto oposto mede 3 e a hipotenusa 5. Então sin α=",
+      "q": "Num triângulo retângulo, relativamente a α, o cateto oposto mede 3 e a hipotenusa 5. Então sen α=",
       "o": [
         "4/5",
         "3/4",
@@ -106,7 +106,7 @@
         "3/5"
       ],
       "a": 3,
-      "sol": "sin α=oposto/hipotenusa=3/5.",
+      "sol": "sen α=oposto/hipotenusa=3/5.",
       "hyp": "Pode usar o cateto adjacente.",
       "contexts": [
         "mission",
@@ -152,7 +152,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Num triângulo retângulo, tan α=3/4 e o cateto adjacente mede 8. O cateto oposto mede...",
+      "q": "Num triângulo retângulo, tg α=3/4 e o cateto adjacente mede 8. O cateto oposto mede...",
       "o": [
         "8",
         "6",
@@ -241,7 +241,7 @@
         "5/√3 m"
       ],
       "a": 0,
-      "sol": "Altura=5 sin60°=5√3/2.",
+      "sol": "Altura=5 sen 60°=5√3/2.",
       "hyp": "Pode usar cosseno em vez de seno.",
       "contexts": [
         "mission",
@@ -287,15 +287,15 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "A Lei dos Senos afirma que, num triângulo ABC...",
+      "q": "Num triângulo acutângulo ABC, a, b e c são os comprimentos dos lados opostos aos ângulos A, B e C. Ao exprimir a altura a partir de C pelos ângulos A e B, e a altura a partir de A pelos ângulos B e C, que relação se obtém?",
       "o": [
         "a cos A=b cos B=c cos C.",
         "a²+b²=c² sempre.",
-        "a/sin A=b/sin B=c/sin C.",
-        "sin A+sin B=sin C."
+        "a/sen A=b/sen B=c/sen C.",
+        "sen A+sen B=sen C."
       ],
       "a": 2,
-      "sol": "Lados são proporcionais aos senos dos ângulos opostos.",
+      "sol": "A altura a partir de C é b sen A ou a sen B, logo a/sen A=b/sen B. A altura a partir de A é c sen B ou b sen C, logo b/sen B=c/sen C. Assim, a/sen A=b/sen B=c/sen C.",
       "hyp": "Pode confundir com Lei dos Cossenos.",
       "contexts": [
         "mission",
@@ -341,7 +341,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Se A=90°, a Lei dos Cossenos reduz-se a...",
+      "q": "Num triângulo, a é o lado oposto ao ângulo A e os outros lados medem b e c. A lei dos cossenos dá a²=b²+c²−2bc cos A. Que igualdade se obtém quando A=90°?",
       "o": [
         "a²=b²+c².",
         "a=b+c.",
@@ -349,7 +349,7 @@
         "a²=2bc."
       ],
       "a": 0,
-      "sol": "cos90°=0.",
+      "sol": "Como cos 90°=0, o termo −2bc cos A é nulo. Fica a²=b²+c², a igualdade do teorema de Pitágoras.",
       "hyp": "Pode não reconhecer a ligação a Pitágoras.",
       "contexts": [
         "mission",
@@ -584,7 +584,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Num triângulo, a=7, A=30° e B=45°. Pela Lei dos Senos, b é aproximadamente...",
+      "q": "Num triângulo, a e b são os lados opostos aos ângulos A e B e verifica-se a/sen A=b/sen B. Se a=7, A=30° e B=45°, qual é o valor de b arredondado às centésimas?",
       "o": [
         "7,00",
         "9,90",
@@ -592,7 +592,7 @@
         "14,00"
       ],
       "a": 1,
-      "sol": "b=7 sin45°/sin30°=7(√2/2)/(1/2)=7√2≈9,90.",
+      "sol": "Da relação dada, b=7 sen 45°/sen 30°=7(√2/2)/(1/2)=7√2. Arredondando às centésimas, b≈9,90.",
       "hyp": "Pode inverter a razão.",
       "contexts": [
         "mission",
@@ -692,7 +692,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Num triângulo com lados 5,6,7, qual é cos do ângulo C oposto ao lado 7?",
+      "q": "Num triângulo com lados 5, 6 e 7, C é o ângulo oposto ao lado 7. Usa a relação 7²=5²+6²−2×5×6 cos C para calcular cos C.",
       "o": [
         "−1/5",
         "1/5",
@@ -700,7 +700,7 @@
         "1/2"
       ],
       "a": 1,
-      "sol": "49=25+36−60 cosC => 60cosC=12 => cosC=1/5.",
+      "sol": "Efetuando as potências e o produto, 49=25+36−60 cos C. Daqui resulta 60 cos C=12, portanto cos C=1/5.",
       "hyp": "Pode mover termos com sinal errado.",
       "contexts": [
         "mission",
@@ -1286,7 +1286,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Dois observadores A e B estão a 100 m um do outro e veem um ponto C com ângulos internos A=45° e B=60°. Quanto mede C?",
+      "q": "Dois observadores A e B estão a 100 m um do outro e veem um ponto C. No triângulo ABC, os ângulos internos em A e B medem 45° e 60°, respetivamente. Qual é a amplitude do ângulo interno em C?",
       "o": [
         "105°",
         "15°",
@@ -1313,15 +1313,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Num triângulo com AB=100, A=45°, B=60° e C=75°, a distância AC, oposta a B=60°, é dada por...",
+      "q": "Num triângulo ABC, AB=100 e os ângulos internos em A, B e C medem 45°, 60° e 75°. O quociente entre o comprimento de um lado e o seno do ângulo oposto é constante. Qual é a expressão do comprimento de AC?",
       "o": [
-        "100 sin60°/sin75°",
-        "100 sin75°/sin60°",
-        "100 cos60°/cos75°",
-        "100 tan60°"
+        "100 sen 60°/sen 75°",
+        "100 sen 75°/sen 60°",
+        "100 cos 60°/cos 75°",
+        "100 tg 60°"
       ],
       "a": 0,
-      "sol": "Pela Lei dos Senos, AC/sin60°=100/sin75°.",
+      "sol": "O lado AC é oposto ao ângulo de 60° e o lado AB é oposto ao ângulo de 75°. Portanto, AC/sen 60°=100/sen 75° e AC=100 sen 60°/sen 75°.",
       "hyp": "Pode inverter a proporção.",
       "contexts": [
         "mission",

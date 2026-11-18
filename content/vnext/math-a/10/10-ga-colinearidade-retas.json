@@ -476,7 +476,7 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Duas retas não verticais são paralelas quando têm...",
+      "q": "Duas retas distintas e não verticais são paralelas quando têm...",
       "o": [
         "declives opostos sempre.",
         "o mesmo declive.",
@@ -484,7 +484,7 @@
         "declives cujo produto é −1."
       ],
       "a": 1,
-      "sol": "Retas paralelas têm direção igual.",
+      "sol": "Uma reta não vertical de declive m tem como vetor diretor (1, m). Se os declives forem iguais, as retas têm a mesma direção e, por serem distintas, são paralelas.",
       "hyp": "Pode confundir paralelismo com perpendicularidade.",
       "contexts": [
         "mission",
@@ -557,15 +557,15 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Compreensão",
-      "q": "Duas retas não verticais de declives m1 e m2 são perpendiculares quando...",
+      "q": "Para duas retas não verticais, o critério de perpendicularidade diz que os declives m₁ e m₂ são recíprocos e de sinais opostos. Qual igualdade traduz esse critério?",
       "o": [
-        "m1m2=−1.",
-        "m1=m2.",
-        "m1+m2=0 sempre.",
-        "m1m2=1."
+        "m₁m₂=−1.",
+        "m₁=m₂.",
+        "m₁+m₂=0.",
+        "m₁m₂=1."
       ],
       "a": 0,
-      "sol": "Declives de retas perpendiculares são recíprocos e de sinais opostos.",
+      "sol": "Se m₁ e m₂ são recíprocos e têm sinais opostos, então m₂=−1/m₁. Ao multiplicar por m₁ obtém-se m₁m₂=−1.",
       "hyp": "Pode confundir declives opostos com perpendiculares.",
       "contexts": [
         "mission",

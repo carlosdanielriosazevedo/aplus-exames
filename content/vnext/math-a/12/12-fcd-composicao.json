@@ -101,8 +101,8 @@
       "q": "Se f(x)=x+1 e g(x)=2x, então f∘g e g∘f...",
       "o": [
         "são sempre iguais.",
-        "só diferem por uma constante.",
-        "têm sempre o mesmo domínio.",
+        "coincidem apenas em x=0.",
+        "coincidem apenas em x=1.",
         "não são iguais."
       ],
       "a": 3,
@@ -179,7 +179,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Se f(x)=√x e g(x)=x−2, qual é o domínio de f∘g?",
+      "q": "Considera f(x)=ln(x+1) e g(x)=√(x−2). Qual é o domínio de f∘g?",
       "o": [
         "]−∞,2].",
         "R.",
@@ -187,7 +187,7 @@
         "]2,+∞[."
       ],
       "a": 2,
-      "sol": "(f∘g)(x)=√(x−2) exige x−2≥0; logo, o domínio é [2,+∞[.",
+      "sol": "A raiz exige x≥2. Para esses x, √(x−2)≥0, pelo que √(x−2)+1>0 e o logaritmo está definido. Logo, o domínio é [2, +∞[.",
       "hyp": "Pode impor x−2>0 e excluir incorretamente x=2, ou inverter a desigualdade.",
       "contexts": [
         "mission",

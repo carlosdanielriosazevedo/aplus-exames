@@ -1340,15 +1340,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Um reservatório perde 2,5 L por hora, partindo de 100 L no instante n=1. Um modelo discreto de PA é...",
+      "q": "Um reservatório contém 100 L no instante n=1 e perde 2,5 L por hora até esvaziar. Para n inteiro, com 1≤n≤41, que expressão dá o volume u_n ao fim de n−1 horas?",
       "o": [
         "u_n=100·2,5^{n−1}.",
         "u_n=100−2,5(n−1).",
-        "u_n=100−2,5n com primeiro termo 100.",
-        "u_n=102,5−2,5n sem equivalência ao termo inicial."
+        "u_n=100−2,5n.",
+        "u_n=100+2,5(n−1)."
       ],
       "a": 1,
-      "sol": "Uma perda absoluta constante produz uma PA de razão −2,5.",
+      "sol": "O primeiro valor é 100 L e a cada hora há uma variação de −2,5 L. Ao fim de n−1 horas, u_n=100−2,5(n−1), que se anula em n=41.",
       "hyp": "Pode usar um modelo multiplicativo ou deslocar mal o índice.",
       "contexts": [
         "mission",

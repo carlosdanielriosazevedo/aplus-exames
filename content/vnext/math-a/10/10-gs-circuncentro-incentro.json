@@ -565,7 +565,7 @@
         "Porque a hipotenusa é uma bissetriz."
       ],
       "a": 0,
-      "sol": "Num triângulo retângulo, a circunferência com diâmetro igual à hipotenusa passa pelos três vértices.",
+      "sol": "Pelo recíproco do teorema do ângulo inscrito numa semicircunferência, a hipotenusa AB é o diâmetro da circunferência circunscrita ao triângulo retângulo ABC. O circuncentro é o ponto médio de AB.",
       "hyp": "Pode justificar com propriedade errada.",
       "contexts": [
         "mission",
@@ -1151,7 +1151,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Quer-se desenhar a maior circunferência interior tangente aos três lados de um triângulo. O seu centro é...",
+      "q": "Quer-se desenhar uma circunferência no interior de um triângulo, tangente aos três lados. Qual é o centro dessa circunferência?",
       "o": [
         "o circuncentro.",
         "o baricentro.",

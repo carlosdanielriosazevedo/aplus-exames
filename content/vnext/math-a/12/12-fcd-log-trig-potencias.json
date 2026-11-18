@@ -44,15 +44,15 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "A derivada de sin x é...",
+      "q": "A derivada de sen(x) é...",
       "o": [
-        "−sin x.",
-        "cos x.",
-        "−cos x.",
-        "tan x."
+        "−sen(x).",
+        "cos(x).",
+        "−cos(x).",
+        "tg(x)."
       ],
       "a": 1,
-      "sol": "(sin x)'=cos x.",
+      "sol": "(sen(x))'=cos(x).",
       "hyp": "Pode trocar seno e cosseno.",
       "contexts": [
         "mission",
@@ -71,15 +71,15 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "A derivada de cos x é...",
+      "q": "A derivada de cos(x) é...",
       "o": [
-        "sin x.",
-        "cos x.",
-        "−sin x.",
-        "−cos x."
+        "sen(x).",
+        "cos(x).",
+        "−sen(x).",
+        "−cos(x)."
       ],
       "a": 2,
-      "sol": "(cos x)'=−sin x.",
+      "sol": "(cos(x))'=−sen(x).",
       "hyp": "Pode esquecer o sinal negativo.",
       "contexts": [
         "mission",
@@ -241,7 +241,7 @@
         "2."
       ],
       "a": 0,
-      "sol": "Pela cadeia: (2)/(2x)=1/x; também ln(2x)=ln2+lnx.",
+      "sol": "Para x>0, a regra da cadeia dá a derivada de ln(2x) como 2/(2x)=1/x. Também se pode usar ln(2x)=ln(2)+ln(x).",
       "hyp": "Pode esquecer simplificar o fator 2.",
       "contexts": [
         "mission",
@@ -557,15 +557,15 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "A derivada de ln(sin x), onde sin x>0, é...",
+      "q": "A derivada de ln(sen(x)), onde sen(x)>0, é...",
       "o": [
-        "cos x/sin x.",
-        "sin x/cos x.",
-        "1/sin x.",
-        "−sin x."
+        "cos(x)/sen(x).",
+        "sen(x)/cos(x).",
+        "1/sen(x).",
+        "−sen(x)."
       ],
       "a": 0,
-      "sol": "g'/g=cosx/sinx.",
+      "sol": "Pela regra da cadeia, a derivada de ln(u) é u′/u. Aqui u=sen(x) e u′=cos(x), pelo que a derivada é cos(x)/sen(x).",
       "hyp": "Pode esquecer a cadeia.",
       "contexts": [
         "mission",
@@ -584,15 +584,15 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "A derivada de ln(cos x), onde cos x>0, é...",
+      "q": "A derivada de ln(cos(x)), onde cos(x)>0, é...",
       "o": [
-        "cos x/sin x.",
-        "−sin x/cos x.",
-        "sin x/cos x.",
-        "−cos x."
+        "cos(x)/sen(x).",
+        "−sen(x)/cos(x).",
+        "sen(x)/cos(x).",
+        "−cos(x)."
       ],
       "a": 1,
-      "sol": "g'/g=(−sinx)/cosx.",
+      "sol": "Pela regra da cadeia, a derivada de ln(u) é u′/u. Aqui u=cos(x) e u′=−sen(x), pelo que a derivada é −sen(x)/cos(x).",
       "hyp": "Pode esquecer o sinal.",
       "contexts": [
         "mission",
@@ -646,7 +646,7 @@
         "1/(x+1)−1/(x−1)."
       ],
       "a": 3,
-      "sol": "Primeiro, ln((x+1)/(x−1))=ln(x+1)−ln(x−1). Derivando no domínio, obtém-se 1/(x+1)−1/(x−1).",
+      "sol": "O quociente u=(x+1)/(x−1) é positivo para x<−1 ou x>1. A sua derivada é u′=−2/(x−1)² e a de ln(u) é u′/u=−2/(x²−1). Esta expressão equivale a 1/(x+1)−1/(x−1) em todo o domínio.",
       "hyp": "Pode trocar o sinal da diferença.",
       "contexts": [
         "mission",
@@ -1313,12 +1313,12 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Uma oscilação é y(t)=5sin(2t). A velocidade y'(t) é...",
+      "q": "Uma oscilação é y(t)=5sen(2t). A velocidade y'(t) é...",
       "o": [
         "10cos(2t).",
         "5cos(2t).",
-        "10sin(2t).",
-        "−10sin(2t)."
+        "10sen(2t).",
+        "−10sen(2t)."
       ],
       "a": 0,
       "sol": "Deriva-se seno e multiplica-se pela frequência angular 2.",

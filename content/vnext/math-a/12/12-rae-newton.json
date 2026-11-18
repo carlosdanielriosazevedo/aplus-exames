@@ -44,7 +44,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "A fórmula iterativa de Newton é...",
+      "q": "Se f é derivável em xₙ e f′(xₙ)≠0, qual é a fórmula de Newton para calcular xₙ₊₁?",
       "o": [
         "x_{n+1}=(a+b)/2.",
         "x_{n+1}=x_n−f(x_n)/f'(x_n).",
@@ -152,7 +152,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Para f(x)=x²−2, a iteração de Newton pode escrever-se...",
+      "q": "Aplica o método de Newton a f(x)=x²−2 numa iteração em que xₙ≠0. Como se escreve xₙ₊₁?",
       "o": [
         "x_{n+1}=x_n/2.",
         "x_{n+1}=(x_n+2/x_n)/2.",
@@ -287,15 +287,15 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Geometricamente, x_{n+1} é...",
+      "q": "No método de Newton, se f′(xₙ)≠0, como se determina geometricamente a aproximação xₙ₊₁?",
       "o": [
-        "o ponto médio de x_n e f(x_n).",
-        "a ordenada da tangente.",
-        "a interseção com Ox da tangente em (x_n,f(x_n)).",
-        "a derivada em x_n."
+        "O ponto médio entre xₙ e a ordenada f(xₙ).",
+        "A ordenada da interseção da tangente com Oy.",
+        "A abcissa da interseção da tangente com Ox.",
+        "O declive da tangente no ponto de abcissa xₙ."
       ],
       "a": 2,
-      "sol": "É exatamente a construção geométrica do método.",
+      "sol": "Traça-se a tangente ao gráfico no ponto (xₙ,f(xₙ)). No ponto em que a tangente corta o eixo Ox, a ordenada é zero e a abcissa é a aproximação seguinte xₙ₊₁.",
       "hyp": "Pode confundir abcissa e ordenada.",
       "contexts": [
         "mission",
@@ -314,7 +314,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "A reta tangente a f em x_n tem equação...",
+      "q": "Se f é derivável em xₙ, qual é a equação da tangente ao gráfico de f no ponto de abcissa xₙ?",
       "o": [
         "y=f'(x_n)x.",
         "y=f(x_n)x+x_n.",
@@ -341,7 +341,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "A tangente a f em x_n tem equação y=f(x_n)+f'(x_n)(x−x_n). Ao impor y=0 para obter a abcissa de interseção com o eixo Ox, obtemos...",
+      "q": "A tangente a f em xₙ tem equação y=f(xₙ)+f′(xₙ)(x−xₙ), com f′(xₙ)≠0. Que fórmula se obtém ao impor y=0 e isolar x?",
       "o": [
         "a fórmula de Newton.",
         "a fórmula da bisseção.",
@@ -557,7 +557,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Outro critério útil é...",
+      "q": "Ao aproximar uma raiz de f(x)=0 pelo método de Newton, qual das seguintes condições pode servir de critério de paragem baseado no resíduo?",
       "o": [
         "|f(x_n)| pequeno, com interpretação adequada.",
         "f'(x_n)>0 sempre.",
@@ -565,7 +565,7 @@
         "x_n próximo de 1."
       ],
       "a": 0,
-      "sol": "Um resíduo pequeno indica que a aproximação quase satisfaz a equação.",
+      "sol": "O resíduo |f(xₙ)| mede quanto falta para satisfazer f(x)=0. Um resíduo pequeno pode justificar a paragem se a tolerância estiver definida para o valor de f. O erro na abcissa é uma grandeza diferente.",
       "hyp": "Pode confundir sinal com precisão.",
       "contexts": [
         "mission",
@@ -692,7 +692,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Exemplo",
-      "q": "Para f(x)=x²−1, um x0 positivo razoável tende a convergir para...",
+      "q": "Aplica o método de Newton a f(x)=x²−1, a partir de x₀>0. Para que raiz converge a sucessão de aproximações?",
       "o": [
         "−1.",
         "1.",
@@ -700,7 +700,7 @@
         "as duas raízes simultaneamente."
       ],
       "a": 1,
-      "sol": "Em geral, o lado positivo pertence à bacia da raiz positiva neste caso simples.",
+      "sol": "A iteração é xₙ₊₁=(xₙ+1/xₙ)/2. Para xₙ>0, xₙ₊₁−1=(xₙ−1)²/(2xₙ)≥0. Quando xₙ≥1, tem-se também xₙ₊₁≤xₙ. A partir do primeiro passo, a sucessão converge para um limite L≥1 que verifica L=(L+1/L)/2. Logo, L=1.",
       "hyp": "Pode ignorar a influência do sinal inicial.",
       "contexts": [
         "mission",

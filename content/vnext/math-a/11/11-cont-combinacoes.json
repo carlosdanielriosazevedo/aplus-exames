@@ -422,15 +422,15 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Se escolher presidente e vice entre 8 pessoas, devemos usar diretamente C(8,2)?",
+      "q": "Entre oito pessoas, vão ser escolhidos um presidente e um vice-presidente distintos. Pode usar-se C(8,2) diretamente para contar as atribuições de cargos?",
       "o": [
-        "Sim, sempre.",
-        "Só se houver 8 cargos.",
-        "Só se as pessoas forem iguais.",
-        "Não, porque os cargos distinguem a ordem/função."
+        "Sim, porque são escolhidas duas pessoas distintas.",
+        "Sim, porque cada dupla admite uma só atribuição.",
+        "Não, porque ficam oito pessoas disponíveis para ambos os cargos.",
+        "Não, porque uma dupla admite duas atribuições."
       ],
       "a": 3,
-      "sol": "O par escolhido pode ocupar os dois cargos de 2 formas.",
+      "sol": "C(8,2) conta os pares sem distinguir cargos. Cada par admite duas atribuições, conforme qual das duas pessoas fica como presidente. O total é 2×C(8,2)=56.",
       "hyp": "Pode ignorar a distinção entre cargos.",
       "contexts": [
         "mission",
@@ -1313,7 +1313,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Uma app escolhe 3 tópicos distintos entre 12 para uma revisão, sem ordem. Quantas seleções?",
+      "q": "Uma aplicação tem 12 tópicos de revisão e vai manter 9 deles. Quantos conjuntos diferentes de tópicos pode manter, sem atender à ordem?",
       "o": [
         "220.",
         "1320.",
@@ -1321,7 +1321,7 @@
         "36."
       ],
       "a": 0,
-      "sol": "C(12,3)=220.",
+      "sol": "Cada conjunto de 9 tópicos fica determinado pelos 3 que são excluídos. Assim, há C(12,9)=C(12,3)=12×11×10/(3×2×1)=220 escolhas.",
       "hyp": "Pode usar arranjos por imaginar uma ordem de apresentação não pedida.",
       "contexts": [
         "mission",

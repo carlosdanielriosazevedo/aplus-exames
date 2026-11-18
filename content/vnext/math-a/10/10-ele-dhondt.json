@@ -22,7 +22,7 @@
         "1, 2, 3, 4, ...",
         "2, 4, 6, 8, ...",
         "1, 3, 5, 7, ...",
-        "10, 100, 1000, ..."
+        "2, 3, 4, 5, ..."
       ],
       "a": 0,
       "sol": "Os quocientes de D'Hondt obtêm-se dividindo os votos de cada lista por 1, 2, 3, 4, ...",
@@ -314,11 +314,11 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Se todos os votos de todas as listas forem multiplicados por 10, mantendo o número de mandatos, o que acontece à distribuição de D'Hondt?",
+      "q": "Se todos os votos forem multiplicados por 10, mantendo o número de mandatos e usando o mesmo critério de desempate baseado nos votos relativos das listas, o que acontece à distribuição de D'Hondt?",
       "o": [
-        "Muda sempre a favor da lista maior.",
-        "Todas as listas recebem mais mandatos.",
-        "Passa a existir empate.",
+        "Pode mudar, porque os maiores quocientes aumentam mais em valor absoluto.",
+        "Mantém-se apenas se as listas tiverem o mesmo número de votos.",
+        "Mantém-se apenas se cada lista já tiver obtido um mandato.",
         "Mantém-se, porque todos os quocientes são multiplicados por 10."
       ],
       "a": 3,
@@ -344,12 +344,12 @@
       "q": "Adicionar exatamente 100 votos a todas as listas garante que a distribuição de D'Hondt fica igual?",
       "o": [
         "Não; somar a mesma constante não multiplica todos os quocientes pelo mesmo fator e pode alterar a ordem.",
-        "Sim, porque todas aumentam o mesmo.",
-        "Sim, desde que haja três listas.",
-        "Não, porque D'Hondt não usa votos."
+        "Sim, porque a ordem das listas pelos votos se mantém.",
+        "Sim, porque é somado o mesmo valor a cada quociente.",
+        "Não, porque a soma altera a sequência de divisores das listas."
       ],
       "a": 0,
-      "sol": "A invariância é garantida para multiplicação comum, não para adição comum. A soma pode alterar razões e quocientes de forma diferente.",
+      "sol": "Com 210 votos para A, 100 para B e dois mandatos, ambos vão para A: 210>105>100. Somando 100 votos a cada lista, o segundo mandato passa para B, porque 200>310÷2=155. Somar o mesmo número de votos pode alterar a ordem dos quocientes.",
       "hyp": "Pode generalizar incorretamente a invariância por escala para uma translação.",
       "contexts": [
         "mission",

@@ -179,7 +179,7 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Se a<0 numa função afim, a função é...",
+      "q": "Se a<0 na função afim f(x)=ax+b, a função é...",
       "o": [
         "crescente.",
         "constante.",
@@ -1046,9 +1046,9 @@
       "q": "Se duas funções afins têm declives de sinais opostos, uma é crescente e outra...",
       "o": [
         "constante.",
-        "paralela.",
+        "negativa em todo o domínio.",
         "decrescente.",
-        "necessariamente perpendicular."
+        "positiva em todo o domínio."
       ],
       "a": 2,
       "sol": "Sinais opostos implicam monotonicidades opostas.",
@@ -1124,7 +1124,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Um depósito tem 120 L e enche a 8 L/min. Qual função V(t) é adequada?",
+      "q": "No instante inicial, um depósito contém 120 L. A água entra a 8 L por minuto. Qual expressão dá o volume V(t), em litros, t minutos depois de se iniciar o enchimento?",
       "o": [
         "V(t)=120−8t",
         "V(t)=120+8t",

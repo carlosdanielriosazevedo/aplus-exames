@@ -17,7 +17,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Uma assíntota vertical de uma função racional ocorre tipicamente num valor x=a onde...",
+      "q": "Para uma função racional, que condição sobre os fatores do numerador e do denominador identifica uma assíntota vertical em x=a?",
       "o": [
         "o denominador se anula sem cancelamento completo.",
         "o numerador se anula.",
@@ -25,7 +25,7 @@
         "a função é constante."
       ],
       "a": 0,
-      "sol": "Se o denominador tende a zero e o fator não se cancela, o gráfico pode divergir junto de x=a.",
+      "sol": "Simplificam-se os fatores comuns. Se o fator x−a permanece no denominador, este aproxima-se de zero quando x se aproxima de a e o numerador simplificado aproxima-se de um valor não nulo. Logo, o quociente cresce em módulo e x=a é uma assíntota vertical.",
       "hyp": "Pode confundir zero da função com exclusão do domínio.",
       "contexts": [
         "mission",
@@ -52,7 +52,7 @@
         "y=1."
       ],
       "a": 1,
-      "sol": "O denominador anula-se em x=0.",
+      "sol": "Quando x se aproxima de 0 pela direita, 1/x cresce sem limite. Pela esquerda, 1/x diminui sem limite. Por isso, a reta x=0 é uma assíntota vertical.",
       "hyp": "Pode trocar vertical e horizontal.",
       "contexts": [
         "mission",
@@ -233,15 +233,15 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Se numerador e denominador de uma função racional têm o mesmo grau, a assíntota horizontal é dada pela...",
+      "q": "Se o numerador e o denominador de uma função racional são ambos funções afins não constantes, que relação entre os seus coeficientes determina a ordenada da assíntota horizontal, quando existe?",
       "o": [
-        "razão dos coeficientes líderes.",
-        "soma dos coeficientes líderes.",
+        "razão entre os coeficientes dos termos de maior grau.",
+        "soma dos coeficientes dos termos de maior grau.",
         "diferença dos graus.",
         "razão dos termos constantes."
       ],
       "a": 0,
-      "sol": "Para |x| grande dominam os termos de maior grau.",
+      "sol": "Para f(x)=(ax+b)/(cx+d), divide-se por x no numerador e no denominador. Quando |x| cresce, b/x e d/x aproximam-se de zero, pelo que f(x) se aproxima da razão a/c.",
       "hyp": "Pode usar os termos independentes.",
       "contexts": [
         "mission",
@@ -422,7 +422,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Divide x²+1 por x. Obtém-se...",
+      "q": "Para x≠0, qual é a expressão equivalente a (x²+1)/x?",
       "o": [
         "x+1.",
         "x².",
@@ -430,7 +430,7 @@
         "x+1/x."
       ],
       "a": 3,
-      "sol": "x²/x=x e sobra 1/x.",
+      "sol": "Dividindo as parcelas do numerador por x, obtém-se x²/x+1/x=x+1/x. A igualdade vale para x≠0.",
       "hyp": "Pode cancelar x num termo onde não existe.",
       "contexts": [
         "mission",
@@ -476,7 +476,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Para f(x)=(x²+2x+3)/(x+1), a divisão dá...",
+      "q": "Para x≠−1, qual das expressões é igual a (x²+2x+3)/(x+1)?",
       "o": [
         "x+2+1/(x+1).",
         "x+1+2/(x+1).",
@@ -484,7 +484,7 @@
         "x+3."
       ],
       "a": 1,
-      "sol": "(x+1)(x+1)=x²+2x+1, sobra 2.",
+      "sol": "A divisão euclidiana dá quociente x+1 e resto 2, pois x²+2x+3=(x+1)²+2. Para x≠−1, a expressão racional é, portanto, x+1+2/(x+1).",
       "hyp": "Pode errar o resto.",
       "contexts": [
         "mission",
@@ -565,7 +565,7 @@
         "a função é crescente."
       ],
       "a": 0,
-      "sol": "Um fator cancelado pode criar apenas uma descontinuidade removível.",
+      "sol": "Depois de cancelar os fatores comuns, verifica-se se x−a permanece no denominador. Se permanecer, há uma assíntota vertical. Se o fator desaparecer por completo, a exclusão de a do domínio original dá apenas um ponto removível.",
       "hyp": "Pode usar apenas o denominador antes de simplificar.",
       "contexts": [
         "mission",
@@ -611,7 +611,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Para f(x)=(x+2)/[(x−1)(x+3)], a assíntota horizontal é...",
+      "q": "Para x≠1 e x≠−3, escreve-se f(x)=(x+2)/[(x−1)(x+3)]=3/[4(x−1)]+1/[4(x+3)]. Para |x| elevado, de que reta horizontal se aproxima o seu gráfico?",
       "o": [
         "y=1.",
         "y=−3.",
@@ -619,7 +619,7 @@
         "não existe."
       ],
       "a": 2,
-      "sol": "Grau do numerador 1 < grau do denominador 2.",
+      "sol": "Quando |x| cresce, 3/[4(x−1)] e 1/[4(x+3)] aproximam-se de zero. Portanto, f(x) aproxima-se de zero e a reta horizontal é y=0.",
       "hyp": "Pode usar a razão dos coeficientes líderes sem comparar graus.",
       "contexts": [
         "mission",
@@ -1043,15 +1043,15 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Para f(x)=(2x²+3x+1)/(x−1)=2x+5+6/(x−1), uma assíntota oblíqua é...",
+      "q": "Reescreve (2x²+3x+1)/(x−1), com x≠1, como soma de uma expressão afim e de uma fração com numerador constante. Qual é o gráfico da parcela afim?",
       "o": [
         "y=2x+1.",
         "y=6.",
         "y=2x+5.",
-        "x=1."
+        "y=2x+6."
       ],
       "a": 2,
-      "sol": "O resto 6/(x−1) tende a 0 em módulo para |x| grande.",
+      "sol": "Temos 2x²+3x+1=(x−1)(2x+5)+6. A divisão dá 2x+5+6/(x−1), pelo que a parcela afim tem gráfico y=2x+5.",
       "hyp": "Pode usar o resto como ordenada na origem.",
       "contexts": [
         "mission",

@@ -719,7 +719,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "O conjunto dos pontos que estão a igual distância de A e B é...",
+      "q": "Considera A=(1, 2), B=(5, 4) e P=(x, y). Que conjunto de pontos P é definido pela condição (x−1)²+(y−2)²=(x−5)²+(y−4)²?",
       "o": [
         "a reta AB.",
         "a circunferência de centro A sempre.",
@@ -727,7 +727,7 @@
         "o eixo Ox."
       ],
       "a": 2,
-      "sol": "A mediatriz é o lugar geométrico dos pontos equidistantes dos extremos.",
+      "sol": "O primeiro membro é o quadrado da distância de P a A e o segundo é o quadrado da distância de P a B. Como as distâncias são não negativas, a igualdade é equivalente a PA=PB. Como A e B são distintos, o conjunto é a mediatriz de AB.",
       "hyp": "Pode confundir com segmento AB.",
       "contexts": [
         "mission",

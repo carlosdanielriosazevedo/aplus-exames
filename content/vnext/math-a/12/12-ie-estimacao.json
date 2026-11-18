@@ -422,15 +422,15 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Se X̄ estima μ com erro padrão 2, uma amostra maior tende a produzir erro padrão...",
+      "q": "Com observações independentes da mesma população, a média amostral tem erro padrão 2 para uma amostra de dimensão n. Como se altera o erro padrão ao aumentar n?",
       "o": [
         "maior sempre.",
         "igual sempre.",
         "negativo.",
-        "menor que 2, mantendo σ comparável."
+        "fica abaixo de 2."
       ],
       "a": 3,
-      "sol": "EP≈σ/√n.",
+      "sol": "O erro padrão teórico é σ/√n. Como o desvio padrão σ da população se mantém e é positivo, aumentar n reduz o erro padrão para menos de 2.",
       "hyp": "Pode pensar que mais dados aumentam erro.",
       "contexts": [
         "mission",
@@ -557,7 +557,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Compreensão",
-      "q": "O erro quadrático médio (EQM/MSE) combina...",
+      "q": "O erro quadrático médio de um estimador T de θ é E[(T−θ)²]. Define-se o viés b=E(T)−θ, de modo que T−θ=(T−E(T))+b. Ao desenvolver o quadrado e calcular a esperança, que duas parcelas restam?",
       "o": [
         "variância e viés ao quadrado.",
         "apenas média e mediana.",
@@ -565,7 +565,7 @@
         "apenas viés."
       ],
       "a": 0,
-      "sol": "MSE=Var(θ̂)+Bias(θ̂)².",
+      "sol": "Ao desenvolver o quadrado, a esperança do termo cruzado é 2b E[T−E(T)]=0. A esperança de [T−E(T)]² é a variância de T. Restam a variância e o quadrado do viés b².",
       "hyp": "Pode pensar que avalia só dispersão.",
       "contexts": [
         "mission",
@@ -584,15 +584,15 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Um pequeno viés pode ser aceitável se permitir...",
+      "q": "Para comparar dois estimadores usa-se o erro total, dado pela soma da variância com o quadrado do viés. Quando pode ser vantajoso aceitar que aumente ligeiramente o viés em módulo?",
       "o": [
-        "variância infinita.",
-        "grande redução de variância e menor erro global.",
-        "ignorar o parâmetro.",
-        "eliminar os dados."
+        "Quando a variância aumenta na mesma proporção.",
+        "Quando a variância diminui mais do que aumenta o quadrado do viés.",
+        "Quando a variância permanece igual.",
+        "Quando o aumento do quadrado do viés é igual à redução da variância."
       ],
       "a": 1,
-      "sol": "Há trade-offs entre viés e variância em alguns estimadores.",
+      "sol": "A soma diminui se a redução da variância for maior do que o aumento do quadrado do viés. Nesse caso, o erro total é menor.",
       "hyp": "Pode tratar não enviesamento como único critério.",
       "contexts": [
         "mission",
@@ -719,12 +719,12 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Compreensão",
-      "q": "Um estimador pode ser função de...",
+      "q": "Um estimador calculado a partir dos dados, como a média amostral, pode depender de que informação?",
       "o": [
-        "do parâmetro desconhecido apenas.",
-        "apenas n.",
+        "do valor verdadeiro do parâmetro desconhecido.",
+        "dos dados que não foram observados.",
         "todos os dados da amostra.",
-        "nenhuma observação."
+        "da média populacional que se quer estimar."
       ],
       "a": 2,
       "sol": "Estatísticas são funções dos dados observados.",

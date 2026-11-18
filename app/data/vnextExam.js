@@ -213,7 +213,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Maioria simples e maioria absoluta",
-    "q": "Com a mesma regra de eleição à primeira volta apenas com mais de 50% dos votos válidos, os resultados são A=50%, B=27%, C=23%. Qual é a decisão correta?",
+    "q": "Um regulamento determina que, se ninguém obtiver mais de 50% dos votos válidos, os dois candidatos mais votados passam à segunda volta. Os resultados são A=50%, B=27% e C=23%. Qual é a decisão correta?",
     "o": [
       "A é eleita porque atingiu 50%.",
       "A e B passam à segunda volta.",
@@ -273,10 +273,10 @@ export const VNEXT_EXAM_QUESTIONS=[
     "focus": "Método de St. Laguë, comparação e limitações",
     "q": "Por que deve evitar-se arredondar demasiado cedo quocientes próximos em St. Laguë?",
     "o": [
-      "Porque só são permitidos inteiros.",
+      "Porque quocientes muito próximos têm obrigatoriamente de ser considerados um empate.",
       "Porque pode alterar artificialmente a ordem dos quocientes.",
-      "Porque arredondar aumenta todos os votos.",
-      "Porque os divisores deixam de ser ímpares."
+      "Porque o número de mandatos depende da soma dos quocientes.",
+      "Porque os maiores quocientes devem ser arredondados com menos casas decimais."
     ],
     "a": 1,
     "sol": "A distribuição depende da comparação ordenada dos quocientes; arredondamentos grosseiros podem trocar posições ou criar falsos empates.",
@@ -300,7 +300,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Método de St. Laguë, comparação e limitações",
-    "q": "Com A=980, B=760, C=460, D=300 e 6 mandatos, qual é o menor quociente entre os seis selecionados em St. Laguë?",
+    "q": "Com A=980, B=760, C=460, D=300 e 6 mandatos, qual é o menor quociente entre os seis selecionados em St. Laguë, arredondado às centésimas quando necessário?",
     "o": [
       "300 de D",
       "326,67 de A",
@@ -308,7 +308,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "460 de C"
     ],
     "a": 2,
-    "sol": "Os selecionados são 980(A),760(B),460(C),326,67(A),300(D),253,33(B). O menor é 253,33.",
+    "sol": "Os seis maiores quocientes são 980 de A, 760 de B, 460 de C, 980÷3 de A, 300 de D e 760÷3 de B. O menor é 760÷3≈253,33.",
     "hyp": "Pode identificar o menor voto inicial em vez do último quociente vencedor.",
     "contexts": [
       "exam"
@@ -358,11 +358,11 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Amostragem, representatividade e enviesamento",
-    "q": "Uma escola envia questionário a todos os alunos, mas só 15% responde. Qual risco permanece?",
+    "q": "Uma escola envia um questionário a todos os alunos, mas só 15% responde. A possibilidade de os alunos que responderam diferirem sistematicamente dos restantes ilustra que risco?",
     "o": [
       "Nenhum, porque todos receberam o questionário.",
       "Enviesamento de não resposta.",
-      "A população desaparece.",
+      "Enviesamento de medição causado pelo questionário.",
       "A amostra passa a ser censo."
     ],
     "a": 1,
@@ -445,15 +445,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Dados bivariados, diagrama de dispersão, correlação, regressão, outliers e correlação vs causalidade",
-    "q": "Se os resíduos formam um padrão curvo claro, isso sugere que...",
+    "q": "Ajustou-se uma reta a um conjunto de pontos. Para cada ponto, calculou-se o resíduo, que é a diferença entre o valor observado de y e o valor previsto pela reta. Se o gráfico dos resíduos em função de x mostra um padrão claramente curvo, o que se pode concluir?",
     "o": [
       "a correlação é necessariamente 1.",
       "uma reta pode não ser o modelo mais adequado.",
-      "todos os dados estão errados.",
+      "uma reta descreve bem a relação desde que os resíduos tenham média zero.",
       "não há relação entre as variáveis."
     ],
     "a": 1,
-    "sol": "Estrutura sistemática nos resíduos indica que o modelo linear deixa padrão por explicar.",
+    "sol": "Um padrão sistemático nos resíduos mostra que a diferença entre o observado e o previsto depende de x de forma regular. Isso sugere que a reta deixou por explicar parte da relação entre as variáveis.",
     "hyp": "Pode ignorar evidência de não linearidade.",
     "contexts": [
       "exam"
@@ -532,7 +532,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Aplicação",
     "focus": "Medidas de dispersão e interpretação conjunta",
-    "q": "Nos mesmos dados 1 a 8, Q3 é...",
+    "q": "Considera os dados ordenados 1, 2, 3, 4, 5, 6, 7 e 8. Usando a mediana das metades, qual é o terceiro quartil Q₃?",
     "o": [
       "5,5",
       "6,5",
@@ -540,7 +540,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "7"
     ],
     "a": 1,
-    "sol": "Metade superior 5,6,7,8; mediana=(6+7)/2=6,5.",
+    "sol": "A metade superior é 5, 6, 7 e 8. A mediana dessa metade é a média dos dois valores centrais: (6+7)/2=6,5.",
     "hyp": "Pode usar 6 ou 7 diretamente.",
     "contexts": [
       "exam"
@@ -967,7 +967,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "IRS, taxas, escalões e progressividade",
-    "q": "Tabela 10%-20%-30% com limites em 1 000 € e 2 000 €. Que rendimento produz imposto total de 600 €?",
+    "q": "Numa tabela progressiva, os primeiros 1 000 € são tributados a 10%, os 1 000 € seguintes a 20% e a parcela que excede 2 000 € a 30%. Qual é o rendimento que produz um imposto total de 600 €?",
     "o": [
       "2 500 €",
       "2 800 €",
@@ -1025,7 +1025,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "IRS, taxas, escalões e progressividade",
-    "q": "Na mesma tabela (10% até 1 000 €; 20% entre 1 000 € e 2 000 €), quanto imposto paga um rendimento de 2 000 €?",
+    "q": "Numa tabela progressiva, os primeiros 1 000 € são tributados a 10% e a parte acima de 1 000 € até 2 000 € é tributada a 20%. Qual é o imposto sobre um rendimento de 2 000 €?",
     "o": [
       "200 €",
       "250 €",
@@ -1054,7 +1054,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Juro composto, poupança, crédito e modelação financeira",
-    "q": "Uma aplicação mensal de 1 000 € cresce para 1 020,10 € em 2 meses. Qual é a taxa mensal composta?",
+    "q": "Numa aplicação com capitalização mensal, um capital inicial de 1 000 € cresce para 1 020,10 € em dois meses, sem depósitos ou levantamentos. Qual é a taxa de juro mensal?",
     "o": [
       "0,5%",
       "2%",
@@ -1083,12 +1083,12 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Juro composto, poupança, crédito e modelação financeira",
-    "q": "Num crédito com capitalização composta e sem pagamentos intermédios, por que o saldo pode crescer cada vez mais em euros por período?",
+    "q": "Num crédito com capitalização composta, taxa de juro positiva constante e sem pagamentos intermédios, por que razão o saldo aumenta mais, em euros, de um período para o seguinte?",
     "o": [
       "Porque a taxa aumenta obrigatoriamente.",
       "Porque a mesma taxa incide sobre uma base crescente.",
-      "Porque os juros deixam de existir.",
-      "Porque o capital inicial é reduzido automaticamente."
+      "Porque se aplica a taxa apenas aos juros do período anterior.",
+      "Porque se repete em cada período o mesmo valor de juro em euros."
     ],
     "a": 1,
     "sol": "Com taxa constante, a percentagem aplica-se a um montante crescente.",
@@ -1141,7 +1141,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Juro simples",
-    "q": "Um capital terminou em 1 260 € depois de 2 anos a 5% ao ano em juro simples. Qual era o capital inicial?",
+    "q": "Um capital atingiu 1 260 € depois de dois anos a 5% ao ano, em regime de juro simples. Qual era o capital inicial, arredondado aos cêntimos?",
     "o": [
       "1 100 €",
       "1 200 €",
@@ -1170,7 +1170,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Juro simples",
-    "q": "Na função M(t)=2 000+80t, o que representa 80?",
+    "q": "Numa aplicação em regime de juro simples, o montante em euros após t anos é M(t)=2 000+80t. O que representa 80?",
     "o": [
       "O capital inicial.",
       "O juro ganho por ano.",
@@ -1347,9 +1347,9 @@ export const VNEXT_EXAM_QUESTIONS=[
     "q": "Se duas funções afins têm declives de sinais opostos, uma é crescente e outra...",
     "o": [
       "constante.",
-      "paralela.",
+      "negativa em todo o domínio.",
       "decrescente.",
-      "necessariamente perpendicular."
+      "positiva em todo o domínio."
     ],
     "a": 2,
     "sol": "Sinais opostos implicam monotonicidades opostas.",
@@ -1373,7 +1373,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Função afim e modelação",
-    "q": "Se a<0 numa função afim, a função é...",
+    "q": "Se a<0 na função afim f(x)=ax+b, a função é...",
     "o": [
       "crescente.",
       "constante.",
@@ -1431,15 +1431,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Conceito de função e representações",
-    "q": "No domínio R, f(x)=(x²−1)/(x−1) e g(x)=x+1 definem a mesma função?",
+    "q": "Considera as expressões f(x)=(x²−1)/(x−1) e g(x)=x+1, cada uma com o seu domínio real natural. Definem a mesma função?",
     "o": [
       "Não, porque f não está definida em x=1 e g está.",
       "Sim, porque simplificam para a mesma expressão.",
-      "Sim, sempre que x≠0.",
-      "Não, porque os gráficos nunca coincidem."
+      "Sim, porque os dois domínios excluem x=1.",
+      "Não, porque os gráficos só coincidem em x=1."
     ],
     "a": 0,
-    "sol": "Apesar de f(x)=x+1 para x≠1, os domínios diferem em x=1.",
+    "sol": "Se x≠1, podemos cancelar o fator x−1 no numerador e no denominador de f. Então f(x)=x+1 para esses valores. Porém, f não está definida em x=1, ao passo que g(1)=2. Os domínios são diferentes.",
     "hyp": "Pode simplificar uma expressão e esquecer restrições do domínio.",
     "contexts": [
       "exam"
@@ -1497,7 +1497,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "[−2,+∞[."
     ],
     "a": 1,
-    "sol": "Como x²≥0, x²+2≥2, e 2 é atingido em x=0.",
+    "sol": "Como x²≥0, temos x²+2≥2. Qualquer y≥2 é atingido, porque basta tomar x=√(y−2) para obter f(x)=y. Assim, a imagem é [2,+∞[.",
     "hyp": "Pode deslocar a imagem para o lado errado.",
     "contexts": [
       "exam"
@@ -1511,59 +1511,59 @@ export const VNEXT_EXAM_QUESTIONS=[
     "productionEligible": false
   },
   {
-    "id": "EX-VN10FUN-DIZ-038",
+    "id": "EX-VN10FUN-DIZ-037",
     "themeId": "10-fun",
     "subtopicId": "10-fun-dominio-imagem-zeros",
     "year": "10.º",
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Domínio, contradomínio/imagem, zeros e sinal",
-    "q": "Qual é o domínio real de f(x)=1/√(4−x)?",
+    "q": "Qual é o domínio real de f(x)=√(x+2)/(x−3)?",
     "o": [
-      "]−∞,4].",
-      "]−∞,4[.",
-      "[4,+∞[.",
-      "R\\{4}."
+      "[−2,+∞[\\{3}.",
+      "[−2,3[.",
+      "R\\{3}.",
+      "]−2,+∞[."
     ],
-    "a": 1,
-    "sol": "É preciso 4−x>0 porque a raiz está no denominador; logo x<4.",
-    "hyp": "Pode permitir x=4 ou inverter desigualdade.",
+    "a": 0,
+    "sol": "A raiz exige x+2≥0, isto é, x≥−2. O denominador exige x−3≠0, logo exclui-se 3, porque é o único valor que o anula. Assim, o domínio é [−2,+∞[ sem o 3.",
+    "hyp": "Pode esquecer uma das duas restrições.",
     "contexts": [
       "exam"
     ],
-    "signature": "exam:10-fun-dominio-imagem-zeros:10-fun-dominio-imagem-zeros:dominio-raiz-denominador",
+    "signature": "exam:10-fun-dominio-imagem-zeros:10-fun-dominio-imagem-zeros:dominio-combinado",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
-    "sourceQuestionId": "VN10FUN-DIZ-038",
+    "sourceQuestionId": "VN10FUN-DIZ-037",
     "sourceFile": "content/vnext/math-a/10/10-fun-dominio-imagem-zeros.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
-    "id": "EX-VN10FUN-DIZ-019",
+    "id": "EX-VN10FUN-DIZ-008",
     "themeId": "10-fun",
     "subtopicId": "10-fun-dominio-imagem-zeros",
     "year": "10.º",
     "difficulty": 2,
-    "cognitive": "Interpretação",
+    "cognitive": "Compreensão",
     "focus": "Domínio, contradomínio/imagem, zeros e sinal",
-    "q": "Se uma função tem domínio [−2,5], isso significa que...",
+    "q": "Em relação ao eixo Ox, onde está o ponto de abcissa x do gráfico de f, sabendo que f(x)>0?",
     "o": [
-      "as saídas estão sempre entre −2 e 5.",
-      "os zeros são −2 e 5.",
-      "só estão admitidas entradas entre −2 e 5, inclusive.",
-      "a função vale zero fora desse intervalo."
+      "abaixo do eixo Ox.",
+      "sobre o eixo Ox.",
+      "sempre no primeiro quadrante.",
+      "acima do eixo Ox."
     ],
-    "a": 2,
-    "sol": "O domínio refere-se às entradas possíveis.",
-    "hyp": "Pode confundir domínio com imagem ou zeros.",
+    "a": 3,
+    "sol": "Para cada entrada x, o ponto do gráfico tem coordenadas (x; f(x)). Se f(x)>0, a ordenada é positiva, por isso o ponto fica acima do eixo Ox.",
+    "hyp": "Pode associar positividade a x>0.",
     "contexts": [
       "exam"
     ],
-    "signature": "exam:10-fun-dominio-imagem-zeros:10-fun-dominio-imagem-zeros:dominio-intervalo",
+    "signature": "exam:10-fun-dominio-imagem-zeros:10-fun-dominio-imagem-zeros:sinal-positivo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
-    "sourceQuestionId": "VN10FUN-DIZ-019",
+    "sourceQuestionId": "VN10FUN-DIZ-008",
     "sourceFile": "content/vnext/math-a/10/10-fun-dominio-imagem-zeros.json",
     "optionOrderVersion": 1,
     "productionEligible": false
@@ -1700,7 +1700,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "−2x−4 para todo x."
     ],
     "a": 1,
-    "sol": "A mudança ocorre quando 2x+4=0, isto é, x=−2.",
+    "sol": "Se x≥−2, então 2x+4≥0 e |2x+4|=2x+4. Se x<−2, então 2x+4<0 e |2x+4|=−(2x+4)=−2x−4.",
     "hyp": "Pode usar sinal oposto ou fronteira errada.",
     "contexts": [
       "exam"
@@ -1808,7 +1808,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Colinearidade e equações de retas",
-    "q": "Duas retas não verticais são paralelas quando têm...",
+    "q": "Duas retas distintas e não verticais são paralelas quando têm...",
     "o": [
       "declives opostos sempre.",
       "o mesmo declive.",
@@ -1816,7 +1816,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "declives cujo produto é −1."
     ],
     "a": 1,
-    "sol": "Retas paralelas têm direção igual.",
+    "sol": "Uma reta não vertical de declive m tem como vetor diretor (1, m). Se os declives forem iguais, as retas têm a mesma direção e, por serem distintas, são paralelas.",
     "hyp": "Pode confundir paralelismo com perpendicularidade.",
     "contexts": [
       "exam"
@@ -1924,7 +1924,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Distâncias e ponto médio",
-    "q": "O conjunto dos pontos que estão a igual distância de A e B é...",
+    "q": "Considera A=(1, 2), B=(5, 4) e P=(x, y). Que conjunto de pontos P é definido pela condição (x−1)²+(y−2)²=(x−5)²+(y−4)²?",
     "o": [
       "a reta AB.",
       "a circunferência de centro A sempre.",
@@ -1932,7 +1932,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "o eixo Ox."
     ],
     "a": 2,
-    "sol": "A mediatriz é o lugar geométrico dos pontos equidistantes dos extremos.",
+    "sol": "O primeiro membro é o quadrado da distância de P a A e o segundo é o quadrado da distância de P a B. Como as distâncias são não negativas, a igualdade é equivalente a PA=PB. Como A e B são distintos, o conjunto é a mediatriz de AB.",
     "hyp": "Pode confundir com segmento AB.",
     "contexts": [
       "exam"
@@ -2185,15 +2185,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Vetores, coordenadas, norma e operações",
-    "q": "Dois vetores não nulos são colineares se...",
+    "q": "Qual é a condição necessária e suficiente para que dois vetores não nulos sejam colineares?",
     "o": [
       "têm a mesma norma.",
-      "a soma é zero sempre.",
+      "a sua soma é o vetor nulo.",
       "um é múltiplo escalar do outro.",
       "as primeiras componentes são iguais."
     ],
     "a": 2,
-    "sol": "Proporcionalidade das componentes caracteriza direção comum.",
+    "sol": "Dois vetores não nulos são colineares exatamente quando um é um múltiplo do outro. Os vetores opostos são um caso particular, em que o fator é −1 e a soma é o vetor nulo.",
     "hyp": "Pode confundir mesma norma com mesma direção.",
     "contexts": [
       "exam"
@@ -2251,7 +2251,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "(a,−b)."
     ],
     "a": 0,
-    "sol": "O vetor oposto tem mesma norma e direção, mas sentido contrário.",
+    "sol": "O vetor oposto é −v=(−a, −b), porque v+(−v) é o vetor nulo. Quando v é diferente de zero, a multiplicação por −1 conserva a direção e a norma e inverte o sentido. O vetor nulo é o seu próprio oposto.",
     "hyp": "Pode mudar só uma componente.",
     "contexts": [
       "exam"
@@ -2446,7 +2446,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Localização dos centros, reta de Euler e circunferência dos nove pontos",
-    "q": "Na reta orientada de O para H, tome O=0 e H=30. Quais são as coordenadas de G e N?",
+    "q": "Num triângulo não equilátero, orienta-se a reta de Euler do circuncentro O para o ortocentro H. As coordenadas de O e H são 0 e 30. Quais são as coordenadas do baricentro G e do centro N da circunferência dos nove pontos?",
     "o": [
       "G=15, N=10",
       "G=10, N=15",
@@ -2454,7 +2454,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "G=10, N=20"
     ],
     "a": 1,
-    "sol": "G fica a 1/3 de OH a partir de O:10; N é ponto médio: 15.",
+    "sol": "G pertence ao segmento OH e fica a um terço de OH a partir de O, pelo que a sua coordenada é 30/3=10. N é o ponto médio de OH, pelo que a sua coordenada é (0+30)/2=15.",
     "hyp": "Pode inverter a razão de G ou confundir N com G.",
     "contexts": [
       "exam"
@@ -2504,7 +2504,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Localização dos centros, reta de Euler e circunferência dos nove pontos",
-    "q": "Outros três pontos da circunferência dos nove pontos são...",
+    "q": "Considera um triângulo escaleno não retângulo. Além dos pontos médios dos lados e dos pontos médios dos segmentos do ortocentro aos vértices, que outros pontos pertencem à circunferência dos nove pontos?",
     "o": [
       "os três vértices.",
       "as interseções das medianas com os lados.",
@@ -2512,7 +2512,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "os três pontos de tangência da inscrita sempre."
     ],
     "a": 2,
-    "sol": "Os pés das alturas pertencem à circunferência dos nove pontos.",
+    "sol": "A terceira família é constituída pelos pés das alturas, isto é, as interseções das alturas com as retas que contêm os respetivos lados opostos.",
     "hyp": "Pode confundir com pontos de tangência da incircunferência.",
     "contexts": [
       "exam"
@@ -2541,7 +2541,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "necessariamente escaleno."
     ],
     "a": 0,
-    "sol": "No triângulo retângulo, o ortocentro é o vértice reto.",
+    "sol": "Se o ortocentro coincide com A, a altura por B passa também por A. A reta AB é então perpendicular a AC. Logo, o triângulo tem um ângulo reto em A.",
     "hyp": "Pode confundir com circuncentro.",
     "contexts": [
       "exam"
@@ -2591,7 +2591,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Ortocentro e alturas",
-    "q": "Se a altura AD é perpendicular a BC e ∠ADB mede...",
+    "q": "No triângulo ABC, a altura que parte de A intersecta a reta BC em D. Qual é a amplitude do ângulo entre as retas AD e BC?",
     "o": [
       "90°",
       "45°",
@@ -2599,7 +2599,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "180°"
     ],
     "a": 0,
-    "sol": "Perpendicularidade implica ângulo reto.",
+    "sol": "Uma altura é perpendicular à reta que contém o lado oposto. Neste caso, AD é perpendicular a BC, pelo que o ângulo entre as duas retas mede 90°.",
     "hyp": "Pode não traduzir perpendicularidade em 90°.",
     "contexts": [
       "exam"
@@ -2649,12 +2649,12 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Propriedades geométricas e construções de base",
-    "q": "Num triângulo, uma construção com régua e compasso da mediatriz de dois lados permite localizar...",
+    "q": "Num triângulo, que ponto se pode localizar construindo com régua e compasso a mediatriz de cada um de dois lados?",
     "o": [
       "um ponto equidistante dos três lados.",
       "um ponto equidistante dos três vértices.",
       "o ponto médio de qualquer altura.",
-      "a moda das medidas."
+      "o ponto de interseção das medianas."
     ],
     "a": 1,
     "sol": "A interseção das mediatrizes é equidistante dos três vértices; isso antecipa o circuncentro.",
@@ -2707,7 +2707,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Taxa instantânea e derivada num ponto",
-    "q": "Para f(x)=x^2, o limite lim_{h->0} [f(1+h)-f(1)]/h vale",
+    "q": "Para f(x)=x², quanto vale o limite do quociente [f(1+h)−f(1)]/h quando h→0?",
     "o": [
       "1",
       "3",
@@ -2715,7 +2715,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "4"
     ],
     "a": 2,
-    "sol": "Expandindo e simplificando, o quociente tende para 2a=2.",
+    "sol": "Para h≠0, o quociente é [(1+h)²−1]/h=2+h. Logo, quando h tende para 0, o limite vale 2.",
     "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "exam"
@@ -2736,7 +2736,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Taxa instantânea e derivada num ponto",
-    "q": "A posição e dada por s(t)=2t^2. Qual é a velocidade instantânea em t=4?",
+    "q": "A posição de uma partícula é dada por s(t)=2t², com s em metros e t em segundos. Qual é, em m/s, a velocidade instantânea no instante t=4?",
     "o": [
       "18",
       "16",
@@ -2744,7 +2744,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "4"
     ],
     "a": 1,
-    "sol": "A velocidade e s'(t); avaliando em t=4, obtém-se 16.",
+    "sol": "A velocidade instantânea é a derivada da posição. Como s′(t)=4t, no instante t=4 resulta s′(4)=16 m/s.",
     "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "exam"
@@ -2773,7 +2773,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "-8"
     ],
     "a": 1,
-    "sol": "Derivando a expressão e substituindo x=-2, obtém-se -4.",
+    "sol": "Pela regra da potência, f′(x)=2x. Logo f′(−2)=2×(−2)=−4.",
     "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "exam"
@@ -2794,7 +2794,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "função derivada",
-    "q": "Se f'(x)=(x-1)(x+2), em x<-2, então",
+    "q": "Se f′(x)=(x−1)(x+2), o que se pode concluir sobre f em ]−∞,−2[?",
     "o": [
       "f é decrescente",
       "f é constante",
@@ -2802,7 +2802,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "f é crescente"
     ],
     "a": 3,
-    "sol": "Ambos os fatores sao negativos, produto positivo.",
+    "sol": "Nesse intervalo, x−1<0 e x+2<0. Logo f′(x)>0, e f é crescente em ]−∞,−2[.",
     "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "exam"
@@ -2823,7 +2823,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "função derivada",
-    "q": "f'(x)=3x^2+2; uma possibilidade para f(x) e",
+    "q": "Em cada expressão, C representa uma constante real. Qual das expressões tem derivada 3x²+2?",
     "o": [
       "x^3+2x+C",
       "3x^3+2x+C",
@@ -2831,7 +2831,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "x^2+2x+C"
     ],
     "a": 0,
-    "sol": "Derivando x^3+2x+C obtém-se 3x^2+2.",
+    "sol": "Ao derivar os termos x³, 2x e C, obtém-se respetivamente 3x², 2 e 0. Portanto, a derivada de x³+2x+C é 3x²+2.",
     "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "exam"
@@ -2854,13 +2854,13 @@ export const VNEXT_EXAM_QUESTIONS=[
     "focus": "função derivada",
     "q": "Se f(x)=x^3+x, então f'(x)=",
     "o": [
-      "x^3+x",
-      "3x^2+1+1",
-      "0",
+      "x²+1",
+      "3x²+x",
+      "3x²",
       "3x^2+1"
     ],
     "a": 3,
-    "sol": "Derivando termo a termo obtém-se 3x^2+1.",
+    "sol": "A derivada de x³ é 3x² e a de x é 1. Somando, obtém-se f′(x)=3x²+1.",
     "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "exam"
@@ -2881,15 +2881,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Monotonia, extremos e otimização",
-    "q": "No intervalo [0,5], para f(x)=x^2-4x, os extremos absolutos sao",
+    "q": "No intervalo [0,5], quais são o máximo e o mínimo absolutos de f(x)=x²−4x e onde se atingem?",
     "o": [
-      "máximo 5 em x=5",
-      "mínimo -4 em x=2",
-      "apenas o ponto onde f'=0",
-      "máximo 5 em x=5; mínimo -4 em x=2."
+      "Máximo 5 em x=5 e mínimo 0 em x=0.",
+      "Máximo 0 em x=0 e mínimo −4 em x=2.",
+      "Máximo 5 em x=5 e mínimo −4 em x=0.",
+      "Máximo 5 em x=5 e mínimo −4 em x=2."
     ],
     "a": 3,
-    "sol": "Comparam-se valores nos pontos criticos e nas extremidades do intervalo.",
+    "sol": "A derivada f′(x)=2x−4 anula-se em x=2. Comparam-se o valor nesse ponto e os nas extremidades: f(0)=0, f(2)=−4 e f(5)=5. Máximo 5 em x=5 e mínimo −4 em x=2.",
     "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
     "contexts": [
       "exam"
@@ -2910,15 +2910,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Monotonia, extremos e otimização",
-    "q": "Uma solução de f'(x)=0 fora do domínio fisico de um problema",
+    "q": "O que se deve fazer com uma solução de f′(x)=0 que está fora do domínio físico de um problema?",
     "o": [
       "deve ser sempre aceite",
       "deve ser rejeitada como candidata nesse contexto",
-      "e automaticamente máximo",
-      "e automaticamente mínimo"
+      "é automaticamente um máximo",
+      "é automaticamente um mínimo"
     ],
     "a": 1,
-    "sol": "O domínio do modelo faz parte do problema.",
+    "sol": "Apenas os valores admissíveis da variável representam soluções possíveis do problema. Se uma solução de f′(x)=0 está fora do domínio físico, deve ser excluída dos candidatos a extremo.",
     "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
     "contexts": [
       "exam"
@@ -2939,15 +2939,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Monotonia, extremos e otimização",
-    "q": "Se f'(x)=x-3, então junto de x=3 a situação correta é",
+    "q": "Uma função f derivável em ℝ satisfaz f′(x)=x−3. Que opção indica a monotonia de f de cada lado de x=3 e o tipo de extremo em x=3?",
     "o": [
-      "decrescente para x<3 e crescente para x>3; mínimo em x=3.",
-      "decrescente para x<3 e crescente para x>3",
-      "mínimo em x=3",
-      "não se pode concluir nada"
+      "decrescente antes de 3, crescente depois de 3 e mínimo em x=3.",
+      "crescente antes de 3, decrescente depois de 3 e máximo em x=3.",
+      "decrescente antes de 3, crescente depois de 3 e máximo em x=3.",
+      "decrescente antes de 3, decrescente depois de 3 e sem extremo em x=3."
     ],
     "a": 0,
-    "sol": "Analisa-se o sinal de f' antes e depois de 3.",
+    "sol": "Temos f′(3)=0. Antes de 3, f′ é negativa e depois é positiva. Portanto, f é decrescente antes de 3 e crescente depois de 3, pelo que tem um mínimo em x=3.",
     "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
     "contexts": [
       "exam"
@@ -2971,12 +2971,12 @@ export const VNEXT_EXAM_QUESTIONS=[
     "q": "Usando a regra do produto, deriva f(x)=x(x^2+3).",
     "o": [
       "3x^2-3",
-      "x(x^2+3)",
+      "x²+3",
       "3x^2+3",
-      "0"
+      "2x"
     ],
     "a": 2,
-    "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtém-se 3x^2+3.",
+    "sol": "Pela regra do produto, a derivada de x(x²+3) é (x²+3)+2x²=3x²+3.",
     "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "exam"
@@ -2997,15 +2997,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Regras de derivação",
-    "q": "Derivar f(x)=x^2(x+1) por expansao ou regra do produto deve dar",
+    "q": "Que relação se obtém entre os resultados ao derivar f(x)=x²(x+1) por expansão ou pela regra do produto?",
     "o": [
       "resultados diferentes",
       "o mesmo resultado",
-      "apenas a expansao e valida",
-      "apenas o produto e valido"
+      "apenas a expansão é válida",
+      "apenas a regra do produto é válida"
     ],
     "a": 1,
-    "sol": "As regras sao coerentes e descrevem a mesma derivada.",
+    "sol": "Expandindo, f(x)=x³+x² e f′(x)=3x²+2x. Pela regra do produto, f′(x)=2x(x+1)+x²=3x²+2x. Os dois métodos dão o mesmo resultado.",
     "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "exam"
@@ -3029,12 +3029,12 @@ export const VNEXT_EXAM_QUESTIONS=[
     "q": "Deriva f(x)=2x^5-3x^2.",
     "o": [
       "10x^4-6x",
-      "2x^5-3x^2",
-      "10x^4-6x+1",
-      "0"
+      "5x⁴−2x",
+      "10x⁴−3x",
+      "10x⁵−6x²"
     ],
     "a": 0,
-    "sol": "Aplicando regra da potência e linearidade obtém-se 10x^4-6x.",
+    "sol": "Pela regra da potência, (2x⁵)′=10x⁴ e (−3x²)′=−6x. Portanto, f′(x)=10x⁴−6x.",
     "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "exam"
@@ -3055,7 +3055,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Reta tangente e interpretação geométrica",
-    "q": "A tangente ao gráfico em x=1 e y=-2x+7. Então f'(1)=",
+    "q": "A reta tangente ao gráfico de f no ponto de abcissa 1 é y=−2x+7. Qual é o valor de f′(1)?",
     "o": [
       "-2",
       "5",
@@ -3063,7 +3063,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "-1"
     ],
     "a": 0,
-    "sol": "O declive da reta y=-2x+7 e -2.",
+    "sol": "A derivada no ponto de tangência é o declive dessa reta, dado pelo coeficiente de x. Logo, f′(1)=−2.",
     "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
     "contexts": [
       "exam"
@@ -3084,7 +3084,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Reta tangente e interpretação geométrica",
-    "q": "Se a tangente em (0,-3) tem declive 4, uma reta normal ao gráfico nesse ponto é",
+    "q": "A reta tangente ao gráfico de f no ponto (0,−3) tem declive 4. Qual é a equação da reta perpendicular à tangente que passa por (0,−3)?",
     "o": [
       "y=4x-3",
       "y=-4x-3",
@@ -3092,7 +3092,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "x=0"
     ],
     "a": 2,
-    "sol": "O declive da normal é -1/4; usando o ponto obtém-se y=-(1/4)x-3.",
+    "sol": "As duas retas não são verticais, por isso os declives têm produto −1. Como o declive da tangente é 4, o da perpendicular é −1/4. A reta passa por (0,−3), logo tem equação y=−(1/4)x−3.",
     "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
     "contexts": [
       "exam"
@@ -3121,7 +3121,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "y=3x-2"
     ],
     "a": 3,
-    "sol": "Usa-se y-1=3(x-1), que simplifica para y=3x-2.",
+    "sol": "Para f(x)=x³, f(1)=1 e f′(x)=3x². Logo f′(1)=3, e a reta passa por (1,1) com esse declive. Assim, y−1=3(x−1), ou seja, y=3x−2.",
     "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
     "contexts": [
       "exam"
@@ -3142,7 +3142,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Modelação",
     "focus": "taxa média de variação",
-    "q": "Uma grandeza de população passa de 500 para 620 em 6 unidades de tempo. Qual é a taxa média?",
+    "q": "A população passa de 500 indivíduos para 620 indivíduos em 6 anos. Qual é a taxa média de variação, em indivíduos/ano?",
     "o": [
       "20",
       "120",
@@ -3150,7 +3150,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "620"
     ],
     "a": 0,
-    "sol": "(620-500)/6=20 individuos por ano.",
+    "sol": "Divide-se a variação total pelo tempo decorrido. Assim, (620−500)/6=20 indivíduos/ano.",
     "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "exam"
@@ -3200,7 +3200,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "taxa média de variação",
-    "q": "Para f(x)=2x+(3), qual é a taxa média de variação entre x=1 e x=5?",
+    "q": "Para f(x)=2x+3, qual é a taxa média de variação entre x=1 e x=5?",
     "o": [
       "2",
       "3",
@@ -3208,7 +3208,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "4"
     ],
     "a": 0,
-    "sol": "Por ser afim, a taxa média e constante e igual ao declive 2.",
+    "sol": "Temos f(1)=5 e f(5)=13. A taxa média é (13−5)/(5−1)=2, igual ao declive da função afim.",
     "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "exam"
@@ -3229,7 +3229,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Princípios da adição e multiplicação",
-    "q": "Quantos números de 3 algarismos pares existem?",
+    "q": "Quantos números pares de três algarismos existem?",
     "o": [
       "500.",
       "900.",
@@ -3237,7 +3237,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "400."
     ],
     "a": 2,
-    "sol": "Centenas: 9, dezenas: 10, unidades pares: 5. 9×10×5=450.",
+    "sol": "Há 9 escolhas para o algarismo das centenas, 10 para o das dezenas e 5 escolhas pares (incluindo zero) para o das unidades. O total é 9×10×5=450.",
     "hyp": "Pode contar zero inicial ou esquecer paridade.",
     "contexts": [
       "exam"
@@ -3258,15 +3258,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Princípios da adição e multiplicação",
-    "q": "Quando os números de opções da segunda etapa dependem da primeira...",
+    "q": "Um percurso é construído em duas etapas. O número de opções na segunda depende da escolha efetuada na primeira. Qual é o procedimento correto para contar todos os percursos?",
     "o": [
-      "multiplica-se sempre o total de opções médias.",
-      "podemos somar os produtos de cada ramo.",
-      "usa-se apenas adição.",
-      "não é possível contar."
+      "multiplica-se o número de escolhas iniciais pelo maior número de escolhas seguintes.",
+      "somam-se as contagens das escolhas seguintes para cada escolha inicial.",
+      "somam-se as escolhas da primeira etapa e as do primeiro ramo.",
+      "multiplica-se o número de escolhas da primeira etapa pelo menor número de escolhas seguintes."
     ],
     "a": 1,
-    "sol": "Conta-se cada ramo pelo princípio da multiplicação e somam-se os ramos exclusivos.",
+    "sol": "Fixada uma escolha inicial, cada escolha seguinte completa um percurso. Os percursos de escolhas iniciais diferentes são disjuntos, pelo que se somam os números de percursos de cada ramo.",
     "hyp": "Pode aplicar uma multiplicação uniforme que não existe.",
     "contexts": [
       "exam"
@@ -3490,7 +3490,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Diagramas, tabelas e organização de casos",
-    "q": "Numa tabela de dupla entrada para pares (i,j), a diagonal principal costuma corresponder a...",
+    "q": "Numa tabela de dupla entrada para pares (i,j), as linhas e as colunas são indexadas pelos mesmos valores na mesma ordem. A que casos corresponde a diagonal principal?",
     "o": [
       "casos em que i≠j.",
       "casos impossíveis sempre.",
@@ -3498,7 +3498,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "resultados não ordenados."
     ],
     "a": 2,
-    "sol": "Na diagonal, índice da linha e coluna coincide.",
+    "sol": "Na diagonal, a linha e a coluna ocupam a mesma posição na ordem de índices. Os dois índices coincidem, logo i=j.",
     "hyp": "Pode interpretar diagonal como exclusão obrigatória.",
     "contexts": [
       "exam"
@@ -3552,11 +3552,11 @@ export const VNEXT_EXAM_QUESTIONS=[
     "o": [
       "multiplicando sempre os graus máximos.",
       "contando apenas os nós internos.",
-      "somando o número de folhas de todos os ramos.",
+      "somando o número de folhas dos ramos que saem diretamente da raiz.",
       "fazendo a média dos ramos."
     ],
     "a": 2,
-    "sol": "Cada folha representa um resultado final distinto.",
+    "sol": "Cada folha representa um resultado final e pertence a exatamente um ramo que sai da raiz. Somar as folhas desses ramos conta cada resultado uma vez.",
     "hyp": "Pode aplicar multiplicação uniforme quando não existe.",
     "contexts": [
       "exam"
@@ -3577,7 +3577,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Fatorial e contagens elementares",
-    "q": "Simplifica (n+3)!/(n+1)!.",
+    "q": "Para um inteiro n≥0, simplifica (n+3)!/(n+1)!.",
     "o": [
       "(n+3)(n+2)(n+1).",
       "n+3.",
@@ -3585,7 +3585,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "n+2."
     ],
     "a": 2,
-    "sol": "Cancelam-se todos os fatores até (n+1)!.",
+    "sol": "Como (n+3)!=(n+3)(n+2)(n+1)!, ao dividir por (n+1)! fica (n+3)(n+2).",
     "hyp": "Pode deixar um fator a mais.",
     "contexts": [
       "exam"
@@ -3606,15 +3606,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Fatorial e contagens elementares",
-    "q": "Um algoritmo testa todas as ordens possíveis de 7 itens distintos. O número de ordens a testar é...",
+    "q": "Um algoritmo testa as ordenações de oito itens distintos em que um item específico fica sempre em último lugar. Qual é o número de ordenações a testar?",
     "o": [
-      "7².",
+      "8!.",
       "7!.",
-      "2⁷.",
-      "7."
+      "8!−7!.",
+      "8!/7!."
     ],
     "a": 1,
-    "sol": "Cada ordem é uma permutação dos 7 itens, totalizando 7!.",
+    "sol": "O último lugar já está ocupado pelo item fixo. Os outros sete itens podem ocupar as sete primeiras posições em qualquer ordem, pelo que há 7! ordenações.",
     "hyp": "Pode usar potência por confundir posição com repetição.",
     "contexts": [
       "exam"
@@ -3635,7 +3635,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Fatorial e contagens elementares",
-    "q": "A relação correta é...",
+    "q": "Para n∈ℕ e n≥1, vale…",
     "o": [
       "n!=(n−1)!+n.",
       "n!=n+(n−1).",
@@ -3643,7 +3643,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "n!=(n−1)!/n."
     ],
     "a": 2,
-    "sol": "É a relação recursiva fundamental do fatorial.",
+    "sol": "No produto n!, o primeiro fator é n e o produto dos fatores restantes é (n−1)!. Logo, n!=n(n−1)!.",
     "hyp": "Pode trocar produto por soma.",
     "contexts": [
       "exam"
@@ -3751,7 +3751,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Assíntotas, interpretação e modelação",
-    "q": "Para f(x)=(x+2)/[(x−1)(x+3)], a assíntota horizontal é...",
+    "q": "Para x≠1 e x≠−3, escreve-se f(x)=(x+2)/[(x−1)(x+3)]=3/[4(x−1)]+1/[4(x+3)]. Para |x| elevado, de que reta horizontal se aproxima o seu gráfico?",
     "o": [
       "y=1.",
       "y=−3.",
@@ -3759,7 +3759,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "não existe."
     ],
     "a": 2,
-    "sol": "Grau do numerador 1 < grau do denominador 2.",
+    "sol": "Quando |x| cresce, 3/[4(x−1)] e 1/[4(x+3)] aproximam-se de zero. Portanto, f(x) aproxima-se de zero e a reta horizontal é y=0.",
     "hyp": "Pode usar a razão dos coeficientes líderes sem comparar graus.",
     "contexts": [
       "exam"
@@ -3780,15 +3780,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Assíntotas, interpretação e modelação",
-    "q": "Para f(x)=(2x²+3x+1)/(x−1)=2x+5+6/(x−1), uma assíntota oblíqua é...",
+    "q": "Reescreve (2x²+3x+1)/(x−1), com x≠1, como soma de uma expressão afim e de uma fração com numerador constante. Qual é o gráfico da parcela afim?",
     "o": [
       "y=2x+1.",
       "y=6.",
       "y=2x+5.",
-      "x=1."
+      "y=2x+6."
     ],
     "a": 2,
-    "sol": "O resto 6/(x−1) tende a 0 em módulo para |x| grande.",
+    "sol": "Temos 2x²+3x+1=(x−1)(2x+5)+6. A divisão dá 2x+5+6/(x−1), pelo que a parcela afim tem gráfico y=2x+5.",
     "hyp": "Pode usar o resto como ordenada na origem.",
     "contexts": [
       "exam"
@@ -3809,15 +3809,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Assíntotas, interpretação e modelação",
-    "q": "Se numerador e denominador de uma função racional têm o mesmo grau, a assíntota horizontal é dada pela...",
+    "q": "Se o numerador e o denominador de uma função racional são ambos funções afins não constantes, que relação entre os seus coeficientes determina a ordenada da assíntota horizontal, quando existe?",
     "o": [
-      "razão dos coeficientes líderes.",
-      "soma dos coeficientes líderes.",
+      "razão entre os coeficientes dos termos de maior grau.",
+      "soma dos coeficientes dos termos de maior grau.",
       "diferença dos graus.",
       "razão dos termos constantes."
     ],
     "a": 0,
-    "sol": "Para |x| grande dominam os termos de maior grau.",
+    "sol": "Para f(x)=(ax+b)/(cx+d), divide-se por x no numerador e no denominador. Quando |x| cresce, b/x e d/x aproximam-se de zero, pelo que f(x) se aproxima da razão a/c.",
     "hyp": "Pode usar os termos independentes.",
     "contexts": [
       "exam"
@@ -3846,7 +3846,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "apenas 1."
     ],
     "a": 1,
-    "sol": "Pode ter um zero simples e um duplo (2 distintos) ou três simples, ou apenas um real.",
+    "sol": "Por ser de grau 3, a função muda de sinal entre os dois extremos do gráfico e é contínua. Tem, assim, pelo menos um zero real e, pelo grau, no máximo três. Por exemplo, x³, x²(x−1) e x(x−1)(x+1) têm respetivamente um, dois e três zeros reais distintos.",
     "hyp": "Pode achar que o grau fixa o número de zeros reais distintos.",
     "contexts": [
       "exam"
@@ -3867,7 +3867,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Famílias cúbicas/quárticas e comportamento gráfico",
-    "q": "Se uma quártica monica tem zeros −2 e 3, ambos duplos, então...",
+    "q": "Se g é um polinómio mónico de grau 4 com zeros −2 e 3, ambos duplos, qual é a expressão de g(x)?",
     "o": [
       "g(x)=(x−2)²(x+3)².",
       "g(x)=(x+2)²(x−3)².",
@@ -3875,7 +3875,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "g(x)=x⁴−6."
     ],
     "a": 1,
-    "sol": "Multiplicidade dupla corresponde ao quadrado de cada fator.",
+    "sol": "Os fatores (x+2)² e (x−3)² já somam grau 4. Como o coeficiente de x⁴ é 1, conclui-se que g(x)=(x+2)²(x−3)².",
     "hyp": "Pode esquecer as multiplicidades.",
     "contexts": [
       "exam"
@@ -3896,7 +3896,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Famílias cúbicas/quárticas e comportamento gráfico",
-    "q": "Uma função polinomial de grau ímpar com coeficiente líder positivo tem, nos extremos...",
+    "q": "Quando x tende para −∞ e +∞, como se comporta uma função polinomial de grau ímpar cujo coeficiente do termo de maior grau é positivo?",
     "o": [
       "ambos para +∞.",
       "esquerda para −∞ e direita para +∞.",
@@ -3904,7 +3904,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "esquerda +∞ e direita −∞."
     ],
     "a": 1,
-    "sol": "É o padrão típico de grau ímpar positivo.",
+    "sol": "O termo de maior grau domina quando |x| é grande. Como o expoente é ímpar e o coeficiente é positivo, a função tende para −∞ à esquerda e para +∞ à direita.",
     "hyp": "Pode aplicar o padrão de grau par.",
     "contexts": [
       "exam"
@@ -4012,7 +4012,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Compreensão",
     "focus": "Operações entre funções",
-    "q": "Para x pertencer ao domínio de f∘g, é necessário que...",
+    "q": "Sejam D_f e D_g os domínios de f e g. Primeiro calcula-se g(x), depois usa-se o resultado como argumento de f. Que condições garantem que as duas avaliações estão definidas?",
     "o": [
       "x∈D_f apenas.",
       "x∈D_f∪D_g.",
@@ -4020,7 +4020,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "f(x)∈D_g."
     ],
     "a": 2,
-    "sol": "Primeiro g tem de estar definida e a sua imagem deve poder entrar em f.",
+    "sol": "Para calcular g(x), é preciso que x pertença a D_g. Para aplicar f ao resultado, é preciso que g(x) pertença a D_f.",
     "hyp": "Pode inverter a condição.",
     "contexts": [
       "exam"
@@ -4049,7 +4049,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "x²."
     ],
     "a": 2,
-    "sol": "A raiz quadrada principal é não negativa.",
+    "sol": "A raiz quadrada principal devolve o número não negativo cujo quadrado é x². Se x≥0, esse número é x. Se x<0, é −x. Em ambos os casos, é |x|.",
     "hyp": "Pode cancelar quadrado e raiz sem considerar o sinal.",
     "contexts": [
       "exam"
@@ -4099,7 +4099,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Funções racionais",
-    "q": "Para f(x)=1/(x−a), o gráfico de 1/x sofre uma translação...",
+    "q": "Para a>0, como se obtém o gráfico de f(x)=1/(x−a) a partir do gráfico de g(x)=1/x?",
     "o": [
       "a unidades na vertical.",
       "a vezes na escala vertical.",
@@ -4107,7 +4107,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "nenhuma."
     ],
     "a": 2,
-    "sol": "Substituir x por x−a desloca para a direita se a>0.",
+    "sol": "Como f(x+a)=g(x) para x≠0, cada ponto (x,g(x)) passa a (x+a,g(x)). É uma translação horizontal de a unidades para a direita.",
     "hyp": "Pode confundir deslocamento horizontal e vertical.",
     "contexts": [
       "exam"
@@ -4186,7 +4186,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Teorema do resto, raízes, multiplicidade e fatorização",
-    "q": "Se P tem raízes 1,2,3 e coeficiente líder 2, então...",
+    "q": "Um polinómio P de grau 3 tem raízes 1, 2 e 3 e o coeficiente de x³ é 2. Qual é a expressão de P(x)?",
     "o": [
       "P(x)=(x−1)(x−2)(x−3).",
       "P(x)=2(x+1)(x+2)(x+3).",
@@ -4194,7 +4194,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "P(x)=2(x−1)(x−2)(x−3)."
     ],
     "a": 3,
-    "sol": "Os fatores vêm das raízes e o coeficiente líder ajusta a escala.",
+    "sol": "As três raízes distintas dão os fatores (x−1), (x−2) e (x−3). Como o grau é 3, o produto destes fatores só precisa de ser multiplicado por 2 para ter o coeficiente de x³ indicado.",
     "hyp": "Pode esquecer o coeficiente líder.",
     "contexts": [
       "exam"
@@ -4273,7 +4273,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Compreensão",
     "focus": "Produto escalar, norma e ângulo",
-    "q": "Normalizar um vetor significa...",
+    "q": "Em que consiste normalizar um vetor não nulo?",
     "o": [
       "multiplicá-lo pela norma.",
       "somar as componentes.",
@@ -4281,7 +4281,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "torná-lo perpendicular."
     ],
     "a": 2,
-    "sol": "O resultado é um vetor unitário com mesma direção e sentido.",
+    "sol": "Divide-se o vetor pela sua norma, que é positiva. O vetor obtido tem norma 1 e mantém a direção e o sentido do vetor inicial.",
     "hyp": "Pode confundir com projeção.",
     "contexts": [
       "exam"
@@ -4452,10 +4452,10 @@ export const VNEXT_EXAM_QUESTIONS=[
       "7.",
       "7/3.",
       "1.",
-      "7/√49."
+      "1/7."
     ],
     "a": 2,
-    "sol": "Norma da normal=√(36+9+4)=7; distância=7/7=1.",
+    "sol": "A norma do vetor normal (6,3,−2) é √(36+9+4)=7. O valor absoluto do termo independente é 7, pelo que a distância da origem ao plano é 7/7=1.",
     "hyp": "Pode não reconhecer a norma 7.",
     "contexts": [
       "exam"
@@ -4563,7 +4563,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Perpendicularidade",
-    "q": "Uma viga deve ficar contida no plano x+2y+2z=0. Qual vetor diretor é possível?",
+    "q": "Uma viga deve ficar contida no plano x+2y+2z=0. Qual dos vetores pode dar a direção da viga?",
     "o": [
       "(1,2,2).",
       "(2,4,4).",
@@ -4571,7 +4571,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "(0,1,1)."
     ],
     "a": 2,
-    "sol": "A normal é (1,2,2); (2,−1,0) tem produto 2−2=0.",
+    "sol": "A direção da viga é perpendicular à normal (1,2,2) do plano. Para (2,−1,0), o produto escalar com a normal é 2−2+0=0, portanto essa direção é possível.",
     "hyp": "Pode usar a normal como direção da viga.",
     "contexts": [
       "exam"
@@ -4658,7 +4658,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "4."
     ],
     "a": 3,
-    "sol": "O produto seleciona a componente horizontal.",
+    "sol": "Como e=(1,0), temos u·e=4×1+(−3)×0=4. O produto escalar com e dá a componente horizontal de u.",
     "hyp": "Pode usar a norma.",
     "contexts": [
       "exam"
@@ -4708,15 +4708,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Compreensão",
     "focus": "Ângulos e posições relativas de retas e planos",
-    "q": "Para vetor diretor v e normal n, o seno do ângulo β entre reta e plano satisfaz...",
+    "q": "Sejam v um vetor diretor de uma reta e n um vetor normal a um plano. O ângulo β entre a reta e o plano é complementar do ângulo entre as direções de v e n tomado em [0,π/2]. Qual das seguintes igualdades é válida?",
     "o": [
       "sinβ=|v·n|/(||v||||n||).",
-      "cosβ=|v·n|/(||v||||n||) sempre.",
-      "tanβ=||v||||n||.",
-      "sinβ=v·n sem normalização."
+      "cosβ=|v·n|/(||v||||n||).",
+      "sinβ=|v·n|/(||v||+||n||).",
+      "sinβ=1−|v·n|/(||v||||n||)."
     ],
     "a": 0,
-    "sol": "É o complemento da fórmula do ângulo entre v e n.",
+    "sol": "O seno de β é o cosseno do ângulo entre a direção da reta e a direção normal ao plano tomado em [0,π/2]. Pelo produto escalar, esse cosseno é |v·n|/(‖v‖‖n‖).",
     "hyp": "Pode confundir com a fórmula entre dois vetores.",
     "contexts": [
       "exam"
@@ -4737,15 +4737,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Ângulos e posições relativas de retas e planos",
-    "q": "Uma reta r tem diretor (1,2,−1). Um plano α tem normal (2,−1,0). A relação direcional é...",
+    "q": "A reta r tem vetor diretor (1,2,−1) e o plano α tem vetor normal (2,−1,0). Sem conhecer um ponto de r, o que se pode concluir?",
     "o": [
-      "r perpendicular a α.",
-      "r paralela a α.",
-      "r normal ao plano.",
-      "impossível determinar qualquer coisa."
+      "A direção de r é paralela a α e r tem de estar contida em α.",
+      "A direção de r é paralela a α e r pode estar contida em α.",
+      "A direção de r é paralela a α e r tem de ser exterior a α.",
+      "A direção de r é perpendicular a α e r interseta α."
     ],
     "a": 1,
-    "sol": "Produto=2−2+0=0, logo a direção é paralela ao plano.",
+    "sol": "O produto escalar entre o vetor diretor e o normal é 1×2+2×(−1)+(−1)×0=0. Assim, a direção de r é paralela ao plano. Dependendo de um ponto de r, ela pode estar contida no plano ou ser-lhe exterior.",
     "hyp": "Pode confundir produto zero com perpendicularidade reta-plano.",
     "contexts": [
       "exam"
@@ -4853,7 +4853,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Modelação",
     "focus": "Comportamento e modelação com sucessões",
-    "q": "Uma bateria retém 90% da carga anterior a cada ciclo. Se começa em 100, o modelo é...",
+    "q": "Uma bateria retém 90% da carga anterior em cada ciclo. A carga antes do primeiro ciclo é u_1=100. Qual é a expressão do termo geral u_n?",
     "o": [
       "u_n=100−10(n−1).",
       "u_n=90n.",
@@ -4861,7 +4861,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "u_n=100·1,1^{n−1}."
     ],
     "a": 2,
-    "sol": "Reter 90% significa multiplicar por 0,9.",
+    "sol": "Reter 90% significa multiplicar por 0,9 a cada ciclo. Para passar de u_1 a u_n há n−1 ciclos, logo u_n=100·0,9^{n−1}.",
     "hyp": "Pode subtrair sempre 10 pontos percentuais.",
     "contexts": [
       "exam"
@@ -4911,15 +4911,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Progressões aritméticas",
-    "q": "Um reservatório perde 2,5 L por hora, partindo de 100 L no instante n=1. Um modelo discreto de PA é...",
+    "q": "Um reservatório contém 100 L no instante n=1 e perde 2,5 L por hora até esvaziar. Para n inteiro, com 1≤n≤41, que expressão dá o volume u_n ao fim de n−1 horas?",
     "o": [
       "u_n=100·2,5^{n−1}.",
       "u_n=100−2,5(n−1).",
-      "u_n=100−2,5n com primeiro termo 100.",
-      "u_n=102,5−2,5n sem equivalência ao termo inicial."
+      "u_n=100−2,5n.",
+      "u_n=100+2,5(n−1)."
     ],
     "a": 1,
-    "sol": "Uma perda absoluta constante produz uma PA de razão −2,5.",
+    "sol": "O primeiro valor é 100 L e a cada hora há uma variação de −2,5 L. Ao fim de n−1 horas, u_n=100−2,5(n−1), que se anula em n=41.",
     "hyp": "Pode usar um modelo multiplicativo ou deslocar mal o índice.",
     "contexts": [
       "exam"
@@ -4998,7 +4998,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Progressões geométricas",
-    "q": "Um ficheiro perde metade do tamanho a cada compressão sucessiva, começando em 80 MB. Um modelo adequado é...",
+    "q": "Num modelo de compressões sucessivas, o tamanho de um ficheiro é reduzido a metade a cada compressão. Antes da primeira compressão, u_1=80 MB. Qual é o termo geral u_n?",
     "o": [
       "u_n=80−(n−1)/2.",
       "u_n=80·(1/2)^{n−1}.",
@@ -5006,7 +5006,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "u_n=80·2^{n−1}."
     ],
     "a": 1,
-    "sol": "Reduzir a metade é uma alteração multiplicativa constante.",
+    "sol": "De u_1 até u_n são feitas n−1 compressões, cada uma multiplicando o tamanho por 1/2. Assim, u_n=80·(1/2)^{n−1}.",
     "hyp": "Pode modelar uma perda absoluta em vez de proporcional.",
     "contexts": [
       "exam"
@@ -5064,7 +5064,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "110."
     ],
     "a": 2,
-    "sol": "Em uma PA, a média dos termos simétricos é o termo central; média=20, logo soma=11×20=220.",
+    "sol": "Numa progressão aritmética, os termos à mesma distância do centro têm desvios opostos em relação a esse termo. A média dos 11 termos é, portanto, 20, e a soma é 11×20=220.",
     "hyp": "Pode somar apenas 10 termos.",
     "contexts": [
       "exam"
@@ -5290,10 +5290,10 @@ export const VNEXT_EXAM_QUESTIONS=[
     "focus": "Ângulos orientados, arcos e radianos",
     "q": "Um ângulo orientado positivo mede-se, por convenção, no sentido...",
     "o": [
-      "horário.",
-      "vertical.",
-      "indiferente.",
-      "anti-horário."
+      "horário a partir do lado inicial.",
+      "anti-horário só no 1.º quadrante.",
+      "horário para amplitudes até 180°.",
+      "anti-horário a partir do lado inicial."
     ],
     "a": 3,
     "sol": "A convenção usual toma o sentido anti-horário como positivo.",
@@ -5317,7 +5317,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Círculo trigonométrico e redução",
-    "q": "Se sin θ=√2/2 e θ∈[0,2π[, então θ pode ser...",
+    "q": "Se sen θ=√2/2 e θ∈[0,2π[, então θ pode ser...",
     "o": [
       "π/4 ou 3π/4.",
       "π/4 ou 7π/4.",
@@ -5404,7 +5404,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Equações trigonométricas",
-    "q": "Resolve sin x=cos x em [0,2π[.",
+    "q": "Resolve sen x=cos x em [0,2π[.",
     "o": [
       "π/4 e 5π/4.",
       "π/4 e 3π/4.",
@@ -5412,7 +5412,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "0 e π."
     ],
     "a": 0,
-    "sol": "Quando cos x≠0, tan x=1; os pontos onde cos x=0 não satisfazem a igualdade.",
+    "sol": "Se cos x=0, então sen x=±1, logo os dois valores não são iguais. Nos restantes pontos, dividir por cos x dá tg x=1. Em [0,2π[, as soluções são π/4 e 5π/4.",
     "hyp": "Pode dividir por cos sem verificar, embora aqui os excluídos não sejam soluções.",
     "contexts": [
       "exam"
@@ -5433,10 +5433,10 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Equações trigonométricas",
-    "q": "Ao dividir uma equação por sin x, que cuidado é necessário?",
+    "q": "Ao dividir uma equação por sen x, que cuidado é necessário?",
     "o": [
-      "Pode criar sempre soluções com sin x=0.",
-      "Pode perder soluções com sin x=0.",
+      "Pode criar sempre soluções com sen x=0.",
+      "Pode perder soluções com sen x=0.",
       "Não há qualquer cuidado.",
       "A tangente deixa de existir sempre."
     ],
@@ -5491,7 +5491,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Compreensão",
     "focus": "Funções seno e cosseno",
-    "q": "No modelo y=A sin(Bx+C)+D, |A| representa...",
+    "q": "No modelo periódico y=A sen(Bx+C)+D, com A≠0 e B≠0, o que representa |A|?",
     "o": [
       "o período.",
       "a amplitude.",
@@ -5499,7 +5499,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "o valor médio."
     ],
     "a": 1,
-    "sol": "O módulo de A determina a escala vertical.",
+    "sol": "Como o seno percorre [−1,1], o máximo é D+|A| e o mínimo é D−|A|. A amplitude é metade da diferença entre esses extremos, ou seja, |A|.",
     "hyp": "Pode usar A sem módulo quando A<0.",
     "contexts": [
       "exam"
@@ -5520,15 +5520,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Funções seno e cosseno",
-    "q": "Se y=2sin(3x−π)+1, qual é o deslocamento horizontal equivalente?",
+    "q": "Qual é a menor translação horizontal para a direita que transforma o gráfico de y=2 sen(3x)+1 no gráfico de y=2 sen(3x−π)+1?",
     "o": [
       "π para a direita.",
       "π/3 para a direita.",
-      "π/3 para a esquerda.",
-      "1 para cima apenas."
+      "π/6 para a direita.",
+      "2π/3 para a direita."
     ],
     "a": 1,
-    "sol": "3x−π=3(x−π/3), logo deslocamento π/3 para a direita.",
+    "sol": "Como 3x−π=3(x−π/3), transladar π/3 para a direita dá o gráfico. O período fundamental do modelo é 2π/3. Os deslocamentos equivalentes diferem por múltiplos de 2π/3, pelo que π/3 é o menor positivo.",
     "hyp": "Pode usar C diretamente sem dividir por B.",
     "contexts": [
       "exam"
@@ -5554,7 +5554,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "[−1,1].",
       "[−2,2].",
       "[0,2].",
-      "R."
+      "ℝ."
     ],
     "a": 1,
     "sol": "Multiplicar por 2 duplica os valores extremos.",
@@ -5578,7 +5578,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Resolução de triângulos e modelação periódica",
-    "q": "Num triângulo com lados 5,6,7, qual é cos do ângulo C oposto ao lado 7?",
+    "q": "Num triângulo com lados 5, 6 e 7, C é o ângulo oposto ao lado 7. Usa a relação 7²=5²+6²−2×5×6 cos C para calcular cos C.",
     "o": [
       "−1/5",
       "1/5",
@@ -5586,7 +5586,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "1/2"
     ],
     "a": 1,
-    "sol": "49=25+36−60 cosC => 60cosC=12 => cosC=1/5.",
+    "sol": "Efetuando as potências e o produto, 49=25+36−60 cos C. Daqui resulta 60 cos C=12, portanto cos C=1/5.",
     "hyp": "Pode mover termos com sinal errado.",
     "contexts": [
       "exam"
@@ -5607,15 +5607,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Resolução de triângulos e modelação periódica",
-    "q": "Num triângulo com AB=100, A=45°, B=60° e C=75°, a distância AC, oposta a B=60°, é dada por...",
+    "q": "Num triângulo ABC, AB=100 e os ângulos internos em A, B e C medem 45°, 60° e 75°. O quociente entre o comprimento de um lado e o seno do ângulo oposto é constante. Qual é a expressão do comprimento de AC?",
     "o": [
-      "100 sin60°/sin75°",
-      "100 sin75°/sin60°",
-      "100 cos60°/cos75°",
-      "100 tan60°"
+      "100 sen 60°/sen 75°",
+      "100 sen 75°/sen 60°",
+      "100 cos 60°/cos 75°",
+      "100 tg 60°"
     ],
     "a": 0,
-    "sol": "Pela Lei dos Senos, AC/sin60°=100/sin75°.",
+    "sol": "O lado AC é oposto ao ângulo de 60° e o lado AB é oposto ao ângulo de 75°. Portanto, AC/sen 60°=100/sen 75° e AC=100 sen 60°/sen 75°.",
     "hyp": "Pode inverter a proporção.",
     "contexts": [
       "exam"
@@ -5636,15 +5636,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Resolução de triângulos e modelação periódica",
-    "q": "A Lei dos Senos afirma que, num triângulo ABC...",
+    "q": "Num triângulo acutângulo ABC, a, b e c são os comprimentos dos lados opostos aos ângulos A, B e C. Ao exprimir a altura a partir de C pelos ângulos A e B, e a altura a partir de A pelos ângulos B e C, que relação se obtém?",
     "o": [
       "a cos A=b cos B=c cos C.",
       "a²+b²=c² sempre.",
-      "a/sin A=b/sin B=c/sin C.",
-      "sin A+sin B=sin C."
+      "a/sen A=b/sen B=c/sen C.",
+      "sen A+sen B=sen C."
     ],
     "a": 2,
-    "sol": "Lados são proporcionais aos senos dos ângulos opostos.",
+    "sol": "A altura a partir de C é b sen A ou a sen B, logo a/sen A=b/sen B. A altura a partir de A é c sen B ou b sen C, logo b/sen B=c/sen C. Assim, a/sen A=b/sen B=c/sen C.",
     "hyp": "Pode confundir com Lei dos Cossenos.",
     "contexts": [
       "exam"
@@ -5665,7 +5665,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Relações e identidades trigonométricas fundamentais",
-    "q": "Se tan x=−√3 e x está no 2.º quadrante, então cos x=",
+    "q": "Se tg x=−√3 e x está no 2.º quadrante, então cos x=",
     "o": [
       "1/2",
       "−1/2",
@@ -5694,7 +5694,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Relações e identidades trigonométricas fundamentais",
-    "q": "A identidade sin²x+cos²x=1 implica que o ponto (cos x,sin x)...",
+    "q": "A identidade sen² x+cos² x=1 implica que o ponto (cos x,sen x)...",
     "o": [
       "pertence ao círculo unitário.",
       "pertence sempre à reta y=x.",
@@ -5723,7 +5723,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Relações e identidades trigonométricas fundamentais",
-    "q": "Se cos x=−3/5 e x está no 2.º quadrante, então sin x=",
+    "q": "Se cos x=−3/5 e x está no 2.º quadrante, então sen x=",
     "o": [
       "−4/5",
       "3/4",
@@ -5731,7 +5731,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "−3/4"
     ],
     "a": 2,
-    "sol": "sin²x=1−9/25=16/25 e no 2.º quadrante sin>0.",
+    "sol": "sen² x=1−9/25=16/25 e no 2.º quadrante sen>0.",
     "hyp": "Pode errar o sinal.",
     "contexts": [
       "exam"
@@ -5781,7 +5781,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Plano de Argand-Gauss e interpretação geométrica",
-    "q": "A condição |z−1|=|z+1| é equivalente a...",
+    "q": "Se conj designa o conjugado, a condição |z−(1+i)|=|conj(z)+(1+i)| é equivalente a...",
     "o": [
       "Re(z)=0.",
       "Im(z)=0.",
@@ -5789,7 +5789,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "Re(z)=1."
     ],
     "a": 0,
-    "sol": "É a mediatriz dos pontos 1 e −1: o eixo imaginário.",
+    "sol": "O módulo do conjugado é igual ao módulo original, pelo que |conj(z)+(1+i)|=|z+(1−i)|. Os afixos 1+i e −1+i têm a mesma ordenada e são simétricos em relação ao eixo imaginário. A sua mediatriz é Re(z)=0.",
     "hyp": "Pode escolher o eixo que contém ±1.",
     "contexts": [
       "exam"
@@ -5955,7 +5955,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Forma algébrica, parte real/imaginária e igualdade",
-    "q": "Se z=(m+2)+(m²−4)i é imaginário puro (admitindo zero), então...",
+    "q": "Seja m real. Para que valor de m tem z=(m+2)+(m²−4)i parte real nula?",
     "o": [
       "m=2.",
       "m=−2.",
@@ -5963,7 +5963,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "m=0."
     ],
     "a": 1,
-    "sol": "Parte real zero implica m=−2; nesse caso z=0, que satisfaz a condição admitindo zero.",
+    "sol": "A parte real é m+2, pelo que m+2=0 equivale a m=−2. Para esse valor também se obtém m²−4=0, logo z=0.",
     "hyp": "Pode não verificar ambas as condições.",
     "contexts": [
       "exam"
@@ -6042,15 +6042,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Forma trigonométrica, módulo e argumento",
-    "q": "A condição arg(z)=π/2, z≠0, descreve...",
+    "q": "Em que semieixo está o afixo de um complexo não nulo com argumento π/2?",
     "o": [
-      "todo o eixo imaginário.",
+      "o semieixo imaginário negativo.",
       "o semieixo imaginário positivo.",
       "o semieixo real positivo.",
-      "uma circunferência."
+      "o semieixo real negativo."
     ],
     "a": 1,
-    "sol": "Argumento π/2 fixa a direção positiva de Oy.",
+    "sol": "O ponto tem abcissa r cos(π/2)=0 e ordenada r sin(π/2)=r>0, onde r é o módulo.",
     "hyp": "Pode incluir a direção oposta.",
     "contexts": [
       "exam"
@@ -6158,7 +6158,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Operações na forma algébrica",
-    "q": "Para dividir por c+di≠0, é útil multiplicar por...",
+    "q": "Para tornar real o denominador c+di≠0 de um quociente, por que número convém multiplicar o numerador e o denominador?",
     "o": [
       "o oposto −c−di.",
       "i.",
@@ -6166,7 +6166,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "o conjugado c−di."
     ],
     "a": 3,
-    "sol": "O produto com o conjugado torna o denominador real.",
+    "sol": "Multiplica-se pelo conjugado c−di, que é não nulo. O denominador passa a (c+di)(c−di)=c²+d².",
     "hyp": "Pode usar o oposto, que não elimina i.",
     "contexts": [
       "exam"
@@ -6216,7 +6216,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
-    "q": "Dividir por um complexo de módulo 2 e argumento π/4 corresponde a...",
+    "q": "No plano complexo, com centro das transformações na origem, a que corresponde dividir por um complexo de módulo 2 e argumento π/4?",
     "o": [
       "dilatar por 2 e rodar π/4.",
       "dilatar por 1/2 e rodar −π/4.",
@@ -6224,7 +6224,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "refletir no eixo real."
     ],
     "a": 1,
-    "sol": "No quociente, divide-se o módulo e subtrai-se o argumento.",
+    "sol": "Dividir por esse número reduz todas as distâncias à origem a metade e subtrai π/4 aos argumentos dos pontos diferentes da origem.",
     "hyp": "Pode aplicar as regras da multiplicação.",
     "contexts": [
       "exam"
@@ -6245,7 +6245,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
-    "q": "Se z^n=w, com w de módulo R>0, então cada raiz z tem módulo...",
+    "q": "Se z^n=w, com n inteiro positivo e |w|=R>0, então cada raiz z tem módulo...",
     "o": [
       "R^n.",
       "R/n.",
@@ -6253,7 +6253,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "nR."
     ],
     "a": 2,
-    "sol": "Ao elevar a n, o módulo fica r^n=R.",
+    "sol": "Tomando módulos na equação obtém-se |z|^n=R. Logo |z|=R^(1/n).",
     "hyp": "Pode dividir o módulo por n.",
     "contexts": [
       "exam"
@@ -6303,7 +6303,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Unidade imaginária, conjunto C e equações de 2.º grau",
-    "q": "Se uma equação real de 2.º grau tem uma raiz 2+3i, a outra é...",
+    "q": "Uma equação do 2.º grau com coeficientes reais tem, em ℂ, a raiz 2+3i. Qual é a outra raiz?",
     "o": [
       "−2+3i.",
       "−2−3i.",
@@ -6361,7 +6361,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Equações exponenciais/logarítmicas e problemas",
-    "q": "Resolve ln(x−1)+ln(x+1)=ln8.",
+    "q": "Resolve em ℝ a equação ln(x−1)+ln(x+1)=ln(8).",
     "o": [
       "x=±3.",
       "x=3.",
@@ -6369,7 +6369,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "x=√8."
     ],
     "a": 1,
-    "sol": "Domínio x>1. Condensando:ln[(x−1)(x+1)]=ln8 =>x²−1=8 =>x=±3; só x=3 pertence ao domínio.",
+    "sol": "Os dois argumentos são positivos quando x>1. Pela propriedade do produto, (x−1)(x+1)=8. Então x²=9. Entre −3 e 3, o único valor no domínio é x=3.",
     "hyp": "Pode aceitar a raiz negativa sem verificar o domínio.",
     "contexts": [
       "exam"
@@ -6395,10 +6395,10 @@ export const VNEXT_EXAM_QUESTIONS=[
       "t>ln(1,5)/ln(1,04).",
       "t<ln(1,5)/ln(1,04).",
       "t>1,5/1,04.",
-      "t>ln1,04/ln1,5."
+      "t>ln(1,04)/ln(1,5)."
     ],
     "a": 0,
-    "sol": "1,04^t>1,5; como a base é maior que 1, t>log_1,04(1,5).",
+    "sol": "Dividindo por 2000, obtém-se (1,04)^t>1,5. Como ln é crescente, t·ln(1,04)>ln(1,5). Dividindo por ln(1,04)>0, obtém-se t>ln(1,5)/ln(1,04).",
     "hyp": "Pode inverter a desigualdade ou a razão de logs.",
     "contexts": [
       "exam"
@@ -6419,7 +6419,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Equações exponenciais/logarítmicas e problemas",
-    "q": "Resolve log_5(x−1)=1.",
+    "q": "Resolve log₅(x−1)=1.",
     "o": [
       "x=5.",
       "x=1.",
@@ -6427,7 +6427,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "x=6."
     ],
     "a": 3,
-    "sol": "x−1=5 =>x=6; o domínio x>1 é respeitado.",
+    "sol": "O domínio exige x>1. Pela definição de logaritmo, x−1=5¹=5, portanto x=6. Esse valor pertence ao domínio.",
     "hyp": "Pode esquecer recompor x.",
     "contexts": [
       "exam"
@@ -6477,15 +6477,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Função exponencial",
-    "q": "Se g(x)=3·2^x, então g(x+1)/g(x)=...",
+    "q": "Se g(x)=3·2^x, para que valor de k se tem g(x+k)=4g(x), qualquer que seja x?",
     "o": [
       "2.",
       "3.",
       "6.",
-      "x+1."
+      "4."
     ],
     "a": 0,
-    "sol": "O fator 3 cancela e a razão exponencial é 2.",
+    "sol": "A razão g(x+k)/g(x)=2^k. A condição pede 2^k=4=2². Pela injetividade da exponencial de base 2, k=2.",
     "hyp": "Pode multiplicar os fatores 3 e 2.",
     "contexts": [
       "exam"
@@ -6506,7 +6506,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Função exponencial",
-    "q": "A identidade a^(x+y)=...",
+    "q": "Para a>0 e quaisquer x,y∈ℝ, qual é a expressão equivalente a a^(x+y)?",
     "o": [
       "a^x+a^y.",
       "a^(xy).",
@@ -6593,7 +6593,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Função inversa e raízes",
-    "q": "A inversa da exponencial f(x)=a^x chama-se...",
+    "q": "Para a>0 e a≠1, como se chama a função inversa de f(x)=a^x?",
     "o": [
       "função raiz quadrada.",
       "função logarítmica de base a.",
@@ -6601,7 +6601,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "função afim."
     ],
     "a": 1,
-    "sol": "O logaritmo resolve o expoente necessário para obter um dado valor positivo.",
+    "sol": "Se y=a^x, então y>0 e a definição de logaritmo dá x=logₐ(y). Assim, a inversa é a função logarítmica de base a.",
     "hyp": "Pode confundir inversa funcional com recíproco.",
     "contexts": [
       "exam"
@@ -6622,12 +6622,12 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Função logarítmica e propriedades",
-    "q": "2log_3 x pode escrever-se como...",
+    "q": "Para x>0, qual é a expressão equivalente a 2·log₃(x)?",
     "o": [
-      "log_3(2x).",
-      "log_3(x+2).",
-      "log_3(x²).",
-      "(log_3 x)² apenas."
+      "log₃(2x).",
+      "log₃(x+2).",
+      "log₃(x²).",
+      "(log₃(x))²."
     ],
     "a": 2,
     "sol": "O coeficiente passa a expoente do argumento.",
@@ -6651,15 +6651,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Interpretação",
     "focus": "Função logarítmica e propriedades",
-    "q": "Os logaritmos são úteis em modelação exponencial porque...",
+    "q": "Por que razão aplicar ln aos dois membros pode ajudar a resolver uma equação com a incógnita no expoente?",
     "o": [
-      "transformam expoentes em fatores e permitem isolar expoentes desconhecidos.",
-      "eliminam qualquer necessidade de domínio.",
-      "transformam sempre exponenciais em funções constantes.",
-      "só funcionam para números inteiros."
+      "Porque passa o expoente a fator multiplicativo.",
+      "Porque transforma a base no expoente da incógnita.",
+      "Porque permite cancelar a base com o expoente.",
+      "Porque transforma o expoente numa parcela aditiva."
     ],
     "a": 0,
-    "sol": "A identidade log(a^x)=x log a permite resolver tempos/taxas em modelos exponenciais.",
+    "sol": "Para a>0, ln(a^x)=x·ln(a). A incógnita passa a ser um fator e, se a≠1, pode isolar-se por divisão por ln(a).",
     "hyp": "Pode pensar que logaritmo é apenas notação calculadora.",
     "contexts": [
       "exam"
@@ -6680,12 +6680,12 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Função logarítmica e propriedades",
-    "q": "log_a(x^k), para x>0, é...",
+    "q": "Para a>0, a≠1 e x>0, qual é a expressão equivalente a logₐ(x^k), para qualquer k∈ℝ?",
     "o": [
-      "k log_a x.",
-      "(log_a x)^k.",
-      "log_a x+k.",
-      "log_a(kx)."
+      "k·logₐ(x).",
+      "(logₐ(x))^k.",
+      "logₐ(x)+k.",
+      "logₐ(kx)."
     ],
     "a": 0,
     "sol": "O expoente passa a fator multiplicativo.",
@@ -6854,7 +6854,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Estudo de funções, modelação e otimização",
-    "q": "Se f''(a)>0 e f'(a)=0, então a é, sob condições usuais...",
+    "q": "Supondo que f″ é contínua numa vizinhança de a, que tipo de ponto é a se f′(a)=0 e f″(a)>0?",
     "o": [
       "ponto de mínimo local.",
       "ponto de máximo local.",
@@ -6862,7 +6862,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "assíntota vertical."
     ],
     "a": 0,
-    "sol": "Segunda derivada positiva indica convexidade local.",
+    "sol": "Como f″ é contínua e positiva em a, é positiva perto de a, onde f′ é crescente. Como f′(a)=0, f′ é negativa à esquerda e positiva à direita de a. Portanto, f tem um mínimo local em a.",
     "hyp": "Pode inverter o teste da segunda derivada.",
     "contexts": [
       "exam"
@@ -6941,7 +6941,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Função composta e domínio",
-    "q": "Se f(x)=√x e g(x)=x−2, qual é o domínio de f∘g?",
+    "q": "Considera f(x)=ln(x+1) e g(x)=√(x−2). Qual é o domínio de f∘g?",
     "o": [
       "]−∞,2].",
       "R.",
@@ -6949,7 +6949,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "]2,+∞[."
     ],
     "a": 2,
-    "sol": "(f∘g)(x)=√(x−2) exige x−2≥0; logo, o domínio é [2,+∞[.",
+    "sol": "A raiz exige x≥2. Para esses x, √(x−2)≥0, pelo que √(x−2)+1>0 e o logaritmo está definido. Logo, o domínio é [2, +∞[.",
     "hyp": "Pode impor x−2>0 e excluir incorretamente x=2, ou inverter a desigualdade.",
     "contexts": [
       "exam"
@@ -7028,7 +7028,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Número e e derivada da exponencial",
-    "q": "Se f(x)=e^{g(x)}, então f'(x)=",
+    "q": "Se g é derivável em x e f(x)=e^(g(x)), qual é a expressão de f′(x)?",
     "o": [
       "e^{g'(x)}.",
       "g(x)e^{g(x)−1}.",
@@ -7065,7 +7065,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "1/(x+1)−1/(x−1)."
     ],
     "a": 3,
-    "sol": "Primeiro, ln((x+1)/(x−1))=ln(x+1)−ln(x−1). Derivando no domínio, obtém-se 1/(x+1)−1/(x−1).",
+    "sol": "O quociente u=(x+1)/(x−1) é positivo para x<−1 ou x>1. A sua derivada é u′=−2/(x−1)² e a de ln(u) é u′/u=−2/(x²−1). Esta expressão equivale a 1/(x+1)−1/(x−1) em todo o domínio.",
     "hyp": "Pode trocar o sinal da diferença.",
     "contexts": [
       "exam"
@@ -7086,12 +7086,12 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Derivadas de logaritmos, trigonométricas e potências",
-    "q": "Uma oscilação é y(t)=5sin(2t). A velocidade y'(t) é...",
+    "q": "Uma oscilação é y(t)=5sen(2t). A velocidade y'(t) é...",
     "o": [
       "10cos(2t).",
       "5cos(2t).",
-      "10sin(2t).",
-      "−10sin(2t)."
+      "10sen(2t).",
+      "−10sen(2t)."
     ],
     "a": 0,
     "sol": "Deriva-se seno e multiplica-se pela frequência angular 2.",
@@ -7123,7 +7123,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "2."
     ],
     "a": 0,
-    "sol": "Pela cadeia: (2)/(2x)=1/x; também ln(2x)=ln2+lnx.",
+    "sol": "Para x>0, a regra da cadeia dá a derivada de ln(2x) como 2/(2x)=1/x. Também se pode usar ln(2x)=ln(2)+ln(x).",
     "hyp": "Pode esquecer simplificar o fator 2.",
     "contexts": [
       "exam"
@@ -7144,15 +7144,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Operações entre derivadas e regra da cadeia",
-    "q": "A derivada de sin(e^x) é...",
+    "q": "A derivada de sen(e^x) é...",
     "o": [
       "cos(e^x).",
       "e^x cos(e^x).",
-      "e^x sin(e^x).",
-      "cos x·e^x."
+      "e^x sen(e^x).",
+      "cos(x)·e^x."
     ],
     "a": 1,
-    "sol": "Pela regra da cadeia, a derivada de sin(e^x) é cos(e^x) vezes a derivada de e^x. Logo, é e^x cos(e^x).",
+    "sol": "Pela regra da cadeia, a derivada de sen(e^x) é cos(e^x) vezes a derivada de e^x. Logo, é e^x cos(e^x).",
     "hyp": "Pode esquecer a derivada interna.",
     "contexts": [
       "exam"
@@ -7202,15 +7202,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Operações entre derivadas e regra da cadeia",
-    "q": "A derivada de x cos x é...",
+    "q": "A derivada de x cos(x) é...",
     "o": [
-      "cos x−x sin x.",
-      "−sin x.",
-      "x sin x.",
-      "cos x+x sin x."
+      "cos(x)−x sen(x).",
+      "−sen(x).",
+      "x sen(x).",
+      "cos(x)+x sen(x)."
     ],
     "a": 0,
-    "sol": "Pela regra do produto, (x cos x)'=1·cos x+x(−sin x)=cos x−x sin x.",
+    "sol": "Pela regra do produto, (x cos(x))'=1·cos(x)+x(−sen(x))=cos(x)−x sen(x).",
     "hyp": "Pode perder o sinal do cosseno.",
     "contexts": [
       "exam"
@@ -7260,7 +7260,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Derivabilidade e relação com continuidade",
-    "q": "Se f é derivável em a, então f(a+h)=f(a)+f'(a)h+o(h) exprime...",
+    "q": "Se f é derivável em a, então lim(h→0) [f(a+h)−f(a)−f′(a)h]/h=0. Que propriedade de f exprime este limite?",
     "o": [
       "uma identidade global exata.",
       "a definição de continuidade apenas.",
@@ -7268,7 +7268,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "a aproximação linear local."
     ],
     "a": 3,
-    "sol": "A derivabilidade equivale a admitir uma aproximação linear de primeira ordem.",
+    "sol": "Pela definição de derivada, [f(a+h)−f(a)]/h tende para f′(a). Assim, o erro da aproximação de f(a+h) por f(a)+f′(a)h, dividido por h, tende para 0. A expressão f(a)+f′(a)h é a ordenada da reta tangente na abcissa a+h.",
     "hyp": "Pode tratar a aproximação como igualdade exata para qualquer h.",
     "contexts": [
       "exam"
@@ -7318,12 +7318,12 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Monotonia, extremos e estudo global de funções",
-    "q": "Para f(x)=x²−4x em [0,5], os candidatos a extremos absolutos são...",
+    "q": "Para f(x)=x²−4x no intervalo [0, 5], que valores de x são candidatos a pontos de extremo absoluto?",
     "o": [
       "x=2 apenas.",
       "x=0 e 5 apenas.",
-      "x=0,4,5.",
-      "x=0,2,5."
+      "x=0, x=4 e x=5.",
+      "x=0, x=2 e x=5."
     ],
     "a": 3,
     "sol": "f'=2x−4=0 dá 2, além das extremidades 0 e 5.",
@@ -7492,15 +7492,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Operações com funções contínuas",
-    "q": "A função tan x=sinx/cosx é contínua onde...",
+    "q": "Qual é o conjunto de continuidade de tg(x)=sen(x)/cos(x)?",
     "o": [
-      "sinx≠0.",
+      "sen(x)≠0.",
       "x≠0.",
       "todo R.",
-      "cosx≠0."
+      "cos(x)≠0."
     ],
     "a": 3,
-    "sol": "É quociente de contínuas com denominador não nulo.",
+    "sol": "As funções seno e cosseno são contínuas em ℝ. O seu quociente está definido e é contínuo nos pontos em que cos(x)≠0.",
     "hyp": "Pode excluir zeros do numerador.",
     "contexts": [
       "exam"
@@ -7550,7 +7550,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Operações com funções contínuas",
-    "q": "A função (x²+1)/(x−3) é contínua em...",
+    "q": "Qual é o maior conjunto em que f(x)=(x²+1)/(x−3) é contínua?",
     "o": [
       "R.",
       "R\\{−3}.",
@@ -7608,7 +7608,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Distribuições de amostragem / comportamento amostral",
-    "q": "A correção finita √[(N−n)/(N−1)] é...",
+    "q": "Numa população de tamanho N>1 e para 1≤n≤N, considera o fator √[(N−n)/(N−1)] que corrige o erro padrão ao amostrar sem reposição. Que afirmação é sempre verdadeira sobre esse fator?",
     "o": [
       "sempre maior que 1.",
       "menor ou igual a 1.",
@@ -7637,7 +7637,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Distribuições de amostragem / comportamento amostral",
-    "q": "O erro padrão teórico de p̂ é...",
+    "q": "Numa amostra de n observações independentes, cada uma com probabilidade p de sucesso, qual é o erro padrão teórico da proporção amostral p̂?",
     "o": [
       "p(1−p)/n.",
       "√p/n.",
@@ -7666,12 +7666,12 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Compreensão",
     "focus": "Estimação de parâmetros",
-    "q": "Um estimador pode ser função de...",
+    "q": "Um estimador calculado a partir dos dados, como a média amostral, pode depender de que informação?",
     "o": [
-      "do parâmetro desconhecido apenas.",
-      "apenas n.",
+      "do valor verdadeiro do parâmetro desconhecido.",
+      "dos dados que não foram observados.",
       "todos os dados da amostra.",
-      "nenhuma observação."
+      "da média populacional que se quer estimar."
     ],
     "a": 2,
     "sol": "Estatísticas são funções dos dados observados.",
@@ -7782,7 +7782,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Raciocínio inferencial e amostragem",
-    "q": "Se duas estratégias são não enviesadas mas A tem menor variância que B, A é...",
+    "q": "Duas estratégias produzem estimadores não enviesados do mesmo parâmetro. Se o estimador da estratégia A tem menor variância do que o da estratégia B, como se compara a precisão das estimativas?",
     "o": [
       "mais precisa.",
       "mais enviesada.",
@@ -7927,7 +7927,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Teorema Limite Central em contexto introdutório",
-    "q": "Aproximadamente 95% está entre...",
+    "q": "Numa distribuição normal de média μ e desvio padrão σ, entre que limites se encontra aproximadamente 95% da probabilidade?",
     "o": [
       "μ−σ e μ+σ.",
       "μ−3σ e μ+3σ.",
@@ -8022,7 +8022,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "2."
     ],
     "a": 3,
-    "sol": "cos muda de sinal emπ/2; área=∫_0^{π/2}cosx dx−∫_{π/2}^π cosx dx=1+1=2.",
+    "sol": "O cosseno muda de sinal em π/2. A área é ∫_0^{π/2} cos x dx−∫_{π/2}^π cos x dx=(1−0)−(0−1)=2.",
     "hyp": "Pode usar a integral algébrica 0.",
     "contexts": [
       "exam"
@@ -8130,12 +8130,12 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Modelação",
     "focus": "Integral definido",
-    "q": "A distância total percorrida quando v muda de sinal é...",
+    "q": "A velocidade v(t) de um móvel muda de sinal entre os instantes a e b, com a<b. Que expressão dá a distância total percorrida nesse intervalo?",
     "o": [
-      "|∫v(t)dt| sempre.",
-      "∫|v(t)|dt.",
-      "∫v'(t)dt.",
-      "∫t v(t)dt."
+      "|∫_a^b v(t) dt|.",
+      "∫_a^b |v(t)| dt.",
+      "∫_a^b v′(t) dt.",
+      "∫_a^b t v(t) dt."
     ],
     "a": 1,
     "sol": "O módulo elimina cancelamentos de direção.",
@@ -8283,7 +8283,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "(x+1)e^{x²+2x}+C."
     ],
     "a": 1,
-    "sol": "Falta metade da derivada interna.",
+    "sol": "A derivada de x²+2x é 2(x+1). Assim, pela regra da cadeia, a derivada de (1/2)e^{x²+2x} é (x+1)e^{x²+2x}. A expressão geral das primitivas é (1/2)e^{x²+2x}+C.",
     "hyp": "Pode esquecer o fator 1/2.",
     "contexts": [
       "exam"
@@ -8370,7 +8370,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "2."
     ],
     "a": 2,
-    "sol": "Primitiva (t−2)²/2? Melhor: t²/2−2t; em 3 dá 4,5−6=−1,5; em 1 dá 0,5−2=−1,5; diferença 0.",
+    "sol": "Como uma primitiva de t−2 é (t−2)²/2, pela fórmula de Barrow A(3)=(3−2)²/2−(1−2)²/2=1/2−1/2=0.",
     "hyp": "Pode confundir derivada e valor acumulado.",
     "contexts": [
       "exam"
@@ -8536,7 +8536,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Aplicação",
     "focus": "Modelação e aplicações",
-    "q": "Se P tem 1.ª linha (0,8; 0,3), 2.ª linha (0,2; 0,7) e x_0=(100,0)^T, então x_1=",
+    "q": "Uma população ocupa dois estados. Em cada passo, a distribuição evolui segundo xₙ₊₁=Pxₙ. A matriz P tem linhas (0,8; 0,3) e (0,2; 0,7). Se x₀=(100,0)ᵀ, qual é o vetor x₁?",
     "o": [
       "(30,70)^T.",
       "(80,20)^T.",
@@ -8594,7 +8594,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Modelação e aplicações",
-    "q": "Se A=[[2,1],[3,4]] dá unidades de recursos por produto e q=(5,2)^T, então Aq=(12,23)^T. A primeira componente representa...",
+    "q": "A matriz A=[[2,1],[3,4]] indica as unidades de cada recurso (linhas) necessárias por unidade de cada produto (colunas). Para o vetor de produção q=(5,2)ᵀ, obtém-se Aq=(12,23)ᵀ. O que representa a primeira componente?",
     "o": [
       "produção total do produto 1.",
       "custo do recurso 1.",
@@ -8660,7 +8660,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "[[3,0],[0,2]]."
     ],
     "a": 0,
-    "sol": "O produto das diagonais correspondentes fica 1.",
+    "sol": "O produto das duas matrizes diagonais tem entradas diagonais 2·(1/2)=1 e 3·(1/3)=1 e entradas nulas fora da diagonal. Resulta a matriz identidade, o que confirma a inversa.",
     "hyp": "Pode trocar ou mudar sinais sem inverter.",
     "contexts": [
       "exam"
@@ -8797,12 +8797,12 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Transformações geométricas com matrizes",
-    "q": "Uma reflexão axial preserva...",
+    "q": "Qual das afirmações descreve corretamente o efeito de uma reflexão axial nas distâncias e na orientação do plano?",
     "o": [
-      "apenas distâncias à origem e não entre pontos.",
-      "sempre as coordenadas.",
-      "a orientação.",
-      "distâncias, mas inverte a orientação."
+      "Preserva as distâncias à origem, mas altera as distâncias entre pontos.",
+      "Preserva as distâncias e a posição de todos os pontos.",
+      "Preserva as distâncias e mantém a orientação.",
+      "Preserva as distâncias e inverte a orientação."
     ],
     "a": 3,
     "sol": "Reflexões são isometrias, mas trocam orientação.",
@@ -9037,7 +9037,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "necessariamente iguais."
     ],
     "a": 2,
-    "sol": "A independência preserva-se ao complementar um dos acontecimentos.",
+    "sol": "P(A∩Bᶜ)=P(A)−P(A∩B)=P(A)−P(A)P(B)=P(A)(1−P(B))=P(A)P(Bᶜ). Logo, A e Bᶜ são independentes.",
     "hyp": "Pode achar que complementar destrói independência.",
     "contexts": [
       "exam"
@@ -9058,7 +9058,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Aplicação",
     "focus": "Fenómeno aleatório, espaço de resultados e acontecimentos",
-    "q": "Ao lançar duas moedas, um espaço de resultados ordenado pode ser...",
+    "q": "Lançam-se duas moedas. Registam-se pela ordem da primeira e da segunda moeda as faces observadas, usando C para cara e K para coroa. Qual é o espaço de resultados deste registo?",
     "o": [
       "{C,K}.",
       "{CC,KK}.",
@@ -9290,7 +9290,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Regra do produto e árvores de probabilidade",
-    "q": "Uma urna tem 3 vermelhas e 2 azuis. Retira-se uma bola, repõe-se e retira-se outra. P(VV)=...",
+    "q": "Uma urna tem 3 bolas vermelhas e 2 azuis. Retira-se ao acaso uma bola, repõe-se a bola e retira-se outra ao acaso. Qual é a probabilidade de ambas serem vermelhas?",
     "o": [
       "3/5.",
       "6/25.",
@@ -9298,7 +9298,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "3/10."
     ],
     "a": 2,
-    "sol": "Com reposição, P(V)=3/5 em ambas; (3/5)^2=9/25.",
+    "sol": "Com reposição, a probabilidade de sair uma bola vermelha é 3/5 em cada extração e as duas extrações são independentes. Assim, a probabilidade pedida é (3/5)²=9/25.",
     "hyp": "Pode usar 3/5×2/5.",
     "contexts": [
       "exam"
@@ -9319,7 +9319,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Probabilidade e propriedades elementares",
-    "q": "Se P(A)=0,7 e P(B)=0,6, então P(A∩B) é pelo menos...",
+    "q": "Se P(A)=0,7 e P(B)=0,6, qual é o menor valor possível de P(A∩B)?",
     "o": [
       "0.",
       "0,1.",
@@ -9327,7 +9327,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "0,6."
     ],
     "a": 2,
-    "sol": "P(A∪B)≤1 =>0,7+0,6−P(A∩B)≤1, logo P(A∩B)≥0,3.",
+    "sol": "Como P(A∪B)=1,3−P(A∩B)≤1, vale P(A∩B)≥0,3. O valor 0,3 é possível, por exemplo, com probabilidades 0,4 para apenas A, 0,3 para apenas B e 0,3 para ambos.",
     "hyp": "Pode assumir interseção zero apesar de a soma ultrapassar 1.",
     "contexts": [
       "exam"
@@ -9406,7 +9406,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Probabilidade total e problemas em cadeia",
-    "q": "Num exemplo com prevalência de 1%, sensibilidade de 99% e 5% de falsos positivos, P(doença|positivo) é cerca de 16,7%. Isto mostra que uma elevada sensibilidade do teste...",
+    "q": "Uma doença afeta 1% da população. Um teste dá positivo em 99% das pessoas com a doença e em 5% das pessoas sem a doença. A probabilidade de ter a doença sabendo que o teste deu positivo é cerca de 16,7%. O que mostra este resultado sobre uma elevada sensibilidade do teste?",
     "o": [
       "não implica, por si só, elevada P(doença|positivo).",
       "garante posterior superior a 90%.",
@@ -9414,7 +9414,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "elimina falsos positivos."
     ],
     "a": 0,
-    "sol": "A prevalência e a taxa de falsos positivos também influenciam fortemente o posterior.",
+    "sol": "A probabilidade de doença e teste positivo é 0,01×0,99=0,0099. A de teste positivo é 0,0099+0,99×0,05=0,0594. O quociente 0,0099/0,0594≈0,167 depende também da prevalência da doença e da taxa de positivos entre as pessoas sem a doença.",
     "hyp": "Pode ignorar a taxa-base.",
     "contexts": [
       "exam"
@@ -9493,7 +9493,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Aplicação",
     "focus": "Variáveis aleatórias discretas e função massa",
-    "q": "Para X=número de caras em 2 lançamentos equilibrados, P(X=1)=...",
+    "q": "Lança-se uma moeda equilibrada duas vezes, de forma independente, e X conta o número de caras. Quanto vale P(X=1)?",
     "o": [
       "1/4.",
       "1/2.",
@@ -9501,7 +9501,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "1."
     ],
     "a": 1,
-    "sol": "CK ou KC:2 de 4 resultados equiprováveis.",
+    "sol": "Há quatro pares ordenados equiprováveis. Ocorre exatamente uma cara nos pares cara–coroa e coroa–cara, pelo que P(X=1)=2/4=1/2.",
     "hyp": "Pode contar apenas uma ordem.",
     "contexts": [
       "exam"
@@ -9551,7 +9551,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Variáveis aleatórias discretas e função massa",
-    "q": "O valor esperado E(X) de uma variável discreta é...",
+    "q": "Como se calcula E(X) para uma variável aleatória X com um conjunto finito de valores possíveis?",
     "o": [
       "ΣP(X=x).",
       "Σx.",
@@ -9580,7 +9580,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Método da bisseção, aproximação e erro",
-    "q": "Se f(a)<0<f(b) e f(m)=−0,1, então...",
+    "q": "Numa iteração da bisseção, o intervalo é [a,b] e o seu ponto médio é m. Se f(a)<0<f(b) e f(m)=−0,1, qual é a atualização correta?",
     "o": [
       "substituímos b por m.",
       "terminamos.",
@@ -9588,7 +9588,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "trocamos a e b."
     ],
     "a": 2,
-    "sol": "m tem o mesmo sinal de a, logo o novo extremo esquerdo é m.",
+    "sol": "Os valores f(m) e f(a) são negativos e f(b) é positivo. Mantém-se o subintervalo [m,b], onde f continua a ter sinais opostos nos extremos.",
     "hyp": "Pode escolher o extremo oposto.",
     "contexts": [
       "exam"
@@ -9638,7 +9638,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Método da bisseção, aproximação e erro",
-    "q": "Após n bisseções, a amplitude é...",
+    "q": "O intervalo inicial tem amplitude L₀. Depois de n iterações do método da bisseção que reduzem o intervalo a metade, qual é a sua amplitude?",
     "o": [
       "L0/n.",
       "2^nL0.",
@@ -9812,15 +9812,15 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Compreensão",
     "focus": "Método de Newton-Raphson, aproximação e análise de adequação",
-    "q": "Geometricamente, x_{n+1} é...",
+    "q": "No método de Newton, se f′(xₙ)≠0, como se determina geometricamente a aproximação xₙ₊₁?",
     "o": [
-      "o ponto médio de x_n e f(x_n).",
-      "a ordenada da tangente.",
-      "a interseção com Ox da tangente em (x_n,f(x_n)).",
-      "a derivada em x_n."
+      "O ponto médio entre xₙ e a ordenada f(xₙ).",
+      "A ordenada da interseção da tangente com Oy.",
+      "A abcissa da interseção da tangente com Ox.",
+      "O declive da tangente no ponto de abcissa xₙ."
     ],
     "a": 2,
-    "sol": "É exatamente a construção geométrica do método.",
+    "sol": "Traça-se a tangente ao gráfico no ponto (xₙ,f(xₙ)). No ponto em que a tangente corta o eixo Ox, a ordenada é zero e a abcissa é a aproximação seguinte xₙ₊₁.",
     "hyp": "Pode confundir abcissa e ordenada.",
     "contexts": [
       "exam"

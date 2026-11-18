@@ -44,7 +44,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "O grau do resto R na divisão por um divisor de grau 2 deve ser...",
+      "q": "Na divisão euclidiana por um polinómio de grau 2, o que se pode afirmar sobre o grau do resto quando este é não nulo?",
       "o": [
         "igual a 2.",
         "inferior a 2.",
@@ -52,7 +52,7 @@
         "sempre 0."
       ],
       "a": 1,
-      "sol": "O resto tem grau estritamente inferior ao do divisor.",
+      "sol": "A divisão euclidiana termina quando o resto é nulo ou tem grau menor do que o divisor. Logo, um resto não nulo tem grau inferior a 2.",
       "hyp": "Pode usar grau igual ao divisor.",
       "contexts": [
         "mission",
@@ -79,7 +79,7 @@
         "de grau 2."
       ],
       "a": 2,
-      "sol": "O divisor tem grau 1, logo o resto tem grau inferior a 1.",
+      "sol": "O divisor tem grau 1, por isso o resto é nulo ou tem grau 0. Em ambos os casos, representa-se por uma constante.",
       "hyp": "Pode pensar que o resto deve ter o mesmo grau do divisor.",
       "contexts": [
         "mission",
@@ -584,7 +584,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Divide x³−6x²+11x−6 por x−2. O quociente é...",
+      "q": "Divide x³−6x²+11x−2 por x−2. Qual é o quociente da divisão euclidiana?",
       "o": [
         "x²−5x+3.",
         "x²−4x+3.",
@@ -592,7 +592,7 @@
         "x²+4x+3."
       ],
       "a": 1,
-      "sol": "Ruffini com 2 dá 1,−4,3 e resto 0.",
+      "sol": "Ruffini com 2 dá os coeficientes 1,−4,3 e o resto 4. De facto, x³−6x²+11x−2=(x−2)(x²−4x+3)+4. Logo o quociente é x²−4x+3.",
       "hyp": "Pode usar o resultado da divisão por x−1.",
       "contexts": [
         "mission",

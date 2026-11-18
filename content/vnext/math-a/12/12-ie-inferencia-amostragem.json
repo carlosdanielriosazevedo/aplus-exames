@@ -152,7 +152,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "A média de 80 alunos selecionados de uma escola é...",
+      "q": "Uma escola tem 500 alunos. Calcula-se a média das idades de 80 dos alunos da escola que foram selecionados para um estudo. Que tipo de medida é essa média?",
       "o": [
         "um parâmetro populacional necessariamente.",
         "uma estatística amostral.",
@@ -211,10 +211,10 @@
         "vantagem aos indivíduos mais acessíveis.",
         "garantia de média exata.",
         "mais peso aos extremos.",
-        "a cada amostra possível de mesmo tamanho uma chance apropriada de seleção."
+        "a mesma probabilidade a todas as amostras possíveis de tamanho fixado."
       ],
       "a": 3,
-      "sol": "A seleção aleatória reduz mecanismos sistemáticos de preferência.",
+      "sol": "Na amostragem aleatória simples, todas as amostras possíveis de tamanho n são equiprováveis. A definição refere-se à seleção da amostra inteira.",
       "hyp": "Pode confundir aleatoriedade com precisão perfeita.",
       "contexts": [
         "mission",
@@ -1097,7 +1097,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Se duas estratégias são não enviesadas mas A tem menor variância que B, A é...",
+      "q": "Duas estratégias produzem estimadores não enviesados do mesmo parâmetro. Se o estimador da estratégia A tem menor variância do que o da estratégia B, como se compara a precisão das estimativas?",
       "o": [
         "mais precisa.",
         "mais enviesada.",

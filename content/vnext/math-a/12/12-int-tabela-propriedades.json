@@ -44,7 +44,7 @@
       "year": "12.º opcional",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Para constante k, ∫k f(x)dx=",
+      "q": "Para uma constante não nula k, como se escreve a expressão geral ∫k f(x) dx em termos de ∫f(x) dx?",
       "o": [
         "∫f(x)dx/k.",
         "k∫f(x)dx.",
@@ -376,7 +376,7 @@
         "3e^x−2cosx+C."
       ],
       "a": 1,
-      "sol": "Integra-se cada termo.",
+      "sol": "Uma primitiva de e^x é e^x e uma primitiva de cos x é sen x. Pela linearidade, a expressão geral é 3e^x−2 sen x+C.",
       "hyp": "Pode trocar a primitiva do cosseno.",
       "contexts": [
         "mission",
@@ -881,7 +881,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "∫(x+1)e^{x²+2x}dx é proporcional a...",
+      "q": "Ao calcular uma primitiva de (x+1)e^{x²+2x} com constante de integração nula, obtém-se um múltiplo constante de que função?",
       "o": [
         "e^{x²+2x}.",
         "ln(x²+2x).",
@@ -916,7 +916,7 @@
         "(x+1)e^{x²+2x}+C."
       ],
       "a": 1,
-      "sol": "Falta metade da derivada interna.",
+      "sol": "A derivada de x²+2x é 2(x+1). Assim, pela regra da cadeia, a derivada de (1/2)e^{x²+2x} é (x+1)e^{x²+2x}. A expressão geral das primitivas é (1/2)e^{x²+2x}+C.",
       "hyp": "Pode esquecer o fator 1/2.",
       "contexts": [
         "mission",

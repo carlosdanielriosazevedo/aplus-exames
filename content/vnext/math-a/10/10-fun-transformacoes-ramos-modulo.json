@@ -1024,7 +1024,7 @@
         "−2x−4 para todo x."
       ],
       "a": 1,
-      "sol": "A mudança ocorre quando 2x+4=0, isto é, x=−2.",
+      "sol": "Se x≥−2, então 2x+4≥0 e |2x+4|=2x+4. Se x<−2, então 2x+4<0 e |2x+4|=−(2x+4)=−2x−4.",
       "hyp": "Pode usar sinal oposto ou fronteira errada.",
       "contexts": [
         "mission",

@@ -565,7 +565,7 @@
         "(x,−y)."
       ],
       "a": 0,
-      "sol": "A regra padrão é (x,y)→(−y,x).",
+      "sol": "A rotação de 90° no sentido positivo leva os vetores dos eixos (1,0) e (0,1) a (0,1) e (−1,0). Assim, a componente x contribui com x para a nova ordenada e a componente y contribui com −y para a nova abcissa. O resultado é (−y,x).",
       "hyp": "Pode usar a rotação horária.",
       "contexts": [
         "mission",
