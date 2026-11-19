@@ -26,6 +26,6 @@ export async function POST(request){
   if(!valid.ok)return json({ok:false,code:valid.code},400);
   const ip=(request.headers.get("x-forwarded-for")||"").split(",")[0].trim();
   if(!funnelRateAllowed(ip))return json({ok:false,code:"RATE_LIMITED"},429);
-  try{await incrementFunnel(getSql(),valid.step);return json({ok:true,recorded:true},201)}
+  try{await incrementFunnel(getSql(),valid.step,valid.source);return json({ok:true,recorded:true},201)}
   catch{return notRecorded("FUNNEL_WRITE_FAILED")}
 }

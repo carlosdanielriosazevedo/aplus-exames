@@ -14,5 +14,11 @@
       "fix/consistent-mobile-header-layout": false,
       "**": false
     }
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/weekly-report",
+      "schedule": "0 7 * * *"
+    }
+  ]
 }

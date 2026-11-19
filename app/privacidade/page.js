@@ -33,7 +33,7 @@ export default function PrivacyPage(){
 
     <div className={styles.section}>
       <h2>Conta e progresso online</h2>
-      <p className={styles.copy}>Se criares ou iniciares sessão numa conta, são tratados os dados necessários à autenticação, como o nome e o email que forneceres, e pode ser guardado online um estado académico limitado para permitir recuperação e continuidade entre dispositivos. O estado enviado para o serviço online usa uma lista explícita de campos permitidos e remove recursivamente o texto das respostas do aluno antes da gravação.</p>
+      <p className={styles.copy}>Se criares ou iniciares sessão numa conta, são tratados os dados necessários à autenticação, como o nome e o email que forneceres (os emails com códigos de confirmação ou de recuperação da palavra-passe são enviados através de um serviço de envio de email, que recebe apenas o teu endereço e o conteúdo da mensagem), e pode ser guardado online um estado académico limitado para permitir recuperação e continuidade entre dispositivos. O estado enviado para o serviço online usa uma lista explícita de campos permitidos e remove recursivamente o texto das respostas do aluno antes da gravação.</p>
     </div>
 
     <div className={styles.section}>
@@ -53,7 +53,7 @@ export default function PrivacyPage(){
 
     <div className={styles.section}>
       <h2>Contagens anónimas de utilização</h2>
-      <p className={styles.copy}>Para sabermos se a app está a ajudar, contamos de forma anónima quantas vezes, por dia, alguém dá certos passos (por exemplo, abrir a app, terminar um diagnóstico ou voltar no dia seguinte). Cada dispositivo conta cada passo no máximo uma vez e guardamos apenas o total diário: não guardamos conta, nome, email, endereço IP, identificador do dispositivo nem respostas.</p>
+      <p className={styles.copy}>Para sabermos se a app está a ajudar, contamos de forma anónima quantas vezes, por dia, alguém dá certos passos (por exemplo, abrir a app, terminar um diagnóstico ou voltar no dia seguinte). Cada dispositivo conta cada passo no máximo uma vez e guardamos apenas o total diário, separado pela origem do primeiro acesso numa lista fechada de categorias (por exemplo, Instagram, TikTok, escola ou acesso direto): não guardamos conta, nome, email, endereço IP, identificador do dispositivo, endereço de origem nem respostas.</p>
     </div>
 
     <div className={styles.section}>

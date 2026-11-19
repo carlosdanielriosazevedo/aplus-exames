@@ -35,10 +35,13 @@ try{
 // reportes de problemas em perguntas no servidor (2026-11-15), fim do acesso
 // direto do browser à base de dados e prova de consentimento no registo. Migrações
 // existentes e rotas existentes continuam congeladas.
-const APPROVED_DB_ADDITIONS=new Set(["db/migrations/009_content_reports.sql","db/migrations/010_revoke_browser_data_api.sql","db/migrations/011_account_consents.sql","db/migrations/012_funnel_daily.sql"]);
+const APPROVED_DB_ADDITIONS=new Set(["db/migrations/009_content_reports.sql","db/migrations/010_revoke_browser_data_api.sql","db/migrations/011_account_consents.sql","db/migrations/012_funnel_daily.sql","db/migrations/013_funnel_source_weekly.sql"]);
 const dbChanges=git("diff","--name-status",production,"--","db").split("\n").filter(Boolean).map(line=>line.split("\t"));
 check(dbChanges.every(([status,file])=>status==="A"&&APPROVED_DB_ADDITIONS.has(file)),"only approved database additions; existing migrations unchanged");
-const APPROVED_API_ADDITIONS=new Set(["app/api/cloud/state/route.js","app/api/content-reports/route.js","app/api/account/consent/route.js","app/api/funnel/route.js","app/api/account/delete/route.js"]);
+const APPROVED_API_ADDITIONS=new Set(["app/api/cloud/state/route.js","app/api/content-reports/route.js","app/api/account/consent/route.js","app/api/funnel/route.js","app/api/account/delete/route.js",
+  // 2026-11-18, PR #506 (opção C aprovada pelo product owner): email de recuperação
+  // em português (webhook do Neon Auth) e resumo semanal/alarmes (Vercel Cron).
+  "app/api/auth-email/route.js","app/api/cron/weekly-report/route.js"]);
 const apiChanges=git("diff","--name-status",production,"--","app/api").split("\n").filter(Boolean).map(line=>line.split("\t"));
 check(apiChanges.every(([status,file])=>status==="A"&&APPROVED_API_ADDITIONS.has(file)),"only approved API additions; existing API routes unchanged");
  for(const mode of ["internal","friends_beta"]){
