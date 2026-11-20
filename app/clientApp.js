@@ -15,7 +15,7 @@ import {
   TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,microcompetencyId
 } from "./data/content";
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
-import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon,StudySessionHeader} from "./components/chrome";
+import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon,StudySessionHeader,markFocusTab,wasInSessionThisTab} from "./components/chrome";
 import StudyModeHub from "./components/StudyModeHub";
 import PausedActivityEyebrow from "./components/PausedActivityEyebrow";
 import {Welcome} from "./components/Welcome";
@@ -398,7 +398,8 @@ export default function App(){
 
     }else if(canRecover){
       setRecoveredSession(validDraft);
-      setScreen(recovered);
+      // Reabrir a app: menu com "Continuar". Recarregar a página a meio: a pergunta.
+      setScreen(wasInSessionThisTab()?recovered:"home");
     }else{
       const activeSubjectId=recoveredState.activeSubjectId;
       const subjectPaused=!!activeSubjectId&&(
@@ -410,7 +411,7 @@ export default function App(){
         &&(recoveredState.subjectSettings?.[activeSubjectId]?.profileConfigured===true||recoveredState.onboardingSharedProfileDone===true);
       const pausedDiagnostic=subjectPaused&&["portuguese","physics-chemistry-a"].includes(activeSubjectId)
         &&subjectProgressFor(recoveredState,activeSubjectId).lastPosition?.kind==="diagnostic";
-      if(pausedDiagnostic)setScreen("resumeSubjectDiagnostic");
+      if(pausedDiagnostic&&wasInSessionThisTab())setScreen("resumeSubjectDiagnostic");
       else if(activeSubjectDiagnosticDone(recoveredState)||subjectPaused)setScreen("home");
       else{
         let fromLanding=false,openAccount=false;
@@ -502,6 +503,10 @@ export default function App(){
     return ()=>window.removeEventListener("popstate",onPopState);
   },[hydrated]);
 
+  const subjectDiagnosticRunning=["portuguese","physics-chemistry-a"].includes(s.activeSubjectId)
+    &&s.subjectProgress?.[s.activeSubjectId]?.lastPosition?.kind==="diagnostic";
+  useEffect(()=>{if(hydrated&&typeof window!=="undefined")markFocusTab(screen,subjectDiagnosticRunning)},[hydrated,screen,subjectDiagnosticRunning]);
+
   useEffect(()=>{
     if(!hydrated||typeof window==="undefined")return;
     if(window.history.state?.approvaScreen!==screen||window.history.state?.approvaSubjectId!==(s.activeSubjectId||null)){
@@ -511,7 +516,9 @@ export default function App(){
 
   const go=x=>{
     if(typeof window!=="undefined"&&hydrated&&window.history.state?.approvaScreen!==x){
-      window.history.pushState({...window.history.state,approvaScreen:x,approvaSubjectId:s.activeSubjectId||null},"");
+      // approvaDepth: quantos ecrãs da app há atrás deste. Com 0, "Voltar" nunca
+      // usa o histórico do browser (sairia da app); vai para o menu inicial.
+      window.history.pushState({...window.history.state,approvaScreen:x,approvaSubjectId:s.activeSubjectId||null,approvaDepth:(Number(window.history.state?.approvaDepth)||0)+1},"");
     }
     setScreen(x);
   };
@@ -996,7 +1003,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     <button className="primary" onClick={retryRecovery}>Tentar novamente</button></Shell>;
 
   return <Shell>
-    <StudySessionHeader progress={Math.max(8,estimate)} label={`${Math.min(blueprintLength,anchorsDone+1)}/${blueprintLength}`} onExit={()=>go("diag")} exitLabel="Guardar e sair"/>
+    <StudySessionHeader progress={Math.max(8,estimate)} label={`${Math.min(blueprintLength,anchorsDone+1)}/${blueprintLength}`} onExit={()=>go("home")} exitLabel="Guardar e sair"/>
     {saveError&&<div className="notice warning"><b>Estamos a conservar o teu progresso</b><span>Tenta continuar novamente. A resposta guardada não será repetida.</span></div>}
     <p className="questionContext">{theme(current.themeId).short}</p>
     <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary>

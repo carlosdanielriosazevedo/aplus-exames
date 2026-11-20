@@ -95,12 +95,29 @@ function mathStateAfterTwoAnswers(){
   return {state:{...state,_stateVersion:31,_savedAt:Date.now()},draft:{...draft,savedAt:Date.now()}};
 }
 
+// Estes cenários verificam a sessão a decorrer neste separador (recarregar a
+// página volta à pergunta). Reabrir a app noutro separador abre no menu com
+// "Continuar" (decisão do product owner, 2026-11-20) e é testado à parte.
 async function seed(page,state,draft=null){
   await page.addInitScript(({state,draft})=>{
+    sessionStorage.setItem("approva-focus-tab-v1","1");
     localStorage.setItem("a25",JSON.stringify(state));
     if(draft)localStorage.setItem("a25-active-session-v1",JSON.stringify(draft));
     else localStorage.removeItem("a25-active-session-v1");
   },{state,draft});
+}
+
+// Reabrir a app com uma sessão a meio: menu com "Continuar", e daí à pergunta.
+async function continueFromHome(page,target=page.getByRole("button",{name:"Responder",exact:true})){
+  const responder=target;
+  const next=page.getByRole("button",{name:/^Continuar (diagnóstico|sessão|missão|Missão →)$/u}).first();
+  for(let step=0;step<3;step++){
+    await expect(responder.or(next)).toBeVisible({timeout:30_000});
+    if(await responder.isVisible())return;
+    await next.click();
+    await expect(next).toBeHidden({timeout:5_000}).catch(()=>{});
+  }
+  await expect(responder).toBeVisible({timeout:30_000});
 }
 
 async function expectNoSubjectSelector(page){
@@ -186,7 +203,10 @@ for(const subject of SUBJECTS){
     await reopened.goto("/");
     if(subject.id==="math-a")await expect(reopened.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page");
     else{
-      await expect(reopened.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
+      // Reabrir abre no menu (Aprender), nunca diretamente na pergunta.
+      await expect(reopened.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page",{timeout:30_000});
+      await expect(reopened.getByRole("button",{name:"Responder",exact:true})).toHaveCount(0);
+      await continueFromHome(reopened);
       const recovered=await reopened.evaluate(id=>{
         const position=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
         return {current:position?.current,results:position?.results?.length};
@@ -269,7 +289,10 @@ for(const subject of [
     await page.close();
     const reopened=await context.newPage();
     await reopened.goto("/");
-    await expect(reopened.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
+    // Reabrir abre no menu (Aprender) com "Continuar"; daí volta à mesma pergunta.
+    await expect(reopened.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page",{timeout:30_000});
+    await expect(reopened.getByRole("button",{name:"Responder",exact:true})).toHaveCount(0);
+    await continueFromHome(reopened);
     await expectNoSubjectSelector(reopened);
     const reopenedPosition=await reopened.evaluate(id=>{
       const draft=JSON.parse(localStorage.getItem("a25-active-session-v1")||"null");
@@ -509,9 +532,10 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
      const choices=page.locator(".ptx-options button, .opts button").first();
      await expect(page.locator(".ptx-question-card, .fqaMiniExamPage, .fqaFullExamPage").first()).toBeVisible({timeout:30_000});
      if(await choices.isVisible())await choices.click();else await page.getByRole("textbox").first().fill("Resposta guardada antes de fechar a aplicação.");
-    }else if(subjectId!=="math-a"&&kind!=="diagnostic"){
-     await expect(page.locator(".learnHome").getByRole("button",{name:"Continuar sessão",exact:true})).toBeVisible({timeout:30_000});
-     await page.locator(".learnHome").getByRole("button",{name:"Continuar sessão",exact:true}).click();
+    }else{
+     // Abrir a app com uma sessão a meio: menu com "Continuar" (decisão de 2026-11-20).
+     await expect(page.locator(".studentTop")).toBeVisible({timeout:30_000});
+     await continueFromHome(page,page.locator(".sessionTop"));
     }
     if(!exam||subjectId==="math-a")await expect(page.locator(".sessionTop")).toBeVisible({timeout:30_000});
     const snapshot=page=>page.evaluate(({subjectId,exam,kind})=>{
@@ -552,4 +576,65 @@ test("math-a · diagnóstico legado incompatível é conservado sem oferecer rei
  const preserved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-active-session-v1")));
  expect(preserved).toEqual(draft);
  await expect(page.getByRole("button",{name:/Começar.*novo|Recomeçar/u})).toHaveCount(0);
+});
+
+// Relato do product owner (2026-11-20): cruz → OK → ecrã do diagnóstico → «Voltar»
+// saía da app (ia para o Google). Agora a cruz leva ao menu e «Voltar» nunca sai.
+test("Matemática A · sair do diagnóstico leva ao menu e «Voltar» nunca sai da app",async({page})=>{
+  const prepared=mathStateAfterTwoAnswers();
+  await seed(page,prepared.state,prepared.draft);
+  await page.goto("about:blank");
+  await page.goto("/");
+  await expect(page.getByRole("button",{name:"Guardar e sair",exact:true})).toBeVisible({timeout:30_000});
+  page.once("dialog",dialog=>dialog.accept());
+  await page.getByRole("button",{name:"Guardar e sair",exact:true}).click();
+  await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page",{timeout:15_000});
+  const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-active-session-v1")));
+  expect(saved.responses).toHaveLength(2);
+  await page.getByRole("button",{name:"Continuar diagnóstico"}).first().click();
+  await expect(page.getByText("AVALIAÇÃO INICIAL · MATEMÁTICA A · PROVA 635",{exact:true})).toBeVisible();
+  await page.getByRole("button",{name:"← Voltar"}).click();
+  await expect(page).toHaveURL(/127\.0\.0\.1:3000/);
+  await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page");
+  await page.getByRole("button",{name:"Continuar diagnóstico"}).first().click();
+  await page.goBack();
+  await expect(page).toHaveURL(/127\.0\.0\.1:3000/);
+});
+
+test("«Voltar» num ecrã aberto diretamente nunca sai da app",async({page})=>{
+  const prepared=mathStateAfterTwoAnswers();
+  await seed(page,prepared.state,prepared.draft);
+  await page.goto("about:blank");
+  await page.goto("/");
+  await expect(page.getByRole("button",{name:"Guardar e sair",exact:true})).toBeVisible({timeout:30_000});
+  page.once("dialog",dialog=>dialog.accept());
+  await page.getByRole("button",{name:"Guardar e sair",exact:true}).click();
+  await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page",{timeout:15_000});
+  // Simular abertura direta do ecrã do diagnóstico (sem ecrãs da app atrás).
+  await page.evaluate(()=>{const state={...history.state,approvaScreen:"diag",approvaDepth:0};history.replaceState(state,"");dispatchEvent(new PopStateEvent("popstate",{state}))});
+  await expect(page.getByText("AVALIAÇÃO INICIAL · MATEMÁTICA A · PROVA 635",{exact:true})).toBeVisible();
+  await page.getByRole("button",{name:"← Voltar"}).click();
+  await expect(page).toHaveURL(/127\.0\.0\.1:3000/);
+  await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page");
+});
+
+// Decisão do product owner (2026-11-20, opção B): reabrir a app com uma sessão a
+// meio abre no menu com "Continuar"; recarregar a página no mesmo separador volta à pergunta.
+test("Matemática A · reabrir a app com diagnóstico a meio abre no menu; recarregar volta à pergunta",async({browser})=>{
+  const context=await browser.newContext({viewport:{width:390,height:844}});
+  const first=await context.newPage();
+  await first.goto("/");
+  const prepared=mathStateAfterTwoAnswers();
+  await first.evaluate(({state,draft})=>{localStorage.setItem("a25",JSON.stringify(state));localStorage.setItem("a25-active-session-v1",JSON.stringify(draft))},prepared);
+  await first.close();
+  const page=await context.newPage();
+  await page.goto("/");
+  await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page",{timeout:30_000});
+  await expect(page.getByRole("button",{name:"Guardar e sair",exact:true})).toHaveCount(0);
+  await continueFromHome(page);
+  await page.reload();
+  await expect(page.getByRole("button",{name:"Guardar e sair",exact:true})).toBeVisible({timeout:30_000});
+  const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-active-session-v1")));
+  expect(saved.responses).toHaveLength(2);
+  await context.close();
 });

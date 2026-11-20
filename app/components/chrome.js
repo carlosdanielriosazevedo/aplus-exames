@@ -15,12 +15,15 @@ function apronsoMotionClass(pose){return pose==="celebrate"?"apronso-motion-cele
 export function Apronso({pose="welcome",className="",alt=""}){return <img className={`apronso ${apronsoMotionClass(pose)} ${className}`.trim()} src={`/mascot/apronso-${pose}.webp`} alt={alt}/>}
 export function ApronsoNudge({pose="thinking",tone="light",children}){return <aside className={`apronsoNudge ${tone}`}><Apronso pose={pose} alt=""/><p>{children}</p></aside>}
 
+// Só recua no histórico quando o ecrã anterior é da própria app (approvaDepth>0).
+// Ao abrir a app diretamente num ecrã (ex.: sessão retomada), o anterior é outro
+// site: "Voltar" vai para o menu inicial em vez de sair da app.
+export function canGoBackInApp(){
+  return typeof window!=="undefined"&&!!window.history.state?.approvaScreen&&(Number(window.history.state?.approvaDepth)||0)>0;
+}
 function safePrevious(go,to){
   if(to){go(to);return}
-  if(typeof window!=="undefined"&&window.history.state?.approvaScreen&&window.history.length>1){
-    window.history.back();
-    return;
-  }
+  if(canGoBackInApp()){window.history.back();return}
   go("home");
 }
 export const Back=({go,to})=><button className="back" type="button" onClick={()=>safePrevious(go,to)}>← Voltar</button>;
@@ -32,7 +35,8 @@ function runExitReplacingSessionEntry(onExit){
   let intercepted=false;
   window.history.pushState=(state,title,url)=>{
     intercepted=true;
-    originalReplace({...state,approvaSessionGuard:false},title,url);
+    // A entrada é substituída (não acrescentada): mantém a profundidade atual.
+    originalReplace({...state,approvaSessionGuard:false,approvaDepth:Number(window.history.state?.approvaDepth)||0},title,url);
   };
   try{onExit?.()}finally{window.history.pushState=originalPush}
   if(!intercepted&&window.history.state?.approvaSessionGuard){
@@ -97,7 +101,23 @@ export function StudentTop({s,go,children}){const daily=engagementSummary(s),sub
 export function FriendsBetaRibbon({s}){const [queryActive,setQueryActive]=useState(false);useEffect(()=>setQueryActive(friendsBetaRequested(window.location.search)),[]);if(!(isFriendsBeta(s)||queryActive))return null;return <div className="friendsBetaRibbon"><b>🧪 TESTE PRIVADO</b><span>Conteúdo ainda em revisão · resultados provisórios</span></div>}
 
 const ROOT_SCREENS=new Set(["welcome","home","train","ranking","progress","exams"]);
-const FOCUS_SCREENS=new Set(["diagRun","mission","trainingRun","miniExamRun","miniExamReview","portugueseMiniExam","physicsChemistryExam","physicsChemistryMini1","physicsChemistryMini2"]);
+export const FOCUS_SCREENS=new Set(["diagRun","mission","trainingRun","miniExamRun","miniExamReview","portugueseMiniExam","physicsChemistryExam","physicsChemistryMini1","physicsChemistryMini2"]);
+// Decisão do product owner (2026-11-20, opção B): reabrir a app com uma sessão a
+// meio abre no menu (com "Continuar"); só um recarregamento da página no mesmo
+// separador volta diretamente à pergunta. sessionStorage sobrevive ao reload,
+// mas não a reabrir a app ou um separador novo.
+export const FOCUS_TAB_KEY="approva-focus-tab-v1";
+// `subjectDiagnosticRunning`: diagnóstico de Português/FQ A a decorrer (corre
+// dentro do ecrã "diag", sem ecrã de sessão próprio).
+export function markFocusTab(screen,subjectDiagnosticRunning=false){
+  try{
+    if(FOCUS_SCREENS.has(screen)||screen==="resumeSubjectDiagnostic"||(screen==="diag"&&subjectDiagnosticRunning))window.sessionStorage.setItem(FOCUS_TAB_KEY,"1");
+    else window.sessionStorage.removeItem(FOCUS_TAB_KEY);
+  }catch{}
+}
+export function wasInSessionThisTab(){
+  try{return window.sessionStorage.getItem(FOCUS_TAB_KEY)==="1"}catch{return false}
+}
 function walk(children,visit){
   Children.forEach(children,child=>{
     if(!isValidElement(child))return;
@@ -138,7 +158,7 @@ export const Shell=({children,className=""})=>{
     <section className="panel">
       {recoveryAnnouncement&&<p className="srOnly" role="alert">{recoveryAnnouncement}</p>}
       {autoBack&&<button className="back" type="button" onClick={()=>{
-        if(window.history.length>1)window.history.back();else goSafeStart();
+        if(canGoBackInApp())window.history.back();else goSafeScreen("home");
       }}>← Voltar</button>}
       {children}
       {diagnosticStartFailure&&<div className="recoveryActions" role="group" aria-label="Sair do diagnóstico" style={{display:"grid",gap:10,marginTop:18}}>
