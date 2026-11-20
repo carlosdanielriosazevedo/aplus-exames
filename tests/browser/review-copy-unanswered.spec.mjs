@@ -7,7 +7,7 @@ test("unanswered mini-exam review does not invent a provisional zero grade",asyn
   const questions=buildMiniExam(state);
   expect(questions.length).toBeGreaterThan(0);
   const draft={kind:"mini_exam",screen:"miniExamRun",session:{sessionId:"review-copy-unanswered-synthetic",questions,current:0,answers:questions.map(()=>null),startedAt:now-60000}};
-  await page.addInitScript(({state,draft})=>{
+  await page.addInitScript(({state,draft})=>{sessionStorage.setItem("approva-focus-tab-v1","1");/* sessão a decorrer neste separador */
     localStorage.setItem("a25",JSON.stringify(state));
     localStorage.setItem("a25-active-session-v1",JSON.stringify(draft));
   },{state,draft});

@@ -13,7 +13,7 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
    state.subjectProgress[subjectId]={subjectId,version:4,diagnosticDone:true,sessions:[],missionHistory:[],competence:{},lastPosition:{sessionId:"reset-"+subjectId,kind:"training",current:2,currentAnswer:"resposta por conservar",results:[{final:true,correct:true}],itemIds:subjectId==="portuguese"?["PT639-FND-001","PT639-FND-002","PT639-FND-004"]:["FQA-ELEM-01","FQA-MAT-01","FQA-ENE-01"],startedAt:now-60000}};
   }
   await page.goto("/");
-  await page.evaluate(({state,draft})=>{localStorage.setItem("a25",JSON.stringify(state));if(draft)localStorage.setItem("a25-active-session-v1",JSON.stringify(draft))},{state,draft});
+  await page.evaluate(({state,draft})=>{sessionStorage.setItem("approva-focus-tab-v1","1");/* sessão a decorrer neste separador */localStorage.setItem("a25",JSON.stringify(state));if(draft)localStorage.setItem("a25-active-session-v1",JSON.stringify(draft))},{state,draft});
   await page.goto("/?dev=1");
   if(draft){
    await expect(page.locator(".sessionTop")).toBeVisible({timeout:30_000});

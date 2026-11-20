@@ -53,7 +53,7 @@ async function seedMathDiagnostic(page){
   const session={id:"contrast-proof",kind:"diagnostic",startedAt:now-1000,finishedAt:null,meta:{}};
   const draft=createDiagnosticDraft({session,item:ITEM,difficulty:ITEM.difficulty,blueprint:[ITEM.subtopicId||ITEM.themeId],now:now-1000});
   const state={goal:17,diagnosticDone:false,diagnosticAnswers:0,selectedSubjectIds:["math-a"],activeSubjectId:"math-a",subjectProgress:{},subjectProgressModelVersion:1,pedagogicalIdVersion:1,betaMode:"internal",firstUseTourCompleted:true,profile:{schoolYear:"Já terminei o secundário",recentGrade:"",syllabus:"most",examTiming:"thisYear",optionalTopics:[],taughtSubtopicIds:[]},_stateVersion:31,_savedAt:now};
-  await page.addInitScript(({state,draft,now})=>{localStorage.setItem("a25",JSON.stringify(state));localStorage.setItem("a25-active-session-v1",JSON.stringify({...draft,savedAt:now}))},{state,draft,now});
+  await page.addInitScript(({state,draft,now})=>{sessionStorage.setItem("approva-focus-tab-v1","1");localStorage.setItem("a25",JSON.stringify(state));localStorage.setItem("a25-active-session-v1",JSON.stringify({...draft,savedAt:now}))},{state,draft,now});
 }
 
 function expectAA(measurement,label){

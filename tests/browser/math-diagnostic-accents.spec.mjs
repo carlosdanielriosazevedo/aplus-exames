@@ -75,7 +75,7 @@ async function seedKnownBadDiagnostic(page){
     _stateVersion:31,
     _savedAt:now
   };
-  await page.addInitScript(({state,draft,now})=>{
+  await page.addInitScript(({state,draft,now})=>{sessionStorage.setItem("approva-focus-tab-v1","1");/* sessão a decorrer neste separador */
     localStorage.setItem("a25",JSON.stringify(state));
     localStorage.setItem("a25-active-session-v1",JSON.stringify({...draft,savedAt:now}));
   },{state,draft,now});

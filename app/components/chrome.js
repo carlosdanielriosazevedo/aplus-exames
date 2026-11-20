@@ -101,7 +101,23 @@ export function StudentTop({s,go,children}){const daily=engagementSummary(s),sub
 export function FriendsBetaRibbon({s}){const [queryActive,setQueryActive]=useState(false);useEffect(()=>setQueryActive(friendsBetaRequested(window.location.search)),[]);if(!(isFriendsBeta(s)||queryActive))return null;return <div className="friendsBetaRibbon"><b>🧪 TESTE PRIVADO</b><span>Conteúdo ainda em revisão · resultados provisórios</span></div>}
 
 const ROOT_SCREENS=new Set(["welcome","home","train","ranking","progress","exams"]);
-const FOCUS_SCREENS=new Set(["diagRun","mission","trainingRun","miniExamRun","miniExamReview","portugueseMiniExam","physicsChemistryExam","physicsChemistryMini1","physicsChemistryMini2"]);
+export const FOCUS_SCREENS=new Set(["diagRun","mission","trainingRun","miniExamRun","miniExamReview","portugueseMiniExam","physicsChemistryExam","physicsChemistryMini1","physicsChemistryMini2"]);
+// Decisão do product owner (2026-11-20, opção B): reabrir a app com uma sessão a
+// meio abre no menu (com "Continuar"); só um recarregamento da página no mesmo
+// separador volta diretamente à pergunta. sessionStorage sobrevive ao reload,
+// mas não a reabrir a app ou um separador novo.
+export const FOCUS_TAB_KEY="approva-focus-tab-v1";
+// `subjectDiagnosticRunning`: diagnóstico de Português/FQ A a decorrer (corre
+// dentro do ecrã "diag", sem ecrã de sessão próprio).
+export function markFocusTab(screen,subjectDiagnosticRunning=false){
+  try{
+    if(FOCUS_SCREENS.has(screen)||screen==="resumeSubjectDiagnostic"||(screen==="diag"&&subjectDiagnosticRunning))window.sessionStorage.setItem(FOCUS_TAB_KEY,"1");
+    else window.sessionStorage.removeItem(FOCUS_TAB_KEY);
+  }catch{}
+}
+export function wasInSessionThisTab(){
+  try{return window.sessionStorage.getItem(FOCUS_TAB_KEY)==="1"}catch{return false}
+}
 function walk(children,visit){
   Children.forEach(children,child=>{
     if(!isValidElement(child))return;

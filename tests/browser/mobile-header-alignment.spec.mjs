@@ -120,10 +120,9 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
    }
    await page.addInitScript(({state,draft})=>{localStorage.setItem("a25",JSON.stringify(state));if(draft)localStorage.setItem("a25-active-session-v1",JSON.stringify(draft))},{state,draft});
    await page.goto("/");
-   if(subjectId==="math-a"){
-    await expect(page.locator(".sessionTop")).toBeVisible({timeout:30_000});
-    await page.getByRole("button",{name:"Guardar e continuar depois",exact:true}).click();
-   }
+   // Abrir a app com uma sessão a meio: menu com o cartão em pausa nas três
+   // disciplinas (decisão do product owner, 2026-11-20).
+   await expect(page.locator(".sessionTop")).toHaveCount(0);
    const home=page.locator(".learnHome");
    await expect(home).toBeVisible({timeout:30_000});
    await expect(home.locator(".pausedSession")).toHaveCount(0);
