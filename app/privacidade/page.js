@@ -67,6 +67,36 @@ export default function PrivacyPage(){
     </div>
 
     <div className={styles.section}>
+      <h2>Quem trata os dados e com que fundamento</h2>
+      <p className={styles.copy}>O responsável pelo tratamento é a pessoa identificada no final desta página. Tratamos os dados da conta (nome, email e palavra-passe, esta última guardada apenas pelo serviço de autenticação e de forma cifrada) e o progresso de estudo para prestar o serviço que pedes ao criar conta, isto é, para executar o acordo de utilização da APProva+ (artigo 6.º, n.º 1, alínea b), do RGPD). Usamos registos técnicos e medidas contra abuso por interesse legítimo em manter o serviço seguro e a funcionar (alínea f). A telemetria do piloto depende do teu consentimento (alínea a), que podes retirar a qualquer momento.</p>
+    </div>
+
+    <div className={styles.section}>
+      <h2>Idade mínima</h2>
+      <p className={styles.copy}>Para criar conta tens de ter pelo menos 13 anos, idade a partir da qual a lei portuguesa permite que consintas sozinho na utilização de serviços da sociedade da informação (Lei n.º 58/2019, artigo 16.º). Se tiveres menos de 13 anos, não cries conta. Se um encarregado de educação souber que uma criança com menos de 13 anos criou conta, pode pedir a sua eliminação através do contacto de privacidade.</p>
+    </div>
+
+    <div className={styles.section}>
+      <h2>Onde ficam os dados e quem nos ajuda</h2>
+      <p className={styles.copy}>A aplicação é alojada pela Vercel Inc. (o processamento no servidor, incluindo a conta e o progresso, ocorre na União Europeia, região de Frankfurt; os ficheiros públicos da aplicação, sem dados pessoais, são distribuídos por uma rede global) e a conta e o progresso online são guardados pela Neon Inc. (base de dados na União Europeia, região de Frankfurt). Estas empresas atuam como subcontratantes, tratam os dados apenas para prestar estes serviços e estão sujeitas a acordos de proteção de dados. Por serem empresas sediadas nos Estados Unidos, pode haver acesso a partir de fora da União Europeia em situações de suporte ou segurança; nesses casos aplicam-se as garantias previstas no RGPD, como o Quadro de Privacidade de Dados UE-EUA ou cláusulas contratuais-tipo. Não partilhamos dados com outras entidades nem os usamos para publicidade.</p>
+    </div>
+
+    <div className={styles.section}>
+      <h2>Reportes de problemas em perguntas</h2>
+      <p className={styles.copy}>Quando usas «Reportar problema nesta pergunta», guardamos apenas a identificação da pergunta, a disciplina, o tipo de problema e a data. O reporte não guarda o teu nome, email, identificador de conta nem texto escrito por ti, e serve apenas para corrigir conteúdo.</p>
+    </div>
+
+    <div className={styles.section}>
+      <h2>Durante quanto tempo guardamos</h2>
+      <p className={styles.copy}>A conta e o progresso online são guardados enquanto a conta estiver ativa. Uma conta sem utilização durante 24 meses é eliminada, juntamente com o progresso online. Os reportes de perguntas são guardados durante 12 meses. Os dados da telemetria do piloto são guardados até à data indicada no consentimento do piloto. O progresso guardado no teu dispositivo fica no browser até o apagares ou terminares sessão; ao terminar sessão, o progresso da conta deixa de estar visível neste dispositivo.</p>
+    </div>
+
+    <div className={styles.section}>
+      <h2>Os teus direitos</h2>
+      <p className={styles.copy}>Podes pedir acesso aos teus dados, a sua correção, eliminação, limitação do tratamento ou portabilidade, e opor-te ao tratamento baseado em interesse legítimo, através do contacto de privacidade indicado abaixo. Respondemos no prazo de um mês. Os encarregados de educação de alunos menores podem pedir a eliminação da conta do seu educando pelo mesmo contacto. Tens também o direito de apresentar reclamação à Comissão Nacional de Proteção de Dados (CNPD, www.cnpd.pt).</p>
+    </div>
+
+    <div className={styles.section}>
       <h2>Controlos do piloto</h2>
       <p className={styles.copy}>Se tiveres aderido à telemetria do piloto, podes retirar o consentimento a qualquer momento ou pedir a eliminação desses dados nas Definições. Retirar o consentimento bloqueia imediatamente novos envios; apagar os dados é uma ação separada.</p>
     </div>
