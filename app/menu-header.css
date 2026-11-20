@@ -1,0 +1,62 @@
+/* Four main menus share one compact header geometry. Text may change, slots
+   must not: allow two title lines and three guide lines at the narrowest width. */
+@media(max-width:760px){
+  :is(.learnHome,.trainHub,.rankingDesktopShell,.progressPage) .studentTop{
+    margin-top:0!important;margin-bottom:24px!important;
+  }
+  :is(.learnHome,.trainHub,.rankingDesktopShell,.progressPage) .menuIntro{
+    display:grid!important;grid-template-rows:calc(25px + 2 * 1.1 * clamp(23px,6vw,29px)) minmax(63px,auto);
+    row-gap:9px;position:relative;box-sizing:border-box;
+    width:100%!important;max-width:none!important;min-height:0!important;
+    margin:10px 0 28px!important;padding:0!important;
+  }
+  .rankingDesktopShell>.panel>.rankingHero{margin:0 0 28px!important;gap:0!important}
+  .rankingDesktopShell>.panel>.rankingHero>.menuIntro{margin:10px 0 0!important}
+  :is(.learnHome,.trainHub,.rankingDesktopShell,.progressPage) .menuIntro.menuIntro .menuTitle{
+    display:block;position:relative;box-sizing:border-box;
+    min-width:0;padding:0 clamp(72px,22vw,94px) 0 0!important;
+  }
+  :is(.learnHome,.trainHub,.rankingDesktopShell,.progressPage) .menuIntro.menuIntro .menuTitle>p{
+    margin:0!important;padding:0!important;height:20px;line-height:20px!important;
+  }
+  :is(.learnHome,.trainHub,.rankingDesktopShell,.progressPage) .menuIntro.menuIntro .menuTitle>h1{
+    margin:5px 0 0!important;padding:0!important;
+    font-size:clamp(23px,6vw,29px)!important;line-height:1.1!important;
+    letter-spacing:-1.4px;font-weight:700;color:var(--app-navy)!important;
+  }
+  :is(.learnHome,.trainHub,.rankingDesktopShell,.progressPage) .menuIntro>:is(span,p){
+    display:block;margin:0!important;width:100%;max-width:none!important;
+    font-size:14px;line-height:21px!important;color:var(--app-muted)!important;
+  }
+  /* Anchor to the common first-title-line baseline, independent of wrapping. */
+  :is(.learnHome,.trainHub,.rankingDesktopShell,.progressPage) .menuTitle::after,
+  :is(.trainHub,.rankingDesktopShell) .menuTitle>.apronso{
+    top:calc(25px + 1.1 * clamp(23px,6vw,29px) - clamp(76px,24vw,100px));
+    bottom:auto!important;right:0!important;
+    width:clamp(68px,21vw,90px)!important;height:clamp(76px,24vw,100px)!important;
+    animation:none!important;transform:none!important;
+  }
+}
+@media(max-width:760px){
+  .learnHome>.studentSurface,
+  :is(.trainHub,.rankingDesktopShell,.progressPage)>.panel{
+    padding-top:max(26px,env(safe-area-inset-top))!important;border:0!important;
+  }
+  .learnHome>.studentSurface>.studentTop,
+  :is(.trainHub,.rankingDesktopShell,.progressPage)>.panel>.studentTop{
+    top:0!important;position:relative;margin:0 0 24px!important;width:100%!important;
+  }
+  .learnHome>.studentSurface>.menuIntro,
+  .trainHub>.panel>.trainIntro.menuIntro,
+  .progressPage>.panel>.menuIntro{margin:0 0 28px!important}
+  .rankingDesktopShell>.panel>.rankingHero{margin:0 0 28px!important;top:0!important}
+  .rankingDesktopShell>.panel>.rankingHero>.menuIntro{margin:0!important}
+}
+
+/* Above 360px all four current titles fit one line; reserve only that line.
+   The narrower layout reserves two without letting the copy shift any menu. */
+@media(min-width:361px) and (max-width:760px){
+  :is(.learnHome,.trainHub,.rankingDesktopShell,.progressPage) .menuIntro{
+    grid-template-rows:calc(25px + 1.1 * clamp(23px,6vw,29px)) minmax(63px,auto);
+  }
+}
