@@ -15,12 +15,15 @@ function apronsoMotionClass(pose){return pose==="celebrate"?"apronso-motion-cele
 export function Apronso({pose="welcome",className="",alt=""}){return <img className={`apronso ${apronsoMotionClass(pose)} ${className}`.trim()} src={`/mascot/apronso-${pose}.webp`} alt={alt}/>}
 export function ApronsoNudge({pose="thinking",tone="light",children}){return <aside className={`apronsoNudge ${tone}`}><Apronso pose={pose} alt=""/><p>{children}</p></aside>}
 
+// Só recua no histórico quando o ecrã anterior é da própria app (approvaDepth>0).
+// Ao abrir a app diretamente num ecrã (ex.: sessão retomada), o anterior é outro
+// site: "Voltar" vai para o menu inicial em vez de sair da app.
+export function canGoBackInApp(){
+  return typeof window!=="undefined"&&!!window.history.state?.approvaScreen&&(Number(window.history.state?.approvaDepth)||0)>0;
+}
 function safePrevious(go,to){
   if(to){go(to);return}
-  if(typeof window!=="undefined"&&window.history.state?.approvaScreen&&window.history.length>1){
-    window.history.back();
-    return;
-  }
+  if(canGoBackInApp()){window.history.back();return}
   go("home");
 }
 export const Back=({go,to})=><button className="back" type="button" onClick={()=>safePrevious(go,to)}>← Voltar</button>;
@@ -32,7 +35,8 @@ function runExitReplacingSessionEntry(onExit){
   let intercepted=false;
   window.history.pushState=(state,title,url)=>{
     intercepted=true;
-    originalReplace({...state,approvaSessionGuard:false},title,url);
+    // A entrada é substituída (não acrescentada): mantém a profundidade atual.
+    originalReplace({...state,approvaSessionGuard:false,approvaDepth:Number(window.history.state?.approvaDepth)||0},title,url);
   };
   try{onExit?.()}finally{window.history.pushState=originalPush}
   if(!intercepted&&window.history.state?.approvaSessionGuard){
@@ -138,7 +142,7 @@ export const Shell=({children,className=""})=>{
     <section className="panel">
       {recoveryAnnouncement&&<p className="srOnly" role="alert">{recoveryAnnouncement}</p>}
       {autoBack&&<button className="back" type="button" onClick={()=>{
-        if(window.history.length>1)window.history.back();else goSafeStart();
+        if(canGoBackInApp())window.history.back();else goSafeScreen("home");
       }}>← Voltar</button>}
       {children}
       {diagnosticStartFailure&&<div className="recoveryActions" role="group" aria-label="Sair do diagnóstico" style={{display:"grid",gap:10,marginTop:18}}>

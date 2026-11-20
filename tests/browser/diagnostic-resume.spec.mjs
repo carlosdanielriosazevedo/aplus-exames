@@ -553,3 +553,43 @@ test("math-a · diagnóstico legado incompatível é conservado sem oferecer rei
  expect(preserved).toEqual(draft);
  await expect(page.getByRole("button",{name:/Começar.*novo|Recomeçar/u})).toHaveCount(0);
 });
+
+// Relato do product owner (2026-11-20): cruz → OK → ecrã do diagnóstico → «Voltar»
+// saía da app (ia para o Google). Agora a cruz leva ao menu e «Voltar» nunca sai.
+test("Matemática A · sair do diagnóstico leva ao menu e «Voltar» nunca sai da app",async({page})=>{
+  const prepared=mathStateAfterTwoAnswers();
+  await seed(page,prepared.state,prepared.draft);
+  await page.goto("about:blank");
+  await page.goto("/");
+  await expect(page.getByRole("button",{name:"Guardar e sair",exact:true})).toBeVisible({timeout:30_000});
+  page.once("dialog",dialog=>dialog.accept());
+  await page.getByRole("button",{name:"Guardar e sair",exact:true}).click();
+  await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page",{timeout:15_000});
+  const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-active-session-v1")));
+  expect(saved.responses).toHaveLength(2);
+  await page.getByRole("button",{name:"Continuar diagnóstico"}).first().click();
+  await expect(page.getByText("AVALIAÇÃO INICIAL · MATEMÁTICA A · PROVA 635",{exact:true})).toBeVisible();
+  await page.getByRole("button",{name:"← Voltar"}).click();
+  await expect(page).toHaveURL(/127\.0\.0\.1:3000/);
+  await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page");
+  await page.getByRole("button",{name:"Continuar diagnóstico"}).first().click();
+  await page.goBack();
+  await expect(page).toHaveURL(/127\.0\.0\.1:3000/);
+});
+
+test("«Voltar» num ecrã aberto diretamente nunca sai da app",async({page})=>{
+  const prepared=mathStateAfterTwoAnswers();
+  await seed(page,prepared.state,prepared.draft);
+  await page.goto("about:blank");
+  await page.goto("/");
+  await expect(page.getByRole("button",{name:"Guardar e sair",exact:true})).toBeVisible({timeout:30_000});
+  page.once("dialog",dialog=>dialog.accept());
+  await page.getByRole("button",{name:"Guardar e sair",exact:true}).click();
+  await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page",{timeout:15_000});
+  // Simular abertura direta do ecrã do diagnóstico (sem ecrãs da app atrás).
+  await page.evaluate(()=>{const state={...history.state,approvaScreen:"diag",approvaDepth:0};history.replaceState(state,"");dispatchEvent(new PopStateEvent("popstate",{state}))});
+  await expect(page.getByText("AVALIAÇÃO INICIAL · MATEMÁTICA A · PROVA 635",{exact:true})).toBeVisible();
+  await page.getByRole("button",{name:"← Voltar"}).click();
+  await expect(page).toHaveURL(/127\.0\.0\.1:3000/);
+  await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page");
+});

@@ -511,7 +511,9 @@ export default function App(){
 
   const go=x=>{
     if(typeof window!=="undefined"&&hydrated&&window.history.state?.approvaScreen!==x){
-      window.history.pushState({...window.history.state,approvaScreen:x,approvaSubjectId:s.activeSubjectId||null},"");
+      // approvaDepth: quantos ecrãs da app há atrás deste. Com 0, "Voltar" nunca
+      // usa o histórico do browser (sairia da app); vai para o menu inicial.
+      window.history.pushState({...window.history.state,approvaScreen:x,approvaSubjectId:s.activeSubjectId||null,approvaDepth:(Number(window.history.state?.approvaDepth)||0)+1},"");
     }
     setScreen(x);
   };
@@ -996,7 +998,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     <button className="primary" onClick={retryRecovery}>Tentar novamente</button></Shell>;
 
   return <Shell>
-    <StudySessionHeader progress={Math.max(8,estimate)} label={`${Math.min(blueprintLength,anchorsDone+1)}/${blueprintLength}`} onExit={()=>go("diag")} exitLabel="Guardar e sair"/>
+    <StudySessionHeader progress={Math.max(8,estimate)} label={`${Math.min(blueprintLength,anchorsDone+1)}/${blueprintLength}`} onExit={()=>go("home")} exitLabel="Guardar e sair"/>
     {saveError&&<div className="notice warning"><b>Estamos a conservar o teu progresso</b><span>Tenta continuar novamente. A resposta guardada não será repetida.</span></div>}
     <p className="questionContext">{theme(current.themeId).short}</p>
     <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary>
