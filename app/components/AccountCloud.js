@@ -21,7 +21,8 @@ import {normalizeAfterCloud} from "../lib/cloudApply";
 import {flushCloudNow,rememberCloudSession,bindCloudAccount,profilesDiffer} from "../lib/cloudAutosync";
 import {CLOUD_ACCOUNT_HINT_KEY} from "../lib/cloudSessionHint";
 import {queueSignupConsent,flushPendingConsent} from "../lib/consentClient";
-import {activeStateAccount,archiveActiveAccount,switchDeviceToAccount,purgeAccountFromDevice,hasAcademicData,eraseAcademicDataFromDevice} from "../lib/accountDeviceStorage";
+import {activeStateAccount,archiveActiveAccount,switchDeviceToAccount,purgeAccountFromDevice,hasAcademicData,eraseAcademicDataFromDevice,restoreAnonymousProgress} from "../lib/accountDeviceStorage";
+import {detectUnsavedWork,logoutPlan,logoutPromptCopy} from "../lib/logoutPlan";
 
 // O ranking ainda usa participantes simulados: não pedimos ano, distrito nem
 // escola a alunos (muitos menores) para uma funcionalidade que ainda não existe.
@@ -58,7 +59,7 @@ export function AccountCloud({s,setS,go,gate=false}){
   const [password,setPassword]=useState("");
   const [signupAge,setSignupAge]=useState(false);
   const [signupTerms,setSignupTerms]=useState(false);
-  const [forgetDevice,setForgetDevice]=useState(false);
+  const [logoutPrompt,setLogoutPrompt]=useState(null);
   const [deletePassword,setDeletePassword]=useState("");
   const [deleteConfirmation,setDeleteConfirmation]=useState("");
   const [resetStep,setResetStep]=useState("request");
@@ -226,36 +227,31 @@ export function AccountCloud({s,setS,go,gate=false}){
     }finally{setBusy(false);setDeletePassword("")}
   }
 
-  async function signout(){
+  // Terminar sessão: a conta é a fonte de verdade. Com o progresso confirmado na
+  // conta, este dispositivo fica limpo (sem caixa de "computador partilhado").
+  // Só se pergunta quando há trabalho a meio ou quando não foi possível guardar.
+  async function signout(confirmed=null){
     setBusy(true);setMessage(null);
     try{
-      // Última gravação antes de sair. Se falhar, o aluno decide: o progresso
-      // nunca é apagado deste dispositivo ao terminar sessão.
       const flushed=await flushCloudNow();
-      // Apagar deste dispositivo só é seguro com o progresso confirmado na conta.
-      if(forgetDevice&&flushed?.status!=="saved"){
-        setMessage({ok:false,text:"Não apagámos nada: o progresso mais recente ainda não está confirmado na conta. Verifica a ligação e tenta novamente."});
-        return;
-      }
-      if(!["saved","inactive","signed_out"].includes(flushed?.status)
-        &&typeof window!=="undefined"
-        &&!window.confirm("Ainda não foi possível guardar online o progresso mais recente. Fica guardado neste dispositivo. Terminar sessão mesmo assim?")){
-        setMessage({ok:false,text:"Sessão mantida. Tenta novamente quando tiveres ligação."});
-        return;
-      }
+      const plan=logoutPlan({flushStatus:flushed?.status,work:detectUnsavedWork(s),confirmed});
+      if(["offline","long","short"].includes(plan.kind)){setLogoutPrompt(plan);return}
+      setLogoutPrompt(null);
       await cloudSignOut();
-      // O progresso desta conta sai da área ativa do dispositivo (fica arquivado
-      // localmente e na conta) para não ficar visível ao próximo aluno.
       const owner=activeStateAccount()||(session.user?String(session.user.id):null);
       // Depois de sair, a app volta ao primeiro ecrã (com "Já tens conta? Entrar"),
       // e não ao onboarding: o próximo aluno tem de poder entrar na sua conta.
       try{sessionStorage.removeItem("a25-onboarding-entry")}catch{}
-      if(forgetDevice&&owner){
+      if(plan.kind==="purge"&&owner){
         purgeAccountFromDevice(owner);
+        // Progresso anónimo de outra pessoa posto à parte ("Não é meu") volta a aparecer.
+        restoreAnonymousProgress();
         try{localStorage.removeItem(CLOUD_ACCOUNT_HINT_KEY)}catch{}
         window.location.reload();
         return;
       }
+      // Sem confirmação da conta: os dados ficam neste dispositivo, arquivados por
+      // conta (não visíveis ao próximo aluno), para nada se perder.
       if(owner&&activeStateAccount()===owner){
         const archived=archiveActiveAccount(owner);
         if(archived.ok){
@@ -591,8 +587,12 @@ export function AccountCloud({s,setS,go,gate=false}){
         </div>)}
 
 
-      <label className="forgetDevice"><input type="checkbox" checked={forgetDevice} onChange={e=>setForgetDevice(e.target.checked)}/><span><b>Computador partilhado?</b> Apagar o meu progresso deste dispositivo ao sair. Continua guardado na tua conta.</span></label>
-      <button className="secondary" onClick={signout} disabled={busy}>Terminar sessão</button>
+      {logoutPrompt?(()=>{const copy=logoutPromptCopy(logoutPrompt);return <div className={`logoutPrompt ${copy.tone}`} role="alertdialog" aria-live="assertive" aria-label="Terminar sessão">
+        <p>{copy.text}</p>
+        <button className="primary" onClick={()=>setLogoutPrompt(null)} disabled={busy} autoFocus>{copy.stay}</button>
+        <button className="secondary" onClick={()=>signout(logoutPrompt.kind)} disabled={busy}>{copy.leave}</button>
+      </div>})()
+      :<button className="secondary" onClick={()=>signout()} disabled={busy}>Terminar sessão</button>}
 
       <details className="deleteAccount">
         <summary>Eliminar conta</summary>

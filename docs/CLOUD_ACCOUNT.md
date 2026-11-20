@@ -50,3 +50,30 @@ Depois de novo deploy, o ecrã Conta A+ deixa o modo local e apresenta login/reg
 
 Os endpoints `NEXT_PUBLIC_*` não são passwords de base de dados.
 São endpoints públicos do serviço. O acesso a dados é autorizado por JWT + RLS.
+
+## Terminar sessão e dispositivos partilhados (2026-11-20)
+
+Decisão do product owner: a conta é a fonte de verdade; o dispositivo é só uma
+cópia temporária. Lógica em `app/lib/logoutPlan.js`, testes em
+`tests/unit/logoutPlan.test.mjs`.
+
+| Situação ao carregar em «Terminar sessão» | O que acontece |
+|---|---|
+| Progresso confirmado na conta, nada a meio | Apaga tudo deste dispositivo, sem perguntar |
+| Missão, diagnóstico ou treino a meio | Aviso de uma linha («recomeça na próxima vez»); «Sair» apaga |
+| Mini-exame, exame de FQ A ou texto de Português a meio | Aviso forte, «Voltar e terminar» em destaque; «Sair e apagar» |
+| Sem confirmação da conta (sem rede, sessão expirada) | Nunca apaga: «Ficar e tentar outra vez» ou «Sair e guardar só neste dispositivo» (arquivo local da conta, invisível ao próximo aluno) |
+
+A antiga caixa «Computador partilhado?» foi retirada: o comportamento seguro passou a ser o normal.
+
+**Irmãos no mesmo dispositivo.** Progresso anónimo (estudo feito sem conta)
+nunca entra numa conta sem o aluno confirmar «Sim, é meu». Se escolher
+«Não é meu», esse progresso é posto à parte no dispositivo (não é enviado nem
+apagado), a app carrega o progresso da conta, e o progresso posto à parte volta a
+aparecer quando essa conta terminar sessão. Progresso ligado a outra conta é
+sempre bloqueado (nem enviado nem substituído).
+
+**Vários dispositivos.** Cada alteração é gravada na conta poucos segundos depois;
+ao esconder o separador grava logo. Ao abrir a app, voltar ao separador ou à
+janela, a app consulta a conta e aplica (ou junta) o progresso feito noutro
+dispositivo. Não há consultas periódicas, para a base de dados poder adormecer.

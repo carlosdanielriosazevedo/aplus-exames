@@ -2050,7 +2050,7 @@ button,input,select,textarea{max-width:100%}
 .pendingCloudSave b{font-size:14px}.pendingCloudSave span{font-size:12.5px}.pendingCloudSave button{font-size:13.5px}
 .rankConsent,.privacyRankNote,.rankingIdentityCard>div:first-child small,.rankingIdentityCard>div:first-child span,.rankingIdentityCard>label:not(.rankConsent),.rankingProfile>label:not(.rankConsent){font-size:12.5px}
 .rankingIdentityCard input,.rankingIdentityCard select{font-size:16px}
-.forgetDevice{display:flex;gap:10px;align-items:flex-start;margin:14px 0 8px;font-size:13.5px;line-height:1.45;color:#4d566b;cursor:pointer}.forgetDevice input{width:20px;height:20px;margin-top:1px;flex:none;accent-color:#6b54db}.forgetDevice b{color:#111a32}
+.logoutPrompt{display:grid;gap:10px;margin:14px 0 8px;padding:14px;border-radius:14px;border:1px solid #dfe4eb;background:#f7f8fb}.logoutPrompt p{margin:0;font-size:14px;line-height:1.5;color:#111a32;font-weight:600}.logoutPrompt.warn{background:#fff8e8;border-color:#f5d48a}.logoutPrompt.danger{background:#fdf1f1;border-color:#f0b9b9}.logoutPrompt button{width:100%}
 .realAuthForm .linkButton{background:transparent;border:0;color:#5a45c9;font-size:14px;font-weight:700;padding:8px;text-decoration:underline;cursor:pointer}.realAuthForm .resetTitle{font-size:16px;color:#111a32}
 .cloudMessage b{font-size:14px}.cloudMessage span{font-size:13.5px;line-height:1.5}
 .landingAccountForm{margin-top:10px}.landingAccountForm button,.welcomeAccountLink{background:transparent!important;border:0!important;color:#4d566b!important;font-size:15.5px!important;font-weight:600!important;padding:10px 14px!important;box-shadow:none!important;cursor:pointer;width:auto!important;min-height:44px}.landingAccountForm u,.welcomeAccountLink u{color:#5a45c9;font-weight:800}

@@ -11,6 +11,7 @@ import {
   registerCloudFlush,retryDelayMs,rememberCloudSession
 } from "../lib/cloudAutosync";
 import {normalizeAfterCloud} from "../lib/cloudApply";
+import {setAsideAnonymousProgress} from "../lib/accountDeviceStorage";
 
 const DEBOUNCE_MS=8000;
 
@@ -156,6 +157,27 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
     return ()=>clearTimeout(timer.current);
   },[fingerprint,account,cycle]);
 
+  // "Não é meu": o progresso anónimo de outra pessoa é posto à parte (não entra
+  // nesta conta, não é apagado) e a app recarrega com o progresso da conta.
+  const declineAdoption=useCallback(()=>{
+    const aside=setAsideAnonymousProgress();
+    setAdoption(false);
+    if(aside.ok&&aside.archived>0){window.location.reload();return}
+    setStatus("not_synced");
+  },[]);
+
+  // Voltar à janela (ex.: estudou no telemóvel e regressa ao computador com o
+  // separador aberto): ver se outro dispositivo avançou. Sem consultas periódicas,
+  // para a base de dados poder adormecer quando ninguém está a estudar.
+  useEffect(()=>{
+    if(!account)return;
+    let last=0;
+    const onFocus=()=>{const now=Date.now();if(now-last<30_000)return;last=now;cycle({fetchRemote:true})};
+    window.addEventListener("focus",onFocus);
+    window.addEventListener("pageshow",onFocus);
+    return ()=>{window.removeEventListener("focus",onFocus);window.removeEventListener("pageshow",onFocus)};
+  },[account,cycle]);
+
   // Ao sair da página ou mudar de separador: gravar já; ao voltar: ver se outro
   // dispositivo avançou.
   useEffect(()=>{
@@ -171,9 +193,9 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
   if(adoption&&account)return <div role="dialog" aria-modal="true" aria-labelledby="cloud-adopt-title" style={styles.overlay}>
     <div style={styles.dialog}>
       <b id="cloud-adopt-title" style={{fontSize:18}}>Guardar o progresso deste dispositivo na tua conta?</b>
-      <p style={styles.text}>Este dispositivo tem estudo feito antes de entrares{account.email?<> como <b>{account.email}</b></>:null}. Se for teu, juntamo-lo ao progresso da conta para o encontrares noutros dispositivos. Nada é apagado. Se este computador for partilhado e o progresso não for teu, escolhe “Agora não”.</p>
+      <p style={styles.text}>Este dispositivo tem estudo feito antes de entrares{account.email?<> como <b>{account.email}</b></>:null}. Se for teu, juntamo-lo ao progresso da conta para o encontrares noutros dispositivos. Nada é apagado. Se não for teu (por exemplo, de um irmão que usou este dispositivo), escolhe “Não é meu”: fica guardado à parte, não entra na tua conta e volta a aparecer quando terminares sessão.</p>
       <button type="button" style={styles.primary} onClick={()=>{adoptionRef.current=true;setS(prev=>bindCloudAccount(prev,account.id,{adopted:true}));setAdoption(false);setTimeout(()=>cycle({fetchRemote:true}),0)}}>Sim, é meu — guardar na conta</button>
-      <button type="button" style={styles.secondary} onClick={()=>{setAdoption(false);setStatus("not_synced")}}>Agora não</button>
+      <button type="button" style={styles.secondary} onClick={declineAdoption}>Não é meu</button>
     </div>
   </div>;
 
