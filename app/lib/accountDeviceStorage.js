@@ -182,3 +182,17 @@ export function eraseAcademicDataFromDevice(accountId){
   }
   return {ok:true,removed};
 }
+
+// Progresso anónimo de outra pessoa (ex.: um irmão que estudou sem conta neste
+// dispositivo). Quando o aluno que entra diz "Não é meu", esse progresso é posto
+// à parte (nunca entra na conta dele nem é apagado) e volta a aparecer quando
+// esse aluno terminar sessão.
+export const ANONYMOUS_ARCHIVE_ID="anonimo-neste-dispositivo";
+export function setAsideAnonymousProgress(){
+  if(activeStateAccount())return {ok:false,code:"NOT_ANONYMOUS"};
+  return archiveActiveAccount(ANONYMOUS_ARCHIVE_ID);
+}
+export function restoreAnonymousProgress(){
+  if(hasAcademicData())return {ok:true,restored:0};
+  return restoreAccountArchive(ANONYMOUS_ARCHIVE_ID);
+}

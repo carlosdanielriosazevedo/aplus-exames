@@ -30,9 +30,12 @@ async function scenario(name,{seed,remote,postMode='ok',session='A'},check){
     assert.equal(posts[0].state.xp,40);assert.ok(!('auth_user_id' in posts[0]));
     const s=await local();assert.equal(s.cloudSync.accountId,'A');assert.equal(s.cloudSync.baseRevision,1);
   });
-  await scenario('S2 "Agora não": nada é enviado',{seed:studied,remote:null},async({p,posts})=>{
-    await p.getByRole('button',{name:'Agora não'}).click();await p.waitForTimeout(9500);
-    assert.equal(posts.length,0);
+  await scenario('S2 "Não é meu" (ex.: irmão): o estudo anónimo nunca entra na conta e fica à parte no dispositivo',{seed:studied,remote:null},async({p,posts,local})=>{
+    await p.getByRole('button',{name:'Não é meu'}).click();await p.waitForTimeout(9500);
+    assert.ok(posts.every(body=>!(body.state?.xp>0)&&!body.state?.diagnosticDone),'o estudo anónimo não é enviado');
+    const aside=await p.evaluate(()=>localStorage.getItem('approva-account-archive-v1:anonimo-neste-dispositivo'));
+    assert.ok(aside&&aside.includes('\\"xp\\":40'),'o estudo anónimo fica guardado à parte');
+    assert.notEqual((await local())?.xp,40);
   });
   await scenario('S3 progresso de outra conta: bloqueia, não envia nem substitui',{seed:{...studied,cloudSync:{accountId:'B',baseRevision:2}},remote:{revision:9,state_json:{schema:'aplus-student-state-v8',xp:999}}},async({p,posts,local})=>{
     await p.getByText(/progresso de outra conta/).waitFor({timeout:5000});
