@@ -591,14 +591,13 @@ test("Matemática A · sair do diagnóstico leva ao menu e «Voltar» nunca sai 
   await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page",{timeout:15_000});
   const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-active-session-v1")));
   expect(saved.responses).toHaveLength(2);
+  // «Continuar diagnóstico» vai direto à pergunta; o browser «para trás» volta ao menu, dentro da app.
   await page.getByRole("button",{name:"Continuar diagnóstico"}).first().click();
-  await expect(page.getByText("AVALIAÇÃO INICIAL · MATEMÁTICA A · PROVA 635",{exact:true})).toBeVisible();
-  await page.getByRole("button",{name:"← Voltar"}).click();
-  await expect(page).toHaveURL(/127\.0\.0\.1:3000/);
-  await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page");
-  await page.getByRole("button",{name:"Continuar diagnóstico"}).first().click();
+  await expect(page.getByRole("button",{name:"Guardar e sair",exact:true})).toBeVisible({timeout:30_000});
+  page.once("dialog",dialog=>dialog.accept());
   await page.goBack();
   await expect(page).toHaveURL(/127\.0\.0\.1:3000/);
+  await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page",{timeout:15_000});
 });
 
 test("«Voltar» num ecrã aberto diretamente nunca sai da app",async({page})=>{
@@ -631,7 +630,10 @@ test("Matemática A · reabrir a app com diagnóstico a meio abre no menu; recar
   await page.goto("/");
   await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page",{timeout:30_000});
   await expect(page.getByRole("button",{name:"Guardar e sair",exact:true})).toHaveCount(0);
-  await continueFromHome(page);
+  // "Continuar diagnóstico" vai direto à pergunta, sem voltar ao ecrã de apresentação.
+  await page.getByRole("button",{name:"Continuar diagnóstico"}).first().click();
+  await expect(page.getByRole("button",{name:"Guardar e sair",exact:true})).toBeVisible({timeout:30_000});
+  await expect(page.getByText("AVALIAÇÃO INICIAL · MATEMÁTICA A · PROVA 635",{exact:true})).toHaveCount(0);
   await page.reload();
   await expect(page.getByRole("button",{name:"Guardar e sair",exact:true})).toBeVisible({timeout:30_000});
   const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-active-session-v1")));
