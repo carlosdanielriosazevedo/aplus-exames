@@ -301,3 +301,53 @@
 }
 /* Treinar no computador usa a mesma expressão do telemóvel (sentado nos livros). */
 html body .trainHub .trainIntro::after{background-image:url('/mascot/apronso-books.webp')}
+
+/* ===== Topo idêntico nos quatro separadores (pedido do product owner, 2026-11-21) =====
+   Aprender, Treinar, Ranking e Progresso: etiqueta, título e Apronso nas mesmas
+   posições e tamanhos, sem animação no topo — mudar de separador não pode dar
+   nenhuma sensação de movimento. Medido por tests/browser/tab-heading-stability. */
+html body .mobileHeadingApronso,
+html body .rankingHeadingApronso{animation:none!important;transform:none!important}
+@media(max-width:760px){
+  html body .learnHome>.studentSurface>.learnIntro .mobileMainTitle,
+  html body .trainHub>.panel>.sectionIntro .mobileMainTitle,
+  html body .progressPage>.panel>.sectionIntro .mobileMainTitle,
+  html body .rankingDesktopShell>.panel>.rankingHero>.sectionIntro .rankingTitle{display:block!important;position:relative!important;box-sizing:border-box!important;min-width:0!important;min-height:0!important;margin:0!important;padding:0 clamp(72px,22vw,94px) 0 0!important}
+  html body .learnHome>.studentSurface>.learnIntro .mobileMainTitle>p,
+  html body .trainHub>.panel>.sectionIntro .mobileMainTitle>p,
+  html body .progressPage>.panel>.sectionIntro .mobileMainTitle>p,
+  html body .rankingDesktopShell>.panel>.rankingHero>.sectionIntro .rankingTitle>p{margin:0!important;padding:0!important;height:20px!important;line-height:20px!important;white-space:nowrap!important}
+  html body .learnHome>.studentSurface>.learnIntro .mobileMainTitle>h1,
+  html body .trainHub>.panel>.sectionIntro .mobileMainTitle>h1,
+  html body .progressPage>.panel>.sectionIntro .mobileMainTitle>h1,
+  html body .rankingDesktopShell>.panel>.rankingHero>.sectionIntro .rankingTitle>h1{margin:5px 0 0!important;padding:0!important;font-size:clamp(23px,6vw,29px)!important;line-height:1.1!important;overflow-wrap:normal!important}
+  html body .trainHub>.panel>.sectionIntro .mobileHeadingApronso,
+  html body .progressPage>.panel>.sectionIntro .mobileHeadingApronso,
+  html body .rankingDesktopShell>.panel>.rankingHero>.sectionIntro .rankingTitle .rankingHeadingApronso{display:block!important;position:absolute!important;right:0!important;bottom:auto!important;top:var(--tab-apronso-top)!important;left:auto!important;margin:0!important;width:clamp(68px,21vw,90px)!important;height:clamp(76px,24vw,100px)!important;object-fit:contain!important;object-position:center bottom!important;pointer-events:none!important}
+  html body .progressPage>.panel>.progressIntro::after{content:none!important;display:none!important}
+  /* Apronso preso pelo topo (não desce quando o título ocupa duas linhas):
+     pés alinhados com o fundo de um título de uma linha. */
+  html body{--tab-apronso-top:calc(25px + 1.1 * clamp(23px,6vw,29px) - clamp(76px,24vw,100px))}
+  html body .learnHome>.studentSurface>.learnIntro .mobileMainTitle::after{top:var(--tab-apronso-top)!important;bottom:auto!important;right:0!important;width:clamp(68px,21vw,90px)!important;height:clamp(76px,24vw,100px)!important}
+  /* Acertos de posição medidos (mesma origem que o Aprender). */
+  html body .trainHub>.panel>.studentTop{margin-top:1px!important}
+  html body .trainHub>.panel>.sectionIntro{margin-top:-8px!important}
+  html body .rankingDesktopShell>.panel>.rankingHero{margin-top:-5px!important;margin-left:-1px!important;margin-right:0!important;width:calc(100% + 2px)!important;max-width:none!important}
+  html body .progressPage>.panel>.progressIntro{margin-top:-8px!important;margin-left:-1px!important;margin-right:0!important;width:calc(100% + 2px)!important;max-width:none!important}
+}
+/* Computador: mesmo contrato (referência: Aprender). Apronso preso pelo topo. */
+@media(min-width:761px){
+  html body .learnHome>.studentSurface>.learnIntro .mobileMainTitle>p,
+  html body .trainHub>.panel>.sectionIntro .mobileMainTitle>p,
+  html body .progressPage>.panel>.sectionIntro .mobileMainTitle>p,
+  html body .rankingDesktopShell>.panel>.rankingHero>.sectionIntro .rankingTitle>p{margin:0!important;padding:0!important;height:22.5px!important;line-height:22.5px!important}
+  html body .learnHome>.studentSurface>.learnIntro .mobileMainTitle>h1,
+  html body .trainHub>.panel>.sectionIntro .mobileMainTitle>h1,
+  html body .progressPage>.panel>.sectionIntro .mobileMainTitle>h1,
+  html body .rankingDesktopShell>.panel>.rankingHero>.sectionIntro .rankingTitle>h1{margin:4px 0 0!important;font-size:42px!important;line-height:1.5!important}
+  html body .progressPage>.panel>.progressIntro{position:relative!important;box-sizing:border-box!important;width:auto!important;max-width:none!important;min-height:138px!important;margin-top:var(--progress-intro-mt, 0px)!important;padding:0 138px 0 0!important}
+  html body .progressPage>.panel>.progressIntro::after{content:""!important;display:block!important;position:absolute!important;right:6px!important;top:-2px!important;bottom:auto!important;width:126px!important;height:142px!important;background:url('/mascot/apronso-progress.webp') center bottom/contain no-repeat!important;pointer-events:none!important}
+  html body .learnHome>.studentSurface>.learnIntro::after,
+  html body .trainHub .trainIntro::after{top:-2px!important;bottom:auto!important}
+  html body .rankingDesktopShell .rankingHeadingApronso{top:-2px!important;bottom:auto!important}
+}

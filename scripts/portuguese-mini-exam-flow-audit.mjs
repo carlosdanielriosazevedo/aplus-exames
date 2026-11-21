@@ -45,7 +45,8 @@ assert.match(studyModeHub,/go\("reviewMatter"\)/u,"Rever matéria deve abrir um 
 assert.match(page,/screen==="reviewMatter"&&s\.activeSubjectId==="portuguese"/u,"o router comum deve reconhecer o ecrã dedicado de Rever matéria para Português");
 assert.match(portugueseSubject,/view==="reviewMatter"/u,"Português deve renderizar Rever matéria como ecrã próprio");
 assert.match(portugueseSubject,/if\(!session&&view==="train"\)return[\s\S]{0,260}<StudyModeHub/u,"o hub de Treinar deve reutilizar o componente comum antes do ecrã Rever matéria");
-assert.match(portugueseSubject,/<Apronso pose="progress" alt="Apronso acompanha o teu progresso"\/>/u,"o progresso de Português deve reutilizar o mesmo Apronso e dimensionamento de Matemática A");
+// 2026-11-21: o Apronso do Progresso passou para o topo (igual nas três disciplinas e aos outros separadores).
+assert.match(portugueseSubject,/<Apronso className="mobileHeadingApronso" pose="progress" alt="Apronso acompanha o teu progresso"\/>/u,"o progresso de Português deve reutilizar o mesmo Apronso e dimensionamento de Matemática A");
 assert.match(globalCss,/\.divisionBadge\{display:flex;flex-direction:column;align-items:center;justify-content:center\}/u,"o cartão semanal de XP deve centrar verticalmente medalha, divisão e XP");
 assert.match(learnPanel,/REVER MATÉRIA/u,"o ecrã dedicado deve usar a nomenclatura Rever matéria");
 assert.match(learnPanel,/SCHOOL_YEARS/u,"Rever matéria deve permitir consultar explicitamente os três anos do secundário");

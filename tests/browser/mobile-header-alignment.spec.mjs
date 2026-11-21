@@ -65,7 +65,9 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
         expect(mascot.legacyContent).toBe('none');
         expect(mascot.content).toBe('""');
         expect(mascot.background).toContain('apronso-welcome.webp');
-        expect(mascot.bottom).toBe('0px');
+        // Pés alinhados com o fundo de um título de uma linha; o Apronso é preso pelo
+        // topo (2026-11-21) e a posição calculada pode ter arredondamentos sub-píxel.
+        expect(Math.abs(parseFloat(mascot.bottom))).toBeLessThanOrEqual(0.5);
         expect(mascot.copyTop).toBeGreaterThan(mascot.titleBottom);
         await expect(page.locator('.learnIntro img.apronso')).toHaveCount(0);
       }
