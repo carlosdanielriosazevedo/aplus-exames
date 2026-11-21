@@ -299,3 +299,5 @@
     object-position:center bottom;
   }
 }
+/* Treinar no computador usa a mesma expressão do telemóvel (sentado nos livros). */
+html body .trainHub .trainIntro::after{background-image:url('/mascot/apronso-books.webp')}
