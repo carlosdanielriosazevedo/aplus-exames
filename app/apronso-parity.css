@@ -235,3 +235,44 @@
     flex:0 0 auto;width:auto;min-width:72px;max-width:none;padding:0 6px!important;
   }
 }
+
+/* 2026-11-21 (pedido do product owner): no telemóvel o Apronso ficava com ~64 px,
+   espremido ao lado da explicação. Agora fica ao lado do título (que ocupa duas
+   linhas e deixa espaço livre) e a explicação usa a largura toda. Igual nas três
+   disciplinas. Substitui as regras compactas anteriores. Especificidade reforçada (html body)
+   porque o Next.js pode alterar a ordem dos ficheiros CSS. */
+@media(max-width:760px){
+  html body .diagApronsoHero{
+    display:grid;
+    position:static;
+    grid-template-columns:minmax(0,1fr) 118px;
+    grid-template-areas:"title mascot" "card card";
+    column-gap:6px;
+    align-items:end;
+  }
+  html body .diagApronsoHero>div{display:contents}
+  html body .diagApronsoHero h1{grid-area:title;margin:0 0 12px;padding-right:0;align-self:end}
+  html body .diagApronsoHero .diagPurposeHero{grid-area:card;min-height:0;padding:18px 20px;margin-top:4px}
+  html body .diagApronsoHero>.apronso{
+    grid-area:mascot;
+    position:static;
+    justify-self:end;
+    align-self:end;
+    width:118px;
+    height:140px;
+    padding:0;
+    margin:0 0 -10px;
+    object-fit:contain;
+    object-position:center bottom;
+    z-index:1;
+  }
+}
+@media(max-width:360px){
+  html body .diagApronsoHero{grid-template-columns:minmax(0,1fr) 100px}
+  html body .diagApronsoHero>.apronso{width:100px;height:122px}
+}
+/* Conselhos do Apronso no telemóvel: 68 px → 80 px, coerente com os restantes ecrãs. */
+@media(max-width:760px){
+  html body .apronsoNudge,html body .examHub .apronsoNudge{grid-template-columns:80px minmax(0,1fr)}
+  html body .apronsoNudge .apronso,html body .examHub .apronsoNudge .apronso{width:80px;height:90px}
+}

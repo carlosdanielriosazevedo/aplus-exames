@@ -836,7 +836,7 @@ const PortugueseSubject=dynamic(()=>import("./components/PortugueseSubject"),{ss
 const PRE_DIAGNOSTIC_TOUR_STEPS=[
   {mascot:"welcome",eyebrow:"PASSO 1 DE 4",title:"Conhece o Apronso",text:<>Sou o teu parceiro de estudo na <BrandName/>. Vou ajudar-te a perceber o que estudar e acompanhar-te até aos exames.</>},
   {mascot:"thinking",eyebrow:"PASSO 2 DE 4",title:"Primeiro, quero conhecer-te",text:"O diagnóstico não é uma nota. Serve para encontrar um bom ponto de partida em cada disciplina."},
-  {mascot:"thinking",eyebrow:"PASSO 3 DE 4",title:"Missões curtas e focadas",text:"Na Home vais encontrar uma Missão diária escolhida a partir do teu percurso e da evidência que fores criando."},
+  {mascot:"pointing",eyebrow:"PASSO 3 DE 4",title:"Missões curtas e focadas",text:"Na Home vais encontrar uma Missão diária escolhida a partir do teu percurso e da evidência que fores criando."},
   {mascot:"progress",eyebrow:"PASSO 4 DE 4",title:"Treinar, fazer exames e acompanhar a evolução",text:["Em Praticar escolhes matéria e submatéria.","Em Exames fazes Mini-exames e, quando disponível, o Exame Completo.","Em Progresso acompanhas a evolução de cada disciplina."]}
 ];
 
@@ -1116,7 +1116,7 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
 }
 
 const FIRST_USE_TOUR_STEPS=[
-  {mascot:"thinking",eyebrow:"PASSO 1 DE 2",title:"Onde encontras o Apronso",text:"Estou contigo na Missão diária, onde a app escolhe uma sessão curta com base no que será mais útil estudar a seguir."},
+  {mascot:"pointing",eyebrow:"PASSO 1 DE 2",title:"Onde encontras o Apronso",text:"Estou contigo na Missão diária, onde a app escolhe uma sessão curta com base no que será mais útil estudar a seguir."},
   {mascot:"progress",eyebrow:"PASSO 2 DE 2",title:"Treina e acompanha a evolução",text:["Em Praticar escolhes qualquer matéria.","Em Exames encontras Mini-exames e, quando disponível, o Exame Completo.","Em Progresso vês o teu Domínio e a certeza da app."]}
 ];
 
@@ -1903,7 +1903,7 @@ function Exams({s,go,startMini}){
   const miniSelection=miniQuestions.length-miniConstructed;
   const miniYears=[...new Set(miniQuestions.map(q=>theme(q.themeId)?.year).filter(Boolean))];
   return <Shell className="wideStudentShell examHub"><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Matemática A · 635</h1><p className="muted">Escolhe um Mini-exame para uma sessão curta em contexto de prova. O Exame Completo ficará disponível quando o respetivo motor estiver validado.</p></div>
-    <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</ApronsoNudge>
+    <ApronsoNudge pose="crossed" tone="dark">Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</ApronsoNudge>
     <FriendsBetaDisclaimer s={s} compact/>
     {pausedExamDraft?.kind==="mini_exam"&&<div className="pausedSession"><div><small>MINI-EXAME EM PAUSA</small><b>Mini-exame de Matemática A</b><span>O teu progresso ficou guardado neste dispositivo.</span></div><button onClick={()=>go(draftScreen(pausedExamDraft)||"miniExamRun")}>Continuar →</button></div>}
     <button className="exam examAction" disabled={!miniReady} onClick={()=>miniReady&&startMini()}>

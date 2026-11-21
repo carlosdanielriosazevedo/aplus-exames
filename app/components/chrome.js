@@ -5,9 +5,11 @@ import {isFriendsBeta, friendsBetaRequested} from "../lib/friendsBeta";
 import {engagementSummary} from "../lib/engagement";
 import {SECONDARY_EXAM_SUBJECTS} from "../data/subjects";
 
+// Logótipo em texto igual ao do ecrã de abertura: «APP» azul-escuro + «rova+»
+// laranja (decisão do product owner, 2026-11-21, opção A).
 export const BrandName = ({className=""}) => (
   <span className={`brandName ${className}`.trim()} aria-label="APProva+">
-    <span className="brandAP">AP</span><span className="brandProva">Prova</span><span className="brandPlus">+</span>
+    <span className="brandAP">APP</span><span className="brandProva">rova</span><span className="brandPlus">+</span>
   </span>
 );
 export const Logo = () => <div className="logo"><BrandName/></div>;
