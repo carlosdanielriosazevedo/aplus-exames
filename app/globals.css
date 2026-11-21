@@ -2083,3 +2083,14 @@ button,input,select,textarea{max-width:100%}
 .installPrimary{border:0;background:var(--app-orange);color:var(--app-navy);border-radius:12px;padding:10px 18px;font-size:15px;font-weight:900;cursor:pointer}
 .installLater{border:0;background:transparent;color:#4d566b;padding:8px 6px;font-size:13.5px;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 @media(min-width:761px){.installAppPrompt{display:none}}
+/* Zoom acidental no telemóvel (pedido do product owner, 2026-11-21).
+   O zoom com dois dedos continua disponível (acessibilidade, WCAG 1.4.4);
+   só se evitam os dois zooms involuntários:
+   1) toque duplo — touch-action:manipulation em toda a app;
+   2) zoom automático do iPhone ao tocar num campo com letra < 16 px. */
+html,body,a,button,input,select,textarea,label,summary,[role="button"]{touch-action:manipulation}
+@media(pointer:coarse){
+  html body input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  html body select,
+  html body textarea{font-size:max(16px,1em)}
+}
