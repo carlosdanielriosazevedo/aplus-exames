@@ -209,10 +209,11 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
 
 const styles={
   overlay:{position:"fixed",inset:0,zIndex:10000,background:"rgba(15,13,35,.72)",display:"flex",alignItems:"center",justifyContent:"center",padding:18},
-  dialog:{background:"#fff",borderRadius:18,padding:22,maxWidth:440,display:"grid",gap:12,color:"#111a32"},
+  dialog:{background:"#fff",borderRadius:18,padding:24,maxWidth:440,display:"grid",gap:12,color:"#111a32",textAlign:"center"},
   text:{margin:0,fontSize:14,lineHeight:1.55,color:"#4d566b"},
-  primary:{border:0,background:"#6b54db",color:"#fff",borderRadius:12,padding:"13px 16px",fontWeight:900},
+  // Cores da marca (antes roxo): ação principal azul-escuro, como no resto da app.
+  primary:{border:0,background:"var(--app-card-dark, #0f3047)",color:"#fff",borderRadius:12,padding:"14px 16px",fontWeight:900},
   secondary:{border:"1px solid #dfe4eb",background:"#fff",color:"#4d566b",borderRadius:12,padding:"12px 16px",fontWeight:700},
   pill:{position:"fixed",left:12,right:12,bottom:"calc(env(safe-area-inset-bottom, 0px) + 84px)",zIndex:9000,margin:"0 auto",maxWidth:520,display:"flex",gap:8,alignItems:"center",background:"#20293d",color:"#fff",borderRadius:12,padding:"10px 12px",fontSize:13,boxShadow:"0 8px 24px #17203c33"},
-  link:{marginLeft:"auto",border:0,background:"transparent",color:"#b9adff",fontWeight:900,whiteSpace:"nowrap"}
+  link:{marginLeft:"auto",border:0,background:"transparent",color:"#ffb13b",fontWeight:900,whiteSpace:"nowrap"}
 };

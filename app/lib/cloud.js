@@ -4,6 +4,18 @@ import {mergeSelectedSubjects} from "./cloudStateMerge.js";
 import {createInternalNeonAuth} from "@neondatabase/neon-js/auth";
 import {BetterAuthReactAdapter} from "@neondatabase/neon-js/auth/react/adapters";
 import {authErrorMessage} from "./authErrorCopy.js";
+import {reportClientError} from "./clientRuntimeReport.js";
+
+// As mensagens ao aluno são genéricas (não revelam se um email tem conta). Para
+// diagnóstico, regista-se só a operação, o código e o estado do erro — nunca o
+// email, o nome nem a mensagem do serviço.
+function reportAuthFailure(kind,error){
+  const code=String(error?.code||"SEM_CODIGO").toUpperCase().replace(/[^A-Z0-9_]/g,"").slice(0,48)||"SEM_CODIGO";
+  const status=Number(error?.status)||0;
+  // Tipo "runtime" já aceite pela rota (as rotas existentes estão congeladas);
+  // o prefixo "auth_failure:" identifica estes registos.
+  try{reportClientError({kind:"runtime",error:{name:`auth_failure:${kind}:${code}:${status}`}})}catch{}
+}
 
 let authInternalSingleton=null;
 
@@ -86,7 +98,7 @@ export async function cloudSignIn({email,password}){
   const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
   const result=await authCall("signin",()=>client.signIn.email({email,password}));
-  if(result?.error)throw new Error(authErrorMessage("signin",result.error));
+  if(result?.error){reportAuthFailure("signin",result.error);throw new Error(authErrorMessage("signin",result.error))}
   await provisionServerIdentity();
   return result;
 }
@@ -100,7 +112,7 @@ export async function cloudRequestPasswordReset({email}){
     ?client.forgetPassword.emailOtp({email})
     :client.emailOtp.sendVerificationOtp({email,type:"forget-password"}));
   // Email sem conta: a mesma resposta que com conta (não revelar quem está registado).
-  if(result?.error&&!/USER_NOT_FOUND/i.test(String(result.error.code||"")))throw new Error(authErrorMessage("reset_request",result.error));
+  if(result?.error&&!/USER_NOT_FOUND/i.test(String(result.error.code||""))){reportAuthFailure("reset_request",result.error);throw new Error(authErrorMessage("reset_request",result.error))}
   return {ok:true};
 }
 
@@ -108,7 +120,7 @@ export async function cloudResetPassword({email,otp,password}){
   const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
   const result=await authCall("reset",()=>client.emailOtp.resetPassword({email,otp,password}));
-  if(result?.error)throw new Error(authErrorMessage("reset",result.error));
+  if(result?.error){reportAuthFailure("reset",result.error);throw new Error(authErrorMessage("reset",result.error))}
   return {ok:true};
 }
 
@@ -116,7 +128,7 @@ export async function cloudSignUp({name,email,password}){
   const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
   const result=await authCall("signup",()=>client.signUp.email({name,email,password}));
-  if(result?.error)throw new Error(authErrorMessage("signup",result.error));
+  if(result?.error){reportAuthFailure("signup",result.error);throw new Error(authErrorMessage("signup",result.error))}
   await provisionServerIdentity();
   return result;
 }
