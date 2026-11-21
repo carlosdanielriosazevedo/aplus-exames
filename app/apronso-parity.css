@@ -276,3 +276,26 @@
   html body .apronsoNudge,html body .examHub .apronsoNudge{grid-template-columns:80px minmax(0,1fr)}
   html body .apronsoNudge .apronso,html body .examHub .apronsoNudge .apronso{width:80px;height:90px}
 }
+/* Computador (pedido do product owner, 2026-11-21): o Apronso ocupa a altura
+   do bloco — topo do cabelo à altura do título e pés no fundo da caixa
+   amarela. Posição absoluta para a imagem não alterar a altura do bloco. */
+@media(min-width:761px){
+  html body .diagApronsoHero{display:grid;position:relative;grid-template-columns:minmax(0,1fr) 220px;gap:24px;align-items:start}
+  html body .diagApronsoHero>div{display:block;min-width:0}
+  html body .diagApronsoHero h1{margin-top:0}
+  html body .diagApronsoHero .diagPurposeHero{margin-bottom:24px}
+  html body .diagApronsoHero>.apronso{
+    position:absolute;
+    top:0;
+    right:0;
+    width:220px;
+    /* do topo do título ao fundo da caixa (24 px de margem por baixo dela);
+       a imagem tem ~2 % de transparência por baixo dos pés. */
+    height:calc(100% - 24px + 1.6%);
+    max-width:none;
+    margin:0;
+    padding:0;
+    object-fit:contain;
+    object-position:center bottom;
+  }
+}

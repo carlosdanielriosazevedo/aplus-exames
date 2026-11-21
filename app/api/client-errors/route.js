@@ -9,7 +9,7 @@ const MAX_BYTES=12_000;
 const WINDOW_MS=60_000;
 const LIMIT=20;
 const buckets=new Map();
-const ALLOWED_KINDS=new Set(["runtime","window_error","unhandled_rejection","react_boundary","global_boundary"]);
+const ALLOWED_KINDS=new Set(["runtime","window_error","unhandled_rejection","react_boundary","global_boundary","auth_failure"]);
 
 function trim(value,max){return String(value??"").replace(/[\r\n\t]+/g," ").trim().slice(0,max)}
 function clientKey(request){
