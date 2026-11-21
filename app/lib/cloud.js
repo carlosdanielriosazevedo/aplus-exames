@@ -12,7 +12,9 @@ import {reportClientError} from "./clientRuntimeReport.js";
 function reportAuthFailure(kind,error){
   const code=String(error?.code||"SEM_CODIGO").toUpperCase().replace(/[^A-Z0-9_]/g,"").slice(0,48)||"SEM_CODIGO";
   const status=Number(error?.status)||0;
-  try{reportClientError({kind:"auth_failure",error:{name:`${kind}:${code}:${status}`}})}catch{}
+  // Tipo "runtime" já aceite pela rota (as rotas existentes estão congeladas);
+  // o prefixo "auth_failure:" identifica estes registos.
+  try{reportClientError({kind:"runtime",error:{name:`auth_failure:${kind}:${code}:${status}`}})}catch{}
 }
 
 let authInternalSingleton=null;
