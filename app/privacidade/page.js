@@ -33,7 +33,7 @@ export default function PrivacyPage(){
 
     <div className={styles.section}>
       <h2>Conta e progresso online</h2>
-      <p className={styles.copy}>Se criares ou iniciares sessão numa conta, são tratados os dados necessários à autenticação, como o nome e o email que forneceres (os emails com códigos de confirmação ou de recuperação da palavra-passe são enviados através de um serviço de envio de email, que recebe apenas o teu endereço e o conteúdo da mensagem), e pode ser guardado online um estado académico limitado para permitir recuperação e continuidade entre dispositivos. O estado enviado para o serviço online usa uma lista explícita de campos permitidos e remove recursivamente o texto das respostas do aluno antes da gravação.</p>
+      <p className={styles.copy}>Se criares ou iniciares sessão numa conta, são tratados os dados necessários à autenticação, como o nome e o email que forneceres (os emails com códigos de confirmação ou de recuperação da palavra-passe são enviados através de um serviço de envio de email, que recebe apenas o teu endereço e o conteúdo da mensagem). Se escolheres entrar com Google ou Microsoft, esse serviço confirma a tua identidade e partilha connosco apenas o teu nome e email; a APProva+ não recebe a palavra-passe dessa conta, e pode ser guardado online um estado académico limitado para permitir recuperação e continuidade entre dispositivos. O estado enviado para o serviço online usa uma lista explícita de campos permitidos e remove recursivamente o texto das respostas do aluno antes da gravação.</p>
     </div>
 
     <div className={styles.section}>

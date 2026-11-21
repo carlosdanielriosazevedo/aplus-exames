@@ -3,7 +3,7 @@ import {useEffect,useState} from "react";
 import {hasPendingAssessment,preservePendingAssessment} from "../lib/pendingAssessment";
 import {Back,BrandName,Shell} from "./chrome";
 import {
-  cloudConfiguration,getCloudSession,cloudSignIn,cloudSignUp,cloudSignOut,cloudDeleteAccount,cloudRequestPasswordReset,cloudResetPassword,
+  cloudConfiguration,getCloudSession,cloudSignIn,cloudSignInSocial,cloudSignUp,cloudSignOut,cloudDeleteAccount,cloudRequestPasswordReset,cloudResetPassword,
   loadStudentCloudState,saveStudentCloudState,overwriteStudentCloudState,mergeStudentCloudState
 } from "../lib/cloud";
 import {
@@ -23,6 +23,7 @@ import {CLOUD_ACCOUNT_HINT_KEY} from "../lib/cloudSessionHint";
 import {queueSignupConsent,flushPendingConsent} from "../lib/consentClient";
 import {activeStateAccount,archiveActiveAccount,switchDeviceToAccount,purgeAccountFromDevice,hasAcademicData,eraseAcademicDataFromDevice,restoreAnonymousProgress} from "../lib/accountDeviceStorage";
 import {detectUnsavedWork,logoutPlan,logoutPromptCopy} from "../lib/logoutPlan";
+import {enabledSocialProviders,markSocialSignInPending,SOCIAL_PENDING_KEY} from "../lib/socialSignIn";
 
 // O ranking ainda usa participantes simulados: não pedimos ano, distrito nem
 // escola a alunos (muitos menores) para uma funcionalidade que ainda não existe.
@@ -59,6 +60,9 @@ export function AccountCloud({s,setS,go,gate=false}){
   const [password,setPassword]=useState("");
   const [signupAge,setSignupAge]=useState(false);
   const [signupTerms,setSignupTerms]=useState(false);
+  // Entrar com Google/Microsoft: só os fornecedores ativados por variável de ambiente.
+  const socialProviders=enabledSocialProviders();
+  const [socialConsent,setSocialConsent]=useState(false);
   const [logoutPrompt,setLogoutPrompt]=useState(null);
   const [deletePassword,setDeletePassword]=useState("");
   const [deleteConfirmation,setDeleteConfirmation]=useState("");
@@ -128,6 +132,20 @@ export function AccountCloud({s,setS,go,gate=false}){
     // pode voltar a ser escrito no armazenamento depois da troca.
     try{localStorage.setItem(CLOUD_ACCOUNT_HINT_KEY,"1")}catch{}
     window.location.reload();
+  }
+
+  async function continueWithProvider(provider){
+    if(!socialConsent)return;
+    setBusy(true);setMessage(null);
+    try{
+      markSocialSignInPending(provider);
+      rememberCloudSession(true);
+      await cloudSignInSocial(provider); // o browser sai para o fornecedor
+    }catch(error){
+      try{localStorage.removeItem(SOCIAL_PENDING_KEY)}catch{}
+      setMessage({ok:false,text:String(error?.message||error)});
+      setBusy(false);
+    }
   }
 
   // "Esqueci-me da palavra-passe": 1) pedir código; 2) código + nova palavra-passe.
@@ -505,7 +523,14 @@ export function AccountCloud({s,setS,go,gate=false}){
           </>}
         <button type="button" className="linkButton" onClick={()=>{setMode("signin");setResetStep("request");setResetCode("");setMessage(null)}}>Voltar a «Entrar»</button>
       </div>
-      :<div className="realAuthForm">
+      :<>{socialProviders.length>0&&<div className="socialAuth">
+        <label className="socialConsent"><input type="checkbox" checked={socialConsent} onChange={e=>setSocialConsent(e.target.checked)}/><span>Tenho 13 anos ou mais e aceito os <a href="/termos" target="_blank" rel="noopener">termos</a> e a <a href="/privacidade" target="_blank" rel="noopener">política de privacidade</a>.</span></label>
+        {socialProviders.map(provider=><button key={provider.id} type="button" className={`socialButton ${provider.id}`} disabled={busy||!socialConsent} onClick={()=>continueWithProvider(provider.id)}>
+          <span aria-hidden="true" className="socialIcon">{provider.id==="google"?"G":"⊞"}</span>{provider.label}
+        </button>)}
+        <div className="socialDivider" aria-hidden="true"><span>ou com email</span></div>
+      </div>}
+      <div className="realAuthForm">
         {mode==="signup"&&<label>Nome<input value={name} onChange={e=>setName(e.target.value)} placeholder="Nome"/></label>}
         <label>Email<input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="nome@email.pt"/></label>
         <label>Palavra-passe<input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="••••••••"/></label>
@@ -515,7 +540,7 @@ export function AccountCloud({s,setS,go,gate=false}){
         </>}
         <button disabled={busy||!email.trim()||password.length<8||(mode==="signup"&&!(signupAge&&signupTerms))} onClick={submit}>{busy?"A processar…":mode==="signup"?"Criar conta":"Entrar"}</button>
         {mode==="signin"&&<button type="button" className="linkButton" onClick={()=>{setMode("reset");setResetStep("request");setMessage(null)}}>Esqueci-me da palavra-passe</button>}
-      </div>}
+      </div></>}
       <small className="cloudPrivacy">A palavra-passe é tratada pelo serviço de autenticação. A APProva+ não a guarda nos dados de progresso.</small>
     </>}
 

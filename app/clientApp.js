@@ -24,6 +24,7 @@ import {miniExamReviewItemLabel,CONTENT_REPORT_SAVED_MESSAGE} from "./lib/scoreR
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
 const AccountCloud=dynamic(()=>import("./components/AccountCloud").then(module=>module.AccountCloud),{ssr:false});
 const CloudSyncLayer=dynamic(()=>import("./components/CloudSyncLayer"),{ssr:false});
+const InstallAppPrompt=dynamic(()=>import("./components/InstallAppPrompt"),{ssr:false});
 // Conta obrigatória para estudar (beta pública). Ativa apenas quando a variável
 // pública está definida, para poder ser ligada/desligada sem alterar código.
 const MAINTENANCE_MESSAGE=String(process.env.NEXT_PUBLIC_APPROVA_MAINTENANCE_MESSAGE||"").trim().slice(0,240);
@@ -1306,6 +1307,7 @@ function Home({s,setS,go,reset}){
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{probableNext?.short||"A definir após esta sessão"}</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>}
     <SaveProgressPrompt s={s} setS={setS} go={go} place="home"/>
+    <InstallAppPrompt eligible={!!s.diagnosticDone}/>
     <StudentNav active="home" go={go}/>
   </section></main>
 }
