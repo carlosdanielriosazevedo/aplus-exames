@@ -183,6 +183,9 @@ export function AccountCloud({s,setS,go,gate=false}){
       }
       await refreshSession();
       rememberCloudSession(true);
+      // Depois de entrar ou criar conta, a app abre sempre no menu inicial
+      // (pedido do product owner, 2026-11-21).
+      go("home");
     }catch(error){
       setMessage({ok:false,text:String(error?.message||error)});
     }finally{setBusy(false)}

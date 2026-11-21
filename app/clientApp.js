@@ -1146,7 +1146,9 @@ function Home({s,setS,go,reset}){
   const devView=typeof window!=="undefined" && new URLSearchParams(window.location.search).get("dev")==="1";
   const computedPlan=dailyMissionPlan(s);
   const persistedPlan=missionPlanForToday(s,null);
-  const [pausedDraft,setPausedDraft]=useState(()=>typeof window!=="undefined"?loadSessionDraft(s.betaMode||"internal"):null);
+  // Lido a cada render (leitura local, barata): depois de entrar na conta ou de
+  // sincronizar, o cartão tem de mostrar logo «Continuar», e não «Começar».
+  const pausedDraft=typeof window!=="undefined"?loadSessionDraft(s.betaMode||"internal"):null;
   const plan=pausedDraft?.kind==="mission"&&pausedDraft.plan
     ?pausedDraft.plan
     :(persistedPlan||computedPlan);
