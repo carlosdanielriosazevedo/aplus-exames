@@ -12,6 +12,7 @@ import {
 } from "../lib/cloudAutosync";
 import {normalizeAfterCloud} from "../lib/cloudApply";
 import {setAsideAnonymousProgress} from "../lib/accountDeviceStorage";
+import {completeSocialSignIn} from "../lib/socialSignIn";
 
 const DEBOUNCE_MS=8000;
 
@@ -52,6 +53,13 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
   const refreshAccount=useCallback(async()=>{
     const result=await verifiedSession();
     if(result.unavailable)return;
+    // Regresso de "Continuar com Google/Microsoft": registar o consentimento e
+    // separar o progresso por conta, como no login por email.
+    if(result.user){
+      const social=await completeSocialSignIn(result.user).catch(()=>({handled:false,reload:false}));
+      if(social.reload){rememberCloudSession(true);window.location.reload();return}
+      if(social.handled)rememberCloudSession(true);
+    }
     setAccount(result.user?{id:String(result.user.id),email:result.user.email||null}:null);
     if(!result.user){setStatus(null);rememberCloudSession(false)}
   },[]);

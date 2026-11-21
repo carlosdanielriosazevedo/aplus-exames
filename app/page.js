@@ -4,6 +4,13 @@ import dynamic from "next/dynamic";
 import {useEffect,useState} from "react";
 import {captureFunnelSource} from "./lib/funnelClient";
 
+// Android/Chrome: o pedido de instalação chega cedo; guardamo-lo para o cartão
+// «Instala a APProva+» (só aparece depois do diagnóstico).
+if(typeof window!=="undefined"&&!window.__approvaInstallListener){
+  window.__approvaInstallListener=true;
+  window.addEventListener("beforeinstallprompt",event=>{window.__approvaInstallPrompt=event;window.dispatchEvent(new Event("approva:install-available"))});
+}
+
 const ClientApp=dynamic(()=>import("./clientApp"),{ssr:false,loading:({error})=>error?<Loading failed/>:<Loading/>});
 const STORAGE_KEYS=["a25","a25-friends-beta"];
 const ENTRY_KEY="a25-onboarding-entry";

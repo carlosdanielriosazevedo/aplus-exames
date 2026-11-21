@@ -124,6 +124,17 @@ export async function cloudResetPassword({email,otp,password}){
   return {ok:true};
 }
 
+// Entrar com Google/Microsoft: o browser sai para o fornecedor e volta à app.
+// O consentimento e a marca "pendente" são guardados antes (socialSignIn.js).
+export async function cloudSignInSocial(provider){
+  const client=getCloudAuthClient();
+  if(!client)throw new Error("Neon Auth ainda não está configurado.");
+  const callbackURL=`${window.location.origin}/`;
+  const result=await authCall("social",()=>client.signIn.social({provider,callbackURL}));
+  if(result?.error){reportAuthFailure(`social_${provider}`,result.error);throw new Error("Não foi possível continuar com "+(provider==="google"?"o Google":"a Microsoft")+". Tenta novamente ou usa email e palavra-passe.")}
+  return {ok:true};
+}
+
 export async function cloudSignUp({name,email,password}){
   const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
