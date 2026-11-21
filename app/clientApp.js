@@ -20,6 +20,9 @@ import StudyModeHub from "./components/StudyModeHub";
 import PausedActivityEyebrow from "./components/PausedActivityEyebrow";
 import {Welcome} from "./components/Welcome";
 import ScoreLossExplanation from "./components/ScoreLossExplanation";
+// Ranking importado diretamente (não à parte): carregado à parte, o primeiro
+// toque mostrava um instante o ecrã vazio antes do topo — parecia movimento.
+import Ranking from "./components/RankingScreen";
 import {miniExamReviewItemLabel,CONTENT_REPORT_SAVED_MESSAGE} from "./lib/scoreReviewCopy";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
 const AccountCloud=dynamic(()=>import("./components/AccountCloud").then(module=>module.AccountCloud),{ssr:false});
@@ -36,7 +39,6 @@ const PortuguesePassageMiniExamRoute=dynamic(()=>import("./components/Portuguese
 const PhysicsChemistrySubject=dynamic(()=>import("./components/PhysicsChemistrySubject"),{ssr:false});
 const PhysicsChemistryExam=dynamic(()=>import("./components/PhysicsChemistryExam"),{ssr:false});
 const PhysicsChemistryMiniExam=dynamic(()=>import("./components/PhysicsChemistryMiniExam"),{ssr:false});
-const Ranking=dynamic(()=>import("./components/SecondaryScreens").then(module=>module.Ranking),{ssr:false});
 const IdentityLab=dynamic(()=>import("./components/SecondaryScreens").then(module=>module.IdentityLab),{ssr:false});
 const Parent=dynamic(()=>import("./components/SecondaryScreens").then(module=>module.Parent),{ssr:false});
 const StudentProfile=dynamic(()=>import("./components/SetupScreens").then(module=>module.StudentProfile),{ssr:false});
@@ -305,6 +307,16 @@ export default function App(){
     update();
     window.addEventListener(AUTH_CHANGED_EVENT,update);
     return ()=>window.removeEventListener(AUTH_CHANGED_EVENT,update);
+  },[hydrated]);
+
+  // As quatro expressões do topo (Aprender, Treinar, Ranking, Progresso) ficam
+  // descarregadas e descodificadas antes da primeira troca de separador: sem isto,
+  // a imagem aparece um instante depois do texto e parece movimento.
+  useEffect(()=>{
+    if(!hydrated||typeof window==="undefined")return;
+    const warm=()=>{for(const pose of ["welcome","books","celebrate","progress"]){const img=new window.Image();img.decoding="async";img.src=`/mascot/apronso-${pose}.webp`;img.decode?.().catch(()=>{})}};
+    const idle=window.requestIdleCallback?window.requestIdleCallback(warm,{timeout:1500}):window.setTimeout(warm,300);
+    return ()=>{window.cancelIdleCallback&&window.requestIdleCallback?window.cancelIdleCallback(idle):window.clearTimeout(idle)};
   },[hydrated]);
 
   useEffect(()=>{
@@ -837,7 +849,7 @@ const PortugueseSubject=dynamic(()=>import("./components/PortugueseSubject"),{ss
 const PRE_DIAGNOSTIC_TOUR_STEPS=[
   {mascot:"welcome",eyebrow:"PASSO 1 DE 4",title:"Conhece o Apronso",text:<>Sou o teu parceiro de estudo na <BrandName/>. Vou ajudar-te a perceber o que estudar e acompanhar-te até aos exames.</>},
   {mascot:"thinking",eyebrow:"PASSO 2 DE 4",title:"Primeiro, quero conhecer-te",text:"O diagnóstico não é uma nota. Serve para encontrar um bom ponto de partida em cada disciplina."},
-  {mascot:"pointing",eyebrow:"PASSO 3 DE 4",title:"Missões curtas e focadas",text:"Na Home vais encontrar uma Missão diária escolhida a partir do teu percurso e da evidência que fores criando."},
+  {mascot:"books",eyebrow:"PASSO 3 DE 4",title:"Missões curtas e focadas",text:"Na Home vais encontrar uma Missão diária escolhida a partir do teu percurso e da evidência que fores criando."},
   {mascot:"progress",eyebrow:"PASSO 4 DE 4",title:"Treinar, fazer exames e acompanhar a evolução",text:["Em Praticar escolhes matéria e submatéria.","Em Exames fazes Mini-exames e, quando disponível, o Exame Completo.","Em Progresso acompanhas a evolução de cada disciplina."]}
 ];
 

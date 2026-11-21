@@ -1,6 +1,8 @@
 // Pedido do product owner (2026-11-21): mudar entre Aprender, Treinar, Ranking e
 // Progresso não pode dar a mínima sensação de movimento. O cabeçalho, a etiqueta,
-// o início do título e o Apronso têm de ficar exatamente no mesmo sítio, sem animação.
+// o início do título e o Apronso têm de ficar exatamente no mesmo sítio, sem animação,
+// com o título na mesma letra (tamanho, peso, espaçamento, cor), um Apronso
+// diferente em cada separador e nenhum frame vazio ou fora do sítio logo após o toque.
 import {test,expect} from "@playwright/test";
 import {emptyScores} from "../../app/lib/engine.js";
 
@@ -34,8 +36,25 @@ function probe(){
     apronso=R(box)+" "+S(box);animated=a.animationName!=="none";break;
   }
   const q=s=>document.querySelector(s)?.getBoundingClientRect();
+  const c=h1?getComputedStyle(h1):null;
+  const font=c?[c.fontFamily,c.fontSize,c.fontWeight,c.letterSpacing,c.color].join(" "):"-";
+  const pose=(img?img.src:[...document.querySelectorAll("*")].map(el=>getComputedStyle(el,"::after").backgroundImage).find(b=>b.includes("/mascot/apronso"))||"").match(/apronso-([a-z]+)/)?.[1]||"-";
   return {logo:R(q(".studentTop .logo")),subject:R(q(".studentTop .subjectSwitcher")),actions:R(q(".studentTopActions")),
-    eyebrow:R(eyebrow?.getBoundingClientRect()),title:R(h1?.getBoundingClientRect()),apronso,animated};
+    eyebrow:R(eyebrow?.getBoundingClientRect()),title:R(h1?.getBoundingClientRect()),apronso,animated,font,pose};
+}
+
+// Grava, frame a frame, o topo do separador logo depois do toque.
+function recordFrames(){
+  window.__tabFrames=[];
+  const vis=el=>el&&el.offsetParent!==null;
+  const snap=()=>{
+    const h1=[...document.querySelectorAll("h1")].find(vis);
+    const eyebrow=h1?[...h1.parentElement.children].find(c=>c!==h1&&c.tagName==="P"):null;
+    const top=el=>el?Math.round(el.getBoundingClientRect().top*2)/2:null;
+    window.__tabFrames.push({title:h1?.textContent||null,titleTop:top(h1),eyebrowTop:top(eyebrow),scrollY:Math.round(window.scrollY)});
+  };
+  let n=0;const loop=()=>{snap();if(++n<20)requestAnimationFrame(loop)};
+  document.addEventListener("click",()=>requestAnimationFrame(loop),{once:true,capture:true});
 }
 
 for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
@@ -47,19 +66,28 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
       await page.goto("/");
       await expect(page.locator(".studentTop")).toBeVisible({timeout:30_000});
       const rows={};
+      const frames={};
       for(const tab of TABS){
+        await page.evaluate(recordFrames);
         await page.locator(".studentNav button",{hasText:tab}).click();
         await expect(page.locator(".studentNav button",{hasText:tab})).toHaveAttribute("aria-current","page");
         await page.waitForTimeout(400);
         rows[tab]=await page.evaluate(probe);
+        frames[tab]=await page.evaluate(()=>window.__tabFrames);
       }
       for(const tab of TABS){
         expect(rows[tab].animated,`${tab}: o Apronso do topo não pode estar animado`).toBe(false);
         expect(rows[tab].apronso,`${tab}: tem de haver Apronso no topo`).not.toBe("-");
-        for(const key of ["logo","subject","actions","eyebrow","title","apronso"]){
+        for(const key of ["logo","subject","actions","eyebrow","title","apronso","font"]){
           expect(rows[tab][key],`${tab} vs Aprender: ${key}`).toBe(rows.Aprender[key]);
         }
+        // Do primeiro frame depois do toque ao último: o novo topo já lá está
+        // (nunca um ecrã vazio) e nada se desloca.
+        const last=frames[tab].at(-1);
+        expect(frames[tab].length,`${tab}: frames gravados`).toBeGreaterThan(5);
+        for(const frame of frames[tab])expect(frame,`${tab}: frame logo após o toque`).toEqual(last);
       }
+      expect(new Set(TABS.map(tab=>rows[tab].pose)).size,`um Apronso diferente em cada separador: ${TABS.map(tab=>rows[tab].pose).join(", ")}`).toBe(4);
       await context.close();
     });
   }

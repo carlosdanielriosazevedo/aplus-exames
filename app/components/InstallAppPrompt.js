@@ -35,7 +35,8 @@ export default function InstallAppPrompt({eligible}){
     window.__approvaInstallPrompt=null;
   };
   return <section className="installAppPrompt" aria-label="Instalar a APProva+">
-    <Apronso pose="pointing" className="installApronso" alt=""/>
+    {/* Apronso ao telemóvel: o cabeçalho do Aprender já usa o Apronso a apontar. */}
+    <Apronso pose="progress" className="installApronso" alt=""/>
     <div>
       <b>{copy.title}</b>
       {copy.steps.length>1?<ol>{copy.steps.map(step=><li key={step}>{step}</li>)}</ol>:<p>{copy.steps[0]}</p>}
