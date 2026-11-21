@@ -13,13 +13,14 @@ const studentSurfaces=[mainPage,secondaryScreens,portuguese,fqa].join("\n");
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 const parityCss=readFileSync(new URL("../app/apronso-parity.css",import.meta.url),"utf8");
 const layout=readFileSync(new URL("../app/layout.js",import.meta.url),"utf8");
-const poses=["welcome","thinking","celebrate","progress"];
+const poses=["welcome","thinking","celebrate","progress","crossed","books","pointing"];
 assert.match(layout,/APProva\+/);assert.match(chrome,/aria-label="APProva\+"/);assert.doesNotMatch(page,/APPp/);assert.doesNotMatch(layout,/APPp/);
-assert.match(chrome,/className="brandAP">AP<\/span><span className="brandProva">Prova<\/span><span className="brandPlus">\+<\/span>/);
+// Logótipo em texto alinhado com o ecrã de abertura (product owner, 2026-11-21, opção A).
+assert.match(chrome,/className="brandAP">APP<\/span><span className="brandProva">rova<\/span><span className="brandPlus">\+<\/span>/);
 assert.match(page,/Não é uma avaliação\. A app usa apenas matéria do teu percurso e aprofunda só quando precisa de perceber melhor uma dificuldade\./);
 assert.match(page,/Conhece o Apronso/);assert.match(page,/Onde encontras o Apronso/);assert.match(page,/const PRE_DIAGNOSTIC_TOUR_STEPS=/);assert.match(page,/PASSO 2 DE 2/);assert.match(page,/dailyMissionApronso/);assert.match(page,/className="dailyMissionHero"/);assert.match(page,/resultApronso/);assert.match(page,/Apronso acompanha o teu progresso/);
 assert.match(css,/--app-orange:#f59e0b/);assert.match(css,/--app-navy:#081a2a/);assert.match(css,/--app-card-dark:#0f3047/);assert.match(css,/--app-card-light:#fff4df/);
-assert.match(css,/\.brandAP,\.brandPlus,\.logo \.brandAP,\.logo \.brandPlus\{color:var\(--app-orange\)\}/);assert.match(css,/\.brandProva,\.logo \.brandProva\{color:var\(--app-card-dark\)\}/);assert.match(css,/\.dailyMissionHero\{display:grid/);assert.match(css,/\.dailyMissionApronso\{position:relative/);assert.match(css,/\.dark,\.light,\.learnHome\{background:#fff/);
+assert.match(css,/\.brandProva,\.brandPlus,\.logo \.brandProva,\.logo \.brandPlus\{color:var\(--app-orange\)\}/);assert.match(css,/\.brandAP,\.logo \.brandAP\{color:var\(--app-card-dark\)\}/);assert.match(css,/\.dailyMissionHero\{display:grid/);assert.match(css,/\.dailyMissionApronso\{position:relative/);assert.match(css,/\.dark,\.light,\.learnHome\{background:#fff/);
 assert.match(css,/\.testerSegmentPicker button\{background:var\(--app-card-light\);[^}]*color:var\(--app-navy\)/);assert.match(css,/\.testerSegmentPicker button\.selected\{background:var\(--app-card-dark\);[^}]*color:#fff/);assert.match(css,/\.testerSegmentPicker button\.selected small\{color:#dce7ef\}/);
 assert.ok(css.lastIndexOf(".dark,.light,.learnHome{background:#fff")>css.lastIndexOf(".learnHome{background:radial-gradient"),"O fundo branco global tem de prevalecer sobre os temas antigos.");
 assert.doesNotMatch(css,/\.dailyMissionApronso\{position:absolute/);assert.doesNotMatch(css,/\.diagApronsoHero>\.apronso\{[^}]*margin:-/);
@@ -40,7 +41,7 @@ assert.match(parityCss,/\.learnIntro::after\{[\s\S]*?background:url\('\/mascot\/
 assert.match(parityCss,/\.progressPage \.progressHero>\.apronso\{[\s\S]*?position:absolute;/u,"Apronso deve continuar integrado no cartão de Progresso em mobile.");
 
 assert.ok((studentSurfaces.match(/<ApronsoNudge/g)||[]).length>=3,"Apronso must remain on useful shared student surfaces without duplicating nearby UI copy");
-assert.match(studyModeHub,/<Apronso className="mobileHeadingApronso" pose="welcome"/u,"O Apronso deve acompanhar o título do hub partilhado, sem cartão duplicado.");
+assert.match(studyModeHub,/<Apronso className="mobileHeadingApronso" pose="(?:welcome|books)"/u,"O Apronso deve acompanhar o título do hub partilhado, sem cartão duplicado.");
 assert.match(portuguese,/Apronso acompanha o teu progresso/u,"Português deve manter Apronso no Progresso.");
 assert.match(fqa,/Apronso acompanha o teu progresso/u,"FQ A deve manter Apronso no Progresso.");
 assert.match(fqa,/diagApronsoHero/u,"FQ A deve reutilizar o mesmo padrão visual do diagnóstico.");

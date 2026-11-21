@@ -18,6 +18,7 @@ describe("exam hub Apronso contrast",()=>{
     ["Física e Química A",physicsChemistry]
   ])("keeps the shared exam hub callout in %s",(_subject,source)=>{
     expect(source).toContain("examHub");
-    expect(source).toContain('ApronsoNudge pose="thinking" tone="dark"');
+    // Pose «braços cruzados» no modo exame (sem pistas), pedido do product owner em 2026-11-21.
+    expect(source).toContain('ApronsoNudge pose="crossed" tone="dark"');
   });
 });
