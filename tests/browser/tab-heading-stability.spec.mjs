@@ -20,20 +20,24 @@ function state(subjectId){
 
 // Posições (arredondadas a 0,5 px) de tudo o que fica no topo do separador.
 function probe(){
+  const PROGRESS_SCALE=1.06;
   const R=b=>b?[b.x,b.y].map(v=>Math.round(v*2)/2).join(","):"-";
-  const S=b=>b?[b.width,b.height].map(v=>Math.round(v*2)/2).join("x"):"-";
   const vis=el=>el&&el.offsetParent!==null;
   const h1=[...document.querySelectorAll("h1")].find(vis);
   const eyebrow=h1?[...h1.parentElement.children].find(c=>c!==h1&&c.tagName==="P"):null;
   let apronso="-",animated=false;
   const img=[...document.querySelectorAll("img.apronso")].find(i=>vis(i)&&getComputedStyle(i).display!=="none"&&i.getBoundingClientRect().top<420);
-  if(img){const b=img.getBoundingClientRect();apronso=R(b)+" "+S(b);animated=getComputedStyle(img).animationName!=="none"}
+  // Pés (fundo) e centro no mesmo sítio; altura igual depois de descontar a escala
+  // própria do Apronso do Progresso (desenhado mais magro, fica 6 % maior).
+  const anchor=(b,pose)=>{const k=pose==="progress"?PROGRESS_SCALE:1;return [b.x+b.width/2,b.y+b.height,b.width,b.height/k].map(v=>Math.round(v*2)/2).join(",")};
+  const poseOf=src=>String(src).match(/apronso-([a-z]+)/)?.[1]||"-";
+  if(img){const b=img.getBoundingClientRect();apronso=anchor(b,poseOf(img.src));animated=getComputedStyle(img).animationName!=="none"}
   else for(const el of document.querySelectorAll("*")){
     const a=getComputedStyle(el,"::after");
     if(a.content==="none"||a.display==="none"||!a.backgroundImage.includes("/mascot/apronso"))continue;
     const e=el.getBoundingClientRect(),w=parseFloat(a.width),hh=parseFloat(a.height),r=parseFloat(a.right)||0,t=parseFloat(a.top),bt=parseFloat(a.bottom);
     const box={x:e.right-r-w,y:Number.isFinite(t)?e.top+t:e.bottom-bt-hh,width:w,height:hh};
-    apronso=R(box)+" "+S(box);animated=a.animationName!=="none";break;
+    apronso=anchor(box,poseOf(a.backgroundImage));animated=a.animationName!=="none";break;
   }
   const q=s=>document.querySelector(s)?.getBoundingClientRect();
   const c=h1?getComputedStyle(h1):null;
