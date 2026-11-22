@@ -2094,3 +2094,15 @@ html,body,a,button,input,select,textarea,label,summary,[role="button"]{touch-act
   html body select,
   html body textarea{font-size:max(16px,1em)}
 }
+
+/* ===== Logótipo do splash (decisão do product owner, 2026-11-22) =====
+   O mesmo lettering, cores e traço do ecrã de abertura, em imagem (igual no
+   Android, no iPhone e no computador). Em fundo claro, «APP» em azul-marinho. */
+.brandLogo{display:block;line-height:0;font-size:0;letter-spacing:0;--brand-logo-w:150px}
+.brandLogo img{display:block;width:var(--brand-logo-w);max-width:100%;height:auto;user-select:none;-webkit-user-drag:none}
+.studentTop .brandLogo{--brand-logo-w:clamp(92px,28vw,112px)}
+.hero .brandLogo{--brand-logo-w:clamp(176px,50vw,232px);width:max-content;margin-inline:auto}
+.centered .brandLogo{--brand-logo-w:150px;margin-inline:auto}
+.topline .brandLogo{--brand-logo-w:112px}
+@media(min-width:761px){.studentTop .brandLogo{--brand-logo-w:128px}}
+
