@@ -17,7 +17,8 @@ test("completed onboarding opens Aprender without launching a diagnosis",()=>{
     assert.match(source,/const onboardingDoneScreen="home"/,path);
   }
   const app=src("app/clientApp.js");
-  assert.match(app,/setScreen\(openAccount\?"account":activeSubjectConfigured\?"home":\(fromLanding\?"subjectOnboard":"welcome"\)\)/);
+  // Depois de entrar numa conta com progresso (dispositivo limpo), abre no menu (2026-11-22).
+  assert.match(app,/setScreen\(openHome\?"home":openAccount\?"account":activeSubjectConfigured\?"home":\(fromLanding\?"subjectOnboard":"welcome"\)\)/);
 });
 
 test("Math Aprender offers explicit per-subject diagnostic entry",()=>{

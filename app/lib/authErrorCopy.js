@@ -1,8 +1,18 @@
-// Mensagens de autenticação em português e sem revelar se um email tem conta.
+// Mensagens de autenticação em português. Só ao criar conta se diz que um email
+// já tem conta (decisão do product owner, 2026-11-22); ao entrar e ao recuperar a
+// palavra-passe a resposta continua a não revelar se um email tem conta.
 // Recebe o erro devolvido pelo serviço de autenticação (code/status/message).
 const GENERIC_SIGNUP="Não foi possível criar a conta. Se já tens conta com este email, usa «Entrar».";
 const GENERIC_SIGNIN="Email ou palavra-passe incorretos.";
 const TOO_MANY="Demasiadas tentativas. Espera alguns minutos e tenta novamente.";
+
+// Criar conta com um email que já tem conta (decisão do product owner,
+// 2026-11-22): dizer claramente, para o aluno passar a «Entrar».
+export function isEmailInUse(error){
+  const code=String(error?.code||"").toUpperCase();
+  return /USER_ALREADY_EXISTS|EMAIL_ALREADY|ALREADY_REGISTERED|EMAIL_EXISTS/.test(code)||/already (exists|registered|in use)/i.test(String(error?.message||""));
+}
+export const EMAIL_IN_USE_MESSAGE="Este email já tem conta. Entra com a tua palavra-passe.";
 
 export function authErrorMessage(kind,error){
   const code=String(error?.code||"").toUpperCase();
@@ -10,6 +20,7 @@ export function authErrorMessage(kind,error){
   const text=String(error?.message||"");
   if(kind==="reset"&&/TOO_MANY_ATTEMPTS/.test(code))return "Demasiadas tentativas com este código. Pede um código novo.";
   if(status===429||/TOO_MANY|RATE/.test(code))return TOO_MANY;
+  if(kind==="signup"&&isEmailInUse(error))return EMAIL_IN_USE_MESSAGE;
   if(code==="SIGNUP_DISABLED")return "A criação de novas contas está temporariamente em pausa. Tenta novamente mais tarde.";
   if(/PASSWORD_TOO_SHORT/.test(code)||/password.*(short|least)/i.test(text))return "A palavra-passe deve ter pelo menos 8 caracteres.";
   if(/PASSWORD_TOO_LONG/.test(code))return "A palavra-passe é demasiado longa.";

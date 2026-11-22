@@ -1,12 +1,17 @@
 import {describe,expect,it} from "vitest";
-import {authErrorMessage} from "../../app/lib/authErrorCopy.js";
+import {authErrorMessage,isEmailInUse} from "../../app/lib/authErrorCopy.js";
 
 describe("mensagens de autenticação",()=>{
-  it("não revela se o email já tem conta",()=>{
-    const exists=authErrorMessage("signup",{code:"USER_ALREADY_EXISTS",message:"User already exists. Use another email.",status:422});
-    const other=authErrorMessage("signup",{code:"FAILED_TO_CREATE_USER",status:500});
-    expect(exists).toBe(other);
-    expect(exists).not.toMatch(/exist|already/i);
+  // Decisão do product owner (2026-11-22): ao criar conta com um email que já tem
+  // conta, a app diz isso claramente e passa para «Entrar». Entrar e recuperar a
+  // palavra-passe continuam a não revelar se um email tem conta.
+  it("criar conta com email já registado: diz que já tem conta",()=>{
+    const error={code:"USER_ALREADY_EXISTS",message:"User already exists. Use another email.",status:422};
+    expect(isEmailInUse(error)).toBe(true);
+    expect(isEmailInUse({code:"USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL",status:422})).toBe(true);
+    expect(authErrorMessage("signup",error)).toBe("Este email já tem conta. Entra com a tua palavra-passe.");
+    expect(isEmailInUse({code:"FAILED_TO_CREATE_USER",status:500})).toBe(false);
+    expect(authErrorMessage("signup",{code:"FAILED_TO_CREATE_USER",status:500})).toBe("Não foi possível criar a conta. Se já tens conta com este email, usa «Entrar».");
   });
   it("login falhado tem a mesma resposta para email inexistente e palavra-passe errada",()=>{
     expect(authErrorMessage("signin",{code:"INVALID_EMAIL_OR_PASSWORD",status:401})).toBe("Email ou palavra-passe incorretos.");

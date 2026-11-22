@@ -15,11 +15,14 @@ const ClientApp=dynamic(()=>import("./clientApp"),{ssr:false,loading:({error})=>
 const STORAGE_KEYS=["a25","a25-friends-beta"];
 const ENTRY_KEY="a25-onboarding-entry";
 const OPEN_ACCOUNT_KEY="approva-open-account";
+// Entrou numa conta com progresso e o dispositivo foi limpo antes de recarregar
+// (2026-11-22): abrir a app (no menu), e não o ecrã inicial público.
+const OPEN_HOME_AFTER_SIGNIN_KEY="approva-open-home-after-signin";
 
 function storedProgress(){
   for(const name of ["localStorage","sessionStorage"])try{
     const store=window[name];
-    if(STORAGE_KEYS.some(key=>store?.getItem(key))||(name==="sessionStorage"&&store?.getItem(ENTRY_KEY)==="1"))return true;
+    if(STORAGE_KEYS.some(key=>store?.getItem(key))||(name==="sessionStorage"&&(store?.getItem(ENTRY_KEY)==="1"||store?.getItem(OPEN_HOME_AFTER_SIGNIN_KEY)==="1")))return true;
   }catch{}
   return false;
 }

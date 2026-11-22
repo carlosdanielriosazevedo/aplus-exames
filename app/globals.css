@@ -2157,3 +2157,21 @@ html body .themeGrid button.sel small{color:var(--app-orange-dark)}
 html body .lastExam small{color:var(--app-orange-dark)}
 /* Cartão de prova a meio no Aprender: o mesmo chip amarelo «Progresso guardado». */
 html body .learnHome .homePausedExam .missionCardMeta .sessionPausedMeta{background:#ffe2a3!important;color:#6c4c0e!important}
+/* Conta obrigatória: saída para um aluno novo num dispositivo com progresso de outra pessoa. */
+.gateNewStudent{display:grid;justify-items:center;gap:6px;margin:22px 0 8px;padding:16px 14px;border-top:1px solid #e3e6ed;text-align:center}
+.gateNewStudent span{font-size:14px;line-height:1.5;color:#5b6676}
+.gateNewStudent .linkButton{background:transparent;border:0;padding:8px;font-size:15px;font-weight:800;color:var(--app-navy);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+/* «Esqueci-me da palavra-passe» e outros links da conta: sem roxo. */
+html body .realAuthForm .linkButton{color:var(--app-navy)}
+
+/* Últimos roxos: «Entrar» do ecrã inicial e contorno ao passar/tocar nos cartões. */
+html body .landingAccountForm u,html body .welcomeAccountLink u{color:var(--app-navy)}
+html body .subjectCard.available:hover,html body .parentEntryChoices button:hover{border-color:#f2c97a}
+/* «Começar de novo» com confirmação (conta obrigatória). */
+.gateNewStudentActions{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
+.gateStartOverConfirm{border:0;border-radius:12px;background:#b3261e;color:#fff;padding:10px 16px;font-size:15px;font-weight:800;cursor:pointer}
+/* Criar conta com email já registado: aviso junto ao formulário (2026-11-22). */
+.emailInUseNotice{display:grid;gap:4px;margin:12px 0 4px;padding:12px 14px;border-radius:14px;border:1px solid #f2d39c;background:#fff8ec;color:var(--app-navy)}
+.emailInUseNotice b{font-size:15px}
+.emailInUseNotice span{font-size:14px;line-height:1.45;color:#4d566b}
+

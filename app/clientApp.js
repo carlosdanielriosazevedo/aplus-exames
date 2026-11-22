@@ -19,6 +19,7 @@ import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,Fri
 import StudyModeHub from "./components/StudyModeHub";
 import PausedActivityEyebrow,{PausedSessionMeta,PausedSessionStatus,pausedPosition} from "./components/PausedActivityEyebrow";
 import PausedSessionCard from "./components/PausedSessionCard";
+import {discardAnonymousArchive,OPEN_HOME_AFTER_SIGNIN_KEY} from "./lib/accountDeviceStorage";
 import {Welcome} from "./components/Welcome";
 import ScoreLossExplanation from "./components/ScoreLossExplanation";
 // Ranking importado diretamente (não à parte): carregado à parte, o primeiro
@@ -335,6 +336,8 @@ export default function App(){
     (async()=>{
     const requested=typeof window!=="undefined"&&friendsBetaRequested(window.location.search);
     const storageKey=requested?FRIENDS_STORAGE_KEY:undefined;
+    // «Não é meu» deixou de existir (2026-11-22): arquivos anónimos antigos saem.
+    discardAnonymousArchive();
     const loaded=loadLocalStateStatus(initial,emptyScores,storageKey);
     if(loaded.error){setScreen("storageRecoveryError");return}
     const x=loaded.state;
@@ -437,11 +440,14 @@ export default function App(){
       if(pausedDiagnostic&&wasInSessionThisTab())setScreen("resumeSubjectDiagnostic");
       else if(activeSubjectDiagnosticDone(recoveredState)||subjectPaused)setScreen("home");
       else{
-        let fromLanding=false,openAccount=false;
+        let fromLanding=false,openAccount=false,openHome=false;
+        // Entrou numa conta com progresso e o dispositivo foi limpo: abrir no menu
+        // enquanto o progresso da conta chega (e não no início do onboarding).
+        try{openHome=window.sessionStorage.getItem(OPEN_HOME_AFTER_SIGNIN_KEY)==="1";window.sessionStorage.removeItem(OPEN_HOME_AFTER_SIGNIN_KEY)}catch{}
         try{fromLanding=window.sessionStorage.getItem("a25-onboarding-entry")==="1"}catch{}
         // "Já tens conta? Entrar" no ecrã inicial: ir direto à conta, sem onboarding.
         try{openAccount=window.sessionStorage.getItem("approva-open-account")==="1";window.sessionStorage.removeItem("approva-open-account")}catch{}
-        setScreen(openAccount?"account":activeSubjectConfigured?"home":(fromLanding?"subjectOnboard":"welcome"));
+        setScreen(openHome?"home":openAccount?"account":activeSubjectConfigured?"home":(fromLanding?"subjectOnboard":"welcome"));
       }
     }
     setHydrated(true);

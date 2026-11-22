@@ -184,16 +184,23 @@ export function eraseAcademicDataFromDevice(accountId){
   return {ok:true,removed};
 }
 
-// Progresso anónimo de outra pessoa (ex.: um irmão que estudou sem conta neste
-// dispositivo). Quando o aluno que entra diz "Não é meu", esse progresso é posto
-// à parte (nunca entra na conta dele nem é apagado) e volta a aparecer quando
-// esse aluno terminar sessão.
+// Arquivo anónimo («Não é meu»): deixou de existir (decisão do product owner,
+// 2026-11-22). Com conta obrigatória, progresso sem conta não pode continuar e,
+// ao terminar sessão, o dispositivo fica limpo. Arquivos antigos são removidos.
 export const ANONYMOUS_ARCHIVE_ID="anonimo-neste-dispositivo";
-export function setAsideAnonymousProgress(){
-  if(activeStateAccount())return {ok:false,code:"NOT_ANONYMOUS"};
-  return archiveActiveAccount(ANONYMOUS_ARCHIVE_ID);
+// Depois de entrar numa conta com progresso (dispositivo limpo e recarregado),
+// abrir no menu e não no início do onboarding.
+export const OPEN_HOME_AFTER_SIGNIN_KEY="approva-open-home-after-signin";
+export function discardAnonymousArchive(){
+  try{globalThis.localStorage?.removeItem(archiveKey(ANONYMOUS_ARCHIVE_ID))}catch{}
 }
-export function restoreAnonymousProgress(){
-  if(hasAcademicData())return {ok:true,restored:0};
-  return restoreAccountArchive(ANONYMOUS_ARCHIVE_ID);
+
+// «Começar de novo» no ecrã da conta obrigatória: o estudo feito sem conta neste
+// dispositivo (por exemplo, um diagnóstico de quem não chegou a criar conta) é
+// apagado. Progresso que pertença a uma conta nunca é apagado: vai para o arquivo
+// dessa conta e volta quando ela entrar.
+export function discardUnsavedDeviceProgress(){
+  const owner=activeStateAccount();
+  if(owner)return archiveActiveAccount(owner);
+  return eraseAcademicDataFromDevice(null);
 }

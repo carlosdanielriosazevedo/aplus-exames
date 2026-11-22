@@ -74,7 +74,7 @@ assert.match(store,/and revision=\$\{expectedRevision\}/u,"gravações cloud dev
 
 // Sincronização automática: mesmas garantias que as ações manuais.
 assert.match(autosync,/blocked_other_account/u,"progresso de outra conta no mesmo dispositivo nunca é sincronizado");
-assert.match(autosync,/needs_adoption/u,"progresso anónimo só vai para a conta com confirmação explícita");
+assert.match(autosync,/needs_adoption/u,"progresso anónimo nunca se junta em silêncio a uma conta com progresso: a conta manda (2026-11-22)");
 assert.match(autosync,/if\(pendingAssessment\)return \{action:"wait_assessment"\}/u,"o online nunca substitui uma avaliação em curso");
 assert.match(autosync,/return \{action:"conflict"\}/u,"alterações locais por guardar + online mais recente = conflito explícito");
 assert.match(layer,/saveLocalSnapshot\(state,\{label:"Antes de aplicar progresso de outro dispositivo"\}\);[\s\S]*setS\(prev=>preservePendingAssessment\(prev,next\)\)/u,"aplicar o online cria cópia local antes e respeita a tentativa atual");

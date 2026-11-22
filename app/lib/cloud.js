@@ -3,7 +3,7 @@ import {mergeSelectedSubjects} from "./cloudStateMerge.js";
 
 import {createInternalNeonAuth} from "@neondatabase/neon-js/auth";
 import {BetterAuthReactAdapter} from "@neondatabase/neon-js/auth/react/adapters";
-import {authErrorMessage} from "./authErrorCopy.js";
+import {authErrorMessage,isEmailInUse} from "./authErrorCopy.js";
 import {reportClientError} from "./clientRuntimeReport.js";
 
 // As mensagens ao aluno são genéricas (não revelam se um email tem conta). Para
@@ -139,7 +139,12 @@ export async function cloudSignUp({name,email,password}){
   const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
   const result=await authCall("signup",()=>client.signUp.email({name,email,password}));
-  if(result?.error){reportAuthFailure("signup",result.error);throw new Error(authErrorMessage("signup",result.error))}
+  if(result?.error){
+    reportAuthFailure("signup",result.error);
+    const failure=new Error(authErrorMessage("signup",result.error));
+    if(isEmailInUse(result.error))failure.code="EMAIL_IN_USE";
+    throw failure;
+  }
   await provisionServerIdentity();
   return result;
 }
