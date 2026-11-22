@@ -58,14 +58,19 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
       expect(counters.textRight,`${tab}: XP invade o menu`).toBeLessThan(counters.menuLeft);
       if(tab==='Aprender'){
         const mascot=await page.locator('.learnIntro').evaluate(el=>{
-          const title=el.querySelector('.mobileMainTitle'),copy=el.querySelector(':scope>span');
+          const title=el.querySelector('.mobileMainTitle'),copy=el.querySelector(':scope>span'),h1=title.querySelector('h1');
           const pseudo=getComputedStyle(title,'::after');
-          return {titleBottom:title.getBoundingClientRect().bottom,copyTop:copy.getBoundingClientRect().top,legacyContent:getComputedStyle(el,'::after').content,content:pseudo.content,background:pseudo.backgroundImage,bottom:pseudo.bottom};
+          const box=title.getBoundingClientRect(),h1Box=h1.getBoundingClientRect();
+          return {titleBottom:box.bottom,copyTop:copy.getBoundingClientRect().top,legacyContent:getComputedStyle(el,'::after').content,content:pseudo.content,background:pseudo.backgroundImage,
+            feet:box.top+parseFloat(pseudo.top)+parseFloat(pseudo.height),firstLineBottom:h1Box.top+parseFloat(getComputedStyle(h1).lineHeight)};
         });
         expect(mascot.legacyContent).toBe('none');
         expect(mascot.content).toBe('""');
         expect(mascot.background).toContain('apronso-welcome.webp');
-        expect(mascot.bottom).toBe('0px');
+        // Pés alinhados com o fundo da 1.ª linha do título. O Apronso é preso pelo
+        // topo (2026-11-21): se o título partir em duas linhas (depende do tipo de
+        // letra do sistema: Roboto, SF, …), o Apronso não desce. Tolerância sub-píxel.
+        expect(Math.abs(mascot.feet-mascot.firstLineBottom)).toBeLessThanOrEqual(0.5);
         expect(mascot.copyTop).toBeGreaterThan(mascot.titleBottom);
         await expect(page.locator('.learnIntro img.apronso')).toHaveCount(0);
       }
