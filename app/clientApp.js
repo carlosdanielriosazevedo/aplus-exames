@@ -560,7 +560,7 @@ export default function App(){
     }else if(pt)target="portugueseMiniExam";
     else target=fqa?.route||(math?draftScreen(math):null);
     const sameMathExam=math?.kind==="mini_exam"&&["miniExamIntro","miniExamRun","miniExamReview"].includes(screen);
-    if(target&&target!==screen&&!sameMathExam&&!(math?.kind==="diagnostic"&&screen==="diag"))return <Shell><Logo/><div className="notice"><b>Tens uma avaliação em curso</b><span>Continua a tentativa guardada, com as tuas respostas.</span></div><button className="btn" onClick={()=>{
+    if(target&&target!==screen&&!sameMathExam&&!(math?.kind==="diagnostic"&&screen==="diag"))return <Shell><Logo/><PausedSessionStatus kind={position?.kind||(pt?(pt.review?"review":pt.examId==="full-1"?"full_exam":"mini_exam"):fqa?.route==="physicsChemistryExam"?"full_exam":fqa?.route?"mini_exam":math?.kind)}/><div className="notice"><b>Tens uma avaliação em curso</b><span>Continua a tentativa guardada, com as tuas respostas.</span></div><button className="btn" onClick={()=>{
       if(math){setRecoveredSession(math);if(math.cfg)setTrainingCfg(math.cfg);if(math.session)setExamSession(math.session)}
       go(target);
     }}>Continuar</button></Shell>;
@@ -1924,7 +1924,7 @@ function Exams({s,go,startMini}){
   return <Shell className="wideStudentShell examHub"><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Matemática A · 635</h1><p className="muted">Escolhe um Mini-exame para uma sessão curta em contexto de prova. O Exame Completo ficará disponível quando o respetivo motor estiver validado.</p></div>
     <ApronsoNudge pose="crossed" tone="dark">Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</ApronsoNudge>
     <FriendsBetaDisclaimer s={s} compact/>
-    {pausedExamDraft?.kind==="mini_exam"&&<div className="pausedSession"><div><PausedActivityEyebrow kind="mini_exam"/><b>Mini-exame de Matemática A</b><div className="missionCardMeta"><PausedSessionMeta/></div></div><button onClick={()=>go(draftScreen(pausedExamDraft)||"miniExamRun")}>Continuar →</button></div>}
+    {pausedExamDraft?.kind==="mini_exam"&&<div className="pausedSession"><div><PausedActivityEyebrow kind="mini_exam"/><b>Mini-exame de Matemática A</b><div className="missionCardMeta"><PausedSessionMeta/></div></div><button onClick={()=>go(draftScreen(pausedExamDraft)||"miniExamRun")}>Continuar sessão</button></div>}
     <button className="exam examAction" disabled={!miniReady} onClick={()=>miniReady&&startMini()}>
       <div><b>⚡ Mini-exame misto</b><span>{miniReady?`${miniSelection} seleção + ${miniConstructed} construção · ~25–30 min · ${miniYears.join(" · ")}`:`${miniAvailable}/${MATH_MINI_EXAM_QUESTIONS} questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
     </button>

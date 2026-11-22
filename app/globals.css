@@ -2130,4 +2130,10 @@ html,body,a,button,input,select,textarea,label,summary,[role="button"]{touch-act
 .pausedSession .missionCardMeta span{display:inline-block;margin-top:0;font-size:12px}
 .pausedSession .missionCardMeta .sessionPausedPosition{background:#fff;color:#6b6252;border:1px solid #eedda9}
 .dailyMissionModalTop .pausedActivityEyebrow{display:inline}
+/* Área Exames: retoma com o mesmo botão do Aprender («Continuar sessão»),
+   por baixo do texto e a toda a largura do cartão. */
+html body .pausedSession{display:grid!important;grid-template-columns:minmax(0,1fr)!important;align-items:stretch!important;gap:14px!important}
+html body .pausedSession>button{width:100%!important;max-width:none!important;min-height:52px!important;padding:14px 18px!important;border:0!important;border-radius:16px!important;background:var(--app-card-dark)!important;color:#fff!important;font-size:16px!important;font-weight:900!important;line-height:1.2!important;white-space:nowrap!important;box-shadow:0 8px 18px rgba(16,43,66,.18)!important;cursor:pointer}
+html body .pausedSession>button:hover{filter:brightness(1.12)}
+html body .pausedSession>button:focus-visible{outline:none;box-shadow:var(--app-focus)!important}
 
