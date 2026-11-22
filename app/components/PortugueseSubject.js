@@ -7,6 +7,7 @@ import {useEffect,useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import PortugueseLearnPanel from "./PortugueseLearnPanel";
 import PausedActivityEyebrow,{PausedSessionMeta,PausedSessionStatus,pausedPosition} from "./PausedActivityEyebrow";
+import PausedSessionCard from "./PausedSessionCard";
 import StudyModeHub from "./StudyModeHub";
 import {PORTUGUESE_COMPETENCIES} from "../data/portugueseFoundation";
 import {PORTUGUESE_ITEMS,portugueseItemById} from "../data/portugueseContent";
@@ -165,7 +166,6 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
   function start(kind,items,label,domain=null){
     // Nunca substituir uma tentativa pendente: apenas permitir a retoma.
     if(progress.lastPosition){resume();return}
-    if(miniExamDraft){go("portugueseMiniExam");return}
     const sessionId=createSubjectSessionId("portuguese",kind);
     setSession({sessionId,kind,label,domain,items,current:0});
     setAnswer(null);setFeedback(null);setEditingCriterionId(null);setResults([]);
@@ -216,8 +216,8 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
   }
 
   function selectMiniExam(id){
-    // Não substituir avaliações nem provas pendentes, mesmo por rotas secundárias.
-    if(progress.lastPosition){resume();return}
+    // Estudo e provas são independentes (2026-11-22); uma prova a meio nunca é
+    // substituída: escolher outra prova abre a que está guardada.
     const selectedId=miniExamDraft?.examId||id;
     setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:selectedId}}}));
     go("portugueseMiniExam");
@@ -353,13 +353,17 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
       {practiceDomain&&selectedFocusCount>=7&&<div className="trainingSummary"><b>{PORTUGUESE_DOMAIN_LABELS[practiceDomain]} → {selectedFocusLabel}</b><span>{selectedFocusCount} perguntas disponíveis neste foco · nível: {levelLabel}. A sessão escolhe 7–10 perguntas e evita repetições recentes sempre que possível.</span></div>}
       {practiceDomain&&selectedFocusCount<7&&<div className="notice"><b>Conteúdo ainda em construção</b><span>Escolhe outro foco com banco suficiente para uma sessão completa.</span></div>}
 
-      <button className="primary" disabled={!practiceDomain||selectedFocusCount<7} onClick={()=>startPractice(
+      {progress.lastPosition?<>
+        <PausedSessionStatus kind={progress.lastPosition.kind} position={pausedPosition(progress.lastPosition.current||0,progress.lastPosition.itemIds?.length)}/>
+        <p className="pausedSessionNote">Tens uma sessão de estudo a meio. Continua-a antes de começares um treino.</p>
+        <button className="primary" onClick={resume}>Continuar sessão</button>
+      </>:<button className="primary" disabled={!practiceDomain||selectedFocusCount<7} onClick={()=>startPractice(
         practiceDomain,
         practiceYear,
         practiceDomain==="educacao-literaria"?null:practiceCompetencyId,
         practiceDomain==="educacao-literaria"?practiceLiteraryWorkId:null,
         practiceLevel
-      )}>Começar treino</button>
+      )}>Começar treino</button>}
     </Shell>;
   }
 
@@ -388,11 +392,11 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
     {sharedTop}
     <div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Português · 639</h1><p className="muted">Escolhe um Mini-exame para uma sessão mais curta ou o Exame Completo quando estiver disponível no teu percurso.</p></div>
     <ApronsoNudge pose="crossed" tone="dark">Aqui não dou pistas durante as perguntas. No fim, voltamos à prova para rever as tuas respostas.</ApronsoNudge>
-    {progress.lastPosition&&<div className="pausedSession"><div><PausedActivityEyebrow kind={progress.lastPosition.kind}/><b>{progress.lastPosition.label}</b><div className="missionCardMeta"><PausedSessionMeta position={pausedPosition(progress.lastPosition.current||0,progress.lastPosition.itemIds?.length)}/></div></div><button onClick={resume}>Continuar sessão</button></div>}
     {miniExamDraft&&<div className="pausedSession"><div><PausedActivityEyebrow kind={miniExamDraft.review?"review":miniExamDraft.examId==="full-1"?"full_exam":"mini_exam"}/><b>{miniExamDraft.examId==="full-1"?"Exame Completo de Português":(portugueseMiniExamMeta(miniExamDraft.examId)?.title||"Mini-exame de Português")}</b><div className="missionCardMeta"><PausedSessionMeta position={miniExamDraft.review?null:pausedPosition(miniExamDraft.index||0,miniExamDraft.itemIds?.length||6)}/></div></div><button onClick={()=>{setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:miniExamDraft.examId}}}));go("portugueseMiniExam")}}>Continuar sessão</button></div>}
-    {!progress.lastPosition&&!miniExamDraft&&portugueseMiniExamsForYear(currentYear).map(exam=><button key={exam.id} className="exam examAction" onClick={()=>selectMiniExam(exam.id)}><div><b>⚡ {exam.title}</b><span>{exam.description}</span></div><strong>Começar →</strong></button>)}
+    {miniExamDraft&&<p className="pausedSessionNote">Tens uma prova a meio. Continua-a antes de começares outra.</p>}
+    {!miniExamDraft&&portugueseMiniExamsForYear(currentYear).map(exam=><button key={exam.id} className="exam examAction" onClick={()=>selectMiniExam(exam.id)}><div><b>⚡ {exam.title}</b><span>{exam.description}</span></div><strong>Começar →</strong></button>)}
     <div className="lastExam"><div><small>MINI-EXAMES REALIZADOS</small><b>{progress.sessions.filter(row=>row.kind==="mini_exam").length||"Ainda nenhum"}</b></div><span>{progress.sessions.filter(row=>row.kind==="mini_exam").length?"O histórico de Português fica separado das restantes disciplinas.":"Escolhe um mini-exame para criar histórico."}</span></div>
-    {!progress.lastPosition&&!miniExamDraft&&(currentYear==="12.º"?<button className="exam examAction" onClick={()=>selectMiniExam("full-1")}><div><b>📝 Exame Completo · Modelo 1</b><span>15 itens · 120 min + 30 min de tolerância · 200 pontos classificáveis</span></div><strong>Começar →</strong></button>:<div className="exam locked"><b>📝 Exame Completo</b><span>Disponível no percurso do 12.º ano, para preparação do exame nacional.</span></div>)}
+    {!miniExamDraft&&(currentYear==="12.º"?<button className="exam examAction" onClick={()=>selectMiniExam("full-1")}><div><b>📝 Exame Completo · Modelo 1</b><span>15 itens · 120 min + 30 min de tolerância · 200 pontos classificáveis</span></div><strong>Começar →</strong></button>:<div className="exam locked"><b>📝 Exame Completo</b><span>Disponível no percurso do 12.º ano, para preparação do exame nacional.</span></div>)}
     <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 Aguardam validação de conteúdos oficiais.</span></div>
     <div className="notice"><b>O que muda num exame?</b><span>Não há feedback pergunta a pergunta. O resultado aparece no fim e as respostas abertas são revistas por critérios observáveis, sem atribuição automática de uma classificação final.</span></div>
     {sharedNav}
@@ -403,10 +407,11 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
     <section className="adaptivePath" aria-label="Caminho adaptativo de Português">
       <div className={`pathNode ${progress.diagnosticDone?"done":"current"}`}><span>{progress.diagnosticDone?"✓":"●"}</span><div><small>{progress.diagnosticDone?"ÚLTIMO PASSO":"PRIMEIRO PASSO"}</small><b>{progress.diagnosticDone?"Diagnóstico concluído":"Conhecer o teu ponto de partida"}</b></div></div>
       <div className="pathLine active"/>
-      <div className={`pathNode current ${missionDone&&!progress.lastPosition&&!miniExamDraft?"complete":""}`}><span>{missionDone&&!progress.lastPosition&&!miniExamDraft?"✓":"●"}</span><article>{progress.lastPosition||miniExamDraft?<PausedActivityEyebrow kind={progress.lastPosition?.kind||(miniExamDraft.review?"review":miniExamDraft.examId==="full-1"?"full_exam":"mini_exam")}/>:<small>{progress.diagnosticDone?(missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"):"PRÓXIMO PASSO"}</small>}<h2>{!progress.lastPosition&&miniExamDraft?(miniExamDraft.examId==="full-1"?"Exame Completo de Português":(portugueseMiniExamMeta(miniExamDraft.examId)?.title||"Mini-exame de Português")):progress.lastPosition?.kind==="diagnostic"?"Diagnóstico de Português":progress.lastPosition?.label&&progress.lastPosition.kind!=="mission"?progress.lastPosition.label:progress.diagnosticDone?"Português adaptado ao teu percurso":"Diagnóstico de Português"}</h2><div className="missionCardMeta">{(progress.lastPosition||miniExamDraft)&&<PausedSessionMeta position={progress.lastPosition?pausedPosition(progress.lastPosition.current||0,progress.lastPosition.itemIds?.length):miniExamDraft.review?null:pausedPosition(miniExamDraft.index||0,miniExamDraft.itemIds?.length||6)}/>}{!progress.lastPosition&&!miniExamDraft&&<><span>{progress.diagnosticDone?"~3–5 min":"8 perguntas"}</span>{progress.diagnosticDone&&<span>{currentYear}</span>}</>}</div><button disabled={(!progress.lastPosition&&!miniExamDraft&&((!progress.diagnosticDone&&!scopedCoverage.diagnosticReady)||(!missionDone&&progress.diagnosticDone&&scopedItems.length<7)))} onClick={progress.lastPosition?resume:miniExamDraft?()=>{setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:miniExamDraft.examId}}}));go("portugueseMiniExam")}:missionDone?()=>go("train"):progress.diagnosticDone?startRecommendedMission:()=>go("diag")}>{progress.lastPosition||miniExamDraft?"Continuar sessão":missionDone?"Continuar a estudar":progress.diagnosticDone?"Começar Missão":"Começar diagnóstico"}</button></article></div>
+      <div className={`pathNode current ${missionDone&&!progress.lastPosition?"complete":""}`}><span>{missionDone&&!progress.lastPosition?"✓":"●"}</span><article>{progress.lastPosition?<PausedActivityEyebrow kind={progress.lastPosition.kind}/>:<small>{progress.diagnosticDone?(missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"):"PRÓXIMO PASSO"}</small>}<h2>{progress.lastPosition?.kind==="diagnostic"?"Diagnóstico de Português":progress.lastPosition?.label&&progress.lastPosition.kind!=="mission"?progress.lastPosition.label:progress.diagnosticDone?"Português adaptado ao teu percurso":"Diagnóstico de Português"}</h2><div className="missionCardMeta">{progress.lastPosition?<PausedSessionMeta position={pausedPosition(progress.lastPosition.current||0,progress.lastPosition.itemIds?.length)}/>:<><span>{progress.diagnosticDone?"~3–5 min":"8 perguntas"}</span>{progress.diagnosticDone&&<span>{currentYear}</span>}</>}</div><button disabled={(!progress.lastPosition&&((!progress.diagnosticDone&&!scopedCoverage.diagnosticReady)||(!missionDone&&progress.diagnosticDone&&scopedItems.length<7)))} onClick={progress.lastPosition?resume:missionDone?()=>go("train"):progress.diagnosticDone?startRecommendedMission:()=>go("diag")}>{progress.lastPosition?"Continuar sessão":missionDone?"Continuar a estudar":progress.diagnosticDone?"Começar Missão":"Começar diagnóstico"}</button></article></div>
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{progress.diagnosticDone?"Praticar, rever matéria ou fazer um exame":"Primeira Missão adaptada"}</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>
+    {miniExamDraft&&<PausedSessionCard kind={miniExamDraft.review?"review":miniExamDraft.examId==="full-1"?"full_exam":"mini_exam"} title={miniExamDraft.examId==="full-1"?"Exame Completo de Português":(portugueseMiniExamMeta(miniExamDraft.examId)?.title||"Mini-exame de Português")} position={miniExamDraft.review?null:pausedPosition(miniExamDraft.index||0,miniExamDraft.itemIds?.length||6)} onContinue={()=>{setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:miniExamDraft.examId}}}));go("portugueseMiniExam")}}/>}
     {!scopedCoverage.diagnosticReady&&<div className="notice warning homeScopeWarning"><b>Atualiza a matéria dada</b><span>Não há matéria assinalada suficiente para um diagnóstico equilibrado no teu ano atual.</span><button onClick={()=>go("curriculumSettings")}>Indicar matéria dada</button></div>}
   </>);
 

@@ -111,9 +111,13 @@ async function seed(page,state,draft=null){
 async function continueFromHome(page,target=page.getByRole("button",{name:"Responder",exact:true})){
   const responder=target;
   const next=page.getByRole("button",{name:/^Continuar (diagnóstico|sessão|missão|Missão →)$/u}).first();
+  // Com uma prova em pausa e a Missão por começar, a janela «Nova Missão» aparece
+  // por cima do menu (2026-11-22): o aluno escolhe ver a Home e continua a prova.
+  const newMission=page.getByRole("button",{name:"Começar Missão →"});
   for(let step=0;step<3;step++){
-    await expect(responder.or(next)).toBeVisible({timeout:30_000});
+    await expect(responder.or(next).or(newMission).first()).toBeVisible({timeout:30_000});
     if(await responder.isVisible())return;
+    if(await newMission.isVisible()){await page.getByRole("button",{name:"Agora não · ver a Home"}).click();continue}
     await next.click();
     await expect(next).toBeHidden({timeout:5_000}).catch(()=>{});
   }
@@ -387,6 +391,8 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
 for(const subjectId of ["portuguese","physics-chemistry-a"]){
   for(const kind of ["diagnostic","mission","training"]){
     test(`${subjectId} · ${kind} resiste à navegação direta para outro exame`,async({page})=>{
+      // Estudo e provas são independentes (2026-11-22): uma Missão ou um treino a meio
+      // não bloqueiam uma prova e ficam intactos; o diagnóstico continua a vir primeiro.
       const state=pausedSubjectState(subjectId,2);
       state.subjectProgress[subjectId].lastPosition.kind=kind;
       state.subjectProgress[subjectId].lastPosition.currentAnswer="Resposta conservada";
@@ -396,9 +402,14 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
       const read=()=>page.evaluate(id=>JSON.parse(localStorage.getItem("a25")).subjectProgress[id].lastPosition,subjectId);
       const before=await read();
       await page.evaluate(({subjectId})=>window.dispatchEvent(new PopStateEvent("popstate",{state:{...window.history.state,approvaSessionGuard:true,approvaScreen:subjectId==="portuguese"?"portugueseMiniExam":"physicsChemistryExam",approvaSubjectId:subjectId}})),{subjectId});
-      await expect(page.getByText("Tens uma avaliação em curso",{exact:true})).toBeVisible();
-      await page.getByRole("button",{name:"Continuar",exact:true}).click();
-      await expect(page.getByRole("button",{name:"Responder",exact:true})).toBeVisible();
+      if(kind==="diagnostic"){
+        await expect(page.getByText("Tens uma avaliação em curso",{exact:true})).toBeVisible();
+        await page.getByRole("button",{name:"Continuar",exact:true}).click();
+        await expect(page.getByRole("button",{name:"Responder",exact:true})).toBeVisible();
+      }else{
+        await expect(page.getByText("Tens uma avaliação em curso",{exact:true})).toHaveCount(0);
+        await expect(page.locator(".ptx-question-card, .fqaMiniExamPage, .fqaFullExamPage, .ptx-shell, .fqaExamIntro, main").first()).toBeVisible({timeout:30_000});
+      }
       const after=await read();
       expect(after.sessionId).toBe(before.sessionId);
       expect(after.current).toBe(before.current);
@@ -444,8 +455,9 @@ for(const subjectId of ["portuguese","physics-chemistry-a"]){
       await expect.poll(async()=>Object.keys((await read()).answers).length).toBeGreaterThan(0);
       const before=await read();
       await page.evaluate(subjectId=>window.dispatchEvent(new PopStateEvent("popstate",{state:{...window.history.state,approvaSessionGuard:true,approvaScreen:"trainingSetup",approvaSubjectId:subjectId}})),subjectId);
-      await expect(page.getByText("Tens uma avaliação em curso",{exact:true})).toBeVisible();
-      await page.getByRole("button",{name:"Continuar",exact:true}).click();
+      // Estudo e provas são independentes (2026-11-22): Praticar abre e a prova fica intacta.
+      await expect(page.getByText("Tens uma avaliação em curso",{exact:true})).toHaveCount(0);
+      await expect(page.getByRole("button",{name:"Começar treino",exact:true})).toBeVisible({timeout:30_000});
       await expect.poll(read).toMatchObject({startedAt:before.startedAt,answers:before.answers,index:before.index});
       await page.close();
       const reopened=await context.newPage();
@@ -469,15 +481,22 @@ for(const kind of ["diagnostic","mission","training","mini_exam"]){
   await seed(page,state,draft);
   await page.goto("/");
   await expect(page.locator(".sessionTop, .examQuestion").first()).toBeVisible({timeout:30_000});
-  const key="a25-active-session-v1";
+  // O Mini-exame vive no espaço das provas; diagnóstico, Missão e treino no do estudo.
+  const key=kind==="mini_exam"?"a25-active-exam-session-v1":"a25-active-session-v1";
   const read=()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
   await expect.poll(read).toBeTruthy();
   const id=kind==="mini_exam"?draft.session.sessionId:draft.sessionId;
   for(const route of ["mission","trainingSetup","miniExamIntro"]){
    if((kind==="mission"&&route==="mission")||(kind==="mini_exam"&&route==="miniExamIntro"))continue;
    await page.evaluate(route=>window.dispatchEvent(new PopStateEvent("popstate",{state:{...window.history.state,approvaSessionGuard:true,approvaScreen:route,approvaSubjectId:"math-a"}})),route);
-   await expect(page.getByText("Tens uma avaliação em curso",{exact:true})).toBeVisible();
-   await page.getByRole("button",{name:"Continuar",exact:true}).click();
+   const sameLane=(kind==="mini_exam")===(route==="miniExamIntro");
+   // Com um Mini-exame a meio, a rota «mission» abre uma Missão nova (outro espaço);
+   // a seguir, Praticar encontra essa Missão a meio no espaço do estudo.
+   const expectGuard=sameLane||(kind==="mini_exam"&&route==="trainingSetup");
+   if(expectGuard){
+    await expect(page.getByText("Tens uma avaliação em curso",{exact:true})).toBeVisible();
+    await page.getByRole("button",{name:"Continuar",exact:true}).click();
+   }
    await expect(page.getByText("Tens uma avaliação em curso",{exact:true})).toHaveCount(0);
    await expect.poll(async()=>{const d=await read();return d.sessionId||d.session?.sessionId}).toBe(id);
    const after=await read();
@@ -540,7 +559,7 @@ for(const subjectId of ["math-a","portuguese","physics-chemistry-a"]){
     if(!exam||subjectId==="math-a")await expect(page.locator(".sessionTop")).toBeVisible({timeout:30_000});
     const snapshot=page=>page.evaluate(({subjectId,exam,kind})=>{
      const state=JSON.parse(localStorage.getItem("a25"));
-     const draft=subjectId==="math-a"?JSON.parse(localStorage.getItem("a25-active-session-v1")||"null")
+     const draft=subjectId==="math-a"?JSON.parse(localStorage.getItem(kind==="mini_exam"?"a25-active-exam-session-v1":"a25-active-session-v1")||"null")
       :exam?(subjectId==="portuguese"?state.subjectSettings.portuguese.miniExamDraft:JSON.parse(localStorage.getItem("applus:fqa-exam-draft:v1:"+(kind==="full_exam"?"fqa-full-715":kind==="mini_exam_2"?"fqa-mini-2":"fqa-mini-1"))||"null")):state.subjectProgress[subjectId].lastPosition;
      if(!draft)return null;
      const attempt=draft.session||draft;

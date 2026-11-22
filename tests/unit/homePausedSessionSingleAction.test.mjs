@@ -28,12 +28,14 @@ describe("single paused-assessment CTA on Aprender",()=>{
   const home=learningHome(fqa,'return <main className="learnHome">','{sharedNav}</section></main>');
   expect(home).not.toContain('className="pausedSession"');
   expect(home).toContain("<PausedActivityEyebrow kind=");
-  expect(home).toContain('go(examDrafts[0].route)');
+  // Prova a meio: cartão próprio, que retoma essa prova (2026-11-22).
+  expect(home).toContain('<PausedSessionCard');
+  expect(home).toContain('onContinue={()=>go(route)}');
   expect(home).toContain('progress.lastPosition?resume');
   expect(home).toContain('"Continuar sessão"');
  });
  it("Matemática A routes paused mission, training, diagnostic and mini-exam",()=>{
-  const home=learningHome(math,'function Home({s,setS,go,reset})','function Mission({s,setS,go,');
+  const home=learningHome(math,'function Home({s,setS,go,reset','function Mission({s,setS,go,');
   expect(home).not.toContain('className="pausedSession"');
   for(const kind of ["mini_exam","training","diagnostic","mission"])expect(home).toContain(`kind==="${kind}"`);
   expect(home).toContain("<PausedActivityEyebrow kind=");

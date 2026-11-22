@@ -7,7 +7,7 @@
 //   com "Voltar e terminar" em destaque: só existe neste dispositivo.
 // - Sem confirmação da conta (sem rede) → o aluno fica, ou sai mantendo os dados
 //   neste dispositivo (arquivo local da conta, como antes).
-import {loadSessionDraftStatus} from "./sessionDraft.js";
+import {loadAllSessionDrafts} from "./sessionLanes.js";
 import {pendingPhysicsChemistryExam} from "./physicsChemistryExamDraft.js";
 
 export const PORTUGUESE_PROTOTYPE_DRAFT_KEY="applus:portuguese-prototype-draft:v1";
@@ -16,15 +16,18 @@ const SHORT_LABELS={mission:"uma missão",diagnostic:"o diagnóstico",training:"
 
 // Trabalho a meio que ainda não está na conta. Os detetores podem ser injetados (testes).
 export function detectUnsavedWork(state,{
-  sessionDraft=()=>loadSessionDraftStatus(state?.betaMode||"internal"),
+  sessionDraft=()=>loadAllSessionDrafts(state?.betaMode||"internal"),
   fqaExam=()=>pendingPhysicsChemistryExam(),
   storage=globalThis.localStorage
 }={}){
   const long=[],short=[];
-  let draft=null;
-  try{draft=sessionDraft()?.draft||null}catch{}
-  if(draft?.kind==="mini_exam")long.push("um mini-exame");
-  else if(draft?.kind)short.push(SHORT_LABELS[draft.kind]||"uma sessão");
+  // Matemática A pode ter, ao mesmo tempo, uma sessão de estudo e um Mini-exame a meio.
+  let drafts=[];
+  try{const found=sessionDraft();drafts=found?.drafts||(found?.draft?[found.draft]:[])}catch{}
+  for(const draft of drafts){
+    if(draft?.kind==="mini_exam")long.push("um mini-exame");
+    else if(draft?.kind)short.push(SHORT_LABELS[draft.kind]||"uma sessão");
+  }
   if(state?.subjectSettings?.portuguese?.miniExamDraft)long.push("um mini-exame de Português");
   let fqa=null;
   try{fqa=fqaExam()}catch{}
@@ -32,7 +35,7 @@ export function detectUnsavedWork(state,{
   let ptDraft=null;
   try{ptDraft=storage?.getItem(PORTUGUESE_PROTOTYPE_DRAFT_KEY)}catch{}
   if(ptDraft)long.push("um texto de Português");
-  if(!draft&&!short.length&&Object.values(state?.subjectProgress||{}).some(row=>row?.lastPosition))short.push("uma sessão");
+  if(!drafts.some(draft=>draft?.kind&&draft.kind!=="mini_exam")&&!short.length&&Object.values(state?.subjectProgress||{}).some(row=>row?.lastPosition))short.push("uma sessão");
   return {long,short};
 }
 
