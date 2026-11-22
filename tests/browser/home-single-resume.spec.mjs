@@ -18,7 +18,8 @@ test("Português · Missão em pausa fica apenas na caixa principal com uma aç�
   await expect(home.locator(".pausedActivityStatus")).toHaveText("SESSÃO EM PAUSA");
   await expect(home.locator(".pausedActivityStatus")).toHaveCSS("color","rgb(255, 179, 173)");
   await expect(home.locator(".pausedActivityEyebrow")).toHaveAttribute("aria-label","MISSÃO DE HOJE — Sessão em pausa");
-  await expect(home.locator(".sessionPausedMeta")).toHaveText("Pergunta 4 de 7");
+  await expect(home.locator(".sessionPausedMeta")).toHaveText("Progresso guardado");
+  await expect(home.locator(".sessionPausedPosition")).toHaveText("Pergunta 4 de 7");
   const resume=home.getByRole("button",{name:"Continuar sessão",exact:true});
   await expect(resume).toHaveCount(1);
   await resume.click();

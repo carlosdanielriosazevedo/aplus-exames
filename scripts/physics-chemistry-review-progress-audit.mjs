@@ -29,7 +29,7 @@ for(const [label,source] of [["Mini-exame",mini],["Exame Completo",full]]){
 }
 
 assert.match(draft,/review:!!review/u,"o rascunho deve persistir explicitamente a fase de revisão.");
-assert.match(subject,/REVISÃO EM PAUSA/u,"a área de Exames deve tornar uma revisão guardada facilmente retomável.");
+assert.match(subject,/PausedActivityEyebrow kind=\{[^}]*"review"/u,"a área de Exames deve tornar uma revisão guardada facilmente retomável.");
 assert.match(subject,/loadPhysicsChemistryExamDraft/u,"o hub de Exames deve ler os rascunhos guardados.");
 
 console.log("✓ FQ A review status: respondidas · provisórias · confiança reduzida · revisão persistente · retoma visível");
