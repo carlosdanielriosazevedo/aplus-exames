@@ -27,14 +27,14 @@ function privateEntry(){
   const q=new URLSearchParams(window.location.search);
   return q.get("beta")==="friends"||q.get("mode")==="friends_beta";
 }
-function Brand(){return <span className="brandName" aria-label="APProva+"><span className="brandAP">AP</span><span className="brandProva">Prova</span><span className="brandPlus">+</span></span>}
+function Brand(){return <span className="brandName" aria-label="APProva+"><span className="brandAP">APP</span><span className="brandProva">rova</span><span className="brandPlus">+</span></span>}
 function Loading({failed=false}){return <main aria-busy={!failed} aria-live="polite" aria-label={failed?"Não foi possível carregar a APProva+":"A preparar a APProva+"} className="apronsoStartup"><span className="apronsoStartupSr">{failed?"O arranque falhou":"A preparar o teu espaço de estudo"}</span><form className="apronsoStartupRecovery" action="/" method="get"><button type="submit" name="recuperar" value="inicio">{failed?"Não foi possível abrir. Voltar ao início":"Não abriu? Voltar ao início sem perder o progresso"}</button></form></main>}
 // Ecrã de abertura único da app instalada: imagem aprovada durante ~2,5 s.
 // Só aparece em modo app (display-mode standalone, via CSS) e desaparece sozinho
 // por animação CSS — nunca bloqueia, mesmo que o JavaScript falhe.
 function LaunchScreen(){return <div className="approvaLaunch" aria-hidden="true"/>}
 function Landing({onStart}){return <main className="dark center"><section className="hero">
-  <div className="logo"><Brand/></div>
+  <div className="logo brandLogo"><img src="/brand/approva-logo-light.webp" alt="APProva+" width={637} height={194} fetchPriority="high"/></div>
   <div className="welcomeApronso"><img className="apronso apronso-motion-idle" src="/mascot/apronso-welcome.webp" alt="Apronso, a mascote da APProva+"/><div><small>OLÁ, EU SOU O APRONSO</small><b>O teu parceiro de estudo.</b><span>Vou ajudar-te a perceber o que estudar, explicar dificuldades e celebrar cada conquista.</span></div></div>
   <p className="eyebrow">PREPARAÇÃO INTELIGENTE PARA EXAMES NACIONAIS</p>
   <h1>A tua melhor nota<br/><em>começa aqui.</em></h1>

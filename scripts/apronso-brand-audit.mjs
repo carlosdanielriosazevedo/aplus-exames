@@ -47,4 +47,9 @@ assert.match(fqa,/Apronso acompanha o teu progresso/u,"FQ A deve manter Apronso 
 assert.match(fqa,/diagApronsoHero/u,"FQ A deve reutilizar o mesmo padrão visual do diagnóstico.");
 
 for(const pose of poses){const asset=new URL(`../public/mascot/apronso-${pose}.webp`,import.meta.url);const size=statSync(asset).size;assert.ok(size>10_000,`${pose}: asset appears incomplete`);assert.ok(size<100_000,`${pose}: asset must remain lightweight for mobile`);assert.match(page,new RegExp(`(?:pose=|mascot:)['\"]${pose}['\"]`),`${pose}: pose must be used in the experience`);}
+// Logótipo do splash (decisão do product owner, 2026-11-22): imagem recortada do
+// splash aprovado, igual em todas as plataformas; leve para o cabeçalho.
+assert.match(chrome,/export const Logo = \(\) => <div className="logo brandLogo"><img src=\{BRAND_LOGO_SRC\} alt="APProva\+"/u,"O logótipo deve ser a imagem do splash.");
+assert.match(chrome,/BRAND_LOGO_SRC="\/brand\/approva-logo-light\.webp"/u);
+{const logo=statSync(new URL("../public/brand/approva-logo-light.webp",import.meta.url));assert.ok(logo.size<60_000,`Logótipo demasiado pesado: ${logo.size} bytes`);}
 console.log("✓ APProva+ identity: Apronso is present and visually integrated across Matemática A, Português and FQ A");

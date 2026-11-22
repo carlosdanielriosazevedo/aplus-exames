@@ -39,5 +39,5 @@ export const metadata={
 export const viewport={width:'device-width',initialScale:1,viewportFit:'cover',themeColor:'#08132e'};
 
 export default function RootLayout({children}){
-  return <html lang="pt-PT"><head><link rel="preload" as="image" type="image/webp" href="/brand/approva-splash-20261031.webp?v=20261031-android-v2" media="(display-mode: standalone)" fetchPriority="high"/></head><body>{children}<StorageDurabilityNotice/><ClientRuntimeReporter/><ServiceWorkerRegistration/></body></html>;
+  return <html lang="pt-PT"><head><link rel="preload" as="image" type="image/webp" href="/brand/approva-logo-light.webp"/><link rel="preload" as="image" type="image/webp" href="/brand/approva-splash-20261031.webp?v=20261031-android-v2" media="(display-mode: standalone)" fetchPriority="high"/></head><body>{children}<StorageDurabilityNotice/><ClientRuntimeReporter/><ServiceWorkerRegistration/></body></html>;
 }

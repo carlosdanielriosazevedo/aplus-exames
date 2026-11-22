@@ -12,7 +12,12 @@ export const BrandName = ({className=""}) => (
     <span className="brandAP">APP</span><span className="brandProva">rova</span><span className="brandPlus">+</span>
   </span>
 );
-export const Logo = () => <div className="logo"><BrandName/></div>;
+// Logótipo do ecrã de abertura (decisão do product owner, 2026-11-22): o mesmo
+// lettering, as mesmas cores e o traço por baixo, recortados do splash aprovado
+// (scripts/extract-brand-logo.py). Em fundo claro, «APP» passa de branco a
+// azul-marinho. BrandName continua a ser o nome escrito dentro de frases.
+export const BRAND_LOGO_SRC="/brand/approva-logo-light.webp";
+export const Logo = () => <div className="logo brandLogo"><img src={BRAND_LOGO_SRC} alt="APProva+" width={637} height={194} decoding="async"/></div>;
 function apronsoMotionClass(pose){return pose==="celebrate"?"apronso-motion-celebrate":pose==="thinking"?"apronso-motion-thinking":"apronso-motion-idle"}
 export function Apronso({pose="welcome",className="",alt=""}){return <img className={`apronso ${apronsoMotionClass(pose)} ${className}`.trim()} src={`/mascot/apronso-${pose}.webp`} alt={alt}/>}
 export function ApronsoNudge({pose="thinking",tone="light",children}){return <aside className={`apronsoNudge ${tone}`}><Apronso pose={pose} alt=""/><p>{children}</p></aside>}
