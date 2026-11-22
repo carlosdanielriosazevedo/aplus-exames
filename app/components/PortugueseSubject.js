@@ -353,13 +353,17 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
       {practiceDomain&&selectedFocusCount>=7&&<div className="trainingSummary"><b>{PORTUGUESE_DOMAIN_LABELS[practiceDomain]} → {selectedFocusLabel}</b><span>{selectedFocusCount} perguntas disponíveis neste foco · nível: {levelLabel}. A sessão escolhe 7–10 perguntas e evita repetições recentes sempre que possível.</span></div>}
       {practiceDomain&&selectedFocusCount<7&&<div className="notice"><b>Conteúdo ainda em construção</b><span>Escolhe outro foco com banco suficiente para uma sessão completa.</span></div>}
 
-      <button className="primary" disabled={!practiceDomain||selectedFocusCount<7} onClick={()=>startPractice(
+      {progress.lastPosition||miniExamDraft?<>
+        <PausedSessionStatus kind={progress.lastPosition?.kind||(miniExamDraft.review?"review":miniExamDraft.examId==="full-1"?"full_exam":"mini_exam")} position={progress.lastPosition?pausedPosition(progress.lastPosition.current||0,progress.lastPosition.itemIds?.length):null}/>
+        <p className="pausedSessionNote">Só podes ter uma sessão a meio de cada vez. Termina esta e depois começa o treino.</p>
+        <button className="primary" onClick={progress.lastPosition?resume:()=>{setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:miniExamDraft.examId}}}));go("portugueseMiniExam")}}>Continuar sessão</button>
+      </>:<button className="primary" disabled={!practiceDomain||selectedFocusCount<7} onClick={()=>startPractice(
         practiceDomain,
         practiceYear,
         practiceDomain==="educacao-literaria"?null:practiceCompetencyId,
         practiceDomain==="educacao-literaria"?practiceLiteraryWorkId:null,
         practiceLevel
-      )}>Começar treino</button>
+      )}>Começar treino</button>}
     </Shell>;
   }
 
@@ -390,6 +394,7 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
     <ApronsoNudge pose="crossed" tone="dark">Aqui não dou pistas durante as perguntas. No fim, voltamos à prova para rever as tuas respostas.</ApronsoNudge>
     {progress.lastPosition&&<div className="pausedSession"><div><PausedActivityEyebrow kind={progress.lastPosition.kind}/><b>{progress.lastPosition.label}</b><div className="missionCardMeta"><PausedSessionMeta position={pausedPosition(progress.lastPosition.current||0,progress.lastPosition.itemIds?.length)}/></div></div><button onClick={resume}>Continuar sessão</button></div>}
     {miniExamDraft&&<div className="pausedSession"><div><PausedActivityEyebrow kind={miniExamDraft.review?"review":miniExamDraft.examId==="full-1"?"full_exam":"mini_exam"}/><b>{miniExamDraft.examId==="full-1"?"Exame Completo de Português":(portugueseMiniExamMeta(miniExamDraft.examId)?.title||"Mini-exame de Português")}</b><div className="missionCardMeta"><PausedSessionMeta position={miniExamDraft.review?null:pausedPosition(miniExamDraft.index||0,miniExamDraft.itemIds?.length||6)}/></div></div><button onClick={()=>{setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:miniExamDraft.examId}}}));go("portugueseMiniExam")}}>Continuar sessão</button></div>}
+    {(progress.lastPosition||miniExamDraft)&&<p className="pausedSessionNote">Só podes ter uma sessão a meio de cada vez. Termina esta e depois começa outra prova.</p>}
     {!progress.lastPosition&&!miniExamDraft&&portugueseMiniExamsForYear(currentYear).map(exam=><button key={exam.id} className="exam examAction" onClick={()=>selectMiniExam(exam.id)}><div><b>⚡ {exam.title}</b><span>{exam.description}</span></div><strong>Começar →</strong></button>)}
     <div className="lastExam"><div><small>MINI-EXAMES REALIZADOS</small><b>{progress.sessions.filter(row=>row.kind==="mini_exam").length||"Ainda nenhum"}</b></div><span>{progress.sessions.filter(row=>row.kind==="mini_exam").length?"O histórico de Português fica separado das restantes disciplinas.":"Escolhe um mini-exame para criar histórico."}</span></div>
     {!progress.lastPosition&&!miniExamDraft&&(currentYear==="12.º"?<button className="exam examAction" onClick={()=>selectMiniExam("full-1")}><div><b>📝 Exame Completo · Modelo 1</b><span>15 itens · 120 min + 30 min de tolerância · 200 pontos classificáveis</span></div><strong>Começar →</strong></button>:<div className="exam locked"><b>📝 Exame Completo</b><span>Disponível no percurso do 12.º ano, para preparação do exame nacional.</span></div>)}

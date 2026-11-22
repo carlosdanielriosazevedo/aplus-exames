@@ -110,8 +110,8 @@ assert.equal(draftScreen(recovered.draft),"miniExamRun");
 const page=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 assert.match(page,/<p className="eyebrow">EXAMES<\/p><h1>Matemática A · 635<\/h1>/u,"a área de Matemática A deve usar o mesmo cabeçalho de Exames das restantes disciplinas.");
 assert.match(page,/📝 Exame Completo/u,"a prova longa deve usar a nomenclatura Exame Completo.");
-assert.match(page,/<PausedActivityEyebrow kind="mini_exam"\/><b>Mini-exame de Matemática A<\/b>/u,"um Mini-exame guardado deve ficar visível na própria área de Exames.");
-assert.match(page,/pausedExamDraft\?\.kind==="mini_exam"/u,"o cartão de retoma só deve aparecer para uma prova realmente em pausa.");
+assert.match(page,/\{pausedExamDraft&&<div className="pausedSession"><div><PausedActivityEyebrow kind=\{pausedExamDraft\.kind\}\/>/u,"uma sessão em pausa (Mini-exame ou outra) deve ficar visível na própria área de Exames.");
+assert.match(page,/disabled=\{!miniReady\|\|!!pausedExamDraft\}/u,"com outra sessão a meio, «Começar» não pode abrir essa sessão em silêncio (2026-11-22).");
 
 clearCompletionRegistry();
 assert.equal(claimSessionCompletion(sessionId),true,"A primeira entrega deve ser aceite.");

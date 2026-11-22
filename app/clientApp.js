@@ -570,6 +570,14 @@ export default function App(){
   const diagnosticSurface=["diag","diagRun","diagResult"].includes(screen)&&s.activeSubjectId==="math-a";
   if(mathSurface&&(!mathEngineReady||(diagnosticSurface&&!diagnosticRecoveryReady)))return <Shell><Logo/><div className="cloudLoading">A preparar Matemática A…</div></Shell>;
 
+  // Retomar a sessão de Matemática A em pausa, seja ela qual for (Missão, treino,
+  // diagnóstico ou Mini-exame), sempre por um botão «Continuar sessão» explícito.
+  const resumePendingMath=()=>{
+    const pending=loadSessionDraft(s.betaMode||"internal");
+    if(!pending)return;
+    setRecoveredSession(pending);if(pending.session)setExamSession(pending.session);if(pending.cfg)setTrainingCfg(pending.cfg);
+    go(draftScreen(pending));
+  };
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
   if(screen==="subjectManager")return <SubjectManager s={s} setS={setS} go={go}/>;
@@ -608,13 +616,14 @@ export default function App(){
   if(screen==="train")return <TrainHub s={s} go={go}/>;
   if(screen==="trainingSetup"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="trainingSetup"/>;
   if(screen==="trainingSetup"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="trainingSetup"/>;
-  if(screen==="trainingSetup")return <Train s={s} setS={setS} go={go} start={cfg=>{setTrainingCfg(cfg);go("trainingRun")}}/>;
+  if(screen==="trainingSetup")return <Train s={s} setS={setS} go={go} resumePending={resumePendingMath} start={cfg=>{setTrainingCfg(cfg);go("trainingRun")}}/>;
   if(screen==="trainingRun")return <TrainingRun s={s} setS={setS} go={go} cfg={trainingCfg} recoveredDraft={recoveredSession?.kind==="training"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="progress")return <Progress s={s} go={go}/>;
   if(screen==="ranking")return <Ranking s={s} setS={setS} go={go}/>;
-  if(screen==="exams")return <Exams s={s} go={go} startMini={()=>{
-    const pending=loadSessionDraft(s.betaMode||"internal");
-    if(pending){setRecoveredSession(pending);if(pending.session)setExamSession(pending.session);if(pending.cfg)setTrainingCfg(pending.cfg);go(draftScreen(pending));return}
+  if(screen==="exams")return <Exams s={s} go={go} resumePending={resumePendingMath} startMini={()=>{
+    // Com outra sessão a meio, «Começar» não faz nada (o botão está bloqueado e o
+    // cartão de pausa mostra «Continuar sessão»): nunca abrir outra sessão em silêncio.
+    if(loadSessionDraft(s.betaMode||"internal"))return;
     setRecoveredSession(null);
     const questions=buildMiniExam(s,MATH_MINI_EXAM_QUESTIONS);
     const ses=sessionStart("mini_exam",{questionCount:questions.length});
@@ -1648,7 +1657,7 @@ function TrainHub({s,go}){
 }
 
 
-function Train({s,setS,go,start}){
+function Train({s,setS,go,start,resumePending}){
   const preferredYear=["10.º","11.º","12.º"].includes(s.profile?.schoolYear)?s.profile.schoolYear:"12.º";
   const [year,setYear]=useState(preferredYear);
   const themes=byYear(year);
@@ -1702,7 +1711,7 @@ function Train({s,setS,go,start}){
 
     {pendingSession&&<PausedSessionStatus kind={pendingSession.kind} position={pendingSession.kind==="training"?pausedPosition(pendingSession.i,pendingSession.questions?.length):null}/>}
     <button className="primary" disabled={!available&&!pendingSession} onClick={()=>{
-      if(pendingSession){go("home");return}
+      if(pendingSession){if(resumePending)resumePending();else go("home");return}
       const ses=sessionStart("training",{themeId,focus,level});
       setS(prev=>({...prev,betaSessions:[...(prev.betaSessions||[]),ses],betaEvents:[...(prev.betaEvents||[]),betaEvent("training_started",{sessionId:ses.id,themeId,focus,level})]}));
       start({themeId,focus,level});
@@ -1912,7 +1921,7 @@ function Progress({s,go}){
   </Shell>
 }
 
-function Exams({s,go,startMini}){
+function Exams({s,go,startMini,resumePending}){
   const pausedExamDraft=typeof window!=="undefined"?loadSessionDraft(s.betaMode||"internal"):null;
   const last=s.lastExam;
   const miniQuestions=buildMiniExam(s,MATH_MINI_EXAM_QUESTIONS);
@@ -1924,9 +1933,10 @@ function Exams({s,go,startMini}){
   return <Shell className="wideStudentShell examHub"><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Matemática A · 635</h1><p className="muted">Escolhe um Mini-exame para uma sessão curta em contexto de prova. O Exame Completo ficará disponível quando o respetivo motor estiver validado.</p></div>
     <ApronsoNudge pose="crossed" tone="dark">Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</ApronsoNudge>
     <FriendsBetaDisclaimer s={s} compact/>
-    {pausedExamDraft?.kind==="mini_exam"&&<div className="pausedSession"><div><PausedActivityEyebrow kind="mini_exam"/><b>Mini-exame de Matemática A</b><div className="missionCardMeta"><PausedSessionMeta/></div></div><button onClick={()=>go(draftScreen(pausedExamDraft)||"miniExamRun")}>Continuar sessão</button></div>}
-    <button className="exam examAction" disabled={!miniReady} onClick={()=>miniReady&&startMini()}>
-      <div><b>⚡ Mini-exame misto</b><span>{miniReady?`${miniSelection} seleção + ${miniConstructed} construção · ~25–30 min · ${miniYears.join(" · ")}`:`${miniAvailable}/${MATH_MINI_EXAM_QUESTIONS} questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
+    {pausedExamDraft&&<div className="pausedSession"><div><PausedActivityEyebrow kind={pausedExamDraft.kind}/><b>{pausedExamDraft.kind==="mini_exam"?"Mini-exame de Matemática A":pausedExamDraft.kind==="training"?"Treino Livre de Matemática A":pausedExamDraft.kind==="diagnostic"?"Diagnóstico de Matemática A":(pausedExamDraft.plan?.focus||"Missão de hoje")}</b><div className="missionCardMeta"><PausedSessionMeta position={pausedExamDraft.kind==="training"?pausedPosition(pausedExamDraft.i,pausedExamDraft.questions?.length):null}/></div></div><button onClick={()=>resumePending?resumePending():go(draftScreen(pausedExamDraft)||"home")}>Continuar sessão</button></div>}
+    {pausedExamDraft&&<p className="pausedSessionNote">Só podes ter uma sessão a meio de cada vez. Termina esta e depois começa o Mini-exame.</p>}
+    <button className="exam examAction" disabled={!miniReady||!!pausedExamDraft} onClick={()=>miniReady&&!pausedExamDraft&&startMini()}>
+      <div><b>⚡ Mini-exame misto</b><span>{miniReady?`${miniSelection} seleção + ${miniConstructed} construção · ~25–30 min · ${miniYears.join(" · ")}`:`${miniAvailable}/${MATH_MINI_EXAM_QUESTIONS} questões elegíveis neste modo`}</span></div><strong>{miniReady&&!pausedExamDraft?"Começar →":"🔒"}</strong>
     </button>
     {!miniReady&&<div className="notice warning"><b>Mini-exame protegido</b><span>O motor não encontrou perguntas elegíveis suficientes para completar este Mini-exame de 12 itens segundo o estado editorial atual. Não completa a prova com conteúdo não aprovado só para atingir o número pretendido.</span></div>}
     {last&&<div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{examScoreLabel(last)}</b></div><span>{last.earnedPoints!==undefined?`${String(last.earnedPoints).replace(".",",")}/${last.maxPoints} pontos${last.reviewRequired?" confirmados":""}`:`${last.correctCount}/${last.total} corretas`}</span></div>}

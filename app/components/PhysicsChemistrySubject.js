@@ -361,7 +361,11 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       {practiceDomain&&practiceSubtopic&&availableInSelection>=7&&<div className="trainingSummary"><b>{selectedDomain?.shortTitle} → {selectedSubtopic?.label}</b><span>{availableInSelection} perguntas disponíveis neste foco · nível: {levelLabel}. A sessão escolhe 7–8 perguntas e evita repetições recentes sempre que possível.</span></div>}
       {practiceSubtopic&&availableInSelection<7&&<div className="notice"><b>Conteúdo ainda em construção</b><span>Esta submatéria ainda não tem perguntas suficientes para uma sessão completa.</span></div>}
 
-      <button className="primary" disabled={!practiceDomain||!practiceSubtopic||availableInSelection<7} onClick={startPractice}>Começar treino</button>
+      {progress.lastPosition||examDrafts.length?<>
+        <PausedSessionStatus kind={progress.lastPosition?.kind||(examDrafts[0].draft.review?"review":examDrafts[0].title.toLowerCase().includes("completo")?"full_exam":"mini_exam")} position={progress.lastPosition?pausedPosition(progress.lastPosition.current||0,progress.lastPosition.itemIds?.length):null}/>
+        <p className="pausedSessionNote">Só podes ter uma sessão a meio de cada vez. Termina esta e depois começa o treino.</p>
+        <button className="primary" onClick={progress.lastPosition?resume:()=>go(examDrafts[0].route)}>Continuar sessão</button>
+      </>:<button className="primary" disabled={!practiceDomain||!practiceSubtopic||availableInSelection<7} onClick={startPractice}>Começar treino</button>}
     </Shell>;
   }
 
@@ -372,6 +376,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     <ApronsoNudge pose="crossed" tone="dark">Aqui não dou pistas durante as perguntas. No fim, voltamos à prova para rever as tuas respostas.</ApronsoNudge>
     {examDrafts.map(({id,title,route,draft})=><div className="pausedSession" key={id}><div><PausedActivityEyebrow kind={draft.review?"review":title.toLowerCase().includes("completo")?"full_exam":"mini_exam"}/><b>{title}</b><div className="missionCardMeta"><PausedSessionMeta position={[draft.review?null:pausedPosition(draft.index||0,draft.itemIds?.length),physicsChemistryDraftAgeLabel(draft.updatedAt)].filter(Boolean).join(" · ")}/></div></div><button onClick={()=>go(route)}>Continuar sessão</button></div>)}
     {progress.lastPosition&&<div className="pausedSession"><div><PausedActivityEyebrow kind={progress.lastPosition.kind}/><b>{progress.lastPosition.label}</b><div className="missionCardMeta"><PausedSessionMeta position={pausedPosition(progress.lastPosition.current||0,progress.lastPosition.itemIds?.length)}/></div></div><button onClick={resume}>Continuar sessão</button></div>}
+    {(progress.lastPosition||examDrafts.length>0)&&<p className="pausedSessionNote">Só podes ter uma sessão a meio de cada vez. Termina esta e depois começa outra prova.</p>}
     {!progress.lastPosition&&examDrafts.length===0&&<div className="trainChoices">
       <button onClick={()=>go("physicsChemistryMini1")}><span>📝</span><div><b>Mini-exame · Modelo 1</b><small>12 itens · 45 min · seleção, construção e suportes científicos</small></div><em>→</em></button>
       <button onClick={()=>go("physicsChemistryMini2")}><span>🧪</span><div><b>Mini-exame · Modelo 2</b><small>12 itens · 45 min · combinação diferente de 10.º e 11.º</small></div><em>→</em></button>
