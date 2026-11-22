@@ -1,6 +1,6 @@
 import {afterEach,beforeEach,describe,expect,it} from "vitest";
 import {detectUnsavedWork,logoutPlan,logoutPromptCopy,PORTUGUESE_PROTOTYPE_DRAFT_KEY} from "../../app/lib/logoutPlan.js";
-import {archiveActiveAccount,purgeAccountFromDevice,setAsideAnonymousProgress,restoreAnonymousProgress,switchDeviceToAccount,hasAcademicData,activeStateAccount,setAsideDeviceProgressForNewStudent} from "../../app/lib/accountDeviceStorage.js";
+import {archiveActiveAccount,purgeAccountFromDevice,switchDeviceToAccount,hasAcademicData,activeStateAccount,discardUnsavedDeviceProgress,discardAnonymousArchive,ANONYMOUS_ARCHIVE_ID,archiveKey} from "../../app/lib/accountDeviceStorage.js";
 
 function memoryStore(){
   const m=new Map();
@@ -61,21 +61,6 @@ describe("dois irmãos no mesmo dispositivo",()=>{
     expect(hasAcademicData()).toBe(false);
     expect(JSON.stringify([...Array(localStorage.length)].map((_,i)=>localStorage.getItem(localStorage.key(i))))).not.toContain("300");
   });
-  it("o Bruno estudou sem conta; a Ana entra e diz «Não é meu» → nada do Bruno entra na conta dela, e volta quando ela sai",()=>{
-    localStorage.setItem("a25",st(40,null));
-    expect(setAsideAnonymousProgress()).toEqual({ok:true,archived:1});
-    expect(hasAcademicData()).toBe(false); // a Ana começa limpa: a app carrega o progresso da conta dela
-    localStorage.setItem("a25",st(300,"ana")); // progresso da Ana vindo da conta
-    purgeAccountFromDevice("ana");
-    expect(restoreAnonymousProgress()).toEqual({ok:true,restored:1});
-    expect(JSON.parse(localStorage.getItem("a25")).xp).toBe(40);
-    expect(activeStateAccount()).toBeNull();
-  });
-  it("«Não é meu» nunca põe à parte progresso que já pertence a uma conta",()=>{
-    localStorage.setItem("a25",st(300,"ana"));
-    expect(setAsideAnonymousProgress()).toEqual({ok:false,code:"NOT_ANONYMOUS"});
-    expect(JSON.parse(localStorage.getItem("a25")).xp).toBe(300);
-  });
   it("sem rede: a Ana sai guardando no dispositivo; o Bruno entra e não vê o progresso dela; a Ana volta e recupera-o",()=>{
     localStorage.setItem("a25",st(300,"ana"));
     expect(archiveActiveAccount("ana").ok).toBe(true);
@@ -88,29 +73,28 @@ describe("dois irmãos no mesmo dispositivo",()=>{
   });
 });
 
-describe("aluno novo num dispositivo com progresso de outra pessoa (2026-11-22)",()=>{
+describe("sem progresso escondido no dispositivo (decisão do product owner, 2026-11-22)",()=>{
   const st=(xp,account)=>JSON.stringify({xp,...(account?{cloudSync:{accountId:account}}:{})});
-  it("progresso anónimo: fica à parte (não é apagado) e volta quando o aluno novo sair",()=>{
+  it("«Começar de novo»: o estudo feito sem conta é apagado e o dispositivo fica limpo",()=>{
     localStorage.setItem("a25",st(40,null));
-    expect(setAsideDeviceProgressForNewStudent()).toEqual({ok:true,archived:1});
+    localStorage.setItem("a25-active-session-v1",'{"kind":"diagnostic"}');
+    expect(discardUnsavedDeviceProgress().ok).toBe(true);
     expect(hasAcademicData()).toBe(false);
-    localStorage.setItem("a25",st(5,"novo"));
-    purgeAccountFromDevice("novo");
-    expect(restoreAnonymousProgress()).toEqual({ok:true,restored:1});
-    expect(JSON.parse(localStorage.getItem("a25")).xp).toBe(40);
+    expect(localStorage.getItem(archiveKey(ANONYMOUS_ARCHIVE_ID))).toBeNull();
   });
-  it("progresso de uma conta que ficou no dispositivo: vai para o arquivo dessa conta e volta quando ela entrar",()=>{
+  it("«Começar de novo» nunca apaga progresso de uma conta: vai para o arquivo dessa conta",()=>{
     localStorage.setItem("a25",st(300,"ana"));
-    expect(setAsideDeviceProgressForNewStudent().ok).toBe(true);
+    expect(discardUnsavedDeviceProgress().ok).toBe(true);
     expect(hasAcademicData()).toBe(false);
     expect(switchDeviceToAccount("ana")).toEqual({ok:true,reload:true});
     expect(JSON.parse(localStorage.getItem("a25")).xp).toBe(300);
   });
-  it("nunca substitui um arquivo que já exista",()=>{
-    localStorage.setItem("a25",st(40,null));
-    expect(setAsideDeviceProgressForNewStudent().ok).toBe(true);
-    localStorage.setItem("a25",st(7,null));
-    expect(setAsideDeviceProgressForNewStudent()).toEqual({ok:false,code:"ARCHIVE_EXISTS"});
-    expect(JSON.parse(localStorage.getItem("a25")).xp).toBe(7);
+  it("arquivos anónimos antigos («Não é meu») são removidos e nunca voltam ao sair",()=>{
+    localStorage.setItem(archiveKey(ANONYMOUS_ARCHIVE_ID),'{"format":"approva-account-archive-v1","accountId":"anonimo-neste-dispositivo","entries":{"localStorage":{"a25":"{}"}}}');
+    localStorage.setItem("a25",st(300,"ana"));
+    purgeAccountFromDevice("ana");
+    discardAnonymousArchive();
+    expect(hasAcademicData()).toBe(false);
+    expect(localStorage.getItem(archiveKey(ANONYMOUS_ARCHIVE_ID))).toBeNull();
   });
 });

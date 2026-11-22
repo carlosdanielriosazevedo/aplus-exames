@@ -21,7 +21,8 @@ import {normalizeAfterCloud} from "../lib/cloudApply";
 import {flushCloudNow,rememberCloudSession,bindCloudAccount,profilesDiffer} from "../lib/cloudAutosync";
 import {CLOUD_ACCOUNT_HINT_KEY} from "../lib/cloudSessionHint";
 import {queueSignupConsent,flushPendingConsent} from "../lib/consentClient";
-import {activeStateAccount,archiveActiveAccount,switchDeviceToAccount,purgeAccountFromDevice,hasAcademicData,eraseAcademicDataFromDevice,restoreAnonymousProgress,setAsideDeviceProgressForNewStudent} from "../lib/accountDeviceStorage";
+import {activeStateAccount,archiveActiveAccount,switchDeviceToAccount,purgeAccountFromDevice,hasAcademicData,eraseAcademicDataFromDevice,discardAnonymousArchive,discardUnsavedDeviceProgress,OPEN_HOME_AFTER_SIGNIN_KEY} from "../lib/accountDeviceStorage";
+import {settleDeviceForAccount} from "../lib/signInDevice";
 import {detectUnsavedWork,logoutPlan,logoutPromptCopy} from "../lib/logoutPlan";
 import {enabledSocialProviders,markSocialSignInPending,SOCIAL_PENDING_KEY} from "../lib/socialSignIn";
 
@@ -57,6 +58,8 @@ export function AccountCloud({s,setS,go,gate=false}){
   });
   const [name,setName]=useState("");
   const [email,setEmail]=useState("");
+  const [confirmStartOver,setConfirmStartOver]=useState(false);
+  const [emailInUse,setEmailInUse]=useState(false);
   const [password,setPassword]=useState("");
   const [signupAge,setSignupAge]=useState(false);
   const [signupTerms,setSignupTerms]=useState(false);
@@ -131,6 +134,9 @@ export function AccountCloud({s,setS,go,gate=false}){
     // Sem setS antes de recarregar: o estado em memória do aluno anterior não
     // pode voltar a ser escrito no armazenamento depois da troca.
     try{localStorage.setItem(CLOUD_ACCOUNT_HINT_KEY,"1")}catch{}
+    // Acabou de entrar: depois de recarregar, abrir no menu (o progresso da conta
+    // chega pela sincronização), e não o ecrã inicial público.
+    try{sessionStorage.setItem(OPEN_HOME_AFTER_SIGNIN_KEY,"1")}catch{}
     window.location.reload();
   }
 
@@ -194,9 +200,17 @@ export function AccountCloud({s,setS,go,gate=false}){
           setMessage({ok:false,text:"Não foi possível separar o progresso de outra conta neste dispositivo (pouco espaço no browser). Por segurança, não vamos guardar nem misturar dados até isto ser resolvido."});
         }
         // Conta acabada de criar neste dispositivo: o estudo feito aqui é de quem a
-        // criou. Liga-o já à conta (sem a pergunta "é teu?", que é para contas antigas).
+        // criou. Liga-o já à conta.
         if(mode==="signup"&&switched.ok&&!activeStateAccount()&&hasAcademicData()){
           setS(prev=>bindCloudAccount(prev,userId,{adopted:true}));
+        }
+        // Entrar numa conta com estudo feito sem conta neste dispositivo
+        // (2026-11-22): a conta manda. Conta com progresso → carrega a conta (o
+        // estudo deste dispositivo é apagado); conta vazia → fica com ele.
+        if(mode==="signin"&&switched.ok){
+          const settled=await settleDeviceForAccount(userId,{load:loadStudentCloudState});
+          if(settled.action==="replaced"){setHintAndReload();return}
+          if(settled.action==="adopt")setS(prev=>bindCloudAccount(prev,userId,{adopted:true}));
         }
       }
       await refreshSession();
@@ -205,6 +219,13 @@ export function AccountCloud({s,setS,go,gate=false}){
       // (pedido do product owner, 2026-11-21).
       go("home");
     }catch(error){
+      if(mode==="signup"&&error?.code==="EMAIL_IN_USE"){
+        // Decisão do product owner (2026-11-22): dizer claramente que já há conta.
+        setMode("signin");setPassword("");setEmailInUse(true);
+        // Logo a seguir, o cursor vai para a palavra-passe.
+        setTimeout(()=>{try{document.querySelector('.realAuthForm input[type="password"]')?.focus()}catch{}},0);
+        return;
+      }
       setMessage({ok:false,text:String(error?.message||error)});
     }finally{setBusy(false)}
   }
@@ -265,8 +286,8 @@ export function AccountCloud({s,setS,go,gate=false}){
       try{sessionStorage.removeItem("a25-onboarding-entry")}catch{}
       if(plan.kind==="purge"&&owner){
         purgeAccountFromDevice(owner);
-        // Progresso anónimo de outra pessoa posto à parte ("Não é meu") volta a aparecer.
-        restoreAnonymousProgress();
+        // O dispositivo fica limpo: já não existe progresso anónimo posto à parte.
+        discardAnonymousArchive();
         try{localStorage.removeItem(CLOUD_ACCOUNT_HINT_KEY)}catch{}
         window.location.reload();
         return;
@@ -290,10 +311,11 @@ export function AccountCloud({s,setS,go,gate=false}){
     finally{setBusy(false)}
   }
 
-  // Ecrã da conta obrigatória com progresso de outra pessoa neste dispositivo.
-  function startAsNewStudent(){
-    const result=setAsideDeviceProgressForNewStudent();
-    if(!result.ok){setMessage({ok:false,text:"Não foi possível pôr à parte o progresso deste dispositivo. Nada foi apagado."});return}
+  // Conta obrigatória: «Começar de novo» apaga o estudo feito sem conta neste
+  // dispositivo (decisão do product owner, 2026-11-22), depois de confirmação.
+  function startOver(){
+    const result=discardUnsavedDeviceProgress();
+    if(!result.ok){setMessage({ok:false,text:"Não foi possível limpar este dispositivo. Nada foi apagado."});return}
     try{sessionStorage.setItem("a25-onboarding-entry","1")}catch{}
     window.location.reload();
   }
@@ -517,7 +539,8 @@ export function AccountCloud({s,setS,go,gate=false}){
     {cfg.configured&&session.loading&&<div className="cloudLoading">A verificar sessão…</div>}
 
     {cfg.configured&&!session.loading&&!user&&<>
-      <div className="authTabs"><button className={mode==="signin"?"sel":""} onClick={()=>setMode("signin")}>Entrar</button><button className={mode==="signup"?"sel":""} onClick={()=>setMode("signup")}>Criar conta</button></div>
+      <div className="authTabs"><button className={mode==="signin"?"sel":""} onClick={()=>setMode("signin")}>Entrar</button><button className={mode==="signup"?"sel":""} onClick={()=>{setMode("signup");setEmailInUse(false)}}>Criar conta</button></div>
+      {emailInUse&&mode==="signin"&&<div className="emailInUseNotice" role="status"><b>Este email já tem conta.</b><span>Entra com a tua palavra-passe: o teu progresso está na conta. Depois podes mudar o ano, as disciplinas, a matéria dada e o objetivo no menu (•••).</span></div>}
       {mode==="reset"?<div className="realAuthForm">
         <b className="resetTitle">Recuperar a palavra-passe</b>
         <label>Email<input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="nome@email.pt" disabled={resetStep==="code"}/></label>
@@ -550,7 +573,9 @@ export function AccountCloud({s,setS,go,gate=false}){
         {mode==="signin"&&<button type="button" className="linkButton" onClick={()=>{setMode("reset");setResetStep("request");setMessage(null)}}>Esqueci-me da palavra-passe</button>}
       </div></>}
       <small className="cloudPrivacy">A palavra-passe é tratada pelo serviço de autenticação. A APProva+ não a guarda nos dados de progresso.</small>
-      {gate&&<div className="gateNewStudent"><span>Não és tu? O progresso que está neste dispositivo fica guardado à parte, sem ser apagado.</span><button type="button" className="linkButton" disabled={busy} onClick={startAsNewStudent}>Começar como aluno novo</button></div>}
+      {gate&&<div className="gateNewStudent">{confirmStartOver
+        ?<><span>O diagnóstico feito neste dispositivo ainda não está guardado numa conta. Se começares de novo, perde-se.</span><div className="gateNewStudentActions"><button type="button" className="gateStartOverConfirm" disabled={busy} onClick={startOver}>Sim, começar de novo</button><button type="button" className="linkButton" onClick={()=>setConfirmStartOver(false)}>Cancelar</button></div></>
+        :<><span>Não és tu, ou queres recomeçar?</span><button type="button" className="linkButton" disabled={busy} onClick={()=>setConfirmStartOver(true)}>Começar de novo</button></>}</div>}
     </>}
 
     {cfg.configured&&!session.loading&&user&&<>

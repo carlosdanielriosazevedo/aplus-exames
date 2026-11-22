@@ -11,7 +11,7 @@ import {
   registerCloudFlush,retryDelayMs,rememberCloudSession
 } from "../lib/cloudAutosync";
 import {normalizeAfterCloud} from "../lib/cloudApply";
-import {setAsideAnonymousProgress} from "../lib/accountDeviceStorage";
+import {settleDeviceForAccount,OPEN_HOME_AFTER_SIGNIN_KEY} from "../lib/signInDevice";
 import {completeSocialSignIn} from "../lib/socialSignIn";
 
 const DEBOUNCE_MS=8000;
@@ -42,7 +42,6 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
   const stateRef=useRef(s);stateRef.current=s;
   const [account,setAccount]=useState(null);
   const [status,setStatus]=useState(null);
-  const [adoption,setAdoption]=useState(false);
   const adoptionRef=useRef(false);
   const busy=useRef(false);
   const again=useRef(false);
@@ -57,7 +56,7 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
     // separar o progresso por conta, como no login por email.
     if(result.user){
       const social=await completeSocialSignIn(result.user).catch(()=>({handled:false,reload:false}));
-      if(social.reload){rememberCloudSession(true);window.location.reload();return}
+      if(social.reload){rememberCloudSession(true);try{sessionStorage.setItem(OPEN_HOME_AFTER_SIGNIN_KEY,"1")}catch{};window.location.reload();return}
       if(social.handled)rememberCloudSession(true);
     }
     setAccount(result.user?{id:String(result.user.id),email:result.user.email||null}:null);
@@ -79,7 +78,21 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
         if(decision.action==="fetch_remote"||(fetchRemote&&remote===undefined&&decision.action!=="needs_adoption"&&decision.action!=="blocked_other_account")){
           remote=await loadStudentCloudState({expectedOwner:user.id});fetchRemote=false;if(accountRef.current?.id!==user.id)return {status:"account_changed"};continue;
         }
-        if(decision.action==="needs_adoption"){setAdoption(true);setStatus(null);return {status:"needs_adoption"}}
+        if(decision.action==="needs_adoption"){
+          // Estudo feito sem conta neste dispositivo (2026-11-22): a conta manda.
+          // Conta com progresso → recarregar com o progresso da conta (o deste
+          // dispositivo é apagado); conta vazia → fica com o que foi feito aqui.
+          const settled=await settleDeviceForAccount(user.id,{load:loadStudentCloudState});
+          if(accountRef.current?.id!==user.id)return {status:"account_changed"};
+          if(settled.action==="replaced"){rememberCloudSession(true);window.location.reload();return {status:"replaced"}}
+          if(settled.action==="adopt"){
+            adoptionRef.current=true;
+            state=bindCloudAccount(state,user.id,{adopted:true});
+            setS(prev=>bindCloudAccount(prev,user.id,{adopted:true}));
+            continue;
+          }
+          setStatus("error");return {status:"error"};
+        }
         if(["blocked_other_account","wait_assessment"].includes(decision.action)){setStatus(decision.action);return {status:decision.action}}
         if(decision.action==="idle"){setStatus("saved");attempts.current=0;return {status:"saved"}}
         if(decision.action==="conflict"){
@@ -165,14 +178,6 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
     return ()=>clearTimeout(timer.current);
   },[fingerprint,account,cycle]);
 
-  // "Não é meu": o progresso anónimo de outra pessoa é posto à parte (não entra
-  // nesta conta, não é apagado) e a app recarrega com o progresso da conta.
-  const declineAdoption=useCallback(()=>{
-    const aside=setAsideAnonymousProgress();
-    setAdoption(false);
-    if(aside.ok&&aside.archived>0){window.location.reload();return}
-    setStatus("not_synced");
-  },[]);
 
   // Voltar à janela (ex.: estudou no telemóvel e regressa ao computador com o
   // separador aberto): ver se outro dispositivo avançou. Sem consultas periódicas,
@@ -198,14 +203,6 @@ export default function CloudSyncLayer({s,setS,hydrated,screen,go}){
     return ()=>document.removeEventListener("visibilitychange",onVisibility);
   },[account,cycle]);
 
-  if(adoption&&account)return <div role="dialog" aria-modal="true" aria-labelledby="cloud-adopt-title" style={styles.overlay}>
-    <div style={styles.dialog}>
-      <b id="cloud-adopt-title" style={{fontSize:18}}>Guardar o progresso deste dispositivo na tua conta?</b>
-      <p style={styles.text}>Este dispositivo tem estudo feito antes de entrares{account.email?<> como <b>{account.email}</b></>:null}. Se for teu, juntamo-lo ao progresso da conta para o encontrares noutros dispositivos. Nada é apagado. Se não for teu (por exemplo, de um irmão que usou este dispositivo), escolhe “Não é meu”: fica guardado à parte, não entra na tua conta e volta a aparecer quando terminares sessão.</p>
-      <button type="button" style={styles.primary} onClick={()=>{adoptionRef.current=true;setS(prev=>bindCloudAccount(prev,account.id,{adopted:true}));setAdoption(false);setTimeout(()=>cycle({fetchRemote:true}),0)}}>Sim, é meu — guardar na conta</button>
-      <button type="button" style={styles.secondary} onClick={declineAdoption}>Não é meu</button>
-    </div>
-  </div>;
 
   const copy=COPY[status];
   if(!copy||screen==="account")return null;

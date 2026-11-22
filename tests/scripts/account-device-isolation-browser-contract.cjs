@@ -61,12 +61,16 @@ const BASE=process.env.APPROVA_BASE_URL||'http://localhost:3100/';
   await p.locator('summary[aria-label="Abrir menu"]').first().click().catch(()=>{});
   await p.getByRole('button',{name:'Conta e progresso'}).first().click({timeout:5000});
   await p.getByRole('button',{name:'Terminar sessão'}).click();
+  // Missão a meio: aviso curto (decisão de 2026-11-20); o aluno confirma que sai.
+  await p.getByText('Tens uma missão a meio').waitFor({timeout:5000});
+  await p.locator('.logoutPrompt button').last().click();
   await p.waitForTimeout(4000);
   const afterOut=await local();
   assert.ok(!afterOut||!afterOut.xp,'após sair, o progresso de A não fica na área ativa');
   assert.equal(await p.evaluate(()=>localStorage.getItem('a25-active-session-v1')),null,'tentativa de A também sai da área ativa');
-  assert.ok(await p.evaluate(()=>!!localStorage.getItem('approva-account-archive-v1:A')),'A fica arquivado no dispositivo');
-  console.log('✓ T1 terminar sessão: progresso e tentativa de A saem da área ativa (arquivados)');
+  // Progresso guardado na conta: o dispositivo fica limpo, sem arquivos escondidos (2026-11-20/22).
+  assert.equal(await p.evaluate(()=>Object.keys(localStorage).filter(k=>k.startsWith('approva-account-archive-v1:')).length),0,'nada fica escondido no dispositivo');
+  console.log('✓ T1 terminar sessão: o dispositivo fica limpo (progresso de A está na conta)');
   // 5) B entra no mesmo browser: não vê A
   await p.goto(BASE);await p.waitForTimeout(2000);
   // Quem já tem conta entra pelo "Já tens conta? Entrar" do primeiro ecrã.
@@ -85,9 +89,8 @@ const BASE=process.env.APPROVA_BASE_URL||'http://localhost:3100/';
   await p.getByPlaceholder('••••••••').fill('palavra-passe-teste-1');
   await p.locator('.realAuthForm > button:not(.linkButton)').click();await p.waitForTimeout(4500);
   const aBack=await local();
-  assert.equal(aBack?.xp,321,'A recupera o seu progresso');
-  assert.equal(await p.evaluate(()=>localStorage.getItem('a25-active-session-v1')),'{"kind":"mission","answers":[2]}','tentativa em curso de A reposta byte a byte');
-  assert.ok(await p.evaluate(()=>!!localStorage.getItem('approva-account-archive-v1:B')),'B fica arquivado');
-  console.log('✓ T3 A volta a entrar: progresso e tentativa em curso repostos; B arquivado');
+  assert.equal(aBack?.xp,321,'A recupera o seu progresso (da conta)');
+  assert.ok(await p.evaluate(()=>!!localStorage.getItem('approva-account-archive-v1:B')),'B (que não terminou sessão) fica arquivado, sem se misturar com A');
+  console.log('✓ T3 A volta a entrar: progresso da conta reposto; B arquivado');
   await b.close();
 })().catch(e=>{console.error('FALHOU',e.message.split('\n')[0]);process.exit(1)});
