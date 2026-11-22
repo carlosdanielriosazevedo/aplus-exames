@@ -193,6 +193,20 @@ export function setAsideAnonymousProgress(){
   if(activeStateAccount())return {ok:false,code:"NOT_ANONYMOUS"};
   return archiveActiveAccount(ANONYMOUS_ARCHIVE_ID);
 }
+// «Não és tu? Começar como aluno novo» (ecrã da conta obrigatória, 2026-11-22).
+// Num dispositivo com progresso de outra pessoa e sem sessão iniciada, o aluno
+// novo não fica preso: esse progresso é guardado à parte, nunca apagado. Se
+// pertence a uma conta, volta quando essa conta entrar; se é anónimo, volta quando
+// o aluno novo terminar sessão. Nunca substitui um arquivo que já exista.
+export function setAsideDeviceProgressForNewStudent(){
+  const local=globalThis.localStorage;
+  if(!local)return {ok:false,code:"STORAGE_UNAVAILABLE"};
+  const id=activeStateAccount()||ANONYMOUS_ARCHIVE_ID;
+  try{if(local.getItem(archiveKey(id))!==null)return {ok:false,code:"ARCHIVE_EXISTS"}}
+  catch{return {ok:false,code:"STORAGE_UNAVAILABLE"}}
+  return archiveActiveAccount(id);
+}
+
 export function restoreAnonymousProgress(){
   if(hasAcademicData())return {ok:true,restored:0};
   return restoreAccountArchive(ANONYMOUS_ARCHIVE_ID);

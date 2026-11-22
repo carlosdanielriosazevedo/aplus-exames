@@ -2157,3 +2157,13 @@ html body .themeGrid button.sel small{color:var(--app-orange-dark)}
 html body .lastExam small{color:var(--app-orange-dark)}
 /* Cartão de prova a meio no Aprender: o mesmo chip amarelo «Progresso guardado». */
 html body .learnHome .homePausedExam .missionCardMeta .sessionPausedMeta{background:#ffe2a3!important;color:#6c4c0e!important}
+/* Conta obrigatória: saída para um aluno novo num dispositivo com progresso de outra pessoa. */
+.gateNewStudent{display:grid;justify-items:center;gap:6px;margin:22px 0 8px;padding:16px 14px;border-top:1px solid #e3e6ed;text-align:center}
+.gateNewStudent span{font-size:14px;line-height:1.5;color:#5b6676}
+.gateNewStudent .linkButton{background:transparent;border:0;padding:8px;font-size:15px;font-weight:800;color:var(--app-navy);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+/* «Esqueci-me da palavra-passe» e outros links da conta: sem roxo. */
+html body .realAuthForm .linkButton{color:var(--app-navy)}
+
+/* Últimos roxos: «Entrar» do ecrã inicial e contorno ao passar/tocar nos cartões. */
+html body .landingAccountForm u,html body .welcomeAccountLink u{color:var(--app-navy)}
+html body .subjectCard.available:hover,html body .parentEntryChoices button:hover{border-color:#f2c97a}

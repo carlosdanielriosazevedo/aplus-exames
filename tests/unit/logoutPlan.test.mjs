@@ -1,6 +1,6 @@
 import {afterEach,beforeEach,describe,expect,it} from "vitest";
 import {detectUnsavedWork,logoutPlan,logoutPromptCopy,PORTUGUESE_PROTOTYPE_DRAFT_KEY} from "../../app/lib/logoutPlan.js";
-import {archiveActiveAccount,purgeAccountFromDevice,setAsideAnonymousProgress,restoreAnonymousProgress,switchDeviceToAccount,hasAcademicData,activeStateAccount} from "../../app/lib/accountDeviceStorage.js";
+import {archiveActiveAccount,purgeAccountFromDevice,setAsideAnonymousProgress,restoreAnonymousProgress,switchDeviceToAccount,hasAcademicData,activeStateAccount,setAsideDeviceProgressForNewStudent} from "../../app/lib/accountDeviceStorage.js";
 
 function memoryStore(){
   const m=new Map();
@@ -85,5 +85,32 @@ describe("dois irmãos no mesmo dispositivo",()=>{
     localStorage.setItem("a25",st(10,"bruno"));
     expect(switchDeviceToAccount("ana")).toEqual({ok:true,reload:true});
     expect(JSON.parse(localStorage.getItem("a25")).xp).toBe(300);
+  });
+});
+
+describe("aluno novo num dispositivo com progresso de outra pessoa (2026-11-22)",()=>{
+  const st=(xp,account)=>JSON.stringify({xp,...(account?{cloudSync:{accountId:account}}:{})});
+  it("progresso anónimo: fica à parte (não é apagado) e volta quando o aluno novo sair",()=>{
+    localStorage.setItem("a25",st(40,null));
+    expect(setAsideDeviceProgressForNewStudent()).toEqual({ok:true,archived:1});
+    expect(hasAcademicData()).toBe(false);
+    localStorage.setItem("a25",st(5,"novo"));
+    purgeAccountFromDevice("novo");
+    expect(restoreAnonymousProgress()).toEqual({ok:true,restored:1});
+    expect(JSON.parse(localStorage.getItem("a25")).xp).toBe(40);
+  });
+  it("progresso de uma conta que ficou no dispositivo: vai para o arquivo dessa conta e volta quando ela entrar",()=>{
+    localStorage.setItem("a25",st(300,"ana"));
+    expect(setAsideDeviceProgressForNewStudent().ok).toBe(true);
+    expect(hasAcademicData()).toBe(false);
+    expect(switchDeviceToAccount("ana")).toEqual({ok:true,reload:true});
+    expect(JSON.parse(localStorage.getItem("a25")).xp).toBe(300);
+  });
+  it("nunca substitui um arquivo que já exista",()=>{
+    localStorage.setItem("a25",st(40,null));
+    expect(setAsideDeviceProgressForNewStudent().ok).toBe(true);
+    localStorage.setItem("a25",st(7,null));
+    expect(setAsideDeviceProgressForNewStudent()).toEqual({ok:false,code:"ARCHIVE_EXISTS"});
+    expect(JSON.parse(localStorage.getItem("a25")).xp).toBe(7);
   });
 });

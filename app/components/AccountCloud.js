@@ -21,7 +21,7 @@ import {normalizeAfterCloud} from "../lib/cloudApply";
 import {flushCloudNow,rememberCloudSession,bindCloudAccount,profilesDiffer} from "../lib/cloudAutosync";
 import {CLOUD_ACCOUNT_HINT_KEY} from "../lib/cloudSessionHint";
 import {queueSignupConsent,flushPendingConsent} from "../lib/consentClient";
-import {activeStateAccount,archiveActiveAccount,switchDeviceToAccount,purgeAccountFromDevice,hasAcademicData,eraseAcademicDataFromDevice,restoreAnonymousProgress} from "../lib/accountDeviceStorage";
+import {activeStateAccount,archiveActiveAccount,switchDeviceToAccount,purgeAccountFromDevice,hasAcademicData,eraseAcademicDataFromDevice,restoreAnonymousProgress,setAsideDeviceProgressForNewStudent} from "../lib/accountDeviceStorage";
 import {detectUnsavedWork,logoutPlan,logoutPromptCopy} from "../lib/logoutPlan";
 import {enabledSocialProviders,markSocialSignInPending,SOCIAL_PENDING_KEY} from "../lib/socialSignIn";
 
@@ -290,6 +290,14 @@ export function AccountCloud({s,setS,go,gate=false}){
     finally{setBusy(false)}
   }
 
+  // Ecrã da conta obrigatória com progresso de outra pessoa neste dispositivo.
+  function startAsNewStudent(){
+    const result=setAsideDeviceProgressForNewStudent();
+    if(!result.ok){setMessage({ok:false,text:"Não foi possível pôr à parte o progresso deste dispositivo. Nada foi apagado."});return}
+    try{sessionStorage.setItem("a25-onboarding-entry","1")}catch{}
+    window.location.reload();
+  }
+
   function registerConflict(remote){
     setConflictRemote(remote||null);
     setS(prev=>cloudConflict(prev,{
@@ -542,6 +550,7 @@ export function AccountCloud({s,setS,go,gate=false}){
         {mode==="signin"&&<button type="button" className="linkButton" onClick={()=>{setMode("reset");setResetStep("request");setMessage(null)}}>Esqueci-me da palavra-passe</button>}
       </div></>}
       <small className="cloudPrivacy">A palavra-passe é tratada pelo serviço de autenticação. A APProva+ não a guarda nos dados de progresso.</small>
+      {gate&&<div className="gateNewStudent"><span>Não és tu? O progresso que está neste dispositivo fica guardado à parte, sem ser apagado.</span><button type="button" className="linkButton" disabled={busy} onClick={startAsNewStudent}>Começar como aluno novo</button></div>}
     </>}
 
     {cfg.configured&&!session.loading&&user&&<>
