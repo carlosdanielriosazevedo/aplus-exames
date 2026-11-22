@@ -2106,3 +2106,28 @@ html,body,a,button,input,select,textarea,label,summary,[role="button"]{touch-act
 .topline .brandLogo{--brand-logo-w:112px}
 @media(min-width:761px){.studentTop .brandLogo{--brand-logo-w:128px}}
 
+/* ===== Ajustes do product owner (2026-11-22) ===== */
+/* Página inicial e boas-vindas: o Apronso não toca nas margens do cartão. */
+.welcomeApronso .apronso{height:132px;margin:14px 0;align-self:center}
+@media(max-width:760px){.welcomeApronso .apronso{height:108px;margin:12px 0}}
+@media(max-width:420px){.welcomeApronso .apronso{height:96px;margin:10px 0}}
+/* Caixa do Apronso: o texto fica centrado na vertical com o Apronso. */
+.apronsoNudge p{align-self:center}
+/* Sessão em pausa, igual em todo o lado: «… — SESSÃO EM PAUSA» a vermelho e
+   «Progresso guardado» (mais a posição, quando se sabe). */
+.pausedActivityEyebrow{display:block;font-size:12px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#7a5a12}
+.pausedActivityEyebrow>span{white-space:nowrap}
+.pausedActivityEyebrow .pausedActivitySeparator{margin:0 6px;color:#9aa6b2}
+.pausedActivityEyebrow .pausedActivityStatus{color:#c0392b;font-weight:900}
+.missionCardMeta .sessionPausedMeta,.pausedSessionStatus .sessionPausedMeta{background:#ffe2a3!important;color:#6c4c0e!important;font-weight:850}
+.pausedSessionStatus{display:grid;gap:6px;margin:14px 0 10px}
+.pausedSessionStatus .missionCardMeta{margin:0}
+.pausedSession .pausedActivityEyebrow{display:block}
+.pausedSession .pausedActivityEyebrow span{display:inline;margin:0;font-size:inherit;color:#9b7627}
+.pausedSession .pausedActivityEyebrow .pausedActivitySeparator{margin:0 6px;color:#c9b98f}
+.pausedSession .pausedActivityEyebrow .pausedActivityStatus{color:#c0392b}
+.pausedSession .missionCardMeta{margin:6px 0 0}
+.pausedSession .missionCardMeta span{display:inline-block;margin-top:0;font-size:12px}
+.pausedSession .missionCardMeta .sessionPausedPosition{background:#fff;color:#6b6252;border:1px solid #eedda9}
+.dailyMissionModalTop .pausedActivityEyebrow{display:inline}
+

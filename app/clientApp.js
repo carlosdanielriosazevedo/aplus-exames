@@ -17,7 +17,7 @@ import {
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
 import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon,StudySessionHeader,markFocusTab,wasInSessionThisTab} from "./components/chrome";
 import StudyModeHub from "./components/StudyModeHub";
-import PausedActivityEyebrow from "./components/PausedActivityEyebrow";
+import PausedActivityEyebrow,{PausedSessionMeta,PausedSessionStatus,pausedPosition} from "./components/PausedActivityEyebrow";
 import {Welcome} from "./components/Welcome";
 import ScoreLossExplanation from "./components/ScoreLossExplanation";
 // Ranking importado diretamente (não à parte): carregado à parte, o primeiro
@@ -928,6 +928,7 @@ function DiagIntro({s,setS,go}){
         ?"A tua seleção ficou guardada. O diagnóstico inicial atual ainda não tem perguntas adequadas para essas submatérias; não precisas de voltar a indicá-las. Podes acrescentar outra matéria já lecionada para começares."
         :"Não vamos avaliar matéria que a tua escola ainda não ensinou. Assinala pelo menos uma submatéria do teu ano para começares."}</span></div>}
     {gated&&!profileBlueprint.length&&<button className="secondary" onClick={()=>go("curriculumSettings")}>{hasIndicatedScope?"Adicionar outra matéria dada":"Indicar matéria dada"}</button>}
+    {pendingDiagnostic&&<PausedSessionStatus kind="diagnostic"/>}
     <button className="primary" disabled={gated&&!pendingDiagnostic} onClick={()=>{
       const existing=loadSessionDraft(s.betaMode||"internal");
       if(existing?.kind==="diagnostic"){go("diagRun");return}
@@ -1087,7 +1088,7 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
     <section className="dailyMissionModal">
       <div className="dailyMissionContent">
       <div className="dailyMissionModalTop">
-        <small>{mode==="resume"?"MISSÃO EM PAUSA":"NOVA MISSÃO DISPONÍVEL"}</small>
+        {mode==="resume"?<PausedActivityEyebrow kind="mission"/>:<small>NOVA MISSÃO DISPONÍVEL</small>}
         <span>🔥 {daily.streak} {daily.streak===1?"dia":"dias"}</span>
       </div>
       <div className="dailyMissionHero">
@@ -1095,6 +1096,7 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
           <span>{typeMeta.icon}</span>
           <div><small>A TUA MISSÃO DE HOJE · {typeMeta.label.toUpperCase()}</small>
             <h2>{mode==="resume"?"Continuamos de onde ficaste?":t?.short||"Missão de Hoje"}</h2>
+            {mode==="resume"&&<div className="missionCardMeta"><PausedSessionMeta/></div>}
             {plan.focus&&<b>{plan.focus}</b>}
           </div>
         </div>
@@ -1305,13 +1307,13 @@ function Home({s,setS,go,reset}){
     {!s.diagnosticDone?<section className="adaptivePath" aria-label="Caminho adaptativo de Matemática A">
       <div className="pathNode current"><span>●</span><div><small>PRIMEIRO PASSO</small><b>Conhecer o teu ponto de partida</b></div></div>
       <div className="pathLine active"/>
-      <div className="pathNode current"><span>●</span><article><small>PRÓXIMO PASSO</small><h2>Diagnóstico de Matemática A</h2><div className="missionCardMeta"><span>Diagnóstico inicial</span></div><button onClick={()=>go(pausedDraft?.kind==="diagnostic"?"diagRun":"diag")}>{pausedDraft?.kind==="diagnostic"?"Continuar diagnóstico":"Começar Diagnóstico"}</button></article></div>
+      <div className="pathNode current"><span>●</span><article>{pausedDraft?.kind==="diagnostic"?<PausedActivityEyebrow kind="diagnostic"/>:<small>PRÓXIMO PASSO</small>}<h2>Diagnóstico de Matemática A</h2><div className="missionCardMeta">{pausedDraft?.kind==="diagnostic"?<PausedSessionMeta/>:<span>Diagnóstico inicial</span>}</div><button onClick={()=>go(pausedDraft?.kind==="diagnostic"?"diagRun":"diag")}>{pausedDraft?.kind==="diagnostic"?"Continuar diagnóstico":"Começar Diagnóstico"}</button></article></div>
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>Primeira Missão adaptada</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>:<section className="adaptivePath" aria-label="Caminho adaptativo">
       <div className="pathNode done"><span>✓</span><div><small>ÚLTIMO PASSO</small><b>{completedMission?.focus||theme(completedMission?.themeId)?.short||"Diagnóstico concluído"}</b></div></div>
       <div className="pathLine active"/>
-      <div className={"pathNode current "+(missionDone&&!pausedDraft?"complete":"")}><span>{missionDone&&!pausedDraft?"✓":"●"}</span><article>{pausedDraft?<PausedActivityEyebrow kind={pausedDraft.kind}/>:<small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small>}<h2>{pausedDraft?.kind==="mini_exam"?"Mini-exame de Matemática A":pausedDraft?.kind==="training"?"Treino Livre de Matemática A":pausedDraft?.kind==="diagnostic"?"Diagnóstico de Matemática A":missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.type==="blocked"?"Ainda não há Missão para hoje":(plan.focus||t?.short||"Missão de hoje"))}</h2><div className="missionCardMeta">{pausedDraft?<span className="sessionPausedMeta">{Number.isInteger(pausedDraft.i)?`Pergunta ${pausedDraft.i+1} de ${pausedDraft.questions?.length||0}`:"Progresso guardado"}</span>:plan.type==="blocked"&&!missionDone?null:<><span>~3–5 min</span>{!missionDone&&t?.year&&<span>{t.year}</span>}</>}</div>{pausedDraft?<button onClick={()=>{if(pausedDraft.kind==="mini_exam")go(pausedDraft.screen||"miniExamRun");else if(pausedDraft.kind==="training")go("trainingRun");else if(pausedDraft.kind==="diagnostic")go(pausedDraft.screen||"diag");else startDailyMission("home_card")}}>Continuar sessão</button>:missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:plan.type==="blocked"
+      <div className={"pathNode current "+(missionDone&&!pausedDraft?"complete":"")}><span>{missionDone&&!pausedDraft?"✓":"●"}</span><article>{pausedDraft?<PausedActivityEyebrow kind={pausedDraft.kind}/>:<small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small>}<h2>{pausedDraft?.kind==="mini_exam"?"Mini-exame de Matemática A":pausedDraft?.kind==="training"?"Treino Livre de Matemática A":pausedDraft?.kind==="diagnostic"?"Diagnóstico de Matemática A":missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.type==="blocked"?"Ainda não há Missão para hoje":(plan.focus||t?.short||"Missão de hoje"))}</h2><div className="missionCardMeta">{pausedDraft?<PausedSessionMeta position={pausedPosition(pausedDraft.i,pausedDraft.questions?.length)}/>:plan.type==="blocked"&&!missionDone?null:<><span>~3–5 min</span>{!missionDone&&t?.year&&<span>{t.year}</span>}</>}</div>{pausedDraft?<button onClick={()=>{if(pausedDraft.kind==="mini_exam")go(pausedDraft.screen||"miniExamRun");else if(pausedDraft.kind==="training")go("trainingRun");else if(pausedDraft.kind==="diagnostic")go(pausedDraft.screen||"diag");else startDailyMission("home_card")}}>Continuar sessão</button>:missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:plan.type==="blocked"
         // Sem perguntas elegíveis para a matéria indicada: nunca um beco sem saída.
         ?<><p className="missionBlockedNote">Com a matéria que indicaste ainda não temos perguntas suficientes. Confirma a matéria dada ou treina livremente.</p><button onClick={()=>go("curriculumSettings")}>Confirmar matéria dada</button></>
         :<button onClick={()=>startDailyMission("home_card")}>Começar Missão</button>}{!pausedDraft&&!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
@@ -1698,6 +1700,7 @@ function Train({s,setS,go,start}){
         :"A app usará perguntas próximas do mesmo tema enquanto este foco é expandido."}</span></div>
       : <div className="notice"><b>Conteúdo ainda em construção</b><span>A taxonomia já contém esta área, mas o banco de perguntas desta versão ainda não tem itens suficientes para a treinar de forma honesta.</span></div>}
 
+    {pendingSession&&<PausedSessionStatus kind={pendingSession.kind} position={pendingSession.kind==="training"?pausedPosition(pendingSession.i,pendingSession.questions?.length):null}/>}
     <button className="primary" disabled={!available&&!pendingSession} onClick={()=>{
       if(pendingSession){go("home");return}
       const ses=sessionStart("training",{themeId,focus,level});
@@ -1736,7 +1739,7 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
     saveSessionDraft({kind:"training",betaMode:s.betaMode||"internal",sessionId,cfg,questions,i,sel,fb,correct,earnedPoints,hasIncomplete});
   },[cfg,questions,i,sel,fb,correct,earnedPoints,hasIncomplete,done]);
 
-  if(conflictingDraft)return <Shell><h1>Já tens uma avaliação em curso.</h1><button onClick={()=>go("home")}>Continuar sessão</button></Shell>;
+  if(conflictingDraft)return <Shell><h1>Já tens uma avaliação em curso.</h1><PausedSessionStatus kind={storedDraft.kind}/><button onClick={()=>go("home")}>Continuar sessão</button></Shell>;
   if(!cfg)return <Shell><Back go={go} to="train"/><h1>Escolhe primeiro o que queres treinar.</h1></Shell>;
   if(questions.length<STUDY_SESSION_MIN_QUESTIONS)return <Shell><Back go={go} to="train"/><h1>Ainda não há perguntas úteis suficientes neste foco.</h1><p className="muted">O treino só começa quando consegue garantir uma sessão completa entre 7 e 10 perguntas.</p></Shell>;
 
@@ -1921,7 +1924,7 @@ function Exams({s,go,startMini}){
   return <Shell className="wideStudentShell examHub"><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Matemática A · 635</h1><p className="muted">Escolhe um Mini-exame para uma sessão curta em contexto de prova. O Exame Completo ficará disponível quando o respetivo motor estiver validado.</p></div>
     <ApronsoNudge pose="crossed" tone="dark">Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</ApronsoNudge>
     <FriendsBetaDisclaimer s={s} compact/>
-    {pausedExamDraft?.kind==="mini_exam"&&<div className="pausedSession"><div><small>MINI-EXAME EM PAUSA</small><b>Mini-exame de Matemática A</b><span>O teu progresso ficou guardado neste dispositivo.</span></div><button onClick={()=>go(draftScreen(pausedExamDraft)||"miniExamRun")}>Continuar →</button></div>}
+    {pausedExamDraft?.kind==="mini_exam"&&<div className="pausedSession"><div><PausedActivityEyebrow kind="mini_exam"/><b>Mini-exame de Matemática A</b><div className="missionCardMeta"><PausedSessionMeta/></div></div><button onClick={()=>go(draftScreen(pausedExamDraft)||"miniExamRun")}>Continuar →</button></div>}
     <button className="exam examAction" disabled={!miniReady} onClick={()=>miniReady&&startMini()}>
       <div><b>⚡ Mini-exame misto</b><span>{miniReady?`${miniSelection} seleção + ${miniConstructed} construção · ~25–30 min · ${miniYears.join(" · ")}`:`${miniAvailable}/${MATH_MINI_EXAM_QUESTIONS} questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
     </button>

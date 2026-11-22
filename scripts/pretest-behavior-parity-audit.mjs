@@ -20,8 +20,8 @@ assert.match(fqa,/className="adaptivePath"/u,"FQ A deve usar o caminho adaptativ
 assert.match(fqa,/Praticar, rever matéria ou fazer um exame/u,"FQ A deve apresentar o mesmo próximo passo provável das restantes disciplinas.");
 
 assert.match(fqa,/if\(!\["home","exams"\]\.includes\(view\)\)return/u,"FQ A deve carregar retomas de exame também no Home.");
-assert.match(fqa,/SESSÃO EM PAUSA/u,"o Home de FQ A deve mostrar sessões de estudo em pausa.");
-assert.match(fqa,/REVISÃO EM PAUSA/u,"o Home de FQ A deve mostrar revisões de exame em pausa.");
+assert.match(fqa,/PausedActivityEyebrow kind=\{progress\.lastPosition\.kind\}/u,"o Home de FQ A deve mostrar sessões de estudo em pausa.");
+assert.match(fqa,/PausedActivityEyebrow kind=\{[^}]*"review"/u,"o Home de FQ A deve mostrar revisões de exame em pausa.");
 assert.match(fqa,/physicsChemistryDraftAgeLabel/u,"a retoma de FQ A deve indicar quando foi guardada.");
 
 for(const [label,source] of [["Matemática A",math],["Português",portuguese],["FQ A",fqa]]){

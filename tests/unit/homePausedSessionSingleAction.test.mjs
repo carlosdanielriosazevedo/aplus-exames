@@ -1,5 +1,6 @@
 import {describe,it,expect} from "vitest";
 import {readFileSync} from "node:fs";
+import {pausedPosition} from "../../app/lib/pausedPosition.js";
 
 const read=path=>readFileSync(new URL("../../"+path,import.meta.url),"utf8");
 const math=read("app/clientApp.js"),pt=read("app/components/PortugueseSubject.js"),fqa=read("app/components/PhysicsChemistrySubject.js"),eyebrow=read("app/components/PausedActivityEyebrow.js");
@@ -12,11 +13,12 @@ describe("single paused-assessment CTA on Aprender",()=>{
   expect(eyebrow).toContain("MINI-EXAME");
   expect(eyebrow).toContain("SESSÃO EM PAUSA");
   expect(eyebrow).not.toContain("<button");
+  expect(eyebrow).toContain("Progresso guardado");
  });
  it("Português replaces duplicated banner for missions with existing primary card",()=>{
   const home=learningHome(pt,'if(!session)return sharedShell(<>','if(session.finished){');
   expect(home).not.toContain('className="pausedSession"');
-  expect(home).toContain('className="sessionPausedMeta"');
+  expect(home).toContain("<PausedSessionMeta position=");
   expect(home).toContain("<PausedActivityEyebrow kind=");
   expect(home).toContain('progress.lastPosition?resume');
   expect(home).toContain('miniExamDraft.examId');
@@ -36,5 +38,19 @@ describe("single paused-assessment CTA on Aprender",()=>{
   for(const kind of ["mini_exam","training","diagnostic","mission"])expect(home).toContain(`kind==="${kind}"`);
   expect(home).toContain("<PausedActivityEyebrow kind=");
   expect(home).toContain('>Continuar sessão</button>');
+ });
+ it("posição só quando é conhecida (nunca «Pergunta 1 de 0»)",()=>{
+  expect(pausedPosition(3,7)).toBe("Pergunta 4 de 7");
+  expect(pausedPosition(0,0)).toBeNull();
+  expect(pausedPosition(undefined,7)).toBeNull();
+  expect(pausedPosition(2,undefined)).toBeNull();
+ });
+ it("todas as avaliações em pausa usam a mesma etiqueta e «Progresso guardado»",()=>{
+  for(const source of [math,pt,fqa]){
+   expect(source).not.toMatch(/(MINI-EXAME|REVISÃO|PROVA|EXAME COMPLETO|MISSÃO) EM PAUSA/u);
+   expect(source).toContain("<PausedSessionMeta");
+  }
+  expect(math).toContain('{mode==="resume"?<PausedActivityEyebrow kind="mission"/>');
+  expect(math).toContain('{pendingDiagnostic&&<PausedSessionStatus kind="diagnostic"/>}');
  });
 });

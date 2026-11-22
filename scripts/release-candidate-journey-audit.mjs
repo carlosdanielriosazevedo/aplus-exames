@@ -41,7 +41,7 @@ assert.match(portuguese,/view==="trainingSetup"/u,"Português RC: Praticar must 
 assert.match(portuguese,/startMission/u,"Português RC: Missão must remain wired.");
 assert.match(portuguese,/go\("portugueseMiniExam"\)/u,"Português RC: Mini-exame must remain reachable.");
 assert.match(portuguese,/Exame Completo/u,"Português RC: Exame Completo must remain reachable.");
-assert.match(portuguese,/REVISÃO EM PAUSA/u,"Português RC: interrupted review must remain resumable.");
+assert.match(portuguese,/PausedActivityEyebrow kind=\{[^}]*"review"/u,"Português RC: interrupted review must remain resumable.");
 assert.match(portuguese,/view==="progress"/u,"Português RC: Progresso must remain wired.");
 assert.match(portugueseMini,/Terminar e rever o exame/u,"Português RC: completed exam must lead to review.");
 assert.match(portugueseMini,/Resposta submetida e fechada/u,"Português RC: submitted answers must stay locked after feedback.");
@@ -53,7 +53,7 @@ assert.match(fqa,/startMission/u,"FQ A RC: Missão must remain wired.");
 assert.match(fqa,/view==="trainingSetup"/u,"FQ A RC: Praticar must remain wired.");
 assert.match(fqa,/Mini-exame · Modelo 1/u,"FQ A RC: Mini-exame must remain reachable.");
 assert.match(fqa,/Exame Completo · 715/u,"FQ A RC: Exame Completo must remain reachable.");
-assert.match(fqa,/REVISÃO EM PAUSA/u,"FQ A RC: interrupted review must remain resumable.");
+assert.match(fqa,/PausedActivityEyebrow kind=\{[^}]*"review"/u,"FQ A RC: interrupted review must remain resumable.");
 assert.match(fqa,/view==="progress"/u,"FQ A RC: Progresso must remain wired.");
 assert.match(fqaMini,/não mostra a correção durante o mini-exame/u,"FQ A RC: Mini-exam must not reveal correction before submission.");
 assert.match(fqaFull,/Durante o Exame Completo não mostramos correções/u,"FQ A RC: full exam must not reveal correction before submission.");

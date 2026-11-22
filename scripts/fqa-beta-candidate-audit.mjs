@@ -27,7 +27,7 @@ assert.match(subject,/StudyModeHub/u,"FQ A: os modos de estudo devem continuar n
 assert.match(subject,/Mini-exame · Modelo 1/u,"FQ A: Mini-exame Modelo 1 deve estar acessível.");
 assert.match(subject,/Mini-exame · Modelo 2/u,"FQ A: Mini-exame Modelo 2 deve estar acessível.");
 assert.match(subject,/Exame Completo · 715/u,"FQ A: Exame Completo 715 deve estar acessível.");
-assert.match(subject,/REVISÃO EM PAUSA/u,"FQ A: a Home deve permitir retomar revisão de prova.");
+assert.match(subject,/PausedActivityEyebrow kind=\{[^}]*"review"/u,"FQ A: a Home deve permitir retomar revisão de prova.");
 assert.match(mini,/não mostra a correção durante o mini-exame/u,"FQ A: Mini-exame não pode revelar correção durante a prova.");
 assert.match(full,/Durante o Exame Completo não mostramos correções/u,"FQ A: Exame Completo não pode revelar correção durante a prova.");
 assert.match(mini,/autoAssessmentConfidence/u,"FQ A: Mini-exame deve expor confiança da correção automática.");

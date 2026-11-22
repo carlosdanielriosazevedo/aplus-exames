@@ -18,3 +18,19 @@ export default function PausedActivityEyebrow({kind}){
     <span className="pausedActivityStatus">SESSÃO EM PAUSA</span>
   </small>;
 }
+
+// Pedido do product owner (2026-11-22): sempre que uma avaliação fica a meio
+// (diagnóstico, missão, treino, mini-exame, exame, revisão), aparece a mesma
+// etiqueta «… — SESSÃO EM PAUSA» a vermelho e «Progresso guardado»; a posição
+// («Pergunta 3 de 8») só quando é conhecida.
+export function PausedSessionMeta({position}){
+  return <><span className="sessionPausedMeta">Progresso guardado</span>{position?<span className="sessionPausedPosition">{position}</span>:null}</>;
+}
+
+// Etiqueta e chips para fora do cartão principal do Aprender (diagnóstico,
+// treino, Progresso). Não tem ação própria: a ação continua a ser o botão do ecrã.
+export function PausedSessionStatus({kind,position}){
+  return <div className="pausedSessionStatus"><PausedActivityEyebrow kind={kind}/><div className="missionCardMeta"><PausedSessionMeta position={position}/></div></div>;
+}
+
+export {pausedPosition} from "../lib/pausedPosition.js";
