@@ -14,6 +14,7 @@ const ARCHIVE_FORMAT="approva-account-archive-v1";
 export const ACADEMIC_KEYS=Object.freeze([
   "a25",
   "a25-active-session-v1",
+  "a25-active-exam-session-v1",
   "a25-completed-sessions-v1",
   "a25-cloud-snapshots-v1",
   "a25-cloud-pending-v1",

@@ -2140,4 +2140,20 @@ html body .pausedSession>button:hover{filter:brightness(1.12)}
 html body .pausedSession>button:focus-visible{outline:none;box-shadow:var(--app-focus)!important}
 /* Uma sessão a meio de cada vez: frase curta a explicar porque não se começa outra. */
 .pausedSessionNote{margin:6px 0 16px;font-size:14px;line-height:1.5;color:#5b6676}
+/* Sem roxo (identidade azul-marinho + laranja, 2026-11-22): barra do objetivo e
+   botões da área dos pais. */
+html body input[type=range],html body .goalSlider{accent-color:var(--app-orange)}
+html body .parentConnect button,html body .pendingInvite button{background:var(--app-card-dark);color:#fff}
+html body .parentConnect button:disabled{background:#c5ccd6;color:#fff}
+/* Ranking e Praticar sem lilás: o cartão da liga é azul-marinho, por isso os
+   textos secundários ficam em cinza-azulado claro; na tabela, azul-marinho/laranja. */
+html body .leagueStatus small{color:#c9d6e2}
+html body .leagueStatus p{color:#dbe4ec}
+html body .leagueStatus>div:nth-child(2) span,html body .leagueStatus footer span{color:#c9d6e2}
+html body .leaderboardHead small{color:var(--app-orange-dark)}
+html body .leaderboardRows em{color:var(--app-navy)}
+html body .themeGrid button.sel small{color:var(--app-orange-dark)}
 
+html body .lastExam small{color:var(--app-orange-dark)}
+/* Cartão de prova a meio no Aprender: o mesmo chip amarelo «Progresso guardado». */
+html body .learnHome .homePausedExam .missionCardMeta .sessionPausedMeta{background:#ffe2a3!important;color:#6c4c0e!important}

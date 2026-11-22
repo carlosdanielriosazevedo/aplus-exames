@@ -7,6 +7,7 @@ import {useEffect,useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import StudyModeHub from "./StudyModeHub";
 import PausedActivityEyebrow,{PausedSessionMeta,PausedSessionStatus,pausedPosition} from "./PausedActivityEyebrow";
+import PausedSessionCard from "./PausedSessionCard";
 import PhysicsChemistryLearnPanel from "./PhysicsChemistryLearnPanel";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
 import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";
@@ -124,7 +125,6 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   function start(kind,items,label,domain=null){
     // Nunca substituir uma tentativa pendente: apenas permitir a retoma.
     if(progress.lastPosition){resume();return}
-    if(examDrafts.length){go(examDrafts[0].route);return}
     const sessionId=createSubjectSessionId(SUBJECT_ID,kind);
     setSession({sessionId,kind,label,domain,items,current:0});
     setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});
@@ -361,10 +361,10 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
       {practiceDomain&&practiceSubtopic&&availableInSelection>=7&&<div className="trainingSummary"><b>{selectedDomain?.shortTitle} → {selectedSubtopic?.label}</b><span>{availableInSelection} perguntas disponíveis neste foco · nível: {levelLabel}. A sessão escolhe 7–8 perguntas e evita repetições recentes sempre que possível.</span></div>}
       {practiceSubtopic&&availableInSelection<7&&<div className="notice"><b>Conteúdo ainda em construção</b><span>Esta submatéria ainda não tem perguntas suficientes para uma sessão completa.</span></div>}
 
-      {progress.lastPosition||examDrafts.length?<>
-        <PausedSessionStatus kind={progress.lastPosition?.kind||(examDrafts[0].draft.review?"review":examDrafts[0].title.toLowerCase().includes("completo")?"full_exam":"mini_exam")} position={progress.lastPosition?pausedPosition(progress.lastPosition.current||0,progress.lastPosition.itemIds?.length):null}/>
-        <p className="pausedSessionNote">Só podes ter uma sessão a meio de cada vez. Termina esta e depois começa o treino.</p>
-        <button className="primary" onClick={progress.lastPosition?resume:()=>go(examDrafts[0].route)}>Continuar sessão</button>
+      {progress.lastPosition?<>
+        <PausedSessionStatus kind={progress.lastPosition.kind} position={pausedPosition(progress.lastPosition.current||0,progress.lastPosition.itemIds?.length)}/>
+        <p className="pausedSessionNote">Tens uma sessão de estudo a meio. Continua-a antes de começares um treino.</p>
+        <button className="primary" onClick={resume}>Continuar sessão</button>
       </>:<button className="primary" disabled={!practiceDomain||!practiceSubtopic||availableInSelection<7} onClick={startPractice}>Começar treino</button>}
     </Shell>;
   }
@@ -375,9 +375,8 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   if(view==="exams")return <Shell className="wideStudentShell examHub">{sharedTop}<div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Física e Química A · 715</h1><p className="muted">Escolhe entre um treino mais curto e o Exame Completo com a estrutura 15 obrigatórios + 8 opcionais, contando os 4 melhores opcionais.</p></div>
     <ApronsoNudge pose="crossed" tone="dark">Aqui não dou pistas durante as perguntas. No fim, voltamos à prova para rever as tuas respostas.</ApronsoNudge>
     {examDrafts.map(({id,title,route,draft})=><div className="pausedSession" key={id}><div><PausedActivityEyebrow kind={draft.review?"review":title.toLowerCase().includes("completo")?"full_exam":"mini_exam"}/><b>{title}</b><div className="missionCardMeta"><PausedSessionMeta position={[draft.review?null:pausedPosition(draft.index||0,draft.itemIds?.length),physicsChemistryDraftAgeLabel(draft.updatedAt)].filter(Boolean).join(" · ")}/></div></div><button onClick={()=>go(route)}>Continuar sessão</button></div>)}
-    {progress.lastPosition&&<div className="pausedSession"><div><PausedActivityEyebrow kind={progress.lastPosition.kind}/><b>{progress.lastPosition.label}</b><div className="missionCardMeta"><PausedSessionMeta position={pausedPosition(progress.lastPosition.current||0,progress.lastPosition.itemIds?.length)}/></div></div><button onClick={resume}>Continuar sessão</button></div>}
-    {(progress.lastPosition||examDrafts.length>0)&&<p className="pausedSessionNote">Só podes ter uma sessão a meio de cada vez. Termina esta e depois começa outra prova.</p>}
-    {!progress.lastPosition&&examDrafts.length===0&&<div className="trainChoices">
+    {examDrafts.length>0&&<p className="pausedSessionNote">Tens uma prova a meio. Continua-a antes de começares outra.</p>}
+    {examDrafts.length===0&&<div className="trainChoices">
       <button onClick={()=>go("physicsChemistryMini1")}><span>📝</span><div><b>Mini-exame · Modelo 1</b><small>12 itens · 45 min · seleção, construção e suportes científicos</small></div><em>→</em></button>
       <button onClick={()=>go("physicsChemistryMini2")}><span>🧪</span><div><b>Mini-exame · Modelo 2</b><small>12 itens · 45 min · combinação diferente de 10.º e 11.º</small></div><em>→</em></button>
       <button onClick={()=>go("physicsChemistryExam")}><span>⏱️</span><div><b>Exame Completo · 715</b><small>23 itens · 200 pontos · 120 min + 30 min de tolerância</small></div><em>→</em></button>
@@ -434,10 +433,11 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
     <section className="adaptivePath" aria-label="Caminho adaptativo de Física e Química A">
       <div className={`pathNode ${progress.diagnosticDone?"done":"current"}`}><span>{progress.diagnosticDone?"✓":"●"}</span><div><small>{progress.diagnosticDone?"ÚLTIMO PASSO":"PRIMEIRO PASSO"}</small><b>{progress.diagnosticDone?"Diagnóstico concluído":"Conhecer o teu ponto de partida"}</b></div></div>
       <div className="pathLine active"/>
-      <div className={`pathNode current ${missionDone&&!progress.lastPosition&&!examDrafts.length?"complete":""}`}><span>{missionDone&&!progress.lastPosition&&!examDrafts.length?"✓":"●"}</span><article>{progress.lastPosition||examDrafts.length?<PausedActivityEyebrow kind={progress.lastPosition?.kind||(examDrafts[0].draft.review?"review":examDrafts[0].title.toLowerCase().includes("completo")?"full_exam":"mini_exam")}/>:<small>{progress.diagnosticDone?(missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"):"PRÓXIMO PASSO"}</small>}<h2>{!progress.lastPosition&&examDrafts.length?examDrafts[0].title:progress.lastPosition?.kind==="diagnostic"?"Diagnóstico de Física e Química A":progress.lastPosition?.label&&progress.lastPosition.kind!=="mission"?progress.lastPosition.label:progress.diagnosticDone?"Física e Química A adaptada ao teu percurso":"Diagnóstico de Física e Química A"}</h2><div className="missionCardMeta">{(progress.lastPosition||examDrafts.length>0)?<PausedSessionMeta position={progress.lastPosition?pausedPosition(progress.lastPosition.current||0,progress.lastPosition.itemIds?.length):examDrafts[0].draft.review?null:pausedPosition(examDrafts[0].draft.index||0,examDrafts[0].draft.itemIds?.length)}/>:<><span>{progress.diagnosticDone?"~3–5 min":"8 perguntas"}</span>{progress.diagnosticDone&&<span>{currentYear}</span>}</>}</div><button disabled={(!progress.lastPosition&&!examDrafts.length&&((!progress.diagnosticDone&&!scopedCoverage.diagnosticReady)||(!missionDone&&progress.diagnosticDone&&!scopedCoverage.missionReady)))} onClick={progress.lastPosition?resume:examDrafts.length?()=>go(examDrafts[0].route):missionDone?()=>go("train"):progress.diagnosticDone?()=>startMission():()=>go("diag")}>{progress.lastPosition||examDrafts.length?"Continuar sessão":missionDone?"Continuar a estudar":progress.diagnosticDone?"Começar Missão":"Começar diagnóstico"}</button></article></div>
+      <div className={`pathNode current ${missionDone&&!progress.lastPosition?"complete":""}`}><span>{missionDone&&!progress.lastPosition?"✓":"●"}</span><article>{progress.lastPosition?<PausedActivityEyebrow kind={progress.lastPosition.kind}/>:<small>{progress.diagnosticDone?(missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"):"PRÓXIMO PASSO"}</small>}<h2>{progress.lastPosition?.kind==="diagnostic"?"Diagnóstico de Física e Química A":progress.lastPosition?.label&&progress.lastPosition.kind!=="mission"?progress.lastPosition.label:progress.diagnosticDone?"Física e Química A adaptada ao teu percurso":"Diagnóstico de Física e Química A"}</h2><div className="missionCardMeta">{progress.lastPosition?<PausedSessionMeta position={pausedPosition(progress.lastPosition.current||0,progress.lastPosition.itemIds?.length)}/>:<><span>{progress.diagnosticDone?"~3–5 min":"8 perguntas"}</span>{progress.diagnosticDone&&<span>{currentYear}</span>}</>}</div><button disabled={(!progress.lastPosition&&((!progress.diagnosticDone&&!scopedCoverage.diagnosticReady)||(!missionDone&&progress.diagnosticDone&&!scopedCoverage.missionReady)))} onClick={progress.lastPosition?resume:missionDone?()=>go("train"):progress.diagnosticDone?()=>startMission():()=>go("diag")}>{progress.lastPosition?"Continuar sessão":missionDone?"Continuar a estudar":progress.diagnosticDone?"Começar Missão":"Começar diagnóstico"}</button></article></div>
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{progress.diagnosticDone?"Praticar, rever matéria ou fazer um exame":"Primeira Missão adaptada"}</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>
+    {examDrafts.map(({id,title,route,draft})=><PausedSessionCard key={id} kind={draft.review?"review":title.toLowerCase().includes("completo")?"full_exam":"mini_exam"} title={title} position={[draft.review?null:pausedPosition(draft.index||0,draft.itemIds?.length),physicsChemistryDraftAgeLabel(draft.updatedAt)].filter(Boolean).join(" · ")} onContinue={()=>go(route)}/>)}
     {!scopedCoverage.diagnosticReady&&<div className="notice warning homeScopeWarning"><b>Atualiza a matéria dada</b><span>O diagnóstico precisa de 8 perguntas disponíveis dentro da matéria que assinalaste. Podes começar mesmo que ainda só tenhas dado uma pequena parte do programa.</span><button onClick={()=>go("curriculumSettings")}>Indicar matéria dada</button></div>}
     <InstallAppPrompt eligible={!!progress.diagnosticDone}/>
     {sharedNav}</section></main>;

@@ -102,6 +102,9 @@ export function StudentProfile({s,setS,go,editing=false,initialProfile}){
       {[["thisYear","Este ano letivo"],["nextYear","No próximo ano"],["twoYears","Daqui a 2 anos"],["unsure","Ainda não sei"]].map(([v,l])=><button key={v} className={p.examTiming===v?"sel":""} onClick={()=>setP({...p,examTiming:v})}>{l}</button>)}
     </div>
 
+    {/* O objetivo define-se aqui só na configuração inicial; depois tem o seu
+        próprio ecrã («Objetivo» no menu) e não se repete em «Ano e percurso escolar». */}
+    {!editing&&<>
     <h3>Que nota queres alcançar a {activeSubject.name}?</h3>
     <p className="muted">Este objetivo é específico desta disciplina. Ajusta a exigência das Missões e pode ser diferente nas outras disciplinas.</p>
     <div className="goalInline">
@@ -109,6 +112,7 @@ export function StudentProfile({s,setS,go,editing=false,initialProfile}){
       <div className="sliderLabels"><span>10</span><span>15</span><span>20</span></div>
       <input aria-label={`Nota objetivo de ${activeSubject.name}`} className="goalSlider" type="range" min="10" max="20" step="1" value={p.goal} onChange={e=>setP({...p,goal:Number(e.target.value)})}/>
     </div>
+    </>}
 
     <div className="notice"><b>Exemplo</b><span>Se tens tido 18 valores, a app não começa por perguntas demasiado elementares. Se a evidência contrariar essa indicação, adapta imediatamente.</span></div>
     <button className="primary" disabled={profileIncomplete} onClick={save}>{editing?"Guardar percurso":`Continuar para a matéria de ${activeSubject.name}`}</button>

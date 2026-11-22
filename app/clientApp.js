@@ -18,6 +18,7 @@ import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculu
 import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon,StudySessionHeader,markFocusTab,wasInSessionThisTab} from "./components/chrome";
 import StudyModeHub from "./components/StudyModeHub";
 import PausedActivityEyebrow,{PausedSessionMeta,PausedSessionStatus,pausedPosition} from "./components/PausedActivityEyebrow";
+import PausedSessionCard from "./components/PausedSessionCard";
 import {Welcome} from "./components/Welcome";
 import ScoreLossExplanation from "./components/ScoreLossExplanation";
 // Ranking importado diretamente (não à parte): carregado à parte, o primeiro
@@ -56,9 +57,11 @@ import {
 import {
   loadLocalStateStatus,saveLocalState,clearLocalState,FRIENDS_STORAGE_KEY
 } from "./lib/persistence";
+// Sessões a meio em dois espaços (2026-11-22): estudo (por omissão) e provas ("exam").
 import {
-  saveSessionDraft,loadSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen
-} from "./lib/sessionDraft";
+  saveLaneDraft as saveSessionDraft,loadLaneDraft as loadSessionDraft,loadLaneDraftStatus as loadSessionDraftStatus,
+  clearLaneDraft as clearSessionDraft,loadAllSessionDrafts,clearAllLaneDrafts,draftScreen
+} from "./lib/sessionLanes";
 import {reconcileDiagnosticRuntimeSessions} from "./lib/diagnosticRuntime";
 import {
   academicScopeThemes,diagnosticBlueprintForProfile,currentYearThemes,normalizeTaughtSubtopics
@@ -335,11 +338,11 @@ export default function App(){
     const loaded=loadLocalStateStatus(initial,emptyScores,storageKey);
     if(loaded.error){setScreen("storageRecoveryError");return}
     const x=loaded.state;
-    const draftPreview=x?loadSessionDraftStatus(x.betaMode||"internal").draft:null;
+    const draftPreviews=x?loadAllSessionDrafts(x.betaMode||"internal").drafts:[];
     const needsMathAtHydration=!!x&&(
       x.activeSubjectId==="math-a"||
       x.pedagogicalIdVersion!==1||
-      ["diagnostic","training","mini_exam"].includes(draftPreview?.kind)
+      draftPreviews.some(row=>["diagnostic","training","mini_exam"].includes(row?.kind))
     );
     if(needsMathAtHydration){
       await loadMathEngine();
@@ -356,8 +359,10 @@ export default function App(){
     const betaState=requested?activateFriendsBeta(subjectReady):subjectReady;
     const next=recordAppOpen(betaState,{source:"initial_load"});
     const draftStatus=loadSessionDraftStatus(next.betaMode||"internal");
-    if(draftStatus.error){setScreen("storageRecoveryError");return}
+    const examDraftStatus=loadSessionDraftStatus(next.betaMode||"internal","exam");
+    if(draftStatus.error||examDraftStatus.error){setScreen("storageRecoveryError");return}
     const draft=draftStatus.draft;
+    const examDraft=examDraftStatus.draft;
     let recoveredState=next;
     let validDraft=draft;
     let recoveryError=null;
@@ -393,10 +398,15 @@ export default function App(){
     setS(recoveredState);
 
     if(draft?.kind==="training" && draft.cfg)setTrainingCfg(draft.cfg);
-    if(draft?.kind==="mini_exam" && draft.session)setExamSession(draft.session);
+    if(examDraft?.session)setExamSession(examDraft.session);
 
-    const recovered=draftScreen(validDraft);
-    const canRecover=recovered&&(validDraft?.kind==="diagnostic"?!recoveredState.diagnosticDone:recoveredState.diagnosticDone);
+    // Pode haver uma sessão de estudo e um Mini-exame a meio. Recarregar a página
+    // volta à que estava aberta (a gravada mais recentemente).
+    const studyRecoverable=validDraft&&(validDraft.kind==="diagnostic"?!recoveredState.diagnosticDone:recoveredState.diagnosticDone)?validDraft:null;
+    const examRecoverable=examDraft&&recoveredState.diagnosticDone?examDraft:null;
+    const recoverDraft=[studyRecoverable,examRecoverable].filter(Boolean).sort((a,b)=>(b.savedAt||0)-(a.savedAt||0))[0]||null;
+    const recovered=draftScreen(recoverDraft);
+    const canRecover=!!recovered;
     const preview=typeof window!=="undefined"?new URLSearchParams(window.location.search).get("preview"):null;
     if(preview==="subjects"){
       setScreen("subjectOnboard");
@@ -410,7 +420,7 @@ export default function App(){
       setScreen("diagResult");
 
     }else if(canRecover){
-      setRecoveredSession(validDraft);
+      setRecoveredSession(recoverDraft);
       // Reabrir a app: menu com "Continuar". Recarregar a página a meio: a pergunta.
       setScreen(wasInSessionThisTab()?recovered:"home");
     }else{
@@ -550,17 +560,21 @@ export default function App(){
   if(hydrated&&assessmentRoutes.includes(screen)){
     const subject=s.activeSubjectId||"math-a";
     const position=s.subjectProgress?.[subject]?.lastPosition;
-    const math=subject==="math-a"?loadSessionDraft(s.betaMode||"internal"):null;
+    // Estudo e provas são independentes (2026-11-22): só há conflito com uma
+    // tentativa do mesmo espaço. As provas só existem depois do diagnóstico.
+    const mathExamScreen=["miniExamIntro","miniExamRun","miniExamReview"].includes(screen);
+    const math=subject==="math-a"?loadSessionDraft(s.betaMode||"internal",mathExamScreen?"exam":"study"):null;
     const fqa=subject==="physics-chemistry-a"?pendingPhysicsChemistryExam():null;
     const pt=subject==="portuguese"&&s.subjectSettings?.portuguese?.miniExamDraft;
     const examRoutes=["portugueseMiniExam","physicsChemistryMini1","physicsChemistryMini2","physicsChemistryExam"];
     let target=null;
-    if(position){
-      if(examRoutes.includes(screen))target="resumeSubjectDiagnostic";
-    }else if(pt)target="portugueseMiniExam";
-    else target=fqa?.route||(math?draftScreen(math):null);
+    if(subject==="math-a")target=math?draftScreen(math):null;
+    else if(examRoutes.includes(screen)){
+      if(position?.kind==="diagnostic")target="resumeSubjectDiagnostic";
+      else if(fqa?.route&&fqa.route!==screen)target=fqa.route;
+    }
     const sameMathExam=math?.kind==="mini_exam"&&["miniExamIntro","miniExamRun","miniExamReview"].includes(screen);
-    if(target&&target!==screen&&!sameMathExam&&!(math?.kind==="diagnostic"&&screen==="diag"))return <Shell><Logo/><PausedSessionStatus kind={position?.kind||(pt?(pt.review?"review":pt.examId==="full-1"?"full_exam":"mini_exam"):fqa?.route==="physicsChemistryExam"?"full_exam":fqa?.route?"mini_exam":math?.kind)}/><div className="notice"><b>Tens uma avaliação em curso</b><span>Continua a tentativa guardada, com as tuas respostas.</span></div><button className="btn" onClick={()=>{
+    if(target&&target!==screen&&!sameMathExam&&!(math?.kind==="diagnostic"&&screen==="diag"))return <Shell><Logo/><PausedSessionStatus kind={subject==="math-a"?math?.kind:target==="resumeSubjectDiagnostic"?"diagnostic":fqa?.route==="physicsChemistryExam"?"full_exam":"mini_exam"}/><div className="notice"><b>Tens uma avaliação em curso</b><span>Continua a tentativa guardada, com as tuas respostas.</span></div><button className="btn" onClick={()=>{
       if(math){setRecoveredSession(math);if(math.cfg)setTrainingCfg(math.cfg);if(math.session)setExamSession(math.session)}
       go(target);
     }}>Continuar</button></Shell>;
@@ -572,8 +586,8 @@ export default function App(){
 
   // Retomar a sessão de Matemática A em pausa, seja ela qual for (Missão, treino,
   // diagnóstico ou Mini-exame), sempre por um botão «Continuar sessão» explícito.
-  const resumePendingMath=()=>{
-    const pending=loadSessionDraft(s.betaMode||"internal");
+  const resumePendingMath=(lane="study")=>{
+    const pending=loadSessionDraft(s.betaMode||"internal",lane);
     if(!pending)return;
     setRecoveredSession(pending);if(pending.session)setExamSession(pending.session);if(pending.cfg)setTrainingCfg(pending.cfg);
     go(draftScreen(pending));
@@ -616,14 +630,15 @@ export default function App(){
   if(screen==="train")return <TrainHub s={s} go={go}/>;
   if(screen==="trainingSetup"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="trainingSetup"/>;
   if(screen==="trainingSetup"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="trainingSetup"/>;
-  if(screen==="trainingSetup")return <Train s={s} setS={setS} go={go} resumePending={resumePendingMath} start={cfg=>{setTrainingCfg(cfg);go("trainingRun")}}/>;
+  if(screen==="trainingSetup")return <Train s={s} setS={setS} go={go} resumePending={()=>resumePendingMath("study")} start={cfg=>{setTrainingCfg(cfg);go("trainingRun")}}/>;
   if(screen==="trainingRun")return <TrainingRun s={s} setS={setS} go={go} cfg={trainingCfg} recoveredDraft={recoveredSession?.kind==="training"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="progress")return <Progress s={s} go={go}/>;
   if(screen==="ranking")return <Ranking s={s} setS={setS} go={go}/>;
-  if(screen==="exams")return <Exams s={s} go={go} resumePending={resumePendingMath} startMini={()=>{
-    // Com outra sessão a meio, «Começar» não faz nada (o botão está bloqueado e o
-    // cartão de pausa mostra «Continuar sessão»): nunca abrir outra sessão em silêncio.
-    if(loadSessionDraft(s.betaMode||"internal"))return;
+  if(screen==="exams")return <Exams s={s} go={go} resumePending={()=>resumePendingMath("exam")} startMini={()=>{
+    // Com um Mini-exame a meio, «Começar» não faz nada (o botão está bloqueado e o
+    // cartão de pausa mostra «Continuar sessão»). Uma Missão ou um treino a meio não
+    // bloqueiam: ficam no outro espaço e não se misturam.
+    if(loadSessionDraft(s.betaMode||"internal","exam"))return;
     setRecoveredSession(null);
     const questions=buildMiniExam(s,MATH_MINI_EXAM_QUESTIONS);
     const ses=sessionStart("mini_exam",{questionCount:questions.length});
@@ -644,10 +659,10 @@ export default function App(){
   if(screen==="parent")return <Parent s={s} setS={setS} go={go} prepIndex={prepIndex} measuredThemes={measuredThemes}/>;
   if(screen==="friendsBetaInfo")return <FriendsBetaInfo s={s} go={go}/>;
 
-  return <Home s={s} setS={setS} go={go} reset={()=>{
+  return <Home s={s} setS={setS} go={go} resumeExam={()=>resumePendingMath("exam")} reset={()=>{
     if(hasPendingAssessment(s))return;
     clearLocalState(s.betaMode==="friends_beta"?FRIENDS_STORAGE_KEY:undefined);
-    clearSessionDraft(s.betaMode||"internal");
+    clearAllLaneDrafts(s.betaMode||"internal");
     clearCompletionRegistry();
     setRecoveredSession(null);
     setS(isFriendsBeta(s)?activateFriendsBeta(initial):initial);go("welcome");
@@ -1164,7 +1179,7 @@ function FirstUseTour({onComplete,onSkip,steps=FIRST_USE_TOUR_STEPS,ariaLabel="C
 }
 
 
-function Home({s,setS,go,reset}){
+function Home({s,setS,go,reset,resumeExam}){
   const missionDone=missionCompletedToday(s);
   const completedMission=todayMissionRecord(s);
   const devView=typeof window!=="undefined" && new URLSearchParams(window.location.search).get("dev")==="1";
@@ -1173,6 +1188,8 @@ function Home({s,setS,go,reset}){
   // Lido a cada render (leitura local, barata): depois de entrar na conta ou de
   // sincronizar, o cartão tem de mostrar logo «Continuar», e não «Começar».
   const pausedDraft=typeof window!=="undefined"?loadSessionDraft(s.betaMode||"internal"):null;
+  // Um Mini-exame a meio fica no seu próprio espaço: não substitui a Missão.
+  const pausedExam=typeof window!=="undefined"?loadSessionDraft(s.betaMode||"internal","exam"):null;
   const plan=pausedDraft?.kind==="mission"&&pausedDraft.plan
     ?pausedDraft.plan
     :(persistedPlan||computedPlan);
@@ -1329,6 +1346,7 @@ function Home({s,setS,go,reset}){
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{probableNext?.short||"A definir após esta sessão"}</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>}
+    {pausedExam&&<PausedSessionCard kind="mini_exam" title="Mini-exame de Matemática A" onContinue={resumeExam}/>}
     <SaveProgressPrompt s={s} setS={setS} go={go} place="home"/>
     <InstallAppPrompt eligible={!!s.diagnosticDone}/>
     <StudentNav active="home" go={go}/>
@@ -1922,7 +1940,7 @@ function Progress({s,go}){
 }
 
 function Exams({s,go,startMini,resumePending}){
-  const pausedExamDraft=typeof window!=="undefined"?loadSessionDraft(s.betaMode||"internal"):null;
+  const pausedExamDraft=typeof window!=="undefined"?loadSessionDraft(s.betaMode||"internal","exam"):null;
   const last=s.lastExam;
   const miniQuestions=buildMiniExam(s,MATH_MINI_EXAM_QUESTIONS);
   const miniAvailable=miniQuestions.length;
@@ -1934,7 +1952,7 @@ function Exams({s,go,startMini,resumePending}){
     <ApronsoNudge pose="crossed" tone="dark">Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</ApronsoNudge>
     <FriendsBetaDisclaimer s={s} compact/>
     {pausedExamDraft&&<div className="pausedSession"><div><PausedActivityEyebrow kind={pausedExamDraft.kind}/><b>{pausedExamDraft.kind==="mini_exam"?"Mini-exame de Matemática A":pausedExamDraft.kind==="training"?"Treino Livre de Matemática A":pausedExamDraft.kind==="diagnostic"?"Diagnóstico de Matemática A":(pausedExamDraft.plan?.focus||"Missão de hoje")}</b><div className="missionCardMeta"><PausedSessionMeta position={pausedExamDraft.kind==="training"?pausedPosition(pausedExamDraft.i,pausedExamDraft.questions?.length):null}/></div></div><button onClick={()=>resumePending?resumePending():go(draftScreen(pausedExamDraft)||"home")}>Continuar sessão</button></div>}
-    {pausedExamDraft&&<p className="pausedSessionNote">Só podes ter uma sessão a meio de cada vez. Termina esta e depois começa o Mini-exame.</p>}
+    {pausedExamDraft&&<p className="pausedSessionNote">Tens um Mini-exame a meio. Continua-o antes de começares outro.</p>}
     <button className="exam examAction" disabled={!miniReady||!!pausedExamDraft} onClick={()=>miniReady&&!pausedExamDraft&&startMini()}>
       <div><b>⚡ Mini-exame misto</b><span>{miniReady?`${miniSelection} seleção + ${miniConstructed} construção · ~25–30 min · ${miniYears.join(" · ")}`:`${miniAvailable}/${MATH_MINI_EXAM_QUESTIONS} questões elegíveis neste modo`}</span></div><strong>{miniReady&&!pausedExamDraft?"Começar →":"🔒"}</strong>
     </button>
@@ -2091,7 +2109,7 @@ function MiniExamReview({session,setSession,s,setS,go}){
     submittingRef.current=true;
 
     if(!claimSessionCompletion(session.sessionId)){
-      clearSessionDraft(s.betaMode||"internal");
+      clearSessionDraft(s.betaMode||"internal","exam");
       go("miniExamResult");
       return;
     }
@@ -2122,7 +2140,7 @@ function MiniExamReview({session,setSession,s,setS,go}){
       at:activityAt
     });
     updated=refreshLearningHypotheses(updated,activityAt);
-    clearSessionDraft(s.betaMode||"internal");
+    clearSessionDraft(s.betaMode||"internal","exam");
     setS(updated);go("miniExamResult");
   }
   return <Shell><Back go={go} to="miniExamRun"/><p className="eyebrow">REVER ANTES DE ENTREGAR</p><h1>Confirma as tuas respostas.</h1>
