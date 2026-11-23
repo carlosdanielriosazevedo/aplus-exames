@@ -11,12 +11,47 @@ function normalizeText(value){
     .replace(/,/g,".");
 }
 
+const SUPERSCRIPT_DIGITS=Object.freeze({"⁰":"0","¹":"1","²":"2","³":"3","⁴":"4","⁵":"5","⁶":"6","⁷":"7","⁸":"8","⁹":"9","⁻":"-","⁺":"+"});
+
+// Notação científica como os alunos a escrevem no telemóvel: 5,8×10⁵, 5,8x10^5,
+// 5,8 * 10^5, 5,8·10^5, 5.8e5 ou 580 000. (Auditoria 2026-11-23: "x10^", "*10^" e
+// expoentes em superscrito eram lidos como 5,8 e davam um falso erro de cálculo.)
+function scientificText(value){
+  return String(value??"").trim()
+    .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]/gu,char=>SUPERSCRIPT_DIGITS[char])
+    .replace(/(\d)[\s\u00a0](?=\d{3}(?:\D|$))/gu,"$1")
+    .replace(",",".")
+    .replace(/\s*[×·xX*]\s*10\s*\^?\s*\(?\s*([-+−]?)\s*(\d+)\s*\)?/u,(_,sign,exp)=>"e"+(sign==="−"?"-":sign)+exp)
+    .replace(/\s*e\s*([-+]?)\s*(\d+)/iu,"e$1$2");
+}
+
 function numberFrom(value){
   if(typeof value==="number"&&Number.isFinite(value))return value;
-  const text=String(value??"").trim().replace(",",".").replace(/[×·]\s*10\s*\^?/iu,"e");
-  const match=text.match(/[-+]?\d*\.?\d+(?:e[-+]?\d+)?/iu);
+  const match=scientificText(value).match(/[-+]?\d*\.?\d+(?:e[-+]?\d+)?/iu);
   const parsed=match?Number(match[0]):NaN;
   return Number.isFinite(parsed)?parsed:null;
+}
+
+// Arredondamento declarado pelo próprio aluno: metade da unidade do último algarismo
+// significativo que escreveu (5,8×10⁵ → ±5×10³). Só conta com pelo menos 2
+// algarismos significativos. (Auditoria 2026-11-23, B-02: arredondamentos
+// corretos a 2 algarismos significativos eram tratados como erro de cálculo.)
+export function declaredRoundingHalfUnit(value){
+  if(typeof value==="number")return 0;
+  const match=scientificText(value).match(/[-+]?(\d*)(?:\.(\d+))?(?:e([-+]?\d+))?/iu);
+  if(!match||!(match[1]||match[2]))return 0;
+  const integer=match[1]||"",decimals=match[2]||"",exponent=Number(match[3]||0);
+  let unitExponent,significant;
+  if(decimals){
+    unitExponent=-decimals.length;
+    significant=(integer+decimals).replace(/^0+/,"").length;
+  }else{
+    const trailingZeros=(integer.match(/0+$/)||[""])[0].length;
+    unitExponent=trailingZeros;
+    significant=integer.replace(/^0+/,"").replace(/0+$/,"").length;
+  }
+  if(significant<2)return 0;
+  return 0.5*10**(unitExponent+exponent)*(1+1e-9);
 }
 
 function normalizedStepAnswer(raw){
@@ -24,6 +59,24 @@ function normalizedStepAnswer(raw){
     return {work:String(raw.work??""),result:String(raw.result??raw.value??""),unit:String(raw.unit??"")};
   }
   return {work:"",result:String(raw??""),unit:""};
+}
+
+// Auditoria externa 2026-11-23 (C-01): o reconhecimento da relação é textual, por
+// isso "Não se aplica n=m/M; não fiz o cálculo." continha a relação e recebia
+// pontuação máxima. Uma resposta que nega o próprio processo, ou declara que não o
+// fez, não demonstra a etapa: fica por rever, sem pontos automáticos. Em caso de
+// dúvida o resultado é "por rever", nunca "errado".
+const PROCESS_DENIAL_PATTERNS=Object.freeze([
+  /\bnao\s+(fiz|faco|calculei|usei|utilizei|apliquei|resolvi|sei|percebi|consegui)\b/u,
+  /\bnao\s+se\s+aplica\b/u,
+  /\bnao\s+(e|esta)\s+(valida|valido|correta|correto|certa|certo|aplicavel)\b/u,
+  /\bsem\s+(fazer|calculo|calculos|calcular|resolver)\b/u,
+  /\b(chutei|adivinhei|palpite|ao\s+calhas|a\s+sorte|copiei)\b/u
+]);
+
+export function processDenied(work){
+  const text=String(work??"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ");
+  return PROCESS_DENIAL_PATTERNS.some(pattern=>pattern.test(text));
 }
 
 function relationAccepted(work,accepted=[]){
@@ -101,6 +154,11 @@ export function gradePhysicsChemistryStepwise(item,value){
       continue;
     }
 
+    if(processDenied(row.work)){
+      requiresReview=true;
+      steps.push({id:step.id,status:"contradiction-review",points:null,maxPoints:step.points,expected:step.expected,answer:row,errorType:null,note:"A justificação nega ou não mostra o processo desta etapa. A app não atribui pontos automáticos; compara com a resolução."});
+      continue;
+    }
     const relationKnown=relationAccepted(row.work,stepPolicy.acceptedRelations||step.accepted||[]);
     if(!relationKnown){
       requiresReview=true;
@@ -128,7 +186,9 @@ export function gradePhysicsChemistryStepwise(item,value){
     }
 
     let status="correct",errorType=null,note="";
-    const direct=closeEnough(numeric,step.value,step.tolerance);
+    const unitScale=rawNumeric?Math.abs(numeric/rawNumeric):1;
+    const roundingTolerance=declaredRoundingHalfUnit(row.result)*unitScale;
+    const direct=closeEnough(numeric,step.value,Math.max(Number(step.tolerance)||0,roundingTolerance));
     if(!direct){
       const ft=stepPolicy.followThrough;
       const previous=ft&&traversed[ft.from]?numericValues[ft.from]:null;
@@ -175,7 +235,7 @@ export function gradePhysicsChemistryStepwise(item,value){
     status:"provisional-review",final:false,correct:null,points:null,provisionalPoints,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode,steps,
     type1Count,type2Count,penalty,requiresReview,
     note:requiresReview
-      ?"Há pelo menos um processo alternativo que a app não consegue avaliar automaticamente. A classificação não está disponível para essa parte da resposta."
+      ?"Há pelo menos uma etapa que a app não consegue avaliar automaticamente (processo alternativo, ou justificação que nega o próprio processo). A classificação não está disponível para essa parte da resposta."
       :"Indicação provisória segundo regras gerais de itens por etapas: soma das etapas e desvalorização por erros detetáveis. Não substitui os critérios específicos oficiais."
   };
 }

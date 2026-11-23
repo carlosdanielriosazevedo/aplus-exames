@@ -29,13 +29,53 @@ const AUTH_TABLES=Object.freeze([
 
 export const DELETION_CONFIRMATION="ELIMINAR";
 
-export function validateDeletionRequest(body){
+// Contas criadas só com Google/Microsoft não têm palavra-passe. Para essas, a
+// reautenticação é ter entrado há pouco tempo (sessão criada nos últimos minutos).
+export const RECENT_LOGIN_MAX_AGE_MS=10*60*1000;
+
+export function validateDeletionRequest(body,{requirePassword=true}={}){
   if(!body||typeof body!=="object"||Array.isArray(body))return {ok:false,code:"INVALID_BODY"};
   const password=typeof body.password==="string"?body.password:"";
   const confirmation=typeof body.confirmation==="string"?body.confirmation.trim().toUpperCase():"";
   if(confirmation!==DELETION_CONFIRMATION)return {ok:false,code:"CONFIRMATION_REQUIRED"};
-  if(password.length<1||password.length>200)return {ok:false,code:"PASSWORD_REQUIRED"};
+  if(password.length>200)return {ok:false,code:"PASSWORD_REQUIRED"};
+  if(requirePassword&&password.length<1)return {ok:false,code:"PASSWORD_REQUIRED"};
   return {ok:true,password};
+}
+
+function tableExists(sql,schema,table){
+  return sql`select to_regclass(${`${schema}."${table}"`}) is not null as present`.then(rows=>!!rows[0]?.present);
+}
+
+// Como é que esta conta confirma a eliminação: "password" (tem credencial de
+// email e palavra-passe) ou "recent-login" (só Google/Microsoft). Sem a tabela de
+// contas do Neon Auth, mantém-se o comportamento anterior (palavra-passe).
+export async function deletionMethod(sql,authUserId){
+  if(!authUserId||!(await tableExists(sql,"neon_auth","account")))return {method:"password",providers:[]};
+  const rows=await sql`select "providerId" as provider from neon_auth."account" where "userId"::text = ${String(authUserId)}`;
+  const providers=[...new Set(rows.map(row=>String(row.provider||"")).filter(Boolean))];
+  if(!providers.length||providers.includes("credential"))return {method:"password",providers};
+  return {method:"recent-login",providers};
+}
+
+function timestampMs(value){
+  if(value===null||value===undefined||value==="")return null;
+  const ms=value instanceof Date?value.getTime():Date.parse(String(value));
+  return Number.isFinite(ms)?ms:null;
+}
+
+// Momento em que a sessão atual foi criada. Usa o valor devolvido pelo Neon Auth
+// e, se faltar, confirma na tabela de sessões (sempre limitado à própria conta).
+export async function sessionCreatedAt(sql,{authUserId,session}={}){
+  const direct=timestampMs(session?.createdAt);
+  if(direct!==null)return direct;
+  if(!session?.id||!authUserId||!(await tableExists(sql,"neon_auth","session")))return null;
+  const rows=await sql`select "createdAt" as created_at from neon_auth."session" where id::text = ${String(session.id)} and "userId"::text = ${String(authUserId)} limit 1`;
+  return timestampMs(rows[0]?.created_at);
+}
+
+export function isRecentLogin(createdAtMs,now=Date.now(),maxAgeMs=RECENT_LOGIN_MAX_AGE_MS){
+  return Number.isFinite(createdAtMs)&&createdAtMs<=now+60_000&&now-createdAtMs<=maxAgeMs;
 }
 
 // Confirma a palavra-passe diretamente no Neon Auth, sem tocar nos cookies do pedido.
@@ -95,6 +135,8 @@ export async function deleteAccountData(sql,authUserId){
   await sql.transaction(statements.map(({text,params})=>sql.query(text,params)));
   return {ok:true,tables:statements.length};
 }
+
+export const ACCOUNT_DELETED_COOKIE="approva_account_deleted";
 
 export const NEON_AUTH_COOKIES=Object.freeze([
   "__Secure-neon-auth.session_token",

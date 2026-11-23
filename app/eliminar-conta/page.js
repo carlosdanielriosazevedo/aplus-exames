@@ -1,4 +1,6 @@
 import Link from "next/link";
+import {cookies} from "next/headers";
+import {ACCOUNT_DELETED_COOKIE} from "../lib/server/account-deletion";
 import styles from "../piloto/pilot.module.css";
 import {pilotPublicFields} from "../lib/pilotCopy";
 
@@ -7,7 +9,9 @@ export const metadata={title:"Eliminar conta · APProva+",alternates:{canonical:
 
 export default async function DeleteAccountPage({searchParams}){
   const params=await searchParams;
-  const done=params?.concluido==="1";
+  // Só confirma a eliminação com o comprovativo que o servidor emite quando a
+  // eliminação foi concluída; o parâmetro do endereço, sozinho, não basta.
+  const done=params?.concluido==="1"&&(await cookies()).get(ACCOUNT_DELETED_COOKIE)?.value==="1";
   const {email}=pilotPublicFields();
   const contact=email&&!email.startsWith("[")?email:null;
   return <main className={styles.page}><section className={styles.wrap}>
@@ -19,7 +23,7 @@ export default async function DeleteAccountPage({searchParams}){
 
     <div className={styles.section}>
       <h2>Na app</h2>
-      <p className={styles.copy}>Entra na tua conta, abre o menu <b>•••</b> e escolhe <b>Conta</b>. No fim da página, em <b>Eliminar conta</b>, confirma com a tua palavra-passe e escreve <b>ELIMINAR</b>. A eliminação é imediata e não pode ser desfeita.</p>
+      <p className={styles.copy}>Entra na tua conta, abre o menu <b>•••</b> e escolhe <b>Conta</b>. No fim da página, em <b>Eliminar conta</b>, confirma com a tua palavra-passe e escreve <b>ELIMINAR</b>. Se entraste com Google ou Microsoft, a conta não tem palavra-passe: a app pede-te para voltares a entrar com esse serviço e depois escreves <b>ELIMINAR</b>. A eliminação é imediata e não pode ser desfeita.</p>
       <p className={styles.copy}><Link href="/?conta=1">Abrir a APProva+ e entrar na conta</Link></p>
     </div>
 

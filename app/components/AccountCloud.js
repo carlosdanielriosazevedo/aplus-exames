@@ -3,7 +3,7 @@ import {useEffect,useState} from "react";
 import {hasPendingAssessment,preservePendingAssessment} from "../lib/pendingAssessment";
 import {Back,BrandName,Shell} from "./chrome";
 import {
-  cloudConfiguration,getCloudSession,cloudSignIn,cloudSignInSocial,cloudSignUp,cloudSignOut,cloudDeleteAccount,cloudRequestPasswordReset,cloudResetPassword,
+  cloudConfiguration,getCloudSession,cloudSignIn,cloudSignInSocial,cloudSignUp,cloudSignOut,cloudDeleteAccount,cloudDeletionMethod,cloudReauthenticateSocial,cloudRequestPasswordReset,cloudResetPassword,
   loadStudentCloudState,saveStudentCloudState,overwriteStudentCloudState,mergeStudentCloudState
 } from "../lib/cloud";
 import {
@@ -69,6 +69,9 @@ export function AccountCloud({s,setS,go,gate=false}){
   const [logoutPrompt,setLogoutPrompt]=useState(null);
   const [deletePassword,setDeletePassword]=useState("");
   const [deleteConfirmation,setDeleteConfirmation]=useState("");
+  // Como confirmar a eliminação: palavra-passe (conta de email) ou voltar a entrar
+  // com Google/Microsoft (conta sem palavra-passe). Carregado ao abrir a secção.
+  const [deleteMethod,setDeleteMethod]=useState(null);
   const [resetStep,setResetStep]=useState("request");
   const [resetCode,setResetCode]=useState("");
   const [rankingYear,setRankingYear]=useState(["10.º","11.º","12.º","Já terminei o secundário"].includes(s.profile?.schoolYear)?s.profile.schoolYear:"");
@@ -244,13 +247,32 @@ export function AccountCloud({s,setS,go,gate=false}){
   }
 
   // Eliminação definitiva: conta, progresso online e dados de estudo deste dispositivo.
+  async function loadDeleteMethod(){
+    if(deleteMethod)return;
+    setDeleteMethod(await cloudDeletionMethod());
+  }
+
+  async function reauthenticateForDeletion(){
+    const provider=deleteMethod?.provider||"google";
+    setBusy(true);setMessage(null);
+    try{
+      rememberCloudSession(true);
+      await cloudReauthenticateSocial(provider); // o browser sai para o fornecedor
+    }catch(error){
+      setMessage({ok:false,text:String(error?.message||error)});
+      setBusy(false);
+    }
+  }
+
   async function deleteAccount(){
     if(busy)return;
     setBusy(true);setMessage(null);
     try{
-      const result=await cloudDeleteAccount({password:deletePassword,confirmation:deleteConfirmation});
+      const result=await cloudDeleteAccount({password:deleteMethod?.method==="recent-login"?"":deletePassword,confirmation:deleteConfirmation});
       if(!result.ok){
+        if(result.code==="RECENT_LOGIN_REQUIRED")setDeleteMethod(prev=>prev?{...prev,recentLogin:false}:prev);
         const text={
+          RECENT_LOGIN_REQUIRED:"Por segurança, volta a entrar com "+(deleteMethod?.provider==="microsoft"?"a Microsoft":"o Google")+" e elimina a conta logo a seguir. Nada foi apagado.",
           INVALID_PASSWORD:"A palavra-passe não está certa. Nada foi apagado.",
           CONFIRMATION_REQUIRED:"Escreve ELIMINAR para confirmar. Nada foi apagado.",
           PASSWORD_REQUIRED:"Indica a tua palavra-passe. Nada foi apagado.",
@@ -656,14 +678,22 @@ export function AccountCloud({s,setS,go,gate=false}){
       </div>})()
       :<button className="secondary" onClick={()=>signout()} disabled={busy}>Terminar sessão</button>}
 
-      <details className="deleteAccount">
+      <details className="deleteAccount" onToggle={event=>{if(event.currentTarget.open)loadDeleteMethod()}}>
         <summary>Eliminar conta</summary>
         <p>Apaga a conta, o progresso guardado online e os dados de estudo deste dispositivo. É imediato e <b>não pode ser desfeito</b>.</p>
-        <form className="deleteAccountForm" onSubmit={event=>{event.preventDefault();deleteAccount()}}>
-          <label>Palavra-passe<input type="password" autoComplete="current-password" value={deletePassword} onChange={e=>setDeletePassword(e.target.value)}/></label>
-          <label>Escreve ELIMINAR para confirmar<input autoComplete="off" autoCapitalize="characters" value={deleteConfirmation} onChange={e=>setDeleteConfirmation(e.target.value)}/></label>
-          <button type="submit" className="dangerButton" disabled={busy||!deletePassword||deleteConfirmation.trim().toUpperCase()!=="ELIMINAR"}>Eliminar conta definitivamente</button>
-        </form>
+        {(()=>{
+          const social=deleteMethod?.method==="recent-login";
+          const providerName=deleteMethod?.provider==="microsoft"?"a Microsoft":"o Google";
+          if(social&&!deleteMethod.recentLogin)return <div className="deleteAccountForm">
+            <p>Entraste com {providerName}, por isso esta conta não tem palavra-passe. Para confirmar que és tu, volta a entrar com {providerName}. Depois, abre outra vez <b>Conta → Eliminar conta</b>: tens {deleteMethod.recentLoginMinutes||10} minutos para concluir.</p>
+            <button type="button" className="secondary" disabled={busy} onClick={reauthenticateForDeletion}>Voltar a entrar com {deleteMethod?.provider==="microsoft"?"Microsoft":"Google"}</button>
+          </div>;
+          return <form className="deleteAccountForm" onSubmit={event=>{event.preventDefault();deleteAccount()}}>
+            {!social&&<label>Palavra-passe<input type="password" autoComplete="current-password" value={deletePassword} onChange={e=>setDeletePassword(e.target.value)}/></label>}
+            <label>Escreve ELIMINAR para confirmar<input autoComplete="off" autoCapitalize="characters" value={deleteConfirmation} onChange={e=>setDeleteConfirmation(e.target.value)}/></label>
+            <button type="submit" className="dangerButton" disabled={busy||!deleteMethod||(!social&&!deletePassword)||deleteConfirmation.trim().toUpperCase()!=="ELIMINAR"}>Eliminar conta definitivamente</button>
+          </form>;
+        })()}
         <small><a href="/eliminar-conta">O que é apagado e o que fica</a></small>
       </details>
     </>}

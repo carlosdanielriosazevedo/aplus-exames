@@ -7,9 +7,9 @@ import {diagnosticAnchor,emptyScores,dailyMissionPlan,selectQuestionForPlan,trai
 import {createDiagnosticDraft,transactDiagnosticAnswer} from "../../app/lib/diagnosticRecovery.js";
 
 const SUBJECTS=[
-  {id:"math-a",marker:"AVALIAÇÃO INICIAL · MATEMÁTICA A · PROVA 635"},
-  {id:"portuguese",marker:"AVALIAÇÃO INICIAL · PORTUGUÊS · PROVA 639"},
-  {id:"physics-chemistry-a",marker:"AVALIAÇÃO INICIAL · FÍSICA E QUÍMICA A · PROVA 715"}
+  {id:"math-a",marker:"DIAGNÓSTICO INICIAL · MATEMÁTICA A · PROVA 635"},
+  {id:"portuguese",marker:"DIAGNÓSTICO INICIAL · PORTUGUÊS · PROVA 639"},
+  {id:"physics-chemistry-a",marker:"DIAGNÓSTICO INICIAL · FÍSICA E QUÍMICA A · PROVA 715"}
 ];
 
 function configuredState(subjectId){
@@ -630,7 +630,7 @@ test("«Voltar» num ecrã aberto diretamente nunca sai da app",async({page})=>{
   await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page",{timeout:15_000});
   // Simular abertura direta do ecrã do diagnóstico (sem ecrãs da app atrás).
   await page.evaluate(()=>{const state={...history.state,approvaScreen:"diag",approvaDepth:0};history.replaceState(state,"");dispatchEvent(new PopStateEvent("popstate",{state}))});
-  await expect(page.getByText("AVALIAÇÃO INICIAL · MATEMÁTICA A · PROVA 635",{exact:true})).toBeVisible();
+  await expect(page.getByText("DIAGNÓSTICO INICIAL · MATEMÁTICA A · PROVA 635",{exact:true})).toBeVisible();
   await page.getByRole("button",{name:"← Voltar"}).click();
   await expect(page).toHaveURL(/127\.0\.0\.1:3000/);
   await expect(page.getByRole("button",{name:"Aprender",exact:true})).toHaveAttribute("aria-current","page");
@@ -652,7 +652,7 @@ test("Matemática A · reabrir a app com diagnóstico a meio abre no menu; recar
   // "Continuar diagnóstico" vai direto à pergunta, sem voltar ao ecrã de apresentação.
   await page.getByRole("button",{name:"Continuar diagnóstico"}).first().click();
   await expect(page.getByRole("button",{name:"Guardar e sair",exact:true})).toBeVisible({timeout:30_000});
-  await expect(page.getByText("AVALIAÇÃO INICIAL · MATEMÁTICA A · PROVA 635",{exact:true})).toHaveCount(0);
+  await expect(page.getByText("DIAGNÓSTICO INICIAL · MATEMÁTICA A · PROVA 635",{exact:true})).toHaveCount(0);
   await page.reload();
   await expect(page.getByRole("button",{name:"Guardar e sair",exact:true})).toBeVisible({timeout:30_000});
   const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-active-session-v1")));

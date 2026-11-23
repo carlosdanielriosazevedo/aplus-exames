@@ -44,7 +44,7 @@ Guarda técnica: `tests/unit/androidIconLock.test.mjs` (corre no CI). Se este te
 - Free Training must not directly change Domain/preparation estimates.
 - One correct answer never proves mastery.
 - Near-identical variants do not count as independent evidence.
-- Diagnostic should use few highly informative questions and remains human-reviewed in the current hybrid policy.
+- Diagnostic should use few highly informative questions and remains human-reviewed in the current hybrid policy. (Para a beta pública e a Google Play, a revisão humana foi substituída pela decisão do product owner de 2026-11-17, ponto 1.)
 - Preparation Index is not a predicted 0–20 National Exam mark.
 - Important pedagogical decisions should have short human-readable explanations.
 
@@ -60,7 +60,7 @@ Principle:
 Do not treat an LLM answer as mathematical certification. Prefer deterministic/local validation, independent checks, automated QA and human pedagogical review where required.
 
 ## Hybrid validation v5.5
-Current closed-beta plan:
+Current closed-beta plan (histórico; para a beta pública vale a decisão do product owner de 2026-11-17, ponto 1):
 - 40 human-required reviews;
 - 5 teacher-sample reviews;
 - 24 machine-lane items;

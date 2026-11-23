@@ -32,13 +32,25 @@ Princípio: declarar o que o código faz, sem declarar «nenhum dado recolhido»
 | Atividade na app (respostas, progresso, XP, missões) | Sim | Não | Funcionalidade da app (plano de estudo, progresso) | Sim, para guardar online |
 | Diagnóstico de falhas (erros técnicos, sem dados pessoais) | Sim | Não | Diagnóstico de falhas | Não pode ser recusado; não identifica |
 | Contagens diárias anónimas de utilização | Não (são agregadas e anónimas, não ligadas ao utilizador) | — | — | — |
+| Reportes de problemas em perguntas | Não ligados ao utilizador: guardam só a pergunta, a disciplina, a categoria, a versão da app e a data | — | Melhorar o conteúdo | Não (o aluno escolhe reportar) |
 
 Outras respostas:
 - Dados encriptados em trânsito: **Sim** (HTTPS).
 - O utilizador pode pedir a eliminação dos dados: **Sim** — na app e em https://approvamais.pt/eliminar-conta
 - Publicidade, venda de dados, localização, contactos, fotografias: **Não**.
 - Prestadores que tratam dados por conta da APProva+ (não contam como «partilha»):
-  Vercel (alojamento), Neon (base de dados e autenticação).
+  Vercel (alojamento), Neon (base de dados e autenticação), Resend (envio dos emails de
+  confirmação e de recuperação da palavra-passe: recebe só o endereço e a mensagem).
+- Entrar com Google ou Microsoft: o fornecedor confirma a identidade e envia nome e email.
+  Declarar nome e email como recolhidos (já estão na tabela) e indicar o login social na
+  política de privacidade (já indicado em `/privacidade`).
+- Eliminação de contas criadas com Google/Microsoft: não têm palavra-passe; a app pede
+  para voltar a entrar com o fornecedor e eliminar nos 10 minutos seguintes.
+
+Pendente de decisão (auditoria externa 2026-11-23, L-03): prazos de retenção por tipo de
+dado (logs da Vercel, cópias de segurança da Neon, emails no Resend), região de
+tratamento de cada prestador e dados do piloto/encarregado. Confirmar antes de submeter
+o formulário; é matéria para o product owner e, idealmente, para parecer jurídico.
 
 ## 4. Público-alvo e conteúdo
 - Faixas etárias a declarar: **13–15, 16–17 e 18+** (alunos do secundário).

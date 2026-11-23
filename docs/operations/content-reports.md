@@ -19,3 +19,17 @@ Categorias: `wrong` (resposta parece errada), `unclear` (enunciado confuso), `di
 - Só com sessão iniciada, e com um limite de 30 reportes por conta por hora.
 - Pedidos de outra origem são recusados.
 - O browser não tem acesso à tabela: as permissões para `authenticated` e `anonymous` foram revogadas.
+
+## Verificar que os reportes funcionam na base publicada (auditoria 2026-11-23, J-01)
+Uma base criada com `db/schema.sql` tinha uma tabela `content_reports` antiga e a migração 009 original falhava. No SQL Editor da Neon:
+
+```sql
+select
+  (select count(*) from information_schema.columns
+     where table_schema='public' and table_name='content_reports' and column_name='subject_id') as formato_novo,
+  to_regclass('public.content_reports_legacy_v23') as tabela_antiga_guardada;
+```
+
+- `formato_novo = 1`: os reportes estão a ser gravados. Nada a fazer.
+- `formato_novo = 0`: os reportes **não** estão a ser gravados. Executar outra vez `db/migrations/009_content_reports.sql` (já corrigida; é idempotente) e, se ainda não tiverem corrido, 010 → 013. Depois, carregar em «Reportar» numa pergunta e confirmar que aparece uma linha em `content_reports`.
+

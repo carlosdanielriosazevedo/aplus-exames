@@ -37,5 +37,7 @@ assert.match(math,/Ir para o menu inicial/u,"o pós-diagnóstico de Matemática 
 assert.match(math,/recordMilestone\(dismissDailyMissionPrompt\(prev\),"first_plan_viewed"/u,"ao sair do diagnóstico de Matemática A, a Home deve abrir sem modal automático da Missão.");
 assert.match(portuguese,/Ir para o menu inicial/u,"o pós-diagnóstico de Português deve devolver explicitamente à Home.");
 assert.match(fqa,/Ir para o menu inicial/u,"o pós-diagnóstico de FQ A deve devolver explicitamente à Home.");
+// Auditoria externa 2026-11-23 (E-01): arrancar a Missão no ecrã de resultado contornava a conta obrigatória.
+assert.doesNotMatch(portuguese,/setTimeout\(\(\)=>startRecommendedMission\(\)/u,"o resultado do diagnóstico de Português não pode arrancar a Missão diretamente; tem de regressar à Home, que aplica a conta obrigatória.");
 
 console.log("✓ percurso pré-teste: diagnósticos multi-disciplina antes de prompt automático · Missão única/dia · Treino 7–10 · retoma no Home · Progresso coerente");

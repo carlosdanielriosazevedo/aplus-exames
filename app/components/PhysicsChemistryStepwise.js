@@ -45,6 +45,7 @@ function statusLabel(step){
   if(step.status==="process-missing")return "Processo não evidenciado";
   if(step.status==="result-missing")return "Resultado em falta";
   if(step.status==="alternative-method-review")return "Processo alternativo · não verificado";
+  if(step.status==="contradiction-review")return "Processo negado ou não demonstrado · por rever";
   return "Sem resposta";
 }
 

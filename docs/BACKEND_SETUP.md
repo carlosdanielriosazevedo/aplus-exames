@@ -19,7 +19,7 @@ Para a beta, a proposta passa a ser **Neon Postgres ligado nativamente ao Vercel
 2. Adicionar **Neon** ao projeto.
 3. Criar uma base nova para A+ Exames.
 4. Confirmar que a integração criou `DATABASE_URL` nas variáveis do projeto.
-5. No SQL Editor da Neon, executar `db/schema.sql`.
+5. No SQL Editor da Neon, executar `db/schema.sql` e, a seguir, todas as migrações de `db/migrations/` por ordem (002 → 013). A migração 009 converte a tabela `content_reports` antiga do `schema.sql` (fica guardada como `content_reports_legacy_v23`).
 6. Fazer novo deploy no Vercel.
 7. Abrir o Painel interno da Beta e carregar em **Sincronizar agora**.
 
