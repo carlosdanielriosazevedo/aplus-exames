@@ -1,6 +1,6 @@
 # Prompt — Auditoria externa integral à APProva+ (antes da Google Play)
 
-> **Como usar:** preenche os campos entre `[parênteses retos]`. O prompt é modular. As Partes 0, 1, 2, 4, 5 e 6 seguem sempre. Da Parte 3, envia todos os módulos a um auditor generalista ou só os da especialidade a um especialista (conteúdo, segurança/privacidade, UX/design, código). Nunca coloques credenciais neste texto: envia-as por um canal separado.
+> Este documento é o caderno de encargos completo da auditoria: aplica todas as partes e todos os módulos. As credenciais nunca aparecem aqui nem no relatório.
 
 ---
 
@@ -21,7 +21,7 @@ Postura exigida:
 ## PARTE 1 — Contexto
 
 ### O produto
-- **Nome:** APProva+ (mascote: Apronso). Versão auditada: `[5.5.0 · SHA do commit]`.
+- **Nome:** APProva+ (mascote: Apronso). Versão auditada: 5.5.0, ramo `main`, commit `5a077234dd7e78fcdc3dbb7329a2f24e1c6eb9c7` (22/11/2026).
 - **Missão:** preparação gamificada e adaptativa para os Exames Nacionais portugueses do secundário.
   - Princípio central: *"O aluno não deve ter de saber o que precisa de estudar. A app deve perceber isso por ele e indicar qual é a melhor próxima ação."*
   - Princípios de experiência: *"A app pensa muito e mostra pouco"* e *"Cada ecrã do aluno deve ter uma ação visualmente dominante."*
@@ -65,13 +65,13 @@ Postura exigida:
 5. **O ícone Android está bloqueado** (ver as regras de execução).
 
 ### Materiais e acessos fornecidos
-- Repositório: `[link / acesso de leitura]` · commit `[SHA]`
-- Produção: https://approvamais.pt · Pré-visualização/staging: `[URL ou "não existe"]`
-- Contas de teste: `[enviadas por canal separado; nunca aparecem no relatório]`
-- Base de dados de teste: `[sim/não; se sim, apenas staging]`
-- Dispositivos disponíveis: `[ex.: Android de gama baixa, Android recente, iPhone, desktop]`
-- Prazo: `[data]` · Esforço previsto: `[horas/dias]`
-- Contacto para dúvidas e para comunicar P0 imediatos: `[canal]`
+- Repositório: https://github.com/carlosdanielriosazevedo/aplus-exames (público, acesso direto de leitura). Audita o ramo `main` no commit `5a07723`. O deploy é manual, por isso a produção pode estar num commit anterior: compara o que vês em produção com o código e regista as diferenças.
+- Produção: https://approvamais.pt. Não existe ambiente de staging. Tudo o que não seja uso normal da app (testes de segurança ativos, dois utilizadores, carga, fuzzing) faz-se num ambiente local (`npm ci` e `npm run dev`). A app é local-first e corre sem base de dados.
+- Contas de teste: não há contas pré-criadas. Em produção, cria a tua própria conta de teste com um email teu e um nome fictício (por exemplo "Auditor"). No fim, elimina-a pela app: é o cenário 6 da Parte 4. Os testes com dois ou mais utilizadores fazem-se em ambiente local.
+- Base de dados: não tens acesso à base de dados de produção. Para testar RLS, IDOR e a sincronização, monta um Postgres local com `db/schema.sql` e `db/migrations/` (ver `docs/BACKEND_SETUP.md` e `tests/scripts/cloud-state-postgres-contract.mjs`). Se não conseguires, analisa o código e as migrações e declara a limitação.
+- Dispositivos: usa os teus. O mínimo é um Android real (de preferência de gama baixa ou média), um iPhone com Safari e um desktop. Se não tiveres um dispositivo físico, usa a emulação do Chrome DevTools ou do Playwright (por exemplo Galaxy A, Pixel 5, iPhone 13) e declara a limitação no relatório.
+- Prazo: os P0 comunicam-se assim que forem encontrados. O relatório final entrega-se até 7 de dezembro de 2026. Esforço de referência: 8 a 12 dias de trabalho de uma pessoa. Se fores um agente de IA, não há limite de tempo: o critério é cumprir a cobertura pedida.
+- Contacto: a pessoa que te enviou este documento, pelo mesmo canal. Usa-o para dúvidas e para comunicar P0 de imediato.
 
 ---
 
@@ -79,7 +79,7 @@ Postura exigida:
 
 ### Regras obrigatórias
 - **Só leitura.** Não alteres código, conteúdo, configuração ou dados e não abras PRs, salvo pedido explícito.
-- **Produção:** usa-a apenas como um utilizador normal, com as contas de teste. Testes de carga, fuzzing e ataques ativos fazem-se apenas em ambiente local ou staging.
+- **Produção:** usa-a apenas como um utilizador normal, com a tua conta de teste. Testes de carga, fuzzing e ataques ativos fazem-se apenas em ambiente local, porque não há staging.
 - **Dados reais:** não uses dados de alunos reais nem crias contas com dados de terceiros. Se encontrares dados pessoais reais, para, não os copies e reporta apenas onde estão.
 - **Segredos:** se encontrares chaves, tokens ou passwords no repositório ou no histórico git, reporta o ficheiro/commit e o tipo, nunca o valor.
 - **Ícone bloqueado:** não alteres, regeneres nem proponhas substituir `assets/brand/icon_1024_*`, `public/icons/*`, as entradas de ícones em `app/manifest.js` ou os hashes de `tests/unit/androidIconLock.test.mjs`. Podes comentar, mas não como recomendação acionável.
@@ -155,7 +155,7 @@ Não houve revisão docente: o conteúdo foi gerado e revisto por IA. O teu trab
 
 **Amostragem:**
 - 100% dos itens do diagnóstico das três disciplinas.
-- Uma amostra aleatória estratificada (ano × tema × tipo de item × dificuldade) de pelo menos `[150]` itens por disciplina, além do diagnóstico.
+- Uma amostra aleatória estratificada (ano × tema × tipo de item × dificuldade) de pelo menos 150 itens por disciplina, além do diagnóstico.
 - Todos os itens das Missões Diárias geradas para 3 perfis de teste ao longo de 7 dias simulados.
 
 **Verificação de cada item:**
@@ -219,7 +219,7 @@ Não houve revisão docente: o conteúdo foi gerado e revisto por IA. O teu trab
 - opções do tipo "todas/nenhuma das anteriores".
 
 ### Módulo C — Correção automática de respostas abertas e construídas
-- **Conjunto de teste:** constrói pelo menos `[30]` respostas por disciplina para itens abertos, incluindo respostas:
+- **Conjunto de teste:** constrói pelo menos 30 respostas por disciplina para itens abertos, incluindo respostas:
   - excelentes;
   - corretas mas mal escritas;
   - parciais;
@@ -428,7 +428,7 @@ Não houve revisão docente: o conteúdo foi gerado e revisto por IA. O teu trab
   - login social.
 - **Autorização:**
   - IDOR em `/api/cloud/state`, `/api/account/*`, `/api/pilot/*`, `/api/content-reports`, `/api/funnel` e `/api/client-errors`;
-  - Row Level Security nas migrações de `db/migrations`. Testa com dois utilizadores, em staging se possível.
+  - Row Level Security nas migrações de `db/migrations`. Testa com dois utilizadores num Postgres local.
 - **CSRF e CORS:** a proteção CSRF (`app/lib/server/csrf.js`) cobre todas as rotas que alteram estado?
 - **Webhooks e cron:**
   - assinatura do webhook do Neon Auth;
@@ -454,6 +454,7 @@ Não houve revisão docente: o conteúdo foi gerado e revisto por IA. O teu trab
   - onde ficam e durante quanto tempo;
   - quem os trata (Vercel, Neon, Resend…);
   - se há transferências para fora da UE.
+- **Responsável e contacto de privacidade:** confirma que `/privacidade` em produção mostra o responsável pelo serviço e o email de contacto. Se aparecer "Informação formal ainda por configurar", é um P0 para o lançamento.
 - **Coerência entre o código e os documentos públicos:** `/privacidade`, `/termos`, `/eliminar-conta`, `docs/operations/google-play.md` e o formulário Data Safety dizem o mesmo que o código faz?
 - **Idade e consentimento:**
   - confirmação dos 13+ anos;
@@ -598,4 +599,4 @@ Executa cada cenário e reporta "OK" ou "falha", com evidência:
 - Um achado concreto e verificado vale mais do que dez genéricos. Não inflaciones contagens: se o mesmo problema aparece em vários sítios, agrupa-o num só achado.
 - Não recomendes reescrever tudo nem mudar de stack sem demonstrar que o custo compensa.
 - Separa factos de opiniões e assume as opiniões como tuas.
-- Comunica qualquer P0 de imediato pelo canal indicado, sem esperar pelo relatório final.
+- Comunica qualquer P0 de imediato a quem te enviou este documento, sem esperar pelo relatório final.
