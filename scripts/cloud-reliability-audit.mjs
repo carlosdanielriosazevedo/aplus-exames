@@ -89,13 +89,18 @@ for(const url of migrationUrls){
 // Só nomes de CTE conhecidos podem parecer tabelas sem existir fisicamente.
 const CTE_ALLOWLIST=new Set(["target_user","revoked","deleted_aggregates","deleted_items","deleted_feedback","deleted_consents"]);
 const serverUrls=walk(new URL("../app/lib/server/",import.meta.url)).filter(url=>/\.(?:js|jsx|ts|tsx)$/u.test(url.pathname));
-const sqlRefRe=/\b(?:insert\s+into|delete\s+from|from|join)\s+(?:public\.)?"?([a-zA-Z_][a-zA-Z0-9_]*)"?|\bupdate\s+(?!set\b)(?:public\.)?"?([a-zA-Z_][a-zA-Z0-9_]*)"?/giu;
+// Tabelas do esquema neon_auth são geridas pelo Neon Auth (não pelas nossas
+// migrações); a eliminação de conta consulta-as explicitamente por esquema.
+const EXTERNAL_SCHEMAS=new Set(["neon_auth"]);
+const sqlRefRe=/\b(?:insert\s+into|delete\s+from|from|join)\s+(?:(public|neon_auth)\.)?"?([a-zA-Z_][a-zA-Z0-9_]*)"?|\bupdate\s+(?!set\b)(?:(public|neon_auth)\.)?"?([a-zA-Z_][a-zA-Z0-9_]*)"?/giu;
 const missing=[];
 for(const url of serverUrls){
   const source=readFileSync(url,"utf8");
   for(const tagged of source.matchAll(/sql`([\s\S]*?)`/gu)){
     for(const match of tagged[1].matchAll(sqlRefRe)){
-      const table=(match[1]||match[2]).toLowerCase();
+      const schema=(match[1]||match[3]||"public").toLowerCase();
+      const table=(match[2]||match[4]).toLowerCase();
+      if(EXTERNAL_SCHEMAS.has(schema))continue;
       if(!finalTables.has(table)&&!CTE_ALLOWLIST.has(table))missing.push(`${table} ← ${fileURLToPath(url)}`);
     }
   }

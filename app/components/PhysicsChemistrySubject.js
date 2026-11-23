@@ -325,7 +325,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResum
   }
 
   if(view==="diagnostic")return <Shell>
-    <p className="eyebrow">AVALIAÇÃO INICIAL · FÍSICA E QUÍMICA A · PROVA 715</p>
+    <p className="eyebrow">DIAGNÓSTICO INICIAL · FÍSICA E QUÍMICA A · PROVA 715</p>
     <div className="diagApronsoHero"><div><h1>Diagnóstico de Física e Química A</h1><div className="diagPurposeHero"><small>8 PERGUNTAS · SÓ MATÉRIA DO TEU PERCURSO</small><strong>8 perguntas para localizar o ponto de partida, usando apenas matéria do teu percurso.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
     <div className="diagIntroGrid">
       <div><span>⏱</span><b>8 perguntas</b><small>Uma avaliação inicial breve para identificar o teu ponto de partida.</small></div>

@@ -748,7 +748,7 @@ function DailyCompletionNote({s}){
   return <div className={"dailyCompletionNote "+(e.dailyGoalComplete?"done":"partial")}>
     <b>{e.dailyGoalComplete?"🔥 Objetivo diário concluído":`🔥 Sequência de ${e.streak} ${e.streak===1?"dia":"dias"} protegida`}</b>
     <span>{e.dailyGoalComplete
-      ?"Hoje já fizeste o essencial. Podes continuar a treinar, mas não precisas de “farmar” exercícios para manter a sequência."
+      ?"Hoje já fizeste o essencial. Podes continuar a treinar, mas a sequência de hoje já está garantida."
       :`Já conta como dia de estudo. Se quiseres completar também o objetivo diário, faltam ${e.xpRemaining} XP ou uma Missão.`}</span>
   </div>;
 }
@@ -944,7 +944,7 @@ function DiagIntro({s,setS,go}){
   const blueprint=profileBlueprint.filter(themeId=>diagnosticAnchor(themeId,difficulty,s));
   const gated=blueprint.length===0;
   const pendingDiagnostic=loadSessionDraft(s.betaMode||"internal")?.kind==="diagnostic";
-  return <Shell><Logo/><p className="eyebrow">AVALIAÇÃO INICIAL · MATEMÁTICA A · PROVA 635</p>
+  return <Shell><Logo/><p className="eyebrow">DIAGNÓSTICO INICIAL · MATEMÁTICA A · PROVA 635</p>
     <div className="diagApronsoHero"><div><h1>Diagnóstico de Matemática A</h1><div className="diagPurposeHero"><small>PARA ENCONTRAR O MELHOR PONTO DE PARTIDA</small><strong>Não é uma avaliação. A app usa apenas matéria do teu percurso e aprofunda só quando precisa de perceber melhor uma dificuldade.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
     <div className="diagIntroGrid">
       <div><span>⏱</span><b>~10–20 min</b><small>Pode terminar mais cedo se já houver evidência suficiente.</small></div>

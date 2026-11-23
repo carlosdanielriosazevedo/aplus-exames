@@ -71,7 +71,7 @@ const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 
 assert.match(editor,/Relação \/ processo/u,"o aluno deve explicitar o processo em cada etapa.");
 assert.match(editor,/Erro tipo/u,"a revisão deve tornar visível a classificação provisória do erro.");
-assert.match(editor,/Processo alternativo · rever/u,"processos alternativos não reconhecidos não podem ser marcados automaticamente como errados.");
+assert.match(editor,/Processo alternativo · (?:rever|não verificado)/u,"processos alternativos não reconhecidos não podem ser marcados automaticamente como errados.");
 assert.match(subject,/PhysicsChemistryStepwiseEditor/u,"treino deve usar o editor por etapas.");
 assert.match(mini,/PhysicsChemistryStepwiseEditor/u,"mini-exame deve usar o editor por etapas.");
 assert.match(full,/PhysicsChemistryStepwiseEditor/u,"simulado deve usar o editor por etapas.");

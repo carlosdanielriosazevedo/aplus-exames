@@ -21,9 +21,9 @@ assert.match(page,/PASSO 1 DE 4/u,"deve existir um único tour inicial.");
 assert.match(page,/PASSO 4 DE 4/u,"o tour deve terminar com navegação e progresso.");
 assert.match(page,/firstUseTourCompleted:true/u,"o tour não deve reaparecer automaticamente depois do diagnóstico.");
 
-assert.match(page,/AVALIAÇÃO INICIAL · MATEMÁTICA A · PROVA 635/u,"o diagnóstico de Matemática deve identificar disciplina e prova.");
-assert.match(portuguese,/AVALIAÇÃO INICIAL · PORTUGUÊS · PROVA 639/u,"o diagnóstico de Português deve identificar disciplina e prova.");
-assert.match(fqa,/AVALIAÇÃO INICIAL · FÍSICA E QUÍMICA A · PROVA 715/u,"o diagnóstico de FQ A deve identificar disciplina e prova.");
+assert.match(page,/DIAGNÓSTICO INICIAL · MATEMÁTICA A · PROVA 635/u,"o diagnóstico de Matemática deve identificar disciplina e prova.");
+assert.match(portuguese,/DIAGNÓSTICO INICIAL · PORTUGUÊS · PROVA 639/u,"o diagnóstico de Português deve identificar disciplina e prova.");
+assert.match(fqa,/DIAGNÓSTICO INICIAL · FÍSICA E QUÍMICA A · PROVA 715/u,"o diagnóstico de FQ A deve identificar disciplina e prova.");
 
 assert.match(workspace,/goal:subjectGoal\(state,id\)/u,"trocar de disciplina deve carregar o objetivo correspondente.");
 assert.match(page,/approvaSubjectId:s\.activeSubjectId\|\|null/u,"o histórico deve guardar a disciplina atual.");

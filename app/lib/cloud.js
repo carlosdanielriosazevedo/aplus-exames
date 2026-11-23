@@ -149,6 +149,28 @@ export async function cloudSignUp({name,email,password}){
   return result;
 }
 
+// Como confirmar a eliminação desta conta: {method:"password"|"recent-login",
+// provider, recentLogin}. Nunca lança: em falha assume palavra-passe.
+export async function cloudDeletionMethod(){
+  try{
+    const response=await fetch("/api/account/delete",{method:"GET",credentials:"include",cache:"no-store"});
+    const body=await response.json().catch(()=>null);
+    if(response.ok&&body?.ok&&(body.method==="password"||body.method==="recent-login"))return body;
+  }catch{}
+  return {ok:false,method:"password",provider:null,recentLogin:false};
+}
+
+// Voltar a entrar com o mesmo fornecedor só para confirmar uma ação sensível.
+// Não repete o consentimento nem a troca de conta do primeiro login.
+export async function cloudReauthenticateSocial(provider){
+  const client=getCloudAuthClient();
+  if(!client)throw new Error("Neon Auth ainda não está configurado.");
+  const callbackURL=`${window.location.origin}/`;
+  const result=await authCall("social",()=>client.signIn.social({provider,callbackURL}));
+  if(result?.error){reportAuthFailure(`reauth_${provider}`,result.error);throw new Error("Não foi possível voltar a entrar com "+(provider==="microsoft"?"a Microsoft":"o Google")+". Tenta novamente.")}
+  return {ok:true};
+}
+
 // Eliminação definitiva da conta (servidor). Nunca lança: devolve {ok,code}.
 export async function cloudDeleteAccount({password,confirmation}){
   try{

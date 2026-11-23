@@ -41,7 +41,7 @@ Postura exigida:
 - Next.js 15.5 (App Router), React 18.3, JavaScript.
 - Vercel (região fra1, cron diário), Neon Postgres + Neon Auth (`@neondatabase/neon-js 0.7.0-beta`) e Resend para emails.
 - Service worker mínimo e `offline.html`.
-- Estado local em `localStorage` (versão de esquema 29), sincronizado com a cloud através de um merge de revisões.
+- Estado local em `localStorage` (versão de esquema 31), sincronizado com a cloud através de um merge de revisões.
 - Conteúdo em `app/data/*.js` e `content/vnext/**/*.json`.
 - Correção:
   - escolha múltipla;
@@ -393,7 +393,7 @@ Não houve revisão docente: o conteúdo foi gerado e revisto por IA. O teu trab
   - código morto ou legado (ex.: `SecondaryScreensLegacy`);
   - feature flags esquecidas;
   - ferramentas internas incluídas no bundle do aluno.
-- **Estado local:** as migrações até à versão 29 funcionam a partir de estados antigos reais? Existem testes para isso?
+- **Estado local:** as migrações até à versão 31 funcionam a partir de estados antigos reais? Existem testes para isso?
 - **Sincronização com a cloud:**
   - como funciona o merge? Como resolve conflitos?
   - é idempotente? Como lida com relógios, falhas parciais e retries?
