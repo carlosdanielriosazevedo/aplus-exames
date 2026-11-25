@@ -2175,3 +2175,7 @@ html body .subjectCard.available:hover,html body .parentEntryChoices button:hove
 .emailInUseNotice b{font-size:15px}
 .emailInUseNotice span{font-size:14px;line-height:1.45;color:#4d566b}
 
+
+/* Entrar: consentimento por clique no botão Google (só se a conta ainda não existir). */
+.socialClickConsent{display:block;margin:8px 2px 0;color:var(--app-muted,#687489);font-size:12px;line-height:1.4}
+.socialClickConsent a{color:inherit;text-decoration:underline}

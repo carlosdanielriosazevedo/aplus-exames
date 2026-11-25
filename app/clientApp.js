@@ -1954,7 +1954,7 @@ function Exams({s,go,startMini,resumePending}){
   const miniConstructed=miniQuestions.filter(isConstructedResponse).length;
   const miniSelection=miniQuestions.length-miniConstructed;
   const miniYears=[...new Set(miniQuestions.map(q=>theme(q.themeId)?.year).filter(Boolean))];
-  return <Shell className="wideStudentShell examHub"><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Matemática A · 635</h1><p className="muted">Escolhe um Mini-exame para uma sessão curta em contexto de prova. O Exame Completo ficará disponível quando o respetivo motor estiver validado.</p></div>
+  return <Shell className="wideStudentShell examHub"><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Matemática A · 635</h1></div>
     <ApronsoNudge pose="crossed" tone="dark">Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</ApronsoNudge>
     <FriendsBetaDisclaimer s={s} compact/>
     {pausedExamDraft&&<div className="pausedSession"><div><PausedActivityEyebrow kind={pausedExamDraft.kind}/><b>{pausedExamDraft.kind==="mini_exam"?"Mini-exame de Matemática A":pausedExamDraft.kind==="training"?"Treino Livre de Matemática A":pausedExamDraft.kind==="diagnostic"?"Diagnóstico de Matemática A":(pausedExamDraft.plan?.focus||"Missão de hoje")}</b><div className="missionCardMeta"><PausedSessionMeta position={pausedExamDraft.kind==="training"?pausedPosition(pausedExamDraft.i,pausedExamDraft.questions?.length):null}/></div></div><button onClick={()=>resumePending?resumePending():go(draftScreen(pausedExamDraft)||"home")}>Continuar sessão</button></div>}
@@ -1964,9 +1964,8 @@ function Exams({s,go,startMini,resumePending}){
     </button>
     {!miniReady&&<div className="notice warning"><b>Mini-exame protegido</b><span>O motor não encontrou perguntas elegíveis suficientes para completar este Mini-exame de 12 itens segundo o estado editorial atual. Não completa a prova com conteúdo não aprovado só para atingir o número pretendido.</span></div>}
     {last&&<div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{examScoreLabel(last)}</b></div><span>{last.earnedPoints!==undefined?`${String(last.earnedPoints).replace(".",",")}/${last.maxPoints} pontos${last.reviewRequired?" confirmados":""}`:`${last.correctCount}/${last.total} corretas`}</span></div>}
-    <div className="exam locked"><b>📝 Exame Completo</b><span>Prova completa · ainda não disponível nesta versão de teste.</span></div>
-    <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 Ainda não disponível nesta versão de teste</span></div>
-    <div className="notice"><b>O que muda num exame?</b><span>Não há feedback pergunta a pergunta. O resultado só aparece no fim e a evidência tem mais peso pedagógico do que numa Missão. O resultado desta prova não é uma previsão da tua nota no Exame Nacional.</span></div><StudentNav active="train" go={go}/>
+    <p className="examSoon">🔒 Em breve: Exame Completo e exames oficiais.</p>
+    <details className="examHowTo"><summary>Como funciona um exame?</summary><p>Não há feedback pergunta a pergunta: o resultado só aparece no fim e conta mais para o teu plano do que uma Missão. Não é uma previsão da tua nota no Exame Nacional.</p></details><StudentNav active="train" go={go}/>
   </Shell>
 }
 

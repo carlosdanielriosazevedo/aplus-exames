@@ -144,7 +144,7 @@ export function AccountCloud({s,setS,go,gate=false}){
   }
 
   async function continueWithProvider(provider){
-    if(!socialConsent)return;
+    if(mode==="signup"&&!socialConsent)return;
     setBusy(true);setMessage(null);
     try{
       markSocialSignInPending(provider);
@@ -548,10 +548,9 @@ export function AccountCloud({s,setS,go,gate=false}){
   const localIndex=prepIndex(s);
   const lastRemoteDevice=sync.lastRemoteDeviceId?shortDeviceId(sync.lastRemoteDeviceId):"—";
 
-  return <Shell>{gate?<Back go={go} to="welcome"/>:<Back go={go}/>}<p className="eyebrow">CONTA <BrandName/> · PROGRESSO ONLINE</p>
-    <h1>{gate?"Cria a tua conta para guardar o teu plano.":"O teu progresso, seguro em todos os teus dispositivos."}</h1>
-    {gate&&<p className="muted">O teu diagnóstico e o teu plano ficam guardados na conta e continuas no telemóvel ou no computador. Só pedimos nome, email e palavra-passe.</p>}
-    <p className="muted">Com sessão iniciada, o teu progresso é guardado automaticamente na conta e aparece nos teus outros dispositivos. Se houver versões diferentes, a APProva+ pede-te para escolher antes de substituir alguma coisa.</p>
+  return <Shell>{gate?<Back go={go} to="welcome"/>:<Back go={go}/>}<p className="eyebrow">CONTA <BrandName/></p>
+    <h1>{gate?"Guarda o teu plano.":user?"A tua conta":"Entra na tua conta"}</h1>
+    {!user&&<p className="muted">{gate?"Cria conta para continuares no telemóvel ou no computador.":"O teu progresso fica guardado em todos os teus dispositivos."}</p>}
 
     {!cfg.configured&&<div className="cloudUnavailable">
       <b>○ Progresso online temporariamente indisponível</b>
@@ -577,10 +576,11 @@ export function AccountCloud({s,setS,go,gate=false}){
         <button type="button" className="linkButton" onClick={()=>{setMode("signin");setResetStep("request");setResetCode("");setMessage(null)}}>Voltar a «Entrar»</button>
       </div>
       :<>{socialProviders.length>0&&<div className="socialAuth">
-        <label className="socialConsent"><input type="checkbox" checked={socialConsent} onChange={e=>setSocialConsent(e.target.checked)}/><span>Tenho 13 anos ou mais e aceito os <a href="/termos" target="_blank" rel="noopener">termos</a> e a <a href="/privacidade" target="_blank" rel="noopener">política de privacidade</a>.</span></label>
-        {socialProviders.map(provider=><button key={provider.id} type="button" className={`socialButton ${provider.id}`} disabled={busy||!socialConsent} onClick={()=>continueWithProvider(provider.id)}>
+        {mode==="signup"&&<label className="socialConsent"><input type="checkbox" checked={socialConsent} onChange={e=>setSocialConsent(e.target.checked)}/><span>Tenho 13 anos ou mais e aceito os <a href="/termos" target="_blank" rel="noopener">termos</a> e a <a href="/privacidade" target="_blank" rel="noopener">política de privacidade</a>.</span></label>}
+        {socialProviders.map(provider=><button key={provider.id} type="button" className={`socialButton ${provider.id}`} disabled={busy||(mode==="signup"&&!socialConsent)} onClick={()=>continueWithProvider(provider.id)}>
           <span aria-hidden="true" className="socialIcon">{provider.id==="google"?"G":"⊞"}</span>{provider.label}
         </button>)}
+        {mode!=="signup"&&<small className="socialClickConsent">Se ainda não tens conta, ao continuar confirmas que tens 13 anos ou mais e aceitas os <a href="/termos" target="_blank" rel="noopener">termos</a> e a <a href="/privacidade" target="_blank" rel="noopener">política de privacidade</a>.</small>}
         <div className="socialDivider" aria-hidden="true"><span>ou com email</span></div>
       </div>}
       <div className="realAuthForm">
@@ -602,7 +602,7 @@ export function AccountCloud({s,setS,go,gate=false}){
 
     {cfg.configured&&!session.loading&&user&&<>
       <div className="signedAccount">
-        <div><span>Conta autenticada</span><b>{user.name||"Aluno"}</b><small>{user.email}</small></div><strong>● online</strong>
+        <div><b>{user.name||"Aluno"}</b><small>{user.email}</small></div><strong>● sincronizado</strong>
       </div>
 
       {RANKING_PROFILE_ENABLED&&<div className="rankingIdentityCard">
@@ -617,13 +617,13 @@ export function AccountCloud({s,setS,go,gate=false}){
       </div>}
 
       <div className="cloudProgressCard">
-        <div><span>Progresso local atual</span><b>{localIndex??"—"}<small>/100 índice parcial</small></b></div>
         <div><span>XP</span><b>{s.xp}</b></div>
-        <div><span>Áreas com evidência</span><b>{measuredThemes(s).length}/{academicScopeThemes(s.profile).length}</b></div>
+        <div><span>Preparação</span><b>{localIndex??"—"}<small>/100</small></b></div>
       </div>
 
       <details className="cloudTechnicalDetails">
         <summary>Detalhes e cópias de segurança</summary>
+        <p className="muted">O progresso é guardado automaticamente e aparece nos teus outros dispositivos. Se houver versões diferentes, pedimos-te para escolher antes de substituir alguma coisa. Cada conta só acede ao seu próprio progresso.</p>
         <div className="cloudRevisionCard">
           <div><small>ESTE DISPOSITIVO</small><b>{shortDeviceId(deviceId)}</b><span>Versão conhecida: {sync.baseRevision}</span></div>
           <div><small>ÚLTIMO PROGRESSO ONLINE</small><b>versão {sync.lastRemoteRevision??sync.baseRevision}</b><span>Dispositivo: {lastRemoteDevice}</span></div>
@@ -700,10 +700,6 @@ export function AccountCloud({s,setS,go,gate=false}){
 
     {message&&<div className={"cloudMessage "+(message.ok?"ok":"bad")}><b>{message.ok?"✓":"!"}</b><span>{message.text}</span></div>}
 
-    <div className="securityBox">
-      <b>🔐 O teu progresso está protegido</b>
-      <span>Cada conta só pode aceder ao respetivo progresso e, se dois dispositivos tiverem versões diferentes, a APProva+ pede-te para decidir antes de substituir alguma coisa.</span>
-    </div>
   </Shell>
 }
 
