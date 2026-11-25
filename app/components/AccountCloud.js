@@ -677,7 +677,7 @@ export function AccountCloud({s,setS,go,gate=false}){
         <button className="primary" onClick={()=>setLogoutPrompt(null)} disabled={busy} autoFocus>{copy.stay}</button>
         <button className="secondary" onClick={()=>signout(logoutPrompt.kind)} disabled={busy}>{copy.leave}</button>
       </div>})()
-      :<button className="secondary" onClick={()=>signout()} disabled={busy}>Terminar sessão</button>}
+      :<button className="secondary accountOptionButton" onClick={()=>signout()} disabled={busy}>Terminar sessão</button>}
 
       <details className="deleteAccount" onToggle={event=>{if(event.currentTarget.open)loadDeleteMethod()}}>
         <summary>Eliminar conta</summary>
