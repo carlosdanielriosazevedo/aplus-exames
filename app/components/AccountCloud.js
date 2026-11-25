@@ -616,9 +616,10 @@ export function AccountCloud({s,setS,go,gate=false}){
         <small className="privacyRankNote">A escola é usada apenas para agrupar o ranking e não é mostrada no teu perfil público. Podes retirar a autorização a qualquer momento.</small>
       </div>}
 
-      <div className="cloudProgressCard">
-        <div><span>XP</span><b>{s.xp}</b></div>
-        <div><span>Preparação</span><b>{localIndex??"—"}<small>/100</small></b></div>
+      <div className="cloudProgressCard cloudSummaryRow" role="group" aria-label="Resumo do progresso">
+        <div><b>{s.xp}</b><span>XP</span></div>
+        <div><b>{localIndex??"—"}<small>/100</small></b><span>Preparação</span></div>
+        <div><b>{measuredThemes(s).length}<small>/{academicScopeThemes(s.profile).length}</small></b><span>Áreas com evidência</span></div>
       </div>
 
       <details className="cloudTechnicalDetails">
