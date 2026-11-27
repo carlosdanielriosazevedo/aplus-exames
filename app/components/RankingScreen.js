@@ -95,7 +95,7 @@ export default function Ranking({s,setS,go}){
     </section>}
 
     {LEAGUES_LIVE&&<>
-    <details className="demoRankingDisclosure"><summary>Modo de demonstração · participantes simulados ⓘ</summary><p>Os restantes participantes são simulados nesta fase e não representam outros alunos reais.</p></details>
+    <details className="demoRankingDisclosure"><summary>ⓘ Modo de demonstração · participantes simulados</summary><p>Os restantes participantes são simulados nesta fase e não representam outros alunos reais.</p></details>
 
     <section aria-label="Filtrar ranking por disciplina">
       <small className="eyebrow">DISCIPLINA</small>

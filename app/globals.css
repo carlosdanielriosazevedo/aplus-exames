@@ -2198,3 +2198,6 @@ html body .deleteAccount[open]{padding-bottom:14px}
 html body .cloudTechnicalDetails{border-radius:14px}
 html body button.secondary.accountOptionButton{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;border-radius:14px}
 @media (prefers-reduced-motion:reduce){html body .cloudTechnicalDetails>summary::before,html body .deleteAccount>summary::before{transition:none}}
+
+/* Informação escondida com ⓘ: o mesmo aspeto em toda a app (pequeno, cinzento, sem caixa). */
+html body .focusDisclosure>summary,html body .progressHelp>summary,html body .demoRankingDisclosure summary{color:var(--app-muted);font-size:12px;font-weight:800;min-height:32px;padding:0 2px}

@@ -4,7 +4,3 @@
 
 /* Ecrã de exames minimalista: bloqueados numa linha e explicação em «Saber mais». */
 .examHub .examSoon{margin:14px 2px 0;color:var(--app-muted,#687489);font-size:14px;font-weight:600}
-.examHub .examHowTo{margin-top:14px;border:1px solid var(--app-line,#eadfce);border-radius:16px;padding:12px 16px;background:#fff}
-.examHub .examHowTo summary{cursor:pointer;font-weight:700;color:var(--app-ink,#13263a);list-style:none}
-.examHub .examHowTo summary::before{content:"ⓘ ";color:var(--app-orange-dark,#a85d00)}
-.examHub .examHowTo p{margin:10px 0 0;color:var(--app-muted,#687489);font-size:14px;line-height:1.45}

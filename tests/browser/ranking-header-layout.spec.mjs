@@ -26,7 +26,7 @@ for(const subjectId of ['math-a','portuguese','physics-chemistry-a'])for(const w
   await expect(owl).toBeVisible();await expect(hero.locator('img')).toHaveCount(1);
   await owl.evaluate(async img=>{await img.decode();if(!img.naturalWidth)throw Error('Mascot not loaded')});
   await expect(badge).toHaveCSS('background-color','rgb(255, 248, 237)');
-  await expect(page.getByText('Modo de demonstração · participantes simulados ⓘ',{exact:true})).toBeVisible();
+  await expect(page.getByText('ⓘ Modo de demonstração · participantes simulados',{exact:true})).toBeVisible();
   const layout=await hero.evaluate(el=>{
    const title=el.querySelector('h1'),owl=el.querySelector('img'),copy=el.querySelector('.muted'),badge=el.querySelector('.divisionBadge');
    const r=document.createRange();r.selectNodeContents(title);
