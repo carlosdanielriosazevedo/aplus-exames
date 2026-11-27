@@ -9,7 +9,7 @@ export default function TermsPage(){
     <article style={{maxWidth:760,margin:"0 auto",lineHeight:1.65}}>
       <Link href="/" style={{color:"#fdba74",textDecoration:"none"}}>← Voltar à APProva+</Link>
       <h1 style={{fontSize:"clamp(2rem,6vw,3.2rem)",marginBottom:8}}>Termos de utilização</h1>
-      <p style={{color:"#cbd5e1"}}>Última atualização: 13 de outubro de 2026 · versão beta pública</p>
+      <p style={{color:"#cbd5e1"}}>Última atualização: 15 de novembro de 2026 · versão beta pública</p>
 
       <section style={section}>
         <h2>Uma ferramenta de preparação</h2>
@@ -33,6 +33,11 @@ export default function TermsPage(){
       </section>
 
       <section style={section}>
+        <h2>Idade mínima e conta</h2>
+        <p>Para criar conta é necessário ter pelo menos 13 anos. A conta é pessoal: não a partilhes nem partilhes a palavra-passe. Em computadores partilhados, termina sempre a sessão no fim do estudo. A utilização é gratuita durante a beta.</p>
+      </section>
+
+      <section style={section}>
         <h2>Utilização responsável</h2>
         <p>O utilizador deve usar a aplicação como apoio ao estudo e confirmar informação importante através de professores, materiais oficiais e outras fontes adequadas. Tentativas de explorar, danificar ou aceder indevidamente a dados ou sistemas da aplicação não fazem parte da utilização permitida.</p>
       </section>
@@ -48,8 +53,23 @@ export default function TermsPage(){
       </section>
 
       <section style={section}>
+        <h2>Suspensão e fim do serviço</h2>
+        <p>Podemos suspender temporariamente funcionalidades, como novos registos ou a gravação online, para proteger o serviço ou os dados dos utilizadores, e podemos suspender contas usadas de forma abusiva. Se a beta terminar, avisaremos com antecedência razoável e indicaremos como obter uma cópia do progresso.</p>
+      </section>
+
+      <section style={section}>
+        <h2>Responsabilidade</h2>
+        <p>A APProva+ é disponibilizada gratuitamente, tal como está, durante a beta. Procuramos que o conteúdo seja correto e que o serviço esteja disponível, mas não garantimos ausência de erros nem resultados em exames. Na medida permitida por lei, não somos responsáveis por decisões de estudo tomadas apenas com base na aplicação. Nada nestes termos limita direitos que a lei garanta aos consumidores.</p>
+      </section>
+
+      <section style={section}>
         <h2>Privacidade</h2>
         <p>A utilização de dados, armazenamento local, progresso online e telemetria opcional é explicada na informação de Privacidade. Quando uma recolha depende de consentimento, a utilização principal da app deve continuar disponível sem esse consentimento, salvo se a funcionalidade em causa exigir tecnicamente uma conta ou ligação online.</p>
+      </section>
+
+      <section style={section}>
+        <h2>Lei aplicável e contacto</h2>
+        <p>Estes termos regem-se pela lei portuguesa. Para questões sobre a aplicação ou sobre os teus dados, usa o contacto indicado na informação de Privacidade.</p>
       </section>
 
       <p style={{marginTop:36}}><Link href="/privacidade" style={{color:"#fdba74"}}>Consultar a informação de Privacidade</Link></p>
