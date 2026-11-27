@@ -1,0 +1,14 @@
+=== GRADER QUALITY REPORT ===
+Curated open-response benchmark: 65 cases
+Strong undercredit: 0%
+Wrong overcredit: 0%
+Review rate: 78.5%
+Paraphrase mean score delta: 12.2pp
+Unstable paraphrases: 15.4%
+Diagnostic accuracy: 87.5% (7/8)
+Human agreement: NOT MEASURED (requires independent teacher labels)
+Unstable excellent↔paraphrase pairs:
+  portuguese::PT639-FND-311: excellent 63.1% · paraphrase 85.4% · Δ 22.3pp · review true/true · diagnosis insufficient_justification/insufficient_justification
+  portuguese::PT639-FND-313: excellent 86.2% · paraphrase 39.2% · Δ 46.9pp · review true/true · diagnosis insufficient_justification/insufficient_justification
+
+GRADER QUALITY REPORT PASSED
