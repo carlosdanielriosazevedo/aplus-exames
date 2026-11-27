@@ -398,7 +398,7 @@ function PortugueseSubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
     <div className="lastExam"><div><small>MINI-EXAMES REALIZADOS</small><b>{progress.sessions.filter(row=>row.kind==="mini_exam").length||"Ainda nenhum"}</b></div><span>{progress.sessions.filter(row=>row.kind==="mini_exam").length?"O histórico de Português fica separado das restantes disciplinas.":"Escolhe um mini-exame para criar histórico."}</span></div>
     {!miniExamDraft&&(currentYear==="12.º"?<button className="exam examAction" onClick={()=>selectMiniExam("full-1")}><div><b>📝 Exame Completo · Modelo 1</b><span>15 itens · 120 min + 30 min de tolerância · 200 pontos classificáveis</span></div><strong>Começar →</strong></button>:<div className="exam locked"><b>📝 Exame Completo</b><span>Disponível no percurso do 12.º ano, para preparação do exame nacional.</span></div>)}
     <p className="examSoon">🔒 Em breve: exames oficiais.</p>
-    <details className="examHowTo"><summary>Como funciona um exame?</summary><p>Não há feedback pergunta a pergunta: o resultado aparece no fim. As respostas abertas são revistas por critérios, sem nota final automática.</p></details>
+    <details className="progressHelp"><summary>ⓘ Como funciona um exame?</summary><div className="notice"><span>Não há feedback pergunta a pergunta: o resultado aparece no fim. As respostas abertas são revistas por critérios, sem nota final automática.</span></div></details>
     {sharedNav}
   </Shell>;
   if(!session)return sharedShell(<>
